@@ -27,6 +27,9 @@ spec:
         app.kubernetes.io/name: {{ include "nextcloud.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
         app.kubernetes.io/component: app
+        {{- if .Values.redis.enabled }}
+        {{ template "nextcloud.redis.fullname" . }}-client: "true"
+        {{- end }}
       annotations:
         rollme: {{ randAlphaNum 5 | quote }}
     spec:
@@ -74,6 +77,12 @@ spec:
           value: {{ .Values.nextcloud.host }}
         - name: NEXTCLOUD_DATA_DIR
           value: {{ .Values.nextcloud.datadir | quote }}
+        {{- if .Values.redis.enabled }}
+        - name: REDIS_HOST
+          value: {{ template "nextcloud.redis.fullname" . }}-master
+        - name: REDIS_HOST_PORT
+          value: {{ .Values.redis.redisPort | quote }}
+        {{- end }}
         ports:
         - name: http
           containerPort: 80

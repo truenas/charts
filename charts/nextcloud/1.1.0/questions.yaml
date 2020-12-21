@@ -119,6 +119,21 @@ questions:
             default: 9001
             required: true
 
+  - variable: redis
+    label: "Redis Configuration"
+    group: "Nextcloud Configuration"
+    schema:
+      type: dict
+      required: true
+      additional_attrs: true
+      attrs:
+        - variable: enabled
+          label: "Enable Redis Cache for Nextcloud?"
+          group: "Nextcloud Configuration"
+          schema:
+            type: boolean
+            default: false
+
   - variable: nextcloudDataHostPathEnabled
     label: "Configure Host Path for Nextcloud data"
     group: "Storage"

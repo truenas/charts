@@ -13,5 +13,9 @@ nextcloud:
   datadir: /var/www/html/data
   strategy: "Recreate"
 
+redis:
+  enabled: false
+  usePassword: false
+
 service:
   nodePort: 9001
