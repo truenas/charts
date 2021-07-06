@@ -42,3 +42,39 @@ Retrieve configured protocol scheme for nextcloud
 {{- print "http" -}}
 {{- end -}}
 {{- end -}}
+
+
+{{/*
+Retrieve nginx certificate secret name
+*/}}
+{{- define "nginx.secretName" -}}
+{{- print "nginx-secret" -}}
+{{- end -}}
+
+
+{{/*
+Formats volumeMount for tls keys and trusted certs
+*/}}
+{{- define "nginx.tlsKeysVolumeMount" -}}
+{{- if eq (include "nginx.certAvailable" .) "true" -}}
+- name: cert-secret-volume
+  mountPath: "/etc/nginx"
+{{- end -}}
+{{- end -}}
+
+{{/*
+Formats volume for tls keys and trusted certs
+*/}}
+{{- define "nginx.tlsKeysVolume" -}}
+{{- if eq (include "nginx.certAvailable" .) "true" -}}
+- name: cert-secret-volume
+  secret:
+    secretName: {{ include "nginx.secretName" . }}
+    items:
+    - key: certPublicKey
+      path: public.crt
+    - key: certPrivateKey
+      path: private.key
+{{- end -}}
+{{- end -}}
+
