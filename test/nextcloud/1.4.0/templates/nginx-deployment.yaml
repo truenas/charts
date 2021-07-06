@@ -20,5 +20,5 @@ spec: {{ include "common.deployment.common_spec" $values | nindent 2 }}
         - name: nginx-configuration
           configMap:
             defaultMode: 0700
-            name: "postgres-backup-hook-config-map"
-{{ include "nginx.tlsKeysVolume" $values | nindent 8 }}
+            name: "nginx-configuration"
+      {{ include "nginx.tlsKeysVolume" $values | nindent 8 }}
