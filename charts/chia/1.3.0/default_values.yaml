@@ -1,6 +1,6 @@
 image:
-  repository: ghcr.io/chia-network/chia
-  tag: 1.1.4
+  repository: ixsystems/chia-docker
+  tag: 1.2.0
   pullPolicy: IfNotPresent
 updateStrategy: Recreate
 environmentVariables:
