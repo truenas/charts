@@ -170,9 +170,11 @@ questions:
     schema:
       type: string
       show_if: [["enableResourceLimits", "=", true]]
+      valid_chars: "^\\d+(?:\\.\\d+(?!.*m$)|m?$)"
   - variable: memLimit
     label: "Memory limit"
     group: "Resource Limits"
     schema:
       type: string
       show_if: [["enableResourceLimits", "=", true]]
+      valid_chars: "^([+-]?[0-9.]+)([eEinumkKMGTP]*[-+]?[0-9]*)$"
