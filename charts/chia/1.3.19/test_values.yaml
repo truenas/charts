@@ -9,8 +9,8 @@ farmr_env: 'off'
 image:
   pullPolicy: IfNotPresent
   repository: ixsystems/chia-docker
-  tag: v1.2.8
-updateStrategy: Recreate
+  tag: v1.2.9_1
 service:
-  nodePort: 31121
   farmerPort: 31122
+  nodePort: 31121
+updateStrategy: Recreate
