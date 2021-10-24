@@ -1,0 +1,15 @@
+appVolumeMounts:
+  data:
+    emptyDir: true
+    mountPath: /data
+  staging:
+    emptyDir: true
+    mountPath: /plots
+image:
+  pullPolicy: IfNotPresent
+  repository: filecoin/lotus
+  tag: v1.12.0
+service:
+  farmerPort: 31122
+  nodePort: 31121
+updateStrategy: Recreate
