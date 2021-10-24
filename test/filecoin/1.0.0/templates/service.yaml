@@ -2,10 +2,7 @@
 {{ $svc := .Values.service }}
 {{ $ports := list }}
 {{ if ge ($svc.nodePort | int) 9000 }}
-{{ $ports = mustAppend $ports (dict "name" "chia-network" "port" $svc.nodePort "nodePort" $svc.nodePort "targetPort" 8444) }}
-{{ end }}
-{{ if ge ($svc.farmerPort | int) 9000 }}
-{{ $ports = mustAppend $ports (dict "name" "chia-farmer" "port" $svc.farmerPort "nodePort" $svc.farmerPort "targetPort" 8447) }}
+{{ $ports = mustAppend $ports (dict "name" "fil-network" "port" $svc.nodePort "nodePort" $svc.nodePort "targetPort" 8444) }}
 {{ end }}
 {{ $params := . }}
 {{ $_ := set $params "commonService" (dict "type" "NodePort" "ports" $ports ) }}

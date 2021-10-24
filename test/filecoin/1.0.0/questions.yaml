@@ -1,12 +1,10 @@
 groups:
   - name: "Storage"
-    description: "Configure Storage for Chia"
-  - name: "Farmr.net Configuration"
-    description: "Configure farmr.net support"
-  - name: "Chia Environment Variables"
+    description: "Configure Storage"
+  - name: "Environment Variables"
     description: "Set the environment that will be visible to the container"
   - name: "Networking"
-    description: "Configure networking for Chia container"
+    description: "Configure networking"
 
 portals:
   web_portal:
@@ -19,106 +17,92 @@ portals:
     path: "/kb/truepool-docker-image/"
 
 questions:
-  - variable: farmr_env
-    label: "Enable 'farmr.net' support"
-    group: "Farmr.net Configuration"
-    description: "Configure 'farmr.net' support for chia"
-    schema:
-      type: string
-      default: "off"
-      enum:
-        - value: "off"
-          description: "OFF"
-        - value: "farmer"
-          description: "FARMER"
-        - value: "harvester"
-          description: "HARVESTER"
   - variable: appVolumeMounts
-    label: "Chia Storage"
+    label: "Storage"
     group: "Storage"
     schema:
       type: dict
       attrs:
-        - variable: config
-          label: "Configuration Volume"
+        - variable: data
+          label: "Lotus Data Volume"
           schema:
             type: dict
             attrs:
               - variable: datasetName
-                label: "Configuration Volume Dataset Name"
+                label: "Lotus Data Volume Dataset Name"
                 schema:
                   type: string
                   hidden: true
                   $ref:
                     - "normalize/ixVolume"
                   show_if: [["hostPathEnabled", "=", false]]
-                  default: "config"
+                  default: "lotus"
                   editable: false
               - variable: mountPath
-                label: "Configuration Mount Path"
+                label: "Lotus Data Mount Path"
+                description: "Path where the volume will be mounted inside the pod"
+                schema:
+                  type: path
+                  hidden: true
+                  editable: false
+                  default: "/var/lib/lotus"
+              - variable: hostPathEnabled
+                label: "Enable Custom Host Path for Lotus Data Volume"
+                schema:
+                  type: boolean
+                  default: false
+                  show_subquestions_if: true
+                  subquestions:
+                    - variable: hostPath
+                      label: "Host Path for Lotus Data Volume"
+                      schema:
+                        type: hostpath
+                        required: true
+        - variable: parameterCache
+          label: "Filecoin Parameter Cache Volume"
+          schema:
+            type: dict
+            attrs:
+              - variable: datasetName
+                label: "Parameter Cache Volume Name"
+                schema:
+                  type: string
+                  hidden: true
+                  $ref:
+                    - "normalize/ixVolume"
+                  show_if: [["hostPathEnabled", "=", false]]
+                  default: "parameter_cache"
+                  editable: false
+              - variable: mountPath
+                label: "Parameter Cache Mount Path"
                 description: "Path where the volume will be mounted inside the pod"
                 schema:
                   type: path
                   hidden: true
                   editable: true
-                  default: "/data"
+                  default: "/var/tmp/filecoin-proof-parameters"
               - variable: hostPathEnabled
-                label: "Enable Custom Host Path for Chia Configuration Volume"
+                label: "Enable Custom Host Path for Parameter Cache Volume"
                 schema:
                   type: boolean
                   default: false
                   show_subquestions_if: true
                   subquestions:
                     - variable: hostPath
-                      label: "Host Path for Chia Configuration Volume"
-                      schema:
-                        type: hostpath
-                        required: true
-        - variable: plots
-          label: "Plot Volume"
-          schema:
-            type: dict
-            attrs:
-              - variable: datasetName
-                label: "Plots Volume Name"
-                schema:
-                  type: string
-                  hidden: true
-                  $ref:
-                    - "normalize/ixVolume"
-                  show_if: [["hostPathEnabled", "=", false]]
-                  default: "plots"
-                  editable: false
-              - variable: mountPath
-                label: "Plots Mount Path"
-                description: "Path where the volume will be mounted inside the pod"
-                schema:
-                  type: path
-                  hidden: true
-                  editable: false
-                  default: "/plots"
-              - variable: hostPathEnabled
-                label: "Enable Custom Host Path for Chia Plots Volume"
-                schema:
-                  type: boolean
-                  default: false
-                  show_subquestions_if: true
-                  subquestions:
-                    - variable: hostPath
-                      label: "Host Path for Chia Plots Volume"
+                      label: "Host Path for Parameter Cache Volume"
                       schema:
                         type: hostpath
                         required: true
 
   - variable: extraAppVolumeMounts
-    label: "Chia Extra Host Path Volumes"
+    label: "Extra Host Path Volumes"
     group: "Storage"
     schema:
       type: list
       items:
         - variable: extraAppVolume
-          label: "Chia Host Path Volume"
-          description: "Add an extra host path volume for chia application"
+          label: "Host Path Volume"
+          description: "Add an extra host path volume"
           schema:
             type: dict
             attrs:
@@ -136,8 +120,8 @@ questions:
                   required: true
 
   - variable: environmentVariables
-    label: "Environment Variables for Chia"
-    group: "Chia Environment Variables"
+    label: "Environment Variables"
+    group: "Environment Variables"
     schema:
       type: list
       default: []
@@ -165,18 +149,10 @@ questions:
       required: true
       attrs:
         - variable: nodePort
-          label: "Node Port to use for Chia"
+          label: "Node Port to use for Filecoin"
           schema:
             type: int
             min: 8000
             max: 65535
-            default: 8444
-            required: true
-        - variable: farmerPort
-          label: "Farmer Port to use for Chia"
-          schema:
-            type: int
-            min: 8000
-            max: 65535
-            default: 8447
+            default: 9665
             required: true

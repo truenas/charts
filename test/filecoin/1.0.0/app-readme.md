@@ -1,4 +1,4 @@
-Chia Network
+Filecoin Network
 =====
 
-[CHIA](https://www.chia.net/) is a new blockchain and smart transaction platform that is easier to use, more efficient, and secure.
+Filecoin is a peer-to-peer network that stores files on the internet, with built-in economic incentives to ensure files are stored reliably over time.

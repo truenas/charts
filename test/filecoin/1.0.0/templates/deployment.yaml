@@ -26,14 +26,10 @@ spec:
               mountPath: {{ $hostPathConfiguration.mountPath }}
           {{ end }}
           ports:
-            - name: chia-network
+            - name: fil-network
               protocol: TCP
-              containerPort: 8444
-              hostPort: null
-            - name: chia-farmer
-              protocol: TCP
-              containerPort: 8447
-              hostPort: null
+              containerPort: 1234
+              hostPort: 1234
           {{ $envList := (default list .Values.environmentVariables) }}
           {{ $envList = mustAppend $envList (dict "name" "keys" "value" "/plots/keyfile") }}
           {{ $envList = mustAppend $envList (dict "name" "farmr" "value" $.Values.farmr_env) }}
