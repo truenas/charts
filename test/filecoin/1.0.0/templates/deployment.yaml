@@ -17,9 +17,19 @@ spec:
     spec:
       # FIXME: Let's please remove hostnetwork when upstream hostport issue is sorted out with kube-router
       hostNetwork: {{ include "hostNetworkingEnabled" . }}
+      initContainers:
+        - name: fil-init
+          image: "debian:bullseye-slim"
+          imagePullPolicy: "IfNotPresent"
+          command: ['sh', '-c', "chown -R 532:532 {{ .Values.appVolumeMounts.data.mountPath }} {{ .Values.appVolumeMounts.parametercache.mountPath }}"]
+          {{ include "common.storage.allContainerVolumeMounts" .Values | nindent 10 }}
       containers:
         - name: {{ .Chart.Name }}
           {{ include "common.containers.imageConfig" .Values.image | nindent 10 }}
+          command:
+            - "sh"
+            - "-c"
+            - "/docker-lotus-entrypoint.sh -help && sleep infinity"
           volumeMounts: {{ include "common.storage.configureAppVolumeMountsInContainer" .Values | nindent 12 }}
           {{ range $index, $hostPathConfiguration := .Values.extraAppVolumeMounts }}
             - name: extrappvolume-{{ $index }}

@@ -58,7 +58,7 @@ questions:
                       schema:
                         type: hostpath
                         required: true
-        - variable: parameterCache
+        - variable: parametercache
           label: "Filecoin Parameter Cache Volume"
           schema:
             type: dict
