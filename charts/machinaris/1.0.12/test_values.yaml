@@ -8,8 +8,8 @@ appVolumeMounts:
 image:
   pullPolicy: IfNotPresent
   repository: ghcr.io/guydavis/machinaris
-  tag: v0.6.1
+  tag: v0.6.2
 machinaris_ui_port: 31003
+nodeIP: 127.0.0.1
 timezone: America/Edmonton
 updateStrategy: Recreate
-nodeIP: 127.0.0.1
