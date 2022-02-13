@@ -25,7 +25,7 @@ spec:
           {{ include "common.storage.allContainerVolumeMounts" .Values | nindent 10 }}
         - name: init-gateway
           {{ include "common.containers.imageConfig" .Values.image | nindent 10 }}
-          command: ['/usr/local/bin/ipfs', 'config', 'Addresses.Gateway', "/ip4/0.0.0.0/tcp/9080"]
+          command: ['/usr/local/bin/ipfs', 'config', 'Addresses.Gateway', "/ip4/0.0.0.0/tcp/9880"]
           {{ include "common.storage.allContainerVolumeMounts" .Values | nindent 10 }}
         - name: init-swarm
           {{ include "common.containers.imageConfig" .Values.image | nindent 10 }}

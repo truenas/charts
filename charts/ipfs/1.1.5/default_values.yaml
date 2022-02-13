@@ -13,7 +13,7 @@ updateStrategy: Recreate
 service:
   swarmPort: 9401
   apiPort: 9501
-  gatewayPort: 9080
+  gatewayPort: 9880
 
 environment:
 
