@@ -46,3 +46,7 @@ $ helm install --set environment.MINIO_BROWSER=on,environment.MINIO_DOMAIN=domai
 ```
 
 You can add as many environment variables as required, using the above format. Just add `environment.<VARIABLE_NAME>=<value>` under `set` flag.
+
+**NOTE**
+- On fresh installation, minIO data directory's ownership will be updated to minio:minio.
+- For existing installations that are exhibiting the upgrade to >=1.5.0, the minIO data directory's ownership will be migrated to minio:minio.
