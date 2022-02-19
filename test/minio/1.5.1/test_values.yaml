@@ -15,6 +15,8 @@ image:
   repository: minio/minio
   tag: RELEASE.2022-02-18T01-50-10Z
 minioDomain: null
+runAsGroup: 473
+runAsUser: 473
 service:
   consolePort: 32325
   nodePort: 32324
