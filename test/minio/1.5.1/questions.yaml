@@ -224,6 +224,7 @@ questions:
                       schema:
                         type: hostpath
                         required: true
+                        immutable: true
 
   - variable: extraAppVolumeMounts
     label: "Extra Host Path Volumes"
