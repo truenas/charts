@@ -2,8 +2,6 @@ appVolumeMounts:
   config:
     emptyDir: true
     mountPath: /config
-dnsConfig:
-  options: []
 emptyDirVolumes: true
 environmentVariables: []
 extraAppVolumeMounts:
