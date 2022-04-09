@@ -1,0 +1,6 @@
+{{ $ports := list }}
+{{ $ports = mustAppend $ports (dict "name" "emby-server-dlna-udp" "port" 1900 "protocol" "UDP" "targetPort" "emby-server-dlna-udp") }}
+{{ $ports = mustAppend $ports (dict "name" "emby-server-lnd-udp" "port" 7359 "protocol" "UDP" "targetPort" "emby-server-lnd-udp") }}
+{{ $params := . }}
+{{ $_ := set $params "commonService" (dict "type" "ClusterIP" "ports" $ports "nameSuffix" "udp" ) }}
+{{ include "common.classes.service" $params }}
