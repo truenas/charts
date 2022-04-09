@@ -20,16 +20,16 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
               {{ end }}
             {{ end }}
           ports:
-          - name: emby-server-http
+          - name: emby
             protocol: TCP
             containerPort: 8096
           {{- if .Values.hostNetwork }}
             hostPort: {{ .Values.embyServerHttp.port }}
           {{- end }}
-          - name: emby-server-dlna-udp
+          - name: emby-dlna
             protocol: UDP
             containerPort: 1900
-          - name: emby-server-lnd-udp
+          - name: emby-lnd
             protocol: UDP
             containerPort: 7359
           env:

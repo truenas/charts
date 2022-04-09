@@ -1,6 +1,6 @@
 groups:
   - name: "Emby Server Configuration"
-    description: "Configure emby-server deployment"
+    description: "Configure emby deployment"
   - name: "Networking"
     description: "Configure networking for container"
   - name: "Storage"
@@ -112,7 +112,7 @@ questions:
                   $ref:
                     - "normalize/ixVolume"
                   show_if: [["hostPathEnabled", "=", false]]
-                  default: "ix-emby-server_config"
+                  default: "ix-emby_config"
                   editable: false
                   hidden: true
               - variable: mountPath
@@ -144,7 +144,7 @@ questions:
       items:
         - variable: extraAppVolume
           label: "Emby Server Host Path Volume"
-          description: "Add an extra host path volume for emby-server application"
+          description: "Add an extra host path volume for emby application"
           schema:
             type: dict
             attrs:

@@ -18,15 +18,15 @@ image:
 #   -   127.0.0.1
 #   -   10.54.2.0/24
 
-# Set The user id of the emby-server user created inside the container.
+# Set The user id of the emby user created inside the container.
 # See https://hub.docker.com/r/emby/embyserver for details
 # embyServerUid: 2
 
-# Set The group id of the emby-server user created inside the container
+# Set The group id of the emby user created inside the container
 # See https://hub.docker.com/r/emby/embyserver for details
 # embyServerGid: 2
 
-# Set The additional group ids of the emby-server user created inside the container
+# Set The additional group ids of the emby user created inside the container
 # See https://hub.docker.com/r/emby/embyserver for details
 # embyServerGidList: 2
 
