@@ -19,6 +19,7 @@ spec:
       labels: {{ include "common.labels.selectorLabels" . | nindent 8 }}
       annotations:
         rollme: {{ randAlphaNum 5 | quote }}
+        container.apparmor.security.beta.kubernetes.io/{{ .Chart.Name }}: unconfined
     spec:
       securityContext:
         fsGroup: 201
