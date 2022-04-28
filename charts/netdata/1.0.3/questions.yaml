@@ -90,6 +90,7 @@ questions:
     group: "Storage"
     schema:
       type: dict
+      immutable: true
       attrs:
         - variable: netdataconfig
           label: "Configuration Volume"
