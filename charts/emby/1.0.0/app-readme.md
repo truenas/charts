@@ -1,3 +1,3 @@
 # Emby Server
 
-Emby Server chart is a chart designed to deploy emby-server in a TrueNAS SCALE kubernetes cluster.
+Emby Server is a personal media server with apps on just about every device
