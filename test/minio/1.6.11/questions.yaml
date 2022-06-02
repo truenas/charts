@@ -153,14 +153,15 @@ questions:
             min: 9000
             max: 65535
             default: 9000
+            required: true
         - variable: consolePort
           label: "Node Port to use for Minio UI Access"
           schema:
             type: int
             min: 9000
             max: 65535
-            default: 9002
-
+            default: 9001
+            required: true
 
   - variable: minioDomain
     label: "Minio Domain Name"
