@@ -144,7 +144,7 @@ questions:
     group: "Minio Configuration"
     schema:
       type: dict
-      required: true
+      show_if: [["distributedMode", "=", false]]
       attrs:
         - variable: nodePort
           label: "Node Port to use for Minio API"
@@ -153,7 +153,6 @@ questions:
             min: 9000
             max: 65535
             default: 9000
-            required: true
         - variable: consolePort
           label: "Node Port to use for Minio UI Access"
           schema:
@@ -161,7 +160,7 @@ questions:
             min: 9000
             max: 65535
             default: 9002
-            required: true
+
 
   - variable: minioDomain
     label: "Minio Domain Name"
