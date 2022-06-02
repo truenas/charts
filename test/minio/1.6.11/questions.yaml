@@ -144,10 +144,10 @@ questions:
     group: "Minio Configuration"
     schema:
       type: dict
+      # show_if: [["distributedMode", "=", false]]
       attrs:
         - variable: nodePort
           label: "Node Port to use for Minio API"
-          show_if: [["distributedMode", "=", false]]
           schema:
             type: int
             min: 9000
@@ -156,7 +156,6 @@ questions:
             required: true
         - variable: consolePort
           label: "Node Port to use for Minio UI Access"
-          show_if: [["distributedMode", "=", false]]
           schema:
             type: int
             min: 9000
