@@ -46,9 +46,9 @@ spec:
             - {{ include "minio.commandArgs" . }}
           ports:
             - name: api
-              containerPort: {{ .Values.nodePort }}
+              containerPort: {{ .Values.nodePort | int }}
             - name: console
-              containerPort: {{ .Values.consolePort }}
+              containerPort: {{ .Values.consolePort | int }}
           env:
             {{ $secretName := (include "minio.secretName" .) }}
             {{ $envList := (default list .Values.environmentVariables) }}
