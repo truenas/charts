@@ -69,6 +69,15 @@ questions:
       default: false
       show_subquestions_if: true
       subquestions:
+        - variable: hostIp
+          description: "Host ip is required to run minio api server on valid ip address"
+          label: "Minio host ip for api server"
+          hidden: true
+          schema:
+            type: string
+            $ref:
+              - "definitions/nodeIP"
+
         - variable: distributedIps
           label: "Distributed Minio Instance URI(s)"
           schema:

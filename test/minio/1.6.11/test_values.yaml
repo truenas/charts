@@ -21,4 +21,10 @@ service:
   consolePort: 32325
   nodePort: 32324
 updateStrategy: RollingUpdate
-distributedMode: false
+distributedMode: true
+
+distributedIps:
+  - "192.168.10.6:2991/export/data"
+hostIp: "192.168.10.6"
+nodePort: 2001
+consolePort: 2000

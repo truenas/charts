@@ -56,11 +56,13 @@ Retrieve scheme/protocol for minio
 Retrieve command for minio application
 */}}
 {{- define "minio.commandArgs" -}}
-{{- $arg := "/usr/bin/docker-entrypoint.sh minio -S /etc/minio/certs server --console-address=':9001'" -}}
+{{- printf "/usr/bin/docker-entrypoint.sh minio -S /etc/minio/certs server --console-address=':%d'" (.Values.consolePort | int) -}}
 {{- if .Values.distributedMode -}}
-{{- cat $arg (join " " (concat (.Values.distributedIps | default list) (.Values.extraArgs | default list))) -}}
+{{- printf " --address '%s':%d' " .Values.hostIp (.Values.nodePort | int) -}}
+{{- cat (join " " (concat (.Values.distributedIps | default list) (.Values.extraArgs | default list))) -}}
+{{- cat ((concat (list " /export/data") (.Values.extraArgs | default list)) | join " ") -}}
 {{- else -}}
-{{- cat $arg ((concat (list "/export") (.Values.extraArgs | default list)) | join " ") -}}
+{{- cat ((concat (list " /export") (.Values.extraArgs | default list)) | join " ") -}}
 {{- end -}}
 {{- end -}}
 
