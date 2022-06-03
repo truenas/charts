@@ -26,5 +26,6 @@ distributedMode: true
 distributedIps:
   - "192.168.10.6:2991/export/data"
 hostIp: "192.168.10.6"
-nodePort: 2001
-consolePort: 2000
+service:
+  nodePort: 2001
+  consolePort: 2000
