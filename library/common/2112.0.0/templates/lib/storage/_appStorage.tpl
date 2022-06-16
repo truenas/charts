@@ -65,7 +65,7 @@ volumes: {{- include "common.storage.configureAppVolumes" . | nindent 2 -}}
 
 
 {{/*
-Get all container volume moutns configuration
+Get all container volume mounts configuration
 */}}
 {{- define "common.storage.allContainerVolumeMounts" -}}
 {{- $appVolumeMounts := .appVolumeMounts -}}
