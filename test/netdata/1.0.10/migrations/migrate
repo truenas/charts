@@ -1,0 +1,117 @@
+#!/usr/bin/python3
+import json
+import os
+import sys
+import subprocess
+from pathlib import Path
+
+from middlewared.client import Client
+from middlewared.service import ValidationErrors, CallError
+
+
+def path_in_locked_datasets(path: str) -> bool:
+    with Client() as c:
+        return c.call('pool.dataset.path_in_locked_datasets', path)
+
+
+def get_configured_user_group(path: str) -> dict:
+    with Client() as c:
+        return c.call('filesystem.stat', path)
+
+
+def get_host_path_attachments(path: str) -> set:
+    with Client() as c:
+        return {
+            attachment['type']
+            for attachment in c.call('pool.dataset.attachments_with_path', path)
+            if attachment['type'].lower() not in ['kubernetes', 'chart releases']
+        }
+
+
+def get_kubernetes_config() -> dict:
+    with Client() as c:
+        return c.call('kubernetes.config')
+
+
+def validate_host_path(path: str, schema_name: str, verrors: ValidationErrors) -> None:
+    """
+    These validations are taken from `FilesystemService._common_perm_path_validate`.
+    """
+    schema_name += ".migration.chown"
+    p = Path(path)
+    if not p.is_absolute():
+        verrors.add(schema_name, f"Must be an absolute path: {path}")
+
+    if p.is_file():
+        verrors.add(schema_name, f"Recursive operations on a file are invalid: {path}")
+
+    if not p.absolute().as_posix().startswith("/mnt/"):
+        verrors.add(
+            schema_name,
+            f"Changes to permissions on paths that are not beneath the directory /mnt are not permitted: {path}"
+        )
+    elif len(p.resolve().parents) == 2:
+        verrors.add(schema_name, f"The specified path is a ZFS pool mountpoint: {path}")
+
+    # Make sure that dataset is not locked
+    if path_in_locked_datasets(path):
+        verrors.add(schema_name, f"Dataset is locked at path: {path}.")
+
+    # Validate attachments
+    if attachments := get_host_path_attachments(path):
+        verrors.add(schema_name, f"The path '{path}' is already attached to service(s): {', '.join(attachments)}.")
+
+
+def validate_path(uid, gid, host_path, release_name):
+    verrors = ValidationErrors()
+
+    current_config = get_configured_user_group(host_path)
+    if current_config["uid"] == uid and current_config["gid"] == gid:
+        return
+
+    validate_host_path(host_path, release_name, verrors)
+    verrors.check()
+
+
+def chown_path(uid, gid, host_path):
+    acltool = subprocess.run([
+        "/usr/bin/nfs4xdr_winacl",
+        "-a", "chown",
+        "-O", str(uid), "-G", str(gid),
+        "-r",
+        "-c", host_path,
+        "-p", host_path], check=False, capture_output=True
+    )
+    if acltool.returncode != 0:
+        raise CallError(f"acltool [chown] on path {host_path} failed with error: [{acltool.stderr.decode().strip()}]")
+
+
+def validate_host_volume_path(values):
+    host_paths = []
+    dataset_names = []
+    for volume_name, data in values["appVolumeMounts"].items():
+        if data["hostPathEnabled"]:
+            validate_path("201", "201", data["hostPath"], values["release_name"])
+            host_paths.append(data["hostPath"])
+        else:
+            dataset_names.append(data["datasetName"])
+    for ix_volume in values["ixVolumes"]:
+        validate_path("201", "201", ix_volume["hostPath"], values["release_name"])
+        if any([volume_name in ix_volume["hostPath"] for volume_name in dataset_names]):
+            host_paths.append(ix_volume["hostPath"])
+    return host_paths
+
+
+def migrate(values):
+    for host_path in validate_host_volume_path(values):
+        chown_path("201", "201", host_path)
+    return values
+
+
+if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        exit(1)
+
+    if os.path.exists(sys.argv[1]):
+        with open(sys.argv[1], 'r') as f:
+            print(json.dumps(migrate(json.loads(f.read()))))
