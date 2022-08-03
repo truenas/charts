@@ -17,7 +17,9 @@ appVolumeMounts:
 claimToken: ''
 dnsConfig:
   options: []
-emptyDirVolumes: true
+emptyDirVolumes:
+  - "/empty_div1"
+  - "/empty_div2"
 enablePlexPass: false
 environmentVariables: []
 extraAppVolumeMounts:

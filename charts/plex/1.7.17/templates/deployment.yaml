@@ -28,6 +28,10 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
               readOnly: {{ $hostPathConfiguration.readOnly }}
               {{ end }}
             {{ end }}
+            {{- range $index, $emptyDirConfiguration := .Values.emptyDirVolumes }}
+            - name: ix-emptydir-volume-{{ $.Release.Name }}-{{ $index }}
+              mountPath: {{ $emptyDirConfiguration }}
+            {{- end }}
           ports:
           - name: pms
             protocol: TCP
@@ -101,4 +105,8 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
           hostPath:
             path: {{ $hostPathConfiguration.hostPath }}
         {{ end }}
-
+        {{- range $index, $emptyDirConfiguration := .Values.emptyDirVolumes }}
+        - name: ix-emptydir-volume-{{ $.Release.Name }}-{{ $index }}
+          emptyDir:
+            medium: Memory
+        {{- end }}
