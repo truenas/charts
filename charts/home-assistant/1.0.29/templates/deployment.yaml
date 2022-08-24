@@ -30,7 +30,10 @@ spec:
         {{- include "common.labels.selectorLabels" . | nindent 8 }}
       annotations: {{ include "common.annotations" . | nindent 8 }}
     spec:
+    {{- if .Values.hostNetwork }}
       hostNetwork: {{ .Values.hostNetwork }}
+      dnsPolicy: ClusterFirstWithHostNet
+    {{- end }}
       initContainers:
         - name: init-postgresdb
           image: {{ template "postgres.imageName" . }}
