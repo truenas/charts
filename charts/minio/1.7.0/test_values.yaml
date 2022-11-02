@@ -2,6 +2,20 @@ appVolumeMounts:
   export:
     emptyDir: true
     mountPath: /export
+postgresAppVolumeMounts:
+  postgres-backup:
+    emptyDir: true
+    mountPath: /postgres_backups
+  postgres-data:
+    emptyDir: true
+    mountPath: /var/lib/postgresql/data
+postgresql:
+  backupVolume:
+    datasetName: ix-postgres_backups
+    mountPath: /postgres_backups
+  dataVolume:
+    datasetName: ix-postgres_data
+    mountPath: /var/lib/postgresql/data
 distributedIps: []
 distributedMode: false
 dnsConfig:

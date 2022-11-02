@@ -26,3 +26,17 @@
 {{- $envList = mustAppend $envList (dict "name" "POSTGRES_PASSWORD" "valueFromSecret" true "secretName" $secretName "secretKey" "db_password") -}}
 {{- include "common.containers.environmentVariables" (dict "environmentVariables" $envList) -}}
 {{- end -}}
+
+{{/*
+Retrieve postgres volume configuration
+*/}}
+{{- define "postgres.volumeConfiguration" -}}
+{{ include "common.storage.configureAppVolumes" (dict "appVolumeMounts" .Values.postgresAppVolumeMounts "emptyDirVolumes" .Values.emptyDirVolumes "ixVolumes" .Values.ixVolumes) | nindent 0 }}
+{{- end -}}
+
+{{/*
+Retrieve postgres volume mounts configuration
+*/}}
+{{- define "postgres.volumeMountsConfiguration" -}}
+{{ include "common.storage.configureAppVolumeMountsInContainer" (dict "appVolumeMounts" .Values.postgresql ) | nindent 0 }}
+{{- end -}}
