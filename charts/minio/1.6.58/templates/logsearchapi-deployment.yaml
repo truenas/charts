@@ -15,4 +15,25 @@ spec: {{ include "common.deployment.common_spec" $values | nindent 2 }}
         - name: logsearchapi
           containerPort: 8080
           protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /status
+            port: 8080
+          failureThreshold: 5
+          periodSeconds: 15
+          initialDelaySeconds: 15
+        livenessProbe:
+          httpGet:
+            path: /status
+            port: 8080
+          failureThreshold: 5
+          periodSeconds: 15
+          initialDelaySeconds: 15
+        startupProbe:
+          httpGet:
+            path: /status
+            port: 8080
+          failureThreshold: 5
+          periodSeconds: 15
+          initialDelaySeconds: 15
 {{ end }}
