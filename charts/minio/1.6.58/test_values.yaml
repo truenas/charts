@@ -14,6 +14,9 @@ image:
   pullPolicy: IfNotPresent
   repository: minio/minio
   tag: RELEASE.2022-10-24T18-35-07Z
+logsearchapi:
+  enabled: true
+  diskCapacityGB: 5
 minioDomain: null
 runAsGroup: 473
 runAsUser: 473

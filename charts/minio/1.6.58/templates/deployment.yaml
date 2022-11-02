@@ -60,6 +60,18 @@ spec:
             {{ end }}
             {{ $envList = mustAppend $envList (dict "name" "MINIO_ROOT_USER" "valueFromSecret" true "secretName" $secretName "secretKey" "accesskey") }}
             {{ $envList = mustAppend $envList (dict "name" "MINIO_ROOT_PASSWORD" "valueFromSecret" true "secretName" $secretName "secretKey" "secretkey") }}
+            {{ if .Values.logsearchapi.enabled }}
+            {{/*
+            We can put any ID we want here. Just make sure it's unique
+            It can be rolled on each startup without problems.
+            */}}
+            {{ $webhookID := (printf "ix-%v" (randAlphaNum 5)) }}
+            {{ $logsearchSecretName := (include "logsearchapi.secretName" .) }}
+            {{ $envList = mustAppend $envList (dict "name" "MINIO_LOG_QUERY_AUTH_TOKEN" "valueFromSecret" true "secretName" $logsearchSecretName "secretKey" "queryToken") }}
+            {{ $envList = mustAppend $envList (dict "name" "MINIO_LOG_QUERY_URL" "value" "http://localhost:8080") }}
+            {{ $envList = mustAppend $envList (dict "name" (printf "MINIO_AUDIT_WEBHOOK_ENDPOINT_%v" $webhookID) "valueFromSecret" true "secretName" $logsearchSecretName "secretKey" "webhookURL") }}
+            {{ $envList = mustAppend $envList (dict "name" (printf "MINIO_AUDIT_WEBHOOK_ENABLE_%v" $webhookID) "value" "on") }}
+            {{ end }}
             {{ include "common.containers.environmentVariables" (dict "environmentVariables" $envList) | nindent 12 }}
 {{ include "common.networking.dnsConfiguration" .Values | nindent 6 }}
       volumes: {{ include "common.storage.configureAppVolumes" .Values | nindent 8 }}
