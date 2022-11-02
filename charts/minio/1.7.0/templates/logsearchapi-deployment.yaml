@@ -6,7 +6,7 @@ spec: {{ include "common.deployment.common_spec" $values | nindent 2 }}
   template: {{ include "common.deployment.pod.metadata" $values | nindent 4 }}
     spec:
       containers:
-      - name: {{ .Chart.Name }}-logsearchapi
+      - name: {{ .Chart.Name }}-{{ include "logsearchapi.nameSuffix" . }}
         image: {{ include "logsearchapi.imageName" . }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         env: {{ include "logsearchapi.envVariableConfiguration" $values | nindent 10 }}
