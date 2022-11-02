@@ -68,7 +68,7 @@ spec:
             {{ $webhookID := (printf "ix-%v" (randAlphaNum 5)) }}
             {{ $logsearchSecretName := (include "logsearchapi.secretName" .) }}
             {{ $envList = mustAppend $envList (dict "name" "MINIO_LOG_QUERY_AUTH_TOKEN" "valueFromSecret" true "secretName" $logsearchSecretName "secretKey" "queryToken") }}
-            {{ $envList = mustAppend $envList (dict "name" "MINIO_LOG_QUERY_URL" "value" "http://localhost:8080") }}
+            {{ $envList = mustAppend $envList (dict "name" "MINIO_LOG_QUERY_URL" "valueFromSecret" true "secretName" $logsearchSecretName "secretKey" "logQueryURL") }}
             {{ $envList = mustAppend $envList (dict "name" (printf "MINIO_AUDIT_WEBHOOK_ENDPOINT_%v" $webhookID) "valueFromSecret" true "secretName" $logsearchSecretName "secretKey" "webhookURL") }}
             {{ $envList = mustAppend $envList (dict "name" (printf "MINIO_AUDIT_WEBHOOK_ENABLE_%v" $webhookID) "value" "on") }}
             {{ end }}

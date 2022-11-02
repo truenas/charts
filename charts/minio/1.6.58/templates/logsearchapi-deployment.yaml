@@ -1,6 +1,6 @@
 {{ if .Values.logsearchapi.enabled }}
 {{ $values := (. | mustDeepCopy) }}
-{{ $_ := set $values "common" (dict "nameSuffix" "logsearchapi") }}
+{{ $_ := set $values "common" (dict "nameSuffix" (include "logsearchapi.nameSuffix" .)) }}
 {{ include "common.deployment.common_config" $values | nindent 0 }}
 spec: {{ include "common.deployment.common_spec" $values | nindent 2 }}
   template: {{ include "common.deployment.pod.metadata" $values | nindent 4 }}

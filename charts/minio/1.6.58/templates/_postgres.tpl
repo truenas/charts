@@ -2,6 +2,10 @@
 {{- print "postgres:14.5" -}}
 {{- end -}}
 
+{{- define "postgres.nameSuffix" -}}
+{{- print "postgres" -}}
+{{- end -}}
+
 {{- define "postgres.secretName" -}}
 {{- print "postgres-details" -}}
 {{- end -}}
