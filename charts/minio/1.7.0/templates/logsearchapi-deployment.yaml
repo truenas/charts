@@ -10,7 +10,8 @@ spec: {{ include "common.deployment.common_spec" $values | nindent 2 }}
         image: {{ include "logsearchapi.imageName" . }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         env: {{ include "logsearchapi.envVariableConfiguration" $values | nindent 10 }}
-        command: {{ include "logsearchapi.command" . }}
+        command:
+          - {{ include "logsearchapi.command" . }}
         ports:
         - name: logsearchapi
           containerPort: 8080
