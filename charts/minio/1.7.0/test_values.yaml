@@ -16,6 +16,7 @@ postgresql:
   dataVolume:
     datasetName: ix-postgres_data
     mountPath: /var/lib/postgresql/data
+ixChartContext: {}
 distributedIps: []
 distributedMode: false
 dnsConfig:

@@ -18,6 +18,15 @@
 {{- print "logsearchapi" -}}
 {{- end -}}
 
+{{/*
+Retrieve postgres backup name
+This will return a unique name based on revision and chart numbers specified.
+*/}}
+{{- define "postgres.backupName" -}}
+{{- $upgradeDict := .Values.ixChartContext.upgradeMetadata -}}
+{{- printf "postgres-backup-from-%s-to-%s-revision-%d" $upgradeDict.oldChartVersion $upgradeDict.newChartVersion (int64 $upgradeDict.preUpgradeRevision) -}}
+{{- end -}}
+
 {{- define "postgres.envVariableConfiguration" -}}
 {{- $envList := list -}}
 {{- $secretName := (include "postgres.secretName" .) -}}
