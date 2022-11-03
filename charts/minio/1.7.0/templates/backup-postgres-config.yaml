@@ -9,7 +9,7 @@ data:
     #!/bin/sh
     cmd="/docker-entrypoint.sh postgres"
     eval "${cmd}" & disown;
-    until pg_isready; do
+    until pg_isready -U "$POSTGRES_USER" -h "$pgHost"; do
       sleep 5;
     done;
-    pg_dump -U $POSTGRES_USER -d {{ include "postgres.dbName" . }} > /postgres_backups/$BACKUP_NAME;
+    pg_dump -U "$POSTGRES_USER" -d "$POSTGRES_DB" -h "$pgHost" -Fc -f /postgres_backups/$BACKUP_NAME.dump;

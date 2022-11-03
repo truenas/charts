@@ -36,6 +36,26 @@ This will return a unique name based on revision and chart numbers specified.
 {{- include "common.containers.environmentVariables" (dict "environmentVariables" $envList) -}}
 {{- end -}}
 
+{{- define "postgresBackup.envVariableConfiguration" -}}
+{{- $envList := list -}}
+{{- $secretName := (include "postgres.secretName" .) -}}
+{{- $envList = mustAppend $envList (dict "name" "POSTGRES_USER" "valueFromSecret" true "secretName" $secretName "secretKey" "db_user") -}}
+{{- $envList = mustAppend $envList (dict "name" "POSTGRES_DB" "valueFromSecret" true "secretName" $secretName "secretKey" "db_name") -}}
+{{/* PGPASSWORD is used by pg_dump */}}
+{{- $envList = mustAppend $envList (dict "name" "PGPASSWORD" "valueFromSecret" true "secretName" $secretName "secretKey" "db_password") -}}
+{{- $envList = mustAppend $envList (dict "name" "pgHost" "valueFromSecret" true "secretName" $secretName "secretKey" "postgresHost") -}}
+{{- include "common.containers.environmentVariables" (dict "environmentVariables" $envList) -}}
+{{- end -}}
+
+{{/* Used in the logsearchapi init container (checks that postgres is available) */}}
+{{- define "postgresInit.envVariableConfiguration" -}}
+{{- $envList := list -}}
+{{- $secretName := (include "postgres.secretName" .) -}}
+{{- $envList = mustAppend $envList (dict "name" "pgHost" "valueFromSecret" true "secretName" $secretName "secretKey" "postgresHost") -}}
+{{- $envList = mustAppend $envList (dict "name" "pguser" "valueFromSecret" true "secretName" $secretName "secretKey" "db_user") -}}
+{{- include "common.containers.environmentVariables" (dict "environmentVariables" $envList) -}}
+{{- end -}}
+
 {{/*
 Retrieve postgres volume configuration
 */}}
@@ -47,5 +67,5 @@ Retrieve postgres volume configuration
 Retrieve postgres volume mounts configuration
 */}}
 {{- define "postgres.volumeMountsConfiguration" -}}
-{{ include "common.storage.configureAppVolumeMountsInContainer" (dict "appVolumeMounts" .Values.postgresql ) | nindent 0 }}
+{{ include "common.storage.configureAppVolumeMountsInContainer" (dict "appVolumeMounts" .Values.postgresAppVolumeMounts ) | nindent 0 }}
 {{- end -}}

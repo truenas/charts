@@ -21,7 +21,7 @@ spec:
       - name: {{ .Chart.Name }}-postgres-backup
         image: {{ include "postgres.imageName" . }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
-        env: {{ include "postgres.envVariableConfiguration" $values | nindent 10 }}
+        env: {{ include "postgresBackup.envVariableConfiguration" $values | nindent 10 }}
           - name: BACKUP_NAME
             value: {{ include "postgres.backupName" . }}
         volumeMounts: {{ include "postgres.volumeMountsConfiguration" $values | nindent 10 }}

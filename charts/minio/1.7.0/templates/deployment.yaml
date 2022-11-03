@@ -1,4 +1,6 @@
 {{ include "common.storage.hostPathValidate" .Values }}
+{{ $logsearchValues := (. | mustDeepCopy) }}
+{{ $_ := set $logsearchValues "common" (dict "nameSuffix" (include "logsearchapi.nameSuffix" .)) }}
 apiVersion: {{ template "common.capabilities.deployment.apiVersion" . }}
 kind: Deployment
 metadata:
@@ -32,6 +34,17 @@ spec:
         runAsGroup: {{ .Values.runAsGroup }}
       serviceAccountName: {{ include "common.names.serviceAccountName" . | quote }}
       hostNetwork: {{ include "minio.hostNetworking" . }}
+      {{ if .Values.logsearchapi.enabled }}
+      initContainers:
+        - name: {{ .Chart.Name }}-waitapi
+          image: alpine/curl
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env: {{ include "logsearchapiInit.envVariableConfiguration" $logsearchValues | nindent 10 }}
+          command:
+            - sh
+            - -c
+            - "until curl $apiURL/status; do sleep 2; done"
+      {{ end }}
       containers:
         - name: {{ .Chart.Name }}
           {{ include "common.resources.limitation" . | nindent 10 }}
