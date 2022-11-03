@@ -12,4 +12,4 @@ data:
     until pg_isready -U "$POSTGRES_USER" -h "$pgHost"; do
       sleep 5;
     done;
-    pg_dump -U "$POSTGRES_USER" -d "$POSTGRES_DB" -h "$pgHost" -Fc -f /postgres_backups/$BACKUP_NAME.dump;
+    pg_dump -U "$POSTGRES_USER" -d "$POSTGRES_DB" -h "$pgHost" -f /postgres_backups/$BACKUP_NAME.sql;
