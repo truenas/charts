@@ -2,7 +2,14 @@
 {{ $values := (. | mustDeepCopy) }}
 {{ $_ := set $values "common" (dict "nameSuffix" (include "postgres.nameSuffix" .)) }}
 {{ include "common.deployment.common_config" $values | nindent 0 }}
-spec: {{ include "common.deployment.common_spec" $values | nindent 2 }}
+spec:
+  replicas: {{ (default 1 .Values.replicas) }}
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: {{ template "common.names.name" . }}
+      release: {{ .Release.Name }}
   template: {{ include "common.deployment.pod.metadata" $values | nindent 4 }}
     spec:
       containers:
