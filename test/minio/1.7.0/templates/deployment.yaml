@@ -76,7 +76,7 @@ spec:
             {{ if .Values.logsearchapi.enabled }}
             {{/*
             We can put any ID we want here. Just make sure it's unique
-            It can be rolled on each startup without problems.
+            It can be rolled on each startup without problems, or se can set a static one.
             */}}
             {{ $webhookID := (printf "ix-%v" (randAlphaNum 5)) }}
             {{ $logsearchSecretName := (include "logsearchapi.secretName" .) }}
