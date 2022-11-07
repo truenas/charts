@@ -39,6 +39,12 @@ questions:
       max: 65535
       default: 20921
       required: true
+  - variable: hostNetwork
+    label: Host Network
+    group: Networking
+    schema:
+      type: boolean
+      default: false
 
   - variable: dnsConfig
     label: DNS Configuration
@@ -67,7 +73,7 @@ questions:
                         type: string
                         required: true
 
-  - variable: wg_easy
+  - variable: wgeasy
     label: WG-Easy Configuration
     group: Configuration
     schema:

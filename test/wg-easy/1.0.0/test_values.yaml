@@ -1,0 +1,25 @@
+image:
+  pullPolicy: IfNotPresent
+  repository: weejewel/wg-easy
+  tag: "7"
+appVolumeMounts:
+  config:
+    emptyDir: true
+    mountPath: /etc/wireguard
+dnsConfig:
+  options: []
+emptyDirVolumes: true
+environmentVariables: []
+extraAppVolumeMounts: []
+hostNetwork: true
+wgUDPPort: 20290
+webUIPort: 20921
+wgeasy:
+  host: wg.domain.com
+  password: secret
+  keep_alive: 5
+  client_address_range: 10.10.0.x
+  client_dns_server: "8.8.8.8"
+  allowed_ips:
+    - 10.10.10.0/24
+    - 10.10.12.0/24
