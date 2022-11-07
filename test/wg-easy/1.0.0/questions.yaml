@@ -102,6 +102,13 @@ questions:
             type: int
             required: true
             default: 0
+        - variable: client_mtu
+          label: Clients MTU
+          description: The MTU the clients will use.
+          schema:
+            type: int
+            required: true
+            default: 1420
         - variable: client_address_range
           label: Clients IP Address Range
           description: Clients IP address range.
