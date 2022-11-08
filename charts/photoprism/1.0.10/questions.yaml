@@ -20,7 +20,7 @@ portals:
       - "$node_ip"
     ports:
       - "$variable-web_port"
-    path: "/admin/"
+    path: "/"
 
 questions:
   - variable: web_port
