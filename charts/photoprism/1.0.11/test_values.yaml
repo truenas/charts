@@ -16,7 +16,7 @@ extraAppVolumeMounts: []
 image:
   pullPolicy: IfNotPresent
   repository: photoprism/photoprism
-  tag: 221105-bullseye
+  tag: 220901-bullseye
 ownerGID: 568
 ownerUID: 568
 password: admin123
