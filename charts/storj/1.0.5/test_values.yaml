@@ -18,7 +18,7 @@ image:
   pullPolicy: IfNotPresent
   repository: storjlabs/storagenode
   tag: ab9cb72f8-v1.67.1-go1.18.8
-nodePort: 30002
+nodePort: 30003
 runAsGroup: 568
 runAsUser: 568
 storageSize: 500
