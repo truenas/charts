@@ -1,0 +1,33 @@
+{{ $values := (. | mustDeepCopy) }}
+{{ $_ := set $values "common" (dict "nameSuffix" "wg-easy") }}
+{{ $ip := .Values.wgeasy.client_address_range | replace "x" "0" }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: post-delete-routes-wg-easy
+  annotations:
+    "helm.sh/hook": post-delete
+    "helm.sh/hook-weight": "1"
+    "helm.sh/hook-delete-policy": hook-succeeded
+    rollme: {{ randAlphaNum 5 | quote }}
+spec:
+  template:
+    metadata:
+      name: post-delete-routes-wg-easy
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: {{ .Chart.Name }}-post-delete-routes-wg-easy
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        command:
+          - /bin/bash
+          - -c
+          - |
+            echo "Deleting routes created by the app..."
+            netmask=$(ip route | grep {{ $ip }})
+            netmask=$(echo $netmask | grep -o -E '/.\d*')
+            netmask=${netmask#/}
+            echo "Matched routes to delete... {{ $ip }}/$netmask"
+            ip route del {{ $ip }}/$netmask || echo "Route deletion failed..."
+            echo "Routes deleted..."

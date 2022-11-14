@@ -44,7 +44,7 @@ questions:
     group: Networking
     schema:
       type: boolean
-      default: false
+      default: true
 
   - variable: dnsConfig
     label: DNS Configuration
