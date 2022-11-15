@@ -89,7 +89,7 @@ spec:
             periodSeconds: 15
           lifecycle:
             preStop:
-            exec:
+              exec:
                 command:
                   - /bin/bash
                   - -c
