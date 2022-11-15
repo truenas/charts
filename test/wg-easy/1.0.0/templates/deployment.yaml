@@ -87,6 +87,7 @@ spec:
             initialDelaySeconds: 5
             failureThreshold: 40
             periodSeconds: 15
+          {{ $ip := .Values.wgeasy.client_address_range | replace "x" "0" }}
           lifecycle:
             preStop:
               exec:
