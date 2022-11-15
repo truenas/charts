@@ -99,7 +99,10 @@ spec:
                     netmask=$(echo $netmask | grep -o -E '/.\d*')
                     netmask=${netmask#/}
                     echo "Matched routes to delete... {{ $ip }}/$netmask"
-                    ip route del {{ $ip }}/$netmask || echo "Route deletion failed..."
+                    # Don't try to delete routes if steps above didn't grep-ed anything
+                    if [ ! "$netmask" == "" ]; then
+                      ip route del {{ $ip }}/$netmask || echo "Route deletion failed..."
+                    fi
                     echo "Routes deleted..."
 {{ include "common.networking.dnsConfiguration" .Values | nindent 6 }}
       volumes: {{ include "common.storage.configureAppVolumes" .Values | nindent 8 }}
