@@ -48,7 +48,7 @@ spec:
           {{ end }}
           ports:
             - name: udp
-              containerPort: 51820
+              containerPort: {{ .Values.wgUDPPort }}
               protocol: UDP
             - name: web
               containerPort: 51821

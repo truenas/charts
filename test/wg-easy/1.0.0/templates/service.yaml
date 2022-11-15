@@ -3,7 +3,7 @@
 {{ $selectors = mustAppend $selectors (dict "key" "release" "value" .Release.Name ) }}
 {{ $ports := list }}
 {{ $ports = mustAppend $ports (dict "name" "web" "port" .Values.webUIPort "nodePort" .Values.webUIPort "targetPort" 51821) }}
-{{ $ports = mustAppend $ports (dict "name" "udp" "port" .Values.wgUDPPort "nodePort" .Values.wgUDPPort "targetPort" 51820 "protocol" "UDP") }}
+{{ $ports = mustAppend $ports (dict "name" "udp" "port" .Values.wgUDPPort "nodePort" .Values.wgUDPPort "targetPort" .Values.wgUDPPort  "protocol" "UDP") }}
 {{ $params := . }}
 {{ $_ := set $params "commonService" (dict "type" "NodePort" "ports" $ports ) }}
 {{ $_1 := set .Values "extraSelectorLabels" $selectors }}
