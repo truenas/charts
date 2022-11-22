@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: truenas/catalog_validation:latest
+      image: ixsystems/catalog_validation:latest
 
     steps:
       - uses: actions/checkout@v2
@@ -20,3 +20,6 @@ jobs:
         with:
             commit_message: Update catalog information
             file_pattern: 'catalog.json'
+            commit_user_name: sonicaj
+            commit_user_email: waqarsonic1@gmail.com
+            commit_author: sonicaj <waqarsonic1@gmail.com>
