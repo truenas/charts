@@ -1,0 +1,22 @@
+name: catalog_validation
+
+on:
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    container:
+      image: truenas/catalog_validation:latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Update catalog details
+        run: ./update_catalog_detail.py
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+            commit_message: Update catalog information
+            file_pattern: 'catalog.json'
