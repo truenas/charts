@@ -15,7 +15,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Update catalog details
-        run: ./update_catalog_detail.py
+        run: |
+          /bin/bash -c "PWD=${pwd}; /usr/local/bin/catalog_update update --path $PWD"
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
             commit_message: Update catalog information
