@@ -12,7 +12,7 @@ environmentVariables: []
 extraArgs: []
 image:
   pullPolicy: IfNotPresent
-  repository: ipfs/go-ipfs
+  repository: ipfs/kubo
   tag: v0.17.0
 service:
   apiPort: 30951
