@@ -18,7 +18,7 @@ hostNetwork: false
 image:
   pullPolicy: IfNotPresent
   repository: pihole/pihole
-  tag: 2022.11.1
+  tag: 2022.11.2
 ownerGID: 568
 ownerUID: 568
 password: admin123
