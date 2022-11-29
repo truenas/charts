@@ -1,5 +1,5 @@
 {{- define "logsearchapi.imageName" -}}
-{{- print "minio/operator:v4.5.3" -}}
+{{- printf "%s:%s" .Values.logSearchImage.repository .Values.logSearchImage.tag -}}
 {{- end -}}
 
 {{- define "logsearchapi.nameSuffix" -}}

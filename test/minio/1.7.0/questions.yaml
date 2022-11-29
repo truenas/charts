@@ -190,7 +190,6 @@ questions:
     group: Minio Configuration
     schema:
       type: dict
-      additional_attrs: true
       attrs:
         - variable: enabled
           label: Enable Log Search API
