@@ -294,7 +294,6 @@ questions:
                   default: ix-postgres_data
                   show_if: [["hostPathEnabled", "=", false]]
                   editable: false
-
               - variable: mountPath
                 label: Postgresql Data Mount Path
                 description: Path where the volume will be mounted inside the pod
@@ -315,6 +314,7 @@ questions:
                       schema:
                         type: hostpath
                         required: true
+                        immutable: true
 
         - variable: postgres-backup
           label: Postgres Backup Volume
