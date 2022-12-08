@@ -166,11 +166,12 @@ questions:
     label: "Restart Policy"
     group: "Restart Policy"
     schema:
-      hidden: true
       type: string
       default: "OnFailure"
       show_if: [["workloadType", "!=", "Deployment"]]
       enum:
+        - value: "Always"
+          description: "Always restart job"
         - value: "OnFailure"
           description: "Only restart job if it fails"
         - value: "Never"
