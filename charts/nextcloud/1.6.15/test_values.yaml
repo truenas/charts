@@ -12,7 +12,7 @@ environmentVariables: []
 image:
   pullPolicy: IfNotPresent
   repository: nextcloud
-  tag: 25.0.1
+  tag: 25.0.2
 ixChartContext: {}
 nextcloud:
   datadir: /var/www/html/data
