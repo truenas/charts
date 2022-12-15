@@ -17,7 +17,7 @@ identityCreationMountPath: /root/.local/share/storj/identity/storagenode
 image:
   pullPolicy: IfNotPresent
   repository: storjlabs/storagenode
-  tag: d2a896bf7-v1.66.4-go1.17.12
+  tag: 1d42f9ac3-v1.68.2-go1.18.8
 nodePort: 30002
 runAsGroup: 568
 runAsUser: 568
