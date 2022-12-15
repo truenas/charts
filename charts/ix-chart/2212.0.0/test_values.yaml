@@ -8,6 +8,7 @@ image:
 
 # Restart / Update policy
 updateStrategy: RollingUpdate
+jobRestartPolicy: OnFailure
 
 # Container CMD / entrypoint
 containerCommand: []

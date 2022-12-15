@@ -153,7 +153,7 @@ questions:
     schema:
       type: string
       show_if: [["workloadType", "=", "Deployment"]]
-      default: "RollingUpdate"
+      default: "Recreate"
       enum:
         - value: "RollingUpdate"
           description: "Create new pods and then kill old ones"
@@ -162,7 +162,7 @@ questions:
 
   # Restart Policy
   - variable: jobRestartPolicy
-    description: "Restart Policy for workload"
+    description: "Restart Policy for Job"
     label: "Restart Policy"
     group: "Restart Policy"
     schema:
