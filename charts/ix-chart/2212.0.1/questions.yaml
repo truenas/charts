@@ -426,6 +426,7 @@ questions:
                 schema:
                   type: int
                   required: true
+                  min: 9000
                   max: 65535
               - variable: protocol
                 label: "Protocol"

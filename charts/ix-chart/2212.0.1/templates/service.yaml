@@ -1,5 +1,4 @@
 {{- if and (.Values.portForwardingList) (eq (include "hostNetworkingConfiguration" .) "false") }}
-{{- $hostNet := .Values.hostNetwork }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -10,9 +9,6 @@ spec:
   type: NodePort
   ports:
     {{- range $index, $config := .Values.portForwardingList }}
-      {{- if and (not $hostNet) (lt (int $config.nodePort) 9000) }}
-        {{- fail (printf "Port (%s) is too low. Minimum allowed port is 9000." ($config.nodePort | toString)) }}
-      {{- end }}
     - port: {{ $config.containerPort }}
       targetPort: {{ $config.containerPort }}
       protocol: {{ $config.protocol }}
