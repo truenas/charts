@@ -21,3 +21,10 @@ Get configuration for host network
 {{- print "true" -}}
 {{- end -}}
 {{- end -}}
+
+{{/* Validate portal port */}}
+{{- if .Values.enableUIPortal }}
+  {{- if and (not .Values.hostNetwork) (lt .Values.portalDetails.port 9000) }}
+    {{- fail (printf "Port (%d) is too low. Minimum allowed port is 9000." .Values.portalDetails.port) }}
+  {{- end }}
+{{- end }}

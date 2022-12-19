@@ -77,7 +77,6 @@ questions:
           description: "Specify port to be used for Portal access"
           schema:
             type: int
-            min: 9000
             max: 65535
             default: 15000
 
@@ -427,7 +426,6 @@ questions:
                 schema:
                   type: int
                   required: true
-                  min: 9000
                   max: 65535
               - variable: protocol
                 label: "Protocol"
