@@ -1,0 +1,6 @@
+image:
+  pullPolicy: IfNotPresent
+  repository: minio/minio
+  tag: RELEASE.2022-12-12T19-27-27Z
+runAsGroup: 473
+runAsUser: 473
