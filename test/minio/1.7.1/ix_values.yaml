@@ -1,0 +1,13 @@
+image:
+  pullPolicy: IfNotPresent
+  repository: minio/minio
+  tag: RELEASE.2022-12-12T19-27-27Z
+logSearchImage:
+  pullPolicy: IfNotPresent
+  repository: minio/operator
+  tag: v4.5.4
+logsearchapi:
+  diskCapacityGB: 5
+  enabled: false
+runAsGroup: 473
+runAsUser: 473
