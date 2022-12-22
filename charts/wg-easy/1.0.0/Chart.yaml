@@ -1,0 +1,15 @@
+apiVersion: v2
+appVersion: "7"
+dependencies:
+- name: common
+  repository: file://../../../library/common/2207.0.0
+  version: 2207.0.0
+description: WG-Easy is the easiest way to install & manage WireGuard!
+home: https://github.com/WeeJeWel/wg-easy
+icon: https://raw.githubusercontent.com/WeeJeWel/wg-easy/master/src/www/img/logo.png
+keywords:
+- wireguard
+- network
+- vpn
+name: wg-easy
+version: 1.0.0
