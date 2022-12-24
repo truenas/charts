@@ -1,0 +1,96 @@
+{{ include "common.storage.hostPathValidate" .Values }}
+{{ $logsearchValues := (. | mustDeepCopy) }}
+{{ $_ := set $logsearchValues "common" (dict "nameSuffix" (include "logsearchapi.nameSuffix" .)) }}
+apiVersion: {{ template "common.capabilities.deployment.apiVersion" . }}
+kind: Deployment
+metadata:
+  name: {{ template "common.names.fullname" . }}
+  labels:
+    app: {{ template "common.names.name" . }}
+    chart: {{ template "common.names.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+  annotations:
+    rollme: {{ randAlphaNum 5 | quote }}
+spec:
+  replicas: {{ (default 1 .Values.replicas) }}
+  strategy:
+    type: {{ (default "Recreate" .Values.updateStrategy ) }}
+  selector:
+    matchLabels:
+      app: {{ template "common.names.name" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      name: {{ template "common.names.fullname" . }}
+      labels:
+        app: {{ template "common.names.name" . }}
+        release: {{ .Release.Name }}
+        {{- include "common.labels.selectorLabels" . | nindent 8 }}
+      annotations: {{ include "common.annotations" . | nindent 8 }}
+    spec:
+      securityContext:
+        runAsUser: {{ .Values.runAsUser }}
+        runAsGroup: {{ .Values.runAsGroup }}
+      serviceAccountName: {{ include "common.names.serviceAccountName" . | quote }}
+      hostNetwork: {{ include "minio.hostNetworking" . }}
+      {{ if .Values.logsearchapi.enabled }}
+      initContainers:
+        - name: {{ .Chart.Name }}-waitapi
+          image: alpine/curl
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env: {{ include "logsearchapiInit.envVariableConfiguration" $logsearchValues | nindent 10 }}
+          command:
+            - sh
+            - -c
+            - "until curl $apiURL/status; do sleep 2; done"
+      {{ end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          {{ include "common.resources.limitation" . | nindent 10 }}
+          {{ include "common.containers.imageConfig" .Values.image | nindent 10 }}
+          volumeMounts: {{ include "common.storage.configureAppVolumeMountsInContainer" .Values | nindent 12 }}
+          {{- include "minio.tlsKeysVolumeMount" . | nindent 12 }}
+          {{ range $index, $hostPathConfiguration := .Values.extraAppVolumeMounts }}
+            - name: extrappvolume-{{ $index }}
+              mountPath: {{ $hostPathConfiguration.mountPath }}
+          {{ end }}
+          command:
+            - "/bin/sh"
+            - "-ce"
+            - {{ include "minio.commandArgs" . }}
+          ports:
+            - name: api
+              containerPort: {{ .Values.service.nodePort | int }}
+            - name: console
+              containerPort: {{ .Values.service.consolePort | int }}
+          env:
+            {{ $secretName := (include "minio.secretName" .) }}
+            {{ $envList := (default list .Values.environmentVariables) }}
+            {{ if and (eq (include "minio.certAvailable" .) "true") .Values.minioDomain }}
+            {{ $envList = mustAppend $envList (dict "name" "MINIO_BROWSER_REDIRECT_URL" "value" (printf "%s://%s:%d" (include "minio.scheme" .) .Values.minioDomain (.Values.service.consolePort | int))) }}
+            {{ $envList = mustAppend $envList (dict "name" "MINIO_SERVER_URL" "value" (printf "%s://%s:%d" (include "minio.scheme" .) .Values.minioDomain (.Values.service.nodePort | int))) }}
+            {{ end }}
+            {{ $envList = mustAppend $envList (dict "name" "MINIO_ROOT_USER" "valueFromSecret" true "secretName" $secretName "secretKey" "accesskey") }}
+            {{ $envList = mustAppend $envList (dict "name" "MINIO_ROOT_PASSWORD" "valueFromSecret" true "secretName" $secretName "secretKey" "secretkey") }}
+            {{ if .Values.logsearchapi.enabled }}
+            {{/*
+            We can put any ID we want here. Just make sure it's unique
+            It can be rolled on each startup without problems, or se can set a static one.
+            */}}
+            {{ $webhookID := (printf "ix-%v" (randAlphaNum 5)) }}
+            {{ $logsearchSecretName := (include "logsearchapi.secretName" .) }}
+            {{ $envList = mustAppend $envList (dict "name" "MINIO_LOG_QUERY_AUTH_TOKEN" "valueFromSecret" true "secretName" $logsearchSecretName "secretKey" "queryToken") }}
+            {{ $envList = mustAppend $envList (dict "name" "MINIO_LOG_QUERY_URL" "valueFromSecret" true "secretName" $logsearchSecretName "secretKey" "logQueryURL") }}
+            {{ $envList = mustAppend $envList (dict "name" (printf "MINIO_AUDIT_WEBHOOK_ENDPOINT_%v" $webhookID) "valueFromSecret" true "secretName" $logsearchSecretName "secretKey" "webhookURL") }}
+            {{ $envList = mustAppend $envList (dict "name" (printf "MINIO_AUDIT_WEBHOOK_ENABLE_%v" $webhookID) "value" "on") }}
+            {{ end }}
+            {{ include "common.containers.environmentVariables" (dict "environmentVariables" $envList) | nindent 12 }}
+{{ include "common.networking.dnsConfiguration" .Values | nindent 6 }}
+      volumes: {{ include "common.storage.configureAppVolumes" .Values | nindent 8 }}
+      {{- include "minio.tlsKeysVolume" . | nindent 8 }}
+      {{ range $index, $hostPathConfiguration := .Values.extraAppVolumeMounts }}
+        - name: extrappvolume-{{ $index }}
+          hostPath:
+            path: {{ $hostPathConfiguration.hostPath }}
+    {{ end }}
