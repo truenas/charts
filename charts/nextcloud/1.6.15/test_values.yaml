@@ -12,7 +12,7 @@ environmentVariables: []
 image:
   pullPolicy: IfNotPresent
   repository: nextcloud
-  tag: 25.0.1
+  tag: 25.0.2
 ixChartContext: {}
 nextcloud:
   datadir: /var/www/html/data
@@ -23,7 +23,7 @@ nginx:
   image:
     pullPolicy: IfNotPresent
     repository: nginx
-    tag: 1.21.3
+    tag: 1.23.3
 postgresAppVolumeMounts:
   postgres-backup:
     emptyDir: true
