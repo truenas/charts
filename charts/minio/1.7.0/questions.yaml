@@ -184,6 +184,27 @@ questions:
       $ref:
         - "definitions/certificate"
 
+  - variable: logsearchapi
+    label: Log Search API Configuration
+    description: Log Search API Configuration
+    group: Minio Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: enabled
+          label: Enable Log Search API
+          description: Enables Log Search API and configures MinIO to use it. It also deploys a postgres DB for it.
+          schema:
+            type: boolean
+            default: false
+        - variable: diskCapacityGB
+          label: Disk Capacity in GB
+          description: Capacity in GB that logs are allowed to occupy.
+          schema:
+            type: int
+            show_if: [["enabled", "=", true]]
+            default: 5
+
   - variable: appVolumeMounts
     label: "Minio Storage"
     group: "Storage"
@@ -251,6 +272,85 @@ questions:
                 schema:
                   type: hostpath
                   required: true
+
+  - variable: postgresAppVolumeMounts
+    label: Postgres Storage
+    group: Storage
+    schema:
+      type: dict
+      attrs:
+        - variable: postgres-data
+          label: Postgres Data Volume
+          schema:
+            type: dict
+            attrs:
+              - variable: datasetName
+                label: Postgres Data Volume Name
+                schema:
+                  type: string
+                  hidden: true
+                  $ref:
+                    - normalize/ixVolume
+                  default: ix-postgres_data
+                  show_if: [["hostPathEnabled", "=", false]]
+                  editable: false
+              - variable: mountPath
+                label: Postgresql Data Mount Path
+                description: Path where the volume will be mounted inside the pod
+                schema:
+                  type: path
+                  hidden: true
+                  editable: false
+                  default: /var/lib/postgresql/data
+              - variable: hostPathEnabled
+                label: Enable Host Path for Postgres Data Volume
+                schema:
+                  type: boolean
+                  default: false
+                  show_subquestions_if: true
+                  subquestions:
+                    - variable: hostPath
+                      label: Host Path for Postgres Data Volume
+                      schema:
+                        type: hostpath
+                        required: true
+                        immutable: true
+
+        - variable: postgres-backup
+          label: Postgres Backup Volume
+          schema:
+            type: dict
+            attrs:
+              - variable: datasetName
+                label: Postgres Backup Volume Name
+                schema:
+                  type: string
+                  hidden: true
+                  $ref:
+                    - normalize/ixVolume
+                  default: ix-postgres_backups
+                  show_if: [["hostPathEnabled", "=", false]]
+                  editable: false
+              - variable: mountPath
+                label: Postgresql Backup Mount Path
+                description: Path where the volume will be mounted inside the pod
+                schema:
+                  type: path
+                  hidden: true
+                  editable: false
+                  default: /postgres_backups
+              - variable: hostPathEnabled
+                label: Enable Host Path for Postgres Backup Volume
+                schema:
+                  type: boolean
+                  default: false
+                  show_subquestions_if: true
+                  subquestions:
+                    - variable: hostPath
+                      label: Host Path for Postgres Backup Volume
+                      schema:
+                        type: hostpath
+                        required: true
 
   - variable: enableResourceLimits
     label: "Enable Pod resource limits"
