@@ -1,0 +1,18 @@
+# Example configuration of `connection` secret for Rails
+# Example for Azure Blob Storage
+#   See https://gitlab.com/gitlab-org/charts/gitlab/blob/master/doc/charts/globals.md#connection
+#   See https://gitlab.com/gitlab-org/charts/gitlab/blob/master/doc/advanced/external-object-storage
+
+# NB: GitLab uses Fog (https://github.com/fog/fog) to connect to GCS, S3 and S3 Compatible, but Azure support in Fog is on a separate project (https://github.com/fog/fog-azure-rm), which GitLab doesnt currently support, so we will use S3-Compatible for Azure.
+
+provider: AWS
+region: us-east-1
+aws_access_key_id: YOUR_AZURE_STORAGE_ACCOUNT_NAME
+aws_secret_access_key: YOUR_AZURE_STORAGE_ACCOUNT_KEY
+
+# URL of your minio setup
+host: your_minio_setup.azurewebsites.net
+endpoint: "https://your_minio_setup.azurewebsites.net"
+
+# Setting path_style to true is important for Azure, this will make sure your storage containers are accessed using paths and not subdomains, subdomains will fail with 404s.
+path_style: true

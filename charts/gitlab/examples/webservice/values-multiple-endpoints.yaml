@@ -1,0 +1,24 @@
+gitlab:
+  webservice:
+    deployments:
+      # answers all external traffic not answers by others
+      default:
+        ingress:
+          path: /
+        resources:
+          requests:
+            cpu: 500m
+            memory: 2G
+        workerProcesses: 2
+      # api answers all external requests for to /api/*
+      api:
+        ingress:
+          path: /api
+        hpa:
+          minReplicas: 1
+          maxReplixas: 5
+        workerProcesses: 1
+        resources:
+          requests:
+            cpu: 300m
+            memory: 1.25G

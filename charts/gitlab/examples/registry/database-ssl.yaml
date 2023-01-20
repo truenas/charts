@@ -1,0 +1,17 @@
+postgresql:
+  image:
+    tag: 12
+
+registry:
+  database:
+    enabled: true
+    password:
+      secret: testing-postgresql-password
+      key: registry-password
+    name: registry_testing
+    sslmode: verify-full
+    ssl:
+      secret: testing-registry-postgresql-ssl
+      clientKey: client-key.pem
+      clientCertificate: client-cert.pem
+      serverCA: server-ca.pem

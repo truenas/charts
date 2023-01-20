@@ -1,0 +1,38 @@
+# Configure the use of AWS ELB LoadBalancer, using layers 4 (TCP) and 7 (HTTPS)
+#
+# HTTPS (443) -> ELB termination -> NGINX (re-encrypt w/ self-signed) -> HTTPS (443)
+# TCP (22) -> ELB -> NGINX -> TCP (22)
+# 
+# - Configures ELB to be layer 7, terminating TLS with ACM
+# - Configures ELB to re-encrypt to HTTPS backend with self-signed certificates after termination
+# - Non HTTPS specified ports are default as TCP backend 
+# - Configures NGINX to trust X-Forwarded-* headers from ELB
+#
+# - See https://kubernetes.io/docs/concepts/services-networking/service/#ssl-support-on-aws
+# - See https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.1/guide/service/annotations/
+# - See https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#use-forwarded-headers
+
+global:
+  ingress:
+    # Disable cert-manager to use self-signed certificates for the backend
+    configureCertmanager: false
+    # Enable TLS termination on Ingress objects, by NGINX to use self-signed certificates 
+    tls:
+      enabled: true
+
+nginx-ingress:
+  controller:
+    config:
+      # pass the X-Forwarded-* headers directly from the upstream
+      use-forwarded-headers: "true" 
+    service:
+      annotations:
+        # Layer 7, injects X-Forwarded-* headers
+        service.beta.kubernetes.io/aws-load-balancer-backend-protocol: https
+        service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: "3600"
+        # Configure ACM certifiates
+        service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:...
+        # Configure which ports are to terminate SSL.
+        service.beta.kubernetes.io/aws-load-balancer-ssl-ports: https
+
+

@@ -1,0 +1,9 @@
+# Example configuration of registry `storage` secret
+# Example for Azure Blob Storage
+#   See https://docs.docker.com/registry/storage-drivers/azure/
+#   See https://gitlab.com/gitlab-org/charts/gitlab/tree/master/doc/charts/registry/#storage
+#   See https://gitlab.com/gitlab-org/charts/gitlab/blob/master/doc/advanced/external-object-storage
+azure:
+    accountname: YOUR_AZURE_STORAGE_ACCOUNT_NAME
+    accountkey: YOUR_AZURE_STORAGE_ACCOUNT_KEY
+    container: gitlab-registry-storage

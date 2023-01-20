@@ -1,0 +1,12 @@
+gitlab:
+  gitaly:
+    extraVolumes: |-
+     - name: gitconfig
+       configMap:
+         name: gitlab-gitaly-gitconfig
+         items:
+         - key: gitconfig
+           path: gitconfig
+    extraVolumeMounts: |-
+      - name: gitconfig
+        mountPath: /usr/local/etc/

@@ -1,0 +1,54 @@
+redis:
+  install: false
+global:
+  redis:
+    host: redis.example
+    port: 9001
+    password:
+      enabled: true
+      secret: redis-secret
+      key: redis-password
+    cache:
+      # use Sentinel servers for the cache example
+      # any redis connection can use sentinels, but each connection
+      # needs to be explicitly specified
+      # host: cache.redis.example
+      # port: 9002
+      host: <redis_cluster_name>  # specified in sentinel.conf
+      sentinels:
+        - host: sentinel1.redis.example
+          port: 26379
+        - host: sentinel2.redis.example
+          port: 26379
+      password:
+        enabled: true
+        secret: cache-secret
+        key: cache-password
+    sharedState:
+      host: shared.redis.example
+      port: 9003
+      password:
+        enabled: true
+        secret: shared-secret
+        key: shared-password
+    queues:
+      host: queues.redis.example
+      port: 9004
+      password:
+        enabled: true
+        secret: queues-secret
+        key: queues-password
+    actioncable:
+      host: cable.redis.example
+      port: 9005
+      password:
+        enabled: true
+        secret: cable-secret
+        key: cable-password
+    sessions:
+      host: sessions.redis.example
+      port: 9005
+      password:
+        enabled: true
+        secret: sessions-secret
+        key: sessions-password

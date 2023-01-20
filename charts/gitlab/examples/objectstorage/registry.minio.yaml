@@ -1,0 +1,14 @@
+# Example configuration of registry `storage` secret
+# Example for Minio storage
+#   See https://docs.gitlab.com/ee/administration/job_artifacts.html#s3-compatible-connection-settings
+#   See https://gitlab.com/gitlab-org/charts/gitlab/tree/master/doc/charts/registry/#storage
+#   See https://gitlab.com/gitlab-org/charts/gitlab/blob/master/doc/advanced/external-object-storage
+#   See https://gitlab.com/gitlab-org/container-registry/-/tree/master/docs-gitlab#additional-parameters
+s3:
+  v4auth: true
+  regionendpoint: "https://storage.example.com:9000"
+  pathstyle: true
+  region: us-east-1
+  bucket: registry
+  accesskey: ACCESSKEY
+  secretkey: SECRETKEY

@@ -1,0 +1,24 @@
+# https://docs.gitlab.com/charts/charts/globals#configure-postgresql-settings
+# https://docs.gitlab.com/ee/administration/database_load_balancing.html
+global:
+  psql:
+    host: primary.postgresql.service.consul
+    load_balancing:
+      # #service-discovery using consul
+      discover:
+        nameserver: some.consul
+        record: secondary.postgresql.service.consul
+        record_type: A
+        port: 8600
+        interval: 60
+        disconnect_timeout: 120
+      # #service-discovery using Kubernetes DNS
+      # discover:
+      #   nameserver: <kube-dns cluster IP>
+      #   record: secondary.postgresql.svc
+      #   record_type: A
+      #   port: 53
+      #   interval: 60
+      #   disconnect_timeout: 120
+postgresql:
+  install: false

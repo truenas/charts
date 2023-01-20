@@ -1,0 +1,61 @@
+{{- $sharedSecretValues := index .Values "shared-secrets" }}
+{{- if and $sharedSecretValues.enabled $sharedSecretValues.rbac.create -}}
+{{-   if $sharedSecretValues.serviceAccount.create -}}
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ template "shared-secrets.serviceAccountName" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "gitlab.standardLabels" . | nindent 4 }}
+    {{- include "gitlab.commonLabels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-weight": "-5"
+    "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
+{{-   end }}
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: {{ template "shared-secrets.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ template "shared-secrets.name" . }}
+    chart: shared-secrets-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+    {{- include "gitlab.commonLabels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-weight": "-5"
+    "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
+rules:
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["get", "list", "create", "patch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ template "shared-secrets.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ template "shared-secrets.name" . }}
+    chart: shared-secrets-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+    {{- include "gitlab.commonLabels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-weight": "-5"
+    "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: {{ template "shared-secrets.fullname" . }}
+subjects:
+  - kind: ServiceAccount
+    name: {{ template "shared-secrets.serviceAccountName" . }}
+    namespace: {{ .Release.Namespace }}
+{{- end}}

@@ -1,0 +1,12 @@
+global:
+  pod:
+    # Applied to all spec.template.metadata.labels
+    labels:
+      environment: global
+      prefix/item-1: global
+gitlab:
+  webservice:
+    # present only on this chart, overriding global, where present.
+    podLabels:
+      environment: local
+      prefix/item-2: local

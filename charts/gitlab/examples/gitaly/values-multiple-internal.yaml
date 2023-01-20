@@ -1,0 +1,12 @@
+# gitaly/values-multiple-internal.yaml
+# This example intended as an example of configuring multiple Gitaly
+# pods as part of the StatefuleSet in this chart.
+# - This provides an example of two pods in the StatefulSet
+# https://gitlab.com/gitlab-org/charts/gitlab/tree/master/doc/
+
+global:
+  gitaly:
+    internal:
+      names:
+        - default
+        - secondary

@@ -1,0 +1,17 @@
+# This is an example values.yaml. It shows how to configure incoming emails
+global:
+  appConfig:
+    incomingEmail:
+      enabled: true
+      address: gitlab-incoming+%{key}@gmail.com
+      host: example.com
+      port: 993
+      ssl: true
+      startTls: true
+      user: myusername
+      password:
+        secret: my-encoming-mail-secret # https://gitlab.com/gitlab-org/charts/gitlab/blob/master/doc/installation/secrets.md#imap-password-for-incoming-emails
+        key: secret
+      mailbox: inbox
+      deliveryMethod: sidekiq
+      authToken: {}

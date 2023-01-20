@@ -1,0 +1,115 @@
+{{- $sharedSecretValues := index .Values "shared-secrets" -}}
+{{- if $sharedSecretValues.enabled }}
+{{-   if not (or .Values.global.ingress.configureCertmanager .Values.global.ingress.tls) -}}
+{{-     $imageCfgSelfsign := dict "global" .Values.global.image "local" $sharedSecretValues.selfsign.image -}}
+{{-     $imageCfgKubectl := dict "global" .Values.global.image "local" .Values.global.kubectl.image -}}
+{{-     $jointPullSecrets := concat (default (list) $sharedSecretValues.selfsign.image.pullSecrets) (default (list) .Values.global.kubectl.image.pullSecrets) -}}
+{{-     $imageCfg := dict "global" .Values.global.image "local" (dict "pullSecrets" $jointPullSecrets) -}}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ template "shared-secrets.jobname" . }}-selfsign
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "gitlab.standardLabels" . | nindent 4 }}
+    {{- include "gitlab.commonLabels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
+spec:
+  template:
+    metadata:
+      labels:
+        app: {{ template "name" . }}
+        release: {{ .Release.Name }}
+      annotations:
+      {{- range $key, $value := $sharedSecretValues.annotations }}
+        {{ $key }}: {{ $value | quote }}
+      {{- end }}
+    spec:
+      {{- include "gitlab.nodeSelector" . | nindent 6 }}
+      {{- if $sharedSecretValues.tolerations }}
+      tolerations:
+        {{- toYaml $sharedSecretValues.tolerations | nindent 8 }}
+      {{- end }}
+      securityContext:
+        runAsUser: {{ $sharedSecretValues.securityContext.runAsUser }}
+        fsGroup: {{ $sharedSecretValues.securityContext.fsGroup }}
+      {{- if or $sharedSecretValues.serviceAccount.enabled .Values.global.serviceAccount.enabled }}
+      serviceAccountName: {{ template "shared-secrets.serviceAccountName" . }}
+      {{- end }}
+      restartPolicy: Never
+      {{- include "gitlab.image.pullSecrets" $imageCfg | nindent 6 }}
+      initContainers:
+      - name: cfssl-self-sign
+        image: "{{ $sharedSecretValues.selfsign.image.repository }}:{{ $sharedSecretValues.selfsign.image.tag }}"
+        {{- include "gitlab.image.pullPolicy" $imageCfgSelfsign | indent 8 }}
+        env:
+        - name: CA_SUBJECT
+          value: {{ $sharedSecretValues.selfsign.caSubject | quote }} # defaults to GitLab in container
+        - name: CA_ORG
+          value: {{ .Release.Namespace | quote }} # defaults to GitLab in container
+        - name: CA_ORG_UNIT
+          value: {{ .Release.Name | quote }} # defaults to Cloud Native in container
+        - name: CERT_SUBJECT
+          value: {{ .Values.global.hosts.domain | quote }} # defaults to GitLab in container
+        - name: CERT_DOMAIN
+          value: {{ .Values.global.hosts.domain | quote }} # defaults to example.com in container
+        - name: EXPIRY
+          value: {{ $sharedSecretValues.selfsign.expiry | quote }} # defaults to 8076h in container
+        - name: ALGORITHM
+          value: {{ $sharedSecretValues.selfsign.keyAlgorithm | quote }} # defaults to ecdsa in container
+        - name: KEY_SIZE
+          value: {{ $sharedSecretValues.selfsign.keySize | quote }} # defaults to 256 inside container
+        volumeMounts:
+        - name: certs-path
+          mountPath: /output
+        resources:
+          {{- toYaml $sharedSecretValues.resources | nindent 10 }}
+      containers:
+      - name: kubectl
+        image: {{ include "gitlab.kubectl.image" . | quote }}
+        {{- include "gitlab.image.pullPolicy" $imageCfgKubectl | indent 8 }}
+        command:
+        - /bin/bash
+        - -exc
+        - |
+          certname={{ template "gitlab.wildcard-self-signed-cert-name" . }}
+          # create wildcard certificate secret
+          kubectl create secret tls $certname \
+            --cert=/output/wildcard.pem --key=/output/wildcard-key.pem || true
+{{- if not .Values.global.application.create }}
+          kubectl --namespace=$namespace label \
+            secret $certname  $(echo '{{ include "gitlab.application.labels" . | replace ": " "=" | replace "\r\n" " " | replace "\n" " " }}' | sed -E 's/=[^ ]*/-/g')
+{{- end }}
+          kubectl --namespace=$namespace label --overwrite \
+            secret $certname {{ include "gitlab.standardLabels" . | replace ": " "=" | replace "\r\n" " " | replace "\n" " " }} {{ include "gitlab.commonLabels" . | replace ": " "=" | replace "\r\n" " " | replace "\n" " " }}
+          # create CA certificate secret
+          kubectl create secret generic ${certname}-ca \
+            --from-file=cfssl_ca=/output/ca.pem || true
+{{- if not .Values.global.application.create }}
+          kubectl --namespace=$namespace label \
+            secret ${certname}-ca  $(echo '{{ include "gitlab.application.labels" . | replace ": " "=" | replace "\r\n" " " | replace "\n" " " }}' | sed -E 's/=[^ ]*/-/g')
+{{- end }}
+          kubectl --namespace=$namespace label --overwrite \
+            secret ${certname}-ca {{ include "gitlab.standardLabels" . | replace ": " "=" | replace "\r\n" " " | replace "\n" " " }} {{ include "gitlab.commonLabels" . | replace ": " "=" | replace "\r\n" " " | replace "\n" " " }}
+          # create certificate chain for GitLab Runner
+          cat /output/ca.pem /output/wildcard.pem > /tmp/{{ template "gitlab.gitlab.hostname" $ }}.crt
+          kubectl create secret generic ${certname}-chain \
+            --from-file=/tmp/{{ template "gitlab.gitlab.hostname" $ }}.crt || true
+{{- if not .Values.global.application.create }}
+          kubectl --namespace=$namespace label \
+            secret ${certname}-chain  $(echo '{{ include "gitlab.application.labels" . | replace ": " "=" | replace "\r\n" " " | replace "\n" " " }}' | sed -E 's/=[^ ]*/-/g')
+{{- end }}
+          kubectl --namespace=$namespace label --overwrite \
+            secret ${certname}-chain {{ include "gitlab.standardLabels" . | replace ": " "=" | replace "\r\n" " " | replace "\n" " " }} {{ include "gitlab.commonLabels" . | replace ": " "=" | replace "\r\n" " " | replace "\n" " " }}
+        volumeMounts:
+        - name: certs-path
+          mountPath: /output
+        resources:
+          {{- toYaml $sharedSecretValues.resources | nindent 10 }}
+      volumes:
+      - name: certs-path
+        emptyDir: {}
+{{-   end -}}
+{{- end }}

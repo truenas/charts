@@ -1,0 +1,23 @@
+# openshift/gitlab-shell-external-ip-alt-port.yaml
+
+# This example shows how to assign an external IP to GitLab Shell with an alternate port. This
+# is required for deployment on OpenShift, when the default SSH port is not available and you
+# want to use an alternate port.
+#
+# You may have to define an external DNS record for this IP. If you did, you also need to pass
+# the external domain name.
+#
+# For more information see:
+#   https://gitlab.com/gitlab-org/charts/gitlab/blob/master/doc/installation/cloud/openshift.md#next-steps
+
+gitlab:
+  gitlab-shell:
+    service:
+      externalIPs:
+        - x.x.x.x
+
+global:
+  hosts:
+    ssh: ssh.gitlab.example.com
+  shell:
+    port: 222

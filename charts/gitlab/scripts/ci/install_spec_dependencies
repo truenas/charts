@@ -1,0 +1,25 @@
+#!/bin/bash
+set -e
+
+export DEBIAN_FRONTEND=noninteractive
+KUBECTL_VERSION=${KUBECTL_VERSION:-v1.16.15}
+HELM_VERSION=${HELM_VERSION:-3.1.2}
+
+apt-get update -qq
+apt-get install -y --no-install-recommends \
+    curl ca-certificates
+
+curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+apt-get update -qq
+apt install docker-ce-cli=5:20.10.5~3-0~debian-buster
+
+curl -Ls https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz | tar zxf -
+chmod +x linux-amd64/helm
+mv linux-amd64/helm /usr/local/bin/
+rm -rf linux-amd64/
+
+curl -LsO https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl
+chmod +x kubectl
+mv kubectl /usr/local/bin/kubectl

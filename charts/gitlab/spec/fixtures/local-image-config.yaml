@@ -1,0 +1,138 @@
+certmanager-issuer:
+  email: test@example.com
+
+global:
+  geo:
+    enabled: true
+    role: secondary
+    psql:
+      host: foo
+      password:
+        secret: bar
+  psql:
+    host: foo
+    password:
+      secret: bar
+
+  image:
+    pullPolicy: pp-global
+    pullSecrets:
+    - name: ps-global
+
+  kubectl:
+    image:
+      pullPolicy: pp-kubectl
+      pullSecrets:
+      - name: ps-kubectl
+  certificates:
+    image:
+      pullPolicy: pp-certificates
+      pullSecrets:
+      - name: ps-certificates
+  busybox:
+    image:
+      pullPolicy: pp-busybox
+      pullSecrets:
+      - name: ps-busybox
+
+gitlab:
+  geo-logcursor:
+    image:
+      pullPolicy: pp-geo-logcursor
+      pullSecrets:
+      - name: ps-geo-logcursor
+    init:
+      image:
+        pullPolicy: pp-geo-logcursor-init
+  gitaly:
+    image:
+      pullPolicy: pp-gitaly
+      pullSecrets:
+      - name: ps-gitaly
+    init:
+      image:
+        pullPolicy: pp-gitaly-init
+  gitlab-exporter:
+    image:
+      pullPolicy: pp-gitlab-exporter
+      pullSecrets:
+      - name: ps-gitlab-exporter
+    init:
+      image:
+        pullPolicy: pp-gitlab-exporter-init
+  gitlab-pages:
+    image:
+      pullPolicy: pp-gitlab-pages
+      pullSecrets:
+      - name: ps-gitlab-pages
+    init:
+      image:
+        pullPolicy: pp-gitlab-pages-init
+  gitlab-shell:
+    image:
+      pullPolicy: Never
+      pullSecrets:
+      - name: ps-gitlab-shell
+    init:
+      image:
+        pullPolicy: Never-init
+  mailroom:
+    image:
+      pullPolicy: pp-mailroom
+      pullSecrets:
+      - name: ps-mailroom
+    init:
+      image:
+        pullPolicy: pp-mailroom-init
+  migrations:
+    image:
+      pullPolicy: pp-migrations
+      pullSecrets:
+      - name: ps-migrations
+    init:
+      image:
+        pullPolicy: pp-migrations-init
+  sidekiq:
+    image:
+      pullPolicy: pp-sidekiq
+      pullSecrets:
+      - name: ps-sidekiq
+    init:
+      image:
+        pullPolicy: pp-sidekiq-init
+  toolbox:
+    image:
+      pullPolicy: pp-toolbox
+      pullSecrets:
+      - name: ps-toolbox
+    init:
+      image:
+        pullPolicy: pp-toolbox-init
+  webservice:
+    image:
+      pullPolicy: pp-webservice
+      pullSecrets:
+      - name: ps-webservice
+    init:
+      image:
+        pullPolicy: pp-webservice-init
+upgradeCheck:
+  image:
+    pullPolicy: pp-gitlab
+    pullSecrets:
+    - name: ps-gitlab
+registry:
+  image:
+    pullPolicy: pp-registry
+    pullSecrets:
+    - name: ps-registry
+  init:
+    image:
+      pullPolicy: pp-registry-init
+minio:
+  imagePullPolicy: pp-minio
+  pullSecrets:
+  - name: ps-minio
+  init:
+    image:
+      pullPolicy: pp-minio-init

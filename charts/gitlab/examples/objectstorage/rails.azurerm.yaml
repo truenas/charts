@@ -1,0 +1,10 @@
+# Example configuration of `connection` secret for Rails
+# Example for Azure Blob Storage
+#   See https://docs.gitlab.com/ee/administration/object_storage.html#azure-blob-storage
+#   See https://gitlab.com/gitlab-org/charts/gitlab/tree/master/doc/charts/registry/#storage
+#   See https://gitlab.com/gitlab-org/charts/gitlab/blob/master/doc/advanced/external-object-storage
+provider: AzureRM
+# Specify storage account/access
+azure_storage_account_name: YOUR_AZURE_STORAGE_ACCOUNT_NAME
+azure_storage_access_key: YOUR_AZURE_STORAGE_ACCOUNT_KEY
+azure_storage_domain: blob.core.windows.net

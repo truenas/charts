@@ -1,0 +1,30 @@
+global:
+  workhorse:
+    # points all other component charts as the internal-api
+    serviceName: webservice-internal-api
+gitlab:
+  webservice:
+    deployments:
+      # default answers all external traffic
+      default:
+        # You must always have at least one with `path: /`
+        ingress:
+          path: /
+        resources:
+          requests:
+            cpu: 500m
+            memory: 2G
+        workerProcesses: 2
+      # internal-api answers only internal traffic from other charts
+      internal-api:
+        # this Deployment has no Ingress
+        ingress:
+          path:
+        hpa:
+          minReplicas: 1
+          maxReplixas: 3
+        workerProcesses: 1
+        resources:
+          requests:
+            cpu: 300m
+            memory: 1.25G

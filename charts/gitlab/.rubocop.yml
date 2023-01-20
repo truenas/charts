@@ -1,0 +1,55 @@
+inherit_gem:
+  gitlab-styles:
+    - rubocop-default.yml
+
+inherit_from: .rubocop_todo.yml
+
+require:
+  - rubocop-rspec
+
+AllCops:
+  TargetRubyVersion: 2.7
+  # Cop names are displayed in offense messages by default. Change behavior
+  # by overriding DisplayCopNames, or by giving the `--no-display-cop-names`
+  # option.
+  DisplayCopNames: true
+  # Style guide URLs are not displayed in offense messages by default. Change
+  # behavior by overriding DisplayStyleGuide, or by giving the
+  # -S/--display-style-guide option.
+  DisplayStyleGuide: false
+  Exclude:
+    - 'bin/*'
+    - 'gems/**/*'
+    - '.bundle/**/*'
+    - 'cache/**/*'
+    - 'node_modules/**/*'
+    - 'vendor/bundle/**/*'
+
+# No rails in charts
+Rails:
+  Enabled: false
+
+# TODO re-enable and start updating rspec tests
+RSpec:
+  Enabled: false
+
+# We are not concerned with the security of using public in charts but we want to ensure
+GitlabSecurity/PublicSend:
+  Enabled: false
+
+Lint/HashCompareByIdentity: # (new in 0.93)
+  Enabled: true
+
+Lint/RedundantSafeNavigation: # (new in 0.93)
+  Enabled: true
+
+Style/ClassEqualityComparison: # (new in 0.93)
+  Enabled: true
+
+# Do not introduce global variables.
+Style/GlobalVars:
+  Enabled: true
+  Exclude: []
+
+Style/MultilineIfModifier:
+  Enabled: false

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "fullname" . }}-chart-info
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "gitlab.standardLabels" . | nindent 4 }}
+    {{- include "gitlab.commonLabels" . | nindent 4 }}
+data:
+  gitlabVersion: "{{ coalesce .Values.global.gitlabVersion .Chart.AppVersion }}"
+  gitlabChartVersion: "{{ .Chart.Version }}"

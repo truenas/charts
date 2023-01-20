@@ -1,0 +1,13 @@
+# Example configuration of registry `storage` secret
+# Example for Amazon S3
+#   See https://docs.docker.com/registry/storage-drivers/s3
+#   See https://gitlab.com/gitlab-org/charts/gitlab/tree/master/doc/charts/registry/#storage
+#   See https://gitlab.com/gitlab-org/charts/gitlab/blob/master/doc/advanced/external-object-storage
+#   See https://gitlab.com/gitlab-org/container-registry/-/tree/master/docs-gitlab#additional-parameters
+s3:
+  bucket: gitlab-registry-storage
+  accesskey: BOGUS_ACCESS_KEY
+  secretkey: BOGUS_SECRET_KEY
+  region: us-east-1
+  # regionendpoint: "https://minio.example.com:9000"
+  v4auth: true

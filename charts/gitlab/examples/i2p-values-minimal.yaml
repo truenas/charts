@@ -1,0 +1,95 @@
+# i2p-values-minimal.yaml
+# This example intended to be used in conjunction with our I2P demo
+# - Minimized CPU/Memory load
+# - Services are scaled down to 1 replica.
+# - The standard `nginx` ingress class it used, so it can be shared with deployed apps
+# - A privileged runner is deployed, so docker-in-docker can be used
+
+# Minimal settings
+global:
+  hosts:
+    domain: example.com
+    externalIP: 1.1.1.1
+  # Use standard ingress class name to share with deployed apps
+  ingress:
+    class: nginx
+certmanager-issuer:
+  email: me@example.com
+# GitLab Runner needs to be privileged for Docker Build to function.
+# Note: that privileged runners **are insecure** and can compromise your cluster.
+gitlab-runner:
+  runners:
+    privileged: true
+  resources:
+    requests:
+      cpu: 10m
+# Reduce replica counts, resource requests reducing CPU & memory requirements
+nginx-ingress:
+  controller:
+    replicaCount: 1
+    minAvailable: 1
+    # Use standard ingress class name to share with deployed apps
+    ingressClass: nginx
+    resources:
+      requests:
+        cpu: 20m
+  defaultBackend:
+    minAvailable: 1
+    replicaCount: 1
+gitlab:
+  webservice:
+    minReplicas: 1
+    maxReplicas: 1
+  sidekiq:
+    minReplicas: 1
+    maxReplicas: 1
+  gitlab-shell:
+    minReplicas: 1
+    maxReplicas: 1
+  gitaly:
+    resources:
+      requests:
+          cpu: 50m
+  shared-secrets:
+    resources:
+        requests:
+          cpu: 10m
+  migrations:
+    resources:
+      requests:
+        cpu: 10m
+  toolbox:
+    resources:
+      requests:
+        cpu: 10m
+registry:
+  hpa:
+    minReplicas: 1
+    maxReplicas: 1
+redis:
+  metrics:
+    resources:
+      requests:
+        cpu: 10m
+postgresql:
+  metrics:
+    resources:
+      requests:
+        cpu: 10m
+prometheus:
+  server:
+    resources:
+      requests:
+        cpu: 20m
+  configmapReload:
+    resources:
+      requests:
+        cpu: 10m
+certmanager:
+  resources:
+    requests:
+      cpu: 10m
+minio:
+  resources:
+    requests:
+      cpu: 50m

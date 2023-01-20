@@ -1,0 +1,23 @@
+certmanager-issuer:
+  email: test@example.com
+
+global:
+  geo:
+    enabled: true
+    role: secondary
+    psql:
+      host: foo
+      password:
+        secret: bar
+  psql:
+    host: foo
+    password:
+      secret: bar
+
+  image:
+    pullPolicy: pp-global
+    pullSecrets:
+    - name: ps-global
+  busybox:
+    image:
+      pullPolicy: pp-busybox

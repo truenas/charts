@@ -1,0 +1,16 @@
+# Disable SSL altogether
+global:
+  hosts:
+    https: false
+  ingress:
+    tls:
+      enabled: false
+
+# Specify NodePort for HTTP on NGINX
+nginx-ingress:
+  controller:
+    service:
+      nodePorts:
+        # http port value below must match the KinD config file:
+        #   nodes[0].extraPortMappings[0].containerPort
+        http: 32080

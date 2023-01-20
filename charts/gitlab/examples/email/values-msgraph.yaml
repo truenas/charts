@@ -1,0 +1,30 @@
+# This is an example values.yaml. It shows how to configure service desk email
+# See https://docs.gitlab.com/ee/user/project/service_desk.html#using-custom-email-address
+global:
+  appConfig:
+    incomingEmail:
+      enabled: true
+      address: example-incoming+%{key}@example.onmicrosoft.com
+      user: example-incoming@example.onmicrosoft.com
+      mailbox: inbox
+      inboxMethod: microsoft_graph
+      tenantId: "YOUR-TENANT-ID"
+      clientId: "YOUR-CLIENT-ID"
+      clientSecret:
+        secret: my-incoming-mail-client-secret
+        key: secret
+      deliveryMethod: sidekiq
+      authToken: {}
+    serviceDeskEmail:
+      enabled: true
+      address: example-servicedesk+%{key}@@example.onmicrosoft.com
+      user: example-servicedesk@example.onmicrosoft.com
+      mailbox: inbox
+      inboxMethod: microsoft_graph
+      tenantId: "YOUR-TENANT-ID"
+      clientId: "YOUR-CLIENT-ID"
+      clientSecret:
+        secret: my-service-desk-client-secret
+        key: secret
+      deliveryMethod: sidekiq
+      authToken: {}

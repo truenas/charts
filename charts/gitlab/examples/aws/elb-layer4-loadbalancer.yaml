@@ -1,0 +1,27 @@
+# Configure the use of AWS ELB LoadBalancer, in Layer 4 mode
+#
+# !! ONLY for 'service.beta.kubernetes.io/aws-load-balancer-backend-protocol: tcp' !!
+#
+# - Configures NLB to use ProxyProtocol to pass real client IP
+# - Configures NGINX to strip those headers from SSH
+#
+# - See https://kubernetes.io/docs/concepts/services-networking/service/#proxy-protocol-support-on-aws
+# - See https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.1/guide/service/annotations/
+# - See https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#use-proxy-protocol
+
+global:
+  shell:
+    # Configure GitLab Shell's NGINX TCP to expect ProxyProtcol headers (and strip them)
+    tcp:
+      proxyProtocol: true
+nginx-ingress:
+  controller:
+    service:
+      annotations:
+        # Configure NLB, Layer 4 with 'tcp'
+        service.beta.kubernetes.io/aws-load-balancer-backend-protocol: tcp
+        # Configure NLB to use ProxyProtocol
+        service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
+      config:
+        proxy-real-ip-cidr: 10.2.0.0/16  # The VPC CIDR, to be trusted
+        use-proxy-protocol: "true"       # Tell NGINX to Expect ProxyProtocol headers

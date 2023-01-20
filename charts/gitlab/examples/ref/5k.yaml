@@ -1,0 +1,184 @@
+gitlab:
+  # n1-highcpu-16 in GKE is
+  # - cpu:    15890m
+  # - memory: 12011718Ki
+  webservice:
+    # Min pods recommended to be set to 75% of max to start
+    maxReplicas: 10
+    maxUnavailable: 5
+    minReplicas: 7
+    hpa:
+      targetAverageValue: 1600m
+    ingress:
+      proxyBodySize: 0 # To allow large file uploads like imports
+    nodeSelector:
+      workload: webservice
+    resources:
+      limits:
+        memory: 5.25G # roughly, 1.3GB/worker
+      requests:
+        cpu: 4 # requests.cpu <= workerProcesses
+        memory: 5G # roughly, 1.25GB/worker
+    workerProcesses: 4
+  sidekiq:
+    maxReplicas: 8
+    minReplicas: 6
+    hpa:
+      targetAverageValue: 700m
+    nodeSelector:
+      workload: sidekiq
+    resources:
+      # Running up to 8 pods with a ratio of roughly 1 vCPU to 2 GB RAM as a starting point for requests.
+      # Per the 5k reference architecture (https://docs.gitlab.com/ee/administration/reference_architectures/5k_users.html),
+      # consider the resource limitations in play:
+      # For an n1-standard-4 node in GKE: 4 vCPU, 15 GB memory
+      # - 3 nodes x 4 vCPU = 12 cores in total
+      # - 3 nodes x 15 GB = 45Gb of memory in total
+      # - 45GB memory / 12 cores = ~3.75 GB memory / core, excluding overhead
+      # Each Sidekiq node has the following resources allocatable (roughly):
+      # - cpu:    3920m
+      # - memory: 12698332Ki
+      # Notice that there is actually only <4 vCPU and <13GB memory allocatable.
+      limits:
+        memory: 4G
+      requests:
+        cpu: 900m # Assume single-process, 1 CPU
+        memory: 2G
+  toolbox:
+    backups:
+      # Below, GCS is used an example for the ObjectStorage section.
+      # All ObjectStorage options are documented here:
+      # https://docs.gitlab.com/ee/administration/reference_architectures/5k_users.html#configure-the-object-storage
+      objectStorage:
+        backend: gcs
+        config:
+          gcpProject: example-gcp-projectname
+          key: gcs.json
+          secret: example-connection-secret
+  migrations:
+    # Migrations pod must point directly to PostgreSQL primary
+    psql:
+      host: example-postgresql-primary-ip
+      password:
+        secret: example-postgresql-secret
+        key: password
+      port: example-postgresql-primary-port
+
+global:
+  appConfig:
+    # For context on the ObjectStorage configuration below, see:
+    # https://docs.gitlab.com/ee/administration/reference_architectures/5k_users.html#configure-the-object-storage
+    object_store:
+      enabled: true
+      connection:
+        secret: example-storage-secret
+        key: password
+    artifacts:
+      bucket: example-artifacts-bucket-name
+    backups:
+      bucket: example-backups-bucket-name
+    dependencyProxy:
+      bucket: example-dependency-proxy-bucket-name
+    externalDiffs:
+      bucket: example-external-diffs-bucket-name
+      # Recommend to only store older External Diffs in Object Storage for performance reasons
+      when: outdated
+    lfs:
+      bucket: example-lfs-bucket-name
+    packages:
+      bucket: example-packages-bucket-name
+    terraformState:
+      bucket: example-terraform-state-bucket-name
+    uploads:
+      bucket: example-uploads-bucket-name
+  shell:
+    authToken:
+      secret: example-shell-secret
+      key: password
+  gitaly:
+    authToken:
+      secret: example-gitaly-praefect-external-token
+      key: password
+    enabled: false # Run Gitaly outside of cluster
+    external:
+    - name: default
+      hostname: default.praefect.gitaly.com
+      port: example-praefect-port
+  gitlab:
+    license:
+      secret: example-gitlab-license
+  grafana:
+    enabled: true
+  hosts:
+    domain: example.com
+  minio:
+    enabled: false
+  psql:
+    host: db.example.com
+    password:
+      secret: example-postgresql-secret
+      key: password
+    port:  example-postgresql-port
+  redis:
+    host: example-redis-queue-1
+    password:
+      key: password
+      secret: example-redis-secret
+    sentinels:
+    - host: consul1.example.com
+    - host: consul2.example.com
+    - host: consul3.example.com
+  registry:
+    bucket: example-registry-storage
+
+# https://docs.gitlab.com/ee/ci/runners/#configuring-runners-in-gitlab
+gitlab-runner:
+  install: false
+
+# Below, we use nodeSelectors to send certain
+# workloads to a node separate from the nodes
+# used for the Webservice and Sidekiq workloads.
+# This helps to ensure Webservice and Sidekiq have
+# sufficient resources to schedule enough pods to
+# meet the 5k reference architecture specifications.
+grafana:
+  nodeSelector:
+    workload: ""
+nginx-ingress:
+  controller:
+    nodeSelector:
+      workload: ""
+  defaultBackend:
+    nodeSelector:
+      workload: ""
+prometheus:
+  alertmanager:
+    nodeSelector:
+      workload: ""
+  install: true
+  kubeStateMetrics:
+    nodeSelector:
+      workload: ""
+  nodeExporter:
+    nodeSelector:
+      workload: ""
+  pushgateway:
+    nodeSelector:
+      workload: ""
+  server:
+    nodeSelector:
+      workload: ""
+
+# Run Redis outside of cluster
+redis:
+  install: false
+
+registry:
+  storage:
+    extraKey: gcs.json
+    key: registry-config
+    secret: gcs-secret-example
+
+# Database run outside of cluster
+postgresql:
+  install: false

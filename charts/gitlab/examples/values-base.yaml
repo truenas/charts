@@ -1,0 +1,18 @@
+## This is an example base values.yaml. It shows how to configure a domain, externalIp as well as smtp
+global:
+  hosts:
+    domain: example.com
+    externalIP: 10.0.0.0
+  smtp:
+    enabled: true
+    address: smtp.mailgun.org
+    port: 2525
+    user_name: myuser
+    password:
+      secret: smtp-password # https://gitlab.com/gitlab-org/charts/gitlab/blob/master/doc/installation/secrets.md#smtp-password
+      key: password
+  email:
+    from: mycompany@example.com
+    display_name: MyCompany
+    reply_to: noreply@example.com
+    subject_suffix: " | MyCompanyName"

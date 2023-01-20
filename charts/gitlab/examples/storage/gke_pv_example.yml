@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: PERSISTENT_VOLUME_NAME
+spec:
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: VOLUME_SIZE
+  storageClassName: CUSTOM_STORAGE_CLASS_NAME
+  gcePersistentDisk:
+    fsType: ext4
+    pdName: DISK_VOLUME_NAME

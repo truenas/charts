@@ -1,0 +1,8 @@
+global:
+  pages:
+    host: pages.example.io
+    port: 80
+    https: false
+    apiSecret:
+      secret: gitlab-pages-api-secret
+      key: shared_secret

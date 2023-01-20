@@ -1,0 +1,12 @@
+# disable in-chart PostgreSQL
+postgresql:
+  install: false
+# Configure separate database for Global, Sidekiq
+global:
+  psql:
+    host: db.global
+gitlab:
+  sidekiq:
+    psql:
+      host: db.sidekiq
+      port: 5431

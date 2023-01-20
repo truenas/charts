@@ -1,0 +1,44 @@
+# Configure chart to use dev registry
+
+# This section should be greatly shortened once https://gitlab.com/gitlab-org/charts/gitlab/-/issues/1617
+#   is addressed. For example: `global.image.repository=dev.gitlab.org:5005/gitlab/charts/components/images`
+# This means we can likely remove this extra file and pass in extra arguments with $HELM_EXTRA_ARGS.
+gitlab:
+  gitlab-exporter:
+    image:
+      repository: dev.gitlab.org:5005/gitlab/charts/components/images/gitlab-exporter
+  gitaly:
+    image:
+      repository: dev.gitlab.org:5005/gitlab/charts/components/images/gitaly
+  gitlab-shell:
+    image:
+      repository: dev.gitlab.org:5005/gitlab/charts/components/images/gitlab-shell
+  migrations:
+    image:
+      repository: dev.gitlab.org:5005/gitlab/charts/components/images/gitlab-toolbox-ee
+  sidekiq:
+    image:
+      repository: dev.gitlab.org:5005/gitlab/charts/components/images/gitlab-sidekiq-ee
+  toolbox:
+    image:
+      repository: dev.gitlab.org:5005/gitlab/charts/components/images/gitlab-toolbox-ee
+  webservice:
+    image:
+      repository: dev.gitlab.org:5005/gitlab/charts/components/images/gitlab-webservice-ee
+    workhorse:
+      image: dev.gitlab.org:5005/gitlab/charts/components/images/gitlab-workhorse-ee
+
+registry:
+  image:
+    repository: dev.gitlab.org:5005/gitlab/charts/components/images/gitlab-container-registry
+
+global:
+  image:
+    pullSecrets:
+    - name: dev-images-pull-secret
+  certificates:
+    image:
+      repository: dev.gitlab.org:5005/gitlab/charts/components/images/alpine-certificates
+  kubectl:
+    image:
+      repository: dev.gitlab.org:5005/gitlab/charts/components/images/kubectl

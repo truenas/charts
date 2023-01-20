@@ -1,0 +1,107 @@
+# Need to set certmanager-issuer.email before templating
+certmanager-issuer:
+  email: me@example.com
+
+# YAML anchor to demonstrate setting image.repository and image.tag
+.custom: &custom
+  image:
+    repository: custom-repository
+    tag: 1.2.3-example
+
+# --- Global settings ---
+
+global:
+  <<: *custom
+  kubectl: *custom
+  certificates: *custom
+
+# --- GitLab charts ---
+
+gitlab:
+  geo-logcursor: *custom
+  gitaly:
+    <<: *custom
+    init: *custom
+  gitlab-exporter:
+    <<: *custom
+    init: *custom
+  # If `global.grafana.enabled=true`, uncomment below to set the custom image
+  # gitlab-grafana: *custom
+  gitlab-shell:
+    <<: *custom
+    init: *custom
+  mailroom: *custom
+  migrations:
+    <<: *custom
+    init: *custom
+  sidekiq:
+    <<: *custom
+    init: *custom
+  toolbox:
+    <<: *custom
+    init: *custom
+  webservice:
+    <<: *custom
+    init: *custom
+    workhorse:
+      image: custom-repository
+      tag: custom-tag
+
+# --- Charts from requirements.yaml ---
+
+certmanager:
+  <<: *custom
+  cainjector: *custom
+
+gitlab-runner:
+  image: custom-repository:custom-tag
+
+minio:
+  image: custom-repository
+  imageTag: custom-tag
+  init: *custom
+  minioMc:
+    image: custom-repository
+    tag: custom-tag
+
+nginx-ingress:
+  controller: *custom
+  defaultBackend: *custom
+
+registry:
+    <<: *custom
+    init: *custom
+
+postgresql:
+  image:
+    registry: custom-registry
+    repository: custom-image
+    tag: 12-custom-tag # start with number to make checkConfig happy
+  metrics:
+    image:
+      registry: custom-registry
+      repository: custom-image
+      tag: custom-tag
+
+prometheus:
+  server: *custom
+  configmapReload: *custom
+
+redis:
+  image:
+    registry: custom-registry
+    repository: custom-image
+    tag: custom-tag
+  metrics:
+    image:
+      registry: custom-registry
+      repository: custom-image
+      tag: custom-tag
+
+upgradeCheck: *custom
+
+# If `global.grafana.enabled=true`, uncomment below to set the custom image
+# grafana:
+#   <<: *custom
+#   sidecar:
+#     image: custom-repository:custom-tag

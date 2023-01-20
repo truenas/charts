@@ -1,0 +1,123 @@
+#!/usr/bin/env bash
+set -e
+
+# Set the timestamp to something predictable so we can use it between backup and restore
+fake_timestamp="database_upgrade_5"
+script_name="database-upgrade"
+
+usage() {
+    echo "USAGE: ${script_name} [-r RELEASE] [-n NAMESPACE] [-b BACKUP_NAME] pre|post"
+}
+
+selector() {
+    base="app=${1}"
+    if [ -n "${release}" ]
+    then
+        base+=",release=${release}"
+    fi
+    echo "${base}"
+}
+
+# Run command in the toolbox pod
+in_toolbox() {
+    task_pod=$(kubectl ${namespace} get pods -l "$(selector toolbox)" --field-selector status.phase=Running  -o custom-columns=N:.metadata.name --no-headers | grep -v backup | head -n 1)
+    kubectl ${namespace} exec -it "${task_pod}" -- "${@}"
+}
+
+database_service() {
+    kubectl ${namespace} get service -l "$(selector postgresql)" -o template --template='{{ range .items }}{{ if ne .spec.clusterIP "None" }}{{.metadata.name}}{{ end }}{{ end }}'
+}
+
+# Patches the given deployment with the given number of replicas
+patch_replicas() {
+  local deployment="${1}"
+  local replicas="${2}"
+  kubectl ${namespace} patch deployment "${deployment}" -p "{\"spec\": {\"replicas\": ${replicas}}}"
+}
+
+pre() {
+    in_toolbox backup-utility -t "${fake_timestamp}" --skip registry,uploads,artifacts,lfs,packages,external_diffs,terraform_state,repositories
+}
+
+post() {
+    # The services that connect to the database, they need to be shutdown before we can restore
+    database_connectors="webservice sidekiq gitlab-exporter registry"
+
+    # This will store the original number of replicas, so we can restore the deployments when we're done
+    declare -A replicas
+
+    # Create a configmap to store the replicas count for each deployment
+    if ! kubectl ${namespace} create configmap "${script_name}"
+    then
+        existing=true
+    fi
+
+    # Find the number of replicas for each deployment and shutdown database accessing deployments
+    for app in ${database_connectors}
+    do
+        info=$(kubectl ${namespace} get deployment -l "$(selector ${app})" -o template --template='{{ range .items }}{{.metadata.name}},{{.spec.replicas}}{{ end }}')
+        deployment=$(echo "${info}" | cut -d, -f1)
+
+        if [ -z "$deployment" ]
+        then
+            continue
+        fi
+
+        if [ -n "${existing}" ]
+        then
+            replicas[${deployment}]=$(kubectl ${namespace} get configmap "${script_name}" -o template --template="{{ index .data \"${deployment}\" }}")
+        else
+            count=$(echo "${info}" | cut -d, -f2)
+            replicas[${deployment}]=${count}
+            kubectl ${namespace} patch configmap "${script_name}" -p "{\"data\": { \"${deployment}\": \"${count}\" }}"
+        fi
+        echo "Stopping: ${deployment}"
+        patch_replicas "${deployment}" 0
+    done
+
+    # Restore the database
+    in_toolbox backup-utility --restore -t "${fake_timestamp}" --skip registry,uploads,artifacts,lfs,packages,external_diffs,terraform_state,repositories
+    in_toolbox gitlab-rake db:migrate
+
+    # Start the deployments back up
+
+    for dep in "${!replicas[@]}"
+    do
+        echo "Starting: ${dep}"
+        patch_replicas "${dep}" "${replicas[$dep]}"
+    done
+
+    # If we made it here, restore was successful, remove the configmap
+    kubectl ${namespace} delete configmap "${script_name}"
+}
+
+while getopts :r:n:b: opt
+do
+    case "${opt}" in
+          r)
+              release="${OPTARG}"
+              ;;
+          n)
+              namespace="-n ${OPTARG}"
+              ;;
+          b)
+              fake_timestamp=${OPTARG}
+              ;;
+          *)
+              usage
+              ;;
+    esac
+done
+shift "$((OPTIND -1))"
+
+case ${1} in
+  pre)
+      pre
+      ;;
+  post)
+      post
+      ;;
+  *)
+      usage
+      ;;
+esac

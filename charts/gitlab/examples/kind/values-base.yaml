@@ -1,0 +1,51 @@
+# Set host domain name.
+# Disable certmanager.
+# Configure global shell port for correct clone URL in UI.
+global:
+  # hosts:
+    # domain: (your host IP).nip.io
+  ingress:
+    configureCertmanager: false
+  shell:
+    port: 32022
+
+# Don't use certmanager, we'll self-sign or use http
+certmanager:
+  install: false
+
+# Specify NodePorts for NGINX and reduce replicas to 1
+nginx-ingress:
+  defaultBackend:
+    replicaCount: 1
+  controller:
+    replicaCount: 1
+    minAavailable: 1
+    service:
+      type: NodePort
+      nodePorts:
+        # gitlab-shell port value below must match the KinD config file:
+        #   nodes[0].extraPortMappings[1].containerPort
+        gitlab-shell: 32022
+
+# Allow privileged runners for Docker-in-Docker pipelines
+gitlab-runner:
+  runners:
+    privileged: true
+
+# Disable services that are not likely needed for local testing.
+# Feel free to adjust these lines if services are indeed needed.
+prometheus:
+  install: false
+registry:
+  hpa:
+    minReplicas: 1
+    maxReplicas: 1
+gitlab:
+  gitlab-shell:
+    minReplicas: 1
+    maxReplicas: 1
+  gitlab-exporter:
+    enabled: false
+  webservice:
+    minReplicas: 1
+    maxReplicas: 1

@@ -1,0 +1,16 @@
+# Specify NodePort for HTTPS on NGINX
+nginx-ingress:
+  controller:
+    service:
+      nodePorts:
+        # https port value below must match the KinD config file:
+        #   nodes[0].extraPortMappings[0].containerPort
+        https: 32443
+
+# Specify self-signed certificate chain so Runner will connect
+# https://docs.gitlab.com/runner/install/kubernetes.html#providing-a-custom-certificate-for-accessing-gitlab
+# https://docs.gitlab.com/runner/configuration/tls-self-signed.html#supported-options-for-self-signed-certificates
+gitlab-runner:
+  # "gitlab-wildcard-tls-chain" assumes your release name is "gitlab". If it is set to something else,
+  #   replace "gitlab" below with your own release name.
+  certsSecretName: gitlab-wildcard-tls-chain

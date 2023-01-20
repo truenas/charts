@@ -1,0 +1,21 @@
+# openshift/gitlab-shell-multiple-external-ip.yaml
+
+# This example shows how to assign multiple external IPs to GitLab Shell. This is required for
+# deployment on OpenShift.
+#
+# You may have to define an external DNS record for these IPs. If you did, you also need to pass
+# the external domain name.
+#
+# For more information see:
+#   https://gitlab.com/gitlab-org/charts/gitlab/blob/master/doc/installation/cloud/openshift.md#next-steps
+
+gitlab:
+  gitlab-shell:
+    service:
+      externalIPs:
+        - x.x.x.x
+        - y.y.y.y
+
+global:
+  hosts:
+    ssh: ssh.gitlab.example.com

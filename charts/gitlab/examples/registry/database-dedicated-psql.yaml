@@ -1,0 +1,13 @@
+postgresql:
+  image:
+    tag: 12
+
+registry:
+  database:
+    enabled: true
+    password:
+      secret: testing-postgresql-password
+      key: registry-password
+    name: registry_testing
+    host: testing.postgresql
+    port: 9999

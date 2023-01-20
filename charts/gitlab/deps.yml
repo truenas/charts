@@ -1,0 +1,74 @@
+version: 3
+dependencies:
+- type: git
+  manifest_updates:
+    filters:
+    - name: ".*minio.*" # minio/mc
+      group: true
+      enabled: true
+    - name: .* # everything else
+      enabled: true
+  settings:
+    # Assign to WarheadsSE (jplum) and twk3 (dmountney) by default
+    gitlab_assignee_ids:
+      - 597578
+      - 42196
+    gitlab_labels:
+      - group::distribution
+      - devops::enablement
+      - feature::maintenance
+      - maintenance
+      - dependencies.io
+    gitlab_remove_source_branch: true
+    commit_message_template: |-
+      {{.SubjectAndBody}}
+
+      Changelog: changed
+    remotes:
+      # Registry chart / container
+      https://gitlab.com/gitlab-org/container-registry.git:
+        replace_in_files:
+        - filename: doc/charts/registry/index.md
+          pattern: "tag: 'v(\\S+)'"
+          range: '>= 2.x.x'
+          prereleases: true
+        - filename: doc/charts/registry/index.md
+          pattern: '`v(\d+\.\d+\.\d+-gitlab)`'
+          range: '>= 2.x.x'
+          prereleases: true
+        - filename: charts/registry/Chart.yaml
+          pattern: "appVersion: 'v(\\S+)'"
+          range: '>= 2.x.x'
+          prereleases: true
+        - filename: charts/registry/values.yaml
+          pattern: "tag: 'v(\\S+)'"
+          range: '>= 2.x.x'
+          prereleases: true
+      # Minio chart / minio container
+      https://github.com/minio/minio.git:
+        replace_in_files:
+        - filename: charts/minio/values.yaml
+          tag_prefix: 'RELEASE.20'
+          pattern: 'imageTag: "RELEASE.20(\d\d-\d\d-\d\dT\d\d-\d\d-\d\dZ)"'
+          semver: false
+        - filename: doc/charts/minio/index.md
+          tag_prefix: 'RELEASE.20'
+          pattern: '`RELEASE.20(\d\d-\d\d-\d\dT\d\d-\d\d-\d\dZ)`'
+          semver: false
+      # Minio chart / mc container
+      https://github.com/minio/mc.git:
+        replace_in_files:
+        - filename: charts/minio/values.yaml
+          tag_prefix: 'RELEASE.20'
+          pattern: 'tag: "RELEASE.20(\d\d-\d\d-\d\dT\d\d-\d\d-\d\dZ)"'
+          semver: false
+      # GitLab Exporter
+      https://gitlab.com/gitlab-org/gitlab-exporter.git:
+        replace_in_files:
+        - filename: charts/gitlab/charts/gitlab-exporter/Chart.yaml
+          pattern: 'appVersion: (\S+)'
+      # GitLab Runner Chart
+      https://gitlab.com/gitlab-org/charts/gitlab-runner.git:
+        replace_in_files:
+        - filename: requirements.yaml
+          pattern: 'name: gitlab-runner\n  version: (\S+)'

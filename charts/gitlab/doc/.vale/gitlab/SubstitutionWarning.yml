@@ -1,0 +1,27 @@
+---
+# Warning: gitlab.SubstitutionWarning
+#
+# Checks for misused terms or common shorthand that should never be used at GitLab, but can't be flagged as errors.
+# Substitutions.yml and SubstitionSuggestions.yml also exist.
+#
+# For a list of all options, see https://errata-ai.gitbook.io/vale/getting-started/styles
+extends: substitution
+message: 'If possible, use "%s" instead of "%s".'
+link: https://about.gitlab.com/handbook/communication/#top-misused-terms
+level: warning
+ignorecase: true
+swap:
+  click: select
+  code base: codebase
+  config: configuration
+  distro: distribution
+  file name: filename
+  filesystem: file system
+  info: information
+  need to: must
+  repo: repository
+  timezone: time zone
+  utilize: use
+  administrator permission: the administrator access level
+  administrator permissions: the administrator access level
+  administrator role: the administrator access level

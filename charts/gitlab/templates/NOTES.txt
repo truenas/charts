@@ -1,0 +1,121 @@
+{{/* PostgreSQL minimum version change */}}
+NOTICE: The minimum required version of PostgreSQL is now 12. See https://gitlab.com/gitlab-org/charts/gitlab/-/blob/master/doc/installation/upgrade.md for more details.
+
+{{/* If the Container Registry metadata database is enabled, note it is not production ready */}}
+{{- if eq .Values.registry.database.enabled true }}
+WARNING: The Container Registry metadata database has been enabled. Please note that it is an experimental feature and must not be used in production.
+{{- end }}
+
+{{/* If the Container Registry filesystem metadata is disabled, note it is not production ready */}}
+{{- if eq true .Values.registry.migration.disablemirrorfs }}
+WARNING: The Container Registry filesystem metadata has been disabled. Please note that it is an experimental feature and must not be used in production.
+{{- end }}
+
+{{/* If the Container Registry migration mode is enabled, note it is not production ready */}}
+{{- if eq .Values.registry.migration.enabled true }}
+WARNING: The Container Registry migration mode has been enabled. Please note that it is an experimental feature and must not be used in production.
+{{- end }}
+
+{{/* If the Container Registry online garbage collection is enabled, note it is not production ready */}}
+{{- if eq false .Values.registry.gc.disabled }}
+WARNING: The Container Registry online garbage collection has been enabled. Please note that it is an experimental feature and must not be used in production.
+{{- end }}
+
+{{/* If Praefect enabled, note it is not production ready */}}
+{{- if eq .Values.global.praefect.enabled true }}
+WARNING: The Praefect chart has been enabled. Please note that it is still under development and not ready for production use. Usage may require significant manual intervention during upgrades.
+{{- end }}
+
+{{/* If shared-secrets is disable, manual secret creation will be needed */}}
+{{- if not (index .Values "shared-secrets").enabled }}
+NOTICE: The automatic generation of secrets has been disabled.
+The user should ensure all necessary secrets are created according to documentation, or the deployment will fail to operate correctly.
+{{- end }}
+{{/* If using self-signed auto-generated certificates, and a service needing them is enabled */}}
+{{- if or .Values.gitlab.webservice.enabled .Values.registry.enabled .Values.global.minio.enabled }}
+{{-   if not (or .Values.global.ingress.configureCertmanager (include "gitlab.ingress.tls.configured" .)) }}
+WARNING: Automatic TLS certificate generation with cert-manager is disabled and no TLS certificates were provided. Self-signed certificates were generated.
+
+You may retrieve the CA root for these certificates from the `{{ template "gitlab.wildcard-self-signed-cert-name" $ }}-ca` secret, via the following command. It can then be imported to a web browser or system store.
+
+    kubectl get secret {{ template "gitlab.wildcard-self-signed-cert-name" $ }}-ca -ojsonpath='{.data.cfssl_ca}' | base64 --decode > {{ template "gitlab.gitlab.hostname" $ }}.ca.pem
+
+If you do not wish to use self-signed certificates, please set the following properties:
+  - global.ingress.tls.secretName
+  OR
+  - global.ingress.tls.enabled (set to `true`)
+{{- if $.Values.gitlab.webservice.enabled }}
+  - gitlab.webservice.ingress.tls.secretName
+{{- if $.Values.global.appConfig.smartcard.enabled }}
+  - gitlab.webservice.ingress.tls.smartcardSecretName
+{{- end }}
+{{- end }}
+{{- if $.Values.registry.enabled }}
+  - registry.ingress.tls.secretName
+{{- end }}
+{{- if $.Values.global.minio.enabled }}
+  - minio.ingress.tls.secretName
+{{- end }}
+
+{{- if (index .Values "gitlab-runner").install }}
+WARNING: Automatic TLS certificate generation with cert-manager is disabled and no TLS certificates were provided. Self-signed certificates were generated that do not work with gitlab-runner. Please either disable gitlab-runner by setting `gitlab-runner.install=false` or provide valid certificates.
+{{- end -}}
+{{- end -}}
+{{- end -}}
+{{/* Runner notice if .install && ! .runners.privileged */}}
+{{ if and (index .Values "gitlab-runner").install (not (index .Values "gitlab-runner").runners.privileged) }}
+NOTICE: You've installed GitLab Runner without the ability to use 'docker in docker'.
+The GitLab Runner chart (gitlab/gitlab-runner) is deployed without the `privileged` flag by default for security purposes. This can be changed by setting `gitlab-runner.runners.privileged` to `true`. Before doing so, please read the GitLab Runner chart's documentation on why we
+chose not to enable this by default. See https://docs.gitlab.com/runner/install/kubernetes.html#running-docker-in-docker-containers-with-gitlab-runners
+{{- end }}
+
+{{/* toolbox replicas */}}
+{{ if eq (index $.Values.gitlab "toolbox" "replicas" | int) 0 }}
+NOTICE: The GitLab toolbox is scaled to 0.
+    The `toolbox` Pod is very useful for administration and debugging of this application suite. You may configure `gitlab.toolbox.replicas=1` if you wish to leave a Pod running at all times, or you can scale the deployment up when needed:
+
+    `kubectl scale --replicas=1 deployment/{{ .Release.Name }}-toolbox`
+
+{{ end }}
+
+{{/* WARN: global.registry.notificationSecret */}}
+{{- if and (not (index .Values "shared-secrets" "enabled")) (not .Values.global.registry.notificationSecret) -}}
+WARNING: shared-secrets.enabled is false, no global.registry.notificationSecret provided.
+  The shared-secrets chart has been disabled, and `global.registry.notificationSecret` has not been provided.
+  Starting in 4.11.x of this chart, this secret must be present, but shared-secrets will not be run to generated it.
+  Please see https://docs.gitlab.com/charts/charts/globals#configure-registry-settings
+{{- end }}
+{{/* print install survey link */}}
+{{- $appVersion := coalesce .Values.global.gitlabVersion .Chart.AppVersion -}}
+{{- if and .Release.IsInstall (regexMatch "^\\d+\\.\\d+\\.\\d+(-rc\\d+)?(-pre)?$" $appVersion) }}
+Help us improve the installation experience, let us know how we did with a 1 minute survey:
+{{ printf "https://gitlab.fra1.qualtrics.com/jfe/form/SV_6kVqZANThUQ1bZb?installation=helm&release=%s" (regexReplaceAll "^(\\d+)\\.(\\d+)\\..+" $appVersion "${1}-${2}") }}
+{{- end }}
+
+{{/* WARN: Usage of PAGES_UPDATE_LEGACY_STORAGE with bundled Pages discouraged.*/}}
+{{- if .Values.global.pages.enabled -}}
+{{-   $envValues := dict }}
+{{-   $_ := set $envValues "gitlab.webservice" (default false .Values.gitlab.webservice.extraEnv.PAGES_UPDATE_LEGACY_STORAGE) }}
+{{-   $_ := set $envValues "gitlab.sidekiq" (default false .Values.gitlab.sidekiq.extraEnv.PAGES_UPDATE_LEGACY_STORAGE) }}
+{{-   $_ := set $envValues "global" (default false .Values.global.extraEnv.PAGES_UPDATE_LEGACY_STORAGE) }}
+{{-   $toolboxExtraEnv := index .Values.gitlab "toolbox" "extraEnv" }}
+{{-   $_ := set $envValues "gitlab.toolbox" (default false $toolboxExtraEnv.PAGES_UPDATE_LEGACY_STORAGE) }}
+{{-   range $component, $value := $envValues }}
+{{-     if eq $value true }}
+WARNING: GitLab Pages configured to use disk storage via `{{ $component }}.extraEnv.PAGES_UPDATE_LEGACY_STORAGE`.
+    Using `PAGES_UPDATE_LEGACY_STORAGE` environment variable with bundled Pages service is not recommended. This setting is specifically used when using an external GitLab Pages deployment.
+{{-     end }}
+{{-   end }}
+{{- end }}
+
+{{/* In-chart NGINX Ingress Controller notices */}}
+{{- if eq true (index $.Values "nginx-ingress").enabled -}}
+NOTICE: The in-chart NGINX Ingress Controller has the following requirements:
+    - Kubernetes version must be 1.19 or newer.
+    - Ingress objects must be in group/version `networking.k8s.io/v1`.
+{{ end }}
+
+{{/* run deprecations */}}
+{{ include "gitlab.deprecations" . }}
+{{/* run checkConfig */}}
+{{ include "gitlab.checkConfig" . }}

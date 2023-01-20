@@ -1,0 +1,8 @@
+dryRun: false
+namespaces: "!kube-system"
+interval: 10m
+timezone: America/New_York
+debug: true
+rbac:
+  create: true
+  serviceAccountName: chaoskube

@@ -1,0 +1,16 @@
+# Example configuration of `connection` secret for Rails
+# Example for Minio storage
+#   See https://gitlab.com/gitlab-org/charts/gitlab/blob/master/doc/charts/globals.md#connection
+#   See https://gitlab.com/gitlab-org/charts/gitlab/blob/master/doc/advanced/external-object-storage
+provider: AWS
+# Specify the region
+region: us-east-1
+# Specify access/secret keys
+aws_access_key_id: BOGUS_ACCESS_KEY
+aws_secret_access_key: BOGUS_SECRET_KEY
+# The below settings are for S3 compatible endpoints
+#   See https://docs.gitlab.com/ee/administration/job_artifacts.html#s3-compatible-connection-settings
+aws_signature_version: 4
+host: storage.example.com
+endpoint: "https://storage.example.com:9000"
+path_style: true

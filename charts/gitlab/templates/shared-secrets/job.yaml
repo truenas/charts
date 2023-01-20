@@ -1,0 +1,58 @@
+{{- $sharedSecretValues := index .Values "shared-secrets" -}}
+{{- if $sharedSecretValues.enabled }}
+{{-   $imageCfg := dict "global" .Values.global.image "local" .Values.global.kubectl.image -}}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ template "shared-secrets.jobname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "gitlab.standardLabels" . | nindent 4 }}
+    {{- include "gitlab.commonLabels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
+spec:
+  template:
+    metadata:
+      labels:
+        {{- include "gitlab.standardLabels" . | nindent 8 }}
+        {{- include "gitlab.commonLabels" . | nindent 8 }}
+        {{- include "gitlab.podLabels" . | nindent 8 }}
+      annotations:
+      {{- range $key, $value := $sharedSecretValues.annotations }}
+        {{ $key }}: {{ $value | quote }}
+      {{- end }}
+    spec:
+      {{- include "gitlab.nodeSelector" . | nindent 6 }}
+      {{- if $sharedSecretValues.tolerations }}
+      tolerations:
+        {{- toYaml $sharedSecretValues.tolerations | nindent 8 }}
+      {{- end }}
+      securityContext:
+        runAsUser: {{ $sharedSecretValues.securityContext.runAsUser }}
+        fsGroup: {{ $sharedSecretValues.securityContext.fsGroup }}
+      {{- if or $sharedSecretValues.serviceAccount.enabled .Values.global.serviceAccount.enabled }}
+      serviceAccountName: {{ template "shared-secrets.serviceAccountName" . }}
+      {{- end }}
+      restartPolicy: Never
+      {{- include "gitlab.image.pullSecrets" $imageCfg | nindent 6 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: {{ include "gitlab.kubectl.image" . | quote }}
+          {{- include "gitlab.image.pullPolicy" $imageCfg | indent 10 }}
+          command: ['/bin/bash', '/scripts/generate-secrets']
+          volumeMounts:
+            - name: scripts
+              mountPath: /scripts
+            - name: ssh
+              mountPath: /etc/ssh
+          resources:
+            {{- toYaml $sharedSecretValues.resources | nindent 12 }}
+      volumes:
+      - name: scripts
+        configMap:
+          name: {{ template "shared-secrets.fullname" . }}
+      - name: ssh
+        emptyDir: {}
+{{- end }}

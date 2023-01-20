@@ -1,0 +1,22 @@
+# Example configuration of `connection` secret for Rails
+# Example for Google Cloud Storage
+#   See https://gitlab.com/gitlab-org/charts/gitlab/blob/master/doc/charts/globals.md#connection
+#   See https://gitlab.com/gitlab-org/charts/gitlab/blob/master/doc/advanced/external-object-storage
+provider: Google
+google_project: example-project-382839
+# Ensure indentation is correct for `google_json_key_string`
+# - YAML is a superset of JSON, so you can paste & indent
+#   `example-project-382839-gcs-bucket.json` 2-4 spaces directly.
+google_json_key_string: |
+  {
+    "type": "service_account",
+    "project_id": "example-project-382839",
+    "private_key_id": "REDACTED",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nREDACTED\n-----END PRIVATE KEY-----\n",
+    "client_email": "gcs-buckets@example-project-382839.iam.gserviceaccount.com",
+    "client_id": "REDACTED",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/gcs-buckets%40example-project-382839.iam.gserviceaccount.com"
+  }

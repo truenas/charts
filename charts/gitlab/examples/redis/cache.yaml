@@ -1,0 +1,17 @@
+redis:
+  install: false
+global:
+  redis:
+    host: redis.example
+    port: 9001
+    password:
+      enabled: true
+      secret: redis-secret
+      key: redis-password
+    cache:
+      host: cache.redis.example
+      port: 9002
+      password:
+        enabled: true
+        secret: cache-secret
+        key: cache-password

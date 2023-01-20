@@ -1,0 +1,14 @@
+gitlab:
+  gitaly:
+    persistence:
+      volumeName: DISK_VOLUME_NAME
+postgresql:
+  persistence:
+    volumeName: DISK_VOLUME_NAME
+minio:
+  persistence:
+    volumeName: DISK_VOLUME_NAME
+redis:
+  master:
+    persistence:
+      volumeName: DISK_VOLUME_NAME

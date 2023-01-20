@@ -1,0 +1,8 @@
+redis:
+  install: false
+global:
+  redis:
+    host: redis.example
+    sentinels:
+    - host: s1.redis.example
+    - host: s2.redis.example

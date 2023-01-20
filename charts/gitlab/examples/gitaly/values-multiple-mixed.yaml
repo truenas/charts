@@ -1,0 +1,21 @@
+# gitaly/values-multiple-external.yaml
+# This example intended as an example of configuring multiple Gitaly
+# nodes both inside and outside of this chart.
+# This provides an example of:
+# - two external nodes.
+# - two pods in the StatefulSet
+# https://gitlab.com/gitlab-org/charts/gitlab/tree/master/doc/
+
+global:
+  gitaly:
+    internal:
+      names:
+        - default
+        - secondary
+    external:
+      - name: git-node-1                # required
+        hostname: node1.git.example.com # required
+        port: 8075                      # optional, default shown
+      - name: git-node-2                # required
+        hostname: node2.git.example.com # required
+        port: 8075                      # optional, default shown

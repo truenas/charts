@@ -1,0 +1,57 @@
+# Global chart properties
+global:
+  ingress:
+    enabled: true
+    # tls:
+    #   secretName:  example-com-tls
+  hosts:
+    domain: example.com
+    # ssh: git.example.com
+    https: true
+
+# NGINX chart provides
+# - HTTP(S) Ingress services with SSL termination to all external facing services
+# - TCP Ingress for gitlab-shell's SSH services
+nginx:
+  service:
+    # loadBalancerIP: <GKE static IP address>
+  serviceAccount:
+    autoGenerate: true
+
+# Registry chart Provides services to Webservice chart(s) and external clients
+registry:
+  enabled: true
+  minio:
+    enabled: true
+
+# Redis chart provides Redis services to multiple charts
+redis:
+  install: true
+
+# Minio chart provides Minio servics for Object Storage
+minio:
+  enabled: true
+  defaultBuckets:
+    - name: registry
+
+# GitLab sub-chart
+gitlab:
+    # Webservice (and workhorse) chart
+    webservice:
+      enabled: true
+      psql:
+    # Sidekiq chart, with split queues (see gitlab-org/charts/gitlab/charts/sidekiq/values.yaml)
+    sidekiq:
+      enabled: true
+      psql:
+    # Shell provides SSH access
+    gitlab-shell:
+      enabled: true
+    # Gitaly provides storage & API access to Git repository data
+    gitaly:
+      enabled: true
+    # Handle database init and upgrade migrations, via gitlab-rails codebase
+    migrations:
+      enabled: true
+      initialRootPassword: "minikube"
+      psql:

@@ -1,0 +1,22 @@
+### Geo Primary
+global:
+  # See docs.gitlab.com/charts/charts/globals
+  # Configure host & domain
+  hosts:
+    hostSuffix: gitlab
+    domain: example.com
+  # configure DB connection
+  psql:
+    host: geo-1.db.example.com
+    port: 5432
+    password:
+      secret: geo
+      key: postgresql-password
+  # configure geo (primary)
+  geo:
+    nodeName: London Office
+    enabled: true
+    role: primary
+# External DB, disable
+postgresql:
+  install: false

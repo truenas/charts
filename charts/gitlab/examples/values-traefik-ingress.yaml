@@ -1,0 +1,7 @@
+# Example configuration of using an external Traefik Ingress provider.
+global:
+  ingress:
+    enabled: true  # Default, present here to be explicit.
+    class: traefik # Alter the `kubernetes.io/ingress.class` annotation chart wide.
+nginx-ingress:
+  enabled: false   # Disable the deployment of the in-chart NGINX Ingress provider.

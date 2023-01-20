@@ -1,0 +1,28 @@
+## Geo Secondary
+global:
+  # See docs.gitlab.com/charts/charts/globals
+  # Configure host & domain
+  hosts:
+    hostSuffix: gitlab
+    domain: example.com
+  # configure DB connection
+  psql:
+    host: geo-2.db.example.com
+    port: 5432
+    password:
+      secret: geo
+      key: postgresql-password
+  # configure geo (secondary)
+  geo:
+    nodeName: Shanghai Office
+    enabled: true
+    role: secondary
+    psql:
+      host: geo-2.db.example.com
+      port: 5431
+      password:
+        secret: geo
+        key: postgresql-password
+# External DB, disable
+postgresql:
+  install: false

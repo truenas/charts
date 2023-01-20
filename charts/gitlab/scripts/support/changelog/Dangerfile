@@ -1,0 +1,91 @@
+require 'yaml'
+
+def lint_commit(commit)
+  trailer = commit.message.match(/^(?<name>Changelog):\s*(?<category>.+)$/i)
+
+  return :missing if trailer.nil? || trailer[:category].nil?
+
+  name = trailer[:name]
+
+  unless name == 'Changelog'
+    self.fail(
+      "The changelog trailer for commit #{commit.sha} must be `Changelog` (starting with a capital C), not `#{name}`"
+    )
+
+    return :invalid
+  end
+
+  category = trailer[:category]
+
+  return :valid if CATEGORIES.include?(category)
+
+  self.fail(
+    "Commit #{commit.sha} uses an invalid changelog category: #{category}"
+  )
+
+  :invalid
+end
+
+def presented_no_changelog_labels
+  NO_CHANGELOG_LABELS.map { |label| %(~"#{label}") }.join(', ')
+end
+
+NO_CHANGELOG_LABELS = [
+  'documentation',
+  'type::tooling',
+  'tooling::pipelines',
+  'tooling::workflow',
+  'ci-build',
+  'meta'
+].freeze
+
+CATEGORIES = YAML
+  .load_file(File.expand_path('../../../.gitlab/changelog_config.yml', __dir__))
+  .fetch('categories')
+  .keys
+  .freeze
+
+SEE_DOC = "See [the documentation](https://docs.gitlab.com/ee/development/changelog.html).".freeze
+
+CHANGELOG_MISSING = <<~MSG.freeze
+**[CHANGELOG missing](https://docs.gitlab.com/ee/development/changelog.html).**
+
+To ceate a changelog, annotate one or more commits with the `Changelog` Git
+trailer. If you want to annotate the latest commit, you can do so using `git
+commit --amend`. If you want to annotate older or multiple commits, you need to
+do so using `git rebase -i`.
+
+When adding the trailer, you can use the following values:
+
+- #{CATEGORIES.join("\n- ")}
+
+For example:
+
+```
+This is the subject of your commit.
+
+This would be the body of your commit containing some extra details.
+
+Changelog: added
+```
+
+If your merge request doesn't warrant a CHANGELOG entry, consider adding any of
+the #{presented_no_changelog_labels} labels.
+
+#{SEE_DOC}
+MSG
+
+changelog_needed = (gitlab.mr_labels & NO_CHANGELOG_LABELS).empty?
+
+if changelog_needed
+  checked = 0
+
+  git.commits.each do |commit|
+    case lint_commit(commit)
+    when :valid, :invalid
+      checked += 1
+    end
+  end
+
+  warn(CHANGELOG_MISSING) if checked.zero?
+end

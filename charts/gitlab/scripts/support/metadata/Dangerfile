@@ -1,0 +1,55 @@
+WORKTYPE_LABELS = [
+  'Community contribution',
+  'security',
+  'type::bug',
+  'type::feature',
+  'feature::addition',
+  'feature::enhancement',
+  'feature::maintenance',
+  'type::maintenance',
+  'type::tooling',
+  'tooling::pipelines',
+  'tooling::workflow',
+  'documentation'
+].freeze
+
+if gitlab.mr_body.size < 5
+  fail "Please provide a proper merge request description."
+end
+
+if gitlab.mr_labels.empty?
+  fail "Please add labels to this merge request."
+end
+
+warn "You may want to add ~group::distribution label to this MR for gitlab-insights" unless gitlab.mr_labels.include?("group::distribution")
+
+unless gitlab.mr_json["assignee"]
+  warn "This merge request does not have any assignee yet. Setting an assignee clarifies who needs to take action on the merge request at any given time."
+end
+
+has_milestone = !gitlab.mr_json["milestone"].nil?
+
+unless has_milestone
+  warn "This merge request does not refer to an existing milestone.", sticky: false
+end
+
+has_pick_into_stable_label = gitlab.mr_labels.find { |label| label.start_with?('Pick into') }
+
+if gitlab.branch_for_base != "master" && !has_pick_into_stable_label
+  warn "Most of the time, all merge requests should target `master`. Otherwise, please set the relevant `Pick into X.Y` label."
+end
+
+has_qa_verified_label = gitlab.mr_labels.find { |label| label.start_with?('QA:verified') }
+is_docs_only_branch = gitlab.branch_for_head =~ /(^docs[\/-].*|.*-docs$)/
+
+unless has_qa_verified_label || is_docs_only_branch
+  warn "Please check the QA job and compare with builds on master. If no new failures are reported in QA job, add 'QA:verified' label."
+end
+
+if (gitlab.mr_labels & WORKTYPE_LABELS).empty?
+  warn "This merge request is missing any [Work Type Classification labels](https://about.gitlab.com/handbook/engineering/metrics/#work-type-classification)."
+end
+
+unless gitlab.mr_json["force_remove_source_branch"]
+  warn "If the source branch can be safely removed after this merge request is accepted, please consider setting the '[delete source branch when merge request is accepted](https://docs.gitlab.com/ee/user/project/merge_requests/getting_started.html#deleting-the-source-branch)' option."
+end

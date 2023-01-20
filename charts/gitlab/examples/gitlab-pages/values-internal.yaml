@@ -1,0 +1,11 @@
+global:
+  pages:
+    enabled: true
+gitlab:
+  gitlab-pages:
+    ingress:
+      tls:
+        # You need to bring your own wildcard SSL certificate which covers
+        # `*.<pages root domain>`. Create a k8s TLS secret with the name
+        # `my-custom-pages-tls` with it.
+        secretName: my-custom-pages-tls

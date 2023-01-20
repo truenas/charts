@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    app: gitaly
+  name: gitlab-gitaly-gitconfig
+data:
+  gitconfig: |
+    [core]
+        alternateRefsCommand = "exit 0 #"
+        autocrlf = input
+        fsyncObjectFiles = true
+    [gc]
+        auto = 0
+    [repack]
+        writeBitmaps = true
+    [pack]
+        threads = 1
+        useSparse = true
+    [receive]
+        fsckobjects = true
+        advertisepushoptions = true
+    [transfer]
+        hiderefs = ^refs/tmp/
+        hiderefs = ^refs/keep-around/
+        hiderefs = ^refs/remotes/
+    [fetch]
+      writeCommitGraph = true
+    [uploadpack]
+        allowReachableSHA1InWant = true
+

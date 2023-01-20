@@ -1,0 +1,19 @@
+global:
+  pages:
+    enabled: true
+    # DNS configuration must be made so that `*.<pages root domain>` points towards
+    # any of the external IPs.
+    # Custom domains should have a CNAME record pointing towards respective
+    # `<namespace>.<pages root domain>` domains.
+    externalHttp:
+      - 1.2.3.4
+    externalHttps:
+      - 1.2.3.4
+gitlab:
+  gitlab-pages:
+    ingress:
+      tls:
+        # You need to bring your own wildcard SSL certificate which covers
+        # `*.<pages root domain>`. Create a k8s TLS secret with the name
+        # `my-custom-pages-tls` with it.
+        secretName: my-custom-pages-tls

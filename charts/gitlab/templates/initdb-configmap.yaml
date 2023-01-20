@@ -1,0 +1,21 @@
+{{- if .Values.postgresql.install -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "gitlab.psql.initdbscripts" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "gitlab.standardLabels" . | nindent 4 }}
+    {{- include "gitlab.commonLabels" . | nindent 4 }}
+data:
+  init_revision.sh: |
+    {{- $initRevision :=  index .Values.postgresql.master.podAnnotations "postgresql.gitlab/init-revision" }}
+    if [[ ! -f "$POSTGRESQL_VOLUME_DIR/.gitlab_{{ $initRevision }}_scripts_initialized" ]] ; then
+      rm -f "$POSTGRESQL_VOLUME_DIR/.user_scripts_initialized"
+      touch "$POSTGRESQL_VOLUME_DIR/.gitlab_{{ $initRevision }}_scripts_initialized"
+    fi
+  enable_extensions.sh: |
+    [[ -n "${POSTGRES_POSTGRES_PASSWORD_FILE:-}" ]] && POSTGRES_POSTGRES_PASSWORD=$(cat ${POSTGRES_POSTGRES_PASSWORD_FILE})
+    PGPASSWORD=${POSTGRES_POSTGRES_PASSWORD} psql -d {{ template "gitlab.psql.database" .}} -U postgres -c 'CREATE EXTENSION IF NOT EXISTS pg_trgm; CREATE EXTENSION IF NOT EXISTS btree_gist;'
+# Leave this here - This line denotes end of block to the parser.
+{{- end -}}

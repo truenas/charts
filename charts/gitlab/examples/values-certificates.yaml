@@ -1,0 +1,12 @@
+# This is an example values.yaml. It shows how to configure cert manager
+# Commented out settings are for setting a custom wild card certificate instead of cert-managera
+# https://gitlab.com/gitlab-org/charts/gitlab/blob/master/doc/installation/tls.md
+certmanager-issuer:
+  email: me@example.com
+  # install: false
+# global:
+#   ingress:
+#     configureCertmanager: false
+#     tls:
+#       secretName: my-wild-card-certificate #
+

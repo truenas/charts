@@ -1,0 +1,78 @@
+# This is an example values.yaml. It adjusts various default settings in order to fit GitLab
+# into the standard GKE cluster defaults. (3 n1-standard-1 nodes). The is **not recommended** for a
+# production deploy of GitLab.
+#
+# - all pods start with a single replica, rather than their other highly available defaults
+# - resource requests are tuned down to the minimal requirements for a single user to fully use GitLab
+# - prometheus, gitlab ci runner, and the gitlab toolbox (used for backups and maintenance) are disabled
+prometheus:
+  install: false
+gitlab-runner:
+  install: false
+nginx-ingress:
+  controller:
+    replicaCount: 1
+    minAvailable: 0
+    resources:
+      requests:
+        cpu: 50m
+        memory: 100Mi
+  defaultBackend:
+    replicaCount: 1
+    minAvailable: 0
+    resources:
+      requests:
+        cpu: 5m
+        memory: 5Mi
+redis:
+  resources:
+    requests:
+      cpu: 10m
+      memory: 64Mi
+minio:
+  resources:
+    requests:
+      memory: 64Mi
+      cpu: 10m
+# Disable Rails bootsnap cache (temporary)
+global:
+  rails:
+    bootsnap:
+      enabled: false
+# Reduce replica counts, reducing CPU & memory requirements
+gitlab:
+  webservice:
+    minReplicas: 1
+    resources:
+      limits:
+       memory: 1.5G
+      requests:
+        cpu: 100m
+        memory: 900M
+    workhorse:
+      resources:
+        limits:
+          memory: 100M
+        requests:
+          cpu: 10m
+          memory: 10M
+  sidekiq:
+    minReplicas: 1
+    resources:
+      limits:
+        memory: 1.5G
+      requests:
+        cpu: 50m
+        memory: 625M
+  gitlab-shell:
+    minReplicas: 1
+  toolbox:
+    enabled: false
+registry:
+  hpa:
+    minReplicas: 1
+certmanager:
+  resources:
+    requests:
+      cpu: 10m
+      memory: 32Mi
