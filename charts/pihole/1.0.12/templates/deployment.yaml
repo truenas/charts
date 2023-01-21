@@ -39,7 +39,11 @@ spec:
           {{ end }}
           ports:
             - name: web
+              {{ if .Values.hostNetwork }}
+              containerPort: {{ .Values.web_port }}
+              {{ else }}
               containerPort: 80
+              {{ end }}
             - name: dns-tcp
               containerPort: 53
               protocol: TCP
@@ -61,6 +65,9 @@ spec:
             {{ $envList := (default list .Values.environmentVariables) }}
             {{ $envList = mustAppend $envList (dict "name" "WEBPASSWORD" "valueFromSecret" true "secretName" $secretName "secretKey" "password") }}
             {{ $envList = mustAppend $envList (dict "name" "TZ" "value" (printf "%s" .Values.timezone)) }}
+            {{ if .Values.hostNetwork }}
+            {{ $envList = mustAppend $envList (dict "name" "WEB_PORT" "value" .Values.web_port ) }}
+            {{ end }}
             {{ if .Values.dhcp }}
             {{ $envList = mustAppend $envList (dict "name" "DHCP_ACTIVE" "value" "true") }}
             {{ $envList = mustAppend $envList (dict "name" "DHCP_START" "value" .Values.dhcp_start) }}
