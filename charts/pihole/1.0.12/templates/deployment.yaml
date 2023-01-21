@@ -51,6 +51,11 @@ spec:
               containerPort: 67
               protocol: UDP
             {{ end }}
+          {{ if .Values.dhcp }}
+          securityContext:
+            capabilities:
+              add: ["NET_ADMIN"]
+          {{ end }}
           env:
             {{ $secretName := (include "common.names.fullname" .) }}
             {{ $envList := (default list .Values.environmentVariables) }}
