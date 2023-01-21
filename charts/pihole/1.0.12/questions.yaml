@@ -65,6 +65,30 @@ questions:
       default: 20722
       required: true
       show_if: [["dhcp", "=", true]]
+  - variable: dhcp_start
+    label: "DHCP Start Address"
+    group: Networking
+    schema:
+      type: ipaddr
+      cidr: false
+      required: true
+      show_if: [["dhcp", "=", true]]
+  - variable: dhcp_end
+    label: "DHCP End Address"
+    group: Networking
+    schema:
+      type: ipaddr
+      cidr: false
+      required: true
+      show_if: [["dhcp", "=", true]]
+  - variable: dhcp_gateway
+    label: "Gateway"
+    group: Networking
+    schema:
+      type: ipaddr
+      cidr: false
+      required: true
+      show_if: [["dhcp", "=", true]]
 
   - variable: dnsConfig
     label: "DNS Configuration"
