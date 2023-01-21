@@ -86,8 +86,8 @@ podAnnotations: {}
 
 # Adds annotations to the service
 addAnnotations:
-  traefik: true
-  metallb: true
+  traefik: false
+  metallb: false
 
 # Used for SCALE
 scaleCerts: {}
