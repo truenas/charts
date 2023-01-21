@@ -67,6 +67,7 @@ spec:
             {{ $envList = mustAppend $envList (dict "name" "TZ" "value" (printf "%s" .Values.timezone)) }}
             {{ if .Values.hostNetwork }}
             {{ $envList = mustAppend $envList (dict "name" "WEB_PORT" "value" .Values.web_port ) }}
+            {{ $envList = mustAppend $envList (dict "name" "DNSMASQ_LISTENING" "value" "all" ) }}
             {{ end }}
             {{ if .Values.dhcp }}
             {{ $envList = mustAppend $envList (dict "name" "DHCP_ACTIVE" "value" "true") }}
