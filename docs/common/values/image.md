@@ -33,12 +33,13 @@ image:
   pullPolicy: IfNotPresents
 ```
 
-If you want define additional images use the following pattern `imageName`.
+If you want define additional images use the following pattern `nameImage`.
+> This pattern is also what tools like `Renovate` look for.
 
 Example:
 
 ```yaml
-imageName:
+nameImage:
   repository: some-repo
   tag: some-tag
   pullPolicy: IfNotPresents
@@ -89,7 +90,7 @@ gpuImage:
   tag: gpu-v1
   pullPolicy: IfNotPresents
 
-imageSelector: imageGPU
+imageSelector: gpuImage
 ```
 
 Additionally you should use the imageSelector (only) when defining
@@ -100,7 +101,7 @@ Example:
 ```yaml
 additionalContainers:
   worker:
-    imageSelector: imageWorker
+    imageSelector: workerImage
 ```
 
 Kubernetes Documentation:
