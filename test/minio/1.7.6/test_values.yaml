@@ -1,23 +1,28 @@
 appVolumeMounts:
-  config:
+  export:
     emptyDir: true
-    mountPath: /config
-  media:
-    emptyDir: true
-    mountPath: /media
+    mountPath: /export
+distributedIps: []
+distributedMode: false
 dnsConfig:
   options: []
 emptyDirVolumes: true
 environmentVariables: []
 extraAppVolumeMounts: []
-hostNetwork: false
+extraArgs: []
 image:
   pullPolicy: IfNotPresent
-  repository: homeassistant/home-assistant
-  tag: 2023.1.5
+  repository: minio/minio
+  tag: RELEASE.2023-01-20T02-05-44Z
 ixChartContext: {}
-ownerGID: 568
-ownerUID: 568
+logSearchImage:
+  pullPolicy: IfNotPresent
+  repository: minio/operator
+  tag: v4.5.4
+logsearchapi:
+  diskCapacityGB: 5
+  enabled: true
+minioDomain: null
 postgresAppVolumeMounts:
   postgres-backup:
     emptyDir: true
@@ -32,5 +37,9 @@ postgresql:
   dataVolume:
     datasetName: ix-postgres_data
     mountPath: /var/lib/postgresql/data
-timezone: America/Los_Angeles
-web_port: 32000
+runAsGroup: 473
+runAsUser: 473
+service:
+  consolePort: 32325
+  nodePort: 32324
+updateStrategy: RollingUpdate
