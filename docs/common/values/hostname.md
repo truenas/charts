@@ -15,6 +15,7 @@ Can be defined in:
 ---
 
 Specifies pod's hostname
+If left unspecified, Kubernetes will use the Deployment's name.
 
 Examples:
 
