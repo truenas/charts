@@ -408,3 +408,8 @@ volumeClaimTemplates: {}
 #   mountPath: /data
 #   accessMode: "ReadWriteOnce"
 #   size: 1Gi
+
+# TODO: Add docs for:
+# - *xxContainers
+# - jobs and cronjobs running with a main pod
+# - jobs and cronjobs running standalone
