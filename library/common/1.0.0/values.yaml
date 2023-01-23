@@ -286,35 +286,7 @@ runtimeClassName: ""
 # Defines the priorityClassName
 priorityClassName: ""
 
-###### - Everything bellow needs documentation #####
-
-# Injected from middleware
-ixCertificates: []
-# Injected from middleware
-ixVolumes: []
-
-# - Bellow values are needed (in addition to the default global)
-# as those are being referenced on other values in values.yaml sometimes
-
-# Default podSecurityContext for main pod
-podSecurityContext:
-  fsGroup: 568
-  supplementalGroups: []
-  fsGroupChangePolicy: OnRootMismatch
-
-# Default securityContext for main container
-securityContext:
-  runAsNonRoot: true
-  runAsUser: 568
-  runAsGroup: 568
-  readOnlyRootFilesystem: true
-  allowPrivilegeEscalation: false
-  privileged: false
-  capabilities:
-    add: []
-    drop:
-      - ALL
-
+# Defines the controller
 controller:
   # -- Enable the controller.
   enabled: true
@@ -342,6 +314,35 @@ controller:
     surge:
     # -- Set StatefulSet RollingUpdate partition
     partition:
+
+###### - Everything bellow needs documentation #####
+
+# Injected from middleware
+ixCertificates: []
+# Injected from middleware
+ixVolumes: []
+
+# - Bellow values are needed (in addition to the default global)
+# as those are being referenced on other places in values.yaml sometimes
+
+# Default podSecurityContext for main pod
+podSecurityContext:
+  fsGroup: 568
+  supplementalGroups: []
+  fsGroupChangePolicy: OnRootMismatch
+
+# Default securityContext for main container
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 568
+  runAsGroup: 568
+  readOnlyRootFilesystem: true
+  allowPrivilegeEscalation: false
+  privileged: false
+  capabilities:
+    add: []
+    drop:
+      - ALL
 
 # -- Configure the services for the chart here.
 # Additional services can be added by adding a dictionary key similar to the 'main' service.
