@@ -72,6 +72,9 @@ dnsPolicy: ""
 # Defines the DNS Config
 dnsConfig: {}
 
+# Tolerations
+tolerations: []
+
 # Creates a service account
 serviceAccount:
   main:
@@ -311,8 +314,6 @@ resources:
   requests:
     cpu: 10m
     memory: 50Mi
-
-tolerations: []
 
 controller:
   # -- Enable the controller.
