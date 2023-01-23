@@ -63,6 +63,15 @@ hostAliases: []
 # Binds to host network
 hostNetwork: false
 
+# Disables services links
+enableServiceLinks: false
+
+# Defines the DNS Policy
+dnsPolicy: ""
+
+# Defines the DNS Config
+dnsConfig: {}
+
 # Creates a service account
 serviceAccount:
   main:
@@ -142,6 +151,8 @@ nodeSelector: {}
 # Defines the runtimeClassName
 runtimeClassName: ""
 
+# Defines the priorityClassName
+priorityClassName: ""
 
 ###### - Everything bellow needs documentation #####
 
@@ -300,14 +311,6 @@ resources:
   requests:
     cpu: 10m
     memory: 50Mi
-
-enableServiceLinks: false
-
-priorityClassName: ""
-
-dnsPolicy: ""
-
-dnsConfig: {}
 
 tolerations: []
 

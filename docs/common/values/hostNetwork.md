@@ -11,6 +11,8 @@ Info:
 Can be defined in:
 
 - `.Values`.hostNetwork
+- `.Values.jobs.[job-name].podSpec`.hostNetwork
+-
 
 ---
 

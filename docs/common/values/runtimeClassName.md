@@ -17,9 +17,17 @@ Can be defined in:
 
 Defines the `runtimeClassName` for the workloads.
 
-Leaving it empty it will use the default `runtimeClassName`.
+Leaving it empty it will let Kubernetes resolve the `runtimeClassName`.
 > On TrueNAS Scale, it will dynamically pick the `runtimeClassName`
 > based on metadata provided by the middleware.
+
+You can also set a global default `runtimeClassName` in `.Values.global.defaults.runtimeClassName`
+
+Priority of usage (Highest to Lowest):
+
+- Dynamic Class Name provided from Scale Metadata
+- Per pod definition
+- Global definition
 
 Examples:
 
