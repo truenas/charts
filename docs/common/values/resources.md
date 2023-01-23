@@ -31,6 +31,8 @@ Can be defined in:
 
 ---
 
+> When no resources are defined on a Chart, library will use the `.Values.global.defaults.resources`
+
 `requests` is used by the scheduler to decide if the node has enough
 resources for the pod. Can be useful when multi node clusters are used.
 Currently set to a very low value, so a pod can always be scheduled on
@@ -40,6 +42,8 @@ the single node.
 is set to 4 cpu and 8GiB RAM.
 
 You can define only what you want to change, and the rest will be pulled from defaults.
+
+> Note: `requests` cannot be empty.
 
 Examples:
 
@@ -51,6 +55,17 @@ resources:
   requests:
     cpu: 10m
     memory: 50Mi
+
+# The bellow will only alter the limits.cpu.
+# Rest will be pulled from global defaults
+resources:
+  limits:
+    cpu: 2000m
+
+# If you want to remove a limit
+resources:
+  limits:
+    cpu: ""
 ```
 
 Kubernetes Documentation:

@@ -2,168 +2,6 @@
 # All values can be overridden per chart, in their values.yaml
 # For Examples and Explanation view the "Values.yaml Explained" markdown file
 
-# Defines image info
-image:
-  repository: repo
-  tag: tag
-  pullPolicy: IfNotPresent
-
-# Defines the image that will be used
-imageSelector: ""
-
-# Defines the imagePullSecrets
-imagePullCredentials: []
-
-# Defines environment variables
-env: {}
-
-# SCALE / GUI Focused
-envList: []
-
-# Defines the environment variables from a secret or configmap
-envFrom: []
-
-# Defines the timezone for the container
-TZ: UTC
-
-# Define the default hostname of the Deployment/StatefulSet/DaemonSet/etc
-hostname: ""
-
-# Overrides the name of the workload
-nameOverride: ""
-
-# Overrides the fullname of the workload
-fullnameOverride: ""
-
-# Default Security values for main container
-security:
-  PUID: 568
-  UMASK: "002"
-
-# Nvidia Caps will be assigned via environment variable
-# If empty, global defaults will be used
-nvidiaCaps: []
-
-stdin: false
-
-tty: false
-
-# Overrides the default entrypoint
-command: []
-
-# Overrides the default args
-args: []
-
-# Appends to args
-extraArgs: []
-
-# Adds hosts to /etc/hosts
-hostAliases: []
-
-# Binds to host network
-hostNetwork: false
-
-# Disables services links
-enableServiceLinks: false
-
-# Defines the DNS Policy
-dnsPolicy: ""
-
-# Defines the DNS Config
-dnsConfig: {}
-
-# Tolerations
-tolerations: []
-
-# Creates a service account
-serviceAccount:
-  main:
-    enabled: false
-    primary: true
-    automountServiceAccountToken: true
-
-# Creates Role and RoleBinding
-# (or ClusterRole and ClusterRoleBinding if clusterWide is true)
-rbac:
-  main:
-    enabled: false
-    primary: true
-    clusterWide: false
-
-# Creates a configmap
-configmap: {}
-
-# Creates a secret
-secret: {}
-
-# Defines lifecycle hooks
-lifecycle: {}
-
-# Used for SCALE / GUI Focused
-scaleGPU: {}
-
-# Adds annotations to the pod
-podAnnotations: {}
-
-# Adds annotations to the service
-addAnnotations:
-  traefik: false
-  metallb: false
-
-# Adds labels to the pod
-podLabels: {}
-
-# Used for SCALE
-scaleCerts: {}
-
-# Used for SCALE / GUI Focused
-scaleCertsList: []
-
-# Defines the probes
-probes:
-  liveness:
-    enabled: true
-  readiness:
-    enabled: true
-  startup:
-    enabled: true
-
-portal:
-  enabled: true
-
-# Used for SCALE / GUI Focused
-externalInterfaces: []
-
-# Injected from middleware
-ixExternalInterfacesConfiguration: []
-# Injected from middleware
-ixExternalInterfacesConfigurationNames: []
-
-# Defines termination strategy
-termination:
-  messagePath: ""
-  messagePolicy: ""
-  gracePeriodSeconds: 10
-
-# Defines the scheduler
-schedulerName: ""
-
-# Defines the nodeSelector(s)
-nodeSelector: {}
-
-# Defines the runtimeClassName
-runtimeClassName: ""
-
-# Defines the priorityClassName
-priorityClassName: ""
-
-###### - Everything bellow needs documentation #####
-
-# Injected from middleware
-ixCertificates: []
-# Injected from middleware
-ixVolumes: []
-
 global:
   nameOverride: ""
   fullnameOverride: ""
@@ -284,6 +122,177 @@ global:
       backoffLimit: 6
       completionMode: NonIndexed
 
+# Defines image info
+image:
+  repository: repo
+  tag: tag
+  pullPolicy: IfNotPresent
+
+# Defines the image that will be used
+imageSelector: ""
+
+# Defines the imagePullSecrets
+imagePullCredentials: []
+
+# Defines environment variables
+env: {}
+
+# SCALE / GUI Focused
+envList: []
+
+# Defines the environment variables from a secret or configmap
+envFrom: []
+
+# Defines the timezone for the container
+TZ: UTC
+
+# Define the default hostname of the Deployment/StatefulSet/DaemonSet/etc
+hostname: ""
+
+# Overrides the name of the workload
+nameOverride: ""
+
+# Overrides the fullname of the workload
+fullnameOverride: ""
+
+# Default Security values for main container
+security:
+  PUID: 568
+  UMASK: "002"
+
+# Nvidia Caps will be assigned via environment variable
+# If empty, global defaults will be used
+nvidiaCaps: []
+
+stdin: false
+
+tty: false
+
+# Overrides the default entrypoint
+command: []
+
+# Overrides the default args
+args: []
+
+# Appends to args
+extraArgs: []
+
+# Adds hosts to /etc/hosts
+hostAliases: []
+
+# Binds to host network
+hostNetwork: false
+
+# Disables services links
+enableServiceLinks: false
+
+# Defines the DNS Policy
+dnsPolicy: ""
+
+# Defines the DNS Config
+dnsConfig: {}
+
+# Tolerations
+tolerations: []
+
+# Default resources for main container
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+  requests:
+    cpu: 10m
+    memory: 50Mi
+
+# Creates a service account
+serviceAccount:
+  main:
+    enabled: false
+    primary: true
+    automountServiceAccountToken: true
+
+# Creates Role and RoleBinding
+# (or ClusterRole and ClusterRoleBinding if clusterWide is true)
+rbac:
+  main:
+    enabled: false
+    primary: true
+    clusterWide: false
+
+# Creates a configmap
+configmap: {}
+
+# Creates a secret
+secret: {}
+
+# Defines lifecycle hooks
+lifecycle: {}
+
+# Used for SCALE / GUI Focused
+scaleGPU: {}
+
+# Adds annotations to the pod
+podAnnotations: {}
+
+# Adds annotations to the service
+addAnnotations:
+  traefik: false
+  metallb: false
+
+# Adds labels to the pod
+podLabels: {}
+
+# Used for SCALE
+scaleCerts: {}
+
+# Used for SCALE / GUI Focused
+scaleCertsList: []
+
+# Defines the probes
+probes:
+  liveness:
+    enabled: true
+  readiness:
+    enabled: true
+  startup:
+    enabled: true
+
+portal:
+  enabled: true
+
+# Used for SCALE / GUI Focused
+externalInterfaces: []
+
+# Injected from middleware
+ixExternalInterfacesConfiguration: []
+# Injected from middleware
+ixExternalInterfacesConfigurationNames: []
+
+# Defines termination strategy
+termination:
+  messagePath: ""
+  messagePolicy: ""
+  gracePeriodSeconds: 10
+
+# Defines the scheduler
+schedulerName: ""
+
+# Defines the nodeSelector(s)
+nodeSelector: {}
+
+# Defines the runtimeClassName
+runtimeClassName: ""
+
+# Defines the priorityClassName
+priorityClassName: ""
+
+###### - Everything bellow needs documentation #####
+
+# Injected from middleware
+ixCertificates: []
+# Injected from middleware
+ixVolumes: []
+
 # - Bellow values are needed (in addition to the default global)
 # as those are being referenced on other values in values.yaml sometimes
 
@@ -305,15 +314,6 @@ securityContext:
     add: []
     drop:
       - ALL
-
-# Default resources for main container
-resources:
-  limits:
-    cpu: 4000m
-    memory: 8Gi
-  requests:
-    cpu: 10m
-    memory: 50Mi
 
 controller:
   # -- Enable the controller.
