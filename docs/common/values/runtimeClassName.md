@@ -26,3 +26,7 @@ Examples:
 ```yaml
 runtimeClassName: some-class-name
 ```
+
+Kubernetes Documentation:
+
+- [Runtime Class](https://kubernetes.io/docs/concepts/containers/runtime-class/#usage)
