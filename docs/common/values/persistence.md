@@ -97,13 +97,13 @@ persistence:
   secret-vol:
     enabled: true
     mountPath: /some/container/path
-    type: configmap
+    type: secret
     # Optional: Must be a string with 4 digits
     # If passed as integer, it will result in a different value
     # Because of how k8s does the conversion to octal
     defaultMode: "0600"
     items:
-      - key: key-from-the-configmap
+      - key: key-from-the-secret
         path: path-in-the-container (usually the filename)
 
   pvc-vol:
