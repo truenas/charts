@@ -137,6 +137,7 @@ Can be defined in:
 Examples:
 
 ```yaml
+# Only applies on StatefulSets
 volumeClaimTemplates:
   data:
     mountPath: /data
