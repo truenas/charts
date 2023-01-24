@@ -19,7 +19,6 @@
       {{- end -}}
     {{- end -}}
 
-    {{/* TODO: write tests when statefulset is ready */}}
     {{- if eq $root.Values.controller.type "StatefulSet" -}}
       {{- range $index, $vct := $root.Values.volumeClaimTemplates -}}
         {{- include "ix.v1.common.container.volumeMount"  (dict "root" $root

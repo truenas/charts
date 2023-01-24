@@ -1,4 +1,3 @@
-
 {{/* Volumes included by the controller. */}}
 {{- define "ix.v1.common.controller.volumes" -}}
   {{- $root := .root -}}

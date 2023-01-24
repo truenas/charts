@@ -337,6 +337,30 @@ securityContext:
     drop:
       - ALL
 
+# TODO: Discuss if we are going to add defaults like:
+  # - /dev/shm
+persistence:
+  # -- Create an emptyDir volume dedicated to be shared between all containers
+  # [[ref]]https://kubernetes.io/docs/concepts/storage/volumes/#emptydir)
+  shared:
+    enabled: true
+    type: emptyDir
+    mountPath: /shared
+
+  # -- Create an emptyDir volume to share between all containers
+  # [[ref]]https://kubernetes.io/docs/concepts/storage/volumes/#emptydir)
+  varlogs:
+    enabled: true
+    type: emptyDir
+    mountPath: /var/logs
+
+  # -- Create an emptyDir volume (shared between all containers) for temporary storage
+  # [[ref]]https://kubernetes.io/docs/concepts/storage/volumes/#emptydir)
+  tmp:
+    enabled: true
+    type: emptyDir
+    mountPath: /tmp
+
 ###### - Everything bellow needs documentation #####
 
 # Injected from middleware
@@ -377,30 +401,6 @@ service:
         # -- Specify the nodePort value NodePort service types.
         # [[ref]](https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport)
         nodePort:
-
-# TODO: Discuss if we are going to add defaults like:
-  # - /dev/shm
-persistence:
-  # -- Create an emptyDir volume dedicated to be shared between all containers
-  # [[ref]]https://kubernetes.io/docs/concepts/storage/volumes/#emptydir)
-  shared:
-    enabled: true
-    type: emptyDir
-    mountPath: /shared
-
-  # -- Create an emptyDir volume to share between all containers
-  # [[ref]]https://kubernetes.io/docs/concepts/storage/volumes/#emptydir)
-  varlogs:
-    enabled: true
-    type: emptyDir
-    mountPath: /var/logs
-
-  # -- Create an emptyDir volume (shared between all containers) for temporary storage
-  # [[ref]]https://kubernetes.io/docs/concepts/storage/volumes/#emptydir)
-  tmp:
-    enabled: true
-    type: emptyDir
-    mountPath: /tmp
 
 # -- Used in conjunction with `controller.type: StatefulSet` to create individual disks for each instance.
 volumeClaimTemplates: {}
