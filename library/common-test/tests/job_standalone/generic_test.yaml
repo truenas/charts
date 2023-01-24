@@ -7,7 +7,6 @@ tests:
     set:
       controller:
         type: Job
-        schedule: "*/5 * * * *"
     asserts:
       - hasDocuments:
           count: 3
@@ -21,7 +20,6 @@ tests:
     set:
       controller:
         type: Job
-        schedule: "* * * * *"
       podSecurityContext:
         fsGroup: 0
         fsGroupChangePolicy: Always
@@ -41,7 +39,6 @@ tests:
     set:
       controller:
         type: Job
-        schedule: "* * * * *"
       securityContext:
         runAsUser: 1000
         runAsGroup: 1000
@@ -69,7 +66,6 @@ tests:
     set:
       controller:
         type: Job
-        schedule: "* * * * *"
       some_string: a_string
       some_int: 123
       some_bool: false
@@ -140,7 +136,6 @@ tests:
     set:
       controller:
         type: Job
-        schedule: "* * * * *"
       persistence:
         volume0:
           type: pvc
