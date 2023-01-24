@@ -315,13 +315,6 @@ controller:
     # -- Set StatefulSet RollingUpdate partition
     partition:
 
-###### - Everything bellow needs documentation #####
-
-# Injected from middleware
-ixCertificates: []
-# Injected from middleware
-ixVolumes: []
-
 # - Bellow values are needed (in addition to the default global)
 # as those are being referenced on other places in values.yaml sometimes
 
@@ -343,6 +336,13 @@ securityContext:
     add: []
     drop:
       - ALL
+
+###### - Everything bellow needs documentation #####
+
+# Injected from middleware
+ixCertificates: []
+# Injected from middleware
+ixVolumes: []
 
 # -- Configure the services for the chart here.
 # Additional services can be added by adding a dictionary key similar to the 'main' service.
