@@ -110,4 +110,10 @@ persistence:
     enabled: true
     mountPath: /some/container/path
     type: pvc
+    # PVC Size
+    size: 1Gi
+    # Optional: Defaults to .Values.global.defaults.accessMode
+    defaultAccessMode: ReadWriteOnce
+    # Optional: Defaults to .Values.global.defaults.PVCRetain
+    retain: true
 ```
