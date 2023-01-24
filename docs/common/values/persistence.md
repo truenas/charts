@@ -2,6 +2,8 @@
 
 ## Key: persistence
 
+Info:
+
 - Type: `dict`
 - Default:
 
@@ -116,4 +118,28 @@ persistence:
     defaultAccessMode: ReadWriteOnce
     # Optional: Defaults to .Values.global.defaults.PVCRetain
     retain: true
+```
+
+## Key: volumeClaimTemplate
+
+Info:
+
+- Type: `dict`
+- Default: `{}`
+- Helm Template: ❌
+
+Can be defined in:
+
+- `.Values`.volumeClaimTemplate
+
+---
+
+Examples:
+
+```yaml
+volumeClaimTemplates:
+  data:
+    mountPath: /data
+    accessMode: "ReadWriteOnce"
+    size: 1Gi
 ```
