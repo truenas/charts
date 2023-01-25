@@ -492,7 +492,7 @@ tests:
         job-name:
           enabled: true
           podSpec:
-            termination: inherit
+            terminationGracePeriodSeconds: inherit
             containers:
               main:
                 imageSelector: image
