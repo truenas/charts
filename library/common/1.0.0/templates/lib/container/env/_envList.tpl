@@ -6,9 +6,8 @@
   {{- $containerName := .containerName -}}
   {{- $root := .root -}}
 
-  {{/* Slices cannot be converted toYaml safely,
-  temporary convert it to dict. Will be removed
-  once the tpl is moved in upper level
+  {{/* We need to make sure that is always dict. With nested values.
+  Will be removed once the tpl is moved in upper level
   */}}
   {{- $envDict := (dict "envs" $envList) -}}
   {{- if $envList -}}

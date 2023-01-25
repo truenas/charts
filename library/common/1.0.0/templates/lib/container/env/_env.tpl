@@ -6,8 +6,12 @@
   {{- $root := .root -}}
   {{- $containerName := .containerName -}}
 
+  {{/* We need to make sure that is always dict. With nested values.
+  Will be removed once the tpl is moved in upper level
+  */}}
+  {{- $envDict := (dict "envs" $envs) -}}
   {{- if $envs -}}
-    {{- $envs = fromYaml (tpl ($envs | toYaml) $root) -}}
+    {{- $envs = (fromYaml (tpl ($envDict | toYaml) $root)).envs -}}
   {{- end -}}
 
   {{- $dupeCheck := dict -}}
