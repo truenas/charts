@@ -24,9 +24,9 @@
   {{- end -}}
 
   {{- with $policy -}}
-    {{- if not (mustHas . (list "File" "FallbackToLogsOnError")) }}
+    {{- if not (mustHas . (list "File" "FallbackToLogsOnError")) -}}
       {{- fail (printf "Not valid option for messagePolicy (%s). Valid options are FallbackToLogsOnError and File" $policy) -}}
-    {{- end }}
-    {{- $policy }}
+    {{- end -}}
+    {{- $policy -}}
   {{- end -}}
 {{- end -}}
