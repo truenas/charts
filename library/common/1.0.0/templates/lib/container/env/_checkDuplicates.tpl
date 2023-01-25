@@ -33,7 +33,7 @@
   {{- end -}}
 
   {{/* Lists are passed as stringified arrays, convert them to a real list */}}
-  {{- if or (eq $source "fixedEnv") -}}
+  {{- if eq $source "fixedEnv" -}}
     {{- $data = $data | fromJsonArray -}}
   {{- end -}}
 
