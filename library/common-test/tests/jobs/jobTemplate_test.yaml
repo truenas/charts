@@ -510,7 +510,7 @@ tests:
         job-name:
           enabled: true
           podSpec:
-            terminationGracePeriodSeconds: 50
+            terminationGracePeriodSeconds: "{{ .Values.key }}"
             containers:
               main:
                 imageSelector: image

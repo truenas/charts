@@ -155,7 +155,7 @@
 {{- end -}}
 
 {{- $termSeconds := "" -}}
-{{- with $values.termination -}}
+{{- with $values.terminationGracePeriodSeconds -}}
   {{- if eq (toString .) $inherit -}}
     {{- with $root.Values.terminationGracePeriodSeconds -}}
       {{- $termSeconds = . -}}
