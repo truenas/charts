@@ -2,7 +2,6 @@
   {{- $job := .job -}}
   {{- $root := .root -}}
   {{- $jobName := include "ix.v1.common.names.jobAndCronJob" (dict "root" $root "jobValues" $job) }}
-
 ---
 apiVersion: {{ include "ix.v1.common.capabilities.job.apiVersion" . }}
 kind: Job

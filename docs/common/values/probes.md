@@ -1,194 +1,176 @@
 # Probes
 
-## key: probes
+| Key                         |  Type   | Helm Template |  Default  | Description                                    |
+| :-------------------------- | :-----: | :-----------: | :-------: | :--------------------------------------------- |
+| probes                      | object  |      Yes      | See below | [probes](#probes)                              |
+| probes.[probe-name]         | object  |      Yes      | See below | Allowed values: readiness / liveness / startup |
+| probes.[probe-name].enabled | boolean |      Yes      |  `true`   | Enables or Disables the probe                  |
+| probes.[probe-name].type    | string  |      Yes      |  `auto`   | [types](#types)                                |
+| probes.[probe-name].spec    | object  |      Yes      | See below | Contains timeout values                        |
 
-Info:
+Default probes:
 
-- Type: `dict`
-- Default:
+```yaml
+probes:
+  liveness:
+    enabled: true
+    type: auto
+    spec:
+      initialDelaySeconds: 10
+      failureThreshold: 5
+      timeoutSeconds: 5
+      periodSeconds: 10
+  readiness:
+    enabled: true
+    type: auto
+    spec:
+      initialDelaySeconds: 10
+      failureThreshold: 5
+      timeoutSeconds: 5
+      periodSeconds: 10
+  startup:
+    enabled: true
+    type: auto
+    spec:
+      initialDelaySeconds: 10
+      failureThreshold: 60
+      timeoutSeconds: 2
+      periodSeconds: 5
+```
 
-  ```yaml
-  probes:
-    liveness:
-      enabled: true
-    readiness:
-      enabled: true
-    startup:
-      enabled: true
-  ```
+> `auto` type is only available for the main container.
 
-- Helm Template:
-  - probes.PROBENAME.command - Single String: ✅
-  - probes.PROBENAME.command - List Entry: ✅
-  - probes.PROBENAME.port: ✅
-  - probes.PROBENAME.path: ✅
-  - probes.PROBENAME.httpHeaders.value: ✅
-  - probes.PROBENAME.httpHeaders.key: ❌
-  - probes.PROBENAME.enabled: ❌
-  - probes.PROBENAME.type: ❌
-  - probes.PROBENAME.spec: ❌
+## probes
 
 Can be defined in:
 
 - `.Values`.probes
 - `.Values.additionalContainers.[container-name]`.probes
 
----
+### spec
 
-With the above mentioned default and without defining anything else,
-common will result in the following initial state of probes.
-You can override every value, you don't have to rewrite every key.
-Only the one's you want to change.
+| Key                                       | Type | Helm Template | Default | Description |
+| :---------------------------------------- | :--: | :-----------: | :-----: | :---------- |
+| probes.liveness.spec.initialDelaySeconds  | int  |      Yes      |   10    |             |
+| probes.liveness.spec.failureThreshold     | int  |      Yes      |    5    |             |
+| probes.liveness.spec.timeoutSeconds       | int  |      Yes      |    5    |             |
+| probes.liveness.spec.periodSeconds        | int  |      Yes      |   10    |             |
+| probes.readiness.spec.initialDelaySeconds | int  |      Yes      |   10    |             |
+| probes.startup.spec.initialDelaySeconds   | int  |      Yes      |   10    |             |
+| probes.startup.spec.failureThreshold      | int  |      Yes      |   60    |             |
+| probes.startup.spec.timeoutSeconds        | int  |      Yes      |    2    |             |
+| probes.startup.spec.periodSeconds         | int  |      Yes      |    5    |             |
+| probes.readiness.spec.failureThreshold    | int  |      Yes      |    5    |             |
+| probes.readiness.spec.timeoutSeconds      | int  |      Yes      |    5    |             |
+| probes.readiness.spec.periodSeconds       | int  |      Yes      |   10    |             |
 
-```yaml
-  probes:
-    liveness:
-      enabled: true
-      type: auto
-      # Optional
-      path: "/"
-      # Optional
-      port: ""
-      # Optional
-      command: []
-      # Optional
-      httpHeaders: {}
-      # Optional
-      spec:
-        initialDelaySeconds: 10
-        periodSeconds: 10
-        timeoutSeconds: 5
-        failureThreshold: 5
-    readiness:
-      enabled: true
-      type: auto
-      path: "/"
-      port: ""
-      command: []
-      spec:
-        initialDelaySeconds: 10
-        periodSeconds: 10
-        timeoutSeconds: 5
-        failureThreshold: 5
-    startup:
-      enabled: true
-      type: auto
-      path: "/"
-      port: ""
-      command: []
-      spec:
-        initialDelaySeconds: 10
-        timeoutSeconds: 2
-        periodSeconds: 5
-        failureThreshold: 60
-```
-
-`probes` key contains the probes for the container.
-`liveness`, `readiness` and `startup` probes, behave the same.
-Below examples will use `liveness`. But applies to all probes.
-
-`auto` type, will automatically define a probe type and it's properties
-based on the `primary` service's `primary` port protocol.
-> (Only available on main container)
-
-`spec` contains the timeouts for the probe (or the custom probe).
+`spec` contains the timeouts for the probe.
 If not defined it will use the defaults from `.Values.global.defaults.probes.[probe-name].spec`.
 
-- `http` and `https` type, will result in `httpGet` probe
-- `tcp` type, will result in `tcp` probe
-- `exec` type, will result in a `exec` probe
-- `grpc` type, will result in a `grpc` probe
-- `custom` type, will require a 1:1 definition from k8s docs
+## Types
 
-`port` defaults to `targetPort` of `primary` service/port,
-or `port` if `targetPort` is missing
+Allowed values: auto / http / https / tcp / grpc / exec / custom
+
+### http / https
+
+| Key                             |  Type  | Helm Template | Default | Description                  |
+| :------------------------------ | :----: | :-----------: | :-----: | :--------------------------- |
+| probes.[probe-name].port        |  int   |      Yes      |  unset  | Sets the probe's port        |
+| probes.[probe-name].path        | string |      Yes      |   `/`   | Sets the probe's path        |
+| probes.[probe-name].httpHeaders | object |      Yes      |  `{}`   | Sets the probe's httpHeaders |
+
+> If type is set to `auto`, `port` defaults the the primary service's targetPort,
+> if not `targetPort` is defined, fail-backs to `port`
+> scheme is set based on the `type` (http / https)
 
 Example:
 
 ```yaml
-# - auto type
-# Main service and main port is by default enabled and primary
-service:
-  main:
-    ports:
-      main:
-        port: 10000
-        protocol: HTTP
-        targetPort: 80
-# No need to define anything under probes
-# as it defaults to auto
-
-# ---
-
-# - HTTP Probe
 probes:
-  liveness:
-    type: http # Defines the scheme
-    path: /health # Hardcoded
-    # path: "{{ .Values.some.path }}"  # tpl
-    port: 80  # Hardcoded
-    # port: "{{ .Values.service.some_service.ports.some_port.targetPort }}"  # tpl
-    # Headers - hardcoded
-    # httpHeaders:
-    #   header: value
-    # Headers - tpl
-    # httpHeaders:
-    #   header: "{{ .Values.some.path }}"
-    spec: # Only if you want to override the defaults
-      initialDelaySeconds: 10
-      timeoutSeconds: 2
-      periodSeconds: 5
-      failureThreshold: 60
-
-# - TCP Probe
-probes:
-  liveness:
-    type: tcp
-    port: 80  # Hardcoded
-    # port: "{{ .Values.service.some_service.ports.some_port.targetPort }}"  # tpl
-
-# - GRPC Probe
-probes:
-  liveness:
-    type: grpc
-    port: 80  # Hardcoded
-    # port: "{{ .Values.service.some_service.ports.some_port.targetPort }}"  # tpl
-
-# - EXEC Probe
-probes:
-  liveness:
-    type: exec
-    command: healthcheck.sh # Hardcoded
-    # command: "{{ .Values.healthcheck_command }}" # tpl
-
-    # command: # Hardcoded List
-    #   - /bin/sh
-    #   - -c
-    #   - |
-    #     healthcheck.sh
-
-    # command: # tpl List
-    #   - /bin/sh
-    #   - -c
-    #   - {{ .Values.healthcheck_command }}
-
-# - CUSTOM Probe - Pure k8s definition, no tpl enabled
-# Not recommended, above options should give all the flexibility needed.
-probes:
-  liveness:
-    type: custom
+  probe-name:
+    enabled: true
+    type: http
+    path: "/"
+    port: 80
+    httpHeaders: {}
     spec:
-      httpGet:
-        path: /
-        scheme: HTTP
-        port: 65535
       initialDelaySeconds: 10
-      failureThreshold: 60
-      timeoutSeconds: 2
-      periodSeconds: 5
+      periodSeconds: 10
+      timeoutSeconds: 5
+      failureThreshold: 5
+```
 
-# - Disable Probe
+---
+
+### tcp
+
+| Key                      | Type | Helm Template | Default | Description           |
+| :----------------------- | :--: | :-----------: | :-----: | :-------------------- |
+| probes.[probe-name].port | int  |      Yes      |  unset  | Sets the probe's port |
+
+> If type is set to `auto`, `port` defaults the the primary service's targetPort,
+> if not `targetPort` is defined, fail-backs to `port`
+
+Example:
+
+```yaml
 probes:
-  liveness:
-    enabled: false
+  probe-name:
+    enabled: true
+    type: tcp
+    port: 80
+    spec:
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      timeoutSeconds: 5
+      failureThreshold: 5
+```
+
+### grpc
+
+| Key                      | Type | Helm Template | Default | Description           |
+| :----------------------- | :--: | :-----------: | :-----: | :-------------------- |
+| probes.[probe-name].grpc | int  |      Yes      |  unset  | Sets the probe's port |
+
+> If type is set to `auto`, `port` defaults the the primary service's targetPort,
+> if not `targetPort` is defined, fail-backs to `port`
+
+Example:
+
+```yaml
+probes:
+  probe-name:
+    enabled: true
+    type: grpc
+    port: 80
+    spec:
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      timeoutSeconds: 5
+      failureThreshold: 5
+```
+
+### exec
+
+| Key                         |    Type     | Helm Template | Default | Description                        |
+| :-------------------------- | :---------: | :-----------: | :-----: | :--------------------------------- |
+| probes.[probe-name].command | list/string |      Yes      |  `{}`   | [command](command-args.md#command) |
+
+Example:
+
+```yaml
+probes:
+  probe-name:
+    enabled: true
+    type: exec
+    command:
+      - /bin/sh
+      - -c
+      - |
+        curl ...
+    spec:
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      timeoutSeconds: 5
+      failureThreshold: 5
 ```

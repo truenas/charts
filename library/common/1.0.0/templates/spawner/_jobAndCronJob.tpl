@@ -5,7 +5,7 @@
     {{- $jobValues := dict -}}
 
     {{/* Controller holds Job/CronJob Configuration */}}
-    {{- $jobValues = $.Values.controller -}}
+    {{- $jobValues = (mustDeepCopy $.Values.controller) -}}
 
     {{/* If it's CronJob prepare the cron dict with enabled forced */}}
     {{- if eq $.Values.controller.type "CronJob" -}}
@@ -15,7 +15,13 @@
 
     {{/* Enable the Job/CronJob and create a podSpec */}}
     {{- $_ := set $jobValues "enabled" true -}}
-    {{- $_ := set $jobValues "podSpec" dict -}}
+
+    {{/* Add the .Values as the main container and as pod */}}
+    {{/* This needs some redesign tbh */}}
+    {{- $_ := set $jobValues "podSpec" (mustDeepCopy $.Values) -}}
+    {{- $_ := set $jobValues.podSpec "containers" dict -}}
+    {{- $_ := set $jobValues.podSpec.containers "main" .Values -}}
+    {{- $_ := set $jobValues.podSpec.containers.main "enabled" "true" -}}
 
     {{/* Add labels/annotations if any. */}}
     {{- range $key := (list "labels" "annotations") -}}
@@ -24,15 +30,8 @@
       {{- end -}}
     {{- end -}}
 
-    {{/* Add the .Values as the main container and as pod */}}
-    {{/* This needs some redesign tbh */}}
-    {{- $_ := set $jobValues "podSpec" .Values -}}
-    {{- $_ := set $jobValues.podSpec "containers" dict -}}
-    {{- $_ := set $jobValues.podSpec.containers "main" .Values -}}
-    {{- $_ := set $jobValues.podSpec.containers.main "enabled" "true" -}}
-
     {{/* Add additional containers if any */}}
-    {{- range $name, $container := .Values.additionalContainers -}}
+    {{- range $name, $container := $.Values.additionalContainers -}}
       {{- if $container.enabled -}}
         {{- $_ := set $jobValues.podSpec.containers $name $container -}}
       {{- end -}}

@@ -3,10 +3,10 @@
   {{- $probeSpec := .probeSpec -}}
   {{- $probeName := .probeName -}}
   {{- $containerName := .containerName -}}
-  {{- $root := .root -}}
+  {{- $defaults := .defaults -}}
 
   {{/* Init default probe from global defaults */}}
-  {{- $defaultProbeSpec := (get $root.Values.global.defaults.probes $probeName).spec -}}
+  {{- $defaultProbeSpec := (get $defaults.probes $probeName).spec -}}
   {{/* Overwrite with any values defined by the user/dev */}}
   {{- $probeSpec = mustMergeOverwrite $defaultProbeSpec $probeSpec -}}
 

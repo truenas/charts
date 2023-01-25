@@ -28,10 +28,6 @@ completions: {{ . }}
 completionMode: {{ $job.completionMode | default $default.completionMode }}
 template:
   spec:
-{{- if not (mustHas $controllerType (list "job" "cronjob")) -}}
   {{- include "ix.v1.common.job.pod" (dict "values" $job.podSpec "root" $root) | trim | nindent 4 -}}
-{{- else -}}
-  {{/* TODO: Call different template when run as standalone here? Or handle it hgiher pods/_job.tpl */}}
-{{- end -}}
 
 {{- end -}}

@@ -1,6 +1,7 @@
 {{/* Probes selection logic included by the container. */}}
 {{- define "ix.v1.common.container.probes" -}}
   {{- $root := .root -}}
+  {{- $defaults := $root.Values.global.defaults -}}
   {{- $probes := .probes -}}
   {{- $isMainContainer := .isMainContainer -}}
   {{- $services := .services -}} {{/* Only passed from main container, not init/install/upgrade/additional */}}
@@ -93,18 +94,18 @@
           {{- $_ := set $tmpProbe "path" $defaultProbePath -}}
         {{- end -}}
         {{- $_ := set $tmpProbe "httpHeaders" $probe.httpHeaders -}}
-        {{- include "ix.v1.common.container.probes.httpGet" (dict "probe" $tmpProbe "root" $root "containerName" $containerName) | trim | nindent 2 }}
+        {{- include "ix.v1.common.container.probes.httpGet" (dict "probe" $tmpProbe "defaults" $defaults "containerName" $containerName) | trim | nindent 2 }}
       {{- else if (eq $probeType "tcp") -}}
-        {{- include "ix.v1.common.container.probes.tcp" (dict "probe" $tmpProbe "root" $root "containerName" $containerName) | trim | nindent 2 }}
+        {{- include "ix.v1.common.container.probes.tcp" (dict "probe" $tmpProbe "defaults" $defaults "containerName" $containerName) | trim | nindent 2 }}
       {{- else if (eq $probeType "grpc") -}}
-        {{- include "ix.v1.common.container.probes.grpc" (dict "probe" $tmpProbe "root" $root "containerName" $containerName) | trim | nindent 2 }}
+        {{- include "ix.v1.common.container.probes.grpc" (dict "probe" $tmpProbe "defaults" $defaults "containerName" $containerName) | trim | nindent 2 }}
       {{- else if (eq $probeType "exec") -}}
         {{- $_ := set $tmpProbe "command" $probe.command -}}
-        {{- include "ix.v1.common.container.probes.exec" (dict "probe" $tmpProbe "root" $root "containerName" $containerName) | trim | nindent 2 }}
+        {{- include "ix.v1.common.container.probes.exec" (dict "probe" $tmpProbe "defaults" $defaults "containerName" $containerName) | trim | nindent 2 }}
       {{- else if (eq $probeType "custom") -}}
-        {{- include "ix.v1.common.container.probes.custom" (dict "probe" $tmpProbe "root" $root "containerName" $containerName) | trim | nindent 2 }}
+        {{- include "ix.v1.common.container.probes.custom" (dict "probe" $tmpProbe "containerName" $containerName) | trim | nindent 2 }}
       {{- else if (eq $probeType "udp") -}} {{/* This just contains a fail message. */}}
-        {{- include "ix.v1.common.container.probes.udp" (dict "probe" $tmpProbe "root" $root "containerName" $containerName) | trim | nindent 2 }}
+        {{- include "ix.v1.common.container.probes.udp" (dict "probe" $tmpProbe "defaults" $defaults "containerName" $containerName) | trim | nindent 2 }}
       {{- end -}}
 
     {{- end -}}
