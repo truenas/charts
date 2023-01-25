@@ -1,6 +1,12 @@
-{{/*
-"toYaml" makes sure that any type of data (int/float/strin)
-will be parsed correctly without causing errors.
+{{/* Call this template like this:
+    {{- $fixedEnv = (include "ix.v1.common.container.fixedEnvs" (dict "root" $root
+                                                                      "fixedEnv" $fixedEnv
+                                                                      "containerName" $containerName
+                                                                      "isMainContainer" $isMainContainer
+                                                                      "scaleGPU" $scaleGPU
+                                                                      "nvidiaCaps" $nvidiaCaps
+                                                                      "secCont" $secCont
+                                                                      "secEnvs" $secEnvs)) -}}
 */}}
 {{- define "ix.v1.common.container.fixedEnvs" -}}
   {{- $root := .root -}}

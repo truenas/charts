@@ -35,19 +35,11 @@ That's why the custom dict is expected.
                                                                       "secEnvs" $secEnvs)) -}}
   {{- end -}} {{/* Finish fixedEnv */}}
   {{- with $fixedEnv -}}
-    {{- range $fixedEnv | fromJsonArray }} {{/* "fromJsonArray" parses stringified output and convet to list */}}
+    {{- range $fixedEnv | fromJsonArray }} {{/* "fromJsonArray" parses stringified output and convert to list */}}
 - name: {{ .name | quote }}
   value: {{ .value | quote }}
     {{- end -}}
   {{- end -}}
-  {{- include "ix.v1.common.container.env"  (dict "envs" $envs
-                                                  "root" $root
-                                                  "fixedEnv" $fixedEnv
-                                                  "containerName" $containerName) -}}
-
-  {{- include "ix.v1.common.container.envList"  (dict "envList" $envList
-                                                      "envs" $envs
-                                                      "root" $root
-                                                      "fixedEnv" $fixedEnv
-                                                      "containerName" $containerName) -}}
+  {{- include "ix.v1.common.container.env" (dict "envs" $envs "root" $root "containerName" $containerName) -}}
+  {{- include "ix.v1.common.container.envList" (dict "envList" $envList "root" $root "containerName" $containerName) -}}
 {{- end -}}

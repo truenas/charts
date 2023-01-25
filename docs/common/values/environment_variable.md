@@ -1,32 +1,42 @@
 # Environment Variable
 
-## Key: env
+| Key                                  |      Type       | Helm Template | Default | Description                                   |
+| :----------------------------------- | :-------------: | :-----------: | :-----: | :-------------------------------------------- |
+| env                                  |     object      |      Yes      |  `{}`   | [env](#env)                                   |
+| env.[env-name]                       | object / string |      Yes      |  `""`   | Specify the value for the `env-name`          |
+| env.[env-name].secretKeyRef          |     object      |      Yes      |  `{}`   | Objects that holds info for the secret ref    |
+| env.[env-name].secretKeyRef.name     |     string      |      Yes      |  `""`   | Specify the secret name                       |
+| env.[env-name].secretKeyRef.key      |     string      |      Yes      |  `""`   | Specify the key on the secret                 |
+| env.[env-name].secretKeyRef.optional |     boolean     |      Yes      | `false` | Specify if the secret is optional             |
+| env.[env-name].configMapKeyRef       |     object      |      Yes      |  `{}`   | Objects that holds info for the configMap ref |
+| env.[env-name].configMapKeyRef.name  |     string      |      Yes      |  `""`   | Specify the configMap name                    |
+| env.[env-name].configMapKeyRef.key   |     string      |      Yes      |  `""`   | Specify the key on the configMap              |
+| envList                              |      list       |      Yes      |  `[]`   | [envlist](#envlist)                           |
+| envList.name                         |     string      |      Yes      |  `""`   | The name of the env                           |
+| envList.value                        |     string      |      Yes      |  `""`   | The value of the env                          |
+| envFrom                              |      list       |      Yes      |  `[]`   | [envfrom](#envfrom)                           |
+| envFrom.secretRef                    |     object      |      Yes      |  `{}`   | Objects that holds info for the secret ref    |
+| envFrom.secretRef.name               |     string      |      Yes      |  `""`   | The name of the secret                        |
+| envFrom.configMapRef                 |     object      |      Yes      |  `{}`   | Objects that holds info for the configMap ref |
+| envFrom.configMapRef.name            |     string      |      Yes      |  `""`   | The name of the configMap                     |
 
-Info:
+## env
 
-- Type: `dict`
-- Default: `{}`
-- Helm Template:
-  - key: ❌
-  - value: ✅
-  - secretKeyRef.name: ✅
-  - secretKeyRef.key: ✅
-  - configMapKeyRef.name: ✅
-  - configMapKeyRef.key: ✅
+Contains environment variables and can be defined in few different formats
+
+---
 
 Can be defined in:
 
 - `.Values`.env
-- `.Values.additionalContainers.[container-name]`.env
 - `.Values.initContainers.[container-name]`.env
+- `.Values.systemContainers.[container-name]`.env
 - `.Values.installContainers.[container-name]`.env
 - `.Values.upgradeContainers.[container-name]`.env
-- `.Values.systemContainers.[container-name]`.env
+- `.Values.additionalContainers.[container-name]`.env
 - `.Values.jobs.[job-name].podSpec.containers.[container-name].[container-name]`.env
 
 ---
-
-Contains environment variables and can be defined in few different formats
 
 Examples:
 
@@ -63,17 +73,13 @@ env:
 ```
 
 ---
+
 ---
 
-## Key: envList
+## envList
 
-Info:
-
-- Type: `list`
-- Default: `[]`
-- Helm Template:
-  - name: ✅
-  - value: ✅
+Mainly designed to be used in the SCALE GUI.
+So users can pass additional environment variables.
 
 Can be defined in:
 
@@ -86,9 +92,6 @@ Can be defined in:
 - `.Values.jobs.[job-name].podSpec.containers.[container-name].[container-name]`.envList
 
 ---
-
-Mainly designed to be used in the SCALE GUI.
-So users can pass additional environment variables.
 
 Examples:
 
@@ -103,17 +106,15 @@ envList:
 ```
 
 ---
+
 ---
 
-## Key: envFrom
+## envFrom
 
-Info:
-
-- Type: `list`
-- Default: `[]`
-- Helm Template:
-  - name: ✅
-  - value: ✅
+Used to load multiple environment variables
+from a `configMap` or a `secret`. With a single list entry,
+it will load all keys as environment variables
+defined in the specified object.
 
 Can be defined in:
 
@@ -126,11 +127,6 @@ Can be defined in:
 - `.Values.jobs.[job-name].podSpec.containers.[container-name].[container-name]`.envFrom
 
 ---
-
-Used to load multiple environment variables
-from a `configMap` or a `secret`. With a single list entry,
-it will load all keys as environment variables
-defined in the specified object.
 
 Examples:
 
@@ -149,9 +145,12 @@ envFrom:
 ```
 
 ---
+
 ---
 
-## Key: TZ
+## Fixed Environment Variables
+
+### TZ
 
 Info:
 
@@ -188,9 +187,10 @@ env:
 ```
 
 ---
+
 ---
 
-## Key: security
+## security
 
 Info:
 
@@ -231,9 +231,10 @@ security:
 ```
 
 ---
+
 ---
 
-## Key: nvidiaCaps
+## nvidiaCaps
 
 Info:
 
@@ -273,9 +274,10 @@ nvidiaCaps:
 ```
 
 ---
+
 ---
 
-## Key: injectFixedEnvs
+## injectFixedEnvs
 
 Info:
 
@@ -294,29 +296,37 @@ Can be defined in:
 - `.Values.jobs.[job-name].podSpec.containers.[container-name].[container-name]`.injectFixedEnvs
 
 If **enabled**, injects environment variables to the container.
+
 > If not defined, it will use the `.Values.global.defaults.injectFixedEnvs`
 
 `TZ`:
+
 > Applied always. No conditions.
 
 `UMASK`, `UMASK_SET`:
+
 > Applied always. No conditions.
 
 `NVIDIA_VISIBLE_DEVICES`:
+
 > Applied and set to `void`, if container has no GPU pass through.
 
 `NVIDIA_DRIVER_CAPABILITIES`:
+
 > Applied when a GPU is passed through to the container.
 > Value is defined based on the `nvidiaCaps` key
 
 `PGID`, `GROUP_ID`, `GID`:
+
 > Applied when container runs as `root` user or `root` group.
 > `PGID`, `GROUP_ID`, `GID` is always equal to `fsGroup`.
 
 `PUID`, `USER_ID`, `UID`:
+
 > Applied when container runs as `root` user or `root` group.
 
 `S6_READ_ONLY_ROOT`:
+
 > Applied when container runs as `root` user or `root` group
 > or has `readOnlyRootFilesystem` set to true
 

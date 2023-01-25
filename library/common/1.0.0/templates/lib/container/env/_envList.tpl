@@ -1,11 +1,17 @@
+{{/* Call this template like this:
+{{- include "ix.v1.common.container.envList" (dict "envList" $envList "root" $root "containerName" $containerName) -}}
+*/}}
 {{- define "ix.v1.common.container.envList" -}}
   {{- $envList := .envList -}}
-  {{- $envs := .envs -}}
   {{- $containerName := .containerName -}}
   {{- $root := .root -}}
-  {{- $fixedEnv := .fixedEnv -}}
+
+  {{- if $envList -}}
+    {{- $envList := fromYaml (tpl ($envList | toYaml) $root) -}}
+  {{- end -}}
 
   {{- $dupeCheck := dict -}}
+
   {{- with $envList -}}
     {{- range $envList -}}
       {{- if and .name .value -}}
@@ -14,16 +20,14 @@
         {{- end -}}
         {{- if mustHas (kindOf .value) (list "map" "slice") -}}
           {{- fail "Value in envList cannot be a map or slice" -}}
-        {{- end -}}
-        {{- $name := tpl .name $root -}}
-        {{- $value := tpl .value $root }}
-- name: {{ $name }}
-  value: {{ $value | quote }}
-        {{- $_ := set $dupeCheck $name $value -}}
+        {{- end }}
+- name: {{ .name }}
+  value: {{ .value | quote }}
+        {{- $_ := set $dupeCheck .name .value -}}
       {{- else -}}
         {{- fail "Please specify both name and value for environment variable" -}}
       {{- end -}}
     {{- end -}}
     {{- include "ix.v1.common.util.storeEnvsForDupeCheck" (dict "root" $root "source" "envList" "data" $dupeCheck "containers" (list $containerName)) -}}
-  {{- end -}} {{/* Finish envList */}}
+  {{- end -}}
 {{- end -}}

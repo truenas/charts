@@ -4,13 +4,15 @@
 {{- $values := .values -}}
 {{- $inherit := "inherit" -}}
 
+{{- $values := fromYaml (tpl ($values | toYaml) $root) -}}
+
 {{/* Prepare values */}}
 {{- $saName := "" -}}
 {{- with $values.serviceAccountName -}}
   {{- if eq . $inherit -}}
     {{- $saName = (include "ix.v1.common.names.serviceAccountName" $root) -}}
   {{- else -}}
-    {{- $saName = tpl . $root -}}
+    {{- $saName = . -}}
   {{- end -}}
 {{- else -}}
   {{/* If we ever have value in global.defaults */}}
@@ -20,8 +22,8 @@
 {{- with $values.schedulerName -}}
   {{- if eq . $inherit -}}
     {{- $schedulerName = (tpl $root.Values.schedulerName $root) -}}
-  {{- else  -}}
-    {{- $schedulerName = tpl . $root -}}
+  {{- else -}}
+    {{- $schedulerName = . -}}
   {{- end -}}
 {{- else -}}
   {{/* If we ever have value in global.defaults */}}
@@ -32,7 +34,7 @@
   {{- if eq . $inherit -}}
     {{- $priorityClassName = (tpl $root.Values.priorityClassName $root) -}}
   {{- else -}}
-    {{- $priorityClassName = tpl . $root -}}
+    {{- $priorityClassName = . -}}
   {{- end -}}
 {{- else -}}
   {{/* If we ever have value in global.defaults */}}
@@ -43,7 +45,7 @@
   {{- if eq . $inherit -}}
     {{- $hostname = (tpl $root.Values.hostname $root) -}}
   {{- else  -}}
-    {{- $hostname = tpl . $root -}}
+    {{- $hostname = . -}}
   {{- end -}}
 {{- else -}}
   {{/* If we ever have value in global.defaults */}}
