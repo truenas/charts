@@ -106,17 +106,25 @@
   {{- $root := .root -}}
   {{- $item := .item -}}
   {{- $name := .name -}}
+
+  {{/* We need to make sure that is always dict. With nested values.
+  Will be removed once the tpl is moved in upper level
+  */}}
+  {{- $itemDict := (dict "item" $item) -}}
+  {{- if $item -}}
+    {{- $item = (fromYaml (tpl ($itemDict | toYaml) $root)).item -}}
+  {{- end -}}
+
   {{- if not $item.mountPath -}} {{/* Make sure that we have a mountPath */}}
     {{- fail "<mountPath> must be defined, alternatively use the <noMount> flag." -}}
   {{- end -}}
-  {{- $mountPath := (tpl $item.mountPath $root) -}}
-  {{- if not (hasPrefix "/" $mountPath) -}}
-    {{- fail (printf "Mount path (%s), must start with a forward slash -> / <-" $mountPath) -}}
+  {{- if not (hasPrefix "/" $item.mountPath) -}}
+    {{- fail (printf "Mount path (%s), must start with a forward slash -> / <-" $item.mountPath) -}}
   {{- end }}
 - name: {{ tpl $name $root }}
-  mountPath: {{ $mountPath }}
+  mountPath: {{ $item.mountPath }}
   {{- with $item.subPath }}
-  subPath: {{ tpl . $root }}
+  subPath: {{ . }}
   {{- end -}}
   {{- if (hasKey $item "readOnly") -}}
     {{- if or (eq $item.readOnly true) (eq $item.readOnly false) }}
@@ -126,6 +134,6 @@
     {{- end -}}
   {{- end -}}
   {{- with $item.mountPropagation }}
-  mountPropagation: {{ tpl . $root }}
+  mountPropagation: {{ . }}
   {{- end -}}
 {{- end -}}

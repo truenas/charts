@@ -1,9 +1,5 @@
-{{/*
-A custom dict is expected with envList and root.
-It's designed to work for mainContainer AND initContainers.
-Calling this from an initContainer, wouldn't work, as it would have a different "root" context,
-and "tpl" on "$" would cause erors.
-That's why the custom dict is expected.
+{{/* Call this template like this:
+{{- include "ix.v1.common.container.envFrom" (dict "envFrom" $envFrom "root" $root "containerName" $containerName) -}}
 */}}
 
 {{/* Environment Variables From included by the container */}}
@@ -12,17 +8,22 @@ That's why the custom dict is expected.
   {{- $containerName := .containerName -}}
   {{- $root := .root -}}
 
+  {{- $envDict := (dict "envs" $envFrom) -}}
+  {{- if $envFrom -}}
+    {{- $envFrom = (fromYaml (tpl ($envDict | toYaml) $root)).envs -}}
+  {{- end -}}
+
   {{- range $envFrom -}}
     {{- if and .secretRef .configMapRef -}}
       {{- fail "You can't define both secretRef and configMapRef on the same item." -}}
     {{- end -}}
     {{- if .secretRef }}
-      {{- $secretName := (tpl (required "Name is required for secretRef in envFrom." .secretRef.name) $root) }}
+      {{- $secretName := required "Name is required for secretRef in envFrom." .secretRef.name }}
 - secretRef:
     name: {{ $secretName | quote }}
     {{- include "ix.v1.common.util.storeEnvFromVarsForCheck" (dict "root" $root "containerName" $containerName "source" (printf "%s-%s" "secret" $secretName)) -}}
     {{- else if .configMapRef }}
-      {{- $configName := (tpl (required "Name is required for configMapRef in envFrom." .configMapRef.name) $root) }}
+      {{- $configName := required "Name is required for configMapRef in envFrom." .configMapRef.name }}
 - configMapRef:
     name: {{ $configName | quote }}
     {{- include "ix.v1.common.util.storeEnvFromVarsForCheck" (dict "root" $root "containerName" $containerName "source" (printf "%s-%s" "configmap" $configName)) -}}
