@@ -9,7 +9,7 @@
 
     {{/* If it's CronJob prepare the cron dict with enabled forced */}}
     {{- if eq $.Values.controller.type "CronJob" -}}
-      {{- $_ := set $jobValues "cron" $.Values.controller -}}
+      {{- $_ := set $jobValues "cron" (mustDeepCopy $.Values.controller) -}}
       {{- $_ := set $jobValues.cron "enabled" true -}}
     {{- end -}}
 
@@ -61,6 +61,8 @@
       {{- if not $jobValues.nameOverride -}}
         {{- $_ := set $jobValues "nameOverride" $jobName -}}
       {{- end -}}
+
+      {{- $jobValues = fromYaml (tpl ($jobValues | toYaml) $) -}}
 
       {{- if hasKey $job "cron" -}}
         {{- if $job.cron.enabled -}}

@@ -4,8 +4,6 @@
 {{- $values := .values -}}
 {{- $inherit := "inherit" -}}
 
-{{- $values = fromYaml (tpl ($values | toYaml) $root) -}}
-
 {{/* Prepare values */}}
 {{- $saName := "" -}}
 {{- with $values.serviceAccountName -}}
