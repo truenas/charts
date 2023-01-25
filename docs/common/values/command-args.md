@@ -1,12 +1,12 @@
 # Command / Args
 
-| Key       |    Type     | Helm Template | Default | Description                 |
-| :-------- | :---------: | :-----------: | :-----: | :-------------------------- |
-| command   | list/string |      Yes      |  `[]`   | [command](#key-command)     |
-| args      | list/string |      Yes      |  `[]`   | [args](#key-args)           |
-| extraArgs | list/string |      Yes      |  `[]`   | [extraArgs](#key-extraargs) |
+| Key       |    Type     | Helm Template | Default | Description             |
+| :-------- | :---------: | :-----------: | :-----: | :---------------------- |
+| command   | list/string |      Yes      |  `[]`   | [command](#command)     |
+| args      | list/string |      Yes      |  `[]`   | [args](#args)           |
+| extraArgs | list/string |      Yes      |  `[]`   | [extraArgs](#extraargs) |
 
-## Key: command
+## command
 
 Overrides the entrypoint of the container
 
@@ -18,11 +18,13 @@ Can be defined in:
 - `.Values.lifecycle.preStop`.command
 - `.Values.lifecycle.postStart`.command
 - `.Values.probes.[probe-name].exec`.command
-- `.Values.additionalContainers.[container-name]`.command
 - `.Values.initContainers.[container-name]`.command
+- `.Values.systemContainers.[container-name]`.command
 - `.Values.installContainers.[container-name]`.command
 - `.Values.upgradeContainers.[container-name]`.command
-- `.Values.systemContainers.[container-name]`.command
+- `.Values.additionalContainers.[container-name]`.command
+- `.Values.additionalContainers.[container-name].lifecycle.preStop`.command
+- `.Values.additionalContainers.[container-name].lifecycle.postStart`.command
 - `.Values.jobs.[job-name].podSpec.containers.[container-name].[container-name]`.command
 
 ---
@@ -49,9 +51,10 @@ command:
 ```
 
 ---
+
 ---
 
-## Key: args
+## args
 
 Specify a single or a list of arguments for the entrypoint of the container.
 
@@ -88,11 +91,12 @@ arg:
 ```
 
 ---
+
 ---
 
-## Key: extraArgs
+## extraArgs
 
-Specify a single or a list of arguments that will be appended to [args](#key-args)
+Specify a single or a list of arguments that will be appended to [args](#args)
 This is useful for exposing it on SCALE GUI, so users can append
 arguments on top of the ones defined from the chart developer
 
@@ -129,6 +133,7 @@ extraArgs:
 ```
 
 ---
+
 ---
 
 Kubernetes Documentation:

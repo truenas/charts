@@ -1,16 +1,18 @@
 # Lifecycle
 
-## Key: lifecycle
+| Key                         |    Type     | Helm Template | Default | Description                      |
+| :-------------------------- | :---------: | :-----------: | :-----: | :------------------------------- |
+| lifecycle                   |   object    |      Yes      |  `{}`   | [lifecycle](#lifecycle)          |
+| lifecycle.preStop           |   object    |      Yes      |  `{}`   | [preStop](#prestop)              |
+| lifecycle.preStop.command   | list/string |      Yes      |  `[]`   | [command](commands-args#command) |
+| lifecycle.postStart         |   object    |      Yes      |  `{}`   | [postStart](#poststart)          |
+| lifecycle.postStart.command | list/string |      Yes      |  `[]`   | [command](commands-args#command) |
 
-Info:
+## lifecycle
 
-- Type: `dict`
-- Default: `{}`
-- Helm Template:
-  - lifecycle.preStop.command - String: ✅
-  - lifecycle.preStop.command - List entry: ✅
-  - lifecycle.postStart.command - String: ✅
-  - lifecycle.postStart.command - List entry: ✅
+Specify hooks that will run on the container. Like `preStop` or `postStart`
+
+---
 
 Can be defined in:
 
@@ -19,7 +21,7 @@ Can be defined in:
 
 ---
 
-`lifecycle` key defines hooks that can run on the pod. Like `preStop` or `postStart`
+### preStop
 
 Examples `preStop`:
 
@@ -49,6 +51,8 @@ lifecycle:
       - --port
       - "{{ .Values.service.main.ports.main.port }}"
 ```
+
+### postStart
 
 Examples `postStart`:
 

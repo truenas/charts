@@ -9,24 +9,27 @@
       {{- end -}}
     {{- end -}}
   {{- end -}}
+
   {{- if (hasKey $lifecycle "preStop") -}}
     {{- with $lifecycle.preStop.command }}
-      {{- print "preStop:" | nindent 0 }}
-      {{- print "exec:" | nindent 2 }}
-      {{- print "command:" | nindent 4 }}
+preStop:
+  exec:
+    command:
       {{- include "ix.v1.common.container.command" (dict "commands" .) | trim | nindent 6 }}
     {{- else -}}
       {{- fail "No commands were given for preStop lifecycle hook" -}}
     {{- end -}}
   {{- end -}}
+
   {{- if (hasKey $lifecycle "postStart") -}}
     {{- with $lifecycle.postStart.command }}
-      {{- print "postStart:" | nindent 0 }}
-      {{- print "exec:" | nindent 2 }}
-      {{- print "command:" | nindent 4 }}
+postStart:
+  exec:
+    command:
       {{- include "ix.v1.common.container.command" (dict "commands" .) | trim | nindent 6 }}
     {{- else -}}
       {{- fail "No commands were given for postStart lifecycle hook" -}}
     {{- end -}}
   {{- end -}}
+
 {{- end -}}
