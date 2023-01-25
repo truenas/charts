@@ -7,7 +7,7 @@
   {{- $root := .root -}}
 
   {{- if $envList -}}
-    {{- $envList := fromYaml (tpl ($envList | toYaml) $root) -}}
+    {{- $envList = fromYaml (tpl ($envList | toYaml) $root) -}}
   {{- end -}}
 
   {{- $dupeCheck := dict -}}

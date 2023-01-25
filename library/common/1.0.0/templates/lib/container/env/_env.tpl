@@ -7,7 +7,7 @@
   {{- $containerName := .containerName -}}
 
   {{- if $envs -}}
-    {{- $envs := fromYaml (tpl ($envs | toYaml) $root) -}}
+    {{- $envs = fromYaml (tpl ($envs | toYaml) $root) -}}
   {{- end -}}
 
   {{- $dupeCheck := dict -}}

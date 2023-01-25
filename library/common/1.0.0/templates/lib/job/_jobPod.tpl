@@ -4,7 +4,7 @@
 {{- $values := .values -}}
 {{- $inherit := "inherit" -}}
 
-{{- $values := fromYaml (tpl ($values | toYaml) $root) -}}
+{{- $values = fromYaml (tpl ($values | toYaml) $root) -}}
 
 {{/* Prepare values */}}
 {{- $saName := "" -}}

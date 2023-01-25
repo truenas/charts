@@ -4,6 +4,8 @@
   {{- $rbacValues := .rbac -}}
   {{- $root := .root -}}
 
+  {{- $rbacValues = fromYaml (tpl ($rbacValues | toYaml) $root) -}}
+
   {{- $saName := include "ix.v1.common.names.serviceAccountName" $root -}}
   {{- $rbacName := include "ix.v1.common.names.rbac" (dict "root" $root "rbacValues" $rbacValues) -}}
 
@@ -62,16 +64,16 @@ rules:
       {{- if eq . "" }}
       - ""
       {{- else }}
-      - {{ tpl . $root | quote }}
+      - {{ . | quote }}
       {{- end }}
     {{- end }}
     resources:
     {{- range .resources }}
-      - {{ tpl . $root | quote }}
+      - {{ . | quote }}
     {{- end }}
     verbs:
     {{- range .verbs }}
-      - {{ tpl . $root | quote }}
+      - {{ . | quote }}
     {{- end }}
   {{- end }}
 {{- end }}
@@ -104,9 +106,9 @@ subjects:
     namespace: {{ $root.Release.Namespace }}
   {{- with $rbacValues.subjects -}}
     {{- range . }}
-  - kind: {{ tpl (required "<kind> cannot be empty in RBAC subjects." .kind) $root | quote }}
-    name: {{ tpl (required "<name> cannot be empty in RBAC subjects." .name) $root | quote }}
-    apiGroup: {{ tpl (required "<apiGroup> cannot be empty in RBAC subjects." .apiGroup) $root | quote }}
+  - kind: {{ required "<kind> cannot be empty in RBAC subjects." .kind | quote }}
+    name: {{ required "<name> cannot be empty in RBAC subjects." .name | quote }}
+    apiGroup: {{ required "<apiGroup> cannot be empty in RBAC subjects." .apiGroup | quote }}
     {{- end }}
   {{- end -}}
 {{- end -}}
