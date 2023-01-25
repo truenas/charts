@@ -2,11 +2,6 @@
 # All values can be overridden per chart, in their values.yaml
 # For Examples and Explanation view the "Values.yaml Explained" markdown file
 
-# [command-args](docs/common/values/command-args.md)
-command: []
-args: []
-extraArgs: []
-
 global:
   nameOverride: ""
   fullnameOverride: ""
@@ -139,17 +134,36 @@ imageSelector: ""
 # Defines the imagePullSecrets
 imagePullCredentials: []
 
+# -- [command-args](docs/common/values/command-args.md)
+# Overrides the default entrypoint
+command: []
+# Overrides the default args
+args: []
+# Appends to args
+extraArgs: []
+
+# -- [environment-variables](docs/common/values/environment-variables.md)
 # Defines environment variables
 env: {}
-
 # SCALE / GUI Focused
 envList: []
-
 # Defines the environment variables from a secret or configmap
 envFrom: []
-
 # Defines the timezone for the container
 TZ: UTC
+# Default Security values for main container
+security:
+  PUID: 568
+  UMASK: "002"
+# Nvidia Caps will be assigned via environment variable
+# If empty, global defaults will be used
+nvidiaCaps: []
+
+# -- [configmap](docs/common/values/configmap.md)
+configmap: {}
+
+# -- [secret](docs/common/values/secret.md)
+secret: {}
 
 # Define the default hostname of the Deployment/StatefulSet/DaemonSet/etc
 hostname: ""
@@ -160,27 +174,9 @@ nameOverride: ""
 # Overrides the fullname of the workload
 fullnameOverride: ""
 
-# Default Security values for main container
-security:
-  PUID: 568
-  UMASK: "002"
-
-# Nvidia Caps will be assigned via environment variable
-# If empty, global defaults will be used
-nvidiaCaps: []
-
 stdin: false
 
 tty: false
-
-# Overrides the default entrypoint
-command: []
-
-# Overrides the default args
-args: []
-
-# Appends to args
-extraArgs: []
 
 # Adds hosts to /etc/hosts
 hostAliases: []
@@ -199,16 +195,6 @@ dnsConfig: {}
 
 # Tolerations
 tolerations: []
-
-# TODO: set them on common init based on the global defaults
-# Default resources for main container
-resources:
-  limits:
-    cpu: 4000m
-    memory: 8Gi
-  requests:
-    cpu: 10m
-    memory: 50Mi
 
 # Creates a service account
 serviceAccount:
@@ -321,17 +307,13 @@ controller:
     # -- Set StatefulSet RollingUpdate partition
     partition:
 
-# - Bellow values are needed (in addition to the default global)
+# -- Bellow values are needed (in addition to the default global)
 # as those are being referenced on other places in values.yaml sometimes
-
-# TODO: set them on common init based on the global defaults
 # Default podSecurityContext for main pod
 podSecurityContext:
   fsGroup: 568
   supplementalGroups: []
   fsGroupChangePolicy: OnRootMismatch
-
-# TODO: set them on common init based on the global defaults
 # Default securityContext for main container
 securityContext:
   runAsNonRoot: true
@@ -344,6 +326,14 @@ securityContext:
     add: []
     drop:
       - ALL
+# Default resources for main container
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+  requests:
+    cpu: 10m
+    memory: 50Mi
 
 # TODO: Discuss if we are going to add defaults like:
   # - /dev/shm
