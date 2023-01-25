@@ -6,8 +6,13 @@
   {{- $containerName := .containerName -}}
   {{- $root := .root -}}
 
+  {{/* Slices cannot be converted toYaml safely,
+  temporary convert it to dict. Will be removed
+  once the tpl is moved in upper level
+  */}}
+  {{- $envDict := (dict "envs" $envList) -}}
   {{- if $envList -}}
-    {{- $envList = fromYaml (tpl ($envList | toYaml) $root) -}}
+    {{- $envList = (fromYaml (tpl ($envDict | toYaml) $root)).envs -}}
   {{- end -}}
 
   {{- $dupeCheck := dict -}}
