@@ -1,29 +1,20 @@
 # Termination
 
-## Key: termination
+| Key                           |  Type  | Helm Template | Default | Description                                                                                 |
+| :---------------------------- | :----: | :-----------: | :-----: | :------------------------------------------------------------------------------------------ |
+| termination                   | object |      Yes      |  `{}`   | [termination](#termination)                                                                 |
+| termination.messagePath       | string |      Yes      |  `""`   | Specify the message path for the termination                                                |
+| termination.messagePolicy     | string |      Yes      |  `""`   | Specify the message policy for the termination. Allowed values: File, FallbackToLogsOnError |
+| terminationGracePeriodSeconds |  int   |      Yes      |  `10`   | [terminationGracePeriodSeconds](#terminationgraceperiodseconds)                             |
 
-Info:
+---
 
-- Type: `dict`
-- Default:
-
-  ```yaml
-  termination:
-    messagePath: ""
-    messagePolicy: ""
-    gracePeriodSeconds: 10
-  ```
-
-- Helm Template:
-  - messagePath: ✅
-  - messagePolicy: ✅
-  - gracePeriodSeconds: ❌
+## termination
 
 Can be defined in:
 
 - `.Values`.termination.messagePath
 - `.Values`.termination.messagePolicy
-- `.Values`.termination.gracePeriodSeconds
 - `.Values.additionalContainers.[container-name]`.termination.messagePath
 - `.Values.additionalContainers.[container-name]`.termination.messagePolicy
 - `.Values.initContainers.[container-name]`.termination.messagePath
@@ -34,14 +25,10 @@ Can be defined in:
 - `.Values.upgradeContainers.[container-name]`.termination.messagePolicy
 - `.Values.systemContainers.[container-name]`.termination.messagePath
 - `.Values.systemContainers.[container-name]`.termination.messagePolicy
-- `.Values.jobs.[job-name].podSpec`.termination.gracePeriodSeconds
 - `.Values.jobs.[job-name].podSpec.containers.[container-name].[container-name]`.termination.messagePath
 - `.Values.jobs.[job-name].podSpec.containers.[container-name].[container-name]`.termination.messagePolicy
 
 ---
-
-`messagePath` and `messagePolicy` can be set per container.
-`gracePeriodSeconds` can only be set per pod.
 
 Examples:
 
@@ -50,6 +37,14 @@ termination:
   messagePath: ""
   # messagePath: "{{ .Values.some.path }}"
   messagePolicy: ""
-  # messagePolicy: "{{ .Values.some.path }}"
-  gracePeriodSeconds: 10
+  # messagePolicy: "{{ .Values.some.policy }}"
 ```
+
+## terminationGracePeriodSeconds
+
+Specify the termination grace period in seconds
+
+Can be defined in:
+
+- `.Values`.terminationGracePeriodSeconds
+- `.Values.jobs.[job-name].podSpec`.terminationGracePeriodSeconds

@@ -157,11 +157,11 @@
 {{- $termSeconds := "" -}}
 {{- with $values.termination -}}
   {{- if eq (toString .) $inherit -}}
-    {{- with $root.Values.termination.gracePeriodSeconds -}}
+    {{- with $root.Values.terminationGracePeriodSeconds -}}
       {{- $termSeconds = . -}}
     {{- end -}}
   {{- else -}}
-    {{- with $values.termination.gracePeriodSeconds -}}
+    {{- with $values.terminationGracePeriodSeconds -}}
       {{- $termSeconds = . -}}
     {{- end -}}
   {{- end -}}

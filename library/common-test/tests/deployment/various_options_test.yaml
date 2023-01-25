@@ -12,11 +12,10 @@ tests:
       - isNull:
           path: spec.template.spec.runtimeClassName
 
-  - it: should pass with gracePeriodSeconds set
+  - it: should pass with terminationGracePeriodSeconds set
     documentIndex: *deploymentDoc
     set:
-      termination:
-        gracePeriodSeconds: 25
+      terminationGracePeriodSeconds: 25
     asserts:
       - equal:
           path: spec.template.spec.terminationGracePeriodSeconds

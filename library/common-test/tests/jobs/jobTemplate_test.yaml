@@ -484,11 +484,10 @@ tests:
           content:
             schedulerName: somename
 
-  - it: should pass with inherit set in termination.gracePeriodSeconds
+  - it: should pass with inherit set in terminationgracePeriodSeconds
     documentIndex: *jobDoc
     set:
-      termination:
-        gracePeriodSeconds: 35
+      terminationGracePeriodSeconds: 35
       jobs:
         job-name:
           enabled: true
@@ -503,7 +502,7 @@ tests:
           content:
             terminationGracePeriodSeconds: 35
 
-  - it: should pass with custom termination.gracePeriodSeconds
+  - it: should pass with custom terminationGracePeriodSeconds
     documentIndex: *jobDoc
     set:
       key: 50
@@ -511,8 +510,7 @@ tests:
         job-name:
           enabled: true
           podSpec:
-            termination:
-              gracePeriodSeconds: 50
+            terminationGracePeriodSeconds: 50
             containers:
               main:
                 imageSelector: image

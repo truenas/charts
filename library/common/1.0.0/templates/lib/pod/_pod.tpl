@@ -55,7 +55,7 @@ runtimeClassName: {{ . }}
 {{- end -}}
 
 {{/* TODO: affinity, topologySpreadConstraints, not something critical as of now. */}}
-{{- with $values.termination.gracePeriodSeconds }}
+{{- with $values.terminationGracePeriodSeconds }}
 terminationGracePeriodSeconds: {{ . }}
 {{- end -}}
 

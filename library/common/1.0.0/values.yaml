@@ -261,10 +261,10 @@ ixExternalInterfacesConfiguration: []
 ixExternalInterfacesConfigurationNames: []
 
 # Defines termination strategy
+terminationGracePeriodSeconds: 10
 termination:
   messagePath: ""
   messagePolicy: ""
-  gracePeriodSeconds: 10
 
 # Defines the scheduler
 schedulerName: ""
