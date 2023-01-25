@@ -1,3 +1,6 @@
+{{/* Call this template like this:
+{{- include "ix.v1.common.container.termination.messagePath" (dict "msgPath" $msgPath "root" $root) -}}
+*/}}
 {{/* Returns the terminationMessagePath for the container */}}
 {{- define "ix.v1.common.container.termination.messagePath" -}}
   {{- $msgPath := .msgPath -}}
@@ -7,6 +10,9 @@
   {{- end -}}
 {{- end -}}
 
+{{/* Call this template like this:
+{{- include "ix.v1.common.container.termination.messagePolicy" (dict "msgPolicy" $msgPolicy "root" $root) -}}
+*/}}
 {{/* Returns the terminationMessagePolicy for the container */}}
 {{- define "ix.v1.common.container.termination.messagePolicy" -}}
   {{- $msgPolicy := .msgPolicy -}}
