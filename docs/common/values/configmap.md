@@ -1,48 +1,32 @@
 # ConfigMap
 
-## key: configmap
+| Key                                           |  Type   | Helm Template | Default | Description                                                            |
+| :-------------------------------------------- | :-----: | :-----------: | :-----: | :--------------------------------------------------------------------- |
+| configmap                                     | object  |      Yes      |  `{}`   | [configmap](#configmap)                                                |
+| configmap.[configmap-name]                    | object  |      Yes      |  `{}`   | [configmap](#configmap)                                                |
+| configmap.[configmap-name].enabled            | boolean |      Yes      |  unset  | Enables or Disables the configmap                                      |
+| configmap.[configmap-name].labels             | object  |      Yes      |  `{}`   | Specify labels for the configmap                                       |
+| configmap.[configmap-name].annotations        | object  |      Yes      |  `{}`   | Specify annotations for the configmap                                  |
+| configmap.[configmap-name].nameOverride       | string  |      Yes      |  `""`   | Specify a name override for the configmap                              |
+| configmap.[configmap-name].parseAsEnv         | boolean |      Yes      |  unset  | Specify if the `content` should be parsed as envs (for the Dupe Check) |
+| configmap.[configmap-name].content            | object  |      Yes      |  `{}`   | Specify the content of the configmap                                   |
+| configmap.[configmap-name].content.[key-name] | string  |      Yes      |  `""`   | Specify the value of the key. String and Scalar is supported           |
 
-Info:
+## configmap
 
-- Type: `dict`
-- Default: `{}`
-- Helm Template:
-  - content.KEY: ❌
-  - content.KEY.value: ✅
+Creates a configmap based on the `content`
+
+> When parseAsEnv is checked, content will be checked against `env`, `envList`, `fixedEnvs` and
+> other configmaps / secrets for duplicate envs. This can be useful to prevent overriding other envs
+> either by mistake or user not knowing that the env is already set by the app developer
+
+---
 
 Can be defined in:
 
 - `.Values`.configmap
 
 ---
-
-Creates a configmap based on the `content`
-
-Options:
-
-```yaml
-configmap:
-  somename:
-    enabled: true
-    # Optional
-    labels: {}
-    # Optional
-    annotations: {}
-    # Optional
-    nameOverride: ""
-    # Tells to common library that this contains environment variables.
-    # So it wil be checked for duplicates among `env`, `envList`, `fixedEnvs`
-    # and other `secrets` / `configmaps` (with parseAsEnv set)
-    # Optional
-    parseAsEnv: true
-    # Key/Value
-    content:
-      key: value
-    # Or yaml scalar
-    content:
-      someKey: |
-        configmap content
-```
 
 Examples:
 

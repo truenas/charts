@@ -1,50 +1,32 @@
 # Secret
 
-## key: secret
+| Key                                     |  Type   | Helm Template | Default | Description                                                            |
+| :-------------------------------------- | :-----: | :-----------: | :-----: | :--------------------------------------------------------------------- |
+| secret                                  | object  |      Yes      |  `{}`   | [secret](#secret)                                                      |
+| secret.[secret-name]                    | object  |      Yes      |  `{}`   | [secret](#secret)                                                      |
+| secret.[secret-name].enabled            | boolean |      Yes      |  unset  | Enables or Disables the secret                                         |
+| secret.[secret-name].labels             | object  |      Yes      |  `{}`   | Specify labels for the secret                                          |
+| secret.[secret-name].annotations        | object  |      Yes      |  `{}`   | Specify annotations for the secret                                     |
+| secret.[secret-name].nameOverride       | string  |      Yes      |  `""`   | Specify a name override for the secret                                 |
+| secret.[secret-name].parseAsEnv         | boolean |      Yes      |  unset  | Specify if the `content` should be parsed as envs (for the Dupe Check) |
+| secret.[secret-name].content            | object  |      Yes      |  `{}`   | Specify the content of the secret                                      |
+| secret.[secret-name].content.[key-name] | string  |      Yes      |  `""`   | Specify the value of the key. String and Scalar is supported           |
 
-Info:
+## secret
 
-- Type: `dict`
-- Default: `{}`
-- Helm Template:
-  - secretType: ❌
-  - content.KEY: ❌
-  - content.KEY.value: ✅
+Creates a secret based on the `content`
+
+> When parseAsEnv is checked, content will be checked against `env`, `envList`, `fixedEnvs` and
+> other configmaps / secrets for duplicate envs. This can be useful to prevent overriding other envs
+> either by mistake or user not knowing that the env is already set by the app developer
+
+---
 
 Can be defined in:
 
 - `.Values`.secret
 
 ---
-Creates a secret based on the `content`
-
-Options:
-
-```yaml
-secret:
-  somename:
-    enabled: true
-    # Optional
-    labels: {}
-    # Optional
-    annotations: {}
-    # Optional
-    nameOverride: ""
-    # Optional - Defaults to Opaque
-    secretType: ""
-    # Tells to common library that this contains environment variables.
-    # So it wil be checked for duplicates among `env`, `envList`, `fixedEnvs`
-    # and other `secrets` / `configmaps` (with parseAsEnv set)
-    # Optional
-    parseAsEnv: true
-    # Key/Value
-    content:
-      key: value
-    # Or yaml scalar
-    content:
-      someKey: |
-        configmap content
-```
 
 Examples:
 
