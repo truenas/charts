@@ -14,11 +14,11 @@ So it can work on multiple places, like additional containers and not only the m
   imagePullPolicy: {{ include "ix.v1.common.images.pullPolicy" (dict "root" $root "selectedImage" $values.imageSelector) }}
   tty: {{ $values.tty }}
   stdin: {{ $values.stdin }}
-  {{- with (include "ix.v1.common.container.command" (dict "commands" $values.command "root" $root)) | trim }}
+  {{- with (include "ix.v1.common.container.command" (dict "commands" $values.command)) | trim }}
   command:
     {{- . | nindent 4 }}
   {{- end -}}
-  {{- with (include "ix.v1.common.container.args" (dict "args" $values.args "extraArgs" $values.extraArgs "root" $root)) | trim }}
+  {{- with (include "ix.v1.common.container.args" (dict "args" $values.args "extraArgs" $values.extraArgs)) | trim }}
   args:
     {{- . | nindent 4 }}
   {{- end -}}
@@ -30,7 +30,7 @@ So it can work on multiple places, like additional containers and not only the m
   securityContext:
     {{- . | nindent 4 }}
   {{- end -}}
-  {{- with (include "ix.v1.common.container.lifecycle" (dict "lifecycle" $values.lifecycle "root" $root)) | trim }}
+  {{- with (include "ix.v1.common.container.lifecycle" (dict "lifecycle" $values.lifecycle)) | trim }}
   lifecycle:
     {{- . | nindent 4 }}
   {{- end -}}

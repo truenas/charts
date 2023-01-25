@@ -1,18 +1,23 @@
 # Command / Args
 
+| Key       |    Type     | Helm Template | Default | Description                 |
+| :-------- | :---------: | :-----------: | :-----: | :-------------------------- |
+| command   | list/string |      Yes      |  `[]`   | [command](#key-command)     |
+| args      | list/string |      Yes      |  `[]`   | [args](#key-args)           |
+| extraArgs | list/string |      Yes      |  `[]`   | [extraArgs](#key-extraargs) |
+
 ## Key: command
 
-Info:
+Overrides the entrypoint of the container
 
-- Type: `list` or `string`
-- Default: `""` or `[]`
-- Helm Template:
-  - String: ✅
-  - List entry: ✅
+---
 
 Can be defined in:
 
 - `.Values`.command
+- `.Values.lifecycle.preStop`.command
+- `.Values.lifecycle.postStart`.command
+- `.Values.probes.[probe-name].exec`.command
 - `.Values.additionalContainers.[container-name]`.command
 - `.Values.initContainers.[container-name]`.command
 - `.Values.installContainers.[container-name]`.command
@@ -21,8 +26,6 @@ Can be defined in:
 - `.Values.jobs.[job-name].podSpec.containers.[container-name].[container-name]`.command
 
 ---
-
-Overrides the entrypoint of the container
 
 Examples:
 
@@ -50,13 +53,9 @@ command:
 
 ## Key: args
 
-Info:
+Specify a single or a list of arguments for the entrypoint of the container.
 
-- Type: `list`
-- Default: `string` or `[]`
-- Helm Template:
-  - String: ✅
-  - List entry: ✅
+---
 
 Can be defined in:
 
@@ -69,8 +68,6 @@ Can be defined in:
 - `.Values.jobs.[job-name].podSpec.containers.[container-name].[container-name]`.args
 
 ---
-
-Adds arguments to the entrypoint of the container
 
 Examples:
 
@@ -95,13 +92,11 @@ arg:
 
 ## Key: extraArgs
 
-Info:
+Specify a single or a list of arguments that will be appended to [args](#key-args)
+This is useful for exposing it on SCALE GUI, so users can append
+arguments on top of the ones defined from the chart developer
 
-- Type: `list`
-- Default: `string` or `[]`
-- Helm Template:
-  - String: ✅
-  - List entry: ✅
+---
 
 Can be defined in:
 
@@ -114,10 +109,6 @@ Can be defined in:
 - `.Values.jobs.[job-name].podSpec.containers.[container-name].[container-name]`.extraArgs
 
 ---
-
-Appends arguments to `args` of the container.
-This is useful for exposing it on SCALE GUI, so users can append
-arguments on top of the ones defined from the chart developer
 
 Examples:
 
@@ -136,6 +127,9 @@ extraArgs:
   - --photos_path
   - "{{ .Values.persistence.photos.mountPath }}"
 ```
+
+---
+---
 
 Kubernetes Documentation:
 

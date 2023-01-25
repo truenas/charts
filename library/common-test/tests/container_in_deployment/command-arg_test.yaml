@@ -109,7 +109,7 @@ tests:
           path: spec.template.spec.containers[0].args
           value:
             - --port
-            - 8000
+            - "8000"
 
   - it: should pass with args set from tpl
     documentIndex: *deploymentDoc
@@ -157,7 +157,7 @@ tests:
           path: spec.template.spec.containers[0].args
           value:
             - --port
-            - 8000
+            - "8000"
 
   - it: should pass with extraArgs set from tpl
     documentIndex: *deploymentDoc
@@ -187,7 +187,7 @@ tests:
           path: spec.template.spec.containers[0].args
           value:
             - --port
-            - 8000
+            - "8000"
             - --photos
             - /photos
 

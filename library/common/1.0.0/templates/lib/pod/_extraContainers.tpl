@@ -45,11 +45,11 @@
   imagePullPolicy: {{ include "ix.v1.common.images.pullPolicy" (dict "root" $root "selectedImage" $container.imageSelector) }}
   tty: {{ $container.tty | default false }}
   stdin: {{ $container.stdin | default false }}
-  {{- with (include "ix.v1.common.container.command" (dict "commands" $container.command "root" $root)) | trim }}
+  {{- with (include "ix.v1.common.container.command" (dict "commands" $container.command)) | trim }}
   command:
     {{- . | nindent 4 }}
   {{- end -}}
-  {{- with (include "ix.v1.common.container.args" (dict "args" $container.args "extraArgs" $container.extraArgs "root" $root)) | trim }}
+  {{- with (include "ix.v1.common.container.args" (dict "args" $container.args "extraArgs" $container.extraArgs)) | trim }}
   args:
     {{- . | nindent 4 }}
   {{- end -}}

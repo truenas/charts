@@ -2,6 +2,11 @@
 # All values can be overridden per chart, in their values.yaml
 # For Examples and Explanation view the "Values.yaml Explained" markdown file
 
+# [command-args](docs/common/values/command-args.md)
+command: []
+args: []
+extraArgs: []
+
 global:
   nameOverride: ""
   fullnameOverride: ""
@@ -195,6 +200,7 @@ dnsConfig: {}
 # Tolerations
 tolerations: []
 
+# TODO: set them on common init based on the global defaults
 # Default resources for main container
 resources:
   limits:
@@ -318,12 +324,14 @@ controller:
 # - Bellow values are needed (in addition to the default global)
 # as those are being referenced on other places in values.yaml sometimes
 
+# TODO: set them on common init based on the global defaults
 # Default podSecurityContext for main pod
 podSecurityContext:
   fsGroup: 568
   supplementalGroups: []
   fsGroupChangePolicy: OnRootMismatch
 
+# TODO: set them on common init based on the global defaults
 # Default securityContext for main container
 securityContext:
   runAsNonRoot: true

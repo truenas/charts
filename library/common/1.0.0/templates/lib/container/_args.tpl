@@ -1,27 +1,26 @@
 {{/*
-A custom dict is expected with args, extraArgs and root.
-It's designed to work for mainContainer AND initContainers.
-Calling this from an initContainer, wouldn't work, as it would have a different "root" context,
-and "tpl" on "$" would cause erors.
-That's why the custom dict is expected.
+Call this template like this:
+{{- include "ix.v1.common.container.args" (dict "args" $args "extraArgs" $extraArgs) -}}
 */}}
 {{/* Args included by the container */}}
 {{- define "ix.v1.common.container.args" -}}
-{{- $args := .args -}}
-{{- $extraArgs := .extraArgs -}}
-{{- $root := .root -}}
-{{- with $args -}} {{/* args usually defined while developing the chart */}}
-  {{- if kindIs "string" . -}}
-- {{ tpl . $root }}
-  {{- else }}
-    {{- tpl (toYaml .) $root }}
-  {{- end }}
-{{- end }}
-{{- with $extraArgs }} {{/* extraArgs used in cases that users wants to APPEND to args */}}
-  {{- if kindIs "string" . }}
-- {{ tpl . $root }}
-  {{- else }}
-    {{- tpl (toYaml .) $root | nindent 0 }} {{/* This nindent is here beacause... Well I've no idea why, but it works only with this here. Sorry */}}
-  {{- end }}
-{{- end }}
+  {{- $args := .args -}}
+  {{- $extraArgs := .extraArgs -}}
+
+  {{- if kindIs "string" $args }} {{/* If it's single value */}}
+- {{ $args | quote }}
+  {{- else -}}
+    {{- range $args }} {{/* args usually defined while developing the chart */}}
+- {{ . | quote }}
+    {{- end -}}
+  {{- end -}}
+
+  {{- if kindIs "string" $extraArgs }} {{/* If it's single value */}}
+- {{ $extraArgs | quote }}
+  {{- else -}}
+    {{- range $extraArgs }} {{/* extraArgs used in cases that users wants to APPEND to args */}}
+- {{ . | quote }}
+    {{- end -}}
+  {{- end -}}
+
 {{- end -}}

@@ -10,7 +10,7 @@
 
 exec:
   command:
-  {{- include "ix.v1.common.container.command" (dict "commands" $probe.command "root" $root) | trim | nindent 4 }}
+  {{- include "ix.v1.common.container.command" (dict "commands" $probe.command) | trim | nindent 4 }}
   {{- include "ix.v1.common.container.probes.timeouts"  (dict "probeSpec" $probe.spec
                                                               "probeName" $probe.name
                                                               "root" $root

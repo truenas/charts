@@ -1,6 +1,5 @@
 {{/* Returns the lifecycle for the container */}}
 {{- define "ix.v1.common.container.lifecycle" -}}
-  {{- $root := .root -}}
   {{- $lifecycle := .lifecycle -}}
 
   {{- with $lifecycle -}}
@@ -15,7 +14,7 @@
       {{- print "preStop:" | nindent 0 }}
       {{- print "exec:" | nindent 2 }}
       {{- print "command:" | nindent 4 }}
-      {{- include "ix.v1.common.container.command" (dict "commands" . "root" $root) | trim | nindent 6 }}
+      {{- include "ix.v1.common.container.command" (dict "commands" .) | trim | nindent 6 }}
     {{- else -}}
       {{- fail "No commands were given for preStop lifecycle hook" -}}
     {{- end -}}
@@ -25,7 +24,7 @@
       {{- print "postStart:" | nindent 0 }}
       {{- print "exec:" | nindent 2 }}
       {{- print "command:" | nindent 4 }}
-      {{- include "ix.v1.common.container.command" (dict "commands" . "root" $root) | trim | nindent 6 }}
+      {{- include "ix.v1.common.container.command" (dict "commands" .) | trim | nindent 6 }}
     {{- else -}}
       {{- fail "No commands were given for postStart lifecycle hook" -}}
     {{- end -}}
