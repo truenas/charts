@@ -184,59 +184,6 @@ tests:
           expired: true
     asserts: *basicAssertion
 
-  - it: should pass with 1 REVOKED secret created and global allow
-    documentIndex: *secretDoc
-    set:
-      global:
-        defaults:
-          useRevokedCerts: true
-      scaleCertsList:
-        - name: certname
-          id: 1
-      # Simulating middleware injection
-      ixCertificates:
-        "1":
-          privatekey: some_key
-          certificate: cert_content
-          revoked: true
-    asserts: *basicAssertion
-
-  - it: should pass with 1 EXPIRED secret created and local allow
-    documentIndex: *secretDoc
-    set:
-      global:
-        defaults:
-          useExpiredCerts: false
-      scaleCertsList:
-        - name: certname
-          id: 1
-          useExpired: true
-      # Simulating middleware injection
-      ixCertificates:
-        "1":
-          certificate: cert_content
-          privatekey: some_key
-          expired: true
-    asserts: *basicAssertion
-
-  - it: should pass with 1 REVOKED secret created and local allow
-    documentIndex: *secretDoc
-    set:
-      global:
-        defaults:
-          useRevokedCerts: false
-      scaleCertsList:
-        - name: certname
-          id: 1
-          useRevoked: true
-      # Simulating middleware injection
-      ixCertificates:
-        "1":
-          privatekey: some_key
-          certificate: cert_content
-          revoked: true
-    asserts: *basicAssertion
-
   - it: should pass with 2 secret created (doc1)
     documentIndex: *secretDoc
     set:

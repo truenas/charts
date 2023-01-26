@@ -11,10 +11,6 @@
       # If not defined on per pod or in ixChartContext, assume this.
       # Empty means NO runtimeClassName
       runtimeClassName: ""
-      # If not defined on the the cert item, assume this
-      useRevokedCerts: false
-      # If not defined on the the cert item, assume this
-      useExpiredCerts: false
       # If not defined on the pod, assume this
       dnsPolicy: ClusterFirst
       # If no restart Policy is defined, assume this

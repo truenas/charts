@@ -38,10 +38,6 @@ scaleCerts:
     certPath: /some/path/in/the/container/crt.key
     # Optional, If populated, it will mount the private key in the container's path
     keyPath: /some/path/in/the/container/key.key
-    # Optional, Allow the use of revoked certs, even if is not allowed globally
-    useRevoked: false
-    # Optional, Allow the use of expired certs, even if is not allowed globally
-    useExpired: false
 ```
 
 ---
@@ -81,8 +77,4 @@ scaleCertsList:
     certPath:
     # Optional
     keyPath:
-    # Optional
-    useRevoked: false
-    # Optional
-    useExpired: false
 ```
