@@ -55,12 +55,18 @@
     {{/* Convert to Yaml before sending to classes */}}
     {{- $classData = toYaml $classData -}}
 
-    {{- $contentType := "yaml" -}}
+    {{- $values := dict -}}
+    {{- $_ := set $values "data" $classData -}}
+    {{- $_ := set $values "name" $objectName -}}
+    {{- $_ := set $values "contentType" "yaml" -}}
+    {{- $_ := set $values "labels" $objectData.labels -}}
+    {{- $_ := set $values "annotations" $objectData.annotations -}}
+    {{- $_ := set $values "secretType" $objectData.secretType -}}
     {{/* Create ConfigMap or Secret */}}
     {{- if eq $objectType "configmap" -}}
-      {{- include "ix.v1.common.class.configmap" (dict "root" $root "configName" $objectName "contentType" $contentType "data" $classData "labels" $objectData.labels "annotations" $objectData.annotations) -}}
+      {{- include "ix.v1.common.class.configmap" (dict "root" $root "values" $values) -}}
     {{- else if eq $objectType "secret" -}}
-      {{- include "ix.v1.common.class.secret" (dict "root" $root "secretName" $objectName "secretType" $objectData.secretType "contentType" $contentType "data" $classData "labels" $objectData.labels "annotations" $objectData.annotations) -}}
+      {{- include "ix.v1.common.class.secret" (dict "root" $root "values" $values) -}}
     {{- end -}}
 
   {{- end -}}

@@ -1,30 +1,26 @@
 {{- define "ix.v1.common.class.configmap" -}}
-  {{- $configName := .configName -}}
-  {{- $data := .data -}}
-  {{- $contentType := .contentType -}}
-  {{- $configLabels := .labels -}}
-  {{- $configAnnotations := .annotations -}}
+  {{- $values := .values -}}
   {{- $root := .root }}
 
 ---
 apiVersion: {{ include "ix.v1.common.capabilities.configMap.apiVersion" $root }}
 kind: ConfigMap
 metadata:
-  name: {{ $configName }}
-  {{- $labels := (mustMerge ($configLabels | default dict) (include "ix.v1.common.labels" $root | fromYaml)) -}}
+  name: {{ $values.name }}
+  {{- $labels := (mustMerge ($values.labels | default dict) (include "ix.v1.common.labels" $root | fromYaml)) -}}
   {{- with (include "ix.v1.common.util.labels.render" (dict "root" $root "labels" $labels) | trim) }}
   labels:
     {{- . | nindent 4 }}
   {{- end -}}
-  {{- $annotations := (mustMerge ($configAnnotations | default dict) (include "ix.v1.common.annotations" $root | fromYaml)) -}}
+  {{- $annotations := (mustMerge ($values.annotations | default dict) (include "ix.v1.common.annotations" $root | fromYaml)) -}}
   {{- with (include "ix.v1.common.util.annotations.render" (dict "root" $root "annotations" $annotations) | trim) }}
   annotations:
     {{- . | nindent 4 }}
   {{- end }}
 data:
-  {{- if eq $contentType "yaml" }}
-    {{- $data | nindent 2 }}
+  {{- if eq $values.contentType "yaml" }}
+    {{- $values.data | nindent 2 }}
   {{- else -}} {{/* This should never happen, unless there is a mistake in the caller of this class */}}
-    {{- fail (printf "Invalid content type (%s) for configmap. Valid types are scalar and key_value" $contentType) -}}
+    {{- fail (printf "Invalid content type (%s) for configmap. Valid types are yaml" $values.contentType) -}}
   {{- end -}}
 {{- end -}}

@@ -39,7 +39,12 @@
         {{- $_ := set $registrySecret "auths" dict -}}
         {{- $_ := set $registrySecret.auths (printf "%s" .registry) $registry -}}
 
-        {{- include "ix.v1.common.class.secret" (dict "root" $root "secretName" $secretName "data" $registrySecret "contentType" "pullSecret") -}}
+        {{- $values := dict -}}
+        {{- $_ := set $values "data" $registrySecret -}}
+        {{- $_ := set $values "name" $secretName -}}
+        {{- $_ := set $values "contentType" "pullSecret" -}}
+
+        {{- include "ix.v1.common.class.secret" (dict "root" $root "values" $values) -}}
       {{- end -}}
     {{- end -}}
   {{- end -}}
