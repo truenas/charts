@@ -1,3 +1,14 @@
+{{/*
+Call this template like this;
+{{- include "ix.v1.common.class.configmap" (dict "root" $root "values" $values) -}}
+$values contains:
+  name: string
+  labels: dict
+  annotations: dict
+  contentType: yaml | certificate | pullSecret
+  data: dict or (data | toYaml) when contentType is yaml
+  secretType: custom secret type (optional)
+*/}}
 {{- define "ix.v1.common.class.secret" -}}
   {{- $values := .values -}}
   {{- $root := .root -}}
@@ -41,6 +52,6 @@ data:
 stringData:
     {{- $values.data | nindent 2 }}
   {{- else -}}
-    {{- fail (printf "Invalid content type (%s) for secret. Valid types are pullSecret, certificate, scalar and key_value" $values.contentType) -}}
+    {{- fail (printf "Invalid content type (%s) for secret. Valid types are pullSecret, certificate, yaml" $values.contentType) -}}
   {{- end -}}
 {{- end -}}
