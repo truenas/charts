@@ -3,10 +3,10 @@ Call this template like this;
 {{- include "ix.v1.common.class.configmap" (dict "root" $root "values" $values) -}}
 $values contains:
   name: string
-  labels: dict
-  annotations: dict
   contentType: yaml (only supported type)
   data: (data | toYaml)
+  labels: dict # Optional
+  annotations: dict # Optional
 */}}
 {{- define "ix.v1.common.class.configmap" -}}
   {{- $values := .values -}}

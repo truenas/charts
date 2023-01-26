@@ -6,6 +6,9 @@
 
   {{/* Now we are sure data is validated, spawn the objects */}}
   {{- range $index, $iface := .Values.ixExternalInterfacesConfiguration -}}
-    {{- include "ix.v1.common.class.externalInterface" (dict "iface" $iface "index" $index "root" $) -}}
+    {{- $values := dict -}}
+    {{- $_ := set $values "iface" $iface -}}
+    {{- $_ := set $values "index" $index -}}
+    {{- include "ix.v1.common.class.externalInterface" (dict "values" $values "root" $) -}}
   {{- end -}}
 {{- end -}}

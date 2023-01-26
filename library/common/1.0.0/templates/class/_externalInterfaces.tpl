@@ -1,12 +1,18 @@
+{{/*
+Call this template like this;
+{{- include "ix.v1.common.class.externalInterface" (dict "values" $values "root" $) -}}
+$values contains:
+  iface:
+  index:
+*/}}
 {{- define "ix.v1.common.class.externalInterface" -}}
-  {{- $iface := .iface -}}
-  {{- $index := .index -}}
+  {{- $values := .values -}}
   {{- $root := .root }}
 ---
 apiVersion: {{ include "ix.v1.common.capabilities.externalInterfaces.apiVersion" . }}
 kind: NetworkAttachmentDefinition
 metadata:
-  name: ix-{{ $root.Release.Name }}-{{ $index }}
+  name: ix-{{ $root.Release.Name }}-{{ $values.index }}
   {{- $labels := (include "ix.v1.common.labels" $root | fromYaml) -}}
   {{- with (include "ix.v1.common.util.labels.render" (dict "root" $root "labels" $labels) | trim) }}
   labels:
@@ -18,5 +24,5 @@ metadata:
     {{- . | nindent 4 }}
   {{- end }}
 spec:
-  config: {{ $iface | squote }}
+  config: {{ $values.iface | squote }}
 {{- end -}}
