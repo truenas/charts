@@ -23,7 +23,7 @@ nameOverride applies only to the current chart
   {{- $globalFullNameOverride := "" -}}
 
   {{- if hasKey .Values "global" -}}
-    {{- $globalFullNameOverride = (default $globalFullNameOverride .Values.global.fullnameOverride) -}}
+    {{- $globalFullNameOverride = (.Values.global.fullnameOverride | default $globalFullNameOverride) -}}
   {{- end -}}
 
   {{- if or .Values.fullnameOverride $globalFullNameOverride -}}

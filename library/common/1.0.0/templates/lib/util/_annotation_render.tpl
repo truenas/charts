@@ -3,6 +3,7 @@
 {{- define "ix.v1.common.util.annotations.render" -}}
   {{- $root := .root -}}
   {{- $annotations := .annotations -}}
+
   {{- if $annotations }}
     {{- range $k, $v := $annotations }}
 {{ $k }}: {{ tpl $v $root | quote }}
