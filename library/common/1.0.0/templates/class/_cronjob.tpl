@@ -2,7 +2,7 @@
   {{- $job := .job -}}
   {{- $root := .root -}}
 
-  {{- $default := $root.Values.global.defaults.job.cron -}}
+  {{- $default := $root.Values.globalDefaults.job.cron -}}
   {{- $jobName := include "ix.v1.common.names.jobAndCronJob" (dict "root" $root "jobValues" $job) -}}
   {{- include "ix.v1.common.validate.cronJob" (dict "root" $root "job" $job) -}}
 

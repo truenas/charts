@@ -63,10 +63,10 @@ spec:
       storageClassName: {{ . }}
       {{- end }}
       accessModes:
-        - {{ tpl ($vct.accessMode | default $.Values.global.defaults.accessMode) $ }}
+        - {{ tpl ($vct.accessMode | default $.Values.globalDefaults.accessMode) $ }}
       resources:
         requests:
-          storage: {{ tpl ($vct.size | default $.Values.global.defaults.VCTSize) $ | quote }}
+          storage: {{ tpl ($vct.size | default $.Values.globalDefaults.VCTSize) $ | quote }}
     {{- end -}}
   {{- end -}}
 {{- end }}

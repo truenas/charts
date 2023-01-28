@@ -385,9 +385,8 @@ tests:
           securityContext:
             runAsUser: 0
             runAsNonRoot: false
-          security:
-            UMASK: "003"
-            PUID: 1000
+          UMASK: "003"
+          PUID: 1000
     asserts:
       - isSubset:
           path: spec.template.spec.containers[0]

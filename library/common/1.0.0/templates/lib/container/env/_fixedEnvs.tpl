@@ -17,7 +17,7 @@
   {{- $scaleGPU := .scaleGPU -}}
   {{- $nvidiaCaps := .nvidiaCaps -}}
 
-  {{- $nvidiaCaps = $nvidiaCaps | default $root.Values.global.defaults.nvidiaCaps -}}
+  {{- $nvidiaCaps = $nvidiaCaps | default $root.Values.globalDefaults.nvidiaCaps -}}
 
   {{- if not (deepEqual $nvidiaCaps (mustUniq $nvidiaCaps)) -}}
     {{- fail (printf "<nvidiaCaps> (%s) are must have unique values only" $nvidiaCaps) -}}

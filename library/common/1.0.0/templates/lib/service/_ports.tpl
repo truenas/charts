@@ -19,8 +19,8 @@ ports:
     protocol: {{ $protocol }}
     targetPort: {{ $port.targetPort | default $name }}
       {{- if and (eq $svcType "NodePort") $port.nodePort -}}
-        {{- if lt $port.nodePort $root.Values.global.defaults.minimumNodePort -}}
-          {{- fail (printf "Port number (%s) for (%s) is too low. The minimum port for Node Port is (%s)" ($port.nodePort | toString) $name ($root.Values.global.defaults.minimumNodePort | toString)) -}}
+        {{- if lt $port.nodePort $root.Values.globalDefaults.minimumNodePort -}}
+          {{- fail (printf "Port number (%s) for (%s) is too low. The minimum port for Node Port is (%s)" ($port.nodePort | toString) $name ($root.Values.globalDefaults.minimumNodePort | toString)) -}}
         {{- end }}
     nodePort: {{ $port.nodePort }}
       {{- end -}}

@@ -3,8 +3,8 @@
 {{- define "ix.v1.common.class.service" -}}
   {{- $svcValues := .svc -}}
   {{- $root := .root -}}
-  {{- $defaultServiceType := $root.Values.global.defaults.serviceType -}}
-  {{- $defaultPortProtocol := $root.Values.global.defaults.portProtocol -}}
+  {{- $defaultServiceType := $root.Values.globalDefaults.serviceType -}}
+  {{- $defaultPortProtocol := $root.Values.globalDefaults.portProtocol -}}
   {{- $svcName := include "ix.v1.common.names.service" (dict "root" $root "svcValues" $svcValues) -}}
 
   {{- $svcType := $svcValues.type | default $defaultServiceType -}}

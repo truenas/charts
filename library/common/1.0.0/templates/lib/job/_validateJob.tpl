@@ -2,7 +2,7 @@
   {{- $root := .root -}}
   {{- $job := .job -}}
 
-  {{- $default := $root.Values.global.defaults.job -}}
+  {{- $default := $root.Values.globalDefaults.job -}}
   {{- $name := $job.nameOverride -}}
 
   {{- if hasKey $job "backoffLimit" -}}

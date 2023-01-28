@@ -2,7 +2,7 @@
 {{- define "ix.v1.common.controller.volumes" -}}
   {{- $root := .root -}}
   {{- $persistence := .persistence -}}
-  {{- $persistenceDefault := $root.Values.global.defaults.persistenceType -}}
+  {{- $persistenceDefault := $root.Values.globalDefaults.persistenceType -}}
 
   {{- range $index, $persistence := $persistence -}}
     {{- if $persistence.enabled -}}

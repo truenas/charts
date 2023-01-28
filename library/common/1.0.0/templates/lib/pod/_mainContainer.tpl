@@ -47,7 +47,7 @@ So it can work on multiple places, like additional containers and not only the m
                                                             "scaleGPU" $values.scaleGPU
                                                             "nvidiaCaps" $values.nvidiaCaps
                                                             "secCont" $values.securityContext
-                                                            "secEnvs" $values.security
+                                                            "secEnvs" (dict "PUID" $values.PUID "UMASK" $values.UMASK)
                                                             "injectFixedEnvs" $values.injectFixedEnvs
                                                             "root" $root) | trim) }}
   env:

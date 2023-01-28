@@ -2,10 +2,10 @@
   {{- $root := .root -}}
   {{- $restartPolicy := .restartPolicy -}}
   {{- $isJob := .isJob | default false -}}
-  {{- $policy := $root.Values.global.defaults.restartPolicy -}}
+  {{- $policy := $root.Values.globalDefaults.restartPolicy -}}
 
   {{- if $isJob -}}
-    {{- $policy = $root.Values.global.defaults.jobRestartPolicy -}}
+    {{- $policy = $root.Values.globalDefaults.jobRestartPolicy -}}
   {{- end -}}
 
   {{- with $restartPolicy -}}

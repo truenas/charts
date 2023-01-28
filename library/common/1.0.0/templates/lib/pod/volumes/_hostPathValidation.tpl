@@ -1,7 +1,7 @@
 {{- define "ix.v1.common.controller.volumes.hostPath.validation" -}}
   {{- $vol := .volume -}}
   {{- $root := .root -}}
-  {{- $validate := $root.Values.global.defaults.validateHostPath -}}
+  {{- $validate := $root.Values.globalDefaults.validateHostPath -}}
 
   {{- if (hasKey $vol "validateHostPath") -}}
     {{- $validate = $vol.validateHostPath -}}

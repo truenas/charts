@@ -60,7 +60,7 @@
                                                             "scaleGPU" $container.scaleGPU
                                                             "nvidiaCaps" $container.nvidiaCaps
                                                             "secCont" $container.securityContext
-                                                            "secEnvs" $container.security
+                                                            "secEnvs" (dict "PUID" $container.PUID "UMASK" $container.UMASK)
                                                             "injectFixedEnvs" $container.injectFixedEnvs
                                                             "root" $root) | trim) }}
   env:

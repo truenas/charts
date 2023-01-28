@@ -14,6 +14,8 @@ tests:
 
   - it: should fail with SCALE-ZFS storageClass but not scaleZFSStorageClass in global
     set:
+      globalDefaults:
+        scaleZFSStorageClass: ""
       persistence:
         vol1:
           enabled: true
@@ -263,9 +265,8 @@ tests:
   - it: should pass with storageClass set to SCALE-ZFS
     documentIndex: *pvcDoc
     set:
-      global:
-        defaults:
-          scaleZFSStorageClass: something
+      globalDefaults:
+        scaleZFSStorageClass: something
       persistence:
         vol1:
           enabled: true
@@ -286,9 +287,8 @@ tests:
     documentIndex: *pvcDoc
     set:
       key: something
-      global:
-        defaults:
-          scaleZFSStorageClass: "{{ .Values.key }}"
+      globalDefaults:
+        scaleZFSStorageClass: "{{ .Values.key }}"
       persistence:
         vol1:
           enabled: true
@@ -368,9 +368,8 @@ tests:
   - it: should pass with storageClass defined globally
     documentIndex: *pvcDoc
     set:
-      global:
-        defaults:
-          storageClass: something
+      globalDefaults:
+        storageClass: something
       persistence:
         vol1:
           enabled: true
@@ -635,9 +634,8 @@ tests:
   - it: should pass with annotations and global retain true
     documentIndex: *pvcDoc
     set:
-      global:
-        defaults:
-          PVCRetain: true
+      globalDefaults:
+        PVCRetain: true
       persistence:
         vol1:
           enabled: true
@@ -656,9 +654,8 @@ tests:
   - it: should pass with annotations and global retain true and pvc object to false
     documentIndex: *pvcDoc
     set:
-      global:
-        defaults:
-          PVCRetain: true
+      globalDefaults:
+        PVCRetain: true
       persistence:
         vol1:
           enabled: true
@@ -677,9 +674,8 @@ tests:
   - it: should pass with annotations and global retain false and pvc object to true
     documentIndex: *pvcDoc
     set:
-      global:
-        defaults:
-          PVCRetain: false
+      globalDefaults:
+        PVCRetain: false
       persistence:
         vol1:
           enabled: true

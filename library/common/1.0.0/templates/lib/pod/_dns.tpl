@@ -4,7 +4,7 @@
   {{- $hostNetwork := .hostNetwork -}}
   {{- $root := .root -}}
 
-  {{- $policy := $root.Values.global.defaults.dnsPolicy -}}
+  {{- $policy := $root.Values.globalDefaults.dnsPolicy -}}
   {{- if $dnsPolicy -}}
     {{- if not (mustHas $dnsPolicy (list "Default" "ClusterFirst" "ClusterFirstWithHostNet" "None"))  -}}
       {{- fail (printf "Not valid dnsPolicy (%s). Valid options are ClusterFirst, Default, ClusterFirstWithHostNet, None" $dnsPolicy) -}}

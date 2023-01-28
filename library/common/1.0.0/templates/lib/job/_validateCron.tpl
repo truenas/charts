@@ -2,7 +2,7 @@
   {{- $root := .root -}}
   {{- $job := .job -}}
 
-  {{- $default := $root.Values.global.defaults.job.cron -}}
+  {{- $default := $root.Values.globalDefaults.job.cron -}}
   {{- $cron := $job.cron -}}
   {{- $name := $job.nameOverride -}}
 

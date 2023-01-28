@@ -3,7 +3,7 @@
   {{- $root := .root -}}
   {{- $job := .job -}}
 
-  {{- $default := $root.Values.global.defaults.job -}}
+  {{- $default := $root.Values.globalDefaults.job -}}
   {{- $controllerType := $root.Values.controller.type -}}
 
   {{- include "ix.v1.common.validate.job" (dict "root" $root "job" $job) -}}

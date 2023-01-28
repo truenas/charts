@@ -1,15 +1,15 @@
 {{/* Probes selection logic included by the container. */}}
 {{- define "ix.v1.common.container.probes" -}}
   {{- $root := .root -}}
-  {{- $defaults := $root.Values.global.defaults -}}
+  {{- $defaults := $root.Values.globalDefaults -}}
   {{- $probes := .probes -}}
   {{- $isMainContainer := .isMainContainer -}}
   {{- $services := .services -}} {{/* Only passed from main container, not init/install/upgrade/additional */}}
   {{- $containerName := .containerName -}}
 
-  {{- $defaultProbeType := $root.Values.global.defaults.probeType -}}
-  {{- $defaultProbePath := $root.Values.global.defaults.probePath -}}
-  {{- $defaultPortProtocol := $root.Values.global.defaults.portProtocol -}}
+  {{- $defaultProbeType := $root.Values.globalDefaults.probeType -}}
+  {{- $defaultProbePath := $root.Values.globalDefaults.probePath -}}
+  {{- $defaultPortProtocol := $root.Values.globalDefaults.portProtocol -}}
 
   {{- $primaryPort := "" -}}
   {{- if and $isMainContainer $services -}} {{/* If no services exist don't try to guess a port, but do only in main container */}}

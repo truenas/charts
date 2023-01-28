@@ -19,7 +19,7 @@ That's why the custom dict is expected.
   {{- $root := .root -}}
   {{- $fixedEnv := list -}}
 
-  {{- $inject := $root.Values.global.defaults.injectFixedEnvs -}}
+  {{- $inject := $root.Values.globalDefaults.injectFixedEnvs -}}
   {{- if (mustHas (toString $injectFixedEnvs) (list "true" "false")) -}}
     {{- $inject = $injectFixedEnvs -}}
   {{- end -}}

@@ -4,7 +4,7 @@
   {{- $isJob := .isJob -}}
   {{/* Override previous if a runtime is passed from global defaults */}}
   {{- $runtimeName := "" -}}
-  {{- with $root.Values.global.defaults.runtimeClassName -}}
+  {{- with $root.Values.globalDefaults.runtimeClassName -}}
     {{- $runtimeName = . -}}
   {{- end -}}
 

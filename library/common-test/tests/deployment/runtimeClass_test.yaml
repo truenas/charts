@@ -48,9 +48,9 @@ tests:
       runtimeClassName: perpod
       scaleGPU:
         something: blabla
+      globalDefaults:
+        runtimeClassName: global
       global:
-        defaults:
-          runtimeClassName: global
         ixChartContext:
           addNvidiaRuntimeClass: true
           nvidiaRuntimeClassName: something
@@ -72,9 +72,8 @@ tests:
   - it: should pass with global runtime set
     documentIndex: *deploymentDoc
     set:
-      global:
-        defaults:
-          runtimeClassName: something
+      globalDefaults:
+        runtimeClassName: something
     asserts:
       - equal:
           path: spec.template.spec.runtimeClassName

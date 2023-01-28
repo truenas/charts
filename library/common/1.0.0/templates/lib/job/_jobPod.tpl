@@ -13,7 +13,7 @@
     {{- $saName = . -}}
   {{- end -}}
 {{- else -}}
-  {{/* If we ever have value in global.defaults */}}
+  {{/* If we ever have value in globalDefaults */}}
 {{- end -}}
 
 {{- $schedulerName := "" -}}
@@ -24,7 +24,7 @@
     {{- $schedulerName = . -}}
   {{- end -}}
 {{- else -}}
-  {{/* If we ever have value in global.defaults */}}
+  {{/* If we ever have value in globalDefaults */}}
 {{- end -}}
 
 {{- $priorityClassName := "" -}}
@@ -35,7 +35,7 @@
     {{- $priorityClassName = . -}}
   {{- end -}}
 {{- else -}}
-  {{/* If we ever have value in global.defaults */}}
+  {{/* If we ever have value in globalDefaults */}}
 {{- end -}}
 
 {{- $hostname := "" -}}
@@ -46,7 +46,7 @@
     {{- $hostname = . -}}
   {{- end -}}
 {{- else -}}
-  {{/* If we ever have value in global.defaults */}}
+  {{/* If we ever have value in globalDefaults */}}
 {{- end -}}
 
 {{- $dnsPolicy := "" -}}
@@ -61,7 +61,7 @@
     {{- end -}}
   {{- end -}}
 {{- else -}}
-  {{/* If we ever have value in global.defaults */}}
+  {{/* If we ever have value in globalDefaults */}}
 {{- end -}}
 
 {{- $dnsConfig := dict -}}
@@ -76,7 +76,7 @@
     {{- end -}}
   {{- end -}}
 {{- else -}}
-  {{/* If we ever have value in global.defaults */}}
+  {{/* If we ever have value in globalDefaults */}}
 {{- end -}}
 
 {{- $hostAliases := dict -}}
@@ -91,7 +91,7 @@
     {{- end -}}
   {{- end -}}
 {{- else -}}
-  {{/* If we ever have value in global.defaults */}}
+  {{/* If we ever have value in globalDefaults */}}
 {{- end -}}
 
 {{- $nodeSelector := "" -}}
@@ -106,7 +106,7 @@
     {{- end -}}
   {{- end -}}
 {{- else -}}
-  {{/* If we ever have value in global.defaults */}}
+  {{/* If we ever have value in globalDefaults */}}
 {{- end -}}
 
 {{- $tolerations := dict -}}
@@ -121,7 +121,7 @@
     {{- end -}}
   {{- end -}}
 {{- else -}}
-  {{/* If we ever have value in global.defaults */}}
+  {{/* If we ever have value in globalDefaults */}}
 {{- end -}}
 
 {{- $imagePullSecrets := dict -}}
@@ -136,7 +136,7 @@
     {{- end -}}
   {{- end -}}
 {{- else -}}
-  {{/* If we ever have value in global.defaults */}}
+  {{/* If we ever have value in globalDefaults */}}
 {{- end -}}
 
 {{- $runtimeClassName := "" -}}
@@ -166,7 +166,7 @@
     {{- end -}}
   {{- end -}}
 {{- else -}}
-  {{/* If we ever have value in global.defaults */}}
+  {{/* If we ever have value in globalDefaults */}}
 {{- end -}}
 
 {{- $secCont := dict -}}

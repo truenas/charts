@@ -7,7 +7,7 @@ can be dynamically configured via an env var.
 {{- define "ix.v1.common.container.ports" -}}
   {{- $root := .root -}}
   {{- $services := .services -}}
-  {{- $defaultPortProtocol := $root.Values.global.defaults.portProtocol -}}
+  {{- $defaultPortProtocol := $root.Values.globalDefaults.portProtocol -}}
   {{- $ports := list -}}
 
   {{- range $svcName, $svc := $services -}}
