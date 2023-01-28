@@ -25,7 +25,7 @@ metadata:
   labels:
     {{- . | nindent 4 }}
   {{- end }}
-  {{- $annotations := (mustMerge ($job.annotations | default dict) (include "ix.v1.common.annotations" $root | fromYaml) (include "ix.v1.common.podAnnotations" $root | fromYaml) (include "ix.v1.common.annotations.workload.spec" $root | fromYaml)) -}}
+  {{- $annotations := (mustMerge ($job.annotations | default dict) (include "ix.v1.common.annotations" $root | fromYaml) (include "ix.v1.common.podAnnotations" $root | fromYaml)) -}}
   {{- with (include "ix.v1.common.util.annotations.render" (dict "root" $root "annotations" $annotations) | trim) }}
   annotations:
     {{- . | nindent 4 }}

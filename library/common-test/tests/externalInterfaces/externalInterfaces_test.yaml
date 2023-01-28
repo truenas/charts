@@ -165,12 +165,12 @@ tests:
           count: 4
       - isKind:
           of: Deployment
-      - isSubset:
+      - isNull:
           path: metadata.annotations
+      - isSubset:
+          path: spec.template.metadata.annotations
           content:
             k8s.v1.cni.cncf.io/networks: ix-RELEASE-NAME-0
-      - isNull:
-          path: metadata.annotations.rollme
       - matchRegex:
           path: spec.template.metadata.annotations.rollme
           pattern: "^[a-zA-Z0-9]{5}$"
@@ -254,12 +254,12 @@ tests:
           count: 5
       - isKind:
           of: Deployment
-      - isSubset:
+      - isNull:
           path: metadata.annotations
+      - isSubset:
+          path: spec.template.metadata.annotations
           content:
             k8s.v1.cni.cncf.io/networks: ix-RELEASE-NAME-0, ix-RELEASE-NAME-1
-      - isNull:
-          path: metadata.annotations.rollme
       - matchRegex:
           path: spec.template.metadata.annotations.rollme
           pattern: "^[a-zA-Z0-9]{5}$"

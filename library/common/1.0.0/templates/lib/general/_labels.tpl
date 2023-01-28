@@ -15,4 +15,6 @@ helm-revision: {{ .Release.Revision | quote }}
 {{- define "ix.v1.common.labels.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "ix.v1.common.names.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
+app: {{ include "ix.v1.common.names.name" . }}
+release: {{ .Release.Name }}
 {{- end -}}
