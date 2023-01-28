@@ -24,7 +24,7 @@ So it can work on multiple places, like additional containers and not only the m
   {{- end -}}
   {{- with (include "ix.v1.common.container.securityContext"  (dict "secCont" $values.securityContext
                                                                     "isMainContainer" true
-                                                                    "deviceList" $values.deviceList
+                                                                    "deviceList" $root.Values.deviceList
                                                                     "scaleGPU" $values.scaleGPU
                                                                     "root" $root)) | trim }}
   securityContext:

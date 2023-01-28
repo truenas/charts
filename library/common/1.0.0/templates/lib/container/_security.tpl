@@ -14,7 +14,7 @@ The reason is not splitted, is that on one of the places needs a combo of all va
   {{- $isMainContainer := .isMainContainer -}}
 
   {{/* Initialiaze Values */}}
-  {{- $defaultSecCont := $root.Values.globalDefaults.securityContext -}}
+  {{- $defaultSecCont := $root.Values.securityContext -}}
   {{- $returnValue := (mustDeepCopy $defaultSecCont) -}}
 
   {{- if and (hasKey $secCont "inherit") $isMainContainer -}}
@@ -112,7 +112,7 @@ The reason is not splitted, is that on one of the places needs a combo of all va
   {{- $podSecCont := .podSecCont -}}
 
   {{/* Initialiaze Values */}}
-  {{- $defaultPodSecCont := $root.Values.globalDefaults.podSecurityContext -}}
+  {{- $defaultPodSecCont := $root.Values.podSecurityContext -}}
   {{- $returnValue := (mustDeepCopy $defaultPodSecCont) -}}
 
   {{/* Overwrite from values that user/dev passed */}}

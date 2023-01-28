@@ -24,7 +24,7 @@ tests:
           mountPath: /somepath
     asserts:
       - failedTemplate:
-          errorMessage: A storageClass must be defined in global.defaults.scaleZFSStorageClass
+          errorMessage: A storageClass must be defined in globalDefaults.scaleZFSStorageClass
 
   - it: should fail with invalid accessMode
     set:

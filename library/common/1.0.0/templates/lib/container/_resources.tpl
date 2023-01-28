@@ -10,7 +10,7 @@
   {{- end -}}
 
   {{/* Get defaults from global */}}
-  {{- $defautlResources := $root.Values.globalDefaults.resources -}}
+  {{- $defautlResources := $root.Values.resources -}}
   {{- $newResources := (mustDeepCopy $defautlResources) -}}
 
   {{- if and $resources.inherit (not $isMainContainer) -}} {{/* if inherit is set, overwrite defaults with values from mainContainer */}}

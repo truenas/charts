@@ -4,7 +4,7 @@
   {{- $hostNetwork := .hostNetwork -}}
   {{- $root := .root -}}
 
-  {{- $policy := $root.Values.globalDefaults.dnsPolicy -}}
+  {{- $policy := $root.Values.dnsPolicy -}}
   {{- if $dnsPolicy -}}
     {{- if not (mustHas $dnsPolicy (list "Default" "ClusterFirst" "ClusterFirstWithHostNet" "None"))  -}}
       {{- fail (printf "Not valid dnsPolicy (%s). Valid options are ClusterFirst, Default, ClusterFirstWithHostNet, None" $dnsPolicy) -}}
@@ -22,6 +22,12 @@
   {{- $dnsPolicy := .dnsPolicy -}}
   {{- $dnsConfig := .dnsConfig -}}
   {{- $root := .root -}}
+
+  {{- $config := $root.Values.dnsConfig -}}
+
+  {{- if not $dnsConfig -}}
+    {{- $dnsConfig = $config -}}
+  {{- end -}}
 
   {{- if and (eq $dnsPolicy "None") (not $dnsConfig.nameservers) -}}
     {{- fail "With dnsPolicy set to None, you must specify at least 1 nameservers on dnsConfig" -}}

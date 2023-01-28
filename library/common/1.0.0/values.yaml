@@ -52,23 +52,6 @@ globalDefaults:
   # Default security context used for all
   # init/install/upgrade/additional
   # and main containers if not specified
-  securityContext:
-    runAsNonRoot: true
-    runAsUser: 568
-    runAsGroup: 568
-    readOnlyRootFilesystem: true
-    allowPrivilegeEscalation: false
-    privileged: false
-    capabilities:
-      add: []
-      drop:
-        - ALL
-  # Default podSecurityContext, used if
-  # no other is specified
-  podSecurityContext:
-    fsGroup: 568
-    supplementalGroups: []
-    fsGroupChangePolicy: OnRootMismatch
   # Whether to inject fixedEnvs on containers
   # Can be overruled per container
   injectFixedEnvs: true
@@ -78,13 +61,7 @@ globalDefaults:
     - all
   # Default Resources values, if no others
   # are specified, use those
-  resources:
-    limits:
-      cpu: 4000m
-      memory: 8Gi
-    requests:
-      cpu: 10m
-      memory: 50Mi
+
   # If no probe Type is defined, assume this
   probeType: auto
   # If no probe Path is defined, assume this
@@ -118,8 +95,6 @@ globalDefaults:
       successfulJobsHistoryLimit: 3
     backoffLimit: 6
     completionMode: NonIndexed
-  # If not defined on the pod, assume this
-  dnsPolicy: ClusterFirst
 
 # Defines image info
 image:
@@ -230,26 +205,44 @@ controllers:
               enabled: true
             startup:
               enabled: true
-          # Default securityContext for main container
-          securityContext:
-            runAsNonRoot: true
-            runAsUser: 568
-            runAsGroup: 568
-            readOnlyRootFilesystem: true
-            allowPrivilegeEscalation: false
-            privileged: false
-            capabilities:
-              add: []
-              drop:
-                - ALL
-          # Default resources for main container
-          resources:
-            limits:
-              cpu: 4000m
-              memory: 8Gi
-            requests:
-              cpu: 10m
-              memory: 50Mi
+
+# Default DNS Policy that applies to all pods
+# Can be overruled per pod
+dnsPolicy: ClusterFirst
+
+# Default DNS Config that applies to all pods
+# Can be overruled per pod
+dnsConfig: {}
+
+# Security Context that applies to all containers
+# Can be overruled per container
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 568
+  runAsGroup: 568
+  readOnlyRootFilesystem: true
+  allowPrivilegeEscalation: false
+  privileged: false
+  capabilities:
+    add: []
+    drop:
+      - ALL
+# Default podSecurityContext that applies to all pods
+# Can be overruled per pod
+podSecurityContext:
+  fsGroup: 568
+  supplementalGroups: []
+  fsGroupChangePolicy: OnRootMismatch
+
+# Resources that apply to all containers
+# Can be overruled per container
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+  requests:
+    cpu: 10m
+    memory: 50Mi
 
 # Values that will be exposed to UI
 # Defines the timezone for the container

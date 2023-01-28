@@ -14,7 +14,12 @@ tests:
   - it: should pass with tty set
     documentIndex: *deploymentDoc
     set:
-      tty: true
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                tty: true
     asserts:
       - equal:
           path: spec.template.spec.containers[0].tty
@@ -23,7 +28,12 @@ tests:
   - it: should pass with stdin set
     documentIndex: *deploymentDoc
     set:
-      stdin: true
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                stdin: true
     asserts:
       - equal:
           path: spec.template.spec.containers[0].stdin
@@ -32,8 +42,13 @@ tests:
   - it: should pass with terminationMessagePath set
     documentIndex: *deploymentDoc
     set:
-      termination:
-        messagePath: /tmp/log
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                termination:
+                  messagePath: /tmp/log
     asserts:
       - equal:
           path: spec.template.spec.containers[0].terminationMessagePath
@@ -43,8 +58,13 @@ tests:
     documentIndex: *deploymentDoc
     set:
       some_path: /tmp/log
-      termination:
-        messagePath: "{{ .Values.some_path }}"
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                termination:
+                  messagePath: "{{ .Values.some_path }}"
     asserts:
       - equal:
           path: spec.template.spec.containers[0].terminationMessagePath
@@ -53,8 +73,13 @@ tests:
   - it: should pass with terminationMessagePolicy set
     documentIndex: *deploymentDoc
     set:
-      termination:
-        messagePolicy: FallbackToLogsOnError
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                termination:
+                  messagePolicy: FallbackToLogsOnError
     asserts:
       - equal:
           path: spec.template.spec.containers[0].terminationMessagePolicy
@@ -64,8 +89,13 @@ tests:
     documentIndex: *deploymentDoc
     set:
       some_key: FallbackToLogsOnError
-      termination:
-        messagePolicy: "{{ .Values.some_key }}"
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                termination:
+                  messagePolicy: "{{ .Values.some_key }}"
     asserts:
       - equal:
           path: spec.template.spec.containers[0].terminationMessagePolicy
@@ -74,8 +104,13 @@ tests:
   - it: should fail with invalid terminationMessagePolicy
     set:
       some_key: invalid
-      termination:
-        messagePolicy: "{{ .Values.some_key }}"
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                termination:
+                  messagePolicy: "{{ .Values.some_key }}"
     asserts:
       - failedTemplate:
           errorMessage: Not valid option for messagePolicy (invalid). Valid options are FallbackToLogsOnError and File

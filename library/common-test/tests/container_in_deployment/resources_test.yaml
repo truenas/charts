@@ -22,8 +22,13 @@ tests:
   - it: should fail with inherit defined in main container
     documentIndex: *deploymentDoc
     set:
-      resources:
-        inherit:
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                resources:
+                  inherit:
     asserts:
       - failedTemplate:
           errorMessage: <resources.inherit> key is only available for additional/init/install/upgrade containers.
@@ -33,13 +38,18 @@ tests:
     set:
       scaleGPU:
         somekey:
-      resources:
-        limits:
-          cpu: 3000m
-          memory: 4Gi
-        requests:
-          cpu: 20m
-          memory: 100Mi
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                resources:
+                  limits:
+                    cpu: 3000m
+                    memory: 4Gi
+                  requests:
+                    cpu: 20m
+                    memory: 100Mi
     asserts:
       - failedTemplate:
           errorMessage: Value is not provided for GPU (<key> somekey)
@@ -47,13 +57,18 @@ tests:
   - it: should fail with empty requests.cpu
     documentIndex: *deploymentDoc
     set:
-      resources:
-        limits:
-          cpu: 3000m
-          memory: 4Gi
-        requests:
-          cpu:
-          memory: 100Mi
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                resources:
+                  limits:
+                    cpu: 3000m
+                    memory: 4Gi
+                  requests:
+                    cpu:
+                    memory: 100Mi
     asserts:
       - failedTemplate:
           errorMessage: <resources.requests.cpu> cannot be empty.
@@ -61,13 +76,18 @@ tests:
   - it: should fail with empty requests.memory
     documentIndex: *deploymentDoc
     set:
-      resources:
-        limits:
-          cpu: 3000m
-          memory: 4Gi
-        requests:
-          cpu: 20m
-          memory:
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                resources:
+                  limits:
+                    cpu: 3000m
+                    memory: 4Gi
+                  requests:
+                    cpu: 20m
+                    memory:
     asserts:
       - failedTemplate:
           errorMessage: <resources.requests.memory> cannot be empty.
@@ -77,13 +97,18 @@ tests:
     set:
       scaleGPU:
         somekey:
-      resources:
-        limits:
-          cpu: 3000m
-          memory: 4Gi
-        requests:
-          cpu: 20m
-          memory: 0.0
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                resources:
+                  limits:
+                    cpu: 3000m
+                    memory: 4Gi
+                  requests:
+                    cpu: 20m
+                    memory: 0.0
     asserts:
       - failedTemplate:
           errorMessage: <resources.requests.memory> has invalid format in value (0). Valid formats are (Suffixed with EPTGMK eg. 1G) (Suffixed with EPTGMK + i eg. 1Gi) (Plain integer (in bytes) eg. 1024) (Exponent eg. 134e6).
@@ -93,13 +118,18 @@ tests:
     set:
       scaleGPU:
         somekey:
-      resources:
-        limits:
-          cpu: 3000m
-          memory: 4Gi
-        requests:
-          cpu: 20m
-          memory: 0e0
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                resources:
+                  limits:
+                    cpu: 3000m
+                    memory: 4Gi
+                  requests:
+                    cpu: 20m
+                    memory: 0e0
     asserts:
       - failedTemplate:
           errorMessage: <resources.requests.memory> has invalid format in value (0). Valid formats are (Suffixed with EPTGMK eg. 1G) (Suffixed with EPTGMK + i eg. 1Gi) (Plain integer (in bytes) eg. 1024) (Exponent eg. 134e6).
@@ -109,13 +139,18 @@ tests:
     set:
       scaleGPU:
         somekey:
-      resources:
-        limits:
-          cpu: 3000m
-          memory: 4Gi
-        requests:
-          cpu: 20m
-          memory: 0M
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                resources:
+                  limits:
+                    cpu: 3000m
+                    memory: 4Gi
+                  requests:
+                    cpu: 20m
+                    memory: 0M
     asserts:
       - failedTemplate:
           errorMessage: <resources.requests.memory> has invalid format in value (0M). Valid formats are (Suffixed with EPTGMK eg. 1G) (Suffixed with EPTGMK + i eg. 1Gi) (Plain integer (in bytes) eg. 1024) (Exponent eg. 134e6).
@@ -125,13 +160,18 @@ tests:
     set:
       scaleGPU:
         somekey:
-      resources:
-        limits:
-          cpu: 3000m
-          memory: 4Gi
-        requests:
-          cpu: 20m
-          memory: not-valid
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                resources:
+                  limits:
+                    cpu: 3000m
+                    memory: 4Gi
+                  requests:
+                    cpu: 20m
+                    memory: not-valid
     asserts:
       - failedTemplate:
           errorMessage: <resources.requests.memory> has invalid format in value (not-valid). Valid formats are (Suffixed with EPTGMK eg. 1G) (Suffixed with EPTGMK + i eg. 1Gi) (Plain integer (in bytes) eg. 1024) (Exponent eg. 134e6).
@@ -139,13 +179,18 @@ tests:
   - it: should fail with invalid format in limits.memory (zero)
     documentIndex: *deploymentDoc
     set:
-      resources:
-        limits:
-          cpu: 3000m
-          memory: 0.0
-        requests:
-          cpu: 20m
-          memory: 100Mi
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                resources:
+                  limits:
+                    cpu: 3000m
+                    memory: 0.0
+                  requests:
+                    cpu: 20m
+                    memory: 100Mi
     asserts:
       - failedTemplate:
           errorMessage: <resources.limits.memory> has invalid format in value (0). Valid formats are (Suffixed with EPTGMK eg. 1G) (Suffixed with EPTGMK + i eg. 1Gi) (Plain integer (in bytes) eg. 1024) (Exponent eg. 134e6).
@@ -153,13 +198,18 @@ tests:
   - it: should fail with invalid format in limits.memory (zero exponent)
     documentIndex: *deploymentDoc
     set:
-      resources:
-        limits:
-          cpu: 3000m
-          memory: 0e0
-        requests:
-          cpu: 20m
-          memory: 100Mi
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                resources:
+                  limits:
+                    cpu: 3000m
+                    memory: 0e0
+                  requests:
+                    cpu: 20m
+                    memory: 100Mi
     asserts:
       - failedTemplate:
           errorMessage: <resources.limits.memory> has invalid format in value (0). Valid formats are (Suffixed with EPTGMK eg. 1G) (Suffixed with EPTGMK + i eg. 1Gi) (Plain integer (in bytes) eg. 1024) (Exponent eg. 134e6).
@@ -167,13 +217,18 @@ tests:
   - it: should fail with invalid format in requests.limits (zero with suffix)
     documentIndex: *deploymentDoc
     set:
-      resources:
-        limits:
-          cpu: 3000m
-          memory: 0M
-        requests:
-          cpu: 20m
-          memory: 100Mi
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                resources:
+                  limits:
+                    cpu: 3000m
+                    memory: 0M
+                  requests:
+                    cpu: 20m
+                    memory: 100Mi
     asserts:
       - failedTemplate:
           errorMessage: <resources.limits.memory> has invalid format in value (0M). Valid formats are (Suffixed with EPTGMK eg. 1G) (Suffixed with EPTGMK + i eg. 1Gi) (Plain integer (in bytes) eg. 1024) (Exponent eg. 134e6).
@@ -181,13 +236,18 @@ tests:
   - it: should fail with invalid format in limits.memory (string)
     documentIndex: *deploymentDoc
     set:
-      resources:
-        limits:
-          cpu: 3000m
-          memory: not-valid
-        requests:
-          cpu: 20m
-          memory: 100Mi
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                resources:
+                  limits:
+                    cpu: 3000m
+                    memory: not-valid
+                  requests:
+                    cpu: 20m
+                    memory: 100Mi
     asserts:
       - failedTemplate:
           errorMessage: <resources.limits.memory> has invalid format in value (not-valid). Valid formats are (Suffixed with EPTGMK eg. 1G) (Suffixed with EPTGMK + i eg. 1Gi) (Plain integer (in bytes) eg. 1024) (Exponent eg. 134e6).
@@ -195,13 +255,18 @@ tests:
   - it: should fail with invalid format in limits.cpu (zero)
     documentIndex: *deploymentDoc
     set:
-      resources:
-        limits:
-          cpu: 0.0
-          memory: 4Gi
-        requests:
-          cpu: 20m
-          memory: 100Mi
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                resources:
+                  limits:
+                    cpu: 0.0
+                    memory: 4Gi
+                  requests:
+                    cpu: 20m
+                    memory: 100Mi
     asserts:
       - failedTemplate:
           errorMessage: <resources.limits.cpu> has invalid format in value (0). Valid formats are (Plain Integer eg. 1) (Float eg. 0.5) (Milicpu 500m).
@@ -209,13 +274,18 @@ tests:
   - it: should fail with invalid format in limits.cpu (zero with suffix)
     documentIndex: *deploymentDoc
     set:
-      resources:
-        limits:
-          cpu: 0m
-          memory: 4Gi
-        requests:
-          cpu: 20m
-          memory: 100Mi
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                resources:
+                  limits:
+                    cpu: 0m
+                    memory: 4Gi
+                  requests:
+                    cpu: 20m
+                    memory: 100Mi
     asserts:
       - failedTemplate:
           errorMessage: <resources.limits.cpu> has invalid format in value (0m). Valid formats are (Plain Integer eg. 1) (Float eg. 0.5) (Milicpu 500m).
@@ -223,13 +293,18 @@ tests:
   - it: should fail with invalid format in limits.cpu (string)
     documentIndex: *deploymentDoc
     set:
-      resources:
-        limits:
-          cpu: not-valid
-          memory: 4Gi
-        requests:
-          cpu: 20m
-          memory: 100Mi
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                resources:
+                  limits:
+                    cpu: not-valid
+                    memory: 4Gi
+                  requests:
+                    cpu: 20m
+                    memory: 100Mi
     asserts:
       - failedTemplate:
           errorMessage: <resources.limits.cpu> has invalid format in value (not-valid). Valid formats are (Plain Integer eg. 1) (Float eg. 0.5) (Milicpu 500m).
@@ -237,13 +312,18 @@ tests:
   - it: should fail with invalid format in requests.cpu (zero)
     documentIndex: *deploymentDoc
     set:
-      resources:
-        limits:
-          cpu: 4000m
-          memory: 4Gi
-        requests:
-          cpu: 0.0
-          memory: 100Mi
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                resources:
+                  limits:
+                    cpu: 4000m
+                    memory: 4Gi
+                  requests:
+                    cpu: 0.0
+                    memory: 100Mi
     asserts:
       - failedTemplate:
           errorMessage: <resources.requests.cpu> has invalid format in value (0). Valid formats are (Plain Integer eg. 1) (Float eg. 0.5) (Milicpu 500m).
@@ -251,13 +331,18 @@ tests:
   - it: should fail with invalid format in requests.cpu (zero with suffix)
     documentIndex: *deploymentDoc
     set:
-      resources:
-        limits:
-          cpu: 4000m
-          memory: 4Gi
-        requests:
-          cpu: 0m
-          memory: 100Mi
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                resources:
+                  limits:
+                    cpu: 4000m
+                    memory: 4Gi
+                  requests:
+                    cpu: 0m
+                    memory: 100Mi
     asserts:
       - failedTemplate:
           errorMessage: <resources.requests.cpu> has invalid format in value (0m). Valid formats are (Plain Integer eg. 1) (Float eg. 0.5) (Milicpu 500m).
@@ -265,13 +350,18 @@ tests:
   - it: should fail with invalid format in requests.cpu (string)
     documentIndex: *deploymentDoc
     set:
-      resources:
-        limits:
-          cpu: 4000m
-          memory: 4Gi
-        requests:
-          cpu: not-valid
-          memory: 100Mi
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                resources:
+                  limits:
+                    cpu: 4000m
+                    memory: 4Gi
+                  requests:
+                    cpu: not-valid
+                    memory: 100Mi
     asserts:
       - failedTemplate:
           errorMessage: <resources.requests.cpu> has invalid format in value (not-valid). Valid formats are (Plain Integer eg. 1) (Float eg. 0.5) (Milicpu 500m).
@@ -279,13 +369,18 @@ tests:
   - it: should pass with changed resources
     documentIndex: *deploymentDoc
     set:
-      resources:
-        limits:
-          cpu: 3000m
-          memory: 4Gi
-        requests:
-          cpu: 20m
-          memory: 100Mi
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                resources:
+                  limits:
+                    cpu: 3000m
+                    memory: 4Gi
+                  requests:
+                    cpu: 20m
+                    memory: 100Mi
     asserts:
       - equal:
           path: spec.template.spec.containers[0].resources
@@ -300,9 +395,14 @@ tests:
   - it: should pass with only limits.cpu resource changed
     documentIndex: *deploymentDoc
     set:
-      resources:
-        limits:
-          cpu: 3000m
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                resources:
+                  limits:
+                    cpu: 3000m
     asserts:
       - equal:
           path: spec.template.spec.containers[0].resources
@@ -317,9 +417,14 @@ tests:
   - it: should pass with only limits.memory resource changed
     documentIndex: *deploymentDoc
     set:
-      resources:
-        limits:
-          memory: 4Gi
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                resources:
+                  limits:
+                    memory: 4Gi
     asserts:
       - equal:
           path: spec.template.spec.containers[0].resources
@@ -334,9 +439,14 @@ tests:
   - it: should pass with only requests.cpu resource changed
     documentIndex: *deploymentDoc
     set:
-      resources:
-        requests:
-          cpu: 20m
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                resources:
+                  requests:
+                    cpu: 20m
     asserts:
       - equal:
           path: spec.template.spec.containers[0].resources
@@ -351,9 +461,14 @@ tests:
   - it: should pass with only requests.memory resource changed
     documentIndex: *deploymentDoc
     set:
-      resources:
-        requests:
-          memory: 25Mi
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                resources:
+                  requests:
+                    memory: 25Mi
     asserts:
       - equal:
           path: spec.template.spec.containers[0].resources
@@ -387,13 +502,18 @@ tests:
     set:
       scaleGPU:
         gpu.intel.com/i915: "1"
-      resources:
-        limits:
-          cpu: 3000m
-          memory: 4Gi
-        requests:
-          cpu: 20m
-          memory: 100Mi
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                resources:
+                  limits:
+                    cpu: 3000m
+                    memory: 4Gi
+                  requests:
+                    cpu: 20m
+                    memory: 100Mi
     asserts:
       - equal:
           path: spec.template.spec.containers[0].resources
@@ -409,10 +529,15 @@ tests:
   - it: should pass with empty resources.limits
     documentIndex: *deploymentDoc
     set:
-      resources:
-        limits:
-          cpu:
-          memory:
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                resources:
+                  limits:
+                    cpu:
+                    memory:
     asserts:
       - equal:
           path: spec.template.spec.containers[0].resources
@@ -425,10 +550,15 @@ tests:
     documentIndex: *deploymentDoc
     set:
       scaleGPU: {}
-      resources:
-        limits:
-          cpu: 3000m
-          memory:
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                resources:
+                  limits:
+                    cpu: 3000m
+                    memory:
     asserts:
       - equal:
           path: spec.template.spec.containers[0].resources
@@ -443,10 +573,15 @@ tests:
     documentIndex: *deploymentDoc
     set:
       scaleGPU: {}
-      resources:
-        limits:
-          cpu:
-          memory: 4Gi
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                resources:
+                  limits:
+                    cpu:
+                    memory: 4Gi
     asserts:
       - equal:
           path: spec.template.spec.containers[0].resources
@@ -461,12 +596,17 @@ tests:
     documentIndex: *deploymentDoc
     set:
       scaleGPU: {}
-      resources:
-        limits:
-          cpu:
-          memory:
-        requests:
-          cpu: 30m
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                resources:
+                  limits:
+                    cpu:
+                    memory:
+                  requests:
+                    cpu: 30m
     asserts:
       - equal:
           path: spec.template.spec.containers[0].resources
@@ -479,12 +619,17 @@ tests:
     documentIndex: *deploymentDoc
     set:
       scaleGPU: {}
-      resources:
-        limits:
-          cpu:
-          memory:
-        requests:
-          memory: 15Mi
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                resources:
+                  limits:
+                    cpu:
+                    memory:
+                  requests:
+                    memory: 15Mi
     asserts:
       - equal:
           path: spec.template.spec.containers[0].resources
@@ -498,10 +643,15 @@ tests:
     set:
       scaleGPU:
         gpu.intel.com/i915: "1"
-      resources:
-        limits:
-          cpu:
-          memory:
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                resources:
+                  limits:
+                    cpu:
+                    memory:
     asserts:
       - equal:
           path: spec.template.spec.containers[0].resources
@@ -516,13 +666,18 @@ tests:
     documentIndex: *deploymentDoc
     set:
       scaleGPU: {}
-      resources:
-        limits:
-          cpu:
-          memory:
-        requests:
-          cpu: 10m
-          memory: 50Mi
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                resources:
+                  limits:
+                    cpu:
+                    memory:
+                  requests:
+                    cpu: 10m
+                    memory: 50Mi
     asserts:
       - equal:
           path: spec.template.spec.containers[0].resources
@@ -535,10 +690,15 @@ tests:
     documentIndex: *deploymentDoc
     set:
       scaleGPU: {}
-      resources:
-        limits:
-          cpu: 1000m
-          memory: 1Gi
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                resources:
+                  limits:
+                    cpu: 1000m
+                    memory: 1Gi
     asserts:
       - equal:
           path: spec.template.spec.containers[0].resources
@@ -550,16 +710,20 @@ tests:
               cpu: 10m
               memory: 50Mi
 
-
   - it: should pass with only gpu defined
     documentIndex: *deploymentDoc
     set:
       scaleGPU:
         gpu.intel.com/i915: "1"
-      resources:
-        limits:
-          cpu:
-          memory:
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                resources:
+                  limits:
+                    cpu:
+                    memory:
     asserts:
       - equal:
           path: spec.template.spec.containers[0].resources
