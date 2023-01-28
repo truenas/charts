@@ -10,14 +10,18 @@ service:
         protocol: HTTP
         port: 8080
 
-args:
-  - --port
-  - "8080"
-
-probes:
-  liveness:
-    enabled: true
-  readiness:
-    enabled: true
-  startup:
-    enabled: true
+controllers:
+  main:
+    pod:
+      containers:
+        main:
+          args:
+            - --port
+            - "8080"
+          probes:
+            liveness:
+              enabled: true
+            readiness:
+              enabled: true
+            startup:
+              enabled: true

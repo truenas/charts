@@ -14,9 +14,14 @@ tests:
   - it: should pass with single postStart lifecycle set
     documentIndex: *deploymentDoc
     set:
-      lifecycle:
-        postStart:
-          command: some_command
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                lifecycle:
+                  postStart:
+                    command: some_command
     asserts:
       - equal:
           path: spec.template.spec.containers[0].lifecycle
@@ -30,9 +35,14 @@ tests:
     documentIndex: *deploymentDoc
     set:
       some_key: some_command
-      lifecycle:
-        postStart:
-          command: "{{ .Values.some_key }}"
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                lifecycle:
+                  postStart:
+                    command: "{{ .Values.some_key }}"
     asserts:
       - equal:
           path: spec.template.spec.containers[0].lifecycle
@@ -45,11 +55,16 @@ tests:
   - it: should pass with postStart lifecycle set
     documentIndex: *deploymentDoc
     set:
-      lifecycle:
-        postStart:
-          command:
-            - /bin/bash
-            - test
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                lifecycle:
+                  postStart:
+                    command:
+                      - /bin/bash
+                      - test
     asserts:
       - equal:
           path: spec.template.spec.containers[0].lifecycle
@@ -64,11 +79,16 @@ tests:
     documentIndex: *deploymentDoc
     set:
       some_key: some_value
-      lifecycle:
-        postStart:
-          command:
-            - /bin/bash
-            - "{{ .Values.some_key }}"
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                lifecycle:
+                  postStart:
+                    command:
+                      - /bin/bash
+                      - "{{ .Values.some_key }}"
     asserts:
       - equal:
           path: spec.template.spec.containers[0].lifecycle
@@ -82,9 +102,14 @@ tests:
   - it: should pass with single preStop lifecycle set
     documentIndex: *deploymentDoc
     set:
-      lifecycle:
-        preStop:
-          command: some_command
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                lifecycle:
+                  preStop:
+                    command: some_command
     asserts:
       - equal:
           path: spec.template.spec.containers[0].lifecycle
@@ -98,9 +123,14 @@ tests:
     documentIndex: *deploymentDoc
     set:
       some_key: some_command
-      lifecycle:
-        preStop:
-          command: "{{ .Values.some_key }}"
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                lifecycle:
+                  preStop:
+                    command: "{{ .Values.some_key }}"
     asserts:
       - equal:
           path: spec.template.spec.containers[0].lifecycle
@@ -110,15 +140,19 @@ tests:
                 command:
                   - some_command
 
-
   - it: should pass with preStop lifecycle set
     documentIndex: *deploymentDoc
     set:
-      lifecycle:
-        preStop:
-          command:
-            - /bin/bash
-            - test
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                lifecycle:
+                  preStop:
+                    command:
+                      - /bin/bash
+                      - test
     asserts:
       - equal:
           path: spec.template.spec.containers[0].lifecycle
@@ -133,11 +167,16 @@ tests:
     documentIndex: *deploymentDoc
     set:
       some_key: some_value
-      lifecycle:
-        preStop:
-          command:
-            - /bin/bash
-            - "{{ .Values.some_key }}"
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                lifecycle:
+                  preStop:
+                    command:
+                      - /bin/bash
+                      - "{{ .Values.some_key }}"
     asserts:
       - equal:
           path: spec.template.spec.containers[0].lifecycle
@@ -150,45 +189,70 @@ tests:
 
   - it: should fail with invalid key
     set:
-      lifecycle:
-        preStart:
-          command: something
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                lifecycle:
+                  preStart:
+                    command: something
     asserts:
       - failedTemplate:
           errorMessage: Invalid key (preStart) in lifecycle. Valid keys are preStop and postStart
 
   - it: should fail with no command in preStop
     set:
-      lifecycle:
-        preStop:
-          command: ""
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                lifecycle:
+                  preStop:
+                    command: ""
     asserts:
       - failedTemplate:
           errorMessage: No commands were given for preStop lifecycle hook
 
   - it: should fail with no command in postStart
     set:
-      lifecycle:
-        postStart:
-          command: ""
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                lifecycle:
+                  postStart:
+                    command: ""
     asserts:
       - failedTemplate:
           errorMessage: No commands were given for postStart lifecycle hook
 
   - it: should fail with no command in preStop
     set:
-      lifecycle:
-        preStop:
-          command: ""
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                lifecycle:
+                  preStop:
+                    command: ""
     asserts:
       - failedTemplate:
           errorMessage: No commands were given for preStop lifecycle hook
 
   - it: should fail with no command in postStart
     set:
-      lifecycle:
-        postStart:
-          command: ""
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                lifecycle:
+                  postStart:
+                    command: ""
     asserts:
       - failedTemplate:
           errorMessage: No commands were given for postStart lifecycle hook

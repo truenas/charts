@@ -3,13 +3,6 @@ image:
   pullPolicy: IfNotPresent
   tag: latest
 
-controller:
-  # -- Enable the controller.
-  enabled: true
-  # -- Set the controller type.
-  # Valid options are: Deployment | DaemonSet | StatefulSet
-  type: DaemonSet
-
 service:
   main:
     ports:
@@ -17,14 +10,20 @@ service:
         protocol: HTTP
         port: 8080
 
-args:
-  - --port
-  - "8080"
+controllers:
+  main:
+    type: DaemonSet
+    pod:
+      containers:
+        main:
+          args:
+            - --port
+            - "8080"
 
-probes:
-  liveness:
-    enabled: true
-  readiness:
-    enabled: true
-  startup:
-    enabled: true
+          probes:
+            liveness:
+              enabled: true
+            readiness:
+              enabled: true
+            startup:
+              enabled: true

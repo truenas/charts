@@ -34,10 +34,10 @@ metadata:
     {{- . | nindent 4 }}
   {{- end -}}
   {{- $additionalAnnotations := dict -}}
-  {{- if and $root.Values.addAnnotations.traefik (eq ($primaryPort.protocol | default "") "HTTPS") -}}
+  {{- if and $root.Values.globalDefaults.addAnnotations.traefik (eq ($primaryPort.protocol | default "") "HTTPS") -}}
     {{- $_ := set $additionalAnnotations "traefik.ingress.kubernetes.io/service.serversscheme" "https" -}}
   {{- end -}}
-  {{- if and $root.Values.addAnnotations.metallb (eq $svcType "LoadBalancer") -}}
+  {{- if and $root.Values.globalDefaults.addAnnotations.metallb (eq $svcType "LoadBalancer") -}}
     {{- $sharedLBKey := include "ix.v1.common.names.fullname" $root -}}
     {{- with $svcValues.metalLBSharedKey -}}
       {{- $sharedLBKey = tpl . $root -}}

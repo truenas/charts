@@ -23,7 +23,7 @@ The reason is not splitted, is that on one of the places needs a combo of all va
 
   {{- if and $secCont.inherit (not $isMainContainer) -}} {{/* if inherit is set, overwrite values from mainContainer */}}
     {{- if (hasKey $root.Values "securityContext") -}}
-      {{- $returnValue = mustMergeOverwrite $returnValue $root.Values.securityContext -}}
+      {{- $returnValue = mustMergeOverwrite $returnValue $root.Values.controllers.main.pod.containers.main.securityContext -}}
     {{- end -}}
   {{- end -}}
 
@@ -214,12 +214,11 @@ The reason is not splitted, is that on one of the places needs a combo of all va
   {{- $secEnvs := .secEnvs -}}
 
   {{/* Initialiaze Values */}}
-  {{- $defaultSecEnvs := (dict "PUID" $root.Values.PUID "UMASK" $root.Values.UMASK ) -}}
+  {{- $defaultSecEnvs := (dict "PUID" $root.Values.PUID "UMASK" $root.Values.UMASK) -}}
   {{- $returnValue := (mustDeepCopy $defaultSecEnvs) -}}
 
   {{/* Overwrite from values that user/dev passed */}}
   {{- $returnValue = mustMergeOverwrite $returnValue $secEnvs -}}
-
   {{/* Validate values, as mergeOverwrite also passes null values */}}
   {{- if not $returnValue.UMASK -}}
     {{- fail (printf "<UMASK> key cannot be empty. Set a value or remove the key for the default (%v) to take effect." $defaultSecEnvs.UMASK) -}}

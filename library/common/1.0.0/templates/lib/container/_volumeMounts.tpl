@@ -4,7 +4,7 @@
   {{- $root := .root -}}
   {{- $extraContainerVolMounts := .extraContainerVolMounts -}}
 
-  {{- if (mustHas $root.Values.controller.type (list "Job" "CronJob")) -}}
+  {{- if (mustHas $root.Values.controllers.main.type (list "Job" "CronJob")) -}}
     {{- $isMainContainer = true -}}
   {{- end -}}
 
@@ -19,7 +19,7 @@
       {{- end -}}
     {{- end -}}
 
-    {{- if eq $root.Values.controller.type "StatefulSet" -}}
+    {{- if eq $root.Values.controllers.main.type "StatefulSet" -}}
       {{- range $index, $vct := $root.Values.volumeClaimTemplates -}}
         {{- include "ix.v1.common.container.volumeMount"  (dict "root" $root
                                                                 "item" $vct

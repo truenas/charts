@@ -13,7 +13,12 @@ tests:
   - it: should fail with empty PUID
     documentIndex: *deploymentDoc
     set:
-      PUID:
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                PUID:
     asserts:
       - failedTemplate:
           errorMessage: <PUID> key cannot be empty. Set a value or remove the key for the default (568) to take effect.
@@ -21,7 +26,12 @@ tests:
   - it: should fail with PUID not-int
     documentIndex: *deploymentDoc
     set:
-      PUID: "1000"
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                PUID: "1000"
     asserts:
       - failedTemplate:
           errorMessage: <PUID> key has value of ("1000"). But must be an int.
@@ -29,7 +39,12 @@ tests:
   - it: should fail with empty UMASK
     documentIndex: *deploymentDoc
     set:
-      UMASK:
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                UMASK:
     asserts:
       - failedTemplate:
           errorMessage: <UMASK> key cannot be empty. Set a value or remove the key for the default (002) to take effect.
@@ -37,7 +52,12 @@ tests:
   - it: should fail with UMASK not-string
     documentIndex: *deploymentDoc
     set:
-      UMASK: 2
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                UMASK: 2
     asserts:
       - failedTemplate:
           errorMessage: <UMASK> key must be a string, so the format is kept intact.
@@ -45,7 +65,12 @@ tests:
   - it: should pass with injectFixedEnvs false
     documentIndex: *deploymentDoc
     set:
-      injectFixedEnvs: false
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                injectFixedEnvs: false
     asserts:
       - isNull:
           path: spec.template.spec.containers[0].env
@@ -73,12 +98,17 @@ tests:
   - it: should pass with an env referencing TZ and PUID
     documentIndex: *deploymentDoc
     set:
-      securityContext:
-        runAsUser: 0
-        runAsNonRoot: false
-      env:
-        TIMEZONE: "{{ .Values.TZ }}"
-        APP_USER_ID: "{{ .Values.security.PUID }}"
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                securityContext:
+                  runAsUser: 0
+                  runAsNonRoot: false
+                env:
+                  TIMEZONE: "{{ .Values.TZ }}"
+                  APP_USER_ID: "{{ .Values.PUID }}"
     asserts:
       - equal:
           path: spec.template.spec.containers[0].env
@@ -113,9 +143,14 @@ tests:
   - it: should pass without S6_READ_ONLY_ROOT
     documentIndex: *deploymentDoc
     set:
-      securityContext:
-        readOnlyRootFilesystem: false
-        runAsNonRoot: false
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                securityContext:
+                  readOnlyRootFilesystem: false
+                  runAsNonRoot: false
     asserts:
       - equal:
           path: spec.template.spec.containers[0].env
@@ -152,9 +187,14 @@ tests:
   - it: should pass with envs changed because run as user root
     documentIndex: *deploymentDoc
     set:
-      securityContext:
-        runAsUser: 0
-        runAsNonRoot: false
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                securityContext:
+                  runAsUser: 0
+                  runAsNonRoot: false
     asserts:
       - equal:
           path: spec.template.spec.containers[0].env
@@ -185,9 +225,14 @@ tests:
   - it: should pass with envs changed because run as group root
     documentIndex: *deploymentDoc
     set:
-      securityContext:
-        runAsGroup: 0
-        runAsNonRoot: false
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                securityContext:
+                  runAsGroup: 0
+                  runAsNonRoot: false
     asserts:
       - equal:
           path: spec.template.spec.containers[0].env
@@ -218,10 +263,15 @@ tests:
   - it: should pass with envs changed because run as user root and PUID 0
     documentIndex: *deploymentDoc
     set:
-      securityContext:
-        runAsUser: 0
-        runAsNonRoot: false
-      PUID: 0
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                securityContext:
+                  runAsUser: 0
+                  runAsNonRoot: false
+                PUID: 0
     asserts:
       - equal:
           path: spec.template.spec.containers[0].env
@@ -252,10 +302,15 @@ tests:
   - it: should pass with envs changed because run as group root and PUID 0
     documentIndex: *deploymentDoc
     set:
-      securityContext:
-        runAsGroup: 0
-        runAsNonRoot: false
-      PUID: 0
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                securityContext:
+                  runAsGroup: 0
+                  runAsNonRoot: false
+                PUID: 0
     asserts:
       - equal:
           path: spec.template.spec.containers[0].env
@@ -286,12 +341,17 @@ tests:
   - it: should pass with envs changed because run as group root and fsGroup 0 and PUID 0
     documentIndex: *deploymentDoc
     set:
-      podSecurityContext:
-        fsGroup: 0
-      securityContext:
-        runAsGroup: 0
-        runAsNonRoot: false
-      PUID: 0
+      controllers:
+        main:
+          pod:
+            securityContext:
+              fsGroup: 0
+            containers:
+              main:
+                securityContext:
+                  runAsGroup: 0
+                  runAsNonRoot: false
+                PUID: 0
     asserts:
       - equal:
           path: spec.template.spec.containers[0].env
@@ -342,10 +402,15 @@ tests:
   - it: should fail with non-unique nvidiaCaps
     documentIndex: *deploymentDoc
     set:
-      nvidiaCaps:
-        - compute
-        - compute
-        - utility
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                nvidiaCaps:
+                  - compute
+                  - compute
+                  - utility
     asserts:
       - failedTemplate:
           errorMessage: <nvidiaCaps> ([compute compute utility]) are must have unique values only
@@ -353,10 +418,15 @@ tests:
   - it: should fail with invalid nvidiaCaps value
     documentIndex: *deploymentDoc
     set:
-      nvidiaCaps:
-        - invalid
-        - compute
-        - utility
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                nvidiaCaps:
+                  - invalid
+                  - compute
+                  - utility
     asserts:
       - failedTemplate:
           errorMessage: Invalid options in <nvidiaCaps> (invalid). Valid options are compute, utility, all, graphics, video
@@ -366,9 +436,14 @@ tests:
     set:
       scaleGPU:
         gpu.intel.com/i915: "1"
-      nvidiaCaps:
-        - compute
-        - utility
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                nvidiaCaps:
+                  - compute
+                  - utility
     asserts:
       - equal:
           path: spec.template.spec.containers[0].env

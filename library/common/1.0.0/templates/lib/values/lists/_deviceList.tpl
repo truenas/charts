@@ -44,7 +44,7 @@
   {{- $root := .root -}}
   {{- $isJob := .isJob -}}
 
-  {{- if (mustHas $root.Values.controller.type (list "Job" "CronJob")) -}}
+  {{- if (mustHas $root.Values.controllers.main.type (list "Job" "CronJob")) -}}
     {{- $isJob = false -}}
   {{- end -}}
 

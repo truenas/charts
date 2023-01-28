@@ -1,15 +1,15 @@
 {{- define "ix.v1.common.spawner.jobAndCronJob" -}}
   {{- $jobs := dict -}}
 
-  {{- if mustHas .Values.controller.type (list "Job" "CronJob") -}}
+  {{- if mustHas .Values.controllers.main.type (list "Job" "CronJob") -}}
     {{- $jobValues := dict -}}
 
     {{/* Controller holds Job/CronJob Configuration */}}
-    {{- $jobValues = (mustDeepCopy $.Values.controller) -}}
+    {{- $jobValues = (mustDeepCopy $.Values.controllers.main) -}}
 
     {{/* If it's CronJob prepare the cron dict with enabled forced */}}
-    {{- if eq $.Values.controller.type "CronJob" -}}
-      {{- $_ := set $jobValues "cron" (mustDeepCopy $.Values.controller) -}}
+    {{- if eq $.Values.controllers.main.type "CronJob" -}}
+      {{- $_ := set $jobValues "cron" (mustDeepCopy $.Values.controllers.main) -}}
       {{- $_ := set $jobValues.cron "enabled" true -}}
     {{- end -}}
 
@@ -25,8 +25,8 @@
 
     {{/* Add labels/annotations if any. */}}
     {{- range $key := (list "labels" "annotations") -}}
-      {{- if hasKey $.Values.controller $key -}}
-        {{- $_ := set $jobValues $key (get $.Values.controller $key) -}}
+      {{- if hasKey $.Values.controllers.main $key -}}
+        {{- $_ := set $jobValues $key (get $.Values.controllers.main $key) -}}
       {{- end -}}
     {{- end -}}
 

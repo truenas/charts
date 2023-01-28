@@ -143,13 +143,18 @@ tests:
               port: 443
               protocol: UDP
               targetPort: 8000
-      probes:
-        liveness:
-          enabled: false
-        readiness:
-          enabled: false
-        startup:
-          enabled: false
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  liveness:
+                    enabled: false
+                  readiness:
+                    enabled: false
+                  startup:
+                    enabled: false
     asserts:
       - equal:
           path: spec.template.spec.containers[0].ports[0]

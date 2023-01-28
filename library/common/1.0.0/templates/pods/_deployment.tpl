@@ -8,26 +8,26 @@ apiVersion: {{ include "ix.v1.common.capabilities.deployment.apiVersion" $ }}
 kind: Deployment
 metadata:
   name: {{ include "ix.v1.common.names.fullname" . }}
-  {{- $labels := (mustMerge (default dict .Values.controller.labels) (include "ix.v1.common.labels" $ | fromYaml)) -}}
+  {{- $labels := (mustMerge (default dict .Values.controllers.main.labels) (include "ix.v1.common.labels" $ | fromYaml)) -}}
   {{- with (include "ix.v1.common.util.labels.render" (dict "root" $ "labels" $labels) | trim) }}
   labels:
     {{- . | nindent 4 }}
   {{- end }}
-  {{- $annotations := (mustMerge (default dict .Values.controller.annotations) (include "ix.v1.common.annotations" $ | fromYaml)) -}}
+  {{- $annotations := (mustMerge (default dict .Values.controllers.main.annotations) (include "ix.v1.common.annotations" $ | fromYaml)) -}}
   {{- with (include "ix.v1.common.util.annotations.render" (dict "root" $ "annotations" $annotations) | trim) }}
   annotations:
     {{- . | nindent 4 }}
   {{- end }}
 spec:
-  revisionHistoryLimit: {{ .Values.controller.revisionHistoryLimit }}
-  replicas: {{ .Values.controller.replicas }}
-  {{- $strategy := default "Recreate" .Values.controller.strategy -}}
+  revisionHistoryLimit: {{ .Values.controllers.main.revisionHistoryLimit }}
+  replicas: {{ .Values.controllers.main.replicas }}
+  {{- $strategy := default "Recreate" .Values.controllers.main.strategy -}}
   {{- if not (mustHas $strategy (list "Recreate" "RollingUpdate")) -}}
     {{- fail (printf "Not a valid strategy type for Deployment (%s)" $strategy) -}}
   {{- end }}
   strategy:
     type: {{ $strategy }}
-    {{- $rollingUpdate := .Values.controller.rollingUpdate -}}
+    {{- $rollingUpdate := .Values.controllers.main.rollingUpdate -}}
     {{- if and (eq $strategy "RollingUpdate") (or $rollingUpdate.surge $rollingUpdate.unavailable) }}
     rollingUpdate:
       {{- with $rollingUpdate.unavailable }}

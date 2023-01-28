@@ -42,8 +42,13 @@ tests:
 
   - it: should fail with wrong probe name
     set:
-      probes:
-        invalid_probe_name:
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  invalid_probe_name:
     asserts:
       - failedTemplate:
           errorMessage: Invalid probe name (invalid_probe_name) in (RELEASE-NAME-common-test) container. Valid options are (liveness, readiness, startup)
@@ -53,27 +58,42 @@ tests:
       service:
         main:
           enabled: false
-      probes:
-        liveness:
-          type: auto
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  liveness:
+                    type: auto
     asserts:
       - failedTemplate:
           errorMessage: <auto> probe type in probe (liveness) in (RELEASE-NAME-common-test) container, is only supported for the main container and only if there is at least 1 port enabled
 
   - it: should fail with probe type set to UDP
     set:
-      probes:
-        liveness:
-          type: udp
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  liveness:
+                    type: udp
     asserts:
       - failedTemplate:
           errorMessage: Invalid probe type (udp) on probe (liveness) in (RELEASE-NAME-common-test) container. Valid types are tcp, http, https, grpc, exec, auto
 
   - it: should fail with probe type auto and port protocol UDP
     set:
-      probes:
-        liveness:
-          type: auto
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  liveness:
+                    type: auto
       service:
         main:
           ports:
@@ -86,9 +106,14 @@ tests:
 
   - it: should fail without commands on exec probe
     set:
-      probes:
-        liveness:
-          type: exec
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  liveness:
+                    type: exec
     asserts:
       - failedTemplate:
           errorMessage: No commands were defined for <exec> type on probe (liveness) in (RELEASE-NAME-common-test) container.
@@ -101,10 +126,15 @@ tests:
           ports:
             main:
               enabled: false
-      probes:
-        liveness:
-          path: "/"
-          type: http
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  liveness:
+                    path: "/"
+                    type: http
     asserts:
       - failedTemplate:
           errorMessage: <port> must be defined for <http>/<https> probe types in probe (liveness) in (RELEASE-NAME-common-test) container.
@@ -117,11 +147,16 @@ tests:
           ports:
             main:
               enabled: false
-      probes:
-        liveness:
-          path: "/"
-          type: https
-          port:
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  liveness:
+                    path: "/"
+                    type: https
+                    port:
     asserts:
       - failedTemplate:
           errorMessage: <port> must be defined for <http>/<https> probe types in probe (liveness) in (RELEASE-NAME-common-test) container.
@@ -134,95 +169,140 @@ tests:
           ports:
             main:
               enabled: false
-      probes:
-        liveness:
-          path: "/"
-          type: http
-          port:
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  liveness:
+                    path: "/"
+                    type: http
+                    port:
     asserts:
       - failedTemplate:
           errorMessage: <port> must be defined for <http>/<https> probe types in probe (liveness) in (RELEASE-NAME-common-test) container.
 
   - it: should fail without initialDelaySeconds on non-custom probes
     set:
-      probes:
-        liveness:
-          spec:
-            initialDelaySeconds:
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  liveness:
+                    spec:
+                      initialDelaySeconds:
     asserts:
       - failedTemplate:
           errorMessage: <initialDelaySeconds> cannot be empty in probe (liveness) in (RELEASE-NAME-common-test) container
 
   - it: should fail without failureThreshold on non-custom probes
     set:
-      probes:
-        liveness:
-          spec:
-            failureThreshold:
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  liveness:
+                    spec:
+                      failureThreshold:
     asserts:
       - failedTemplate:
           errorMessage: <failureThreshold> cannot be empty in probe (liveness) in (RELEASE-NAME-common-test) container
 
   - it: should fail without timeoutSeconds on non-custom probes
     set:
-      probes:
-        liveness:
-          spec:
-            timeoutSeconds:
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  liveness:
+                    spec:
+                      timeoutSeconds:
     asserts:
       - failedTemplate:
           errorMessage: <timeoutSeconds> cannot be empty in probe (liveness) in (RELEASE-NAME-common-test) container
 
   - it: should fail without periodSeconds on non-custom probes
     set:
-      probes:
-        liveness:
-          spec:
-            periodSeconds:
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  liveness:
+                    spec:
+                      periodSeconds:
     asserts:
       - failedTemplate:
           errorMessage: <periodSeconds> cannot be empty in probe (liveness) in (RELEASE-NAME-common-test) container
 
   - it: should fail with invalid probe type
     set:
-      probes:
-        liveness:
-          type: not_valid_type
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  liveness:
+                    type: not_valid_type
     asserts:
       - failedTemplate:
           errorMessage: Invalid probe type (not_valid_type) on probe (liveness) in (RELEASE-NAME-common-test) container. Valid types are tcp, http, https, grpc, exec, auto
 
   - it: should fail with probe path not starting with /
     set:
-      probes:
-        liveness:
-          type: http
-          path: a/random/path
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  liveness:
+                    type: http
+                    path: a/random/path
     asserts:
       - failedTemplate:
           errorMessage: Probe in container (RELEASE-NAME-common-test) with path (a/random/path), must start with a forward slash -> / <-
 
   - it: should fail with httpHeader value is defined as list
     set:
-      probes:
-        liveness:
-          type: http
-          httpHeaders:
-            some_header:
-              - list_value
-              - list_value2
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  liveness:
+                    type: http
+                    httpHeaders:
+                      some_header:
+                        - list_value
+                        - list_value2
     asserts:
       - failedTemplate:
           errorMessage: Lists or Dicts are not allowed in httpHeaders on probe (liveness)
 
   - it: should fail with httpHeader value is defined as dict
     set:
-      probes:
-        liveness:
-          type: http
-          httpHeaders:
-            some_header:
-              some_key:
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  liveness:
+                    type: http
+                    httpHeaders:
+                      some_header:
+                        some_key:
     asserts:
       - failedTemplate:
           errorMessage: Lists or Dicts are not allowed in httpHeaders on probe (liveness)
@@ -230,10 +310,15 @@ tests:
   - it: should fail without spec in custom defined probe
     documentIndex: *deploymentDoc
     set:
-      probes:
-        liveness:
-          type: custom
-          spec: {}
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  liveness:
+                    type: custom
+                    spec: {}
     asserts:
       - failedTemplate:
           errorMessage: <spec> must be defined for <custom> probe types in probe (liveness) in (RELEASE-NAME-common-test) container.
@@ -241,18 +326,23 @@ tests:
   - it: should pass with with custom defined liveness probe
     documentIndex: *deploymentDoc
     set:
-      probes:
-        liveness:
-          type: custom
-          spec:
-            httpGet:
-              path: /path
-              scheme: HTTPS
-              port: 1234
-            initialDelaySeconds: 15
-            failureThreshold: 10
-            timeoutSeconds: 10
-            periodSeconds: 15
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  liveness:
+                    type: custom
+                    spec:
+                      httpGet:
+                        path: /path
+                        scheme: HTTPS
+                        port: 1234
+                      initialDelaySeconds: 15
+                      failureThreshold: 10
+                      timeoutSeconds: 10
+                      periodSeconds: 15
     asserts:
       - equal:
           path: spec.template.spec.containers[0].livenessProbe
@@ -269,18 +359,23 @@ tests:
   - it: should pass with with custom defined readiness probe
     documentIndex: *deploymentDoc
     set:
-      probes:
-        readiness:
-          type: custom
-          spec:
-            httpGet:
-              path: /path
-              scheme: HTTPS
-              port: 1234
-            initialDelaySeconds: 15
-            failureThreshold: 10
-            timeoutSeconds: 10
-            periodSeconds: 15
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  readiness:
+                    type: custom
+                    spec:
+                      httpGet:
+                        path: /path
+                        scheme: HTTPS
+                        port: 1234
+                      initialDelaySeconds: 15
+                      failureThreshold: 10
+                      timeoutSeconds: 10
+                      periodSeconds: 15
     asserts:
       - equal:
           path: spec.template.spec.containers[0].readinessProbe
@@ -297,18 +392,23 @@ tests:
   - it: should pass with with custom defined startup probe
     documentIndex: *deploymentDoc
     set:
-      probes:
-        startup:
-          type: custom
-          spec:
-            httpGet:
-              path: /path
-              scheme: HTTPS
-              port: 1234
-            initialDelaySeconds: 15
-            failureThreshold: 10
-            timeoutSeconds: 10
-            periodSeconds: 15
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  startup:
+                    type: custom
+                    spec:
+                      httpGet:
+                        path: /path
+                        scheme: HTTPS
+                        port: 1234
+                      initialDelaySeconds: 15
+                      failureThreshold: 10
+                      timeoutSeconds: 10
+                      periodSeconds: 15
     asserts:
       - equal:
           path: spec.template.spec.containers[0].startupProbe
@@ -346,9 +446,14 @@ tests:
   - it: should pass with with probe type TCP and service TCP
     documentIndex: *deploymentDoc
     set:
-      probes:
-        liveness:
-          type: tcp
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  liveness:
+                    type: tcp
     asserts:
       - equal:
           path: spec.template.spec.containers[0].livenessProbe
@@ -368,11 +473,16 @@ tests:
           ports:
             main:
               enabled: false
-      probes:
-        liveness:
-          path: "/"
-          type: tcp
-          port: ""
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  liveness:
+                    path: "/"
+                    type: tcp
+                    port: ""
     asserts:
       - failedTemplate:
           errorMessage: <port> must be defined for <tcp> probe types in probe (liveness) in (RELEASE-NAME-common-test) container.
@@ -385,9 +495,14 @@ tests:
           ports:
             main:
               protocol: HTTP
-      probes:
-        liveness:
-          path: /some_path
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  liveness:
+                    path: /some_path
     asserts:
       - equal:
           path: spec.template.spec.containers[0].livenessProbe
@@ -409,9 +524,14 @@ tests:
           ports:
             main:
               protocol: HTTP
-      probes:
-        liveness:
-          port: 1234
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  liveness:
+                    port: 1234
     asserts:
       - equal:
           path: spec.template.spec.containers[0].livenessProbe
@@ -433,10 +553,15 @@ tests:
           ports:
             main:
               protocol: HTTP
-      probes:
-        liveness:
-          httpHeaders:
-            some_header: 1234
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  liveness:
+                    httpHeaders:
+                      some_header: 1234
     asserts:
       - equal:
           path: spec.template.spec.containers[0].livenessProbe
@@ -457,11 +582,16 @@ tests:
     documentIndex: *deploymentDoc
     set:
       some_header_value: 1234
-      probes:
-        liveness:
-          type: http
-          httpHeaders:
-            some_header: "{{ .Values.some_header_value }}"
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  liveness:
+                    type: http
+                    httpHeaders:
+                      some_header: "{{ .Values.some_header_value }}"
     asserts:
       - equal:
           path: spec.template.spec.containers[0].livenessProbe
@@ -483,12 +613,17 @@ tests:
     set:
       some_header_value: 1234
       some_header_value2: some_value
-      probes:
-        liveness:
-          type: http
-          httpHeaders:
-            some_header: "{{ .Values.some_header_value }}"
-            some_header2: "{{ .Values.some_header_value2 }}"
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  liveness:
+                    type: http
+                    httpHeaders:
+                      some_header: "{{ .Values.some_header_value }}"
+                      some_header2: "{{ .Values.some_header_value2 }}"
     asserts:
       - equal:
           path: spec.template.spec.containers[0].livenessProbe
@@ -511,10 +646,15 @@ tests:
     documentIndex: *deploymentDoc
     set:
       some_path: /ping
-      probes:
-        liveness:
-          type: http
-          path: "{{ .Values.some_path }}"
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  liveness:
+                    type: http
+                    path: "{{ .Values.some_path }}"
     asserts:
       - equal:
           path: spec.template.spec.containers[0].livenessProbe
@@ -532,10 +672,15 @@ tests:
     documentIndex: *deploymentDoc
     set:
       some_port: 1234
-      probes:
-        liveness:
-          type: http
-          port: "{{ .Values.some_port }}"
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  liveness:
+                    type: http
+                    port: "{{ .Values.some_port }}"
     asserts:
       - equal:
           path: spec.template.spec.containers[0].livenessProbe
@@ -553,10 +698,15 @@ tests:
     documentIndex: *deploymentDoc
     set:
       some_port: 1234
-      probes:
-        liveness:
-          type: tcp
-          port: "{{ .Values.some_port }}"
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  liveness:
+                    type: tcp
+                    port: "{{ .Values.some_port }}"
     asserts:
       - equal:
           path: spec.template.spec.containers[0].livenessProbe
@@ -571,14 +721,19 @@ tests:
   - it: should pass with with changed times
     documentIndex: *deploymentDoc
     set:
-      probes:
-        liveness:
-          type: tcp
-          spec:
-            initialDelaySeconds: 15
-            failureThreshold: 10
-            timeoutSeconds: 10
-            periodSeconds: 15
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  liveness:
+                    type: tcp
+                    spec:
+                      initialDelaySeconds: 15
+                      failureThreshold: 10
+                      timeoutSeconds: 10
+                      periodSeconds: 15
     asserts:
       - equal:
           path: spec.template.spec.containers[0].livenessProbe
@@ -593,9 +748,14 @@ tests:
   - it: should pass with with probe type GRPC
     documentIndex: *deploymentDoc
     set:
-      probes:
-        liveness:
-          type: grpc
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  liveness:
+                    type: grpc
     asserts:
       - equal:
           path: spec.template.spec.containers[0].livenessProbe
@@ -615,11 +775,16 @@ tests:
           ports:
             main:
               enabled: false
-      probes:
-        liveness:
-          path: "/"
-          type: grpc
-          port: ""
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  liveness:
+                    path: "/"
+                    type: grpc
+                    port: ""
     asserts:
       - failedTemplate:
           errorMessage: <port> must be defined for <grpc> probe types in probe (liveness) in (RELEASE-NAME-common-test) container.
@@ -627,14 +792,19 @@ tests:
   - it: should pass with with probe type exec with multiline command
     documentIndex: *deploymentDoc
     set:
-      probes:
-        liveness:
-          type: exec
-          command:
-            - /bin/bash
-            - -c
-            - |
-              echo "probe!"
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  liveness:
+                    type: exec
+                    command:
+                      - /bin/bash
+                      - -c
+                      - |
+                        echo "probe!"
     asserts:
       - equal:
           path: spec.template.spec.containers[0].livenessProbe
@@ -654,14 +824,19 @@ tests:
     documentIndex: *deploymentDoc
     set:
       some_msg: probe!
-      probes:
-        liveness:
-          type: exec
-          command:
-            - /bin/bash
-            - -c
-            - |
-              echo "{{ .Values.some_msg }}"
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  liveness:
+                    type: exec
+                    command:
+                      - /bin/bash
+                      - -c
+                      - |
+                        echo "{{ .Values.some_msg }}"
     asserts:
       - equal:
           path: spec.template.spec.containers[0].livenessProbe
@@ -680,10 +855,15 @@ tests:
   - it: should pass with with probe type exec single command
     documentIndex: *deploymentDoc
     set:
-      probes:
-        liveness:
-          type: exec
-          command: env
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  liveness:
+                    type: exec
+                    command: env
     asserts:
       - equal:
           path: spec.template.spec.containers[0].livenessProbe
@@ -700,10 +880,15 @@ tests:
     documentIndex: *deploymentDoc
     set:
       some_command: env
-      probes:
-        liveness:
-          type: exec
-          command: "{{ .Values.some_command }}"
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  liveness:
+                    type: exec
+                    command: "{{ .Values.some_command }}"
     asserts:
       - equal:
           path: spec.template.spec.containers[0].livenessProbe
@@ -719,15 +904,20 @@ tests:
   - it: should pass with with probe type exec single command and custom timings
     documentIndex: *deploymentDoc
     set:
-      probes:
-        liveness:
-          type: exec
-          command: env
-          spec:
-            initialDelaySeconds: 15
-            failureThreshold: 10
-            timeoutSeconds: 10
-            periodSeconds: 15
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                probes:
+                  liveness:
+                    type: exec
+                    command: env
+                    spec:
+                      initialDelaySeconds: 15
+                      failureThreshold: 10
+                      timeoutSeconds: 10
+                      periodSeconds: 15
     asserts:
       - equal:
           path: spec.template.spec.containers[0].livenessProbe

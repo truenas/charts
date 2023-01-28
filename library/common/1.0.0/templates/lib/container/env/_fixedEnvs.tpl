@@ -29,7 +29,7 @@
     {{- end -}}
   {{- end -}}
 
-  {{- $podSecCont := $root.Values.podSecurityContext -}}
+  {{- $podSecCont := $root.Values.controllers.main.pod.securityContext -}}
 
   {{/* Calculate all security values */}}
   {{- $securityContext := (include "ix.v1.common.lib.securityContext" (dict "root" $root

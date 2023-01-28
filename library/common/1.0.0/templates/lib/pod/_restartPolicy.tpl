@@ -16,7 +16,7 @@
     {{- fail (printf "Invalid <restartPolicy> (%s). Valid options are Always, Never, OnFailure" $policy) -}}
   {{- end -}}
 
-  {{- if and (not $isJob) (mustHas $root.Values.controller.type (list "Deployment" "ReplicaSet" "DaemonSet" "StatefulSet")) -}}
+  {{- if and (not $isJob) (mustHas $root.Values.controllers.main.type (list "Deployment" "ReplicaSet" "DaemonSet" "StatefulSet")) -}}
     {{- if and (ne $policy "Always") -}}
       {{- fail (printf "Invalid <restartPolicy (%s). Valid option for Deployment, StatefulSet, DaemonSet and ReplicaSet is Always" $policy) -}}
     {{- end -}}

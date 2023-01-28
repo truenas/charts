@@ -4,7 +4,7 @@
   {{- $job := .job -}}
 
   {{- $default := $root.Values.globalDefaults.job -}}
-  {{- $controllerType := $root.Values.controller.type -}}
+  {{- $controllerType := $root.Values.controllers.main.type -}}
 
   {{- include "ix.v1.common.validate.job" (dict "root" $root "job" $job) -}}
 

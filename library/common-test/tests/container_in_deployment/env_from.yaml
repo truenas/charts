@@ -12,45 +12,70 @@ tests:
 
   - it: should fail with envFrom configMapRef has empty name
     set:
-      envFrom:
-        - configMapRef:
-            name: ""
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                envFrom:
+                  - configMapRef:
+                      name: ""
     asserts:
       - failedTemplate:
           errorMessage: Name is required for configMapRef in envFrom.
 
   - it: should fail with envFrom secretRef has empty name
     set:
-      envFrom:
-        - secretRef:
-            name: ""
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                envFrom:
+                  - secretRef:
+                      name: ""
     asserts:
       - failedTemplate:
           errorMessage: Name is required for secretRef in envFrom.
 
   - it: should fail with envFrom secretRef has missing name
     set:
-      envFrom:
-        - secretRef:
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                envFrom:
+                  - secretRef:
     asserts:
       - failedTemplate:
           errorMessage: Not valid Ref or <name> key is missing in envFrom.
 
   - it: should fail with envFrom configMapRef has missing name
     set:
-      envFrom:
-        - configMapRef:
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                envFrom:
+                  - configMapRef:
     asserts:
       - failedTemplate:
           errorMessage: Not valid Ref or <name> key is missing in envFrom.
 
   - it: should fail with envFrom configMapRef and secretRef on the same item
     set:
-      envFrom:
-        - configMapRef:
-            name: something
-          secretRef:
-            name: something
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                envFrom:
+                  - configMapRef:
+                      name: something
+                    secretRef:
+                      name: something
     asserts:
       - failedTemplate:
           errorMessage: You can't define both secretRef and configMapRef on the same item.
@@ -58,9 +83,14 @@ tests:
   - it: should pass with envFrom configMapRef entry added
     documentIndex: *deploymentDoc
     set:
-      envFrom:
-        - configMapRef:
-            name: some_name
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                envFrom:
+                  - configMapRef:
+                      name: some_name
     asserts:
       - equal:
           path: spec.template.spec.containers[0].envFrom
@@ -73,11 +103,16 @@ tests:
     set:
       some_name: a_name
       some_name2: a_name2
-      envFrom:
-        - configMapRef:
-            name: "{{ .Values.some_name }}"
-        - configMapRef:
-            name: "{{ .Values.some_name2 }}"
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                envFrom:
+                  - configMapRef:
+                      name: "{{ .Values.some_name }}"
+                  - configMapRef:
+                      name: "{{ .Values.some_name2 }}"
     asserts:
       - equal:
           path: spec.template.spec.containers[0].envFrom
@@ -90,9 +125,14 @@ tests:
   - it: should pass with envFrom secretRef entry added
     documentIndex: *deploymentDoc
     set:
-      envFrom:
-        - secretRef:
-            name: some_name
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                envFrom:
+                  - secretRef:
+                      name: some_name
     asserts:
       - equal:
           path: spec.template.spec.containers[0].envFrom
@@ -105,11 +145,16 @@ tests:
     set:
       some_name: a_name
       some_name2: a_name2
-      envFrom:
-        - secretRef:
-            name: "{{ .Values.some_name }}"
-        - secretRef:
-            name: "{{ .Values.some_name2 }}"
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                envFrom:
+                  - secretRef:
+                      name: "{{ .Values.some_name }}"
+                  - secretRef:
+                      name: "{{ .Values.some_name2 }}"
     asserts:
       - equal:
           path: spec.template.spec.containers[0].envFrom
@@ -124,11 +169,16 @@ tests:
     set:
       some_name: a_name
       some_name2: a_name2
-      envFrom:
-        - secretRef:
-            name: "{{ .Values.some_name }}"
-        - configMapRef:
-            name: "{{ .Values.some_name2 }}"
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                envFrom:
+                  - secretRef:
+                      name: "{{ .Values.some_name }}"
+                  - configMapRef:
+                      name: "{{ .Values.some_name2 }}"
     asserts:
       - equal:
           path: spec.template.spec.containers[0].envFrom

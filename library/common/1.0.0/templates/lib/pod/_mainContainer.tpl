@@ -40,14 +40,21 @@ So it can work on multiple places, like additional containers and not only the m
   {{- with (include "ix.v1.common.container.termination.messagePolicy" (dict "msgPolicy" $values.termination.messagePolicy "root" $root)) | trim }}
   terminationMessagePolicy: {{ . }}
   {{- end -}}
+  {{- $secEnvs := dict -}}
+  {{- if hasKey $values "PUID" -}}
+    {{- $_ := set $secEnvs "PUID" $values.PUID -}}
+  {{- end -}}
+  {{- if hasKey $values "UMASK" -}}
+    {{- $_ := set $secEnvs "UMASK" $values.UMASK -}}
+  {{- end -}}
   {{- with (include "ix.v1.common.container.envVars"  (dict "envs" $values.env
                                                             "envList" $values.envList
                                                             "containerName" $name
                                                             "isMainContainer" true
-                                                            "scaleGPU" $values.scaleGPU
+                                                            "scaleGPU" $root.Values.scaleGPU
                                                             "nvidiaCaps" $values.nvidiaCaps
                                                             "secCont" $values.securityContext
-                                                            "secEnvs" (dict "PUID" $values.PUID "UMASK" $values.UMASK)
+                                                            "secEnvs" $secEnvs
                                                             "injectFixedEnvs" $values.injectFixedEnvs
                                                             "root" $root) | trim) }}
   env:
@@ -57,7 +64,7 @@ So it can work on multiple places, like additional containers and not only the m
   envFrom:
     {{- . | nindent 4 }}
   {{- end -}}
-  {{- with (include "ix.v1.common.container.ports" (dict "services" $values.service "root" $root) | trim) }}
+  {{- with (include "ix.v1.common.container.ports" (dict "services" $root.Values.service "root" $root) | trim) }}
   ports:
     {{- . | nindent 4 }}
   {{- end -}}
@@ -67,14 +74,14 @@ So it can work on multiple places, like additional containers and not only the m
     {{- . | nindent 4 }}
   {{- end -}}
   {{- with (include "ix.v1.common.container.probes" (dict "probes" $values.probes
-                                                          "services" $values.service
+                                                          "services" $root.Values.service
                                                           "containerName" $name
                                                           "isMainContainer" true
                                                           "root" $root) | trim) }}
     {{- . | nindent 2 }}
   {{- end -}}
   {{- with (include "ix.v1.common.container.resources"  (dict "resources" $values.resources
-                                                              "gpu" $values.scaleGPU
+                                                              "gpu" $root.Values.scaleGPU
                                                               "isMainContainer" true
                                                               "root" $root) | trim) }}
   resources:

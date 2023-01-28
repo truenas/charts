@@ -27,8 +27,6 @@ globalDefaults:
   portProtocol: TCP
   # Define the minimum NodePort
   minimumNodePort: 9000
-  # If not defined on the pod, assume this
-  dnsPolicy: ClusterFirst
   # If no service Type is defined, assume this
   serviceType: ClusterIP
   # If no PVC Size is defined, assume this
@@ -120,15 +118,8 @@ globalDefaults:
       successfulJobsHistoryLimit: 3
     backoffLimit: 6
     completionMode: NonIndexed
-
-
-# Defines the timezone for the container
-TZ: UTC
-# Default PUID
-PUID: 568
-# Default UMASK
-UMASK: "002"
-
+  # If not defined on the pod, assume this
+  dnsPolicy: ClusterFirst
 
 # Defines image info
 image:
@@ -136,68 +127,146 @@ image:
   tag: tag
   pullPolicy: IfNotPresent
 
-# Defines the image that will be used
-imageSelector: ""
+controllers:
+  # Defines the controller
+  main:
+    # -- Enable the controller.
+    enabled: true
+    # -- Set the controller as primary.
+    primary: true
+    # Valid options are: Deployment | DaemonSet | StatefulSet | CronJob | Job
+    type: Deployment
+    # -- Set labels on the Deployment/StatefulSet/DaemonSet/CronJob/Job. Helm templates can be used.
+    labels: {}
+    # -- Set  annotations on the Deployment/StatefulSet/DaemonSet. Helm templates can be used.
+    annotations: {}
+    # -- Revision history limit
+    revisionHistoryLimit: 3
+    # -- Number of desired pods
+    replicas: 1
+    # For Deployments, valid values are Recreate (default) and RollingUpdate.
+    # For StatefulSets, valid values are OnDelete and RollingUpdate (default).
+    # DaemonSets ignore this.
+    strategy: ""
+    # -- Set rollingUpdate strategies
+    rollingUpdate:
+      # -- Set Deployment RollingUpdate max unavailable
+      unavailable:
+      # -- Set Deployment RollingUpdate max surge
+      surge:
+      # -- Set StatefulSet RollingUpdate partition
+      partition:
+    pod:
+      labels: {}
+      annotations: {}
+      # Overrides the name of the workload
+      nameOverride: ""
+      # Overrides the fullname of the workload
+      fullnameOverride: ""
+      # Defines the scheduler
+      schedulerName: ""
+      # Defines the nodeSelector(s)
+      nodeSelector: {}
+      # Defines the runtimeClassName
+      runtimeClassName: ""
+      # Defines the priorityClassName
+      priorityClassName: ""
+      # Define the default hostname of the Deployment/StatefulSet/DaemonSet/etc
+      hostname: ""
+      # Adds hosts to /etc/hosts
+      hostAliases: []
+      # Binds to host network
+      hostNetwork: false
+      # Disables services links
+      enableServiceLinks: false
+      # Tolerations
+      tolerations: []
+      # Defines termination strategy
+      terminationGracePeriodSeconds: 10
+      # Default podSecurityContext for main pod
+      securityContext:
+        fsGroup: 568
+        supplementalGroups: []
+        fsGroupChangePolicy: OnRootMismatch
+      # Defines the DNS Config
+      dnsConfig: {}
+      # Defines the DNS Policy
+      dnsPolicy: ""
+      containers:
+        main:
+          enabled: true
+          primary: true
+          # Defines the image that will be used
+          imageSelector: ""
+          # -- [command-args](docs/common/values/command-args.md)
+          # Overrides the default entrypoint
+          command: []
+          # Overrides the default args
+          args: []
+          # Appends to args
+          extraArgs: []
+          termination:
+            messagePath: ""
+            messagePolicy: ""
+          # -- [environment-variables](docs/common/values/environment-variables.md)
+          # Defines environment variables
+          env: {}
+          # SCALE / GUI Focused
+          envList: []
+          # Defines the environment variables from a secret or configmap
+          envFrom: []
+          # Nvidia Caps will be assigned via environment variable
+          # If empty, global defaults will be used
+          nvidiaCaps: []
+          stdin: false
+          tty: false
+          # Defines lifecycle hooks
+          lifecycle: {}
+          # Defines the probes
+          probes:
+            liveness:
+              enabled: true
+            readiness:
+              enabled: true
+            startup:
+              enabled: true
+          # Default securityContext for main container
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 568
+            runAsGroup: 568
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            privileged: false
+            capabilities:
+              add: []
+              drop:
+                - ALL
+          # Default resources for main container
+          resources:
+            limits:
+              cpu: 4000m
+              memory: 8Gi
+            requests:
+              cpu: 10m
+              memory: 50Mi
+
+# Values that will be exposed to UI
+# Defines the timezone for the container
+TZ: UTC
+# Default PUID
+PUID: 568
+# Default UMASK
+UMASK: "002"
 
 # Defines the imagePullSecrets
 imagePullCredentials: []
-
-# -- [command-args](docs/common/values/command-args.md)
-# Overrides the default entrypoint
-command: []
-# Overrides the default args
-args: []
-# Appends to args
-extraArgs: []
-
-# -- [environment-variables](docs/common/values/environment-variables.md)
-# Defines environment variables
-env: {}
-# SCALE / GUI Focused
-envList: []
-# Defines the environment variables from a secret or configmap
-envFrom: []
-
-# Nvidia Caps will be assigned via environment variable
-# If empty, global defaults will be used
-nvidiaCaps: []
 
 # -- [configmap](docs/common/values/configmap.md)
 configmap: {}
 
 # -- [secret](docs/common/values/secret.md)
 secret: {}
-
-# Define the default hostname of the Deployment/StatefulSet/DaemonSet/etc
-hostname: ""
-
-# Overrides the name of the workload
-nameOverride: ""
-
-# Overrides the fullname of the workload
-fullnameOverride: ""
-
-stdin: false
-
-tty: false
-
-# Adds hosts to /etc/hosts
-hostAliases: []
-
-# Binds to host network
-hostNetwork: false
-
-# Disables services links
-enableServiceLinks: false
-
-# Defines the DNS Policy
-dnsPolicy: ""
-
-# Defines the DNS Config
-dnsConfig: {}
-
-# Tolerations
-tolerations: []
 
 # Creates a service account
 serviceAccount:
@@ -214,37 +283,14 @@ rbac:
     primary: true
     clusterWide: false
 
-# Defines lifecycle hooks
-lifecycle: {}
-
 # Used for SCALE / GUI Focused
 scaleGPU: {}
-
-# Adds annotations to the pod
-podAnnotations: {}
-
-# Adds annotations to the service
-addAnnotations:
-  traefik: false
-  metallb: false
-
-# Adds labels to the pod
-podLabels: {}
 
 # Used for SCALE
 scaleCerts: {}
 
 # Used for SCALE / GUI Focused
 scaleCertsList: []
-
-# Defines the probes
-probes:
-  liveness:
-    enabled: true
-  readiness:
-    enabled: true
-  startup:
-    enabled: true
 
 portal:
   enabled: true
@@ -256,81 +302,6 @@ externalInterfaces: []
 ixExternalInterfacesConfiguration: []
 # Injected from middleware
 ixExternalInterfacesConfigurationNames: []
-
-# Defines termination strategy
-terminationGracePeriodSeconds: 10
-termination:
-  messagePath: ""
-  messagePolicy: ""
-
-# Defines the scheduler
-schedulerName: ""
-
-# Defines the nodeSelector(s)
-nodeSelector: {}
-
-# Defines the runtimeClassName
-runtimeClassName: ""
-
-# Defines the priorityClassName
-priorityClassName: ""
-
-# Defines the controller
-controller:
-  # -- Enable the controller.
-  enabled: true
-  # -- Set the controller type.
-  # Valid options are: Deployment | DaemonSet | StatefulSet | CronJob | Job
-  type: Deployment
-  # -- Set labels on the Deployment/StatefulSet/DaemonSet/CronJob/Job. Helm templates can be used.
-  labels: {}
-  # -- Set  annotations on the Deployment/StatefulSet/DaemonSet. Helm templates can be used.
-  annotations: {}
-  # -- Revision history limit
-  revisionHistoryLimit: 3
-  # -- Number of desired pods
-  replicas: 1
-  # -- Set the controller upgrade strategy
-  # For Deployments, valid values are Recreate (default) and RollingUpdate.
-  # For StatefulSets, valid values are OnDelete and RollingUpdate (default).
-  # DaemonSets ignore this.
-  strategy: ""
-  # -- Set rollingUpdate strategies
-  rollingUpdate:
-    # -- Set Deployment RollingUpdate max unavailable
-    unavailable:
-    # -- Set Deployment RollingUpdate max surge
-    surge:
-    # -- Set StatefulSet RollingUpdate partition
-    partition:
-
-# -- Bellow values are needed (in addition to the default global)
-# as those are being referenced on other places in values.yaml sometimes
-# Default podSecurityContext for main pod
-podSecurityContext:
-  fsGroup: 568
-  supplementalGroups: []
-  fsGroupChangePolicy: OnRootMismatch
-# Default securityContext for main container
-securityContext:
-  runAsNonRoot: true
-  runAsUser: 568
-  runAsGroup: 568
-  readOnlyRootFilesystem: true
-  allowPrivilegeEscalation: false
-  privileged: false
-  capabilities:
-    add: []
-    drop:
-      - ALL
-# Default resources for main container
-resources:
-  limits:
-    cpu: 4000m
-    memory: 8Gi
-  requests:
-    cpu: 10m
-    memory: 50Mi
 
 # TODO: Discuss if we are going to add defaults like:
   # - /dev/shm
@@ -370,6 +341,7 @@ ixCertificates: []
 # Injected from middleware
 ixVolumes: []
 
+deviceList: []
 # -- Configure the services for the chart here.
 # Additional services can be added by adding a dictionary key similar to the 'main' service.
 # @default -- See below

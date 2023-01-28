@@ -53,14 +53,21 @@
   args:
     {{- . | nindent 4 }}
   {{- end -}}
+  {{- $secEnvs := dict -}}
+  {{- if hasKey $container "PUID" -}}
+    {{- $_ := set $secEnvs "PUID" $container.PUID -}}
+  {{- end -}}
+  {{- if hasKey $container "UMASK" -}}
+    {{- $_ := set $secEnvs "UMASK" $container.UMASK -}}
+  {{- end -}}
   {{- with (include "ix.v1.common.container.envVars"  (dict "envs" $container.env
                                                             "envList" $container.envList
                                                             "containerName" $name
                                                             "isMainContainer" false
-                                                            "scaleGPU" $container.scaleGPU
+                                                            "scaleGPU" $root.Values.scaleGPU
                                                             "nvidiaCaps" $container.nvidiaCaps
                                                             "secCont" $container.securityContext
-                                                            "secEnvs" (dict "PUID" $container.PUID "UMASK" $container.UMASK)
+                                                            "secEnvs" $secEnvs
                                                             "injectFixedEnvs" $container.injectFixedEnvs
                                                             "root" $root) | trim) }}
   env:

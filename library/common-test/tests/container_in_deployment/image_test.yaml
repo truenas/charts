@@ -66,7 +66,12 @@ tests:
         repository: some_repo
         tag: some_tag
         pullPolicy: invalid_policy
-      imageSelector: imageY
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                imageSelector: imageY
     asserts:
       - failedTemplate:
           errorMessage: Selected image (imageY) does not exist in values
@@ -77,7 +82,12 @@ tests:
       betaImage:
         repository: some_other_repo
         tag: some_other_tag
-      imageSelector: betaImage
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                imageSelector: betaImage
     asserts:
       - equal:
           path: spec.template.spec.containers[0].image
@@ -90,7 +100,12 @@ tests:
         repository: some_other_repo
         tag: some_other_tag
         pullPolicy: Never
-      imageSelector: betaImage
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                imageSelector: betaImage
     asserts:
       - equal:
           path: spec.template.spec.containers[0].image
@@ -104,7 +119,12 @@ tests:
       betaImage:
         repository: ""
         tag: some_other_tag
-      imageSelector: betaImage
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                imageSelector: betaImage
     asserts:
       - failedTemplate:
           errorMessage: Image <repository> is required
@@ -114,7 +134,12 @@ tests:
       betaImage:
         repository: some_other_repo
         tag: ""
-      imageSelector: betaImage
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                imageSelector: betaImage
     asserts:
       - failedTemplate:
           errorMessage: Image <tag> is required

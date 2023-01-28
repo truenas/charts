@@ -3,44 +3,44 @@
 {{- $root := . }}
 {{- $values := fromYaml (tpl ($.Values | toYaml) $) }}
 serviceAccountName: {{ (include "ix.v1.common.names.serviceAccountName" $root) }}
-hostNetwork: {{ $values.hostNetwork }}
-enableServiceLinks: {{ $values.enableServiceLinks }}
+hostNetwork: {{ $values.controllers.main.pod.hostNetwork }}
+enableServiceLinks: {{ $values.controllers.main.pod.enableServiceLinks }}
 {{- with (include "ix.v1.common.restartPolicy" (dict "restartPolicy" $values.restartPolicy "root" $root) | trim) }}
 restartPolicy: {{ . }}
 {{- end -}}
 
-{{- with $values.schedulerName }}
+{{- with $values.controllers.main.pod.schedulerName }}
 schedulerName: {{ . }}
 {{- end -}}
 
-{{- with $values.priorityClassName }}
+{{- with $values.controllers.main.pod.priorityClassName }}
 priorityClassName: {{ . }}
 {{- end }}
 
-{{- with $values.hostname }}
+{{- with $values.controllers.main.pod.hostname }}
 hostname: {{ . }}
 {{- end -}}
 
-{{- with (include "ix.v1.common.dnsPolicy" (dict "dnsPolicy" $values.dnsPolicy "hostNetwork" $values.hostNetwork "root" $root) | trim ) }}
+{{- with (include "ix.v1.common.dnsPolicy" (dict "dnsPolicy" $values.controllers.main.pod.dnsPolicy "hostNetwork" $values.controllers.main.pod.hostNetwork "root" $root) | trim ) }}
 dnsPolicy: {{ . }}
 {{- end -}}
 
-{{- with (include "ix.v1.common.dnsConfig" (dict "dnsPolicy" $values.dnsPolicy "dnsConfig" $values.dnsConfig "root" $root) | trim ) }}
+{{- with (include "ix.v1.common.dnsConfig" (dict "dnsPolicy" $values.controllers.main.pod.dnsPolicy "dnsConfig" $values.controllers.main.pod.dnsConfig "root" $root) | trim ) }}
 dnsConfig:
   {{- . | nindent 2 }}
 {{- end -}}
 
-{{- with (include "ix.v1.common.hostAliases" (dict "hostAliases" $values.hostAliases "root" $root) | trim) }}
+{{- with (include "ix.v1.common.hostAliases" (dict "hostAliases" $values.controllers.main.pod.hostAliases "root" $root) | trim) }}
 hostAliases:
   {{- . | nindent 2 }}
 {{- end -}}
 
-{{- with (include "ix.v1.common.nodeSelector" (dict "nodeSelector" $values.nodeSelector "root" $root) | trim) }}
+{{- with (include "ix.v1.common.nodeSelector" (dict "nodeSelector" $values.controllers.main.pod.nodeSelector "root" $root) | trim) }}
 nodeSelector:
   {{- . | nindent 2 }}
 {{- end -}}
 
-{{- with (include "ix.v1.common.tolerations" (dict "tolerations" $values.tolerations "root" $root) | trim) }}
+{{- with (include "ix.v1.common.tolerations" (dict "tolerations" $values.controllers.main.pod.tolerations "root" $root) | trim) }}
 tolerations:
   {{- . | nindent 2 }}
 {{- end -}}
@@ -50,21 +50,21 @@ imagePullSecrets:
   {{- . | nindent 2 }}
 {{- end -}}
 
-{{- with (include "ix.v1.common.runtimeClassName" (dict "root" $root "runtime" $values.runtimeClassName) | trim) }}
+{{- with (include "ix.v1.common.runtimeClassName" (dict "root" $root "runtime" $values.controllers.main.pod.runtimeClassName) | trim) }}
 runtimeClassName: {{ . }}
 {{- end -}}
 
 {{/* TODO: affinity, topologySpreadConstraints, not something critical as of now. */}}
-{{- with $values.terminationGracePeriodSeconds }}
+{{- with $values.controllers.main.pod.terminationGracePeriodSeconds }}
 terminationGracePeriodSeconds: {{ . }}
 {{- end -}}
 
-{{- with (include "ix.v1.common.container.podSecurityContext" (dict "podSecCont" $values.podSecurityContext "root" $root) | trim) }}
+{{- with (include "ix.v1.common.container.podSecurityContext" (dict "podSecCont" $values.controllers.main.pod.securityContext "root" $root) | trim) }}
 securityContext:
   {{- . | nindent 2 }}
 {{- end -}}
 
-{{- with (include "ix.v1.common.controller.mainContainer" (dict "values" $values "root" $root) | trim) }}
+{{- with (include "ix.v1.common.controller.mainContainer" (dict "values" $values.controllers.main.pod.containers.main "root" $root) | trim) }}
 containers:
   {{- . | nindent 2 }}
   {{- with (include "ix.v1.common.controller.extraContainers" (dict "root" $root "containerList" $values.additionalContainers "type" "additional") | trim) }}

@@ -12,17 +12,17 @@
 
   {{- include "ix.v1.common.spawner.configmapAndSecret" . | nindent 0 -}}
 
-  {{- if .Values.controller.enabled -}}
-    {{- if eq .Values.controller.type "Deployment" -}}
+  {{- if .Values.controllers.main.enabled -}}
+    {{- if eq .Values.controllers.main.type "Deployment" -}}
       {{- include "ix.v1.common.deployment" . | nindent 0 -}}
-    {{- else if eq .Values.controller.type "DaemonSet" -}}
+    {{- else if eq .Values.controllers.main.type "DaemonSet" -}}
       {{- include "ix.v1.common.daemonset" . | nindent 0 -}}
-    {{- else if eq .Values.controller.type "StatefulSet" -}}
+    {{- else if eq .Values.controllers.main.type "StatefulSet" -}}
       {{- include "ix.v1.common.statefulset" . | nindent 0 -}}
-    {{- else if (mustHas .Values.controller.type (list "Job" "CronJob")) -}}
+    {{- else if (mustHas .Values.controllers.main.type (list "Job" "CronJob")) -}}
       {{/* Pass, it will render from the spawner.jobAndCronJob bellow */}}
     {{- else -}}
-      {{- fail (printf "Not a valid controller.type (%s). Valid options are Deployment, DaemonSet, StatefulSet, Job, CronJob" .Values.controller.type) -}}
+      {{- fail (printf "Not a valid controller.type (%s). Valid options are Deployment, DaemonSet, StatefulSet, Job, CronJob" .Values.controllers.main.type) -}}
     {{- end -}}
   {{- end -}}
 

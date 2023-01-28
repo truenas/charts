@@ -37,7 +37,6 @@
       {{- if $probe.type -}}
         {{- $probeType = $probe.type -}}
       {{- end -}}
-
       {{- if and (or (not $services) (not $primaryPort)) (eq $probeType "auto") -}}
         {{- fail (printf "<auto> probe type in probe (%s) in (%s) container, is only supported for the main container and only if there is at least 1 port enabled" $probeName $containerName) -}}
       {{- end -}}

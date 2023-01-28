@@ -12,56 +12,86 @@ tests:
 
   - it: should fail with envList missing name
     set:
-      envList:
-        - value: some_value
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                envList:
+                  - value: some_value
     asserts:
       - failedTemplate:
           errorMessage: Please specify both name and value for environment variable
 
   - it: should fail with envList missing value
     set:
-      envList:
-        - name: some_name
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                envList:
+                  - name: some_name
     asserts:
       - failedTemplate:
           errorMessage: Please specify both name and value for environment variable
 
   - it: should fail with envList name as a map
     set:
-      envList:
-        - name:
-            some_key: some_value
-          value: some_value
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                envList:
+                  - name:
+                      some_key: some_value
+                    value: some_value
     asserts:
       - failedTemplate:
           errorMessage: Name in envList cannot be a map or slice
 
   - it: should fail with envList name as a slice
     set:
-      envList:
-        - name:
-            - some_key: some_value
-          value: some_value
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                envList:
+                  - name:
+                      - some_key: some_value
+                    value: some_value
     asserts:
       - failedTemplate:
           errorMessage: Name in envList cannot be a map or slice
 
   - it: should fail with envList value as a map
     set:
-      envList:
-        - name: some_name
-          value:
-            some_key: some_value
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                envList:
+                  - name: some_name
+                    value:
+                      some_key: some_value
     asserts:
       - failedTemplate:
           errorMessage: Value in envList cannot be a map or slice
 
   - it: should fail with envList value as a slice
     set:
-      envList:
-        - name: some_name
-          value:
-            - some_key: some_value
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                envList:
+                  - name: some_name
+                    value:
+                      - some_key: some_value
     asserts:
       - failedTemplate:
           errorMessage: Value in envList cannot be a map or slice
@@ -69,9 +99,14 @@ tests:
   - it: should pass with envList entry added
     documentIndex: *deploymentDoc
     set:
-      envList:
-        - name: some_name
-          value: some_value
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                envList:
+                  - name: some_name
+                    value: some_value
     asserts:
       - equal:
           path: spec.template.spec.containers[0].env
@@ -92,11 +127,16 @@ tests:
   - it: should pass with envList entries added
     documentIndex: *deploymentDoc
     set:
-      envList:
-        - name: some_name
-          value: some_value
-        - name: some_name2
-          value: some_value2
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                envList:
+                  - name: some_name
+                    value: some_value
+                  - name: some_name2
+                    value: some_value2
     asserts:
       - equal:
           path: spec.template.spec.containers[0].env
@@ -121,9 +161,14 @@ tests:
     set:
       some_name: a_name
       some_value: a_value
-      envList:
-        - name: "{{ .Values.some_name }}"
-          value: "{{ .Values.some_value }}"
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                envList:
+                  - name: "{{ .Values.some_name }}"
+                    value: "{{ .Values.some_value }}"
     asserts:
       - equal:
           path: spec.template.spec.containers[0].env
@@ -148,11 +193,16 @@ tests:
       some_value: a_value
       some_name2: a_name2
       some_value2: a_value2
-      envList:
-        - name: "{{ .Values.some_name }}"
-          value: "{{ .Values.some_value }}"
-        - name: "{{ .Values.some_name2 }}"
-          value: "{{ .Values.some_value2 }}"
+      controllers:
+        main:
+          pod:
+            containers:
+              main:
+                envList:
+                  - name: "{{ .Values.some_name }}"
+                    value: "{{ .Values.some_value }}"
+                  - name: "{{ .Values.some_name2 }}"
+                    value: "{{ .Values.some_value2 }}"
     asserts:
       - equal:
           path: spec.template.spec.containers[0].env

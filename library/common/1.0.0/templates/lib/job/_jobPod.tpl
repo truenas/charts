@@ -19,7 +19,7 @@
 {{- $schedulerName := "" -}}
 {{- with $values.schedulerName -}}
   {{- if eq . $inherit -}}
-    {{- $schedulerName = (tpl $root.Values.schedulerName $root) -}}
+    {{- $schedulerName = (tpl $root.Values.controllers.main.pod.schedulerName $root) -}}
   {{- else -}}
     {{- $schedulerName = . -}}
   {{- end -}}
@@ -30,7 +30,7 @@
 {{- $priorityClassName := "" -}}
 {{- with $values.priorityClassName -}}
   {{- if eq . $inherit -}}
-    {{- $priorityClassName = (tpl $root.Values.priorityClassName $root) -}}
+    {{- $priorityClassName = (tpl $root.Values.controllers.main.pod.priorityClassName $root) -}}
   {{- else -}}
     {{- $priorityClassName = . -}}
   {{- end -}}
@@ -41,7 +41,7 @@
 {{- $hostname := "" -}}
 {{- with $values.hostname -}}
   {{- if eq . $inherit -}}
-    {{- $hostname = (tpl $root.Values.hostname $root) -}}
+    {{- $hostname = (tpl $root.Values.controllers.main.pod.hostname $root) -}}
   {{- else  -}}
     {{- $hostname = . -}}
   {{- end -}}
@@ -52,11 +52,11 @@
 {{- $dnsPolicy := "" -}}
 {{- with $values.dnsPolicy -}}
   {{- if eq . $inherit -}}
-    {{- with (include "ix.v1.common.dnsPolicy" (dict "dnsPolicy" $root.Values.dnsPolicy "hostNetwork" $root.Values.hostNetwork "root" $root) | trim ) -}}
+    {{- with (include "ix.v1.common.dnsPolicy" (dict "dnsPolicy" $root.Values.controllers.main.pod.dnsPolicy "hostNetwork" $root.Values.controllers.main.pod.hostNetwork "root" $root) | trim ) -}}
       {{- $dnsPolicy = . -}}
     {{- end -}}
   {{- else -}}
-    {{- with (include "ix.v1.common.dnsPolicy" (dict "dnsPolicy" $values.dnsPolicy "hostNetwork" ($values.hostNetwork | default $root.Values.hostNetwork) "root" $root) | trim ) -}}
+    {{- with (include "ix.v1.common.dnsPolicy" (dict "dnsPolicy" $values.dnsPolicy "hostNetwork" ($values.hostNetwork | default false) "root" $root) | trim ) -}}
       {{- $dnsPolicy = . -}}
     {{- end -}}
   {{- end -}}
@@ -67,11 +67,11 @@
 {{- $dnsConfig := dict -}}
 {{- with $values.dnsConfig -}}
   {{- if eq (toString .) $inherit -}}
-    {{- with (include "ix.v1.common.dnsConfig" (dict "dnsPolicy" $root.Values.dnsPolicy "dnsConfig" $root.Values.dnsConfig "root" $root) | trim ) -}}
+    {{- with (include "ix.v1.common.dnsConfig" (dict "dnsPolicy" $root.Values.controllers.main.pod.dnsPolicy "dnsConfig" $root.Values.controllers.main.pod.dnsConfig "root" $root) | trim ) -}}
       {{- $dnsConfig = . -}}
     {{- end -}}
   {{- else -}}
-    {{- with (include "ix.v1.common.dnsConfig" (dict "dnsPolicy" ($dnsPolicy | default $root.Values.dnsPolicy) "dnsConfig" $values.dnsConfig "root" $root) | trim ) -}}
+    {{- with (include "ix.v1.common.dnsConfig" (dict "dnsPolicy" ($dnsPolicy | default $root.Values.controllers.main.pod.dnsPolicy) "dnsConfig" $values.dnsConfig "root" $root) | trim ) -}}
       {{- $dnsConfig = . -}}
     {{- end -}}
   {{- end -}}
@@ -82,7 +82,7 @@
 {{- $hostAliases := dict -}}
 {{- with $values.hostAliases -}}
   {{- if eq (toString .) $inherit -}}
-    {{- with (include "ix.v1.common.hostAliases" (dict "hostAliases" $root.Values.hostAliases "root" $root) | trim) -}}
+    {{- with (include "ix.v1.common.hostAliases" (dict "hostAliases" $root.Values.controllers.main.pod.hostAliases "root" $root) | trim) -}}
       {{- $hostAliases = . -}}
     {{- end -}}
   {{- else -}}
@@ -97,7 +97,7 @@
 {{- $nodeSelector := "" -}}
 {{- with $values.nodeSelector -}}
   {{- if eq (toString .) $inherit -}}
-    {{- with (include "ix.v1.common.nodeSelector" (dict "nodeSelector" $root.Values.nodeSelector "root" $root) | trim) -}}
+    {{- with (include "ix.v1.common.nodeSelector" (dict "nodeSelector" $root.Values.controllers.main.pod.nodeSelector "root" $root) | trim) -}}
       {{- $nodeSelector = . -}}
     {{- end -}}
   {{- else -}}
@@ -112,7 +112,7 @@
 {{- $tolerations := dict -}}
 {{- with $values.tolerations -}}
   {{- if eq (toString .) $inherit -}}
-    {{- with (include "ix.v1.common.tolerations" (dict "tolerations" $root.Values.tolerations "root" $root) | trim) -}}
+    {{- with (include "ix.v1.common.tolerations" (dict "tolerations" $root.Values.controllers.main.pod.tolerations "root" $root) | trim) -}}
       {{- $tolerations = . -}}
     {{- end -}}
   {{- else -}}
@@ -142,14 +142,14 @@
 {{- $runtimeClassName := "" -}}
 {{- with $values.runtimeClassName -}}
   {{- if eq . $inherit -}}
-    {{- with (include "ix.v1.common.runtimeClassName" (dict "root" $root "runtime" $root.Values.runtimeClassName) | trim) -}}
+    {{- with (include "ix.v1.common.runtimeClassName" (dict "root" $root "runtime" $root.Values.controllers.main.pod.runtimeClassName) | trim) -}}
       {{- $runtimeClassName = . -}}
     {{- end -}}
   {{- else -}}
     {{- $runtimeClassName = . -}}
   {{- end -}}
 {{- else -}}
-  {{- with (include "ix.v1.common.runtimeClassName" (dict "root" $root "runtime" $root.Values.runtimeClassName "isJob" true) | trim) -}}
+  {{- with (include "ix.v1.common.runtimeClassName" (dict "root" $root "runtime" $root.Values.controllers.main.pod.runtimeClassName "isJob" true) | trim) -}}
     {{- $runtimeClassName = . -}}
   {{- end -}}
 {{- end -}}
@@ -157,7 +157,7 @@
 {{- $termSeconds := "" -}}
 {{- with $values.terminationGracePeriodSeconds -}}
   {{- if eq (toString .) $inherit -}}
-    {{- with $root.Values.terminationGracePeriodSeconds -}}
+    {{- with $root.Values.controllers.main.pod.terminationGracePeriodSeconds -}}
       {{- $termSeconds = . -}}
     {{- end -}}
   {{- else -}}
@@ -172,7 +172,7 @@
 {{- $secCont := dict -}}
 {{- with $values.podSecurityContext -}}
   {{- if eq (toString .) $inherit -}} {{/* If inherti is set, use the main podSecCont */}}
-    {{- with (include "ix.v1.common.container.podSecurityContext" (dict "podSecCont" $root.Values.podSecurityContext "root" $root "isJob" true) | trim) -}}
+    {{- with (include "ix.v1.common.container.podSecurityContext" (dict "podSecCont" $root.Values.controllers.main.pod.securityContext "root" $root "isJob" true) | trim) -}}
       {{- $secCont = . -}}
     {{- end -}}
   {{- else -}} {{/* Otherwise use the job's podpodSecCont values */}}
@@ -189,7 +189,7 @@
 {{/* Now render the actual values */}}
 {{- if hasKey $values "hostNetwork" -}}
   {{- if eq (toString $values.hostNetwork) $inherit }}
-hostNetwork: {{ $root.Values.hostNetwork }}
+hostNetwork: {{ $root.Values.controllers.main.pod.hostNetwork }}
   {{- else if (kindIs "bool" $values.hostNetwork) }}
 hostNetwork: {{ $values.hostNetwork }}
   {{- end -}}
@@ -199,7 +199,7 @@ hostNetwork: false
 
 {{- if hasKey $values "enableServiceLinks" -}}
   {{- if eq (toString $values.enableServiceLinks) $inherit }}
-enableServiceLinks: {{ $root.Values.enableServiceLinks }}
+enableServiceLinks: {{ $root.Values.controllers.main.pod.enableServiceLinks }}
   {{- else if (kindIs "bool" $values.enableServiceLinks) }}
 enableServiceLinks: {{ $values.enableServiceLinks }}
   {{- end -}}

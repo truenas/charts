@@ -14,7 +14,7 @@ nameOverride applies only to the current chart
   {{- end -}}
 
   {{/* Order of preference: global.nameOverride -> nameOverride -> Chart.Name */}}
-  {{- ($globalNameOverride | default .Values.nameOverride) | default .Chart.Name | trunc 63 | trimSuffix "-" -}}
+  {{- ($globalNameOverride | default .Values.controllers.main.pod.nameOverride) | default .Chart.Name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
 {{/* Create a default fully qualified app name. */}}
@@ -26,8 +26,8 @@ nameOverride applies only to the current chart
     {{- $globalFullNameOverride = (.Values.global.fullnameOverride | default $globalFullNameOverride) -}}
   {{- end -}}
 
-  {{- if or .Values.fullnameOverride $globalFullNameOverride -}}
-    {{- $name = $globalFullNameOverride | default .Values.fullnameOverride -}}
+  {{- if or .Values.controllers.main.pod.fullnameOverride $globalFullNameOverride -}}
+    {{- $name = $globalFullNameOverride | default .Values.controllers.main.pod.fullnameOverride -}}
   {{- else -}}
     {{- if contains $name .Release.Name -}}
       {{- $name = .Release.Name -}}
@@ -56,14 +56,14 @@ nameOverride applies only to the current chart
 
 {{/* Return the properly cased version of the controller type */}}
 {{- define "ix.v1.common.names.controllerType" -}}
-  {{- if eq .Values.controller.type "deployment" -}}
+  {{- if eq .Values.controllers.main.type "deployment" -}}
     {{- print "Deployment" -}}
-  {{- else if eq .Values.controller.type "daemonset" -}}
+  {{- else if eq .Values.controllers.main.type "daemonset" -}}
     {{- print "DaemonSet" -}}
-  {{- else if eq .Values.controller.type "statefulset"  -}}
+  {{- else if eq .Values.controllers.main.type "statefulset"  -}}
     {{- print "StatefulSet" -}}
   {{- else -}}
-    {{- fail (printf "Not a valid controller.type (%s)" .Values.controller.type) -}}
+    {{- fail (printf "Not a valid controller.type (%s)" .Values.controllers.main.type) -}}
   {{- end -}}
 {{- end -}}
 
@@ -302,7 +302,7 @@ nameOverride applies only to the current chart
 
     {{- if and (hasKey $jobValues "nameOverride") $jobValues.nameOverride -}}
       {{- if not (eq $jobValues.nameOverride "-") -}}
-        {{- if (mustHas $root.Values.controller.type (list "Job" "CronJob")) -}}
+        {{- if (mustHas $root.Values.controllers.main.type (list "Job" "CronJob")) -}}
           {{- $jobName = $jobValues.nameOverride -}}
         {{- else -}}
           {{- $jobName = printf "%v-%v" $jobName $jobValues.nameOverride -}}

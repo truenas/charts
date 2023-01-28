@@ -3,15 +3,6 @@ image:
   pullPolicy: IfNotPresent
   tag: latest
 
-controller:
-  # -- Enable the controller.
-  enabled: true
-  # -- Set the controller type.
-  # Valid options are: Deployment | DaemonSet | StatefulSet
-  type: StatefulSet
-  # -- Number of desired pods
-  replicas: 2
-
 volumeClaimTemplates:
   test:
     mountPath: /test
@@ -25,14 +16,21 @@ service:
         protocol: HTTP
         port: 8080
 
-args:
-  - --port
-  - "8080"
+controllers:
+  main:
+    type: StatefulSet
+    replicas: 2
+    pod:
+      containers:
+        main:
+          args:
+            - --port
+            - "8080"
 
-probes:
-  liveness:
-    enabled: true
-  readiness:
-    enabled: true
-  startup:
-    enabled: true
+          probes:
+            liveness:
+              enabled: true
+            readiness:
+              enabled: true
+            startup:
+              enabled: true
