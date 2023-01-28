@@ -450,7 +450,10 @@ tests:
   - it: should pass with inherit set in schedulerName
     documentIndex: *jobDoc
     set:
-      schedulerName: somename
+      controllers:
+        main:
+          pod:
+            schedulerName: somename
       jobs:
         job-name:
           enabled: true
@@ -469,7 +472,10 @@ tests:
     documentIndex: *jobDoc
     set:
       key: somename
-      schedulerName: main-scheduler
+      controllers:
+        main:
+          pod:
+            schedulerName: main-scheduler
       jobs:
         job-name:
           enabled: true
@@ -487,7 +493,10 @@ tests:
   - it: should pass with inherit set in terminationgracePeriodSeconds
     documentIndex: *jobDoc
     set:
-      terminationGracePeriodSeconds: 35
+      controllers:
+        main:
+          pod:
+            terminationGracePeriodSeconds: 35
       jobs:
         job-name:
           enabled: true
@@ -559,7 +568,10 @@ tests:
   - it: should pass with inherit set for enableServiceLinks
     documentIndex: *jobDoc
     set:
-      enableServiceLinks: true
+      controllers:
+        main:
+          pod:
+            enableServiceLinks: true
       jobs:
         job-name:
           enabled: true
@@ -577,7 +589,10 @@ tests:
   - it: should pass with false on enableServiceLinks and true on main
     documentIndex: *jobDoc
     set:
-      enableServiceLinks: true
+      controllers:
+        main:
+          pod:
+            enableServiceLinks: true
       jobs:
         job-name:
           enabled: true
@@ -612,7 +627,10 @@ tests:
   - it: should pass with inherit set in priorityClassName
     documentIndex: *jobDoc
     set:
-      priorityClassName: somename
+      controllers:
+        main:
+          pod:
+            priorityClassName: somename
       jobs:
         job-name:
           enabled: true
@@ -631,7 +649,10 @@ tests:
     documentIndex: *jobDoc
     set:
       key: somename
-      priorityClassName: main-priorityClass
+      controllers:
+        main:
+          pod:
+            priorityClassName: main-priorityClass
       jobs:
         job-name:
           enabled: true
@@ -708,7 +729,10 @@ tests:
     documentIndex: *jobDoc
     set:
       key: somename
-      hostname: main-hostname
+      controllers:
+        main:
+          pod:
+            hostname: main-hostname
       jobs:
         job-name:
           enabled: true
@@ -726,7 +750,10 @@ tests:
   - it: should pass with inherit set in dnsPolicy
     documentIndex: *jobDoc
     set:
-      dnsPolicy: ClusterFirstWithHostNet
+      controllers:
+        main:
+          pod:
+            dnsPolicy: ClusterFirstWithHostNet
       jobs:
         job-name:
           enabled: true
@@ -744,7 +771,10 @@ tests:
   - it: should pass with custom dnsPolicy
     documentIndex: *jobDoc
     set:
-      dnsPolicy: ClusterFirstWithHostNet
+      controllers:
+        main:
+          pod:
+            dnsPolicy: ClusterFirstWithHostNet
       jobs:
         job-name:
           enabled: true
