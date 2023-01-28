@@ -158,15 +158,6 @@ controllers:
       tolerations: []
       # Defines termination strategy
       terminationGracePeriodSeconds: 10
-      # Default podSecurityContext for main pod
-      securityContext:
-        fsGroup: 568
-        supplementalGroups: []
-        fsGroupChangePolicy: OnRootMismatch
-      # Defines the DNS Config
-      dnsConfig: {}
-      # Defines the DNS Policy
-      dnsPolicy: ""
       containers:
         main:
           enabled: true

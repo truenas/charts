@@ -5,9 +5,10 @@ tests:
   - it: should pass with controller set to CronJob
     documentIndex: &cronjobDoc 2
     set:
-      controller:
-        type: CronJob
-        schedule: "*/5 * * * *"
+      controllers:
+        main:
+          type: CronJob
+          schedule: "*/5 * * * *"
     asserts:
       - hasDocuments:
           count: 3
@@ -19,9 +20,32 @@ tests:
   - it: should pass with podSecurityContext changed
     documentIndex: *cronjobDoc
     set:
-      controller:
-        type: CronJob
-        schedule: "* * * * *"
+      controllers:
+        main:
+          type: CronJob
+          schedule: "* * * * *"
+          pod:
+            securityContext:
+              fsGroup: 0
+              fsGroupChangePolicy: Always
+              supplementalGroups:
+                - 1000
+    asserts:
+      - equal:
+          path: spec.jobTemplate.spec.template.spec.securityContext
+          value:
+            fsGroup: 0
+            fsGroupChangePolicy: Always
+            supplementalGroups:
+              - 1000
+
+  - it: should pass with podSecurityContext changed from the default
+    documentIndex: *cronjobDoc
+    set:
+      controllers:
+        main:
+          type: CronJob
+          schedule: "* * * * *"
       podSecurityContext:
         fsGroup: 0
         fsGroupChangePolicy: Always
@@ -36,13 +60,45 @@ tests:
             supplementalGroups:
               - 1000
 
-
-  - it: should pass with podSecurityContext changed
+  - it: should pass with securityContext changed
     documentIndex: *cronjobDoc
     set:
-      controller:
-        type: CronJob
-        schedule: "* * * * *"
+      controllers:
+        main:
+          type: CronJob
+          schedule: "* * * * *"
+          pod:
+            containers:
+              main:
+                securityContext:
+                  runAsUser: 1000
+                  runAsGroup: 1000
+                  capabilities:
+                    add:
+                      - something
+    asserts:
+      - equal:
+          path: spec.jobTemplate.spec.template.spec.containers[0].securityContext
+          value:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            capabilities:
+              add:
+                - something
+              drop:
+                - ALL
+
+  - it: should pass with securityContext changed from the default
+    documentIndex: *cronjobDoc
+    set:
+      controllers:
+        main:
+          type: CronJob
+          schedule: "* * * * *"
       securityContext:
         runAsUser: 1000
         runAsGroup: 1000
@@ -68,16 +124,20 @@ tests:
   - it: should pass with multiple envs defined via tpl
     documentIndex: *cronjobDoc
     set:
-      controller:
-        type: CronJob
-        schedule: "* * * * *"
+      controllers:
+        main:
+          type: CronJob
+          schedule: "* * * * *"
+          pod:
+            containers:
+              main:
+                env:
+                  ENVVAR: "{{ .Values.some_string }}"
+                  ENVVAR2: "{{ .Values.some_int }}"
+                  ENVVAR3: "{{ .Values.some_bool }}"
       some_string: a_string
       some_int: 123
       some_bool: false
-      env:
-        ENVVAR: "{{ .Values.some_string }}"
-        ENVVAR2: "{{ .Values.some_int }}"
-        ENVVAR3: "{{ .Values.some_bool }}"
     asserts:
       - equal:
           path: spec.jobTemplate.spec.template.spec.containers[0].env
@@ -102,9 +162,10 @@ tests:
   - it: should pass with addNvidiaRuntimeClass and nvidiaRuntimeClassName set
     documentIndex: *cronjobDoc
     set:
-      controller:
-        type: CronJob
-        schedule: "* * * * *"
+      controllers:
+        main:
+          type: CronJob
+          schedule: "* * * * *"
       scaleGPU:
         something: blabla
       global:
@@ -119,9 +180,10 @@ tests:
   - it: should pass with deviceList set
     documentIndex: *cronjobDoc
     set:
-      controller:
-        type: CronJob
-        schedule: "* * * * *"
+      controllers:
+        main:
+          type: CronJob
+          schedule: "* * * * *"
       deviceList:
         - enabled: true
           hostPath: /dev/usb
@@ -141,9 +203,10 @@ tests:
   - it: should pass with added persistence
     documentIndex: &cronjobDoc 3
     set:
-      controller:
-        type: CronJob
-        schedule: "* * * * *"
+      controllers:
+        main:
+          type: CronJob
+          schedule: "* * * * *"
       persistence:
         volume0:
           type: pvc

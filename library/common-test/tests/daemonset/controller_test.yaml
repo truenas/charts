@@ -5,12 +5,13 @@ tests:
   - it: should pass with strategy changed in DaemonSet
     documentIndex: &dameonsetDoc 0
     set:
-      controller:
-        type: DaemonSet
-        strategy: OnDelete
-        rollingUpdate:
-          surge: 5
-          unavailable: 6
+      controllers:
+        main:
+          type: DaemonSet
+          strategy: OnDelete
+          rollingUpdate:
+            surge: 5
+            unavailable: 6
     asserts:
       - hasDocuments:
           count: 3
@@ -26,12 +27,13 @@ tests:
   - it: should pass with strategy changed in DaemonSet
     documentIndex: *dameonsetDoc
     set:
-      controller:
-        type: DaemonSet
-        strategy: RollingUpdate
-        rollingUpdate:
-          surge: 5
-          unavailable: 6
+      controllers:
+        main:
+          type: DaemonSet
+          strategy: RollingUpdate
+          rollingUpdate:
+            surge: 5
+            unavailable: 6
     asserts:
       - equal:
           path: spec.updateStrategy
@@ -44,9 +46,10 @@ tests:
   - it: should fail with wrong strategy
     documentIndex: *dameonsetDoc
     set:
-      controller:
-        type: DaemonSet
-        strategy: not_valid_strategy
+      controllers:
+        main:
+          type: DaemonSet
+          strategy: not_valid_strategy
     asserts:
       - failedTemplate:
           errorMessage: Not a valid strategy type for DaemonSet (not_valid_strategy)
@@ -54,9 +57,10 @@ tests:
   - it: should pass with revisionHistoryLimit changed
     documentIndex: *dameonsetDoc
     set:
-      controller:
-        type: DaemonSet
-        revisionHistoryLimit: 1
+      controllers:
+        main:
+          type: DaemonSet
+          revisionHistoryLimit: 1
     asserts:
       - equal:
           path: spec.revisionHistoryLimit

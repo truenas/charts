@@ -153,7 +153,7 @@
     {{- $runtimeClassName = . -}}
   {{- end -}}
 {{- end -}}
-
+{{- fail (toYaml $values) -}}
 {{- $termSeconds := "" -}}
 {{- with $values.terminationGracePeriodSeconds -}}
   {{- if eq (toString .) $inherit -}}

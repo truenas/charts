@@ -5,7 +5,9 @@ tests:
   - it: should pass with controller set to DaemonSet
     documentIndex: &daemonsetDoc 0
     set:
-      controller.type: DaemonSet
+      controllers:
+        main:
+          type: DaemonSet
     asserts:
       - hasDocuments:
           count: 3
@@ -14,11 +16,33 @@ tests:
       - isAPIVersion:
           of: apps/v1
 
-
   - it: should pass with podSecurityContext changed
     documentIndex: *daemonsetDoc
     set:
-      controller.type: DaemonSet
+      controllers:
+        main:
+          type: DaemonSet
+          pod:
+            securityContext:
+              fsGroup: 0
+              fsGroupChangePolicy: Always
+              supplementalGroups:
+                - 1000
+    asserts:
+      - equal:
+          path: spec.template.spec.securityContext
+          value:
+            fsGroup: 0
+            fsGroupChangePolicy: Always
+            supplementalGroups:
+              - 1000
+
+  - it: should pass with podSecurityContext changed from default
+    documentIndex: *daemonsetDoc
+    set:
+      controllers:
+        main:
+          type: DaemonSet
       podSecurityContext:
         fsGroup: 0
         fsGroupChangePolicy: Always
@@ -33,10 +57,43 @@ tests:
             supplementalGroups:
               - 1000
 
+  - it: should pass with podSecurityContext changed from default
+    documentIndex: *daemonsetDoc
+    set:
+      controllers:
+        main:
+          type: DaemonSet
+          pod:
+            containers:
+              main:
+                securityContext:
+                  runAsUser: 1000
+                  runAsGroup: 1000
+                  capabilities:
+                    add:
+                      - something
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].securityContext
+          value:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            capabilities:
+              add:
+                - something
+              drop:
+                - ALL
+
   - it: should pass with podSecurityContext changed
     documentIndex: *daemonsetDoc
     set:
-      controller.type: DaemonSet
+      controllers:
+        main:
+          type: DaemonSet
       securityContext:
         runAsUser: 1000
         runAsGroup: 1000
@@ -62,14 +119,19 @@ tests:
   - it: should pass with multiple envs defined via tpl
     documentIndex: *daemonsetDoc
     set:
-      controller.type: DaemonSet
+      controllers:
+        main:
+          type: DaemonSet
+          pod:
+            containers:
+              main:
+                env:
+                  ENVVAR: "{{ .Values.some_string }}"
+                  ENVVAR2: "{{ .Values.some_int }}"
+                  ENVVAR3: "{{ .Values.some_bool }}"
       some_string: a_string
       some_int: 123
       some_bool: false
-      env:
-        ENVVAR: "{{ .Values.some_string }}"
-        ENVVAR2: "{{ .Values.some_int }}"
-        ENVVAR3: "{{ .Values.some_bool }}"
     asserts:
       - equal:
           path: spec.template.spec.containers[0].env
@@ -94,7 +156,9 @@ tests:
   - it: should pass with image defined in init containers
     documentIndex: *daemonsetDoc
     set:
-      controller.type: DaemonSet
+      controllers:
+        main:
+          type: DaemonSet
       image:
         repository: some-repo
         tag: some-tag
@@ -135,7 +199,9 @@ tests:
   - it: should pass with added persistence
     documentIndex: *daemonsetDoc
     set:
-      controller.type: DaemonSet
+      controllers:
+        main:
+          type: DaemonSet
       persistence:
         volume0:
           type: pvc

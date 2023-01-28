@@ -14,7 +14,7 @@ nameOverride applies only to the current chart
   {{- end -}}
 
   {{/* Order of preference: global.nameOverride -> nameOverride -> Chart.Name */}}
-  {{- ($globalNameOverride | default .Values.controllers.main.pod.nameOverride) | default .Chart.Name | trunc 63 | trimSuffix "-" -}}
+  {{- ($globalNameOverride | default .Values.controllers.main.nameOverride) | default .Chart.Name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
 {{/* Create a default fully qualified app name. */}}
@@ -26,8 +26,8 @@ nameOverride applies only to the current chart
     {{- $globalFullNameOverride = (.Values.global.fullnameOverride | default $globalFullNameOverride) -}}
   {{- end -}}
 
-  {{- if or .Values.controllers.main.pod.fullnameOverride $globalFullNameOverride -}}
-    {{- $name = $globalFullNameOverride | default .Values.controllers.main.pod.fullnameOverride -}}
+  {{- if or .Values.controllers.main.fullnameOverride $globalFullNameOverride -}}
+    {{- $name = $globalFullNameOverride | default .Values.controllers.main.fullnameOverride -}}
   {{- else -}}
     {{- if contains $name .Release.Name -}}
       {{- $name = .Release.Name -}}

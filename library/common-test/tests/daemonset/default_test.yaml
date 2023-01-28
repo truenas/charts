@@ -5,7 +5,9 @@ tests:
   - it: should pass with controller set to DaemonSet
     documentIndex: &daemonsetDoc 0
     set:
-      controller.type: DaemonSet
+      controllers:
+        main:
+          type: DaemonSet
     asserts:
       - hasDocuments:
           count: 3

@@ -23,11 +23,11 @@ tests:
       controller:
         type: CronJob
         schedule: "* * * * *"
-      nameOverride: overrodeName
+      nameOverride: overrodename
     asserts:
       - equal:
           path: metadata.name
-          value: RELEASE-NAME-overrodeName
+          value: RELEASE-NAME-overrodename
 
   - it: should pass with global.nameOverride
     documentIndex: *cronjobDoc
@@ -35,10 +35,10 @@ tests:
       controller:
         type: CronJob
         schedule: "* * * * *"
-      nameOverride: overrodeName
+      nameOverride: overrodename
       global:
-        nameOverride: globalOverrodeName
+        nameOverride: globaloverrodename
     asserts:
       - equal:
           path: metadata.name
-          value: RELEASE-NAME-globalOverrodeName
+          value: RELEASE-NAME-globaloverrodename

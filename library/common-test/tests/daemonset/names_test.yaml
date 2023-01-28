@@ -5,7 +5,9 @@ tests:
   - it: should pass with default values
     documentIndex: &daemonsetDoc 0
     set:
-      controller.type: DaemonSet
+      controllers:
+        main:
+          type: DaemonSet
     asserts:
       - hasDocuments:
           count: 3
@@ -18,21 +20,25 @@ tests:
   - it: should pass with nameOverride
     documentIndex: *daemonsetDoc
     set:
-      controller.type: DaemonSet
-      nameOverride: overrodeName
+      controllers:
+        main:
+          type: DaemonSet
+          nameOverride: overrodename
     asserts:
       - equal:
           path: metadata.name
-          value: RELEASE-NAME-overrodeName
+          value: RELEASE-NAME-overrodename
 
   - it: should pass with global.nameOverride
     documentIndex: *daemonsetDoc
     set:
-      controller.type: DaemonSet
-      nameOverride: overrodeName
+      controllers:
+        main:
+          type: DaemonSet
+          nameOverride: overrodename
       global:
-        nameOverride: globalOverrodeName
+        nameOverride: globaloverrodename
     asserts:
       - equal:
           path: metadata.name
-          value: RELEASE-NAME-globalOverrodeName
+          value: RELEASE-NAME-globaloverrodename

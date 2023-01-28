@@ -5,9 +5,10 @@ tests:
   - it: should pass with controller set to CronJob
     documentIndex: &cronjobDoc 2
     set:
-      controller:
-        type: CronJob
-        schedule: "*/5 * * * *"
+      controllers:
+        main:
+            type: CronJob
+            schedule: "*/5 * * * *"
     asserts:
       - hasDocuments:
           count: 3
@@ -63,8 +64,9 @@ tests:
           path: spec.jobTemplate.spec.template.spec.priorityClassName
       - isNull:
           path: spec.jobTemplate.spec.template.spec.hostname
-      - isNull:
+      - equal:
           path: spec.jobTemplate.spec.template.spec.dnsPolicy
+          value: ClusterFirst
       - isNull:
           path: spec.jobTemplate.spec.template.spec.dnsConfig
       - isNull:

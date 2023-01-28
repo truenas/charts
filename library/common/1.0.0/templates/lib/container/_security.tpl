@@ -117,7 +117,6 @@ The reason is not splitted, is that on one of the places needs a combo of all va
 
   {{/* Overwrite from values that user/dev passed */}}
   {{- $returnValue = mustMergeOverwrite $returnValue $podSecCont -}}
-
   {{- $appendGPUGroup := false -}}
   {{- $appendDeviceGroups := false -}}
 

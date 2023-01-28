@@ -5,9 +5,10 @@ tests:
   - it: should pass with default values
     documentIndex: &cronJobDoc 2
     set:
-      controller:
-        type: CronJob
-        schedule: "*/1 * * * *"
+      controllers:
+        main:
+          type: CronJob
+          schedule: "*/1 * * * *"
     asserts:
       - hasDocuments:
           count: 3
@@ -20,12 +21,13 @@ tests:
     documentIndex: *cronJobDoc
     set:
       some_key: some_value
-      controller:
-        type: CronJob
-        schedule: "*/1 * * * *"
-        annotations:
-          controller_key: controller_value
-          controller_key2: "{{ .Values.some_key }}"
+      controllers:
+        main:
+          type: CronJob
+          schedule: "*/1 * * * *"
+          annotations:
+            controller_key: controller_value
+            controller_key2: "{{ .Values.some_key }}"
       global:
         annotations:
           global_key: global_value
@@ -44,13 +46,15 @@ tests:
   - it: should pass with podAnnotations set
     documentIndex: *cronJobDoc
     set:
-      controller:
-        type: CronJob
-        schedule: "*/1 * * * *"
       some_key: some_value2
-      podAnnotations:
-        test: some_value
-        test2: "{{ .Values.some_key }}"
+      controllers:
+        main:
+          type: CronJob
+          schedule: "*/1 * * * *"
+          pod:
+            annotations:
+              test: some_value
+              test2: "{{ .Values.some_key }}"
     asserts:
       - isSubset:
           path: metadata.annotations

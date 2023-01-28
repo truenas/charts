@@ -19,10 +19,11 @@ tests:
     documentIndex: *deploymentDoc
     set:
       some_key: some_value
-      controller:
-        annotations:
-          controller_key: controller_value
-          controller_key2: "{{ .Values.some_key }}"
+      controllers:
+        main:
+          annotations:
+            controller_key: controller_value
+            controller_key2: "{{ .Values.some_key }}"
       global:
         annotations:
           global_key: global_value
@@ -45,9 +46,12 @@ tests:
     documentIndex: *deploymentDoc
     set:
       some_key: some_value2
-      podAnnotations:
-        test: some_value
-        test2: "{{ .Values.some_key }}"
+      controllers:
+        main:
+          pod:
+            annotations:
+              test: some_value
+              test2: "{{ .Values.some_key }}"
     asserts:
       - isSubset:
           path: spec.template.metadata.annotations
