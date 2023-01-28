@@ -64,7 +64,7 @@
                                                             "envList" $container.envList
                                                             "containerName" $name
                                                             "isMainContainer" false
-                                                            "scaleGPU" $root.Values.scaleGPU
+                                                            "scaleGPU" ($root.Values.scaleGPU | default $container.scaleGPU)
                                                             "nvidiaCaps" $container.nvidiaCaps
                                                             "secCont" $container.securityContext
                                                             "secEnvs" $secEnvs

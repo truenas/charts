@@ -23,7 +23,7 @@ The reason is not splitted, is that on one of the places needs a combo of all va
 
   {{- if and $secCont.inherit (not $isMainContainer) -}} {{/* if inherit is set, overwrite values from mainContainer */}}
     {{- if (hasKey $root.Values "securityContext") -}}
-      {{- $returnValue = mustMergeOverwrite $returnValue $root.Values.controllers.main.pod.containers.main.securityContext -}}
+      {{- $returnValue = mustMergeOverwrite $returnValue ($root.Values.controllers.main.pod.containers.main.securityContext | default $root.Values.securityContext) -}}
     {{- end -}}
   {{- end -}}
 
