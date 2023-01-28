@@ -42,7 +42,7 @@ global:
     # Leave empty to rely on the node's default storageClass
     storageClass:
     # When SCALE-ZFS is set for storageClass, return this name
-    scaleZFSStorageClass:
+    scaleZFSStorageClass: '{{ printf "ix-storage-class-%v" .Release.Name}}'
     # Default security context used for all
     # init/install/upgrade/additional
     # and main containers if not specified
