@@ -15,7 +15,10 @@ tests:
   - it: should pass with terminationGracePeriodSeconds set
     documentIndex: *deploymentDoc
     set:
-      terminationGracePeriodSeconds: 25
+      controllers:
+        main:
+          pod:
+            terminationGracePeriodSeconds: 25
     asserts:
       - equal:
           path: spec.template.spec.terminationGracePeriodSeconds
@@ -24,7 +27,10 @@ tests:
   - it: should pass with schedulerName set
     documentIndex: *deploymentDoc
     set:
-      schedulerName: some_scheduler
+      controllers:
+        main:
+          pod:
+            schedulerName: some_scheduler
     asserts:
       - equal:
           path: spec.template.spec.schedulerName
@@ -34,7 +40,10 @@ tests:
     documentIndex: *deploymentDoc
     set:
       name: some_scheduler
-      schedulerName: "{{ .Values.name }}"
+      controllers:
+        main:
+          pod:
+            schedulerName: "{{ .Values.name }}"
     asserts:
       - equal:
           path: spec.template.spec.schedulerName
@@ -43,7 +52,10 @@ tests:
   - it: should pass with schedulerName set
     documentIndex: *deploymentDoc
     set:
-      priorityClassName: some_priority_class_name
+      controllers:
+        main:
+          pod:
+            priorityClassName: some_priority_class_name
     asserts:
       - equal:
           path: spec.template.spec.priorityClassName
@@ -53,7 +65,10 @@ tests:
     documentIndex: *deploymentDoc
     set:
       name: some_priority_class_name
-      priorityClassName: "{{ .Values.name }}"
+      controllers:
+        main:
+          pod:
+            priorityClassName: "{{ .Values.name }}"
     asserts:
       - equal:
           path: spec.template.spec.priorityClassName
@@ -69,7 +84,10 @@ tests:
   - it: should pass with set restartPolicy
     documentIndex: *deploymentDoc
     set:
-      restartPolicy: Always
+      controllers:
+        main:
+          pod:
+            restartPolicy: Always
     asserts:
       - equal:
           path: spec.template.spec.restartPolicy
@@ -77,54 +95,54 @@ tests:
 
   - it: should fail with invalid restartPolicy
     set:
-      restartPolicy: invalid
+      controllers:
+        main:
+          pod:
+            restartPolicy: invalid
     asserts:
       - failedTemplate:
           errorMessage: Invalid <restartPolicy> (invalid). Valid options are Always, Never, OnFailure
 
   - it: should fail with invalid restartPolicy on Deployment
     set:
-      controller:
-        type: Deployment
-      restartPolicy: OnFailure
+      controllers:
+        main:
+          type: Deployment
+          pod:
+            restartPolicy: OnFailure
     asserts:
       - failedTemplate:
-          errorMessage: Invalid <restartPolicy (OnFailure). Valid option for Deployment, StatefulSet, DaemonSet and ReplicaSet is Always
+          errorMessage: Invalid <restartPolicy (OnFailure). Valid option for Deployment, StatefulSet, DaemonSet is Always
 
-  # Bellow tests cannot be verified currently,
-  # until templates are created for those controller types
-  # TODO:
-  # - it: should fail with invalid restartPolicy on DaemonSet
-  #   set:
-  #     controller:
-  #       type: DaemonSet
-  #     restartPolicy: OnFailure
-  #   asserts:
-  #     - failedTemplate:
-  #         errorMessage: Invalid <restartPolicy (OnFailure). Valid option for Deployment, StatefulSet, DaemonSet and ReplicaSet is Always
+  - it: should fail with invalid restartPolicy on DaemonSet
+    set:
+      controllers:
+        main:
+          type: DaemonSet
+          pod:
+            restartPolicy: OnFailure
+    asserts:
+      - failedTemplate:
+          errorMessage: Invalid <restartPolicy (OnFailure). Valid option for Deployment, StatefulSet, DaemonSet is Always
 
-  # - it: should fail with invalid restartPolicy on StatefulSet
-  #   set:
-  #     controller:
-  #       type: StatefulSet
-  #     restartPolicy: OnFailure
-  #   asserts:
-  #     - failedTemplate:
-  #         errorMessage: Invalid <restartPolicy (OnFailure). Valid option for Deployment, StatefulSet, DaemonSet and ReplicaSet is Always
-
-  # - it: should fail with invalid restartPolicy on ReplicaSet
-  #   set:
-  #     controller:
-  #       type: ReplicaSet
-  #     restartPolicy: OnFailure
-  #   asserts:
-  #     - failedTemplate:
-  #         errorMessage: Invalid <restartPolicy (OnFailure). Valid option for Deployment, StatefulSet, DaemonSet and ReplicaSet is Always
+  - it: should fail with invalid restartPolicy on StatefulSet
+    set:
+      controllers:
+        main:
+          type: StatefulSet
+          pod:
+            restartPolicy: OnFailure
+    asserts:
+      - failedTemplate:
+          errorMessage: Invalid <restartPolicy (OnFailure). Valid option for Deployment, StatefulSet, DaemonSet is Always
 
   - it: should fail with no value in a key in nodeSelector
     set:
-      nodeSelector:
-        diskType:
+      controllers:
+        main:
+          pod:
+            nodeSelector:
+              diskType:
     asserts:
       - failedTemplate:
           errorMessage: Value is required on every key in <nodeSelector>
@@ -132,9 +150,12 @@ tests:
   - it: should pass with nodeSelector set
     documentIndex: *deploymentDoc
     set:
-      nodeSelector:
-        diskType: ssd
-        cpuType: intel
+      controllers:
+        main:
+          pod:
+            nodeSelector:
+              diskType: ssd
+              cpuType: intel
     asserts:
       - equal:
           path: spec.template.spec.nodeSelector
@@ -147,9 +168,12 @@ tests:
     set:
       some_key: ssd
       some_other_key: intel
-      nodeSelector:
-        diskType: "{{ .Values.some_key }}"
-        cpuType: "{{ .Values.some_other_key }}"
+      controllers:
+        main:
+          pod:
+            nodeSelector:
+              diskType: "{{ .Values.some_key }}"
+              cpuType: "{{ .Values.some_other_key }}"
     asserts:
       - equal:
           path: spec.template.spec.nodeSelector
@@ -159,44 +183,59 @@ tests:
 
   - it: should fail with invalid operator in tolerations
     set:
-      tolerations:
-        - operator: invalid_op
+      controllers:
+        main:
+          pod:
+            tolerations:
+              - operator: invalid_op
     asserts:
       - failedTemplate:
           errorMessage: Invalid <operator>. Valid options are Exists, Equal.
 
   - it: should fail with invalid effect in tolerations
     set:
-      tolerations:
-        - effect: invalid_effect
-          operator: Exists
+      controllers:
+        main:
+          pod:
+            tolerations:
+              - effect: invalid_effect
+                operator: Exists
     asserts:
       - failedTemplate:
           errorMessage: Invalid <effect> (invalid_effect). Valid options are NoExecute, NoSchedule, PreferNoSchedule
 
   - it: should fail with empty key and operator Equal in tolerations
     set:
-      tolerations:
-        - key: ""
-          operator: Equal
+      controllers:
+        main:
+          pod:
+            tolerations:
+              - key: ""
+                operator: Equal
     asserts:
       - failedTemplate:
           errorMessage: <key> is required when <operator> is set to <Equal>
 
   - it: should fail with operator Exists and defined value in tolerations
     set:
-      tolerations:
-        - value: something
-          operator: Exists
+      controllers:
+        main:
+          pod:
+            tolerations:
+              - value: something
+                operator: Exists
     asserts:
       - failedTemplate:
           errorMessage: When <operator> is set to <Exists>, you cannot define a <value>
 
   - it: should fail with operator Exists and non-integer tolerationSeconds in tolerations
     set:
-      tolerations:
-        - tolerationSeconds: not_an_int
-          operator: Exists
+      controllers:
+        main:
+          pod:
+            tolerations:
+              - tolerationSeconds: not_an_int
+                operator: Exists
     asserts:
       - failedTemplate:
           errorMessage: <tolerationSeconds> must result to an integer.
@@ -204,9 +243,12 @@ tests:
   - it: should pass with tolerations defined, with tolerationSeconds set
     documentIndex: *deploymentDoc
     set:
-      tolerations:
-        - operator: Exists
-          tolerationSeconds: 6000
+      controllers:
+        main:
+          pod:
+            tolerations:
+              - operator: Exists
+                tolerationSeconds: 6000
     asserts:
       - equal:
           path: spec.template.spec.tolerations
@@ -217,8 +259,11 @@ tests:
   - it: should pass with tolerations defined, with only operator Exists
     documentIndex: *deploymentDoc
     set:
-      tolerations:
-        - operator: Exists
+      controllers:
+        main:
+          pod:
+            tolerations:
+              - operator: Exists
     asserts:
       - equal:
           path: spec.template.spec.tolerations
@@ -229,8 +274,11 @@ tests:
     documentIndex: *deploymentDoc
     set:
       op: Exists
-      tolerations:
-        - operator: "{{ .Values.op }}"
+      controllers:
+        main:
+          pod:
+            tolerations:
+              - operator: "{{ .Values.op }}"
     asserts:
       - equal:
           path: spec.template.spec.tolerations
@@ -240,9 +288,12 @@ tests:
   - it: should pass with tolerations defined, with only operator Equal and key defined
     documentIndex: *deploymentDoc
     set:
-      tolerations:
-        - operator: Equal
-          key: key1
+      controllers:
+        main:
+          pod:
+            tolerations:
+              - operator: Equal
+                key: key1
     asserts:
       - equal:
           path: spec.template.spec.tolerations
@@ -254,9 +305,12 @@ tests:
     documentIndex: *deploymentDoc
     set:
       some_key: key1
-      tolerations:
-        - operator: Equal
-          key: "{{ .Values.some_key }}"
+      controllers:
+        main:
+          pod:
+            tolerations:
+              - operator: Equal
+                key: "{{ .Values.some_key }}"
     asserts:
       - equal:
           path: spec.template.spec.tolerations
@@ -267,9 +321,12 @@ tests:
   - it: should pass with tolerations defined, with operator Exists and effect defined
     documentIndex: *deploymentDoc
     set:
-      tolerations:
-        - operator: Exists
-          effect: NoExecute
+      controllers:
+        main:
+          pod:
+            tolerations:
+              - operator: Exists
+                effect: NoExecute
     asserts:
       - equal:
           path: spec.template.spec.tolerations
@@ -281,9 +338,12 @@ tests:
     documentIndex: *deploymentDoc
     set:
       ef1: NoExecute
-      tolerations:
-        - operator: Exists
-          effect: "{{ .Values.ef1 }}"
+      controllers:
+        main:
+          pod:
+            tolerations:
+              - operator: Exists
+                effect: "{{ .Values.ef1 }}"
     asserts:
       - equal:
           path: spec.template.spec.tolerations
@@ -294,10 +354,13 @@ tests:
   - it: should pass with tolerations defined, with operator Equal and value defined
     documentIndex: *deploymentDoc
     set:
-      tolerations:
-        - operator: Equal
-          value: some_value
-          key: key1
+      controllers:
+        main:
+          pod:
+            tolerations:
+              - operator: Equal
+                value: some_value
+                key: key1
     asserts:
       - equal:
           path: spec.template.spec.tolerations
@@ -310,10 +373,13 @@ tests:
     documentIndex: *deploymentDoc
     set:
       val: some_value
-      tolerations:
-        - operator: Equal
-          value: "{{ .Values.val }}"
-          key: key1
+      controllers:
+        main:
+          pod:
+            tolerations:
+              - operator: Equal
+                value: "{{ .Values.val }}"
+                key: key1
     asserts:
       - equal:
           path: spec.template.spec.tolerations
@@ -326,10 +392,13 @@ tests:
     documentIndex: *deploymentDoc
     set:
       val: some_value
-      tolerations:
-        - operator: Equal
-          value: "{{ .Values.val }}"
-          key: key1
+      controllers:
+        main:
+          pod:
+            tolerations:
+              - operator: Equal
+                value: "{{ .Values.val }}"
+                key: key1
     asserts:
       - equal:
           path: spec.template.spec.tolerations
@@ -341,12 +410,15 @@ tests:
   - it: should pass with tolerations defined, with everything set, multiple entries
     documentIndex: *deploymentDoc
     set:
-      tolerations:
-        - operator: Equal
-          value: some_value
-          key: key1
-          effect: NoExecute
-          tolerationSeconds: 6000
+      controllers:
+        main:
+          pod:
+            tolerations:
+              - operator: Equal
+                value: some_value
+                key: key1
+                effect: NoExecute
+                tolerationSeconds: 6000
     asserts:
       - equal:
           path: spec.template.spec.tolerations
@@ -368,17 +440,20 @@ tests:
       val2: some_value2
       k2: key2
       ef2: NoSchedule
-      tolerations:
-        - operator: "{{ .Values.op1 }}"
-          value: "{{ .Values.val1 }}"
-          key: "{{ .Values.k1 }}"
-          effect: "{{ .Values.ef1 }}"
-          tolerationSeconds: 6000
-        - operator: "{{ .Values.op2 }}"
-          value: "{{ .Values.val2 }}"
-          key: "{{ .Values.k2 }}"
-          effect: "{{ .Values.ef2 }}"
-          tolerationSeconds: 6000
+      controllers:
+        main:
+          pod:
+            tolerations:
+              - operator: "{{ .Values.op1 }}"
+                value: "{{ .Values.val1 }}"
+                key: "{{ .Values.k1 }}"
+                effect: "{{ .Values.ef1 }}"
+                tolerationSeconds: 6000
+              - operator: "{{ .Values.op2 }}"
+                value: "{{ .Values.val2 }}"
+                key: "{{ .Values.k2 }}"
+                effect: "{{ .Values.ef2 }}"
+                tolerationSeconds: 6000
     asserts:
       - equal:
           path: spec.template.spec.tolerations

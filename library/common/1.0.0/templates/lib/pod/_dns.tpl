@@ -3,15 +3,14 @@
   {{- $dnsPolicy := .dnsPolicy -}}
   {{- $hostNetwork := .hostNetwork -}}
   {{- $root := .root -}}
-
   {{- $policy := $root.Values.dnsPolicy -}}
   {{- if $dnsPolicy -}}
-    {{- if not (mustHas $dnsPolicy (list "Default" "ClusterFirst" "ClusterFirstWithHostNet" "None"))  -}}
-      {{- fail (printf "Not valid dnsPolicy (%s). Valid options are ClusterFirst, Default, ClusterFirstWithHostNet, None" $dnsPolicy) -}}
-    {{- end -}}
     {{- $policy = $dnsPolicy -}}
   {{- else if $hostNetwork -}}
     {{- $policy = "ClusterFirstWithHostNet" -}}
+  {{- end -}}
+  {{- if not (mustHas $policy (list "Default" "ClusterFirst" "ClusterFirstWithHostNet" "None"))  -}}
+    {{- fail (printf "Not valid dnsPolicy (%s). Valid options are ClusterFirst, Default, ClusterFirstWithHostNet, None" $policy) -}}
   {{- end -}}
 {{- $policy -}}
 {{- end -}}

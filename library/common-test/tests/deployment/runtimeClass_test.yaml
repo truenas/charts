@@ -45,7 +45,10 @@ tests:
   - it: should pass overriding global and per pod runtime
     documentIndex: *deploymentDoc
     set:
-      runtimeClassName: perpod
+      controllers:
+        main:
+          pod:
+            runtimeClassName: perpod
       scaleGPU:
         something: blabla
       globalDefaults:
@@ -82,7 +85,10 @@ tests:
   - it: should pass with pod runtime set
     documentIndex: *deploymentDoc
     set:
-      runtimeClassName: something
+      controllers:
+        main:
+          pod:
+            runtimeClassName: something
     asserts:
       - equal:
           path: spec.template.spec.runtimeClassName

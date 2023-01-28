@@ -16,7 +16,7 @@ tests:
             fsGroupChangePolicy: OnRootMismatch
             supplementalGroups: []
 
-  - it: should pass with changed podSecurity values
+  - it: should pass with changed podSecurity values from default
     documentIndex: *deploymentDoc
     set:
       podSecurityContext:
@@ -33,42 +33,77 @@ tests:
             supplementalGroups:
               - 1000
 
+  - it: should pass with changed podSecurity values
+    documentIndex: *deploymentDoc
+    set:
+      controllers:
+        main:
+          pod:
+            securityContext:
+              fsGroup: 999
+              fsGroupChangePolicy: Always
+              supplementalGroups:
+                - 1000
+    asserts:
+      - equal:
+          path: spec.template.spec.securityContext
+          value:
+            fsGroup: 999
+            fsGroupChangePolicy: Always
+            supplementalGroups:
+              - 1000
+
   - it: should fail with invalid fsGroupChangePolicy
     set:
-      podSecurityContext:
-        fsGroupChangePolicy: invalid_policy
+      controllers:
+        main:
+          pod:
+            securityContext:
+              fsGroupChangePolicy: invalid_policy
     asserts:
       - failedTemplate:
           errorMessage: Invalid option for fsGroupChangePolicy. Valid options are <Always> and <OnRootMismatch>.
 
   - it: should fail with empty fsGroupChangePolicy
     set:
-      podSecurityContext:
-        fsGroupChangePolicy:
+      controllers:
+        main:
+          pod:
+            securityContext:
+              fsGroupChangePolicy:
     asserts:
       - failedTemplate:
           errorMessage: <fsGroupChangePolicy> key cannot be empty. Set a value or remove the key for the default (OnRootMismatch) to take effect.
 
   - it: should fail with empty fsGroup
     set:
-      podSecurityContext:
-        fsGroup:
+      controllers:
+        main:
+          pod:
+            securityContext:
+              fsGroup:
     asserts:
       - failedTemplate:
           errorMessage: <fsGroup> key cannot be empty. Set a value or remove the key for the default (568) to take effect.
 
   - it: should fail with non-int fsGroup
     set:
-      podSecurityContext:
-        fsGroup: "1000"
+      controllers:
+        main:
+          pod:
+            securityContext:
+              fsGroup: "1000"
     asserts:
       - failedTemplate:
           errorMessage: <fsGroup> key has value of ("1000"). But must be an int.
 
   - it: should fail with empty supplementalGroups
     set:
-      podSecurityContext:
-        supplementalGroups:
+      controllers:
+        main:
+          pod:
+            securityContext:
+              supplementalGroups:
     asserts:
       - failedTemplate:
           errorMessage: <supplementalGroups> key has a value (<nil>). But it must be a list. Set a list value or remove the key for the default ([]) to take effect.

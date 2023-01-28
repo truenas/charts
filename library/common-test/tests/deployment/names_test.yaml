@@ -16,7 +16,9 @@ tests:
   - it: should pass with nameOverride
     documentIndex: *deploymentDoc
     set:
-      nameOverride: overrodename
+      controllers:
+        main:
+          nameOverride: overrodename
     asserts:
       - equal:
           path: metadata.name
@@ -25,7 +27,9 @@ tests:
   - it: should pass with global.nameOverride
     documentIndex: *deploymentDoc
     set:
-      nameOverride: overrodename
+      controllers:
+        main:
+          nameOverride: overrodename
       global:
         nameOverride: globaloverrodename
     asserts:

@@ -27,11 +27,13 @@ priorityClassName: {{ . }}
 hostname: {{ . }}
 {{- end -}}
 
+{{- $dnsPol := (include "ix.v1.common.dnsPolicy" (dict "dnsPolicy" $values.controllers.main.pod.dnsPolicy "hostNetwork" $hostNet "root" $root) | trim ) -}}
 {{- with (include "ix.v1.common.dnsPolicy" (dict "dnsPolicy" $values.controllers.main.pod.dnsPolicy "hostNetwork" $hostNet "root" $root) | trim ) }}
 dnsPolicy: {{ . }}
 {{- end -}}
 
-{{- with (include "ix.v1.common.dnsConfig" (dict "dnsPolicy" $values.controllers.main.pod.dnsPolicy "dnsConfig" $values.controllers.main.pod.dnsConfig "root" $root) | trim ) }}
+{{- $dnsConf := ($values.controllers.main.pod.dnsConfig | default $root.Values.dnsConfig) -}}
+{{- with (include "ix.v1.common.dnsConfig" (dict "dnsPolicy" $dnsPol "dnsConfig" $dnsConf "root" $root) | trim ) }}
 dnsConfig:
   {{- . | nindent 2 }}
 {{- end -}}

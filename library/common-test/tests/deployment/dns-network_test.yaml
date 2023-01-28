@@ -109,8 +109,11 @@ tests:
   - it: should pass with hostNet and changed dnsPolicy
     documentIndex: *deploymentDoc
     set:
-      dnsPolicy: Default
-      hostNetwork: true
+      controllers:
+        main:
+          pod:
+            dnsPolicy: Default
+            hostNetwork: true
     asserts:
       - equal:
           path: spec.template.spec.dnsPolicy
@@ -326,8 +329,11 @@ tests:
 
   - it: should fail without hostnames in hostAliases
     set:
-      hostAliases:
-        - ip: 1.1.1.1
+      controllers:
+        main:
+          pod:
+            hostAliases:
+              - ip: 1.1.1.1
     asserts:
       - failedTemplate:
           errorMessage: At least one <hostnames> is required in hostAliases

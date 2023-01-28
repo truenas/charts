@@ -34,10 +34,11 @@ tests:
     documentIndex: *deploymentDoc
     set:
       some_key: some_value
-      controller:
-        labels:
-          controller_key: controller_value
-          controller_key2: "{{ .Values.some_key }}"
+      controllers:
+        main:
+          labels:
+            controller_key: controller_value
+            controller_key2: "{{ .Values.some_key }}"
       global:
         labels:
           global_key: global_value
@@ -63,9 +64,12 @@ tests:
     documentIndex: *deploymentDoc
     set:
       some_key: some_value2
-      podLabels:
-        test: some_value
-        test2: "{{ .Values.some_key }}"
+      controllers:
+        main:
+          pod:
+            labels:
+              test: some_value
+              test2: "{{ .Values.some_key }}"
     asserts:
       - equal:
           path: spec.template.metadata.labels.test2
