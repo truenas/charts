@@ -11,7 +11,7 @@ tests:
       - isKind:
           of: Deployment
 
-  - it: should pass with hostNetwork set
+  - it: should pass with hostNetwork set from default
     documentIndex: *deploymentDoc
     set:
       hostNetwork: true
@@ -20,10 +20,25 @@ tests:
           path: spec.template.spec.hostNetwork
           value: true
 
+  - it: should pass with hostNetwork set
+    documentIndex: *deploymentDoc
+    set:
+      controllers:
+        main:
+          pod:
+            hostNetwork: true
+    asserts:
+      - equal:
+          path: spec.template.spec.hostNetwork
+          value: true
+
   - it: should pass with hostname set
     documentIndex: *deploymentDoc
     set:
-      hostname: some_hostname
+      controllers:
+        main:
+          pod:
+            hostname: some_hostname
     asserts:
       - equal:
           path: spec.template.spec.hostname
@@ -33,7 +48,10 @@ tests:
     documentIndex: *deploymentDoc
     set:
       name: some_hostname
-      hostname: "{{ .Values.name }}"
+      controllers:
+        main:
+          pod:
+            hostname: "{{ .Values.name }}"
     asserts:
       - equal:
           path: spec.template.spec.hostname
@@ -42,7 +60,10 @@ tests:
   - it: should pass with enableServiceLinks set
     documentIndex: *deploymentDoc
     set:
-      enableServiceLinks: true
+      controllers:
+        main:
+          pod:
+            enableServiceLinks: true
     asserts:
       - equal:
           path: spec.template.spec.enableServiceLinks
@@ -55,10 +76,22 @@ tests:
       - failedTemplate:
           errorMessage: Not valid dnsPolicy (invalid). Valid options are ClusterFirst, Default, ClusterFirstWithHostNet, None
 
-  - it: should pass with changed dnsPolicy
+  - it: should pass with changed dnsPolicy from default
     documentIndex: *deploymentDoc
     set:
       dnsPolicy: Default
+    asserts:
+      - equal:
+          path: spec.template.spec.dnsPolicy
+          value: Default
+
+  - it: should pass with changed dnsPolicy
+    documentIndex: *deploymentDoc
+    set:
+      controllers:
+        main:
+          pod:
+            dnsPolicy: Default
     asserts:
       - equal:
           path: spec.template.spec.dnsPolicy
@@ -117,7 +150,7 @@ tests:
       - failedTemplate:
           errorMessage: With dnsPolicy set to None, you must specify at least 1 nameservers on dnsConfig
 
-  - it: should pass with dnsConfig defined
+  - it: should pass with dnsConfig defined from default
     documentIndex: *deploymentDoc
     set:
       dnsConfig:
@@ -131,6 +164,38 @@ tests:
           - name: ndots
             value: 2
           - name: edns0
+    asserts:
+      - equal:
+          path: spec.template.spec.dnsConfig
+          value:
+            nameservers:
+              - ns1
+              - ns2
+            searches:
+              - domain_search_1
+              - domain_search_2
+            options:
+              - name: ndots
+                value: "2"
+              - name: edns0
+
+  - it: should pass with dnsConfig defined
+    documentIndex: *deploymentDoc
+    set:
+      controllers:
+        main:
+          pod:
+            dnsConfig:
+              nameservers:
+                - ns1
+                - ns2
+              searches:
+                - domain_search_1
+                - domain_search_2
+              options:
+                - name: ndots
+                  value: 2
+                - name: edns0
     asserts:
       - equal:
           path: spec.template.spec.dnsConfig
@@ -249,9 +314,12 @@ tests:
 
   - it: should fail without ip in hostAliases
     set:
-      hostAliases:
-        - hostnames:
-          - hostname1
+      controllers:
+        main:
+          pod:
+            hostAliases:
+              - hostnames:
+                - hostname1
     asserts:
       - failedTemplate:
           errorMessage: <ip> field is required in hostAliases
@@ -267,15 +335,18 @@ tests:
   - it: should pass with hostAliases defined
     documentIndex: *deploymentDoc
     set:
-      hostAliases:
-        - ip: 1.1.1.1
-          hostnames:
-            - hostname1
-            - hostname2
-        - ip: 8.8.8.8
-          hostnames:
-            - hostname3
-            - hostname4
+      controllers:
+        main:
+          pod:
+            hostAliases:
+              - ip: 1.1.1.1
+                hostnames:
+                  - hostname1
+                  - hostname2
+              - ip: 8.8.8.8
+                hostnames:
+                  - hostname3
+                  - hostname4
     asserts:
       - equal:
           path: spec.template.spec.hostAliases
@@ -298,15 +369,18 @@ tests:
       host2: hostname2
       host3: hostname3
       host4: hostname4
-      hostAliases:
-        - ip: "{{ .Values.ip1 }}"
-          hostnames:
-            - "{{ .Values.host1 }}"
-            - "{{ .Values.host2 }}"
-        - ip: "{{ .Values.ip2 }}"
-          hostnames:
-            - "{{ .Values.host3 }}"
-            - "{{ .Values.host4 }}"
+      controllers:
+        main:
+          pod:
+            hostAliases:
+              - ip: "{{ .Values.ip1 }}"
+                hostnames:
+                  - "{{ .Values.host1 }}"
+                  - "{{ .Values.host2 }}"
+              - ip: "{{ .Values.ip2 }}"
+                hostnames:
+                  - "{{ .Values.host3 }}"
+                  - "{{ .Values.host4 }}"
     asserts:
       - equal:
           path: spec.template.spec.hostAliases
@@ -319,6 +393,3 @@ tests:
               hostnames:
                 - hostname3
                 - hostname4
-
-# TODO: default dns on root level and on pod
-# TODO: default dns on root level and not on pod

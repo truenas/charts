@@ -16,6 +16,15 @@
   {{/* If we ever have value in globalDefaults */}}
 {{- end -}}
 
+{{- $hostNet := false -}}
+{{- if hasKey $values "hostNetwork" -}}
+  {{- if eq (toString $values.hostNetwork) $inherit }}
+    {{ $hostNet = $root.Values.hostNetwork }}
+  {{- else if (kindIs "bool" $values.hostNetwork) }}
+    {{ $hostNet =  $values.hostNetwork }}
+  {{- end -}}
+{{- end -}}
+
 {{- $schedulerName := "" -}}
 {{- with $values.schedulerName -}}
   {{- if eq . $inherit -}}
@@ -52,7 +61,7 @@
 {{- $dnsPolicy := "" -}}
 {{- with $values.dnsPolicy -}}
   {{- if eq . $inherit -}}
-    {{- with (include "ix.v1.common.dnsPolicy" (dict "dnsPolicy" $root.Values.controllers.main.pod.dnsPolicy "hostNetwork" $root.Values.controllers.main.pod.hostNetwork "root" $root) | trim ) -}}
+    {{- with (include "ix.v1.common.dnsPolicy" (dict "dnsPolicy" $root.Values.dnsPolicy "hostNetwork" $root.Values.hostNetwork "root" $root) | trim ) -}}
       {{- $dnsPolicy = . -}}
     {{- end -}}
   {{- else -}}
@@ -153,7 +162,6 @@
     {{- $runtimeClassName = . -}}
   {{- end -}}
 {{- end -}}
-{{- fail (toYaml $values) -}}
 {{- $termSeconds := "" -}}
 {{- with $values.terminationGracePeriodSeconds -}}
   {{- if eq (toString .) $inherit -}}
@@ -187,15 +195,7 @@
 {{- end -}}
 
 {{/* Now render the actual values */}}
-{{- if hasKey $values "hostNetwork" -}}
-  {{- if eq (toString $values.hostNetwork) $inherit }}
-hostNetwork: {{ $root.Values.controllers.main.pod.hostNetwork }}
-  {{- else if (kindIs "bool" $values.hostNetwork) }}
-hostNetwork: {{ $values.hostNetwork }}
-  {{- end -}}
-{{- else }}
-hostNetwork: false
-{{- end -}}
+hostNetwork: {{ $hostNet }}
 
 {{- if hasKey $values "enableServiceLinks" -}}
   {{- if eq (toString $values.enableServiceLinks) $inherit }}

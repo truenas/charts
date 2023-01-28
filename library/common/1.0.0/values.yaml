@@ -150,8 +150,6 @@ controllers:
       hostname: ""
       # Adds hosts to /etc/hosts
       hostAliases: []
-      # Binds to host network
-      hostNetwork: false
       # Disables services links
       enableServiceLinks: false
       # Tolerations
@@ -200,11 +198,12 @@ controllers:
 # Default DNS Policy that applies to all pods
 # Can be overruled per pod
 dnsPolicy: ClusterFirst
-
 # Default DNS Config that applies to all pods
 # Can be overruled per pod
 dnsConfig: {}
-
+# Default hostNetwork that applies to all pods
+# Can be overruled per pod
+hostNetwork: false
 # Security Context that applies to all containers
 # Can be overruled per container
 securityContext:
@@ -224,7 +223,6 @@ podSecurityContext:
   fsGroup: 568
   supplementalGroups: []
   fsGroupChangePolicy: OnRootMismatch
-
 # Resources that apply to all containers
 # Can be overruled per container
 resources:
@@ -234,13 +232,14 @@ resources:
   requests:
     cpu: 10m
     memory: 50Mi
-
-# Values that will be exposed to UI
-# Defines the timezone for the container
+# Default TZ for all containers
+# Can be overruled per container
 TZ: UTC
-# Default PUID
+# Default PUID for all containers
+# Can be overruled per container
 PUID: 568
-# Default UMASK
+# Default UMASK for all containers
+# Can be overruled per container
 UMASK: "002"
 
 # Defines the imagePullSecrets

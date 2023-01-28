@@ -3,9 +3,15 @@
 {{- $root := . }}
 {{- $values := fromYaml (tpl ($.Values | toYaml) $) }}
 serviceAccountName: {{ (include "ix.v1.common.names.serviceAccountName" $root) }}
-hostNetwork: {{ $values.controllers.main.pod.hostNetwork }}
+{{- $hostNet := false -}}
+{{- if hasKey $values.controllers.main.pod "hostNetwork" -}}
+  {{- $hostNet = $values.controllers.main.pod.hostNetwork -}}
+{{- else -}}
+  {{- $hostNet = $root.Values.hostNetwork -}}
+{{- end }}
+hostNetwork: {{ $hostNet }}
 enableServiceLinks: {{ $values.controllers.main.pod.enableServiceLinks }}
-{{- with (include "ix.v1.common.restartPolicy" (dict "restartPolicy" $values.restartPolicy "root" $root) | trim) }}
+{{- with (include "ix.v1.common.restartPolicy" (dict "restartPolicy" $values.controllers.main.pod.restartPolicy "root" $root) | trim) }}
 restartPolicy: {{ . }}
 {{- end -}}
 
@@ -21,7 +27,7 @@ priorityClassName: {{ . }}
 hostname: {{ . }}
 {{- end -}}
 
-{{- with (include "ix.v1.common.dnsPolicy" (dict "dnsPolicy" $values.controllers.main.pod.dnsPolicy "hostNetwork" $values.controllers.main.pod.hostNetwork "root" $root) | trim ) }}
+{{- with (include "ix.v1.common.dnsPolicy" (dict "dnsPolicy" $values.controllers.main.pod.dnsPolicy "hostNetwork" $hostNet "root" $root) | trim ) }}
 dnsPolicy: {{ . }}
 {{- end -}}
 
@@ -96,7 +102,7 @@ initContainers:
   {{- end -}}
 {{- end -}}
 
-{{- with (include "ix.v1.common.controller.volumes" (dict "persistence" $values.persistence "root" $root) | trim) }}
+{{- with (include "ix.v1.common.controller.volumes" (dict "persistence" $root.Values.persistence "root" $root) | trim) }}
 volumes:
     {{- . | nindent 2 }}
 {{- end -}}
