@@ -3,16 +3,3 @@ service:
     ports:
       main:
         port: 65535
-controllers:
-  main:
-    type: CronJob
-    schedule: "* * * * *"
-    pod:
-      containers:
-        main:
-          securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
-            capabilities:
-              add:
-                - something
