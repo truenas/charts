@@ -1,1 +1,1 @@
-{{ include "ix.v1.common.loader.all" . }}
+{{- include "ix.v1.common.loader.all" . -}}

@@ -1,229 +1,127 @@
-# This file only includes the default values that are applied.
-# All values can be overridden per chart, in their values.yaml
-# For Examples and Explanation view the "docs".
-
-# Global Values
+# -- Global values
 global:
-  # Labels applied to all objects
+  # -- Set additional global labels
   labels: {}
-  # Annotations applied to all objects
+  # -- Set additional global annotations
   annotations: {}
-
-# Default values to use if not defined on the chart
-globalDefaults:
-  # Whether to add annotations for specific use cases
-  addAnnotations:
-    metallb: false
-    traefik: false
-  # Default RuntimeClassName to use for pods
-  # If not defined on per pod or in ixChartContext, assume this.
-  # Empty means NO runtimeClassName
-  runtimeClassName: ""
-  # Default Restart Policy to use for pods
-  restartPolicy: Always
-  # Default Job Restart Policy
-  jobRestartPolicy: Never
-  # Default portProtocol for service
-  portProtocol: TCP
-  # Define the minimum NodePort
-  minimumNodePort: 9000
-  # If no service Type is defined, assume this
-  serviceType: ClusterIP
-  # If no PVC Size is defined, assume this
-  PVCSize: 1Gi
-  # If no VCT Size is defined, assume this
-  VCTSize: 999Gi
-  # If no PVC type is defined, assume this
-  persistenceType: pvc
-  # If no validateHostPath key exists in the persistence item, assume this
-  validateHostPath: false
-  # If no PVC accessMode is defined, assume this
-  accessMode: ReadWriteOnce
-  # Define a storageClassName that will be used for all PVCs by default
-  # Leave empty to rely on the node's default storageClass
-  storageClass:
-  # When SCALE-ZFS is set for storageClass, return this name
+  # -- Scale Storage Class
   scaleZFSStorageClass: '{{ printf "ix-storage-class-%v" .Release.Name}}'
-  # If no PVC retain key is defined, assume this
-  # Note, that this adds an annotation for helm whether to delete
-  # the resource on uninstall, manually deleting the namespace it will delete
-  # the resource no matter what this is set.
-  PVCRetain: false
-  # Default security context used for all
-  # init/install/upgrade/additional
-  # and main containers if not specified
-  # Whether to inject fixedEnvs on containers
-  # Can be overruled per container
-  injectFixedEnvs: true
-  # Default nvidia Caps will be assigned via
-  # environment variable (requires injectFixedEnvs)
-  nvidiaCaps:
-    - all
-  # Default Resources values, if no others
-  # are specified, use those
 
-  # If no probe Type is defined, assume this
-  probeType: auto
-  # If no probe Path is defined, assume this
-  probePath: /
-  # Default probe timeouts, if no others
-  # are specified, use those
-  probes:
-    liveness:
-      spec:
-        initialDelaySeconds: 10
-        periodSeconds: 10
-        timeoutSeconds: 5
-        failureThreshold: 5
-    readiness:
-      spec:
-        initialDelaySeconds: 10
-        periodSeconds: 10
-        timeoutSeconds: 5
-        failureThreshold: 5
-    startup:
-      spec:
-        initialDelaySeconds: 10
-        periodSeconds: 5
-        timeoutSeconds: 2
-        failureThreshold: 60
-  # Default job/cronjob values
-  job:
-    cron:
-      concurrencyPolicy: Forbid
-      failedJobsHistoryLimit: 1
-      successfulJobsHistoryLimit: 3
-    backoffLimit: 6
-    completionMode: NonIndexed
+# TODO:
+fallbackDefaults:
+  # -- Define a storageClassName that will be used for all PVCs
+  # Can be overruled per PVC
+  storageClass:
 
-# Defines image info
+# -- Injected from SCALE middleware
+# Only for reference here
+ixExternalInterfacesConfiguration: []
+# -- Injected from SCALE middleware
+# Only for reference here
+ixExternalInterfacesConfigurationNames: []
+# -- Injected from SCALE middleware
+# Only for reference here
+ixCertificates: []
+# -- Injected from SCALE middleware
+# Only for reference here
+ixVolumes: []
+
+# -- Image values
 image:
-  repository: repo
-  tag: tag
+  # -- Image repository
+  repository: traefik/whoami
+  # -- Image tag
+  tag: latest
+  # -- Image pull policy
   pullPolicy: IfNotPresent
 
-controllers:
-  # Defines the controller
-  main:
-    # -- Enable the controller.
-    enabled: true
-    # -- Set the controller as primary.
-    primary: true
-    # Valid options are: Deployment | DaemonSet | StatefulSet | CronJob | Job
-    type: Deployment
-    # -- Set labels on the Deployment/StatefulSet/DaemonSet/CronJob/Job. Helm templates can be used.
-    labels: {}
-    # -- Set  annotations on the Deployment/StatefulSet/DaemonSet. Helm templates can be used.
-    annotations: {}
-    # -- Revision history limit
-    revisionHistoryLimit: 3
-    # -- Number of desired pods
-    replicas: 1
-    # For Deployments, valid values are Recreate (default) and RollingUpdate.
-    # For StatefulSets, valid values are OnDelete and RollingUpdate (default).
-    # DaemonSets ignore this.
-    strategy: ""
-    # -- Set rollingUpdate strategies
-    rollingUpdate:
-      # -- Set Deployment RollingUpdate max unavailable
-      unavailable:
-      # -- Set Deployment RollingUpdate max surge
-      surge:
-      # -- Set StatefulSet RollingUpdate partition
-      partition:
-    pod:
-      labels: {}
-      annotations: {}
-      # Overrides the name of the workload
-      nameOverride: ""
-      # Overrides the fullname of the workload
-      fullnameOverride: ""
-      # Defines the scheduler
-      schedulerName: ""
-      # Defines the nodeSelector(s)
-      nodeSelector: {}
-      # Defines the runtimeClassName
-      runtimeClassName: ""
-      # Defines the priorityClassName
-      priorityClassName: ""
-      # Define the default hostname of the Deployment/StatefulSet/DaemonSet/etc
-      hostname: ""
-      # Adds hosts to /etc/hosts
-      hostAliases: []
-      # Disables services links
-      enableServiceLinks: false
-      # Tolerations
-      tolerations: []
-      # Defines termination strategy
-      terminationGracePeriodSeconds: 10
-      containers:
-        main:
-          enabled: true
-          primary: true
-          # Defines the image that will be used
-          imageSelector: ""
-          # -- [command-args](docs/common/values/command-args.md)
-          # Overrides the default entrypoint
-          command: []
-          # Overrides the default args
-          args: []
-          # Appends to args
-          extraArgs: []
-          termination:
-            messagePath: ""
-            messagePolicy: ""
-          # -- [environment-variables](docs/common/values/environment-variables.md)
-          # Defines environment variables
-          env: {}
-          # SCALE / GUI Focused
-          envList: []
-          # Defines the environment variables from a secret or configmap
-          envFrom: []
-          # Nvidia Caps will be assigned via environment variable
-          # If empty, global defaults will be used
-          nvidiaCaps: []
-          stdin: false
-          tty: false
-          # Defines lifecycle hooks
-          lifecycle: {}
-          # Defines the probes
-          probes:
-            liveness:
-              enabled: true
-            readiness:
-              enabled: true
-            startup:
-              enabled: true
+# -- ConfigMaps
+configmaps: {}
+  # # -- ConfigMap name
+  # conf-name:
+  #   # -- Enables the ConfigMap
+  #   enabled: false
+  #   # -- ConfigMap labels
+  #   labels: {}
+  #   # -- ConfigMap annotations
+  #   annotations: {}
+  #   # -- ConfigMap data
+  #   data: {}
 
-# Default DNS Policy that applies to all pods
-# Can be overruled per pod
-dnsPolicy: ClusterFirst
-# Default DNS Config that applies to all pods
-# Can be overruled per pod
-dnsConfig: {}
-# Default hostNetwork that applies to all pods
-# Can be overruled per pod
-hostNetwork: false
-# Security Context that applies to all containers
-# Can be overruled per container
+# -- Secrets
+secrets: {}
+  # # -- Secret name
+  # secret-name:
+  #   # -- Enables the secret
+  #   enabled: false
+  #   # -- Secret labels
+  #   labels: {}
+  #   # -- Secret annotations
+  #   annotations: {}
+  #   # -- Secret data
+  #   data:
+  #     # -- Secret data (stringData)
+  #     key: value
+
+# -- Service Account:
+serviceAccount:
+  sa-name:
+    # -- Enables the service account
+    enabled: false
+    # -- Service account labels
+    labels: {}
+    # -- Service account annotations
+    annotations: {}
+    autoMountSAToken: true
+    # targetSelector: all
+    targetSelector:
+      - pod-name
+
+# -- RBAC
+rbac:
+  # -- Enables the RBAC
+  enabled: false
+  # -- RBAC labels
+  labels: {}
+  # -- RBAC annotations
+  annotations: {}
+  # -- ClusterWide
+  clusterWide: false
+  # -- Service account name
+  serviceAccounts:
+    - sa-name
+  # -- RBAC rules
+  rules:
+    - apiGroups:
+        - ""
+      resources:
+        - pods
+      verbs:
+        - get
+
+# -- Security Context
 securityContext:
-  runAsNonRoot: true
-  runAsUser: 568
-  runAsGroup: 568
-  readOnlyRootFilesystem: true
-  allowPrivilegeEscalation: false
-  privileged: false
-  capabilities:
-    add: []
-    drop:
-      - ALL
-# Default podSecurityContext that applies to all pods
-# Can be overruled per pod
-podSecurityContext:
-  fsGroup: 568
-  supplementalGroups: []
-  fsGroupChangePolicy: OnRootMismatch
-# Resources that apply to all containers
+  # -- Container security context for all containers
+  # Can be overruled per container
+  container:
+    runAsNonRoot: true
+    runAsUser: 568
+    runAsGroup: 568
+    readOnlyRootFilesystem: true
+    allowPrivilegeEscalation: false
+    privileged: false
+    capabilities:
+      add: []
+      drop:
+        - ALL
+  # -- Pod security context for all pods
+  # Can be overruled per pod
+  pod:
+    fsGroup: 568
+    supplementalGroups: []
+    fsGroupChangePolicy: OnRootMismatch
+
+# -- Resources
 # Can be overruled per container
 resources:
   limits:
@@ -232,129 +130,439 @@ resources:
   requests:
     cpu: 10m
     memory: 50Mi
-# Default TZ for all containers
+
+# -- Options for all pods
+# Can be overruled per pod
+podOptions:
+  enableServiceLinks: false
+  hostNetwork: false
+  dnsPolicy: ClusterFirst
+  dnsConfig: {}
+  hostAliases: []
+  nodeSelector: {}
+  tolerations: []
+  schedulerName: ""
+  priorityClassName: ""
+  terminationGracePeriodSeconds: 30
+  # TODO: Add affinity
+  # TODO: Add topologySpreadConstraints
+
+# -- Timezone for all containers
 # Can be overruled per container
 TZ: UTC
-# Default PUID for all containers
+# -- PUID for all containers
 # Can be overruled per container
 PUID: 568
-# Default UMASK for all containers
+# -- UMASK for all containers
 # Can be overruled per container
 UMASK: "002"
+NVIDIA_CAPS:
+  - all
 
-# Defines the imagePullSecrets
-imagePullCredentials: []
-
-# -- [configmap](docs/common/values/configmap.md)
-configmap: {}
-
-# -- [secret](docs/common/values/secret.md)
-secret: {}
-
-# Creates a service account
-serviceAccount:
-  main:
-    enabled: false
-    primary: true
-    automountServiceAccountToken: true
-
-# Creates Role and RoleBinding
-# (or ClusterRole and ClusterRoleBinding if clusterWide is true)
-rbac:
-  main:
-    enabled: false
-    primary: true
-    clusterWide: false
-
-# Used for SCALE / GUI Focused
-scaleGPU: {}
-
-# Used for SCALE
-scaleCerts: {}
-
-# Used for SCALE / GUI Focused
-scaleCertsList: []
-
-portal:
-  enabled: true
-
-# Used for SCALE / GUI Focused
-externalInterfaces: []
-
-# Injected from middleware
-ixExternalInterfacesConfiguration: []
-# Injected from middleware
-ixExternalInterfacesConfigurationNames: []
-
-# TODO: Discuss if we are going to add defaults like:
-  # - /dev/shm
+# -- Persistence
 persistence:
-  # -- Create an emptyDir volume dedicated to be shared between all containers
-  # [[ref]]https://kubernetes.io/docs/concepts/storage/volumes/#emptydir)
   shared:
     enabled: true
     type: emptyDir
     mountPath: /shared
-
-  # -- Create an emptyDir volume to share between all containers
-  # [[ref]]https://kubernetes.io/docs/concepts/storage/volumes/#emptydir)
+    targetSelector: all
   varlogs:
     enabled: true
     type: emptyDir
     mountPath: /var/logs
-
-  # -- Create an emptyDir volume (shared between all containers) for temporary storage
-  # [[ref]]https://kubernetes.io/docs/concepts/storage/volumes/#emptydir)
+    targetSelector: all
   tmp:
     enabled: true
     type: emptyDir
     mountPath: /tmp
+    targetSelector: all
+  devshm:
+    # TODO: Enable by default?
+    enabled: false
+    type: emptyDir
+    mountPath: /dev/shm
+    targetSelector: all
+  # -- Volume name
+  vol-name:
+    # -- Enables the volume
+    enabled: false
+    # -- Type of volume
+    type: type
+    # -- Volume Options
 
-# -- Used in conjunction with `controller.type: StatefulSet` to create individual disks for each instance.
-volumeClaimTemplates: {}
-# data:
-#   mountPath: /data
-#   accessMode: "ReadWriteOnce"
-#   size: 1Gi
+    # -  ConfigMap, Secret
+    # Default Mode (ConfigMap, Secret)
+    defaultMode: "0600"
+    # Items (ConfigMap, Secret)
+    items:
+      - key: key
+        path: path
 
-###### - Everything bellow needs documentation #####
+    # - EmptyDir
+    # Medium
+    medium: Memory
+    # SizeLimit
+    size: 1Gi
 
-# Injected from middleware
-ixCertificates: []
-# Injected from middleware
-ixVolumes: []
+    # - HostPath
+    # Host Path
+    hostPath: /path/to/host
+    # Host Path Type
+    hostPathType: DirectoryOrCreate
 
-deviceList: []
-# -- Configure the services for the chart here.
-# Additional services can be added by adding a dictionary key similar to the 'main' service.
-# @default -- See below
-service:
-  main:
-    # -- Enables or disables the service
+    # - NFS
+    # Server
+    server: nfs-server
+    # Path
+    path: /path/to/nfs
+
+    # - ixVolumes
+    # datasetName
+    datasetName: dataset-name
+    # Host Path Type
+    # hostPathType: DirectoryOrCreate
+
+    # - PVC
+    # labels (Only for PVC type)
+    labels: {}
+    # annotations (Only for PVC type)
+    annotations: {}
+    # Size
+    # size: 1Gi
+    # Retain
+    retain: false
+    # Storage Class
+    storageClassName: ""
+    # Existing Claim
+    existingClaim: ""
+    # VolumeName
+    volumeName: ""
+    # Access Modes
+    accessModes:
+      - ReadWriteOnce
+    # -- Options that apply to all volumeMounts
+    # Can be overruled per volumeMount under targetSelector
+    mountPath: /shared
+    readOnly: False
+    subPath: ""
+    mountPropagation: ""
+    # Where to define the volume and mount the volume
+    # targetSelector: all
+    targetSelector:
+      pod-name:
+        container-name:
+          mountPath: /shared
+          readOnly: False
+          subPath: ""
+          mountPropagation: ""
+
+# -- Services
+services:
+  # -- Service name
+  service-name:
+    # -- Enables the service
     enabled: true
-    # enabled: false
-    # -- Configure the Service port information here.
-    # Additional ports can be added by adding a dictionary key similar to the 'main' port.
-    # @default -- See below
+    # -- Primary service
     primary: true
+    # -- Pod to connect
+    targetSelector: pod-name
+    # -- Ports
     ports:
-      main:
-        # -- Enables or disables the port
+      port-name:
+        # -- Enable the port
         enabled: true
-        # enabled: false
-        # -- Make this the primary port (used in probes, notes, etc...)
-        # If there is more than 1 service, make sure that only 1 port is marked as primary.
+        # -- Primary port
         primary: true
-        # -- The port number (Default port is required if enabled: true)
+        # -- Port
         port:
-        # -- Port protocol.
-        # Support values are `HTTP`, `HTTPS`, `TCP` and `UDP`.
-        # HTTPS and HTTPS spawn a TCP service and get used for internal URL and name generation
-        protocol: HTTP
-        # -- Specify a service targetPort if you wish to differ the service port from the application port.
-        # If `targetPort` is specified, this port number is used in the container definition instead of
-        # the `port` value. Therefore named ports are not supported for this field.
+        # -- Protocol
+        protocol: HTTPS
+        # -- Target port
         targetPort:
-        # -- Specify the nodePort value NodePort service types.
-        # [[ref]](https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport)
+        # -- Node port
         nodePort:
+        # -- Container to assign the port
+        targetSelector: container-name
+
+# -- VolumeClaimTemplates (StatefulSet only)
+volumeClaimTemplates:
+  # -- VolumeClaimTemplate name
+  vct-name:
+    # -- Enables the VolumeClaimTemplate
+    enabled: true
+    # -- VolumeClaimTemplate labels
+    labels: {}
+    # -- VolumeClaimTemplate annotations
+    annotations: {}
+    # -- VolumeClaimTemplate access modes
+    accessModes:
+      - ReadWriteOnce
+    # -- VolumeClaimTemplate storage class
+    storageClassName: ""
+    # -- VolumeClaimTemplate size
+    size: 1Gi
+    # -- Options that apply to all volumeMounts
+    # Can be overruled per volumeMount under targetSelector
+    # -- VolumeClaimTemplate mount path
+    mountPath: /data
+    readOnly: false
+    subPath: ""
+    mountPropagation: ""
+    targetSelector:
+      pod-name:
+        container-name:
+          mountPath: /data
+          readOnly: False
+          subPath: ""
+          mountPropagation: ""
+
+# -- Image Pull Secrets
+imagePullSecrets:
+  # -- Image Pull Secret name
+  image-secret-name:
+    # -- Enables the Image Pull Secret
+    enabled: false
+    # -- Image Pull Secret Data
+    data:
+      # -- Registry
+      registry: ""
+      # -- Username
+      username: ""
+      # -- Password
+      password: ""
+      # -- Email
+      email: ""
+    # targetSelector: all
+    targetSelector:
+      - pod-name
+
+# -- SCALE GPU
+scaleGPU:
+  - gpu:
+      key: value
+    # Without targetSelector, the gpu will
+    # be applied to primary pods
+    targetSelector:
+      pod-name:
+        - container-name
+
+# -- SCALE External Interfaces
+scaleExternalInterfaces:
+  - hostInterface: ""
+    ipam:
+      type: ""
+    staticRoutes: []
+    staticIPConfigurations: []
+    # targetSelector: all
+    targetSelector:
+      - pod-name
+
+# -- SCALE Certificates
+scaleCerts:
+  # -- Certificate name
+  cert-name:
+    # -- Enables the certificate
+    enabled: false
+    # -- Certificate ID (Comes from SCALE)
+    id: 1
+    # -- Default Paths that will be used on all defined containers
+    # Can be overruled per container under targetSelector
+    certPath: ""
+    keyPath: ""
+    # -- Defining a selector is only needed
+    # if you want to mount the certificate file(s)
+    # It will be mounted as readOnly
+    targetSelector:
+      pod-name:
+        container-name:
+          certPath: ""
+          keyPath: ""
+
+# -- Devices
+devices:
+  # -- Device name
+  device-name:
+    # -- Enables the device
+    enabled: false
+    # -- Device host path
+    hostPath: /host/device/path
+    # -- Options that apply to all volumeMounts
+    # Can be overruled per volumeMount under targetSelector
+    mountPath: /shared
+    readOnly: False
+    subPath: ""
+    mountPropagation: ""
+    # Where to define the volume and mount the volume
+    # targetSelector: all
+    targetSelector:
+      pod-name:
+        container-name:
+          mountPath: /shared
+          readOnly: False
+          subPath: ""
+          mountPropagation: ""
+
+notes:
+  header: |
+    # Welcome to SCALE
+    Thank you for installing {{ .Chart.Name }}.
+  custom: ""
+  footer: |
+    # Documentation
+    # Bug reports
+
+# -- Controllers
+controllers:
+  # -- Controller name
+  controller-name:
+    # -- Enables the controller
+    enabled: false
+    # -- Controller type
+    type: Deployment
+    # -- Controller labels
+    labels: {}
+    # -- Controller annotations
+    annotations: {}
+    # -- Controller replicas (Deployment and StatefulSet only)
+    replicas: 1
+    # -- Controller revision history limit
+    revisionHistoryLimit: 10
+    # Strategy
+    strategy:
+      # -- Controller strategy type
+      type: RollingUpdate
+      # -- Controller strategy rolling update
+      rollingUpdate:
+        # -- Controller strategy rolling update max unavailable
+        maxUnavailable: 1
+        # -- Controller strategy rolling update max surge
+        maxSurge: 1
+        # -- Controller strategy rolling update partition (StatefulSet only)
+        partition: 0
+    # -- CronJob
+    # - CronJob schedule
+    schedule: ""
+    # - CronJob concurrency policy
+    concurrencyPolicy: ""
+    # - CronJob timezone
+    timezone: ""
+    # - CronJob failed jobs history limit
+    failedJobsHistoryLimit: 1
+    # - CronJob successful jobs history limit
+    successfulJobsHistoryLimit: 3
+    # - CronJob starting deadline seconds
+    startingDeadlineSeconds: 0
+
+    # -- Job
+    # - Job active deadline seconds
+    activeDeadlineSeconds: 0
+    # - Job backoff limit
+    backoffLimit: 6
+    # - Job completions
+    completions: 1
+    # - Job parallelism
+    parallelism: 1
+    # - Job ttl seconds after finished
+    ttlSecondsAfterFinished: 0
+    # - Job completion mode
+    completionMode: NonIndexed
+
+    # -- Pod Spec
+    podSpec:
+      # -- hostNetwork
+      hostNetwork: false
+      # -- enableServiceLinks
+      enableServiceLinks: true
+      # -- restartPolicy
+      restartPolicy: Always
+      # -- schedulerName
+      schedulerName: ""
+      # -- priorityClassName
+      priorityClassName: ""
+      # -- hostname
+      hostname: ""
+      # -- nodeselector
+      nodeSelector: {}
+      # -- tolerations
+      tolerations: []
+      # -- runtimeClassName
+      runtimeClassName: ""
+      # -- terminationGracePeriodSeconds
+      terminationGracePeriodSeconds: 30
+      # -- securityContext
+      securityContext:
+        fsGroup: 0
+        fsGroupChangePolicy: OnRootMismatch
+        supplementalGroups: []
+      # -- Containers
+      containers:
+        # -- Container name
+        container-name:
+          # -- Enables the container
+          enabled: true
+          # -- Container image
+          imageSelector: ""
+          tty: false
+          stdin: false
+          command: []
+          args: []
+          extraArgs: []
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 568
+            runAsGroup: 568
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            privileged: false
+            capabilities:
+              add: []
+              drop:
+                - ALL
+          lifecycle:
+            postStart:
+              command: []
+            preStop:
+              command: []
+          termination:
+            messagePath: ""
+            messagePolicy: ""
+          env: {}
+          envList: []
+          envFrom: []
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          probes:
+            liveness:
+              enabled: true
+              type: HTTP
+              port:
+              path:
+              httpHeaders: {}
+              command: []
+            readiness:
+              enabled: true
+              type: HTTP
+              port:
+              path:
+              httpHeaders: {}
+              command: []
+            startup:
+              enabled: true
+              type: HTTP
+              port:
+              path:
+              httpHeaders: {}
+              command: []
+      initContainers:
+        init-cont-name:
+          enabled: false
+          type: install
+          # ...containerSpec
+
+# TODO:
+portal: {}
