@@ -45,8 +45,7 @@ data:
     {{- if eq $objectData.type "certificate" }}
       {{/* TODO: print certificate values and test */}}
     {{- else if eq $objectData.type "imagePullSecret" }}
-      {{/* TODO: test this */}}
-  .dockerconfigjson: {{ $objectData.data | toJson | b64enc }}
+  .dockerconfigjson: {{ $objectData.data | trim | b64enc }}
     {{- end -}}
   {{- else }}
 stringData:

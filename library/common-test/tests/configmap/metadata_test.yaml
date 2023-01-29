@@ -1,11 +1,11 @@
-suite: secret test
+suite: configmap metadata test
 templates:
   - common.yaml
 chart:
   appVersion: &appVer v9.9.9
 tests:
-  - it: should pass with secret created with labels and annotations
-    documentIndex: &secretDoc 0
+  - it: should pass with configmap created with labels and annotations
+    documentIndex: &configMapDoc 0
     set:
       label1: label1
       label2: global_label2
@@ -18,8 +18,8 @@ tests:
         annotations:
           g_annotation1: global_annotation1
           g_annotation2: "{{ .Values.annotation2 }}"
-      secrets:
-        my-secret1:
+      configmaps:
+        my-configmap1:
           enabled: true
           labels:
             label1: "{{ .Values.label1 }}"
@@ -31,7 +31,7 @@ tests:
             foo: bar
     asserts:
       - isKind:
-          of: Secret
+          of: ConfigMap
       - equal:
           path: metadata.annotations
           value:

@@ -35,34 +35,6 @@ image:
   # -- Image pull policy
   pullPolicy: IfNotPresent
 
-# -- ConfigMaps (docs/configmaps.md)
-configmaps: {}
-  # # -- ConfigMap name
-  # conf-name:
-  #   # -- Enables the ConfigMap
-  #   enabled: false
-  #   # -- ConfigMap labels
-  #   labels: {}
-  #   # -- ConfigMap annotations
-  #   annotations: {}
-  #   # -- ConfigMap data
-  #   data: {}
-
-# -- Secrets (docs/secrets.md)
-secrets: {}
-  # # -- Secret name
-  # secret-name:
-  #   # -- Enables the secret
-  #   enabled: false
-  #   # -- Secret labels
-  #   labels: {}
-  #   # -- Secret annotations
-  #   annotations: {}
-  #   # -- Secret data
-  #   data:
-  #     # -- Secret data (stringData)
-  #     key: value
-
 # -- Service Account:
 serviceAccount:
   sa-name:
@@ -118,8 +90,11 @@ securityContext:
   # Can be overruled per pod
   pod:
     fsGroup: 568
-    supplementalGroups: []
     fsGroupChangePolicy: OnRootMismatch
+    supplementalGroups: []
+    sysctls: {}
+      # net.ipv4.ip_unprivileged_port_start: "0"
+      # net.ipv4.ping_group_range:
 
 # -- Resources
 # Can be overruled per container
@@ -322,6 +297,10 @@ imagePullSecrets:
   image-secret-name:
     # -- Enables the Image Pull Secret
     enabled: false
+    # -- Labels
+    labels: {}
+    # -- Annotations
+    annotations: {}
     # -- Image Pull Secret Data
     data:
       # -- Registry
@@ -329,9 +308,10 @@ imagePullSecrets:
       # -- Username
       username: ""
       # -- Password
-      password: ""
+      password: "asfd"
       # -- Email
       email: ""
+    # TODO: Add support for targetSelector
     # targetSelector: all
     targetSelector:
       - pod-name
@@ -491,8 +471,9 @@ controllers:
       terminationGracePeriodSeconds: 30
       # -- securityContext
       securityContext:
-        fsGroup: 0
+        fsGroup: 568
         fsGroupChangePolicy: OnRootMismatch
+        sysctls: []
         supplementalGroups: []
       # -- Containers
       containers:
@@ -566,3 +547,31 @@ controllers:
 
 # TODO:
 portal: {}
+
+# -- ConfigMaps (docs/configmaps.md)
+configmaps: {}
+  # # -- ConfigMap name
+  # conf-name:
+  #   # -- Enables the ConfigMap
+  #   enabled: false
+  #   # -- ConfigMap labels
+  #   labels: {}
+  #   # -- ConfigMap annotations
+  #   annotations: {}
+  #   # -- ConfigMap data
+  #   data: {}
+
+# -- Secrets (docs/secrets.md)
+secrets: {}
+  # # -- Secret name
+  # secret-name:
+  #   # -- Enables the secret
+  #   enabled: false
+  #   # -- Secret labels
+  #   labels: {}
+  #   # -- Secret annotations
+  #   annotations: {}
+  #   # -- Secret data
+  #   data:
+  #     # -- Secret data (stringData)
+  #     key: value
