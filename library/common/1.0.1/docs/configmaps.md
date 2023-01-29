@@ -19,7 +19,7 @@ Appears in:
 
 Naming scheme:
 
-- `$FullName-$ConfigmapName`
+- `$FullName-$ConfigmapName` (release-name-chart-name-configmapName)
 
 ---
 
@@ -43,7 +43,6 @@ configmaps:
     enabled: true
       data:
         key: |
+          multi line
           text value
-
-
 ```

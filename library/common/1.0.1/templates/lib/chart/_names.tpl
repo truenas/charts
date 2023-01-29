@@ -3,7 +3,7 @@
 {{/* Returns the name of the Chart */}}
 {{- define "ix.common.lib.chart.names.name" -}}
 
-  {{- .Chart.Name | trunc 63 | trimSuffix "-" -}}
+  {{- .Chart.Name | lower | trunc 63 | trimSuffix "-" -}}
 
 {{- end -}}
 
@@ -12,12 +12,30 @@
 
   {{- $name := include "ix.common.lib.chart.names.name" . -}}
 
-  {{- if contains $name .Release.name -}}
+  {{- if contains $name .Release.Name -}}
     {{- $name = .Release.Name -}}
   {{- else -}}
     {{- $name = printf "%s-%s" .Release.Name $name -}}
   {{- end -}}
 
-  {{- $name | trunc 63 | trimSuffix "-" -}}
+  {{- $name | lower | trunc 63 | trimSuffix "-" -}}
+
+{{- end -}}
+
+{{/* Validates names */}}
+{{- define "ix.v1.common.lib.chart.names.validation" -}}
+
+  {{- $name := .name -}}
+
+  {{- if not (mustRegexMatch "^[a-z0-9]([a-z0-9-]){1,61}[a-z0-9]$" $name) -}}
+    {{- fail (printf "Name [%s] is not valid. Must start and end with an alphanumeric character. It can contain '-'. And must be at most 63 characters." $name) -}}
+  {{- end -}}
+
+{{- end -}}
+
+{{/* Create chart name and version as used by the chart label */}}
+{{- define "ix.v1.common.lib.chart.names.chart" -}}
+
+  {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 
 {{- end -}}

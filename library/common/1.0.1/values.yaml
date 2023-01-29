@@ -36,19 +36,17 @@ image:
   pullPolicy: IfNotPresent
 
 # -- ConfigMaps
-configmaps:
-  # -- ConfigMap name
-  conf-name:
-    # -- Enables the ConfigMap
-    enabled: false
-    # -- ConfigMap labels
-    labels: {}
-    # -- ConfigMap annotations
-    annotations: {}
-    # -- ConfigMap data
-    data:
-      # -- ConfigMap data
-      key: value
+configmaps: {}
+  # # -- ConfigMap name
+  # conf-name:
+  #   # -- Enables the ConfigMap
+  #   enabled: false
+  #   # -- ConfigMap labels
+  #   labels: {}
+  #   # -- ConfigMap annotations
+  #   annotations: {}
+  #   # -- ConfigMap data
+  #   data: {}
 
 # -- Secrets
 secrets:

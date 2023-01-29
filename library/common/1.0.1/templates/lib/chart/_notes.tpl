@@ -9,11 +9,11 @@
 {{- end -}}
 
 {{- define "ix.v1.common.lib.chart.header" -}}
-  {{- tpl $.Values.common.notes.header $ | nindent 0 }}
+  {{- tpl $.Values.notes.header $ | nindent 0 }}
 {{- end -}}
 {{- define "ix.v1.common.lib.chart.custom" -}}
-  {{- tpl $.Values.common.notes.header $ | nindent 0 }}
+  {{- tpl $.Values.notes.header $ | nindent 0 }}
 {{- end -}}
 {{- define "ix.v1.common.lib.chart.footer" -}}
-  {{- tpl $.Values.common.notes.header $ | nindent 0 }}
+  {{- tpl $.Values.notes.header $ | nindent 0 }}
 {{- end -}}
