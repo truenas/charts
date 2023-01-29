@@ -4,7 +4,4 @@ helm-extra-args: --timeout 600s --debug
 chart-yaml-schema: .github/ct-install-config/chart_schema.yaml
 chart-dirs:
   - library
-# TODO: Remove
-excluded-charts:
-  - common/1.0.0
-  - common-test
+excluded-charts: []

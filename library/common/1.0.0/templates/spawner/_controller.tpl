@@ -1,6 +1,6 @@
 {{/* Configmap Spawwner */}}
 {{/* Call this template:
-{{ include "ix.v1.common.spawner.configmaps" . -}}
+{{ include "ix.v1.common.spawner.configmaps" $ -}}
 */}}
 
 {{- define "ix.v1.common.spawner.configmaps" -}}

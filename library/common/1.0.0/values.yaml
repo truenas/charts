@@ -35,7 +35,7 @@ image:
   # -- Image pull policy
   pullPolicy: IfNotPresent
 
-# -- ConfigMaps
+# -- ConfigMaps (docs/configmaps.md)
 configmaps: {}
   # # -- ConfigMap name
   # conf-name:
@@ -48,7 +48,7 @@ configmaps: {}
   #   # -- ConfigMap data
   #   data: {}
 
-# -- Secrets
+# -- Secrets (docs/secrets.md)
 secrets: {}
   # # -- Secret name
   # secret-name:

@@ -1,6 +1,6 @@
 {{/* Labels that are added to all objects */}}
 {{/* Call this template:
-{{ include "ix.v1.common.lib.metadata.allLabels" . }}
+{{ include "ix.v1.common.lib.metadata.allLabels" $ }}
 */}}
 {{- define "ix.v1.common.lib.metadata.allLabels" -}}
 helm.sh/chart: {{ include "ix.v1.common.lib.chart.names.chart" . }}

@@ -1,6 +1,6 @@
 {{/* Secret Spawwner */}}
 {{/* Call this template:
-{{ include "ix.v1.common.spawner.secrets" . -}}
+{{ include "ix.v1.common.spawner.secrets" $ -}}
 */}}
 
 {{- define "ix.v1.common.spawner.secrets" -}}
