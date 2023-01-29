@@ -4,7 +4,7 @@
 # -- You need to install this helm plugin
 # helm plugin install https://github.com/quintush/helm-unittest
 
-common_test_path="library/common-test"
+common_test_path="library/common-testing"
 
 function cleanup {
   if [ -d "$common_test_path/charts" ]; then

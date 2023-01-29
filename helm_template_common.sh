@@ -1,6 +1,6 @@
 #!/bin/bash
 
-chart_path=library/common-test
+chart_path=library/common-testing
 
 if [ ! $1 == "template" ]; then
   if [ $1 == "-f" ] && [ ! -z $2 ]; then
