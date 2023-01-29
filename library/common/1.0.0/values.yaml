@@ -291,30 +291,6 @@ volumeClaimTemplates:
           subPath: ""
           mountPropagation: ""
 
-# -- Image Pull Secrets
-imagePullSecrets:
-  # -- Image Pull Secret name
-  image-secret-name:
-    # -- Enables the Image Pull Secret
-    enabled: false
-    # -- Labels
-    labels: {}
-    # -- Annotations
-    annotations: {}
-    # -- Image Pull Secret Data
-    data:
-      # -- Registry
-      registry: ""
-      # -- Username
-      username: ""
-      # -- Password
-      password: "asfd"
-      # -- Email
-      email: ""
-    # TODO: Add support for targetSelector
-    # targetSelector: all
-    targetSelector:
-      - pod-name
 
 # -- SCALE GPU
 scaleGPU:
@@ -547,6 +523,31 @@ controllers:
 
 # TODO:
 portal: {}
+
+# # -- Image Pull Secrets
+# imagePullSecrets:
+#   # -- Image Pull Secret name
+#   image-secret-name:
+#     # -- Enables the Image Pull Secret
+#     enabled: false
+#     # -- Labels
+#     labels: {}
+#     # -- Annotations
+#     annotations: {}
+#     # -- Image Pull Secret Data
+#     data:
+#       # -- Registry
+#       registry: ""
+#       # -- Username
+#       username: ""
+#       # -- Password
+#       password: ""
+#       # -- Email
+#       email: ""
+#     # TODO: Add support for targetSelector
+#     # targetSelector: all
+#     targetSelector:
+#       - pod-name
 
 # -- ConfigMaps (docs/configmaps.md)
 configmaps: {}
