@@ -23,7 +23,7 @@ metadata:
   {{- with (include "ix.v1.common.lib.metadata.render" (dict "rootCtx" $rootCtx "labels" $labels) | trim) }}
   labels:
     {{- . | nindent 4 }}
-  {{- end }}
+  {{- end -}}
   {{- $annotations := (mustMerge ($objectData.annotations | default dict) (include "ix.v1.common.lib.metadata.allAnnotations" $rootCtx | fromYaml)) -}}
   {{- with (include "ix.v1.common.lib.metadata.render" (dict "rootCtx" $rootCtx "annotations" $annotations) | trim) }}
   annotations:
@@ -31,4 +31,5 @@ metadata:
   {{- end }}
 data:
   {{- tpl (toYaml $objectData.data) $rootCtx | nindent 2 }}
+  {{/* This comment is here to add a new line */}}
 {{- end -}}

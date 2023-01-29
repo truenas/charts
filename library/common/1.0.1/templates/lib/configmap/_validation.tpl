@@ -12,19 +12,19 @@ objectData:
   {{- $objectData := .objectData -}}
 
   {{- if not $objectData.data -}}
-    {{- fail "Configmap - Expected non-empty <data>" -}}
+    {{- fail "ConfigMap - Expected non-empty <data>" -}}
   {{- end -}}
 
   {{- if not (kindIs "map" $objectData.data) -}}
-    {{- fail (printf "Configmap - Expected <data> to be a dictionary, but got [%v]" (kindOf $objectData.data)) -}}
+    {{- fail (printf "ConfigMap - Expected <data> to be a dictionary, but got [%v]" (kindOf $objectData.data)) -}}
   {{- end -}}
 
   {{- if and $objectData.labels (not (kindIs "map" $objectData.labels)) -}}
-    {{- fail (printf "Configmap - Expected <labels> to be a dictionary, but got [%v]" (kindOf $objectData.labels)) -}}
+    {{- fail (printf "ConfigMap - Expected <labels> to be a dictionary, but got [%v]" (kindOf $objectData.labels)) -}}
   {{- end -}}
 
   {{- if and $objectData.annotations (not (kindIs "map" $objectData.annotations)) -}}
-    {{- fail (printf "Configmap - Expected <annotations> to be a dictionary, but got [%v]" (kindOf $objectData.annotations)) -}}
+    {{- fail (printf "ConfigMap - Expected <annotations> to be a dictionary, but got [%v]" (kindOf $objectData.annotations)) -}}
   {{- end -}}
 
 {{- end -}}

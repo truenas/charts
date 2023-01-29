@@ -49,19 +49,19 @@ configmaps: {}
   #   data: {}
 
 # -- Secrets
-secrets:
-  # -- Secret name
-  secret-name:
-    # -- Enables the secret
-    enabled: false
-    # -- Secret labels
-    labels: {}
-    # -- Secret annotations
-    annotations: {}
-    # -- Secret data
-    data:
-      # -- Secret data (stringData)
-      key: value
+secrets: {}
+  # # -- Secret name
+  # secret-name:
+  #   # -- Enables the secret
+  #   enabled: false
+  #   # -- Secret labels
+  #   labels: {}
+  #   # -- Secret annotations
+  #   annotations: {}
+  #   # -- Secret data
+  #   data:
+  #     # -- Secret data (stringData)
+  #     key: value
 
 # -- Service Account:
 serviceAccount:
