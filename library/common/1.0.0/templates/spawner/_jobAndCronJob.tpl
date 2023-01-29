@@ -18,9 +18,9 @@
 
     {{/* Add the .Values as the main container and as pod */}}
     {{/* This needs some redesign tbh */}}
-    {{- $_ := set $jobValues "podSpec" (mustDeepCopy $.Values) -}}
+    {{- $_ := set $jobValues "podSpec" (mustDeepCopy $.Values.controllers.main) -}}
     {{- $_ := set $jobValues.podSpec "containers" dict -}}
-    {{- $_ := set $jobValues.podSpec.containers "main" .Values -}}
+    {{- $_ := set $jobValues.podSpec.containers "main" .Values.controllers.main.pod.containers.main -}}
     {{- $_ := set $jobValues.podSpec.containers.main "enabled" "true" -}}
 
     {{/* Add labels/annotations if any. */}}
@@ -46,7 +46,6 @@
     {{- end -}}
     {{/* Add $jobValues to a "main" $job, now the spawner has the "usual" format */}}
     {{- $_ := set $jobs "main" $jobValues -}}
-
   {{- else -}}
 
     {{/* If it's not "standalone" Use the jobs dict */}}

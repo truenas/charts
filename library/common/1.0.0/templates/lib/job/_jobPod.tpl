@@ -189,7 +189,7 @@
     {{- end -}}
   {{- end -}}
 {{- else -}} {{/* Otherwise use the job's podSecCont values (if empty, will use the global defaults) */}}
-  {{- with (include "ix.v1.common.container.podSecurityContext" (dict "podSecCont" $values.podSecurityContext "root" $root "isJob" true) | trim) -}}
+  {{- with (include "ix.v1.common.container.podSecurityContext" (dict "podSecCont" $root.Values.podSecurityContext "root" $root "isJob" true) | trim) -}}
     {{- $secCont = . -}}
   {{- end -}}
 {{- end -}}
