@@ -291,7 +291,6 @@ volumeClaimTemplates:
           subPath: ""
           mountPropagation: ""
 
-
 # -- SCALE GPU
 scaleGPU:
   - gpu:
@@ -373,28 +372,31 @@ controllers:
   controller-name:
     # -- Enables the controller
     enabled: false
+    # -- Primary controller
+    primary: true
     # -- Controller type
     type: Deployment
     # -- Controller labels
     labels: {}
     # -- Controller annotations
     annotations: {}
-    # -- Controller replicas (Deployment and StatefulSet only)
-    replicas: 1
-    # -- Controller revision history limit
-    revisionHistoryLimit: 10
-    # Strategy
-    strategy:
-      # -- Controller strategy type
-      type: RollingUpdate
-      # -- Controller strategy rolling update
-      rollingUpdate:
-        # -- Controller strategy rolling update max unavailable
-        maxUnavailable: 1
-        # -- Controller strategy rolling update max surge
-        maxSurge: 1
-        # -- Controller strategy rolling update partition (StatefulSet only)
-        partition: 0
+
+    # # -- Controller replicas (Deployment and StatefulSet only)
+    # replicas: 1
+    # # -- Controller revision history limit
+    # revisionHistoryLimit: 3
+    # # Strategy
+    # # -- Controller strategy type
+    # strategy: Recreate
+    # # -- Controller strategy rolling update
+    # rollingUpdate:
+    #   # -- Controller strategy rolling update max unavailable
+    #   maxUnavailable: 1
+    #   # -- Controller strategy rolling update max surge
+    #   maxSurge: 1
+    #   # -- Controller strategy rolling update partition (StatefulSet only)
+    #   partition: 0
+
     # -- CronJob
     # - CronJob schedule
     schedule: ""

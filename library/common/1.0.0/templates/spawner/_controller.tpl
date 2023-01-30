@@ -1,21 +1,41 @@
-{{/* Configmap Spawwner */}}
+{{/* Controller Spawner */}}
 {{/* Call this template:
-{{ include "ix.v1.common.spawner.configmaps" $ -}}
+{{ include "ix.v1.common.spawner.controllers" $ -}}
 */}}
 
-{{- define "ix.v1.common.spawner.configmaps" -}}
+{{- define "ix.v1.common.spawner.controllers" -}}
 
-  {{- range $name, $configmap := .Values.configmaps -}}
+  {{/* Primary validation for enabled controllers. */}}
+  {{- include "ix.v1.common.lib.controllers.primaryValidation" $ -}}
 
-    {{- if $configmap.enabled -}}
+  {{- range $name, $controller := .Values.controllers -}}
 
-      {{/* Create a copy of the configmap */}}
-      {{- $objectData := (mustDeepCopy $configmap) -}}
+    {{- if $controller.enabled -}}
 
-      {{/* Set the name of the configmap */}}
-      {{- $_ := set $objectData "name" (printf "%s-%s" (include "ix.common.lib.chart.names.fullname" $) $name) -}}
+      {{/* Create a copy of the controller */}}
+      {{- $objectData := (mustDeepCopy $controller) -}}
+
+      {{/* Generate the name of the controller */}}
+      {{- $objectName := include "ix.common.lib.chart.names.fullname" $ -}}
+      {{- if not $objectData.primary -}}
+        {{- $objectName = printf "%s-%s" (include "ix.common.lib.chart.names.fullname" $) $name -}}
+      {{- end -}}
+
+      {{/* Perform validations */}}
+      {{- include "ix.v1.common.lib.chart.names.validation" (dict "name" $objectName) -}}
+      {{- include "ix.v1.common.lib.controller.basicValidation" (dict "objectData" $objectData) -}}
+
+      {{/* Set the name of the controller */}}
+      {{- $_ := set $objectData "name" $objectName -}}
+
       {{/* Call class to create the object */}}
-      {{- include "ix.v1.common.class.configmap" (dict "objectData" $objectData "rootCtx" $) -}}
+      {{- if eq $objectData.type "Deployment" -}}
+        {{- include "ix.v1.common.class.deployment" (dict "objectData" $objectData "rootCtx" $) -}}
+      {{- else if eq $objectData.type "StatefulSet" -}}
+      {{- else if eq $objectData.type "DaemonSet" -}}
+      {{- else if eq $objectData.type "Job" -}}
+      {{- else if eq $objectData.type "CronJob" -}}
+      {{- end -}}
 
     {{- end -}}
 

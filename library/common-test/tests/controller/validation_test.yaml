@@ -1,0 +1,98 @@
+suite: controller validation test
+templates:
+  - common.yaml
+tests:
+  - it: should fail with name longer than 63 characters
+    set:
+      controllers:
+        controller-name:
+          enabled: true
+          primary: true
+          type: Deployment
+        other-controller-name-super-long-name-that-is-longer-than-63-characters:
+          enabled: true
+          primary: false
+          type: Deployment
+    asserts:
+      - failedTemplate:
+          errorMessage: Name [release-name-common-test-other-controller-name-super-long-name-that-is-longer-than-63-characters] is not valid. Must start and end with an alphanumeric character. It can contain '-'. And must be at most 63 characters.
+
+  - it: should fail with name starting with underscore
+    set:
+      controllers:
+        controller-name:
+          enabled: true
+          primary: true
+          type: Deployment
+        _other-controller-name:
+          enabled: true
+          primary: false
+          type: Deployment
+    asserts:
+      - failedTemplate:
+          errorMessage: Name [release-name-common-test-_other-controller-name] is not valid. Must start and end with an alphanumeric character. It can contain '-'. And must be at most 63 characters.
+
+  - it: should fail with invalid type
+    set:
+      controllers:
+        controller-name:
+          enabled: true
+          primary: true
+          type: not-valid-type
+    asserts:
+      - failedTemplate:
+          errorMessage: Controller - Expected <type> to be one of [Deployment, StatefulSet, DaemonSet, Job, CronJob], but got [not-valid-type]
+
+  - it: should fail without primary enabled controller
+    set:
+      controllers:
+        controller-name:
+          enabled: false
+          primary: true
+          type: Deployment
+        other-controller-name:
+          enabled: true
+          primary: false
+          type: Deployment
+    asserts:
+      - failedTemplate:
+          errorMessage: Controller - At least one enabled controller must be primary
+
+  - it: should fail more than one primary enabled controller
+    set:
+      controllers:
+        controller-name:
+          enabled: true
+          primary: true
+          type: Deployment
+        other-controller-name:
+          enabled: true
+          primary: true
+          type: Deployment
+    asserts:
+      - failedTemplate:
+          errorMessage: Controller - Only one controller can be primary
+
+  - it: should fail with labels not a dict
+    set:
+      controllers:
+        controller-name:
+          enabled: true
+          primary: true
+          type: Deployment
+          labels: "not a dict"
+    asserts:
+      - failedTemplate:
+          errorMessage: Controller - Expected <labels> to be a dictionary, but got [string]
+
+  - it: should fail with annotations not a dict
+    set:
+      controllers:
+        controller-name:
+          enabled: true
+          primary: true
+          type: Deployment
+          annotations: "not a dict"
+    asserts:
+      - failedTemplate:
+          errorMessage: Controller - Expected <annotations> to be a dictionary, but got [string]

@@ -1,0 +1,52 @@
+suite: deployment spec test
+templates:
+  - common.yaml
+tests:
+  - it: should pass with controller enabled
+    set:
+      controllers:
+        controller-name:
+          enabled: true
+          primary: true
+          type: Deployment
+    asserts:
+      - documentIndex: &deploymentDoc 0
+        isKind:
+          of: Deployment
+      - documentIndex: *deploymentDoc
+        isAPIVersion:
+          of: apps/v1
+      - documentIndex: *deploymentDoc
+        isSubset:
+          path: spec
+          content:
+            replicas: 1
+            revisionHistoryLimit: 3
+            strategy:
+              type: Recreate
+
+  - it: should apply spec correctly
+    set:
+      controllers:
+        controller-name:
+          enabled: true
+          primary: true
+          type: Deployment
+          replicas: 2
+          revisionHistoryLimit: 4
+          strategy: RollingUpdate
+          rollingUpdate:
+            maxSurge: 5
+            maxUnavailable: 5
+    asserts:
+      - documentIndex: *deploymentDoc
+        isSubset:
+          path: spec
+          content:
+            replicas: 2
+            revisionHistoryLimit: 4
+            strategy:
+              type: RollingUpdate
+              rollingUpdate:
+                maxSurge: 5
+                maxUnavailable: 5

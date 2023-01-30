@@ -1,10 +1,11 @@
-suite: secret metadata test
+suite: deployment metadata test
 templates:
   - common.yaml
 chart:
   appVersion: &appVer v9.9.9
 tests:
-  - it: should pass with secret created with labels and annotations
+  - it: should pass with deployment created with labels and annotations
+
     set:
       label1: label1
       label2: global_label2
@@ -17,22 +18,22 @@ tests:
         annotations:
           g_annotation1: global_annotation1
           g_annotation2: "{{ .Values.annotation2 }}"
-      secrets:
-        my-secret1:
+      controllers:
+        controller-name:
           enabled: true
+          primary: true
+          type: Deployment
           labels:
             label1: "{{ .Values.label1 }}"
             label2: label2
           annotations:
             annotation1: "{{ .Values.annotation1 }}"
             annotation2: annotation2
-          data:
-            foo: bar
     asserts:
-      - documentIndex: &secretDoc 0
+      - documentIndex: &deploymentDoc 0
         isKind:
-          of: Secret
-      - documentIndex: *secretDoc
+          of: Deployment
+      - documentIndex: *deploymentDoc
         equal:
           path: metadata.annotations
           value:
@@ -40,7 +41,7 @@ tests:
             annotation2: annotation2
             g_annotation1: global_annotation1
             g_annotation2: global_annotation2
-      - documentIndex: *secretDoc
+      - documentIndex: *deploymentDoc
         equal:
           path: metadata.labels
           value:

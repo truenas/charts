@@ -5,7 +5,6 @@ chart:
   appVersion: &appVer v9.9.9
 tests:
   - it: should pass with configmap created with labels and annotations
-    documentIndex: &configMapDoc 0
     set:
       label1: label1
       label2: global_label2
@@ -30,16 +29,19 @@ tests:
           data:
             foo: bar
     asserts:
-      - isKind:
+      - documentIndex: &configMapDoc 0
+        isKind:
           of: ConfigMap
-      - equal:
+      - documentIndex: *configMapDoc
+        equal:
           path: metadata.annotations
           value:
             annotation1: annotation1
             annotation2: annotation2
             g_annotation1: global_annotation1
             g_annotation2: global_annotation2
-      - equal:
+      - documentIndex: *configMapDoc
+        equal:
           path: metadata.labels
           value:
             app: common-test-1.0.0
