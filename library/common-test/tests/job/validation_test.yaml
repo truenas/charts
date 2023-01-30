@@ -10,6 +10,7 @@ tests:
           primary: true
           type: Job
           completionMode: not-a-mode
+          podSpec: {}
     asserts:
       - failedTemplate:
           errorMessage: Job - Expected <completionMode> to be one of [Indexed, NonIndexed], but got [not-a-mode]
@@ -23,6 +24,7 @@ tests:
           type: Job
           completionMode: Indexed
           completions:
+          podSpec: {}
     asserts:
       - failedTemplate:
           errorMessage: Job - Expected <completions> to be set when <completionMode> is set to [Indexed]
@@ -37,6 +39,7 @@ tests:
           completionMode: Indexed
           completions: 5
           parallelism:
+          podSpec: {}
     asserts:
       - failedTemplate:
           errorMessage: Job - Expected <parallelism> to be set when <completionMode> is set to [Indexed]

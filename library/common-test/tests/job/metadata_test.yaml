@@ -28,6 +28,13 @@ tests:
           annotations:
             annotation1: "{{ .Values.annotation1 }}"
             annotation2: annotation2
+          podSpec:
+            labels:
+              pod-label1: pod-label1
+              pod-label2: "{{ .Values.label2 }}"
+            annotations:
+              pod-annotation1: pod-annotation1
+              pod-annotation2: "{{ .Values.annotation2 }}"
     asserts:
       - documentIndex: &jobDoc 0
         isKind:
@@ -54,3 +61,59 @@ tests:
             g_label2: global_label2
             label1: label1
             label2: label2
+      - documentIndex: *jobDoc
+        equal:
+          path: spec.template.metadata.labels
+          value:
+            pod.name: release-name-common-test
+            app: common-test-1.0.0
+            release: release-name
+            app.kubernetes.io/instance: RELEASE-NAME
+            app.kubernetes.io/managed-by: Helm
+            app.kubernetes.io/name: common-test
+            app.kubernetes.io/version: v9.9.9
+            helm-revision: 0
+            helm.sh/chart: common-test-1.0.0
+            g_label1: global_label1
+            g_label2: global_label2
+            pod-label1: pod-label1
+            pod-label2: global_label2
+      - documentIndex: *jobDoc
+        matchRegex:
+          path: spec.template.metadata.annotations.rollme
+          pattern: '^[0-9a-zA-Z]{5}$'
+
+  - it: should pass with 2 job created with correct selector labels
+    set:
+      controllers:
+        controller-name:
+          enabled: true
+          primary: true
+          type: Job
+          podSpec: {}
+        other-controller-name:
+          enabled: true
+          primary: false
+          type: Job
+          podSpec: {}
+    asserts:
+      - documentIndex: *jobDoc
+        isKind:
+          of: Job
+      - documentIndex: *jobDoc
+        isSubset:
+          path: spec.template.metadata.labels
+          content:
+            pod.name: release-name-common-test
+            app.kubernetes.io/instance: RELEASE-NAME
+            app.kubernetes.io/name: common-test
+      - documentIndex: &otherJobDoc 1
+        isKind:
+          of: Job
+      - documentIndex: *otherJobDoc
+        isSubset:
+          path: spec.template.metadata.labels
+          content:
+            pod.name: release-name-common-test-other-controller-name
+            app.kubernetes.io/instance: RELEASE-NAME
+            app.kubernetes.io/name: common-test

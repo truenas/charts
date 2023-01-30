@@ -9,6 +9,7 @@ tests:
           enabled: true
           primary: true
           type: Job
+          podSpec: {}
     asserts:
       - documentIndex: &jobDoc 0
         isKind:
@@ -39,6 +40,7 @@ tests:
           parallelism: 5
           ttlSecondsAfterFinished: 100
           activeDeadlineSeconds: 100
+          podSpec: {}
     asserts:
       - documentIndex: *jobDoc
         isSubset:

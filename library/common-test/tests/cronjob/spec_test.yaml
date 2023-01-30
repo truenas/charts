@@ -10,6 +10,7 @@ tests:
           primary: true
           type: CronJob
           schedule: "* * * * *"
+          podSpec: {}
     asserts:
       - documentIndex: &cronJobDoc 0
         isKind:
@@ -58,6 +59,7 @@ tests:
           parallelism: 5
           ttlSecondsAfterFinished: 100
           activeDeadlineSeconds: 100
+          podSpec: {}
     asserts:
       - documentIndex: *cronJobDoc
         isSubset:
