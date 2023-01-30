@@ -377,17 +377,17 @@ controllers:
     # -- Controller type
     type: Deployment
     # -- Controller labels
-    labels: {}
-    # -- Controller annotations
-    annotations: {}
-    # -- Controller replicas (Deployment and StatefulSet only)
-    replicas: 1
-    # -- Controller revision history limit
-    revisionHistoryLimit: 3
-    # Strategy
-    # -- Controller strategy type
-    strategy: Recreate
-    # -- Controller strategy rolling update
+    # labels: {}
+    # # -- Controller annotations
+    # annotations: {}
+    # # -- Controller replicas (Deployment and StatefulSet only)
+    # replicas: 1
+    # # -- Controller revision history limit
+    # revisionHistoryLimit: 3
+    # # Strategy
+    # # -- Controller strategy type
+    # strategy: Recreate
+    # # -- Controller strategy rolling update
     # rollingUpdate:
     #   # -- Controller strategy rolling update max unavailable
     #   maxUnavailable: 1
@@ -396,19 +396,19 @@ controllers:
     #   # -- Controller strategy rolling update partition (StatefulSet only)
     #   partition: 0
 
-    # -- CronJob
-    # - CronJob schedule
-    schedule: "5"
-    # - CronJob concurrency policy
-    concurrencyPolicy: ""
-    # - CronJob timezone
-    timezone: ""
-    # - CronJob failed jobs history limit
-    failedJobsHistoryLimit: 1
-    # - CronJob successful jobs history limit
-    successfulJobsHistoryLimit: 3
-    # - CronJob starting deadline seconds
-    startingDeadlineSeconds: 0
+    # # -- CronJob
+    # # - CronJob schedule
+    # schedule: "5"
+    # # - CronJob concurrency policy
+    # concurrencyPolicy: ""
+    # # - CronJob timezone
+    # timezone: ""
+    # # - CronJob failed jobs history limit
+    # failedJobsHistoryLimit: 1
+    # # - CronJob successful jobs history limit
+    # successfulJobsHistoryLimit: 3
+    # # - CronJob starting deadline seconds
+    # startingDeadlineSeconds: 0
 
     # # -- Job
     # # - Job active deadline seconds
@@ -426,10 +426,10 @@ controllers:
 
     # -- Pod Spec
     podSpec:
-      # -- Pod labels
-      labels: {}
-      # -- Pod annotations
-      annotations: {}
+      # # -- Pod labels
+      # labels: {}
+      # # -- Pod annotations
+      # annotations: {}
       # -- hostNetwork
       hostNetwork: false
       # -- enableServiceLinks

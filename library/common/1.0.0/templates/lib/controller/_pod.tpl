@@ -5,4 +5,7 @@ rootCtx: The root context of the template. It is used to access the global conte
 objectData: The object data to be used to render the Pod.
 */}}
 {{- define "ix.v1.common.lib.controller.pod" -}}
+  {{- $rootCtx := .rootCtx -}}
+  {{- $objectData := .objectData -}}
+
 {{- end -}}
