@@ -28,6 +28,7 @@ tests:
           annotations:
             annotation1: "{{ .Values.annotation1 }}"
             annotation2: annotation2
+          podSpec: {}
     asserts:
       - documentIndex: &deploymentDoc 0
         isKind:

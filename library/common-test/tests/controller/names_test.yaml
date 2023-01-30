@@ -9,10 +9,12 @@ tests:
           enabled: true
           primary: true
           type: Deployment
+          podSpec: {}
         other-controller-name:
           enabled: true
           primary: false
           type: DaemonSet
+          podSpec: {}
     asserts:
       - documentIndex: &deploymentDoc 0
         isKind:

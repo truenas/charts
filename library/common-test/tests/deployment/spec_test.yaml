@@ -9,6 +9,7 @@ tests:
           enabled: true
           primary: true
           type: Deployment
+          podSpec: {}
     asserts:
       - documentIndex: &deploymentDoc 0
         isKind:
@@ -38,6 +39,7 @@ tests:
           rollingUpdate:
             maxSurge: 5
             maxUnavailable: 5
+          podSpec: {}
     asserts:
       - documentIndex: *deploymentDoc
         isSubset:
