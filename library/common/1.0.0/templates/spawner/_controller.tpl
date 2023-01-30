@@ -32,6 +32,7 @@
       {{- if eq $objectData.type "Deployment" -}}
         {{- include "ix.v1.common.class.deployment" (dict "objectData" $objectData "rootCtx" $) -}}
       {{- else if eq $objectData.type "StatefulSet" -}}
+        {{- include "ix.v1.common.class.statefulset" (dict "objectData" $objectData "rootCtx" $) -}}
       {{- else if eq $objectData.type "DaemonSet" -}}
         {{- include "ix.v1.common.class.daemonset" (dict "objectData" $objectData "rootCtx" $) -}}
       {{- else if eq $objectData.type "Job" -}}

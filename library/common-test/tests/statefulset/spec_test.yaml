@@ -1,0 +1,49 @@
+suite: statefulset spec test
+templates:
+  - common.yaml
+tests:
+  - it: should pass with controller enabled
+    set:
+      controllers:
+        controller-name:
+          enabled: true
+          primary: true
+          type: StatefulSet
+    asserts:
+      - documentIndex: &statefulSetDoc 0
+        isKind:
+          of: StatefulSet
+      - documentIndex: *statefulSetDoc
+        isAPIVersion:
+          of: apps/v1
+      - documentIndex: *statefulSetDoc
+        isSubset:
+          path: spec
+          content:
+            revisionHistoryLimit: 3
+            updateStrategy:
+              type: RollingUpdate
+
+  - it: should apply spec correctly
+    set:
+      controllers:
+        controller-name:
+          enabled: true
+          primary: true
+          type: StatefulSet
+          revisionHistoryLimit: 4
+          strategy: RollingUpdate
+          rollingUpdate:
+            partition: 5
+            maxUnavailable: 5
+    asserts:
+      - documentIndex: *statefulSetDoc
+        isSubset:
+          path: spec
+          content:
+            revisionHistoryLimit: 4
+            updateStrategy:
+              type: RollingUpdate
+              rollingUpdate:
+                partition: 5
+                maxUnavailable: 5

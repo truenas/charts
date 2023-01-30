@@ -13,7 +13,10 @@ objectData:
 revisionHistoryLimit: {{ $objectData.revisionHistoryLimit | default 3 }}
 updateStrategy:
   type: {{ $objectData.strategy | default "RollingUpdate" }}
-  {{- if and (eq $objectData.strategy "RollingUpdate") $objectData.rollingUpdate }}
+  {{- if and
+        (eq $objectData.strategy "RollingUpdate")
+        $objectData.rollingUpdate
+        (or $objectData.rollingUpdate.maxUnavailable $objectData.rollingUpdate.maxSurge) }}
   rollingUpdate:
     {{- with $objectData.rollingUpdate.maxUnavailable }}
     maxUnavailable: {{ .}}
