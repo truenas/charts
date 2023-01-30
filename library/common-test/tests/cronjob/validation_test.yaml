@@ -25,3 +25,16 @@ tests:
     asserts:
       - failedTemplate:
           errorMessage: CronJob - Expected non-empty <schedule>
+
+  - it: should fail with invalid completionMode (make sure job validation kicks in)
+    set:
+      controllers:
+        controller-name:
+          enabled: true
+          primary: true
+          type: CronJob
+          schedule: "* * * * *"
+          completionMode: not-a-mode
+    asserts:
+      - failedTemplate:
+          errorMessage: Job - Expected <completionMode> to be one of [Indexed, NonIndexed], but got [not-a-mode]
