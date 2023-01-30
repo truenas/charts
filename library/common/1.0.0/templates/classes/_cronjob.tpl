@@ -46,5 +46,5 @@ spec:
             {{- . | nindent 12 }}
             {{- end }}
         spec:
-          {{- include "ix.v1.common.lib.controller.pod" (dict "rootCtx" $rootCtx "objectData" $objectData) | nindent 10 }}
+          {{- include "ix.v1.common.lib.controller.pod" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 10 }}
 {{- end -}}

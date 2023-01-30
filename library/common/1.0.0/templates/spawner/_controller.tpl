@@ -28,6 +28,9 @@
       {{/* Set the name of the controller */}}
       {{- $_ := set $objectData "name" $objectName -}}
 
+      {{/* Short name is the one that defined on the chart, used on selectors */}}
+      {{- $_ := set $objectData "shortName" $name -}}
+
       {{/* Call class to create the object */}}
       {{- if eq $objectData.type "Deployment" -}}
         {{- include "ix.v1.common.class.deployment" (dict "objectData" $objectData "rootCtx" $) -}}

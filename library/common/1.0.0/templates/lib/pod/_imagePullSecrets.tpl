@@ -1,0 +1,40 @@
+{{/* Returns Image Pull Secret List */}}
+{{/* Call this template:
+{{ include "ix.v1.common.lib.pod.imagePullSecrets" (dict "rootCtx" $ "objectData" $objectData) }}
+rootCtx: The root context of the template. It is used to access the global context.
+objectData: The object data to be used to render the Pod.
+*/}}
+{{- define "ix.v1.common.lib.pod.imagePullSecrets" -}}
+  {{- $rootCtx := .rootCtx -}}
+  {{- $objectData := .objectData -}}
+
+  {{- $imgPullSecrets := list -}}
+  {{- $podSelected := true -}}
+
+  {{- range $name, $imgPull := $rootCtx.Values.imagePullSecrets -}}
+    {{- $pullName := (printf "%s-%s" (include "ix.v1.common.lib.chart.names.fullname" $rootCtx) $name) -}}
+
+    {{- if $imgPull.enabled -}}
+      {{- if $imgPull.targetSelector -}}
+
+        {{- if and (kindIs "string" $imgPull.targetSelector) (eq $imgPull.targetSelector "all") -}}
+          {{- $imgPullSecrets = mustAppend $imgPullSecrets $pullName -}}
+        {{- else -}}
+          {{- if (mustHas $objectData.shortName $imgPull.targetSelector) -}}
+            {{- $imgPullSecrets = mustAppend $imgPullSecrets $pullName -}}
+          {{- end -}}
+        {{- end -}}
+
+      {{/* If not targetSelector, but is the primary pod */}}
+      {{- else if $objectData.primary -}}
+        {{- $imgPullSecrets = mustAppend $imgPullSecrets $pullName -}}
+      {{- end -}}
+
+    {{- end -}}
+  {{- end -}}
+
+  {{- range $imgPullSecrets }}
+- {{ . }}
+  {{- end -}}
+{{- end -}}
+{{/* TODO: tests */}}
