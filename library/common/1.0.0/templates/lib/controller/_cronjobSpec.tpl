@@ -1,6 +1,6 @@
 {{/* CronJob Spec */}}
 {{/* Call this template:
-{{ include "ix.v1.common.lib.controller.cronjobSpec" (dict "objectData" $objectData "rootCtx" $rootCtx) -}}
+{{ include "ix.v1.common.lib.controller.cronjobSpec" (dict "rootCtx" $rootCtx "objectData" $objectData) -}}
 rootCtx: The root context of the template. It is used to access the global context.
 objectData:
   schedule: The schedule in Cron format, see https://en.wikipedia.org/wiki/Cron.
@@ -22,5 +22,5 @@ successfulJobsHistoryLimit: {{ $objectData.successfulJobsHistoryLimit | default 
 startingDeadlineSeconds: {{ $objectData.startingDeadlineSeconds | default nil }}
 jobTemplate:
   spec:
-    {{- include "ix.v1.common.lib.controller.jobSpec" (dict "objectData" $objectData "rootCtx" $rootCtx) | nindent 4 }}
+    {{- include "ix.v1.common.lib.controller.jobSpec" (dict "rootCtx" $rootCtx "objectData" $objectData) | nindent 4 }}
 {{- end -}}
