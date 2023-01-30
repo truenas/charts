@@ -1,18 +1,22 @@
 # Image Pull Secrets
 
-| Key                                               |   Type    | Required | Helm Template | Default | Description                                  |
-| :------------------------------------------------ | :-------: | :------: | :-----------: | :-----: | :------------------------------------------- |
-| imagePullSecrets                                  |  `dict`   |    ❌    |      ❌       |  `{}`   | Define the image pull secrets as dicts       |
-| imagePullSecrets.[pull-secret-name]               |  `dict`   |    ✅    |      ❌       |  `{}`   | Holds configMap definition                   |
-| imagePullSecrets.[pull-secret-name].enabled       | `boolean` |    ✅    |      ❌       | `false` | Enables or Disables the image pull secret    |
-| imagePullSecrets.[pull-secret-name].labels        |  `dict`   |    ❌    |      ✅       |  `{}`   | Additional labels for image pull secret      |
-| imagePullSecrets.[pull-secret-name].annotations   |  `dict`   |    ❌    |      ✅       |  `{}`   | Additional annotations for image pull secret |
-| imagePullSecrets.[pull-secret-name].data          |  `dict`   |    ✅    |      ✅       |  `{}`   | Define the data of the image pull secret     |
-| imagePullSecrets.[pull-secret-name].data.registry | `string`  |    ✅    |      ✅       |  `""`   | Define the registry of the image pull secret |
-| imagePullSecrets.[pull-secret-name].data.username | `string`  |    ✅    |      ✅       |  `""`   | Define the username of the image pull secret |
-| imagePullSecrets.[pull-secret-name].data.password | `string`  |    ✅    |      ✅       |  `""`   | Define the password of the image pull secret |
-| imagePullSecrets.[pull-secret-name].data.email    | `string`  |    ✅    |      ✅       |  `""`   | Define the email of the image pull secret    |
+| Key                                                |     Type      | Required | Helm Template | Default | Description                                  |
+| :------------------------------------------------- | :-----------: | :------: | :-----------: | :-----: | :------------------------------------------- |
+| imagePullSecrets                                   |    `dict`     |    ❌    |      ❌       |  `{}`   | Define the image pull secrets as dicts       |
+| imagePullSecrets.[pull-secret-name]                |    `dict`     |    ✅    |      ❌       |  `{}`   | Holds configMap definition                   |
+| imagePullSecrets.[pull-secret-name].enabled        |   `boolean`   |    ✅    |      ❌       | `false` | Enables or Disables the image pull secret    |
+| imagePullSecrets.[pull-secret-name].labels         |    `dict`     |    ❌    |      ✅       |  `{}`   | Additional labels for image pull secret      |
+| imagePullSecrets.[pull-secret-name].annotations    |    `dict`     |    ❌    |      ✅       |  `{}`   | Additional annotations for image pull secret |
+| imagePullSecrets.[pull-secret-name].data           |    `dict`     |    ✅    |      ✅       |  `{}`   | Define the data of the image pull secret     |
+| imagePullSecrets.[pull-secret-name].data.registry  |   `string`    |    ✅    |      ✅       |  `""`   | Define the registry of the image pull secret |
+| imagePullSecrets.[pull-secret-name].data.username  |   `string`    |    ✅    |      ✅       |  `""`   | Define the username of the image pull secret |
+| imagePullSecrets.[pull-secret-name].data.password  |   `string`    |    ✅    |      ✅       |  `""`   | Define the password of the image pull secret |
+| imagePullSecrets.[pull-secret-name].data.email     |   `string`    |    ✅    |      ✅       |  `""`   | Define the email of the image pull secret    |
+| imagePullSecrets.[pull-secret-name].targetSelector | `string/list` |    ❌    |      ❌       |  `""`   | Define the pod(s) to assign the secret       |
 
+> When `targetSelector` is string, it only accepts the keyword `all` which will assign the secret to all pods
+> When `targetSelector` is a list, it's entry is a string, referencing the pod(s) name that will be assigned.
+> When `targetSelector` is a empty, it will assign the secret to the primary pod
 ---
 
 Appears in:
@@ -45,6 +49,7 @@ imagePullSecrets:
         username: my_user
         password: my_pass
         email: my_mail@example.com
+      targetSelector: all
 
   other-pull-secret-name:
     enabled: true
@@ -53,5 +58,7 @@ imagePullSecrets:
         username: "{{ .Values.my_user }}"
         password: "{{ .Values.my_pass }}"
         email: "{{ .Values.my_mail }}"
-# TODO: targetSelector
+      targetSelector:
+        - controller-name1
+        - controller-name2
 ```
