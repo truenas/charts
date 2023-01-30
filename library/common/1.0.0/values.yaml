@@ -375,7 +375,7 @@ controllers:
     # -- Primary controller
     primary: true
     # -- Controller type
-    type: Job
+    type: CronJob
     # -- Controller labels
     labels: {}
     # -- Controller annotations
@@ -398,7 +398,7 @@ controllers:
 
     # -- CronJob
     # - CronJob schedule
-    schedule: ""
+    schedule: "5"
     # - CronJob concurrency policy
     concurrencyPolicy: ""
     # - CronJob timezone
@@ -410,19 +410,19 @@ controllers:
     # - CronJob starting deadline seconds
     startingDeadlineSeconds: 0
 
-    # -- Job
-    # - Job active deadline seconds
-    activeDeadlineSeconds: 0
-    # - Job backoff limit
-    backoffLimit: 6
-    # - Job completions
-    completions: 1
-    # - Job parallelism
-    parallelism: 1
-    # - Job ttl seconds after finished
-    ttlSecondsAfterFinished: 0
-    # - Job completion mode
-    completionMode: NonIndexed
+    # # -- Job
+    # # - Job active deadline seconds
+    # activeDeadlineSeconds: 0
+    # # - Job backoff limit
+    # backoffLimit: 6
+    # # - Job completions
+    # completions: 1
+    # # - Job parallelism
+    # parallelism: 1
+    # # - Job ttl seconds after finished
+    # ttlSecondsAfterFinished: 0
+    # # - Job completion mode
+    # completionMode: NonIndexed
 
     # -- Pod Spec
     podSpec:

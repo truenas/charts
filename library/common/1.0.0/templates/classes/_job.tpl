@@ -3,13 +3,7 @@
 {{ include "ix.v1.common.class.job" (dict "objectData" $objectData "rootCtx" $) }}
 
 rootCtx: The root context of the template. It is used to access the global context.
-objectData:
-  name: The name of the job.
-  labels: The labels of the job.
-  annotations: The annotations of the job.
-  replicas: The number of replicas.
-  revisionHistoryLimit: The number of old ReplicaSets to retain to allow rollback.
-  strategy: The job strategy.
+objectData: The object data to be used to render the Job.
 */}}
 
 {{- define "ix.v1.common.class.job" -}}

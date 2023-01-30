@@ -15,7 +15,7 @@ objectData:
   {{- $rootCtx := .rootCtx -}}
 backoffLimit: {{ $objectData.backoffLimit | default 5 }}
 completionMode: {{ $objectData.completionMode | default "NonIndexed" }}
-completions: {{ $objectData.completions }}{{/* Can be nil too */}}
+completions: {{ $objectData.completions | default nil }}
 parallelism: {{ $objectData.parallelism | default 1 }}
 ttlSecondsAfterFinished: {{ $objectData.ttlSecondsAfterFinished | default 120 }}
   {{- with $objectData.activeDeadlineSeconds }}

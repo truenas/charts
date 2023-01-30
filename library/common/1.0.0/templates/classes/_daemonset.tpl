@@ -3,13 +3,7 @@
 {{ include "ix.v1.common.class.deployment" (dict "objectData" $objectData "rootCtx" $) }}
 
 rootCtx: The root context of the template. It is used to access the global context.
-objectData:
-  name: The name of the daemonset.
-  labels: The labels of the daemonset.
-  annotations: The annotations of the daemonset.
-  replicas: The number of replicas.
-  revisionHistoryLimit: The number of old ReplicaSets to retain to allow rollback.
-  strategy: The deployment strategy.
+objectData: The object data to be used to render the DaemonSet.
 */}}
 
 {{- define "ix.v1.common.class.daemonset" -}}

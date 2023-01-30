@@ -13,3 +13,6 @@
   - Primary: `$FullName`
   - Others: `$FullName-$PodName`
 - Containers: `$ContainerName`
+
+> Full name -> `$ReleaseName-$ChartName`
+> Any name that exceeds 63 characters, will throw an error

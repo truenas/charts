@@ -1,0 +1,81 @@
+suite: cronjob spec test
+templates:
+  - common.yaml
+tests:
+  - it: should pass with controller enabled
+    set:
+      controllers:
+        controller-name:
+          enabled: true
+          primary: true
+          type: CronJob
+          schedule: "* * * * *"
+    asserts:
+      - documentIndex: &cronJobDoc 0
+        isKind:
+          of: CronJob
+      - documentIndex: *cronJobDoc
+        isAPIVersion:
+          of: batch/v1
+      - documentIndex: *cronJobDoc
+        isSubset:
+          path: spec
+          content:
+            schedule: "* * * * *"
+            timeZone: UTC
+            concurrencyPolicy: Forbid
+            failedJobsHistoryLimit: 1
+            successfulJobsHistoryLimit: 3
+            startingDeadlineSeconds:
+      - documentIndex: *cronJobDoc
+        isSubset:
+          path: spec.jobTemplate.spec
+          content:
+            backoffLimit: 5
+            completionMode: NonIndexed
+            completions:
+            parallelism: 1
+            ttlSecondsAfterFinished: 120
+
+  - it: should apply spec correctly
+    set:
+      cron: "*/5 * * * *"
+      someTZ: America/New_York
+      controllers:
+        controller-name:
+          enabled: true
+          primary: true
+          type: CronJob
+          schedule: "{{ .Values.cron }}"
+          timezone: "{{ .Values.someTZ }}"
+          concurrencyPolicy: Allow
+          failedJobsHistoryLimit: 2
+          successfulJobsHistoryLimit: 4
+          startingDeadlineSeconds: 100
+          backoffLimit: 5
+          completionMode: Indexed
+          completions: 5
+          parallelism: 5
+          ttlSecondsAfterFinished: 100
+          activeDeadlineSeconds: 100
+    asserts:
+      - documentIndex: *cronJobDoc
+        isSubset:
+          path: spec
+          content:
+            schedule: "*/5 * * * *"
+            concurrencyPolicy: Allow
+            failedJobsHistoryLimit: 2
+            successfulJobsHistoryLimit: 4
+            startingDeadlineSeconds: 100
+            timeZone: America/New_York
+      - documentIndex: *cronJobDoc
+        isSubset:
+          path: spec.jobTemplate.spec
+          content:
+            backoffLimit: 5
+            completionMode: Indexed
+            completions: 5
+            parallelism: 5
+            ttlSecondsAfterFinished: 100
+            activeDeadlineSeconds: 100
