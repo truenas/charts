@@ -375,7 +375,7 @@ controllers:
     # -- Primary controller
     primary: true
     # -- Controller type
-    type: Deployment
+    type: Job
     # -- Controller labels
     labels: {}
     # -- Controller annotations

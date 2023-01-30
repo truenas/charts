@@ -1,0 +1,52 @@
+suite: job spec test
+templates:
+  - common.yaml
+tests:
+  - it: should pass with controller enabled
+    set:
+      controllers:
+        controller-name:
+          enabled: true
+          primary: true
+          type: Job
+    asserts:
+      - documentIndex: &jobDoc 0
+        isKind:
+          of: Job
+      - documentIndex: *jobDoc
+        isAPIVersion:
+          of: batch/v1
+      - documentIndex: *jobDoc
+        isSubset:
+          path: spec
+          content:
+            backoffLimit: 5
+            completionMode: NonIndexed
+            completions:
+            parallelism: 1
+            ttlSecondsAfterFinished: 120
+
+  - it: should apply spec correctly
+    set:
+      controllers:
+        controller-name:
+          enabled: true
+          primary: true
+          type: Job
+          backoffLimit: 5
+          completionMode: Indexed
+          completions: 5
+          parallelism: 5
+          ttlSecondsAfterFinished: 100
+          activeDeadlineSeconds: 100
+    asserts:
+      - documentIndex: *jobDoc
+        isSubset:
+          path: spec
+          content:
+            backoffLimit: 5
+            completionMode: Indexed
+            completions: 5
+            parallelism: 5
+            ttlSecondsAfterFinished: 100
+            activeDeadlineSeconds: 100

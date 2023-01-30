@@ -27,3 +27,4 @@ objectData:
 
   {{- end -}}
 {{- end -}}
+{{/* TODO: Extend validation for sub-values of rollingUpdate */}}

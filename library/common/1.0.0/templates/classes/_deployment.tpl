@@ -4,9 +4,9 @@
 
 rootCtx: The root context of the template. It is used to access the global context.
 objectData:
-  name: The name of the configmap.
-  labels: The labels of the configmap.
-  annotations: The annotations of the configmap.
+  name: The name of the deployment.
+  labels: The labels of the deployment.
+  annotations: The annotations of the deployment.
   replicas: The number of replicas.
   revisionHistoryLimit: The number of old ReplicaSets to retain to allow rollback.
   strategy: The deployment strategy.
