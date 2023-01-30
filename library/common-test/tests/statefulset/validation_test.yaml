@@ -10,6 +10,7 @@ tests:
           primary: true
           type: StatefulSet
           strategy: not-a-strategy
+          podSpec: {}
     asserts:
       - failedTemplate:
           errorMessage: StatefulSet - Expected <strategy> to be one of [OnDelete, RollingUpdate], but got [not-a-strategy]
@@ -23,6 +24,7 @@ tests:
           type: StatefulSet
           strategy: RollingUpdate
           rollingUpdate: "not a dict"
+          podSpec: {}
     asserts:
       - failedTemplate:
           errorMessage: StatefulSet - Expected <rollingUpdate> to be a dictionary, but got [string]

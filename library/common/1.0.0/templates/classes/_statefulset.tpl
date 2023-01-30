@@ -28,5 +28,25 @@ metadata:
   {{- end }}
 spec:
   {{- include "ix.v1.common.lib.controller.statefulsetSpec" (dict "rootCtx" $rootCtx "objectData" $objectData) | nindent 2 }}
-
+  selector:
+    matchLabels:
+      {{- include "ix.v1.common.lib.metadata.selectorLabels" (dict "rootCtx" $rootCtx "podName" $objectData.name) | nindent 6 }}
+  template:
+    metadata:
+        {{- $labels := (mustMerge ($objectData.podSpec.labels | default dict)
+                                  (include "ix.v1.common.lib.metadata.allLabels" $rootCtx | fromYaml)
+                                  (include "ix.v1.common.lib.metadata.podLabels" $rootCtx | fromYaml)
+                                  (include "ix.v1.common.lib.metadata.selectorLabels" (dict "rootCtx" $rootCtx "podName" $objectData.name) | fromYaml)) -}}
+        {{- with (include "ix.v1.common.lib.metadata.render" (dict "rootCtx" $rootCtx "labels" $labels) | trim) }}
+      labels:
+        {{- . | nindent 8 }}
+        {{- end -}}
+        {{- $annotations := (mustMerge ($objectData.podSpec.annotations | default dict)
+                                        (include "ix.v1.common.lib.metadata.allAnnotations" $rootCtx | fromYaml)
+                                        (include "ix.v1.common.lib.metadata.podAnnotations" $rootCtx | fromYaml)) -}}
+        {{- with (include "ix.v1.common.lib.metadata.render" (dict "rootCtx" $rootCtx "annotations" $annotations) | trim) }}
+      annotations:
+        {{- . | nindent 8 }}
+        {{- end }}
+  spec:
 {{- end -}}

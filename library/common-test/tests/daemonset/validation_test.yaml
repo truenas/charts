@@ -10,6 +10,7 @@ tests:
           primary: true
           type: DaemonSet
           strategy: not-a-strategy
+          podSpec: {}
     asserts:
       - failedTemplate:
           errorMessage: DaemonSet - Expected <strategy> to be one of [OnDelete, RollingUpdate], but got [not-a-strategy]
@@ -23,6 +24,7 @@ tests:
           type: DaemonSet
           strategy: RollingUpdate
           rollingUpdate: "not a dict"
+          podSpec: {}
     asserts:
       - failedTemplate:
           errorMessage: DaemonSet - Expected <rollingUpdate> to be a dictionary, but got [string]

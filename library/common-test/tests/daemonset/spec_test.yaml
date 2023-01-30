@@ -9,6 +9,7 @@ tests:
           enabled: true
           primary: true
           type: DaemonSet
+          podSpec: {}
     asserts:
       - documentIndex: &daemonSetDoc 0
         isKind:
@@ -36,6 +37,7 @@ tests:
           rollingUpdate:
             maxSurge: 5
             maxUnavailable: 5
+          podSpec: {}
     asserts:
       - documentIndex: *daemonSetDoc
         isSubset:

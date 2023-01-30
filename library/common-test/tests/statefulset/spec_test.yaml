@@ -9,6 +9,7 @@ tests:
           enabled: true
           primary: true
           type: StatefulSet
+          podSpec: {}
     asserts:
       - documentIndex: &statefulSetDoc 0
         isKind:
@@ -36,6 +37,7 @@ tests:
           rollingUpdate:
             partition: 5
             maxUnavailable: 5
+          podSpec: {}
     asserts:
       - documentIndex: *statefulSetDoc
         isSubset:
