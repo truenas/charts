@@ -2,7 +2,6 @@
 {{/* Call this template:
 {{ include "ix.v1.common.lib.configmap.validation" (dict "objectData" $objectData) -}}
 objectData:
-  name: The name of the configmap.
   labels: The labels of the configmap.
   annotations: The annotations of the configmap.
   data: The data of the configmap.

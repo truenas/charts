@@ -2,7 +2,6 @@
 {{/* Call this template:
 {{ include "ix.v1.common.lib.imagePullSecret.validation" (dict "objectData" $objectData) -}}
 objectData:
-  name: The name of the imagePullSecret.
   labels: The labels of the imagePullSecret.
   annotations: The annotations of the imagePullSecret.
   data: The data of the imagePullSecret.

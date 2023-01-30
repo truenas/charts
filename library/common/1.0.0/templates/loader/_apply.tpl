@@ -1,5 +1,4 @@
 {{/* Loads all spawners */}}
-
 {{- define "ix.v1.common.loader.apply" -}}
 
   {{/* Render ConfigMap(s) */}}
@@ -10,5 +9,8 @@
 
   {{/* Render Image Pull Secrets(s) */}}
   {{- include "ix.v1.common.spawner.imagePullSecrets" . | nindent 0 -}}
+
+  {{/* Render Controller(s) */}}
+  {{- include "ix.v1.common.spawner.controllers" . | nindent 0 -}}
 
 {{- end -}}

@@ -2,7 +2,6 @@
 {{/* Call this template:
 {{ include "ix.v1.common.lib.secret.validation" (dict "objectData" $objectData) -}}
 objectData:
-  name: The name of the secret.
   labels: The labels of the secret.
   annotations: The annotations of the secret.
   data: The data of the secret.
