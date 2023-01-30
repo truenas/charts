@@ -11,6 +11,6 @@ objectData: The object data to be used to render the Pod.
 imagePullSecrets:
 {{-  . | nindent 2 }}
   {{- end }}
-hostNetwork: false
-
+hostNetwork: {{ include "ix.v1.common.lib.pod.hostNetwork" (dict "rootCtx" $rootCtx "objectData" $objectData) }}
+enableServiceLinks: {{ include "ix.v1.common.lib.pod.enableServiceLinks" (dict "rootCtx" $rootCtx "objectData" $objectData) }}
 {{- end -}}
