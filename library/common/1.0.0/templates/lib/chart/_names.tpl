@@ -1,16 +1,16 @@
 {{/* Contains functions for generating names */}}
 
 {{/* Returns the name of the Chart */}}
-{{- define "ix.common.lib.chart.names.name" -}}
+{{- define "ix.v1.common.lib.chart.names.name" -}}
 
   {{- .Chart.Name | lower | trunc 63 | trimSuffix "-" -}}
 
 {{- end -}}
 
 {{/* Returns the fullname of the Chart */}}
-{{- define "ix.common.lib.chart.names.fullname" -}}
+{{- define "ix.v1.common.lib.chart.names.fullname" -}}
 
-  {{- $name := include "ix.common.lib.chart.names.name" . -}}
+  {{- $name := include "ix.v1.common.lib.chart.names.name" . -}}
 
   {{- if contains $name .Release.Name -}}
     {{- $name = .Release.Name -}}

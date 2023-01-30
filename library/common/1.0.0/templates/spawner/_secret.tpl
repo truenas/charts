@@ -12,7 +12,7 @@
       {{/* Create a copy of the secret */}}
       {{- $objectData := (mustDeepCopy $secret) -}}
 
-      {{- $objectName := (printf "%s-%s" (include "ix.common.lib.chart.names.fullname" $) $name) -}}
+      {{- $objectName := (printf "%s-%s" (include "ix.v1.common.lib.chart.names.fullname" $) $name) -}}
       {{/* Perform validations */}}
       {{- include "ix.v1.common.lib.chart.names.validation" (dict "name" $objectName) -}}
       {{- include "ix.v1.common.lib.secret.validation" (dict "objectData" $objectData) -}}

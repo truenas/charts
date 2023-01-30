@@ -375,7 +375,7 @@ controllers:
     # -- Primary controller
     primary: true
     # -- Controller type
-    type: CronJob
+    type: Deployment
     # -- Controller labels
     labels: {}
     # -- Controller annotations
@@ -426,6 +426,10 @@ controllers:
 
     # -- Pod Spec
     podSpec:
+      # -- Pod labels
+      labels: {}
+      # -- Pod annotations
+      annotations: {}
       # -- hostNetwork
       hostNetwork: false
       # -- enableServiceLinks

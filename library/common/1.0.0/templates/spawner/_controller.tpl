@@ -16,9 +16,9 @@
       {{- $objectData := (mustDeepCopy $controller) -}}
 
       {{/* Generate the name of the controller */}}
-      {{- $objectName := include "ix.common.lib.chart.names.fullname" $ -}}
+      {{- $objectName := include "ix.v1.common.lib.chart.names.fullname" $ -}}
       {{- if not $objectData.primary -}}
-        {{- $objectName = printf "%s-%s" (include "ix.common.lib.chart.names.fullname" $) $name -}}
+        {{- $objectName = printf "%s-%s" (include "ix.v1.common.lib.chart.names.fullname" $) $name -}}
       {{- end -}}
 
       {{/* Perform validations */}}
