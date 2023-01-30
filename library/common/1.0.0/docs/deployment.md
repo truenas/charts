@@ -9,7 +9,7 @@
 | controllers.[controller-name].labels                       |  `dict`   |    ❌    |      ✅       |    `{}`    | Additional labels for controller                                     |
 | controllers.[controller-name].annotations                  |  `dict`   |    ❌    |      ✅       |    `{}`    | Additional annotations for controller                                |
 | controllers.[controller-name].type                         | `string`  |    ✅    |      ❌       |    `""`    | Define the type (kind) of the controller                             |
-| controllers.[controller-name].strategy                     | `string`  |    ❌    |      ❌       | `Recreate` | Define the strategy of the controller                                |
+| controllers.[controller-name].strategy                     | `string`  |    ❌    |      ❌       | `Recreate` | Define the strategy of the controller (Recreate, RollingUpdate)      |
 | controllers.[controller-name].rollingUpdate                |  `dict`   |    ❌    |      ❌       |    `{}`    | Holds the rollingUpdate options, Only when strategy is RollingUpdate |
 | controllers.[controller-name].rollingUpdate.maxUnavailable |   `int`   |    ❌    |      ❌       |            | Define the maxUnavailable, Only when strategy is RollingUpdate       |
 | controllers.[controller-name].rollingUpdate.maxSurge       |   `int`   |    ❌    |      ❌       |            | Define the maxSurge, Only when strategy is RollingUpdate             |
