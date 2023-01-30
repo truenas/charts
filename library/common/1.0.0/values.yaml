@@ -369,9 +369,9 @@ notes:
 # -- Controllers
 controllers:
   # -- Controller name
-  controller-name:
+  main:
     # -- Enables the controller
-    enabled: false
+    enabled: true
     # -- Primary controller
     primary: true
     # -- Controller type
@@ -380,15 +380,14 @@ controllers:
     labels: {}
     # -- Controller annotations
     annotations: {}
-
-    # # -- Controller replicas (Deployment and StatefulSet only)
-    # replicas: 1
-    # # -- Controller revision history limit
-    # revisionHistoryLimit: 3
-    # # Strategy
-    # # -- Controller strategy type
-    # strategy: Recreate
-    # # -- Controller strategy rolling update
+    # -- Controller replicas (Deployment and StatefulSet only)
+    replicas: 1
+    # -- Controller revision history limit
+    revisionHistoryLimit: 3
+    # Strategy
+    # -- Controller strategy type
+    strategy: Recreate
+    # -- Controller strategy rolling update
     # rollingUpdate:
     #   # -- Controller strategy rolling update max unavailable
     #   maxUnavailable: 1

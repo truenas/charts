@@ -1,0 +1,7 @@
+# As we have by default enabled
+# a "main" controller" for all charts
+# We disable it so tests run with their defined
+# controllers (Tests use a different named controller)
+controllers:
+  main:
+    enabled: false
