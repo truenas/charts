@@ -16,7 +16,7 @@ objectData:
 
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
-  {{- include "ix.v1.common.lib.controller.deploymentValidation" (dict "objectData" $objectData "rootCtx" $rootCtx) }}
+  {{- include "ix.v1.common.lib.controller.deploymentValidation" (dict "objectData" $objectData) }}
 ---
 apiVersion: apps/v1
 kind: Deployment

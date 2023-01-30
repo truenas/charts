@@ -1,8 +1,8 @@
-suite: deployment name test
+suite: controller name test
 templates:
   - common.yaml
 tests:
-  - it: should generate correct name
+  - it: should generate correct controller name
     set:
       controllers:
         controller-name:
@@ -12,7 +12,7 @@ tests:
         other-controller-name:
           enabled: true
           primary: false
-          type: Deployment
+          type: DaemonSet
     asserts:
       - documentIndex: &deploymentDoc 0
         isKind:
@@ -24,13 +24,13 @@ tests:
         equal:
           path: metadata.name
           value: release-name-common-test
-      - documentIndex: &deploymentDoc 1
+      - documentIndex: &daemonSetDoc 1
         isKind:
-          of: Deployment
-      - documentIndex: *deploymentDoc
+          of: DaemonSet
+      - documentIndex: *daemonSetDoc
         isAPIVersion:
           of: apps/v1
-      - documentIndex: *deploymentDoc
+      - documentIndex: *daemonSetDoc
         equal:
           path: metadata.name
           value: release-name-common-test-other-controller-name

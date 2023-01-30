@@ -33,6 +33,7 @@
         {{- include "ix.v1.common.class.deployment" (dict "objectData" $objectData "rootCtx" $) -}}
       {{- else if eq $objectData.type "StatefulSet" -}}
       {{- else if eq $objectData.type "DaemonSet" -}}
+        {{- include "ix.v1.common.class.daemonset" (dict "objectData" $objectData "rootCtx" $) -}}
       {{- else if eq $objectData.type "Job" -}}
       {{- else if eq $objectData.type "CronJob" -}}
       {{- end -}}
