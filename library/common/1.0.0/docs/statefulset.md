@@ -13,6 +13,9 @@
 | controllers.[controller-name].rollingUpdate                |  `dict`   |    ❌    |      ❌       |      `{}`       | Holds the rollingUpdate options, Only when strategy is RollingUpdate |
 | controllers.[controller-name].rollingUpdate.maxUnavailable |   `int`   |    ❌    |      ❌       |                 | Define the maxUnavailable, Only when strategy is RollingUpdate       |
 | controllers.[controller-name].rollingUpdate.partition      |   `int`   |    ❌    |      ❌       |                 | Define the partition, Only when strategy is RollingUpdate            |
+| controllers.[controller-name].podSpec                      |  `dict`   |    ✅    |      ❌       |      `{}`       | Holds the pod definition                                             |
+| controllers.[controller-name].podSpec.labels               |  `dict`   |    ❌    |      ✅       |      `{}`       | Pod Labels                                                           |
+| controllers.[controller-name].podSpec.annotations          |  `dict`   |    ❌    |      ✅       |      `{}`       | Pod Annotations                                                      |
 
 ---
 
@@ -45,6 +48,10 @@ controllers:
     rollingUpdate:
       maxUnavailable: 1
       partition: 1
+    podSpec:
+      labels: {}
+      annotations: {}
+
   other-controller-name:
     enabled: true
     primary: false
@@ -57,4 +64,5 @@ controllers:
     rollingUpdate:
       maxUnavailable: 1
       partition: 1
+    podSpec: {}
 ```

@@ -21,6 +21,9 @@
 | controllers.[controller-name].parallelism                |   `int`   |    ❌    |      ❌       |        `1`         | Define the parallelism                                |
 | controllers.[controller-name].ttlSecondsAfterFinished    |   `int`   |    ❌    |      ❌       |       `120`        | Define the ttlSecondsAfterFinished                    |
 | controllers.[controller-name].activeDeadlineSeconds      |   `int`   |    ❌    |      ❌       |                    | Define the activeDeadlineSeconds                      |
+| controllers.[controller-name].podSpec                    |  `dict`   |    ✅    |      ❌       |        `{}`        | Holds the pod definition                              |
+| controllers.[controller-name].podSpec.labels             |  `dict`   |    ❌    |      ✅       |        `{}`        | Pod Labels                                            |
+| controllers.[controller-name].podSpec.annotations        |  `dict`   |    ❌    |      ✅       |        `{}`        | Pod Annotations                                       |
 
 ---
 
@@ -59,6 +62,10 @@ controllers:
     parallelism: 5
     ttlSecondsAfterFinished: 100
     activeDeadlineSeconds: 100
+    podSpec:
+      labels: {}
+      annotations: {}
+
   other-controller-name:
     enabled: true
     primary: false
@@ -66,4 +73,5 @@ controllers:
     labels: {}
     annotations: {}
     schedule: "* * * * *"
+    podSpec: {}
 ```
