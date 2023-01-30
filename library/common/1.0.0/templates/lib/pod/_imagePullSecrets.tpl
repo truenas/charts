@@ -37,4 +37,3 @@ objectData: The object data to be used to render the Pod.
 - {{ . }}
   {{- end -}}
 {{- end -}}
-{{/* TODO: tests */}}
