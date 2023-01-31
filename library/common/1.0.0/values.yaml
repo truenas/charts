@@ -360,7 +360,8 @@ devices:
 notes:
   header: |
     # Welcome to SCALE
-    Thank you for installing {{ .Chart.Name }}.
+    Thank you for installing <{{ .Chart.Name }}>.
+  # custom: "{{ toYaml $.Values }}"
   custom: ""
   footer: |
     # Documentation
@@ -529,29 +530,29 @@ controllers:
 # TODO:
 portal: {}
 
-# # -- Image Pull Secrets
-# imagePullSecrets:
-#   # -- Image Pull Secret name
-#   image-secret-name:
-#     # -- Enables the Image Pull Secret
-#     enabled: false
-#     # -- Labels
-#     labels: {}
-#     # -- Annotations
-#     annotations: {}
-#     # -- Image Pull Secret Data
-#     data:
-#       # -- Registry
-#       registry: ""
-#       # -- Username
-#       username: ""
-#       # -- Password
-#       password: ""
-#       # -- Email
-#       email: ""
-#     # targetSelector: all
-#     targetSelector:
-#       - pod-name
+# -- Image Pull Secrets
+imagePullSecrets:
+  # -- Image Pull Secret name
+  image-secret-name:
+    # -- Enables the Image Pull Secret
+    enabled: false
+    # -- Labels
+    labels: {}
+    # -- Annotations
+    annotations: {}
+    # -- Image Pull Secret Data
+    data:
+      # -- Registry
+      registry: ""
+      # -- Username
+      username: ""
+      # -- Password
+      password: ""
+      # -- Email
+      email: ""
+    targetSelectAll: true
+    targetSelector:
+      - pod-name
 
 # -- ConfigMaps (docs/configmaps.md)
 configmaps: {}

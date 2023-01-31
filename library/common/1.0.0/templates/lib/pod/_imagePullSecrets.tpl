@@ -15,17 +15,17 @@ objectData: The object data to be used to render the Pod.
     {{- $pullName := (printf "%s-%s" (include "ix.v1.common.lib.chart.names.fullname" $rootCtx) $name) -}}
 
     {{- if $imgPull.enabled -}}
-      {{- if $imgPull.targetSelector -}}
+      {{/* If targetSelectAll is true */}}
+      {{- if $imgPull.targetSelectAll -}}
+        {{- $imgPullSecrets = mustAppend $imgPullSecrets $pullName -}}
 
-        {{- if and (kindIs "string" $imgPull.targetSelector) (eq $imgPull.targetSelector "all") -}}
+      {{/* Else if targetSelector is a list */}}
+      {{- else if (kindIs "slice" $imgPull.targetSelector) -}}
+        {{- if (mustHas $objectData.shortName $imgPull.targetSelector) -}}
           {{- $imgPullSecrets = mustAppend $imgPullSecrets $pullName -}}
-        {{- else -}}
-          {{- if (mustHas $objectData.shortName $imgPull.targetSelector) -}}
-            {{- $imgPullSecrets = mustAppend $imgPullSecrets $pullName -}}
-          {{- end -}}
         {{- end -}}
 
-      {{/* If not targetSelector, but is the primary pod */}}
+      {{/* If not targetSelectAll or targetSelector, but is the primary pod */}}
       {{- else if $objectData.primary -}}
         {{- $imgPullSecrets = mustAppend $imgPullSecrets $pullName -}}
       {{- end -}}
