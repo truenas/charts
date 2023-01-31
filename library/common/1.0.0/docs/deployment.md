@@ -25,20 +25,13 @@ controllers:
     enabled: true
     primary: true
     type: Deployment
-    labels: {}
-    annotations: {}
     replicas: 1
     revisionHistoryLimit: 3
     strategy: Recreate
     rollingUpdate:
       maxUnavailable: 1
       maxSurge: 1
-    podSpec:
-      labels: {}
-      annotations: {}
-      hostNetwork: false
-      enableServiceLinks: false
-      restartPolicy: Always
+    podSpec: {}
 
   other-controller-name:
     enabled: true

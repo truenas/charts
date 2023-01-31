@@ -25,8 +25,6 @@ controllers:
     enabled: true
     primary: true
     type: Job
-    labels: {}
-    annotations: {}
     backoffLimit: 5
     completionMode: Indexed
     completions: 5
@@ -34,17 +32,11 @@ controllers:
     ttlSecondsAfterFinished: 100
     activeDeadlineSeconds: 100
     podSpec:
-      labels: {}
-      annotations: {}
-      hostNetwork: false
-      enableServiceLinks: false
       restartPolicy: Never
 
   other-controller-name:
     enabled: true
     primary: false
     type: Job
-    labels: {}
-    annotations: {}
     podSpec: {}
 ```

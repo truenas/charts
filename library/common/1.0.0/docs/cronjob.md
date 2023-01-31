@@ -31,8 +31,6 @@ controllers:
     enabled: true
     primary: true
     type: CronJob
-    labels: {}
-    annotations: {}
     schedule: "{{ .Values.cron }}"
     timezone: "{{ .Values.someTZ }}"
     concurrencyPolicy: Allow
@@ -46,18 +44,12 @@ controllers:
     ttlSecondsAfterFinished: 100
     activeDeadlineSeconds: 100
     podSpec:
-      labels: {}
-      annotations: {}
-      hostNetwork: false
-      enableServiceLinks: false
       restartPolicy: OnFailure
 
   other-controller-name:
     enabled: true
     primary: false
     type: CronJob
-    labels: {}
-    annotations: {}
     schedule: "* * * * *"
     podSpec: {}
 ```

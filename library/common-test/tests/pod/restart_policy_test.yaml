@@ -2,6 +2,25 @@ suite: pod restart policy test
 templates:
   - common.yaml
 tests:
+  - it: should pass with restartPolicy empty
+    set:
+      podOptions:
+        restartPolicy: ""
+      controllers:
+        controller-name1:
+          enabled: true
+          primary: true
+          type: Deployment
+          podSpec: {}
+    asserts:
+      - documentIndex: &deploymentDoc 0
+        isKind:
+          of: Deployment
+      - documentIndex: *deploymentDoc
+        equal:
+          path: spec.template.spec.restartPolicy
+          value: Always
+
   - it: should pass with restartPolicy set from "global"
     set:
       podOptions:
@@ -52,6 +71,27 @@ tests:
           type: Job
           podSpec:
             restartPolicy: OnFailure
+    asserts:
+      - documentIndex: &jobDoc 0
+        isKind:
+          of: Job
+      - documentIndex: *jobDoc
+        equal:
+          path: spec.template.spec.restartPolicy
+          value: OnFailure
+
+  - it: should pass with restartPolicy set from "pod" on Jobs from tpl
+    set:
+      policy: OnFailure
+      podOptions:
+        restartPolicy: Never
+      controllers:
+        controller-name1:
+          enabled: true
+          primary: true
+          type: Job
+          podSpec:
+            restartPolicy: "{{ .Values.policy }}"
     asserts:
       - documentIndex: &jobDoc 0
         isKind:

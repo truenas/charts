@@ -25,27 +25,18 @@ controllers:
     enabled: true
     primary: true
     type: StatefulSet
-    labels: {}
-    annotations: {}
     replicas: 1
     revisionHistoryLimit: 3
     strategy: RollingUpdate
     rollingUpdate:
       maxUnavailable: 1
       partition: 1
-    podSpec:
-      labels: {}
-      annotations: {}
-      hostNetwork: false
-      enableServiceLinks: false
-      restartPolicy: Always
+    podSpec: {}
 
   other-controller-name:
     enabled: true
     primary: false
     type: StatefulSet
-    labels: {}
-    annotations: {}
     replicas: 1
     revisionHistoryLimit: 3
     strategy: RollingUpdate

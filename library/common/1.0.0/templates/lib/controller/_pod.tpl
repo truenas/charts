@@ -9,9 +9,12 @@ objectData: The object data to be used to render the Pod.
   {{- $objectData := .objectData -}}
   {{- with (include "ix.v1.common.lib.pod.imagePullSecrets" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim) }}
 imagePullSecrets:
-{{-  . | nindent 2 }}
+    {{-  . | nindent 2 }}
   {{- end }}
 hostNetwork: {{ include "ix.v1.common.lib.pod.hostNetwork" (dict "rootCtx" $rootCtx "objectData" $objectData) }}
 enableServiceLinks: {{ include "ix.v1.common.lib.pod.enableServiceLinks" (dict "rootCtx" $rootCtx "objectData" $objectData) }}
 restartPolicy: {{ include "ix.v1.common.lib.pod.restartPolicy" (dict "rootCtx" $rootCtx "objectData" $objectData) }}
+  {{- with include "ix.v1.common.lib.pod.schedulerName" (dict "rootCtx" $rootCtx "objectData" $objectData) }}
+schedulerName: {{ . }}
+  {{- end }}
 {{- end -}}

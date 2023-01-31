@@ -14,7 +14,8 @@
 | controllers.[controller-name].podSpec.annotations        |  `dict`   |    ❌    |      ✅       |                         `{}`                          | Pod Annotations                                                                      |
 | controllers.[controller-name].podSpec.hostNetwork        | `boolean` |    ❌    |      ❌       |    `{{ .Values.podOptions.hostNetwork }}` (false)     | Pod's hostNetwork                                                                    |
 | controllers.[controller-name].podSpec.enableServiceLinks | `boolean` |    ❌    |      ❌       | `{{ .Values.podOptions.enableServiceLinks }}` (false) | Pod's enableServiceLinks                                                             |
-| controllers.[controller-name].podSpec.restartPolicy      | `string`  |    ❌    |      ❌       |   `{{ .Values.podOptions.restartPolicy }}` (Always)   | Pod's restartPolicy. (Always, Never, OnFailure)                                      |
+| controllers.[controller-name].podSpec.restartPolicy      | `string`  |    ❌    |      ✅       |   `{{ .Values.podOptions.restartPolicy }}` (Always)   | Pod's restartPolicy. (Always, Never, OnFailure)                                      |
+| controllers.[controller-name].podSpec.schedulerName      | `string`  |    ❌    |      ✅       |     `{{ .Values.podOptions.schedulerName }}` ("")     | Pod's schedulerName                                                                  |
 
 ---
 
@@ -39,3 +40,22 @@ Naming scheme:
 - [StatefulSet](statefulset.md)
 - [CronJob](cronjob.md)
 - [Job](job.md)
+
+---
+
+Examples:
+
+```yaml
+controllers:
+  controller-name:
+    enabled: true
+    primary: true
+    labels: {}
+    annotations: {}
+    podSpec:
+      labels: {}
+      annotations: {}
+      hostNetwork: false
+      enableServiceLinks: false
+      schedulerName: some-scheduler
+```
