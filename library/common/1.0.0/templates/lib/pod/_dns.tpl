@@ -75,7 +75,7 @@ dnsConfig:
       {{- end -}}
     {{- end -}}
 
-    {{- with $config.options -}}
+    {{- with $config.options }}
   options:
       {{- range . }}
     - name: {{ tpl .name $rootCtx }}

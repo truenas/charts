@@ -113,7 +113,10 @@ podOptions:
   hostNetwork: false
   restartPolicy: Always
   dnsPolicy: ClusterFirst
-  dnsConfig: {}
+  dnsConfig:
+    options:
+      - name: ndots
+        value: "2"
   hostAliases: []
   nodeSelector: {}
   tolerations: []
