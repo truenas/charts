@@ -25,6 +25,10 @@ priorityClassName: {{ . }}
 nodeSelector:
     {{- . | nindent 2 }}
   {{- end -}}
+  {{- with (include "ix.v1.common.lib.pod.hostAliases" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim) }}
+hostAliases:
+    {{- . | nindent 2 }}
+  {{- end -}}
   {{- with (include "ix.v1.common.lib.pod.hostname" (dict "rootCtx" $rootCtx "objectData" $objectData)) }}
 hostname: {{ . }}
   {{- end }}
