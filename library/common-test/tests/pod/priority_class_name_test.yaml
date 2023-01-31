@@ -31,7 +31,7 @@ tests:
           type: Deployment
           podSpec: {}
     asserts:
-      - documentIndex: &deploymentDoc 0
+      - documentIndex: *deploymentDoc
         isKind:
           of: Deployment
       - documentIndex: *deploymentDoc
@@ -51,7 +51,7 @@ tests:
           podSpec:
             priorityClassName: some-other-priority-class
     asserts:
-      - documentIndex: &deploymentDoc 0
+      - documentIndex: *deploymentDoc
         isKind:
           of: Deployment
       - documentIndex: *deploymentDoc
@@ -72,7 +72,7 @@ tests:
           podSpec:
             priorityClassName: "{{ .Values.priorityclass }}"
     asserts:
-      - documentIndex: &deploymentDoc 0
+      - documentIndex: *deploymentDoc
         isKind:
           of: Deployment
       - documentIndex: *deploymentDoc

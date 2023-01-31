@@ -7,6 +7,7 @@ objectData: The object data to be used to render the Pod.
 {{- define "ix.v1.common.lib.controller.pod" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
+#TODO:serviceAccountName:
   {{- with (include "ix.v1.common.lib.pod.imagePullSecrets" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim) }}
 imagePullSecrets:
     {{-  . | nindent 2 }}
@@ -19,5 +20,8 @@ schedulerName: {{ . }}
   {{- end -}}
   {{- with (include "ix.v1.common.lib.pod.priorityClassName" (dict "rootCtx" $rootCtx "objectData" $objectData)) }}
 priorityClassName: {{ . }}
+  {{- end }}
+  {{- with (include "ix.v1.common.lib.pod.hostname" (dict "rootCtx" $rootCtx "objectData" $objectData)) }}
+hostname: {{ . }}
   {{- end }}
 {{- end -}}

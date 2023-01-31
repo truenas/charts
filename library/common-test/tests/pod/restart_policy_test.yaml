@@ -32,7 +32,7 @@ tests:
           type: Deployment
           podSpec: {}
     asserts:
-      - documentIndex: &deploymentDoc 0
+      - documentIndex: *deploymentDoc
         isKind:
           of: Deployment
       - documentIndex: *deploymentDoc
@@ -93,7 +93,7 @@ tests:
           podSpec:
             restartPolicy: "{{ .Values.policy }}"
     asserts:
-      - documentIndex: &jobDoc 0
+      - documentIndex: *jobDoc
         isKind:
           of: Job
       - documentIndex: *jobDoc

@@ -17,6 +17,7 @@
 | controllers.[controller-name].podSpec.restartPolicy      | `string`  |    ❌    |      ✅       |   `{{ .Values.podOptions.restartPolicy }}` (Always)   | Pod's restartPolicy. (Always, Never, OnFailure)                                      |
 | controllers.[controller-name].podSpec.schedulerName      | `string`  |    ❌    |      ✅       |     `{{ .Values.podOptions.schedulerName }}` ("")     | Pod's schedulerName                                                                  |
 | controllers.[controller-name].podSpec.priorityClassName  | `string`  |    ❌    |      ✅       |   `{{ .Values.podOptions.priorityClassName }}` ("")   | Pod's priorityClassName                                                              |
+| controllers.[controller-name].podSpec.hostname           | `string`  |    ❌    |      ✅       |                         `""`                          | Pod's hostname                                                                       |
 
 ---
 
@@ -60,4 +61,5 @@ controllers:
       enableServiceLinks: false
       schedulerName: some-scheduler
       priorityClassName: some-priority-class-name
+      hostname: some-hostname
 ```
