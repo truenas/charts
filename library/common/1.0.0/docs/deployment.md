@@ -1,36 +1,19 @@
 # Deployment
 
-| Key                                                        |   Type    | Required | Helm Template |                        Default                        | Description                                                          |
-| :--------------------------------------------------------- | :-------: | :------: | :-----------: | :---------------------------------------------------: | :------------------------------------------------------------------- |
-| controllers                                                |  `dict`   |    ❌    |      ❌       |                         `{}`                          | Define the controllers as dicts                                      |
-| controllers.[controller-name]                              |  `dict`   |    ✅    |      ❌       |                         `{}`                          | Holds controller definition                                          |
-| controllers.[controller-name].enabled                      | `boolean` |    ✅    |      ❌       |                        `false`                        | Enables or Disables the controller                                   |
-| controllers.[controller-name].primary                      | `boolean` |    ✅    |      ❌       |                        `false`                        | Sets the controller as primary                                       |
-| controllers.[controller-name].labels                       |  `dict`   |    ❌    |      ✅       |                         `{}`                          | Additional labels for controller                                     |
-| controllers.[controller-name].annotations                  |  `dict`   |    ❌    |      ✅       |                         `{}`                          | Additional annotations for controller                                |
-| controllers.[controller-name].type                         | `string`  |    ✅    |      ❌       |                         `""`                          | Define the type (kind) of the controller                             |
-| controllers.[controller-name].strategy                     | `string`  |    ❌    |      ❌       |                      `Recreate`                       | Define the strategy of the controller (Recreate, RollingUpdate)      |
-| controllers.[controller-name].rollingUpdate                |  `dict`   |    ❌    |      ❌       |                         `{}`                          | Holds the rollingUpdate options, Only when strategy is RollingUpdate |
-| controllers.[controller-name].rollingUpdate.maxUnavailable |   `int`   |    ❌    |      ❌       |                                                       | Define the maxUnavailable, Only when strategy is RollingUpdate       |
-| controllers.[controller-name].rollingUpdate.maxSurge       |   `int`   |    ❌    |      ❌       |                                                       | Define the maxSurge, Only when strategy is RollingUpdate             |
-| controllers.[controller-name].podSpec                      |  `dict`   |    ✅    |      ❌       |                         `{}`                          | Holds the pod definition                                             |
-| controllers.[controller-name].podSpec.labels               |  `dict`   |    ❌    |      ✅       |                         `{}`                          | Pod Labels                                                           |
-| controllers.[controller-name].podSpec.annotations          |  `dict`   |    ❌    |      ✅       |                         `{}`                          | Pod Annotations                                                      |
-| controllers.[controller-name].podSpec.hostNetwork          | `boolean` |    ❌    |      ❌       |    `{{ .Values.podOptions.hostNetwork }}` (false)     | Pod's hostNetwork                                                    |
-| controllers.[controller-name].podSpec.enableServiceLinks   | `boolean` |    ❌    |      ❌       | `{{ .Values.podOptions.enableServiceLinks }}` (false) | Pod's enableServiceLinks                                             |
+| Key                                                        |   Type    | Required | Helm Template |                        Default                        | Description                                                                 |
+| :--------------------------------------------------------- | :-------: | :------: | :-----------: | :---------------------------------------------------: | :-------------------------------------------------------------------------- |
+| controllers.[controller-name].strategy                     | `string`  |    ❌    |      ❌       |                      `Recreate`                       | Define the strategy of the controller (Recreate, RollingUpdate)             |
+| controllers.[controller-name].rollingUpdate                |  `dict`   |    ❌    |      ❌       |                         `{}`                          | Holds the rollingUpdate options, Only when strategy is RollingUpdate        |
+| controllers.[controller-name].rollingUpdate.maxUnavailable |   `int`   |    ❌    |      ❌       |                                                       | Define the maxUnavailable, Only when strategy is RollingUpdate              |
+| controllers.[controller-name].rollingUpdate.maxSurge       |   `int`   |    ❌    |      ❌       |                                                       | Define the maxSurge, Only when strategy is RollingUpdate                    |
 
 ---
 
-Appears in:
+Notes:
 
-- `.Values.controllers`
+View common `keys` of `controllers` in [Controllers Documentation](controllers.md).
 
----
-
-Naming scheme:
-
-- Primary: `$FullName` (release-name-chart-name)
-- Non-Primary: `$FullName-$ControllerName` (release-name-chart-name-controller-name)
+> Value of `controllers.[controller-name].podSpec.restartPolicy` can only be `Always` for this type of controller
 
 ---
 
@@ -55,6 +38,7 @@ controllers:
       annotations: {}
       hostNetwork: false
       enableServiceLinks: false
+      restartPolicy: Always
 
   other-controller-name:
     enabled: true

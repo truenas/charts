@@ -1,38 +1,19 @@
 # Job
 
-| Key                                                      |   Type    | Required | Helm Template |                        Default                        | Description                                     |
-| :------------------------------------------------------- | :-------: | :------: | :-----------: | :---------------------------------------------------: | :---------------------------------------------- |
-| controllers                                              |  `dict`   |    ❌    |      ❌       |                         `{}`                          | Define the controllers as dicts                 |
-| controllers.[controller-name]                            |  `dict`   |    ✅    |      ❌       |                         `{}`                          | Holds controller definition                     |
-| controllers.[controller-name].enabled                    | `boolean` |    ✅    |      ❌       |                        `false`                        | Enables or Disables the controller              |
-| controllers.[controller-name].primary                    | `boolean` |    ✅    |      ❌       |                        `false`                        | Sets the controller as primary                  |
-| controllers.[controller-name].labels                     |  `dict`   |    ❌    |      ✅       |                         `{}`                          | Additional labels for controller                |
-| controllers.[controller-name].annotations                |  `dict`   |    ❌    |      ✅       |                         `{}`                          | Additional annotations for controller           |
-| controllers.[controller-name].type                       | `string`  |    ✅    |      ❌       |                         `""`                          | Define the type (kind) of the controller        |
-| controllers.[controller-name].completionMode             | `string`  |    ❌    |      ❌       |                     `NonIndexed`                      | Define the completionMode (Indexed, NonIndexed) |
-| controllers.[controller-name].backoffLimit               |   `int`   |    ❌    |      ❌       |                          `5`                          | Define the backoffLimit                         |
-| controllers.[controller-name].completions                |   `int`   |    ❌    |      ❌       |                                                       | Define the completions                          |
-| controllers.[controller-name].parallelism                |   `int`   |    ❌    |      ❌       |                          `1`                          | Define the parallelism                          |
-| controllers.[controller-name].ttlSecondsAfterFinished    |   `int`   |    ❌    |      ❌       |                         `120`                         | Define the ttlSecondsAfterFinished              |
-| controllers.[controller-name].activeDeadlineSeconds      |   `int`   |    ❌    |      ❌       |                                                       | Define the activeDeadlineSeconds                |
-| controllers.[controller-name].podSpec                    |  `dict`   |    ✅    |      ❌       |                         `{}`                          | Holds the pod definition                        |
-| controllers.[controller-name].podSpec.labels             |  `dict`   |    ❌    |      ✅       |                         `{}`                          | Pod Labels                                      |
-| controllers.[controller-name].podSpec.annotations        |  `dict`   |    ❌    |      ✅       |                         `{}`                          | Pod Annotations                                 |
-| controllers.[controller-name].podSpec.hostNetwork        | `boolean` |    ❌    |      ❌       |    `{{ .Values.podOptions.hostNetwork }}` (false)     | Pod's hostNetwork                               |
-| controllers.[controller-name].podSpec.enableServiceLinks | `boolean` |    ❌    |      ❌       | `{{ .Values.podOptions.enableServiceLinks }}` (false) | Pod's enableServiceLinks                        |
+| Key                                                   |   Type   | Required | Helm Template |   Default    | Description                                     |
+| :---------------------------------------------------- | :------: | :------: | :-----------: | :----------: | :---------------------------------------------- |
+| controllers.[controller-name].completionMode          | `string` |    ❌    |      ❌       | `NonIndexed` | Define the completionMode (Indexed, NonIndexed) |
+| controllers.[controller-name].backoffLimit            |  `int`   |    ❌    |      ❌       |     `5`      | Define the backoffLimit                         |
+| controllers.[controller-name].completions             |  `int`   |    ❌    |      ❌       |              | Define the completions                          |
+| controllers.[controller-name].parallelism             |  `int`   |    ❌    |      ❌       |     `1`      | Define the parallelism                          |
+| controllers.[controller-name].ttlSecondsAfterFinished |  `int`   |    ❌    |      ❌       |    `120`     | Define the ttlSecondsAfterFinished              |
+| controllers.[controller-name].activeDeadlineSeconds   |  `int`   |    ❌    |      ❌       |              | Define the activeDeadlineSeconds                |
 
 ---
 
-Appears in:
+Notes:
 
-- `.Values.controllers`
-
----
-
-Naming scheme:
-
-- Primary: `$FullName` (release-name-chart-name)
-- Non-Primary: `$FullName-$ControllerName` (release-name-chart-name-controller-name)
+View common `keys` of `controllers` in [Controllers Documentation](controllers.md).
 
 ---
 
@@ -57,6 +38,7 @@ controllers:
       annotations: {}
       hostNetwork: false
       enableServiceLinks: false
+      restartPolicy: Never
 
   other-controller-name:
     enabled: true
