@@ -12,7 +12,6 @@ tests:
           primary: true
           type: CronJob
           schedule: "*/1 * * * *"
-          schedule: "*/1 * * * *"
           podSpec: {}
     asserts:
       - documentIndex: &cronJobDoc 0
@@ -91,3 +90,19 @@ tests:
           value:
             disk: hdd
             cpu: amd
+  # Failures
+  - it: should fail with empty value on nodeSelector
+    set:
+      podOptions:
+        nodeSelector:
+          disk: ""
+      controllers:
+        controller-name1:
+          enabled: true
+          primary: true
+          type: CronJob
+          schedule: "*/1 * * * *"
+          podSpec: {}
+    asserts:
+      - failedTemplate:
+          errorMessage: Expected non-empty value on <nodeSelector> [disk] key.
