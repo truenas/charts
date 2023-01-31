@@ -34,6 +34,13 @@
 | controllers.[controller-name].podSpec.hostAliases.ip                    | `string`  |    ❌    |      ✅       |                                                                | Value for `ip` in hosts aliases                                                      |
 | controllers.[controller-name].podSpec.hostAliases.hostnames             |  `list`   |    ❌    |      ❌       |                                                                | Hostnames for the `ip` in hosts aliases                                              |
 | controllers.[controller-name].podSpec.hostAliases.hostnames.[host-name] | `string`  |    ❌    |      ✅       |                                                                | [Value] for `hostnames` for the `ip` in hosts aliases                                |
+| controllers.[controller-name].podSpec.dnsPolicy                         | `string`  |    ❌    |      ✅       |      `{{ .Values.podOptions.dnsPolicy }}` (ClusterFirst)       | Pod's DNS Policy (ClusterFirst, ClusterFirstWithHostNet, Default, None).             |
+
+---
+
+Notes
+
+> `dnsPolicy` is set automatically to `ClusterFirstWithHostNet` when `hostNetwork` is `true`
 
 ---
 
@@ -94,4 +101,16 @@ controllers:
           hostnames:
             - myotherserver.local
             - backups.local
+      dnsPolicy: ClusterFirst
+      dnsConfig:
+        nameservers:
+          - 1.1.1.1
+          - 1.0.0.1
+        searches:
+          - ns1.svc.cluster-domain.example
+          - my.dns.search.suffix
+        options:
+          - name: ndots
+            value: "2"
+          - name: edns0
 ```
