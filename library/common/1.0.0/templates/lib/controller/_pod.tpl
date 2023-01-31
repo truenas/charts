@@ -21,6 +21,10 @@ schedulerName: {{ . }}
   {{- with (include "ix.v1.common.lib.pod.priorityClassName" (dict "rootCtx" $rootCtx "objectData" $objectData)) }}
 priorityClassName: {{ . }}
   {{- end }}
+  {{- with (include "ix.v1.common.lib.pod.nodeSelector" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim) }}
+nodeSelector:
+    {{- . | nindent 2 }}
+  {{- end -}}
   {{- with (include "ix.v1.common.lib.pod.hostname" (dict "rootCtx" $rootCtx "objectData" $objectData)) }}
 hostname: {{ . }}
   {{- end }}
