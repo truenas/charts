@@ -111,6 +111,7 @@ resources:
 podOptions:
   enableServiceLinks: false
   hostNetwork: false
+  restartPolicy: Always
   dnsPolicy: ClusterFirst
   dnsConfig: {}
   hostAliases: []
