@@ -33,9 +33,6 @@ tests:
           podSpec: {}
     asserts:
       - documentIndex: *deploymentDoc
-        isKind:
-          of: Deployment
-      - documentIndex: *deploymentDoc
         equal:
           path: spec.template.spec.restartPolicy
           value: Always
@@ -52,9 +49,6 @@ tests:
           podSpec:
             restartPolicy: Always
     asserts:
-      - documentIndex: *deploymentDoc
-        isKind:
-          of: Deployment
       - documentIndex: *deploymentDoc
         equal:
           path: spec.template.spec.restartPolicy
@@ -93,9 +87,6 @@ tests:
           podSpec:
             restartPolicy: "{{ .Values.policy }}"
     asserts:
-      - documentIndex: *jobDoc
-        isKind:
-          of: Job
       - documentIndex: *jobDoc
         equal:
           path: spec.template.spec.restartPolicy

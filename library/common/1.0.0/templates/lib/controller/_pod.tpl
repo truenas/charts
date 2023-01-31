@@ -24,4 +24,7 @@ priorityClassName: {{ . }}
   {{- with (include "ix.v1.common.lib.pod.hostname" (dict "rootCtx" $rootCtx "objectData" $objectData)) }}
 hostname: {{ . }}
   {{- end }}
+  {{- with (include "ix.v1.common.lib.pod.terminationGracePeriodSeconds" (dict "rootCtx" $rootCtx "objectData" $objectData)) }}
+terminationGracePeriodSeconds: {{ . }}
+  {{- end }}
 {{- end -}}

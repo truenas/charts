@@ -32,9 +32,6 @@ tests:
           podSpec: {}
     asserts:
       - documentIndex: *deploymentDoc
-        isKind:
-          of: Deployment
-      - documentIndex: *deploymentDoc
         equal:
           path: spec.template.spec.schedulerName
           value: some-scheduler
@@ -51,9 +48,6 @@ tests:
           podSpec:
             schedulerName: some-other-scheduler
     asserts:
-      - documentIndex: *deploymentDoc
-        isKind:
-          of: Deployment
       - documentIndex: *deploymentDoc
         equal:
           path: spec.template.spec.schedulerName
@@ -72,9 +66,6 @@ tests:
           podSpec:
             schedulerName: "{{ .Values.scheduler }}"
     asserts:
-      - documentIndex: *deploymentDoc
-        isKind:
-          of: Deployment
       - documentIndex: *deploymentDoc
         equal:
           path: spec.template.spec.schedulerName

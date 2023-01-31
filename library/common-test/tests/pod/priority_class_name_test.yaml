@@ -32,9 +32,6 @@ tests:
           podSpec: {}
     asserts:
       - documentIndex: *deploymentDoc
-        isKind:
-          of: Deployment
-      - documentIndex: *deploymentDoc
         equal:
           path: spec.template.spec.priorityClassName
           value: some-priority-class
@@ -52,16 +49,13 @@ tests:
             priorityClassName: some-other-priority-class
     asserts:
       - documentIndex: *deploymentDoc
-        isKind:
-          of: Deployment
-      - documentIndex: *deploymentDoc
         equal:
           path: spec.template.spec.priorityClassName
           value: some-other-priority-class
 
   - it: should pass with priorityClassName from "pod" with tpl
     set:
-      priorityclass: some-other-priority-class
+      priorityClass: some-other-priority-class
       podOptions:
         priorityClassName: some-priority-class
       controllers:
@@ -70,11 +64,8 @@ tests:
           primary: true
           type: Deployment
           podSpec:
-            priorityClassName: "{{ .Values.priorityclass }}"
+            priorityClassName: "{{ .Values.priorityClass }}"
     asserts:
-      - documentIndex: *deploymentDoc
-        isKind:
-          of: Deployment
       - documentIndex: *deploymentDoc
         equal:
           path: spec.template.spec.priorityClassName

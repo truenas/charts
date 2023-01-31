@@ -119,7 +119,7 @@ podOptions:
   tolerations: []
   schedulerName: ""
   priorityClassName: ""
-  terminationGracePeriodSeconds: 30
+  terminationGracePeriodSeconds: 120
   # TODO: Add affinity
   # TODO: Add topologySpreadConstraints
 
