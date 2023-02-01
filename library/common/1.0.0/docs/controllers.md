@@ -35,6 +35,12 @@
 | controllers.[controller-name].podSpec.hostAliases.hostnames             |  `list`   |    ❌    |      ❌       |                                                                | Hostnames for the `ip` in hosts aliases                                              |
 | controllers.[controller-name].podSpec.hostAliases.hostnames.[host-name] | `string`  |    ❌    |      ✅       |                                                                | [Value] for `hostnames` for the `ip` in hosts aliases                                |
 | controllers.[controller-name].podSpec.dnsPolicy                         | `string`  |    ❌    |      ✅       |      `{{ .Values.podOptions.dnsPolicy }}` (ClusterFirst)       | Pod's DNS Policy (ClusterFirst, ClusterFirstWithHostNet, Default, None).             |
+| controllers.[controller-name].podSpec.tolerations                       |  `list`   |    ❌    |      ❌       |          `{{ .Values.podOptions.tolerations }}` ([])           | Pod's Tolerations                                                                    |
+| controllers.[controller-name].podSpec.tolerations.operator              | `string`  |    ✅    |      ✅       |                                                                | Toleration's `operator` (Equal, Exists)                                              |
+| controllers.[controller-name].podSpec.tolerations.key                   | `string`  |  ❌/✅   |      ✅       |                                                                | Toleration's `key`. Required only when `operator` = `Equal`                          |
+| controllers.[controller-name].podSpec.tolerations.value                 | `string`  |  ❌/✅   |      ✅       |                                                                | Toleration's `value`. Required only when `operator` = `Equal`                        |
+| controllers.[controller-name].podSpec.tolerations.effect                | `string`  |    ❌    |      ✅       |                                                                | Toleration's `effect`.(NoExecute, NoSchedule, PreferNoSchedule)                      |
+| controllers.[controller-name].podSpec.tolerations.tolerationSeconds     |   `int`   |    ❌    |      ❌       |                                                                | Toleration's `tolerationSeconds`.                                                    |
 
 ---
 
@@ -113,4 +119,8 @@ controllers:
           - name: ndots
             value: "2"
           - name: edns0
+      tolerations:
+        - operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 3600
 ```

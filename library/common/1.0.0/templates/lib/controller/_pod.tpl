@@ -20,7 +20,7 @@ schedulerName: {{ . }}
   {{- end -}}
   {{- with (include "ix.v1.common.lib.pod.priorityClassName" (dict "rootCtx" $rootCtx "objectData" $objectData)) }}
 priorityClassName: {{ . }}
-  {{- end }}
+  {{- end -}}
   {{- with (include "ix.v1.common.lib.pod.nodeSelector" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim) }}
 nodeSelector:
     {{- . | nindent 2 }}
@@ -35,5 +35,9 @@ hostname: {{ . }}
   {{- include "ix.v1.common.lib.pod.dns" (dict "rootCtx" $rootCtx "objectData" $objectData) -}}
   {{- with (include "ix.v1.common.lib.pod.terminationGracePeriodSeconds" (dict "rootCtx" $rootCtx "objectData" $objectData)) }}
 terminationGracePeriodSeconds: {{ . }}
-  {{- end }}
+  {{- end -}}
+  {{- with (include "ix.v1.common.lib.pod.tolerations" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim) }}
+tolerations:
+    {{- . | nindent 2 }}
+  {{- end -}}
 {{- end -}}
