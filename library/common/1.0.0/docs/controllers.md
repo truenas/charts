@@ -42,12 +42,16 @@
 | controllers.[controller-name].podSpec.tolerations.value                 | `string`  |  ❌/✅   |      ✅       |                                                                 | Toleration's `value`. Required only when `operator` = `Equal`                        |
 | controllers.[controller-name].podSpec.tolerations.effect                | `string`  |    ❌    |      ✅       |                                                                 | Toleration's `effect`.(NoExecute, NoSchedule, PreferNoSchedule)                      |
 | controllers.[controller-name].podSpec.tolerations.tolerationSeconds     |   `int`   |    ❌    |      ❌       |                                                                 | Toleration's `tolerationSeconds`.                                                    |
+| controllers.[controller-name].podSpec.runtimeClassName                  | `string`  |    ✅    |      ❌       |        `{{ .Values.podOptions.runtimeClassName }}` ("")         | Pod's runtimeClassName                                                               |
 
 ---
 
 Notes
 
 > `dnsPolicy` is set automatically to `ClusterFirstWithHostNet` when `hostNetwork` is `true`
+> `runtimeClassName` will ignore any value set and use the `.Values.global.ixChartContext.nvidiaRuntimeClassName`,
+> if a GPU is assigned to a container and Scale Middleware sets `.Values.global.ixChartContext.addNvidiaRuntimeClass` to `true`.
+> Note that it will only set the `runtimeClassName` on the pod that this container belongs to.
 
 ---
 
@@ -125,4 +129,5 @@ controllers:
         - operator: Exists
           effect: NoExecute
           tolerationSeconds: 3600
+      runtimeClassName: some-runtime-class
 ```
