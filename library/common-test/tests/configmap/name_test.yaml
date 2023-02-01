@@ -24,13 +24,13 @@ tests:
         equal:
           path: metadata.name
           value: release-name-common-test-my-configmap1
-      - documentIndex: &configmapDoc2 1
+      - documentIndex: &otherConfigmapDoc 1
         isKind:
           of: ConfigMap
-      - documentIndex: *configmapDoc2
+      - documentIndex: *otherConfigmapDoc
         isAPIVersion:
           of: v1
-      - documentIndex: *configmapDoc2
+      - documentIndex: *otherConfigmapDoc
         equal:
           path: metadata.name
           value: release-name-common-test-my-configmap2

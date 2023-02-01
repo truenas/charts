@@ -6,6 +6,9 @@ global:
   annotations: {}
   # -- Scale Storage Class
   scaleZFSStorageClass: '{{ printf "ix-storage-class-%v" .Release.Name }}'
+  ixChartContext:
+    addNvidiaRuntimeClass: true
+    nvidiaRuntimeClassName: asdf
 
 # TODO:
 fallbackDefaults:
@@ -121,6 +124,7 @@ podOptions:
   tolerations: []
   schedulerName: ""
   priorityClassName: ""
+  runtimeClassName: ""
   automountServiceAccountToken: false
   terminationGracePeriodSeconds: 120
   # TODO: Add affinity

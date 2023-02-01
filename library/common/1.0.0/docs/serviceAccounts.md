@@ -5,6 +5,7 @@
 | serviceAccounts                           |  `dict`   |    ❌    |      ❌       |  `{}`   | Define the serviceAccounts as dicts                     |
 | serviceAccounts.[sa-name]                 |  `dict`   |    ✅    |      ❌       |  `{}`   | Holds secret definition                                 |
 | serviceAccounts.[sa-name].enabled         | `boolean` |    ✅    |      ❌       | `false` | Enables or Disables the secret                          |
+| serviceAccounts.[sa-name].primary         | `boolean` |    ❌    |      ❌       | `false` | Sets the service account as primary                     |
 | serviceAccounts.[sa-name].labels          |  `dict`   |    ❌    |      ✅       |  `{}`   | Additional labels for secret                            |
 | serviceAccounts.[sa-name].annotations     |  `dict`   |    ❌    |      ✅       |  `{}`   | Additional annotations for secret                       |
 | serviceAccounts.[sa-name].targetSelectAll | `boolean` |    ❌    |      ❌       |         | Whether to assign the serviceAccount to all pods or not |
@@ -24,7 +25,8 @@ Appears in:
 
 Naming scheme:
 
-- `$FullName-$ServiceAccountName` (release-name-chart-name-ServiceAccountName)
+- Primary: `$FullName` (release-name-chart-name)
+- Non-Primary: `$FullName-$ServiceAccountName` (release-name-chart-name-ServiceAccountName)
 
 ---
 

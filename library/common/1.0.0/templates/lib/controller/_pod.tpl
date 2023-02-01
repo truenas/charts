@@ -9,6 +9,7 @@ objectData: The object data to be used to render the Pod.
   {{- $objectData := .objectData -}}
 serviceAccountName: {{ include "ix.v1.common.lib.pod.serviceAccountName" (dict "rootCtx" $rootCtx "objectData" $objectData) }}
 automountServiceAccountToken: {{ include "ix.v1.common.lib.pod.automountServiceAccountToken" (dict "rootCtx" $rootCtx "objectData" $objectData) }}
+runtimeClassName: {{ include "ix.v1.common.lib.pod.runtimeClassName" (dict "rootCtx" $rootCtx "objectData" $objectData) }}
   {{- with (include "ix.v1.common.lib.pod.imagePullSecrets" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim) }}
 imagePullSecrets:
     {{-  . | nindent 2 }}
@@ -41,7 +42,6 @@ terminationGracePeriodSeconds: {{ . }}
 tolerations:
     {{- . | nindent 2 }}
   {{- end }}
-#TODO:runtimeClassName:
 #TODO:securityContext:
 #TODO:containers:
 #TODO:initContainers:

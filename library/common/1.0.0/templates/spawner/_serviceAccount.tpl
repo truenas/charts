@@ -5,6 +5,9 @@
 
 {{- define "ix.v1.common.spawner.serviceAccounts" -}}
 
+  {{/* Primary validation for enabled service accounts. */}}
+  {{- include "ix.v1.common.lib.serviceAccount.primaryValidation" $ -}}
+
   {{- range $name, $serviceAccount := .Values.serviceAccounts -}}
 
     {{- if $serviceAccount.enabled -}}
@@ -12,10 +15,14 @@
       {{/* Create a copy of the configmap */}}
       {{- $objectData := (mustDeepCopy $serviceAccount) -}}
 
-      {{- $objectName := (printf "%s-%s" (include "ix.v1.common.lib.chart.names.fullname" $) $name) -}}
+      {{- $objectName := include "ix.v1.common.lib.chart.names.fullname" $ -}}
+      {{- if not $objectData.primary -}}
+        {{- $objectName = (printf "%s-%s" (include "ix.v1.common.lib.chart.names.fullname" $) $name) -}}
+      {{- end -}}
 
       {{/* Perform validations */}}
       {{- include "ix.v1.common.lib.chart.names.validation" (dict "name" $objectName) -}}
+      {{- include "ix.v1.common.lib.serviceAccount.validation" (dict "objectData" $objectData) -}}
 
       {{/* Set the name of the service account */}}
       {{- $_ := set $objectData "name" $objectName -}}
