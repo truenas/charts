@@ -20,7 +20,7 @@
       {{/* Set the name of the configmap */}}
       {{- $_ := set $objectData "name" $objectName -}}
       {{/* Call class to create the object */}}
-      {{- include "ix.v1.common.class.configmap" (dict "objectData" $objectData "rootCtx" $) -}}
+      {{- include "ix.v1.common.class.configmap" (dict "rootCtx" $ "objectData" $objectData) -}}
 
     {{- end -}}
 

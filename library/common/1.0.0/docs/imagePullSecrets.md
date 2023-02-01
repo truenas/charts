@@ -13,10 +13,10 @@
 | imagePullSecrets.[pull-secret-name].data.password   | `string`  |    ✅    |      ✅       |  `""`   | Define the password of the image pull secret    |
 | imagePullSecrets.[pull-secret-name].data.email      | `string`  |    ✅    |      ✅       |  `""`   | Define the email of the image pull secret       |
 | imagePullSecrets.[pull-secret-name].targetSelectAll | `boolean` |    ❌    |      ❌       |         | Whether to assign the secret to all pods or not |
-| imagePullSecrets.[pull-secret-name].targetSelector  |  `list`   |    ❌    |      ❌       |  `""`   | Define the pod(s) to assign the secret          |
+| imagePullSecrets.[pull-secret-name].targetSelector  |  `list`   |    ❌    |      ❌       |  `[]`   | Define the pod(s) to assign the secret          |
 
 > When `targetSelectAll` is `true`, it will assign the secret to all pods (`targetSelector` is ignored in this case)
-> When `targetSelector` is a list, it's entry is a string, referencing the pod(s) name that will be assigned.
+> When `targetSelector` is a list, each entry is a string, referencing the pod(s) name that will be assigned.
 > When `targetSelector` is a empty, it will assign the secret to the primary pod
 
 ---

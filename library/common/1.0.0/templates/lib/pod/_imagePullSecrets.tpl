@@ -9,7 +9,6 @@ objectData: The object data to be used to render the Pod.
   {{- $objectData := .objectData -}}
 
   {{- $imgPullSecrets := list -}}
-  {{- $podSelected := true -}}
 
   {{- range $name, $imgPull := $rootCtx.Values.imagePullSecrets -}}
     {{- $pullName := (printf "%s-%s" (include "ix.v1.common.lib.chart.names.fullname" $rootCtx) $name) -}}
@@ -34,6 +33,6 @@ objectData: The object data to be used to render the Pod.
   {{- end -}}
 
   {{- range $imgPullSecrets }}
-- {{ . }}
+- name: {{ . }}
   {{- end -}}
 {{- end -}}

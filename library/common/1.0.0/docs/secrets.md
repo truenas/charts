@@ -31,9 +31,9 @@ secrets:
 
   secret-name:
     enabled: true
+    type: CustomSecretType
     labels:
       key: value
-      type: CustomSecretType
       keytpl: "{{ .Values.some.value }}"
     annotations:
       key: value

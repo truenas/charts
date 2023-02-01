@@ -1,22 +1,22 @@
-{{/* Configmap Class */}}
+{{/* Service Account Class */}}
 {{/* Call this template:
-{{ include "ix.v1.common.class.configmap" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "ix.v1.common.class.serviceAccount" (dict "rootCtx" $ "objectData" $objectData) }}
 
 rootCtx: The root context of the template. It is used to access the global context.
 objectData:
-  name: The name of the configmap.
-  labels: The labels of the configmap.
-  annotations: The annotations of the configmap.
-  data: The data of the configmap.
+  name: The name of the serviceAccount.
+  labels: The labels of the serviceAccount.
+  annotations: The annotations of the serviceAccount.
+  autoMountToken: Whether to mount the ServiceAccount token or not.
 */}}
 
-{{- define "ix.v1.common.class.configmap" -}}
+{{- define "ix.v1.common.class.serviceAccount" -}}
 
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData }}
 ---
 apiVersion: v1
-kind: ConfigMap
+kind: ServiceAccount
 metadata:
   name: {{ $objectData.name }}
   {{- $labels := (mustMerge ($objectData.labels | default dict) (include "ix.v1.common.lib.metadata.allLabels" $rootCtx | fromYaml)) -}}
@@ -28,8 +28,5 @@ metadata:
   {{- with (include "ix.v1.common.lib.metadata.render" (dict "rootCtx" $rootCtx "annotations" $annotations) | trim) }}
   annotations:
     {{- . | nindent 4 }}
-  {{- end }}
-data:
-  {{- tpl (toYaml $objectData.data) $rootCtx | nindent 2 }}
-  {{/* This comment is here to add a new line */}}
+  {{- end -}}
 {{- end -}}

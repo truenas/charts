@@ -20,7 +20,7 @@
       {{/* Set the name of the secret */}}
       {{- $_ := set $objectData "name" $objectName -}}
       {{/* Call class to create the object */}}
-      {{- include "ix.v1.common.class.secret" (dict "objectData" $objectData "rootCtx" $) -}}
+      {{- include "ix.v1.common.class.secret" (dict "rootCtx" $ "objectData" $objectData) -}}
 
     {{- end -}}
 

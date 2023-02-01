@@ -1,6 +1,6 @@
 {{/* Secret Class */}}
 {{/* Call this template:
-{{ include "ix.v1.common.class.secret" (dict "objectData" $objectData "rootCtx" $) }}
+{{ include "ix.v1.common.class.secret" (dict "rootCtx" $ "objectData" $objectData) }}
 
 rootCtx: The root context of the template. It is used to access the global context.
 objectData:

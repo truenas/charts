@@ -10,6 +10,9 @@
   {{/* Render Image Pull Secrets(s) */}}
   {{- include "ix.v1.common.spawner.imagePullSecrets" . | nindent 0 -}}
 
+  {{/* Render Service Accounts(s) */}}
+  {{- include "ix.v1.common.spawner.serviceAccounts" . | nindent 0 -}}
+
   {{/* Render Controller(s) */}}
   {{- include "ix.v1.common.spawner.controllers" . | nindent 0 -}}
 
