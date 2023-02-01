@@ -40,5 +40,10 @@ terminationGracePeriodSeconds: {{ . }}
   {{- with (include "ix.v1.common.lib.pod.tolerations" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim) }}
 tolerations:
     {{- . | nindent 2 }}
-  {{- end -}}
+  {{- end }}
+#TODO:runtimeClassName:
+#TODO:securityContext:
+#TODO:containers:
+#TODO:initContainers:
+#TODO:volumes:
 {{- end -}}
