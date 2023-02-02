@@ -33,11 +33,13 @@ objectData:
 
   {{/* Initialize values */}}
   {{- $hasPrimary := false -}}
+  {{- $hasEnabled := false -}}
 
   {{- range $name, $serviceAccount := .Values.serviceAccount -}}
 
     {{/* If service account is enabled */}}
     {{- if $serviceAccount.enabled -}}
+      {{- $hasEnabled = true -}}
 
       {{/* And service account is primary */}}
       {{- if and (hasKey $serviceAccount "primary") ($serviceAccount.primary) -}}
@@ -52,6 +54,11 @@ objectData:
       {{- end -}}
 
     {{- end -}}
+  {{- end -}}
+
+  {{/* Require at least one primary service account, if any enabled */}}
+  {{- if and $hasEnabled (not $hasPrimary) -}}
+    {{- fail "Service Account - At least one enabled service account must be primary" -}}
   {{- end -}}
 
 {{- end -}}
