@@ -4,7 +4,6 @@
 objectData:
   labels: The labels of the serviceAccount.
   annotations: The annotations of the serviceAccount.
-  data: The data of the serviceAccount.
 */}}
 
 {{- define "ix.v1.common.lib.serviceAccount.validation" -}}
@@ -26,7 +25,6 @@ objectData:
 objectData:
   labels: The labels of the serviceAccount.
   annotations: The annotations of the serviceAccount.
-  data: The data of the serviceAccount.
 */}}
 
 {{- define "ix.v1.common.lib.serviceAccount.primaryValidation" -}}
