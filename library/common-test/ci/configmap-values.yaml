@@ -10,7 +10,7 @@ service:
         protocol: HTTP
         port: 8080
 
-controllers:
+workload:
   main:
     pod:
       containers:

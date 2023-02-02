@@ -6,8 +6,8 @@ tests:
     set:
       podOptions:
         tolerations: []
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Deployment
@@ -27,8 +27,8 @@ tests:
           - operator: Exists
             effect: NoExecute
             tolerationSeconds: 3600
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Deployment
@@ -49,8 +49,8 @@ tests:
           - operator: Exists
             effect: NoExecute
             tolerationSeconds: 3600
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Deployment
@@ -81,8 +81,8 @@ tests:
           - operator: Exists
             effect: NoExecute
             tolerationSeconds: 3600
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Deployment
@@ -113,8 +113,8 @@ tests:
   # Failures
   - it: should fail with invalid operator
     set:
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Deployment
@@ -127,8 +127,8 @@ tests:
 
   - it: should fail with empty key and operator set to Equal
     set:
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Deployment
@@ -142,8 +142,8 @@ tests:
 
   - it: should fail with empty value and operator set to Equal
     set:
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Deployment
@@ -157,8 +157,8 @@ tests:
 
   - it: should fail with value set and operator set to Exists
     set:
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Deployment
@@ -172,8 +172,8 @@ tests:
 
   - it: should fail with effect set to Invalid
     set:
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Deployment
@@ -187,8 +187,8 @@ tests:
 
   - it: should fail with tolerationSeconds not a number
     set:
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Deployment

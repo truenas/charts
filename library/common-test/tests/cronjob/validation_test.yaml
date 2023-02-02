@@ -4,8 +4,8 @@ templates:
 tests:
   - it: should fail with invalid concurrencyPolicy
     set:
-      controllers:
-        controller-name:
+      workload:
+        workload-name:
           enabled: true
           primary: true
           type: CronJob
@@ -17,8 +17,8 @@ tests:
 
   - it: should fail with empty schedule
     set:
-      controllers:
-        controller-name:
+      workload:
+        workload-name:
           enabled: true
           primary: true
           type: CronJob
@@ -30,8 +30,8 @@ tests:
 
   - it: should fail with invalid completionMode (make sure job validation kicks in)
     set:
-      controllers:
-        controller-name:
+      workload:
+        workload-name:
           enabled: true
           primary: true
           type: CronJob

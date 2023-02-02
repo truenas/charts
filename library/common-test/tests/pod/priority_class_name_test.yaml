@@ -6,8 +6,8 @@ tests:
     set:
       podOptions:
         priorityClassName: ""
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Deployment
@@ -24,8 +24,8 @@ tests:
     set:
       podOptions:
         priorityClassName: some-priority-class
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Deployment
@@ -40,8 +40,8 @@ tests:
     set:
       podOptions:
         priorityClassName: some-priority-class
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Deployment
@@ -58,8 +58,8 @@ tests:
       priorityClass: some-other-priority-class
       podOptions:
         priorityClassName: some-priority-class
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Deployment

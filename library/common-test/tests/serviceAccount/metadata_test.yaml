@@ -17,7 +17,7 @@ tests:
         annotations:
           g_annotation1: global_annotation1
           g_annotation2: "{{ .Values.annotation2 }}"
-      serviceAccounts:
+      serviceAccount:
         my-sa1:
           enabled: true
           labels:

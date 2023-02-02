@@ -6,8 +6,8 @@ tests:
     set:
       podOptions:
         nodeSelector: {}
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: CronJob
@@ -27,8 +27,8 @@ tests:
         nodeSelector:
           disk: ssd
           cpu: intel
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: CronJob
@@ -48,8 +48,8 @@ tests:
         nodeSelector:
           disk: ssd
           cpu: intel
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: CronJob
@@ -73,8 +73,8 @@ tests:
         nodeSelector:
           disk: ssd
           cpu: intel
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: CronJob
@@ -96,8 +96,8 @@ tests:
       podOptions:
         nodeSelector:
           disk: ""
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: CronJob

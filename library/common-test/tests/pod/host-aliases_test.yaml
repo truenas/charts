@@ -6,8 +6,8 @@ tests:
     set:
       podOptions:
         hostAliases: ""
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Deployment
@@ -32,8 +32,8 @@ tests:
             hostnames:
               - myotherserver.local
               - backups.local
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Deployment
@@ -64,8 +64,8 @@ tests:
             hostnames:
               - myotherserver.local
               - backups.local
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Deployment
@@ -104,8 +104,8 @@ tests:
             hostnames:
               - myserver.local
               - storage.local
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Deployment

@@ -1,11 +1,11 @@
 {{/* Configmap Spawwner */}}
 {{/* Call this template:
-{{ include "ix.v1.common.spawner.configmaps" $ -}}
+{{ include "ix.v1.common.spawner.configmap" $ -}}
 */}}
 
-{{- define "ix.v1.common.spawner.configmaps" -}}
+{{- define "ix.v1.common.spawner.configmap" -}}
 
-  {{- range $name, $configmap := .Values.configmaps -}}
+  {{- range $name, $configmap := .Values.configmap -}}
 
     {{- if $configmap.enabled -}}
 

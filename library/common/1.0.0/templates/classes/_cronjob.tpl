@@ -10,7 +10,7 @@ objectData: The object data to be used to render the CronJob.
 
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
-  {{- include "ix.v1.common.lib.controller.cronjobValidation" (dict "objectData" $objectData) }}
+  {{- include "ix.v1.common.lib.workload.cronjobValidation" (dict "objectData" $objectData) }}
 ---
 apiVersion: batch/v1
 kind: CronJob
@@ -27,7 +27,7 @@ metadata:
     {{- . | nindent 4 }}
   {{- end }}
 spec:
-  {{- include "ix.v1.common.lib.controller.cronjobSpec" (dict "rootCtx" $rootCtx "objectData" $objectData) | nindent 2 }}
+  {{- include "ix.v1.common.lib.workload.cronjobSpec" (dict "rootCtx" $rootCtx "objectData" $objectData) | nindent 2 }}
       template:
         metadata:
             {{- $labels := (mustMerge ($objectData.podSpec.labels | default dict)
@@ -46,5 +46,5 @@ spec:
             {{- . | nindent 12 }}
             {{- end }}
         spec:
-          {{- include "ix.v1.common.lib.controller.pod" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 10 }}
+          {{- include "ix.v1.common.lib.workload.pod" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 10 }}
 {{- end -}}

@@ -1,11 +1,11 @@
 {{/* Secret Spawwner */}}
 {{/* Call this template:
-{{ include "ix.v1.common.spawner.secrets" $ -}}
+{{ include "ix.v1.common.spawner.secret" $ -}}
 */}}
 
-{{- define "ix.v1.common.spawner.secrets" -}}
+{{- define "ix.v1.common.spawner.secret" -}}
 
-  {{- range $name, $secret := .Values.secrets -}}
+  {{- range $name, $secret := .Values.secret -}}
 
     {{- if $secret.enabled -}}
 

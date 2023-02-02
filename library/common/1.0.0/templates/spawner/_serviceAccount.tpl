@@ -1,14 +1,14 @@
 {{/* Service Account Spawner */}}
 {{/* Call this template:
-{{ include "ix.v1.common.spawner.serviceAccounts" $ -}}
+{{ include "ix.v1.common.spawner.serviceAccount" $ -}}
 */}}
 
-{{- define "ix.v1.common.spawner.serviceAccounts" -}}
+{{- define "ix.v1.common.spawner.serviceAccount" -}}
 
   {{/* Primary validation for enabled service accounts. */}}
   {{- include "ix.v1.common.lib.serviceAccount.primaryValidation" $ -}}
 
-  {{- range $name, $serviceAccount := .Values.serviceAccounts -}}
+  {{- range $name, $serviceAccount := .Values.serviceAccount -}}
 
     {{- if $serviceAccount.enabled -}}
 

@@ -17,8 +17,8 @@ tests:
         annotations:
           g_annotation1: global_annotation1
           g_annotation2: "{{ .Values.annotation2 }}"
-      controllers:
-        controller-name:
+      workload:
+        workload-name:
           enabled: true
           primary: true
           type: CronJob
@@ -86,14 +86,14 @@ tests:
 
   - it: should pass with 2 cronjob created with correct selector labels
     set:
-      controllers:
-        controller-name:
+      workload:
+        workload-name:
           enabled: true
           primary: true
           type: CronJob
           schedule: "*/1 * * * *"
           podSpec: {}
-        other-controller-name:
+        other-workload-name:
           enabled: true
           primary: false
           type: CronJob
@@ -104,19 +104,27 @@ tests:
         isKind:
           of: CronJob
       - documentIndex: *cronJobDoc
+        equal:
+          path: metadata.name
+          value: release-name-common-test-other-workload-name
+      - documentIndex: *cronJobDoc
         isSubset:
           path: spec.jobTemplate.spec.template.metadata.labels
           content:
-            pod.name: release-name-common-test
+            pod.name: release-name-common-test-other-workload-name
             app.kubernetes.io/instance: RELEASE-NAME
             app.kubernetes.io/name: common-test
       - documentIndex: &otherCronJobDoc 1
         isKind:
           of: CronJob
       - documentIndex: *otherCronJobDoc
+        equal:
+          path: metadata.name
+          value: release-name-common-test
+      - documentIndex: *otherCronJobDoc
         isSubset:
           path: spec.jobTemplate.spec.template.metadata.labels
           content:
-            pod.name: release-name-common-test-other-controller-name
+            pod.name: release-name-common-test
             app.kubernetes.io/instance: RELEASE-NAME
             app.kubernetes.io/name: common-test

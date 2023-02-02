@@ -1,10 +1,10 @@
-suite: imagePullSecrets validation test
+suite: imagePullSecret validation test
 templates:
   - common.yaml
 tests:
   - it: should fail with name longer than 63 characters
     set:
-      imagePullSecrets:
+      imagePullSecret:
         my-pull-secret-super-long-name-that-is-longer-than-63-characters:
           enabled: true
           data: &data
@@ -18,7 +18,7 @@ tests:
 
   - it: should fail with name starting with underscore
     set:
-      imagePullSecrets:
+      imagePullSecret:
         _my-pull-secret:
           enabled: true
           data: *data
@@ -28,7 +28,7 @@ tests:
 
   - it: should fail with labels not a dict
     set:
-      imagePullSecrets:
+      imagePullSecret:
         my-pull-secret:
           enabled: true
           labels: "not a dict"
@@ -39,7 +39,7 @@ tests:
 
   - it: should fail with annotations not a dict
     set:
-      imagePullSecrets:
+      imagePullSecret:
         my-pull-secret:
           enabled: true
           annotations: "not a dict"
@@ -50,7 +50,7 @@ tests:
 
   - it: should fail with data not a dict
     set:
-      imagePullSecrets:
+      imagePullSecret:
         my-pull-secret:
           enabled: true
           data: "not a dict"
@@ -60,7 +60,7 @@ tests:
 
   - it: should fail with empty data
     set:
-      imagePullSecrets:
+      imagePullSecret:
         my-pull-secret:
           enabled: true
           data: {}
@@ -70,7 +70,7 @@ tests:
 
   - it: should fail with empty registry key
     set:
-      imagePullSecrets:
+      imagePullSecret:
         my-pull-secret:
           enabled: true
           type: ""
@@ -85,7 +85,7 @@ tests:
 
   - it: should fail with empty username key
     set:
-      imagePullSecrets:
+      imagePullSecret:
         my-pull-secret:
           enabled: true
           type: ""
@@ -100,7 +100,7 @@ tests:
 
   - it: should fail with empty password key
     set:
-      imagePullSecrets:
+      imagePullSecret:
         my-pull-secret:
           enabled: true
           type: ""
@@ -115,7 +115,7 @@ tests:
 
   - it: should fail with empty email key
     set:
-      imagePullSecrets:
+      imagePullSecret:
         my-pull-secret:
           enabled: true
           type: ""

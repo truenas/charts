@@ -4,7 +4,7 @@ templates:
 tests:
   - it: should fail with name longer than 63 characters
     set:
-      serviceAccounts:
+      serviceAccount:
         my-service-account-super-long-name-that-is-longer-than-63-characters:
           enabled: true
     asserts:
@@ -13,7 +13,7 @@ tests:
 
   - it: should fail with name starting with underscore
     set:
-      serviceAccounts:
+      serviceAccount:
         _my-sa:
           enabled: true
           data:
@@ -24,7 +24,7 @@ tests:
 
   - it: should fail with labels not a dict
     set:
-      serviceAccounts:
+      serviceAccount:
         my-sa:
           enabled: true
           labels: "not a dict"
@@ -34,7 +34,7 @@ tests:
 
   - it: should fail with annotations not a dict
     set:
-      serviceAccounts:
+      serviceAccount:
         my-sa:
           enabled: true
           annotations: "not a dict"
@@ -44,7 +44,7 @@ tests:
 
   - it: should fail with more than 1 primary service accounts
     set:
-      serviceAccounts:
+      serviceAccount:
         my-sa:
           enabled: true
           primary: true

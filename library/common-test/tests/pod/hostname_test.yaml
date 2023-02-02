@@ -4,8 +4,8 @@ templates:
 tests:
   - it: should pass with empty hostname
     set:
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: StatefulSet
@@ -20,8 +20,8 @@ tests:
 
   - it: should pass with hostname set
     set:
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: StatefulSet
@@ -39,8 +39,8 @@ tests:
   - it: should pass with hostname from "pod" with tpl
     set:
       host: some-other-hostname
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: StatefulSet

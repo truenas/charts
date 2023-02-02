@@ -1,12 +1,12 @@
 {{/* Deployment Validation */}}
 {{/* Call this template:
-{{ include "ix.v1.common.lib.controller.deploymentValidation" (dict "objectData" $objectData) -}}
+{{ include "ix.v1.common.lib.workload.deploymentValidation" (dict "objectData" $objectData) -}}
 rootCtx: The root context of the template. It is used to access the global context.
 objectData:
   strategy: The strategy of the object.
   rollingUpdate: The rollingUpdate of the object.
 */}}
-{{- define "ix.v1.common.lib.controller.deploymentValidation" -}}
+{{- define "ix.v1.common.lib.workload.deploymentValidation" -}}
   {{- $objectData := .objectData -}}
 
   {{- if $objectData.strategy -}}

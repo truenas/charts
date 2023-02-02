@@ -2,10 +2,10 @@ suite: cronjob spec test
 templates:
   - common.yaml
 tests:
-  - it: should pass with controller enabled
+  - it: should pass with workload enabled
     set:
-      controllers:
-        controller-name:
+      workload:
+        workload-name:
           enabled: true
           primary: true
           type: CronJob
@@ -42,8 +42,8 @@ tests:
     set:
       cron: "*/5 * * * *"
       someTZ: America/New_York
-      controllers:
-        controller-name:
+      workload:
+        workload-name:
           enabled: true
           primary: true
           type: CronJob

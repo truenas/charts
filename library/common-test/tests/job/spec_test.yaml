@@ -2,10 +2,10 @@ suite: job spec test
 templates:
   - common.yaml
 tests:
-  - it: should pass with controller enabled
+  - it: should pass with workload enabled
     set:
-      controllers:
-        controller-name:
+      workload:
+        workload-name:
           enabled: true
           primary: true
           type: Job
@@ -29,8 +29,8 @@ tests:
 
   - it: should apply spec correctly
     set:
-      controllers:
-        controller-name:
+      workload:
+        workload-name:
           enabled: true
           primary: true
           type: Job

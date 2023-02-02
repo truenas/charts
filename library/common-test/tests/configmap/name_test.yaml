@@ -4,7 +4,7 @@ templates:
 tests:
   - it: should generate correct name
     set:
-      configmaps:
+      configmap:
         my-configmap1:
           enabled: true
           data:

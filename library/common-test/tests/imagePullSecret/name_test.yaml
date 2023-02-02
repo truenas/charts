@@ -1,10 +1,10 @@
-suite: imagePullSecrets name test
+suite: imagePullSecret name test
 templates:
   - common.yaml
 tests:
   - it: should generate correct name
     set:
-      imagePullSecrets:
+      imagePullSecret:
         my-pull-secret1:
           enabled: true
           data:

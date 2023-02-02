@@ -10,7 +10,7 @@ objectData: The object data to be used to render the Deployment.
 
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
-  {{- include "ix.v1.common.lib.controller.deploymentValidation" (dict "objectData" $objectData) }}
+  {{- include "ix.v1.common.lib.workload.deploymentValidation" (dict "objectData" $objectData) }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -27,7 +27,7 @@ metadata:
     {{- . | nindent 4 }}
   {{- end }}
 spec:
-  {{- include "ix.v1.common.lib.controller.deploymentSpec" (dict "rootCtx" $rootCtx "objectData" $objectData) | nindent 2 }}
+  {{- include "ix.v1.common.lib.workload.deploymentSpec" (dict "rootCtx" $rootCtx "objectData" $objectData) | nindent 2 }}
   selector:
     matchLabels:
       {{- include "ix.v1.common.lib.metadata.selectorLabels" (dict "rootCtx" $rootCtx "podName" $objectData.name) | nindent 6 }}
@@ -49,5 +49,5 @@ spec:
         {{- . | nindent 8 }}
         {{- end }}
     spec:
-      {{- include "ix.v1.common.lib.controller.pod" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 6 }}
+      {{- include "ix.v1.common.lib.workload.pod" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 6 }}
 {{- end -}}

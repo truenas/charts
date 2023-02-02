@@ -9,8 +9,8 @@ tests:
           nameservers: []
           searches: []
           options: []
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Deployment
@@ -37,8 +37,8 @@ tests:
             - name: ndots
               value: "2"
             - name: edns0
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Deployment
@@ -69,8 +69,8 @@ tests:
             - example.org
           options:
             - name: edns0
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Deployment
@@ -108,8 +108,8 @@ tests:
       s1: example.com
       property: ndots
       value: 2
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Deployment
@@ -147,8 +147,8 @@ tests:
     set:
       podOptions:
         dnsPolicy: None
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Deployment
@@ -163,8 +163,8 @@ tests:
     set:
       podOptions:
         dnsPolicy: None
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Deployment
@@ -181,8 +181,8 @@ tests:
     set:
       podOptions:
         dnsPolicy: None
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Deployment
@@ -199,8 +199,8 @@ tests:
 
   - it: should fail with more than 3 nameservers
     set:
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Deployment
@@ -217,8 +217,8 @@ tests:
 
   - it: should fail with more than 6 Searches
     set:
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Deployment

@@ -1,11 +1,11 @@
 {{/* Image Pull Secrets Spawner */}}
 {{/* Call this template:
-{{ include "ix.v1.common.spawner.imagePullSecrets" $ -}}
+{{ include "ix.v1.common.spawner.imagePullSecret" $ -}}
 */}}
 
-{{- define "ix.v1.common.spawner.imagePullSecrets" -}}
+{{- define "ix.v1.common.spawner.imagePullSecret" -}}
 
-  {{- range $name, $imgPullSecret := .Values.imagePullSecrets -}}
+  {{- range $name, $imgPullSecret := .Values.imagePullSecret -}}
 
     {{- if $imgPullSecret.enabled -}}
 

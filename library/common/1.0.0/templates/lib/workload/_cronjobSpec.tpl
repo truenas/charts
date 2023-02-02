@@ -1,6 +1,6 @@
 {{/* CronJob Spec */}}
 {{/* Call this template:
-{{ include "ix.v1.common.lib.controller.cronjobSpec" (dict "rootCtx" $rootCtx "objectData" $objectData) -}}
+{{ include "ix.v1.common.lib.workload.cronjobSpec" (dict "rootCtx" $rootCtx "objectData" $objectData) -}}
 rootCtx: The root context of the template. It is used to access the global context.
 objectData:
   schedule: The schedule in Cron format, see https://en.wikipedia.org/wiki/Cron.
@@ -11,7 +11,7 @@ objectData:
   timezone: The timezone name. Defaults to .Values.TZ.
   +jobSpec data
 */}}
-{{- define "ix.v1.common.lib.controller.cronjobSpec" -}}
+{{- define "ix.v1.common.lib.workload.cronjobSpec" -}}
   {{- $objectData := .objectData -}}
   {{- $rootCtx := .rootCtx -}}
 timeZone: {{ (tpl ($objectData.timezone | default $rootCtx.Values.TZ) $rootCtx) | quote }}
@@ -22,5 +22,5 @@ successfulJobsHistoryLimit: {{ $objectData.successfulJobsHistoryLimit | default 
 startingDeadlineSeconds: {{ $objectData.startingDeadlineSeconds | default nil }}
 jobTemplate:
   spec:
-    {{- include "ix.v1.common.lib.controller.jobSpec" (dict "rootCtx" $rootCtx "objectData" $objectData) | nindent 4 }}
+    {{- include "ix.v1.common.lib.workload.jobSpec" (dict "rootCtx" $rootCtx "objectData" $objectData) | nindent 4 }}
 {{- end -}}

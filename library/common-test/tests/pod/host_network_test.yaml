@@ -6,8 +6,8 @@ tests:
     set:
       podOptions:
         hostNetwork: false
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Deployment
@@ -25,8 +25,8 @@ tests:
     set:
       podOptions:
         hostNetwork: true
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Deployment
@@ -44,8 +44,8 @@ tests:
     set:
       podOptions:
         hostNetwork: true
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Deployment
@@ -61,8 +61,8 @@ tests:
     set:
       podOptions:
         hostNetwork: false
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Deployment

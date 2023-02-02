@@ -1,10 +1,10 @@
-suite: imagePullSecrets data test
+suite: imagePullSecret data test
 templates:
   - common.yaml
 tests:
   - it: should pass with data
     set:
-      imagePullSecrets:
+      imagePullSecret:
         my-secret1:
           enabled: true
           data:
@@ -32,7 +32,7 @@ tests:
       user: user
       pass: secret_pass
       email: mail@example.com
-      imagePullSecrets:
+      imagePullSecret:
         my-secret1:
           enabled: true
           data:

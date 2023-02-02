@@ -6,8 +6,8 @@ tests:
     set:
       podOptions:
         runtimeClassName: ""
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Deployment
@@ -24,8 +24,8 @@ tests:
     set:
       podOptions:
         runtimeClassName: some-runtime-class
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Deployment
@@ -40,8 +40,8 @@ tests:
     set:
       podOptions:
         runtimeClassName: some-runtime-class
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Deployment
@@ -58,8 +58,8 @@ tests:
       runtimeClass: some-other-runtime-class
       podOptions:
         runtimeClassName: some-runtime-class
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Deployment
@@ -77,9 +77,9 @@ tests:
         - gpu:
             key: value
           targetSelector:
-            controller-name1:
+            workload-name1:
               - container-name1
-            controller-name3:
+            workload-name3:
               - container-name1
       global:
         ixChartContext:
@@ -87,20 +87,20 @@ tests:
           nvidiaRuntimeClassName: ix-runtime
       podOptions:
         runtimeClassName: some-class
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Deployment
           podSpec:
             runtimeClassName: some-other-class
-        controller-name2:
+        workload-name2:
           enabled: true
           primary: false
           type: DaemonSet
           podSpec:
             runtimeClassName: some-class
-        controller-name3:
+        workload-name3:
           enabled: true
           primary: false
           type: StatefulSet
@@ -126,7 +126,7 @@ tests:
           path: spec.template.spec.runtimeClassName
           value: ix-runtime
 
-  - it: should pass with runtimeClassName from ixChartContext without targetSelector (on primary controller)
+  - it: should pass with runtimeClassName from ixChartContext without targetSelector (on primary workload)
     set:
       scaleGPU:
         - gpu:
@@ -135,14 +135,14 @@ tests:
         ixChartContext:
           addNvidiaRuntimeClass: true
           nvidiaRuntimeClassName: ix-runtime
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Job
           podSpec:
             runtimeClassName: some-other-class
-        controller-name2:
+        workload-name2:
           enabled: true
           primary: false
           type: CronJob
@@ -168,14 +168,14 @@ tests:
       scaleGPU:
         - gpu: {}
           targetSelector:
-            controller-name1:
+            workload-name1:
               - container-name1
       global:
         ixChartContext:
           addNvidiaRuntimeClass: true
           nvidiaRuntimeClassName: ix-runtime
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Job

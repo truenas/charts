@@ -1,13 +1,13 @@
 {{/* Job Validation */}}
 {{/* Call this template:
-{{ include "ix.v1.common.lib.controller.jobValidation" (dict "objectData" $objectData) -}}
+{{ include "ix.v1.common.lib.workload.jobValidation" (dict "objectData" $objectData) -}}
 rootCtx: The root context of the template. It is used to access the global context.
 objectData:
   completionMode: The completionMode of the object.
   completions: The completions of the object.
   parallelism: The parallelism of the object.
 */}}
-{{- define "ix.v1.common.lib.controller.jobValidation" -}}
+{{- define "ix.v1.common.lib.workload.jobValidation" -}}
   {{- $objectData := .objectData -}}
 
   {{- if $objectData.completionMode -}}

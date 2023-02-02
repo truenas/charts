@@ -11,7 +11,7 @@ objectData: The object data to be used to render the Pod.
   {{- $saName := "default" -}}
   {{- $saNameCount := 0 -}}
 
-  {{- range $name, $serviceAccount := $rootCtx.Values.serviceAccounts -}}
+  {{- range $name, $serviceAccount := $rootCtx.Values.serviceAccount -}}
     {{- $name = (printf "%s-%s" (include "ix.v1.common.lib.chart.names.fullname" $rootCtx) $name) -}}
 
     {{- if $serviceAccount.enabled -}}

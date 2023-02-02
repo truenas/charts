@@ -4,7 +4,7 @@ templates:
 tests:
   - it: should generate correct name
     set:
-      serviceAccounts:
+      serviceAccount:
         my-sa1:
           enabled: true
         my-sa2:

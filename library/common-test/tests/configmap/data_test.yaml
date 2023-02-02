@@ -4,7 +4,7 @@ templates:
 tests:
   - it: should pass with key-value data
     set:
-      configmaps:
+      configmap:
         my-configmap1:
           enabled: true
           data:
@@ -22,7 +22,7 @@ tests:
   - it: should pass with key-value data from tpl
     set:
       data: bar
-      configmaps:
+      configmap:
         my-configmap1:
           enabled: true
           data:
@@ -36,7 +36,7 @@ tests:
 
   - it: should pass with scalar data
     set:
-      configmaps:
+      configmap:
         my-configmap1:
           enabled: true
           data:
@@ -55,7 +55,7 @@ tests:
   - it: should pass with scalar data with tpl
     set:
       data: Some other text
-      configmaps:
+      configmap:
         my-configmap:
           enabled: true
           data:
@@ -76,7 +76,7 @@ tests:
       data: |
         Some other text
         some_text
-      configmaps:
+      configmap:
         my-configmap1:
           enabled: true
           data:

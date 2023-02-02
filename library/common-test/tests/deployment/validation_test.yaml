@@ -4,8 +4,8 @@ templates:
 tests:
   - it: should fail with invalid strategy
     set:
-      controllers:
-        controller-name:
+      workload:
+        workload-name:
           enabled: true
           primary: true
           type: Deployment
@@ -17,8 +17,8 @@ tests:
 
   - it: should fail with rollingUpdate not a dict
     set:
-      controllers:
-        controller-name:
+      workload:
+        workload-name:
           enabled: true
           primary: true
           type: Deployment

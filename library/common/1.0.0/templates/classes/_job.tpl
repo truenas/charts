@@ -10,7 +10,7 @@ objectData: The object data to be used to render the Job.
 
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
-  {{- include "ix.v1.common.lib.controller.jobValidation" (dict "objectData" $objectData) }}
+  {{- include "ix.v1.common.lib.workload.jobValidation" (dict "objectData" $objectData) }}
 ---
 apiVersion: batch/v1
 kind: Job
@@ -27,7 +27,7 @@ metadata:
     {{- . | nindent 4 }}
   {{- end }}
 spec:
-  {{- include "ix.v1.common.lib.controller.jobSpec" (dict "rootCtx" $rootCtx "objectData" $objectData) | nindent 2 }}
+  {{- include "ix.v1.common.lib.workload.jobSpec" (dict "rootCtx" $rootCtx "objectData" $objectData) | nindent 2 }}
   template:
     metadata:
         {{- $labels := (mustMerge ($objectData.podSpec.labels | default dict)
@@ -46,5 +46,5 @@ spec:
         {{- . | nindent 8 }}
         {{- end }}
     spec:
-      {{- include "ix.v1.common.lib.controller.pod" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 6 }}
+      {{- include "ix.v1.common.lib.workload.pod" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 6 }}
 {{- end -}}

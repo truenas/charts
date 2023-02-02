@@ -6,8 +6,8 @@ tests:
     set:
       podOptions:
         terminationGracePeriodSeconds: ""
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: DaemonSet
@@ -24,8 +24,8 @@ tests:
     set:
       podOptions:
         terminationGracePeriodSeconds: 100
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: DaemonSet
@@ -40,8 +40,8 @@ tests:
     set:
       podOptions:
         terminationGracePeriodSeconds: 100
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: DaemonSet
@@ -58,8 +58,8 @@ tests:
       period: 125
       podOptions:
         terminationGracePeriodSeconds: 50
-      controllers:
-        controller-name1:
+      workload:
+        workload-name1:
           enabled: true
           primary: true
           type: DaemonSet

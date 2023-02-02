@@ -1,33 +1,33 @@
 # CronJob
 
-| Key                                                      |   Type    | Required | Helm Template |                        Default                        | Description                                           |
-| :------------------------------------------------------- | :-------: | :------: | :-----------: | :---------------------------------------------------: | :---------------------------------------------------- |
-| controllers.[controller-name].schedule                   | `string`  |    ✅    |      ✅       |                         `""`                          | Define the schedule                                   |
-| controllers.[controller-name].timezone                   | `string`  |    ❌    |      ✅       |                  `{{ .Values.TZ }}`                   | Define the timezone                                   |
-| controllers.[controller-name].concurrencyPolicy          | `string`  |    ❌    |      ✅       |                       `Forbid`                        | Define the concurrencyPolicy (Allow, Replace, Forbid) |
-| controllers.[controller-name].failedJobsHistoryLimit     |   `int`   |    ❌    |      ❌       |                          `1`                          | Define the failedJobsHistoryLimit                     |
-| controllers.[controller-name].successfulJobsHistoryLimit |   `int`   |    ❌    |      ❌       |                          `3`                          | Define the successfulJobsHistoryLimit                 |
-| controllers.[controller-name].startingDeadlineSeconds    |   `int`   |    ❌    |      ❌       |                                                       | Define the startingDeadlineSeconds                    |
-| controllers.[controller-name].completionMode             | `string`  |    ❌    |      ❌       |                     `NonIndexed`                      | Define the completionMode (Indexed, NonIndexed)       |
-| controllers.[controller-name].backoffLimit               |   `int`   |    ❌    |      ❌       |                          `5`                          | Define the backoffLimit                               |
-| controllers.[controller-name].completions                |   `int`   |    ❌    |      ❌       |                                                       | Define the completions                                |
-| controllers.[controller-name].parallelism                |   `int`   |    ❌    |      ❌       |                          `1`                          | Define the parallelism                                |
-| controllers.[controller-name].ttlSecondsAfterFinished    |   `int`   |    ❌    |      ❌       |                         `120`                         | Define the ttlSecondsAfterFinished                    |
-| controllers.[controller-name].activeDeadlineSeconds      |   `int`   |    ❌    |      ❌       |                                                       | Define the activeDeadlineSeconds                      |
+| Key                                                 |   Type   | Required | Helm Template |      Default       | Description                                           |
+| :-------------------------------------------------- | :------: | :------: | :-----------: | :----------------: | :---------------------------------------------------- |
+| workload.[workload-name].schedule                   | `string` |    ✅    |      ✅       |        `""`        | Define the schedule                                   |
+| workload.[workload-name].timezone                   | `string` |    ❌    |      ✅       | `{{ .Values.TZ }}` | Define the timezone                                   |
+| workload.[workload-name].concurrencyPolicy          | `string` |    ❌    |      ✅       |      `Forbid`      | Define the concurrencyPolicy (Allow, Replace, Forbid) |
+| workload.[workload-name].failedJobsHistoryLimit     |  `int`   |    ❌    |      ❌       |        `1`         | Define the failedJobsHistoryLimit                     |
+| workload.[workload-name].successfulJobsHistoryLimit |  `int`   |    ❌    |      ❌       |        `3`         | Define the successfulJobsHistoryLimit                 |
+| workload.[workload-name].startingDeadlineSeconds    |  `int`   |    ❌    |      ❌       |                    | Define the startingDeadlineSeconds                    |
+| workload.[workload-name].completionMode             | `string` |    ❌    |      ❌       |    `NonIndexed`    | Define the completionMode (Indexed, NonIndexed)       |
+| workload.[workload-name].backoffLimit               |  `int`   |    ❌    |      ❌       |        `5`         | Define the backoffLimit                               |
+| workload.[workload-name].completions                |  `int`   |    ❌    |      ❌       |                    | Define the completions                                |
+| workload.[workload-name].parallelism                |  `int`   |    ❌    |      ❌       |        `1`         | Define the parallelism                                |
+| workload.[workload-name].ttlSecondsAfterFinished    |  `int`   |    ❌    |      ❌       |       `120`        | Define the ttlSecondsAfterFinished                    |
+| workload.[workload-name].activeDeadlineSeconds      |  `int`   |    ❌    |      ❌       |                    | Define the activeDeadlineSeconds                      |
 
 ---
 
 Notes:
 
-View common `keys` of `controllers` in [Controllers Documentation](controllers.md).
+View common `keys` of `workload` in [workload Documentation](workload.md).
 
 ---
 
 Examples:
 
 ```yaml
-controllers:
-  controller-name:
+workload:
+  workload-name:
     enabled: true
     primary: true
     type: CronJob
@@ -46,7 +46,7 @@ controllers:
     podSpec:
       restartPolicy: OnFailure
 
-  other-controller-name:
+  other-workload-name:
     enabled: true
     primary: false
     type: CronJob

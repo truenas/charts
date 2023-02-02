@@ -34,7 +34,7 @@ objectData:
   {{/* Initialize values */}}
   {{- $hasPrimary := false -}}
 
-  {{- range $name, $serviceAccount := .Values.serviceAccounts -}}
+  {{- range $name, $serviceAccount := .Values.serviceAccount -}}
 
     {{/* If service account is enabled */}}
     {{- if $serviceAccount.enabled -}}

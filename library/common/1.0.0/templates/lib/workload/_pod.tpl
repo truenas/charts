@@ -1,16 +1,16 @@
 {{/* Pod Spec */}}
 {{/* Call this template:
-{{ include "ix.v1.common.lib.controller.pod" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "ix.v1.common.lib.workload.pod" (dict "rootCtx" $ "objectData" $objectData) }}
 rootCtx: The root context of the template. It is used to access the global context.
 objectData: The object data to be used to render the Pod.
 */}}
-{{- define "ix.v1.common.lib.controller.pod" -}}
+{{- define "ix.v1.common.lib.workload.pod" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 serviceAccountName: {{ include "ix.v1.common.lib.pod.serviceAccountName" (dict "rootCtx" $rootCtx "objectData" $objectData) }}
 automountServiceAccountToken: {{ include "ix.v1.common.lib.pod.automountServiceAccountToken" (dict "rootCtx" $rootCtx "objectData" $objectData) }}
 runtimeClassName: {{ include "ix.v1.common.lib.pod.runtimeClassName" (dict "rootCtx" $rootCtx "objectData" $objectData) }}
-  {{- with (include "ix.v1.common.lib.pod.imagePullSecrets" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim) }}
+  {{- with (include "ix.v1.common.lib.pod.imagePullSecret" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim) }}
 imagePullSecrets:
     {{-  . | nindent 2 }}
   {{- end }}

@@ -1,4 +1,4 @@
-suite: imagePullSecrets metadata test
+suite: imagePullSecret metadata test
 templates:
   - common.yaml
 chart:
@@ -17,7 +17,7 @@ tests:
         annotations:
           g_annotation1: global_annotation1
           g_annotation2: "{{ .Values.annotation2 }}"
-      imagePullSecrets:
+      imagePullSecret:
         my-secret1:
           enabled: true
           labels:

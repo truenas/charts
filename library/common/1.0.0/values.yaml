@@ -39,7 +39,7 @@ image:
   pullPolicy: IfNotPresent
 
 # -- Service Account:
-serviceAccounts:
+serviceAccount:
   sa-name:
     # -- Enables the service account
     enabled: false
@@ -375,34 +375,34 @@ notes:
     # Documentation
     # Bug reports
 
-# -- Controllers
-controllers:
-  # -- Controller name
+# -- workload
+workload:
+  # -- Workload name
   main:
-    # -- Enables the controller
+    # -- Enables the workload
     enabled: true
-    # -- Primary controller
+    # -- Primary workload
     primary: true
-    # -- Controller type
+    # -- Workload type
     type: Deployment
-    # -- Controller labels
+    # -- Workload labels
     # labels: {}
-    # # -- Controller annotations
+    # # -- Workload annotations
     # annotations: {}
-    # # -- Controller replicas (Deployment and StatefulSet only)
+    # # -- Workload replicas (Deployment and StatefulSet only)
     # replicas: 1
-    # # -- Controller revision history limit
+    # # -- Workload revision history limit
     # revisionHistoryLimit: 3
     # # Strategy
-    # # -- Controller strategy type
+    # # -- Workload strategy type
     # strategy: Recreate
-    # # -- Controller strategy rolling update
+    # # -- Workload strategy rolling update
     # rollingUpdate:
-    #   # -- Controller strategy rolling update max unavailable
+    #   # -- Workload strategy rolling update max unavailable
     #   maxUnavailable: 1
-    #   # -- Controller strategy rolling update max surge
+    #   # -- Workload strategy rolling update max surge
     #   maxSurge: 1
-    #   # -- Controller strategy rolling update partition (StatefulSet only)
+    #   # -- Workload strategy rolling update partition (StatefulSet only)
     #   partition: 0
 
     # # -- CronJob
@@ -539,7 +539,7 @@ controllers:
 portal: {}
 
 # -- Image Pull Secrets
-imagePullSecrets:
+imagePullSecret:
   # -- Image Pull Secret name
   image-secret-name:
     # -- Enables the Image Pull Secret
@@ -562,8 +562,8 @@ imagePullSecrets:
     targetSelector:
       - pod-name
 
-# -- ConfigMaps (docs/configmaps.md)
-configmaps: {}
+# -- ConfigMaps (docs/configmap.md)
+configmap: {}
   # # -- ConfigMap name
   # conf-name:
   #   # -- Enables the ConfigMap
@@ -575,8 +575,8 @@ configmaps: {}
   #   # -- ConfigMap data
   #   data: {}
 
-# -- Secrets (docs/secrets.md)
-secrets: {}
+# -- Secrets (docs/secret.md)
+secret: {}
   # # -- Secret name
   # secret-name:
   #   # -- Enables the secret

@@ -4,8 +4,8 @@ templates:
 tests:
   - it: should fail with invalid completionMode
     set:
-      controllers:
-        controller-name:
+      workload:
+        workload-name:
           enabled: true
           primary: true
           type: Job
@@ -17,8 +17,8 @@ tests:
 
   - it: should fail with completionMode to Indexed and no completions
     set:
-      controllers:
-        controller-name:
+      workload:
+        workload-name:
           enabled: true
           primary: true
           type: Job
@@ -31,8 +31,8 @@ tests:
 
   - it: should fail with completionMode to Indexed and no parallelism
     set:
-      controllers:
-        controller-name:
+      workload:
+        workload-name:
           enabled: true
           primary: true
           type: Job

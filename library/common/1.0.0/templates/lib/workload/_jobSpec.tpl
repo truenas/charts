@@ -1,6 +1,6 @@
 {{/* Job Spec */}}
 {{/* Call this template:
-{{ include "ix.v1.common.lib.controller.jobSpec" (dict "rootCtx" $rootCtx "objectData" $objectData) -}}
+{{ include "ix.v1.common.lib.workload.jobSpec" (dict "rootCtx" $rootCtx "objectData" $objectData) -}}
 rootCtx: The root context of the template. It is used to access the global context.
 objectData:
   backoffLimit: The number of retries before marking this job failed. Defaults to 6.
@@ -10,7 +10,7 @@ objectData:
   ttlSecondsAfterFinished: TTLSecondsAfterFinished limits the lifetime of a Job that has finished execution (either Complete or Failed). If this field is set, ttlSecondsAfterFinished after the Job finishes, it is eligible to be automatically deleted. When the Job is being deleted, its lifecycle guarantees (e.g. finalizers) will be honored. If this field is unset, the Job won't be automatically deleted. If this field is set to zero, the Job becomes eligible to be deleted immediately after it finishes. This field is alpha-level and is only honored by servers that enable the TTLAfterFinished feature.
   completionMode: CompletionMode specifies how Pod completions are tracked. It can be `NonIndexed` (default) or `Indexed`.
 */}}
-{{- define "ix.v1.common.lib.controller.jobSpec" -}}
+{{- define "ix.v1.common.lib.workload.jobSpec" -}}
   {{- $objectData := .objectData -}}
   {{- $rootCtx := .rootCtx -}}
 backoffLimit: {{ $objectData.backoffLimit | default 5 }}
