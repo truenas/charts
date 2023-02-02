@@ -5,13 +5,13 @@ tests:
   - it: should generate correct name
     set:
       serviceAccount:
+        my-sa:
+          enabled: true
+          primary: true
         my-sa1:
           enabled: true
         my-sa2:
           enabled: true
-        main:
-          enabled: true
-          primary: true
     asserts:
       - documentIndex: &primaryServiceAccount 0
         isKind:

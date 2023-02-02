@@ -26,6 +26,7 @@
 
       {{/* Set the name of the service account */}}
       {{- $_ := set $objectData "name" $objectName -}}
+      {{- $_ := set $objectData "shortName" $name -}}
 
       {{/* Call class to create the object */}}
       {{- include "ix.v1.common.class.serviceAccount" (dict "rootCtx" $ "objectData" $objectData) -}}
