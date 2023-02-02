@@ -43,6 +43,8 @@ serviceAccount:
   sa-name:
     # -- Enables the service account
     enabled: false
+    # -- Primary service account
+    primary: true
     # -- Service account labels
     labels: {}
     # -- Service account annotations
@@ -53,25 +55,35 @@ serviceAccount:
 
 # -- RBAC
 rbac:
-  # -- Enables the RBAC
-  enabled: false
-  # -- RBAC labels
-  labels: {}
-  # -- RBAC annotations
-  annotations: {}
-  # -- ClusterWide
-  clusterWide: false
-  # -- Service account name
-  serviceAccounts:
-    - sa-name
-  # -- RBAC rules
-  rules:
-    - apiGroups:
-        - ""
-      resources:
-        - pods
-      verbs:
-        - get
+  rbac-name:
+    # -- Enables the RBAC
+    enabled: false
+    # -- Primary RBAC
+    primary: true
+    # -- RBAC labels
+    labels: {}
+    # -- RBAC annotations
+    annotations: {}
+    # -- ClusterWide
+    clusterWide: false
+    # -- Select all service accounts
+    allServiceAccounts: false
+    # -- Service accounts to select
+    serviceAccounts:
+      - sa-name2
+    # -- RBAC rules
+    rules:
+      - apiGroups:
+          - ""
+        resources:
+          - pods
+        verbs:
+          - get
+    # -- RBAC subjects
+    subjects:
+      - kind: a-kind
+        name: a-name
+        apiGroup: a-group
 
 # -- Security Context
 securityContext:
