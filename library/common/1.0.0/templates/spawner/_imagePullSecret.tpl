@@ -27,6 +27,7 @@
 
       {{/* Set the name of the image pull secret */}}
       {{- $_ := set $objectData "name" $objectName -}}
+      {{- $_ := set $objectData "shortName" $name -}}
 
       {{/* Call class to create the object */}}
       {{- include "ix.v1.common.class.secret" (dict "rootCtx" $ "objectData" $objectData) -}}
