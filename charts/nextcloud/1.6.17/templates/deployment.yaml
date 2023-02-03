@@ -82,6 +82,7 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
         - name: extrappvolume-{{ $index }}
           mountPath: {{ $hostPathConfiguration.mountPath }}
         {{ end }}
+        {{- if .Values.nextcloud.install_ffmpeg }}
         lifecycle:
           postStart:
             exec:
@@ -94,6 +95,7 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
                   apt install -y --no-install-recommends \
                   ffmpeg || echo "Failed to install ffmpeg"
                   echo "Finished."
+        {{- end }}
 {{ include "common.networking.dnsConfiguration" .Values | nindent 6 }}
       volumes:
         - name: nginx-configuration

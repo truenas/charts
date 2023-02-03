@@ -19,6 +19,7 @@ nextcloud:
   host: nextcloud.kube.home
   password: changeme
   username: admin
+  install_ffmpeg: true
 nginx:
   image:
     pullPolicy: IfNotPresent
