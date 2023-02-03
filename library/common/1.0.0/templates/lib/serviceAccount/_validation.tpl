@@ -21,10 +21,7 @@ objectData:
 
 {{/* Service Account Primary Validation */}}
 {{/* Call this template:
-{{ include "ix.v1.common.lib.serviceAccount.primaryValidation" (dict "objectData" $objectData) -}}
-objectData:
-  labels: The labels of the serviceAccount.
-  annotations: The annotations of the serviceAccount.
+{{ include "ix.v1.common.lib.serviceAccount.primaryValidation" $ -}}
 */}}
 
 {{- define "ix.v1.common.lib.serviceAccount.primaryValidation" -}}

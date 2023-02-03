@@ -22,10 +22,7 @@ objectData:
 
 {{/* RBAC Primary Validation */}}
 {{/* Call this template:
-{{ include "ix.v1.common.lib.rbac.primaryValidation" (dict "objectData" $objectData) -}}
-objectData:
-  labels: The labels of the rbac.
-  annotations: The annotations of the rbac.
+{{ include "ix.v1.common.lib.rbac.primaryValidation" $ -}}
 */}}
 
 {{- define "ix.v1.common.lib.rbac.primaryValidation" -}}
