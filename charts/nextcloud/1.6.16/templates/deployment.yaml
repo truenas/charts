@@ -82,6 +82,18 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
         - name: extrappvolume-{{ $index }}
           mountPath: {{ $hostPathConfiguration.mountPath }}
         {{ end }}
+        lifecycle:
+          postStart:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  echo "Installing ffmpeg..."
+                  apt update && \
+                  apt install -y --no-install-recommends \
+                  ffmpeg || echo "Failed to install ffmpeg"
+                  echo "Finished."
 {{ include "common.networking.dnsConfiguration" .Values | nindent 6 }}
       volumes:
         - name: nginx-configuration
