@@ -12,8 +12,9 @@ objectData:
   {{- if $objectData.strategy -}}
     {{- $strategy := $objectData.strategy -}}
 
-    {{- if not (mustHas $strategy (list "Recreate" "RollingUpdate")) -}}
-      {{- fail (printf "Deployment - Expected <strategy> to be one of [Recreate, RollingUpdate], but got [%v]" $strategy) -}}
+    {{- $strategies := (list "Recreate" "RollingUpdate") -}}
+    {{- if not (mustHas $strategy $strategies) -}}
+      {{- fail (printf "Deployment - Expected <strategy> to be one of [%s], but got [%v]" (join ", " $strategies) $strategy) -}}
     {{- end -}}
 
   {{- end -}}

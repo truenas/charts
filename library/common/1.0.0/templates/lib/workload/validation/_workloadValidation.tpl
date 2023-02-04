@@ -11,8 +11,9 @@
   {{/* Go over workload */}}
   {{- range $name, $workload := .Values.workload -}}
 
-    {{- if not (mustHas $workload.type (list "Deployment" "StatefulSet" "DaemonSet" "Job" "CronJob")) -}}
-      {{- fail (printf "Workload - Expected <type> to be one of [Deployment, StatefulSet, DaemonSet, Job, CronJob], but got [%s]" $workload.type) -}}
+    {{- $types := (list "Deployment" "StatefulSet" "DaemonSet" "Job" "CronJob") -}}
+    {{- if not (mustHas $workload.type $types) -}}
+      {{- fail (printf "Workload - Expected <type> to be one of [%s], but got [%s]" (join ", " $types) $workload.type) -}}
     {{- end -}}
 
     {{/* If workload is enabled */}}

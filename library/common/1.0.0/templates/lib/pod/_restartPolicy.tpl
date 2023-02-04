@@ -20,11 +20,13 @@ objectData: The object data to be used to render the Pod.
     {{- $policy = tpl . $rootCtx -}}
   {{- end -}}
 
-  {{- if not (mustHas $policy (list "Always" "Never" "OnFailure")) -}}
-    {{- fail (printf "Expected <restartPolicy to be one of [Never, Always, OnFailure] but got [%s]" $policy) -}}
+  {{- $policies := (list "Never" "Always" "OnFailure") -}}
+  {{- if not (mustHas $policy $policies) -}}
+    {{- fail (printf "Expected <restartPolicy to be one of [%s] but got [%s]" (join ", " $policies) $policy) -}}
   {{- end -}}
 
-  {{- if and (ne "Always" $policy) (mustHas $objectData.type (list "Deployment" "DaemonSet" "StatefulSet")) -}}
+  {{- $types := (list "Deployment" "DaemonSet" "StatefulSet") -}}
+  {{- if and (ne "Always" $policy) (mustHas $objectData.type $types) -}}
     {{- fail (printf "Expected <restartPolicy to be [Always] for [%s] but got [%s]" $objectData.type $policy) -}}
   {{- end -}}
 

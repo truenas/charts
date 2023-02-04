@@ -28,8 +28,9 @@ objectData: The object data to be used to render the Pod.
     {{- $effect := (tpl (.effect | default "") $rootCtx) -}}
     {{- $tolSeconds := .tolerationSeconds -}}
 
-    {{- if not (mustHas $operator (list "Exists" "Equal")) -}}
-      {{- fail (printf "Expected <tolerations.operator> to be one of [Exists, Equal] but got [%s]" $operator) -}}
+    {{- $operators := (list "Exists" "Equal") -}}
+    {{- if not (mustHas $operator $operators) -}}
+      {{- fail (printf "Expected <tolerations.operator> to be one of [%s] but got [%s]" (join ", " $operators) $operator) -}}
     {{- end -}}
 
     {{- if and (eq $operator "Equal") (or (not $key) (not $value)) -}}
@@ -40,8 +41,9 @@ objectData: The object data to be used to render the Pod.
       {{- fail (printf "Expected empty <tolerations.value> with <tolerations.operator> set to [Exists], but got [%s]" $value) -}}
     {{- end -}}
 
-    {{- if and $effect (not (mustHas $effect (list "NoExecute" "NoSchedule" "PreferNoSchedule"))) -}}
-      {{- fail (printf "Expected <tolerations.effect> to be one of [NoExecute, NoSchedule, PreferNoSchedule], but got [%s]" $effect) -}}
+    {{- $effects := (list "NoExecute" "NoSchedule" "PreferNoSchedule") -}}
+    {{- if and $effect (not (mustHas $effect $effects)) -}}
+      {{- fail (printf "Expected <tolerations.effect> to be one of [%s], but got [%s]" (join ", " $effects) $effect) -}}
     {{- end -}}
 
     {{- if and (not (kindIs "invalid" $tolSeconds)) (not (mustHas (kindOf $tolSeconds) (list "int" "float64"))) -}}

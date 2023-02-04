@@ -1,15 +1,16 @@
 # Service
 
-| Key                                   |   Type    | Required |   Helm Template    |   Default   | Description                                                             |
-| :------------------------------------ | :-------: | :------: | :----------------: | :---------: | :---------------------------------------------------------------------- |
-| service                               |  `dict`   |    ❌    |         ❌         |    `{}`     | Define the service as dicts                                             |
-| service.[service-name]                |  `dict`   |    ✅    |         ❌         |    `{}`     | Holds service definition                                                |
-| service.[service-name].enabled        | `boolean` |    ✅    |         ❌         |   `false`   | Enables or Disables the service                                         |
-| service.[service-name].labels         |  `dict`   |    ❌    | ✅ (On value only) |    `{}`     | Additional labels for service                                           |
-| service.[service-name].annotations    |  `dict`   |    ❌    | ✅ (On value only) |    `{}`     | Additional annotations for service                                      |
-| service.[service-name].type           | `string`  |    ❌    |         ✅         | `ClusterIP` | Define the service type                                                 |
-| service.[service-name].sharedKey      | `string`  |    ❌    |         ✅         | `$FullName` | Custom Shared Key for MetalLB Annotation                                |
-| service.[service-name].targetSelector | `string`  |    ❌    |         ✅         |    `""`     | Define the pod to link the service, by default will use the primary pod |
+| Key                                   |   Type    | Required |   Helm Template    |   Default   | Description                                                                           |
+| :------------------------------------ | :-------: | :------: | :----------------: | :---------: | :------------------------------------------------------------------------------------ |
+| service                               |  `dict`   |    ❌    |         ❌         |    `{}`     | Define the service as dicts                                                           |
+| service.[service-name]                |  `dict`   |    ✅    |         ❌         |    `{}`     | Holds service definition                                                              |
+| service.[service-name].enabled        | `boolean` |    ✅    |         ❌         |   `false`   | Enables or Disables the service                                                       |
+| service.[service-name].labels         |  `dict`   |    ❌    | ✅ (On value only) |    `{}`     | Additional labels for service                                                         |
+| service.[service-name].annotations    |  `dict`   |    ❌    | ✅ (On value only) |    `{}`     | Additional annotations for service                                                    |
+| service.[service-name].type           | `string`  |    ❌    |         ✅         | `ClusterIP` | Define the service type (ClusterIP, LoadBalancer, NodePort, ExternalIP, ExternalName) |
+| service.[service-name].sharedKey      | `string`  |    ❌    |         ✅         | `$FullName` | Custom Shared Key for MetalLB Annotation                                              |
+| service.[service-name].targetSelector | `string`  |    ❌    |         ✅         |    `""`     | Define the pod to link the service, by default will use the primary pod               |
+| service.[service-name].ports          |  `list`   |    ✅    |         ❌         |    `{}`     | Define the ports of the service                                                       |
 
 ---
 

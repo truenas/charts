@@ -115,7 +115,7 @@ tests:
               primary: true
     asserts:
       - failedTemplate:
-          errorMessage: Service - Expected service's <targetSelector> to be [string], but got [map]
+          errorMessage: Service - Expected <targetSelector> to be [string], but got [map]
 
   - it: should fail with container targetSelector not a string
     set:
@@ -131,7 +131,7 @@ tests:
                 container: not-a-string
     asserts:
       - failedTemplate:
-          errorMessage: Service - Expected port's <targetSelector> to be [string], but got [map]
+          errorMessage: Service - Expected <port.targetSelector> to be [string], but got [map]
 
   - it: should fail with selected pod not defined
     set:
@@ -188,4 +188,20 @@ tests:
               protocol: not-a-protocol
     asserts:
       - failedTemplate:
-          errorMessage: Service - Expected port's protocol to be one of [TCP, UDP, HTTP, HTTPS] but got [not-a-protocol]
+          errorMessage: Service - Expected <port.protocol> to be one of [TCP, UDP, HTTP, HTTPS] but got [not-a-protocol]
+
+  - it: should fail with invalid service type
+    set:
+      service:
+        service-name1:
+          enabled: true
+          primary: true
+          type: not-a-type
+          ports:
+            port-name1:
+              enabled: true
+              primary: true
+              protocol: not-a-protocol
+    asserts:
+      - failedTemplate:
+          errorMessage: Service - Expected <type> to be one of [ClusterIP, LoadBalancer, NodePort, ExternalName, ExternalIP] but got [not-a-type]

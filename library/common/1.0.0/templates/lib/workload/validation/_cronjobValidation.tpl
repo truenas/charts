@@ -13,8 +13,9 @@ objectData:
   {{- if $objectData.concurrencyPolicy -}}
     {{- $concurrencyPolicy := $objectData.concurrencyPolicy -}}
 
-    {{- if not (mustHas $concurrencyPolicy (list "Allow" "Forbid" "Replace")) -}}
-      {{- fail (printf "CronJob - Expected <concurrencyPolicy> to be one of [Allow, Forbid, Replace], but got [%v]" $concurrencyPolicy) -}}
+    {{- $policies := (list "Allow" "Forbid" "Replace") -}}
+    {{- if not (mustHas $concurrencyPolicy $policies) -}}
+      {{- fail (printf "CronJob - Expected <concurrencyPolicy> to be one of [%s], but got [%v]" (join ", " $policies) $concurrencyPolicy) -}}
     {{- end -}}
 
   {{- end -}}
