@@ -56,7 +56,7 @@ metadata:
   {{- end -}}
   {{- $annotations := (mustMerge ($objectData.annotations | default dict) (include "ix.v1.common.lib.metadata.allAnnotations" $rootCtx | fromYaml)) -}}
   {{- if eq $svcType "LoadBalancer" -}}
-    {{- include "ix.v1.common.lib.service.metalLBAnnotations" (dict "rootCtx" $rootCtx "annotations" $annotations) -}}
+    {{- include "ix.v1.common.lib.service.metalLBAnnotations" (dict "rootCtx" $rootCtx "objectData" $objectData "annotations" $annotations) -}}
   {{- end -}}
   {{- if and $hasHTTPSPort -}}
     {{- include "ix.v1.common.lib.service.traefikAnnotations" (dict "rootCtx" $rootCtx "annotations" $annotations) -}}
@@ -66,5 +66,9 @@ metadata:
     {{- . | nindent 4 }}
   {{- end }}
 spec:
+{{- if not (mustHas $svcType (list "ExternalName" "ExternalIP")) }}
+selector:
+  {{- include "ix.v1.common.lib.metadata.selectorLabels" (dict "rootCtx" $rootCtx "podName" $podValues.shortName) | trim | nindent 2 }}
+{{- end -}}
 {{/* TODO: */}}
 {{- end -}}

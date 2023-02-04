@@ -17,6 +17,7 @@ service:
 # The above just makes it easier to test with specific values,
 # set on each test case, without having to worry about pre-defined values.
 
+# TODO:
 # It will be a test case using a different values.yaml (default-values.yaml),
 # that do not disable any objects. So we can make sure that defaults apply.
 

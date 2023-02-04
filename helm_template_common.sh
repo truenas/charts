@@ -23,7 +23,7 @@ helm dependency update "$chart_path"
 
 if [ $1 == "template" ]; then
   echo "🧪 Running <helm template ./$chart_path"
-  helm template "./$chart_path" --debug --set workload.main.enabled=true
+  helm template -f "$chart_path/default-values.yaml" "./$chart_path" --debug
 else
   echo "🏁 Running <helm install --dry-run --debug common-test ${extra_args[@]} ./$chart_path"
   helm install --dry-run --debug common-test "${extra_args[@]}" "./$chart_path"

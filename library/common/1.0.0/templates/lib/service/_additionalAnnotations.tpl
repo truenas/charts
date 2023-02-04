@@ -6,9 +6,15 @@ rootCtx: The root context of the service
 
 {{- define "ix.v1.common.lib.service.metalLBAnnotations" -}}
   {{- $rootCtx := .rootCtx -}}
+  {{- $objectData := .objectData -}}
   {{- $annotations := .annotations -}}
 
   {{- $sharedKey := include "ix.v1.common.lib.chart.names.fullname" $rootCtx -}}
+
+  {{/* A custom shared key can be defined per service even between multiple charts */}}
+  {{- with $objectData.sharedKey -}}
+    {{- $sharedKey = tpl . $rootCtx -}}
+  {{- end -}}
 
   {{- if $rootCtx.Values.global.addMetalLBAnnotations -}}
     {{- $_ := set $annotations "metallb.universe.tf/allow-shared-ip" $sharedKey -}}

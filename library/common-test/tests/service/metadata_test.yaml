@@ -96,6 +96,35 @@ tests:
             metallb.universe.tf/allow-shared-ip: release-name-common-test
             traefik.ingress.kubernetes.io/service.serversscheme: https
 
+  - it: should pass with correct selector with targetSelector
+    set:
+      service:
+        my-service1:
+          enabled: true
+          primary: true
+          targetSelector: my-workload
+          ports:
+            port-name:
+              enabled: true
+              primary: true
+      workload:
+        my-workload:
+          enabled: true
+          primary: true
+          type: Deployment
+          podSpec: {}
+    asserts:
+      - documentIndex: *serviceDoc
+        isKind:
+          of: Service
+      - documentIndex: *serviceDoc
+        equal:
+          path: selector
+          value:
+            pod.name: my-workload
+            app.kubernetes.io/name: common-test
+            app.kubernetes.io/instance: RELEASE-NAME
+
   - it: should pass with correct selector without targetSelector
     set:
       service:
@@ -117,36 +146,7 @@ tests:
           type: StatefulSet
           podSpec: {}
     asserts:
-      - documentIndex: *serviceDoc
-        isKind:
-          of: Service
-      - documentIndex: *serviceDoc
-        equal:
-          path: selector
-          value:
-            pod.name: my-workload
-            app.kubernetes.io/name: common-test
-            app.kubernetes.io/instance: RELEASE-NAME
-
-  - it: should pass with correct selector with targetSelector
-    set:
-      service:
-        my-service1:
-          enabled: true
-          primary: true
-          targetSelector: my-workload
-          ports:
-            port-name:
-              enabled: true
-              primary: true
-      workload:
-        my-workload:
-          enabled: true
-          primary: true
-          type: Deployment
-          podSpec: {}
-    asserts:
-      - documentIndex: *serviceDoc
+      - documentIndex: &serviceDoc 2
         isKind:
           of: Service
       - documentIndex: *serviceDoc
