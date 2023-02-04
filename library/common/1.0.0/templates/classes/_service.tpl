@@ -12,6 +12,8 @@ objectData: The service data, that will be used to render the Service object.
   {{- $objectData := .objectData -}}
 
   {{- $svcType := $objectData.type | default "ClusterIP" -}}
+  {{/* Expand svcType in case it has tpl */}}
+  {{- $svcType = (tpl $svcType $rootCtx) -}}
 
   {{/* Get Pod Values based on the selector (or the absence of it) */}}
   {{- $podValues := fromJson (include "ix.v1.common.lib.service.getSelectedPodValues" (dict "rootCtx" $rootCtx "objectData" $objectData)) -}}
@@ -66,9 +68,11 @@ metadata:
     {{- . | nindent 4 }}
   {{- end }}
 spec:
-{{- if not (mustHas $svcType (list "ExternalName" "ExternalIP")) }}
+  {{- if eq $svcType "ClusterIP" -}}
+    {{- include "ix.v1.common.lib.service.clusterIP" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 }}
+  {{- end }}
+  {{- if not (mustHas $svcType (list "ExternalName" "ExternalIP")) }}
 selector:
-  {{- include "ix.v1.common.lib.metadata.selectorLabels" (dict "rootCtx" $rootCtx "podName" $podValues.shortName) | trim | nindent 2 }}
-{{- end -}}
-{{/* TODO: */}}
+    {{- include "ix.v1.common.lib.metadata.selectorLabels" (dict "rootCtx" $rootCtx "podName" $podValues.shortName) | trim | nindent 2 }}
+  {{- end -}}
 {{- end -}}

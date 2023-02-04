@@ -18,7 +18,12 @@ objectData:
   {{- end -}}
 
   {{- if and $objectData.targetSelector (not (kindIs "string" $objectData.targetSelector)) -}}
-    {{- fail (printf "Service - Expected service's <targetSelector> to be [string], but got [%s]" (kindOf $objectData.targetSelector)) -}}
+    {{- fail (printf "Service - Expected <targetSelector> to be [string], but got [%s]" (kindOf $objectData.targetSelector)) -}}
+  {{- end -}}
+
+  {{- $svcTypes := (list "ClusterIP" "LoadBalancer" "NodePort" "ExternalName" "ExternalIP") -}}
+  {{- if and $objectData.type (not (mustHas $objectData.type $svcTypes)) -}}
+    {{- fail (printf "Service - Expected <type> to be one of [%s] but got [%s]" (join ", " $svcTypes) $objectData.type) -}}
   {{- end -}}
 
   {{- $hasEnabledPort := false -}}
@@ -27,11 +32,12 @@ objectData:
       {{- $hasEnabledPort = true -}}
 
       {{- if and $port.targetSelector (not (kindIs "string" $port.targetSelector)) -}}
-        {{- fail (printf "Service - Expected port's <targetSelector> to be [string], but got [%s]" (kindOf $port.targetSelector)) -}}
+        {{- fail (printf "Service - Expected <port.targetSelector> to be [string], but got [%s]" (kindOf $port.targetSelector)) -}}
       {{- end -}}
 
-      {{- if and $port.protocol (not (mustHas $port.protocol (list "TCP" "UDP" "HTTP" "HTTPS"))) -}}
-        {{- fail (printf "Service - Expected port's protocol to be one of [TCP, UDP, HTTP, HTTPS] but got [%s]" $port.protocol) -}}
+      {{- $protocolTypes := (list "TCP" "UDP" "HTTP" "HTTPS") -}}
+      {{- if and $port.protocol (not (mustHas $port.protocol $protocolTypes)) -}}
+        {{- fail (printf "Service - Expected <port.protocol> to be one of [%s] but got [%s]" (join ", " $protocolTypes) $port.protocol) -}}
       {{- end -}}
 
     {{- end -}}
