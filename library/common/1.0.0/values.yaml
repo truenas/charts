@@ -4,11 +4,12 @@ global:
   labels: {}
   # -- Set additional global annotations
   annotations: {}
+  # -- Adds metalLB annotations to services
+  addMetalLBAnnotations: false
+  # -- Adds traefik annotations to services
+  addTraefikAnnotations: false
   # -- Scale Storage Class
   scaleZFSStorageClass: '{{ printf "ix-storage-class-%v" .Release.Name }}'
-  ixChartContext:
-    addNvidiaRuntimeClass: true
-    nvidiaRuntimeClassName: asdf
 
 # TODO:
 fallbackDefaults:
@@ -251,16 +252,20 @@ persistence:
           subPath: ""
           mountPropagation: ""
 
-# -- Services
-services:
+# -- Service
+service:
   # -- Service name
-  service-name:
+  main:
     # -- Enables the service
-    enabled: true
+    enabled: false
     # -- Primary service
     primary: true
+    # -- Service labels
+    labels: {}
+    # -- Service annotations
+    annotations: {}
     # -- Pod to connect
-    targetSelector: pod-name
+    targetSelector: main
     # -- Ports
     ports:
       port-name:

@@ -1,0 +1,191 @@
+suite: service validation test
+templates:
+  - common.yaml
+tests:
+  - it: should fail without primary service
+    set:
+      service:
+        service-name:
+          enabled: true
+    asserts:
+      - failedTemplate:
+          errorMessage: Service - At least one enabled service must be primary
+
+  - it: should fail with more than one primary service
+    set:
+      service:
+        service-name1:
+          enabled: true
+          primary: true
+        service-name2:
+          enabled: true
+          primary: true
+    asserts:
+      - failedTemplate:
+          errorMessage: Service - Only one service can be primary
+
+  - it: should fail without primary port in service
+    set:
+      service:
+        service-name1:
+          enabled: true
+          primary: true
+          ports:
+            port-name:
+              enabled: true
+    asserts:
+      - failedTemplate:
+          errorMessage: Service - At least one enabled port in service must be primary
+
+  - it: should fail with more than one primary port in service
+    set:
+      service:
+        service-name1:
+          enabled: true
+          primary: true
+          ports:
+            port-name1:
+              enabled: true
+              primary: true
+            port-name2:
+              enabled: true
+              primary: true
+    asserts:
+      - failedTemplate:
+          errorMessage: Service - Only one port per service can be primary
+
+  - it: should fail with no enabled ports in enabled service
+    set:
+      service:
+        service-name1:
+          enabled: true
+          primary: true
+          ports:
+            port-name1:
+              enabled: true
+              primary: true
+            port-name2:
+              enabled: true
+              primary: true
+    asserts:
+      - failedTemplate:
+          errorMessage: Service - Only one port per service can be primary
+
+  - it: should fail with annotations not a dict
+    set:
+      service:
+        service-name1:
+          enabled: true
+          primary: true
+          annotations: not-a-dict
+          ports:
+            port-name1:
+              enabled: true
+              primary: true
+    asserts:
+      - failedTemplate:
+          errorMessage: Service - Expected <annotations> to be a dictionary, but got [string]
+
+  - it: should fail with labels not a dict
+    set:
+      service:
+        service-name1:
+          enabled: true
+          primary: true
+          labels: not-a-dict
+          ports:
+            port-name1:
+              enabled: true
+              primary: true
+    asserts:
+      - failedTemplate:
+          errorMessage: Service - Expected <labels> to be a dictionary, but got [string]
+
+  - it: should fail with pod targetSelector not a string
+    set:
+      service:
+        service-name1:
+          enabled: true
+          primary: true
+          targetSelector:
+            pod: not-a-string
+          ports:
+            port-name1:
+              enabled: true
+              primary: true
+    asserts:
+      - failedTemplate:
+          errorMessage: Service - Expected service's <targetSelector> to be [string], but got [map]
+
+  - it: should fail with container targetSelector not a string
+    set:
+      service:
+        service-name1:
+          enabled: true
+          primary: true
+          ports:
+            port-name1:
+              enabled: true
+              primary: true
+              targetSelector:
+                container: not-a-string
+    asserts:
+      - failedTemplate:
+          errorMessage: Service - Expected port's <targetSelector> to be [string], but got [map]
+
+  - it: should fail with selected pod not defined
+    set:
+      service:
+        service-name1:
+          enabled: true
+          primary: true
+          targetSelector: some-pod-name
+          ports:
+            port-name:
+              enabled: true
+              primary: true
+      workload:
+        main:
+          enabled: true
+          primary: true
+          type: Deployment
+          podSpec: {}
+    asserts:
+      - failedTemplate:
+          errorMessage: Service - Selected pod [some-pod-name] is not defined
+
+  - it: should fail with selected pod not enabled
+    set:
+      service:
+        service-name1:
+          enabled: true
+          primary: true
+          targetSelector: some-pod-name
+          ports:
+            port-name:
+              enabled: true
+              primary: true
+      workload:
+        some-pod-name:
+          enabled: false
+          primary: true
+          type: Deployment
+          podSpec: {}
+    asserts:
+      - failedTemplate:
+          errorMessage: Service - Selected pod [some-pod-name] is not enabled
+
+  - it: should fail with invalid port protocol
+    set:
+      service:
+        service-name1:
+          enabled: true
+          primary: true
+          ports:
+            port-name1:
+              enabled: true
+              primary: true
+              protocol: not-a-protocol
+    asserts:
+      - failedTemplate:
+          errorMessage: Service - Expected port's protocol to be one of [TCP, UDP, HTTP, HTTPS] but got [not-a-protocol]

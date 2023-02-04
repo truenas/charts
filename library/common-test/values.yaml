@@ -1,7 +1,11 @@
 # As we have by default enabled
-# a "main" workload" for all charts
+# a "main" workload and service" for all charts
 # We disable it so tests run with their defined
-# workload (Tests use a different named workload)
+# values (Tests use a different named values)
 workload:
+  main:
+    enabled: false
+
+service:
   main:
     enabled: false
