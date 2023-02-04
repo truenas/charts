@@ -77,7 +77,7 @@ tests:
           path: metadata.labels
           value:
             app: common-test-1.0.0
-            release: release-name
+            release: RELEASE-NAME
             helm-revision: 0
             helm.sh/chart: common-test-1.0.0
             app.kubernetes.io/managed-by: Helm
@@ -102,7 +102,7 @@ tests:
           path: metadata.labels
           value:
             app: common-test-1.0.0
-            release: release-name
+            release: RELEASE-NAME
             helm-revision: 0
             helm.sh/chart: common-test-1.0.0
             app.kubernetes.io/managed-by: Helm
@@ -127,7 +127,7 @@ tests:
           path: metadata.labels
           value:
             app: common-test-1.0.0
-            release: release-name
+            release: RELEASE-NAME
             helm-revision: 0
             helm.sh/chart: common-test-1.0.0
             app.kubernetes.io/managed-by: Helm
@@ -152,7 +152,7 @@ tests:
           path: metadata.labels
           value:
             app: common-test-1.0.0
-            release: release-name
+            release: RELEASE-NAME
             helm-revision: 0
             helm.sh/chart: common-test-1.0.0
             app.kubernetes.io/managed-by: Helm

@@ -1,15 +1,15 @@
 # Service Account
 
-| Key                                      |   Type    | Required | Helm Template | Default | Description                                             |
-| :--------------------------------------- | :-------: | :------: | :-----------: | :-----: | :------------------------------------------------------ |
-| serviceAccount                           |  `dict`   |    ❌    |      ❌       |  `{}`   | Define the serviceAccount as dicts                      |
-| serviceAccount.[sa-name]                 |  `dict`   |    ✅    |      ❌       |  `{}`   | Holds service account definition                                 |
-| serviceAccount.[sa-name].enabled         | `boolean` |    ✅    |      ❌       | `false` | Enables or Disables the service account                          |
-| serviceAccount.[sa-name].primary         | `boolean` |    ❌    |      ❌       | `false` | Sets the service account as primary                     |
-| serviceAccount.[sa-name].labels          |  `dict`   |    ❌    |      ✅       |  `{}`   | Additional labels for service account                            |
-| serviceAccount.[sa-name].annotations     |  `dict`   |    ❌    |      ✅       |  `{}`   | Additional annotations for service account                       |
-| serviceAccount.[sa-name].targetSelectAll | `boolean` |    ❌    |      ❌       |         | Whether to assign the serviceAccount to all pods or not |
-| serviceAccount.[sa-name].targetSelector  |  `list`   |    ❌    |      ❌       |  `[]`   | Define the pod(s) to assign the serviceAccount          |
+| Key                                      |   Type    | Required |   Helm Template    | Default | Description                                             |
+| :--------------------------------------- | :-------: | :------: | :----------------: | :-----: | :------------------------------------------------------ |
+| serviceAccount                           |  `dict`   |    ❌    |         ❌         |  `{}`   | Define the serviceAccount as dicts                      |
+| serviceAccount.[sa-name]                 |  `dict`   |    ✅    |         ❌         |  `{}`   | Holds service account definition                        |
+| serviceAccount.[sa-name].enabled         | `boolean` |    ✅    |         ❌         | `false` | Enables or Disables the service account                 |
+| serviceAccount.[sa-name].primary         | `boolean` |    ❌    |         ❌         | `false` | Sets the service account as primary                     |
+| serviceAccount.[sa-name].labels          |  `dict`   |    ❌    | ✅ (On value only) |  `{}`   | Additional labels for service account                   |
+| serviceAccount.[sa-name].annotations     |  `dict`   |    ❌    | ✅ (On value only) |  `{}`   | Additional annotations for service account              |
+| serviceAccount.[sa-name].targetSelectAll | `boolean` |    ❌    |         ❌         |         | Whether to assign the serviceAccount to all pods or not |
+| serviceAccount.[sa-name].targetSelector  |  `list`   |    ❌    |         ❌         |  `[]`   | Define the pod(s) to assign the serviceAccount          |
 
 > When `targetSelectAll` is `true`, it will assign the serviceAccount to all pods (`targetSelector` is ignored in this case)
 > When `targetSelector` is a list, each entry is a string, referencing the pod(s) name that will be assigned.

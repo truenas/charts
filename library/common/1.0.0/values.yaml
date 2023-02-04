@@ -39,53 +39,6 @@ image:
   # -- Image pull policy
   pullPolicy: IfNotPresent
 
-# -- Service Account:
-serviceAccount:
-  sa-name:
-    # -- Enables the service account
-    enabled: false
-    # -- Primary service account
-    primary: true
-    # -- Service account labels
-    labels: {}
-    # -- Service account annotations
-    annotations: {}
-    targetSelectAll: false
-    targetSelector:
-      - pod-name
-
-# -- RBAC
-rbac:
-  rbac-name:
-    # -- Enables the RBAC
-    enabled: false
-    # -- Primary RBAC
-    primary: true
-    # -- RBAC labels
-    labels: {}
-    # -- RBAC annotations
-    annotations: {}
-    # -- ClusterWide
-    clusterWide: false
-    # -- Select all service accounts
-    allServiceAccounts: false
-    # -- Service accounts to select
-    serviceAccounts:
-      - sa-name2
-    # -- RBAC rules
-    rules:
-      - apiGroups:
-          - ""
-        resources:
-          - pods
-        verbs:
-          - get
-    # -- RBAC subjects
-    subjects:
-      - kind: a-kind
-        name: a-name
-        apiGroup: a-group
-
 # -- Security Context
 securityContext:
   # -- Container security context for all containers
@@ -257,7 +210,7 @@ service:
   # -- Service name
   main:
     # -- Enables the service
-    enabled: false
+    enabled: true
     # -- Primary service
     primary: true
     # -- Service labels
@@ -265,7 +218,7 @@ service:
     # -- Service annotations
     annotations: {}
     # -- Pod to connect
-    targetSelector: main
+    # targetSelector: main
     # -- Ports
     ports:
       port-name:
@@ -485,7 +438,7 @@ workload:
       # -- Containers
       containers:
         # -- Container name
-        container-name:
+        main:
           # -- Enables the container
           enabled: true
           # -- Container image
@@ -555,29 +508,30 @@ workload:
 # TODO:
 portal: {}
 
+# Done
 # -- Image Pull Secrets
-imagePullSecret:
+imagePullSecret: []
   # -- Image Pull Secret name
-  image-secret-name:
-    # -- Enables the Image Pull Secret
-    enabled: false
-    # -- Labels
-    labels: {}
-    # -- Annotations
-    annotations: {}
-    # -- Image Pull Secret Data
-    data:
-      # -- Registry
-      registry: ""
-      # -- Username
-      username: ""
-      # -- Password
-      password: ""
-      # -- Email
-      email: ""
-    targetSelectAll: true
-    targetSelector:
-      - pod-name
+  # image-secret-name:
+  #   # -- Enables the Image Pull Secret
+  #   enabled: false
+  #   # -- Labels
+  #   labels: {}
+  #   # -- Annotations
+  #   annotations: {}
+  #   # -- Image Pull Secret Data
+  #   data:
+  #     # -- Registry
+  #     registry: ""
+  #     # -- Username
+  #     username: ""
+  #     # -- Password
+  #     password: ""
+  #     # -- Email
+  #     email: ""
+  #   targetSelectAll: true
+  #   targetSelector:
+  #     - main
 
 # -- ConfigMaps (docs/configmap.md)
 configmap: {}
@@ -606,3 +560,50 @@ secret: {}
   #   data:
   #     # -- Secret data (stringData)
   #     key: value
+
+# -- Service Account:
+serviceAccount: {}
+  # main:
+  #   # -- Enables the service account
+  #   enabled: false
+  #   # -- Primary service account
+  #   primary: true
+  #   # -- Service account labels
+  #   labels: {}
+  #   # -- Service account annotations
+  #   annotations: {}
+  #   targetSelectAll: false
+  #   targetSelector:
+  #     - main
+
+# -- RBAC
+rbac: {}
+  # main:
+  #   # -- Enables the RBAC
+  #   enabled: false
+  #   # -- Primary RBAC
+  #   primary: true
+  #   # -- RBAC labels
+  #   labels: {}
+  #   # -- RBAC annotations
+  #   annotations: {}
+  #   # -- ClusterWide
+  #   clusterWide: false
+  #   # -- Select all service accounts
+  #   allServiceAccounts: false
+  #   # -- Service accounts to select
+  #   serviceAccounts:
+  #     - main
+  #   # -- RBAC rules
+  #   rules:
+  #     - apiGroups:
+  #         - ""
+  #       resources:
+  #         - pods
+  #       verbs:
+  #         - get
+  #   # -- RBAC subjects
+  #   subjects:
+  #     - kind: a-kind
+  #       name: a-name
+  #       apiGroup: a-group

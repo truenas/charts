@@ -53,7 +53,7 @@ tests:
           path: metadata.labels
           value:
             app: common-test-1.0.0
-            release: release-name
+            release: RELEASE-NAME
             helm-revision: 0
             helm.sh/chart: common-test-1.0.0
             app.kubernetes.io/managed-by: Helm
@@ -66,9 +66,9 @@ tests:
         equal:
           path: spec.jobTemplate.spec.template.metadata.labels
           value:
-            pod.name: release-name-common-test
+            pod.name: workload-name
             app: common-test-1.0.0
-            release: release-name
+            release: RELEASE-NAME
             app.kubernetes.io/instance: RELEASE-NAME
             app.kubernetes.io/managed-by: Helm
             app.kubernetes.io/name: common-test
@@ -111,7 +111,7 @@ tests:
         isSubset:
           path: spec.jobTemplate.spec.template.metadata.labels
           content:
-            pod.name: release-name-common-test-other-workload-name
+            pod.name: other-workload-name
             app.kubernetes.io/instance: RELEASE-NAME
             app.kubernetes.io/name: common-test
       - documentIndex: &otherCronJobDoc 1
@@ -125,6 +125,6 @@ tests:
         isSubset:
           path: spec.jobTemplate.spec.template.metadata.labels
           content:
-            pod.name: release-name-common-test
+            pod.name: workload-name
             app.kubernetes.io/instance: RELEASE-NAME
             app.kubernetes.io/name: common-test

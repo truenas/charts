@@ -8,6 +8,6 @@ helm-revision: {{ .Release.Revision | quote }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 app: {{ include "ix.v1.common.lib.chart.names.chart" . }}
-release: {{ .Release.Name | lower }}
+release: {{ .Release.Name }}
 {{- include "ix.v1.common.lib.metadata.globalLabels" . }}
 {{- end -}}

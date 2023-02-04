@@ -52,7 +52,7 @@ tests:
           path: metadata.labels
           value:
             app: common-test-1.0.0
-            release: release-name
+            release: RELEASE-NAME
             helm-revision: 0
             helm.sh/chart: common-test-1.0.0
             app.kubernetes.io/managed-by: Helm
@@ -65,16 +65,16 @@ tests:
         equal:
           path: spec.selector.matchLabels
           value:
-            pod.name: release-name-common-test
+            pod.name: workload-name
             app.kubernetes.io/name: common-test
             app.kubernetes.io/instance: RELEASE-NAME
       - documentIndex: *deploymentDoc
         equal:
           path: spec.template.metadata.labels
           value:
-            pod.name: release-name-common-test
+            pod.name: workload-name
             app: common-test-1.0.0
-            release: release-name
+            release: RELEASE-NAME
             app.kubernetes.io/instance: RELEASE-NAME
             app.kubernetes.io/managed-by: Helm
             app.kubernetes.io/name: common-test
@@ -115,14 +115,14 @@ tests:
         equal:
           path: spec.selector.matchLabels
           value:
-            pod.name: release-name-common-test-other-workload-name
+            pod.name: other-workload-name
             app.kubernetes.io/name: common-test
             app.kubernetes.io/instance: RELEASE-NAME
       - documentIndex: *deploymentDoc
         isSubset:
           path: spec.template.metadata.labels
           content:
-            pod.name: release-name-common-test-other-workload-name
+            pod.name: other-workload-name
             app.kubernetes.io/instance: RELEASE-NAME
             app.kubernetes.io/name: common-test
       - documentIndex: &otherDeploymentDoc 1
@@ -136,13 +136,13 @@ tests:
         equal:
           path: spec.selector.matchLabels
           value:
-            pod.name: release-name-common-test
+            pod.name: workload-name
             app.kubernetes.io/name: common-test
             app.kubernetes.io/instance: RELEASE-NAME
       - documentIndex: *otherDeploymentDoc
         isSubset:
           path: spec.template.metadata.labels
           content:
-            pod.name: release-name-common-test
+            pod.name: workload-name
             app.kubernetes.io/instance: RELEASE-NAME
             app.kubernetes.io/name: common-test

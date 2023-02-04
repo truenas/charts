@@ -33,7 +33,7 @@ spec:
             {{- $labels := (mustMerge ($objectData.podSpec.labels | default dict)
                                       (include "ix.v1.common.lib.metadata.allLabels" $rootCtx | fromYaml)
                                       (include "ix.v1.common.lib.metadata.podLabels" $rootCtx | fromYaml)
-                                      (include "ix.v1.common.lib.metadata.selectorLabels" (dict "rootCtx" $rootCtx "podName" $objectData.name) | fromYaml)) -}}
+                                      (include "ix.v1.common.lib.metadata.selectorLabels" (dict "rootCtx" $rootCtx "podName" $objectData.shortName) | fromYaml)) -}}
             {{- with (include "ix.v1.common.lib.metadata.render" (dict "rootCtx" $rootCtx "labels" $labels) | trim) }}
           labels:
             {{- . | nindent 12 }}

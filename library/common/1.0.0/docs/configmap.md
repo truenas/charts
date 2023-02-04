@@ -1,13 +1,13 @@
 # ConfigMap
 
-| Key                                    |   Type    | Required | Helm Template | Default | Description                          |
-| :------------------------------------- | :-------: | :------: | :-----------: | :-----: | :----------------------------------- |
-| configmap                              |  `dict`   |    ❌    |      ❌       |  `{}`   | Define the configMaps as dicts       |
-| configmap.[configmap-name]             |  `dict`   |    ✅    |      ❌       |  `{}`   | Holds configMap definition           |
-| configmap.[configmap-name].enabled     | `boolean` |    ✅    |      ❌       | `false` | Enables or Disables the configMap    |
-| configmap.[configmap-name].labels      |  `dict`   |    ❌    |      ✅       |  `{}`   | Additional labels for configmap      |
-| configmap.[configmap-name].annotations |  `dict`   |    ❌    |      ✅       |  `{}`   | Additional annotations for configmap |
-| configmap.[configmap-name].data        |  `dict`   |    ✅    |      ✅       |  `{}`   | Define the data of the configmap     |
+| Key                                    |   Type    | Required |   Helm Template    | Default | Description                          |
+| :------------------------------------- | :-------: | :------: | :----------------: | :-----: | :----------------------------------- |
+| configmap                              |  `dict`   |    ❌    |         ❌         |  `{}`   | Define the configMaps as dicts       |
+| configmap.[configmap-name]             |  `dict`   |    ✅    |         ❌         |  `{}`   | Holds configMap definition           |
+| configmap.[configmap-name].enabled     | `boolean` |    ✅    |         ❌         | `false` | Enables or Disables the configMap    |
+| configmap.[configmap-name].labels      |  `dict`   |    ❌    | ✅ (On value only) |  `{}`   | Additional labels for configmap      |
+| configmap.[configmap-name].annotations |  `dict`   |    ❌    | ✅ (On value only) |  `{}`   | Additional annotations for configmap |
+| configmap.[configmap-name].data        |  `dict`   |    ✅    |         ✅         |  `{}`   | Define the data of the configmap     |
 
 ---
 
