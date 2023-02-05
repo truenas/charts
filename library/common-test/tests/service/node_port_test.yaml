@@ -1,14 +1,14 @@
-suite: service loadBalancer test
+suite: service nodePort test
 templates:
   - common.yaml
 tests:
-  - it: should pass with type LoadBalancer
+  - it: should pass with type nodePort
     set:
       service:
         my-service:
           enabled: true
           primary: true
-          type: LoadBalancer
+          type: NodePort
           ports:
             port-name:
               enabled: true
@@ -34,24 +34,18 @@ tests:
         equal:
           path: spec
           value:
-            type: LoadBalancer
+            type: NodePort
 
-  - it: should pass with type LoadBalancer and available options set
+  - it: should pass with type NodePort and available options set
     set:
       some_ip: 172.16.20.35
-      some_other_ip: 10.100.200.45
-      some_range: 11.100.200.0/24
       some_family: IPv6
       service:
         my-service:
           enabled: true
           primary: true
-          type: LoadBalancer
+          type: NodePort
           clusterIP: "{{ .Values.some_ip }}"
-          loadBalancerIP: "{{ .Values.some_other_ip }}"
-          loadBalancerSourceRanges:
-            - "{{ .Values.some_range }}"
-            - 10.100.200.0/24
           externalTrafficPolicy: Local
           ipFamilyPolicy: PreferDualStack
           ipFamilies:
@@ -72,12 +66,8 @@ tests:
         equal:
           path: spec
           value:
-            type: LoadBalancer
+            type: NodePort
             clusterIP: 172.16.20.35
-            loadBalancerIP: 10.100.200.45
-            loadBalancerSourceRanges:
-              - 11.100.200.0/24
-              - 10.100.200.0/24
             externalTrafficPolicy: Local
             ipFamilyPolicy: PreferDualStack
             ipFamilies:
