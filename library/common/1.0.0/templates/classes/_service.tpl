@@ -72,7 +72,10 @@ spec:
     {{- include "ix.v1.common.lib.service.spec.loadBalancer" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 }}
   {{- else if eq $svcType "NodePort" -}}
     {{- include "ix.v1.common.lib.service.spec.nodePort" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 }}
+  {{- else if eq $svcType "ExternalName" -}}
+    {{- include "ix.v1.common.lib.service.spec.externalName" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 }}
   {{- end }}
+  publishNotReadyAddresses: {{ include "ix.v1.common.lib.service.publishNotReadyAddresses" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim }}
   {{- if not (mustHas $svcType (list "ExternalName" "ExternalIP")) }}
 selector:
     {{- include "ix.v1.common.lib.metadata.selectorLabels" (dict "rootCtx" $rootCtx "podName" $podValues.shortName) | trim | nindent 2 }}

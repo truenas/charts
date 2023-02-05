@@ -8,6 +8,7 @@
 | service.[service-name].labels                                  |  `dict`   |    ❌    | ✅ (On value only) |    `{}`     | Additional labels for service                                                         |
 | service.[service-name].annotations                             |  `dict`   |    ❌    | ✅ (On value only) |    `{}`     | Additional annotations for service                                                    |
 | service.[service-name].type                                    | `string`  |    ❌    |         ✅         | `ClusterIP` | Define the service type (ClusterIP, LoadBalancer, NodePort, ExternalIP, ExternalName) |
+| service.[service-name].publishNotReadyAddresses                | `boolean` |    ❌    |         ❌         |   `false`   | Define whether to publishNotReadyAddresses or not                                     |
 | service.[service-name].sharedKey                               | `string`  |    ❌    |         ✅         | `$FullName` | Custom Shared Key for MetalLB Annotation                                              |
 | service.[service-name].clusterIP                               | `string`  |    ❌    |         ✅         |             | Custom Cluster IP                                                                     |
 | service.[service-name].ipFamilyPolicy                          | `string`  |    ❌    |         ✅         |             | Define the ipFamilyPolicy (SingleStack, PreferDualStack, RequireDualStack)            |
@@ -42,6 +43,7 @@ service:
   service-clusterip:
     enabled: true
     primary: true
+    publishNotReadyAddresses: true
     clusterIP: 172.16.20.233
     ipFamilyPolicy: SingleStack
     ipFamilies:

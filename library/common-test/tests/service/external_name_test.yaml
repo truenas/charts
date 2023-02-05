@@ -1,14 +1,15 @@
-suite: service nodePort test
+suite: service externalName test
 templates:
   - common.yaml
 tests:
-  - it: should pass with type nodePort
+  - it: should pass with type externalName
     set:
       service:
         my-service:
           enabled: true
           primary: true
-          type: NodePort
+          type: ExternalName
+          externalName: my-external-name
           ports:
             port-name:
               enabled: true
@@ -34,24 +35,22 @@ tests:
         equal:
           path: spec
           value:
-            type: NodePort
+            type: ExternalName
+            externalName: my-external-name
             publishNotReadyAddresses: false
 
-  - it: should pass with type NodePort and available options set
+  - it: should pass with type ExternalName and available options set
     set:
       some_ip: 172.16.20.35
-      some_family: IPv6
+      some_name: my-external-name
       service:
         my-service:
           enabled: true
           primary: true
-          type: NodePort
+          type: ExternalName
           clusterIP: "{{ .Values.some_ip }}"
+          externalName: "{{ .Values.some_name }}"
           externalTrafficPolicy: Local
-          ipFamilyPolicy: PreferDualStack
-          ipFamilies:
-            - IPv4
-            - "{{ .Values.some_family }}"
           ports:
             port-name:
               enabled: true
@@ -67,11 +66,8 @@ tests:
         equal:
           path: spec
           value:
-            type: NodePort
+            type: ExternalName
             clusterIP: 172.16.20.35
             externalTrafficPolicy: Local
-            ipFamilyPolicy: PreferDualStack
+            externalName: my-external-name
             publishNotReadyAddresses: false
-            ipFamilies:
-              - IPv4
-              - IPv6

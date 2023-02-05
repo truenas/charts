@@ -293,3 +293,25 @@ tests:
     asserts:
       - failedTemplate:
           errorMessage: Service - Expected <externalTrafficPolicy> to be one of [Cluster, Local], but got [not-a-policy]
+
+  - it: should fail with invalid externalName
+    set:
+      service:
+        service-name1:
+          enabled: true
+          primary: true
+          type: ExternalName
+          externalName: ""
+          ports:
+            port-name1:
+              enabled: true
+              primary: true
+      workload:
+        some-pod-name:
+          enabled: true
+          primary: true
+          type: Deployment
+          podSpec: {}
+    asserts:
+      - failedTemplate:
+          errorMessage: Service - Expected non-empty <externalName> on ExternalName service type.

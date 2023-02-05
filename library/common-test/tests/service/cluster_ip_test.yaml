@@ -35,6 +35,7 @@ tests:
           path: spec
           value:
             type: ClusterIP
+            publishNotReadyAddresses: false
 
   - it: should pass with type ClusterIP and available options set
     set:
@@ -69,6 +70,7 @@ tests:
             type: ClusterIP
             clusterIP: 172.16.20.35
             ipFamilyPolicy: PreferDualStack
+            publishNotReadyAddresses: false
             ipFamilies:
               - IPv4
               - IPv6
