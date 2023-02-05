@@ -271,3 +271,25 @@ tests:
     asserts:
       - failedTemplate:
           errorMessage: Service - Expected <ipFamilies> to be one of [IPv4, IPv6], but got [not-a-family]
+
+  - it: should fail with invalid externalTrafficPolicy
+    set:
+      service:
+        service-name1:
+          enabled: true
+          primary: true
+          type: LoadBalancer
+          externalTrafficPolicy: not-a-policy
+          ports:
+            port-name1:
+              enabled: true
+              primary: true
+      workload:
+        some-pod-name:
+          enabled: true
+          primary: true
+          type: Deployment
+          podSpec: {}
+    asserts:
+      - failedTemplate:
+          errorMessage: Service - Expected <externalTrafficPolicy> to be one of [Cluster, Local], but got [not-a-policy]

@@ -69,7 +69,9 @@ metadata:
   {{- end }}
 spec:
   {{- if eq $svcType "ClusterIP" -}}
-    {{- include "ix.v1.common.lib.service.clusterIP" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 }}
+    {{- include "ix.v1.common.lib.service.spec.clusterIP" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 }}
+  {{- else if eq $svcType "LoadBalancer" -}}
+    {{- include "ix.v1.common.lib.service.spec.loadBalancer" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 }}
   {{- end }}
   {{- if not (mustHas $svcType (list "ExternalName" "ExternalIP")) }}
 selector:

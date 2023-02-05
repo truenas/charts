@@ -1,14 +1,14 @@
-suite: service clusterIP test
+suite: service loadBalancer test
 templates:
   - common.yaml
 tests:
-  - it: should pass with type ClusterIP
+  - it: should pass with type LoadBalancer
     set:
       service:
         my-service:
           enabled: true
           primary: true
-          type: ClusterIP
+          type: LoadBalancer
           ports:
             port-name:
               enabled: true
@@ -34,23 +34,28 @@ tests:
         equal:
           path: spec
           value:
-            type: ClusterIP
+            type: LoadBalancer
 
-  - it: should pass with type ClusterIP and available options set
+  - it: should pass with type LoadBalancer and available options set
     set:
-      some_policy: PreferDualStack
-      some_family: IPv6
       some_ip: 172.16.20.35
+      some_other_ip: 10.100.200.45
+      some_range: 11.100.200.0/24
       service:
         my-service:
           enabled: true
           primary: true
-          type: ClusterIP
+          type: LoadBalancer
           clusterIP: "{{ .Values.some_ip }}"
-          ipFamilyPolicy: "{{ .Values.some_policy }}"
+          loadBalancerIP: "{{ .Values.some_other_ip }}"
+          loadBalancerSourceRanges:
+            - "{{ .Values.some_range }}"
+            - 10.100.200.0/24
+          externalTrafficPolicy: Local
+          ipFamilyPolicy: PreferDualStack
           ipFamilies:
             - IPv4
-            - "{{ .Values.some_family }}"
+            - IPv6
           ports:
             port-name:
               enabled: true
@@ -66,8 +71,13 @@ tests:
         equal:
           path: spec
           value:
-            type: ClusterIP
+            type: LoadBalancer
             clusterIP: 172.16.20.35
+            loadBalancerIP: 10.100.200.45
+            loadBalancerSourceRanges:
+              - 11.100.200.0/24
+              - 10.100.200.0/24
+            externalTrafficPolicy: Local
             ipFamilyPolicy: PreferDualStack
             ipFamilies:
               - IPv4
