@@ -1,14 +1,15 @@
-suite: service clusterIP test
+suite: service externalIP test
 templates:
   - common.yaml
 tests:
-  - it: should pass with type ClusterIP
+  - it: should pass with type externalIP
     set:
       service:
         my-service:
           enabled: true
           primary: true
-          type: ClusterIP
+          type: ExternalIP
+          externalName: my-external-name
           ports:
             port-name:
               enabled: true
@@ -34,28 +35,21 @@ tests:
         equal:
           path: spec
           value:
-            type: ClusterIP
             publishNotReadyAddresses: false
 
-  - it: should pass with type ClusterIP and available options set
+  - it: should pass with type ExternalIP and available options set
     set:
-      some_policy: PreferDualStack
-      some_family: IPv6
-      some_ip: 172.16.20.35
-      some_other_ip: 10.200.34.53
+      some_policy: Local
+      some_ip: 10.200.34.53
       service:
         my-service:
           enabled: true
           primary: true
-          type: ClusterIP
-          clusterIP: "{{ .Values.some_ip }}"
+          type: ExternalIP
           publishNotReadyAddresses: true
-          ipFamilyPolicy: "{{ .Values.some_policy }}"
-          ipFamilies:
-            - IPv4
-            - "{{ .Values.some_family }}"
+          externalTrafficPolicy: "{{ .Values.some_policy }}"
           externalIPs:
-            - "{{ .Values.some_other_ip }}"
+            - "{{ .Values.some_ip }}"
             - 10.200.34.54
           ports:
             port-name:
@@ -72,13 +66,8 @@ tests:
         equal:
           path: spec
           value:
-            type: ClusterIP
-            clusterIP: 172.16.20.35
-            ipFamilyPolicy: PreferDualStack
+            externalTrafficPolicy: Local
             publishNotReadyAddresses: true
-            ipFamilies:
-              - IPv4
-              - IPv6
             externalIPs:
               - 10.200.34.53
               - 10.200.34.54

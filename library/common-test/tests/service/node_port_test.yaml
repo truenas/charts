@@ -41,17 +41,23 @@ tests:
     set:
       some_ip: 172.16.20.35
       some_family: IPv6
+      some_policy: Local
+      some_other_ip: 10.200.34.53
       service:
         my-service:
           enabled: true
           primary: true
           type: NodePort
           clusterIP: "{{ .Values.some_ip }}"
-          externalTrafficPolicy: Local
+          externalTrafficPolicy: "{{ .Values.some_policy }}"
+          publishNotReadyAddresses: true
           ipFamilyPolicy: PreferDualStack
           ipFamilies:
             - IPv4
             - "{{ .Values.some_family }}"
+          externalIPs:
+            - "{{ .Values.some_other_ip }}"
+            - 10.200.34.54
           ports:
             port-name:
               enabled: true
@@ -71,7 +77,10 @@ tests:
             clusterIP: 172.16.20.35
             externalTrafficPolicy: Local
             ipFamilyPolicy: PreferDualStack
-            publishNotReadyAddresses: false
+            publishNotReadyAddresses: true
             ipFamilies:
               - IPv4
               - IPv6
+            externalIPs:
+              - 10.200.34.53
+              - 10.200.34.54

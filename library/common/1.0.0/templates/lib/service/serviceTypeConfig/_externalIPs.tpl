@@ -7,13 +7,11 @@ objectData: The service object data
 
 {{- define "ix.v1.common.lib.service.externalIPs" -}}
   {{- $rootCtx := .rootCtx -}}
-  {{- $objectData := .objectData }}
+  {{- $objectData := .objectData -}}
 
-  {{- $publishAddr := false -}}
-
-  {{- if (kindIs "bool" $objectData.publishNotReadyAddresses) -}}
-    {{- $publishAddr = $objectData.publishNotReadyAddresses -}}
+  {{- with $objectData.externalIPs -}}
+    {{- range . }}
+- {{ tpl . $rootCtx }}
+    {{- end -}}
   {{- end -}}
-
-  {{- $publishAddr -}}
 {{- end -}}

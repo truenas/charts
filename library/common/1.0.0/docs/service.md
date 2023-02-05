@@ -9,6 +9,8 @@
 | service.[service-name].annotations                             |  `dict`   |    ❌    | ✅ (On value only) |    `{}`     | Additional annotations for service                                                    |
 | service.[service-name].type                                    | `string`  |    ❌    |         ✅         | `ClusterIP` | Define the service type (ClusterIP, LoadBalancer, NodePort, ExternalIP, ExternalName) |
 | service.[service-name].publishNotReadyAddresses                | `boolean` |    ❌    |         ❌         |   `false`   | Define whether to publishNotReadyAddresses or not                                     |
+| service.[service-name].externalIPs                             |  `list`   |    ❌    |         ❌         |             | Define externalIPs                                                                    |
+| service.[service-name].externalIPs.[externalIP]                | `string`  |    ✅    |         ✅         |             | The external IP                                                                       |
 | service.[service-name].sharedKey                               | `string`  |    ❌    |         ✅         | `$FullName` | Custom Shared Key for MetalLB Annotation                                              |
 | service.[service-name].clusterIP                               | `string`  |    ❌    |         ✅         |             | Custom Cluster IP                                                                     |
 | service.[service-name].ipFamilyPolicy                          | `string`  |    ❌    |         ✅         |             | Define the ipFamilyPolicy (SingleStack, PreferDualStack, RequireDualStack)            |
@@ -45,9 +47,12 @@ service:
     primary: true
     publishNotReadyAddresses: true
     clusterIP: 172.16.20.233
+    publishNotReadyAddresses: true
     ipFamilyPolicy: SingleStack
     ipFamilies:
       - IPv4
+    externalIPs:
+      - 10.200.230.34
     targetSelector: pod-name
     ports:
       port-name:
@@ -64,11 +69,46 @@ service:
       - 10.100.100.0/24
     clusterIP: 172.16.20.233
     sharedKey: custom-shared-key
+    publishNotReadyAddresses: true
     ipFamilyPolicy: SingleStack
     ipFamilies:
       - IPv4
+    externalIPs:
+      - 10.200.230.34
     externalTrafficPolicy: Cluster
     targetSelector: pod-name
+    ports:
+      port-name:
+        enabled: true
+        primary: true
+        container-name: container-name
+
+  service-nodeport:
+    enabled: true
+    primary: true
+    type: NodePort
+    clusterIP: 172.16.20.233
+    publishNotReadyAddresses: true
+    externalIPs:
+      - 10.200.230.34
+    externalTrafficPolicy: Cluster
+    targetSelector: pod-name
+    ports:
+      port-name:
+        enabled: true
+        primary: true
+        container-name: container-name
+
+  service-externalname:
+    enabled: true
+    primary: true
+    type: ExternalName
+    externalName: external-name
+    clusterIP: 172.16.20.233
+    publishNotReadyAddresses: true
+    externalIPs:
+      - 10.200.230.34
+    externalTrafficPolicy: Cluster
     ports:
       port-name:
         enabled: true

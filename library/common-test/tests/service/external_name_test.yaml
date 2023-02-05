@@ -42,7 +42,9 @@ tests:
   - it: should pass with type ExternalName and available options set
     set:
       some_ip: 172.16.20.35
+      some_other_ip: 10.200.34.53
       some_name: my-external-name
+      some_policy: Local
       service:
         my-service:
           enabled: true
@@ -50,7 +52,11 @@ tests:
           type: ExternalName
           clusterIP: "{{ .Values.some_ip }}"
           externalName: "{{ .Values.some_name }}"
-          externalTrafficPolicy: Local
+          publishNotReadyAddresses: true
+          externalTrafficPolicy: "{{ .Values.some_policy }}"
+          externalIPs:
+            - "{{ .Values.some_other_ip }}"
+            - 10.200.34.54
           ports:
             port-name:
               enabled: true
@@ -70,4 +76,7 @@ tests:
             clusterIP: 172.16.20.35
             externalTrafficPolicy: Local
             externalName: my-external-name
-            publishNotReadyAddresses: false
+            publishNotReadyAddresses: true
+            externalIPs:
+              - 10.200.34.53
+              - 10.200.34.54

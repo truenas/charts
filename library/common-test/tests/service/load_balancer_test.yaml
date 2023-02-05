@@ -41,6 +41,8 @@ tests:
     set:
       some_ip: 172.16.20.35
       some_other_ip: 10.100.200.45
+      some_extra_ip: 10.200.34.53
+      some_policy: Local
       some_range: 11.100.200.0/24
       some_family: IPv6
       service:
@@ -53,11 +55,15 @@ tests:
           loadBalancerSourceRanges:
             - "{{ .Values.some_range }}"
             - 10.100.200.0/24
-          externalTrafficPolicy: Local
+          externalTrafficPolicy: "{{ .Values.some_policy }}"
+          publishNotReadyAddresses: true
           ipFamilyPolicy: PreferDualStack
           ipFamilies:
             - IPv4
             - "{{ .Values.some_family }}"
+          externalIPs:
+            - "{{ .Values.some_extra_ip }}"
+            - 10.200.34.54
           ports:
             port-name:
               enabled: true
@@ -81,7 +87,10 @@ tests:
               - 10.100.200.0/24
             externalTrafficPolicy: Local
             ipFamilyPolicy: PreferDualStack
-            publishNotReadyAddresses: false
+            publishNotReadyAddresses: true
             ipFamilies:
               - IPv4
               - IPv6
+            externalIPs:
+              - 10.200.34.53
+              - 10.200.34.54

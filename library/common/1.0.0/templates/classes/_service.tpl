@@ -14,6 +14,7 @@ objectData: The service data, that will be used to render the Service object.
   {{- $svcType := $objectData.type | default "ClusterIP" -}}
 
   {{/* Get Pod Values based on the selector (or the absence of it) */}}
+  {{/* TODO: handle caes that svcType does not need a pod to link with */}}
   {{- $podValues := fromJson (include "ix.v1.common.lib.service.getSelectedPodValues" (dict "rootCtx" $rootCtx "objectData" $objectData)) -}}
 
   {{/* Get Pod's hostNetwork configuration */}}
@@ -74,10 +75,20 @@ spec:
     {{- include "ix.v1.common.lib.service.spec.nodePort" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 }}
   {{- else if eq $svcType "ExternalName" -}}
     {{- include "ix.v1.common.lib.service.spec.externalName" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 }}
+  {{- else if eq $svcType "ExternalIP" -}}
+    {{- include "ix.v1.common.lib.service.spec.externalIP" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 }}
   {{- end }}
   publishNotReadyAddresses: {{ include "ix.v1.common.lib.service.publishNotReadyAddresses" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim }}
+  {{- with (include "ix.v1.common.lib.service.externalIPs" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim) }}
+  externalIPs:
+    {{- . | nindent 2 }}
+  {{- end -}}
+  {{/* TODO: sessionAffinity */}}
+
+{{/* TODO: ports */}}
   {{- if not (mustHas $svcType (list "ExternalName" "ExternalIP")) }}
 selector:
     {{- include "ix.v1.common.lib.metadata.selectorLabels" (dict "rootCtx" $rootCtx "podName" $podValues.shortName) | trim | nindent 2 }}
   {{- end -}}
+{{/* TODO: endpoints */}}
 {{- end -}}
