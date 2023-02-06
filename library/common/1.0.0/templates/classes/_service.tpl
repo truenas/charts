@@ -13,36 +13,42 @@ objectData: The service data, that will be used to render the Service object.
 
   {{- $svcType := $objectData.type | default "ClusterIP" -}}
 
-  {{/* Get Pod Values based on the selector (or the absence of it) */}}
-  {{/* TODO: handle caes that svcType does not need a pod to link with */}}
-  {{- $podValues := fromJson (include "ix.v1.common.lib.service.getSelectedPodValues" (dict "rootCtx" $rootCtx "objectData" $objectData)) -}}
-
-  {{/* Get Pod's hostNetwork configuration */}}
-  {{- $hostNetwork := include "ix.v1.common.lib.pod.hostNetwork" (dict "rootCtx" $rootCtx "objectData" $podValues) -}}
-
+  {{/* Init variables */}}
   {{- $hasHTTPSPort := false -}}
   {{- $hasHostPort := false -}}
+  {{- $hostNetwork := false -}}
+  {{- $podValues := dict -}}
 
-  {{- range $portName, $port := $objectData.ports -}}
-    {{- if $port.enabled -}}
-      {{- if eq ($port.protocol | default "") "HTTPS" -}}
-        {{- $hasHTTPSPort = true -}}
-      {{- end -}}
+  {{- $specialTypes := (list "ExternalName" "ExternalIP") -}}
+  {{/* External Name / External IP does not rely on any pod values */}}
+  {{- if not (mustHas $svcType $specialTypes) -}}
+    {{/* Get Pod Values based on the selector (or the absence of it) */}}
+    {{- $podValues = fromJson (include "ix.v1.common.lib.service.getSelectedPodValues" (dict "rootCtx" $rootCtx "objectData" $objectData)) -}}
 
-      {{- if and (hasKey $port "hostPort") $port.hostPort -}}
-        {{- $hasHostPort = true -}}
+    {{/* Get Pod's hostNetwork configuration */}}
+    {{- $hostNetwork = include "ix.v1.common.lib.pod.hostNetwork" (dict "rootCtx" $rootCtx "objectData" $podValues) -}}
+
+    {{- range $portName, $port := $objectData.ports -}}
+      {{- if $port.enabled -}}
+        {{- if eq ($port.protocol | default "") "HTTPS" -}}
+          {{- $hasHTTPSPort = true -}}
+        {{- end -}}
+
+        {{- if and (hasKey $port "hostPort") $port.hostPort -}}
+          {{- $hasHostPort = true -}}
+        {{- end -}}
       {{- end -}}
     {{- end -}}
-  {{- end -}}
 
-  {{/* When hostNetwork is set on the pod, force ClusterIP, so services won't try to bind the same ports on the host */}}
-  {{- if or (and (kindIs "bool" $hostNetwork) $hostNetwork) (and (kindIs "string" $hostNetwork) (eq $hostNetwork "true")) -}}
-    {{- $svcType = "ClusterIP" -}}
-  {{- end -}}
+    {{/* When hostNetwork is set on the pod, force ClusterIP, so services won't try to bind the same ports on the host */}}
+    {{- if or (and (kindIs "bool" $hostNetwork) $hostNetwork) (and (kindIs "string" $hostNetwork) (eq $hostNetwork "true")) -}}
+      {{- $svcType = "ClusterIP" -}}
+    {{- end -}}
 
-  {{/* When hostPort is defined, force ClusterIP aswell */}}
-  {{- if $hasHostPort -}}
-    {{- $svcType = "ClusterIP" -}}
+    {{/* When hostPort is defined, force ClusterIP aswell */}}
+    {{- if $hasHostPort -}}
+      {{- $svcType = "ClusterIP" -}}
+    {{- end -}}
   {{- end }}
 
 ---
@@ -59,7 +65,7 @@ metadata:
   {{- if eq $svcType "LoadBalancer" -}}
     {{- include "ix.v1.common.lib.service.metalLBAnnotations" (dict "rootCtx" $rootCtx "objectData" $objectData "annotations" $annotations) -}}
   {{- end -}}
-  {{- if and $hasHTTPSPort -}}
+  {{- if $hasHTTPSPort -}}
     {{- include "ix.v1.common.lib.service.traefikAnnotations" (dict "rootCtx" $rootCtx "annotations" $annotations) -}}
   {{- end -}}
   {{- with (include "ix.v1.common.lib.metadata.render" (dict "rootCtx" $rootCtx "annotations" $annotations) | trim) }}
@@ -84,11 +90,13 @@ spec:
     {{- . | nindent 2 }}
   {{- end -}}
   {{/* TODO: sessionAffinity */}}
-
+ports:
 {{/* TODO: ports */}}
-  {{- if not (mustHas $svcType (list "ExternalName" "ExternalIP")) }}
+  {{- if not (mustHas $svcType $specialTypes) }}
 selector:
     {{- include "ix.v1.common.lib.metadata.selectorLabels" (dict "rootCtx" $rootCtx "podName" $podValues.shortName) | trim | nindent 2 }}
   {{- end -}}
-{{/* TODO: endpoints */}}
+  {{- if eq $svcType "ExternalIP" -}}
+    {{/* TODO: endpoints for externalIP */}}
+  {{- end -}}
 {{- end -}}
