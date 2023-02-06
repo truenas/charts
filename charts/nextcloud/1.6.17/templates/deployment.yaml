@@ -79,12 +79,21 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
           timeoutSeconds: 5
           failureThreshold: 5
         startupProbe:
+        {{- if .Values.nextcloud.install_ffmpeg }}
           exec:
             command:
               - /bin/sh
               - -c
               - |
                 command -v ffmpeg /dev/null 2>&1 || exit 1
+        {{- else }}
+          httpGet:
+            path: /status.php
+            port: http
+            httpHeaders:
+            - name: Host
+              value: localhost
+        {{- end }}
           initialDelaySeconds: 60
           periodSeconds: 10
           timeoutSeconds: 5
