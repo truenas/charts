@@ -28,28 +28,30 @@ objectData:
   {{- end -}}
 
   {{- $hasEnabledPort := false -}}
-  {{- range $name, $port := $objectData.ports -}}
-    {{- if $port.enabled -}}
-      {{- $hasEnabledPort = true -}}
+  {{- if ne $objectData.type "ExternalName" -}}
+    {{- range $name, $port := $objectData.ports -}}
+      {{- if $port.enabled -}}
+        {{- $hasEnabledPort = true -}}
 
-      {{- if and $port.targetSelector (not (kindIs "string" $port.targetSelector)) -}}
-        {{- fail (printf "Service - Expected <port.targetSelector> to be [string], but got [%s]" (kindOf $port.targetSelector)) -}}
+        {{- if and $port.targetSelector (not (kindIs "string" $port.targetSelector)) -}}
+          {{- fail (printf "Service - Expected <port.targetSelector> to be [string], but got [%s]" (kindOf $port.targetSelector)) -}}
+        {{- end -}}
+
+        {{- if not $port.port -}}
+          {{- fail (printf "Service - Expected non-empty <port.port>") -}}
+        {{- end -}}
+
+        {{- $protocolTypes := (list "TCP" "UDP" "HTTP" "HTTPS") -}}
+        {{- if and $port.protocol (not (mustHas (tpl $port.protocol $rootCtx) $protocolTypes)) -}}
+          {{- fail (printf "Service - Expected <port.protocol> to be one of [%s] but got [%s]" (join ", " $protocolTypes) $port.protocol) -}}
+        {{- end -}}
+
       {{- end -}}
-
-      {{- if not $port.port -}}
-        {{- fail (printf "Service - Expected non-empty <port.port>") -}}
-      {{- end -}}
-
-      {{- $protocolTypes := (list "TCP" "UDP" "HTTP" "HTTPS") -}}
-      {{- if and $port.protocol (not (mustHas (tpl $port.protocol $rootCtx) $protocolTypes)) -}}
-        {{- fail (printf "Service - Expected <port.protocol> to be one of [%s] but got [%s]" (join ", " $protocolTypes) $port.protocol) -}}
-      {{- end -}}
-
     {{- end -}}
-  {{- end -}}
 
-  {{- if not $hasEnabledPort -}}
-    {{- fail "Service - Expected enabled service to have at least one port" -}}
+    {{- if not $hasEnabledPort -}}
+      {{- fail "Service - Expected enabled service to have at least one port" -}}
+    {{- end -}}
   {{- end -}}
 
 {{- end -}}

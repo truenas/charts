@@ -83,9 +83,11 @@ spec:
     {{- include "ix.v1.common.lib.service.spec.externalName" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 -}}
   {{- else if eq $svcType "ExternalIP" -}}
     {{- include "ix.v1.common.lib.service.spec.externalIP" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 -}}
-  {{- end }}
+  {{- end -}}
+  {{- with (include "ix.v1.common.lib.service.ports" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim) }}
   ports:
-  {{- include "ix.v1.common.lib.service.ports" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 4 }}
+    {{- . | nindent 4 }}
+  {{- end -}}
   {{- if not (mustHas $svcType $specialTypes) }}
   selector:
     {{- include "ix.v1.common.lib.metadata.selectorLabels" (dict "rootCtx" $rootCtx "podName" $podValues.shortName) | trim | nindent 4 -}}
