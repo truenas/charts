@@ -246,6 +246,41 @@ tests:
       - failedTemplate:
           errorMessage: Service - Expected <ipFamilyPolicy> to be one of [SingleStack, PreferDualStack, RequireDualStack], but got [not-a-policy]
 
+  - it: should fail with empty externalIP
+    set:
+      service:
+        service-name1:
+          enabled: true
+          primary: true
+          type: ExternalIP
+          externalIP: ""
+          ports:
+            port-name1:
+              enabled: true
+              primary: true
+              port: 12345
+    asserts:
+      - failedTemplate:
+          errorMessage: EndpointSlice - Expected non-empty <externalIP>
+
+  - it: should fail with externalIP not a string
+    set:
+      service:
+        service-name1:
+          enabled: true
+          primary: true
+          type: ExternalIP
+          externalIP:
+            - not-a-string
+          ports:
+            port-name1:
+              enabled: true
+              primary: true
+              port: 12345
+    asserts:
+      - failedTemplate:
+          errorMessage: EndpointSlice - Expected <externalIP> to be a [string], but got [slice]
+
   - it: should fail with ipFamilies not a list
     set:
       service:

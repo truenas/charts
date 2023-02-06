@@ -1,6 +1,8 @@
 suite: service externalIP test
 templates:
   - common.yaml
+chart:
+  appVersion: &appVer v9.9.9
 tests:
   - it: should pass with type externalIP
     set:
@@ -9,7 +11,7 @@ tests:
           enabled: true
           primary: true
           type: ExternalIP
-          externalName: my-external-name
+          externalIP: 1.1.1.1
           ports:
             port-name:
               enabled: true
@@ -46,6 +48,8 @@ tests:
       some_port: 12344
       some_target_port: 12346
       some_protocol: HTTP
+      some_external_ip: 1.1.1.1
+      some_address_type: IPv6
       service:
         my-service:
           enabled: true
@@ -53,6 +57,7 @@ tests:
           type: ExternalIP
           publishNotReadyAddresses: true
           externalTrafficPolicy: "{{ .Values.some_policy }}"
+          externalIP: "{{ .Values.some_external_ip }}"
           externalIPs:
             - "{{ .Values.some_ip }}"
             - 10.200.34.54
@@ -60,6 +65,7 @@ tests:
           sessionAffinityConfig:
             clientIP:
               timeoutSeconds: "{{ .Values.some_timeout }}"
+          addressType: "{{ .Values.some_address_type }}"
           ports:
             port-name:
               enabled: true
@@ -93,3 +99,46 @@ tests:
               port: 12344
               protocol: TCP
               targetPort: 12346
+      - documentIndex: &endpointSliceDoc 1
+        isKind:
+          of: EndpointSlice
+      - documentIndex: *endpointSliceDoc
+        isAPIVersion:
+          of: discovery.k8s.io/v1
+      - documentIndex: *endpointSliceDoc
+        equal:
+          path: metadata.name
+          value: release-name-common-test
+      - documentIndex: *endpointSliceDoc
+        equal:
+          path: metadata.labels
+          value:
+            kubernetes.io/service-name: release-name-common-test
+            app.kubernetes.io/managed-by: Helm
+            app.kubernetes.io/version: *appVer
+            helm.sh/chart: common-test-1.0.0
+            helm-revision: 0
+            app: common-test-1.0.0
+            release: RELEASE-NAME
+      - documentIndex: *endpointSliceDoc
+        equal:
+          path: addressType
+          value: IPv6
+      - documentIndex: *endpointSliceDoc
+        equal:
+          path: ports
+          value:
+            - name: port-name
+              port: 12345
+              protocol: TCP
+              appProtocol: tcp
+            - name: port-name2
+              port: 12346
+              protocol: TCP
+              appProtocol: http
+      - documentIndex: *endpointSliceDoc
+        equal:
+          path: endpoints
+          value:
+            - addresses:
+                - 1.1.1.1

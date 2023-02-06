@@ -93,6 +93,6 @@ spec:
     {{- include "ix.v1.common.lib.metadata.selectorLabels" (dict "rootCtx" $rootCtx "podName" $podValues.shortName) | trim | nindent 4 -}}
   {{- end -}}
   {{- if eq $svcType "ExternalIP" -}}
-    {{/* TODO: endpointsslice for externalIP */}}
+    {{- include "ix.v1.common.class.endpointSlice" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 0 }}
   {{- end -}}
 {{- end -}}
