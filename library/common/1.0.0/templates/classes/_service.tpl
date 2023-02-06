@@ -89,7 +89,7 @@ spec:
   externalIPs:
     {{- . | nindent 2 }}
   {{- end -}}
-  {{/* TODO: sessionAffinity */}}
+  {{- include "ix.v1.common.lib.service.sessionAffinity" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 }}
 ports:
 {{/* TODO: ports */}}
   {{- if not (mustHas $svcType $specialTypes) }}
@@ -97,6 +97,6 @@ selector:
     {{- include "ix.v1.common.lib.metadata.selectorLabels" (dict "rootCtx" $rootCtx "podName" $podValues.shortName) | trim | nindent 2 }}
   {{- end -}}
   {{- if eq $svcType "ExternalIP" -}}
-    {{/* TODO: endpoints for externalIP */}}
+    {{/* TODO: endpointsslice for externalIP */}}
   {{- end -}}
 {{- end -}}

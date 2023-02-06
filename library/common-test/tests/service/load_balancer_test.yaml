@@ -45,6 +45,8 @@ tests:
       some_policy: Local
       some_range: 11.100.200.0/24
       some_family: IPv6
+      some_affinity: ClientIP
+      some_timeout: 100
       service:
         my-service:
           enabled: true
@@ -64,6 +66,10 @@ tests:
           externalIPs:
             - "{{ .Values.some_extra_ip }}"
             - 10.200.34.54
+          sessionAffinity: "{{ .Values.some_affinity }}"
+          sessionAffinityConfig:
+            clientIP:
+              timeoutSeconds: "{{ .Values.some_timeout }}"
           ports:
             port-name:
               enabled: true
@@ -94,3 +100,7 @@ tests:
             externalIPs:
               - 10.200.34.53
               - 10.200.34.54
+            sessionAffinity: ClientIP
+            sessionAffinityConfig:
+              clientIP:
+                timeoutSeconds: 100

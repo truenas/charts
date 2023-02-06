@@ -315,3 +315,50 @@ tests:
     asserts:
       - failedTemplate:
           errorMessage: Service - Expected non-empty <externalName> on ExternalName service type.
+
+  - it: should fail with invalid sessionAffinity
+    set:
+      service:
+        service-name1:
+          enabled: true
+          primary: true
+          type: ClusterIP
+          sessionAffinity: not-an-affinity
+          ports:
+            port-name1:
+              enabled: true
+              primary: true
+      workload:
+        some-pod-name:
+          enabled: true
+          primary: true
+          type: Deployment
+          podSpec: {}
+    asserts:
+      - failedTemplate:
+          errorMessage: Service - Expected <sessionAffinity> to be one of [ClientIP, None], but got [not-an-affinity]
+
+  - it: should fail with invalid timeoutSeconds in sessionAffinityConfig
+    set:
+      service:
+        service-name1:
+          enabled: true
+          primary: true
+          type: ClusterIP
+          sessionAffinity: ClientIP
+          sessionAffinityConfig:
+            clientIP:
+              timeoutSeconds: -1
+          ports:
+            port-name1:
+              enabled: true
+              primary: true
+      workload:
+        some-pod-name:
+          enabled: true
+          primary: true
+          type: Deployment
+          podSpec: {}
+    asserts:
+      - failedTemplate:
+          errorMessage: Service - Expected <sessionAffinityConfig.clientIP.timeoutSeconds> to be between [0 - 86400], but got [-1]

@@ -7,7 +7,7 @@ objectData: The service object data
 
 {{- define "ix.v1.common.lib.service.ipFamily" -}}
   {{- $rootCtx := .rootCtx -}}
-  {{- $objectData := .objectData }}
+  {{- $objectData := .objectData -}}
 
   {{- with $objectData.ipFamilyPolicy -}}
     {{- $famPolicy := tpl . $rootCtx -}}
