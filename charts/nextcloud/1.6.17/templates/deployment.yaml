@@ -79,12 +79,12 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
           timeoutSeconds: 5
           failureThreshold: 5
         startupProbe:
-          httpGet:
-            path: /status.php
-            port: http
-            httpHeaders:
-            - name: Host
-              value: localhost
+          exec:
+            command:
+              - /bin/sh
+              - -c
+              - |
+                command -v ffmpeg /dev/null 2>&1 || exit 1
           initialDelaySeconds: 60
           periodSeconds: 10
           timeoutSeconds: 5
