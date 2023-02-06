@@ -31,6 +31,7 @@ tests:
             port-name:
               enabled: true
               primary: true
+              port: 12345
       workload:
         my-workload:
           enabled: true
@@ -79,6 +80,7 @@ tests:
               enabled: true
               primary: true
               protocol: HTTPS
+              port: 12345
       workload:
         my-workload:
           enabled: true
@@ -107,6 +109,7 @@ tests:
             port-name:
               enabled: true
               primary: true
+              port: 12345
       workload:
         my-workload:
           enabled: true
@@ -135,6 +138,7 @@ tests:
             port-name:
               enabled: true
               primary: true
+              port: 12345
       workload:
         my-workload:
           enabled: true

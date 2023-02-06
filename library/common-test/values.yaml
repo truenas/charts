@@ -9,6 +9,9 @@ workload:
 service:
   main:
     enabled: false
+    ports:
+      main:
+        enabled: false
 
 # The above just disables the "main" objects,
 # every other config is stays as it is set in common's values.yaml.

@@ -8,6 +8,8 @@ global:
   addMetalLBAnnotations: false
   # -- Adds traefik annotations to services
   addTraefikAnnotations: false
+  # -- Minimum nodePort value
+  minNodePort: 9000
   # -- Scale Storage Class
   scaleZFSStorageClass: '{{ printf "ix-storage-class-%v" .Release.Name }}'
 
@@ -16,6 +18,10 @@ fallbackDefaults:
   # -- Define a storageClassName that will be used for all PVCs
   # Can be overruled per PVC
   storageClass:
+  # -- Default Service Protocol
+  serviceProtocol: TCP
+  # -- Default Service Type
+  serviceType: ClusterIP
 
 # -- Injected from SCALE middleware
 # Only for reference here
@@ -221,7 +227,7 @@ service:
     # targetSelector: main
     # -- Ports
     ports:
-      port-name:
+      main:
         # -- Enable the port
         enabled: true
         # -- Primary port
@@ -229,7 +235,7 @@ service:
         # -- Port
         port:
         # -- Protocol
-        protocol: HTTPS
+        protocol: HTTP
         # -- Target port
         targetPort:
         # -- Node port

@@ -12,12 +12,14 @@ tests:
             port-name:
               enabled: true
               primary: true
+              port: 12344
         my-service2:
           enabled: true
           ports:
             port-name:
               enabled: true
               primary: true
+              port: 12345
       workload:
         my-workload:
           enabled: true

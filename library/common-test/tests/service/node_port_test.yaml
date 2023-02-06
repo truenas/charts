@@ -13,6 +13,8 @@ tests:
             port-name:
               enabled: true
               primary: true
+              port: 12345
+              nodePort: 30000
       workload:
         my-workload:
           enabled: true
@@ -36,6 +38,15 @@ tests:
           value:
             type: NodePort
             publishNotReadyAddresses: false
+      - documentIndex: *serviceDoc
+        equal:
+          path: ports
+          value:
+            - name: port-name
+              port: 12345
+              protocol: TCP
+              targetPort: 12345
+              nodePort: 30000
 
   - it: should pass with type NodePort and available options set
     set:
@@ -45,6 +56,10 @@ tests:
       some_other_ip: 10.200.34.53
       some_affinity: ClientIP
       some_timeout: 100
+      some_port: 12344
+      some_target_port: 12346
+      some_protocol: HTTP
+      some_nodePort: 30001
       service:
         my-service:
           enabled: true
@@ -68,6 +83,14 @@ tests:
             port-name:
               enabled: true
               primary: true
+              port: 12345
+              nodePort: 30000
+            port-name2:
+              enabled: true
+              port: "{{ .Values.some_port }}"
+              targetPort: "{{ .Values.some_target_port }}"
+              protocol: "{{ .Values.some_protocol }}"
+              nodePort: "{{ .Values.some_nodePort }}"
       workload:
         my-workload:
           enabled: true
@@ -94,3 +117,17 @@ tests:
             sessionAffinityConfig:
               clientIP:
                 timeoutSeconds: 100
+      - documentIndex: *serviceDoc
+        equal:
+          path: ports
+          value:
+            - name: port-name
+              port: 12345
+              protocol: TCP
+              targetPort: 12345
+              nodePort: 30000
+            - name: port-name2
+              port: 12344
+              protocol: TCP
+              targetPort: 12346
+              nodePort: 30001

@@ -11,7 +11,7 @@ objectData: The service data, that will be used to render the Service object.
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
-  {{- $svcType := $objectData.type | default "ClusterIP" -}}
+  {{- $svcType := $objectData.type | default $rootCtx.Values.fallbackDefaults.serviceType -}}
 
   {{/* Init variables */}}
   {{- $hasHTTPSPort := false -}}
@@ -74,15 +74,15 @@ metadata:
   {{- end }}
 spec:
   {{- if eq $svcType "ClusterIP" -}}
-    {{- include "ix.v1.common.lib.service.spec.clusterIP" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 }}
+    {{- include "ix.v1.common.lib.service.spec.clusterIP" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 -}}
   {{- else if eq $svcType "LoadBalancer" -}}
-    {{- include "ix.v1.common.lib.service.spec.loadBalancer" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 }}
+    {{- include "ix.v1.common.lib.service.spec.loadBalancer" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 -}}
   {{- else if eq $svcType "NodePort" -}}
-    {{- include "ix.v1.common.lib.service.spec.nodePort" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 }}
+    {{- include "ix.v1.common.lib.service.spec.nodePort" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 -}}
   {{- else if eq $svcType "ExternalName" -}}
-    {{- include "ix.v1.common.lib.service.spec.externalName" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 }}
+    {{- include "ix.v1.common.lib.service.spec.externalName" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 -}}
   {{- else if eq $svcType "ExternalIP" -}}
-    {{- include "ix.v1.common.lib.service.spec.externalIP" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 }}
+    {{- include "ix.v1.common.lib.service.spec.externalIP" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 -}}
   {{- end -}}
   {{- /* Following apply to all service types */}}
   publishNotReadyAddresses: {{ include "ix.v1.common.lib.service.publishNotReadyAddresses" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim }}
@@ -92,10 +92,10 @@ spec:
   {{- end -}}
   {{- include "ix.v1.common.lib.service.sessionAffinity" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 }}
 ports:
-{{/* TODO: ports */}}
+  {{- include "ix.v1.common.lib.service.ports" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 }}
   {{- if not (mustHas $svcType $specialTypes) }}
 selector:
-    {{- include "ix.v1.common.lib.metadata.selectorLabels" (dict "rootCtx" $rootCtx "podName" $podValues.shortName) | trim | nindent 2 }}
+    {{- include "ix.v1.common.lib.metadata.selectorLabels" (dict "rootCtx" $rootCtx "podName" $podValues.shortName) | trim | nindent 2 -}}
   {{- end -}}
   {{- if eq $svcType "ExternalIP" -}}
     {{/* TODO: endpointsslice for externalIP */}}

@@ -2,11 +2,12 @@
 {{/* Call this template:
 {{ include "ix.v1.common.lib.service.validation" (dict "objectData" $objectData) -}}
 objectData:
-  labels: The labels of the service.
-  annotations: The annotations of the service.
+  rootCtx: The root context.
+  objectData: The service object.
 */}}
 
 {{- define "ix.v1.common.lib.service.validation" -}}
+  {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
   {{- if and $objectData.labels (not (kindIs "map" $objectData.labels)) -}}
@@ -35,8 +36,12 @@ objectData:
         {{- fail (printf "Service - Expected <port.targetSelector> to be [string], but got [%s]" (kindOf $port.targetSelector)) -}}
       {{- end -}}
 
+      {{- if not $port.port -}}
+        {{- fail (printf "Service - Expected non-empty <port.port>") -}}
+      {{- end -}}
+
       {{- $protocolTypes := (list "TCP" "UDP" "HTTP" "HTTPS") -}}
-      {{- if and $port.protocol (not (mustHas $port.protocol $protocolTypes)) -}}
+      {{- if and $port.protocol (not (mustHas (tpl $port.protocol $rootCtx) $protocolTypes)) -}}
         {{- fail (printf "Service - Expected <port.protocol> to be one of [%s] but got [%s]" (join ", " $protocolTypes) $port.protocol) -}}
       {{- end -}}
 

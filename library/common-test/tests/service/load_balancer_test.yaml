@@ -13,6 +13,7 @@ tests:
             port-name:
               enabled: true
               primary: true
+              port: 12345
       workload:
         my-workload:
           enabled: true
@@ -36,6 +37,14 @@ tests:
           value:
             type: LoadBalancer
             publishNotReadyAddresses: false
+      - documentIndex: *serviceDoc
+        equal:
+          path: ports
+          value:
+            - name: port-name
+              port: 12345
+              protocol: TCP
+              targetPort: 12345
 
   - it: should pass with type LoadBalancer and available options set
     set:
@@ -47,6 +56,9 @@ tests:
       some_family: IPv6
       some_affinity: ClientIP
       some_timeout: 100
+      some_port: 12344
+      some_target_port: 12346
+      some_protocol: HTTP
       service:
         my-service:
           enabled: true
@@ -74,6 +86,12 @@ tests:
             port-name:
               enabled: true
               primary: true
+              port: 12345
+            port-name2:
+              enabled: true
+              port: "{{ .Values.some_port }}"
+              targetPort: "{{ .Values.some_target_port }}"
+              protocol: "{{ .Values.some_protocol }}"
       workload:
         my-workload:
           enabled: true
@@ -104,3 +122,15 @@ tests:
             sessionAffinityConfig:
               clientIP:
                 timeoutSeconds: 100
+      - documentIndex: *serviceDoc
+        equal:
+          path: ports
+          value:
+            - name: port-name
+              port: 12345
+              protocol: TCP
+              targetPort: 12345
+            - name: port-name2
+              port: 12344
+              protocol: TCP
+              targetPort: 12346

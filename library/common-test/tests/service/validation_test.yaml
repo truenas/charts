@@ -144,6 +144,7 @@ tests:
             port-name:
               enabled: true
               primary: true
+              port: 12345
       workload:
         main:
           enabled: true
@@ -165,6 +166,7 @@ tests:
             port-name:
               enabled: true
               primary: true
+              port: 12345
       workload:
         some-pod-name:
           enabled: false
@@ -185,10 +187,26 @@ tests:
             port-name1:
               enabled: true
               primary: true
+              port: 12345
               protocol: not-a-protocol
     asserts:
       - failedTemplate:
           errorMessage: Service - Expected <port.protocol> to be one of [TCP, UDP, HTTP, HTTPS] but got [not-a-protocol]
+
+  - it: should fail without port number
+    set:
+      service:
+        service-name1:
+          enabled: true
+          primary: true
+          ports:
+            port-name1:
+              enabled: true
+              primary: true
+              port:
+    asserts:
+      - failedTemplate:
+          errorMessage: Service - Expected non-empty <port.port>
 
   - it: should fail with invalid service type
     set:
@@ -217,6 +235,7 @@ tests:
             port-name1:
               enabled: true
               primary: true
+              port: 12345
       workload:
         some-pod-name:
           enabled: true
@@ -239,6 +258,7 @@ tests:
             port-name1:
               enabled: true
               primary: true
+              port: 12345
       workload:
         some-pod-name:
           enabled: true
@@ -262,6 +282,7 @@ tests:
             port-name1:
               enabled: true
               primary: true
+              port: 12345
       workload:
         some-pod-name:
           enabled: true
@@ -284,6 +305,7 @@ tests:
             port-name1:
               enabled: true
               primary: true
+              port: 12345
       workload:
         some-pod-name:
           enabled: true
@@ -306,6 +328,7 @@ tests:
             port-name1:
               enabled: true
               primary: true
+              port: 12345
       workload:
         some-pod-name:
           enabled: true
@@ -328,6 +351,7 @@ tests:
             port-name1:
               enabled: true
               primary: true
+              port: 12345
       workload:
         some-pod-name:
           enabled: true
@@ -353,6 +377,7 @@ tests:
             port-name1:
               enabled: true
               primary: true
+              port: 12345
       workload:
         some-pod-name:
           enabled: true
@@ -362,3 +387,51 @@ tests:
     asserts:
       - failedTemplate:
           errorMessage: Service - Expected <sessionAffinityConfig.clientIP.timeoutSeconds> to be between [0 - 86400], but got [-1]
+
+  - it: should fail without nodePort number on NodePort
+    set:
+      service:
+        service-name1:
+          enabled: true
+          primary: true
+          type: NodePort
+          ports:
+            port-name1:
+              enabled: true
+              primary: true
+              port: 80
+              nodePort:
+      workload:
+        some-pod-name:
+          enabled: true
+          primary: true
+          type: Deployment
+          podSpec: {}
+    asserts:
+      - failedTemplate:
+          errorMessage: Service - Expected non-empty <nodePort> on NodePort service type
+
+  - it: should fail with nodePort lower than the minimum on NodePort
+    set:
+      global:
+        minNodePort: 10000
+      service:
+        service-name1:
+          enabled: true
+          primary: true
+          type: NodePort
+          ports:
+            port-name1:
+              enabled: true
+              primary: true
+              port: 80
+              nodePort: 9999
+      workload:
+        some-pod-name:
+          enabled: true
+          primary: true
+          type: Deployment
+          podSpec: {}
+    asserts:
+      - failedTemplate:
+          errorMessage: Service - Expected <nodePort> to be higher than [10000], but got [9999]

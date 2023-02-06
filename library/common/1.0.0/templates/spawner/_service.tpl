@@ -22,7 +22,7 @@
 
       {{/* Perform validations */}}
       {{- include "ix.v1.common.lib.chart.names.validation" (dict "name" $objectName) -}}
-      {{- include "ix.v1.common.lib.service.validation" (dict "objectData" $objectData) -}}
+      {{- include "ix.v1.common.lib.service.validation" (dict "rootCtx" $ "objectData" $objectData) -}}
 
       {{/* Set the name of the service account */}}
       {{- $_ := set $objectData "name" $objectName -}}

@@ -5,3 +5,7 @@ workload:
 service:
   main:
     enabled: true
+    ports:
+      main:
+        enabled: true
+        port: 80
