@@ -122,7 +122,7 @@ tests:
           of: Service
       - documentIndex: *serviceDoc
         equal:
-          path: selector
+          path: spec.selector
           value:
             pod.name: my-workload
             app.kubernetes.io/name: common-test
@@ -155,7 +155,7 @@ tests:
           of: Service
       - documentIndex: *serviceDoc
         equal:
-          path: selector
+          path: spec.selector
           value:
             pod.name: my-workload
             app.kubernetes.io/name: common-test

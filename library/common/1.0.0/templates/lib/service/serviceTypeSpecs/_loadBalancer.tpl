@@ -10,6 +10,11 @@ objectData: The service object data
   {{- $objectData := .objectData }}
 
 type: LoadBalancer
+publishNotReadyAddresses: {{ include "ix.v1.common.lib.service.publishNotReadyAddresses" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim }}
+  {{- with (include "ix.v1.common.lib.service.externalIPs" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim) }}
+externalIPs:
+    {{- . | nindent 2 }}
+  {{- end -}}
   {{- with $objectData.loadBalancerIP }}
 loadBalancerIP: {{ tpl . $rootCtx }}
   {{- end -}}
@@ -20,8 +25,8 @@ loadBalancerSourceRanges:
   - {{ tpl . $rootCtx }}
     {{- end -}}
   {{- end -}}
-
   {{- include "ix.v1.common.lib.service.clusterIP" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 0 }}
   {{- include "ix.v1.common.lib.service.ipFamily" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 0 }}
   {{- include "ix.v1.common.lib.service.externalTrafficPolicy" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 0 }}
+  {{- include "ix.v1.common.lib.service.sessionAffinity" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 0 }}
 {{- end -}}

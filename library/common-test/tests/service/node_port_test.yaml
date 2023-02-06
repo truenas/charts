@@ -38,15 +38,16 @@ tests:
           value:
             type: NodePort
             publishNotReadyAddresses: false
-      - documentIndex: *serviceDoc
-        equal:
-          path: ports
-          value:
+            ports:
             - name: port-name
               port: 12345
               protocol: TCP
               targetPort: 12345
               nodePort: 30000
+            selector:
+              app.kubernetes.io/instance: RELEASE-NAME
+              app.kubernetes.io/name: common-test
+              pod.name: my-workload
 
   - it: should pass with type NodePort and available options set
     set:
@@ -117,10 +118,7 @@ tests:
             sessionAffinityConfig:
               clientIP:
                 timeoutSeconds: 100
-      - documentIndex: *serviceDoc
-        equal:
-          path: ports
-          value:
+            ports:
             - name: port-name
               port: 12345
               protocol: TCP
@@ -131,3 +129,7 @@ tests:
               protocol: TCP
               targetPort: 12346
               nodePort: 30001
+            selector:
+              app.kubernetes.io/instance: RELEASE-NAME
+              app.kubernetes.io/name: common-test
+              pod.name: my-workload

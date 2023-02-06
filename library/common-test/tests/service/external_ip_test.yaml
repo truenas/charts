@@ -31,10 +31,7 @@ tests:
           path: spec
           value:
             publishNotReadyAddresses: false
-      - documentIndex: *serviceDoc
-        equal:
-          path: ports
-          value:
+            ports:
             - name: port-name
               port: 12345
               protocol: TCP
@@ -87,10 +84,7 @@ tests:
             sessionAffinityConfig:
               clientIP:
                 timeoutSeconds: 100
-      - documentIndex: *serviceDoc
-        equal:
-          path: ports
-          value:
+            ports:
             - name: port-name
               port: 12345
               protocol: TCP

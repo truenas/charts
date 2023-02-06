@@ -37,14 +37,15 @@ tests:
           value:
             type: LoadBalancer
             publishNotReadyAddresses: false
-      - documentIndex: *serviceDoc
-        equal:
-          path: ports
-          value:
+            ports:
             - name: port-name
               port: 12345
               protocol: TCP
               targetPort: 12345
+            selector:
+              app.kubernetes.io/instance: RELEASE-NAME
+              app.kubernetes.io/name: common-test
+              pod.name: my-workload
 
   - it: should pass with type LoadBalancer and available options set
     set:
@@ -122,10 +123,7 @@ tests:
             sessionAffinityConfig:
               clientIP:
                 timeoutSeconds: 100
-      - documentIndex: *serviceDoc
-        equal:
-          path: ports
-          value:
+            ports:
             - name: port-name
               port: 12345
               protocol: TCP
@@ -134,3 +132,7 @@ tests:
               port: 12344
               protocol: TCP
               targetPort: 12346
+            selector:
+              app.kubernetes.io/instance: RELEASE-NAME
+              app.kubernetes.io/name: common-test
+              pod.name: my-workload
