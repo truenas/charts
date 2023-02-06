@@ -25,7 +25,7 @@ objectData: The service data, that will be used to render the Service object.
     {{/* Get Pod Values based on the selector (or the absence of it) */}}
     {{- $podValues = fromJson (include "ix.v1.common.lib.service.getSelectedPodValues" (dict "rootCtx" $rootCtx "objectData" $objectData)) -}}
 
-    {{/* Get Pod's hostNetwork configuration */}}
+    {{/* Get Pod hostNetwork configuration */}}
     {{- $hostNetwork = include "ix.v1.common.lib.pod.hostNetwork" (dict "rootCtx" $rootCtx "objectData" $podValues) -}}
 
     {{- range $portName, $port := $objectData.ports -}}
@@ -40,7 +40,7 @@ objectData: The service data, that will be used to render the Service object.
       {{- end -}}
     {{- end -}}
 
-    {{/* When hostNetwork is set on the pod, force ClusterIP, so services won't try to bind the same ports on the host */}}
+    {{/* When hostNetwork is set on the pod, force ClusterIP, so services wont try to bind the same ports on the host */}}
     {{- if or (and (kindIs "bool" $hostNetwork) $hostNetwork) (and (kindIs "string" $hostNetwork) (eq $hostNetwork "true")) -}}
       {{- $svcType = "ClusterIP" -}}
     {{- end -}}
