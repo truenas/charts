@@ -65,4 +65,10 @@ persistence:
     type: nfs
     path: /path/of/nfs/share
     server: nfs-server
+
+  emptyDir-vol:
+    enabled: true
+    type: emptyDir
+    medium: Memory
+    size: 2Gi
 ```
