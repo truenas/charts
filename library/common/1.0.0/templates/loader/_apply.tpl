@@ -22,4 +22,7 @@
   {{/* Render Services(s) */}}
   {{- include "ix.v1.common.spawner.service" . | nindent 0 -}}
 
+  {{/* Render PVC(s) */}}
+  {{- include "ix.v1.common.spawner.pvc" . | nindent 0 -}}
+
 {{- end -}}

@@ -10,8 +10,6 @@ global:
   addTraefikAnnotations: false
   # -- Minimum nodePort value
   minNodePort: 9000
-  # -- Scale Storage Class
-  scaleZFSStorageClass: '{{ printf "ix-storage-class-%v" .Release.Name }}'
 
 # TODO:
 fallbackDefaults:
@@ -22,6 +20,15 @@ fallbackDefaults:
   serviceProtocol: TCP
   # -- Default Service Type
   serviceType: ClusterIP
+  # -- Default persistence type
+  persistenceType: pvc
+  # -- Default Retain PVC
+  pvcRetain: false
+  # -- Default PVC Size
+  pvcSize: 1Gi
+  # -- Default PVC Access Modes
+  pvcAccessModes:
+    - ReadWriteOnce
 
 # -- Injected from SCALE middleware
 # Only for reference here
@@ -120,96 +127,97 @@ persistence:
     enabled: true
     type: emptyDir
     mountPath: /shared
-    targetSelector: all
+    targetSelectAll: true
   varlogs:
     enabled: true
     type: emptyDir
     mountPath: /var/logs
-    targetSelector: all
+    targetSelectAll: true
   tmp:
     enabled: true
     type: emptyDir
     mountPath: /tmp
-    targetSelector: all
+    targetSelectAll: true
   devshm:
     # TODO: Enable by default?
     enabled: false
     type: emptyDir
     mountPath: /dev/shm
-    targetSelector: all
-  # -- Volume name
-  vol-name:
-    # -- Enables the volume
-    enabled: false
-    # -- Type of volume
-    type: type
-    # -- Volume Options
+    targetSelectAll: true
 
-    # -  ConfigMap, Secret
-    # Default Mode (ConfigMap, Secret)
-    defaultMode: "0600"
-    # Items (ConfigMap, Secret)
-    items:
-      - key: key
-        path: path
+  # # -- Volume name
+  # vol-name:
+  #   # -- Enables the volume
+  #   enabled: false
+  #   # -- Type of volume
+  #   type: type
+  #   # -- Volume Options
 
-    # - EmptyDir
-    # Medium
-    medium: Memory
-    # SizeLimit
-    size: 1Gi
+  #   # -  ConfigMap, Secret
+  #   # Default Mode (ConfigMap, Secret)
+  #   defaultMode: "0600"
+  #   # Items (ConfigMap, Secret)
+  #   items:
+  #     - key: key
+  #       path: path
 
-    # - HostPath
-    # Host Path
-    hostPath: /path/to/host
-    # Host Path Type
-    hostPathType: DirectoryOrCreate
+  #   # - EmptyDir
+  #   # Medium
+  #   medium: Memory
+  #   # SizeLimit
+  #   size: 1Gi
 
-    # - NFS
-    # Server
-    server: nfs-server
-    # Path
-    path: /path/to/nfs
+  #   # - HostPath
+  #   # Host Path
+  #   hostPath: /path/to/host
+  #   # Host Path Type
+  #   hostPathType: DirectoryOrCreate
 
-    # - ixVolumes
-    # datasetName
-    datasetName: dataset-name
-    # Host Path Type
-    # hostPathType: DirectoryOrCreate
+  #   # - NFS
+  #   # Server
+  #   server: nfs-server
+  #   # Path
+  #   path: /path/to/nfs
 
-    # - PVC
-    # labels (Only for PVC type)
-    labels: {}
-    # annotations (Only for PVC type)
-    annotations: {}
-    # Size
-    # size: 1Gi
-    # Retain
-    retain: false
-    # Storage Class
-    storageClassName: ""
-    # Existing Claim
-    existingClaim: ""
-    # VolumeName
-    volumeName: ""
-    # Access Modes
-    accessModes:
-      - ReadWriteOnce
-    # -- Options that apply to all volumeMounts
-    # Can be overruled per volumeMount under targetSelector
-    mountPath: /shared
-    readOnly: False
-    subPath: ""
-    mountPropagation: ""
-    # Where to define the volume and mount the volume
-    # targetSelector: all
-    targetSelector:
-      pod-name:
-        container-name:
-          mountPath: /shared
-          readOnly: False
-          subPath: ""
-          mountPropagation: ""
+  #   # - ixVolumes
+  #   # datasetName
+  #   datasetName: dataset-name
+  #   # Host Path Type
+  #   # hostPathType: DirectoryOrCreate
+
+  #   # - PVC
+  #   # labels (Only for PVC type)
+  #   labels: {}
+  #   # annotations (Only for PVC type)
+  #   annotations: {}
+  #   # Size
+  #   # size: 1Gi
+  #   # Retain
+  #   retain: false
+  #   # Storage Class
+  #   storageClassName: ""
+  #   # Existing Claim
+  #   existingClaim: ""
+  #   # VolumeName
+  #   volumeName: ""
+  #   # Access Modes
+  #   accessModes:
+  #     - ReadWriteOnce
+  #   # -- Options that apply to all volumeMounts
+  #   # Can be overruled per volumeMount under targetSelector
+  #   mountPath: /shared
+  #   readOnly: False
+  #   subPath: ""
+  #   mountPropagation: ""
+  #   # Where to define the volume and mount the volume
+  #   # targetSelector: all
+  #   targetSelector:
+  #     pod-name:
+  #       container-name:
+  #         mountPath: /shared
+  #         readOnly: False
+  #         subPath: ""
+  #         mountPropagation: ""
 
 # -- Service
 service:
