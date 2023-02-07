@@ -24,6 +24,10 @@
 | persistence.[volume-name].targetSelector.[pod-name].[container-name]           |    `dict`     |       ❌        |         ❌         |                                `{}`                                 | Define a dict named after the container to mount the volume                                                                      |
 | persistence.[volume-name].targetSelector.[pod-name].[container-name].mountPath |   `string`    |       ❌        |         ✅         |                      `[volume-name].mountPath`                      | Define the mountPath for the container                                                                                           |
 
+> When `targetSelectAll` is `true`, it will define the volume to all pods (`targetSelector` is ignored in this case)
+> When `targetSelector` is defined, referencing pod(s) it will define the volume to those pod(s)
+> When `targetSelector` is a empty, it will define the volume to the primary pod
+
 ---
 
 Appears in:
