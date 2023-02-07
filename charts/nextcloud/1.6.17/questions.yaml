@@ -104,6 +104,12 @@ questions:
             type: path
             default: "/var/www/html/data"
             required: true
+        - variable: install_ffmpeg
+          label: "Install ffmpeg"
+          description: "Automatically Install ffmpeg when the container starts"
+          schema:
+            type: boolean
+            default: false
 
   - variable: cronjob
     description: "Setup cronjob for nextcloud"

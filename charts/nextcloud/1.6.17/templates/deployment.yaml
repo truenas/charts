@@ -56,6 +56,48 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
         - name: http
           containerPort: 80
           protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /status.php
+            port: http
+            httpHeaders:
+            - name: Host
+              value: localhost
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 5
+        readinessProbe:
+          httpGet:
+            path: /status.php
+            port: http
+            httpHeaders:
+            - name: Host
+              value: localhost
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 5
+        startupProbe:
+        {{- if .Values.nextcloud.install_ffmpeg }}
+          exec:
+            command:
+              - /bin/sh
+              - -c
+              - |
+                command -v ffmpeg /dev/null 2>&1 || exit 1
+        {{- else }}
+          httpGet:
+            path: /status.php
+            port: http
+            httpHeaders:
+            - name: Host
+              value: localhost
+        {{- end }}
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 60
         volumeMounts:
         - name: nextcloud-data
           mountPath: /var/www/
@@ -82,6 +124,20 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
         - name: extrappvolume-{{ $index }}
           mountPath: {{ $hostPathConfiguration.mountPath }}
         {{ end }}
+        {{- if .Values.nextcloud.install_ffmpeg }}
+        lifecycle:
+          postStart:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  echo "Installing ffmpeg..."
+                  apt update && \
+                  apt install -y --no-install-recommends \
+                  ffmpeg || echo "Failed to install ffmpeg"
+                  echo "Finished."
+        {{- end }}
 {{ include "common.networking.dnsConfiguration" .Values | nindent 6 }}
       volumes:
         - name: nginx-configuration
