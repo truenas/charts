@@ -45,5 +45,8 @@ tolerations:
 #TODO:securityContext:
 #TODO:containers:
 #TODO:initContainers:
-#TODO:volumes:
+{{- with (include "ix.v1.common.lib.pod.volumes" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim) }}
+volumes:
+  {{- . | nindent 2 }}
+{{- end -}}
 {{- end -}}
