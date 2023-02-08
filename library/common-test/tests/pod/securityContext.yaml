@@ -1,0 +1,236 @@
+suite: pod securityContext test
+templates:
+  - common.yaml
+tests:
+  - it: should pass with securityContext from "global"
+    set:
+      securityContext:
+        pod:
+          fsGroup: 1000
+          fsGroupChangePolicy: OnRootMismatch
+          supplementalGroups:
+            - 1000
+            - 1001
+          sysctls:
+            - name: net.ipv4.ip_forward
+              value: "1"
+            - name: net.ipv4.ping_group_range
+              value: "0 65535"
+      workload:
+        workload-name1:
+          enabled: true
+          primary: true
+          type: StatefulSet
+          podSpec: {}
+    asserts:
+      - documentIndex: &statefulSetDoc 0
+        isKind:
+          of: StatefulSet
+      - documentIndex: *statefulSetDoc
+        equal:
+          path: spec.template.spec.securityContext
+          value:
+            fsGroup: 1000
+            fsGroupChangePolicy: OnRootMismatch
+            supplementalGroups:
+              - 1000
+              - 1001
+            sysctls:
+              - name: net.ipv4.ip_forward
+                value: "1"
+              - name: net.ipv4.ping_group_range
+                value: "0 65535"
+
+  - it: should pass with securityContext from "global" and partial override with "pod"
+    set:
+      securityContext:
+        pod:
+          fsGroup: 1000
+          fsGroupChangePolicy: OnRootMismatch
+          supplementalGroups:
+            - 1000
+            - 1001
+          sysctls:
+            - name: net.ipv4.ip_forward
+              value: "1"
+            - name: net.ipv4.ping_group_range
+              value: "0 65535"
+      workload:
+        workload-name1:
+          enabled: true
+          primary: true
+          type: StatefulSet
+          podSpec:
+            securityContext:
+              fsGroup: 1001
+    asserts:
+      - documentIndex: &statefulSetDoc 0
+        isKind:
+          of: StatefulSet
+      - documentIndex: *statefulSetDoc
+        equal:
+          path: spec.template.spec.securityContext
+          value:
+            fsGroup: 1001
+            fsGroupChangePolicy: OnRootMismatch
+            supplementalGroups:
+              - 1000
+              - 1001
+            sysctls:
+              - name: net.ipv4.ip_forward
+                value: "1"
+              - name: net.ipv4.ping_group_range
+                value: "0 65535"
+
+  - it: should pass with securityContext from "global" and full override with "pod"
+    set:
+      some_sysctl_name: net.ipv4.ip_forward
+      some_sysctl_value: 2
+      securityContext:
+        pod:
+          fsGroup: 1000
+          fsGroupChangePolicy: OnRootMismatch
+          supplementalGroups:
+            - 1000
+            - 1001
+          sysctls:
+            - name: net.ipv4.ip_forward
+              value: "1"
+            - name: net.ipv4.ping_group_range
+              value: "0 65535"
+      workload:
+        workload-name1:
+          enabled: true
+          primary: true
+          type: StatefulSet
+          podSpec:
+            securityContext:
+              fsGroup: 1001
+              fsGroupChangePolicy: Always
+              supplementalGroups:
+                - 1002
+                - 1003
+              sysctls:
+                - name: "{{ .Values.some_sysctl_name }}"
+                  value: "{{ .Values.some_sysctl_value }}"
+                - name: net.ipv4.ping_group_range
+                  value: "1 65534"
+    asserts:
+      - documentIndex: &statefulSetDoc 0
+        isKind:
+          of: StatefulSet
+      - documentIndex: *statefulSetDoc
+        equal:
+          path: spec.template.spec.securityContext
+          value:
+            fsGroup: 1001
+            fsGroupChangePolicy: Always
+            supplementalGroups:
+              - 1002
+              - 1003
+            sysctls:
+              - name: net.ipv4.ip_forward
+                value: "2"
+              - name: net.ipv4.ping_group_range
+                value: "1 65534"
+
+# Failures
+
+  - it: should fail with empty securityContext from "global"
+    set:
+      securityContext:
+        pod: null
+      workload:
+        workload-name1:
+          enabled: true
+          primary: true
+          type: StatefulSet
+          podSpec: {}
+    asserts:
+      - failedTemplate:
+          errorMessage: Pod - Expected non-empty <.Values.securityContext.pod>
+
+  - it: should fail with empty fsGroup
+    set:
+      securityContext:
+        pod:
+          fsGroup: ""
+      workload:
+        workload-name1:
+          enabled: true
+          primary: true
+          type: StatefulSet
+          podSpec: {}
+    asserts:
+      - failedTemplate:
+          errorMessage: Pod - Expected non-empty <fsGroup>
+
+  - it: should fail with empty fsGroupChangePolicy
+    set:
+      securityContext:
+        pod:
+          fsGroup: 568
+          fsGroupChangePolicy: ""
+      workload:
+        workload-name1:
+          enabled: true
+          primary: true
+          type: StatefulSet
+          podSpec: {}
+    asserts:
+      - failedTemplate:
+          errorMessage: Pod - Expected non-empty <fsGroupChangePolicy>
+
+  - it: should fail with invalid fsGroupChangePolicy
+    set:
+      securityContext:
+        pod:
+          fsGroup: 568
+          fsGroupChangePolicy: invalid
+      workload:
+        workload-name1:
+          enabled: true
+          primary: true
+          type: StatefulSet
+          podSpec: {}
+    asserts:
+      - failedTemplate:
+          errorMessage: Pod - Expected <fsGroupChangePolicy> to be one of [Always, OnRootMismatch], but got [invalid]
+
+  - it: should fail with empty name in sysctls
+    set:
+      securityContext:
+        pod:
+          fsGroup: 568
+          fsGroupChangePolicy: OnRootMismatch
+          sysctls:
+            - name: ""
+              value: "1"
+      workload:
+        workload-name1:
+          enabled: true
+          primary: true
+          type: StatefulSet
+          podSpec: {}
+    asserts:
+      - failedTemplate:
+          errorMessage: Pod - Expected non-empty <name> in <sysctls>
+
+  - it: should fail with empty value in sysctls
+    set:
+      securityContext:
+        pod:
+          fsGroup: 568
+          fsGroupChangePolicy: OnRootMismatch
+          sysctls:
+            - name: net.ipv4.ip_forward
+              value: ""
+      workload:
+        workload-name1:
+          enabled: true
+          primary: true
+          type: StatefulSet
+          podSpec: {}
+    asserts:
+      - failedTemplate:
+          errorMessage: Pod - Expected non-empty <value> in <sysctls>

@@ -75,7 +75,7 @@ securityContext:
     fsGroup: 568
     fsGroupChangePolicy: OnRootMismatch
     supplementalGroups: []
-    sysctls: {}
+    sysctls: []
 
 # -- Resources
 # Can be overruled per container

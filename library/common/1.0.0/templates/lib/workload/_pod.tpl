@@ -42,7 +42,7 @@ terminationGracePeriodSeconds: {{ . }}
 tolerations:
     {{- . | nindent 2 }}
   {{- end }}
-securityContext: {{/* TODO: Unit Tests */}}
+securityContext:
   {{- include "ix.v1.common.lib.pod.securityContext" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 }}
 #TODO:containers:
 #TODO:initContainers:

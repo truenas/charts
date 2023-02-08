@@ -8,12 +8,12 @@ objectData: The object data to be used to render the Pod.
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
-  {{- $secContext := dict -}}
+  {{- if not $rootCtx.Values.securityContext.pod -}}
+    {{- fail "Pod - Expected non-empty <.Values.securityContext.pod>" -}}
+  {{- end -}}
 
   {{/* Initialize from the "global" option */}}
-  {{- with $rootCtx.Values.securityContext.pod  -}}
-    {{- $secContext = (mustDeepCopy .) -}}
-  {{- end -}}
+  {{- $secContext := mustDeepCopy $rootCtx.Values.securityContext.pod -}}
 
   {{/* Override with pod's option */}}
   {{- with $objectData.podSpec.securityContext -}}
@@ -26,6 +26,7 @@ objectData: The object data to be used to render the Pod.
   {{/* TODO: Add sysctls
     net.ipv4.ip_unprivileged_port_start: (Set to the lowest port on the pod's containers)
     net.ipv4.ping_group_range: (Set to the lowest port and highest port on the pod's containers)
+    TODO: Unit Test the above cases
   */}}
 
   {{- if not $secContext.fsGroup -}}
@@ -52,15 +53,15 @@ supplementalGroups: []
   {{- end -}}
   {{- with $secContext.sysctls }}
 sysctls:
-    {{- range $name, $value := . }}
-    {{- if not $name -}}
+    {{- range . }}
+    {{- if not .name -}}
       {{- fail "Pod - Expected non-empty <name> in <sysctls>" -}}
     {{- end -}}
-    {{- if not $value -}}
+    {{- if not .value -}}
       {{- fail "Pod - Expected non-empty <value> in <sysctls>" -}}
     {{- end }}
-  - name: {{ $name }}
-    value: {{ $value }}
+  - name: {{ tpl .name $rootCtx | quote }}
+    value: {{ tpl .value $rootCtx | quote }}
     {{- end -}}
   {{- else }}
 sysctls: []
