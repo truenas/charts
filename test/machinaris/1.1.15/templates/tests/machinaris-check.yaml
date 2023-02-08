@@ -10,4 +10,4 @@ spec:
   containers:
     - name: {{ .Release.Name }}-machinaris-deployment-test
       image: busybox
-      command: ['sh', '-c', 'nc -vz {{ .Values.nodeIP }} {{ .Values.machinarisApiPort }}']
+      command: ['sh', '-c', 'sleep 30 && nc -vz {{ .Values.nodeIP }} {{ .Values.machinarisApiPort }}']
