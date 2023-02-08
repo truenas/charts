@@ -26,6 +26,8 @@
 | persistence.[volume-name].items                                                |    `list`     |              ❌              |         ❌         |                                `[]`                                 | Define a list of items for configmap/secret                                                                                      |
 | persistence.[volume-name].items.key                                            |   `string`    |              ✅              |         ✅         |                                `""`                                 | Define the key of the configmap/secret                                                                                           |
 | persistence.[volume-name].items.path                                           |   `string`    |              ✅              |         ✅         |                                `""`                                 | Define the path                                                                                                                  |
+| persistence.[volume-name].hostPath                                             |   `string`    |     ✅(On hostPath type)     |         ✅         |                                `""`                                 | Define the hostPath                                                                                                              |
+| persistence.[volume-name].hostPathType                                         |   `string`    |              ❌              |         ✅         |                                `""`                                 | Define the hostPathType                                                                                                          |
 | persistence.[volume-name].targetSelector.[pod-name]                            |    `dict`     |              ❌              |         ❌         |                                `{}`                                 | Define a dict named after the pod to define the volume                                                                           |
 | persistence.[volume-name].targetSelector.[pod-name].[container-name]           |    `dict`     |              ❌              |         ❌         |                                `{}`                                 | Define a dict named after the container to mount the volume                                                                      |
 | persistence.[volume-name].targetSelector.[pod-name].[container-name].mountPath |   `string`    |              ❌              |         ✅         |                      `[volume-name].mountPath`                      | Define the mountPath for the container                                                                                           |
@@ -105,4 +107,10 @@ persistence:
         path: path1
       - key: key2
         path: path2
+
+  hostpath-vol:
+    enabled: true
+    type: hostPath
+    hostPath: /path/to/host
+    hostPathType: DirectoryOrCreate
 ```
