@@ -1,8 +1,8 @@
-suite: pod hostPath volume test
+suite: pod ixVolume volume test
 templates:
   - common.yaml
 tests:
-  - it: should pass with hostPath volume
+  - it: should pass with ixVolume volume
     set:
       workload:
         workload-name1:
@@ -10,11 +10,13 @@ tests:
           primary: true
           type: Deployment
           podSpec: {}
+      ixVolumes:
+        - /mnt/pool/ix-applications/ix-app
       persistence:
-        host-vol:
+        ix-vol:
           enabled: true
-          type: hostPath
-          hostPath: /some-path
+          type: ixVolume
+          datasetName: ix-app
     asserts:
       - documentIndex: &deploymentDoc 0
         isKind:
@@ -23,13 +25,13 @@ tests:
         contains:
           path: spec.template.spec.volumes
           content:
-            name: host-vol
+            name: ix-vol
             hostPath:
-              path: /some-path
+              path: /mnt/pool/ix-applications/ix-app
 
   - it: should pass with hostPath volume and type
     set:
-      some_path: /some-path
+      some_dataset: ix-app
       some_type: DirectoryOrCreate
       workload:
         workload-name1:
@@ -37,11 +39,13 @@ tests:
           primary: true
           type: Deployment
           podSpec: {}
+      ixVolumes:
+        - /mnt/pool/ix-applications/ix-app
       persistence:
-        host-vol:
+        ix-vol:
           enabled: true
-          type: hostPath
-          hostPath: "{{ .Values.some_path }}"
+          type: ixVolume
+          datasetName: "{{ .Values.some_dataset }}"
           hostPathType: "{{ .Values.some_type }}"
     asserts:
       - documentIndex: *deploymentDoc
@@ -51,13 +55,13 @@ tests:
         contains:
           path: spec.template.spec.volumes
           content:
-            name: host-vol
+            name: ix-vol
             hostPath:
-              path: /some-path
+              path: /mnt/pool/ix-applications/ix-app
               type: DirectoryOrCreate
 
 # Failures
-  - it: should fail without hostPath
+  - it: should fail without datasetName
     set:
       workload:
         some-workload:
@@ -68,13 +72,13 @@ tests:
       persistence:
         volume1:
           enabled: true
-          type: hostPath
-          hostPath: ""
+          type: ixVolume
+          datasetname: ""
     asserts:
       - failedTemplate:
-          errorMessage: Persistence - Expected non-empty <hostPath> on <hostPath> type
+          errorMessage: Persistence - Expected non-empty <datasetName> on <ixVolume> type
 
-  - it: should fail with relative hostPath
+  - it: should fail with empty ixVolumes
     set:
       workload:
         some-workload:
@@ -82,14 +86,35 @@ tests:
           primary: true
           type: Deployment
           podSpec: {}
+      ixVolumes: []
       persistence:
         volume1:
           enabled: true
-          type: hostPath
-          hostPath: some-path
+          type: ixVolume
+          datasetName: ix-app
     asserts:
       - failedTemplate:
-          errorMessage: Persistence - Expected <hostPath> to start with a forward slash [/] on <hostPath> type
+          errorMessage: Persistence - Expected non-empty <ixVolumes> in values on <ixVolume> type
+
+  - it: should fail with empty ixVolumes
+    set:
+      workload:
+        some-workload:
+          enabled: true
+          primary: true
+          type: Deployment
+          podSpec: {}
+      ixVolumes:
+        - /mnt/pool/ix-applications/ix-wrong-app
+        - /mnt/pool/ix-applications/ix-other-app
+      persistence:
+        volume1:
+          enabled: true
+          type: ixVolume
+          datasetName: ix-app
+    asserts:
+      - failedTemplate:
+          errorMessage: Persistence - Expected <datasetName> [ix-app] to exist on <ixVolumes> list, but list contained [/mnt/pool/ix-applications/ix-wrong-app, /mnt/pool/ix-applications/ix-other-app] on <ixVolume> type
 
   - it: should fail with invalid hostPathType
     set:
@@ -99,11 +124,13 @@ tests:
           primary: true
           type: Deployment
           podSpec: {}
+      ixVolumes:
+        - /mnt/pool/ix-applications/ix-app
       persistence:
         volume1:
           enabled: true
-          type: hostPath
-          hostPath: /some-path
+          type: ixVolume
+          datasetName: ix-app
           hostPathType: invalid
     asserts:
       - failedTemplate:
