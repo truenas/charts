@@ -47,7 +47,7 @@ tests:
           path: ""
     asserts:
       - failedTemplate:
-          errorMessage: Persistence - Expected non-empty [path] on NFS type
+          errorMessage: Persistence - Expected non-empty [path] on <nfs> type
 
   - it: should fail with path not starting with / in nfs
     set:
@@ -64,7 +64,7 @@ tests:
           path: some-relative-path
     asserts:
       - failedTemplate:
-          errorMessage: Persistence - Expected [path] to start with a forward slash [/] on NFS type
+          errorMessage: Persistence - Expected [path] to start with a forward slash [/] on <nfs> type
 
   - it: should fail without server in nfs
     set:
@@ -82,4 +82,4 @@ tests:
           server: ""
     asserts:
       - failedTemplate:
-          errorMessage: Persistence - Expected non-empty [server] on NFS type
+          errorMessage: Persistence - Expected non-empty [server] on <nfs> type

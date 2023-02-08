@@ -18,7 +18,7 @@ objectData: The object data to be used to render the volume.
   {{- end -}}
 
   {{- if and $medium (ne $medium "Memory") -}}
-    {{- fail (printf "Persistence - Expected [medium] to be one of [\"\", Memory], but got [%s] on emptyDir type" $medium)  -}}
+    {{- fail (printf "Persistence - Expected [medium] to be one of [\"\", Memory], but got [%s] on <emptyDir> type" $medium)  -}}
   {{- end }}
 - name: {{ $objectData.shortName }}
   {{- if or $medium $size }}

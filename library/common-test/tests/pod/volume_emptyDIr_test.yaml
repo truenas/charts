@@ -120,4 +120,4 @@ tests:
           medium: not-a-valid-medium
     asserts:
       - failedTemplate:
-          errorMessage: Persistence - Expected [medium] to be one of ["", Memory], but got [not-a-valid-medium] on emptyDir type
+          errorMessage: Persistence - Expected [medium] to be one of ["", Memory], but got [not-a-valid-medium] on <emptyDir> type
