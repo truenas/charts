@@ -35,6 +35,17 @@ tests:
         isNull:
           path: spec.storageClassName
 
+  - it: should not create pvc when existingClaim is set
+    set:
+      persistence:
+        my-volume1:
+          enabled: true
+          type: pvc
+          existingClaim: some-existing-claim
+    asserts:
+      - hasDocuments:
+          of: 0
+
   - it: should create pvc with accessModes set as string
     set:
       some_mode: ReadWriteMany

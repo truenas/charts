@@ -18,7 +18,7 @@
       {{- include "ix.v1.common.lib.persistence.validation" (dict "rootCtx" $ "objectData" $objectData) -}}
 
       {{/* Only spawn PVC if it's enabled and type of "pvc" */}}
-      {{- if eq "pvc" $objectData.type -}}
+      {{- if and (eq "pvc" $objectData.type) (not $objectData.existingClaim) -}}
 
         {{- $objectName := (printf "%s-%s" (include "ix.v1.common.lib.chart.names.fullname" $) $name) -}}
         {{/* Perform validations */}}
