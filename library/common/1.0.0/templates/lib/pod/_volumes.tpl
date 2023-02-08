@@ -38,6 +38,7 @@ objectData: The object data to be used to render the Pod.
         {{- $type := ($persistence.type | default $rootCtx.Values.fallbackDefaults.persistenceType) -}}
 
         {{- if eq "pvc" $type -}}
+          {{- include "ix.v1.common.lib.pod.volume.pvc" (dict "rootCtx" $rootCtx "objectData" $persistence) | trim | nindent 0 -}}
         {{- else if eq "ixVolume" $type -}}
         {{- else if eq "hostPath" $type -}}
         {{- else if eq "secret" $type -}}

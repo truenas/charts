@@ -1,11 +1,9 @@
-suite: pod nfs volume test
+suite: pod pvc volume test
 templates:
   - common.yaml
 tests:
-  - it: should pass with nfs volume
+  - it: should pass with pvc volume
     set:
-      some_path: /some-path
-      some_server: some-server
       workload:
         workload-name1:
           enabled: true
@@ -13,11 +11,9 @@ tests:
           type: Deployment
           podSpec: {}
       persistence:
-        nfs-vol:
+        pvc-vol:
           enabled: true
-          type: nfs
-          path: "{{ .Values.some_path }}"
-          server: "{{ .Values.some_server }}"
+          type: pvc
     asserts:
       - documentIndex: &deploymentDoc 0
         isKind:
@@ -26,60 +22,31 @@ tests:
         contains:
           path: spec.template.spec.volumes
           content:
-            name: nfs-vol
-            nfs:
-              path: /some-path
-              server: some-server
+            name: pvc-vol
+            persistentVolumeClaim:
+              claimName: release-name-common-test-pvc-vol
 
-# Failures
-  - it: should fail without path in nfs
+  - it: should pass with pvc volume with existing claim
     set:
       workload:
-        some-workload:
+        workload-name1:
           enabled: true
           primary: true
           type: Deployment
           podSpec: {}
       persistence:
-        volume1:
+        pvc-vol:
           enabled: true
-          type: nfs
-          path: ""
+          type: pvc
+          existingClaim: some-existing-claim
     asserts:
-      - failedTemplate:
-          errorMessage: Persistence - Expected non-empty [path] on <nfs> type
-
-  - it: should fail with path not starting with / in nfs
-    set:
-      workload:
-        some-workload:
-          enabled: true
-          primary: true
-          type: Deployment
-          podSpec: {}
-      persistence:
-        volume1:
-          enabled: true
-          type: nfs
-          path: some-relative-path
-    asserts:
-      - failedTemplate:
-          errorMessage: Persistence - Expected [path] to start with a forward slash [/] on <nfs> type
-
-  - it: should fail without server in nfs
-    set:
-      workload:
-        some-workload:
-          enabled: true
-          primary: true
-          type: Deployment
-          podSpec: {}
-      persistence:
-        volume1:
-          enabled: true
-          type: nfs
-          path: /some-path
-          server: ""
-    asserts:
-      - failedTemplate:
-          errorMessage: Persistence - Expected non-empty [server] on <nfs> type
+      - documentIndex: &deploymentDoc 0
+        isKind:
+          of: Deployment
+      - documentIndex: *deploymentDoc
+        contains:
+          path: spec.template.spec.volumes
+          content:
+            name: pvc-vol
+            persistentVolumeClaim:
+              claimName: some-existing-claim
