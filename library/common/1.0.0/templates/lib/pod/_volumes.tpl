@@ -41,6 +41,7 @@ objectData: The object data to be used to render the Pod.
         {{- else if eq "ixVolume" $type -}}
         {{- else if eq "hostPath" $type -}}
         {{- else if eq "secret" $type -}}
+          {{- include "ix.v1.common.lib.pod.volume.secret" (dict "rootCtx" $rootCtx "objectData" $persistence) | trim | nindent 0 -}}
         {{- else if eq "configmap" $type -}}
           {{- include "ix.v1.common.lib.pod.volume.configmap" (dict "rootCtx" $rootCtx "objectData" $persistence) | trim | nindent 0 -}}
         {{- else if eq "emptyDir" $type -}}

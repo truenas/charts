@@ -93,4 +93,16 @@ persistence:
         path: path1
       - key: key2
         path: path2
+
+  secret-vol:
+    enabled: true
+    type: secret
+    objectName: secret-name
+    expandObjecName: false
+    defaultMode: "0777"
+    items:
+      - key: key1
+        path: path1
+      - key: key2
+        path: path2
 ```
