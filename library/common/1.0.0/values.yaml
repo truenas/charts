@@ -63,6 +63,8 @@ securityContext:
     readOnlyRootFilesystem: true
     allowPrivilegeEscalation: false
     privileged: false
+    seccompProfile:
+      type: RuntimeDefault
     capabilities:
       add: []
       drop:
@@ -74,8 +76,6 @@ securityContext:
     fsGroupChangePolicy: OnRootMismatch
     supplementalGroups: []
     sysctls: {}
-      # net.ipv4.ip_unprivileged_port_start: "0"
-      # net.ipv4.ping_group_range:
 
 # -- Resources
 # Can be overruled per container
