@@ -12,7 +12,7 @@
       {{/* Create a copy of the persistence */}}
       {{- $objectData := (mustDeepCopy $persistence) -}}
 
-      {{ $_ := set $objectData "type" ($objectData.type | default $.Values.fallbackDefaults.persistenceType) }}
+      {{- $_ := set $objectData "type" ($objectData.type | default $.Values.fallbackDefaults.persistenceType) -}}
 
       {{/* Perform general validations */}}
       {{- include "ix.v1.common.lib.persistence.validation" (dict "rootCtx" $ "objectData" $objectData) -}}
