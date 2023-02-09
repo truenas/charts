@@ -1,6 +1,10 @@
 workload:
   main:
     enabled: true
+    podSpec:
+      containers:
+        main:
+          enabled: false
 
 service:
   main:

@@ -98,7 +98,6 @@ containerOptions:
   NVIDIA_CAPS:
     - all
 
-
 # -- Options for all pods
 # Can be overruled per pod
 podOptions:
@@ -455,6 +454,8 @@ workload:
         main:
           # -- Enables the container
           enabled: true
+          # -- Sets the container as primary
+          primary: true
           # -- Container image
           imageSelector: ""
           tty: false
