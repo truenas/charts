@@ -44,9 +44,14 @@ tolerations:
   {{- end }}
 securityContext:
   {{- include "ix.v1.common.lib.pod.securityContext" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 }}
-#TODO:containers:
+  {{- if $objectData.podSpec.contaienrs }}
+containers:
+    {{- range $name, $containerValues := $objectData.podSpec.containers -}}
+      {{- include "ix.v1.common.lib.pod.container" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 }}
+    {{- end -}}
+  {{- end -}}
 #TODO:initContainers:
-{{- with (include "ix.v1.common.lib.pod.volumes" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim) }}
+  {{- with (include "ix.v1.common.lib.pod.volumes" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim) }}
 volumes:
   {{- . | nindent 2 }}
 {{- end -}}
