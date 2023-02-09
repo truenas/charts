@@ -27,4 +27,3 @@ objectData:
   {{/* CronJob contains a job inside, so we validate job values too */}}
   {{- include "ix.v1.common.lib.workload.jobValidation" (dict "objectData" $objectData) -}}
 {{- end -}}
-{{/* TODO: Extend validation for other values of cronjob */}}
