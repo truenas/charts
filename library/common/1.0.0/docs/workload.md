@@ -48,6 +48,8 @@ Notes
 > `dnsPolicy` is set automatically to `ClusterFirstWithHostNet` when `hostNetwork` is `true` > `runtimeClassName` will ignore any value set and use the `.Values.global.ixChartContext.nvidiaRuntimeClassName`,
 > if a GPU is assigned to a container and Scale Middleware sets `.Values.global.ixChartContext.addNvidiaRuntimeClass` to `true`.
 > Note that it will only set the `runtimeClassName` on the pod that this container belongs to.
+> **sysctl** `net.ipv4.ip_unprivileged_port_start` will be automatically set to the lowest `targetPort` (or `port` if targetPort is not defined) number assigned to the pod.
+> **sysctl** `net.ipv4.ping_group_range` will be automatically set to the lowest and highest `targetPort` (or `port` if targetPort is not defined) number assigned to the pod.
 
 ---
 

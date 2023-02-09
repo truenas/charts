@@ -22,12 +22,14 @@ objectData: The object data to be used to render the Pod.
 
   {{/* TODO: Add supplemental groups
     scaleGPU (44) (Only when GPU is enabled on the pod's containers)
-    devices (5, 10, 20, 24) (Only when devices is assigned on the pod's containers) */}}
-  {{/* TODO: Add sysctls
-    net.ipv4.ip_unprivileged_port_start: (Set to the lowest port on the pod's containers)
-    net.ipv4.ping_group_range: (Set to the lowest port and highest port on the pod's containers)
+    devices (5, 10, 20, 24) (Only when devices is assigned on the pod's containers)
     TODO: Unit Test the above cases
-  */}}
+    */}}
+  {{- $portRange := fromJson (include "ix.v1.common.lib.pod.securityContext.getPortRange" (dict "rootCtx" $rootCtx "objectData" $objectData)) -}}
+  {{- if and $portRange.low $portRange.high -}}
+    {{- $_ := set $secContext "sysctls" (mustAppend $secContext.sysctls (dict "name" "net.ipv4.ip_unprivileged_port_start" "value" (printf "%v" $portRange.low))) -}}
+    {{- $_ := set $secContext "sysctls" (mustAppend $secContext.sysctls (dict "name" "net.ipv4.ping_group_range" "value" (printf "%v %v" $portRange.low $portRange.high))) -}}
+  {{- end -}}
 
   {{- if not $secContext.fsGroup -}}
     {{- fail "Pod - Expected non-empty <fsGroup>" -}}
@@ -66,4 +68,65 @@ sysctls:
   {{- else }}
 sysctls: []
   {{- end -}}
+{{- end -}}
+
+{{/* Returns Lowest and Highest ports assigned to the any container in the pod */}}
+{{/* Call this template:
+{{ include "ix.v1.common.lib.pod.securityContext.getPortRange" (dict "rootCtx" $ "objectData" $objectData) }}
+rootCtx: The root context of the template. It is used to access the global context.
+objectData: The object data to be used to render the Pod.
+*/}}
+{{- define "ix.v1.common.lib.pod.securityContext.getPortRange" -}}
+  {{- $rootCtx := .rootCtx -}}
+  {{- $objectData := .objectData -}}
+
+  {{ $portRange := (dict "high" 0 "low" 0) }}
+
+  {{- range $name, $service := $rootCtx.Values.service -}}
+    {{- $selected := false -}}
+    {{/* If service is enabled... */}}
+    {{- if $service.enabled -}}
+
+      {{/* If there is a selector */}}
+      {{- if $service.targetSelector -}}
+
+        {{/* And pod is selected */}}
+        {{- if eq $service.targetSelector $objectData.shortName -}}
+          {{- $selected = true -}}
+        {{- end -}}
+
+      {{- else -}}
+        {{/* If no selector is defined but pod is primary */}}
+        {{- if $objectData.primary -}}
+          {{- $selected = true -}}
+        {{- end -}}
+
+      {{- end -}}
+    {{- end -}}
+
+    {{- if $selected -}}
+      {{- range $name, $portValues := $service.ports -}}
+        {{- if $portValues.enabled -}}
+
+          {{- $portToCheck := ($portValues.targetPort | default $portValues.port) -}}
+          {{- if kindIs "string" $portToCheck -}}
+            {{/* Helm stores ints as floats, so convert string to float before comparing */}}
+            {{- $portToCheck = (tpl $portToCheck $rootCtx) | float64 -}}
+          {{- end -}}
+
+          {{- if or (not $portRange.low) (lt $portToCheck $portRange.low) -}}
+            {{- $_ := set $portRange "low" $portToCheck -}}
+          {{- end -}}
+
+          {{- if or (not $portRange.high) (gt $portToCheck $portRange.high) -}}
+            {{- $_ := set $portRange "high" $portToCheck -}}
+          {{- end -}}
+
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+
+  {{- end -}}
+
+  {{- $portRange | toJson -}}
 {{- end -}}

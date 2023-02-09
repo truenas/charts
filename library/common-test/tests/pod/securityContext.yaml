@@ -12,10 +12,10 @@ tests:
             - 1000
             - 1001
           sysctls:
-            - name: net.ipv4.ip_forward
-              value: "1"
-            - name: net.ipv4.ping_group_range
-              value: "0 65535"
+            - name: some_name
+              value: "some_value"
+            - name: some_other_name
+              value: "some_other_value"
       workload:
         workload-name1:
           enabled: true
@@ -36,10 +36,10 @@ tests:
               - 1000
               - 1001
             sysctls:
-              - name: net.ipv4.ip_forward
-                value: "1"
-              - name: net.ipv4.ping_group_range
-                value: "0 65535"
+              - name: some_name
+                value: "some_value"
+              - name: some_other_name
+                value: "some_other_value"
 
   - it: should pass with securityContext from "global" and partial override with "pod"
     set:
@@ -51,10 +51,10 @@ tests:
             - 1000
             - 1001
           sysctls:
-            - name: net.ipv4.ip_forward
-              value: "1"
-            - name: net.ipv4.ping_group_range
-              value: "0 65535"
+            - name: some_name
+              value: "some_value"
+            - name: some_other_name
+              value: "some_other_value"
       workload:
         workload-name1:
           enabled: true
@@ -77,14 +77,14 @@ tests:
               - 1000
               - 1001
             sysctls:
-              - name: net.ipv4.ip_forward
-                value: "1"
-              - name: net.ipv4.ping_group_range
-                value: "0 65535"
+              - name: some_name
+                value: "some_value"
+              - name: some_other_name
+                value: "some_other_value"
 
   - it: should pass with securityContext from "global" and full override with "pod"
     set:
-      some_sysctl_name: net.ipv4.ip_forward
+      some_sysctl_name: some_name
       some_sysctl_value: 2
       securityContext:
         pod:
@@ -94,10 +94,10 @@ tests:
             - 1000
             - 1001
           sysctls:
-            - name: net.ipv4.ip_forward
-              value: "1"
-            - name: net.ipv4.ping_group_range
-              value: "0 65535"
+            - name: some_name
+              value: "some_value"
+            - name: some_other_name
+              value: "some_other_value"
       workload:
         workload-name1:
           enabled: true
@@ -113,8 +113,8 @@ tests:
               sysctls:
                 - name: "{{ .Values.some_sysctl_name }}"
                   value: "{{ .Values.some_sysctl_value }}"
-                - name: net.ipv4.ping_group_range
-                  value: "1 65534"
+                - name: some_other_name
+                  value: "some_different_value"
     asserts:
       - documentIndex: &statefulSetDoc 0
         isKind:
@@ -129,13 +129,102 @@ tests:
               - 1002
               - 1003
             sysctls:
-              - name: net.ipv4.ip_forward
+              - name: some_name
                 value: "2"
+              - name: some_other_name
+                value: "some_different_value"
+
+  - it: should pass with sysctls automatically appended based on services
+    set:
+      some_sysctl_name: some_name
+      some_sysctl_value: 2
+      workload:
+        workload-name1:
+          enabled: true
+          primary: true
+          type: StatefulSet
+          podSpec:
+            securityContext:
+              fsGroup: 1001
+              fsGroupChangePolicy: Always
+              supplementalGroups:
+                - 1002
+                - 1003
+              sysctls:
+                - name: "{{ .Values.some_sysctl_name }}"
+                  value: "{{ .Values.some_sysctl_value }}"
+                - name: some_other_name
+                  value: "some_different_value"
+        workload-name2:
+          enabled: true
+          type: StatefulSet
+          podSpec: {}
+      service:
+        service-name1:
+          enabled: true
+          primary: true
+          type: ClusterIP
+          ports:
+            port-name:
+              enabled: true
+              primary: true
+              port: 80
+        service-name2:
+          enabled: true
+          type: ClusterIP
+          ports:
+            port-name:
+              enabled: true
+              primary: true
+              port: 53
+        service-name3:
+          enabled: true
+          type: ClusterIP
+          targetSelector: workload-name2
+          ports:
+            port-name:
+              enabled: true
+              primary: true
+              port: 443
+    asserts:
+      - documentIndex: &statefulSetDoc 0
+        isKind:
+          of: StatefulSet
+      - documentIndex: *statefulSetDoc
+        equal:
+          path: spec.template.spec.securityContext
+          value:
+            fsGroup: 1001
+            fsGroupChangePolicy: Always
+            supplementalGroups:
+              - 1002
+              - 1003
+            sysctls:
+              - name: some_name
+                value: "2"
+              - name: some_other_name
+                value: "some_different_value"
+              - name: net.ipv4.ip_unprivileged_port_start
+                value: "53"
               - name: net.ipv4.ping_group_range
-                value: "1 65534"
+                value: "53 80"
+      - documentIndex: &otherStatefulSetDoc 1
+        isKind:
+          of: StatefulSet
+      - documentIndex: *otherStatefulSetDoc
+        equal:
+          path: spec.template.spec.securityContext
+          value:
+            fsGroup: 568
+            fsGroupChangePolicy: OnRootMismatch
+            supplementalGroups: []
+            sysctls:
+              - name: net.ipv4.ip_unprivileged_port_start
+                value: "443"
+              - name: net.ipv4.ping_group_range
+                value: "443 443"
 
-# Failures
-
+  # Failures
   - it: should fail with empty securityContext from "global"
     set:
       securityContext:
@@ -205,7 +294,7 @@ tests:
           fsGroupChangePolicy: OnRootMismatch
           sysctls:
             - name: ""
-              value: "1"
+              value: "some_value"
       workload:
         workload-name1:
           enabled: true
@@ -223,7 +312,7 @@ tests:
           fsGroup: 568
           fsGroupChangePolicy: OnRootMismatch
           sysctls:
-            - name: net.ipv4.ip_forward
+            - name: some_name
               value: ""
       workload:
         workload-name1:
