@@ -6,7 +6,7 @@ import re
 from catalog_update.upgrade_strategy import datetime_versioning
 
 
-VERSION_REG = r'2[2-9][0-1][0-9][0-3][0-9]-bullseye'
+VERSION_REG = r'2[2-9][0-1][0-9][0-3][0-9]-jammy'
 
 
 def newer_mapping(image_tags):
@@ -22,7 +22,7 @@ def newer_mapping(image_tags):
         return {}
 
     return {
-        'tags': {key: f'{version}-bullseye'},
+        'tags': {key: f'{version}-jammy'},
         'app_version': version,
     }
 
