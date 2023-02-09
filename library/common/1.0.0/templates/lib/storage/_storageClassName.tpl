@@ -9,7 +9,7 @@ objectData: The object data of the pvc
   {{- $rootCtx := .rootCtx -}}
 
   {{/*
-    If storageClass is defined on the objectData: (Takes precedence over ixChartContext and fallbackDefaults)
+    If storageClass is defined on the objectData:
       *  "-" returns "", which means requesting a PV without class
       *  "SCALE-ZFS" returns the value set on Values.global.ixChartContext.storageClassName
       (*)  "SCALE-SMB" returns the value set on Values.global.ixChartContext.smbStorageClassName (Example for the future)

@@ -66,7 +66,7 @@ Naming scheme:
 
 ---
 
-> Those are the common `keys` for all workload.
+> Those are the common `keys` for all **workloads**.
 > Additional keys, information and examples, see on the specific kind of workload
 
 - [Deployment](deployment.md)

@@ -11,7 +11,7 @@
 
 Notes:
 
-View common `keys` of `workload` in [workload Documentation](workload.md).
+View common `keys` of `workload` in [workload Documentation](README.md).
 
 > Value of `workload.[workload-name].podSpec.restartPolicy` can only be `Always` for this type of workload
 
