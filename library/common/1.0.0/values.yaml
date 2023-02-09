@@ -77,6 +77,8 @@ securityContext:
     supplementalGroups: []
     sysctls: []
 
+TZ: UTC
+
 containerOptions:
   # -- Resources
   # Can be overruled per container
@@ -87,9 +89,6 @@ containerOptions:
     requests:
       cpu: 10m
       memory: 50Mi
-  # -- Timezone for all containers
-  # Can be overruled per container
-  TZ: UTC
   # -- PUID for all containers
   # Can be overruled per container
   PUID: 568
@@ -98,6 +97,7 @@ containerOptions:
   UMASK: "002"
   NVIDIA_CAPS:
     - all
+
 
 # -- Options for all pods
 # Can be overruled per pod

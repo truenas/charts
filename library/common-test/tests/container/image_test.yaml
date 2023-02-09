@@ -69,7 +69,10 @@ tests:
 
   - it: should fail with empty repository in selected image
     set:
-      image: *image
+      image:
+        repository: ""
+        tag: 1.19.0
+        pullPolicy: IfNotPresent
       workload:
         workload-name:
           enabled: true
