@@ -8,4 +8,10 @@ objectData: The object data to be used to render the Pod.
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
+  {{- $imageObj := fromJson (include "ix.v1.common.lib.container.imageSelector" (dict "rootCtx" $rootCtx "objectData" $objectData)) }}
+- name: {{ $objectData.name }}
+  image: {{ printf "%s:%s" $imageObj.repository $imageObj.tag }}
+  imagePullPolicy: {{ $imageObj.pullPolicy }}
+  tty: {{ $objectData.tty | default false }}
+  stdin: {{ $objectData.stdin | default false }}
 {{- end -}}

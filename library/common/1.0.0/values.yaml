@@ -77,15 +77,27 @@ securityContext:
     supplementalGroups: []
     sysctls: []
 
-# -- Resources
-# Can be overruled per container
-resources:
-  limits:
-    cpu: 4000m
-    memory: 8Gi
-  requests:
-    cpu: 10m
-    memory: 50Mi
+containerOptions:
+  # -- Resources
+  # Can be overruled per container
+  resources:
+    limits:
+      cpu: 4000m
+      memory: 8Gi
+    requests:
+      cpu: 10m
+      memory: 50Mi
+  # -- Timezone for all containers
+  # Can be overruled per container
+  TZ: UTC
+  # -- PUID for all containers
+  # Can be overruled per container
+  PUID: 568
+  # -- UMASK for all containers
+  # Can be overruled per container
+  UMASK: "002"
+  NVIDIA_CAPS:
+    - all
 
 # -- Options for all pods
 # Can be overruled per pod
@@ -108,18 +120,6 @@ podOptions:
   terminationGracePeriodSeconds: 120
   # TODO: Add affinity
   # TODO: Add topologySpreadConstraints
-
-# -- Timezone for all containers
-# Can be overruled per container
-TZ: UTC
-# -- PUID for all containers
-# Can be overruled per container
-PUID: 568
-# -- UMASK for all containers
-# Can be overruled per container
-UMASK: "002"
-NVIDIA_CAPS:
-  - all
 
 # -- Persistence
 persistence:

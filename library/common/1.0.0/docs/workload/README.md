@@ -40,6 +40,8 @@
 | workload.[workload-name].podSpec.securityContext.sysctls             |  `list`   |    ❌    |         ❌         |                              `[]`                               | Pod's sysctls                                                                      |
 | workload.[workload-name].podSpec.securityContext.sysctls.name        | `string`  |    ✅    |         ✅         |                              `""`                               | `name` of the sysctl                                                               |
 | workload.[workload-name].podSpec.securityContext.sysctls.value       | `string`  |    ✅    |         ✅         |                              `""`                               | `value` of the sysctl                                                              |
+| workload.[workload-name].podSpec.containers                          |  `dict`   |    ❌    |         ❌         |                              `{}`                               | Define container(s)                                                                |
+| workload.[workload-name].podSpec.initContainers                      |  `dict`   |    ❌    |         ❌         |                              `{}`                               | Define initContainer(s)                                                            |
 
 ---
 
@@ -74,6 +76,10 @@ Naming scheme:
 - [StatefulSet](statefulset.md)
 - [CronJob](cronjob.md)
 - [Job](job.md)
+
+> Additional keys, information and examples for `workload.[workload-name].podSpec.containers`.
+
+- [Container](../container/README.md)
 
 ---
 

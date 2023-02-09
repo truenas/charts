@@ -44,12 +44,23 @@ tolerations:
   {{- end }}
 securityContext:
   {{- include "ix.v1.common.lib.pod.securityContext" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 }}
-  {{- if $objectData.podSpec.contaienrs }}
+  {{- if $objectData.podSpec.containers }}
 containers:
-    {{- range $name, $containerValues := $objectData.podSpec.containers -}}
-      {{- include "ix.v1.common.lib.pod.container" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 }}
+    {{- include "ix.v1.common.lib.container.primaryValidation" (dict "rootCtx" $rootCtx "objectData" $objectData) -}}
+    {{- range $containerName, $containerValues := $objectData.podSpec.containers -}}
+      {{- if $containerValues.enabled -}}
+        {{- $container := (mustDeepCopy $containerValues) -}}
+        {{- $name := include "ix.v1.common.lib.chart.names.fullname" $rootCtx -}}
+        {{- if not $container.primary -}}
+          {{- $name = printf "%s-%s" $name $containerName  -}}
+        {{- end -}}
+
+        {{- $_ := set $container "name" $name -}}
+        {{- $_ := set $container "shortName" $containerName -}}
+        {{- include "ix.v1.common.lib.pod.container" (dict "rootCtx" $rootCtx "objectData" $container) | trim | nindent 2 }}
+      {{- end -}}
     {{- end -}}
-  {{- end -}}
+  {{- end }}
 #TODO:initContainers:
   {{- with (include "ix.v1.common.lib.pod.volumes" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim) }}
 volumes:
