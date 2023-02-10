@@ -15,9 +15,15 @@ objectData: The object data to be used to render the container.
   {{- if kindIs "string" $port -}}
     {{- $port = tpl $port $rootCtx -}}
   {{- end -}}
+
   {{- with $objectData.path -}}
     {{- $path = tpl . $rootCtx -}}
   {{- end -}}
+
+  {{- if not (hasPrefix "/" $path) -}}
+    {{- fail "Container - Expected <path> to start with a forward slash [/] on <http> type" -}}
+  {{- end -}}
+
   {{- with $objectData.scheme -}}
     {{- $scheme = tpl . $rootCtx -}}
   {{- end }}

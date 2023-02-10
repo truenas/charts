@@ -217,6 +217,29 @@ tests:
       - failedTemplate:
           errorMessage: Container - Expected non-empty <lifecycle> <port> on [http] type
 
+  - it: should fail with path not starting with / on http lifecycle type
+    set:
+      image: *image
+      workload:
+        workload-name:
+          enabled: true
+          primary: true
+          type: Deployment
+          podSpec:
+            containers:
+              container-name1:
+                enabled: true
+                primary: true
+                imageSelector: image
+                lifecycle:
+                  preStop:
+                    type: http
+                    port: 80
+                    path: "api/v1"
+    asserts:
+      - failedTemplate:
+          errorMessage: Container - Expected <path> to start with a forward slash [/] on <http> type
+
   - it: should fail with empty value on httpHeaders on http lifecycle type
     set:
       image: *image
