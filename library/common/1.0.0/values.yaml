@@ -476,9 +476,19 @@ workload:
                 - ALL
           lifecycle:
             postStart:
-              command: []
+              type: http
+              port: 123
+              path: /asdf
+              httpHeaders:
+                key: value
+                key2: value2
+              host: asdf
+              scheme: HTTPS
             preStop:
-              command: []
+              type: exec
+              command:
+                - asdf
+                - asdf
           termination:
             messagePath: ""
             messagePolicy: ""

@@ -29,9 +29,12 @@ objectData: The object data to be used to render the Pod.
   {{- with $termination.messagePolicy }}
   terminationMessagePolicy: {{ . }}
   {{- end -}}
+  {{- with (include "ix.v1.common.lib.container.lifecycle" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim) }}
+  lifecycle:
+    {{- . | nindent 4 }}
+  {{- end -}}
 {{- end -}}
 {{/* TODO:
-lifecycle
 securityContext
 resources
 probes
