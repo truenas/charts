@@ -8,7 +8,8 @@ objectData: The object data to be used to render the Pod.
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
-  {{- $imageObj := fromJson (include "ix.v1.common.lib.container.imageSelector" (dict "rootCtx" $rootCtx "objectData" $objectData)) }}
+  {{- $imageObj := fromJson (include "ix.v1.common.lib.container.imageSelector" (dict "rootCtx" $rootCtx "objectData" $objectData)) -}}
+  {{- $termination := fromJson (include "ix.v1.common.lib.container.termination" (dict "rootCtx" $rootCtx "objectData" $objectData)) }}
 - name: {{ $objectData.name }}
   image: {{ printf "%s:%s" $imageObj.repository $imageObj.tag }}
   imagePullPolicy: {{ $imageObj.pullPolicy }}
@@ -22,4 +23,22 @@ objectData: The object data to be used to render the Pod.
   args:
     {{- . | nindent 4 }}
   {{- end -}}
+  {{- with $termination.messagePath }}
+  terminationMessagePath: {{ . }}
+  {{- end -}}
+  {{- with $termination.messagePolicy }}
+  terminationMessagePolicy: {{ . }}
+  {{- end -}}
 {{- end -}}
+{{/* TODO:
+lifecycle
+securityContext
+resources
+probes
+env
+envList
+fixedEnv
+envFrom
+ports
+volumeMounts
+*/}}

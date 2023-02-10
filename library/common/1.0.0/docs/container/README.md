@@ -2,16 +2,19 @@
 
 Assume every key bellow has a prefix of `workload.[workload-name].podSpec`.
 
-| Key                                   |     Type      | Required | Helm Template | Default | Description                                                                                    |
-| :------------------------------------ | :-----------: | :------: | :-----------: | :-----: | :--------------------------------------------------------------------------------------------- |
-| containers.[container-name]           |    `dict`     |    ✅    |      ❌       |  `{}`   | Define the container as dict                                                                   |
-| containers.[container-name].enabled   |   `boolean`   |    ✅    |      ❌       | `false` | Enables or Disables the container                                                              |
-| containers.[container-name].primary   |   `boolean`   |    ✅    |      ❌       | `false` | Sets the container as primary                                                                  |
-| containers.[container-name].stdin     |   `boolean`   |    ❌    |      ❌       | `false` | whether to enable stdin or not                                                                 |
-| containers.[container-name].tty       |   `boolean`   |    ❌    |      ❌       | `false` | whether to enable tty or not                                                                   |
-| containers.[container-name].command   | `list/string` |    ❌    |      ✅       |  `[]`   | Define command(s). If it's single, can be defined as string                                    |
-| containers.[container-name].args      | `list/string` |    ❌    |      ✅       |  `[]`   | Define arg(s). If it's single, can be defined as string                                        |
-| containers.[container-name].extraArgs | `list/string` |    ❌    |      ✅       |  `[]`   | Define extraArg(s). Those are appended after the `args`. Useful for user defined args from GUI |
+| Key                                                   |     Type      | Required | Helm Template | Default | Description                                                                                    |
+| :---------------------------------------------------- | :-----------: | :------: | :-----------: | :-----: | :--------------------------------------------------------------------------------------------- |
+| containers.[container-name]                           |    `dict`     |    ✅    |      ❌       |  `{}`   | Define the container as dict                                                                   |
+| containers.[container-name].enabled                   |   `boolean`   |    ✅    |      ❌       | `false` | Enables or Disables the container                                                              |
+| containers.[container-name].primary                   |   `boolean`   |    ✅    |      ❌       | `false` | Sets the container as primary                                                                  |
+| containers.[container-name].stdin                     |   `boolean`   |    ❌    |      ❌       | `false` | whether to enable stdin or not                                                                 |
+| containers.[container-name].tty                       |   `boolean`   |    ❌    |      ❌       | `false` | whether to enable tty or not                                                                   |
+| containers.[container-name].command                   | `list/string` |    ❌    |      ✅       |  `[]`   | Define command(s). If it's single, can be defined as string                                    |
+| containers.[container-name].args                      | `list/string` |    ❌    |      ✅       |  `[]`   | Define arg(s). If it's single, can be defined as string                                        |
+| containers.[container-name].extraArgs                 | `list/string` |    ❌    |      ✅       |  `[]`   | Define extraArg(s). Those are appended after the `args`. Useful for user defined args from GUI |
+| containers.[container-name].termination               |    `dict`     |    ❌    |      ❌       |  `{}`   | Define termination for the container                                                           |
+| containers.[container-name].termination.messagePath   |   `string`    |    ❌    |      ✅       |  `""`   | Define termination message path for the container                                              |
+| containers.[container-name].termination.messagePolicy |   `string`    |    ❌    |      ✅       |  `""`   | Define termination message policy for the container                                            |
 
 ---
 
@@ -51,5 +54,7 @@ workload:
           args: arg
           extraArgs:
             - extraArg
-
+          termination:
+            messagePath: /dev/termination-log
+            messagePolicy: File
 ```
