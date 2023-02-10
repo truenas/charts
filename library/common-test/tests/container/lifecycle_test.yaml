@@ -59,7 +59,7 @@ tests:
       some_host: some_host
       some_scheme: HTTPS
       some_path: /api/v1
-      some_value: some_value
+      some_value: 123
       workload:
         workload-name:
           enabled: true
@@ -103,7 +103,7 @@ tests:
                   host: some_host
                   httpHeaders:
                     - name: key
-                      value: some_value
+                      value: "123"
               preStop:
                 exec:
                   command:

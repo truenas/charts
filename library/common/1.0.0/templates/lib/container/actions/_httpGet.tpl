@@ -35,7 +35,7 @@ httpGet:
         {{- fail "Container - Expected non-empty <value> on <httpHeaders>" -}}
       {{- end }}
     - name: {{ $name }}
-      value: {{ tpl $value $rootCtx }}
+      value: {{ tpl (toString $value) $rootCtx  | quote }}
     {{- end -}}
   {{- end -}}
 
