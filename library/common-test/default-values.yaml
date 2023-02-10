@@ -4,7 +4,8 @@ workload:
     podSpec:
       containers:
         main:
-          enabled: false
+          enabled: true
+
 
 service:
   main:

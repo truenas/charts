@@ -14,4 +14,12 @@ objectData: The object data to be used to render the Pod.
   imagePullPolicy: {{ $imageObj.pullPolicy }}
   tty: {{ $objectData.tty | default false }}
   stdin: {{ $objectData.stdin | default false }}
+  {{- with (include "ix.v1.common.lib.container.command" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim) }}
+  command:
+    {{- . | nindent 4 }}
+  {{- end -}}
+  {{- with (include "ix.v1.common.lib.container.args" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim) }}
+  args:
+    {{- . | nindent 4 }}
+  {{- end -}}
 {{- end -}}
