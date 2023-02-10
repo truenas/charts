@@ -33,15 +33,21 @@ objectData: The object data to be used to render the Pod.
   lifecycle:
     {{- . | nindent 4 }}
   {{- end -}}
+  {{- with (include "ix.v1.common.lib.container.ports" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim) }}
+  ports:
+    {{- . | nindent 4 }}
+  {{- end -}}
 {{- end -}}
+
 {{/* TODO:
-securityContext
-resources
-probes
+
 env
 envList
 fixedEnv
 envFrom
-ports
+
+securityContext
+resources
+probes
 volumeMounts
 */}}

@@ -15,7 +15,8 @@
 | service.[service-name].ports.[port-name].port           |   `int`   |    ✅    |         ✅         |                    | Define the port that will be exposed by the service                                                                                               |
 | service.[service-name].ports.[port-name].targetPort     |   `int`   |    ❌    |         ✅         | `[port-name].port` | Define the target port (No named ports, as this will be used to assign the containerPort to containers)                                           |
 | service.[service-name].ports.[port-name].protocol       | `string`  |    ❌    |         ✅         |       `TCP`        | Define the port protocol (HTTP, HTTPS, TCP, UDP). (Also used by the container ports and probes, HTTP and HTTPS are converted to TCP where needed) |
-| service.[service-name].ports.[port-name].hostPort       | `string`  |    ❌    |         ❌         |                    | Define the hostPort, should be avoided, unless ABSOLUTELY necessary                                                                               |
+| service.[service-name].ports.[port-name].nodePort       | `string`  |    ❌    |         ✅         |                    | Define the node port                                                                               |
+| service.[service-name].ports.[port-name].hostPort       | `string`  |    ❌    |         ❌         |                    | Define the hostPort, should be **avoided**, unless **ABSOLUTELY** necessary                                                                               |
 | service.[service-name].ports.[port-name].targetSelector | `string`  |    ❌    |         ❌         |                    | Define the container to link this port (Must be on under the pod linked above)                                                                    |
 
 > When `targetSelector`(s) is empty, it will define auto-select the primary pod/container

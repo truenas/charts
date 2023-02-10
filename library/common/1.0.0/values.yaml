@@ -248,7 +248,7 @@ service:
         # -- Node port
         nodePort:
         # -- Container to assign the port
-        targetSelector: container-name
+        # targetSelector: container-name
 
 # -- VolumeClaimTemplates (StatefulSet only)
 volumeClaimTemplates:
@@ -474,21 +474,7 @@ workload:
               add: []
               drop:
                 - ALL
-          lifecycle:
-            postStart:
-              type: http
-              port: 123
-              path: /asdf
-              httpHeaders:
-                key: value
-                key2: value2
-              host: asdf
-              scheme: HTTPS
-            preStop:
-              type: exec
-              command:
-                - asdf
-                - asdf
+          lifecycle: {}
           termination:
             messagePath: ""
             messagePolicy: ""
