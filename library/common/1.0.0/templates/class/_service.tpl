@@ -30,7 +30,7 @@ objectData: The service data, that will be used to render the Service object.
 
     {{- range $portName, $port := $objectData.ports -}}
       {{- if $port.enabled -}}
-        {{- if eq ($port.protocol | default "") "HTTPS" -}}
+        {{- if eq (tpl ($port.protocol | default "") $rootCtx) "HTTPS" -}}
           {{- $hasHTTPSPort = true -}}
         {{- end -}}
 

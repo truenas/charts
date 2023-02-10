@@ -70,6 +70,7 @@ tests:
       global:
         addMetalLBAnnotations: true
         addTraefikAnnotations: true
+      proto: HTTPS
       service:
         my-service1:
           enabled: true
@@ -79,7 +80,7 @@ tests:
             port-name:
               enabled: true
               primary: true
-              protocol: HTTPS
+              protocol: "{{ .Values.proto }}"
               port: 12345
       workload:
         my-workload:
