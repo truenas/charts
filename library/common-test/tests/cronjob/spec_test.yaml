@@ -41,14 +41,14 @@ tests:
   - it: should apply spec correctly
     set:
       cron: "*/5 * * * *"
-      someTZ: America/New_York
+      someTimezone: America/New_York
       workload:
         workload-name:
           enabled: true
           primary: true
           type: CronJob
           schedule: "{{ .Values.cron }}"
-          timezone: "{{ .Values.someTZ }}"
+          timezone: "{{ .Values.someTimezone }}"
           concurrencyPolicy: Allow
           failedJobsHistoryLimit: 2
           successfulJobsHistoryLimit: 4

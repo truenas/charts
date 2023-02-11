@@ -44,7 +44,7 @@ ixCertificates: []
 # Only for reference here
 ixVolumes: []
 
-# TODO: Docs
+# TODO: Docs (for the imageName) convention
 # -- Image values
 image:
   # -- Image repository
@@ -55,7 +55,8 @@ image:
   pullPolicy: IfNotPresent
 
 # TODO: Docs
-TZ: UTC
+TIMEZONE: UTC
+
 # TODO: Docs
 # -- Security Context
 securityContext:
@@ -166,6 +167,7 @@ workload:
     primary: true
     type: Deployment
     podSpec:
+      # TODO: Currently implementing
       containers:
         main:
           enabled: true
@@ -235,7 +237,10 @@ serviceAccount: {}
 # -- (docs/rbac.md)
 rbac: {}
 
-# NOTES.txt
+# -- (docs/scaleExternalInterface.md)
+scaleExternalInterface: []
+
+# NOTES.txt TODO: Docs
 notes:
   header: |
     # Welcome to SCALE
@@ -293,8 +298,6 @@ scaleGPU:
       pod-name:
         - container-name
 
-# -- (docs/scaleExternalInterface.md)
-scaleExternalInterface: []
 
 # -- SCALE Certificate
 scaleCert:
