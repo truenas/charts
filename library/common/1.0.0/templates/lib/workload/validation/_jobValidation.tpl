@@ -30,4 +30,3 @@ objectData:
   {{- end -}}
 
 {{- end -}}
-{{/* TODO: Extend validation for other values of job */}}
