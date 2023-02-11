@@ -43,14 +43,13 @@ objectData: The object data to be used to render the Pod.
   {{- end -}}
 {{- end -}}
 
-{{/* TODO:
-probes
-
-env
-envList
-fixedEnv
-envFrom
-
-securityContext
-resources
+{{/*
+TODO: probes
+TODO: env
+TODO: envList
+TODO: fixedEnv
+TODO: envFrom
+TODO: securityContext
+TODO: resources
+TODO: ignore vkeys that are not supported in initContainers
 */}}
