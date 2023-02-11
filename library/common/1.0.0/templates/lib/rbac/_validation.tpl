@@ -1,25 +1,3 @@
-{{/* RBAC Validation */}}
-{{/* Call this template:
-{{ include "ix.v1.common.lib.rbac.validation" (dict "objectData" $objectData) -}}
-objectData:
-  labels: The labels of the rbac.
-  annotations: The annotations of the rbac.
-  data: The data of the rbac.
-*/}}
-
-{{- define "ix.v1.common.lib.rbac.validation" -}}
-  {{- $objectData := .objectData -}}
-
-  {{- if and $objectData.labels (not (kindIs "map" $objectData.labels)) -}}
-    {{- fail (printf "RBAC - Expected <labels> to be a dictionary, but got [%v]" (kindOf $objectData.labels)) -}}
-  {{- end -}}
-
-  {{- if and $objectData.annotations (not (kindIs "map" $objectData.annotations)) -}}
-    {{- fail (printf "RBAC - Expected <annotations> to be a dictionary, but got [%v]" (kindOf $objectData.annotations)) -}}
-  {{- end -}}
-
-{{- end -}}
-
 {{/* RBAC Primary Validation */}}
 {{/* Call this template:
 {{ include "ix.v1.common.lib.rbac.primaryValidation" $ -}}

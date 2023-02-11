@@ -17,6 +17,7 @@
       {{/* Perform validations */}}
       {{- include "ix.v1.common.lib.chart.names.validation" (dict "name" $objectName) -}}
       {{- include "ix.v1.common.lib.imagePullSecret.validation" (dict "objectData" $objectData) -}}
+      {{- include "ix.v1.common.lib.metadata.validation" (dict "objectData" $objectData "caller" "Image Pull Secret") -}}
       {{- $data := include "ix.v1.common.lib.imagePullSecret.createData" (dict "rootCtx" $ "objectData" $objectData) -}}
 
       {{/* Update the data */}}

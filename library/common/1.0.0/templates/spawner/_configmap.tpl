@@ -16,6 +16,7 @@
       {{/* Perform validations */}}
       {{- include "ix.v1.common.lib.chart.names.validation" (dict "name" $objectName) -}}
       {{- include "ix.v1.common.lib.configmap.validation" (dict "objectData" $objectData) -}}
+      {{- include "ix.v1.common.lib.metadata.validation" (dict "objectData" $objectData "caller" "ConfigMap") -}}
 
       {{/* Set the name of the configmap */}}
       {{- $_ := set $objectData "name" $objectName -}}

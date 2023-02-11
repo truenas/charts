@@ -18,14 +18,6 @@ objectData:
     {{- fail (printf "Image Pull Secret - Expected <data> to be a dictionary, but got [%v]" (kindOf $objectData.data)) -}}
   {{- end -}}
 
-  {{- if and $objectData.labels (not (kindIs "map" $objectData.labels)) -}}
-    {{- fail (printf "Image Pull Secret - Expected <labels> to be a dictionary, but got [%v]" (kindOf $objectData.labels)) -}}
-  {{- end -}}
-
-  {{- if and $objectData.annotations (not (kindIs "map" $objectData.annotations)) -}}
-    {{- fail (printf "Image Pull Secret - Expected <annotations> to be a dictionary, but got [%v]" (kindOf $objectData.annotations)) -}}
-  {{- end -}}
-
   {{- range $key := (list "username" "password" "registry" "email") -}}
     {{- if not (get $objectData.data $key) -}}
       {{- fail (printf "Image Pull Secret - Expected non-empty <%s>" $key) -}}

@@ -10,14 +10,6 @@ objectData:
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
-  {{- if and $objectData.labels (not (kindIs "map" $objectData.labels)) -}}
-    {{- fail (printf "Service - Expected <labels> to be a dictionary, but got [%v]" (kindOf $objectData.labels)) -}}
-  {{- end -}}
-
-  {{- if and $objectData.annotations (not (kindIs "map" $objectData.annotations)) -}}
-    {{- fail (printf "Service - Expected <annotations> to be a dictionary, but got [%v]" (kindOf $objectData.annotations)) -}}
-  {{- end -}}
-
   {{- if and $objectData.targetSelector (not (kindIs "string" $objectData.targetSelector)) -}}
     {{- fail (printf "Service - Expected <targetSelector> to be [string], but got [%s]" (kindOf $objectData.targetSelector)) -}}
   {{- end -}}

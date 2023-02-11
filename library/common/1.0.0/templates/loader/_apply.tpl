@@ -4,6 +4,9 @@
   {{/* Render ConfigMap(s) */}}
   {{- include "ix.v1.common.spawner.configmap" . | nindent 0 -}}
 
+  {{/* Render Certificate(s) */}}
+  {{- include "ix.v1.common.spawner.certificate" . | nindent 0 -}}
+
   {{/* Render Secret(s) */}}
   {{- include "ix.v1.common.spawner.secret" . | nindent 0 -}}
 

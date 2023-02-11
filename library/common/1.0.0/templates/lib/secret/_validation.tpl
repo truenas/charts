@@ -22,12 +22,4 @@ objectData:
     {{- fail (printf "Secret - Found <type> key, but it's empty") -}}
   {{- end -}}
 
-  {{- if and $objectData.labels (not (kindIs "map" $objectData.labels)) -}}
-    {{- fail (printf "Secret - Expected <labels> to be a dictionary, but got [%v]" (kindOf $objectData.labels)) -}}
-  {{- end -}}
-
-  {{- if and $objectData.annotations (not (kindIs "map" $objectData.annotations)) -}}
-    {{- fail (printf "Secret - Expected <annotations> to be a dictionary, but got [%v]" (kindOf $objectData.annotations)) -}}
-  {{- end -}}
-
 {{- end -}}

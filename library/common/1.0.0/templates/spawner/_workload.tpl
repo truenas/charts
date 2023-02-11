@@ -23,7 +23,7 @@
 
       {{/* Perform validations */}}
       {{- include "ix.v1.common.lib.chart.names.validation" (dict "name" $objectName) -}}
-      {{- include "ix.v1.common.lib.workload.basicValidation" (dict "objectData" $objectData) -}}
+      {{- include "ix.v1.common.lib.metadata.validation" (dict "objectData" $objectData "caller" "Workload") -}}
 
       {{/* Set the name of the workload */}}
       {{- $_ := set $objectData "name" $objectName -}}

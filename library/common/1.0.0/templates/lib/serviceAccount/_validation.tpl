@@ -1,24 +1,3 @@
-{{/* Service Account Validation */}}
-{{/* Call this template:
-{{ include "ix.v1.common.lib.serviceAccount.validation" (dict "objectData" $objectData) -}}
-objectData:
-  labels: The labels of the serviceAccount.
-  annotations: The annotations of the serviceAccount.
-*/}}
-
-{{- define "ix.v1.common.lib.serviceAccount.validation" -}}
-  {{- $objectData := .objectData -}}
-
-  {{- if and $objectData.labels (not (kindIs "map" $objectData.labels)) -}}
-    {{- fail (printf "Service Account - Expected <labels> to be a dictionary, but got [%v]" (kindOf $objectData.labels)) -}}
-  {{- end -}}
-
-  {{- if and $objectData.annotations (not (kindIs "map" $objectData.annotations)) -}}
-    {{- fail (printf "Service Account - Expected <annotations> to be a dictionary, but got [%v]" (kindOf $objectData.annotations)) -}}
-  {{- end -}}
-
-{{- end -}}
-
 {{/* Service Account Primary Validation */}}
 {{/* Call this template:
 {{ include "ix.v1.common.lib.serviceAccount.primaryValidation" $ -}}

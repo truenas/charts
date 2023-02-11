@@ -16,6 +16,7 @@
 
       {{/* Perform general validations */}}
       {{- include "ix.v1.common.lib.persistence.validation" (dict "rootCtx" $ "objectData" $objectData) -}}
+      {{- include "ix.v1.common.lib.metadata.validation" (dict "objectData" $objectData "caller" "Persistence") -}}
 
       {{/* Only spawn PVC if it's enabled and type of "pvc" */}}
       {{- if and (eq "pvc" $objectData.type) (not $objectData.existingClaim) -}}
