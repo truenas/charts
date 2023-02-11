@@ -6,7 +6,7 @@ image:
 elasticsearch:
   image:
     pullPolicy: IfNotPresent
-    repository: docker.elastic.co/elasticsearch/elasticsearch
+    repository: elasticsearch
     tag: "7.5.2"
 
 python:
