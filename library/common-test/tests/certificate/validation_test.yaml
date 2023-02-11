@@ -64,3 +64,80 @@ tests:
     asserts:
       - failedTemplate:
           errorMessage: Certificate - Expected <targetSelector> to be a [map], but got [string]
+
+  - it: should fail with empty ixCertificates when cert is defined
+    set:
+      ixCertificates: []
+      scaleCertificate:
+        my-cert:
+          enabled: true
+          id: 1
+    asserts:
+      - failedTemplate:
+          errorMessage: Certificate - Expected non-empty <ixCertificates>
+
+  - it: should fail with not defined id in ixCertificates when cert is defined
+    set:
+      ixCertificates:
+        "2":
+          key: value
+      scaleCertificate:
+        my-cert:
+          enabled: true
+          id: 1
+    asserts:
+      - failedTemplate:
+          errorMessage: Certificate - Expected certificate with <id> ["1"] to exist in <ixCertificates>
+
+  - it: should fail with with revoked cert
+    set:
+      ixCertificates:
+        "1":
+          revoked: true
+      scaleCertificate:
+        my-cert:
+          enabled: true
+          id: 1
+    asserts:
+      - failedTemplate:
+          errorMessage: Certificate - Expected non-revoked certificate with <id> ["1"]
+
+  - it: should fail with with expired cert
+    set:
+      ixCertificates:
+        "1":
+          expired: true
+      scaleCertificate:
+        my-cert:
+          enabled: true
+          id: 1
+    asserts:
+      - failedTemplate:
+          errorMessage: Certificate - Expected non-expired certificate with <id> ["1"]
+
+  - it: should fail with with empty certificate
+    set:
+      ixCertificates:
+        "1":
+          certificate: ""
+      scaleCertificate:
+        my-cert:
+          enabled: true
+          id: 1
+    asserts:
+      - failedTemplate:
+          errorMessage: Certificate - Expected non-empty [certificate] in certificate with <id> ["1"] in <ixCertificates>
+
+  - it: should fail with with empty privatekey
+    set:
+      ixCertificates:
+        "1":
+          certificate: some_value
+          privatekey: ""
+      scaleCertificate:
+        my-cert:
+          enabled: true
+          id: 1
+    asserts:
+      - failedTemplate:
+          errorMessage: Certificate - Expected non-empty [privatekey] in certificate with <id> ["1"] in <ixCertificates>

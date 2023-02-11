@@ -4,6 +4,13 @@ templates:
 tests:
   - it: should generate correct name
     set:
+      ixCertificates:
+        "1":
+          certificate: some_cert
+          privatekey: some_key
+        "2":
+          certificate: some_cert
+          privatekey: some_key
       scaleCertificate:
         my-cert1:
           enabled: true

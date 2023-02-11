@@ -17,6 +17,10 @@ tests:
         annotations:
           g_annotation1: global_annotation1
           g_annotation2: "{{ .Values.annotation2 }}"
+      ixCertificates:
+        "1":
+          certificate: some_cert
+          privatekey: some_key
       scaleCertificate:
         my-cert:
           enabled: true

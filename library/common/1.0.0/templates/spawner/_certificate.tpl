@@ -18,7 +18,9 @@
       {{- include "ix.v1.common.lib.certificate.validation" (dict "objectData" $objectData) -}}
       {{- include "ix.v1.common.lib.metadata.validation" (dict "objectData" $objectData "caller" "Certificate") -}}
 
-      {{/* TODO: Prepare data */}}
+      {{/* Prepare data */}}
+      {{- $data := fromJson (include "ix.v1.common.lib.certificate.getData" (dict "rootCtx" $ "objectData" $objectData)) -}}
+      {{- $_ := set $objectData "data" $data -}}
 
       {{/* TODO: Create persistence if defined */}}
 
