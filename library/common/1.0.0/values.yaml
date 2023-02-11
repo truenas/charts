@@ -31,22 +31,6 @@ fallbackDefaults:
   pvcAccessModes:
     - ReadWriteOnce
 
-# -- Timezone used everywhere applicable
-TIMEZONE: UTC
-
-# -- Injected from SCALE middleware
-# Only for reference here
-ixExternalInterfacesConfiguration: []
-# -- Injected from SCALE middleware
-# Only for reference here
-ixExternalInterfacesConfigurationNames: []
-# -- Injected from SCALE middleware
-# Only for reference here
-ixCertificates: []
-# -- Injected from SCALE middleware
-# Only for reference here
-ixVolumes: []
-
 # TODO: Docs (for the imageName) convention
 # -- Image values
 image:
@@ -56,7 +40,6 @@ image:
   tag: latest
   # -- Image pull policy
   pullPolicy: IfNotPresent
-
 
 # TODO: Docs
 # -- Security Context
@@ -124,41 +107,6 @@ podOptions:
   automountServiceAccountToken: false
   terminationGracePeriodSeconds: 120
 
-# -- (docs/persistence/README.md)
-# TODO: Enable any of below by default?
-persistence:
-  shared:
-    enabled: false
-    type: emptyDir
-    mountPath: /shared
-    targetSelectAll: true
-  varlogs:
-    enabled: false
-    type: emptyDir
-    mountPath: /var/logs
-    targetSelectAll: true
-  tmp:
-    enabled: false
-    type: emptyDir
-    mountPath: /tmp
-    targetSelectAll: true
-  devshm:
-    enabled: false
-    type: emptyDir
-    mountPath: /dev/shm
-    targetSelectAll: true
-
-# -- (docs/service/README.md)
-service:
-  main:
-    enabled: true
-    primary: true
-    ports:
-      main:
-        enabled: true
-        primary: true
-        protocol: HTTP
-
 # -- (docs/workload/README.md)
 workload:
   main:
@@ -220,38 +168,6 @@ workload:
           enabled: false
           type: install
           # ...containerSpec
-
-# -- (docs/imagePullSecrets.md)
-imagePullSecret: []
-
-# -- (docs/configmap.md)
-configmap: {}
-
-# -- (docs/secret.md)
-secret: {}
-
-# -- (docs/serviceAccount.md)
-serviceAccount: {}
-
-# -- (docs/rbac.md)
-rbac: {}
-
-# -- (docs/scaleExternalInterface.md)
-scaleExternalInterface: []
-
-# NOTES.txt TODO: Docs
-notes:
-  header: |
-    # Welcome to SCALE
-    Thank you for installing <{{ .Chart.Name }}>.
-  # custom: "{{ toYaml $.Values }}"
-  custom: ""
-  footer: |
-    # Documentation
-    Documentation for this chart can be found at ...
-    # Bug reports
-    If you find a bug in this chart, please file an issue at ...
-
 # TODO:
 portal: {}
 
@@ -297,13 +213,88 @@ scaleGPU:
       pod-name:
         - container-name
 
-# -- SCALE Certificate
-scaleCertificate:
-  # -- Certificate name
-  cert-name:
-    # -- Enables the certificate
-    enabled: false
-    labels: {}
-    annotations: {}
-    # -- Certificate ID (Comes from SCALE)
-    id: 1
+##### ⬇ Done ⬇ #####
+
+# -- (docs/persistence/README.md)
+persistence:
+  shared:
+    enabled: false # TODO: Enable by default?
+    type: emptyDir
+    mountPath: /shared
+    targetSelectAll: true
+  varlogs:
+    enabled: false # TODO: Enable by default?
+    type: emptyDir
+    mountPath: /var/logs
+    targetSelectAll: true
+  tmp:
+    enabled: false # TODO: Enable by default?
+    type: emptyDir
+    mountPath: /tmp
+    targetSelectAll: true
+  devshm:
+    enabled: false # TODO: Enable by default?
+    type: emptyDir
+    mountPath: /dev/shm
+    targetSelectAll: true
+
+# -- (docs/service/README.md)
+service:
+  main:
+    enabled: true
+    primary: true
+    ports:
+      main:
+        enabled: true
+        primary: true
+        protocol: HTTP
+
+# -- Timezone used everywhere applicable
+TIMEZONE: UTC
+
+# -- Injected from SCALE middleware
+# Only for reference here
+ixExternalInterfacesConfiguration: []
+# -- Injected from SCALE middleware
+# Only for reference here
+ixExternalInterfacesConfigurationNames: []
+# -- Injected from SCALE middleware
+# Only for reference here
+ixCertificates: []
+# -- Injected from SCALE middleware
+# Only for reference here
+ixVolumes: []
+
+# -- (docs/imagePullSecrets.md)
+imagePullSecret: []
+
+# -- (docs/configmap.md)
+configmap: {}
+
+# -- (docs/secret.md)
+secret: {}
+
+# -- (docs/serviceAccount.md)
+serviceAccount: {}
+
+# -- (docs/rbac.md)
+rbac: {}
+
+# -- (docs/scaleExternalInterface.md)
+scaleExternalInterface: []
+
+# -- (docs/scaleCertificate.md)
+scaleCertificate: {}
+
+# NOTES.txt TODO: Docs
+notes:
+  header: |
+    # Welcome to SCALE
+    Thank you for installing <{{ .Chart.Name }}>.
+  # custom: "{{ toYaml $.Values }}"
+  custom: ""
+  footer: |
+    # Documentation
+    Documentation for this chart can be found at ...
+    # Bug reports
+    If you find a bug in this chart, please file an issue at ...
