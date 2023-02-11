@@ -35,8 +35,6 @@ scaleCertificate:
     id: 1
 ```
 
-Tip:
-
 You can mount certificate as a secret using the following snippet:
 
 ```yaml
