@@ -112,6 +112,22 @@ tests:
         volume1:
           enabled: true
           type: configmap
+    asserts:
+      - failedTemplate:
+          errorMessage: Persistence - Expected non-empty <objectName> on <configmap> type
+
+  - it: should fail with empty objectName in configmap
+    set:
+      workload:
+        some-workload:
+          enabled: true
+          primary: true
+          type: Deployment
+          podSpec: {}
+      persistence:
+        volume1:
+          enabled: true
+          type: configmap
           objectName: ""
     asserts:
       - failedTemplate:

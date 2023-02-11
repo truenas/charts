@@ -44,7 +44,6 @@ objectData: The object data to be used to render the Pod.
 {{- end -}}
 
 {{/* TODO:
-volumeMounts
 probes
 
 env

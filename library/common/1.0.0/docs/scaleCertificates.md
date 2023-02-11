@@ -41,8 +41,6 @@ You can mount certificate as a secret using the following snippet:
 scaleCertificate:
   cert-name:
     enabled: false
-    labels: {}
-    annotations: {}
     id: 1
 
 persistence:

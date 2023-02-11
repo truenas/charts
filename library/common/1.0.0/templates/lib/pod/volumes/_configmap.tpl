@@ -8,6 +8,10 @@ objectData: The object data to be used to render the volume.
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
+  {{- if not $objectData.objectName -}}
+    {{- fail "Persistence - Expected non-empty <objectName> on <configmap> type" -}}
+  {{- end -}}
+
   {{- $objectName := tpl $objectData.objectName $rootCtx -}}
   {{- $expandName := true -}}
   {{- if kindIs "bool" $objectData.expandObjectName -}}
@@ -19,10 +23,6 @@ objectData: The object data to be used to render the volume.
   {{- end -}}
 
   {{- $defMode := "" -}}
-
-  {{- if not $objectData.objectName -}}
-    {{- fail "Persistence - Expected non-empty <objectName> on <configmap> type" -}}
-  {{- end -}}
 
   {{- if (and $objectData.defaultMode (not (kindIs "string" $objectData.defaultMode))) -}}
     {{- fail (printf "Persistence - Expected <defaultMode> to be [string], but got [%s]" (kindOf $objectData.defaultMode)) -}}
