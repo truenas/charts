@@ -206,8 +206,6 @@ tests:
                 value: "some_different_value"
               - name: net.ipv4.ip_unprivileged_port_start
                 value: "53"
-              - name: net.ipv4.ping_group_range
-                value: "53 80"
       - documentIndex: &otherStatefulSetDoc 1
         isKind:
           of: StatefulSet
@@ -221,8 +219,6 @@ tests:
             sysctls:
               - name: net.ipv4.ip_unprivileged_port_start
                 value: "443"
-              - name: net.ipv4.ping_group_range
-                value: "443 443"
 
   - it: should pass with no sysctls port_start automatically appended based on services when port is higher than 1024
     set:
@@ -253,9 +249,8 @@ tests:
           value:
             fsGroup: 568
             fsGroupChangePolicy: OnRootMismatch
-            sysctls:
-              - name: net.ipv4.ping_group_range
-                value: "3000 3000"
+            supplementalGroups: []
+            sysctls: []
 
   # Failures
   - it: should fail with empty securityContext from "global"
