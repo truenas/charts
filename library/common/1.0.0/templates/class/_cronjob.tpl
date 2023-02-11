@@ -40,6 +40,7 @@ spec:
             {{- end -}}
             {{- $annotations := (mustMerge ($objectData.podSpec.annotations | default dict)
                                             (include "ix.v1.common.lib.metadata.allAnnotations" $rootCtx | fromYaml)
+                                            (include "ix.v1.common.lib.metadata.externalInterfacePodAnnotations" (dict "rootCtx" $rootCtx "objectData" $objectData) | fromYaml)
                                             (include "ix.v1.common.lib.metadata.podAnnotations" $rootCtx | fromYaml)) -}}
             {{- with (include "ix.v1.common.lib.metadata.render" (dict "rootCtx" $rootCtx "annotations" $annotations) | trim) }}
           annotations:

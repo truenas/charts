@@ -17,7 +17,7 @@ tests:
           podSpec: {}
     asserts:
       - failedTemplate:
-          errorMessage: Name [release-name-common-test-other-workload-name-super-long-name-that-is-longer-than-63-characters] is not valid. Must start and end with an alphanumeric character. It can contain '-'. And must be at most 63 characters.
+          errorMessage: Name [release-name-common-test-other-workload-name-super-long-name-that-is-longer-than-63-characters] is not valid. Must start and end with an alphanumeric lowercase character. It can contain '-'. And must be at most 63 characters.
 
   - it: should fail with name starting with underscore
     set:
@@ -34,7 +34,7 @@ tests:
           podSpec: {}
     asserts:
       - failedTemplate:
-          errorMessage: Name [release-name-common-test-_other-workload-name] is not valid. Must start and end with an alphanumeric character. It can contain '-'. And must be at most 63 characters.
+          errorMessage: Name [release-name-common-test-_other-workload-name] is not valid. Must start and end with an alphanumeric lowercase character. It can contain '-'. And must be at most 63 characters.
 
   - it: should fail with invalid type
     set:
