@@ -8,6 +8,8 @@
 | scaleCertificate.[cert-name].annotations |  `dict`   |    ❌    | ✅ (On value only) |  `{}`   | Additional annotations for secret             |
 | scaleCertificate.[cert-name].id          | `string`  |    ✅    |         ❌         |  `""`   | ID of the certificate in ixCertificates       |
 
+> A secret will be created with 2 keys in the data section: `crt` and `key`.
+
 ---
 
 Appears in:
@@ -31,4 +33,57 @@ scaleCertificate:
     labels: {}
     annotations: {}
     id: 1
+```
+
+Tip:
+
+You can mount certificate as a secret using the following snippet:
+
+```yaml
+scaleCertificate:
+  cert-name:
+    enabled: false
+    labels: {}
+    annotations: {}
+    id: 1
+
+persistence:
+  # This will mount it on the primary pod/container
+  cert-vol:
+    enabled: true
+    type: secret
+    objectName: cert-name
+    expandObjectName: true # You can omit this, it's the default
+    # subPath
+    mountPath: /path/to/mount/cert.crt
+    subPath: crt
+    # or items
+    mountPath: /path/to/mount
+    items:
+      - key: crt
+        path: cert.crt
+
+  # This will mount it on the specific pod/container
+  cert-vol:
+    enabled: true
+    type: secret
+    objectName: cert-name
+    expandObjectName: true # You can omit this, it's the default
+    # subPath
+    subPath: crt
+    targetSelector:
+      workload-name:
+        container-name:
+          mountPath: /path/to/mount/cert.crt
+          # subPath: crt (You can define subPath here as well, per container)
+    # or items
+    items:
+      - key: crt
+        path: cert.crt
+    targetSelector:
+      workload-name:
+        container-name:
+          mountPath: /path/to/mount
+
+# Both will result in a mounted file in the container at /path/to/mount/cert.crt
 ```

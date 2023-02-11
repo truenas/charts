@@ -287,7 +287,6 @@ volumeClaimTemplates:
     #       subPath: ""
     #       mountPropagation: ""
 
-
 # -- SCALE GPU
 scaleGPU:
   - gpu:
@@ -308,15 +307,3 @@ scaleCertificate:
     annotations: {}
     # -- Certificate ID (Comes from SCALE)
     id: 1
-    # -- Default Paths that will be used on all defined containers
-    # Can be overruled per container under targetSelector
-    certPath: ""
-    keyPath: ""
-    # -- Defining a selector is only needed
-    # if you want to mount the certificate file(s)
-    # It will be mounted as readOnly
-    targetSelector:
-      pod-name:
-        container-name:
-          certPath: ""
-          keyPath: ""
