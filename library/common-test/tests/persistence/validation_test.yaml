@@ -40,7 +40,7 @@ tests:
           type: not-a-type
     asserts:
       - failedTemplate:
-          errorMessage: Persistence - Expected <type> to be one of [pvc, emptyDir, nfs, hostPath, ixVolume, secret, configmap], but got [not-a-type]
+          errorMessage: Persistence - Expected <type> to be one of [pvc, emptyDir, nfs, hostPath, ixVolume, secret, configmap, device], but got [not-a-type]
 
   - it: should fail without storageClassName in ixChartContext
     set:

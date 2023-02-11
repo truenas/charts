@@ -299,7 +299,6 @@ scaleGPU:
       pod-name:
         - container-name
 
-
 # -- SCALE Certificate
 scaleCertificate:
   # -- Certificate name
@@ -322,27 +321,3 @@ scaleCertificate:
         container-name:
           certPath: ""
           keyPath: ""
-
-# -- Device
-device:
-  # -- Device name
-  device-name:
-    # -- Enables the device
-    enabled: false
-    # -- Device host path
-    hostPath: /host/device/path
-    # -- Options that apply to all volumeMounts
-    # Can be overruled per volumeMount under targetSelector
-    mountPath: /shared
-    readOnly: False
-    subPath: ""
-    mountPropagation: ""
-    # Where to define the volume and mount the volume
-    # targetSelector: all
-    targetSelector:
-      pod-name:
-        container-name:
-          mountPath: /shared
-          readOnly: False
-          subPath: ""
-          mountPropagation: ""
