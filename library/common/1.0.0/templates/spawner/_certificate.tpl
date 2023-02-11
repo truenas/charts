@@ -22,8 +22,6 @@
       {{- $data := fromJson (include "ix.v1.common.lib.certificate.getData" (dict "rootCtx" $ "objectData" $objectData)) -}}
       {{- $_ := set $objectData "data" $data -}}
 
-      {{/* TODO: Create persistence if defined */}}
-
       {{/* Set the type to certificate */}}
       {{- $_ := set $objectData "type" "certificate" -}}
 
