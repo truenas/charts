@@ -27,7 +27,9 @@ objectData: The object data to be used to render the Pod.
     */}}
   {{- $portRange := fromJson (include "ix.v1.common.lib.pod.securityContext.getPortRange" (dict "rootCtx" $rootCtx "objectData" $objectData)) -}}
   {{- if and $portRange.low $portRange.high -}}
-    {{- $_ := set $secContext "sysctls" (mustAppend $secContext.sysctls (dict "name" "net.ipv4.ip_unprivileged_port_start" "value" (printf "%v" $portRange.low))) -}}
+    {{- if le (int $portRange.low) 1024 -}}
+      {{- $_ := set $secContext "sysctls" (mustAppend $secContext.sysctls (dict "name" "net.ipv4.ip_unprivileged_port_start" "value" (printf "%v" $portRange.low))) -}}
+    {{- end -}}
     {{- $_ := set $secContext "sysctls" (mustAppend $secContext.sysctls (dict "name" "net.ipv4.ping_group_range" "value" (printf "%v %v" $portRange.low $portRange.high))) -}}
   {{- end -}}
 

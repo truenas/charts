@@ -64,7 +64,7 @@ tests:
             securityContext:
               fsGroup: 1001
     asserts:
-      - documentIndex: &statefulSetDoc 0
+      - documentIndex: *statefulSetDoc
         isKind:
           of: StatefulSet
       - documentIndex: *statefulSetDoc
@@ -116,7 +116,7 @@ tests:
                 - name: some_other_name
                   value: "some_different_value"
     asserts:
-      - documentIndex: &statefulSetDoc 0
+      - documentIndex: *statefulSetDoc
         isKind:
           of: StatefulSet
       - documentIndex: *statefulSetDoc
@@ -187,7 +187,7 @@ tests:
               primary: true
               port: 443
     asserts:
-      - documentIndex: &statefulSetDoc 0
+      - documentIndex: *statefulSetDoc
         isKind:
           of: StatefulSet
       - documentIndex: *statefulSetDoc
@@ -223,6 +223,39 @@ tests:
                 value: "443"
               - name: net.ipv4.ping_group_range
                 value: "443 443"
+
+  - it: should pass with no sysctls port_start automatically appended based on services when port is higher than 1024
+    set:
+      workload:
+        workload-name1:
+          enabled: true
+          primary: true
+          type: Deployment
+          podSpec: {}
+      service:
+        service-name1:
+          enabled: true
+          primary: true
+          type: ClusterIP
+          ports:
+            port-name:
+              enabled: true
+              primary: true
+              port: 25000
+              targetPort: 3000
+    asserts:
+      - documentIndex: &deploymentDoc 0
+        isKind:
+          of: Deployment
+      - documentIndex: *deploymentDoc
+        equal:
+          path: spec.template.spec.securityContext
+          value:
+            fsGroup: 568
+            fsGroupChangePolicy: OnRootMismatch
+            sysctls:
+              - name: net.ipv4.ping_group_range
+                value: "3000 3000"
 
   # Failures
   - it: should fail with empty securityContext from "global"
