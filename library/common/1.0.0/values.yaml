@@ -316,6 +316,7 @@ scaleCertificate:
     # -- Defining a selector is only needed
     # if you want to mount the certificate file(s)
     # It will be mounted as readOnly
+    targetSelectAll: false
     targetSelector:
       pod-name:
         container-name:

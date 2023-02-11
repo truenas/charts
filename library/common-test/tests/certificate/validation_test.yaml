@@ -1,0 +1,66 @@
+suite: certificate validation test
+templates:
+  - common.yaml
+tests:
+  - it: should fail with name longer than 63 characters
+    set:
+      scaleCertificate:
+        my-certificate-super-long-name-that-is-longer-than-63-characters:
+          enabled: true
+          id: 1
+    asserts:
+      - failedTemplate:
+          errorMessage: Name [release-name-common-test-my-certificate-super-long-name-that-is-longer-than-63-characters] is not valid. Must start and end with an alphanumeric lowercase character. It can contain '-'. And must be at most 63 characters.
+
+  - it: should fail with name starting with underscore
+    set:
+      scaleCertificate:
+        _my-cert:
+          enabled: true
+          id: 1
+    asserts:
+      - failedTemplate:
+          errorMessage: Name [release-name-common-test-_my-cert] is not valid. Must start and end with an alphanumeric lowercase character. It can contain '-'. And must be at most 63 characters.
+
+  - it: should fail with labels not a dict
+    set:
+      scaleCertificate:
+        my-cert:
+          enabled: true
+          labels: "not a dict"
+          id: 1
+    asserts:
+      - failedTemplate:
+          errorMessage: Certificate - Expected <labels> to be a dictionary, but got [string]
+
+  - it: should fail with annotations not a dict
+    set:
+      scaleCertificate:
+        my-cert:
+          enabled: true
+          annotations: "not a dict"
+          id: 1
+    asserts:
+      - failedTemplate:
+          errorMessage: Certificate - Expected <annotations> to be a dictionary, but got [string]
+
+  - it: should fail without id
+    set:
+      scaleCertificate:
+        my-cert:
+          enabled: true
+          id: ""
+    asserts:
+      - failedTemplate:
+          errorMessage: Certificate - Expected non-empty <id>
+
+  - it: should fail with targetSelector not a dict
+    set:
+      scaleCertificate:
+        my-cert:
+          enabled: true
+          id: 1
+          targetSelector: "not a dict"
+    asserts:
+      - failedTemplate:
+          errorMessage: Certificate - Expected <targetSelector> to be a [map], but got [string]
