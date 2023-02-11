@@ -32,5 +32,4 @@ persistence:
         path: path1
       - key: key2
         path: path2
-
 ```

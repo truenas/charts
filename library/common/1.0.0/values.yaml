@@ -125,26 +125,24 @@ podOptions:
   terminationGracePeriodSeconds: 120
 
 # -- (docs/persistence/README.md)
+# TODO: Enable any of below by default?
 persistence:
-  # TODO: targetSelectors on volumeMounts
   shared:
-    enabled: true
+    enabled: false
     type: emptyDir
     mountPath: /shared
     targetSelectAll: true
   varlogs:
-    enabled: true
+    enabled: false
     type: emptyDir
     mountPath: /var/logs
     targetSelectAll: true
   tmp:
-    enabled: true
+    enabled: false
     type: emptyDir
     mountPath: /tmp
     targetSelectAll: true
-
   devshm:
-    # TODO: Enable by default?
     enabled: false
     type: emptyDir
     mountPath: /dev/shm
@@ -281,13 +279,14 @@ volumeClaimTemplates:
     readOnly: false
     subPath: ""
     mountPropagation: ""
-    targetSelector:
-      pod-name:
-        container-name:
-          mountPath: /data
-          readOnly: False
-          subPath: ""
-          mountPropagation: ""
+    # targetSelector:
+    #   pod-name:
+    #     container-name:
+    #       mountPath: /data
+    #       readOnly: false
+    #       subPath: ""
+    #       mountPropagation: ""
+
 
 # -- SCALE GPU
 scaleGPU:
@@ -316,7 +315,6 @@ scaleCertificate:
     # -- Defining a selector is only needed
     # if you want to mount the certificate file(s)
     # It will be mounted as readOnly
-    targetSelectAll: false
     targetSelector:
       pod-name:
         container-name:

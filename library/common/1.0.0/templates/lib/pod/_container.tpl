@@ -37,9 +37,14 @@ objectData: The object data to be used to render the Pod.
   ports:
     {{- . | nindent 4 }}
   {{- end -}}
+  {{- with (include "ix.v1.common.lib.container.volumeMount" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim) }}
+  volumeMounts:
+    {{- . | nindent 4 }}
+  {{- end -}}
 {{- end -}}
 
 {{/* TODO:
+volumeMounts
 probes
 
 env
@@ -49,5 +54,4 @@ envFrom
 
 securityContext
 resources
-volumeMounts
 */}}
