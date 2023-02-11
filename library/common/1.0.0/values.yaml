@@ -11,7 +11,6 @@ global:
   # -- Minimum nodePort value
   minNodePort: 9000
 
-# TODO:
 fallbackDefaults:
   # -- Define a storageClassName that will be used for all PVCs
   # Can be overruled per PVC
@@ -52,6 +51,8 @@ image:
   # -- Image pull policy
   pullPolicy: IfNotPresent
 
+TZ: UTC
+
 # -- Security Context
 securityContext:
   # -- Container security context for all containers
@@ -76,8 +77,6 @@ securityContext:
     fsGroupChangePolicy: OnRootMismatch
     supplementalGroups: []
     sysctls: []
-
-TZ: UTC
 
 containerOptions:
   # -- Resources
@@ -117,11 +116,10 @@ podOptions:
   runtimeClassName: ""
   automountServiceAccountToken: false
   terminationGracePeriodSeconds: 120
-  # TODO: Add affinity
-  # TODO: Add topologySpreadConstraints
 
-# -- Persistence
+# -- (docs/persistence/README.md)
 persistence:
+  # TODO: targetSelectors on volumeMounts
   shared:
     enabled: true
     type: emptyDir
@@ -137,6 +135,7 @@ persistence:
     type: emptyDir
     mountPath: /tmp
     targetSelectAll: true
+
   devshm:
     # TODO: Enable by default?
     enabled: false
@@ -144,111 +143,105 @@ persistence:
     mountPath: /dev/shm
     targetSelectAll: true
 
-  # # -- Volume name
-  # vol-name:
-  #   # -- Enables the volume
-  #   enabled: false
-  #   # -- Type of volume
-  #   type: type
-  #   # -- Volume Options
-
-  #   # -  ConfigMap, Secret
-  #   # Default Mode (ConfigMap, Secret)
-  #   defaultMode: "0600"
-  #   # Items (ConfigMap, Secret)
-  #   items:
-  #     - key: key
-  #       path: path
-
-  #   # - EmptyDir
-  #   # Medium
-  #   medium: Memory
-  #   # SizeLimit
-  #   size: 1Gi
-
-  #   # - HostPath
-  #   # Host Path
-  #   hostPath: /path/to/host
-  #   # Host Path Type
-  #   hostPathType: DirectoryOrCreate
-
-  #   # - NFS
-  #   # Server
-  #   server: nfs-server
-  #   # Path
-  #   path: /path/to/nfs
-
-  #   # - ixVolumes
-  #   # datasetName
-  #   datasetName: dataset-name
-  #   # Host Path Type
-  #   # hostPathType: DirectoryOrCreate
-
-  #   # - PVC
-  #   # labels (Only for PVC type)
-  #   labels: {}
-  #   # annotations (Only for PVC type)
-  #   annotations: {}
-  #   # Size
-  #   # size: 1Gi
-  #   # Retain
-  #   retain: false
-  #   # Storage Class
-  #   storageClassName: ""
-  #   # Existing Claim
-  #   existingClaim: ""
-  #   # VolumeName
-  #   volumeName: ""
-  #   # Access Modes
-  #   accessModes:
-  #     - ReadWriteOnce
-  #   # -- Options that apply to all volumeMounts
-  #   # Can be overruled per volumeMount under targetSelector
-  #   mountPath: /shared
-  #   readOnly: False
-  #   subPath: ""
-  #   mountPropagation: ""
-  #   # Where to define the volume and mount the volume
-  #   # targetSelector: all
-  #   targetSelector:
-  #     pod-name:
-  #       container-name:
-  #         mountPath: /shared
-  #         readOnly: False
-  #         subPath: ""
-  #         mountPropagation: ""
-
-# -- Service
+# -- (docs/service/README.md)
 service:
-  # -- Service name
   main:
-    # -- Enables the service
     enabled: true
-    # -- Primary service
     primary: true
-    # -- Service labels
-    labels: {}
-    # -- Service annotations
-    annotations: {}
-    # -- Pod to connect
-    # targetSelector: main
-    # -- Ports
     ports:
       main:
-        # -- Enable the port
         enabled: true
-        # -- Primary port
         primary: true
-        # -- Port
-        port:
-        # -- Protocol
         protocol: HTTP
-        # -- Target port
-        targetPort:
-        # -- Node port
-        nodePort:
-        # -- Container to assign the port
-        # targetSelector: container-name
+
+# -- (docs/workload/README.md)
+workload:
+  main:
+    enabled: true
+    primary: true
+    type: Deployment
+    podSpec:
+      containers:
+        main:
+          enabled: true
+          primary: true
+          imageSelector: image
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 568
+            runAsGroup: 568
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            privileged: false
+            capabilities:
+              add: []
+              drop:
+                - ALL
+          env: {}
+          envList: []
+          envFrom: []
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          probes:
+            liveness:
+              enabled: true
+              type: HTTP
+              port:
+              path:
+              httpHeaders: {}
+              command: []
+            readiness:
+              enabled: true
+              type: HTTP
+              port:
+              path:
+              httpHeaders: {}
+              command: []
+            startup:
+              enabled: true
+              type: HTTP
+              port:
+              path:
+              httpHeaders: {}
+              command: []
+      initContainers:
+        init-cont-name:
+          enabled: false
+          type: install
+          # ...containerSpec
+
+# -- (docs/imagePullSecrets.md)
+imagePullSecret: []
+
+# -- (docs/configmap.md)
+configmap: {}
+
+# -- (docs/secret.md)
+secret: {}
+
+# -- (docs/serviceAccount.md)
+serviceAccount: {}
+
+# -- (docs/rbac.md)
+rbac: {}
+
+notes:
+  header: |
+    # Welcome to SCALE
+    Thank you for installing <{{ .Chart.Name }}>.
+  # custom: "{{ toYaml $.Values }}"
+  custom: ""
+  footer: |
+    # Documentation
+    # Bug reports
+
+# TODO:
+portal: {}
 
 # -- VolumeClaimTemplates (StatefulSet only)
 volumeClaimTemplates:
@@ -287,7 +280,7 @@ scaleGPU:
   - gpu:
       key: value
     # Without targetSelector, the gpu will
-    # be applied to primary pods
+    # be applied to primary pod/container
     targetSelector:
       pod-name:
         - container-name
@@ -347,274 +340,3 @@ devices:
           readOnly: False
           subPath: ""
           mountPropagation: ""
-
-notes:
-  header: |
-    # Welcome to SCALE
-    Thank you for installing <{{ .Chart.Name }}>.
-  # custom: "{{ toYaml $.Values }}"
-  custom: ""
-  footer: |
-    # Documentation
-    # Bug reports
-
-# -- workload
-workload:
-  # -- Workload name
-  main:
-    # -- Enables the workload
-    enabled: true
-    # -- Primary workload
-    primary: true
-    # -- Workload type
-    type: Deployment
-    # -- Workload labels
-    # labels: {}
-    # # -- Workload annotations
-    # annotations: {}
-    # # -- Workload replicas (Deployment and StatefulSet only)
-    # replicas: 1
-    # # -- Workload revision history limit
-    # revisionHistoryLimit: 3
-    # # Strategy
-    # # -- Workload strategy type
-    # strategy: Recreate
-    # # -- Workload strategy rolling update
-    # rollingUpdate:
-    #   # -- Workload strategy rolling update max unavailable
-    #   maxUnavailable: 1
-    #   # -- Workload strategy rolling update max surge
-    #   maxSurge: 1
-    #   # -- Workload strategy rolling update partition (StatefulSet only)
-    #   partition: 0
-
-    # # -- CronJob
-    # # - CronJob schedule
-    # schedule: "5"
-    # # - CronJob concurrency policy
-    # concurrencyPolicy: ""
-    # # - CronJob timezone
-    # timezone: ""
-    # # - CronJob failed jobs history limit
-    # failedJobsHistoryLimit: 1
-    # # - CronJob successful jobs history limit
-    # successfulJobsHistoryLimit: 3
-    # # - CronJob starting deadline seconds
-    # startingDeadlineSeconds: 0
-
-    # # -- Job
-    # # - Job active deadline seconds
-    # activeDeadlineSeconds: 0
-    # # - Job backoff limit
-    # backoffLimit: 6
-    # # - Job completions
-    # completions: 1
-    # # - Job parallelism
-    # parallelism: 1
-    # # - Job ttl seconds after finished
-    # ttlSecondsAfterFinished: 0
-    # # - Job completion mode
-    # completionMode: NonIndexed
-
-    # -- Pod Spec
-    podSpec:
-      # # -- Pod labels
-      # labels: {}
-      # # -- Pod annotations
-      # annotations: {}
-      # -- hostNetwork
-      hostNetwork: false
-      # -- enableServiceLinks
-      enableServiceLinks: true
-      # -- restartPolicy
-      restartPolicy: Always
-      # -- schedulerName
-      schedulerName: ""
-      # -- priorityClassName
-      priorityClassName: ""
-      # -- hostname
-      hostname: ""
-      # -- nodeselector
-      nodeSelector: {}
-      # -- tolerations
-      tolerations: []
-      # -- runtimeClassName
-      runtimeClassName: ""
-      # -- terminationGracePeriodSeconds
-      terminationGracePeriodSeconds: 30
-      # -- securityContext
-      securityContext:
-        fsGroup: 568
-        fsGroupChangePolicy: OnRootMismatch
-        sysctls: []
-        supplementalGroups: []
-      # -- Containers
-      containers:
-        # -- Container name
-        main:
-          # -- Enables the container
-          enabled: true
-          # -- Sets the container as primary
-          primary: true
-          # -- Container image
-          imageSelector: ""
-          tty: false
-          stdin: false
-          command: []
-          args: []
-          extraArgs: []
-          securityContext:
-            runAsNonRoot: true
-            runAsUser: 568
-            runAsGroup: 568
-            readOnlyRootFilesystem: true
-            allowPrivilegeEscalation: false
-            privileged: false
-            capabilities:
-              add: []
-              drop:
-                - ALL
-          lifecycle: {}
-          termination:
-            messagePath: ""
-            messagePolicy: ""
-          env: {}
-          envList: []
-          envFrom: []
-          resources:
-            limits:
-              cpu: 100m
-              memory: 128Mi
-            requests:
-              cpu: 100m
-              memory: 128Mi
-          probes:
-            liveness:
-              enabled: true
-              type: HTTP
-              port:
-              path:
-              httpHeaders: {}
-              command: []
-            readiness:
-              enabled: true
-              type: HTTP
-              port:
-              path:
-              httpHeaders: {}
-              command: []
-            startup:
-              enabled: true
-              type: HTTP
-              port:
-              path:
-              httpHeaders: {}
-              command: []
-      initContainers:
-        init-cont-name:
-          enabled: false
-          type: install
-          # ...containerSpec
-
-# TODO:
-portal: {}
-
-# Done
-# -- Image Pull Secrets
-imagePullSecret: []
-  # -- Image Pull Secret name
-  # image-secret-name:
-  #   # -- Enables the Image Pull Secret
-  #   enabled: false
-  #   # -- Labels
-  #   labels: {}
-  #   # -- Annotations
-  #   annotations: {}
-  #   # -- Image Pull Secret Data
-  #   data:
-  #     # -- Registry
-  #     registry: ""
-  #     # -- Username
-  #     username: ""
-  #     # -- Password
-  #     password: ""
-  #     # -- Email
-  #     email: ""
-  #   targetSelectAll: true
-  #   targetSelector:
-  #     - main
-
-# -- ConfigMaps (docs/configmap.md)
-configmap: {}
-  # # -- ConfigMap name
-  # conf-name:
-  #   # -- Enables the ConfigMap
-  #   enabled: false
-  #   # -- ConfigMap labels
-  #   labels: {}
-  #   # -- ConfigMap annotations
-  #   annotations: {}
-  #   # -- ConfigMap data
-  #   data: {}
-
-# -- Secrets (docs/secret.md)
-secret: {}
-  # # -- Secret name
-  # secret-name:
-  #   # -- Enables the secret
-  #   enabled: false
-  #   # -- Secret labels
-  #   labels: {}
-  #   # -- Secret annotations
-  #   annotations: {}
-  #   # -- Secret data
-  #   data:
-  #     # -- Secret data (stringData)
-  #     key: value
-
-# -- Service Account:
-serviceAccount: {}
-  # main:
-  #   # -- Enables the service account
-  #   enabled: false
-  #   # -- Primary service account
-  #   primary: true
-  #   # -- Service account labels
-  #   labels: {}
-  #   # -- Service account annotations
-  #   annotations: {}
-  #   targetSelectAll: false
-  #   targetSelector:
-  #     - main
-
-# -- RBAC
-rbac: {}
-  # main:
-  #   # -- Enables the RBAC
-  #   enabled: false
-  #   # -- Primary RBAC
-  #   primary: true
-  #   # -- RBAC labels
-  #   labels: {}
-  #   # -- RBAC annotations
-  #   annotations: {}
-  #   # -- ClusterWide
-  #   clusterWide: false
-  #   # -- Select all service accounts
-  #   allServiceAccounts: false
-  #   # -- Service accounts to select
-  #   serviceAccounts:
-  #     - main
-  #   # -- RBAC rules
-  #   rules:
-  #     - apiGroups:
-  #         - ""
-  #       resources:
-  #         - pods
-  #       verbs:
-  #         - get
-  #   # -- RBAC subjects
-  #   subjects:
-  #     - kind: a-kind
-  #       name: a-name
-  #       apiGroup: a-group
