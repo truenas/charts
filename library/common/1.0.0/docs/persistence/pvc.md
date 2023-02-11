@@ -16,7 +16,7 @@
 >   - "SCALE-ZFS" **->** returns the value set on `{{ .Values.global.ixChartContext.storageClassName }}`
 >   - (\*)"SCALE-SMB" **->** returns the value set on `{{ .Values.global.ixChartContext.smbStorageClassName }}` (Example for the future, not implemented yet)
 >   - Else **->** return the original defined `storageClass`
-> - Else if we are in an **ixChartContext**, always return the **storageClassName** defined on the **ixChartContext**
+> - Else if we are in an **ixChartContext**, always return `{{ .Values.global.ixChartContext.storageClassName }}`.
 > - Else if there is a storageClass defined in `{{ .Values.fallbackDefaults.storageClass }}`, return this
 > - In any other case, return _nothing_ (which means requesting a PV without class)
 
