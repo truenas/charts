@@ -230,6 +230,7 @@ serviceAccount: {}
 # -- (docs/rbac.md)
 rbac: {}
 
+# NOTES.txt
 notes:
   header: |
     # Welcome to SCALE
@@ -238,7 +239,9 @@ notes:
   custom: ""
   footer: |
     # Documentation
+    Documentation for this chart can be found at ...
     # Bug reports
+    If you find a bug in this chart, please file an issue at ...
 
 # TODO:
 portal: {}
