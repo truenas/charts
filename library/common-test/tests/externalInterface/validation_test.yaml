@@ -1,6 +1,8 @@
 suite: external interface validation test
 templates:
   - common.yaml
+release:
+  name: release-name
 tests:
   - it: should fail with targetSelector not a list
     set:
@@ -112,3 +114,24 @@ tests:
     asserts:
       - failedTemplate:
           errorMessage: External Interface - Expected non-empty <destination> in <staticRoutes>
+
+  - it: should fail with empty ixExternalInterfaceConfigurationNames when interface is defined
+    set:
+      # Simulate middleware injection
+      ixExternalInterfacesConfiguration:
+        - '{"cniVersion": "0.3.1", "name": "ix-release-name-0", "type": "macvlan", "master": "ens3s0", "ipam": {"type": "dhcp"}}'
+      ixExternalInterfaceConfigurationNames: []
+      scaleExternalInterface:
+        - hostInterface: enp0s3
+          ipam:
+            type: dhcp
+      workload:
+        workload-name1:
+          enabled: true
+          primary: true
+          type: CronJob
+          schedule: "*/1 * * * *"
+          podSpec: {}
+    asserts:
+      - failedTemplate:
+          errorMessage: External Interface - Expected non empty <ixExternalInterfaceConfigurationNames>

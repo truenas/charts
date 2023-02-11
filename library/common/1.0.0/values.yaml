@@ -1,3 +1,4 @@
+# TODO: Docs
 # -- Global values
 global:
   # -- Set additional global labels
@@ -11,6 +12,7 @@ global:
   # -- Minimum nodePort value
   minNodePort: 9000
 
+# TODO: Docs
 fallbackDefaults:
   # -- Define a storageClassName that will be used for all PVCs
   # Can be overruled per PVC
@@ -42,6 +44,7 @@ ixCertificates: []
 # Only for reference here
 ixVolumes: []
 
+# TODO: Docs
 # -- Image values
 image:
   # -- Image repository
@@ -51,8 +54,9 @@ image:
   # -- Image pull policy
   pullPolicy: IfNotPresent
 
+# TODO: Docs
 TZ: UTC
-
+# TODO: Docs
 # -- Security Context
 securityContext:
   # -- Container security context for all containers
@@ -78,6 +82,7 @@ securityContext:
     supplementalGroups: []
     sysctls: []
 
+# TODO: Docs
 containerOptions:
   # -- Resources
   # Can be overruled per container
@@ -97,7 +102,7 @@ containerOptions:
   NVIDIA_CAPS:
     - all
 
-# -- Options for all pods
+# -- Options for all pods # TODO: Docs
 # Can be overruled per pod
 podOptions:
   enableServiceLinks: false
@@ -288,19 +293,11 @@ scaleGPU:
       pod-name:
         - container-name
 
-# -- SCALE External Interfaces
-scaleExternalInterfaces:
-  - hostInterface: ""
-    ipam:
-      type: ""
-    staticRoutes: []
-    staticIPConfigurations: []
-    # targetSelector: all
-    targetSelector:
-      - pod-name
+# -- (docs/scaleExternalInterface.md)
+scaleExternalInterface: []
 
-# -- SCALE Certificates
-scaleCerts:
+# -- SCALE Certificate
+scaleCert:
   # -- Certificate name
   cert-name:
     # -- Enables the certificate
@@ -320,8 +317,8 @@ scaleCerts:
           certPath: ""
           keyPath: ""
 
-# -- Devices
-devices:
+# -- Device
+device:
   # -- Device name
   device-name:
     # -- Enables the device
