@@ -2,7 +2,7 @@
 {{/* Call this template:
 {{ include "ix.v1.common.lib.service.getSelectedPodValues" (dict "rootCtx" $rootCtx "objectData" $objectData) -}}
 objectData: The object data of the service
-rootCtx: The root context of the service
+rootCtx: The root context of the chart.
 */}}
 
 {{- define "ix.v1.common.lib.service.getSelectedPodValues" -}}

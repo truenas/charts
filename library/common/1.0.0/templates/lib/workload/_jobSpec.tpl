@@ -1,7 +1,7 @@
 {{/* Job Spec */}}
 {{/* Call this template:
 {{ include "ix.v1.common.lib.workload.jobSpec" (dict "rootCtx" $rootCtx "objectData" $objectData) -}}
-rootCtx: The root context of the template. It is used to access the global context.
+rootCtx: The root context of the chart.
 objectData:
   backoffLimit: The number of retries before marking this job failed. Defaults to 6.
   completions: The desired number of successfully finished pods the job should be run with. Defaults to 1.

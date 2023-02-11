@@ -1,7 +1,7 @@
 {{/* CronJob Validation */}}
 {{/* Call this template:
 {{ include "ix.v1.common.lib.workload.cronjobValidation" (dict "objectData" $objectData) -}}
-rootCtx: The root context of the template. It is used to access the global context.
+rootCtx: The root context of the chart.
 objectData:
   completionMode: The completionMode of the object.
   completions: The completions of the object.

@@ -2,7 +2,7 @@
 {{/* Call this template:
 {{ include "ix.v1.common.class.pvc" (dict "rootCtx" $ "objectData" $objectData) }}
 
-rootCtx: The root context of the template. It is used to access the global context.
+rootCtx: The root context of the chart.
 objectData:
   name: The name of the PVC.
   labels: The labels of the PVC.

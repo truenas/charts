@@ -1,7 +1,7 @@
 {{/* Deployment Spec */}}
 {{/* Call this template:
 {{ include "ix.v1.common.lib.workload.deploymentSpec" (dict "rootCtx" $rootCtx "objectData" $objectData) -}}
-rootCtx: The root context of the template. It is used to access the global context.
+rootCtx: The root context of the chart.
 objectData:
   replicas: The number of replicas.
   revisionHistoryLimit: The number of old ReplicaSets to retain to allow rollback.

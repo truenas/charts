@@ -1,7 +1,7 @@
 {{/* Returns hostPath Volume */}}
 {{/* Call this template:
 {{ include "ix.v1.common.lib.pod.volume.hostPath" (dict "rootCtx" $ "objectData" $objectData) }}
-rootCtx: The root context of the template. It is used to access the global context.
+rootCtx: The root context of the chart.
 objectData: The object data to be used to render the volume.
 */}}
 {{- define "ix.v1.common.lib.pod.volume.hostPath" -}}

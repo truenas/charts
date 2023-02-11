@@ -1,7 +1,7 @@
 {{/* DaemonSet Validation */}}
 {{/* Call this template:
 {{ include "ix.v1.common.lib.workload.daemonsetValidation" (dict "objectData" $objectData) -}}
-rootCtx: The root context of the template. It is used to access the global context.
+rootCtx: The root context of the chart.
 objectData:
   strategy: The strategy of the object.
   rollingUpdate: The rollingUpdate of the object.

@@ -1,7 +1,7 @@
 {{/* EndpointSlice - endpoints */}}
 {{/* Call this template:
 {{ include "ix.v1.common.lib.endpointslice.endpoints" (dict "rootCtx" $rootCtx "objectData" $objectData) -}}
-rootCtx: The root context of the service
+rootCtx: The root context of the chart.
 objectData: The object data of the service
 */}}
 

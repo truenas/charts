@@ -2,7 +2,7 @@
 {{/* Call this template:
 {{ include "ix.v1.common.lib.service.validation" (dict "objectData" $objectData) -}}
 objectData:
-  rootCtx: The root context.
+  rootCtx: The root context of the chart.
   objectData: The service object.
 */}}
 

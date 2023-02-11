@@ -1,7 +1,7 @@
 {{/* Service - MetalLB Annotations */}}
 {{/* Call this template:
 {{ include "ix.v1.common.lib.service.metalLBAnnotations" (dict "rootCtx" $rootCtx "objectData" $objectData "annotations" $annotations) -}}
-rootCtx: The root context of the service
+rootCtx: The root context of the chart.
 objectData: The object data of the service
 annotations: The annotations variable reference, to append the MetalLB annotations
 */}}
@@ -26,7 +26,7 @@ annotations: The annotations variable reference, to append the MetalLB annotatio
 {{/* Service - Traefik Annotations */}}
 {{/* Call this template:
 {{ include "ix.v1.common.lib.service.traefikAnnotations" (dict "rootCtx" $rootCtx "annotations" $annotations) -}}
-rootCtx: The root context of the service
+rootCtx: The root context of the chart.
 annotations: The annotations variable reference, to append the Traefik annotations
 */}}
 

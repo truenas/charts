@@ -1,7 +1,7 @@
 {{/* Returns Pod Security Context */}}
 {{/* Call this template:
 {{ include "ix.v1.common.lib.pod.securityContext" (dict "rootCtx" $ "objectData" $objectData) }}
-rootCtx: The root context of the template. It is used to access the global context.
+rootCtx: The root context of the chart.
 objectData: The object data to be used to render the Pod.
 */}}
 {{- define "ix.v1.common.lib.pod.securityContext" -}}
@@ -72,7 +72,7 @@ sysctls: []
 {{/* Returns Lowest and Highest ports assigned to the any container in the pod */}}
 {{/* Call this template:
 {{ include "ix.v1.common.lib.pod.securityContext.getPortRange" (dict "rootCtx" $ "objectData" $objectData) }}
-rootCtx: The root context of the template. It is used to access the global context.
+rootCtx: The root context of the chart.
 objectData: The object data to be used to render the Pod.
 */}}
 {{- define "ix.v1.common.lib.pod.securityContext.getPortRange" -}}

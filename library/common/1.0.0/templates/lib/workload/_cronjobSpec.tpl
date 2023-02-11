@@ -1,7 +1,7 @@
 {{/* CronJob Spec */}}
 {{/* Call this template:
 {{ include "ix.v1.common.lib.workload.cronjobSpec" (dict "rootCtx" $rootCtx "objectData" $objectData) -}}
-rootCtx: The root context of the template. It is used to access the global context.
+rootCtx: The root context of the chart.
 objectData:
   schedule: The schedule in Cron format, see https://en.wikipedia.org/wiki/Cron.
   concurrencyPolicy: Allow, Forbid, or Replace. Defaults to Allow.

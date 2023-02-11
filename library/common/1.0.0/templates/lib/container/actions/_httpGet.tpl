@@ -1,7 +1,7 @@
 {{/* Returns httpGet action */}}
 {{/* Call this template:
 {{ include "ix.v1.common.lib.container.actions.httpGet" (dict "rootCtx" $ "objectData" $objectData) }}
-rootCtx: The root context of the template. It is used to access the global context.
+rootCtx: The root context of the chart.
 objectData: The object data to be used to render the container.
 */}}
 {{- define "ix.v1.common.lib.container.actions.httpGet" -}}
