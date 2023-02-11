@@ -203,7 +203,7 @@ volumeClaimTemplates:
     #       subPath: ""
     #       mountPropagation: ""
 
-# -- SCALE GPU
+# -- SCALE GPU (TODO: Only the resources part is left)
 scaleGPU:
   - gpu:
       key: value
