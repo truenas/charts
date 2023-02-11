@@ -596,6 +596,24 @@ tests:
       - failedTemplate:
           errorMessage: Persistence - Expected <readOnly> to be [boolean], but got [string]
 
+  - it: should fail with empty readOnly
+    set:
+      image: *image
+      workload:
+        workload-name: *workload
+      persistence:
+        vol-name:
+          enabled: true
+          type: pvc
+          mountPath: /some/path
+          targetSelector:
+            workload-name:
+              container-name1:
+                readOnly:
+    asserts:
+      - failedTemplate:
+          errorMessage: Persistence - Expected <readOnly> to be [boolean], but got [invalid]
+
   - it: should fail with empty mountPath
     set:
       image: *image
