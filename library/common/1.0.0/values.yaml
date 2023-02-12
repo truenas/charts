@@ -114,7 +114,7 @@ workload:
   main:
     enabled: true
     primary: true
-    type: StatefulSet
+    type: Deployment
     podSpec:
       # TODO: Currently implementing
       containers:
