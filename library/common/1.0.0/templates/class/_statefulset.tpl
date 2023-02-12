@@ -51,5 +51,9 @@ spec:
         {{- end }}
     spec:
       {{- include "ix.v1.common.lib.workload.pod" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 6 }}
+  {{- with (include "ix.v1.common.lib.workload.volumeClaimTemplates" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim) }}
+  volumeClaimTemplates:
+    {{- . | nindent 4 }}
+  {{- end }}
 {{- end -}}
 {{/* TODO: VCT */}}

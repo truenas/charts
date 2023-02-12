@@ -42,6 +42,17 @@ tests:
       - failedTemplate:
           errorMessage: Persistence - Expected <type> to be one of [pvc, emptyDir, nfs, hostPath, ixVolume, secret, configmap, device], but got [not-a-type]
 
+  - it: should fail with invalid accessMode
+    set:
+      persistence:
+        volume1:
+          enabled: true
+          accessModes:
+            - not-an-access-mode
+    asserts:
+      - failedTemplate:
+          errorMessage: PVC - Expected <accessModes> entry to be one of [ReadWriteOnce, ReadOnlyMany, ReadWriteMany, ReadWriteOncePod], but got [not-an-access-mode]
+
   - it: should fail without storageClassName in ixChartContext
     set:
       global:

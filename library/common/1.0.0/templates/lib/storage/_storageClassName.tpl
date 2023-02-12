@@ -7,6 +7,7 @@ objectData: The object data of the pvc
 {{- define "ix.v1.common.lib.pvc.storageClassName" -}}
   {{- $objectData := .objectData -}}
   {{- $rootCtx := .rootCtx -}}
+  {{- $caller := .caller -}}
 
   {{/*
     If storageClass is defined on the objectData:
@@ -30,7 +31,7 @@ objectData: The object data of the pvc
       {{- $className = "\"\"" -}}
     {{- else if eq "SCALE-ZFS" $storageClass -}}
       {{- if not $rootCtx.Values.global.ixChartContext.storageClassName -}}
-        {{- fail "PVC - Expected non-empty <global.ixChartContext.storageClassName> on [SCALE-ZFS] storageClass" -}}
+        {{- fail (printf "%s - Expected non-empty <global.ixChartContext.storageClassName> on [SCALE-ZFS] storageClass" $caller) -}}
       {{- end -}}
       {{- $className = tpl $rootCtx.Values.global.ixChartContext.storageClassName $rootCtx -}}
     {{- else -}}
@@ -39,7 +40,7 @@ objectData: The object data of the pvc
 
   {{- else if $rootCtx.Values.global.ixChartContext -}}
     {{- if not $rootCtx.Values.global.ixChartContext.storageClassName -}}
-      {{- fail "PVC - Expected non-empty <global.ixChartContext.storageClassName>" -}}
+      {{- fail (printf "%s - Expected non-empty <global.ixChartContext.storageClassName>" $caller) -}}
     {{- end -}}
     {{- $className = tpl $rootCtx.Values.global.ixChartContext.storageClassName $rootCtx -}}
 

@@ -27,8 +27,10 @@ fallbackDefaults:
   pvcRetain: false
   # -- Default PVC Size
   pvcSize: 1Gi
-  # -- Default PVC Access Modes
-  pvcAccessModes:
+  # -- Default VCT Size
+  vctSize: 100Gi
+  # -- Default PVC/VCT Access Modes
+  accessModes:
     - ReadWriteOnce
 
 # TODO: Docs (for the imageName) convention
@@ -112,7 +114,7 @@ workload:
   main:
     enabled: true
     primary: true
-    type: Deployment
+    type: StatefulSet
     podSpec:
       # TODO: Currently implementing
       containers:
@@ -171,37 +173,6 @@ workload:
 # TODO:
 portal: {}
 
-# -- VolumeClaimTemplates (StatefulSet only)
-volumeClaimTemplates:
-  # -- VolumeClaimTemplate name
-  vct-name:
-    # -- Enables the VolumeClaimTemplate
-    enabled: true
-    # -- VolumeClaimTemplate labels
-    labels: {}
-    # -- VolumeClaimTemplate annotations
-    annotations: {}
-    # -- VolumeClaimTemplate access modes
-    accessModes:
-      - ReadWriteOnce
-    # -- VolumeClaimTemplate storage class
-    storageClassName: ""
-    # -- VolumeClaimTemplate size
-    size: 1Gi
-    # -- Options that apply to all volumeMounts
-    # Can be overruled per volumeMount under targetSelector
-    # -- VolumeClaimTemplate mount path
-    mountPath: /data
-    readOnly: false
-    subPath: ""
-    mountPropagation: ""
-    # targetSelector:
-    #   pod-name:
-    #     container-name:
-    #       mountPath: /data
-    #       readOnly: false
-    #       subPath: ""
-    #       mountPropagation: ""
 
 # -- SCALE GPU (TODO: Only the resources part is left)
 scaleGPU:
@@ -279,6 +250,9 @@ serviceAccount: {}
 
 # -- (docs/rbac.md)
 rbac: {}
+
+# -- (docs/volumeClaimTemplates) (StatefulSet only)
+volumeClaimTemplates: {}
 
 # -- (docs/scaleExternalInterface.md)
 scaleExternalInterface: []

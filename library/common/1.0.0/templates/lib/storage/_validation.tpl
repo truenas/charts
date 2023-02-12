@@ -3,7 +3,7 @@
 {{ include "ix.v1.common.lib.persistence.validation" (dict "objectData" $objectData) -}}
 objectData:
   rootCtx: The root context of the chart.
-  objectData: The service object.
+  objectData: The pvc object.
 */}}
 
 {{- define "ix.v1.common.lib.persistence.validation" -}}
@@ -17,6 +17,23 @@ objectData:
 
   {{- if and $objectData.targetSelector (not (kindIs "map" $objectData.targetSelector)) -}}
     {{- fail (printf "Persistence - Expected <targetSelector> to be [dict], but got [%s]" (kindOf $objectData.targetSelector)) -}}
+  {{- end -}}
+
+{{- end -}}
+
+{{/* VCT Validation */}}
+{{/* Call this template:
+{{ include "ix.v1.common.lib.vct.validation" (dict "objectData" $objectData) -}}
+objectData:
+  rootCtx: The root context of the chart.
+  objectData: The vct object.
+*/}}
+
+{{- define "ix.v1.common.lib.vct.validation" -}}
+  {{- $objectData := .objectData -}}
+
+  {{- if and $objectData.targetSelector (not (kindIs "map" $objectData.targetSelector)) -}}
+    {{- fail (printf "Volume Claim Templates - Expected <targetSelector> to be [dict], but got [%s]" (kindOf $objectData.targetSelector)) -}}
   {{- end -}}
 
 {{- end -}}

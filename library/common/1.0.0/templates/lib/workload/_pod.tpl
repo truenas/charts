@@ -59,6 +59,7 @@ containers:
         {{- $_ := set $container "shortName" $containerName -}}
         {{- $_ := set $container "podShortName" $objectData.shortName -}}
         {{- $_ := set $container "podPrimary" $objectData.primary -}}
+        {{- $_ := set $container "podType" $objectData.type -}}
         {{- include "ix.v1.common.lib.pod.container" (dict "rootCtx" $rootCtx "objectData" $container) | trim | nindent 2 }}
       {{- end -}}
     {{- end -}}

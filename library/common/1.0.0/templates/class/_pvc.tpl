@@ -43,14 +43,14 @@ metadata:
   {{- end }}
 spec:
   accessModes:
-    {{- include "ix.v1.common.lib.pvc.accessModes" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 4 }}
+    {{- include "ix.v1.common.lib.pvc.accessModes" (dict "rootCtx" $rootCtx "objectData" $objectData "caller" "PVC") | trim | nindent 4 }}
   resources:
     requests:
       storage: {{ $pvcSize }}
   {{- with $objectData.volumeName }}
   volumeName: {{ tpl . $rootCtx }}
   {{- end -}}
-  {{- with (include "ix.v1.common.lib.pvc.storageClassName" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim) }}
+  {{- with (include "ix.v1.common.lib.pvc.storageClassName" (dict "rootCtx" $rootCtx "objectData" $objectData "caller" "PVC") | trim) }}
   storageClassName: {{ . }}
   {{- end -}}
 {{- end -}}

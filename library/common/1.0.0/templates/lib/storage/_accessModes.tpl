@@ -8,6 +8,7 @@ objectData: The object data of the pvc
 {{- define "ix.v1.common.lib.pvc.accessModes" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
+  {{- $caller := .caller -}}
 
   {{- $accessModes := $objectData.accessModes -}}
 
@@ -16,7 +17,7 @@ objectData: The object data of the pvc
   {{- end -}}
 
   {{- if not $accessModes -}}
-    {{- $accessModes = $rootCtx.Values.fallbackDefaults.pvcAccessModes -}}
+    {{- $accessModes = $rootCtx.Values.fallbackDefaults.accessModes -}}
   {{- end -}}
 
   {{- $validAccessModes := (list "ReadWriteOnce" "ReadOnlyMany" "ReadWriteMany" "ReadWriteOncePod") -}}
@@ -24,7 +25,7 @@ objectData: The object data of the pvc
   {{- range $accessModes -}}
     {{- $mode := tpl . $rootCtx -}}
     {{- if not (mustHas $mode $validAccessModes) -}}
-      {{- fail (printf "PVC - Expected <accessModes> entry to be one of [%s], but got [%s]" (join ", " $validAccessModes) $mode) -}}
+      {{- fail (printf "%s - Expected <accessModes> entry to be one of [%s], but got [%s]" $caller (join ", " $validAccessModes) $mode) -}}
     {{- end }}
 - {{ $mode }}
   {{- end -}}
