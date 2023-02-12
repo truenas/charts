@@ -30,7 +30,7 @@ spec:
   {{- include "ix.v1.common.lib.workload.statefulsetSpec" (dict "rootCtx" $rootCtx "objectData" $objectData) | nindent 2 }}
   selector:
     matchLabels:
-      {{- include "ix.v1.common.lib.metadata.selectorLabels" (dict "rootCtx" $rootCtx "objectType" "pod" "objectName" $objectData.shortName) | nindent 6 }}
+      {{- include "ix.v1.common.lib.metadata.selectorLabels" (dict "rootCtx" $rootCtx "objectType" "pod" "objectName" $objectData.shortName) | trim | nindent 6 }}
   template:
     metadata:
         {{- $labels := (mustMerge ($objectData.podSpec.labels | default dict)
