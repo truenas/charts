@@ -56,4 +56,3 @@ spec:
     {{- . | nindent 4 }}
   {{- end }}
 {{- end -}}
-{{/* TODO: VCT */}}
