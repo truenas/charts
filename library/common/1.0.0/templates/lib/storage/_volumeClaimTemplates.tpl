@@ -52,7 +52,7 @@ objectData: The object data to be used to render the Pod.
       {{- . | nindent 6 }}
     {{- end }}
   spec:
-    {{- with (include "ix.v1.common.lib.pvc.storageClassName" (dict "rootCtx" $rootCtx "objectData" $vct "caller" "Volume Claim Templates") | trim) }}
+    {{- with (include "ix.v1.common.lib.storage.storageClassName" (dict "rootCtx" $rootCtx "objectData" $vct "caller" "Volume Claim Templates") | trim) }}
     storageClassName: {{ . }}
     {{- end }}
     accessModes:

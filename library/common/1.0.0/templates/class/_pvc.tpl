@@ -50,7 +50,7 @@ spec:
   {{- with $objectData.volumeName }}
   volumeName: {{ tpl . $rootCtx }}
   {{- end -}}
-  {{- with (include "ix.v1.common.lib.pvc.storageClassName" (dict "rootCtx" $rootCtx "objectData" $objectData "caller" "PVC") | trim) }}
+  {{- with (include "ix.v1.common.lib.storage.storageClassName" (dict "rootCtx" $rootCtx "objectData" $objectData "caller" "PVC") | trim) }}
   storageClassName: {{ . }}
   {{- end -}}
 {{- end -}}
