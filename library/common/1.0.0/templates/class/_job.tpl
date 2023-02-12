@@ -28,12 +28,15 @@ metadata:
   {{- end }}
 spec:
   {{- include "ix.v1.common.lib.workload.jobSpec" (dict "rootCtx" $rootCtx "objectData" $objectData) | nindent 2 }}
+  selector:
+    matchLabels:
+      {{- include "ix.v1.common.lib.metadata.selectorLabels" (dict "rootCtx" $rootCtx "objectType" "pod" "objectName" $objectData.shortName) | nindent 6 }}
   template:
     metadata:
         {{- $labels := (mustMerge ($objectData.podSpec.labels | default dict)
                                   (include "ix.v1.common.lib.metadata.allLabels" $rootCtx | fromYaml)
                                   (include "ix.v1.common.lib.metadata.podLabels" $rootCtx | fromYaml)
-                                  (include "ix.v1.common.lib.metadata.selectorLabels" (dict "rootCtx" $rootCtx "podName" $objectData.shortName) | fromYaml)) -}}
+                                  (include "ix.v1.common.lib.metadata.selectorLabels" (dict "rootCtx" $rootCtx "objectType" "pod" "objectName" $objectData.shortName) | fromYaml)) -}}
         {{- with (include "ix.v1.common.lib.metadata.render" (dict "rootCtx" $rootCtx "labels" $labels) | trim) }}
       labels:
         {{- . | nindent 8 }}

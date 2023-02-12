@@ -5,8 +5,10 @@ podName is the "shortName" of the pod. The one you define in the .Values.workloa
 */}}
 {{- define "ix.v1.common.lib.metadata.selectorLabels" -}}
   {{- $rootCtx := .rootCtx -}}
-  {{- $podName := .podName -}}
-pod.name: {{ $podName }}
+  {{- $objectType := .objectType -}}
+  {{- $objectName := .objectName }}
+
+{{ printf "%s.name" $objectType }}: {{ $objectName }}
 app.kubernetes.io/name: {{ include "ix.v1.common.lib.chart.names.name" $rootCtx }}
 app.kubernetes.io/instance: {{ $rootCtx.Release.Name }}
 {{- end -}}

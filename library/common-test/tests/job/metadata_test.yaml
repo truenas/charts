@@ -63,6 +63,13 @@ tests:
             label2: label2
       - documentIndex: *jobDoc
         equal:
+          path: spec.selector.matchLabels
+          value:
+            pod.name: workload-name
+            app.kubernetes.io/name: common-test
+            app.kubernetes.io/instance: RELEASE-NAME
+      - documentIndex: *jobDoc
+        equal:
           path: spec.template.metadata.labels
           value:
             pod.name: workload-name
@@ -105,6 +112,13 @@ tests:
           path: metadata.name
           value: release-name-common-test-other-workload-name
       - documentIndex: *jobDoc
+        equal:
+          path: spec.selector.matchLabels
+          value:
+            pod.name: other-workload-name
+            app.kubernetes.io/name: common-test
+            app.kubernetes.io/instance: RELEASE-NAME
+      - documentIndex: *jobDoc
         isSubset:
           path: spec.template.metadata.labels
           content:
@@ -118,6 +132,13 @@ tests:
         equal:
           path: metadata.name
           value: release-name-common-test
+      - documentIndex: *otherJobDoc
+        equal:
+          path: spec.selector.matchLabels
+          value:
+            pod.name: workload-name
+            app.kubernetes.io/name: common-test
+            app.kubernetes.io/instance: RELEASE-NAME
       - documentIndex: *otherJobDoc
         isSubset:
           path: spec.template.metadata.labels
