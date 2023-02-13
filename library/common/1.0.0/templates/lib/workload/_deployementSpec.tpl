@@ -15,6 +15,9 @@ revisionHistoryLimit: {{ $objectData.revisionHistoryLimit | default 3 }}
 strategy:
   type: {{ $objectData.strategy | default "Recreate" }}
   {{- if eq $objectData.strategy "RollingUpdate" }}
+    {{- if not $objectData.rollingUpdate -}} {{/* Create the key if it does not exist, to avoid nil pointers */}}
+      {{- $_ := set $objectData "rollingUpdate" dict -}}
+    {{- end }}
   rollingUpdate:
     maxUnavailable: {{ $objectData.rollingUpdate.maxUnavailable | default $rootCtx.Values.fallbackDefaults.maxUnavailable }}
     maxSurge: {{ $objectData.rollingUpdate.maxSurge | default $rootCtx.Values.fallbackDefaults.maxSurge }}

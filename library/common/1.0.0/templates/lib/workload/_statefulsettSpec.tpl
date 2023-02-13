@@ -17,6 +17,9 @@ updateStrategy:
   type: {{ $objectData.strategy | default "RollingUpdate" }}
   {{- if eq $objectData.strategy "RollingUpdate" }}
   rollingUpdate:
+    {{- if not $objectData.rollingUpdate -}} {{/* Create the key if it does not exist, to avoid nil pointers */}}
+      {{- $_ := set $objectData "rollingUpdate" dict -}}
+    {{- end }}
     maxUnavailable: {{ $objectData.rollingUpdate.maxUnavailable | default $rootCtx.Values.fallbackDefaults.maxUnavailable }}
     partition: {{ $objectData.rollingUpdate.partition | default $rootCtx.Values.fallbackDefaults.partition }}
   {{- end -}}
