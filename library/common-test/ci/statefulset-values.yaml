@@ -18,7 +18,7 @@ workload:
   main:
     enabled: true
     primary: true
-    type: DaemonSet
+    type: StatefulSet
     podSpec:
       containers:
         main:
