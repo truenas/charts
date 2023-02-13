@@ -24,6 +24,9 @@ tests:
             revisionHistoryLimit: 3
             updateStrategy:
               type: RollingUpdate
+              rollingUpdate:
+                maxSurge: 1
+                partition: 1
 
   - it: should apply defaults to rollingUpdate
     set:
@@ -43,7 +46,7 @@ tests:
           content:
             replicas: 2
             revisionHistoryLimit: 4
-            strategy:
+            updateStrategy:
               type: RollingUpdate
               rollingUpdate:
                 maxSurge: 1
