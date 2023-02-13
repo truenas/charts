@@ -21,6 +21,13 @@ tests:
                 enabled: true
                 primary: true
                 imageSelector: image
+                probes: &probes
+                  liveness:
+                    enabled: false
+                  readiness:
+                    enabled: false
+                  startup:
+                    enabled: false
                 termination:
                   messagePath: "{{ .Values.some_path }}"
                   messagePolicy: "{{ .Values.some_policy }}"
@@ -55,6 +62,7 @@ tests:
                 enabled: true
                 primary: true
                 imageSelector: image
+                probes: *probes
                 termination:
                   messagePath: /some/path
     asserts:
@@ -90,6 +98,7 @@ tests:
                 enabled: true
                 primary: true
                 imageSelector: image
+                probes: *probes
                 termination:
                   messagePolicy: File
     asserts:
@@ -126,6 +135,7 @@ tests:
                 enabled: true
                 primary: true
                 imageSelector: image
+                probes: *probes
                 termination:
                   messagePolicy: SomeInvalidPolicy
     asserts:

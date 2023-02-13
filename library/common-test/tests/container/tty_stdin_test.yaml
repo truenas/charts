@@ -19,6 +19,13 @@ tests:
                 enabled: true
                 primary: true
                 imageSelector: image
+                probes: &probes
+                  liveness:
+                    enabled: false
+                  readiness:
+                    enabled: false
+                  startup:
+                    enabled: false
     asserts:
       - documentIndex: &deploymentDoc 0
         isKind:
@@ -47,6 +54,7 @@ tests:
                 enabled: true
                 primary: true
                 imageSelector: image
+                probes: *probes
                 tty: true
                 stdin: true
     asserts:

@@ -19,10 +19,18 @@ tests:
                 enabled: true
                 primary: true
                 imageSelector: image
+                probes: &probes
+                  liveness:
+                    enabled: false
+                  readiness:
+                    enabled: false
+                  startup:
+                    enabled: false
               container-name2:
                 enabled: true
                 primary: false
                 imageSelector: image
+                probes: *probes
     asserts:
       - documentIndex: &deploymentDoc 0
         isKind:

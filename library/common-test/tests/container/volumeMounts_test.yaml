@@ -20,10 +20,18 @@ tests:
                 enabled: true
                 primary: true
                 imageSelector: image
+                probes: &probes
+                  liveness:
+                    enabled: false
+                  readiness:
+                    enabled: false
+                  startup:
+                    enabled: false
               container-name2:
                 enabled: true
                 primary: false
                 imageSelector: image
+                probes: *probes
         workload-name2:
           enabled: true
           primary: false
@@ -34,10 +42,12 @@ tests:
                 enabled: true
                 primary: true
                 imageSelector: image
+                probes: *probes
               container-name2:
                 enabled: true
                 primary: false
                 imageSelector: image
+                probes: *probes
       persistence:
         shared-vol:
           enabled: true
@@ -100,10 +110,12 @@ tests:
                 enabled: true
                 primary: true
                 imageSelector: image
+                probes: *probes
               container-name2:
                 enabled: true
                 primary: false
                 imageSelector: image
+                probes: *probes
         workload-name2:
           enabled: true
           primary: false
@@ -114,10 +126,12 @@ tests:
                 enabled: true
                 primary: true
                 imageSelector: image
+                probes: *probes
               container-name2:
                 enabled: true
                 primary: false
                 imageSelector: image
+                probes: *probes
       persistence:
         some-vol:
           enabled: true
@@ -168,10 +182,12 @@ tests:
                 enabled: true
                 primary: true
                 imageSelector: image
+                probes: *probes
               container-name2:
                 enabled: true
                 primary: false
                 imageSelector: image
+                probes: *probes
         workload-name2:
           enabled: true
           primary: false
@@ -182,10 +198,12 @@ tests:
                 enabled: true
                 primary: true
                 imageSelector: image
+                probes: *probes
               container-name2:
                 enabled: true
                 primary: false
                 imageSelector: image
+                probes: *probes
       persistence:
         some-vol:
           enabled: true
@@ -245,10 +263,12 @@ tests:
                 enabled: true
                 primary: true
                 imageSelector: image
+                probes: *probes
               container-name2:
                 enabled: true
                 primary: false
                 imageSelector: image
+                probes: *probes
         workload-name2:
           enabled: true
           primary: false
@@ -259,10 +279,12 @@ tests:
                 enabled: true
                 primary: true
                 imageSelector: image
+                probes: *probes
               container-name2:
                 enabled: true
                 primary: false
                 imageSelector: image
+                probes: *probes
       persistence:
         some-vol:
           enabled: true
@@ -321,10 +343,12 @@ tests:
                 enabled: true
                 primary: true
                 imageSelector: image
+                probes: *probes
               container-name2:
                 enabled: true
                 primary: false
                 imageSelector: image
+                probes: *probes
         workload-name2:
           enabled: true
           primary: false
@@ -335,10 +359,12 @@ tests:
                 enabled: true
                 primary: true
                 imageSelector: image
+                probes: *probes
               container-name2:
                 enabled: true
                 primary: false
                 imageSelector: image
+                probes: *probes
       persistence:
         some-vol:
           enabled: true
@@ -406,10 +432,12 @@ tests:
                 enabled: true
                 primary: true
                 imageSelector: image
+                probes: *probes
               container-name2:
                 enabled: true
                 primary: false
                 imageSelector: image
+                probes: *probes
       persistence:
         some-vol:
           enabled: true
@@ -470,6 +498,7 @@ tests:
                 enabled: true
                 primary: true
                 imageSelector: image
+                probes: *probes
       persistence:
         cert-vol:
           enabled: true
@@ -520,6 +549,7 @@ tests:
                 enabled: true
                 primary: true
                 imageSelector: image
+                probes: *probes
       persistence:
         cert-vol:
           enabled: true
@@ -563,6 +593,7 @@ tests:
                 enabled: true
                 primary: true
                 imageSelector: image
+                probes: *probes
         workload-name2:
           enabled: true
           primary: false
@@ -573,6 +604,7 @@ tests:
                 enabled: true
                 primary: true
                 imageSelector: image
+                probes: *probes
       volumeClaimTemplates:
         vct-vol:
           enabled: true

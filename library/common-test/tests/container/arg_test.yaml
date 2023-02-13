@@ -20,6 +20,13 @@ tests:
                 enabled: true
                 primary: true
                 imageSelector: image
+                probes: &probes
+                  liveness:
+                    enabled: false
+                  readiness:
+                    enabled: false
+                  startup:
+                    enabled: false
                 args:
                   - --port
                   - "{{ .Values.some_port }}"
@@ -55,6 +62,7 @@ tests:
                 enabled: true
                 primary: true
                 imageSelector: image
+                probes: *probes
                 args: --accept-eula
     asserts:
       - documentIndex: &deploymentDoc 0
@@ -88,6 +96,7 @@ tests:
                 enabled: true
                 primary: true
                 imageSelector: image
+                probes: *probes
                 args:
                   - --port
                   - "80"

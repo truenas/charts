@@ -24,10 +24,18 @@ tests:
                 enabled: true
                 primary: true
                 imageSelector: "{{ .Values.imageDictToUse }}"
+                probes: &probes
+                  liveness:
+                    enabled: false
+                  readiness:
+                    enabled: false
+                  startup:
+                    enabled: false
               container-name2:
                 enabled: true
                 primary: false
                 imageSelector: imageGPU
+                probes: *probes
     asserts:
       - documentIndex: &deploymentDoc 0
         isKind:
