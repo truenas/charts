@@ -23,7 +23,7 @@ objectData: The service data, that will be used to render the Service object.
   {{/* External Name / External IP does not rely on any pod values */}}
   {{- if not (mustHas $svcType $specialTypes) -}}
     {{/* Get Pod Values based on the selector (or the absence of it) */}}
-    {{- $podValues = fromJson (include "ix.v1.common.lib.service.getSelectedPodValues" (dict "rootCtx" $rootCtx "objectData" $objectData)) -}}
+    {{- $podValues = fromJson (include "ix.v1.common.lib.helpers.getSelectedPodValues" (dict "rootCtx" $rootCtx "objectData" $objectData "caller" "Service")) -}}
 
     {{- if $podValues -}}
       {{/* Get Pod hostNetwork configuration */}}
