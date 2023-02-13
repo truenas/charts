@@ -105,8 +105,8 @@ jobs:
           - job-values.yaml
           - cronjob-values.yaml
           - statefulset-values.yaml
+          - persistence-values.yaml
           # - extra-containers-values.yaml
-          # - persistence-values.yaml
           # - rbac-values.yaml
 
     steps:

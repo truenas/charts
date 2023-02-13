@@ -1,7 +1,7 @@
 image:
-  repository: traefik/whoami
+  repository: tccr.io/truecharts/whoami
   pullPolicy: IfNotPresent
-  tag: latest
+  tag: 1.8.7@sha256:8c61f0ca92fd806fcb4ed1465cb793c05443f37951554b105b0f2dc686a95772
 
 service:
   main:
@@ -9,22 +9,30 @@ service:
       main:
         port: 8080
 
-controllers:
+workload:
   main:
-    pod:
+    enabled: true
+    primary: true
+    type: Deployment
+    podSpec:
       containers:
         main:
           args:
             - --port
-            - '8080'
-
+            - "8080"
           probes:
             liveness:
               enabled: true
+              type: http
+              port: "{{ .Values.service.main.ports.main.port }}"
             readiness:
               enabled: true
+              type: http
+              port: "{{ .Values.service.main.ports.main.port }}"
             startup:
               enabled: true
+              type: http
+              port: "{{ .Values.service.main.ports.main.port }}"
 
 persistence:
   pvc-stock:
@@ -37,12 +45,6 @@ persistence:
     type: pvc
     mountPath: /pvcsize
     size: 1Gi
-
-  pvc-forcedname:
-    enabled: true
-    type: pvc
-    forceName: "testname"
-    mountPath: /pvcfn
 
   pvc-readonly:
     enabled: true
@@ -64,13 +66,6 @@ persistence:
     readOnly: false
     storageClass: ""
 
-  pvc-auto:
-    enabled: true
-    setPermissions: true
-    type: pvc
-    mountPath: /autotest
-    readOnly: false
-
   emptydir:
     enabled: true
     type: emptyDir
@@ -86,14 +81,14 @@ persistence:
     enabled: true
     type: emptyDir
     mountPath: /emptydirsize
-    sizeLimit: 1Gi
+    size: 1Gi
 
   emptydir-memsize:
     enabled: true
     type: emptyDir
     mountPath: /emptydirmemsize
     medium: Memory
-    sizeLimit: 1Gi
+    size: 1Gi
 
   hostpath-stock:
     enabled: true

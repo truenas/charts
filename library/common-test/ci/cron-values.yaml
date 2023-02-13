@@ -13,7 +13,9 @@ service:
 workload:
   main:
     type: CronJob
+    schedule: "*/1 * * * *"
     podSpec:
+      restartPolicy: OnFailure
       containers:
         main:
           args:

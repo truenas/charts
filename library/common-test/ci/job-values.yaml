@@ -14,6 +14,7 @@ workload:
   main:
     type: Job
     podSpec:
+      restartPolicy: Never
       containers:
         main:
           args:

@@ -12,6 +12,8 @@ service:
 
 workload:
   main:
+    enabled: true
+    primary: true
     type: DaemonSet
     podSpec:
       containers:
