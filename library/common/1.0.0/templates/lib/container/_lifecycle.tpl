@@ -25,12 +25,9 @@ objectData: The object data to be used to render the container.
       {{- end }}
 {{ $hook }}:
       {{- if eq $hookValues.type "exec" -}}
-        {{- if not $hookValues.command -}}
-          {{- fail "Container - Expected non-empty <lifecycle> <command> on [exec] type" -}}
-        {{- end }}
-        {{- include "ix.v1.common.lib.container.actions.exec" (dict "rootCtx" $rootCtx "objectData" $hookValues) | trim | nindent 2 }}
-      {{- else if mustHas $hookValues.type (list "http" "https") }}
-        {{- include "ix.v1.common.lib.container.actions.httpGet" (dict "rootCtx" $rootCtx "objectData" $hookValues "caller" "lifecycle") | trim | nindent 2 }}
+        {{- include "ix.v1.common.lib.container.actions.exec" (dict "rootCtx" $rootCtx "objectData" $hookValues "caller" "lifecycle") | trim | nindent 2 -}}
+      {{- else if mustHas $hookValues.type (list "http" "https") -}}
+        {{- include "ix.v1.common.lib.container.actions.httpGet" (dict "rootCtx" $rootCtx "objectData" $hookValues "caller" "lifecycle") | trim | nindent 2 -}}
       {{- end -}}
 
     {{- end -}}
