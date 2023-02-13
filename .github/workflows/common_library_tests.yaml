@@ -101,12 +101,13 @@ jobs:
           - configmap-values.yaml
           - secrets-values.yaml
           - imagePullSecret-values.yaml
-          # - daemonset-values.yaml
+          - daemonset-values.yaml
+          - job-values.yaml
+          - cronjob-values.yaml
+          - statefulset-values.yaml
           # - extra-containers-values.yaml
-          # - job-cron-values.yaml
           # - persistence-values.yaml
           # - rbac-values.yaml
-          # - statefulset-values.yaml
 
     steps:
       - name: Checkout

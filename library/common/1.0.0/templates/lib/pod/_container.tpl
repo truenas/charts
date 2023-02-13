@@ -41,10 +41,10 @@ objectData: The object data to be used to render the Pod.
   volumeMounts:
     {{- . | nindent 4 }}
   {{- end -}}
+  {{- include "ix.v1.common.lib.container.probes" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 -}}
 {{- end -}}
 
 {{/*
-TODO: probes
 TODO: env
 TODO: envList
 TODO: fixedEnv

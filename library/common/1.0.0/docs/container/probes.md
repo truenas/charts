@@ -18,7 +18,7 @@ Assume every key bellow has a prefix of `workload.[workload-name].podSpec.contai
 | probes.[probe-name].spec.periodSeconds       |     `int`     |              ❌               |         ❌         |    `{{ .Values.fallbackDefaults.probeTimeouts.[probe-name].periodSeconds }}`    | Define the periodSeconds in seconds                                                       |
 | probes.[probe-name].spec.timeoutSeconds      |     `int`     |              ❌               |         ❌         |   `{{ .Values.fallbackDefaults.probeTimeouts.[probe-name].timeoutSeconds }}`    | Define the timeoutSeconds in seconds                                                      |
 | probes.[probe-name].spec.failureThreshold    |     `int`     |              ❌               |         ❌         |  `{{ .Values.fallbackDefaults.probeTimeouts.[probe-name].failureThreshold }}`   | Define the failureThreshold in seconds                                                    |
-| probes.[probe-name].spec.successThreshold    |     `int`     |              ❌               |         ❌         |  `{{ .Values.fallbackDefaults.probeTimeouts.[probe-name].successThreshold }}`   | Define the successThreshold in seconds                                                    |
+| probes.[probe-name].spec.successThreshold    |     `int`     |              ❌               |         ❌         |  `{{ .Values.fallbackDefaults.probeTimeouts.[probe-name].successThreshold }}`   | Define the successThreshold in seconds (liveness and startup must always be 1)            |
 
 ---
 

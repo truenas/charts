@@ -1,16 +1,21 @@
 {{/* Returns httpGet action */}}
 {{/* Call this template:
-{{ include "ix.v1.common.lib.container.actions.httpGet" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "ix.v1.common.lib.container.actions.httpGet" (dict "rootCtx" $ "objectData" $objectData "caller" $caller) }}
 rootCtx: The root context of the chart.
 objectData: The object data to be used to render the container.
 */}}
 {{- define "ix.v1.common.lib.container.actions.httpGet" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
+  {{- $caller := .caller -}}
+
+  {{- if not $objectData.port -}}
+    {{- fail (printf "Container - Expected non-empty <%s> <port> on [http] type" $caller) -}}
+  {{- end -}}
 
   {{- $port := $objectData.port -}}
   {{- $path := "/" -}}
-  {{- $scheme := "HTTP" -}}
+  {{- $scheme := "http" -}}
 
   {{- if kindIs "string" $port -}}
     {{- $port = tpl $port $rootCtx -}}
@@ -21,10 +26,10 @@ objectData: The object data to be used to render the container.
   {{- end -}}
 
   {{- if not (hasPrefix "/" $path) -}}
-    {{- fail "Container - Expected <path> to start with a forward slash [/] on <http> type" -}}
+    {{- fail (printf "Container - Expected <%s> <path> to start with a forward slash [/] on <http> type" $caller) -}}
   {{- end -}}
 
-  {{- with $objectData.scheme -}}
+  {{- with $objectData.type -}}
     {{- $scheme = tpl . $rootCtx -}}
   {{- end }}
 httpGet:
@@ -33,7 +38,7 @@ httpGet:
   {{- end }}
   port: {{ $port }}
   path: {{ $path }}
-  scheme: {{ $scheme }}
+  scheme: {{ $scheme | upper }}
   {{- with $objectData.httpHeaders }}
   httpHeaders:
     {{- range $name, $value := . }}

@@ -10,20 +10,25 @@ service:
         protocol: HTTP
         port: 8080
 
-controllers:
+workload:
   main:
-    type: DaemonSet
+    type: CronJob
     pod:
       containers:
         main:
           args:
             - --port
             - "8080"
-
           probes:
             liveness:
               enabled: true
+              type: http
+              port: "{{ .Values.service.main.ports.main.port }}"
             readiness:
               enabled: true
+              type: http
+              port: "{{ .Values.service.main.ports.main.port }}"
             startup:
               enabled: true
+              type: http
+              port: "{{ .Values.service.main.ports.main.port }}"
