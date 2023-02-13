@@ -103,7 +103,7 @@ jobs:
           - imagePullSecret-values.yaml
           - daemonset-values.yaml
           - job-values.yaml
-          - cronjob-values.yaml
+          - cron-values.yaml
           - statefulset-values.yaml
           - persistence-values.yaml
           # - extra-containers-values.yaml

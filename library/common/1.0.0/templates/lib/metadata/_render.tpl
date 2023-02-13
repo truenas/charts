@@ -12,7 +12,7 @@
   {{- with $labels -}}
     {{- range $k, $v := . -}}
       {{- if and $k $v }}
-{{ $k }}: {{ tpl $v $rootCtx }}
+{{ $k }}: {{ tpl $v $rootCtx | quote }}
       {{- end -}}
     {{- end -}}
   {{- end -}}
@@ -20,7 +20,7 @@
   {{- with $annotations -}}
     {{- range $k, $v := . -}}
       {{- if and $k $v }}
-{{ $k }}: {{ tpl $v $rootCtx }}
+{{ $k }}: {{ tpl $v $rootCtx | quote }}
       {{- end -}}
     {{- end -}}
   {{- end -}}

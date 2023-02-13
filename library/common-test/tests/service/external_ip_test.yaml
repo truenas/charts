@@ -117,7 +117,7 @@ tests:
             app.kubernetes.io/managed-by: Helm
             app.kubernetes.io/version: *appVer
             helm.sh/chart: common-test-1.0.0
-            helm-revision: 0
+            helm-revision: "0"
             app: common-test-1.0.0
             release: RELEASE-NAME
       - documentIndex: *endpointSliceDoc

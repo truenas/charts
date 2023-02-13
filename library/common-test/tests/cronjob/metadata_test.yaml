@@ -54,7 +54,7 @@ tests:
           value:
             app: common-test-1.0.0
             release: RELEASE-NAME
-            helm-revision: 0
+            helm-revision: "0"
             helm.sh/chart: common-test-1.0.0
             app.kubernetes.io/managed-by: Helm
             app.kubernetes.io/version: *appVer
@@ -80,7 +80,7 @@ tests:
             app.kubernetes.io/managed-by: Helm
             app.kubernetes.io/name: common-test
             app.kubernetes.io/version: v9.9.9
-            helm-revision: 0
+            helm-revision: "0"
             helm.sh/chart: common-test-1.0.0
             g_label1: global_label1
             g_label2: global_label2
