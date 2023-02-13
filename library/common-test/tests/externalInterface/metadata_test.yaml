@@ -31,6 +31,13 @@ tests:
                 enabled: true
                 primary: true
                 imageSelector: image
+                probes: &probes
+                  liveness:
+                    enabled: false
+                  readiness:
+                    enabled: false
+                  startup:
+                    enabled: false
         workload-name2:
           enabled: true
           primary: false
@@ -41,6 +48,7 @@ tests:
                 enabled: true
                 primary: true
                 imageSelector: image
+                probes: *probes
     asserts:
       - documentIndex: &deploymentDoc 2
         isKind:
@@ -102,6 +110,7 @@ tests:
                 enabled: true
                 primary: true
                 imageSelector: image
+                probes: *probes
         workload-name2:
           enabled: true
           primary: false
@@ -112,6 +121,7 @@ tests:
                 enabled: true
                 primary: true
                 imageSelector: image
+                probes: *probes
     asserts:
       - documentIndex: &daemonSetDoc 2
         isKind:
@@ -176,6 +186,7 @@ tests:
                 enabled: true
                 primary: true
                 imageSelector: image
+                probes: *probes
         workload-name2:
           enabled: true
           primary: false
@@ -187,6 +198,7 @@ tests:
                 enabled: true
                 primary: true
                 imageSelector: image
+                probes: *probes
     asserts:
       - documentIndex: &daemonSetDoc 2
         isKind:
