@@ -7,7 +7,7 @@ tests:
       some_port: 80
       some_path: /healthz
       some_command: echo
-      probe_type: exec
+      probe_type: EXEC
       image: &image
         repository: nginx
         tag: 1.19.0
@@ -26,12 +26,12 @@ tests:
                 probes: &probes
                   liveness:
                     enabled: true
-                    type: http
+                    type: HTTP
                     port: "{{ .Values.some_port }}"
                     path: "{{ .Values.some_path }}"
                   readiness:
                     enabled: true
-                    type: tcp
+                    type: TCP
                     port: 123
                   startup:
                     enabled: true
@@ -96,7 +96,7 @@ tests:
                 probes: &probes
                   liveness:
                     enabled: true
-                    type: https
+                    type: HTTPS
                     port: 443
                     spec:
                       initialDelaySeconds: 120
@@ -106,7 +106,7 @@ tests:
                       failureThreshold: 3
                   readiness:
                     enabled: true
-                    type: tcp
+                    type: TCP
                     port: 443
                     spec:
                       initialDelaySeconds: 50
@@ -116,7 +116,7 @@ tests:
                       failureThreshold: 9
                   startup:
                     enabled: true
-                    type: tcp
+                    type: TCP
                     port: 443
                     spec:
                       initialDelaySeconds: 25
@@ -302,7 +302,7 @@ tests:
                     enabled: false
     asserts:
       - failedTemplate:
-          errorMessage: Container - Expected probe type to be one of [http, https, tcp, grpc, exec], but got [invalid]
+          errorMessage: Container - Expected probe type to be one of [HTTP, HTTPS, TCP, GRPC, EXEC], but got [invalid]
 
   - it: should fail with successThreshold more than 1 on liveness
     set:
@@ -321,7 +321,7 @@ tests:
                 probes:
                   liveness:
                     enabled: true
-                    type: http
+                    type: HTTP
                     port: 8080
                     spec:
                       successThreshold: 2
@@ -350,7 +350,7 @@ tests:
                 probes:
                   startup:
                     enabled: true
-                    type: http
+                    type: HTTP
                     port: 8080
                     spec:
                       successThreshold: 2
@@ -379,7 +379,7 @@ tests:
                 probes:
                   liveness:
                     enabled: true
-                    type: http
+                    type: HTTP
                     port: 8080
                     spec:
                       initialDelaySeconds: invalid
@@ -408,7 +408,7 @@ tests:
                 probes:
                   liveness:
                     enabled: true
-                    type: http
+                    type: HTTP
                     port: 8080
                     spec:
                       failureThreshold: invalid
@@ -437,7 +437,7 @@ tests:
                 probes:
                   liveness:
                     enabled: true
-                    type: http
+                    type: HTTP
                     port: 8080
                     spec:
                       successThreshold: invalid
@@ -466,7 +466,7 @@ tests:
                 probes:
                   liveness:
                     enabled: true
-                    type: http
+                    type: HTTP
                     port: 8080
                     spec:
                       timeoutSeconds: invalid
@@ -495,7 +495,7 @@ tests:
                 probes:
                   liveness:
                     enabled: true
-                    type: http
+                    type: HTTP
                     port: 8080
                     spec:
                       periodSeconds: invalid
@@ -524,7 +524,7 @@ tests:
                 probes:
                   liveness:
                     enabled: true
-                    type: exec
+                    type: EXEC
                     command: []
                   readiness:
                     enabled: false
@@ -532,7 +532,7 @@ tests:
                     enabled: false
     asserts:
       - failedTemplate:
-          errorMessage: Container - Expected non-empty <probes> <command> on [exec] type
+          errorMessage: Container - Expected non-empty <probes> <command> on [EXEC] type
 
   - it: should fail with empty port on grpc type
     set:
@@ -551,7 +551,7 @@ tests:
                 probes:
                   liveness:
                     enabled: true
-                    type: grpc
+                    type: GRPC
                     port: ""
                   readiness:
                     enabled: false
@@ -559,7 +559,7 @@ tests:
                     enabled: false
     asserts:
       - failedTemplate:
-          errorMessage: Container - Expected non-empty <probes> <port> on [grpc] type
+          errorMessage: Container - Expected non-empty <probes> <port> on [GRPC] type
 
   - it: should fail with empty port on tcp type
     set:
@@ -578,7 +578,7 @@ tests:
                 probes:
                   liveness:
                     enabled: true
-                    type: tcp
+                    type: TCP
                     port: ""
                   readiness:
                     enabled: false
@@ -586,7 +586,7 @@ tests:
                     enabled: false
     asserts:
       - failedTemplate:
-          errorMessage: Container - Expected non-empty <probes> <port> on [tcp] type
+          errorMessage: Container - Expected non-empty <probes> <port> on [TCP] type
 
   - it: should fail with empty port on http type
     set:
@@ -605,7 +605,7 @@ tests:
                 probes:
                   liveness:
                     enabled: true
-                    type: http
+                    type: HTTP
                     port: ""
                   readiness:
                     enabled: false
@@ -613,7 +613,7 @@ tests:
                     enabled: false
     asserts:
       - failedTemplate:
-          errorMessage: Container - Expected non-empty <probes> <port> on [http] type
+          errorMessage: Container - Expected non-empty <probes> <port> on [HTTP] type
 
   - it: should fail with invalid path on http type
     set:
@@ -632,7 +632,7 @@ tests:
                 probes:
                   liveness:
                     enabled: true
-                    type: http
+                    type: HTTP
                     port: 8080
                     path: not-starting-with-slash
                   readiness:
@@ -641,7 +641,7 @@ tests:
                     enabled: false
     asserts:
       - failedTemplate:
-          errorMessage: Container - Expected <probes> <path> to start with a forward slash [/] on <http> type
+          errorMessage: Container - Expected <probes> <path> to start with a forward slash [/] on <HTTP> type
 
   - it: should fail with empty value in http headers
     set:
@@ -660,7 +660,7 @@ tests:
                 probes:
                   liveness:
                     enabled: true
-                    type: http
+                    type: HTTP
                     port: not-starting-with-slash
                     httpHeaders:
                       key:

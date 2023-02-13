@@ -28,12 +28,12 @@ tests:
                     enabled: false
                 lifecycle:
                   postStart:
-                    type: exec
+                    type: EXEC
                     command:
                       - echo
                       - hello
                   preStop:
-                    type: http
+                    type: HTTP
                     port: 80
     asserts:
       - documentIndex: &deploymentDoc 0
@@ -80,14 +80,14 @@ tests:
                 probes: *probes
                 lifecycle:
                   postStart:
-                    type: https
+                    type: HTTPS
                     port: "{{ .Values.some_port }}"
                     host: "{{ .Values.some_host }}"
                     path: "{{ .Values.some_path }}"
                     httpHeaders:
                       key: "{{ .Values.some_value }}"
                   preStop:
-                    type: exec
+                    type: EXEC
                     command: "{{ .Values.some_command }}"
     asserts:
       - documentIndex: &deploymentDoc 0
@@ -178,7 +178,7 @@ tests:
                     command: []
     asserts:
       - failedTemplate:
-          errorMessage: Container - Expected <lifecycle> <type> to be one of [exec, http, https], but got [invalid]
+          errorMessage: Container - Expected <lifecycle> <type> to be one of [EXEC, HTTP, HTTPS], but got [invalid]
 
   - it: should fail with empty command on exec lifecycle type
     set:
@@ -196,11 +196,11 @@ tests:
                 imageSelector: image
                 lifecycle:
                   preStop:
-                    type: exec
+                    type: EXEC
                     command: []
     asserts:
       - failedTemplate:
-          errorMessage: Container - Expected non-empty <lifecycle> <command> on [exec] type
+          errorMessage: Container - Expected non-empty <lifecycle> <command> on [EXEC] type
 
   - it: should fail with empty port on http lifecycle type
     set:
@@ -218,11 +218,11 @@ tests:
                 imageSelector: image
                 lifecycle:
                   preStop:
-                    type: http
+                    type: HTTP
                     port: ""
     asserts:
       - failedTemplate:
-          errorMessage: Container - Expected non-empty <lifecycle> <port> on [http] type
+          errorMessage: Container - Expected non-empty <lifecycle> <port> on [HTTP] type
 
   - it: should fail with path not starting with / on http lifecycle type
     set:
@@ -240,12 +240,12 @@ tests:
                 imageSelector: image
                 lifecycle:
                   preStop:
-                    type: http
+                    type: HTTP
                     port: 80
                     path: "api/v1"
     asserts:
       - failedTemplate:
-          errorMessage: Container - Expected <lifecycle> <path> to start with a forward slash [/] on <http> type
+          errorMessage: Container - Expected <lifecycle> <path> to start with a forward slash [/] on <HTTP> type
 
   - it: should fail with empty value on httpHeaders on http lifecycle type
     set:
@@ -263,7 +263,7 @@ tests:
                 imageSelector: image
                 lifecycle:
                   preStop:
-                    type: http
+                    type: HTTP
                     port: 80
                     httpHeaders:
                       key: ""
