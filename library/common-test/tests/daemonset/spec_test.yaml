@@ -42,15 +42,12 @@ tests:
     asserts:
       - documentIndex: *daemonSetDoc
         isSubset:
-          path: spec
+          path: spec.updateStrategy
           content:
-            replicas: 2
-            revisionHistoryLimit: 4
-            updateStrategy:
-              type: RollingUpdate
-              rollingUpdate:
-                maxSurge: 1
-                maxUnavailable: 1
+            type: RollingUpdate
+            rollingUpdate:
+              maxSurge: 1
+              maxUnavailable: 1
 
   - it: should apply spec correctly
     set:

@@ -42,15 +42,12 @@ tests:
     asserts:
       - documentIndex: *statefulSetDoc
         isSubset:
-          path: spec
+          path: spec.updateStrategy
           content:
-            replicas: 2
-            revisionHistoryLimit: 4
-            updateStrategy:
-              type: RollingUpdate
-              rollingUpdate:
-                maxSurge: 1
-                partition: 1
+            type: RollingUpdate
+            rollingUpdate:
+              maxSurge: 1
+              partition: 1
 
   - it: should apply spec correctly
     set:

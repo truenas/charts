@@ -40,15 +40,12 @@ tests:
     asserts:
       - documentIndex: *deploymentDoc
         isSubset:
-          path: spec
+          path: spec.strategy
           content:
-            replicas: 2
-            revisionHistoryLimit: 4
-            strategy:
-              type: RollingUpdate
-              rollingUpdate:
-                maxSurge: 1
-                maxUnavailable: 1
+            type: RollingUpdate
+            rollingUpdate:
+              maxSurge: 1
+              maxUnavailable: 1
 
   - it: should apply spec correctly
     set:
