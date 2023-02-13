@@ -21,9 +21,10 @@ updateStrategy:
   rollingUpdate:
     {{- $maxSurge := $objectData.rollingUpdate.maxSurge | default $rootCtx.Values.fallbackDefaults.maxSurge -}}
     {{- $maxUnavailable := $objectData.rollingUpdate.maxUnavailable | default $rootCtx.Values.fallbackDefaults.maxUnavailable -}}
-    {{- if ne (int $maxSurge) 0 }}
-    maxUnavailable: {{ $maxUnavailable }}
+    {{- if and (eq (int $maxSurge) 0) (eq (int $maxUnavailable) 0)  -}}
+      {{- fail "DaemonSet - Cannot have <maxSurge> and <maxUnavailable> both set to 0" -}}
     {{- end }}
+    maxUnavailable: {{ $maxUnavailable }}
     maxSurge: {{ $maxSurge }}
   {{- end -}}
 {{- end -}}
