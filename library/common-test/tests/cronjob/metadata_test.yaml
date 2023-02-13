@@ -64,13 +64,6 @@ tests:
             label2: label2
       - documentIndex: *cronJobDoc
         equal:
-          path: spec.jobTemplate.spec.selector.matchLabels
-          value:
-            pod.name: workload-name
-            app.kubernetes.io/name: common-test
-            app.kubernetes.io/instance: RELEASE-NAME
-      - documentIndex: *cronJobDoc
-        equal:
           path: spec.jobTemplate.spec.template.metadata.labels
           value:
             pod.name: workload-name
