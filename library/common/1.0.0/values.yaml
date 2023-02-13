@@ -20,7 +20,7 @@ fallbackDefaults:
   # -- Default maxUnavailable
   maxUnavailable: 1
   # -- Default maxSurge
-  maxSurge: 1
+  maxSurge: 0
   # -- Default partition (StatefulSet only)
   partition: 1
   # -- Default probe type

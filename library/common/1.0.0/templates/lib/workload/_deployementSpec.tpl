@@ -20,7 +20,12 @@ strategy:
       {{- $_ := set $objectData "rollingUpdate" dict -}}
     {{- end }}
   rollingUpdate:
-    maxUnavailable: {{ $objectData.rollingUpdate.maxUnavailable | default $rootCtx.Values.fallbackDefaults.maxUnavailable }}
-    maxSurge: {{ $objectData.rollingUpdate.maxSurge | default $rootCtx.Values.fallbackDefaults.maxSurge }}
+    {{- $maxSurge := $objectData.rollingUpdate.maxSurge | default $rootCtx.Values.fallbackDefaults.maxSurge -}}
+    {{- $maxUnavailable := $objectData.rollingUpdate.maxUnavailable | default $rootCtx.Values.fallbackDefaults.maxUnavailable -}}
+    {{- if ne (int $maxSurge) 0 }}
+    maxUnavailable: {{ $maxUnavailable }}
+    {{- end }}
+    maxSurge: {{ $maxSurge }}
+    {{- end -}}
   {{- end -}}
 {{- end -}}
