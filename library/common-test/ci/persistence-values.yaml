@@ -5,8 +5,12 @@ image:
 
 service:
   main:
+    enabled: true
+    primary: true
     ports:
       main:
+        enabled: true
+        primary: true
         port: 8080
 
 workload:
@@ -17,6 +21,8 @@ workload:
     podSpec:
       containers:
         main:
+          enabled: true
+          primary: true
           args:
             - --port
             - "8080"

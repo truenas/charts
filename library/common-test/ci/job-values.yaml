@@ -5,8 +5,12 @@ image:
 
 service:
   main:
+    enabled: true
+    primary: true
     ports:
       main:
+        enabled: true
+        primary: true
         protocol: HTTP
         port: 8080
 
@@ -17,6 +21,8 @@ workload:
       restartPolicy: Never
       containers:
         main:
+          enabled: true
+          primary: true
           args:
             - --port
             - "8080"
