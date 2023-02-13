@@ -25,6 +25,5 @@ updateStrategy:
     maxUnavailable: {{ $maxUnavailable }}
     {{- end }}
     maxSurge: {{ $maxSurge }}
-    {{- end -}}
   {{- end -}}
 {{- end -}}
