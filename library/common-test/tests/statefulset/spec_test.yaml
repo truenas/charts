@@ -34,7 +34,7 @@ tests:
         workload-name:
           enabled: true
           primary: true
-          type: DaemonSet
+          type: StatefulSet
           replicas: 2
           revisionHistoryLimit: 4
           strategy: RollingUpdate
@@ -46,7 +46,7 @@ tests:
           content:
             type: RollingUpdate
             rollingUpdate:
-              maxSurge: 1
+              maxUnavailable: 1
               partition: 1
 
   - it: should apply spec correctly
