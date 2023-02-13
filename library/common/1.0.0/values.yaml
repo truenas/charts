@@ -149,7 +149,6 @@ workload:
           enabled: true
           primary: true
           imageSelector: image
-          # TODO: Currently implementing
           probes:
             liveness:
               enabled: true
@@ -163,32 +162,33 @@ workload:
               enabled: true
               type: http
               port: "{{ .Values.service.main.ports.main.port }}"
-          securityContext:
-            runAsNonRoot: true
-            runAsUser: 568
-            runAsGroup: 568
-            readOnlyRootFilesystem: true
-            allowPrivilegeEscalation: false
-            privileged: false
-            capabilities:
-              add: []
-              drop:
-                - ALL
-          env: {}
-          envList: []
-          envFrom: []
-          resources:
-            limits:
-              cpu: 100m
-              memory: 128Mi
-            requests:
-              cpu: 100m
-              memory: 128Mi
-      initContainers:
-        init-cont-name:
-          enabled: false
-          type: install
-          # ...containerSpec
+    #       # TODO: Currently implementing
+    #       securityContext:
+    #         runAsNonRoot: true
+    #         runAsUser: 568
+    #         runAsGroup: 568
+    #         readOnlyRootFilesystem: true
+    #         allowPrivilegeEscalation: false
+    #         privileged: false
+    #         capabilities:
+    #           add: []
+    #           drop:
+    #             - ALL
+    #       env: {}
+    #       envList: []
+    #       envFrom: []
+    #       resources:
+    #         limits:
+    #           cpu: 100m
+    #           memory: 128Mi
+    #         requests:
+    #           cpu: 100m
+    #           memory: 128Mi
+    #   initContainers:
+    #     init-cont-name:
+    #       enabled: false
+    #       type: install
+    #       # ...containerSpec
 # TODO:
 portal: {}
 

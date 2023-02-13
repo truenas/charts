@@ -12,8 +12,8 @@ service:
 
 workload:
   main:
-    type: StatefulSet
-    pod:
+    type: DaemonSet
+    podSpec:
       containers:
         main:
           args:

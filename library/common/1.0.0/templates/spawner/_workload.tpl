@@ -31,6 +31,11 @@
       {{/* Short name is the one that defined on the chart, used on selectors */}}
       {{- $_ := set $objectData "shortName" $name -}}
 
+      {{/* Set the podSpec so it doesn't fail on nil pointer */}}
+      {{- if not (hasKey $objectData "podSpec") -}}
+        {{ $_ := set $objectData "podSpec" dict }}
+      {{- end -}}
+
       {{/* Call class to create the object */}}
       {{- if eq $objectData.type "Deployment" -}}
         {{- include "ix.v1.common.class.deployment" (dict "rootCtx" $ "objectData" $objectData) -}}

@@ -21,8 +21,7 @@
       {{- $hasEnabled = true -}}
 
       {{/* And workload is primary */}}
-      {{- if and (hasKey $workload "primary") ($workload.primary) -}}
-
+      {{- if $workload.primary -}}
         {{/* Fail if there is already a primary workload */}}
         {{- if $hasPrimary -}}
           {{- fail "Workload - Only one workload can be primary" -}}
@@ -35,9 +34,9 @@
 
   {{- end -}}
 
-  {{/* Require at least one primary workload, if any enabled */}}
+  {{/* Require at one primary workload, if any enabled */}}
   {{- if and $hasEnabled (not $hasPrimary) -}}
-    {{- fail "Workload - At least one enabled workload must be primary" -}}
+    {{- fail "Workload - One enabled workload must be primary" -}}
   {{- end -}}
 
 {{- end -}}
