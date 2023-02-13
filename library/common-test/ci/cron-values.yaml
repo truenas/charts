@@ -13,7 +13,7 @@ service:
 workload:
   main:
     type: CronJob
-    pod:
+    podSpec:
       containers:
         main:
           args:
