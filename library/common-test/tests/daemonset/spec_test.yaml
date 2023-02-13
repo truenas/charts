@@ -24,30 +24,6 @@ tests:
             revisionHistoryLimit: 3
             updateStrategy:
               type: RollingUpdate
-              rollingUpdate:
-                maxSurge: 0
-                maxUnavailable: 1
-
-  - it: should apply defaults to rollingUpdate
-    set:
-      workload:
-        workload-name:
-          enabled: true
-          primary: true
-          type: DaemonSet
-          replicas: 2
-          revisionHistoryLimit: 4
-          strategy: RollingUpdate
-          podSpec: {}
-    asserts:
-      - documentIndex: *daemonSetDoc
-        isSubset:
-          path: spec.updateStrategy
-          content:
-            type: RollingUpdate
-            rollingUpdate:
-              maxSurge: 0
-              maxUnavailable: 1
 
   - it: should apply spec correctly
     set:
@@ -73,3 +49,45 @@ tests:
               rollingUpdate:
                 maxSurge: 5
                 maxUnavailable: 5
+
+  - it: should apply maxSurge with 0
+    set:
+      workload:
+        workload-name:
+          enabled: true
+          primary: true
+          type: DaemonSet
+          strategy: RollingUpdate
+          rollingUpdate:
+            maxSurge: 0
+          podSpec: {}
+    asserts:
+      - documentIndex: *daemonSetDoc
+        isSubset:
+          path: spec
+          content:
+            updateStrategy:
+              type: RollingUpdate
+              rollingUpdate:
+                maxSurge: 0
+
+  - it: should apply maxUnavailable with 0
+    set:
+      workload:
+        workload-name:
+          enabled: true
+          primary: true
+          type: DaemonSet
+          strategy: RollingUpdate
+          rollingUpdate:
+            maxUnavailable: 0
+          podSpec: {}
+    asserts:
+      - documentIndex: *daemonSetDoc
+        isSubset:
+          path: spec
+          content:
+            updateStrategy:
+              type: RollingUpdate
+              rollingUpdate:
+                maxUnavailable: 0

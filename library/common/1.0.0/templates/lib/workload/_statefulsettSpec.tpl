@@ -16,12 +16,16 @@ revisionHistoryLimit: {{ $objectData.revisionHistoryLimit | default 3 }}
 serviceName: {{ $objectData.name }}
 updateStrategy:
   type: {{ $strategy }}
-  {{- if eq $strategy "RollingUpdate" }}
+  {{- if and
+        (eq $objectData.strategy "RollingUpdate")
+        $objectData.rollingUpdate
+        (or (hasKey $objectData.rollingUpdate "maxUnavailable") (hasKey $objectData.rollingUpdate "partition")) }}
   rollingUpdate:
-    {{- if not $objectData.rollingUpdate -}} {{/* Create the key if it does not exist, to avoid nil pointers */}}
-      {{- $_ := set $objectData "rollingUpdate" dict -}}
-    {{- end }}
-    maxUnavailable: {{ $objectData.rollingUpdate.maxUnavailable | default $rootCtx.Values.fallbackDefaults.maxUnavailable }}
-    partition: {{ $objectData.rollingUpdate.partition | default $rootCtx.Values.fallbackDefaults.partition }}
+    {{- if hasKey $objectData.rollingUpdate "maxUnavailable" }}
+    maxUnavailable: {{ $objectData.rollingUpdate.maxUnavailable }}
+    {{- end -}}
+    {{- if hasKey $objectData.rollingUpdate "partition" }}
+    partition: {{ $objectData.rollingUpdate.partition }}
+    {{- end -}}
   {{- end -}}
 {{- end -}}

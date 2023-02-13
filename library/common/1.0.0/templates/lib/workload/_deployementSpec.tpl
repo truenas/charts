@@ -15,17 +15,16 @@ replicas: {{ $objectData.replicas | default 1 }}
 revisionHistoryLimit: {{ $objectData.revisionHistoryLimit | default 3 }}
 strategy:
   type: {{ $strategy }}
-  {{- if eq $strategy "RollingUpdate" }}
-    {{- if not $objectData.rollingUpdate -}} {{/* Create the key if it does not exist, to avoid nil pointers */}}
-      {{- $_ := set $objectData "rollingUpdate" dict -}}
-    {{- end }}
+  {{- if and
+        (eq $objectData.strategy "RollingUpdate")
+        $objectData.rollingUpdate
+        (or (hasKey $objectData.rollingUpdate "maxUnavailable") (hasKey $objectData.rollingUpdate "partition")) }}
   rollingUpdate:
-    {{- $maxSurge := $objectData.rollingUpdate.maxSurge | default $rootCtx.Values.fallbackDefaults.maxSurge -}}
-    {{- $maxUnavailable := $objectData.rollingUpdate.maxUnavailable | default $rootCtx.Values.fallbackDefaults.maxUnavailable -}}
-    {{- if and (eq (int $maxSurge) 0) (eq (int $maxUnavailable) 0)  -}}
-      {{- fail "Deployment - Cannot have <maxSurge> and <maxUnavailable> both set to 0" -}}
-    {{- end }}
-    maxUnavailable: {{ $maxUnavailable }}
-    maxSurge: {{ $maxSurge }}
+    {{- if hasKey $objectData.rollingUpdate "maxUnavailable" }}
+    maxUnavailable: {{ $objectData.rollingUpdate.maxUnavailable }}
+    {{- end -}}
+    {{- if hasKey $objectData.rollingUpdate "maxSurge" }}
+    maxSurge: {{ $objectData.rollingUpdate.maxSurge }}
+    {{- end -}}
   {{- end -}}
 {{- end -}}
