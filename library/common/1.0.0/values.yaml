@@ -173,8 +173,7 @@ workload:
 # TODO:
 portal: {}
 
-
-# -- SCALE GPU (TODO: Only the resources part is left)
+# -- SCALE GPU (TODO: Only the resources/targetSelector part is left)
 scaleGPU:
   - gpu:
       key: value
@@ -185,6 +184,20 @@ scaleGPU:
         - container-name
 
 ##### ⬇ Done ⬇ #####
+
+# -- Timezone used everywhere applicable
+TIMEZONE: UTC
+
+# -- (docs/service/README.md)
+service:
+  main:
+    enabled: true
+    primary: true
+    ports:
+      main:
+        enabled: true
+        primary: true
+        protocol: HTTP
 
 # -- (docs/persistence/README.md)
 persistence:
@@ -208,20 +221,6 @@ persistence:
     type: emptyDir
     mountPath: /dev/shm
     targetSelectAll: true
-
-# -- (docs/service/README.md)
-service:
-  main:
-    enabled: true
-    primary: true
-    ports:
-      main:
-        enabled: true
-        primary: true
-        protocol: HTTP
-
-# -- Timezone used everywhere applicable
-TIMEZONE: UTC
 
 # -- Injected from SCALE middleware
 # Only for reference here

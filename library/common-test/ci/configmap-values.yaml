@@ -33,6 +33,10 @@ key4: value2
 key5: 81
 key6: false
 
+envFrom:
+  - configMapRef:
+      name: kv-test
+
 configmap:
   kv-test:
     enabled: true
