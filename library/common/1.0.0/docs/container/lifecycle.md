@@ -3,17 +3,16 @@
 Assume every key bellow has a prefix of `workload.[workload-name].podSpec.containers.[container-name]`.
 
 | Key                          |     Type      |     Required      |   Helm Template    | Default | Description                                                                               |
-| :--------------------------- | :-----------: | :---------------: | :----------------: | :-----: | :---------------------------------------------------------------------------------------- | --- |
+| :--------------------------- | :-----------: | :---------------: | :----------------: | :-----: | :---------------------------------------------------------------------------------------- |
 | lifecycle                    |    `dict`     |        ❌         |         ❌         |  `{}`   | Define lifecycle for the container                                                        |
 | lifecycle.preStop            |    `dict`     |        ❌         |         ❌         |  `{}`   | Define preStop lifecycle                                                                  |
 | lifecycle.postStart          |    `dict`     |        ❌         |         ❌         |  `{}`   | Define preStop lifecycle                                                                  |
-| lifecycle.[hook].type        |   `string`    |        ❌         |         ❌         |  `""`   | Define hook type (exec, http, https)                                                             |
-| lifecycle.[hook].command     | `list/string` | ✅ (On exec type) |         ✅         |  `""`   | Define command(s). If it's single, can be defined as string (Only when exec type is used) |     |
-| lifecycle.[hook].port        |     `int`     | ✅ (On http type) |         ✅         |  `""`   | Define the port, (Only when http type is used)                                            |     |
-| lifecycle.[hook].host        |   `string`    |        ❌         |         ✅         |         | Define the host, k8s defaults to POD IP (Only when http type is used)                     |     |
-| lifecycle.[hook].path        |   `string`    |        ❌         |         ✅         |   `/`   | Define the path (Only when http type is used)                                             |     |
-| lifecycle.[hook].scheme      |   `string`    |        ❌         |         ✅         | `HTTP`  | Define the scheme (Only when http type is used)                                           |     |
-| lifecycle.[hook].httpHeaders |    `dict`     |        ❌         | ✅ (On value only) |  `{}`   | Define the httpHeaders in key-value pairs (Only when http type is used)                   |     |
+| lifecycle.[hook].type        |   `string`    |        ❌         |         ❌         |  `""`   | Define hook type (exec, http, https) (Used as a scheme in http(s) types)                  |
+| lifecycle.[hook].command     | `list/string` | ✅ (On exec type) |         ✅         |  `""`   | Define command(s). If it's single, can be defined as string (Only when exec type is used) |
+| lifecycle.[hook].port        |     `int`     | ✅ (On http type) |         ✅         |  `""`   | Define the port, (Only when http(s) type is used)                                         |
+| lifecycle.[hook].host        |   `string`    |        ❌         |         ✅         |         | Define the host, k8s defaults to POD IP (Only when http(s) type is used)                  |
+| lifecycle.[hook].path        |   `string`    |        ❌         |         ✅         |   `/`   | Define the path (Only when http(s) type is used)                                          |
+| lifecycle.[hook].httpHeaders |    `dict`     |        ❌         | ✅ (On value only) |  `{}`   | Define the httpHeaders in key-value pairs (Only when http(s) type is used)                |
 
 ---
 
@@ -45,7 +44,6 @@ workload:
               port: 8080
               host: localhost
               path: /path
-              scheme: HTTP
               httpHeaders:
                 key: value
 ```

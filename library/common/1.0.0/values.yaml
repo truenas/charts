@@ -23,6 +23,8 @@ fallbackDefaults:
   maxSurge: 1
   # -- Default partition (StatefulSet only)
   partition: 1
+  # -- Default probe type
+  probeType: http
   # -- Default Service Protocol
   serviceProtocol: TCP
   # -- Default Service Type
@@ -38,6 +40,26 @@ fallbackDefaults:
   # -- Default PVC/VCT Access Modes
   accessModes:
     - ReadWriteOnce
+  # -- Default probe timeouts
+  probeTimeouts:
+    liveness:
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      timeoutSeconds: 5
+      failureThreshold: 5
+      successThreshold: 1
+    readiness:
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      timeoutSeconds: 5
+      failureThreshold: 5
+      successThreshold: 2
+    startup:
+      initialDelaySeconds: 10
+      periodSeconds: 5
+      timeoutSeconds: 2
+      failureThreshold: 60
+      successThreshold: 1
 
 # TODO: Docs (for the imageName) convention
 # -- Image values
@@ -122,12 +144,25 @@ workload:
     primary: true
     type: Deployment
     podSpec:
-      # TODO: Currently implementing
       containers:
         main:
           enabled: true
           primary: true
           imageSelector: image
+          # TODO: Currently implementing
+          probes:
+            liveness:
+              enabled: true
+              type: http
+              port: "{{ .Values.service.main.ports.main.port }}"
+            readiness:
+              enabled: true
+              type: http
+              port: "{{ .Values.service.main.ports.main.port }}"
+            startup:
+              enabled: true
+              type: http
+              port: "{{ .Values.service.main.ports.main.port }}"
           securityContext:
             runAsNonRoot: true
             runAsUser: 568
@@ -149,28 +184,6 @@ workload:
             requests:
               cpu: 100m
               memory: 128Mi
-          probes:
-            liveness:
-              enabled: true
-              type: HTTP
-              port:
-              path:
-              httpHeaders: {}
-              command: []
-            readiness:
-              enabled: true
-              type: HTTP
-              port:
-              path:
-              httpHeaders: {}
-              command: []
-            startup:
-              enabled: true
-              type: HTTP
-              port:
-              path:
-              httpHeaders: {}
-              command: []
       initContainers:
         init-cont-name:
           enabled: false
