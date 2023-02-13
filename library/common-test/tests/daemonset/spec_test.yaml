@@ -25,8 +25,8 @@ tests:
             updateStrategy:
               type: RollingUpdate
               rollingUpdate:
+                maxSurge: 0
                 maxUnavailable: 1
-                maxSurge: 1
 
   - it: should apply defaults to rollingUpdate
     set:
@@ -46,7 +46,7 @@ tests:
           content:
             type: RollingUpdate
             rollingUpdate:
-              maxSurge: 1
+              maxSurge: 0
               maxUnavailable: 1
 
   - it: should apply spec correctly

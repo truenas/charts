@@ -28,3 +28,22 @@ tests:
     asserts:
       - failedTemplate:
           errorMessage: DaemonSet - Expected <rollingUpdate> to be a dictionary, but got [string]
+
+  - it: should fail with both maxSurge and maxUnavailable set to 0
+    set:
+      fallbackDefaults:
+        maxSurge: 0
+        maxUnavailable: 0
+      workload:
+        workload-name:
+          enabled: true
+          primary: true
+          type: DaemonSet
+          strategy: RollingUpdate
+          rollingUpdate:
+            maxSurge: 0
+            maxUnavailable: 0
+          podSpec: {}
+    asserts:
+      - failedTemplate:
+          errorMessage: DaemonSet - Cannot have <maxSurge> and <maxUnavailable> both set to 0
