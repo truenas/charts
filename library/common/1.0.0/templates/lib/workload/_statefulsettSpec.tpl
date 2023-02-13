@@ -15,16 +15,9 @@ revisionHistoryLimit: {{ $objectData.revisionHistoryLimit | default 3 }}
 serviceName: {{ $objectData.name }}
 updateStrategy:
   type: {{ $objectData.strategy | default "RollingUpdate" }}
-  {{- if and
-        (eq $objectData.strategy "RollingUpdate")
-        $objectData.rollingUpdate
-        (or $objectData.rollingUpdate.maxUnavailable $objectData.rollingUpdate.partition) }}
+  {{- if eq $objectData.strategy "RollingUpdate" }}
   rollingUpdate:
-    {{- with $objectData.rollingUpdate.maxUnavailable }}
-    maxUnavailable: {{ .}}
-    {{- end -}}
-    {{- with $objectData.rollingUpdate.partition }}
-    partition: {{ . }}
-    {{- end -}}
+    maxUnavailable: {{ $objectData.rollingUpdate.maxUnavailable | default $rootCtx.Values.fallbackDefaults.maxUnavailable }}
+    partition: {{ $objectData.rollingUpdate.partition | default $rootCtx.Values.fallbackDefaults.partition }}
   {{- end -}}
 {{- end -}}

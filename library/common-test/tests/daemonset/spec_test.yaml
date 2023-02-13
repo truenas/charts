@@ -25,6 +25,30 @@ tests:
             updateStrategy:
               type: RollingUpdate
 
+  - it: should apply defaults to rollingUpdate
+    set:
+      workload:
+        workload-name:
+          enabled: true
+          primary: true
+          type: DaemonSet
+          replicas: 2
+          revisionHistoryLimit: 4
+          strategy: RollingUpdate
+          podSpec: {}
+    asserts:
+      - documentIndex: *daemonSetDoc
+        isSubset:
+          path: spec
+          content:
+            replicas: 2
+            revisionHistoryLimit: 4
+            strategy:
+              type: RollingUpdate
+              rollingUpdate:
+                maxSurge: 1
+                maxUnavailable: 1
+
   - it: should apply spec correctly
     set:
       workload:

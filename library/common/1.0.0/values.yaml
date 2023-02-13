@@ -17,6 +17,12 @@ fallbackDefaults:
   # -- Define a storageClassName that will be used for all PVCs
   # Can be overruled per PVC
   storageClass:
+  # -- Default maxUnavailable
+  maxUnavailable: 1
+  # -- Default maxSurge
+  maxSurge: 1
+  # -- Default partition (StatefulSet only)
+  partition: 1
   # -- Default Service Protocol
   serviceProtocol: TCP
   # -- Default Service Type

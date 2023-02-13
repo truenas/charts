@@ -13,16 +13,9 @@ objectData:
 revisionHistoryLimit: {{ $objectData.revisionHistoryLimit | default 3 }}
 updateStrategy:
   type: {{ $objectData.strategy | default "RollingUpdate" }}
-  {{- if and
-        (eq $objectData.strategy "RollingUpdate")
-        $objectData.rollingUpdate
-        (or $objectData.rollingUpdate.maxUnavailable $objectData.rollingUpdate.maxSurge) }}
+  {{- if eq $objectData.strategy "RollingUpdate" }}
   rollingUpdate:
-    {{- with $objectData.rollingUpdate.maxUnavailable }}
-    maxUnavailable: {{ .}}
-    {{- end -}}
-    {{- with $objectData.rollingUpdate.maxSurge }}
-    maxSurge: {{ . }}
-    {{- end -}}
+    maxUnavailable: {{ $objectData.rollingUpdate.maxUnavailable | default $rootCtx.Values.fallbackDefaults.maxUnavailable }}
+    maxSurge: {{ $objectData.rollingUpdate.maxSurge | default $rootCtx.Values.fallbackDefaults.maxSurge }}
   {{- end -}}
 {{- end -}}

@@ -1,11 +1,11 @@
 # DaemonSet
 
-| Key                                                   |   Type   | Required | Helm Template |     Default     | Description                                                          |
-| :---------------------------------------------------- | :------: | :------: | :-----------: | :-------------: | :------------------------------------------------------------------- |
-| workload.[workload-name].strategy                     | `string` |    ❌    |      ❌       | `RollingUpdate` | Define the strategy of the workload (OnDelete, RollingUpdate)        |
-| workload.[workload-name].rollingUpdate                |  `dict`  |    ❌    |      ❌       |      `{}`       | Holds the rollingUpdate options, Only when strategy is RollingUpdate |
-| workload.[workload-name].rollingUpdate.maxUnavailable |  `int`   |    ❌    |      ❌       |                 | Define the maxUnavailable, Only when strategy is RollingUpdate       |
-| workload.[workload-name].rollingUpdate.partition      |  `int`   |    ❌    |      ❌       |                 | Define the partition, Only when strategy is RollingUpdate            |
+| Key                                                   |   Type   | Required | Helm Template |                     Default                     | Description                                                          |
+| :---------------------------------------------------- | :------: | :------: | :-----------: | :---------------------------------------------: | :------------------------------------------------------------------- |
+| workload.[workload-name].strategy                     | `string` |    ❌    |      ❌       |                 `RollingUpdate`                 | Define the strategy of the workload (OnDelete, RollingUpdate)        |
+| workload.[workload-name].rollingUpdate                |  `dict`  |    ❌    |      ❌       |                      `{}`                       | Holds the rollingUpdate options, Only when strategy is RollingUpdate |
+| workload.[workload-name].rollingUpdate.maxUnavailable |  `int`   |    ❌    |      ❌       | `{{ .Values.fallbackDefaults.maxUnavailable }}` | Define the maxUnavailable, Only when strategy is RollingUpdate       |
+| workload.[workload-name].rollingUpdate.partition      |  `int`   |    ❌    |      ❌       |   `{{ .Values.fallbackDefaults.partition }}`    | Define the partition, Only when strategy is RollingUpdate            |
 
 ---
 
