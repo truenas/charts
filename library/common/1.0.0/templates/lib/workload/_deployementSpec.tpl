@@ -15,16 +15,15 @@ replicas: {{ $objectData.replicas | default 1 }}
 revisionHistoryLimit: {{ $objectData.revisionHistoryLimit | default 3 }}
 strategy:
   type: {{ $strategy }}
-  {{- if and
-        (eq $objectData.strategy "RollingUpdate")
-        $objectData.rollingUpdate
-        (or (hasKey $objectData.rollingUpdate "maxUnavailable") (hasKey $objectData.rollingUpdate "partition")) }}
+  {{- if and (eq $objectData.strategy "RollingUpdate") $objectData.rollingUpdate -}}
+    {{ if (or (hasKey $objectData.rollingUpdate "maxUnavailable") (hasKey $objectData.rollingUpdate "maxSurge")) }}
   rollingUpdate:
-    {{- if hasKey $objectData.rollingUpdate "maxUnavailable" }}
+      {{- if hasKey $objectData.rollingUpdate "maxUnavailable" }}
     maxUnavailable: {{ $objectData.rollingUpdate.maxUnavailable }}
-    {{- end -}}
-    {{- if hasKey $objectData.rollingUpdate "maxSurge" }}
+      {{- end -}}
+      {{- if hasKey $objectData.rollingUpdate "maxSurge" }}
     maxSurge: {{ $objectData.rollingUpdate.maxSurge }}
+      {{- end -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
