@@ -10,11 +10,12 @@ objectData:
 {{- define "ix.v1.common.lib.workload.deploymentSpec" -}}
   {{- $objectData := .objectData -}}
   {{- $rootCtx := .rootCtx -}}
+  {{- $strategy := $objectData.strategy | default "Recreate" }}
 replicas: {{ $objectData.replicas | default 1 }}
 revisionHistoryLimit: {{ $objectData.revisionHistoryLimit | default 3 }}
 strategy:
-  type: {{ $objectData.strategy | default "Recreate" }}
-  {{- if eq $objectData.strategy "RollingUpdate" }}
+  type: {{ $strategy }}
+  {{- if eq $strategy "RollingUpdate" }}
     {{- if not $objectData.rollingUpdate -}} {{/* Create the key if it does not exist, to avoid nil pointers */}}
       {{- $_ := set $objectData "rollingUpdate" dict -}}
     {{- end }}

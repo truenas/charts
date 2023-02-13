@@ -10,10 +10,11 @@ objectData:
 {{- define "ix.v1.common.lib.workload.daemonsetSpec" -}}
   {{- $objectData := .objectData -}}
   {{- $rootCtx := .rootCtx -}}
+  {{- $strategy := $objectData.strategy | default "RollingUpdate" }}
 revisionHistoryLimit: {{ $objectData.revisionHistoryLimit | default 3 }}
 updateStrategy:
-  type: {{ $objectData.strategy | default "RollingUpdate" }}
-  {{- if eq $objectData.strategy "RollingUpdate" }}
+  type: {{ $strategy }}
+  {{- if eq $strategy "RollingUpdate" }}
     {{- if not $objectData.rollingUpdate -}} {{/* Create the key if it does not exist, to avoid nil pointers */}}
       {{- $_ := set $objectData "rollingUpdate" dict -}}
     {{- end }}

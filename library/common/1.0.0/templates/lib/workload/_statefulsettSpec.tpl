@@ -10,12 +10,13 @@ objectData:
 {{- define "ix.v1.common.lib.workload.statefulsetSpec" -}}
   {{- $objectData := .objectData -}}
   {{- $rootCtx := .rootCtx -}}
+  {{- $strategy := $objectData.strategy | default "RollingUpdate" }}
 replicas: {{ $objectData.replicas | default 1 }}
 revisionHistoryLimit: {{ $objectData.revisionHistoryLimit | default 3 }}
 serviceName: {{ $objectData.name }}
 updateStrategy:
-  type: {{ $objectData.strategy | default "RollingUpdate" }}
-  {{- if eq $objectData.strategy "RollingUpdate" }}
+  type: {{ $strategy }}
+  {{- if eq $strategy "RollingUpdate" }}
   rollingUpdate:
     {{- if not $objectData.rollingUpdate -}} {{/* Create the key if it does not exist, to avoid nil pointers */}}
       {{- $_ := set $objectData "rollingUpdate" dict -}}
