@@ -25,8 +25,10 @@ objectData: The service data, that will be used to render the Service object.
     {{/* Get Pod Values based on the selector (or the absence of it) */}}
     {{- $podValues = fromJson (include "ix.v1.common.lib.service.getSelectedPodValues" (dict "rootCtx" $rootCtx "objectData" $objectData)) -}}
 
-    {{/* Get Pod hostNetwork configuration */}}
-    {{- $hostNetwork = include "ix.v1.common.lib.pod.hostNetwork" (dict "rootCtx" $rootCtx "objectData" $podValues) -}}
+    {{- if $podValues -}}
+      {{/* Get Pod hostNetwork configuration */}}
+      {{- $hostNetwork = include "ix.v1.common.lib.pod.hostNetwork" (dict "rootCtx" $rootCtx "objectData" $podValues) -}}
+    {{- end -}}
 
     {{- range $portName, $port := $objectData.ports -}}
       {{- if $port.enabled -}}
