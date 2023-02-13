@@ -48,6 +48,17 @@ tests:
       - failedTemplate:
           errorMessage: Workload - Expected <type> to be one of [Deployment, StatefulSet, DaemonSet, Job, CronJob], but got [not-valid-type]
 
+  - it: should fail without podSpec
+    set:
+      workload:
+        workload-name:
+          enabled: true
+          primary: true
+          type: Deployment
+    asserts:
+      - failedTemplate:
+          errorMessage: Workload - Expected <podSpec> key to exist
+
   - it: should fail without primary enabled workload
     set:
       workload:
@@ -63,7 +74,7 @@ tests:
           podSpec: {}
     asserts:
       - failedTemplate:
-          errorMessage: Workload - At least one enabled workload must be primary
+          errorMessage: Workload - One enabled workload must be primary
 
   - it: should fail more than one primary enabled workload
     set:
