@@ -19,6 +19,13 @@ tests:
                 enabled: true
                 primary: true
                 imageSelector: image
+                probes: &probes
+                  liveness:
+                    enabled: false
+                  readiness:
+                    enabled: false
+                  startup:
+                    enabled: false
                 lifecycle:
                   postStart:
                     type: exec
@@ -57,7 +64,6 @@ tests:
       some_command: ./some_command
       some_port: 80
       some_host: some_host
-      some_scheme: HTTPS
       some_path: /api/v1
       some_value: 123
       workload:
@@ -71,12 +77,12 @@ tests:
                 enabled: true
                 primary: true
                 imageSelector: image
+                probes: *probes
                 lifecycle:
                   postStart:
-                    type: http
+                    type: https
                     port: "{{ .Values.some_port }}"
                     host: "{{ .Values.some_host }}"
-                    scheme: "{{ .Values.some_scheme }}"
                     path: "{{ .Values.some_path }}"
                     httpHeaders:
                       key: "{{ .Values.some_value }}"
@@ -123,6 +129,7 @@ tests:
               container-name1:
                 enabled: true
                 primary: true
+                probes: *probes
                 imageSelector: image
                 lifecycle:
                   invalid: {}
@@ -171,7 +178,7 @@ tests:
                     command: []
     asserts:
       - failedTemplate:
-          errorMessage: Container - Expected <lifecycle> <type> to be one of [exec, http], but got [invalid]
+          errorMessage: Container - Expected <lifecycle> <type> to be one of [exec, http, https], but got [invalid]
 
   - it: should fail with empty command on exec lifecycle type
     set:
@@ -238,7 +245,7 @@ tests:
                     path: "api/v1"
     asserts:
       - failedTemplate:
-          errorMessage: Container - Expected <path> to start with a forward slash [/] on <http> type
+          errorMessage: Container - Expected <lifecycle> <path> to start with a forward slash [/] on <http> type
 
   - it: should fail with empty value on httpHeaders on http lifecycle type
     set:
