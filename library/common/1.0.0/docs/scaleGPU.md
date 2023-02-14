@@ -10,6 +10,7 @@
 
 > When `targetSelector` is a dict, each entry is a list, containing the name(s) of the container(s) to assign the GPU
 > When `targetSelector` is a empty, it will assign the GPU to the primary pod/container
+> Selected pod's will get appended the group `44` in `supplementalGroups`. This is to allow rootless containers to access the GPU
 
 ---
 

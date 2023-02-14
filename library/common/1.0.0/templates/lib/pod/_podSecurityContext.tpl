@@ -25,6 +25,23 @@ objectData: The object data to be used to render the Pod.
     devices (5, 10, 20, 24) (Only when devices is assigned on the pod's containers)
     TODO: Unit Test the above cases
     */}}
+  {{- $addSupplemental := list -}}
+  {{- range $GPUValues := $rootCtx.Values.scaleGPU -}}
+    {{/* If there is a selector and pod is selected */}}
+    {{- if $GPUValues.targetSelector -}}
+      {{- if mustHas $objectData.shortName ($GPUValues.targetSelector | keys) -}}
+        {{- $addSupplemental = mustAppend $addSupplemental 44 -}}
+      {{- end -}}
+    {{/* If there isn't a selector, but pod is primary */}}
+    {{- else if $objectData.primary -}}
+      {{- $addSupplemental = mustAppend $addSupplemental 44 -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- if $addSupplemental -}}
+    {{- $_ := set $secContext "supplementalGroups" (concat $secContext.supplementalGroups $addSupplemental) -}}
+  {{- end -}}
+
   {{- $portRange := fromJson (include "ix.v1.common.lib.pod.securityContext.getPortRange" (dict "rootCtx" $rootCtx "objectData" $objectData)) -}}
   {{- if and $portRange.low (le (int $portRange.low) 1024) -}}
     {{- $_ := set $secContext "sysctls" (mustAppend $secContext.sysctls (dict "name" "net.ipv4.ip_unprivileged_port_start" "value" (printf "%v" $portRange.low))) -}}

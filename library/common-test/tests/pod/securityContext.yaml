@@ -252,6 +252,150 @@ tests:
             supplementalGroups: []
             sysctls: []
 
+  - it: should pass with with gpu assigned to primary pod
+    set:
+      workload:
+        workload-name1:
+          enabled: true
+          primary: true
+          type: Deployment
+          podSpec:
+            securityContext:
+              supplementalGroups:
+                - 1000
+        workload-name2:
+          enabled: true
+          primary: false
+          type: Deployment
+          podSpec: {}
+      scaleGPU:
+        - gpu:
+            nvidia: "1"
+    asserts:
+      - documentIndex: &deploymentDoc 0
+        isKind:
+          of: Deployment
+      - documentIndex: *deploymentDoc
+        equal:
+          path: spec.template.spec.securityContext
+          value:
+            fsGroup: 568
+            fsGroupChangePolicy: OnRootMismatch
+            supplementalGroups:
+              - 1000
+              - 44
+            sysctls: []
+      - documentIndex: &otherDeploymentDoc 1
+        isKind:
+          of: Deployment
+      - documentIndex: *otherDeploymentDoc
+        equal:
+          path: spec.template.spec.securityContext
+          value:
+            fsGroup: 568
+            fsGroupChangePolicy: OnRootMismatch
+            supplementalGroups: []
+            sysctls: []
+
+  - it: should pass with with gpu assigned to specific pod
+    set:
+      workload:
+        workload-name1:
+          enabled: true
+          primary: true
+          type: Deployment
+          podSpec:
+            securityContext:
+              supplementalGroups:
+                - 1000
+        workload-name2:
+          enabled: true
+          primary: false
+          type: Deployment
+          podSpec: {}
+      scaleGPU:
+        - gpu:
+            nvidia: "1"
+          targetSelector:
+            workload-name1:
+              - container-name1
+    asserts:
+      - documentIndex: &deploymentDoc 0
+        isKind:
+          of: Deployment
+      - documentIndex: *deploymentDoc
+        equal:
+          path: spec.template.spec.securityContext
+          value:
+            fsGroup: 568
+            fsGroupChangePolicy: OnRootMismatch
+            supplementalGroups:
+              - 1000
+              - 44
+            sysctls: []
+      - documentIndex: &otherDeploymentDoc 1
+        isKind:
+          of: Deployment
+      - documentIndex: *otherDeploymentDoc
+        equal:
+          path: spec.template.spec.securityContext
+          value:
+            fsGroup: 568
+            fsGroupChangePolicy: OnRootMismatch
+            supplementalGroups: []
+            sysctls: []
+
+  - it: should pass with with gpu assigned to multiple pod
+    set:
+      workload:
+        workload-name1:
+          enabled: true
+          primary: true
+          type: Deployment
+          podSpec:
+            securityContext:
+              supplementalGroups:
+                - 1000
+        workload-name2:
+          enabled: true
+          primary: false
+          type: Deployment
+          podSpec: {}
+      scaleGPU:
+        - gpu:
+            nvidia: "1"
+          targetSelector:
+            workload-name1:
+              - container-name1
+            workload-name2:
+              - container-name1
+    asserts:
+      - documentIndex: &deploymentDoc 0
+        isKind:
+          of: Deployment
+      - documentIndex: *deploymentDoc
+        equal:
+          path: spec.template.spec.securityContext
+          value:
+            fsGroup: 568
+            fsGroupChangePolicy: OnRootMismatch
+            supplementalGroups:
+              - 1000
+              - 44
+            sysctls: []
+      - documentIndex: &otherDeploymentDoc 1
+        isKind:
+          of: Deployment
+      - documentIndex: *otherDeploymentDoc
+        equal:
+          path: spec.template.spec.securityContext
+          value:
+            fsGroup: 568
+            fsGroupChangePolicy: OnRootMismatch
+            supplementalGroups:
+              - 44
+            sysctls: []
+
   # Failures
   - it: should fail with empty securityContext from "global"
     set:
