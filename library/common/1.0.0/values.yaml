@@ -157,6 +157,13 @@ workload:
               type: http
               port: "{{ .Values.service.main.ports.main.port }}"
     #       # TODO: Currently implementing
+          resources:
+            limits:
+              cpu: 0
+              memory: 128Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
     #       securityContext:
     #         runAsNonRoot: true
     #         runAsUser: 568
@@ -171,13 +178,6 @@ workload:
     #       env: {}
     #       envList: []
     #       envFrom: []
-    #       resources:
-    #         limits:
-    #           cpu: 100m
-    #           memory: 128Mi
-    #         requests:
-    #           cpu: 100m
-    #           memory: 128Mi
     #   initContainers:
     #     init-cont-name:
     #       enabled: false

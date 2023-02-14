@@ -106,8 +106,8 @@ jobs:
           - cron-values.yaml
           - statefulset-values.yaml
           - persistence-values.yaml
+          - rbac-values.yaml
           # - extra-containers-values.yaml
-          # - rbac-values.yaml
 
     steps:
       - name: Checkout

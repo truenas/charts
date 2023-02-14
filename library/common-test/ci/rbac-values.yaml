@@ -18,7 +18,7 @@ workload:
   main:
     enabled: true
     primary: true
-    type: StatefulSet
+    type: Deployment
     podSpec:
       containers:
         main:
@@ -39,10 +39,49 @@ workload:
             startup:
               enabled: true
               type: http
-              port: "{{ .Values.service.main.ports.main.port }}"
+              port:
 
-volumeClaimTemplates:
-  data:
-    mountPath: /data
-    accessMode: "ReadWriteOnce"
-    size: 1Gi
+rbac:
+  main:
+    enabled: true
+    primary: true
+    clusterWide: true
+    allServiceAccounts: true
+    labels:
+      key: value
+      key1: value1
+    annotations:
+      key: value
+      key1: value1
+    rules:
+      - apiGroups:
+          - ""
+        resources:
+          - services
+          - endpoints
+          - secrets
+        verbs:
+          - get
+          - list
+          - watch
+      - apiGroups:
+          - ""
+        resources:
+          - pods
+        verbs:
+          - get
+          - list
+          - watch
+
+serviceAccount:
+  sa-name:
+    enabled: true
+    primary: true
+    labels:
+      key: value
+      key2: value
+    annotations:
+      key: value
+      key2: value
+  other-sa-name:
+    enabled: true
