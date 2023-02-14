@@ -29,15 +29,15 @@ workload:
           probes:
             liveness:
               enabled: true
-              type: HTTP
+              type: http
               port: "{{ .Values.service.main.ports.main.port }}"
             readiness:
               enabled: true
-              type: HTTP
+              type: http
               port: "{{ .Values.service.main.ports.main.port }}"
             startup:
               enabled: true
-              type: HTTP
+              type: http
               port: "{{ .Values.service.main.ports.main.port }}"
 
 persistence:

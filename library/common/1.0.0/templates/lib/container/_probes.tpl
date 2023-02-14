@@ -9,7 +9,7 @@ objectData: The object data to be used to render the container.
   {{- $objectData := .objectData -}}
 
   {{- $probeNames := (list "liveness" "readiness" "startup") -}}
-  {{- $probeTypes := (list "HTTP" "HTTPS" "TCP" "GRPC" "EXEC") -}}
+  {{- $probeTypes := (list "http" "https" "tcp" "grpc" "exec") -}}
 
   {{- if not $objectData.probes -}}
     {{- fail "Container - Expected non-empty <probes>" -}}
@@ -44,13 +44,13 @@ objectData: The object data to be used to render the container.
         {{- fail (printf "Container - Expected probe type to be one of [%s], but got [%s]" (join ", " $probeTypes) $probeType) -}}
       {{- end }}
 {{ $probeName }}Probe:
-      {{- if (mustHas $probeType (list "HTTP" "HTTPS")) -}}
+      {{- if (mustHas $probeType (list "http" "https")) -}}
         {{- include "ix.v1.common.lib.container.actions.httpGet" (dict "rootCtx" $rootCtx "objectData" $probe "caller" "probes") | trim | nindent 2 -}}
-      {{- else if eq $probeType "TCP" -}}
+      {{- else if eq $probeType "tcp" -}}
         {{- include "ix.v1.common.lib.container.actions.tcpSocket" (dict "rootCtx" $rootCtx "objectData" $probe "caller" "probes") | trim | nindent 2 -}}
-      {{- else if eq $probeType "GRPC" -}}
+      {{- else if eq $probeType "grpc" -}}
         {{- include "ix.v1.common.lib.container.actions.grpc" (dict "rootCtx" $rootCtx "objectData" $probe "caller" "probes") | trim | nindent 2 -}}
-      {{- else if eq $probeType "EXEC" -}}
+      {{- else if eq $probeType "exec" -}}
         {{- include "ix.v1.common.lib.container.actions.exec" (dict "rootCtx" $rootCtx "objectData" $probe "caller" "probes") | trim | nindent 2 -}}
       {{- end -}}
 

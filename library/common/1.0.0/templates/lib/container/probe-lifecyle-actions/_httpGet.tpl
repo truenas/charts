@@ -10,12 +10,12 @@ objectData: The object data to be used to render the container.
   {{- $caller := .caller -}}
 
   {{- if not $objectData.port -}}
-    {{- fail (printf "Container - Expected non-empty <%s> <port> on [HTTP] type" $caller) -}}
+    {{- fail (printf "Container - Expected non-empty <%s> <port> on [http] type" $caller) -}}
   {{- end -}}
 
   {{- $port := $objectData.port -}}
   {{- $path := "/" -}}
-  {{- $scheme := "HTTP" -}}
+  {{- $scheme := "http" -}}
 
   {{- if kindIs "string" $port -}}
     {{- $port = tpl $port $rootCtx -}}
@@ -26,7 +26,7 @@ objectData: The object data to be used to render the container.
   {{- end -}}
 
   {{- if not (hasPrefix "/" $path) -}}
-    {{- fail (printf "Container - Expected <%s> <path> to start with a forward slash [/] on <HTTP> type" $caller) -}}
+    {{- fail (printf "Container - Expected <%s> <path> to start with a forward slash [/] on <http> type" $caller) -}}
   {{- end -}}
 
   {{- with $objectData.type -}}
@@ -38,7 +38,7 @@ httpGet:
   {{- end }}
   port: {{ $port }}
   path: {{ $path }}
-  scheme: {{ $scheme }}
+  scheme: {{ $scheme | upper }}
   {{- with $objectData.httpHeaders }}
   httpHeaders:
     {{- range $name, $value := . }}

@@ -9,11 +9,11 @@ Assume every key bellow has a prefix of `workload.[workload-name].podSpec.contai
 | probes.readiness                             |    `dict`     |              ✅               |         ❌         |                                      `{}`                                       | Define the readiness probe                                                                |
 | probes.startup                               |    `dict`     |              ✅               |         ❌         |                                      `{}`                                       | Define the startup probe                                                                  |
 | probes.[probe-name].enabled                  |   `boolean`   |              ✅               |         ❌         |                                     `true`                                      | Enable or disable the probe                                                               |
-| probes.[probe-name].type                     |   `string`    |              ❌               |         ✅         |                                     `http`                                      | Define probe type (EXEC, HTTP, HTTPS, TCP, GRPC) (Used as a scheme in HTTP(S) types)      |
-| probes.[probe-name].command                  | `list/string` |       ✅ (On EXEC type)       |         ✅         |                                      `""`                                       | Define command(s). If it's single, can be defined as string (Only when EXEC type is used) |
-| probes.[probe-name].port                     |     `int`     | ✅ (On GRPC/TCP/HTTP(S) type) |         ✅         |                                      `""`                                       | Define the port, (Only when GRPC/TCP/HTTP/HTTPS type is used)                             |
-| probes.[probe-name].path                     |   `string`    |              ❌               |         ✅         |                                       `/`                                       | Define the path (Only when HTTPS/HTTP type is used)                                       |
-| probes.[probe-name].httpHeaders              |    `dict`     |              ❌               | ✅ (On value only) |                                      `{}`                                       | Define the httpHeaders in key-value pairs (Only when HTTP/HTTPS type is used)             |
+| probes.[probe-name].type                     |   `string`    |              ❌               |         ✅         |                                     `http`                                      | Define probe type (exec, http, https, tcp, grpc) (Used as a scheme in http(s) types)      |
+| probes.[probe-name].command                  | `list/string` |       ✅ (On exec type)       |         ✅         |                                      `""`                                       | Define command(s). If it's single, can be defined as string (Only when exec type is used) |
+| probes.[probe-name].port                     |     `int`     | ✅ (On grpc/tcp/http(s) type) |         ✅         |                                      `""`                                       | Define the port, (Only when grpc/tcp/http/https type is used)                             |
+| probes.[probe-name].path                     |   `string`    |              ❌               |         ✅         |                                       `/`                                       | Define the path (Only when https/http type is used)                                       |
+| probes.[probe-name].httpHeaders              |    `dict`     |              ❌               | ✅ (On value only) |                                      `{}`                                       | Define the httpHeaders in key-value pairs (Only when http/https type is used)             |
 | probes.[probe-name].spec.initialDelaySeconds |     `int`     |              ❌               |         ❌         | `{{ .Values.fallbackDefaults.probeTimeouts.[probe-name].initialDelaySeconds }}` | Define the initialDelaySeconds in seconds                                                 |
 | probes.[probe-name].spec.periodSeconds       |     `int`     |              ❌               |         ❌         |    `{{ .Values.fallbackDefaults.probeTimeouts.[probe-name].periodSeconds }}`    | Define the periodSeconds in seconds                                                       |
 | probes.[probe-name].spec.timeoutSeconds      |     `int`     |              ❌               |         ❌         |   `{{ .Values.fallbackDefaults.probeTimeouts.[probe-name].timeoutSeconds }}`    | Define the timeoutSeconds in seconds                                                      |
@@ -43,7 +43,7 @@ workload:
           probes:
             liveness:
               enabled: true
-              type: HTTPS
+              type: https
               port: 8080
               path: /healthz
               httpHeaders:
@@ -57,7 +57,7 @@ workload:
                 successThreshold: 10
             readiness:
               enabled: true
-              type: TCP
+              type: tcp
               port: 8080
               spec:
                 initialDelaySeconds: 10
@@ -67,7 +67,7 @@ workload:
                 successThreshold: 10
             startup:
               enabled: true
-              type: EXEC
+              type: exec
               command:
                 - command1
                 - command2
