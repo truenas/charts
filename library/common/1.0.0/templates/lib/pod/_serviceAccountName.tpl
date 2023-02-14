@@ -12,24 +12,28 @@ objectData: The object data to be used to render the Pod.
   {{- $saNameCount := 0 -}}
 
   {{- range $name, $serviceAccount := $rootCtx.Values.serviceAccount -}}
-    {{- $name = (printf "%s-%s" (include "ix.v1.common.lib.chart.names.fullname" $rootCtx) $name) -}}
+    {{- $tempName := include "ix.v1.common.lib.chart.names.fullname" $rootCtx -}}
+
+    {{- if not $serviceAccount.primary -}}
+      {{- $tempName = (printf "%s-%s" $tempName $name) -}}
+    {{- end -}}
 
     {{- if $serviceAccount.enabled -}}
       {{/* If targetSelectAll is true */}}
       {{- if $serviceAccount.targetSelectAll -}}
-        {{- $saName = $name -}}
+        {{- $saName = $tempName -}}
         {{- $saNameCount = add1 $saNameCount -}}
 
       {{/* Else if targetSelector is a list */}}
       {{- else if (kindIs "slice" $serviceAccount.targetSelector) -}}
         {{- if (mustHas $objectData.shortName $serviceAccount.targetSelector) -}}
-          {{- $saName = $name -}}
+          {{- $saName = $tempName -}}
           {{- $saNameCount = add1 $saNameCount -}}
         {{- end -}}
 
       {{/* If not targetSelectAll or targetSelector, but is the primary pod */}}
       {{- else if $objectData.primary -}}
-        {{- $saName = $name -}}
+        {{- $saName = $tempName -}}
         {{- $saNameCount = add1 $saNameCount -}}
       {{- end -}}
 
