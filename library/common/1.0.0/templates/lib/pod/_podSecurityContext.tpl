@@ -21,10 +21,10 @@ objectData: The object data to be used to render the Pod.
   {{- end -}}
 
   {{/* TODO: Add supplemental groups
-    scaleGPU (44) (Only when GPU is enabled on the pod's containers)
     devices (5, 10, 20, 24) (Only when devices is assigned on the pod's containers)
     TODO: Unit Test the above cases
-    */}}
+  */}}
+
   {{- $addSupplemental := list -}}
   {{- range $GPUValues := $rootCtx.Values.scaleGPU -}}
     {{/* If there is a selector and pod is selected */}}
