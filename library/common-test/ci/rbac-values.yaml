@@ -39,7 +39,32 @@ workload:
             startup:
               enabled: true
               type: http
-              port:
+              port: "{{ .Values.service.main.ports.main.port }}"
+  workload2:
+    enabled: true
+    primary: false
+    type: Deployment
+    podSpec:
+      containers:
+        main:
+          enabled: true
+          primary: true
+          args:
+            - --port
+            - "8080"
+          probes:
+            liveness:
+              enabled: true
+              type: http
+              port: "{{ .Values.service.main.ports.main.port }}"
+            readiness:
+              enabled: true
+              type: http
+              port: "{{ .Values.service.main.ports.main.port }}"
+            startup:
+              enabled: true
+              type: http
+              port: "{{ .Values.service.main.ports.main.port }}"
 
 rbac:
   main:
@@ -85,3 +110,5 @@ serviceAccount:
       key2: value
   other-sa-name:
     enabled: true
+    targetSelector:
+      - workload2
