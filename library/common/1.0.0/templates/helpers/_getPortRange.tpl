@@ -1,10 +1,10 @@
 {{/* Returns Lowest and Highest ports assigned to the any container in the pod */}}
 {{/* Call this template:
-{{ include "ix.v1.common.lib.pod.securityContext.getPortRange" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "ix.v1.common.lib.helpers.securityContext.getPortRange" (dict "rootCtx" $ "objectData" $objectData) }}
 rootCtx: The root context of the chart.
 objectData: The object data to be used to render the Pod.
 */}}
-{{- define "ix.v1.common.lib.pod.securityContext.getPortRange" -}}
+{{- define "ix.v1.common.lib.helpers.securityContext.getPortRange" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
