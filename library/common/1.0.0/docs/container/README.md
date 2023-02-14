@@ -32,6 +32,7 @@ More keys for `container` can be found below:
 - [termination](termination.md)
 - [lifecycle](lifecycle.md)
 - [probes](probes.md)
+- [resources](resources.md)
 
 ---
 

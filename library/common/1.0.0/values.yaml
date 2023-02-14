@@ -157,13 +157,6 @@ workload:
               type: http
               port: "{{ .Values.service.main.ports.main.port }}"
     #       # TODO: Currently implementing
-          resources:
-            limits:
-              cpu: 0
-              memory: 128Mi
-            requests:
-              cpu: 100m
-              memory: 128Mi
     #       securityContext:
     #         runAsNonRoot: true
     #         runAsUser: 568
@@ -185,16 +178,6 @@ workload:
     #       # ...containerSpec
 # TODO:
 portal: {}
-
-# -- SCALE GPU (TODO: Only the resources/targetSelector part is left)
-scaleGPU:
-  - gpu:
-      key: value
-    # Without targetSelector, the gpu will
-    # be applied to primary pod/container
-    targetSelector:
-      pod-name:
-        - container-name
 
 ##### ⬇ Done ⬇ #####
 
@@ -271,6 +254,9 @@ scaleExternalInterface: []
 
 # -- (docs/scaleCertificate.md)
 scaleCertificate: {}
+
+# -- (docs/scaleGPU.md)
+scaleGPU: []
 
 # NOTES.txt TODO: Docs
 notes:
