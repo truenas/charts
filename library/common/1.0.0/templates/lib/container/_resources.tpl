@@ -97,7 +97,7 @@ resources: The resources object
                 "cpu" "^(0\\.[1-9]|[1-9][0-9]*)(\\.[0-9]|m?)$"
                 "memory" "^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$") -}}
   {{- $errorMsg := (dict
-                    "cpu" "(Plain Interger - eg. 1), (Float - eg. 0.5), (Milicpu - eg. 500m)"
+                    "cpu" "(Plain Integer - eg. 1), (Float - eg. 0.5), (Milicpu - eg. 500m)"
                     "memory" "(Suffixed with E/P/T/G/M/K - eg. 1G), (Suffixed with Ei/Pi/Ti/Gi/Mi/Ki - eg. 1Gi), (Plain Integer in bytes - eg. 1024), (Exponent - eg. 134e6)") -}}
 
   {{- $resourceTypes := (list "cpu" "memory") -}}
