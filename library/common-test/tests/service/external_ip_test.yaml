@@ -47,7 +47,7 @@ tests:
       some_timeout: 100
       some_port: 12344
       some_target_port: 12346
-      some_protocol: HTTP
+      some_protocol: http
       some_external_ip: 1.1.1.1
       some_address_type: IPv6
       service:

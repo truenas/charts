@@ -94,12 +94,12 @@ tests:
             helm.sh/chart: common-test-1.0.0
             release: RELEASE-NAME
 
-  - it: should pass with service type LoadBalancer, with HTTPS port and addMetalLBAnnotations/Traefik true
+  - it: should pass with service type LoadBalancer, with https port and addMetalLBAnnotations/Traefik true
     set:
       global:
         addMetalLBAnnotations: true
         addTraefikAnnotations: true
-      proto: HTTPS
+      proto: https
       service:
         my-service1:
           enabled: true

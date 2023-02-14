@@ -20,7 +20,7 @@ fallbackDefaults:
   # -- Default probe type
   probeType: http
   # -- Default Service Protocol
-  serviceProtocol: TCP
+  serviceProtocol: tcp
   # -- Default Service Type
   serviceType: ClusterIP
   # -- Default persistence type
@@ -210,7 +210,7 @@ service:
       main:
         enabled: true
         primary: true
-        protocol: HTTP
+        protocol: http
 
 # -- (docs/persistence/README.md)
 persistence:

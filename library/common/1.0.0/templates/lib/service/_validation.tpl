@@ -33,7 +33,7 @@ objectData:
           {{- fail (printf "Service - Expected non-empty <port.port>") -}}
         {{- end -}}
 
-        {{- $protocolTypes := (list "TCP" "UDP" "HTTP" "HTTPS") -}}
+        {{- $protocolTypes := (list "tcp" "udp" "http" "https") -}}
         {{- if and $port.protocol (not (mustHas (tpl $port.protocol $rootCtx) $protocolTypes)) -}}
           {{- fail (printf "Service - Expected <port.protocol> to be one of [%s] but got [%s]" (join ", " $protocolTypes) $port.protocol) -}}
         {{- end -}}

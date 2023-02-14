@@ -191,7 +191,7 @@ tests:
               protocol: not-a-protocol
     asserts:
       - failedTemplate:
-          errorMessage: Service - Expected <port.protocol> to be one of [TCP, UDP, HTTP, HTTPS] but got [not-a-protocol]
+          errorMessage: Service - Expected <port.protocol> to be one of [tcp, udp, http, https] but got [not-a-protocol]
 
   - it: should fail without port number
     set:

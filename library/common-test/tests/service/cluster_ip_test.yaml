@@ -57,7 +57,7 @@ tests:
       some_timeout: 100
       some_port: 12344
       some_target_port: 12346
-      some_protocol: HTTP
+      some_protocol: http
       service:
         my-service:
           enabled: true

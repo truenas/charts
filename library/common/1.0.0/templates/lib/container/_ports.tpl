@@ -60,14 +60,14 @@ objectData: The object data to be used to render the container.
             {{- $containerPort = (tpl $containerPort $rootCtx) -}}
           {{- end -}}
 
-          {{- $tcpProtocols := (list "TCP" "HTTP" "HTTPS") -}}
+          {{- $tcpProtocols := (list "tcp" "http" "https") -}}
           {{- $protocol := tpl ($portValues.protocol | default $rootCtx.Values.fallbackDefaults.serviceProtocol) $rootCtx -}}
           {{- if mustHas $protocol $tcpProtocols -}}
-            {{- $protocol = "TCP" -}}
+            {{- $protocol = "tcp" -}}
           {{- end }}
 - name: {{ $portName }}
   containerPort: {{ $containerPort }}
-  protocol: {{ $protocol }}
+  protocol: {{ $protocol | upper }}
         {{- with $portValues.hostPort }}
   hostPort: {{ . }}
           {{- end -}}

@@ -11,7 +11,7 @@ service:
       main:
         enabled: true
         primary: true
-        protocol: HTTP
+        protocol: http
         port: 8080
 
 workload:

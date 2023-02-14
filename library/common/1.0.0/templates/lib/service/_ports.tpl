@@ -9,7 +9,7 @@ objectData: The object data of the service
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
-  {{- $tcpProtocols := (list "TCP" "HTTP" "HTTPS") -}}
+  {{- $tcpProtocols := (list "tcp" "http" "https") -}}
   {{- range $name, $portValues := $objectData.ports -}}
     {{- if $portValues.enabled -}}
       {{- $protocol := $rootCtx.Values.fallbackDefaults.serviceProtocol -}} {{/* Default to fallback protocol, if no protocol is defined */}}
@@ -39,12 +39,12 @@ objectData: The object data of the service
         {{- $protocol = tpl . $rootCtx -}}
 
         {{- if mustHas $protocol $tcpProtocols -}}
-          {{- $protocol = "TCP" -}}
+          {{- $protocol = "tcp" -}}
         {{- end -}}
       {{- end }}
 - name: {{ $name }}
   port: {{ $port }}
-  protocol: {{ $protocol }}
+  protocol: {{ $protocol | upper }}
   targetPort: {{ $targetPort | default $port }} {{/* If no targetPort, default to port */}}
       {{- if (eq $objectData.type "NodePort") -}}
         {{- if not $nodePort -}}

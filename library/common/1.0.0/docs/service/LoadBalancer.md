@@ -55,6 +55,6 @@ service:
         primary: true
         targetSelector: container-name
         port: 80
-        protocol: HTTP
+        protocol: http
         targetPort: 8080
 ```
