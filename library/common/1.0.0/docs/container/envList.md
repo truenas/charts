@@ -4,7 +4,7 @@ Assume every key bellow has a prefix of `workload.[workload-name].podSpec.contai
 
 | Key           |   Type   | Required | Helm Template | Default | Description                      |
 | :------------ | :------: | :------: | :-----------: | :-----: | :------------------------------- |
-| envList       |  `list`  |    ❌    |      ❌       |  `{}`   | Define env(s) for the container |
+| envList       |  `list`  |    ❌    |      ❌       |  `[]`   | Define env(s) for the container |
 | envList.name  | `string` |    ✅    |      ❌       |  `""`   | Define the env name              |
 | envList.value | `string` |    ❌    |      ✅       |  `""`   | Define the env value             |
 

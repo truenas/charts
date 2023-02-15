@@ -157,7 +157,6 @@ workload:
               type: http
               port: "{{ .Values.service.main.ports.main.port }}"
     #       # TODO: Currently implementing
-    #       env: {}
     #   initContainers:
     #     init-cont-name:
     #       enabled: false

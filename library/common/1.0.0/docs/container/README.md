@@ -35,6 +35,8 @@ More keys for `container` can be found below:
 - [resources](resources.md)
 - [securityContext](securityContext.md)
 - [envFrom](envFrom.md)
+- [env](env.md)
+- [envList](envList.md)
 
 ---
 
