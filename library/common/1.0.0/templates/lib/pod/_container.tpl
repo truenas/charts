@@ -48,12 +48,18 @@ objectData: The object data to be used to render the Pod.
   {{- end }}
   securityContext:
   {{- include "ix.v1.common.lib.container.securityContext" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 4 }}
+  {{- /* Create a dict for storing env's so it can be checked for dupes */ -}}
+  {{- $_ := set $objectData "envDupe" dict -}}
+  {{- with (include "ix.v1.common.lib.container.envFrom" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim) }}
+  envFrom:
+    {{- . | nindent 4 }}
+  {{- end -}}
+  {{- $_ := unset $objectData "envDupe" -}}
 {{- end -}}
 
 {{/*
 TODO: env
 TODO: envList
 TODO: fixedEnv
-TODO: envFrom
 TODO: ignore keys that are not supported in initContainers
 */}}

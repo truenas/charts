@@ -159,12 +159,12 @@ workload:
     #       # TODO: Currently implementing
     #       env: {}
     #       envList: []
-    #       envFrom: []
     #   initContainers:
     #     init-cont-name:
     #       enabled: false
     #       type: install
     #       # ...containerSpec
+
 # TODO:
 portal: {}
 
