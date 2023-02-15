@@ -32,24 +32,21 @@ objectData: The object data to be used to render the container.
         {{- end -}}
 
         {{- if $expandName -}}
+          {{- $object := dict -}}
+          {{- $source := "" -}}
           {{- if eq $ref "configMapRef" -}}
-            {{- $configmap := (get $rootCtx.Values.configmap $objectName) -}}
-            {{- if not $configmap -}}
-              {{- fail (printf "Container - Expected ConfigMap [%s] defined in <envFrom> to exist" $objectName) -}}
-            {{- end -}}
-            {{- range $k, $v := $configmap.data -}}
-              {{- include "ix.v1.common.helper.container.envDupeCheck" (dict "rootCtx" $rootCtx "objectData" $objectData "source" (printf "ConfigMap - %s" $objectName) "key" $k) -}}
-            {{- end -}}
-
+            {{- $object = (get $rootCtx.Values.configmap $objectName) -}}
+            {{- $source = "ConfigMap" -}}
           {{- else if eq $ref "secretRef" -}}
-            {{- $secret := (get $rootCtx.Values.secret $objectName) -}}
-            {{- if not $secret -}}
-              {{- fail (printf "Container - Expected Secret [%s] defined in <envFrom> to exist" $objectName) -}}
-            {{- end -}}
+            {{- $object = (get $rootCtx.Values.secret $objectName) -}}
+            {{- $source = "Secret" -}}
+          {{- end -}}
 
-            {{- range $k, $v := $secret.data -}}
-              {{- include "ix.v1.common.helper.container.envDupeCheck" (dict "rootCtx" $rootCtx "objectData" $objectData "source" (printf "Secret - %s" $objectName) "key" $k) -}}
+            {{- if not $object -}}
+              {{- fail (printf "Container - Expected %s [%s] defined in <envFrom> to exist" $source $objectName) -}}
             {{- end -}}
+          {{- range $k, $v := $object.data -}}
+            {{- include "ix.v1.common.helper.container.envDupeCheck" (dict "rootCtx" $rootCtx "objectData" $objectData "source" (printf "%s - %s" $source $objectName) "key" $k) -}}
           {{- end -}}
 
           {{- $objectName = (printf "%s-%s" (include "ix.v1.common.lib.chart.names.fullname" $rootCtx) $objectName) -}}
