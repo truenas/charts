@@ -51,6 +51,407 @@ tests:
                 drop:
                   - ALL
 
+  - it: should override the securityContext runAsUser and runAsNonRoot
+    set:
+      image: *image
+      workload:
+        workload-name1:
+          enabled: true
+          primary: true
+          type: Deployment
+          podSpec:
+            containers:
+              container-name1:
+                enabled: true
+                primary: true
+                imageSelector: image
+                probes: *probes
+                securityContext:
+                  runAsUser: 0
+                  runAsNonRoot: false
+    asserts:
+      - documentIndex: &deploymentDoc 0
+        isKind:
+          of: Deployment
+      - documentIndex: *deploymentDoc
+        isAPIVersion:
+          of: apps/v1
+      - documentIndex: *deploymentDoc
+        isSubset:
+          path: spec.template.spec.containers[0]
+          content:
+            securityContext:
+              runAsUser: 0
+              runAsGroup: 568
+              readOnlyRootFilesystem: true
+              allowPrivilegeEscalation: false
+              privileged: false
+              runAsNonRoot: false
+              seccompProfile:
+                type: RuntimeDefault
+              capabilities:
+                add: []
+                drop:
+                  - ALL
+
+  - it: should override the securityContext runAsGroup and runAsNonRoot
+    set:
+      image: *image
+      workload:
+        workload-name1:
+          enabled: true
+          primary: true
+          type: Deployment
+          podSpec:
+            containers:
+              container-name1:
+                enabled: true
+                primary: true
+                imageSelector: image
+                probes: *probes
+                securityContext:
+                  runAsGroup: 0
+                  runAsNonRoot: false
+    asserts:
+      - documentIndex: &deploymentDoc 0
+        isKind:
+          of: Deployment
+      - documentIndex: *deploymentDoc
+        isAPIVersion:
+          of: apps/v1
+      - documentIndex: *deploymentDoc
+        isSubset:
+          path: spec.template.spec.containers[0]
+          content:
+            securityContext:
+              runAsUser: 568
+              runAsGroup: 0
+              readOnlyRootFilesystem: true
+              allowPrivilegeEscalation: false
+              privileged: false
+              runAsNonRoot: false
+              seccompProfile:
+                type: RuntimeDefault
+              capabilities:
+                add: []
+                drop:
+                  - ALL
+
+  - it: should override the securityContext readOnlyRootFilesystem
+    set:
+      image: *image
+      workload:
+        workload-name1:
+          enabled: true
+          primary: true
+          type: Deployment
+          podSpec:
+            containers:
+              container-name1:
+                enabled: true
+                primary: true
+                imageSelector: image
+                probes: *probes
+                securityContext:
+                  readOnlyRootFilesystem: false
+    asserts:
+      - documentIndex: &deploymentDoc 0
+        isKind:
+          of: Deployment
+      - documentIndex: *deploymentDoc
+        isAPIVersion:
+          of: apps/v1
+      - documentIndex: *deploymentDoc
+        isSubset:
+          path: spec.template.spec.containers[0]
+          content:
+            securityContext:
+              runAsUser: 568
+              runAsGroup: 568
+              readOnlyRootFilesystem: false
+              allowPrivilegeEscalation: false
+              privileged: false
+              runAsNonRoot: true
+              seccompProfile:
+                type: RuntimeDefault
+              capabilities:
+                add: []
+                drop:
+                  - ALL
+
+  - it: should override the securityContext privileged
+    set:
+      image: *image
+      workload:
+        workload-name1:
+          enabled: true
+          primary: true
+          type: Deployment
+          podSpec:
+            containers:
+              container-name1:
+                enabled: true
+                primary: true
+                imageSelector: image
+                probes: *probes
+                securityContext:
+                  privileged: true
+    asserts:
+      - documentIndex: &deploymentDoc 0
+        isKind:
+          of: Deployment
+      - documentIndex: *deploymentDoc
+        isAPIVersion:
+          of: apps/v1
+      - documentIndex: *deploymentDoc
+        isSubset:
+          path: spec.template.spec.containers[0]
+          content:
+            securityContext:
+              runAsUser: 568
+              runAsGroup: 568
+              readOnlyRootFilesystem: true
+              allowPrivilegeEscalation: false
+              privileged: true
+              runAsNonRoot: true
+              seccompProfile:
+                type: RuntimeDefault
+              capabilities:
+                add: []
+                drop:
+                  - ALL
+
+  - it: should override the securityContext allowPrivilegeEscalation
+    set:
+      image: *image
+      workload:
+        workload-name1:
+          enabled: true
+          primary: true
+          type: Deployment
+          podSpec:
+            containers:
+              container-name1:
+                enabled: true
+                primary: true
+                imageSelector: image
+                probes: *probes
+                securityContext:
+                  allowPrivilegeEscalation: true
+    asserts:
+      - documentIndex: &deploymentDoc 0
+        isKind:
+          of: Deployment
+      - documentIndex: *deploymentDoc
+        isAPIVersion:
+          of: apps/v1
+      - documentIndex: *deploymentDoc
+        isSubset:
+          path: spec.template.spec.containers[0]
+          content:
+            securityContext:
+              runAsUser: 568
+              runAsGroup: 568
+              readOnlyRootFilesystem: true
+              allowPrivilegeEscalation: true
+              privileged: false
+              runAsNonRoot: true
+              seccompProfile:
+                type: RuntimeDefault
+              capabilities:
+                add: []
+                drop:
+                  - ALL
+
+  - it: should override the securityContext capabilities.add
+    set:
+      image: *image
+      workload:
+        workload-name1:
+          enabled: true
+          primary: true
+          type: Deployment
+          podSpec:
+            containers:
+              container-name1:
+                enabled: true
+                primary: true
+                imageSelector: image
+                probes: *probes
+                securityContext:
+                  capabilities:
+                    add:
+                      - NET_ADMIN
+    asserts:
+      - documentIndex: &deploymentDoc 0
+        isKind:
+          of: Deployment
+      - documentIndex: *deploymentDoc
+        isAPIVersion:
+          of: apps/v1
+      - documentIndex: *deploymentDoc
+        isSubset:
+          path: spec.template.spec.containers[0]
+          content:
+            securityContext:
+              runAsUser: 568
+              runAsGroup: 568
+              readOnlyRootFilesystem: true
+              allowPrivilegeEscalation: false
+              privileged: false
+              runAsNonRoot: true
+              seccompProfile:
+                type: RuntimeDefault
+              capabilities:
+                add:
+                  - NET_ADMIN
+                drop:
+                  - ALL
+
+  - it: should override the securityContext capabilities.drop
+    set:
+      image: *image
+      workload:
+        workload-name1:
+          enabled: true
+          primary: true
+          type: Deployment
+          podSpec:
+            containers:
+              container-name1:
+                enabled: true
+                primary: true
+                imageSelector: image
+                probes: *probes
+                securityContext:
+                  capabilities:
+                    drop:
+                      - NET_ADMIN
+    asserts:
+      - documentIndex: &deploymentDoc 0
+        isKind:
+          of: Deployment
+      - documentIndex: *deploymentDoc
+        isAPIVersion:
+          of: apps/v1
+      - documentIndex: *deploymentDoc
+        isSubset:
+          path: spec.template.spec.containers[0]
+          content:
+            securityContext:
+              runAsUser: 568
+              runAsGroup: 568
+              readOnlyRootFilesystem: true
+              allowPrivilegeEscalation: false
+              privileged: false
+              runAsNonRoot: true
+              seccompProfile:
+                type: RuntimeDefault
+              capabilities:
+                add: []
+                drop:
+                  - NET_ADMIN
+
+  - it: should override the securityContext seccompProfile.type
+    set:
+      image: *image
+      workload:
+        workload-name1:
+          enabled: true
+          primary: true
+          type: Deployment
+          podSpec:
+            containers:
+              container-name1:
+                enabled: true
+                primary: true
+                imageSelector: image
+                probes: *probes
+                securityContext:
+                  seccompProfile:
+                    type: Unconfined
+    asserts:
+      - documentIndex: &deploymentDoc 0
+        isKind:
+          of: Deployment
+      - documentIndex: *deploymentDoc
+        isAPIVersion:
+          of: apps/v1
+      - documentIndex: *deploymentDoc
+        isSubset:
+          path: spec.template.spec.containers[0]
+          content:
+            securityContext:
+              runAsUser: 568
+              runAsGroup: 568
+              readOnlyRootFilesystem: true
+              allowPrivilegeEscalation: false
+              privileged: false
+              runAsNonRoot: true
+              seccompProfile:
+                type: Unconfined
+              capabilities:
+                add: []
+                drop:
+                  - ALL
+
+  - it: should override the securityContext all
+    set:
+      image: *image
+      workload:
+        workload-name1:
+          enabled: true
+          primary: true
+          type: Deployment
+          podSpec:
+            containers:
+              container-name1:
+                enabled: true
+                primary: true
+                imageSelector: image
+                probes: *probes
+                securityContext:
+                  runAsUser: 1000
+                  runAsGroup: 1000
+                  readOnlyRootFilesystem: false
+                  allowPrivilegeEscalation: true
+                  privileged: true
+                  runAsNonRoot: false
+                  capabilities:
+                    add:
+                      - NET_ADMIN
+                    drop:
+                      - NET_BIND_SERVICE
+                  seccompProfile:
+                    type: Localhost
+                    profile: path/to/profile.json
+    asserts:
+      - documentIndex: &deploymentDoc 0
+        isKind:
+          of: Deployment
+      - documentIndex: *deploymentDoc
+        isAPIVersion:
+          of: apps/v1
+      - documentIndex: *deploymentDoc
+        isSubset:
+          path: spec.template.spec.containers[0]
+          content:
+            securityContext:
+              runAsUser: 1000
+              runAsGroup: 1000
+              readOnlyRootFilesystem: false
+              allowPrivilegeEscalation: true
+              privileged: true
+              runAsNonRoot: false
+              seccompProfile:
+                type: Localhost
+                localhostProfile: path/to/profile.json
+              capabilities:
+                add:
+                  - NET_ADMIN
+                drop:
+                  - NET_BIND_SERVICE
+
   # Failures
   - it: should fail with empty securityContext
     set:
