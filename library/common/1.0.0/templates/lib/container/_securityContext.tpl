@@ -86,6 +86,12 @@ objectData: The object data to be used to render the container.
     {{- fail (printf "Container - Expected <securityContext.seccompProfile> to be one of [%s], but got [%s]" (join ", " $profiles) $secContext.seccompProfile.type) -}}
   {{- end -}}
 
+  {{- if eq $secContext.seccompProfile.type "Localhost" -}}
+    {{- if not $secContext.seccompProfile.profile -}}
+      {{- fail "Container - Expected <securityContext.seccompProfile.profile> to be defined on type [Localhost]" -}}
+    {{- end -}}
+  {{- end -}}
+
   {{- if not $secContext.capabilities -}}
     {{- fail "Container - Expected <securityContext.capabilities> to be defined" -}}
   {{- end -}}
@@ -100,6 +106,12 @@ objectData: The object data to be used to render the container.
       {{- if not (kindIs "string" .) -}}
         {{- fail (printf "Container - Expected items of <securityContext.capabilities.%s> to be [string], but got [%s]" $key (kindOf .)) -}}
       {{- end -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- if or (eq (int $secContext.runAsUser) 0) (eq (int $secContext.runAsGroup) 0) -}}
+    {{- if $secContext.runAsNonRoot -}}
+      {{- fail "Container - Expected <securityContext.runAsNonRoot> to be [false] with either [runAsUser, runAsGroup] set to [0]" -}}
     {{- end -}}
   {{- end -}}
 
