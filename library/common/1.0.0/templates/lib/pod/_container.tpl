@@ -55,6 +55,5 @@ TODO: env
 TODO: envList
 TODO: fixedEnv
 TODO: envFrom
-TODO: securityContext
 TODO: ignore keys that are not supported in initContainers
 */}}
