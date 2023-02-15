@@ -45,7 +45,9 @@ objectData: The object data to be used to render the Pod.
   {{- with (include "ix.v1.common.lib.container.resources" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim) }}
   resources:
     {{- . | nindent 4 }}
-  {{- end -}}
+  {{- end }}
+  securityContext:
+  {{- include "ix.v1.common.lib.container.securityContext" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 4 }}
 {{- end -}}
 
 {{/*

@@ -157,17 +157,6 @@ workload:
               type: http
               port: "{{ .Values.service.main.ports.main.port }}"
     #       # TODO: Currently implementing
-    #       securityContext:
-    #         runAsNonRoot: true
-    #         runAsUser: 568
-    #         runAsGroup: 568
-    #         readOnlyRootFilesystem: true
-    #         allowPrivilegeEscalation: false
-    #         privileged: false
-    #         capabilities:
-    #           add: []
-    #           drop:
-    #             - ALL
     #       env: {}
     #       envList: []
     #       envFrom: []

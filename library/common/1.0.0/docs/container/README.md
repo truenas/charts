@@ -33,6 +33,7 @@ More keys for `container` can be found below:
 - [lifecycle](lifecycle.md)
 - [probes](probes.md)
 - [resources](resources.md)
+- [securityContext](securityContext.md)
 
 ---
 

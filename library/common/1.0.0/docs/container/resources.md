@@ -12,7 +12,7 @@ Assume every key bellow has a prefix of `workload.[workload-name].podSpec.contai
 | resources.limits.cpu      | `string` |    ❌    |      ❌       |   `{{ .Values.containerOptions.resources.limits.cpu }}`    | Define the limits.cpu for the container      |
 | resources.limits.memory   | `string` |    ❌    |      ❌       |  `{{ .Values.containerOptions.resources.limits.memory }}`  | Define the limits.memory for the container   |
 
-> Each value that is not defined in the `resources` under the container level, it will get replaced with the value defined `containerOptions.resources`.
+> Each value that is not defined in the `resources` under the container level, it will get replaced with the value defined `.Values.containerOptions.resources`.
 > `requests` is **required**.
 > `limits` is **optional**, can be set to "unlimited" by setting it's values (`cpu` and `memory`) to `0`.
 
