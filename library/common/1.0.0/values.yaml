@@ -158,7 +158,6 @@ workload:
               port: "{{ .Values.service.main.ports.main.port }}"
     #       # TODO: Currently implementing
     #       env: {}
-    #       envList: []
     #   initContainers:
     #     init-cont-name:
     #       enabled: false

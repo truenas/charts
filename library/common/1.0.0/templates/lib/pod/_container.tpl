@@ -54,12 +54,15 @@ objectData: The object data to be used to render the Pod.
   envFrom:
     {{- . | nindent 4 }}
   {{- end -}}
+  {{- if or $objectData.env $objectData.envList }}
+  env:
+    {{- include "ix.v1.common.lib.container.envList" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 4 }}
+  {{- end -}}
   {{- $_ := unset $objectData "envDupe" -}}
 {{- end -}}
 
 {{/*
 TODO: env
-TODO: envList
 TODO: fixedEnv
 TODO: ignore keys that are not supported in initContainers
 */}}
