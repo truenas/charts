@@ -40,6 +40,7 @@ objectData: The object data to be used to render the container.
 {{- define "ix.v1.common.lib.container.resources.gpu" -}}
   {{- $objectData := .objectData -}}
   {{- $rootCtx := .rootCtx -}}
+  {{- $returnBool := .returnBool -}}
 
   {{- $gpuResource := list -}}
 
@@ -71,13 +72,18 @@ objectData: The object data to be used to render the container.
     {{- end -}}
   {{- end -}}
 
-
-  {{- range $gpu := $gpuResource -}}
-    {{- range $k, $v := $gpu -}}
-      {{- if not $v -}}
-        {{- fail "Container - Expected non-empty <scaleGPU> <value>" -}}
-      {{- end }}
+  {{- if not $returnBool -}}
+    {{- range $gpu := $gpuResource -}}
+      {{- range $k, $v := $gpu -}}
+        {{- if not $v -}}
+          {{- fail "Container - Expected non-empty <scaleGPU> <value>" -}}
+        {{- end }}
 {{ $k }}: {{ $v | quote }}
+      {{- end -}}
+    {{- end -}}
+  {{- else -}}
+    {{- if $gpuResource -}}
+      {{- "true" -}}
     {{- end -}}
   {{- end -}}
 

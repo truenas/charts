@@ -13,7 +13,7 @@ Assume every key bellow has a prefix of `workload.[workload-name].podSpec.contai
 | envFrom.configMapRef.expandObjectName | `boolean` |    ❌    |      ❌       | `true`  | Whether to expand (adding the fullname as prefix) the configmap name |
 
 > When the `expandObjectName` is `true`, it will also scan the contents of the secret/configmap
-> for duplicate keys between other secrets/configmaps/env/envList and will throw an error if it finds any.
+> for duplicate keys between other secrets/configmaps/env/envList/fixedEnv and will throw an error if it finds any.
 > `expandObjectName` should only be set to `false` if you want to consume a secret/configmap created outside of this chart
 
 ---

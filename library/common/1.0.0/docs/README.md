@@ -2,14 +2,14 @@
 
 | Key              |   Type   | Required | Helm Template | Default | Description                                 |
 | :--------------- | :------: | :------: | :-----------: | :-----: | :------------------------------------------ |
-| .Values.TIMEZONE | `string` |    ✅    |      ❌       |  `UTC`  | Timezone that is used everywhere applicable |
+| .Values.TZ | `string` |    ✅    |      ❌       |  `UTC`  | Timezone that is used everywhere applicable |
 
 ---
 
 Examples:
 
 ```yaml
-TIMEZONE: Europe/Berlin
+TZ: Europe/Berlin
 ```
 
 ---

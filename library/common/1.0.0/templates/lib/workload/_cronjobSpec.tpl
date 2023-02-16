@@ -8,13 +8,13 @@ objectData:
   failedJobsHistoryLimit: The number of failed finished jobs to retain. Defaults to 1.
   successfulJobsHistoryLimit: The number of successful finished jobs to retain. Defaults to 3.
   startingDeadlineSeconds: Optional deadline in seconds for starting the job if it misses scheduled time for any reason. Defaults to nil.
-  timezone: The timezone name. Defaults to .Values.TIMEZONE
+  timezone: The timezone name. Defaults to .Values.TZ
   +jobSpec data
 */}}
 {{- define "ix.v1.common.lib.workload.cronjobSpec" -}}
   {{- $objectData := .objectData -}}
   {{- $rootCtx := .rootCtx -}}
-timeZone: {{ (tpl ($objectData.timezone | default $rootCtx.Values.TIMEZONE) $rootCtx) | quote }}
+timeZone: {{ (tpl ($objectData.timezone | default $rootCtx.Values.TZ) $rootCtx) | quote }}
 schedule: {{ (tpl $objectData.schedule $rootCtx) | quote }}
 concurrencyPolicy: {{ $objectData.concurrencyPolicy | default "Forbid" }}
 failedJobsHistoryLimit: {{ $objectData.failedJobsHistoryLimit | default 1 }}

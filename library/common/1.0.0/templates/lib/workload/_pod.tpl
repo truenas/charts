@@ -60,6 +60,8 @@ containers:
         {{- $_ := set $container "podShortName" $objectData.shortName -}}
         {{- $_ := set $container "podPrimary" $objectData.primary -}}
         {{- $_ := set $container "podType" $objectData.type -}}
+        {{/* Created from the pod.securityContext, used by fixedEnv */}}
+        {{- $_ := set $container "calculatedFSGroup" $objectData.podSpec.calculatedFSGroup -}}
         {{- include "ix.v1.common.lib.pod.container" (dict "rootCtx" $rootCtx "objectData" $container) | trim | nindent 2 }}
       {{- end -}}
     {{- end -}}

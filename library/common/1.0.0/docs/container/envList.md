@@ -10,7 +10,7 @@ Assume every key bellow has a prefix of `workload.[workload-name].podSpec.contai
 
 > `envList` is used for the SCALE GUI for "Additional Environment Variables"
 > Environment variables defined in `envList` will be scanned for duplicate keys
-> between other secrets/configmaps/env/envList and will throw an error if it finds any.
+> between other secrets/configmaps/env/envList/fixedEnv and will throw an error if it finds any.
 
 ---
 

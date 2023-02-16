@@ -72,38 +72,61 @@ tests:
         isAPIVersion:
           of: apps/v1
       - documentIndex: *deploymentDoc
-        isSubset:
-          path: spec.template.spec.containers[0]
+        contains:
+          path: spec.template.spec.containers[0].env
           content:
-            env:
-              - name: VAR1
-                value: value1
-              - name: VAR2
-                value: some_value
-              - name: VAR3
-                valueFrom:
-                  configMapKeyRef:
-                    key: key1
-                    name: release-name-common-test-configmap-name
-              - name: VAR4
-                valueFrom:
-                  secretKeyRef:
-                    key: key2
-                    name: release-name-common-test-secret-name
-              - name: VAR5
-                valueFrom:
-                  configMapKeyRef:
-                    key: key3
-                    name: configmap-name
-              - name: VAR6
-                valueFrom:
-                  secretKeyRef:
-                    key: key4
-                    name: secret-name
-              - name: VAR7
-                valueFrom:
-                  fieldRef:
-                    fieldPath: metadata.name
+            name: VAR1
+            value: value1
+      - documentIndex: *deploymentDoc
+        contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: VAR2
+            value: some_value
+      - documentIndex: *deploymentDoc
+        contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: VAR3
+            valueFrom:
+              configMapKeyRef:
+                key: key1
+                name: release-name-common-test-configmap-name
+      - documentIndex: *deploymentDoc
+        contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: VAR4
+            valueFrom:
+              secretKeyRef:
+                key: key2
+                name: release-name-common-test-secret-name
+      - documentIndex: *deploymentDoc
+        contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: VAR5
+            valueFrom:
+              configMapKeyRef:
+                key: key3
+                name: configmap-name
+      - documentIndex: *deploymentDoc
+        contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: VAR6
+            valueFrom:
+              secretKeyRef:
+                key: key4
+                name: secret-name
+      - documentIndex: *deploymentDoc
+        contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: VAR7
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
 
   # Failures
   - it: it should fail invalid ref

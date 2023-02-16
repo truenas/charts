@@ -51,6 +51,9 @@ objectData: The object data to be used to render the Pod.
     {{- fail "Pod - Expected non-empty <fsGroup>" -}}
   {{- end -}}
 
+  {{/* Used by the fixedEnv template */}}
+  {{- $_ := set $objectData.podSpec "calculatedFSGroup" $secContext.fsGroup -}}
+
   {{- if not $secContext.fsGroupChangePolicy -}}
     {{- fail "Pod - Expected non-empty <fsGroupChangePolicy>" -}}
   {{- end -}}

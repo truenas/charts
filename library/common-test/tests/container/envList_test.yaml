@@ -43,16 +43,23 @@ tests:
         isAPIVersion:
           of: apps/v1
       - documentIndex: *deploymentDoc
-        isSubset:
-          path: spec.template.spec.containers[0]
+        contains:
+          path: spec.template.spec.containers[0].env
           content:
-            env:
-              - name: env1
-                value: value1
-              - name: env2
-                value: "2"
-              - name: env3
-                value: ""
+            name: env1
+            value: value1
+      - documentIndex: *deploymentDoc
+        contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: env2
+            value: "2"
+      - documentIndex: *deploymentDoc
+        contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: env3
+            value: ""
 
   # Failures
   - it: it should fail with empty name

@@ -19,7 +19,7 @@ Assume every key bellow has a prefix of `workload.[workload-name].podSpec.contai
 | env.[key].fieldRef.apiVersion              | `string`  |    ❌    |       ❌        |  `""`   | Define apiVersion                                                    |
 
 > Environment variables defined in `env` will be scanned for duplicate keys
-> between other secrets/configmaps/env/envList and will throw an error if it finds any.
+> between other secrets/configmaps/env/envList/fixedEnv and will throw an error if it finds any.
 > `secretKeyRef` and `configMapKeyRef` with `expandObjectName` set to `true` will also be validated that
 > the actual objects are defined and have the specified key.
 > `expandObjectName` should only be set to `false` if you want to consume a secret/configmap created outside of this chart

@@ -3,7 +3,7 @@
 | Key                                                 |   Type   | Required | Helm Template |         Default          | Description                                           |
 | :-------------------------------------------------- | :------: | :------: | :-----------: | :----------------------: | :---------------------------------------------------- |
 | workload.[workload-name].schedule                   | `string` |    ✅    |      ✅       |           `""`           | Define the schedule                                   |
-| workload.[workload-name].timezone                   | `string` |    ❌    |      ✅       | `{{ .Values.TIMEZONE }}` | Define the timezone                                   |
+| workload.[workload-name].timezone                   | `string` |    ❌    |      ✅       | `{{ .Values.TZ }}` | Define the timezone                                   |
 | workload.[workload-name].concurrencyPolicy          | `string` |    ❌    |      ✅       |         `Forbid`         | Define the concurrencyPolicy (Allow, Replace, Forbid) |
 | workload.[workload-name].failedJobsHistoryLimit     |  `int`   |    ❌    |      ❌       |           `1`            | Define the failedJobsHistoryLimit                     |
 | workload.[workload-name].successfulJobsHistoryLimit |  `int`   |    ❌    |      ❌       |           `3`            | Define the successfulJobsHistoryLimit                 |

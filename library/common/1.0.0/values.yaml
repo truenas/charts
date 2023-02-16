@@ -156,7 +156,6 @@ workload:
               enabled: true
               type: http
               port: "{{ .Values.service.main.ports.main.port }}"
-    #       # TODO: Currently implementing
     #   initContainers:
     #     init-cont-name:
     #       enabled: false
@@ -169,7 +168,7 @@ portal: {}
 ##### ⬇ Done ⬇ #####
 
 # -- Timezone used everywhere applicable
-TIMEZONE: UTC
+TZ: UTC
 
 # -- (docs/service/README.md)
 service:
