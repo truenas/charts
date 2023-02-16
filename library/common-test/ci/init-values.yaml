@@ -43,3 +43,15 @@ workload:
             - -c
             - |
               echo "Hello World"
+
+service:
+  main:
+    enabled: true
+    primary: true
+    ports:
+      main:
+        enabled: true
+        primary: true
+        port: 8080
+        targetPort: 8080
+        protocol: http
