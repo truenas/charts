@@ -131,37 +131,6 @@ podOptions:
   automountServiceAccountToken: false
   terminationGracePeriodSeconds: 120
 
-# -- (docs/workload/README.md)
-workload:
-  main:
-    enabled: true
-    primary: true
-    type: Deployment
-    podSpec:
-      containers:
-        main:
-          enabled: true
-          primary: true
-          imageSelector: image
-          probes:
-            liveness:
-              enabled: true
-              type: http
-              port: "{{ .Values.service.main.ports.main.port }}"
-            readiness:
-              enabled: true
-              type: http
-              port: "{{ .Values.service.main.ports.main.port }}"
-            startup:
-              enabled: true
-              type: http
-              port: "{{ .Values.service.main.ports.main.port }}"
-    #   initContainers:
-    #     init-cont-name:
-    #       enabled: false
-    #       type: install
-    #       # ...containerSpec
-
 # TODO:
 portal: {}
 
@@ -170,16 +139,11 @@ portal: {}
 # -- Timezone used everywhere applicable
 TZ: UTC
 
+# -- (docs/workload/README.md)
+workload: {}
+
 # -- (docs/service/README.md)
-service:
-  main:
-    enabled: true
-    primary: true
-    ports:
-      main:
-        enabled: true
-        primary: true
-        protocol: http
+service: {}
 
 # -- (docs/persistence/README.md)
 persistence:

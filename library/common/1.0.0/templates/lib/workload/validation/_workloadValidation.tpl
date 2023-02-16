@@ -11,13 +11,14 @@
   {{/* Go over workload */}}
   {{- range $name, $workload := .Values.workload -}}
 
-    {{- $types := (list "Deployment" "StatefulSet" "DaemonSet" "Job" "CronJob") -}}
-    {{- if not (mustHas $workload.type $types) -}}
-      {{- fail (printf "Workload - Expected <type> to be one of [%s], but got [%s]" (join ", " $types) $workload.type) -}}
-    {{- end -}}
-
     {{/* If workload is enabled */}}
     {{- if $workload.enabled -}}
+
+      {{- $types := (list "Deployment" "StatefulSet" "DaemonSet" "Job" "CronJob") -}}
+      {{- if not (mustHas $workload.type $types) -}}
+        {{- fail (printf "Workload - Expected <type> to be one of [%s], but got [%s]" (join ", " $types) $workload.type) -}}
+      {{- end -}}
+
       {{- $hasEnabled = true -}}
 
       {{/* And workload is primary */}}
