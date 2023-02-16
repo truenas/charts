@@ -39,15 +39,15 @@ workload:
           type: init
           imageSelector: initImage
           args:
-            - |
-              echo "Hello World" && exit 0
+            - echo
+            - "Hello World"
         install-cont:
           enabled: true
           type: install
           imageSelector: initImage
           args:
-            - |
-              echo "Hello World" && exit 0
+            - echo
+            - "Hello World"
 
 service:
   main:
