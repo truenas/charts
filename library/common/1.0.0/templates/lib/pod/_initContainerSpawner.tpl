@@ -14,7 +14,13 @@ objectData: The object data to be used to render the Pod.
 
   {{- $types := (list "init" "install" "upgrade") -}}
   {{- range $containerName, $containerValues := $objectData.podSpec.initContainers -}}
-    {{- if $containerValues.enabled -}}
+
+    {{- $enabled := $containerValues.enabled -}}
+    {{- if kindIs "string" $enabled -}}
+      {{- $enabled = tpl $enabled $rootCtx -}}
+    {{- end -}}
+
+    {{- if $enabled -}}
 
       {{- if not ($containerValues.type) -}}
         {{- fail "InitContainer - Expected non-empty <type>" -}}

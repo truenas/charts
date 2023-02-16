@@ -5,6 +5,7 @@ tests:
   - it: should generate correct init container
     set:
       initType: install
+      render: true
       persistence:
         shared-vol:
           enabled: true
@@ -41,7 +42,7 @@ tests:
                     enabled: false
             initContainers:
               container-name1:
-                enabled: true
+                enabled: "{{ .Values.render }}"
                 type: init
                 imageSelector: initImage
               container-name3:

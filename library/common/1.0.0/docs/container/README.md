@@ -59,10 +59,11 @@ workload:
 
 ## InitContainer
 
-| Key                                  |   Type   | Required | Helm Template | Default | Description                                            |
-| :----------------------------------- | :------: | :------: | :-----------: | :-----: | :----------------------------------------------------- |
-| initContainers.[container-name]      |  `dict`  |    ✅    |      ❌       |  `{}`   | Define the initContainer as dict                       |
-| initContainers.[container-name].type | `string` |    ✅    |      ✅       |  `{}`   | Define the type initContainer (init, install, upgrade) |
+| Key                                     |   Type    | Required | Helm Template | Default | Description                                            |
+| :-------------------------------------- | :-------: | :------: | :-----------: | :-----: | :----------------------------------------------------- |
+| initContainers.[container-name]         |  `dict`   |    ✅    |      ❌       |  `{}`   | Define the initContainer as dict                       |
+| initContainers.[container-name].enabled | `boolean` |    ✅    |      ✅       | `false` | Enables or Disables the initContainer                      |
+| initContainers.[container-name].type    | `string`  |    ✅    |      ✅       |  `{}`   | Define the type initContainer (init, install, upgrade) |
 
 > Supports all keys from [container](container.md)
 > Does not use `primary` key, `lifecycle` key and `probes` key

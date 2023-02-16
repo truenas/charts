@@ -7,6 +7,7 @@ tests:
   - it: should generate correct init container
     set:
       initType: upgrade
+      render: true
       persistence:
         shared-vol:
           enabled: true
@@ -31,7 +32,7 @@ tests:
           podSpec:
             containers:
               container-name1:
-                enabled: true
+                enabled: "{{ .Values.render }}"
                 primary: true
                 imageSelector: image
                 probes:
