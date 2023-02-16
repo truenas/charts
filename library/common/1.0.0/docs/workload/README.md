@@ -80,6 +80,7 @@ Naming scheme:
 > Additional keys, information and examples for `workload.[workload-name].podSpec.containers`.
 
 - [Container](../container/README.md)
+- [InitContainer](../container/README.md#initcontainer)
 
 ---
 

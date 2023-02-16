@@ -1,15 +1,40 @@
+imageDictToUse: image
+image: &image
+  repository: nginx
+  tag: 1.19.0
+  pullPolicy: IfNotPresent
+imageGPU:
+  repository: some-gpu-image
+  tag: 5.20.0
+  pullPolicy: Always
 workload:
-  main:
+  workload-name:
     enabled: true
+    primary: true
+    type: Deployment
     podSpec:
       containers:
-        main:
+        container-name1:
           enabled: true
-
-service:
-  main:
-    enabled: true
-    ports:
-      main:
-        enabled: true
-        port: 80
+          primary: true
+          imageSelector: "{{ .Values.imageDictToUse }}"
+          probes: &probes
+            liveness:
+              enabled: false
+            readiness:
+              enabled: false
+            startup:
+              enabled: false
+      initContainers:
+        container-name2:
+          enabled: true
+          type: install
+          imageSelector: imageGPU
+        container-name3:
+          enabled: true
+          type: install
+          imageSelector: imageGPU
+        container-name4:
+          enabled: true
+          type: init
+          imageSelector: imageGPU

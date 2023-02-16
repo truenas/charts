@@ -8,13 +8,21 @@ objectData: The object data to be used to render the Pod.
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
-  {{- $initContainers := list -}}
+  {{- $initContainers := (dict  "init" list
+                                "install" list
+                                "upgrade" list) -}}
 
   {{- $types := (list "init" "install" "upgrade") -}}
   {{- range $containerName, $containerValues := $objectData.podSpec.initContainers -}}
     {{- if $containerValues.enabled -}}
-      {{- if or (not $containerValues.type) (not (mustHas $containerValues.type $types)) -}}
-        {{- fail (printf "InitContainer - Expected <type> to be one of [%s], but got [%s]" (join ", " $types) $containerValues.type) -}}
+
+      {{- if not ($containerValues.type) -}}
+        {{- fail "InitContainer - Expected non-empty <type>" -}}
+      {{- end -}}
+
+      {{- $containerType := tpl $containerValues.type $rootCtx -}}
+      {{- if not (mustHas $containerType $types) -}}
+        {{- fail (printf "InitContainer - Expected <type> to be one of [%s], but got [%s]" (join ", " $types) $containerType) -}}
       {{- end -}}
 
       {{- $container := (mustDeepCopy $containerValues) -}}
@@ -41,25 +49,25 @@ objectData: The object data to be used to render the Pod.
       {{- $_ := set $container "calculatedFSGroup" $objectData.podSpec.calculatedFSGroup -}}
 
       {{/* Append to list of containers based on type */}}
-      {{- $tempContainers = (get $initContainers $containerValues.type) -}}
-      {{- $_ := set $initContainers $containerValues.type (mustAppend $tempContainers $container) -}}
+      {{- $tempContainers := (get $initContainers $containerType) -}}
+      {{- $_ := set $initContainers $containerType (mustAppend $tempContainers $container) -}}
     {{- end -}}
   {{- end -}}
 
   {{- if $rootCtx.Release.IsInstall -}}
     {{- range $container := (get $initContainers "install") -}}
-      {{- include "ix.v1.common.lib.pod.container" (dict "rootCtx" $rootCtx "objectData" $container) | trim }}
+      {{- include "ix.v1.common.lib.pod.container" (dict "rootCtx" $rootCtx "objectData" $container) -}}
     {{- end -}}
   {{- end -}}
 
   {{- if $rootCtx.Release.IsUpgrade -}}
     {{- range $container := (get $initContainers "upgrade") -}}
-      {{- include "ix.v1.common.lib.pod.container" (dict "rootCtx" $rootCtx "objectData" $container) | trim }}
+      {{- include "ix.v1.common.lib.pod.container" (dict "rootCtx" $rootCtx "objectData" $container) -}}
     {{- end -}}
   {{- end -}}
 
   {{- range $container := (get $initContainers "init") -}}
-    {{- include "ix.v1.common.lib.pod.container" (dict "rootCtx" $rootCtx "objectData" $container) | trim }}
+    {{- include "ix.v1.common.lib.pod.container" (dict "rootCtx" $rootCtx "objectData" $container) -}}
   {{- end -}}
 
 {{- end -}}
