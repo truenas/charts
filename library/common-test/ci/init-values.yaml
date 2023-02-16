@@ -39,10 +39,17 @@ workload:
           type: init
           imageSelector: initImage
           command:
-            - /bin/bash
-            - -c
+            - bash
             - |
-              echo "Hello World"
+              echo "Hello World" && exit 0
+        install-cont:
+          enabled: true
+          type: install
+          imageSelector: initImage
+          command:
+            - bash
+            - |
+              echo "Hello World" && exit 0
 
 service:
   main:
@@ -52,6 +59,5 @@ service:
       main:
         enabled: true
         primary: true
-        port: 8080
-        targetPort: 8080
         protocol: http
+        port: 8080

@@ -134,6 +134,19 @@ podOptions:
 # TODO:
 portal: {}
 
+# NOTES.txt TODO: Docs
+notes:
+  header: |
+    # Welcome to SCALE
+    Thank you for installing <{{ .Chart.Name }}>.
+  # custom: "{{ toYaml $.Values }}"
+  custom: ""
+  footer: |
+    # Documentation
+    Documentation for this chart can be found at ...
+    # Bug reports
+    If you find a bug in this chart, please file an issue at ...
+
 ##### ⬇ Done ⬇ #####
 
 # -- Timezone used everywhere applicable
@@ -207,16 +220,3 @@ scaleCertificate: {}
 
 # -- (docs/scaleGPU.md)
 scaleGPU: []
-
-# NOTES.txt TODO: Docs
-notes:
-  header: |
-    # Welcome to SCALE
-    Thank you for installing <{{ .Chart.Name }}>.
-  # custom: "{{ toYaml $.Values }}"
-  custom: ""
-  footer: |
-    # Documentation
-    Documentation for this chart can be found at ...
-    # Bug reports
-    If you find a bug in this chart, please file an issue at ...
