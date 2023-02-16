@@ -1,7 +1,7 @@
 # Root Chart Context
 
-| Key              |   Type   | Required | Helm Template | Default | Description                                 |
-| :--------------- | :------: | :------: | :-----------: | :-----: | :------------------------------------------ |
+| Key        |   Type   | Required | Helm Template | Default | Description                                 |
+| :--------- | :------: | :------: | :-----------: | :-----: | :------------------------------------------ |
 | .Values.TZ | `string` |    ✅    |      ❌       |  `UTC`  | Timezone that is used everywhere applicable |
 
 ---
@@ -29,3 +29,15 @@ Documentation:
 - [scaleCertificate](scaleCertificate.md)
 - [scaleExternalInterface](scaleExternalInterface.md)
 - [volumeClaimTemplates](volumeClaimTemplates.md)
+
+---
+
+Notes:
+
+This applies across all the documentation:
+
+- Helm Template:
+  - `❌` means that the value is not templated
+  - `✅` means that the value is templated,
+    for example instead of a hardcoded value, you can set it to `{{ .Values.some.value }}`.
+    and it will be replaced by the value contained in `.Values.some.value` at the installation/upgrade time.
