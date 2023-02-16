@@ -39,7 +39,7 @@ workload:
           type: init
           imageSelector: initImage
           command:
-ec            - |
+            - |
               echo "Hello World" && exit 0
         install-cont:
           enabled: true
