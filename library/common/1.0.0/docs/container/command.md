@@ -1,6 +1,6 @@
 # Command
 
-Assume every key bellow has a prefix of `workload.[workload-name].podSpec.containers.[container-name]`.
+Assume every key below has a prefix of `workload.[workload-name].podSpec.containers.[container-name]`.
 
 | Key     |     Type      | Required | Helm Template | Default | Description                                                 |
 | :------ | :-----------: | :------: | :-----------: | :-----: | :---------------------------------------------------------- |
@@ -10,7 +10,7 @@ Assume every key bellow has a prefix of `workload.[workload-name].podSpec.contai
 
 Appears in:
 
-- `.Values.workload.[workload-name].podSpec.containers.[container-name].args`
+- `.Values.workload.[workload-name].podSpec.containers.[container-name].command`
 
 ---
 

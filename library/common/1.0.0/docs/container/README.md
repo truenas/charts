@@ -1,6 +1,6 @@
 # Container
 
-Assume every key bellow has a prefix of `workload.[workload-name].podSpec`.
+Assume every key below has a prefix of `workload.[workload-name].podSpec`.
 
 | Key                                 |   Type    | Required | Helm Template | Default | Description                       |
 | :---------------------------------- | :-------: | :------: | :-----------: | :-----: | :-------------------------------- |

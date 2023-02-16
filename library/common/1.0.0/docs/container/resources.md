@@ -1,6 +1,6 @@
 # Resources
 
-Assume every key bellow has a prefix of `workload.[workload-name].podSpec.containers.[container-name]`.
+Assume every key below has a prefix of `workload.[workload-name].podSpec.containers.[container-name]`.
 
 | Key                       |   Type   | Required | Helm Template |                          Default                           | Description                                  |
 | :------------------------ | :------: | :------: | :-----------: | :--------------------------------------------------------: | :------------------------------------------- |
@@ -13,7 +13,7 @@ Assume every key bellow has a prefix of `workload.[workload-name].podSpec.contai
 | resources.limits.memory   | `string` |    ❌    |      ❌       |  `{{ .Values.containerOptions.resources.limits.memory }}`  | Define the limits.memory for the container   |
 
 > Each value that is not defined in the `resources` under the container level, it will get replaced with the value defined `.Values.containerOptions.resources`.
-> `requests` is **required**.
+> `requests` is **required**, because without it, kubernetes uses the `limits` as the `requests`. Which can lead pods to be evicted when they reach their `limits` or not even scheduled.
 > `limits` is **optional**, can be set to "unlimited" by setting it's values (`cpu` and `memory`) to `0`.
 
 Regex Match:

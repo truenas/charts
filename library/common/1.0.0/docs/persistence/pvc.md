@@ -8,7 +8,7 @@
 | persistence.[volume-name].accessModes      | `string/list` |    ❌    |         ✅         | `{{ .Values.global.fallbackDefaults.pvcAccessModes }}` | Define the accessModes of the PVC, if it's single can be defined as a string, multiple as a list                                 |
 | persistence.[volume-name].volumeName       |   `string`    |    ❌    |         ✅         |                                                        | Define the volumeName of a PV, backing the claim                                                                                 |
 | persistence.[volume-name].existingClaim    |   `string`    |    ❌    |         ✅         |                                                        | Define an existing claim to use                                                                                                  |
-| persistence.[volume-name].storageClassName |   `string`    |    ❌    |         ✅         |                       See bellow                       | Define an existing claim to use                                                                                                  |
+| persistence.[volume-name].storageClassName |   `string`    |    ❌    |         ✅         |                       See below                       | Define an existing claim to use                                                                                                  |
 | persistence.[volume-name].size             |   `string`    |    ❌    |         ✅         |    `{{ .Values.global.fallbackDefaults.pvcSize }}`     | Define the size of the PVC                                                                                                       |
 
 > - If storageClass is defined on the `persistence`:

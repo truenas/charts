@@ -36,13 +36,13 @@ configmap:
     annotations:
       key: value
       keytpl: "{{ .Values.some.value }}"
-      data:
-        key: value
+    data:
+      key: value
 
   other-configmap-name:
     enabled: true
-      data:
-        key: |
-          multi line
-          text value
+    data:
+      key: |
+        multi line
+        text value
 ```
