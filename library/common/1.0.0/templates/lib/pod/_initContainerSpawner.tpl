@@ -26,10 +26,7 @@ objectData: The object data to be used to render the Pod.
       {{- end -}}
 
       {{- $container := (mustDeepCopy $containerValues) -}}
-      {{- $name := include "ix.v1.common.lib.chart.names.fullname" $rootCtx -}}
-      {{- if not $container.primary -}}
-        {{- $name = printf "%s-%s" $name $containerName  -}}
-      {{- end -}}
+      {{- $name := printf "%s-%s-%s" (include "ix.v1.common.lib.chart.names.fullname" $rootCtx) $containerType $containerName -}}
 
       {{- $_ := set $container "name" $name -}}
       {{- $_ := set $container "shortName" $containerName -}}
