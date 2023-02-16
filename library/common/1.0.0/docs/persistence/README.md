@@ -20,7 +20,7 @@
 | persistence.[volume-name].targetSelector.[pod-name].[container-name].readOnly         | `boolean` |    ❌    |      ❌       |     `[volume-name].readOnly`     | Define the readOnly for the container                                                 |
 
 > When `targetSelectAll` is `true`, it will define the volume to all pods and volumeMount to all containers (`targetSelector` is ignored in this case)
-> When `targetSelector` is defined, referencing pod(s) and container(s) it will define the volume to those pod(s) and volumeMount to those container(s)
+> When `targetSelector` is defined, it will define the volume to the pod(s) and volumeMount to the container(s) selected. See below for the selector structure.
 > When `targetSelector` is a empty, it will define the volume to the primary pod and volumeMount to the primary container
 > `targetSelectAll` is only useful when you want to mount a shared volume to all pods and containers.
 > Otherwise, you should use `targetSelector` to define the volume to specific pods and containers.

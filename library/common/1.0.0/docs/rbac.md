@@ -24,7 +24,7 @@
 | rbac.[rbac-name].subjects.apiGroup       | `string`  |    ✅    |         ✅         |  `""`   | Define the `apiGroup` of `subjects` entry                                 |
 
 > When `allServiceAccounts` is `true`, it will assign the all the serviceAccount(s) to the (Cluster)RoleBinding (`serviceAccounts` is ignored in this case)
-> When `serviceAccounts` is a list, each entry is a string, referencing the serviceAccount(s) name that will be assigned to the (Cluster)RoleBinding.
+> When `serviceAccounts` is a list, each entry is a string with the serviceAccount name that will be assigned to the (Cluster)RoleBinding. Can have multiple entries.
 > When `serviceAccounts` is a empty, it will assign the primary serviceAccount to the primary rbac
 
 ---

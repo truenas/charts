@@ -15,7 +15,7 @@
 | scaleExternalInterface.staticRoutes.gateway       | `string`  |               ✅                |      ❌       |  `""`   | Define the static gateway (Only with static ipam type)                          |
 
 > When `targetSelectAll` is `true`, it will add the annotations to all pods (`targetSelector` is ignored in this case)
-> When `targetSelector` is a list, each entry is a string, referencing the pod(s) name that will add the annotations
+> When `targetSelector` is a list, each entry is a string, with the pod name that will add the annotations. Can have multiple entries.
 > When `targetSelector` is a empty, it will add the annotations to the primary pod
 
 ---

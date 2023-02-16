@@ -16,7 +16,7 @@
 | imagePullSecret.[pull-secret-name].targetSelector  |  `list`   |    ❌    |         ❌         |  `[]`   | Define the pod(s) to assign the secret          |
 
 > When `targetSelectAll` is `true`, it will assign the secret to all pods (`targetSelector` is ignored in this case)
-> When `targetSelector` is a list, each entry is a string, referencing the pod(s) name that will be assigned.
+> When `targetSelector` is a list, each entry is a string with the pod name that will be assigned. Can have multiple entries
 > When `targetSelector` is a empty, it will assign the secret to the primary pod
 
 ---
