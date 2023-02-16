@@ -1,0 +1,8 @@
+image:
+  pullPolicy: IfNotPresent
+  repository: plexinc/pms-docker
+  tag: 1.31.0.6654-02189b09f
+plexpassImage:
+  pullPolicy: IfNotPresent
+  repository: plexinc/pms-docker
+  tag: plexpass
