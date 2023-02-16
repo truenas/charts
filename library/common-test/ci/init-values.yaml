@@ -38,14 +38,14 @@ workload:
           enabled: true
           type: init
           imageSelector: initImage
-          command:
+          args:
             - |
               echo "Hello World" && exit 0
         install-cont:
           enabled: true
           type: install
           imageSelector: initImage
-          command:
+          args:
             - |
               echo "Hello World" && exit 0
 
