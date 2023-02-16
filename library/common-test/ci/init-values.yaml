@@ -8,13 +8,13 @@ initImage:
   tag: latest
 
 workload:
-  workload-name:
+  main:
     enabled: true
     primary: true
     type: Deployment
     podSpec:
       containers:
-        container-name1:
+        main:
           enabled: true
           primary: true
           args:
@@ -34,7 +34,7 @@ workload:
               type: http
               port: "{{ .Values.service.main.ports.main.port }}"
       initContainers:
-        container-name2:
+        init-cont:
           enabled: true
           type: init
           imageSelector: initImage
