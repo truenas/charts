@@ -1,0 +1,45 @@
+image:
+  repository: traefik/whoami
+  pullPolicy: IfNotPresent
+  tag: latest
+initImage:
+  repository: bash
+  pullPolicy: IfNotPresent
+  tag: latest
+
+workload:
+  workload-name:
+    enabled: true
+    primary: true
+    type: Deployment
+    podSpec:
+      containers:
+        container-name1:
+          enabled: true
+          primary: true
+          args:
+            - --port
+            - "8080"
+          probes:
+            liveness:
+              enabled: true
+              type: http
+              port: "{{ .Values.service.main.ports.main.port }}"
+            readiness:
+              enabled: true
+              type: http
+              port: "{{ .Values.service.main.ports.main.port }}"
+            startup:
+              enabled: true
+              type: http
+              port: "{{ .Values.service.main.ports.main.port }}"
+      initContainers:
+        container-name2:
+          enabled: true
+          type: init
+          imageSelector: initImage
+          command:
+            - /bin/bash
+            - -c
+            - |
+              echo "Hello World"

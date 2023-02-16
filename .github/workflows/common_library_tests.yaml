@@ -107,7 +107,7 @@ jobs:
           - statefulset-values.yaml
           - persistence-values.yaml
           - rbac-values.yaml
-          # - extra-containers-values.yaml
+          - init-values.yaml
 
     steps:
       - name: Checkout
