@@ -6,7 +6,7 @@ objectData: The object data to be used to render the Pod.
 */}}
 {{- define "ix.v1.common.lib.workload.pod" -}}
   {{- $rootCtx := .rootCtx -}}
-  {{- $objectData := .objectData -}}
+  {{- $objectData := .objectData }}
 serviceAccountName: {{ include "ix.v1.common.lib.pod.serviceAccountName" (dict "rootCtx" $rootCtx "objectData" $objectData) }}
 automountServiceAccountToken: {{ include "ix.v1.common.lib.pod.automountServiceAccountToken" (dict "rootCtx" $rootCtx "objectData" $objectData) }}
 runtimeClassName: {{ include "ix.v1.common.lib.pod.runtimeClassName" (dict "rootCtx" $rootCtx "objectData" $objectData) }}
@@ -46,27 +46,12 @@ securityContext:
   {{- include "ix.v1.common.lib.pod.securityContext" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 }}
   {{- if $objectData.podSpec.containers }}
 containers:
-    {{- include "ix.v1.common.lib.container.primaryValidation" (dict "rootCtx" $rootCtx "objectData" $objectData) -}}
-    {{- range $containerName, $containerValues := $objectData.podSpec.containers -}}
-      {{- if $containerValues.enabled -}}
-        {{- $container := (mustDeepCopy $containerValues) -}}
-        {{- $name := include "ix.v1.common.lib.chart.names.fullname" $rootCtx -}}
-        {{- if not $container.primary -}}
-          {{- $name = printf "%s-%s" $name $containerName  -}}
-        {{- end -}}
-
-        {{- $_ := set $container "name" $name -}}
-        {{- $_ := set $container "shortName" $containerName -}}
-        {{- $_ := set $container "podShortName" $objectData.shortName -}}
-        {{- $_ := set $container "podPrimary" $objectData.primary -}}
-        {{- $_ := set $container "podType" $objectData.type -}}
-        {{/* Created from the pod.securityContext, used by fixedEnv */}}
-        {{- $_ := set $container "calculatedFSGroup" $objectData.podSpec.calculatedFSGroup -}}
-        {{- include "ix.v1.common.lib.pod.container" (dict "rootCtx" $rootCtx "objectData" $container) | trim | nindent 2 }}
-      {{- end -}}
-    {{- end -}}
-  {{- end }}
-#TODO:initContainers:
+    {{- include "ix.v1.common.lib.pod.containerSpawner" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 -}}
+  {{- end -}}
+  {{- if $objectData.podSpec.initContainers }}
+initContainers:
+    {{- include "ix.v1.common.lib.pod.initContainerSpawner" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 -}}
+  {{- end -}}
   {{- with (include "ix.v1.common.lib.pod.volumes" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim) }}
 volumes:
   {{- . | nindent 2 }}
