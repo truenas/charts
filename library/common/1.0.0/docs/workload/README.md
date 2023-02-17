@@ -18,7 +18,6 @@
 | workload.[workload-name].podSpec.restartPolicy                       | `string`  |    ❌    |         ✅         |        `{{ .Values.podOptions.restartPolicy }}` (Always)        | Pod's restartPolicy. (Always, Never, OnFailure)                                    |
 | workload.[workload-name].podSpec.hostname                            | `string`  |    ❌    |         ✅         |                              `""`                               | Pod's hostname                                                                     |
 | workload.[workload-name].podSpec.terminationGracePeriodSeconds       |   `int`   |    ❌    |         ✅         | `{{ .Values.podOptions.terminationGracePeriodSeconds }}` (120)  | Pod's terminationGracePeriodSeconds                                                |
-| workload.[workload-name].podSpec.nodeSelector                        |  `dict`   |    ❌    | ✅ (On value only) |          `{{ .Values.podOptions.nodeSelector }}` ({})           | Pod's nodeSelector                                                                 |
 | workload.[workload-name].podSpec.hostAliases                         |  `list`   |    ❌    |         ❌         |                                                                 | Pod's host aliases                                                                 |
 | workload.[workload-name].podSpec.hostAliases.ip                      | `string`  |    ❌    |         ✅         |                                                                 | Value for `ip` in hosts aliases                                                    |
 | workload.[workload-name].podSpec.hostAliases.hostnames               |  `list`   |    ❌    |         ❌         |                                                                 | Hostnames for the `ip` in hosts aliases                                            |
@@ -102,8 +101,6 @@ workload:
       enableServiceLinks: false
       hostname: some-hostname
       terminationGracePeriodSeconds: 100
-      nodeSelector:
-        disk_type: ssd
       hostAliases:
         - ip: 10.10.10.100
           hostnames:
