@@ -221,7 +221,7 @@ tests:
               primary: true
     asserts:
       - failedTemplate:
-          errorMessage: Service - Expected <type> to be one of [ClusterIP, LoadBalancer, NodePort, ExternalName] but got [not-a-type]
+          errorMessage: Service - Expected <type> to be one of [ClusterIP, NodePort, ExternalName] but got [not-a-type]
 
   - it: should fail with invalid ipFamilyPolicy
     set:
@@ -292,29 +292,6 @@ tests:
     asserts:
       - failedTemplate:
           errorMessage: Service - Expected <ipFamilies> to be one of [IPv4, IPv6], but got [not-a-family]
-
-  - it: should fail with invalid externalTrafficPolicy
-    set:
-      service:
-        service-name1:
-          enabled: true
-          primary: true
-          type: LoadBalancer
-          externalTrafficPolicy: not-a-policy
-          ports:
-            port-name1:
-              enabled: true
-              primary: true
-              port: 12345
-      workload:
-        some-pod-name:
-          enabled: true
-          primary: true
-          type: Deployment
-          podSpec: {}
-    asserts:
-      - failedTemplate:
-          errorMessage: Service - Expected <externalTrafficPolicy> to be one of [Cluster, Local], but got [not-a-policy]
 
   - it: should fail with invalid externalName
     set:

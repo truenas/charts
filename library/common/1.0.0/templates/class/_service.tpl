@@ -14,7 +14,6 @@ objectData: The service data, that will be used to render the Service object.
   {{- $svcType := $objectData.type | default $rootCtx.Values.fallbackDefaults.serviceType -}}
 
   {{/* Init variables */}}
-  {{- $hasHTTPSPort := false -}}
   {{- $hasHostPort := false -}}
   {{- $hostNetwork := false -}}
   {{- $podValues := dict -}}
@@ -32,10 +31,6 @@ objectData: The service data, that will be used to render the Service object.
 
     {{- range $portName, $port := $objectData.ports -}}
       {{- if $port.enabled -}}
-        {{- if eq (tpl ($port.protocol | default "") $rootCtx) "https" -}}
-          {{- $hasHTTPSPort = true -}}
-        {{- end -}}
-
         {{- if and (hasKey $port "hostPort") $port.hostPort -}}
           {{- $hasHostPort = true -}}
         {{- end -}}
@@ -65,12 +60,6 @@ metadata:
     {{- . | nindent 4 }}
   {{- end -}}
   {{- $annotations := (mustMerge ($objectData.annotations | default dict) (include "ix.v1.common.lib.metadata.allAnnotations" $rootCtx | fromYaml)) -}}
-  {{- if eq $svcType "LoadBalancer" -}}
-    {{- include "ix.v1.common.lib.service.metalLBAnnotations" (dict "rootCtx" $rootCtx "objectData" $objectData "annotations" $annotations) -}}
-  {{- end -}}
-  {{- if $hasHTTPSPort -}}
-    {{- include "ix.v1.common.lib.service.traefikAnnotations" (dict "rootCtx" $rootCtx "annotations" $annotations) -}}
-  {{- end -}}
   {{- with (include "ix.v1.common.lib.metadata.render" (dict "rootCtx" $rootCtx "annotations" $annotations) | trim) }}
   annotations:
     {{- . | nindent 4 }}
@@ -78,8 +67,6 @@ metadata:
 spec:
   {{- if eq $svcType "ClusterIP" -}}
     {{- include "ix.v1.common.lib.service.spec.clusterIP" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 -}}
-  {{- else if eq $svcType "LoadBalancer" -}}
-    {{- include "ix.v1.common.lib.service.spec.loadBalancer" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 -}}
   {{- else if eq $svcType "NodePort" -}}
     {{- include "ix.v1.common.lib.service.spec.nodePort" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 -}}
   {{- else if eq $svcType "ExternalName" -}}

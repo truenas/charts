@@ -5,10 +5,6 @@ global:
   labels: {}
   # -- Set additional global annotations
   annotations: {}
-  # -- Adds metalLB annotations to services
-  addMetalLBAnnotations: false
-  # -- Adds traefik annotations to services
-  addTraefikAnnotations: false
   # -- Minimum nodePort value
   minNodePort: 9000
 
