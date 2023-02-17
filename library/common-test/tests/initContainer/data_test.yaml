@@ -110,3 +110,44 @@ tests:
       - documentIndex: *deploymentDoc
         isNull:
           path: spec.template.spec.initContainers[2]
+
+  - it: should NOT generate render init container
+    set:
+      render: false
+      image:
+        repository: nginx
+        tag: 1.19.0
+        pullPolicy: IfNotPresent
+      workload:
+        workload-name:
+          enabled: true
+          primary: true
+          type: Deployment
+          podSpec:
+            containers:
+              container-name1:
+                enabled: true
+                primary: true
+                imageSelector: image
+                probes:
+                  liveness:
+                    enabled: false
+                  readiness:
+                    enabled: false
+                  startup:
+                    enabled: false
+            initContainers:
+              container-name1:
+                enabled: "{{ .Values.render }}"
+                type: init
+                imageSelector: image
+    asserts:
+      - documentIndex: &deploymentDoc 0
+        isKind:
+          of: Deployment
+      - documentIndex: *deploymentDoc
+        isAPIVersion:
+          of: apps/v1
+      - documentIndex: *deploymentDoc
+        isNull:
+          path: spec.template.spec.initContainers

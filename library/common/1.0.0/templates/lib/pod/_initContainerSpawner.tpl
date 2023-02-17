@@ -18,6 +18,13 @@ objectData: The object data to be used to render the Pod.
     {{- $enabled := $containerValues.enabled -}}
     {{- if kindIs "string" $enabled -}}
       {{- $enabled = tpl $enabled $rootCtx -}}
+
+      {{/* After tpl it becomes a string, not a bool */}}
+      {{-  if eq $enabled "true" -}}
+        {{- $enabled = true -}}
+      {{- else -}}
+        {{- $enabled = false -}}
+      {{- end -}}
     {{- end -}}
 
     {{- if $enabled -}}
