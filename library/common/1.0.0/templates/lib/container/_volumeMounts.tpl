@@ -26,8 +26,12 @@ objectData: The object data to be used to render the container.
 
       {{/* If persistence is enabled... */}}
       {{- if $persistenceValues.enabled -}}
+        {{/* If targetSelectAll is set, means all pods/containers */}} {{/* targetSelectAll does not make sense for vct */}}
+        {{- if and $persistenceValues.targetSelectAll -}}
+          {{- $volMounts = mustAppend $volMounts $volMount -}}
+
         {{/* Else if selector is defined */}}
-        {{- if $persistenceValues.targetSelector -}}
+        {{- else if $persistenceValues.targetSelector -}}
           {{/* If pod is selected */}}
           {{- if mustHas $objectData.podShortName ($persistenceValues.targetSelector | keys) -}}
             {{- $selectorValues := (get $persistenceValues.targetSelector $objectData.podShortName) -}}
