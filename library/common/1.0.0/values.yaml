@@ -1,3 +1,5 @@
+
+##### ⬇ Done ⬇ #####
 # -- (docs/README.md)
 global:
   labels: {}
@@ -30,21 +32,14 @@ fallbackDefaults:
       failureThreshold: 60
       successThreshold: 1
 
-# TODO: Docs (for the imageName) convention
-# -- Image values
+# -- (docs/README.md)
 image:
-  # -- Image repository
-  repository: traefik/whoami
-  # -- Image tag
-  tag: latest
-  # -- Image pull policy
+  repository: ""
+  tag: ""
   pullPolicy: IfNotPresent
 
-# TODO: Docs
-# -- Security Context
+# -- (docs/README.md)
 securityContext:
-  # -- Container security context for all containers
-  # Can be overruled per container
   container:
     runAsNonRoot: true
     runAsUser: 568
@@ -58,18 +53,18 @@ securityContext:
       add: []
       drop:
         - ALL
-  # -- Pod security context for all pods
-  # Can be overruled per pod
   pod:
     fsGroup: 568
     fsGroupChangePolicy: OnRootMismatch
     supplementalGroups: []
     sysctls: []
 
-# TODO: Docs
+# -- (docs/README.md)
 containerOptions:
-  # -- Resources
-  # Can be overruled per container
+  PUID: 568
+  UMASK: "002"
+  NVIDIA_CAPS:
+    - all
   resources:
     limits:
       cpu: 4000m
@@ -77,17 +72,8 @@ containerOptions:
     requests:
       cpu: 10m
       memory: 50Mi
-  # -- PUID for all containers
-  # Can be overruled per container
-  PUID: 568
-  # -- UMASK for all containers
-  # Can be overruled per container
-  UMASK: "002"
-  NVIDIA_CAPS:
-    - all
 
-# -- Options for all pods # TODO: Docs
-# Can be overruled per pod
+# -- (docs/README.md)
 podOptions:
   enableServiceLinks: false
   hostNetwork: false
@@ -102,11 +88,6 @@ podOptions:
   runtimeClassName: ""
   automountServiceAccountToken: false
   terminationGracePeriodSeconds: 120
-
-# TODO:
-portal: {}
-
-##### ⬇ Done ⬇ #####
 
 # -- (docs/notes.md)
 notes:
@@ -189,3 +170,6 @@ scaleCertificate: {}
 
 # -- (docs/scaleGPU.md)
 scaleGPU: []
+
+# TODO:
+portal: {}

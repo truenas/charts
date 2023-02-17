@@ -20,6 +20,10 @@ tests:
         - hostInterface: enp0s4
           ipam:
             type: dhcp
+      image: &image
+        repository: nginx
+        tag: 1.21.4
+        pullPolicy: IfNotPresent
       workload:
         workload-name1:
           enabled: true
@@ -99,6 +103,7 @@ tests:
           ipam:
             type: dhcp
           targetSelectAll: true
+      image: *image
       workload:
         workload-name1:
           enabled: true
@@ -175,6 +180,7 @@ tests:
             type: dhcp
           targetSelector:
             - workload-name1
+      image: *image
       workload:
         workload-name1:
           enabled: true
