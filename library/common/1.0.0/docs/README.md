@@ -102,6 +102,7 @@ Documentation:
 - [scaleGPU](scaleGPU.md)
 - [scaleCertificate](scaleCertificate.md)
 - [scaleExternalInterface](scaleExternalInterface.md)
+- [notes](notes.md)
 
 ---
 

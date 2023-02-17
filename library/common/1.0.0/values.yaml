@@ -1,8 +1,10 @@
+# -- (docs/README.md)
 global:
   labels: {}
   annotations: {}
   minNodePort: 9000
 
+# -- (docs/README.md)
 fallbackDefaults:
   probeType: http
   serviceProtocol: tcp
@@ -104,7 +106,9 @@ podOptions:
 # TODO:
 portal: {}
 
-# NOTES.txt TODO: Docs
+##### ⬇ Done ⬇ #####
+
+# -- (docs/notes.md)
 notes:
   header: |
     # Welcome to SCALE
@@ -116,8 +120,6 @@ notes:
     Documentation for this chart can be found at ...
     # Bug reports
     If you find a bug in this chart, please file an issue at ...
-
-##### ⬇ Done ⬇ #####
 
 # -- Timezone used everywhere applicable
 TZ: UTC
