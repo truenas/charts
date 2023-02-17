@@ -1,24 +1,13 @@
-# TODO: Docs
-# -- Global values
 global:
-  # -- Set additional global labels
   labels: {}
-  # -- Set additional global annotations
   annotations: {}
-  # -- Minimum nodePort value
   minNodePort: 9000
 
-# TODO: Docs
 fallbackDefaults:
-  # -- Default probe type
   probeType: http
-  # -- Default Service Protocol
   serviceProtocol: tcp
-  # -- Default Service Type
   serviceType: ClusterIP
-  # -- Default persistence type
   persistenceType: emptyDir # TODO: Maybe something else?
-  # -- Default probe timeouts
   probeTimeouts:
     liveness:
       initialDelaySeconds: 10
