@@ -16,7 +16,6 @@
 | workload.[workload-name].podSpec.hostNetwork                         | `boolean` |    ❌    |         ❌         |         `{{ .Values.podOptions.hostNetwork }}` (false)          | Pod's hostNetwork                                                                  |
 | workload.[workload-name].podSpec.enableServiceLinks                  | `boolean` |    ❌    |         ❌         |      `{{ .Values.podOptions.enableServiceLinks }}` (false)      | Pod's enableServiceLinks                                                           |
 | workload.[workload-name].podSpec.restartPolicy                       | `string`  |    ❌    |         ✅         |        `{{ .Values.podOptions.restartPolicy }}` (Always)        | Pod's restartPolicy. (Always, Never, OnFailure)                                    |
-| workload.[workload-name].podSpec.priorityClassName                   | `string`  |    ❌    |         ✅         |        `{{ .Values.podOptions.priorityClassName }}` ("")        | Pod's priorityClassName                                                            |
 | workload.[workload-name].podSpec.hostname                            | `string`  |    ❌    |         ✅         |                              `""`                               | Pod's hostname                                                                     |
 | workload.[workload-name].podSpec.terminationGracePeriodSeconds       |   `int`   |    ❌    |         ✅         | `{{ .Values.podOptions.terminationGracePeriodSeconds }}` (120)  | Pod's terminationGracePeriodSeconds                                                |
 | workload.[workload-name].podSpec.nodeSelector                        |  `dict`   |    ❌    | ✅ (On value only) |          `{{ .Values.podOptions.nodeSelector }}` ({})           | Pod's nodeSelector                                                                 |
@@ -102,7 +101,6 @@ workload:
       automountServiceAccountToken: true
       hostNetwork: false
       enableServiceLinks: false
-      priorityClassName: some-priority-class-name
       hostname: some-hostname
       terminationGracePeriodSeconds: 100
       nodeSelector:
