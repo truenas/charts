@@ -8,7 +8,9 @@ podName is the "shortName" of the pod. The one you define in the .Values.workloa
   {{- $objectType := .objectType -}}
   {{- $objectName := .objectName }}
 
+{{- if $objectType }}
 {{ printf "%s.name" $objectType }}: {{ $objectName }}
+{{- end }}
 app.kubernetes.io/name: {{ include "ix.v1.common.lib.chart.names.name" $rootCtx }}
 app.kubernetes.io/instance: {{ $rootCtx.Release.Name }}
 {{- end -}}
