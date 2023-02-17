@@ -19,7 +19,7 @@ objectData: The service data, that will be used to render the Service object.
   {{- $hostNetwork := false -}}
   {{- $podValues := dict -}}
 
-  {{- $specialTypes := (list "ExternalName" "ExternalIP") -}}
+  {{- $specialTypes := (list "ExternalName") -}}
   {{/* External Name / External IP does not rely on any pod values */}}
   {{- if not (mustHas $svcType $specialTypes) -}}
     {{/* Get Pod Values based on the selector (or the absence of it) */}}
@@ -84,8 +84,6 @@ spec:
     {{- include "ix.v1.common.lib.service.spec.nodePort" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 -}}
   {{- else if eq $svcType "ExternalName" -}}
     {{- include "ix.v1.common.lib.service.spec.externalName" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 -}}
-  {{- else if eq $svcType "ExternalIP" -}}
-    {{- include "ix.v1.common.lib.service.spec.externalIP" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 -}}
   {{- end -}}
   {{- with (include "ix.v1.common.lib.service.ports" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim) }}
   ports:
@@ -94,8 +92,5 @@ spec:
   {{- if not (mustHas $svcType $specialTypes) }}
   selector:
     {{- include "ix.v1.common.lib.metadata.selectorLabels" (dict "rootCtx" $rootCtx "objectType" "pod" "objectName" $podValues.shortName) | trim | nindent 4 -}}
-  {{- end -}}
-  {{- if eq $svcType "ExternalIP" -}}
-    {{- include "ix.v1.common.class.endpointSlice" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 0 }}
   {{- end -}}
 {{- end -}}

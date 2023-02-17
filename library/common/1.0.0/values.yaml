@@ -125,8 +125,6 @@ podOptions:
   hostAliases: []
   nodeSelector: {}
   tolerations: []
-  schedulerName: ""
-  priorityClassName: ""
   runtimeClassName: ""
   automountServiceAccountToken: false
   terminationGracePeriodSeconds: 120

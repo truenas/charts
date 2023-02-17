@@ -93,7 +93,7 @@ tests:
                 - otherserver.local
                 - mybackups.local
 
-  - it: should pass with schedulerName from "pod" with tpl
+  - it: should pass with hostaliases from "pod" with tpl
     set:
       ip: 10.10.10.200
       host1: server.local

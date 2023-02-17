@@ -49,8 +49,6 @@ objectData: The object data to be used to render the Pod.
           {{- include "ix.v1.common.lib.pod.volume.configmap" (dict "rootCtx" $rootCtx "objectData" $persistence) | trim | nindent 0 -}}
         {{- else if eq "emptyDir" $type -}}
           {{- include "ix.v1.common.lib.pod.volume.emptyDir" (dict "rootCtx" $rootCtx "objectData" $persistence) | trim | nindent 0 -}}
-        {{- else if eq "nfs" $type -}}
-          {{- include "ix.v1.common.lib.pod.volume.nfs" (dict "rootCtx" $rootCtx "objectData" $persistence) | trim | nindent 0 -}}
         {{- else if eq "device" $type -}}
           {{- include "ix.v1.common.lib.pod.volume.device" (dict "rootCtx" $rootCtx "objectData" $persistence) | trim | nindent 0 -}}
         {{- end -}}

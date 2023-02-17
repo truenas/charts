@@ -5,7 +5,7 @@
 | persistence                                                                           |  `dict`   |    ❌    |      ❌       |               `{}`               | Define the persistence as dicts                                                       |
 | persistence.[volume-name]                                                             |  `dict`   |    ✅    |      ❌       |               `{}`               | Holds persistence definition                                                          |
 | persistence.[volume-name].enabled                                                     | `boolean` |    ✅    |      ❌       |             `false`              | Enables or Disables the persistence                                                   |
-| persistence.[volume-name].type                                                        | `string`  |    ❌    |      ❌       |              `pvc`               | Define the persistence type (pvc, ixVolume, nfs, hostPath, configmap, secret, device) |
+| persistence.[volume-name].type                                                        | `string`  |    ❌    |      ❌       |              `pvc`               | Define the persistence type (pvc, ixVolume, hostPath, configmap, secret, device) |
 | persistence.[volume-name].mountPath                                                   | `string`  |    ✅    |      ✅       |               `""`               | Default mountPath for all containers that are selected                                |
 | persistence.[volume-name].mountPropagation                                            | `string`  |    ❌    |      ✅       |               `""`               | Default mountPropagation for all containers that are selected                         |
 | persistence.[volume-name].subPath                                                     | `string`  |    ❌    |      ✅       |               `""`               | Default subPath for all containers that are selected                                  |
@@ -49,7 +49,6 @@ Naming scheme:
 - [device](device.md)
 - [secret](secret.md)
 - [pvc](pvc.md)
-- [nfs](nfs.md)
 
 ---
 

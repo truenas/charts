@@ -221,7 +221,7 @@ tests:
               primary: true
     asserts:
       - failedTemplate:
-          errorMessage: Service - Expected <type> to be one of [ClusterIP, LoadBalancer, NodePort, ExternalName, ExternalIP] but got [not-a-type]
+          errorMessage: Service - Expected <type> to be one of [ClusterIP, LoadBalancer, NodePort, ExternalName] but got [not-a-type]
 
   - it: should fail with invalid ipFamilyPolicy
     set:
@@ -245,41 +245,6 @@ tests:
     asserts:
       - failedTemplate:
           errorMessage: Service - Expected <ipFamilyPolicy> to be one of [SingleStack, PreferDualStack, RequireDualStack], but got [not-a-policy]
-
-  - it: should fail with empty externalIP
-    set:
-      service:
-        service-name1:
-          enabled: true
-          primary: true
-          type: ExternalIP
-          externalIP: ""
-          ports:
-            port-name1:
-              enabled: true
-              primary: true
-              port: 12345
-    asserts:
-      - failedTemplate:
-          errorMessage: EndpointSlice - Expected non-empty <externalIP>
-
-  - it: should fail with externalIP not a string
-    set:
-      service:
-        service-name1:
-          enabled: true
-          primary: true
-          type: ExternalIP
-          externalIP:
-            - not-a-string
-          ports:
-            port-name1:
-              enabled: true
-              primary: true
-              port: 12345
-    asserts:
-      - failedTemplate:
-          errorMessage: EndpointSlice - Expected <externalIP> to be a [string], but got [slice]
 
   - it: should fail with ipFamilies not a list
     set:
