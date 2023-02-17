@@ -41,7 +41,7 @@ tests:
         workload-name2:
           enabled: true
           primary: false
-          type: StatefulSet
+          type: Deployment
           podSpec:
             containers:
               container-name1:
@@ -65,17 +65,17 @@ tests:
           path: spec.template.metadata.annotations
           content:
             k8s.v1.cni.cncf.io/networks: ix-release-name-0, ix-release-name-1
-      - documentIndex: &statefulSetDoc 3
+      - documentIndex: &otherDeploymentDoc 3
         isKind:
-          of: StatefulSet
-      - documentIndex: *statefulSetDoc
+          of: Deployment
+      - documentIndex: *otherDeploymentDoc
         isAPIVersion:
           of: apps/v1
-      - documentIndex: *statefulSetDoc
+      - documentIndex: *otherDeploymentDoc
         equal:
           path: metadata.name
           value: release-name-common-test-workload-name2
-      - documentIndex: *statefulSetDoc
+      - documentIndex: *otherDeploymentDoc
         isNotSubset:
           path: spec.template.metadata.annotations
           content:

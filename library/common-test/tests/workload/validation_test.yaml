@@ -46,7 +46,7 @@ tests:
           podSpec: {}
     asserts:
       - failedTemplate:
-          errorMessage: Workload - Expected <type> to be one of [Deployment, StatefulSet, DaemonSet, Job, CronJob], but got [not-valid-type]
+          errorMessage: Workload - Expected <type> to be one of [Deployment, DaemonSet, Job, CronJob], but got [not-valid-type]
 
   - it: should fail without podSpec
     set:

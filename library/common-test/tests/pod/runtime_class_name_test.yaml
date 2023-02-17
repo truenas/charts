@@ -103,7 +103,7 @@ tests:
         workload-name3:
           enabled: true
           primary: false
-          type: StatefulSet
+          type: Deployment
           podSpec:
             runtimeClassName: some-class
     asserts:
@@ -118,10 +118,10 @@ tests:
         equal:
           path: spec.template.spec.runtimeClassName
           value: some-class
-      - documentIndex: &statefulSetDoc 2
+      - documentIndex: &otherDeploymentDoc 2
         isKind:
-          of: StatefulSet
-      - documentIndex: *statefulSetDoc
+          of: Deployment
+      - documentIndex: *otherDeploymentDoc
         equal:
           path: spec.template.spec.runtimeClassName
           value: ix-runtime

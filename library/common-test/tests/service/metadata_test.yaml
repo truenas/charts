@@ -143,7 +143,7 @@ tests:
           podSpec: {}
         my-workload2:
           enabled: true
-          type: StatefulSet
+          type: Deployment
           podSpec: {}
     asserts:
       - documentIndex: &serviceDoc 2

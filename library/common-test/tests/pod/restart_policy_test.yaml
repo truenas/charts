@@ -121,7 +121,7 @@ tests:
       - failedTemplate:
           errorMessage: Expected <restartPolicy to be [Always] for [DaemonSet] but got [Never]
 
-  - it: should fail with restartPolicy to Never on StatefulSet
+  - it: should fail with restartPolicy to Never on Deployment
     set:
       podOptions:
         restartPolicy: Never
@@ -129,11 +129,11 @@ tests:
         workload-name1:
           enabled: true
           primary: true
-          type: StatefulSet
+          type: Deployment
           podSpec: {}
     asserts:
       - failedTemplate:
-          errorMessage: Expected <restartPolicy to be [Always] for [StatefulSet] but got [Never]
+          errorMessage: Expected <restartPolicy to be [Always] for [Deployment] but got [Never]
 
   - it: should fail with restartPolicy to invalid on global
     set:
@@ -143,7 +143,7 @@ tests:
         workload-name1:
           enabled: true
           primary: true
-          type: StatefulSet
+          type: Deployment
           podSpec: {}
     asserts:
       - failedTemplate:
@@ -157,7 +157,7 @@ tests:
         workload-name1:
           enabled: true
           primary: true
-          type: StatefulSet
+          type: Deployment
           podSpec:
             restartPolicy: invalid-policy
     asserts:

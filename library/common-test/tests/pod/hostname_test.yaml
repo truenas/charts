@@ -8,13 +8,13 @@ tests:
         workload-name1:
           enabled: true
           primary: true
-          type: StatefulSet
+          type: Deployment
           podSpec: {}
     asserts:
-      - documentIndex: &statefulSetDoc 0
+      - documentIndex: &deploymentDoc 0
         isKind:
-          of: StatefulSet
-      - documentIndex: *statefulSetDoc
+          of: Deployment
+      - documentIndex: *deploymentDoc
         isNull:
           path: spec.template.spec.hostname
 
@@ -24,14 +24,14 @@ tests:
         workload-name1:
           enabled: true
           primary: true
-          type: StatefulSet
+          type: Deployment
           podSpec:
             hostname: some-other-hostname
     asserts:
-      - documentIndex: *statefulSetDoc
+      - documentIndex: *deploymentDoc
         isKind:
-          of: StatefulSet
-      - documentIndex: *statefulSetDoc
+          of: Deployment
+      - documentIndex: *deploymentDoc
         equal:
           path: spec.template.spec.hostname
           value: some-other-hostname
@@ -43,14 +43,14 @@ tests:
         workload-name1:
           enabled: true
           primary: true
-          type: StatefulSet
+          type: Deployment
           podSpec:
             hostname: "{{ .Values.host }}"
     asserts:
-      - documentIndex: *statefulSetDoc
+      - documentIndex: *deploymentDoc
         isKind:
-          of: StatefulSet
-      - documentIndex: *statefulSetDoc
+          of: Deployment
+      - documentIndex: *deploymentDoc
         equal:
           path: spec.template.spec.hostname
           value: some-other-hostname

@@ -28,7 +28,6 @@ Documentation:
 - [scaleGPU](scaleGPU.md)
 - [scaleCertificate](scaleCertificate.md)
 - [scaleExternalInterface](scaleExternalInterface.md)
-- [volumeClaimTemplates](volumeClaimTemplates.md)
 
 ---
 

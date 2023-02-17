@@ -25,9 +25,7 @@ fallbackDefaults:
   pvcRetain: false
   # -- Default PVC Size
   pvcSize: 1Gi
-  # -- Default VCT Size
-  vctSize: 100Gi
-  # -- Default PVC/VCT Access Modes
+  # -- Default PVC Access Modes
   accessModes:
     - ReadWriteOnce
   # -- Default probe timeouts
@@ -202,9 +200,6 @@ serviceAccount: {}
 
 # -- (docs/rbac.md)
 rbac: {}
-
-# -- (docs/volumeClaimTemplates) (StatefulSet only)
-volumeClaimTemplates: {}
 
 # -- (docs/scaleExternalInterface.md)
 scaleExternalInterface: []

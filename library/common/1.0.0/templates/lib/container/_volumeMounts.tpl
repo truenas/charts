@@ -11,9 +11,6 @@ objectData: The object data to be used to render the container.
   {{- $volMounts := list -}}
 
   {{- $keys := (list "persistence") -}}
-  {{- if eq $objectData.podType "StatefulSet" -}}
-    {{- $keys = mustAppend $keys "volumeClaimTemplates" -}}
-  {{- end -}}
 
   {{- range $key := $keys -}}
     {{- range $persistenceName, $persistenceValues := (get $rootCtx.Values $key) -}}
@@ -29,12 +26,8 @@ objectData: The object data to be used to render the container.
 
       {{/* If persistence is enabled... */}}
       {{- if $persistenceValues.enabled -}}
-        {{/* If targetSelectAll is set, means all pods/containers */}} {{/* targetSelectAll does not make sense for vct */}}
-        {{- if and $persistenceValues.targetSelectAll (ne $key "volumeClaimTemplates") -}}
-          {{- $volMounts = mustAppend $volMounts $volMount -}}
-
         {{/* Else if selector is defined */}}
-        {{- else if $persistenceValues.targetSelector -}}
+        {{- if $persistenceValues.targetSelector -}}
           {{/* If pod is selected */}}
           {{- if mustHas $objectData.podShortName ($persistenceValues.targetSelector | keys) -}}
             {{- $selectorValues := (get $persistenceValues.targetSelector $objectData.podShortName) -}}

@@ -20,13 +20,13 @@ tests:
         workload-name1:
           enabled: true
           primary: true
-          type: StatefulSet
+          type: Deployment
           podSpec: {}
     asserts:
-      - documentIndex: &statefulSetDoc 0
+      - documentIndex: &deploymentDoc 0
         isKind:
-          of: StatefulSet
-      - documentIndex: *statefulSetDoc
+          of: Deployment
+      - documentIndex: *deploymentDoc
         equal:
           path: spec.template.spec.securityContext
           value:
@@ -59,15 +59,15 @@ tests:
         workload-name1:
           enabled: true
           primary: true
-          type: StatefulSet
+          type: Deployment
           podSpec:
             securityContext:
               fsGroup: 1001
     asserts:
-      - documentIndex: *statefulSetDoc
+      - documentIndex: *deploymentDoc
         isKind:
-          of: StatefulSet
-      - documentIndex: *statefulSetDoc
+          of: Deployment
+      - documentIndex: *deploymentDoc
         equal:
           path: spec.template.spec.securityContext
           value:
@@ -102,7 +102,7 @@ tests:
         workload-name1:
           enabled: true
           primary: true
-          type: StatefulSet
+          type: Deployment
           podSpec:
             securityContext:
               fsGroup: 1001
@@ -116,10 +116,10 @@ tests:
                 - name: some_other_name
                   value: "some_different_value"
     asserts:
-      - documentIndex: *statefulSetDoc
+      - documentIndex: *deploymentDoc
         isKind:
-          of: StatefulSet
-      - documentIndex: *statefulSetDoc
+          of: Deployment
+      - documentIndex: *deploymentDoc
         equal:
           path: spec.template.spec.securityContext
           value:
@@ -142,7 +142,7 @@ tests:
         workload-name1:
           enabled: true
           primary: true
-          type: StatefulSet
+          type: Deployment
           podSpec:
             securityContext:
               fsGroup: 1001
@@ -157,7 +157,7 @@ tests:
                   value: "some_different_value"
         workload-name2:
           enabled: true
-          type: StatefulSet
+          type: Deployment
           podSpec: {}
       service:
         service-name1:
@@ -187,10 +187,10 @@ tests:
               primary: true
               port: 443
     asserts:
-      - documentIndex: *statefulSetDoc
+      - documentIndex: *deploymentDoc
         isKind:
-          of: StatefulSet
-      - documentIndex: *statefulSetDoc
+          of: Deployment
+      - documentIndex: *deploymentDoc
         equal:
           path: spec.template.spec.securityContext
           value:
@@ -206,10 +206,10 @@ tests:
                 value: "some_different_value"
               - name: net.ipv4.ip_unprivileged_port_start
                 value: "53"
-      - documentIndex: &otherStatefulSetDoc 1
+      - documentIndex: &otherdeploymentDoc 1
         isKind:
-          of: StatefulSet
-      - documentIndex: *otherStatefulSetDoc
+          of: Deployment
+      - documentIndex: *otherdeploymentDoc
         equal:
           path: spec.template.spec.securityContext
           value:
@@ -405,7 +405,7 @@ tests:
         workload-name1:
           enabled: true
           primary: true
-          type: StatefulSet
+          type: Deployment
           podSpec: {}
     asserts:
       - failedTemplate:
@@ -420,7 +420,7 @@ tests:
         workload-name1:
           enabled: true
           primary: true
-          type: StatefulSet
+          type: Deployment
           podSpec: {}
     asserts:
       - failedTemplate:
@@ -436,7 +436,7 @@ tests:
         workload-name1:
           enabled: true
           primary: true
-          type: StatefulSet
+          type: Deployment
           podSpec: {}
     asserts:
       - failedTemplate:
@@ -452,7 +452,7 @@ tests:
         workload-name1:
           enabled: true
           primary: true
-          type: StatefulSet
+          type: Deployment
           podSpec: {}
     asserts:
       - failedTemplate:
@@ -471,7 +471,7 @@ tests:
         workload-name1:
           enabled: true
           primary: true
-          type: StatefulSet
+          type: Deployment
           podSpec: {}
     asserts:
       - failedTemplate:
@@ -490,7 +490,7 @@ tests:
         workload-name1:
           enabled: true
           primary: true
-          type: StatefulSet
+          type: Deployment
           podSpec: {}
     asserts:
       - failedTemplate:

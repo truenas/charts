@@ -104,7 +104,6 @@ jobs:
           - daemonset-values.yaml
           - job-values.yaml
           - cron-values.yaml
-          - statefulset-values.yaml
           - persistence-values.yaml
           - rbac-values.yaml
           - init-values.yaml
