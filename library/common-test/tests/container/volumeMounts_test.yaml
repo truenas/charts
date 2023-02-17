@@ -557,7 +557,7 @@ tests:
           objectName: cert-name
           readOnly: true
           items:
-            - key: crt
+            - key: tls.crt
               path: cert.crt
           targetSelector:
             workload-name:

@@ -8,7 +8,7 @@
 | scaleCertificate.[cert-name].annotations |  `dict`   |    ❌    | ✅ (On value only) |  `{}`   | Additional annotations for secret             |
 | scaleCertificate.[cert-name].id          | `string`  |    ✅    |         ❌         |  `""`   | ID of the certificate in ixCertificates       |
 
-> A secret will be created with 2 keys in the data section: `crt` and `key`.
+> A secret will be created with 2 keys in the data section: `tls.crt` and `tls.key`.
 
 ---
 
@@ -52,11 +52,11 @@ persistence:
     expandObjectName: true # You can omit this, it's the default
     # subPath
     mountPath: /path/to/mount/cert.crt
-    subPath: crt
+    subPath: cert.crt
     # or items
     mountPath: /path/to/mount
     items:
-      - key: crt
+      - key: tls.crt
         path: cert.crt
 
   # This will mount it on the specific pod/container
@@ -66,15 +66,15 @@ persistence:
     objectName: cert-name
     expandObjectName: true # You can omit this, it's the default
     # subPath
-    subPath: crt
+    subPath: tls.crt
     targetSelector:
       workload-name:
         container-name:
           mountPath: /path/to/mount/cert.crt
-          # subPath: crt (You can define subPath here as well, per container)
+          # subPath: cert.crt (You can define subPath here as well, per container)
     # or items
     items:
-      - key: crt
+      - key: tls.crt
         path: cert.crt
     targetSelector:
       workload-name:

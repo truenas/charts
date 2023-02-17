@@ -43,8 +43,8 @@ metadata:
   {{- if (mustHas $objectData.type (list "certificate" "imagePullSecret")) }}
 data:
     {{- if eq $objectData.type "certificate" }}
-  crt: {{ $objectData.data.certificate | trim | b64enc }}
-  key: {{ $objectData.data.privatekey | trim | b64enc }}
+  tls.crt: {{ $objectData.data.certificate | trim | b64enc }}
+  tls.key: {{ $objectData.data.privatekey | trim | b64enc }}
     {{- else if eq $objectData.type "imagePullSecret" }}
   .dockerconfigjson: {{ $objectData.data | trim | b64enc }}
     {{- end -}}
