@@ -14,38 +14,36 @@ objectData:
     {{- fail (printf "Service - Expected <targetSelector> to be [string], but got [%s]" (kindOf $objectData.targetSelector)) -}}
   {{- end -}}
 
-  {{- $svcTypes := (list "ClusterIP" "NodePort" "ExternalName") -}}
+  {{- $svcTypes := (list "ClusterIP" "NodePort") -}}
   {{- if and $objectData.type (not (mustHas $objectData.type $svcTypes)) -}}
     {{- fail (printf "Service - Expected <type> to be one of [%s] but got [%s]" (join ", " $svcTypes) $objectData.type) -}}
   {{- end -}}
 
   {{- $hasEnabledPort := false -}}
-  {{- if ne $objectData.type "ExternalName" -}}
-    {{- range $name, $port := $objectData.ports -}}
-      {{- if $port.enabled -}}
-        {{- $hasEnabledPort = true -}}
+  {{- range $name, $port := $objectData.ports -}}
+    {{- if $port.enabled -}}
+      {{- $hasEnabledPort = true -}}
 
-        {{- if and $port.targetSelector (not (kindIs "string" $port.targetSelector)) -}}
-          {{- fail (printf "Service - Expected <port.targetSelector> to be [string], but got [%s]" (kindOf $port.targetSelector)) -}}
-        {{- end -}}
-
-        {{- if not $port.port -}}
-          {{- fail (printf "Service - Expected non-empty <port.port>") -}}
-        {{- end -}}
-
-        {{- $protocolTypes := (list "tcp" "udp" "http" "https") -}}
-        {{- if $port.protocol -}}
-          {{- if not (mustHas (tpl $port.protocol $rootCtx) $protocolTypes) -}}
-            {{- fail (printf "Service - Expected <port.protocol> to be one of [%s] but got [%s]" (join ", " $protocolTypes) $port.protocol) -}}
-          {{- end -}}
-        {{- end -}}
-
+      {{- if and $port.targetSelector (not (kindIs "string" $port.targetSelector)) -}}
+        {{- fail (printf "Service - Expected <port.targetSelector> to be [string], but got [%s]" (kindOf $port.targetSelector)) -}}
       {{- end -}}
-    {{- end -}}
 
-    {{- if not $hasEnabledPort -}}
-      {{- fail "Service - Expected enabled service to have at least one port" -}}
+      {{- if not $port.port -}}
+        {{- fail (printf "Service - Expected non-empty <port.port>") -}}
+      {{- end -}}
+
+      {{- $protocolTypes := (list "tcp" "udp" "http" "https") -}}
+      {{- if $port.protocol -}}
+        {{- if not (mustHas (tpl $port.protocol $rootCtx) $protocolTypes) -}}
+          {{- fail (printf "Service - Expected <port.protocol> to be one of [%s] but got [%s]" (join ", " $protocolTypes) $port.protocol) -}}
+        {{- end -}}
+      {{- end -}}
+
     {{- end -}}
+  {{- end -}}
+
+  {{- if not $hasEnabledPort -}}
+    {{- fail "Service - Expected enabled service to have at least one port" -}}
   {{- end -}}
 
 {{- end -}}

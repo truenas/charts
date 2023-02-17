@@ -7,7 +7,7 @@
 | service.[service-name].enabled                          | `boolean` |    ✅    |         ❌         |                     `false`                      | Enables or Disables the service                                                                                                                   |
 | service.[service-name].labels                           |  `dict`   |    ❌    | ✅ (On value only) |                       `{}`                       | Additional labels for service                                                                                                                     |
 | service.[service-name].annotations                      |  `dict`   |    ❌    | ✅ (On value only) |                       `{}`                       | Additional annotations for service                                                                                                                |
-| service.[service-name].type                             | `string`  |    ❌    |         ✅         |                   `ClusterIP`                    | Define the service type (ClusterIP, NodePort, ExternalName)                                                             |
+| service.[service-name].type                             | `string`  |    ❌    |         ✅         |                   `ClusterIP`                    | Define the service type (ClusterIP, NodePort)                                                             |
 | service.[service-name].publishNotReadyAddresses         | `boolean` |    ❌    |         ❌         |                     `false`                      | Define whether to publishNotReadyAddresses or not                                                                                                 |
 | service.[service-name].targetSelector                   | `string`  |    ❌    |         ❌         |                       `""`                       | Define the pod to link the service, by default will use the primary pod                                                                           |
 | service.[service-name].ports                            |  `list`   |    ✅    |         ❌         |                       `{}`                       | Define the ports of the service                                                                                                                   |
@@ -41,4 +41,3 @@ Naming scheme:
 
 - [ClusterIP](ClusterIP.md)
 - [NodePort](NodePort.md)
-- [ExternalName](ExternalName.md)
