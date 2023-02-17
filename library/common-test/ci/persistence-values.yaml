@@ -41,37 +41,6 @@ workload:
               port: "{{ .Values.service.main.ports.main.port }}"
 
 persistence:
-  pvc-stock:
-    enabled: true
-    type: pvc
-    mountPath: /pvcstock
-
-  pvc-size:
-    enabled: true
-    type: pvc
-    mountPath: /pvcsize
-    size: 1Gi
-
-  pvc-readonly:
-    enabled: true
-    type: pvc
-    mountPath: /pvcro
-    readOnly: true
-
-  pvc-labeled:
-    enabled: true
-    labels:
-      labelexample1: labelvalue2
-    type: pvc
-    mountPath: /pvclabeled
-
-  pvc-sc-empty:
-    enabled: true
-    type: pvc
-    mountPath: /pvcscempty
-    readOnly: false
-    storageClass: ""
-
   emptydir:
     enabled: true
     type: emptyDir

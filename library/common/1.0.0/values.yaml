@@ -10,9 +10,6 @@ global:
 
 # TODO: Docs
 fallbackDefaults:
-  # -- Define a storageClassName that will be used for all PVCs
-  # Can be overruled per PVC
-  storageClass:
   # -- Default probe type
   probeType: http
   # -- Default Service Protocol
@@ -20,14 +17,7 @@ fallbackDefaults:
   # -- Default Service Type
   serviceType: ClusterIP
   # -- Default persistence type
-  persistenceType: pvc
-  # -- Default Retain PVC
-  pvcRetain: false
-  # -- Default PVC Size
-  pvcSize: 1Gi
-  # -- Default PVC Access Modes
-  accessModes:
-    - ReadWriteOnce
+  persistenceType: emptyDir # TODO: Maybe something else?
   # -- Default probe timeouts
   probeTimeouts:
     liveness:

@@ -10,8 +10,12 @@ objectData: The object data to be used to render the Pod.
 
   {{- range $name, $persistenceValues := $rootCtx.Values.persistence -}}
     {{- if $persistenceValues.enabled -}}
+
       {{- $persistence := (mustDeepCopy $persistenceValues) -}}
+
       {{- $_ := set $persistence "shortName" $name -}}
+      {{- $_ := set $persistence "type" ($persistence.type | default $rootCtx.Values.fallbackDefaults.persistenceType) -}}
+      {{- include "ix.v1.common.lib.persistence.validation" (dict "rootCtx" $rootCtx "objectData" $persistence) -}}
 
       {{- $selected := false -}}
 
@@ -37,9 +41,7 @@ objectData: The object data to be used to render the Pod.
         {{/* Define the volume based on type */}}
         {{- $type := ($persistence.type | default $rootCtx.Values.fallbackDefaults.persistenceType) -}}
 
-        {{- if eq "pvc" $type -}}
-          {{- include "ix.v1.common.lib.pod.volume.pvc" (dict "rootCtx" $rootCtx "objectData" $persistence) | trim | nindent 0 -}}
-        {{- else if eq "ixVolume" $type -}}
+        {{- if eq "ixVolume" $type -}}
           {{- include "ix.v1.common.lib.pod.volume.ixVolume" (dict "rootCtx" $rootCtx "objectData" $persistence) | trim | nindent 0 -}}
         {{- else if eq "hostPath" $type -}}
           {{- include "ix.v1.common.lib.pod.volume.hostPath" (dict "rootCtx" $rootCtx "objectData" $persistence) | trim | nindent 0 -}}

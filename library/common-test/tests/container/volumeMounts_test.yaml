@@ -597,7 +597,7 @@ tests:
       persistence:
         vol-name:
           enabled: true
-          type: pvc
+          type: emptyDir
           mountPath: /some/path
           mountPropagation: HostToContainer
           targetSelector:
@@ -616,7 +616,7 @@ tests:
       persistence:
         vol-name:
           enabled: true
-          type: pvc
+          type: emptyDir
           mountPath: /some/path
           targetSelector:
             workload-name:
@@ -634,7 +634,7 @@ tests:
       persistence:
         vol-name:
           enabled: true
-          type: pvc
+          type: emptyDir
           mountPath: /some/path
           targetSelector:
             workload-name:
@@ -652,7 +652,7 @@ tests:
       persistence:
         vol-name:
           enabled: true
-          type: pvc
+          type: emptyDir
           mountPath: ""
           targetSelector:
             workload-name:
@@ -669,7 +669,7 @@ tests:
       persistence:
         vol-name:
           enabled: true
-          type: pvc
+          type: emptyDir
           targetSelector:
             workload-name:
               container-name1:
@@ -686,7 +686,7 @@ tests:
       persistence:
         vol-name:
           enabled: true
-          type: pvc
+          type: emptyDir
           targetSelector:
             workload-name: string
     asserts:
@@ -701,7 +701,7 @@ tests:
       persistence:
         vol-name:
           enabled: true
-          type: pvc
+          type: emptyDir
           targetSelector:
             workload-name: {}
     asserts:
