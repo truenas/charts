@@ -17,9 +17,6 @@ imagePullSecrets:
 hostNetwork: {{ include "ix.v1.common.lib.pod.hostNetwork" (dict "rootCtx" $rootCtx "objectData" $objectData) }}
 enableServiceLinks: {{ include "ix.v1.common.lib.pod.enableServiceLinks" (dict "rootCtx" $rootCtx "objectData" $objectData) }}
 restartPolicy: {{ include "ix.v1.common.lib.pod.restartPolicy" (dict "rootCtx" $rootCtx "objectData" $objectData) }}
-  {{- with (include "ix.v1.common.lib.pod.schedulerName" (dict "rootCtx" $rootCtx "objectData" $objectData)) }}
-schedulerName: {{ . }}
-  {{- end -}}
   {{- with (include "ix.v1.common.lib.pod.priorityClassName" (dict "rootCtx" $rootCtx "objectData" $objectData)) }}
 priorityClassName: {{ . }}
   {{- end -}}

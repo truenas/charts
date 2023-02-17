@@ -16,7 +16,6 @@
 | workload.[workload-name].podSpec.hostNetwork                         | `boolean` |    ❌    |         ❌         |         `{{ .Values.podOptions.hostNetwork }}` (false)          | Pod's hostNetwork                                                                  |
 | workload.[workload-name].podSpec.enableServiceLinks                  | `boolean` |    ❌    |         ❌         |      `{{ .Values.podOptions.enableServiceLinks }}` (false)      | Pod's enableServiceLinks                                                           |
 | workload.[workload-name].podSpec.restartPolicy                       | `string`  |    ❌    |         ✅         |        `{{ .Values.podOptions.restartPolicy }}` (Always)        | Pod's restartPolicy. (Always, Never, OnFailure)                                    |
-| workload.[workload-name].podSpec.schedulerName                       | `string`  |    ❌    |         ✅         |          `{{ .Values.podOptions.schedulerName }}` ("")          | Pod's schedulerName                                                                |
 | workload.[workload-name].podSpec.priorityClassName                   | `string`  |    ❌    |         ✅         |        `{{ .Values.podOptions.priorityClassName }}` ("")        | Pod's priorityClassName                                                            |
 | workload.[workload-name].podSpec.hostname                            | `string`  |    ❌    |         ✅         |                              `""`                               | Pod's hostname                                                                     |
 | workload.[workload-name].podSpec.terminationGracePeriodSeconds       |   `int`   |    ❌    |         ✅         | `{{ .Values.podOptions.terminationGracePeriodSeconds }}` (120)  | Pod's terminationGracePeriodSeconds                                                |
@@ -103,7 +102,6 @@ workload:
       automountServiceAccountToken: true
       hostNetwork: false
       enableServiceLinks: false
-      schedulerName: some-scheduler
       priorityClassName: some-priority-class-name
       hostname: some-hostname
       terminationGracePeriodSeconds: 100
