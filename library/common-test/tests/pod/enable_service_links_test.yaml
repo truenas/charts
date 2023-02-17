@@ -10,13 +10,13 @@ tests:
         workload-name1:
           enabled: true
           primary: true
-          type: DaemonSet
+          type: Deployment
           podSpec: {}
     asserts:
-      - documentIndex: &daemonSetDoc 0
+      - documentIndex: &deploymentDoc 0
         isKind:
-          of: DaemonSet
-      - documentIndex: *daemonSetDoc
+          of: Deployment
+      - documentIndex: *deploymentDoc
         equal:
           path: spec.template.spec.enableServiceLinks
           value: false
@@ -29,13 +29,13 @@ tests:
         workload-name1:
           enabled: true
           primary: true
-          type: DaemonSet
+          type: Deployment
           podSpec: {}
     asserts:
-      - documentIndex: *daemonSetDoc
+      - documentIndex: *deploymentDoc
         isKind:
-          of: DaemonSet
-      - documentIndex: *daemonSetDoc
+          of: Deployment
+      - documentIndex: *deploymentDoc
         equal:
           path: spec.template.spec.enableServiceLinks
           value: true
@@ -48,11 +48,11 @@ tests:
         workload-name1:
           enabled: true
           primary: true
-          type: DaemonSet
+          type: Deployment
           podSpec:
             enableServiceLinks: false
     asserts:
-      - documentIndex: *daemonSetDoc
+      - documentIndex: *deploymentDoc
         equal:
           path: spec.template.spec.enableServiceLinks
           value: false
@@ -65,11 +65,11 @@ tests:
         workload-name1:
           enabled: true
           primary: true
-          type: DaemonSet
+          type: Deployment
           podSpec:
             enableServiceLinks: true
     asserts:
-      - documentIndex: *daemonSetDoc
+      - documentIndex: *deploymentDoc
         equal:
           path: spec.template.spec.enableServiceLinks
           value: true

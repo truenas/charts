@@ -10,11 +10,6 @@ tests:
           primary: true
           type: Deployment
           podSpec: {}
-        daemonset-workload-name:
-          enabled: true
-          primary: false
-          type: DaemonSet
-          podSpec: {}
         cronjob-workload-name:
           enabled: true
           primary: false
@@ -37,17 +32,7 @@ tests:
         equal:
           path: metadata.name
           value: release-name-common-test-cronjob-workload-name
-      - documentIndex: &daemonSetDoc 1
-        isKind:
-          of: DaemonSet
-      - documentIndex: *daemonSetDoc
-        isAPIVersion:
-          of: apps/v1
-      - documentIndex: *daemonSetDoc
-        equal:
-          path: metadata.name
-          value: release-name-common-test-daemonset-workload-name
-      - documentIndex: &jobDoc 2
+      - documentIndex: &jobDoc 1
         isKind:
           of: Job
       - documentIndex: *jobDoc
@@ -57,7 +42,7 @@ tests:
         equal:
           path: metadata.name
           value: release-name-common-test-job-workload-name
-      - documentIndex: &deploymentDoc 3
+      - documentIndex: &deploymentDoc 2
         isKind:
           of: Deployment
       - documentIndex: *deploymentDoc

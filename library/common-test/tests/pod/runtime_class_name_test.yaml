@@ -97,7 +97,7 @@ tests:
         workload-name2:
           enabled: true
           primary: false
-          type: DaemonSet
+          type: Deployment
           podSpec:
             runtimeClassName: some-class
         workload-name3:
@@ -111,10 +111,10 @@ tests:
         equal:
           path: spec.template.spec.runtimeClassName
           value: ix-runtime
-      - documentIndex: &daemonSetDoc 1
+      - documentIndex: &deploymentDoc 1
         isKind:
-          of: DaemonSet
-      - documentIndex: *daemonSetDoc
+          of: Deployment
+      - documentIndex: *deploymentDoc
         equal:
           path: spec.template.spec.runtimeClassName
           value: some-class

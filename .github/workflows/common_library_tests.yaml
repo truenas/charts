@@ -101,7 +101,6 @@ jobs:
           - configmap-values.yaml
           - secrets-values.yaml
           - imagePullSecret-values.yaml
-          - daemonset-values.yaml
           - job-values.yaml
           - cron-values.yaml
           - persistence-values.yaml

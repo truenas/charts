@@ -8,7 +8,7 @@
 | workload.[workload-name].primary                                     | `boolean` |    ✅    |         ❌         |                             `false`                             | Sets the workload as primary                                                       |
 | workload.[workload-name].labels                                      |  `dict`   |    ❌    | ✅ (On value only) |                              `{}`                               | Additional labels for workload                                                     |
 | workload.[workload-name].annotations                                 |  `dict`   |    ❌    | ✅ (On value only) |                              `{}`                               | Additional annotations for workload                                                |
-| workload.[workload-name].type                                        | `string`  |    ✅    |         ❌         |                              `""`                               | Define the kind of the workload (Deployment, DaemonSet, CronJob, Job) |
+| workload.[workload-name].type                                        | `string`  |    ✅    |         ❌         |                              `""`                               | Define the kind of the workload (Deployment, CronJob, Job) |
 | workload.[workload-name].podSpec                                     |  `dict`   |    ✅    |         ❌         |                              `{}`                               | Holds the pod definition                                                           |
 | workload.[workload-name].podSpec.labels                              |  `dict`   |    ❌    | ✅ (On value only) |                              `{}`                               | Additional Pod Labels                                                              |
 | workload.[workload-name].podSpec.annotations                         |  `dict`   |    ❌    | ✅ (On value only) |                              `{}`                               | Pod Annotations                                                                    |
@@ -69,7 +69,6 @@ Naming scheme:
 > Additional keys, information and examples, see on the specific kind of workload
 
 - [Deployment](deployment.md)
-- [DaemonSet](daemonset.md)
 - [CronJob](cronjob.md)
 - [Job](job.md)
 

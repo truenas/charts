@@ -10,13 +10,13 @@ tests:
         workload-name1:
           enabled: true
           primary: true
-          type: DaemonSet
+          type: Deployment
           podSpec: {}
     asserts:
-      - documentIndex: &daemonSetDoc 0
+      - documentIndex: &deploymentDoc 0
         isKind:
-          of: DaemonSet
-      - documentIndex: *daemonSetDoc
+          of: Deployment
+      - documentIndex: *deploymentDoc
         isNull:
           path: spec.template.spec.terminationGracePeriodSeconds
 
@@ -28,10 +28,10 @@ tests:
         workload-name1:
           enabled: true
           primary: true
-          type: DaemonSet
+          type: Deployment
           podSpec: {}
     asserts:
-      - documentIndex: *daemonSetDoc
+      - documentIndex: *deploymentDoc
         equal:
           path: spec.template.spec.terminationGracePeriodSeconds
           value: 100
@@ -44,11 +44,11 @@ tests:
         workload-name1:
           enabled: true
           primary: true
-          type: DaemonSet
+          type: Deployment
           podSpec:
             terminationGracePeriodSeconds: 150
     asserts:
-      - documentIndex: *daemonSetDoc
+      - documentIndex: *deploymentDoc
         equal:
           path: spec.template.spec.terminationGracePeriodSeconds
           value: 150
@@ -62,11 +62,11 @@ tests:
         workload-name1:
           enabled: true
           primary: true
-          type: DaemonSet
+          type: Deployment
           podSpec:
             terminationGracePeriodSeconds: "{{ .Values.period }}"
     asserts:
-      - documentIndex: *daemonSetDoc
+      - documentIndex: *deploymentDoc
         equal:
           path: spec.template.spec.terminationGracePeriodSeconds
           value: 125

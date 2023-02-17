@@ -39,8 +39,6 @@
       {{/* Call class to create the object */}}
       {{- if eq $objectData.type "Deployment" -}}
         {{- include "ix.v1.common.class.deployment" (dict "rootCtx" $ "objectData" $objectData) -}}
-      {{- else if eq $objectData.type "DaemonSet" -}}
-        {{- include "ix.v1.common.class.daemonset" (dict "rootCtx" $ "objectData" $objectData) -}}
       {{- else if eq $objectData.type "Job" -}}
         {{- include "ix.v1.common.class.job" (dict "rootCtx" $ "objectData" $objectData) -}}
       {{- else if eq $objectData.type "CronJob" -}}

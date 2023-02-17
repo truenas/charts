@@ -103,7 +103,7 @@ tests:
         workload-name1:
           enabled: true
           primary: true
-          type: DaemonSet
+          type: Deployment
           podSpec:
             containers:
               container-name1:
@@ -123,17 +123,17 @@ tests:
                 imageSelector: image
                 probes: *probes
     asserts:
-      - documentIndex: &daemonSetDoc 2
+      - documentIndex: *deploymentDoc
         isKind:
-          of: DaemonSet
-      - documentIndex: *daemonSetDoc
+          of: Deployment
+      - documentIndex: *deploymentDoc
         isAPIVersion:
           of: apps/v1
-      - documentIndex: *daemonSetDoc
+      - documentIndex: *deploymentDoc
         equal:
           path: metadata.name
           value: release-name-common-test
-      - documentIndex: *daemonSetDoc
+      - documentIndex: *deploymentDoc
         isSubset:
           path: spec.template.metadata.annotations
           content:
@@ -179,7 +179,7 @@ tests:
         workload-name1:
           enabled: true
           primary: true
-          type: DaemonSet
+          type: Deployment
           podSpec:
             containers:
               container-name1:
@@ -200,17 +200,17 @@ tests:
                 imageSelector: image
                 probes: *probes
     asserts:
-      - documentIndex: &daemonSetDoc 2
+      - documentIndex: *deploymentDoc
         isKind:
-          of: DaemonSet
-      - documentIndex: *daemonSetDoc
+          of: Deployment
+      - documentIndex: *deploymentDoc
         isAPIVersion:
           of: apps/v1
-      - documentIndex: *daemonSetDoc
+      - documentIndex: *deploymentDoc
         equal:
           path: metadata.name
           value: release-name-common-test
-      - documentIndex: *daemonSetDoc
+      - documentIndex: *deploymentDoc
         isSubset:
           path: spec.template.metadata.annotations
           content:
