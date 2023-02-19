@@ -30,6 +30,13 @@ Naming scheme:
 
 ---
 
+Notes:
+
+By default the `automountServiceAccountToken` is set to `false` for all service accounts.
+You have to explicitly set it to `true` on per pod(workload) basis with `workload.[workload-name].podSpec.automountServiceAccountToken`
+
+---
+
 Examples:
 
 ```yaml
