@@ -7,7 +7,6 @@ objectData:
   name: The name of the serviceAccount.
   labels: The labels of the serviceAccount.
   annotations: The annotations of the serviceAccount.
-  autoMountToken: Whether to mount the ServiceAccount token or not.
 */}}
 
 {{- define "ix.v1.common.class.serviceAccount" -}}
@@ -29,4 +28,6 @@ metadata:
   annotations:
     {{- . | nindent 4 }}
   {{- end -}}
+  {{- /* We already allow to override it on per pod basis, let's hard default to false globally */}}
+automountServiceAccountToken: false
 {{- end -}}

@@ -53,3 +53,7 @@ tests:
             g_label2: global_label2
             label1: label1
             label2: label2
+      - documentIndex: *serviceAccountDoc
+        equal:
+          path: automountServiceAccountToken
+          value: false
