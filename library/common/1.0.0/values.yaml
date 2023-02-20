@@ -1,0 +1,173 @@
+# -- (docs/README.md)
+global:
+  labels: {}
+  annotations: {}
+  minNodePort: 9000
+
+# -- (docs/README.md)
+fallbackDefaults:
+  probeType: http
+  serviceProtocol: tcp
+  serviceType: ClusterIP
+  persistenceType: emptyDir # TODO: Maybe something else?
+  probeTimeouts:
+    liveness:
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      timeoutSeconds: 5
+      failureThreshold: 5
+      successThreshold: 1
+    readiness:
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      timeoutSeconds: 5
+      failureThreshold: 5
+      successThreshold: 2
+    startup:
+      initialDelaySeconds: 10
+      periodSeconds: 5
+      timeoutSeconds: 2
+      failureThreshold: 60
+      successThreshold: 1
+
+# -- (docs/README.md)
+image:
+  repository: ""
+  tag: ""
+  pullPolicy: IfNotPresent
+
+# -- (docs/README.md)
+securityContext:
+  container:
+    runAsNonRoot: true
+    runAsUser: 568
+    runAsGroup: 568
+    readOnlyRootFilesystem: true
+    allowPrivilegeEscalation: false
+    privileged: false
+    seccompProfile:
+      type: RuntimeDefault
+    capabilities:
+      add: []
+      drop:
+        - ALL
+  pod:
+    fsGroup: 568
+    fsGroupChangePolicy: OnRootMismatch
+    supplementalGroups: []
+    sysctls: []
+
+# -- (docs/README.md)
+containerOptions:
+  PUID: 568
+  UMASK: "002"
+  NVIDIA_CAPS:
+    - all
+  resources:
+    limits:
+      cpu: 4000m
+      memory: 8Gi
+    requests:
+      cpu: 10m
+      memory: 50Mi
+
+# -- (docs/README.md)
+podOptions:
+  enableServiceLinks: false
+  hostNetwork: false
+  restartPolicy: Always
+  dnsPolicy: ClusterFirst
+  dnsConfig:
+    options:
+      - name: ndots
+        value: "2"
+  hostAliases: []
+  tolerations: []
+  runtimeClassName: ""
+  automountServiceAccountToken: false
+  terminationGracePeriodSeconds: 120
+
+# -- (docs/notes.md)
+notes:
+  header: |
+    # Welcome to SCALE
+    Thank you for installing <{{ .Chart.Name }}>.
+  # custom: "{{ toYaml $.Values }}"
+  custom: ""
+  footer: |
+    # Documentation
+    Documentation for this chart can be found at ...
+    # Bug reports
+    If you find a bug in this chart, please file an issue at ...
+
+# -- Timezone used everywhere applicable
+TZ: UTC
+
+# -- (docs/workload/README.md)
+workload: {}
+
+# -- (docs/service/README.md)
+service: {}
+
+# -- (docs/persistence/README.md)
+persistence: {}
+  # shared:
+  #   enabled: false # TODO: Enable by default?
+  #   type: emptyDir
+  #   mountPath: /shared
+  #   targetSelectAll: true
+  # varlogs:
+  #   enabled: false # TODO: Enable by default?
+  #   type: emptyDir
+  #   mountPath: /var/logs
+  #   targetSelectAll: true
+  # tmp:
+  #   enabled: false # TODO: Enable by default?
+  #   type: emptyDir
+  #   mountPath: /tmp
+  #   targetSelectAll: true
+  # devshm:
+  #   enabled: false # TODO: Enable by default?
+  #   type: emptyDir
+  #   mountPath: /dev/shm
+  #   targetSelectAll: true
+
+# -- Injected from SCALE middleware
+# Only for reference here
+ixExternalInterfacesConfiguration: []
+# -- Injected from SCALE middleware
+# Only for reference here
+ixExternalInterfacesConfigurationNames: []
+# -- Injected from SCALE middleware
+# Only for reference here
+ixCertificates: []
+# -- Injected from SCALE middleware
+# Only for reference here
+ixVolumes: []
+
+# -- (docs/imagePullSecrets.md)
+imagePullSecret: []
+
+# -- (docs/configmap.md)
+configmap: {}
+
+# -- (docs/secret.md)
+secret: {}
+
+# -- (docs/serviceAccount.md)
+serviceAccount: {}
+
+# -- (docs/rbac.md)
+rbac: {}
+
+# -- (docs/scaleExternalInterface.md)
+scaleExternalInterface: []
+
+# -- (docs/scaleCertificate.md)
+scaleCertificate: {}
+
+# -- (docs/scaleGPU.md)
+scaleGPU: []
+
+# TODO:
+portal: {}

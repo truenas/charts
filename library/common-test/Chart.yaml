@@ -1,0 +1,17 @@
+name: common-test
+title: Common Library Chart Testing
+version: 1.0.0
+apiVersion: v2
+appVersion: v1.0.0
+kubeVersion: '>=1.16.0-0'
+description: A chart for the common library chart-testing
+home: http://localhost
+type: application
+icon: https://localhost/icon
+dependencies:
+  - name: common
+    repository: file://../common/1.0.0
+    version: ~1.0.0
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
