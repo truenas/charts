@@ -1,0 +1,21 @@
+name: minio
+description: High Performance, Kubernetes Native Object Storage
+annotations:
+  title: MinIO
+type: application
+version: 1.0.0
+apiVersion: v1
+appVersion: '2023-02-17'
+dependencies:
+- name: common
+  repository: file://../../library/common/1.0.0
+  version: 1.0.0
+home: https://min.io
+icon: https://min.io/resources/img/logo/MINIO_wordmark.png
+sources:
+- https://github.com/minio/minio
+- https://github.com/minio/charts
+keywords:
+- storage
+- object-storage
+- S3
