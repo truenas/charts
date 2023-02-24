@@ -78,6 +78,7 @@ permissions:
     {{- with (lookup "v1" "Secret" .Release.Namespace (printf "%s-logsearch-creds" $fullname)) -}}
       {{- $_ := set $config "queryToken" ((index .data "MINIO_LOG_QUERY_AUTH_TOKEN") | b64dec) -}}
     {{- end -}}
+    {{- $_ := set $config "diskCapacity" (required "Expected non-empty <disk_capacity_gb>" .Values.logsearch.disk_capacity_gb) -}}
 
     {{- $_ := set $config "dbUser" "logsearch" -}}
     {{- $_ := set $config "dbName" "logsearch" -}}

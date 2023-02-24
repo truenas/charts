@@ -18,6 +18,11 @@ bashImage:
   tag: 4.4.23
   pullPolicy: IfNotPresent
 
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
 minio:
   creds:
     root_user: ""
@@ -37,20 +42,12 @@ minio:
 
 logsearch:
   enabled: false
-  disk_capacity_gb: ""
+  disk_capacity_gb: 5
   postgres_data:
     type: ixVolume
     hostPath: ""
-    datasetName: ""
+    datasetName: postgres-data
   postgres_backup:
     type: ixVolume
     hostPath: ""
     datasetName: postgres-backup
-
-resources:
-  limits:
-    cpu: 4000m
-    memory: 8Gi
-
-# TODO:
-# - Add postgres export job

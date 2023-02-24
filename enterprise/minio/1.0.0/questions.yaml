@@ -96,15 +96,15 @@ questions:
                 description: |
                   The URL that console will use to reach API</br>
                   For example https;//minio1.example.com.</br></br>
-                  Required only in specific cases. #TODO: What are the specific cases?
+                  This field is optional.
                 schema:
                   type: string
               - variable: console_url
                 label: MinIO Browser Redirect URL
                 description: |
-                  The URL that console will provide as a redirct URL</br>
+                  The URL that console will provide as a redirect URL</br>
                   For example https;//console.example.com.</br></br>
-                  Required only in specific cases. #TODO: What are the specific cases?
+                  This field is optional.
                 schema:
                   type: string
 
@@ -182,7 +182,8 @@ questions:
                         type: string
                         show_if: [["type", "=", "ixVolume"]]
                         required: true
-                        # Can we make this dynamic?!
+                        immutable: true
+                        # Can we make this dynamic, so we can hide it?!
                         default: data1
                         $ref:
                           - "normalize/ixVolume"
@@ -231,6 +232,8 @@ questions:
                         type: string
                         show_if: [["type", "=", "ixVolume"]]
                         required: true
+                        hidden: true
+                        immutable: true
                         default: postgres-data
                         $ref:
                           - "normalize/ixVolume"
@@ -264,6 +267,8 @@ questions:
                         type: string
                         show_if: [["type", "=", "ixVolume"]]
                         required: true
+                        hidden: true
+                        immutable: true
                         default: postgres-backup
                         $ref:
                           - "normalize/ixVolume"

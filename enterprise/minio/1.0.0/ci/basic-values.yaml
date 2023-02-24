@@ -1,3 +1,7 @@
+# When inside the versioned minio folder, run:
+# helm dependency update
+# helm template . -f ci/basic-values.yaml
+
 image:
   repository: minio/minio
   tag: RELEASE.2023-02-22T18-23-45Z
@@ -17,6 +21,11 @@ bashImage:
   repository: bash
   tag: 4.4.23
   pullPolicy: IfNotPresent
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
 
 minio:
   creds:
@@ -50,11 +59,6 @@ logsearch:
     type: ixVolume
     hostPath: ""
     datasetName: postgres-backup
-
-resources:
-  limits:
-    cpu: 4000m
-    memory: 8Gi
 
 ixVolumes:
   - hostPath: /mnt/pool/ix-applications/data1

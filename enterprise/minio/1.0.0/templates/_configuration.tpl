@@ -21,7 +21,7 @@ configmap:
   logsearch-config:
     enabled: true
     data:
-      LOGSEARCH_DISK_CAPACITY_GB: {{ required "Expected non-empty <disk_capacity_gb>" .Values.logsearch.disk_capacity_gb | quote }}
+      LOGSEARCH_DISK_CAPACITY_GB: {{ $config.diskCapacity | quote }}
 
   postgres-config:
     enabled: true
