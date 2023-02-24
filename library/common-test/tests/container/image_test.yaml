@@ -7,11 +7,11 @@ tests:
       imageDictToUse: image
       image: &image
         repository: nginx
-        tag: 1.19.0
+        tag: "1.19.0"
         pullPolicy: IfNotPresent
       imageGPU:
         repository: some-gpu-image
-        tag: 5.20.0
+        tag: "5.20"
         pullPolicy: Always
       workload:
         workload-name:
@@ -53,7 +53,7 @@ tests:
         isSubset:
           path: spec.template.spec.containers[1]
           content:
-            image: some-gpu-image:5.20.0
+            image: some-gpu-image:5.20
             imagePullPolicy: Always
 
   # Failures
@@ -121,7 +121,7 @@ tests:
     set:
       image:
         repository: nginx
-        tag: 1.19.0
+        tag: "1.19.0"
         pullPolicy: invalid
       workload:
         workload-name:
@@ -136,4 +136,25 @@ tests:
                 imageSelector: image
     asserts:
       - failedTemplate:
-          errorMessage:  Container - Expected <.Values.image.pullPolicy> to be one of [IfNotPresent, Always, Never], but got [invalid]
+          errorMessage: Container - Expected <.Values.image.pullPolicy> to be one of [IfNotPresent, Always, Never], but got [invalid]
+
+  - it: should fail with tag not string on selected image
+    set:
+      image:
+        repository: nginx
+        tag: 1.19
+        pullPolicy: invalid
+      workload:
+        workload-name:
+          enabled: true
+          primary: true
+          type: Deployment
+          podSpec:
+            containers:
+              container-name1:
+                enabled: true
+                primary: true
+                imageSelector: image
+    asserts:
+      - failedTemplate:
+          errorMessage: Container - Expected <.Values.image.tag> to be string, but got [float64]

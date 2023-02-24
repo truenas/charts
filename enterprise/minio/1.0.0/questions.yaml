@@ -1,0 +1,303 @@
+groups:
+  - name: MinIO Configuration
+    description: Configure MinIO
+  - name: LogSearch Configuration
+    description: Configure LogSearch
+  - name: Resources Configuration
+    description: Configure Resources for MinIO
+
+questions:
+  - variable: minio
+    label: MinIO Configuration
+    group: MinIO Configuration
+    schema:
+      type: dict
+      attrs:
+
+        - variable: creds
+          label: Credentials
+          schema:
+            type: dict
+            attrs:
+              - variable: root_user
+                label: Root User
+                description: The access key for the root user.
+                schema:
+                  type: string
+                  min_length: 5
+                  required: true
+              - variable: root_pass
+                label: Root Password
+                description: The secret key for the root user.
+                schema:
+                  type: string
+                  required: true
+                  min_length: 8
+                  private: true
+
+        - variable: logging
+          label: Logging
+          schema:
+            type: dict
+            attrs:
+              - variable: anonymous
+                label: Anonymous
+                description: Hides sensitive information from logging.
+                schema:
+                  type: boolean
+                  default: false
+              - variable: quiet
+                label: Quiet
+                description: Disables startup information.
+                schema:
+                  type: boolean
+                  default: false
+
+        - variable: network
+          label: Network
+          schema:
+            type: dict
+            attrs:
+              - variable: api_port
+                label: API Port
+                description: The port for the MinIO API.
+                schema:
+                  type: int
+                  default: 30000
+                  min: 9000
+                  max: 65535
+                  required: true
+              - variable: web_port
+                label: Web Port
+                description: The port for the MinIO Web UI.
+                schema:
+                  type: int
+                  default: 30001
+                  min: 9000
+                  max: 65535
+                  required: true
+              - variable: host_network
+                label: Host Network
+                description: |
+                  Bind to the host network. It's recommended to keep this disabled.</br>
+                schema:
+                  type: boolean
+                  default: false
+              - variable: certificate_id
+                label: Certificate
+                description: The certificate to use for MinIO
+                schema:
+                  type: int
+                  "null": true
+                  $ref:
+                    - "definitions/certificate"
+              - variable: server_url
+                label: MinIO Server URL (API)
+                description: |
+                  The URL that console will use to reach API</br>
+                  For example https;//minio1.example.com.</br></br>
+                  Required only in specific cases. #TODO: What are the specific cases?
+                schema:
+                  type: string
+              - variable: console_url
+                label: MinIO Browser Redirect URL
+                description: |
+                  The URL that console will provide as a redirct URL</br>
+                  For example https;//console.example.com.</br></br>
+                  Required only in specific cases. #TODO: What are the specific cases?
+                schema:
+                  type: string
+
+        - variable: enable_multi_mode
+          label: Enable Multi Mode (SNMD or MNMD)
+          description: |
+            For Single Node Multi Drive (SNMD), the entry will look like this:</br>
+            Example Entry - /data{1...4}</br></br>
+            For Multi Node Multi Drive (MNMD), the entry will look like this:</br>
+            Example Entry - https://minio{1...3}.example.com:30000/data{1...4}</br></br>
+            Note that each host must use the same port number and the same number of storage items.</br>
+            In both cases /data{1..4} is the directories to be used for MinIO.
+            You have to add additional storage for each data entry.
+          schema:
+            type: boolean
+            default: false
+            show_subquestions_if: true
+            subquestions:
+              - variable: multi_mode
+                label: Multi Mode (SNMD or MNMD)
+                schema:
+                  type: list
+                  default: []
+                  items:
+                    - variable: item
+                      label: ""
+                      schema:
+                        type: string
+                        required: true
+
+        - variable: storage
+          label: Storage
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: item
+                label: Storage Item
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: type
+                      label: Type
+                      schema:
+                        type: string
+                        immutable: true
+                        required: true
+                        default: ixVolume
+                        enum:
+                          - value: hostPath
+                            description: Host Path
+                          - value: ixVolume
+                            description: ixVolume
+                    - variable: mountPath
+                      label: Mount Path
+                      description: The path inside the container to mount the storage.
+                      schema:
+                        type: path
+                        required: true
+                        immutable: true
+                        default: /data1
+                    - variable: hostPath
+                      label: Host Path
+                      description: The host path to use for storage.
+                      schema:
+                        type: hostpath
+                        required: true
+                        immutable: true
+                        default: ""
+                        show_if: [["type", "=", "hostPath"]]
+                    - variable: datasetName
+                      label: Dataset Name
+                      description: The name of the dataset to use for storage.
+                      schema:
+                        type: string
+                        show_if: [["type", "=", "ixVolume"]]
+                        required: true
+                        # Can we make this dynamic?!
+                        default: data1
+                        $ref:
+                          - "normalize/ixVolume"
+
+  - variable: logsearch
+    label: LogSearch Configuration
+    group: LogSearch Configuration
+    schema:
+      type: dict
+      attrs:
+
+        - variable: enabled
+          label: Enable LogSearch
+          schema:
+            type: boolean
+            default: false
+            show_subquestions_if: true
+            subquestions:
+              - variable: disk_capacity_gb
+                label: Disk Capacity (GB)
+                description: The disk capacity for LogSearch.
+                schema:
+                  type: int
+                  default: 5
+                  required: true
+              - variable: postgres_data
+                label: Postgres Data
+                description: The path to store Postgres data.
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: type
+                      label: Type
+                      schema:
+                        type: string
+                        required: true
+                        default: ixVolume
+                        enum:
+                          - value: hostPath
+                            description: Host Path
+                          - value: ixVolume
+                            description: ixVolume
+                    - variable: datasetName
+                      label: Dataset Name
+                      schema:
+                        type: string
+                        show_if: [["type", "=", "ixVolume"]]
+                        required: true
+                        default: postgres-data
+                        $ref:
+                          - "normalize/ixVolume"
+                    - variable: hostPath
+                      label: Host Path
+                      schema:
+                        type: hostpath
+                        show_if: [["type", "=", "hostPath"]]
+                        immutable: true
+                        required: true
+              - variable: postgres_backup
+                label: Postgres Backup
+                description: The path to store Postgres backups.
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: type
+                      label: Type
+                      schema:
+                        type: string
+                        required: true
+                        default: ixVolume
+                        enum:
+                          - value: hostPath
+                            description: Host Path
+                          - value: ixVolume
+                            description: ixVolume
+                    - variable: datasetName
+                      label: Dataset Name
+                      schema:
+                        type: string
+                        show_if: [["type", "=", "ixVolume"]]
+                        required: true
+                        default: postgres-backup
+                        $ref:
+                          - "normalize/ixVolume"
+                    - variable: hostPath
+                      label: Host Path
+                      schema:
+                        type: hostpath
+                        show_if: [["type", "=", "hostPath"]]
+                        immutable: true
+                        required: true
+
+  - variable: resources
+    label: Resources Configuration
+    group: Resources Configuration
+    schema:
+      type: dict
+      attrs:
+
+        - variable: limits
+          label: Limits
+          schema:
+            type: dict
+            attrs:
+              - variable: cpu
+                label: CPU
+                description: CPU limit for MinIO.
+                schema:
+                  type: string
+                  default: 4000m
+                  required: true
+              - variable: memory
+                label: Memory
+                description: Memory limit for MinIO.
+                schema:
+                  type: string
+                  default: 8Gi
+                  required: true

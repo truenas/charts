@@ -28,6 +28,20 @@ tests:
       - failedTemplate:
           errorMessage: CronJob - Expected non-empty <schedule>
 
+  - it: should fail with restartPolicy set to Always
+    set:
+      workload:
+        workload-name:
+          enabled: true
+          primary: true
+          type: CronJob
+          schedule: "* * * * *"
+          restartPolicy: Always
+          podSpec: {}
+    asserts:
+      - failedTemplate:
+          errorMessage: Expected <restartPolicy to be [OnFailure, Never] for [CronJob] but got [Always]
+
   - it: should fail with invalid completionMode (make sure job validation kicks in)
     set:
       workload:

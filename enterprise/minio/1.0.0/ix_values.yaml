@@ -1,0 +1,56 @@
+image:
+  repository: minio/minio
+  tag: RELEASE.2023-02-22T18-23-45Z
+  pullPolicy: IfNotPresent
+
+logsearchImage:
+  repository: minio/operator
+  tag: v4.5.8
+  pullPolicy: IfNotPresent
+
+postgresImage:
+  repository: postgres
+  tag: "15.2"
+  pullPolicy: IfNotPresent
+
+bashImage:
+  repository: bash
+  tag: 4.4.23
+  pullPolicy: IfNotPresent
+
+minio:
+  creds:
+    root_user: ""
+    root_pass: ""
+  network:
+    api_port: 30000
+    web_port: 30001
+    certificate_id: ""
+    host_network: false
+    server_url: ""
+    console_url: ""
+  logging:
+    anonymous: false
+    quiet: false
+  multi_mode: []
+  storage: []
+
+logsearch:
+  enabled: false
+  disk_capacity_gb: ""
+  postgres_data:
+    type: ixVolume
+    hostPath: ""
+    datasetName: ""
+  postgres_backup:
+    type: ixVolume
+    hostPath: ""
+    datasetName: postgres-backup
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+# TODO:
+# - Add postgres export job
