@@ -13,7 +13,7 @@ extraAppVolumeMounts: []
 image:
   pullPolicy: IfNotPresent
   repository: linuxserver/qbittorrent
-  tag: 4.5.1
+  tag: 4.5.2
 ownerGID: 568
 ownerUID: 568
 tcp_port: 32001
