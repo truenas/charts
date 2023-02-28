@@ -4,15 +4,15 @@ Assume every key below has a prefix of `workload.[workload-name].podSpec.contain
 
 | Key                       |   Type   | Required | Helm Template |                          Default                           | Description                                  |
 | :------------------------ | :------: | :------: | :-----------: | :--------------------------------------------------------: | :------------------------------------------- |
-| resources                 |  `dict`  |    ✅    |      ❌       |         `{{ .Values.containerOptions.resources }}`         | Define resources for the container           |
-| resources.requests        |  `dict`  |    ✅    |      ❌       |    `{{ .Values.containerOptions.resources.requests }}`     | Define the requests for the container        |
-| resources.requests.cpu    | `string` |    ✅    |      ❌       |  `{{ .Values.containerOptions.resources.requests.cpu }}`   | Define the requests.cpu for the container    |
-| resources.requests.memory | `string` |    ✅    |      ❌       | `{{ .Values.containerOptions.resources.requests.memory }}` | Define the requests.memory for the container |
-| resources.limits          |  `dict`  |    ❌    |      ❌       |     `{{ .Values.containerOptions.resources.limits }}`      | Define the limits for the container          |
-| resources.limits.cpu      | `string` |    ❌    |      ❌       |   `{{ .Values.containerOptions.resources.limits.cpu }}`    | Define the limits.cpu for the container      |
-| resources.limits.memory   | `string` |    ❌    |      ❌       |  `{{ .Values.containerOptions.resources.limits.memory }}`  | Define the limits.memory for the container   |
+| resources                 |  `dict`  |    ✅    |      ❌       |         `{{ .Values.resources }}`         | Define resources for the container           |
+| resources.requests        |  `dict`  |    ✅    |      ❌       |    `{{ .Values.resources.requests }}`     | Define the requests for the container        |
+| resources.requests.cpu    | `string` |    ✅    |      ❌       |  `{{ .Values.resources.requests.cpu }}`   | Define the requests.cpu for the container    |
+| resources.requests.memory | `string` |    ✅    |      ❌       | `{{ .Values.resources.requests.memory }}` | Define the requests.memory for the container |
+| resources.limits          |  `dict`  |    ❌    |      ❌       |     `{{ .Values.resources.limits }}`      | Define the limits for the container          |
+| resources.limits.cpu      | `string` |    ❌    |      ❌       |   `{{ .Values.resources.limits.cpu }}`    | Define the limits.cpu for the container      |
+| resources.limits.memory   | `string` |    ❌    |      ❌       |  `{{ .Values.resources.limits.memory }}`  | Define the limits.memory for the container   |
 
-> Each value that is not defined in the `resources` under the container level, it will get replaced with the value defined `.Values.containerOptions.resources`.
+> Each value that is not defined in the `resources` under the container level, it will get replaced with the value defined `.Values.resources`.
 > `requests` is **required**, because without it, kubernetes uses the `limits` as the `requests`. Which can lead pods to be evicted when they reach their `limits` or not even scheduled.
 > `limits` is **optional**, can be set to "unlimited" by setting it's values (`cpu` and `memory`) to `0`.
 

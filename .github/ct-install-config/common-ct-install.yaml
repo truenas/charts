@@ -2,6 +2,10 @@ remote: origin
 target-branch: master
 helm-extra-args: --timeout 600s --debug
 chart-yaml-schema: .github/ct-install-config/chart_schema.yaml
+# Print debug output, contains the rendered k8s objects
+debug: true
 chart-dirs:
   - library
+charts:
+  - library/common-test
 excluded-charts: []

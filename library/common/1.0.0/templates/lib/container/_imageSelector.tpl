@@ -29,6 +29,10 @@ objectData: The object data to be used to render the container.
     {{- fail (printf "Container - Expected non-empty <.Values.%s.tag>" $selector) -}}
   {{- end -}}
 
+  {{- if not (kindIs "string" $imageObj.tag) -}}
+    {{- fail (printf "Container - Expected <.Values.%s.tag> to be string, but got [%s]" $selector (kindOf $imageObj.tag)) -}}
+  {{- end -}}
+
   {{- if not $imageObj.pullPolicy -}}
     {{- $_ := set $imageObj "pullPolicy" "IfNotPresent" -}}
   {{- end -}}

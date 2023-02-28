@@ -141,13 +141,15 @@ tests:
           primary: true
           type: Job
           podSpec:
+            restartPolicy: Never
             runtimeClassName: some-other-class
         workload-name2:
           enabled: true
           primary: false
           type: CronJob
           schedule: "* * * * *"
-          podSpec: {}
+          podSpec:
+            restartPolicy: Never
     asserts:
       - documentIndex: &jobDoc 0
         isKind:
@@ -180,6 +182,7 @@ tests:
           primary: true
           type: Job
           podSpec:
+            restartPolicy: Never
             runtimeClassName: some-other-class
     asserts:
       - documentIndex: *jobDoc
