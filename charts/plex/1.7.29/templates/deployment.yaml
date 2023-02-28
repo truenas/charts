@@ -3,8 +3,8 @@
 spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
   template: {{ include "common.deployment.pod.metadata" . | nindent 4 }}
     spec:
-    {{- if .Values.hostNetwork }}
       hostNetwork: {{ .Values.hostNetwork }}
+    {{- if .Values.hostNetwork }}
       dnsPolicy: ClusterFirstWithHostNet
     {{- end }}
       hostname: {{ template "common.names.fullname" . }}
@@ -101,4 +101,3 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
           hostPath:
             path: {{ $hostPathConfiguration.hostPath }}
         {{ end }}
-
