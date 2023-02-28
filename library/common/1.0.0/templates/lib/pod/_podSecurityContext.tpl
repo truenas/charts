@@ -25,21 +25,21 @@ objectData: The object data to be used to render the Pod.
     TODO: Unit Test the above cases
   */}}
 
-  {{- $addSupplemental := list -}}
+  {{- $gpuAdded := false -}}
   {{- range $GPUValues := $rootCtx.Values.scaleGPU -}}
     {{/* If there is a selector and pod is selected */}}
     {{- if $GPUValues.targetSelector -}}
       {{- if mustHas $objectData.shortName ($GPUValues.targetSelector | keys) -}}
-        {{- $addSupplemental = mustAppend $addSupplemental 44 -}}
+        {{- $gpuAdded = true -}}
       {{- end -}}
     {{/* If there isn't a selector, but pod is primary */}}
     {{- else if $objectData.primary -}}
-      {{- $addSupplemental = mustAppend $addSupplemental 44 -}}
+      {{- $gpuAdded = true -}}
     {{- end -}}
   {{- end -}}
 
-  {{- if $addSupplemental -}}
-    {{- $_ := set $secContext "supplementalGroups" (concat $secContext.supplementalGroups $addSupplemental) -}}
+  {{- if $gpuAdded -}}
+    {{- $_ := set $secContext "supplementalGroups" (concat $secContext.supplementalGroups (list 44)) -}}
   {{- end -}}
 
   {{- $portRange := fromJson (include "ix.v1.common.lib.helpers.securityContext.getPortRange" (dict "rootCtx" $rootCtx "objectData" $objectData)) -}}

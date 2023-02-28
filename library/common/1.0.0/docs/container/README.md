@@ -2,13 +2,14 @@
 
 Assume every key below has a prefix of `workload.[workload-name].podSpec`.
 
-| Key                                 |   Type    | Required | Helm Template | Default | Description                       |
-| :---------------------------------- | :-------: | :------: | :-----------: | :-----: | :-------------------------------- |
-| containers.[container-name]         |  `dict`   |    ✅    |      ❌       |  `{}`   | Define the container as dict      |
-| containers.[container-name].enabled | `boolean` |    ✅    |      ❌       | `false` | Enables or Disables the container |
-| containers.[container-name].primary | `boolean` |    ✅    |      ❌       | `false` | Sets the container as primary     |
-| containers.[container-name].stdin   | `boolean` |    ❌    |      ❌       | `false` | whether to enable stdin or not    |
-| containers.[container-name].tty     | `boolean` |    ❌    |      ❌       | `false` | whether to enable tty or not      |
+| Key                                       |   Type    | Required | Helm Template | Default | Description                       |
+| :---------------------------------------- | :-------: | :------: | :-----------: | :-----: | :-------------------------------- |
+| containers.[container-name]               |  `dict`   |    ✅    |      ❌       |  `{}`   | Define the container as dict      |
+| containers.[container-name].enabled       | `boolean` |    ✅    |      ❌       | `false` | Enables or Disables the container |
+| containers.[container-name].imageSelector | `string`  |    ✅    |      ✅       | `image` | Defines the image dict to use     |
+| containers.[container-name].primary       | `boolean` |    ✅    |      ❌       | `false` | Sets the container as primary     |
+| containers.[container-name].stdin         | `boolean` |    ❌    |      ❌       | `false` | whether to enable stdin or not    |
+| containers.[container-name].tty           | `boolean` |    ❌    |      ❌       | `false` | whether to enable tty or not      |
 
 ---
 
@@ -53,6 +54,7 @@ workload:
         container-name:
           enabled: true
           primary: true
+          imageSelector: image
           stdin: true
           tty: true
 ```
@@ -62,7 +64,7 @@ workload:
 | Key                                     |   Type    | Required | Helm Template | Default | Description                                            |
 | :-------------------------------------- | :-------: | :------: | :-----------: | :-----: | :----------------------------------------------------- |
 | initContainers.[container-name]         |  `dict`   |    ✅    |      ❌       |  `{}`   | Define the initContainer as dict                       |
-| initContainers.[container-name].enabled | `boolean` |    ✅    |      ✅       | `false` | Enables or Disables the initContainer                      |
+| initContainers.[container-name].enabled | `boolean` |    ✅    |      ✅       | `false` | Enables or Disables the initContainer                  |
 | initContainers.[container-name].type    | `string`  |    ✅    |      ✅       |  `{}`   | Define the type initContainer (init, install, upgrade) |
 
 > Supports all keys from [container](container.md)

@@ -95,31 +95,28 @@ All of the below values are applied on all pods/containers, but can be overridde
 This is so, you can have a single point to define the values from the scale UI,
 but still have the ability to override them on the pod/container level, in case you need to.
 
-| Key                                                |   Type    | Required | Helm Template |  Default  | Description                                                            |
-| :------------------------------------------------- | :-------: | :------: | :-----------: | :-------: | :--------------------------------------------------------------------- |
-| .Values.TZ                                         | `string`  |    ✅    |      ❌       | See below | Timezone that is used everywhere applicable                            |
-| .Values.PUID                                       |   `int`   |    ✅    |      ❌       | See below | PUID (Only applied when running as root)                               |
-| .Values.UMASK                                      | `string`  |    ✅    |      ❌       | See below | UMASK                                                                  |
-| .Values.NVIDIA_CAPS                                |  `list`   |    ✅    |      ❌       | See below | NVIDIA_CAPS (Only applied when scaleGPU is passed)                     |
-| .Values.containerOptions                           |  `dict`   |    ✅    |      ❌       | See below | Options that apply to all containers                                   |
-| .Values.containerOptions.resources                 |  `dict`   |    ✅    |      ❌       | See below | Resources                                                              |
-| .Values.containerOptions.resources.limits          |  `dict`   |    ✅    |      ❌       | See below | Resources                                                              |
-| .Values.containerOptions.resources.limits.cpu      | `string`  |    ✅    |      ❌       | See below | Resources                                                              |
-| .Values.containerOptions.resources.limits.memory   | `string`  |    ✅    |      ❌       | See below | Resources                                                              |
-| .Values.containerOptions.resources.requests        |  `dict`   |    ✅    |      ❌       | See below | Resources                                                              |
-| .Values.containerOptions.resources.requests.cpu    | `string`  |    ✅    |      ❌       | See below | Resources                                                              |
-| .Values.containerOptions.resources.requests.memory | `string`  |    ✅    |      ❌       | See below | Resources                                                              |
-| .Values.podOptions                                 |  `dict`   |    ✅    |      ❌       | See below | Options that apply to all pods                                         |
-| .Values.podOptions.enableServiceLinks              | `boolean` |    ✅    |      ❌       | See below | enableServiceLinks                                                     |
-| .Values.podOptions.hostNetwork                     | `boolean` |    ✅    |      ❌       | See below | hostNetwork                                                            |
-| .Values.podOptions.restartPolicy                   | `string`  |    ✅    |      ❌       | See below | restartPolicy                                                          |
-| .Values.podOptions.dnsPolicy                       | `string`  |    ✅    |      ❌       | See below | dnsPolicy                                                              |
-| .Values.podOptions.dnsConfig                       |  `list`   |    ✅    |      ❌       | See below | dnsConfig                                                              |
-| .Values.podOptions.hostAliases                     |  `list`   |    ✅    |      ❌       | See below | hostAliases                                                            |
-| .Values.podOptions.tolerations                     |  `list`   |    ✅    |      ❌       | See below | tolerations                                                            |
-| .Values.podOptions.runtimeClassName                | `string`  |    ✅    |      ❌       | See below | runtimeClassName (value in ixChartContext will always take precedence) |
-| .Values.podOptions.automountServiceAccountToken    | `boolean` |    ✅    |      ❌       | See below | automountServiceAccountToken                                           |
-| .Values.podOptions.terminationGracePeriodSeconds   |   `int`   |    ✅    |      ❌       | See below | terminationGracePeriodSeconds                                          |
+| Key                                              |   Type    | Required | Helm Template |  Default  | Description                                                            |
+| :----------------------------------------------- | :-------: | :------: | :-----------: | :-------: | :--------------------------------------------------------------------- |
+| .Values.TZ                                       | `string`  |    ✅    |      ❌       | See below | Timezone that is used everywhere applicable                            |
+| .Values.resources.NVIDIA_CAPS                    |  `list`   |    ✅    |      ❌       | See below | NVIDIA_CAPS (Only applied when scaleGPU is passed)                     |
+| .Values.resources                                |  `dict`   |    ✅    |      ❌       | See below | Resources                                                              |
+| .Values.resources.limits                         |  `dict`   |    ✅    |      ❌       | See below | Resources                                                              |
+| .Values.resources.limits.cpu                     | `string`  |    ✅    |      ❌       | See below | Resources                                                              |
+| .Values.resources.limits.memory                  | `string`  |    ✅    |      ❌       | See below | Resources                                                              |
+| .Values.resources.requests                       |  `dict`   |    ✅    |      ❌       | See below | Resources                                                              |
+| .Values.resources.requests.cpu                   | `string`  |    ✅    |      ❌       | See below | Resources                                                              |
+| .Values.resources.requests.memory                | `string`  |    ✅    |      ❌       | See below | Resources                                                              |
+| .Values.podOptions                               |  `dict`   |    ✅    |      ❌       | See below | Options that apply to all pods                                         |
+| .Values.podOptions.enableServiceLinks            | `boolean` |    ✅    |      ❌       | See below | enableServiceLinks                                                     |
+| .Values.podOptions.hostNetwork                   | `boolean` |    ✅    |      ❌       | See below | hostNetwork                                                            |
+| .Values.podOptions.restartPolicy                 | `string`  |    ✅    |      ❌       | See below | restartPolicy                                                          |
+| .Values.podOptions.dnsPolicy                     | `string`  |    ✅    |      ❌       | See below | dnsPolicy                                                              |
+| .Values.podOptions.dnsConfig                     |  `list`   |    ✅    |      ❌       | See below | dnsConfig                                                              |
+| .Values.podOptions.hostAliases                   |  `list`   |    ✅    |      ❌       | See below | hostAliases                                                            |
+| .Values.podOptions.tolerations                   |  `list`   |    ✅    |      ❌       | See below | tolerations                                                            |
+| .Values.podOptions.runtimeClassName              | `string`  |    ✅    |      ❌       | See below | runtimeClassName (value in ixChartContext will always take precedence) |
+| .Values.podOptions.automountServiceAccountToken  | `boolean` |    ✅    |      ❌       | See below | automountServiceAccountToken                                           |
+| .Values.podOptions.terminationGracePeriodSeconds |   `int`   |    ✅    |      ❌       | See below | terminationGracePeriodSeconds                                          |
 
 <!-- TODO: Improve descriptions -->
 
@@ -129,18 +126,15 @@ Defaults:
 
 ```yaml
 TZ: UTC
-PUID: 568
-UMASK: "002"
-NVIDIA_CAPS:
-  - all
-containerOptions:
-  resources:
-    limits:
-      cpu: 4000m
-      memory: 8Gi
-    requests:
-      cpu: 10m
-      memory: 50Mi
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+  requests:
+    cpu: 10m
+    memory: 50Mi
+  NVIDIA_CAPS:
+    - all
 podOptions:
   enableServiceLinks: false
   hostNetwork: false
@@ -165,27 +159,29 @@ All of the below values are applied on all pods/containers, but can be overridde
 This is so, you can have a single point to define the values from the scale UI,
 but still have the ability to override them on the pod/container level, in case you need to.
 
-| Key                                                        |   Type    | Required | Helm Template |  Default  | Description                     |
-| :--------------------------------------------------------- | :-------: | :------: | :-----------: | :-------: | :------------------------------ |
-| .Values.securityContext                                    |  `dict`   |    ✅    |      ❌       | See below | Security Context                |
-| .Values.securityContext.container                          |  `dict`   |    ✅    |      ❌       | See below | Security Context for containers |
-| .Values.securityContext.container.runAsNonRoot             | `boolean` |    ✅    |      ❌       | See below |                                 |
-| .Values.securityContext.container.runAsUser                |   `int`   |    ✅    |      ❌       | See below |                                 |
-| .Values.securityContext.container.runAsGroup               |   `int`   |    ✅    |      ❌       | See below |                                 |
-| .Values.securityContext.container.readOnlyRootFilesystem   | `boolean` |    ✅    |      ❌       | See below |                                 |
-| .Values.securityContext.container.allowPrivilegeEscalation | `boolean` |    ✅    |      ❌       | See below |                                 |
-| .Values.securityContext.container.privileged               | `boolean` |    ✅    |      ❌       | See below |                                 |
-| .Values.securityContext.container.seccompProfile           |  `dict`   |    ✅    |      ❌       | See below |                                 |
-| .Values.securityContext.container.seccompProfile.type      | `string`  |    ✅    |      ❌       | See below |                                 |
-| .Values.securityContext.container.seccompProfile.profile   | `string`  |    ✅    |      ❌       | See below |                                 |
-| .Values.securityContext.container.capabilities             |  `dict`   |    ✅    |      ❌       | See below |                                 |
-| .Values.securityContext.container.capabilities.add         |  `list`   |    ✅    |      ❌       | See below |                                 |
-| .Values.securityContext.container.capabilities.drop        |  `list`   |    ✅    |      ❌       | See below |                                 |
-| .Values.securityContext.pod                                |  `dict`   |    ✅    |      ❌       | See below | Security Context for pods       |
-| .Values.securityContext.pod.fsGroup                        |   `int`   |    ✅    |      ❌       | See below |                                 |
-| .Values.securityContext.pod.fsGroupChangePolicy            | `string`  |    ✅    |      ❌       | See below |                                 |
-| .Values.securityContext.pod.supplementalGroup              |  `list`   |    ✅    |      ❌       | See below |                                 |
-| .Values.securityContext.pod.sysctls                        |  `list`   |    ✅    |      ❌       | See below |                                 |
+| Key                                                        |   Type    | Required | Helm Template |  Default  | Description                              |
+| :--------------------------------------------------------- | :-------: | :------: | :-----------: | :-------: | :--------------------------------------- |
+| .Values.securityContext                                    |  `dict`   |    ✅    |      ❌       | See below | Security Context                         |
+| .Values.securityContext.container                          |  `dict`   |    ✅    |      ❌       | See below | Security Context for containers          |
+| .Values.securityContext.container.PUID                     |   `int`   |    ✅    |      ❌       | See below | PUID (Only applied when running as root) |
+| .Values.securityContext.container.UMASK                    | `string`  |    ✅    |      ❌       | See below | UMASK                                    |
+| .Values.securityContext.container.runAsNonRoot             | `boolean` |    ✅    |      ❌       | See below |                                          |
+| .Values.securityContext.container.runAsUser                |   `int`   |    ✅    |      ❌       | See below |                                          |
+| .Values.securityContext.container.runAsGroup               |   `int`   |    ✅    |      ❌       | See below |                                          |
+| .Values.securityContext.container.readOnlyRootFilesystem   | `boolean` |    ✅    |      ❌       | See below |                                          |
+| .Values.securityContext.container.allowPrivilegeEscalation | `boolean` |    ✅    |      ❌       | See below |                                          |
+| .Values.securityContext.container.privileged               | `boolean` |    ✅    |      ❌       | See below |                                          |
+| .Values.securityContext.container.seccompProfile           |  `dict`   |    ✅    |      ❌       | See below |                                          |
+| .Values.securityContext.container.seccompProfile.type      | `string`  |    ✅    |      ❌       | See below |                                          |
+| .Values.securityContext.container.seccompProfile.profile   | `string`  |    ✅    |      ❌       | See below |                                          |
+| .Values.securityContext.container.capabilities             |  `dict`   |    ✅    |      ❌       | See below |                                          |
+| .Values.securityContext.container.capabilities.add         |  `list`   |    ✅    |      ❌       | See below |                                          |
+| .Values.securityContext.container.capabilities.drop        |  `list`   |    ✅    |      ❌       | See below |                                          |
+| .Values.securityContext.pod                                |  `dict`   |    ✅    |      ❌       | See below | Security Context for pods                |
+| .Values.securityContext.pod.fsGroup                        |   `int`   |    ✅    |      ❌       | See below |                                          |
+| .Values.securityContext.pod.fsGroupChangePolicy            | `string`  |    ✅    |      ❌       | See below |                                          |
+| .Values.securityContext.pod.supplementalGroup              |  `list`   |    ✅    |      ❌       | See below |                                          |
+| .Values.securityContext.pod.sysctls                        |  `list`   |    ✅    |      ❌       | See below |                                          |
 
 <!-- TODO: Improve descriptions -->
 
@@ -196,6 +192,8 @@ securityContext:
   # -- Container security context for all containers
   # Can be overruled per container
   container:
+    PUID: 568
+    UMASK: "002"
     runAsNonRoot: true
     runAsUser: 568
     runAsGroup: 568
@@ -250,7 +248,7 @@ imageWorker:
   pullPolicy: IfNotPresent
 ```
 
-There isn't anything special in the above format, it's just a convention.
+There isn't anything special in the above format (`imageSomething`), it's just a convention.
 It's also a format that some external tools can use for automatic image updates.
 For example, `Renovate`
 

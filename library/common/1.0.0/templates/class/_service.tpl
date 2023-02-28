@@ -42,7 +42,8 @@ objectData: The service data, that will be used to render the Service object.
   {{/* When hostPort is defined, force ClusterIP aswell */}}
   {{- if $hasHostPort -}}
     {{- $svcType = "ClusterIP" -}}
-  {{- end }}
+  {{- end -}}
+  {{- $_ := set $objectData "type" $svcType }}
 
 ---
 apiVersion: v1
@@ -61,9 +62,9 @@ metadata:
     {{- . | nindent 4 }}
   {{- end }}
 spec:
-  {{- if eq $svcType "ClusterIP" -}}
+  {{- if eq $objectData.type "ClusterIP" -}}
     {{- include "ix.v1.common.lib.service.spec.clusterIP" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 -}}
-  {{- else if eq $svcType "NodePort" -}}
+  {{- else if eq $objectData.type "NodePort" -}}
     {{- include "ix.v1.common.lib.service.spec.nodePort" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 -}}
   {{- end -}}
   {{- with (include "ix.v1.common.lib.service.ports" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim) }}

@@ -1,5 +1,4 @@
 name: str(required=True)
-title: str(required=True)
 description: str(required=True)
 version: str(required=True)
 type: str(required=True)
@@ -17,7 +16,8 @@ condition: str(required=False)
 keywords: list(str(), required=False)
 tags: str(required=False)
 maintainers: list(include('maintainer'))
-annotations: map(str(), str(), required=False)
+annotations:
+  title: str(required=True)
 ---
 maintainer:
   name: str()

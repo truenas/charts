@@ -19,6 +19,7 @@ workload:
     enabled: true
     primary: true
     type: Job
+    ttlSecondsAfterFinished: 0
     podSpec:
       restartPolicy: Never
       containers:

@@ -29,6 +29,7 @@ tests:
             annotation1: "{{ .Values.annotation1 }}"
             annotation2: annotation2
           podSpec:
+            restartPolicy: Never
             labels:
               pod-label1: pod-label1
               pod-label2: "{{ .Values.label2 }}"

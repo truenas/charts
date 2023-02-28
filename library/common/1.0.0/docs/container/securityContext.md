@@ -57,3 +57,10 @@ workload:
               drop:
                 - ALL
 ```
+
+---
+
+Notes:
+
+When setting capabilities for containers, remember to **NOT** include `CAP_` prefix.
+For example, `CAP_NET_ADMIN` should be `NET_ADMIN`.
