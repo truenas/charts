@@ -17,12 +17,12 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Update catalog details
-        run: |
-          /bin/bash -c "PWD=${pwd}; /usr/local/bin/catalog_update update --path $PWD"
       - name: Add catalog json as a safe directory
         run: |
           /bin/bash -c "PWD=${pwd}; git config --global --add safe.directory $PWD"
+      - name: Update catalog details
+        run: |
+          /bin/bash -c "PWD=${pwd}; /usr/local/bin/catalog_update update --path $PWD"
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
             commit_message: Update catalog information
