@@ -35,10 +35,22 @@ function copy_app() {
     rsync --recursive "library/$train/$app/" "$train/$app/$version"
     # Rename values.yaml to ix_values.yaml
     mv "$train/$app/$version/values.yaml" "$train/$app/$version/ix_values.yaml"
-    mv "$train/$app/$version/item.yaml" "$train/$app/item.yaml"
 
-    # Remove CI directory
+    # Remove CI directory from the versioned app
     rm -r "$train/$app/$version/ci"
+
+    # Grab icon and categories from Chart.yaml
+    icon=$("$YQ_PATH" '.icon' "library/$train/$app/Chart.yaml")
+    check_args "$icon"
+    categories=$("$YQ_PATH" '.keywords' "library/$train/$app/Chart.yaml")
+    check_args "$categories"
+
+    # Create item.yaml
+    rm "$train/$app/$version/item.yaml"
+    echo "" > "$train/$app/item.yaml"
+    ICON="$icon" "$YQ_PATH" '.icon_url = env(ICON)' --inplace "$train/$app/item.yaml"
+    CATEGORIES="$categories" "$YQ_PATH" '.categories = env(CATEGORIES)' --inplace "$train/$app/item.yaml"
+
 }
 
 # TODO: Call this function for each changed app
