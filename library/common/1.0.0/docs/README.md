@@ -98,7 +98,6 @@ but still have the ability to override them on the pod/container level, in case 
 | Key                                              |   Type    | Required | Helm Template |  Default  | Description                                                            |
 | :----------------------------------------------- | :-------: | :------: | :-----------: | :-------: | :--------------------------------------------------------------------- |
 | .Values.TZ                                       | `string`  |    ✅    |      ❌       | See below | Timezone that is used everywhere applicable                            |
-| .Values.resources.NVIDIA_CAPS                    |  `list`   |    ✅    |      ❌       | See below | NVIDIA_CAPS (Only applied when scaleGPU is passed)                     |
 | .Values.resources                                |  `dict`   |    ✅    |      ❌       | See below | Resources                                                              |
 | .Values.resources.limits                         |  `dict`   |    ✅    |      ❌       | See below | Resources                                                              |
 | .Values.resources.limits.cpu                     | `string`  |    ✅    |      ❌       | See below | Resources                                                              |
@@ -106,6 +105,7 @@ but still have the ability to override them on the pod/container level, in case 
 | .Values.resources.requests                       |  `dict`   |    ✅    |      ❌       | See below | Resources                                                              |
 | .Values.resources.requests.cpu                   | `string`  |    ✅    |      ❌       | See below | Resources                                                              |
 | .Values.resources.requests.memory                | `string`  |    ✅    |      ❌       | See below | Resources                                                              |
+| .Values.resources.NVIDIA_CAPS                    |  `list`   |    ✅    |      ❌       | See below | NVIDIA_CAPS (Only applied when scaleGPU is passed)                     |
 | .Values.podOptions                               |  `dict`   |    ✅    |      ❌       | See below | Options that apply to all pods                                         |
 | .Values.podOptions.enableServiceLinks            | `boolean` |    ✅    |      ❌       | See below | enableServiceLinks                                                     |
 | .Values.podOptions.hostNetwork                   | `boolean` |    ✅    |      ❌       | See below | hostNetwork                                                            |
