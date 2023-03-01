@@ -1,10 +1,12 @@
-{{/* Returns an init container that fixes permissions */}}
+{{/* Returns a postgres pod with init container for fixing permissions
+and a pre-upgrade job to backup the database */}}
 {{/* Call this template:
-{{ include "ix.v1.common.app.permissions" (dict "UID" 568 "GID" 568 "type" "init") }}
+{{ include "ix.v1.common.app.postgres" (dict "name" "postgres" "secretName" "postgres-creds" "backupPath" "/postgres_backup" "resources" .Values.resources) }}
 
-type (optional): init or install (default: install)
-UID: UID to change permissions to
-GID: GID to change permissions to
+name (optional): Name of the postgres pod/container (default: postgres)
+secretName (required): Name of the secret containing the postgres credentials
+backupPath (optional): Path to store the backup, it's the container's path (default: /postgres_backup)
+resources (required): Resources for the postgres container
 */}}
 {{- define "ix.v1.common.app.postgres" -}}
   {{- $name := .name | default "postgres" -}}
