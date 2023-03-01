@@ -38,7 +38,12 @@ image:
 
 imageBash:
   repository: bash
-  tag: 4.4.23
+  tag: "4.4.23"
+  pullPolicy: IfNotPresent
+
+imagePostgres:
+  repository: postgres
+  tag: "15.2"
   pullPolicy: IfNotPresent
 
 # -- (docs/README.md)
