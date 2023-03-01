@@ -12,7 +12,7 @@ resources (required): Resources for the postgres container
   {{- $name := .name | default "postgres" -}}
   {{- $secretName := (required "Postgres - Secret Name is required" .secretName) -}}
   {{- $backupPath := .backupPath | default "/postgres_backup" -}}
-  {{- $resources := .resources }}
+  {{- $resources := (required "Postgres - Resources are required" .resources) }}
 {{ $name }}:
   enabled: true
   type: Deployment
