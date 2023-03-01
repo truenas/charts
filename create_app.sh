@@ -41,4 +41,4 @@ function copy_app() {
 }
 
 # TODO: Call this function for each changed app
-copy_app "enterprise" "minio"
+copy_app "$1" "$2"
