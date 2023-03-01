@@ -3,13 +3,21 @@
 {{ include "ix.v1.common.app.permissions" (dict "UID" 568 "GID" 568 "type" "init") }}
 
 type (optional): init or install (default: install)
-UID: UID to change to
-GID: GID to change to
+UID: UID to change permissions to
+GID: GID to change permissions to
 */}}
-{{- define "ix.v1.common.app.permissions" -}} {{/* TODO: Maybe move this to common as a named function? */}}
+{{- define "ix.v1.common.app.permissions" -}}
   {{- $type := .type -}}
   {{- $UID := .UID -}}
-  {{- $GID := .GID }}
+  {{- $GID := .GID -}}
+
+  {{- if (kindIs "invalid" $GID) -}}
+    {{- fail "Permissions Container - [GID] cannot be empty" -}}
+  {{- end -}}
+  {{- if (kindIs "invalid" $UID) -}}
+    {{- fail "Permissions Container - [UID] cannot be empty" -}}
+  {{- end }}
+
 permissions:
   enabled: true
   type: {{ $type | default "install" }}
