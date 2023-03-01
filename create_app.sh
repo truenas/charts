@@ -32,9 +32,11 @@ function copy_app() {
     mkdir -p "$train/$app/$version"
 
     # Copy files over
-    rsync --recursive "library/$train/$app/" "$train/$app/$version"
+    rsync --archive --delete  "library/$train/$app/" "$train/$app/$version"
     # Rename values.yaml to ix_values.yaml
     mv "$train/$app/$version/values.yaml" "$train/$app/$version/ix_values.yaml"
+    # Rename README.md to app-readme.md
+    mv "$train/$app/$version/README.md" "$train/$app/$version/app-readme.md"
 
     # Remove CI directory from the versioned app
     rm -r "$train/$app/$version/ci"
