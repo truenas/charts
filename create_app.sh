@@ -35,6 +35,7 @@ function copy_app() {
     rsync --recursive "library/$train/$app/" "$train/$app/$version"
     # Rename values.yaml to ix_values.yaml
     mv "$train/$app/$version/values.yaml" "$train/$app/$version/ix_values.yaml"
+    mv "$train/$app/$version/item.yaml" "$train/$app/item.yaml"
 
     # Remove CI directory
     rm -r "$train/$app/$version/ci"
