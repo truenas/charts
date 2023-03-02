@@ -1,4 +1,4 @@
-# Int Schema
+# Dict Schema
 
 ## Example of dict schema options
 
