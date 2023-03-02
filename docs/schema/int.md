@@ -3,21 +3,24 @@
 ## Example of int schema options
 
 ```yaml
-schema:
-  type: int
-  required: true
-  editable: true
-  immutable: true
-  hidden: true
-  "null": true
-  min: 5
-  max: 12
-  valid_chars: "[0-9]{3}"
-  default: 10
+- variable: int_variable
+  label: Int Variable
+  description: Description of int variable
+  schema:
+    type: int
+    required: true
+    editable: true
+    immutable: true
+    hidden: true
+    "null": true
+    min: 5
+    max: 12
+    valid_chars: "[0-9]{3}"
+    default: 10
 ```
 
 Following attributes can be added to `int` schema to enforce validation when a chart release is being created/edited:
-Those attributes are set during the chart development and are not user configurable.
+Those attributes are set in the schema during the chart development and are not user configurable.
 
 | Attribute     |   Type    | Default | Description                                                                                                                                                                     |
 | :------------ | :-------: | :-----: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |

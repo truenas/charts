@@ -3,24 +3,27 @@
 ## Example of string schema options
 
 ```yaml
-schema:
-  type: string
-  private: true
-  required: true
-  editable: true
-  immutable: true
-  hidden: true
-  min_length: 5
-  max_length: 12
-  default: "default_value"
-  valid_chars: "[a-zA-Z0-9]$"
-  enum:
-    - value: "value1"
-      description: "Description of value1"
+- variable: string_variable
+  label: String Variable
+  description: Description of string variable
+  schema:
+    type: string
+    private: true
+    required: true
+    editable: true
+    immutable: true
+    hidden: true
+    min_length: 5
+    max_length: 12
+    default: "default_value"
+    valid_chars: "[a-zA-Z0-9]$"
+    enum:
+      - value: "value1"
+        description: "Description of value1"
 ```
 
 Following attributes can be added to `string` schema to enforce validation when a chart release is being created/edited:
-Those attributes are set during the chart development and are not user configurable.
+Those attributes are set in the schema during the chart development and are not user configurable.
 
 | Attribute     |   Type    | Default | Description                                                                                                                                                                                     |
 | :------------ | :-------: | :-----: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
