@@ -1,0 +1,35 @@
+suite: persistence validation test
+templates:
+  - common.yaml
+tests:
+  - it: should fail with pod targetSelector not a map
+    set:
+      workload:
+        main:
+          enabled: true
+          primary: true
+          type: Deployment
+          podSpec: {}
+      persistence:
+        volume1:
+          enabled: true
+          targetSelector: not-a-map
+    asserts:
+      - failedTemplate:
+          errorMessage: Persistence - Expected <targetSelector> to be [dict], but got [string]
+
+  - it: should fail with invalid type
+    set:
+      workload:
+        main:
+          enabled: true
+          primary: true
+          type: Deployment
+          podSpec: {}
+      persistence:
+        volume1:
+          enabled: true
+          type: not-a-type
+    asserts:
+      - failedTemplate:
+          errorMessage: Persistence - Expected <type> to be one of [emptyDir, hostPath, ixVolume, secret, configmap, device], but got [not-a-type]
