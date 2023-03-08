@@ -9,6 +9,7 @@ debug: false
 upgrade: true
 chart-dirs:
   - library/enterprise
+  - library/community
 excluded-charts:
   - library/common-test
   - library/common
