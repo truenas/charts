@@ -31,6 +31,7 @@ function copy_app() {
     # Make sure directories exist
     mkdir -p "$train/$app/$version"
 
+    helm dependency update "library/$train/$app"
     # Copy files over
     rsync --archive --delete "library/$train/$app/" "$train/$app/$version"
     # Rename values.yaml to ix_values.yaml
