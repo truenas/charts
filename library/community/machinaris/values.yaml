@@ -1,0 +1,15 @@
+image:
+  repository: ghcr.io/guydavis/machinaris
+  pullPolicy: IfNotPresent
+  tag: v0.8.7
+flaxImage:
+  repository: ghcr.io/guydavis/machinaris-flax
+  pullPolicy: IfNotPresent
+  tag: v0.8.7
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+machinaris_network: {}
