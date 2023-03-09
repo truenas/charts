@@ -7,10 +7,17 @@ UID: UID to change permissions to
 GID: GID to change permissions to
 */}}
 {{- define "ix.v1.common.app.permissions" -}}
-  {{- $type := .type -}}
+  {{- $type := .type | default "install" -}}
+  {{- $containerName := .containerName | default "permisions" -}}
   {{- $UID := .UID -}}
   {{- $GID := .GID -}}
 
+  {{- if (kindIs "invalid" $type) -}}
+    {{- fail "Permissions Container - [type] cannot be empty" -}}
+  {{- end -}}
+  {{- if (kindIs "invalid" $containerName) -}}
+    {{- fail "Permissions Container - [containerName] cannot be empty" -}}
+  {{- end -}}
   {{- if (kindIs "invalid" $GID) -}}
     {{- fail "Permissions Container - [GID] cannot be empty" -}}
   {{- end -}}
@@ -18,9 +25,9 @@ GID: GID to change permissions to
     {{- fail "Permissions Container - [UID] cannot be empty" -}}
   {{- end }}
 
-permissions:
+{{ $containerName }}:
   enabled: true
-  type: {{ $type | default "install" }}
+  type: {{ $type }}
   imageSelector: imageBash
   resources:
     limits:
