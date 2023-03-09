@@ -1,0 +1,26 @@
+name: machinaris
+description: An easy-to-use WebUI for crypto plotting and farming.
+annotations:
+  title: Machinaris
+type: application
+version: 1.0.0
+apiVersion: v2
+appVersion: 'v0.8.7'
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+dependencies:
+- name: common
+  repository: file://../../../library/common/1.0.0
+  version: 1.0.0
+home: https://www.machinaris.app
+icon: https://raw.githubusercontent.com/guydavis/machinaris/main/web/static/machinaris.png
+sources:
+- https://github.com/guydavis/machinaris
+- https://github.com/truenas/charts/tree/master/community/machinaris
+- https://www.machinaris.app
+keywords:
+- storage
+- ipfs
+- kubo
