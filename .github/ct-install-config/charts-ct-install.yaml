@@ -8,8 +8,8 @@ debug: false
 # Also test upgrade on each app/ci-values
 upgrade: true
 chart-dirs:
-  - library/enterprise
-  - library/community
+  - library/ix-dev/enterprise
+  - library/ix-dev/community
 excluded-charts:
   - library/common-test
   - library/common

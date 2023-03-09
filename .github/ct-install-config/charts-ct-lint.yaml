@@ -7,8 +7,8 @@ chart-yaml-schema: .github/ct-install-config/chart_schema.yaml
 check-version-increment: true
 debug: true
 chart-dirs:
-  - library/enterprise
-  - library/community
+  - library/ix-dev/enterprise
+  - library/ix-dev/community
 excluded-charts:
   - library/common-test
   - library/common
