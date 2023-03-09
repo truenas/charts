@@ -1,6 +1,9 @@
 {{/* Loads all spawners */}}
 {{- define "ix.v1.common.loader.apply" -}}
 
+  {{/* Make sure there are not any YAML errors */}}
+  {{- include "ix.v1.common.values.validate" .Values -}}
+
   {{/* Render ConfigMap(s) */}}
   {{- include "ix.v1.common.spawner.configmap" . | nindent 0 -}}
 
