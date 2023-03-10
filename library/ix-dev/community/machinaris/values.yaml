@@ -27,21 +27,27 @@ machNetwork:
 # to the "plots_dir" variable on each pod
 machStorage:
   config:
-    type: hostPath # hostPath | ixVolume
+    # hostPath | ixVolume
+    type: hostPath
     hostPath: /hostPath
     datasetName: config
   plotting:
-    type: hostPath # hostPath | ixVolume
+    # hostPath | ixVolume
+    type: hostPath
     hostPath: /hostPath
     datasetName: plotting
   additionalVolumes:
-  - type: hostPath # hostPath | ixVolume
-    usedFor: plots # plots | other
+    # hostPath | ixVolume
+  - type: hostPath
+    # plots | other
+    usedFor: plots
     datasetName: plot1
     hostPath: /hostPath
     mountPath: /plots/plot1
-  - type: hostPath # hostPath | ixVolume
-    usedFor: plots # plots | other
+    # hostPath | ixVolume
+  - type: hostPath
+    # plots | other
+    usedFor: plots
     datasetName: plot2
     hostPath: /hostPath
     mountPath: /plots/plot2
