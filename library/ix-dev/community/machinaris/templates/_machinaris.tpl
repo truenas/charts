@@ -71,12 +71,12 @@ service:
         port: {{ $allConfig.machinaris.apiPort }}
         # nodePort:
         targetSelector: machinaris
-      farmerPort:
+      farmer:
         enabled: true
         port: {{ $allConfig.machinaris.farmerPort }}
         # nodePort:
         targetSelector: machinaris
-      networkPort:
+      network:
         enabled: true
         port: {{ $allConfig.machinaris.networkPort }}
         # nodePort:
