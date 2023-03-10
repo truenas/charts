@@ -2,7 +2,11 @@ image:
   repository: ghcr.io/guydavis/machinaris
   pullPolicy: IfNotPresent
   tag: v0.8.7
-flaxImage:
+imageCurl:
+  repository: curlimages/curl
+  pullPolicy: IfNotPresent
+  tag: "7.88.1"
+imageFlax:
   repository: ghcr.io/guydavis/machinaris-flax
   pullPolicy: IfNotPresent
   tag: v0.8.7
@@ -12,4 +16,50 @@ resources:
     cpu: 4000m
     memory: 8Gi
 
-machinaris_network: {}
+machConfig:
+  additionalEnvs: []
+
+machNetwork:
+  nodeIP: 127.0.0.1
+
+# Storage here will be mounted on all pods
+# When usedFor is plots, it will also append the mountPath
+# to the "plots_dir" variable on each pod
+machStorage:
+  config:
+    type: hostPath # hostPath | ixVolume
+    hostPath: /hostPath
+    datasetName: config
+  plotting:
+    type: hostPath # hostPath | ixVolume
+    hostPath: /hostPath
+    datasetName: plotting
+  additionalVolumes:
+  - type: hostPath # hostPath | ixVolume
+    usedFor: plots # plots | other
+    datasetName: plot1
+    hostPath: /hostPath
+    mountPath: /plots/plot1
+  - type: hostPath # hostPath | ixVolume
+    usedFor: plots # plots | other
+    datasetName: plot2
+    hostPath: /hostPath
+    mountPath: /plots/plot2
+
+machCoins:
+  - name: flax
+    additionalEnvs:
+    - name: env
+      value: var
+    - name: env2
+      value: var
+    # Storage here will be mounted on the $name container only
+    configStorage:
+      type: hostPath
+      hostPath: /hostpath
+      datasetName: flax-config
+    additionalVolumes:
+    - type: hostPath
+      datasetName: flax
+      hostPath: /hostPath
+      mountPath: /containerPath

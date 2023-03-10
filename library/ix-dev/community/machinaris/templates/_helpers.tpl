@@ -1,21 +1,37 @@
-{{- define "machinaris.portmap" -}}
-  {{- $ports := (dict
-                          "machinaris"
-                              (dict "apiPort" 8927
-                                    "webPort" 8926
-                                    "workerPort" 8947)
-                          "apple"
-                              (dict "farmerPort" 26667
-                                    "netPort" 266666
-                                    "workerPort" 8947)
-                          "ballcoin"
-                              (dict "farmerPort" 38891
-                                    "netPort" 38888
-                                    "workerPort" 8957)
-                          "greenbtc"
-                              (dict "farmerPort" 23332
-                                    "netPort" 23333
-                                    "workerPort" 8955)
-  ) -}}
-  {{- $ports | toJson -}}
+{{- define "machinaris.config" -}}
+machinaris:
+  imageSelector: image
+  blockchains: chia
+  webPort: 8926
+  apiPort: 8927
+  networkPort: 8444
+  farmerPort: 8447
+apple:
+  workerPort: 8947
+  networkPort: 266666
+  farmerPort: 26667
+ballcoin:
+  workerPort: 8957
+  networkPort: 38888
+  farmerPort: 38891
+greenbtc:
+  workerPort: 8955
+  networkPort: 23333
+  farmerPort: 23332
+flax:
+  imageSelector: imageFlax
+  blockchains: flax
+  workerPort: 8928
+  networkPort: 6888
+  farmerPort: 6885
+{{- end -}}
+
+{{- define "machinaris.plotDirs" -}}
+  {{ $plotDirs := list }}
+  {{ range $storage := .Values.machStorage.additionalVolumes }}
+    {{ if eq $storage.usedFor "plots" }}
+      {{ $plotDirs = mustAppend $plotDirs $storage.mountPath }}
+    {{ end }}
+  {{ end }}
+  {{- $plotDirs | toJson -}}
 {{- end -}}

@@ -1,9 +1,10 @@
 {{- include "ix.v1.common.loader.init" . -}}
 
-{{/* Merge the templates with Values
-{{- $_ := mustMergeOverwrite .Values (include "ipfs.workload" $ | fromYaml) -}}
-{{- $_ := mustMergeOverwrite .Values (include "ipfs.configuration" $ | fromYaml) -}}
-*/}}
+{{- include "machinaris.validation" $ -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "machinaris.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "machinaris.coin" $ | fromYaml) -}}
 
 {{/* Create the configmap for portal manually*/}}
 {{- include "machinaris.portal" $ -}}
