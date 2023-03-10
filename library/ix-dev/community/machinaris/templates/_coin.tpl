@@ -21,6 +21,7 @@ workload:
             runAsUser: 0
             runAsGroup: 0
             runAsNonRoot: false
+            readOnlyRootFilesystem: false
           env:
             controller_host: {{ $.Values.machNetwork.nodeIP }}
             worker_address: {{ $.Values.machNetwork.nodeIP }}

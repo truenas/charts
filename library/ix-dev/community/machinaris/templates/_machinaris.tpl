@@ -25,6 +25,7 @@ workload:
             runAsUser: 0
             runAsGroup: 0
             runAsNonRoot: false
+            readOnlyRootFilesystem: false
           env:
             mode: fullnode
             worker_address: {{ .Values.machNetwork.nodeIP }}
