@@ -20,7 +20,7 @@ machStorage:
     - type: hostPath
       usedFor: other
       hostPath: /mnt/{{ .Release.Name }}/plot2
-      mountPath: /plotting
+      mountPath: /somepath
 
 machConfig:
   additionalEnvs:
