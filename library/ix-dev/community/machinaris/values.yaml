@@ -37,35 +37,35 @@ machStorage:
     hostPath: /hostPath
     datasetName: plotting
   additionalVolumes:
-    # hostPath | ixVolume
-  - type: hostPath
-    # plots | other
-    usedFor: plots
-    datasetName: plot1
-    hostPath: /hostPath
-    mountPath: /plots/plot1
-    # hostPath | ixVolume
-  - type: hostPath
-    # plots | other
-    usedFor: plots
-    datasetName: plot2
-    hostPath: /hostPath
-    mountPath: /plots/plot2
+  #   # hostPath | ixVolume
+  # - type: hostPath
+  #   # plots | other
+  #   usedFor: plots
+  #   datasetName: plot1
+  #   hostPath: /hostPath
+  #   mountPath: /plots/plot1
+  #   # hostPath | ixVolume
+  # - type: hostPath
+  #   # plots | other
+  #   usedFor: plots
+  #   datasetName: plot2
+  #   hostPath: /hostPath
+  #   mountPath: /plots/plot2
 
 machCoins:
-  - name: flax
-    additionalEnvs:
-    - name: env
-      value: var
-    - name: env2
-      value: var
-    # Storage here will be mounted on the $name container only
-    configStorage:
-      type: hostPath
-      hostPath: /hostpath
-      datasetName: flax-config
-    additionalVolumes:
-    - type: hostPath
-      datasetName: flax
-      hostPath: /hostPath
-      mountPath: /containerPath
+  # - name: flax
+  #   additionalEnvs:
+  #   - name: env
+  #     value: var
+  #   - name: env2
+  #     value: var
+  #   # Storage here will be mounted on the $name container only
+  #   configStorage:
+  #     type: hostPath
+  #     hostPath: /hostpath
+  #     datasetName: flax-config
+  #   additionalVolumes:
+  #   - type: hostPath
+  #     datasetName: flax
+  #     hostPath: /hostPath
+  #     mountPath: /containerPath
