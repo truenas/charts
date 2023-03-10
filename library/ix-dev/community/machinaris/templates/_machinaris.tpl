@@ -100,6 +100,7 @@ persistence:
     type: {{ .Values.machStorage.plotting.type }}
     datasetName: {{ .Values.machStorage.plotting.datasetName | default "" }}
     hostPath: {{ .Values.machStorage.plotting.hostPath | default "" }}
+    mountPath: /plotting
     targetSelectAll: true
 
   {{/* Mount plot dirs to all pods */}}
