@@ -242,15 +242,15 @@ image:
 You can define additional images using the following convention:
 
 ```yaml
-imageWorker:
+workerImage:
   repository: ""
   tag: ""
   pullPolicy: IfNotPresent
 ```
 
-There isn't anything special in the above format (`imageSomething`), it's just a convention.
+There isn't anything special in the above format (`nameImage`), it's just a convention.
 It's also a format that some external tools can use for automatic image updates.
-For example, `Renovate`
+For example, [Renovate](https://docs.renovatebot.com/modules/manager/helm-values/#additional-information)
 
 ---
 

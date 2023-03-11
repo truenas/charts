@@ -28,7 +28,7 @@ GID: GID to change permissions to
 {{ $containerName }}:
   enabled: true
   type: {{ $type }}
-  imageSelector: imageBash
+  imageSelector: bashImage
   resources:
     limits:
       cpu: 1000m

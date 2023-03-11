@@ -21,7 +21,7 @@ resources (required): Resources for the postgres container
       {{ $name }}:
         enabled: true
         primary: true
-        imageSelector: imagePostgres
+        imageSelector: postgresImage
         securityContext:
           runAsUser: 999
           runAsGroup: 999

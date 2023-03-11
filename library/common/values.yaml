@@ -36,12 +36,12 @@ image:
   tag: ""
   pullPolicy: IfNotPresent
 
-imageBash:
+bashImage:
   repository: bash
   tag: "4.4.23"
   pullPolicy: IfNotPresent
 
-imagePostgres:
+postgresImage:
   repository: postgres
   tag: "15.2"
   pullPolicy: IfNotPresent
