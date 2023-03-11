@@ -8,7 +8,7 @@ GID: GID to change permissions to
 */}}
 {{- define "ix.v1.common.app.permissions" -}}
   {{- $type := .type | default "install" -}}
-  {{- $containerName := .containerName | default "permisions" -}}
+  {{- $containerName := .containerName | default "permissions" -}}
   {{- $UID := .UID -}}
   {{- $GID := .GID -}}
 
