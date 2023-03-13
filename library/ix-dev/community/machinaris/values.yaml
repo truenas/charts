@@ -17,6 +17,7 @@ resources:
     memory: 8Gi
 
 machConfig:
+  enableProbes: true
   additionalEnvs: []
 
 machNetwork:
@@ -53,19 +54,21 @@ machStorage:
   #   mountPath: /plots/plot2
 
 machCoins:
-  # - name: flax
-  #   additionalEnvs:
-  #   - name: env
-  #     value: var
-  #   - name: env2
-  #     value: var
-  #   # Storage here will be mounted on the $name container only
-  #   configStorage:
-  #     type: hostPath
-  #     hostPath: /hostpath
-  #     datasetName: flax-config
-  #   additionalVolumes:
-  #   - type: hostPath
-  #     datasetName: flax
-  #     hostPath: /hostPath
-  #     mountPath: /containerPath
+  - name: flax
+    configStorage:
+      type: hostPath
+      hostPath: /hostpath
+      datasetName: flax-config
+    config:
+      mode: harvester,plotter
+    additionalEnvs:
+    - name: env
+      value: var
+    - name: env2
+      value: var
+    # Storage here will be mounted on the $name container only
+    additionalVolumes:
+    - type: hostPath
+      datasetName: flax
+      hostPath: /hostPath
+      mountPath: /containerPath

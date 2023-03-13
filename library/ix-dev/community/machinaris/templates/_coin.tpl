@@ -24,10 +24,35 @@ workload:
             readOnlyRootFilesystem: false
           env:
             controller_host: {{ $.Values.machNetwork.nodeIP }}
+            controller_api_port: {{ $allConfig.machinaris.apiPort }}
             worker_address: {{ $.Values.machNetwork.nodeIP }}
+            worker_api_port: {{ $coinConfig.workerPort }}
             blockchains: {{ $coinConfig.blockchains }}
             plots_dir: {{ join ":" $plotDirs | squote }}
-            mode: fullnode
+          {{ if not (mustHas $coin.config.mode $coinConfig.availableModes) }}
+            {{ fail (printf "Invalid mode [%s] for coin [%s]. Available modes: %s" $coin.config.mode $coin.name (join ", " $coinConfig.availableModes)) }}
+          {{ end }}
+            mode: {{ $coin.config.mode }}
+          {{/*
+          Mode can be harverster, plotter or "harvester,plotter"
+          Only few support plotter tho.
+          */}}
+          {{ if contains $coin.config.mode "harvester" }}
+            farmer_address: {{ $.Values.machNetwork.nodeIP }}
+            farmer_api_port: {{ $coinConfig.farmerPort }}
+          {{ end }}
+          {{ if contains $coin.config.mode "plotter" }}
+            {{/* Not sure if those are optional or not. */}}
+            {{ with $coin.config.farmerPk }}
+            farmer_pk: {{ . }}
+            {{ end }}
+            {{ with $coin.config.poolPk }}
+            pool_pk: {{ . }}
+            {{ end }}
+            {{ with $coin.config.poolContractAddress }}
+            pool_contract_address: {{ . }}
+            {{ end }}
+          {{ end }}
           {{ with $coin.additionalEnvs }}
             {{ range $env := . }}
             {{ $env.name }}: {{ $env.value }}
@@ -37,17 +62,17 @@ workload:
             liveness:
               # Might need to disable probes. Depends on when the API is available.
               # (Before or After coin syncing)
-              enabled: true
+              enabled: {{ $coin.config.enableProbes }}
               type: http
               port: {{ $coinConfig.workerPort }}
               path: /ping
             readiness:
-              enabled: true
+              enabled: {{ $coin.config.enableProbes }}
               type: http
               port: {{ $coinConfig.workerPort }}
               path: /ping
             startup:
-              enabled: true
+              enabled: {{ $coin.config.enableProbes }}
               type: http
               port: {{ $coinConfig.workerPort }}
               path: /ping

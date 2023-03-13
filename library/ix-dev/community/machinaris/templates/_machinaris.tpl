@@ -38,17 +38,17 @@ workload:
           {{ end }}
           probes:
             liveness:
-              enabled: true
+              enabled: {{ .Values.machConfig.enableProbes }}
               type: http
               port: {{ $allConfig.machinaris.apiPort }}
               path: /ping
             readiness:
-              enabled: true
+              enabled: {{ .Values.machConfig.enableProbes }}
               type: http
               port: {{ $allConfig.machinaris.apiPort }}
               path: /ping
             startup:
-              enabled: true
+              enabled: {{ .Values.machConfig.enableProbes }}
               type: http
               port: {{ $allConfig.machinaris.apiPort }}
               path: /ping
