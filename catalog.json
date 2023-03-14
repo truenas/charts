@@ -15,6 +15,7 @@
             "latest_human_version": "v1.7.0_1.3.39",
             "last_update": "2023-03-01 13:26:19",
             "name": "chia",
+            "recommended": false,
             "title": "Chia",
             "icon_url": "https://www.chia.net/wp-content/uploads/2022/09/chia-logo.svg"
         },
@@ -33,6 +34,7 @@
             "latest_human_version": "4.5.2_1.0.11",
             "last_update": "2023-02-28 16:37:54",
             "name": "qbittorent",
+            "recommended": false,
             "title": "Qbittorent",
             "icon_url": "https://github.com/linuxserver/docker-templates/raw/master/linuxserver.io/img/qbittorrent-icon.png"
         },
@@ -51,6 +53,7 @@
             "latest_human_version": "2022.12.1_1.0.12",
             "last_update": "2023-01-05 00:00:17",
             "name": "pihole",
+            "recommended": false,
             "title": "Pihole",
             "icon_url": "https://github.com/pi-hole/graphics/raw/master/Vortex/Vortex_Vertical_wordmark_lightmode.png?raw=true)"
         },
@@ -68,6 +71,7 @@
             "latest_human_version": "4.7.11.0_1.0.16",
             "last_update": "2022-12-28 00:00:17",
             "name": "emby",
+            "recommended": false,
             "title": "Emby",
             "icon_url": "https://images-na.ssl-images-amazon.com/images/I/41NwssJC1iL.png"
         },
@@ -88,6 +92,7 @@
             "latest_human_version": "v1.68.2_1.0.5",
             "last_update": "2023-03-01 14:26:02",
             "name": "storj",
+            "recommended": false,
             "title": "Storj",
             "icon_url": "https://assets-global.website-files.com/602eda09fc78afc76e9706b6/60917835a05862243e7de9af_logo.svg"
         },
@@ -105,6 +110,7 @@
             "latest_human_version": "v1.38.1_1.0.15",
             "last_update": "2023-02-16 00:00:23",
             "name": "netdata",
+            "recommended": false,
             "title": "Netdata",
             "icon_url": "https://netdata.github.io/helmchart/logo.png"
         },
@@ -122,6 +128,7 @@
             "latest_human_version": "221118_1.0.12",
             "last_update": "2023-02-08 12:57:35",
             "name": "photoprism",
+            "recommended": false,
             "title": "Photoprism",
             "icon_url": "https://photoprism.app/static/icons/logo.svg"
         },
@@ -140,6 +147,7 @@
             "latest_human_version": "v0.8.5_1.1.14",
             "last_update": "2022-11-10 21:26:28",
             "name": "machinaris",
+            "recommended": false,
             "title": "Machinaris",
             "icon_url": "https://raw.githubusercontent.com/guydavis/machinaris/main/web/static/machinaris.png"
         },
@@ -157,6 +165,7 @@
             "latest_human_version": "1.31.1.6782_1.7.31",
             "last_update": "2023-03-10 13:47:51",
             "name": "plex",
+            "recommended": false,
             "title": "Plex",
             "icon_url": "https://www.plex.tv/wp-content/uploads/2018/01/pmp-icon-1.png"
         },
@@ -174,6 +183,7 @@
             "latest_human_version": "25.0.4_1.6.18",
             "last_update": "2023-02-27 10:12:34",
             "name": "nextcloud",
+            "recommended": false,
             "title": "Nextcloud",
             "icon_url": "https://cdn.rawgit.com/docker-library/docs/defa5ffc7123177acd60ddef6e16bddf694cc35f/nextcloud/logo.svg"
         },
@@ -193,6 +203,7 @@
             "latest_human_version": "2.0.1_1.0.4",
             "last_update": "2022-07-28 21:12:09",
             "name": "diskoverdata",
+            "recommended": false,
             "title": "Diskoverdata",
             "icon_url": "http://www.diskoverdata.com/wp-content/uploads/2019/09/diskover.png"
         },
@@ -212,6 +223,7 @@
             "latest_human_version": "7_1.0.0",
             "last_update": "2022-12-22 11:20:06",
             "name": "wg-easy",
+            "recommended": false,
             "title": "Wg-easy",
             "icon_url": "https://raw.githubusercontent.com/WeeJeWel/wg-easy/master/src/www/img/logo.png"
         },
@@ -229,6 +241,7 @@
             "latest_human_version": "2023.3.3_1.0.69",
             "last_update": "2023-03-10 13:47:51",
             "name": "home-assistant",
+            "recommended": false,
             "title": "Home-assistant",
             "icon_url": "https://avatars.githubusercontent.com/u/13844975?s=200&v=4"
         },
@@ -248,6 +261,7 @@
             "latest_human_version": "21.11.4.1.1_1.2.6",
             "last_update": "2022-07-28 21:12:09",
             "name": "collabora",
+            "recommended": false,
             "title": "Collabora",
             "icon_url": "https://avatars.githubusercontent.com/u/22418908?s=200&v=4"
         },
@@ -265,6 +279,7 @@
             "latest_human_version": "v1_2212.0.1",
             "last_update": "2022-12-19 11:37:56",
             "name": "ix-chart",
+            "recommended": false,
             "title": "Ix-chart",
             "icon_url": null
         },
@@ -282,6 +297,7 @@
             "latest_human_version": "v0.18.1_1.2.13",
             "last_update": "2023-01-31 00:00:23",
             "name": "ipfs",
+            "recommended": false,
             "title": "Ipfs",
             "icon_url": "https://ipfs.io/ipfs/QmVk7srrwahXLNmcDYvyUEJptyoxpndnRa57YJ11L4jV26/ipfs.go.png"
         },
@@ -295,11 +311,12 @@
             "healthy": true,
             "healthy_error": null,
             "location": "/__w/charts/charts/charts/minio",
-            "latest_version": "1.7.14",
-            "latest_app_version": "2023-03-09",
-            "latest_human_version": "2023-03-09_1.7.14",
-            "last_update": "2023-03-11 12:39:02",
+            "latest_version": "1.7.15",
+            "latest_app_version": "2023-03-13",
+            "latest_human_version": "2023-03-13_1.7.15",
+            "last_update": "2023-03-14 13:28:13",
             "name": "minio",
+            "recommended": false,
             "title": "Minio",
             "icon_url": "https://min.io/resources/img/logo/MINIO_wordmark.png"
         },
@@ -318,6 +335,7 @@
             "latest_human_version": "1.23.2_1.0.18",
             "last_update": "2023-03-08 12:30:59",
             "name": "syncthing",
+            "recommended": false,
             "title": "Syncthing",
             "icon_url": "https://play-lh.googleusercontent.com/KIy_dqUdZqcsTq4GDstHrHwLRvu60gT3v0p41gw792BC6OxamNhUw2eIy0-LI05qNEA=w240-h480"
         }
@@ -338,6 +356,7 @@
             "latest_human_version": "v1.7.0_1.3.39",
             "last_update": "2023-03-01 13:26:19",
             "name": "chia",
+            "recommended": false,
             "title": "Chia",
             "icon_url": "https://www.chia.net/wp-content/uploads/2022/09/chia-logo.svg"
         },
@@ -356,6 +375,7 @@
             "latest_human_version": "4.5.2_1.0.11",
             "last_update": "2023-02-28 16:37:54",
             "name": "qbittorent",
+            "recommended": false,
             "title": "Qbittorent",
             "icon_url": "https://github.com/linuxserver/docker-templates/raw/master/linuxserver.io/img/qbittorrent-icon.png"
         },
@@ -374,6 +394,7 @@
             "latest_human_version": "2022.12.1_1.0.12",
             "last_update": "2023-01-05 00:00:17",
             "name": "pihole",
+            "recommended": false,
             "title": "Pihole",
             "icon_url": "https://github.com/pi-hole/graphics/raw/master/Vortex/Vortex_Vertical_wordmark_lightmode.png?raw=true)"
         },
@@ -391,6 +412,7 @@
             "latest_human_version": "4.7.11.0_1.0.16",
             "last_update": "2022-12-28 00:00:17",
             "name": "emby",
+            "recommended": false,
             "title": "Emby",
             "icon_url": "https://images-na.ssl-images-amazon.com/images/I/41NwssJC1iL.png"
         },
@@ -411,6 +433,7 @@
             "latest_human_version": "v1.68.2_1.0.5",
             "last_update": "2023-03-01 14:26:02",
             "name": "storj",
+            "recommended": false,
             "title": "Storj",
             "icon_url": "https://assets-global.website-files.com/602eda09fc78afc76e9706b6/60917835a05862243e7de9af_logo.svg"
         },
@@ -428,6 +451,7 @@
             "latest_human_version": "v1.38.1_1.0.15",
             "last_update": "2023-02-16 00:00:23",
             "name": "netdata",
+            "recommended": false,
             "title": "Netdata",
             "icon_url": "https://netdata.github.io/helmchart/logo.png"
         },
@@ -445,6 +469,7 @@
             "latest_human_version": "221118_1.0.12",
             "last_update": "2023-02-08 12:57:35",
             "name": "photoprism",
+            "recommended": false,
             "title": "Photoprism",
             "icon_url": "https://photoprism.app/static/icons/logo.svg"
         },
@@ -463,6 +488,7 @@
             "latest_human_version": "v0.8.5_1.1.14",
             "last_update": "2022-11-10 21:26:28",
             "name": "machinaris",
+            "recommended": false,
             "title": "Machinaris",
             "icon_url": "https://raw.githubusercontent.com/guydavis/machinaris/main/web/static/machinaris.png"
         },
@@ -480,6 +506,7 @@
             "latest_human_version": "1.31.1.6782_1.7.31",
             "last_update": "2023-03-10 13:47:51",
             "name": "plex",
+            "recommended": false,
             "title": "Plex",
             "icon_url": "https://www.plex.tv/wp-content/uploads/2018/01/pmp-icon-1.png"
         },
@@ -497,6 +524,7 @@
             "latest_human_version": "25.0.4_1.6.18",
             "last_update": "2023-02-27 10:12:34",
             "name": "nextcloud",
+            "recommended": false,
             "title": "Nextcloud",
             "icon_url": "https://cdn.rawgit.com/docker-library/docs/defa5ffc7123177acd60ddef6e16bddf694cc35f/nextcloud/logo.svg"
         },
@@ -516,6 +544,7 @@
             "latest_human_version": "2.0.1_1.0.4",
             "last_update": "2022-07-28 21:12:09",
             "name": "diskoverdata",
+            "recommended": false,
             "title": "Diskoverdata",
             "icon_url": "http://www.diskoverdata.com/wp-content/uploads/2019/09/diskover.png"
         },
@@ -535,6 +564,7 @@
             "latest_human_version": "7_1.0.0",
             "last_update": "2022-12-21 17:54:20",
             "name": "wg-easy",
+            "recommended": false,
             "title": "Wg-easy",
             "icon_url": "https://raw.githubusercontent.com/WeeJeWel/wg-easy/master/src/www/img/logo.png"
         },
@@ -552,6 +582,7 @@
             "latest_human_version": "2023.3.3_1.0.69",
             "last_update": "2023-03-10 13:47:51",
             "name": "home-assistant",
+            "recommended": false,
             "title": "Home-assistant",
             "icon_url": "https://avatars.githubusercontent.com/u/13844975?s=200&v=4"
         },
@@ -571,6 +602,7 @@
             "latest_human_version": "21.11.4.1.1_1.2.6",
             "last_update": "2022-07-28 21:12:09",
             "name": "collabora",
+            "recommended": false,
             "title": "Collabora",
             "icon_url": "https://avatars.githubusercontent.com/u/22418908?s=200&v=4"
         },
@@ -588,6 +620,7 @@
             "latest_human_version": "v1_2212.0.1",
             "last_update": "2022-12-19 11:37:56",
             "name": "ix-chart",
+            "recommended": false,
             "title": "Ix-chart",
             "icon_url": null
         },
@@ -605,6 +638,7 @@
             "latest_human_version": "v0.18.1_1.2.13",
             "last_update": "2023-01-31 00:00:23",
             "name": "ipfs",
+            "recommended": false,
             "title": "Ipfs",
             "icon_url": "https://ipfs.io/ipfs/QmVk7srrwahXLNmcDYvyUEJptyoxpndnRa57YJ11L4jV26/ipfs.go.png"
         },
@@ -618,11 +652,12 @@
             "healthy": true,
             "healthy_error": null,
             "location": "/__w/charts/charts/test/minio",
-            "latest_version": "1.7.14",
-            "latest_app_version": "2023-03-09",
-            "latest_human_version": "2023-03-09_1.7.14",
-            "last_update": "2023-03-11 12:39:02",
+            "latest_version": "1.7.15",
+            "latest_app_version": "2023-03-13",
+            "latest_human_version": "2023-03-13_1.7.15",
+            "last_update": "2023-03-14 13:28:13",
             "name": "minio",
+            "recommended": false,
             "title": "Minio",
             "icon_url": "https://min.io/resources/img/logo/MINIO_wordmark.png"
         },
@@ -641,6 +676,7 @@
             "latest_human_version": "1.23.2_1.0.18",
             "last_update": "2023-03-08 12:30:59",
             "name": "syncthing",
+            "recommended": false,
             "title": "Syncthing",
             "icon_url": "https://play-lh.googleusercontent.com/KIy_dqUdZqcsTq4GDstHrHwLRvu60gT3v0p41gw792BC6OxamNhUw2eIy0-LI05qNEA=w240-h480"
         }
