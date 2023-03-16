@@ -1,0 +1,34 @@
+image:
+  repository: ghcr.io/onedr0p/qbittorrent
+  pullPolicy: IfNotPresent
+  tag: 4.5.2
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+qbitConfig:
+  additionalEnvs: []
+qbitNetwork:
+  webPort: 30000
+  btPort: 50413
+  hostNetwork: false
+qbitRunAs:
+  user: 568
+  group: 568
+qbitStorage:
+  downloads:
+    type: ixVolume
+    hostPath: ""
+    datasetName: downloads
+  config:
+    type: ixVolume
+    hostPath: ""
+    datasetName: config
+
+notes:
+  custom: |
+    Default credentials:
+    -  username: admin
+    -  password: adminadmin
