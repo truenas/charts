@@ -1,0 +1,8 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{- include "chia.validation" $ -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "chia.workload" $ | fromYaml) -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}

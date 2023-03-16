@@ -1,0 +1,21 @@
+chiaConfig:
+  additionalEnvs:
+    - name: testnet
+      value: true
+
+chiaStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/data
+  plots:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/plots
+  additionalVolumes:
+    - type: hostPath
+      hostPath: /mnt/{{ .Release.Name }}/plots1
+      isPlotDir: true
+      mountPath: /plots1
+    - type: hostPath
+      hostPath: /mnt/{{ .Release.Name }}/random_mount
+      isPlotDir: false
+      mountPath: /random_mount
