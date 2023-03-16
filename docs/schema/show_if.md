@@ -16,8 +16,8 @@
 |   `<=`   | Value of `variable_name` is less or equal than "value"          | `[[ "variable_name", "<=", "10" ]]`      |
 |   `in`   | Value of `variable_name` is contained in "value"                | `[[ "variable_name", "in", "value" ]]`   |
 |  `nin`   | Value of `variable_name` is **not** contained in "value"        | `[[ "variable_name", "nin", "value" ]]`  |
-|  `rin`   | "value" is contained in the value of `variable_name`            | `[[ "variable_name", "rin", "value" ]]`  |
-|  `rnin`  | "value" is **not** contained in the value of `variable_name`    | `[[ "variable_name", "rnin", "value" ]]` |
+|  `rin`   | Value of `variable_name` includes "value"                       | `[[ "variable_name", "rin", "value" ]]`  |
+|  `rnin`  | Value of `variable_name` does **not** include "value"           | `[[ "variable_name", "rnin", "value" ]]` |
 |   `^`    | Value of `variable_name` starts with "value"                    | `[[ "variable_name", "^", "value" ]]`    |
 |   `!^`   | Value of `variable_name` does not start with "value"            | `[[ "variable_name", "!^", "value" ]]`   |
 |   `$`    | Value of `variable_name` ends with "value"                      | `[[ "variable_name", "$", "value" ]]`    |
