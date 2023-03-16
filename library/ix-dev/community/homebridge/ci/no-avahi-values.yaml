@@ -1,0 +1,13 @@
+hbStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/data
+
+hbNetwork:
+  webPort: 38000
+
+hbConfig:
+  enableAvahi: false
+  additionalEnvs:
+    - name: HOMEBRIDGE_CONFIG_UI_THEME
+      value: blue
