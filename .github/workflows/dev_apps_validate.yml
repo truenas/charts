@@ -10,6 +10,10 @@ jobs:
       image: ixsystems/catalog_validation:latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Fetch base branch history
+        run: git fetch origin master:master
       - name: validate dev catalog
         run: /bin/bash -c "/usr/local/bin/dev_charts_validate validate --path $(pwd)"
