@@ -51,7 +51,7 @@ workload:
                                                         "UID" .Values.ipfsRunAs.user
                                                         "GID" .Values.ipfsRunAs.group
                                                         "type" "install") | nindent 8 }}
-        # "zz" prefix is used to ensure this container runs after the permissions container
+        # "02" prefix is used to ensure this container runs after the permissions container
         02-init-config:
           enabled: true
           type: init
@@ -121,7 +121,7 @@ persistence:
           mountPath: /data/ipfs
         01-permissions:
           mountPath: /mnt/directories/data
-        zz-init-config:
+        02-init-config:
           mountPath: /data/ipfs
   staging:
     enabled: true
@@ -141,7 +141,7 @@ persistence:
     defaultMode: "0755"
     targetSelector:
       ipfs:
-        zz-init-config:
+        02-init-config:
           mountPath: /init-config.sh
           readOnly: true
           subPath: init-config.sh
