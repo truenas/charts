@@ -1,0 +1,15 @@
+name: dev_catalog_validation
+
+on: [push]
+
+jobs:
+  ix-dev-validate:
+    runs-on: ubuntu-latest
+
+    container:
+      image: ixsystems/catalog_validation:latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: validate dev catalog
+        run: /bin/bash -c "/usr/local/bin/dev_charts_validate validate --path $(pwd)"
