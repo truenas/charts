@@ -1,0 +1,14 @@
+remote: origin
+target-branch: master
+helm-extra-args: --timeout 600s --debug
+lint-conf: .github/ct-install-config/lint-conf.yaml
+chart-yaml-schema: .github/ct-install-config/chart_schema.yaml
+# Check that the version in Chart.yaml is incremented
+check-version-increment: true
+debug: true
+chart-dirs:
+  - library/ix-dev/enterprise
+  - library/ix-dev/community
+excluded-charts:
+  - library/common-test
+  - library/common

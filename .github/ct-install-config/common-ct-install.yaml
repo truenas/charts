@@ -1,0 +1,11 @@
+remote: origin
+target-branch: master
+# Print helm debug output, contains the rendered k8s objects
+helm-extra-args: --timeout 600s --debug
+chart-yaml-schema: .github/ct-install-config/chart_schema.yaml
+debug: true
+chart-dirs:
+  - library
+charts:
+  - library/common-test
+excluded-charts: []

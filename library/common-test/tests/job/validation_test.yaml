@@ -14,20 +14,31 @@ tests:
     asserts:
       - failedTemplate:
           errorMessage: Job - Expected <completionMode> to be one of [Indexed, NonIndexed], but got [not-a-mode]
-
-  - it: should fail with completionMode to Indexed and no completions
+  - it: should fail with invalid completionMode
     set:
       workload:
         workload-name:
           enabled: true
           primary: true
           type: Job
-          completionMode: Indexed
-          completions:
+          completionMode: not-a-mode
           podSpec: {}
     asserts:
       - failedTemplate:
-          errorMessage: Job - Expected <completions> to be set when <completionMode> is set to [Indexed]
+          errorMessage: Job - Expected <completionMode> to be one of [Indexed, NonIndexed], but got [not-a-mode]
+
+  - it: should fail with restartPolicy set to Always
+    set:
+      workload:
+        workload-name:
+          enabled: true
+          primary: true
+          type: Job
+          restartPolicy: Always
+          podSpec: {}
+    asserts:
+      - failedTemplate:
+          errorMessage: Expected <restartPolicy to be [OnFailure, Never] for [Job] but got [Always]
 
   - it: should fail with completionMode to Indexed and no parallelism
     set:

@@ -37,6 +37,7 @@ tests:
           primary: false
           type: Job
           podSpec:
+            restartPolicy: Never
             containers:
               container-name1:
                 enabled: true
@@ -121,6 +122,7 @@ tests:
           primary: false
           type: Job
           podSpec:
+            restartPolicy: Never
             containers:
               container-name1:
                 enabled: true
@@ -193,6 +195,7 @@ tests:
           primary: false
           type: Job
           podSpec:
+            restartPolicy: Never
             containers:
               container-name1:
                 enabled: true
@@ -274,6 +277,7 @@ tests:
           primary: false
           type: Job
           podSpec:
+            restartPolicy: Never
             containers:
               container-name1:
                 enabled: true
@@ -354,6 +358,7 @@ tests:
           primary: false
           type: Job
           podSpec:
+            restartPolicy: Never
             containers:
               container-name1:
                 enabled: true

@@ -121,6 +121,7 @@ tests:
           primary: false
           type: Job
           podSpec:
+            restartPolicy: Never
             containers:
               container-name1:
                 enabled: true
@@ -199,6 +200,7 @@ tests:
           type: CronJob
           schedule: "*/1 * * * *"
           podSpec:
+            restartPolicy: Never
             containers:
               container-name1:
                 enabled: true

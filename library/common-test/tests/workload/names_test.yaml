@@ -15,12 +15,14 @@ tests:
           primary: false
           type: CronJob
           schedule: "*/1 * * * *"
-          podSpec: {}
+          podSpec:
+            restartPolicy: Never
         job-workload-name:
           enabled: true
           primary: false
           type: Job
-          podSpec: {}
+          podSpec:
+            restartPolicy: Never
     asserts:
       - documentIndex: &cronJobDoc 0
         isKind:
