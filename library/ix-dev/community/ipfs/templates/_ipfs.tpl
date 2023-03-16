@@ -47,9 +47,12 @@ workload:
                 - stat
                 - /ipfs/QmUNLLsPACCz1vLxQVkXqqLX5R1X345qqfHbsf67hvA3Nn
       initContainers:
-      {{- include "ix.v1.common.app.permissions" (dict "UID" .Values.ipfsRunAs.user "GID" .Values.ipfsRunAs.group "type" "init") | nindent 8 }}
+      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
+                                                        "UID" .Values.ipfsRunAs.user
+                                                        "GID" .Values.ipfsRunAs.group
+                                                        "type" "install") | nindent 8 }}
         # "zz" prefix is used to ensure this container runs after the permissions container
-        zz-init-config:
+        02-init-config:
           enabled: true
           type: init
           imageSelector: image
@@ -116,7 +119,7 @@ persistence:
       ipfs:
         ipfs:
           mountPath: /data/ipfs
-        permissions:
+        01-permissions:
           mountPath: /mnt/directories/data
         zz-init-config:
           mountPath: /data/ipfs
@@ -129,7 +132,7 @@ persistence:
       ipfs:
         ipfs:
           mountPath: /export
-        permissions:
+        01-permissions:
           mountPath: /mnt/directories/export
   config-script:
     enabled: true
