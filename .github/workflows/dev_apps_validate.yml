@@ -13,6 +13,8 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+      - name: Adding git directory to safe path
+        run: git config --global --add safe.directory "$(pwd)"
       - name: Fetch base branch history
         run: git fetch origin master:master
       - name: validate dev catalog
