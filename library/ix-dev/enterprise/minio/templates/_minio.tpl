@@ -5,7 +5,7 @@ workload:
     primary: true
     type: Deployment
     podSpec:
-      hostNetwork: {{ .Values.minioNetwork.hostNetwork }}
+      hostNetwork: {{ include "minio.hostnetwork" $ }}
       containers:
         minio:
           enabled: true

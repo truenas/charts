@@ -8,6 +8,22 @@
   {{- $scheme -}}
 {{- end -}}
 
+{{- define "minio.hostnetwork" -}}
+  {{- $hostNet := .Values.minioNetwork.hostNetwork -}}
+
+  {{- range $entry := .Values.minioMultiMode -}}
+    {{/*
+      Only if multi mode has urls set hostnetwork,
+      Multi Mode can be used for single node, multi disk setup
+     */}}
+    {{- if contains "://" $entry -}}
+      {{- $hostNet = true -}}
+    {{- end -}}
+
+  {{- end -}}
+  {{- $hostNet -}}
+{{- end -}}
+
 {{/* Validation */}}
 {{- define "minio.validation" -}}
   {{- if not .Values.minioCreds.rootUser -}}
