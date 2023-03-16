@@ -1,0 +1,7 @@
+hbStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/data
+
+hbNetwork:
+  webPort: 38000

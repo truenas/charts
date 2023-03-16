@@ -1,0 +1,25 @@
+name: homebridge
+description: Homebridge is a lightweight NodeJS server you can run on your home network that emulates the iOS HomeKit API.
+annotations:
+  title: Homebridge
+type: application
+version: 1.0.0
+apiVersion: v2
+appVersion: '2023-01-08'
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+dependencies:
+- name: common
+  repository: file://../../../common
+  version: 1.0.0
+home: https://github.com/homebridge/homebridge
+icon: https://raw.githubusercontent.com/homebridge/branding/master/logos/homebridge-color-round-stylized.png
+sources:
+- https://github.com/oznu/docker-homebridge
+- https://github.com/truenas/charts/tree/master/library/ix-dev/community/homebridge
+- https://github.com/homebridge/homebridge
+keywords:
+- homekit
+- homebridge

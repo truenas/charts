@@ -1,0 +1,135 @@
+groups:
+  - name: Homebridge Configuration
+    description: Configure Homebridge
+  - name: Network Configuration
+    description: Configure Network for Homebridge
+  - name: Storage Configuration
+    description: Configure Storage for Homebridge
+  - name: Resources Configuration
+    description: Configure Resources for Homebridge
+
+questions:
+
+  - variable: TZ
+    group: Homebridge Configuration
+    label: Timezone
+    schema:
+      type: string
+      default: Etc/UTC
+      required: true
+      $ref:
+        - definitions/timezone
+
+  - variable: hbConfig
+    label: ""
+    group: Homebridge Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: enableAvahi
+          label: Enable Avahi
+          description: Enable Avahi for Homebridge.
+          schema:
+            type: boolean
+            default: true
+        - variable: additionalEnvs
+          label: Additional Environment Variables
+          description: Configure additional environment variables for Homebridge.
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: env
+                label: Environment Variable
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: name
+                      label: Name
+                      schema:
+                        type: string
+                        required: true
+                    - variable: value
+                      label: Value
+                      schema:
+                        type: string
+                        required: true
+
+  - variable: hbNetwork
+    group: Network Configuration
+    label: ""
+    schema:
+      type: dict
+      attrs:
+        - variable: webPort
+          label: Web UI Port
+          schema:
+            type: int
+            min: 9000
+            max: 65535
+            required: true
+            default: 30000
+
+  - variable: hbStorage
+    group: Storage Configuration
+    label: ""
+    schema:
+      type: dict
+      attrs:
+        - variable: data
+          label: Data
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                schema:
+                  type: string
+                  default: ixVolume
+                  required: true
+                  enum:
+                    - value: ixVolume
+                      description: ixVolume
+                    - value: hostPath
+                      description: hostPath
+              - variable: hostPath
+                label: Host Path
+                schema:
+                  type: hostpath
+                  show_if: [["type", "=", "hostPath"]]
+                  default: ""
+              - variable: datasetName
+                label: Dataset Name
+                schema:
+                  type: string
+                  default: data
+                  show_if: [["type", "=", "ixVolume"]]
+                  hidden: true
+                  $ref:
+                    - "normalize/ixVolume"
+
+  - variable: resources
+    label: ""
+    group: Resources Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: limits
+          label: Limits
+          schema:
+            type: dict
+            attrs:
+              - variable: cpu
+                label: CPU
+                description: CPU limit for qBittorrent.
+                schema:
+                  type: string
+                  default: 4000m
+                  required: true
+              - variable: memory
+                label: Memory
+                description: Memory limit for qBittorrent.
+                schema:
+                  type: string
+                  default: 8Gi
+                  required: true

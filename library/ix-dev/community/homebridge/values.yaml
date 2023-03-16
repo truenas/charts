@@ -1,0 +1,22 @@
+image:
+  repository: oznu/homebridge
+  tag: "2023-01-08"
+  pullPolicy: IfNotPresent
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+hbStorage:
+  data:
+    type: ixVolume
+    hostPath: ""
+    datasetName: data
+
+hbNetwork:
+  webPort: 30000
+
+hbConfig:
+  enableAvahi: true
+  additionalEnvs: []
