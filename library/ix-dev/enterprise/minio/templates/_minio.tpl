@@ -50,7 +50,9 @@ workload:
               port: "{{ .Values.minioNetwork.apiPort }}"
               path: /minio/health/live
       initContainers:
-      {{- include "ix.v1.common.app.permissions" (dict "UID" .Values.minioRunAs.user "GID" .Values.minioRunAs.group) | nindent 8 -}}
+      {{- include "ix.v1.common.app.permissions" (dict "UID" .Values.minioRunAs.user
+                                                        "GID" .Values.minioRunAs.group
+                                                        "type" "install") | nindent 8 -}}
       {{- if .Values.minioLogging.logsearch.enabled }}
         logsearch-wait:
           enabled: true
