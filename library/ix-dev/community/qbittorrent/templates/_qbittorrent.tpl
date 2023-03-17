@@ -40,7 +40,9 @@ workload:
               port: "{{ .Values.qbitNetwork.webPort }}"
               path: /
       initContainers:
-      {{- include "ix.v1.common.app.permissions" (dict "UID" .Values.qbitRunAs.user "GID" .Values.qbitRunAs.group "type" "init") | nindent 8 -}}
+      {{- include "ix.v1.common.app.permissions" (dict "UID" .Values.qbitRunAs.user
+                                                        "GID" .Values.qbitRunAs.group
+                                                        "type" "install") | nindent 8 -}}
 
 {{/* Service */}}
 service:
