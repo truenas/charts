@@ -1,0 +1,9 @@
+ipfsStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/data
+    datasetName: data
+  staging:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/staging
+    datasetName: staging
