@@ -1,6 +1,8 @@
 name: dev_catalog_validation
 
-on: [push]
+on:
+  push:
+  workflow_dispatch:
 
 jobs:
   ix-dev-validate:
