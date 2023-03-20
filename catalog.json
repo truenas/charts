@@ -683,6 +683,26 @@
     },
     "enterprise": {},
     "community": {
+        "ipfs": {
+            "app_readme": "<h1>IPFS</h1>\n<p><a href=\"https://ipfs.tech\">Interplanetary Filesystem</a> - the Web3 standard for content-addressing, interoperable with HTTP</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the ipfs directories.\nAfterward, the <code>ipfs</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).</p>\n</blockquote>",
+            "categories": [
+                "storage",
+                "ipfs",
+                "kubo"
+            ],
+            "description": "Interplanetary Filesystem - the Web3 standard for content-addressing, interoperable with HTTP",
+            "healthy": true,
+            "healthy_error": null,
+            "location": "/__w/charts/charts/community/ipfs",
+            "latest_version": "1.0.0",
+            "latest_app_version": "0.18.1",
+            "latest_human_version": "0.18.1_1.0.0",
+            "last_update": null,
+            "name": "ipfs",
+            "recommended": false,
+            "title": "Ipfs",
+            "icon_url": "https://avatars.githubusercontent.com/u/10536621"
+        },
         "chia": {
             "app_readme": "<h1>Chia</h1>\n<p>This container runs as <code>root</code> user.</p>\n<p>When a port is set to &lt; 9000. Host Networking is enabled automatically.</p>\n<blockquote>\n<p>Also NodePort services turn to ClusterIP services, to avoid attempts to bind ports twice.</p>\n</blockquote>\n<p>Key file is stored in <code>/plots/keyfile</code> and is generated automatically, <strong>only</strong> if the file does not exist.\nIf you want to use your own <code>keyfile</code>, you can create a file called <code>keyfile</code> in the <code>/plots</code> directory and it will be used instead.</p>\n<blockquote>\n<p>When set on <code>harvester</code> mode <code>keys</code> variable is set to <code>none</code> and no generation is performed.</p>\n</blockquote>",
             "categories": [
@@ -696,7 +716,7 @@
             "latest_version": "1.0.1",
             "latest_app_version": "1.7.0",
             "latest_human_version": "1.7.0_1.0.1",
-            "last_update": "2023-03-20 15:36:25",
+            "last_update": "2023-03-20 15:58:58",
             "name": "chia",
             "recommended": false,
             "title": "Chia",

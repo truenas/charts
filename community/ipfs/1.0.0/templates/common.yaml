@@ -1,0 +1,10 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "ipfs.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "ipfs.configuration" $ | fromYaml) -}}
+
+{{/* Create the configmap for portal manually*/}}
+{{- include "ipfs.portal" $ -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}
