@@ -21,10 +21,12 @@ workload:
                 # Without those, logs show: "Failed to start message bus: Failed to drop capabilities: Operation not permitted"
                 - SETGID
                 - SETUID
-                # Without this, logs show: "Failed to create runtime directory /run/avahi-daemon"
-                - CHOWN
                 # Witout this, logs show: "Failed to start message bus: Failed to bind socket "/var/run/dbus/system_bus_socket": Permission denied"
                 - DAC_OVERRIDE
+                {{ if .Values.hbConfig.enableAvahi }}
+                # Without this, logs show: "Failed to create runtime directory /run/avahi-daemon"
+                - CHOWN
+                {{ end }}
           env:
             HOMEBRIDGE_CONFIG_UI_PORT: {{ .Values.hbNetwork.webPort }}
             ENABLE_AVAHI: {{ ternary "1" "0" .Values.hbConfig.enableAvahi | quote }}

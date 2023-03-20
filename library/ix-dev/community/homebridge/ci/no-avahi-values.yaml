@@ -4,7 +4,7 @@ hbStorage:
     hostPath: /mnt/{{ .Release.Name }}/data
 
 hbNetwork:
-  webPort: 38000
+  webPort: 30000
 
 hbConfig:
   enableAvahi: false
