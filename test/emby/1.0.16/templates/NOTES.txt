@@ -1,7 +1,0 @@
-1. Get the application URL by running these commands:
-
-{{- if .Values.hostNetwork }}
-http://$node_ip:8096/
-{{ else }}
-http://$node_ip:{{ .Values.embyServerHttp.port }}/
-{{ end }}
