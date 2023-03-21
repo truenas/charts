@@ -20,10 +20,6 @@ global:
     operation: INSTALL
     storageClassName: ix-storage-class-netdata
     upgradeMetadata: {}
-image:
-  pullPolicy: IfNotPresent
-  repository: netdata/netdata
-  tag: v1.38.1
 ixCertificateAuthorities: {}
 ixCertificates: {}
 ixChartContext:
