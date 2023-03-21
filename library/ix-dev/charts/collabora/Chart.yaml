@@ -13,15 +13,15 @@ maintainers:
   - name: truenas
     url: https://www.truenas.com/
 dependencies:
-- name: common
-  repository: file://../../../common/2207.0.0
-  version: 2207.0.0
+  - name: common
+    repository: file://../../../common/2207.0.0
+    version: 2207.0.0
 home: https://github.com/CollaboraOnline/online
 icon: https://avatars.githubusercontent.com/u/22418908?s=200&v=4
 sources:
-- https://github.com/CollaboraOnline/online.git
-- https://hub.docker.com/r/collabora/code
+  - https://github.com/CollaboraOnline/online.git
+  - https://hub.docker.com/r/collabora/code
 keywords:
-- office
-- documents
-- productivity
+  - office
+  - documents
+  - productivity
