@@ -40,19 +40,30 @@ spec:
             httpGet:
               path: /api/v1/info
               port: http
-            failureThreshold: 3
-            periodSeconds: 30
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 5
             successThreshold: 1
-            timeoutSeconds: 1
           readinessProbe:
             httpGet:
               path: /api/v1/info
               port: http
-            failureThreshold: 3
-            periodSeconds: 30
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 5
+            successThreshold: 2
+          startupProbe:
+            httpGet:
+              path: /api/v1/info
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 60
             successThreshold: 1
-            timeoutSeconds: 1
-          volumeMounts:{{ include "common.storage.configureAppVolumeMountsInContainer" .Values | nindent 12 }}
+          volumeMounts: {{ include "common.storage.configureAppVolumeMountsInContainer" .Values | nindent 12 }}
             - name: os-release
               mountPath: /host/etc/os-release
               readOnly: true
@@ -74,7 +85,7 @@ spec:
                 - SYS_PTRACE
       terminationGracePeriodSeconds: 60
       {{ include "common.networking.dnsConfiguration" .Values | nindent 6 }}
-      volumes:{{ include "common.storage.configureAppVolumes" .Values | nindent 8 }}
+      volumes: {{ include "common.storage.configureAppVolumes" .Values | nindent 8 }}
         - name: os-release
           hostPath:
             path: /etc/os-release

@@ -1,0 +1,25 @@
+name: netdata
+description: Real-time performance monitoring, done right!
+annotations:
+  title: Netdata
+type: application
+version: 1.0.16
+apiVersion: v2
+appVersion: v1.38.1
+kubeVersion: ">=1.16.0-0"
+maintainers:
+- name: truenas
+  url: https://www.truenas.com/
+dependencies:
+- name: common
+  repository: file://../../../library/common/2207.0.0
+  version: 2207.0.0
+home: https://www.netdata.cloud/
+icon: https://netdata.github.io/helmchart/logo.png
+sources:
+- https://github.com/netdata/helmchart
+- https://github.com/netdata/netdata
+keywords:
+- alerting
+- metric
+- monitoring
