@@ -6,6 +6,7 @@ type: application
 version: 1.0.1
 apiVersion: v2
 appVersion: "7"
+kubeVersion: ">=1.16.0-0"
 maintainers:
 - name: truenas
   url: https://www.truenas.com/
