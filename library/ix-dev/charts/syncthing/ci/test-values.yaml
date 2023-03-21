@@ -8,10 +8,6 @@ emptyDirVolumes: true
 environmentVariables: []
 extraAppVolumeMounts: []
 hostNetwork: false
-image:
-  pullPolicy: IfNotPresent
-  repository: syncthing/syncthing
-  tag: 1.23.2
 ownerGID: 568
 ownerUID: 568
 tcp_port: 32001
