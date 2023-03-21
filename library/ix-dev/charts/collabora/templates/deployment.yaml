@@ -46,6 +46,33 @@ spec:
               mountPath: {{ $hostPathConfiguration.mountPath }}
           {{ end }}
           {{ end }}
+          livenessProbe:
+            httpGet:
+              path: /browser/dist/admin/admin.html
+              port: 9980
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 5
+            successThreshold: 1
+          readinessProbe:
+            httpGet:
+              path: /browser/dist/admin/admin.html
+              port: 9980
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 5
+            successThreshold: 1
+          startupProbe:
+            httpGet:
+              path: /browser/dist/admin/admin.html
+              port: 9980
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 5
+            successThreshold: 1
           ports:
             - name: collabora
               protocol: TCP
