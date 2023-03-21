@@ -8,16 +8,16 @@ apiVersion: v2
 appVersion: '221118'
 kubeVersion: '>=1.16.0-0'
 maintainers:
-- name: truenas
-  url: https://www.truenas.com/
+  - name: truenas
+    url: https://www.truenas.com/
 dependencies:
-- name: common
-  repository: file://../../../common/2207.0.0
-  version: 2207.0.0
+  - name: common
+    repository: file://../../../common/2207.0.0
+    version: 2207.0.0
 home: https://photoprism.app/
 icon: https://photoprism.app/static/icons/logo.svg
 sources:
   - https://photoprism.app/
   - https://github.com/truenas/charts/tree/master/library/ix-dev/charts/photoprism
 keywords:
-- media
+  - media
