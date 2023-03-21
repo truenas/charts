@@ -1,0 +1,24 @@
+name: wg-easy
+description: WG-Easy is the easiest way to install & manage WireGuard!
+annotations:
+  title: WG Easy
+type: application
+version: 1.0.0
+apiVersion: v2
+appVersion: "7"
+maintainers:
+- name: truenas
+  url: https://www.truenas.com/
+dependencies:
+- name: common
+  repository: file://../../../library/common/2207.0.0
+  version: 2207.0.0
+home: https://github.com/WeeJeWel/wg-easy
+icon: https://raw.githubusercontent.com/WeeJeWel/wg-easy/master/src/www/img/logo.png
+sources:
+  - https://github.com/WeeJeWel/wg-easy
+  - https://github.com/truenas/charts/tree/master/library/ix-dev/charts/wg-easy
+keywords:
+- wireguard
+- network
+- vpn
