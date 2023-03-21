@@ -15,10 +15,42 @@ spec: {{ include "common.deployment.common_spec" $values | nindent 2 }}
           {{ $envList = mustAppend $envList (dict "name" "POSTGRES_USER" "valueFromSecret" true "secretName" "db-details" "secretKey" "db-user")}}
           {{ $envList = mustAppend $envList (dict "name" "POSTGRES_PASSWORD" "valueFromSecret" true "secretName" "db-details" "secretKey" "db-password")}}
           {{ include "common.containers.environmentVariables" (dict "environmentVariables" $envList) | nindent 10 }}
-
         volumeMounts: {{ include "postgres.volumeMountsConfiguration" $values | nindent 10 }}
         ports:
         - name: postgres-tcp
           containerPort: 5432
           protocol: TCP
+        readinessProbe:
+          exec:
+            command:
+              - sh
+              - -c
+              - "until pg_isready -U ${POSTGRES_USER} -h localhost; do sleep 2; done"
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 5
+          successThreshold: 2
+        livenessProbe:
+          exec:
+            command:
+              - sh
+              - -c
+              - "until pg_isready -U ${POSTGRES_USER} -h localhost; do sleep 2; done"
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 5
+          successThreshold: 1
+        startupProbe:
+          exec:
+            command:
+              - sh
+              - -c
+              - "until pg_isready -U ${POSTGRES_USER} -h localhost; do sleep 2; done"
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 2
+          failureThreshold: 60
+          successThreshold: 1
       volumes: {{ include "postgres.volumeConfiguration" $values | nindent 8 }}
