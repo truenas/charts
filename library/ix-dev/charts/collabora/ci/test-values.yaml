@@ -30,7 +30,8 @@ ixCertificates:
     cert_type_CSR: false
     cert_type_existing: true
     cert_type_internal: false
-    certificate: '-----BEGIN CERTIFICATE-----
+    certificate: |
+      -----BEGIN CERTIFICATE-----
       MIIEdjCCA16gAwIBAgIDYFMYMA0GCSqGSIb3DQEBCwUAMGwxDDAKBgNVBAMMA2Fz
       ZDELMAkGA1UEBhMCVVMxDTALBgNVBAgMBGFzZGYxCzAJBgNVBAcMAmFmMQ0wCwYD
       VQQKDARhc2RmMQwwCgYDVQQLDANhc2QxFjAUBgkqhkiG9w0BCQEWB2FAYS5jb20w
@@ -83,11 +84,12 @@ ixCertificates:
       2No34DQLgqSmST/LAvPM7Cbp6knYgnKmGr1nETCXasg1cueHLnWWTvps2HiPp2D/
       +Fq0uqcZLu4Mdo0CPs4e5sHRyldEnRSKh0DVLprq9zr/GMipmPLJUsT5Jed3sj0w
       M7Y3vwxshpo=
-      -----END CERTIFICATE-----'
+      -----END CERTIFICATE-----
     certificate_path: /etc/certificates/slog3.crt
     chain: true
     chain_list:
-    - '-----BEGIN CERTIFICATE-----
+    - |
+      -----BEGIN CERTIFICATE-----
       MIIEdjCCA16gAwIBAgIDYFMYMA0GCSqGSIb3DQEBCwUAMGwxDDAKBgNVBAMMA2Fz
       ZDELMAkGA1UEBhMCVVMxDTALBgNVBAgMBGFzZGYxCzAJBgNVBAcMAmFmMQ0wCwYD
       VQQKDARhc2RmMQwwCgYDVQQLDANhc2QxFjAUBgkqhkiG9w0BCQEWB2FAYS5jb20w
@@ -112,8 +114,9 @@ ixCertificates:
       fmfC6O7t1PjQ5ZyVtzizIUP8ah9n4TKdXU4A3QIM6WsJXpHb+vqp1WDWJ7mKFtgj
       x5TKv3wcPnktx0zMPfLb5BTSE9rc9djcBG0eIAsPT4FgiatCUChe7VhuMnqskxEz
       MymJLoq8+mzucRwFkOkR2EIt1x+Irl2mJVMeBow63rVZfUQBD8h++LqB
-      -----END CERTIFICATE-----'
-    - '-----BEGIN CERTIFICATE-----
+      -----END CERTIFICATE-----
+    - |
+      -----BEGIN CERTIFICATE-----
       MIIEhDCCA2ygAwIBAgIDYFMXMA0GCSqGSIb3DQEBCwUAMGwxDDAKBgNVBAMMA2Fz
       ZDELMAkGA1UEBhMCVVMxDTALBgNVBAgMBGFzZGYxCzAJBgNVBAcMAmFmMQ0wCwYD
       VQQKDARhc2RmMQwwCgYDVQQLDANhc2QxFjAUBgkqhkiG9w0BCQEWB2FAYS5jb20w
@@ -147,14 +150,15 @@ ixCertificates:
     digest_algorithm: SHA256
     email: a@a.com
     extensions:
-      AuthorityKeyIdentifier: 'keyid:B9:58:7F:D2:FD:F6:7C:49:0D:CA:42:33:F2:D3:DD:5E:61:43:F6:B7
+      AuthorityKeyIdentifier: |
+        keyid:B9:58:7F:D2:FD:F6:7C:49:0D:CA:42:33:F2:D3:DD:5E:61:43:F6:B7
         DirName:/CN=asd/C=US/ST=asdf/L=af/O=asdf/OU=asd/emailAddress=a@a.com
         serial:60:53:17
-        '
       BasicConstraints: CA:FALSE
       ExtendedKeyUsage: TLS Web Server Authentication
       KeyUsage: Digital Signature, Key Encipherment
-      SubjectAltName: IP Address:192.168.0.3, IP Address:192.168.0.5, IP Address:192.168.0.182,
+      SubjectAltName: |
+        IP Address:192.168.0.3, IP Address:192.168.0.5, IP Address:192.168.0.182,
         IP Address:192.168.0.129, IP Address:192.168.0.146
       SubjectKeyIdentifier: 38:1B:67:DF:E2:D8:19:97:8B:E6:A3:8C:42:7E:A9:89:85:DA:92:87
     fingerprint: 59:7A:49:6D:04:CE:70:E5:AF:9A:FB:75:3C:26:58:7D:B7:8E:A6:9D
@@ -169,7 +173,8 @@ ixCertificates:
     organization: adsf
     organizational_unit: asdf
     parsed: true
-    privatekey: '-----BEGIN PRIVATE KEY-----
+    privatekey: |
+      -----BEGIN PRIVATE KEY-----
       MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC7+1xOHRQyOnQT
       HFcrdasXZl0gzutVlA890a1wiQpdD5dOtCLo7+eqVYjqVKo9W8RUIArXWmBu/Abk
       H7oVFWC1P973W1+ArF5sA70f7BZgqRKJTIisuIFIlRETgfnP2pfQmHRZtGaIJRZI
@@ -196,7 +201,7 @@ ixCertificates:
       //L852uyzYhXKw5/fjFGhQ6LbaLgIRFaCZ0L2809u0HFnNvJjHv4AKP6j+vFQYYY
       qQ+66XnfsA9G/bu4MDS9AX83iahD9IdLXQAy8I19prAbpVumKegPbMnNYNB/TYEc
       3G15AKCXo7jjOUtHY01DCQ==
-      -----END PRIVATE KEY-----'
+      -----END PRIVATE KEY-----
     privatekey_path: /etc/certificates/slog3.key
     revoked: false
     revoked_date: null
