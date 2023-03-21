@@ -50,7 +50,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /
-              port: {{ .Values.web_port }}
+              port: 8384
             initialDelaySeconds: 10
             periodSeconds: 10
             timeoutSeconds: 5
@@ -59,7 +59,7 @@ spec:
           livenessProbe:
             httpGet:
               path: /
-              port: {{ .Values.web_port }}
+              port: 8384
             initialDelaySeconds: 10
             periodSeconds: 10
             timeoutSeconds: 5
@@ -68,7 +68,7 @@ spec:
           startupProbe:
             httpGet:
               path: /
-              port: {{ .Values.web_port }}
+              port: 8384
             initialDelaySeconds: 10
             periodSeconds: 5
             timeoutSeconds: 2
