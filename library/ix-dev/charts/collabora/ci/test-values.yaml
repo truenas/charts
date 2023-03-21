@@ -1,4 +1,5 @@
 certificate: 55
+nodePort: 31980
 config:
   DONT_GEN_SSL_CERT: 'true'
   dictionaries: de_DE en_GB en_US es_ES fr_FR it nl pt_BR pt_PT ru
@@ -9,12 +10,18 @@ config:
   server_name: ssh.sonicaj.com:49980
   timezone: Asia/Karachi
   username: admin
+ixChartContext:
+  isInstall: false
+  isUpdate: true
+  isUpgrade: false
+  operation: UPDATE
+  storageClassName: ix-storage-class-col
+  upgradeMetadata: {}
+ixExternalInterfacesConfiguration: []
+ixExternalInterfacesConfigurationNames: []
+ixVolumes: []
 environmentVariables: []
 extraAppVolumeMounts: []
-image:
-  pullPolicy: IfNotPresent
-  repository: collabora/code
-  tag: 21.11.4.1.1
 ixCertificateAuthorities: {}
 ixCertificates:
   '55':
@@ -218,19 +225,3 @@ ixCertificates:
     subject_name_hash: 1673640987
     type: 8
     until: Mon Dec  4 04:23:54 2023
-ixChartContext:
-  isInstall: false
-  isUpdate: true
-  isUpgrade: false
-  operation: UPDATE
-  storageClassName: ix-storage-class-col
-  upgradeMetadata: {}
-ixExternalInterfacesConfiguration: []
-ixExternalInterfacesConfigurationNames: []
-ixVolumes: []
-nginx:
-  image:
-    pullPolicy: IfNotPresent
-    repository: nginx
-    tag: 1.21.3
-nodePort: 31980
