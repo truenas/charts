@@ -8,18 +8,18 @@ apiVersion: v2
 appVersion: "7"
 kubeVersion: ">=1.16.0-0"
 maintainers:
-- name: truenas
-  url: https://www.truenas.com/
+  - name: truenas
+    url: https://www.truenas.com/
 dependencies:
-- name: common
-  repository: file://../../../common/2207.0.0
-  version: 2207.0.0
+  - name: common
+    repository: file://../../../common/2207.0.0
+    version: 2207.0.0
 home: https://github.com/WeeJeWel/wg-easy
 icon: https://raw.githubusercontent.com/WeeJeWel/wg-easy/master/src/www/img/logo.png
 sources:
   - https://github.com/WeeJeWel/wg-easy
   - https://github.com/truenas/charts/tree/master/library/ix-dev/charts/wg-easy
 keywords:
-- wireguard
-- network
-- vpn
+  - wireguard
+  - network
+  - vpn
