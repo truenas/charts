@@ -55,16 +55,16 @@ spec:
             periodSeconds: 10
             timeoutSeconds: 5
             failureThreshold: 5
-            successThreshold: 1
+            successThreshold: 2
           startupProbe:
             httpGet:
               scheme: HTTPS
               path: /robots.txt
               port: 443
             initialDelaySeconds: 10
-            periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 5
+            periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 60
             successThreshold: 1
         - name: {{ .Chart.Name }}
           {{ include "common.resources.limitation" . | nindent 10 }}
