@@ -77,6 +77,10 @@ spec:
             - name: udp
               containerPort: 28967
               protocol: UDP
+          {{ if .Values.zksync }}
+          args:
+            - --operator.wallet-features=zksync
+          {{ end }}
           env:
             {{ $envList := (default list .Values.environmentVariables) }}
             {{ $envList = mustAppend $envList (dict "name" "WALLET" "valueFromSecret" true "secretName" "storj-credentials" "secretKey" "wallet") }}
