@@ -115,7 +115,7 @@ spec:
             {{ include "common.containers.environmentVariables" (dict "environmentVariables" $envListDiskover) | nindent 12 }}
           livenessProbe:
             httpGet:
-              path: /
+              path: /login.php
               port: 80
             initialDelaySeconds: 10
             periodSeconds: 10
@@ -124,7 +124,7 @@ spec:
             successThreshold: 1
           readinessProbe:
             httpGet:
-              path: /
+              path: /login.php
               port: 80
             initialDelaySeconds: 10
             periodSeconds: 10
@@ -133,7 +133,7 @@ spec:
             successThreshold: 2
           startupProbe:
             httpGet:
-              path: /
+              path: /login.php
               port: 80
             initialDelaySeconds: 10
             periodSeconds: 5
