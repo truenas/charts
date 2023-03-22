@@ -28,6 +28,36 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
           - name: nginx-https
             containerPort: 443
             protocol: TCP
+        livenessProbe:
+          httpGet:
+            scheme: HTTPS
+            path: /status.php
+            port: 443
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 5
+          successThreshold: 1
+        readinessProbe:
+          httpGet:
+            scheme: HTTPS
+            path: /robots.txt
+            port: 443
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 5
+          successThreshold: 2
+        startupProbe:
+          httpGet:
+            scheme: HTTPS
+            path: /robots.txt
+            port: 443
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 2
+          failureThreshold: 60
+          successThreshold: 1
       {{ end }}
       - name: {{ .Chart.Name }}
           {{ include "common.resources.limitation" . | nindent 8 }}
@@ -63,10 +93,11 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
             httpHeaders:
             - name: Host
               value: localhost
-          initialDelaySeconds: 30
+          initialDelaySeconds: 10
           periodSeconds: 10
           timeoutSeconds: 5
           failureThreshold: 5
+          successThreshold: 1
         readinessProbe:
           httpGet:
             path: /status.php
@@ -74,10 +105,11 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
             httpHeaders:
             - name: Host
               value: localhost
-          initialDelaySeconds: 30
+          initialDelaySeconds: 10
           periodSeconds: 10
           timeoutSeconds: 5
           failureThreshold: 5
+          successThreshold: 1
         startupProbe:
         {{- if .Values.nextcloud.install_ffmpeg }}
           exec:
@@ -94,10 +126,11 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
             - name: Host
               value: localhost
         {{- end }}
-          initialDelaySeconds: 60
+          initialDelaySeconds: 10
           periodSeconds: 10
           timeoutSeconds: 5
-          failureThreshold: 60
+          failureThreshold: 5
+          successThreshold: 1
         volumeMounts:
         - name: nextcloud-data
           mountPath: /var/www/
