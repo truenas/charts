@@ -18,12 +18,12 @@ dependencies:
 home: https://nextcloud.com/
 icon: https://cdn.rawgit.com/docker-library/docs/defa5ffc7123177acd60ddef6e16bddf694cc35f/nextcloud/logo.svg
 sources:
-- https://github.com/nextcloud/docker
-- https://github.com/nextcloud/helm
-- https://github.com/truenas/charts/tree/master/library/ix-dev/charts/nextcloud
+  - https://github.com/nextcloud/docker
+  - https://github.com/nextcloud/helm
+  - https://github.com/truenas/charts/tree/master/library/ix-dev/charts/nextcloud
 keywords:
-- nextcloud
-- storage
-- http
-- web
-- php
+  - nextcloud
+  - storage
+  - http
+  - web
+  - php
