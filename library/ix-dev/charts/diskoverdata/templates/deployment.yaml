@@ -95,7 +95,7 @@ spec:
           lifecycle:
             postStart:
               exec:
-                command: 
+                command:
                   - /bin/sh
                   - -c
                   - |
@@ -113,6 +113,33 @@ spec:
             {{ $envListDiskover = mustAppend $envListDiskover (dict "name" "PUID" "value" .Values.ownerUID) }}
             {{ $envListDiskover = mustAppend $envListDiskover (dict "name" "PGID" "value" .Values.ownerGID) }}
             {{ include "common.containers.environmentVariables" (dict "environmentVariables" $envListDiskover) | nindent 12 }}
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 5
+            successThreshold: 1
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 5
+            successThreshold: 2
+          startupProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 60
+            successThreshold: 1
 
 {{ include "common.networking.dnsConfiguration" .Values | nindent 6 }}
       volumes: {{ include "common.storage.configureAppVolumes" .Values | nindent 8 }}
