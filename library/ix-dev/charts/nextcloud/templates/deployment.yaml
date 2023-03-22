@@ -33,6 +33,9 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
             scheme: HTTPS
             path: /status.php
             port: 443
+            httpHeaders:
+            - name: Host
+              value: localhost
           initialDelaySeconds: 10
           periodSeconds: 10
           timeoutSeconds: 5
@@ -41,8 +44,11 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
         readinessProbe:
           httpGet:
             scheme: HTTPS
-            path: /robots.txt
+            path: /status.php
             port: 443
+            httpHeaders:
+            - name: Host
+              value: localhost
           initialDelaySeconds: 10
           periodSeconds: 10
           timeoutSeconds: 5
@@ -51,8 +57,11 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
         startupProbe:
           httpGet:
             scheme: HTTPS
-            path: /robots.txt
+            path: /status.php
             port: 443
+            httpHeaders:
+            - name: Host
+              value: localhost
           initialDelaySeconds: 10
           periodSeconds: 5
           timeoutSeconds: 2
