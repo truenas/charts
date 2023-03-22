@@ -14,3 +14,5 @@ chart-dirs:
 excluded-charts:
   - library/common-test
   - library/common
+  # GH Runner does not have the required storage space
+  - library/ix-dev/charts/storj
