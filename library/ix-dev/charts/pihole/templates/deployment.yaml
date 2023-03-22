@@ -37,6 +37,14 @@ spec:
             - name: extrappvolume-{{ $index }}
               mountPath: {{ $hostPathConfiguration.mountPath }}
           {{ end }}
+          securityContext:
+            capabilities:
+            {{ if .Values.hostNetwork }}
+              {{/* This is needed to be able to bind 53(DNS) and 67(DHCP) ports */}}
+              add: ["NET_ADMIN"]
+            {{ else }}
+              add: []
+            {{ end }}
           ports:
             - name: web
               containerPort: {{ .Values.web_port }}
@@ -86,6 +94,9 @@ spec:
             {{ $envList = mustAppend $envList (dict "name" "WEB_PORT" "value" .Values.web_port) }}
             {{ if .Values.dhcp }}
             {{ $envList = mustAppend $envList (dict "name" "DHCP_ACTIVE" "value" "true") }}
+            {{ $envList = mustAppend $envList (dict "name" "DHCP_START" "value" .Values.dhcp_start) }}
+            {{ $envList = mustAppend $envList (dict "name" "DHCP_END" "value" .Values.dhcp_end) }}
+            {{ $envList = mustAppend $envList (dict "name" "DHCP_ROUTER" "value" .Values.dhcp_gateway) }}
             {{ end }}
             {{ include "common.containers.environmentVariables" (dict "environmentVariables" $envList) | nindent 12 }}
 {{ include "common.networking.dnsConfiguration" .Values | nindent 6 }}

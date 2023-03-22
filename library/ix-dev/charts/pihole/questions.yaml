@@ -39,6 +39,7 @@ questions:
       min: 8000
       max: 65535
       default: 20721
+      show_if: [["hostNetwork", "=", false]]
       required: true
   - variable: dns_udp_port
     label: "DNS UDP Port for pihole"
@@ -48,6 +49,7 @@ questions:
       min: 8000
       max: 65535
       default: 20721
+      show_if: [["hostNetwork", "=", false]]
       required: true
   - variable: dhcp
     label: "Enable DHCP"
@@ -55,16 +57,39 @@ questions:
     schema:
       type: boolean
       default: false
-  - variable: dhcp_port
-    label: "DHCP Port for pihole"
-    group: Networking
-    schema:
-      type: int
-      min: 8000
-      max: 65535
-      default: 20722
-      required: true
-      show_if: [["dhcp", "=", true]]
+      show_subquestions_if: true
+      subquestions:
+        - variable: dhcp_port
+          label: "DHCP Port for pihole"
+          group: Networking
+          schema:
+            type: int
+            min: 8000
+            max: 65535
+            default: 20722
+            show_if: [["hostNetwork", "=", false]]
+            required: true
+        - variable: dhcp_start
+          label: "DHCP Start Address"
+          group: Networking
+          schema:
+            type: ipaddr
+            cidr: false
+            required: true
+        - variable: dhcp_end
+          label: "DHCP End Address"
+          group: Networking
+          schema:
+            type: ipaddr
+            cidr: false
+            required: true
+        - variable: dhcp_gateway
+          label: "Gateway"
+          group: Networking
+          schema:
+            type: ipaddr
+            cidr: false
+            required: true
 
   - variable: dnsConfig
     label: "DNS Configuration"
