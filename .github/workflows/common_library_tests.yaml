@@ -50,7 +50,7 @@ jobs:
     name: Unit Tests
     runs-on: ubuntu-22.04
     env:
-      helmUnitVersion: 0.2.11
+      helmUnitVersion: 0.3.0
     strategy:
       fail-fast: false
       matrix:
@@ -74,10 +74,10 @@ jobs:
         shell: bash
         run: |
           # Retry helm plugin install
-          helm plugin install https://github.com/quintush/helm-unittest --version v${helmUnitVersion} || \
-          helm plugin install https://github.com/quintush/helm-unittest --version v${helmUnitVersion} || \
-          helm plugin install https://github.com/quintush/helm-unittest --version v${helmUnitVersion} || \
-          helm plugin install https://github.com/quintush/helm-unittest --version v${helmUnitVersion}
+          helm plugin install https://github.com/helm-unittest/helm-unittest --version v${helmUnitVersion} || \
+          helm plugin install https://github.com/helm-unittest/helm-unittest --version v${helmUnitVersion} || \
+          helm plugin install https://github.com/helm-unittest/helm-unittest --version v${helmUnitVersion} || \
+          helm plugin install https://github.com/helm-unittest/helm-unittest --version v${helmUnitVersion}
 
           # Run tests
           cd library/common-test/
