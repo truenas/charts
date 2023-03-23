@@ -13,6 +13,7 @@ email: user@example.com
 emptyDirVolumes: true
 environmentVariables: []
 extraAppVolumeMounts: []
+terminationGracePeriod: 120
 identityCreationMountPath: /root/.local/share/storj/identity/storagenode
 nodePort: 30002
 runAsGroup: 568

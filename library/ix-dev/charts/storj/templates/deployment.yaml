@@ -27,6 +27,7 @@ spec:
         {{- include "common.labels.selectorLabels" . | nindent 8 }}
       annotations: {{ include "common.annotations" . | nindent 8 }}
     spec:
+      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriod | default 30 }}
       initContainers:
       - name: generate-identity
         image: "alpine/curl:latest"

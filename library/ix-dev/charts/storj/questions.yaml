@@ -103,6 +103,15 @@ questions:
       type: boolean
       default: false
 
+  - variable: terminationGracePeriod
+    label: Termination Grace Period
+    description: Optional duration in seconds the pod needs to terminate gracefully.
+    group: "Configuration"
+    schema:
+      type: int
+      min: 30
+      default: 30
+
   - variable: storageSize
     label: "Configure Storage Size You Want To Share in GB's"
     group: Storage
