@@ -82,7 +82,7 @@ jobs:
           # Run tests
           cd library/common-test/
           helm dependency update
-          helm unittest --helm3 -f "tests/*/*.yaml" .
+          helm unittest -f "tests/*/*.yaml" .
 
   install:
     needs:
