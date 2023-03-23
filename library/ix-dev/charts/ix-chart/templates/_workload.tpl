@@ -68,6 +68,35 @@ containers:
     capabilities:
       add: {{ toYaml .Values.securityContext.capabilities | nindent 8 }}
     {{ end }}
+    {{ if .Values.ci }}
+    livenessProbe:
+      httpGet:
+        path: /
+        port: 80
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      timeoutSeconds: 5
+      failureThreshold: 5
+      successThreshold: 1
+    readinessProbe:
+      httpGet:
+        path: /
+        port: 80
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      timeoutSeconds: 5
+      failureThreshold: 5
+      successThreshold: 2
+    startupProbe:
+      httpGet:
+        path: /
+        port: 80
+      initialDelaySeconds: 10
+      periodSeconds: 5
+      timeoutSeconds: 2
+      failureThreshold: 60
+      successThreshold: 1
+    {{ end }}
   image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default "latest" }}"
   imagePullPolicy: {{ .Values.image.pullPolicy }}
   {{- include "containerCommand" . | indent 2 }}
