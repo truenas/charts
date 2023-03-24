@@ -9,10 +9,6 @@ dnsConfig:
   options: []
 emptyDirVolumes: true
 environmentVariables: []
-image:
-  pullPolicy: IfNotPresent
-  repository: nextcloud
-  tag: 25.0.4
 ixChartContext: {}
 nextcloud:
   datadir: /var/www/html/data
@@ -20,11 +16,6 @@ nextcloud:
   install_ffmpeg: true
   password: changeme
   username: admin
-nginx:
-  image:
-    pullPolicy: IfNotPresent
-    repository: nginx
-    tag: 1.23.3
 postgresAppVolumeMounts:
   postgres-backup:
     emptyDir: true
