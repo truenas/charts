@@ -31,7 +31,9 @@ workload:
             {{ if .Values.vaultwardenNetwork.certificateID }}
             ROCKET_TLS: '{certs="/certs/public.crt",key="/certs/private.key"}'
             {{ end }}
-            DOMAIN: {{ .Values.vaultwardenNetwork.domain | default "" }}
+            {{ with .Values.vaultwardenNetwork.domain }}
+            DOMAIN: {{ . }}
+            {{ end }}
           {{ with .Values.vaultwardenConfig.additionalEnvs }}
             {{ range $env := . }}
             {{ $env.name }}: {{ $env.value }}
