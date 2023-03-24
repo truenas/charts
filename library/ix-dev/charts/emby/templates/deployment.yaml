@@ -48,21 +48,29 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
             httpGet:
               path: /emby/System/Ping
               port: 8096
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
             failureThreshold: 5
-            periodSeconds: 15
+            successThreshold: 2
           livenessProbe:
             httpGet:
               path: /emby/System/Ping
               port: 8096
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
             failureThreshold: 5
-            periodSeconds: 15
+            successThreshold: 1
           startupProbe:
             httpGet:
               path: /emby/System/Ping
               port: 8096
-            initialDelaySeconds: 5
-            failureThreshold: 40
-            periodSeconds: 15
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 60
+            successThreshold: 1
       volumes: {{ include "common.storage.configureAppVolumes" .Values | nindent 8 }}
         {{ range $index, $hostPathConfiguration := .Values.extraAppVolumeMounts }}
         - name: extrappvolume-{{ $index }}
