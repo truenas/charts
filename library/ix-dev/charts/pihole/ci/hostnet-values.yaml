@@ -5,20 +5,16 @@ appVolumeMounts:
   dnsmasq:
     emptyDir: true
     mountPath: /etc/dnsmasq.d
-dhcp: false
-dhcp_port: 32003
+dhcp: true
+dhcp_start: 192.168.10.2
+dhcp_end: 192.168.10.254
+dhcp_gateway: 192.168.10.1
 dnsConfig:
   options: []
-dns_tcp_port: 32001
-dns_udp_port: 32002
 emptyDirVolumes: true
 environmentVariables: []
 extraAppVolumeMounts: []
-hostNetwork: false
-image:
-  pullPolicy: IfNotPresent
-  repository: pihole/pihole
-  tag: 2022.12.1
+hostNetwork: true
 ownerGID: 568
 ownerUID: 568
 password: admin123

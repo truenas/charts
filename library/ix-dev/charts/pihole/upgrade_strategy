@@ -2,13 +2,13 @@
 import json
 import sys
 
-from catalog_update.upgrade_strategy import semantic_versioning
+from catalog_update.upgrade_strategy import datetime_versioning
 
 
 def newer_mapping(image_tags):
     key = list(image_tags.keys())[0]
-    tags = {t: t for t in image_tags[key]}
-    version = semantic_versioning(list(tags))
+    tags = {t for t in image_tags[key]}
+    version = datetime_versioning(list(tags), '%Y-%m-%d')
     if not version:
         return {}
 
