@@ -13,10 +13,6 @@ dnsConfig:
 emptyDirVolumes: true
 environmentVariables: []
 extraAppVolumeMounts: []
-image:
-  pullPolicy: IfNotPresent
-  repository: photoprism/photoprism
-  tag: 221118-jammy
 ownerGID: 568
 ownerUID: 568
 password: admin123
