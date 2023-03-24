@@ -1,0 +1,23 @@
+name: emby
+description: Emby Server
+annotations:
+  title: Emby Server
+type: application
+version: 1.0.17
+apiVersion: v2
+appVersion: '4.7.11.0'
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+dependencies:
+  - name: common
+    repository: file://../../../common/2207.0.0
+    version: 2207.0.0
+home: https://emby.media/
+icon: https://images-na.ssl-images-amazon.com/images/I/41NwssJC1iL.png
+sources:
+  - https://hub.docker.com/r/emby/embyserver
+keywords:
+  - emby
+  - media
