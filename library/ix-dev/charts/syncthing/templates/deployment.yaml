@@ -49,7 +49,7 @@ spec:
               protocol: UDP
           readinessProbe:
             httpGet:
-              path: /
+              path: /rest/noauth/health
               port: 8384
             initialDelaySeconds: 10
             periodSeconds: 10
@@ -58,7 +58,7 @@ spec:
             successThreshold: 2
           livenessProbe:
             httpGet:
-              path: /
+              path: /rest/noauth/health
               port: 8384
             initialDelaySeconds: 10
             periodSeconds: 10
@@ -67,7 +67,7 @@ spec:
             successThreshold: 1
           startupProbe:
             httpGet:
-              path: /
+              path: /rest/noauth/health
               port: 8384
             initialDelaySeconds: 10
             periodSeconds: 5
