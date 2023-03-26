@@ -68,8 +68,7 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
             {{ $envList = mustAppend $envList (dict "name" "PMS_IMAGE" "value" (printf "%s:%s" .Values.image.repository .Values.image.tag))}}
             {{ include "common.containers.environmentVariables" (dict "environmentVariables" $envList) | nindent 12 }}
           readinessProbe:
-            httpGet:
-              path: /identity
+            tcpSocket:
               port: 32400
             initialDelaySeconds: 10
             periodSeconds: 10
@@ -77,8 +76,7 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
             failureThreshold: 5
             successThreshold: 2
           livenessProbe:
-            httpGet:
-              path: /identity
+            tcpSocket:
               port: 32400
             initialDelaySeconds: 10
             periodSeconds: 10
@@ -86,8 +84,7 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
             failureThreshold: 5
             successThreshold: 1
           startupProbe:
-            httpGet:
-              path: /identity
+            tcpSocket:
               port: 32400
             initialDelaySeconds: 10
             periodSeconds: 5
