@@ -1,0 +1,25 @@
+name: adguard-home
+description: Free and open source, powerful network-wide ads & trackers blocking DNS server.
+annotations:
+  title: AdGuard Home
+type: application
+version: 1.0.1
+apiVersion: v2
+appVersion: '1.7.0'
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.0.0
+home: https://github.com/AdguardTeam/AdGuardHome
+icon: https://github.com/AdguardTeam/AdGuardHome/raw/master/doc/adguard_home_darkmode.svg
+sources:
+  - https://github.com/AdguardTeam/AdGuardHome
+  - https://github.com/truenas/charts/tree/master/library/ix-dev/community/adguard-home
+  - https://hub.docker.com/r/adguard/adguardhome
+keywords:
+  - dns
+  - adblock

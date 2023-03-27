@@ -1,0 +1,9 @@
+adguardStorage:
+  work:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/work
+    datasetName: work
+  conf:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/conf
+    datasetName: conf
