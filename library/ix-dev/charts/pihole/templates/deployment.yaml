@@ -39,7 +39,7 @@ spec:
           {{ end }}
           securityContext:
             capabilities:
-            {{ if .Values.hostNetwork }}
+            {{ if or .Values.hostNetwork .Values.dhcp }}
               {{/* This is needed to be able to bind 53(DNS) and 67(DHCP) ports */}}
               add: ["NET_ADMIN"]
             {{ else }}

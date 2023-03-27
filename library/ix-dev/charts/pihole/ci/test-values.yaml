@@ -6,7 +6,6 @@ appVolumeMounts:
     emptyDir: true
     mountPath: /etc/dnsmasq.d
 dhcp: false
-dhcp_port: 32003
 dnsConfig:
   options: []
 dns_tcp_port: 32001
