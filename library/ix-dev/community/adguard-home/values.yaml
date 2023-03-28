@@ -10,7 +10,7 @@ resources:
 
 adguardNetwork:
   webPort: 30000
-  hostNetwork: false
+  enableDHCP: false
 
 # FIXME: See _adguard.tpl
 # adguardRunAs:
