@@ -55,7 +55,7 @@ questions:
           description: |
             The port for the AdGuard Home WebUI. Set the same during the setup wizard.
             In case you set a different port, you will need to stop/start the app for the
-            port set here to take effect.
+            port set here to take effect. (Or wait for the container to restart automatically)
           schema:
             type: int
             default: 30000
