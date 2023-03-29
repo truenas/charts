@@ -1,15 +1,16 @@
 name: chia
-description: Chia is a modern cryptocurrency built from scratch, designed to be efficient, decentralized, and secure.
+description: Chia is a modern cryptocurrency built from scratch, designed to be efficient,
+  decentralized, and secure.
 annotations:
   title: Chia
 type: application
-version: 1.0.1
+version: 1.0.2
 apiVersion: v2
-appVersion: '1.7.0'
+appVersion: 1.7.1
 kubeVersion: '>=1.16.0-0'
 maintainers:
-  - name: truenas
-    url: https://www.truenas.com/
+- name: truenas
+  url: https://www.truenas.com/
 dependencies:
 - name: common
   repository: file://../../../common

@@ -3,21 +3,21 @@ description: Plex Media Server
 annotations:
   title: Plex
 type: application
-version: 1.7.34
+version: 1.7.35
 apiVersion: v2
-appVersion: '1.31.2.6810'
+appVersion: 1.31.3.6868
 kubeVersion: '>=1.16.0-0'
 maintainers:
-  - name: truenas
-    url: https://www.truenas.com/
+- name: truenas
+  url: https://www.truenas.com/
 dependencies:
-  - name: common
-    repository: file://../../../common/2207.0.0
-    version: 2207.0.0
+- name: common
+  repository: file://../../../common/2207.0.0
+  version: 2207.0.0
 home: https://plex.tv/
 icon: https://www.plex.tv/wp-content/uploads/2018/01/pmp-icon-1.png
 sources:
-  - https://hub.docker.com/r/plexinc/pms-docker/
-  - https://github.com/k8s-at-home/charts/tree/master/charts/plex
+- https://hub.docker.com/r/plexinc/pms-docker/
+- https://github.com/k8s-at-home/charts/tree/master/charts/plex
 keywords:
-  - plex
+- plex
