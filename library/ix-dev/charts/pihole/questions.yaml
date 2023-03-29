@@ -32,41 +32,12 @@ questions:
       default: 20720
       required: true
 
-  - variable: hostNetwork
-    label: "Enable Host Network"
-    group: "Networking"
-    description: Required for DHCP to work
-    schema:
-      type: boolean
-      default: false
-
-  - variable: dns_tcp_port
-    label: "DNS TCP Port for pihole"
-    group: Networking
-    schema:
-      type: int
-      min: 8000
-      max: 65535
-      default: 20721
-      show_if: [["hostNetwork", "=", false]]
-      required: true
-  - variable: dns_udp_port
-    label: "DNS UDP Port for pihole"
-    group: Networking
-    schema:
-      type: int
-      min: 8000
-      max: 65535
-      default: 20721
-      show_if: [["hostNetwork", "=", false]]
-      required: true
   - variable: dhcp
     label: "Enable DHCP"
     group: "Networking"
     schema:
       type: boolean
       default: false
-      show_if: [["hostNetwork", "=", true]]
       show_subquestions_if: true
       subquestions:
         - variable: dhcp_start
