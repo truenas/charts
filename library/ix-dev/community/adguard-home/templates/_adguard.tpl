@@ -5,6 +5,9 @@ workload:
     primary: true
     type: Deployment
     podSpec:
+      # Host network is pretty much a requirement for apps like this.
+      # Because NodePort can't bind ports like 53(DNS) or 67(DHCP)
+      # and the majority of devices do not have option to change the port.
       hostNetwork: true
       containers:
         adguard:
