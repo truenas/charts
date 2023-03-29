@@ -1,34 +1,28 @@
+chiaConfig:
+  additionalEnvs: []
+  ca: ''
+  farmer_address: ''
+  farmer_port: ''
+  full_node_peer: ''
+  service: ''
+chiaNetwork:
+  chiaPort: 8444
+  farmerPort: 8447
+chiaStorage:
+  additionalVolumes: []
+  data:
+    datasetName: data
+    hostPath: ''
+    type: ixVolume
+  plots:
+    datasetName: plots
+    hostPath: /
+    type: ixVolume
 image:
-  repository: ghcr.io/chia-network/chia
-  tag: "1.7.0"
   pullPolicy: IfNotPresent
-
+  repository: ghcr.io/chia-network/chia
+  tag: 1.7.1
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
-
-chiaNetwork:
-  chiaPort: 8444
-  farmerPort: 8447
-
-chiaConfig:
-  # farmer-only | harvester | ""
-  service: ""
-  # farmer_address, farmer_port and ca. Only if sevice == harvester
-  farmer_address: ""
-  farmer_port: ""
-  ca: ""
-  full_node_peer: ""
-  additionalEnvs: []
-
-chiaStorage:
-  data:
-    type: ixVolume
-    hostPath: ""
-    datasetName: data
-  plots:
-    type: ixVolume
-    hostPath: "/"
-    datasetName: plots
-  additionalVolumes: []

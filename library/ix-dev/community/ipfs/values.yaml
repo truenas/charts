@@ -1,29 +1,27 @@
 image:
-  repository: ipfs/kubo
   pullPolicy: IfNotPresent
-  tag: v0.18.1
-
-resources:
-  limits:
-    cpu: 4000m
-    memory: 8Gi
-
+  repository: ipfs/kubo
+  tag: v0.19.0
 ipfsConfig:
   additionalEnvs: []
 ipfsNetwork:
   apiPort: 30000
-  swarmPort: 30001
   gatewayPort: 30002
   hostNetwork: false
+  swarmPort: 30001
 ipfsRunAs:
-  user: 568
   group: 568
+  user: 568
 ipfsStorage:
   data:
-    type: ixVolume
-    hostPath: ""
     datasetName: data
-  staging:
+    hostPath: ''
     type: ixVolume
-    hostPath: ""
+  staging:
     datasetName: staging
+    hostPath: ''
+    type: ixVolume
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
