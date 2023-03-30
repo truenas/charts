@@ -1,0 +1,302 @@
+groups:
+  - name: Gitea Configuration
+    description: Configure Gitea
+  - name: User and Group Configuration
+    description: Configure User and Group for Gitea
+  - name: Network Configuration
+    description: Configure Network for Gitea
+  - name: Storage Configuration
+    description: Configure Storage for Gitea
+  - name: Resources Configuration
+    description: Configure Resources for Gitea
+
+portals:
+  web_portal:
+    protocols:
+      - "$kubernetes-resource_configmap_portal_protocol"
+    host:
+      - "$kubernetes-resource_configmap_portal_host"
+    ports:
+      - "$kubernetes-resource_configmap_portal_port"
+    path: "$kubernetes-resource_configmap_portal_path"
+
+questions:
+
+  - variable: giteaConfig
+    label: ""
+    group: Gitea Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: additionalEnvs
+          label: Additional Environment Variables
+          description: Configure additional environment variables for Gitea.
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: env
+                label: Environment Variable
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: name
+                      label: Name
+                      schema:
+                        type: string
+                        required: true
+                    - variable: value
+                      label: Value
+                      schema:
+                        type: string
+                        required: true
+
+  - variable: giteaRunAs
+    label: ""
+    group: User and Group Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: user
+          label: User ID
+          description: The user id that Gitea will run as.
+          schema:
+            type: int
+            min: 1
+            # FIXME: See values.yaml
+            hidden: true
+            editable: false
+            default: 1000
+            required: true
+        - variable: group
+          label: Group ID
+          description: The group id that Gitea will run as.
+          schema:
+            type: int
+            min: 1
+            # FIXME: See values.yaml
+            hidden: true
+            editable: false
+            default: 1000
+            required: true
+
+  - variable: giteaNetwork
+    label: ""
+    group: Network Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: webPort
+          label: Web Port
+          description: The port for the Gitea WebUI.
+          schema:
+            type: int
+            default: 30000
+            min: 9000
+            max: 65535
+            required: true
+        - variable: sshPort
+          label: SSH Port
+          description: The port for the Gitea SSH.
+          schema:
+            type: int
+            default: 30001
+            min: 9000
+            max: 65535
+            required: true
+        - variable: hostNetwork
+          label: Host Network
+          description: |
+            Bind to the host network. It's recommended to keep this disabled.
+          schema:
+            type: boolean
+            default: false
+        - variable: rootURL
+          label: Root URL
+          description: The URL that Gitea will be available at.
+          schema:
+            type: string
+            default: ""
+            required: true
+        - variable: certificateID
+          label: Certificate
+          description: |
+            The certificate to use for Gitea
+          schema:
+            type: int
+            "null": true
+            $ref:
+              - "definitions/certificate"
+
+  - variable: giteaStorage
+    label: ""
+    group: Storage Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: data
+          label: Gitea Data Storage
+          description: The path to store Gitea data.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                schema:
+                  type: string
+                  required: true
+                  default: ixVolume
+                  enum:
+                    - value: hostPath
+                      description: Host Path
+                    - value: ixVolume
+                      description: ixVolume
+              - variable: datasetName
+                label: Dataset Name
+                schema:
+                  type: string
+                  show_if: [["type", "=", "ixVolume"]]
+                  required: true
+                  hidden: true
+                  immutable: true
+                  default: data
+                  $ref:
+                    - "normalize/ixVolume"
+              - variable: hostPath
+                label: Host Path
+                schema:
+                  type: hostpath
+                  show_if: [["type", "=", "hostPath"]]
+                  immutable: true
+                  required: true
+        - variable: config
+          label: Gitea Configuration Storage
+          description: The path to store Gitea configuration storage.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                schema:
+                  type: string
+                  required: true
+                  default: ixVolume
+                  enum:
+                    - value: hostPath
+                      description: Host Path
+                    - value: ixVolume
+                      description: ixVolume
+              - variable: datasetName
+                label: Dataset Name
+                schema:
+                  type: string
+                  show_if: [["type", "=", "ixVolume"]]
+                  required: true
+                  hidden: true
+                  immutable: true
+                  default: config
+                  $ref:
+                    - "normalize/ixVolume"
+              - variable: hostPath
+                label: Host Path
+                schema:
+                  type: hostpath
+                  show_if: [["type", "=", "hostPath"]]
+                  immutable: true
+                  required: true
+        - variable: pgData
+          label: Gitea Postgres Data Storage
+          description: The path to store Gitea Postgres Data.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                schema:
+                  type: string
+                  required: true
+                  default: ixVolume
+                  enum:
+                    - value: hostPath
+                      description: Host Path
+                    - value: ixVolume
+                      description: ixVolume
+              - variable: datasetName
+                label: Dataset Name
+                schema:
+                  type: string
+                  show_if: [["type", "=", "ixVolume"]]
+                  required: true
+                  hidden: true
+                  immutable: true
+                  default: pgData
+                  $ref:
+                    - "normalize/ixVolume"
+              - variable: hostPath
+                label: Host Path
+                schema:
+                  type: hostpath
+                  show_if: [["type", "=", "hostPath"]]
+                  immutable: true
+                  required: true
+        - variable: pgBackup
+          label: Gitea Postgres Backup Storage
+          description: The path to store Gitea Postgres Backup.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                schema:
+                  type: string
+                  required: true
+                  default: ixVolume
+                  enum:
+                    - value: hostPath
+                      description: Host Path
+                    - value: ixVolume
+                      description: ixVolume
+              - variable: datasetName
+                label: Dataset Name
+                schema:
+                  type: string
+                  show_if: [["type", "=", "ixVolume"]]
+                  required: true
+                  hidden: true
+                  immutable: true
+                  default: pgBackup
+                  $ref:
+                    - "normalize/ixVolume"
+              - variable: hostPath
+                label: Host Path
+                schema:
+                  type: hostpath
+                  show_if: [["type", "=", "hostPath"]]
+                  immutable: true
+                  required: true
+
+  - variable: resources
+    label: ""
+    group: Resources Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: limits
+          label: Limits
+          schema:
+            type: dict
+            attrs:
+              - variable: cpu
+                label: CPU
+                description: CPU limit for Gitea.
+                schema:
+                  type: string
+                  default: 4000m
+                  required: true
+              - variable: memory
+                label: Memory
+                description: Memory limit for Gitea.
+                schema:
+                  type: string
+                  default: 8Gi
+                  required: true
