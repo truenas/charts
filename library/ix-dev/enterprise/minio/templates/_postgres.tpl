@@ -30,7 +30,7 @@ persistence:
           mountPath: /var/lib/postgresql/data
         # Permissions container
         permissions:
-          mountPath: /mnt/directories/posgres_data
+          mountPath: /mnt/directories/postgres_data
   postgresbackup:
     enabled: true
     type: {{ .Values.minioLogging.logsearch.pgBackup.type }}
@@ -44,5 +44,5 @@ persistence:
           mountPath: /postgres_backup
         # Permissions container
         permissions:
-          mountPath: /mnt/directories/posgres_backup
+          mountPath: /mnt/directories/postgres_backup
 {{- end -}}
