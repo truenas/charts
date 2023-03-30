@@ -56,6 +56,7 @@ questions:
     group: User and Group Configuration
     schema:
       type: dict
+      hidden: true
       attrs:
         - variable: user
           label: User ID
