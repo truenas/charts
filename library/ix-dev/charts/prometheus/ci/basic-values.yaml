@@ -1,0 +1,7 @@
+prometheusStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/data
+  config:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/config
