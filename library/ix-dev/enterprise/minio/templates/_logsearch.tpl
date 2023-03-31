@@ -33,25 +33,8 @@ workload:
               port: 8080
               path: /status
       initContainers:
-        db-wait:
-          enabled: true
-          type: init
-          imageSelector: postgresImage
-          envFrom:
-            - secretRef:
-                name: postgres-creds
-          resources:
-            limits:
-              cpu: 500m
-              memory: 256Mi
-          command: bash
-          args:
-            - -c
-            - |
-              echo "Waiting for postgres to be ready"
-              until pg_isready -h ${POSTGRES_HOST} -U ${POSTGRES_USER} -d ${POSTGRES_DB}; do
-                sleep 2
-              done
+      {{- include "ix.v1.common.app.postgresWait" (dict "name" "postgres-wait"
+                                                        "secretName" "postgres-creds") | nindent 8 }}
 
 {{/* Service */}}
 service:
