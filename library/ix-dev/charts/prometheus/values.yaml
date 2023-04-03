@@ -1,23 +1,28 @@
 image:
-  repository: prometheus/kubo
+  repository: prom/prometheus
   pullPolicy: IfNotPresent
-  tag: v0.19.0
+  tag: v2.43.0
+
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
+
 prometheusConfig:
   retentionTime: 15d
   retentionSize: ""
   walCompression: true
   additionalEnvs: []
   additionalArgs: []
+
 prometheusNetwork:
   apiPort: 30000
   hostNetwork: false
+
 prometheusRunAs:
   user: 568
   group: 568
+
 prometheusStorage:
   data:
     type: ixVolume

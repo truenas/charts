@@ -15,7 +15,7 @@ workload:
             runAsUser: {{ .Values.prometheusRunAs.user }}
             runAsGroup: {{ .Values.prometheusRunAs.group }}
           args:
-            - --web.listen-address="0.0.0.0:{{ .Values.prometheusNetwork.apiPort }}"
+            - --web.listen-address=0.0.0.0:{{ .Values.prometheusNetwork.apiPort }}
             - --storage.tsdb.path=/data
             - --config.file=/config/prometheus.yml
             - --storage.tsdb.retention.time={{ .Values.prometheusConfig.retentionTime }}
@@ -58,6 +58,24 @@ workload:
                                                         "UID" .Values.prometheusRunAs.user
                                                         "GID" .Values.prometheusRunAs.group
                                                         "type" "install") | nindent 8 }}
+        init-config:
+          enabled: true
+          type: init
+          imageSelector: image
+          resources:
+            limits:
+              cpu: 500m
+              memory: 256Mi
+          securityContext:
+            runAsUser: {{ .Values.prometheusRunAs.user }}
+            runAsGroup: {{ .Values.prometheusRunAs.group }}
+          command: sh
+          args:
+            - -c
+            - |
+              if [ ! -f /config/prometheus.yml ]; then
+                touch /config/prometheus.yml
+              fi
 {{/* Service */}}
 service:
   prometheus:
@@ -97,4 +115,6 @@ persistence:
           mountPath: /config
         01-permissions:
           mountPath: /mnt/directories/export
+        init-config:
+          mountPath: /config
 {{- end -}}

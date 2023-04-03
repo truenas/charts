@@ -5,7 +5,7 @@ annotations:
 type: application
 version: 1.0.0
 apiVersion: v2
-appVersion: '2.43.0'
+appVersion: v2.43.0
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: truenas
@@ -14,12 +14,12 @@ dependencies:
   - name: common
     repository: file://../../../common
     version: 1.0.0
-home: https://prometheus.io/
+home: https://prometheus.io
 icon: https://avatars.githubusercontent.com/u/3380462
 sources:
   - https://github.com/prometheus/prometheus
-  - https://github.com/truenas/charts/tree/master/community/prometheus
-  - https://prometheus.io/
+  - https://github.com/truenas/charts/tree/master/charts/prometheus
+  - https://prometheus.io
 keywords:
   - metrics
   - prometheus

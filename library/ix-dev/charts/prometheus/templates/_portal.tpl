@@ -5,7 +5,7 @@ kind: ConfigMap
 metadata:
   name: portal
 data:
-  path: /webui
+  path: /
   port: {{ .Values.prometheusNetwork.apiPort | quote }}
   protocol: http
   host: $node_ip
