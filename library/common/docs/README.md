@@ -148,7 +148,7 @@ podOptions:
   tolerations: []
   runtimeClassName: ""
   automountServiceAccountToken: false
-  terminationGracePeriodSeconds: 120
+  terminationGracePeriodSeconds: 30
 ```
 
 ---

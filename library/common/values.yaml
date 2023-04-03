@@ -94,7 +94,7 @@ podOptions:
   tolerations: []
   runtimeClassName: ""
   automountServiceAccountToken: false
-  terminationGracePeriodSeconds: 120
+  terminationGracePeriodSeconds: 30
 
 # -- (docs/notes.md)
 notes:

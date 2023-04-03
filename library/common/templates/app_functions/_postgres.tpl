@@ -12,6 +12,7 @@ resources (required): Resources for the postgres container
   {{- $name := .name | default "postgres" -}}
   {{- $secretName := (required "Postgres - Secret Name is required" .secretName) -}}
   {{- $backupPath := .backupPath | default "/postgres_backup" -}}
+  {{- $ixChartContext := .ixChartContext -}}
   {{- $resources := (required "Postgres - Resources are required" .resources) }}
 {{ $name }}:
   enabled: true
@@ -57,8 +58,21 @@ resources (required): Resources for the postgres container
               - "until pg_isready -U ${POSTGRES_USER} -h localhost; do sleep 2; done"
     initContainers:
     {{- include "ix.v1.common.app.permissions" (dict "UID" 999 "GID" 999) | nindent 6 }}
+{{- $enableBackupJob := false -}}
+{{- if hasKey $ixChartContext "isUpgrade" -}}
+  {{- if $ixChartContext.isUpgrade -}}
+    {{- $enableBackupJob = true -}}
+  {{- end -}}
+{{- else -}}
+  {{/*
+    If the key is not present in ixChartContext,
+    means we are outside SCALE (Probably CI),
+    let upgrade job run
+  */}}
+  {{- $enableBackupJob = true -}}
+{{- end }}
 postgresbackup:
-  enabled: true
+  enabled: {{ $enableBackupJob }}
   type: Job
   annotations:
     "helm.sh/hook": pre-upgrade
@@ -99,4 +113,36 @@ postgresbackup:
             echo "Backup finished"
     initContainers:
     {{- include "ix.v1.common.app.permissions" (dict "UID" 999 "GID" 999 "type" "init") | nindent 6 }}
+{{- end -}}
+
+{{/* Returns a postgres-wait container for waiting for postgres to be ready */}}
+{{/* Call this template:
+{{ include "ix.v1.common.app.postgresWait" (dict "name" "postgres-wait" "secretName" "postgres-creds") }}
+
+name (optional): Name of the postgres-wait container (default: postgres-wait)
+secretName (required): Name of the secret containing the postgres credentials
+*/}}
+
+{{- define "ix.v1.common.app.postgresWait" -}}
+  {{- $name := .name | default "postgres-wait" -}}
+  {{- $secretName := (required "Postgres-Wait - Secret Name is required" .secretName) }}
+{{ $name }}:
+  enabled: true
+  type: init
+  imageSelector: postgresImage
+  envFrom:
+    - secretRef:
+        name: {{ $secretName }}
+  resources:
+    limits:
+      cpu: 500m
+      memory: 256Mi
+  command: bash
+  args:
+    - -c
+    - |
+      echo "Waiting for postgres to be ready"
+      until pg_isready -h ${POSTGRES_HOST} -U ${POSTGRES_USER} -d ${POSTGRES_DB}; do
+        sleep 2
+      done
 {{- end -}}
