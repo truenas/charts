@@ -14,9 +14,6 @@ workload:
           securityContext:
             runAsUser: {{ .Values.vaultwardenRunAs.user }}
             runAsGroup: {{ .Values.vaultwardenRunAs.group }}
-            capabilities:
-              add:
-                - NET_BIND_SERVICE
           env:
             ROCKET_PORT: {{ .Values.vaultwardenNetwork.webPort }}
             WEBSOCKET_PORT: {{ .Values.vaultwardenNetwork.wsPort }}
