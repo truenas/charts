@@ -9,8 +9,14 @@ GID: GID to change permissions to
 {{- define "ix.v1.common.app.permissions" -}}
   {{- $type := .type | default "install" -}}
   {{- $containerName := .containerName | default "permissions" -}}
+  {{- $mode := .mode | default "always" -}}
   {{- $UID := .UID -}}
   {{- $GID := .GID -}}
+
+  {{- $modes := (list "always" "check") -}}
+  {{- if not (mustHas $mode $modes) -}}
+    {{- fail (printf "Permissions Container - [mode] must be one of [%s]" (join ", " $modes)) -}}
+  {{- end -}}
 
   {{- if (kindIs "invalid" $type) -}}
     {{- fail "Permissions Container - [type] cannot be empty" -}}
@@ -45,10 +51,36 @@ GID: GID to change permissions to
   args:
     - -c
     - |
-      echo "Changing ownership to {{ $UID }}:{{ $GID }} on the following directories:"
-      ls -la /mnt/directories
-      chown -R {{ $UID }}:{{ $GID }} /mnt/directories
-      echo "Finished changing ownership"
-      echo "Permissions after changing ownership:"
-      ls -la /mnt/directories
+      for dir in /mnt/directories/*; do
+        if [ ! -d "$dir" ]; then
+          echo "[$dir] is not a directory, skipping"
+          continue
+        fi
+
+        echo "Current Permissions on ["$dir"]:"
+        stat -c "%u %g" "$dir"
+
+      {{- if eq $mode "check" }} {{/* If mode is check, check parent dir */}}
+        if [ $(stat -c %u "$dir") -eq {{ $UID }} ] && [ $(stat -c %g "$dir") -eq {{ $GID }} ]; then
+          echo "Permissions are correct. Skipping..."
+          fix_perms="false"
+        else
+          echo "Permissions are incorrect. Fixing..."
+          fix_perms="true"
+        fi
+
+      {{- else if eq $mode "always" }} {{/* If mode is always, always fix perms */}}
+
+        fix_perms="true"
+
+      {{- end }}
+
+        if [ "$fix_perms" = "true" ]; then
+          echo "Changing ownership to {{ $UID }}:{{ $GID }} on: ["$dir"]"
+          chown -R {{ $UID }}:{{ $GID }} "$dir"
+          echo "Finished changing ownership"
+          echo "Permissions after changing ownership:"
+          stat -c "%u %g" "$dir"
+        fi
+      done
 {{- end -}}
