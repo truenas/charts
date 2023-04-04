@@ -3,8 +3,8 @@ name: Common Library Tests
 on:
   pull_request:
     paths:
-      - library/common/
-      - library/common-test/
+      - library/common/**
+      - library/common-test/**
       - .github/ct-install-config/common*.yaml
       - '!.github/ct-install-config/charts*'
       - .github/workflows/common_library_tests.yaml
