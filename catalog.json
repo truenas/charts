@@ -287,6 +287,26 @@
     "test": {},
     "enterprise": {},
     "community": {
+        "vaultwarden": {
+            "app_readme": "<h1>Vaultwarden</h1>\n<p><a href=\"https://github.com/dani-garcia/vaultwarden\">Vaultwarden</a> Alternative implementation of the <code>Bitwarden</code> server API written in Rust and compatible with upstream Bitwarden clients</p>\n<blockquote>\n<p>During the installation process, a container will be launched with <strong>root</strong> privileges. This is required\nin order to apply the correct permissions to the <code>Vaultwarden</code> data directory. Afterward, the <code>Vaultwarden</code> container\nwill run as a <strong>non</strong>-root user (default <code>568</code>).\nSame applies to the <code>postgres</code> container. This will run afterwards as a <strong>non</strong>-root user (<code>999</code>).\nOn each upgrade, a container will be launched with <strong>root</strong> privileges in order to apply the correct\npermissions to the <code>postgres</code> <strong>backups</strong> directory. Container that performs the backup will run as a <strong>non</strong>-root user (<code>999</code>) afterwards.\nKeep in mind the permissions on the backup directory will be changed to <code>999:999</code> on <strong>every</strong> update.\nBut will only be changed once for the <code>Vaultwarden</code> and <code>postgres</code> data directories.</p>\n</blockquote>\n<p>While the option to use <code>Rocket</code> for TLS is there, it is not\n<a href=\"https://github.com/dani-garcia/vaultwarden/wiki/Enabling-HTTPS#via-rocket\">recommended</a>.\nInstead, use a reverse proxy to handle TLS termination.</p>\n<p>Using <code>HTTPS</code> is <strong>required</strong> for the most of the features to work (correctly).</p>",
+            "categories": [
+                "password",
+                "manager"
+            ],
+            "description": "Alternative implementation of the Bitwarden server API written in Rust and compatible with upstream Bitwarden clients.",
+            "healthy": true,
+            "healthy_error": null,
+            "location": "/__w/charts/charts/community/vaultwarden",
+            "latest_version": "1.0.0",
+            "latest_app_version": "1.27.0",
+            "latest_human_version": "1.27.0_1.0.0",
+            "last_update": null,
+            "name": "vaultwarden",
+            "recommended": false,
+            "title": "Vaultwarden",
+            "icon": "https://raw.githubusercontent.com/dani-garcia/vaultwarden/main/src/static/images/vaultwarden-icon.png",
+            "icon_url": null
+        },
         "ipfs": {
             "app_readme": "<h1>IPFS</h1>\n<p><a href=\"https://ipfs.tech\">Interplanetary Filesystem</a> - the Web3 standard for content-addressing, interoperable with HTTP</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the ipfs directories.\nAfterward, the <code>ipfs</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).</p>\n</blockquote>",
             "categories": [
@@ -306,6 +326,26 @@
             "recommended": false,
             "title": "IPFS",
             "icon_url": "https://avatars.githubusercontent.com/u/10536621"
+        },
+        "qbittorrent": {
+            "app_readme": "<h1>qBittorrent</h1>\n<p>The <a href=\"https://www.qbittorrent.org/\">qBittorrent</a> project aims to provide an open-source software alternative to \u00b5Torrent.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the qBittorrent directories.\nAfterward, the <code>qBittorrent</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).</p>\n</blockquote>",
+            "categories": [
+                "media",
+                "torrent",
+                "download"
+            ],
+            "description": "The qBittorrent project aims to provide an open-source software alternative to \u00b5Torrent.",
+            "healthy": true,
+            "healthy_error": null,
+            "location": "/__w/charts/charts/community/qbittorrent",
+            "latest_version": "1.0.0",
+            "latest_app_version": "4.5.2",
+            "latest_human_version": "4.5.2_1.0.0",
+            "last_update": null,
+            "name": "qbittorrent",
+            "recommended": false,
+            "title": "qBittorrent",
+            "icon_url": "https://upload.wikimedia.org/wikipedia/commons/9/9e/Qbittorrent_logo.png"
         },
         "chia": {
             "app_readme": "<h1>Chia</h1>\n<p>This container runs as <code>root</code> user.</p>\n<p>When a port is set to &lt; 9000. Host Networking is enabled automatically.</p>\n<blockquote>\n<p>Also NodePort services turn to ClusterIP services, to avoid attempts to bind ports twice.</p>\n</blockquote>\n<p>Key file is stored in <code>/plots/keyfile</code> and is generated automatically, <strong>only</strong> if the file does not exist.\nIf you want to use your own <code>keyfile</code>, you can create a file called <code>keyfile</code> in the <code>/plots</code> directory and it will be used instead.</p>\n<blockquote>\n<p>When set on <code>harvester</code> mode <code>keys</code> variable is set to <code>none</code> and no generation is performed.</p>\n</blockquote>",

@@ -1,0 +1,39 @@
+image:
+  repository: vaultwarden/server
+  pullPolicy: IfNotPresent
+  tag: "1.28.1"
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+vaultwardenConfig:
+  adminToken: ""
+  additionalEnvs: []
+
+vaultwardenNetwork:
+  webPort: 30000
+  wsEnabled: true
+  wsPort: 30001
+  hostNetwork: false
+  certificateID: ""
+  domain: ""
+
+vaultwardenRunAs:
+  user: 568
+  group: 568
+
+vaultwardenStorage:
+  data:
+    type: ixVolume
+    hostPath: ""
+    datasetName: data
+  pgData:
+    type: ixVolume
+    hostPath: ""
+    datasetName: pgData
+  pgBackup:
+    type: ixVolume
+    hostPath: ""
+    datasetName: pgBackup
