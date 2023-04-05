@@ -1,11 +1,12 @@
 name: vaultwarden
-description: Alternative implementation of the Bitwarden server API written in Rust and compatible with upstream Bitwarden clients.
+description: Alternative implementation of the Bitwarden server API written in Rust
+  and compatible with upstream Bitwarden clients.
 annotations:
   title: Vaultwarden
 type: application
-version: 1.0.0
+version: 1.0.1
 apiVersion: v2
-appVersion: '1.27.0'
+appVersion: v1.28.1
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: truenas

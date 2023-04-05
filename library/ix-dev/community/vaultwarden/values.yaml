@@ -1,7 +1,7 @@
 image:
   repository: vaultwarden/server
   pullPolicy: IfNotPresent
-  tag: "1.28.1"
+  tag: v1.28.1
 
 resources:
   limits:
@@ -9,7 +9,7 @@ resources:
     memory: 8Gi
 
 vaultwardenConfig:
-  adminToken: ""
+  adminToken: ''
   additionalEnvs: []
 
 vaultwardenNetwork:
@@ -17,8 +17,8 @@ vaultwardenNetwork:
   wsEnabled: true
   wsPort: 30001
   hostNetwork: false
-  certificateID: ""
-  domain: ""
+  certificateID: ''
+  domain: ''
 
 vaultwardenRunAs:
   user: 568
@@ -27,13 +27,13 @@ vaultwardenRunAs:
 vaultwardenStorage:
   data:
     type: ixVolume
-    hostPath: ""
+    hostPath: ''
     datasetName: data
   pgData:
     type: ixVolume
-    hostPath: ""
+    hostPath: ''
     datasetName: pgData
   pgBackup:
     type: ixVolume
-    hostPath: ""
+    hostPath: ''
     datasetName: pgBackup
