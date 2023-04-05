@@ -7,11 +7,15 @@ name (optional): Name of the postgres pod/container (default: postgres)
 secretName (required): Name of the secret containing the postgres credentials
 backupPath (optional): Path to store the backup, it's the container's path (default: /postgres_backup)
 resources (required): Resources for the postgres container
+backupChownMode (optional): Whether to chown the backup directory or
+          check parent directory permissions and fix them if needed.
+          (default: check) Valid values: always, check
 */}}
 {{- define "ix.v1.common.app.postgres" -}}
   {{- $name := .name | default "postgres" -}}
   {{- $secretName := (required "Postgres - Secret Name is required" .secretName) -}}
   {{- $backupPath := .backupPath | default "/postgres_backup" -}}
+  {{- $backupChownMode := .backupChownMode | default "check" -}}
   {{- $ixChartContext := .ixChartContext -}}
   {{- $resources := (required "Postgres - Resources are required" .resources) }}
 {{ $name }}:
@@ -112,7 +116,7 @@ postgresbackup:
             pg_dump --dbname=${POSTGRES_URL} --file {{ $backupPath }}/${POSTGRES_DB}_$(date +%Y-%m-%d_%H-%M-%S).sql || echo "Failed to create backup"
             echo "Backup finished"
     initContainers:
-    {{- include "ix.v1.common.app.permissions" (dict "UID" 999 "GID" 999 "type" "init") | nindent 6 }}
+    {{- include "ix.v1.common.app.permissions" (dict "UID" 999 "GID" 999 "type" "init" "mode" $backupChownMode) | nindent 6 }}
 {{- end -}}
 
 {{/* Returns a postgres-wait container for waiting for postgres to be ready */}}

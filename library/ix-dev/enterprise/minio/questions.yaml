@@ -55,19 +55,25 @@ questions:
       attrs:
         - variable: user
           label: User ID
-          description: The user id that MinIO will run as.
+          description: |
+            The user id that MinIO will run as. <br/>
+            Can't be changed after initial install.
           schema:
             type: int
             min: 1
             default: 568
+            immutable: true
             required: true
         - variable: group
           label: Group ID
-          description: The group id that MinIO will run as.
+          description: |
+            The group id that MinIO will run as. <br/>
+            Can't be changed after initial install.
           schema:
             type: int
             min: 1
             default: 568
+            immutable: true
             required: true
 
   - variable: minioNetwork
