@@ -1,0 +1,173 @@
+groups:
+  - name: Elastic Search Configuration
+    description: Configure Elastic Search
+  - name: User and Group Configuration
+    description: Configure User and Group for Elastic Search
+  - name: Network Configuration
+    description: Configure Network for Elastic Search
+  - name: Storage Configuration
+    description: Configure Storage for Elastic Search
+  - name: Resources Configuration
+    description: Configure Resources for Elastic Search
+
+portals:
+  web_portal:
+    protocols:
+      - "$kubernetes-resource_configmap_portal_protocol"
+    host:
+      - "$kubernetes-resource_configmap_portal_host"
+    ports:
+      - "$kubernetes-resource_configmap_portal_port"
+    path: "$kubernetes-resource_configmap_portal_path"
+
+questions:
+
+  - variable: esConfig
+    label: ""
+    group: Elastic Search Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: password
+          label: Password
+          description: The password for the Elastic Search (elastic) user.
+          schema:
+            type: string
+            default: ""
+            required: true
+        - variable: nodeName
+          label: Node Name
+          description: The name of the Elastic Search node.
+          schema:
+            type: string
+            default: elastic_search_node
+            required: true
+        - variable: heapSize
+          label: Heap Size
+          description: The heap size for Elastic Search.
+          schema:
+            type: string
+            default: 512m
+            required: true
+        - variable: additionalEnvs
+          label: Additional Environment Variables
+          description: Configure additional environment variables for Elastic Search.
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: env
+                label: Environment Variable
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: name
+                      label: Name
+                      schema:
+                        type: string
+                        required: true
+                    - variable: value
+                      label: Value
+                      schema:
+                        type: string
+                        required: true
+
+  - variable: esNetwork
+    label: ""
+    group: Network Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: httpPort
+          label: HTTP Port
+          description: The port for the Elastic Search HTTP
+          schema:
+            type: int
+            default: 30000
+            min: 9000
+            max: 65535
+            required: true
+        - variable: hostNetwork
+          label: Host Network
+          description: |
+            Bind to the host network. It's recommended to keep this disabled.
+          schema:
+            type: boolean
+            default: false
+        - variable: certificateID
+          label: Certificate
+          description: |
+            The certificate to use for Elastic Search </br>
+          schema:
+            type: int
+            "null": true
+            $ref:
+              - "definitions/certificate"
+
+  - variable: esStorage
+    label: ""
+    group: Storage Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: data
+          label: Elastic Search Data Storage
+          description: The path to store Elastic Search data.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                schema:
+                  type: string
+                  required: true
+                  default: ixVolume
+                  enum:
+                    - value: hostPath
+                      description: Host Path
+                    - value: ixVolume
+                      description: ixVolume
+              - variable: datasetName
+                label: Dataset Name
+                schema:
+                  type: string
+                  show_if: [["type", "=", "ixVolume"]]
+                  required: true
+                  hidden: true
+                  immutable: true
+                  default: data
+                  $ref:
+                    - "normalize/ixVolume"
+              - variable: hostPath
+                label: Host Path
+                schema:
+                  type: hostpath
+                  show_if: [["type", "=", "hostPath"]]
+                  immutable: true
+                  required: true
+
+  - variable: resources
+    label: ""
+    group: Resources Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: limits
+          label: Limits
+          schema:
+            type: dict
+            attrs:
+              - variable: cpu
+                label: CPU
+                description: CPU limit for Elastic Search.
+                schema:
+                  type: string
+                  default: 4000m
+                  required: true
+              - variable: memory
+                label: Memory
+                description: Memory limit for Elastic Search.
+                schema:
+                  type: string
+                  default: 8Gi
+                  required: true
