@@ -11,15 +11,15 @@ maintainers:
   - name: truenas
     url: https://www.truenas.com/
 dependencies:
-- name: common
-  repository: file://../../../common
-  version: 1.0.3
+  - name: common
+    repository: file://../../../common
+    version: 1.0.3
 home: https://min.io
 icon: https://min.io/resources/img/logo/MINIO_wordmark.png
 sources:
-- https://github.com/minio/minio
-- https://github.com/truenas/charts/tree/master/enterprise/minio
+  - https://github.com/minio/minio
+  - https://github.com/truenas/charts/tree/master/enterprise/minio
 keywords:
-- storage
-- object-storage
-- S3
+  - storage
+  - object-storage
+  - S3
