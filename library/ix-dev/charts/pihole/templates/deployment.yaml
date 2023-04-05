@@ -33,6 +33,7 @@ spec:
        and the majority of devices do not have option to change the port.
       */}}
       hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
       containers:
         - name: {{ .Chart.Name }}
           {{ include "common.resources.limitation" . | nindent 10 }}
