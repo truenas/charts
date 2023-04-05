@@ -266,7 +266,28 @@
         }
     },
     "test": {},
-    "enterprise": {},
+    "enterprise": {
+        "minio": {
+            "app_readme": "<h1>MinIO</h1>\n<p><a href=\"https://min.io\">MinIO</a> is a High Performance Object Storage released under Apache License v2.0.\nIt is API compatible with Amazon S3 cloud storage service. Use MinIO to build high performance infrastructure\nfor machine learning, analytics and application data workloads.</p>\n<blockquote>\n<p>During the installation process, a container will be launched with <strong>root</strong> privileges. This is required\nin order to apply the correct permissions to the MinIO data directory. Afterward, the <code>MinIO</code> container\nwill run as a <strong>non</strong>-root user (<code>568</code>).\nSame applies to the <code>postgres</code> container. This will run afterwards as a <strong>non</strong>-root user (<code>999</code>).\nOn each upgrade, a container will be launched with <strong>root</strong> privileges in order to apply the correct\npermissions to the <code>postgres</code> backups directory. Container that performs the backup will run as a <strong>non</strong>-root user (<code>999</code>) afterwards.\nKeep in mind the permissions on the backup directory will be changed to <code>999:999</code> on <strong>every</strong> update.\nBut will only be changed once for the <code>MinIO</code> and <code>postgres</code> data directories.</p>\n</blockquote>\n<p>When Multi Mode is enabled and entries contain <code>://</code> (url) will enable Host Networking. Regardless of the selection in the <code>Networking</code> section.</p>",
+            "categories": [
+                "storage",
+                "object-storage",
+                "S3"
+            ],
+            "description": "High Performance, Kubernetes Native Object Storage",
+            "healthy": true,
+            "healthy_error": null,
+            "location": "/__w/charts/charts/enterprise/minio",
+            "latest_version": "1.0.0",
+            "latest_app_version": "2023-02-17",
+            "latest_human_version": "2023-02-17_1.0.0",
+            "last_update": null,
+            "name": "minio",
+            "recommended": false,
+            "title": "MinIO",
+            "icon_url": "https://min.io/resources/img/logo/MINIO_wordmark.png"
+        }
+    },
     "community": {
         "vaultwarden": {
             "app_readme": "<h1>Vaultwarden</h1>\n<p><a href=\"https://github.com/dani-garcia/vaultwarden\">Vaultwarden</a> Alternative implementation of the <code>Bitwarden</code> server API written in Rust and compatible with upstream Bitwarden clients</p>\n<blockquote>\n<p>During the installation process, a container will be launched with <strong>root</strong> privileges. This is required\nin order to apply the correct permissions to the <code>Vaultwarden</code> data directory. Afterward, the <code>Vaultwarden</code> container\nwill run as a <strong>non</strong>-root user (default <code>568</code>).\nSame applies to the <code>postgres</code> container. This will run afterwards as a <strong>non</strong>-root user (<code>999</code>).\nOn each upgrade, a container will be launched with <strong>root</strong> privileges in order to apply the correct\npermissions to the <code>postgres</code> <strong>backups</strong> directory. Container that performs the backup will run as a <strong>non</strong>-root user (<code>999</code>) afterwards.\nKeep in mind the permissions on the backup directory will be changed to <code>999:999</code> on <strong>every</strong> update.\nBut will only be changed once for the <code>Vaultwarden</code> and <code>postgres</code> data directories.</p>\n</blockquote>\n<p>While the option to use <code>Rocket</code> for TLS is there, it is not\n<a href=\"https://github.com/dani-garcia/vaultwarden/wiki/Enabling-HTTPS#via-rocket\">recommended</a>.\nInstead, use a reverse proxy to handle TLS termination.</p>\n<p>Using <code>HTTPS</code> is <strong>required</strong> for the most of the features to work (correctly).</p>",
@@ -322,7 +343,7 @@
             "latest_version": "1.0.1",
             "latest_app_version": "4.5.2",
             "latest_human_version": "4.5.2_1.0.1",
-            "last_update": "2023-04-04 06:53:15",
+            "last_update": "2023-04-04 14:36:31",
             "name": "qbittorrent",
             "recommended": false,
             "title": "qBittorrent",
