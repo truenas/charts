@@ -1,6 +1,6 @@
 image:
   repository: minio/minio
-  tag: RELEASE.2023-02-27T18-10-45Z
+  tag: RELEASE.2023-03-24T21-41-23Z
   pullPolicy: IfNotPresent
 
 logsearchImage:
@@ -14,8 +14,8 @@ resources:
     memory: 8Gi
 
 minioCreds:
-  rootUser: ""
-  rootPass: ""
+  rootUser: ''
+  rootPass: ''
 
 minioRunAs:
   user: 568
@@ -24,10 +24,10 @@ minioRunAs:
 minioNetwork:
   apiPort: 30000
   webPort: 30001
-  certificateID: ""
+  certificateID: ''
   hostNetwork: false
-  serverUrl: ""
-  consoleUrl: ""
+  serverUrl: ''
+  consoleUrl: ''
 
 minioMultiMode: []
 
@@ -42,9 +42,9 @@ minioLogging:
     diskCapacityGB: 5
     pgData:
       type: ixVolume
-      hostPath: ""
+      hostPath: ''
       datasetName: postgres-data
     pgBackup:
       type: ixVolume
-      hostPath: ""
+      hostPath: ''
       datasetName: postgres-backup

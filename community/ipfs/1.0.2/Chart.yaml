@@ -4,9 +4,9 @@ description: Interplanetary Filesystem - the Web3 standard for content-addressin
 annotations:
   title: IPFS
 type: application
-version: 1.0.1
+version: 1.0.2
 apiVersion: v2
-appVersion: v0.19.0
+appVersion: v0.19.1
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: truenas
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.0.0
+    version: 1.0.3
 home: https://ipfs.tech/
 icon: https://avatars.githubusercontent.com/u/10536621
 sources:

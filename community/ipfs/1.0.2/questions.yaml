@@ -205,14 +205,14 @@ questions:
             attrs:
               - variable: cpu
                 label: CPU
-                description: CPU limit for qBittorrent.
+                description: CPU limit for IPFS.
                 schema:
                   type: string
                   default: 4000m
                   required: true
               - variable: memory
                 label: Memory
-                description: Memory limit for qBittorrent.
+                description: Memory limit for IPFS.
                 schema:
                   type: string
                   default: 8Gi

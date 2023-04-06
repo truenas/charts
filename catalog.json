@@ -1,43 +1,77 @@
 {
     "charts": {
-        "wg-easy": {
-            "app_readme": "<h1>WG-Easy</h1>\n<p><a href=\"https://github.com/WeeJeWel/wg-easy\">WG-Easy (WireGuard Easy)</a> is the easiest way to install &amp; manage WireGuard!</p>",
+        "ix-chart": {
+            "app_readme": "<h1>iX-Chart</h1>\n<p>iX-chart is a chart designed to let user deploy a docker image in a TrueNAS SCALE kubernetes cluster.\nIt provides a mechanism to specify workload type, add external host interfaces in the pods, configure volumes and allocate host resources to the workload.</p>",
             "categories": [
-                "wireguard",
-                "network",
-                "vpn"
+                "generic"
             ],
-            "description": "WG-Easy is the easiest way to install & manage WireGuard!",
+            "description": "A Helm chart for deploying simple workloads Kubernetes",
             "healthy": true,
             "healthy_error": null,
-            "location": "/__w/charts/charts/charts/wg-easy",
-            "latest_version": "1.0.1",
-            "latest_app_version": "7",
-            "latest_human_version": "7_1.0.1",
-            "last_update": "2023-03-24 21:23:31",
-            "name": "wg-easy",
+            "location": "/__w/charts/charts/charts/ix-chart",
+            "latest_version": "2212.0.1",
+            "latest_app_version": "v1",
+            "latest_human_version": "v1_2212.0.1",
+            "last_update": "2022-12-19 11:37:56",
+            "name": "ix-chart",
             "recommended": false,
-            "title": "WG Easy",
-            "icon_url": "https://raw.githubusercontent.com/WeeJeWel/wg-easy/master/src/www/img/logo.png"
+            "title": "Ix-chart",
+            "icon_url": null
         },
-        "pihole": {
-            "app_readme": "<h1>Pihole</h1>\n<p>DNS and Ad-filtering for your network.</p>",
+        "home-assistant": {
+            "app_readme": "<p>home-assistant App for TrueNAS SCALE</p>",
             "categories": [
-                "networking",
-                "dns"
+                "home-automation"
             ],
-            "description": "DNS and Ad-filtering for your network.",
+            "description": "Home Assistant App for TrueNAS SCALE",
             "healthy": true,
             "healthy_error": null,
-            "location": "/__w/charts/charts/charts/pihole",
-            "latest_version": "1.0.13",
-            "latest_app_version": "2023.02.2",
-            "latest_human_version": "2023.02.2_1.0.13",
-            "last_update": "2023-03-24 21:25:31",
-            "name": "pihole",
+            "location": "/__w/charts/charts/charts/home-assistant",
+            "latest_version": "1.0.74",
+            "latest_app_version": "2023.4.0",
+            "latest_human_version": "2023.4.0_1.0.74",
+            "last_update": "2023-03-30 13:03:27",
+            "name": "home-assistant",
             "recommended": false,
-            "title": "Pi-hole",
-            "icon_url": "https://github.com/pi-hole/graphics/raw/master/Vortex/Vortex_Vertical_wordmark_lightmode.png?raw=true)"
+            "title": "Home Assistant",
+            "icon_url": "https://avatars.githubusercontent.com/u/13844975?s=200&v=4"
+        },
+        "minio": {
+            "app_readme": "<p><a href=\"https://min.io\">MinIO</a> is a High Performance Object Storage released under Apache License v2.0. It is API compatible with Amazon S3 cloud storage service. Use MinIO to build high performance infrastructure for machine learning, analytics and application data workloads.</p>\n<p><strong>NOTE</strong>\n- On installation, minIO data directory's ownership will be updated to minio:minio.\n- For existing installations that are exhibiting the upgrade to &gt;=1.5.0, the minIO data directory's ownership will be migrated to minio:minio.</p>",
+            "categories": [
+                "storage",
+                "S3"
+            ],
+            "description": "High Performance, Kubernetes Native Object Storage",
+            "healthy": true,
+            "healthy_error": null,
+            "location": "/__w/charts/charts/charts/minio",
+            "latest_version": "1.7.15",
+            "latest_app_version": "2023-03-13",
+            "latest_human_version": "2023-03-13_1.7.15",
+            "last_update": "2023-03-14 13:28:13",
+            "name": "minio",
+            "recommended": false,
+            "title": "Minio",
+            "icon_url": "https://min.io/resources/img/logo/MINIO_wordmark.png"
+        },
+        "emby": {
+            "app_readme": "<h1>Emby Server</h1>\n<p>Emby Server is a personal media server with apps on just about every device</p>",
+            "categories": [
+                "entertainment"
+            ],
+            "description": "Emby Server",
+            "healthy": true,
+            "healthy_error": null,
+            "location": "/__w/charts/charts/charts/emby",
+            "latest_version": "1.0.17",
+            "latest_app_version": "4.7.11.0",
+            "latest_human_version": "4.7.11.0_1.0.17",
+            "last_update": "2023-03-24 21:22:08",
+            "name": "emby",
+            "recommended": false,
+            "title": "Emby Server",
+            "icon_url": "https://images-na.ssl-images-amazon.com/images/I/41NwssJC1iL.png"
         },
         "diskoverdata": {
             "app_readme": "<p>DiskOver App for TrueNAS SCALE</p>",
@@ -59,6 +93,63 @@
             "title": "Diskover Data",
             "icon_url": "http://www.diskoverdata.com/wp-content/uploads/2019/09/diskover.png"
         },
+        "nextcloud": {
+            "app_readme": "<h1>nextcloud</h1>\n<p><a href=\"https://nextcloud.com/\">nextcloud</a> is a file sharing server that puts the control and security of your own data back into your hands.</p>",
+            "categories": [
+                "productivity"
+            ],
+            "description": "A file sharing server that puts the control and security of your own data back into your hands.",
+            "healthy": true,
+            "healthy_error": null,
+            "location": "/__w/charts/charts/charts/nextcloud",
+            "latest_version": "1.6.20",
+            "latest_app_version": "26.0.0",
+            "latest_human_version": "26.0.0_1.6.20",
+            "last_update": "2023-03-30 13:03:27",
+            "name": "nextcloud",
+            "recommended": false,
+            "title": "Nextcloud",
+            "icon_url": "https://cdn.rawgit.com/docker-library/docs/defa5ffc7123177acd60ddef6e16bddf694cc35f/nextcloud/logo.svg"
+        },
+        "pihole": {
+            "app_readme": "<h1>Pihole</h1>\n<p>DNS and Ad-filtering for your network.</p>",
+            "categories": [
+                "networking",
+                "dns"
+            ],
+            "description": "DNS and Ad-filtering for your network.",
+            "healthy": true,
+            "healthy_error": null,
+            "location": "/__w/charts/charts/charts/pihole",
+            "latest_version": "1.0.13",
+            "latest_app_version": "2023.02.2",
+            "latest_human_version": "2023.02.2_1.0.13",
+            "last_update": "2023-03-24 21:25:31",
+            "name": "pihole",
+            "recommended": false,
+            "title": "Pi-hole",
+            "icon_url": "https://github.com/pi-hole/graphics/raw/master/Vortex/Vortex_Vertical_wordmark_lightmode.png?raw=true)"
+        },
+        "wg-easy": {
+            "app_readme": "<h1>WG-Easy</h1>\n<p><a href=\"https://github.com/WeeJeWel/wg-easy\">WG-Easy (WireGuard Easy)</a> is the easiest way to install &amp; manage WireGuard!</p>",
+            "categories": [
+                "wireguard",
+                "network",
+                "vpn"
+            ],
+            "description": "WG-Easy is the easiest way to install & manage WireGuard!",
+            "healthy": true,
+            "healthy_error": null,
+            "location": "/__w/charts/charts/charts/wg-easy",
+            "latest_version": "1.0.1",
+            "latest_app_version": "7",
+            "latest_human_version": "7_1.0.1",
+            "last_update": "2023-03-24 21:23:31",
+            "name": "wg-easy",
+            "recommended": false,
+            "title": "WG Easy",
+            "icon_url": "https://raw.githubusercontent.com/WeeJeWel/wg-easy/master/src/www/img/logo.png"
+        },
         "plex": {
             "app_readme": "<h1>Plex</h1>\n<p>Plex chart is a chart designed to deploy plex in a TrueNAS SCALE kubernetes cluster.</p>",
             "categories": [
@@ -76,6 +167,66 @@
             "recommended": false,
             "title": "Plex",
             "icon_url": "https://www.plex.tv/wp-content/uploads/2018/01/pmp-icon-1.png"
+        },
+        "collabora": {
+            "app_readme": "<h1>Collabora Online Development Edition</h1>\n<p>An awesome, Online Office suite image suitable for home use.\nWith the Collabora Online Development Edition (CODE) Docker Image you can host\nyour own online Office Suite at home! This Docker image is aimed at home users\nand contains the latest and greatest developments. Simply integrate it in your\npreferred File Sync and Share (FSS), to easily get your own online Office \nSuite up and running!</p>",
+            "categories": [
+                "office",
+                "documents",
+                "productivity"
+            ],
+            "description": "Collabora Online Development Edition \\u2013 an awesome, Online Office\nsuite image suitable for home use.\n",
+            "healthy": true,
+            "healthy_error": null,
+            "location": "/__w/charts/charts/charts/collabora",
+            "latest_version": "1.2.7",
+            "latest_app_version": "21.11.4.1.1",
+            "latest_human_version": "21.11.4.1.1_1.2.7",
+            "last_update": "2023-03-24 21:19:04",
+            "name": "collabora",
+            "recommended": false,
+            "title": "Collabora",
+            "icon_url": "https://avatars.githubusercontent.com/u/22418908?s=200&v=4"
+        },
+        "syncthing": {
+            "app_readme": "<h1>Syncthing</h1>\n<p><a href=\"https://syncthing.net/\">syncthing</a> is a continuous file synchronization program. It synchronizes files between two or\nmore computers in real time, safely protected from prying eyes.</p>\n<blockquote>\n<p><strong>WARNING</strong> Do check out https://docs.syncthing.net/users/faq.html#what-things-are-synced to see what is synced.</p>\n</blockquote>",
+            "categories": [
+                "backup",
+                "storage"
+            ],
+            "description": "Syncthing is a continuous file synchronization program.",
+            "healthy": true,
+            "healthy_error": null,
+            "location": "/__w/charts/charts/charts/syncthing",
+            "latest_version": "1.0.21",
+            "latest_app_version": "1.23.4",
+            "latest_human_version": "1.23.4_1.0.21",
+            "last_update": "2023-03-26 21:47:00",
+            "name": "syncthing",
+            "recommended": false,
+            "title": "Syncthing",
+            "icon_url": "https://play-lh.googleusercontent.com/KIy_dqUdZqcsTq4GDstHrHwLRvu60gT3v0p41gw792BC6OxamNhUw2eIy0-LI05qNEA=w240-h480"
+        },
+        "storj": {
+            "app_readme": "<h1>storj</h1>\n<p><a href=\"https://www.storj.io/\">storj</a> share your extra storage and earn money</p>",
+            "categories": [
+                "storage",
+                "dapps",
+                "networking",
+                "finantial"
+            ],
+            "description": "Share your storage on the internet and earn.",
+            "healthy": true,
+            "healthy_error": null,
+            "location": "/__w/charts/charts/charts/storj",
+            "latest_version": "1.0.6",
+            "latest_app_version": "v1.68.2",
+            "latest_human_version": "v1.68.2_1.0.6",
+            "last_update": "2023-03-24 21:39:43",
+            "name": "storj",
+            "recommended": false,
+            "title": "Storj",
+            "icon_url": "https://assets-global.website-files.com/602eda09fc78afc76e9706b6/60917835a05862243e7de9af_logo.svg"
         },
         "photoprism": {
             "app_readme": "<h1>Photo Prism</h1>\n<p>PhotoPrism is a server-based application for browsing, organizing and sharing your personal photo collection.</p>",
@@ -112,223 +263,10 @@
             "recommended": false,
             "title": "Netdata",
             "icon_url": "https://netdata.github.io/helmchart/logo.png"
-        },
-        "nextcloud": {
-            "app_readme": "<h1>nextcloud</h1>\n<p><a href=\"https://nextcloud.com/\">nextcloud</a> is a file sharing server that puts the control and security of your own data back into your hands.</p>",
-            "categories": [
-                "productivity"
-            ],
-            "description": "A file sharing server that puts the control and security of your own data back into your hands.",
-            "healthy": true,
-            "healthy_error": null,
-            "location": "/__w/charts/charts/charts/nextcloud",
-            "latest_version": "1.6.20",
-            "latest_app_version": "26.0.0",
-            "latest_human_version": "26.0.0_1.6.20",
-            "last_update": "2023-03-30 13:03:27",
-            "name": "nextcloud",
-            "recommended": false,
-            "title": "Nextcloud",
-            "icon_url": "https://cdn.rawgit.com/docker-library/docs/defa5ffc7123177acd60ddef6e16bddf694cc35f/nextcloud/logo.svg"
-        },
-        "ix-chart": {
-            "app_readme": "<h1>iX-Chart</h1>\n<p>iX-chart is a chart designed to let user deploy a docker image in a TrueNAS SCALE kubernetes cluster.\nIt provides a mechanism to specify workload type, add external host interfaces in the pods, configure volumes and allocate host resources to the workload.</p>",
-            "categories": [
-                "generic"
-            ],
-            "description": "A Helm chart for deploying simple workloads Kubernetes",
-            "healthy": true,
-            "healthy_error": null,
-            "location": "/__w/charts/charts/charts/ix-chart",
-            "latest_version": "2212.0.1",
-            "latest_app_version": "v1",
-            "latest_human_version": "v1_2212.0.1",
-            "last_update": "2022-12-19 11:37:56",
-            "name": "ix-chart",
-            "recommended": false,
-            "title": "Ix-chart",
-            "icon_url": null
-        },
-        "collabora": {
-            "app_readme": "<h1>Collabora Online Development Edition</h1>\n<p>An awesome, Online Office suite image suitable for home use.\nWith the Collabora Online Development Edition (CODE) Docker Image you can host\nyour own online Office Suite at home! This Docker image is aimed at home users\nand contains the latest and greatest developments. Simply integrate it in your\npreferred File Sync and Share (FSS), to easily get your own online Office \nSuite up and running!</p>",
-            "categories": [
-                "office",
-                "documents",
-                "productivity"
-            ],
-            "description": "Collabora Online Development Edition \\u2013 an awesome, Online Office\nsuite image suitable for home use.\n",
-            "healthy": true,
-            "healthy_error": null,
-            "location": "/__w/charts/charts/charts/collabora",
-            "latest_version": "1.2.7",
-            "latest_app_version": "21.11.4.1.1",
-            "latest_human_version": "21.11.4.1.1_1.2.7",
-            "last_update": "2023-03-24 21:19:04",
-            "name": "collabora",
-            "recommended": false,
-            "title": "Collabora",
-            "icon_url": "https://avatars.githubusercontent.com/u/22418908?s=200&v=4"
-        },
-        "storj": {
-            "app_readme": "<h1>storj</h1>\n<p><a href=\"https://www.storj.io/\">storj</a> share your extra storage and earn money</p>",
-            "categories": [
-                "storage",
-                "dapps",
-                "networking",
-                "finantial"
-            ],
-            "description": "Share your storage on the internet and earn.",
-            "healthy": true,
-            "healthy_error": null,
-            "location": "/__w/charts/charts/charts/storj",
-            "latest_version": "1.0.6",
-            "latest_app_version": "v1.68.2",
-            "latest_human_version": "v1.68.2_1.0.6",
-            "last_update": "2023-03-24 21:39:43",
-            "name": "storj",
-            "recommended": false,
-            "title": "Storj",
-            "icon_url": "https://assets-global.website-files.com/602eda09fc78afc76e9706b6/60917835a05862243e7de9af_logo.svg"
-        },
-        "minio": {
-            "app_readme": "<p><a href=\"https://min.io\">MinIO</a> is a High Performance Object Storage released under Apache License v2.0. It is API compatible with Amazon S3 cloud storage service. Use MinIO to build high performance infrastructure for machine learning, analytics and application data workloads.</p>\n<p><strong>NOTE</strong>\n- On installation, minIO data directory's ownership will be updated to minio:minio.\n- For existing installations that are exhibiting the upgrade to &gt;=1.5.0, the minIO data directory's ownership will be migrated to minio:minio.</p>",
-            "categories": [
-                "storage",
-                "S3"
-            ],
-            "description": "High Performance, Kubernetes Native Object Storage",
-            "healthy": true,
-            "healthy_error": null,
-            "location": "/__w/charts/charts/charts/minio",
-            "latest_version": "1.7.15",
-            "latest_app_version": "2023-03-13",
-            "latest_human_version": "2023-03-13_1.7.15",
-            "last_update": "2023-03-14 13:28:13",
-            "name": "minio",
-            "recommended": false,
-            "title": "Minio",
-            "icon_url": "https://min.io/resources/img/logo/MINIO_wordmark.png"
-        },
-        "home-assistant": {
-            "app_readme": "<p>home-assistant App for TrueNAS SCALE</p>",
-            "categories": [
-                "home-automation"
-            ],
-            "description": "Home Assistant App for TrueNAS SCALE",
-            "healthy": true,
-            "healthy_error": null,
-            "location": "/__w/charts/charts/charts/home-assistant",
-            "latest_version": "1.0.73",
-            "latest_app_version": "2023.3.6",
-            "latest_human_version": "2023.3.6_1.0.73",
-            "last_update": "2023-03-30 13:03:27",
-            "name": "home-assistant",
-            "recommended": false,
-            "title": "Home Assistant",
-            "icon_url": "https://avatars.githubusercontent.com/u/13844975?s=200&v=4"
-        },
-        "syncthing": {
-            "app_readme": "<h1>Syncthing</h1>\n<p><a href=\"https://syncthing.net/\">syncthing</a> is a continuous file synchronization program. It synchronizes files between two or\nmore computers in real time, safely protected from prying eyes.</p>\n<blockquote>\n<p><strong>WARNING</strong> Do check out https://docs.syncthing.net/users/faq.html#what-things-are-synced to see what is synced.</p>\n</blockquote>",
-            "categories": [
-                "backup",
-                "storage"
-            ],
-            "description": "Syncthing is a continuous file synchronization program.",
-            "healthy": true,
-            "healthy_error": null,
-            "location": "/__w/charts/charts/charts/syncthing",
-            "latest_version": "1.0.20",
-            "latest_app_version": "1.23.2",
-            "latest_human_version": "1.23.2_1.0.20",
-            "last_update": "2023-03-26 21:47:00",
-            "name": "syncthing",
-            "recommended": false,
-            "title": "Syncthing",
-            "icon_url": "https://play-lh.googleusercontent.com/KIy_dqUdZqcsTq4GDstHrHwLRvu60gT3v0p41gw792BC6OxamNhUw2eIy0-LI05qNEA=w240-h480"
-        },
-        "emby": {
-            "app_readme": "<h1>Emby Server</h1>\n<p>Emby Server is a personal media server with apps on just about every device</p>",
-            "categories": [
-                "entertainment"
-            ],
-            "description": "Emby Server",
-            "healthy": true,
-            "healthy_error": null,
-            "location": "/__w/charts/charts/charts/emby",
-            "latest_version": "1.0.17",
-            "latest_app_version": "4.7.11.0",
-            "latest_human_version": "4.7.11.0_1.0.17",
-            "last_update": "2023-03-24 21:22:08",
-            "name": "emby",
-            "recommended": false,
-            "title": "Emby Server",
-            "icon_url": "https://images-na.ssl-images-amazon.com/images/I/41NwssJC1iL.png"
         }
     },
     "test": {},
-    "enterprise": {
-        "minio": {
-            "app_readme": "<h1>MinIO</h1>\n<p><a href=\"https://min.io\">MinIO</a> is a High Performance Object Storage released under Apache License v2.0.\nIt is API compatible with Amazon S3 cloud storage service. Use MinIO to build high performance infrastructure\nfor machine learning, analytics and application data workloads.</p>\n<blockquote>\n<p>During the installation process, a container will be launched with <strong>root</strong> privileges. This is required\nin order to apply the correct permissions to the MinIO data directory. Afterward, the <code>MinIO</code> container\nwill run as a <strong>non</strong>-root user (<code>568</code>).\nSame applies to the <code>postgres</code> container. This will run afterwards as a <strong>non</strong>-root user (<code>999</code>).\nOn each upgrade, a container will be launched with <strong>root</strong> privileges in order to apply the correct\npermissions to the <code>postgres</code> backups directory. Container that performs the backup will run as a <strong>non</strong>-root user (<code>999</code>) afterwards.\nKeep in mind the permissions on the backup directory will be changed to <code>999:999</code> on <strong>every</strong> update.\nBut will only be changed once for the <code>MinIO</code> and <code>postgres</code> data directories.</p>\n</blockquote>\n<p>When Multi Mode is enabled and entries contain <code>://</code> (url) will enable Host Networking. Regardless of the selection in the <code>Networking</code> section.</p>",
-            "categories": [
-                "storage",
-                "object-storage",
-                "S3"
-            ],
-            "description": "High Performance, Kubernetes Native Object Storage",
-            "healthy": true,
-            "healthy_error": null,
-            "location": "/__w/charts/charts/enterprise/minio",
-            "latest_version": "1.0.0",
-            "latest_app_version": "2023-02-17",
-            "latest_human_version": "2023-02-17_1.0.0",
-            "last_update": null,
-            "name": "minio",
-            "recommended": false,
-            "title": "MinIO",
-            "icon_url": "https://min.io/resources/img/logo/MINIO_wordmark.png"
-        }
-    },
     "community": {
-        "vaultwarden": {
-            "app_readme": "<h1>Vaultwarden</h1>\n<p><a href=\"https://github.com/dani-garcia/vaultwarden\">Vaultwarden</a> Alternative implementation of the <code>Bitwarden</code> server API written in Rust and compatible with upstream Bitwarden clients</p>\n<blockquote>\n<p>During the installation process, a container will be launched with <strong>root</strong> privileges. This is required\nin order to apply the correct permissions to the <code>Vaultwarden</code> data directory. Afterward, the <code>Vaultwarden</code> container\nwill run as a <strong>non</strong>-root user (default <code>568</code>).\nSame applies to the <code>postgres</code> container. This will run afterwards as a <strong>non</strong>-root user (<code>999</code>).\nOn each upgrade, a container will be launched with <strong>root</strong> privileges in order to apply the correct\npermissions to the <code>postgres</code> <strong>backups</strong> directory. Container that performs the backup will run as a <strong>non</strong>-root user (<code>999</code>) afterwards.\nKeep in mind the permissions on the backup directory will be changed to <code>999:999</code> on <strong>every</strong> update.\nBut will only be changed once for the <code>Vaultwarden</code> and <code>postgres</code> data directories.</p>\n</blockquote>\n<p>While the option to use <code>Rocket</code> for TLS is there, it is not\n<a href=\"https://github.com/dani-garcia/vaultwarden/wiki/Enabling-HTTPS#via-rocket\">recommended</a>.\nInstead, use a reverse proxy to handle TLS termination.</p>\n<p>Using <code>HTTPS</code> is <strong>required</strong> for the most of the features to work (correctly).</p>",
-            "categories": [
-                "password",
-                "manager"
-            ],
-            "description": "Alternative implementation of the Bitwarden server API written in Rust and compatible with upstream Bitwarden clients.",
-            "healthy": true,
-            "healthy_error": null,
-            "location": "/__w/charts/charts/community/vaultwarden",
-            "latest_version": "1.0.0",
-            "latest_app_version": "1.27.0",
-            "latest_human_version": "1.27.0_1.0.0",
-            "last_update": "2023-04-04 06:53:15",
-            "name": "vaultwarden",
-            "recommended": false,
-            "title": "Vaultwarden",
-            "icon": "https://raw.githubusercontent.com/dani-garcia/vaultwarden/main/src/static/images/vaultwarden-icon.png",
-            "icon_url": null
-        },
-        "ipfs": {
-            "app_readme": "<h1>IPFS</h1>\n<p><a href=\"https://ipfs.tech\">Interplanetary Filesystem</a> - the Web3 standard for content-addressing, interoperable with HTTP</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the ipfs directories.\nAfterward, the <code>ipfs</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).</p>\n</blockquote>",
-            "categories": [
-                "storage",
-                "ipfs",
-                "kubo"
-            ],
-            "description": "Interplanetary Filesystem - the Web3 standard for content-addressing, interoperable with HTTP",
-            "healthy": true,
-            "healthy_error": null,
-            "location": "/__w/charts/charts/community/ipfs",
-            "latest_version": "1.0.1",
-            "latest_app_version": "v0.19.0",
-            "latest_human_version": "v0.19.0_1.0.1",
-            "last_update": "2023-03-30 13:03:27",
-            "name": "ipfs",
-            "recommended": false,
-            "title": "IPFS",
-            "icon_url": "https://avatars.githubusercontent.com/u/10536621"
-        },
         "qbittorrent": {
             "app_readme": "<h1>qBittorrent</h1>\n<p>The <a href=\"https://www.qbittorrent.org/\">qBittorrent</a> project aims to provide an open-source software alternative to \u00b5Torrent.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the qBittorrent directories.\nAfterward, the <code>qBittorrent</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).</p>\n</blockquote>",
             "categories": [
@@ -367,6 +305,68 @@
             "recommended": false,
             "title": "Chia",
             "icon_url": "https://www.chia.net/wp-content/uploads/2022/09/chia-logo.svg"
+        },
+        "ipfs": {
+            "app_readme": "<h1>IPFS</h1>\n<p><a href=\"https://ipfs.tech\">Interplanetary Filesystem</a> - the Web3 standard for content-addressing, interoperable with HTTP</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the ipfs directories.\nAfterward, the <code>ipfs</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).</p>\n</blockquote>",
+            "categories": [
+                "storage",
+                "ipfs",
+                "kubo"
+            ],
+            "description": "Interplanetary Filesystem - the Web3 standard for content-addressing, interoperable with HTTP",
+            "healthy": true,
+            "healthy_error": null,
+            "location": "/__w/charts/charts/community/ipfs",
+            "latest_version": "1.0.2",
+            "latest_app_version": "v0.19.1",
+            "latest_human_version": "v0.19.1_1.0.2",
+            "last_update": "2023-03-30 13:03:27",
+            "name": "ipfs",
+            "recommended": false,
+            "title": "IPFS",
+            "icon_url": "https://avatars.githubusercontent.com/u/10536621"
+        },
+        "vaultwarden": {
+            "app_readme": "<h1>Vaultwarden</h1>\n<p><a href=\"https://github.com/dani-garcia/vaultwarden\">Vaultwarden</a> Alternative implementation of the <code>Bitwarden</code> server API written in Rust and compatible with upstream Bitwarden clients</p>\n<blockquote>\n<p>During the installation process, a container will be launched with <strong>root</strong> privileges. This is required\nin order to apply the correct permissions to the <code>Vaultwarden</code> data directory. Afterward, the <code>Vaultwarden</code> container\nwill run as a <strong>non</strong>-root user (default <code>568</code>).\nSame applies to the <code>postgres</code> container. This will run afterwards as a <strong>non</strong>-root user (<code>999</code>).\nOn each upgrade, a container will be launched with <strong>root</strong> privileges in order to apply the correct\npermissions to the <code>postgres</code> <strong>backups</strong> directory. Container that performs the backup will run as a <strong>non</strong>-root user (<code>999</code>) afterwards.\nKeep in mind the permissions on the backup directory will be changed to <code>999:999</code> on <strong>every</strong> update.\nBut will only be changed once for the <code>Vaultwarden</code> and <code>postgres</code> data directories.</p>\n</blockquote>\n<p>While the option to use <code>Rocket</code> for TLS is there, it is not\n<a href=\"https://github.com/dani-garcia/vaultwarden/wiki/Enabling-HTTPS#via-rocket\">recommended</a>.\nInstead, use a reverse proxy to handle TLS termination.</p>\n<p>Using <code>HTTPS</code> is <strong>required</strong> for the most of the features to work (correctly).</p>",
+            "categories": [
+                "password",
+                "manager"
+            ],
+            "description": "Alternative implementation of the Bitwarden server API written in Rust and compatible with upstream Bitwarden clients.",
+            "healthy": true,
+            "healthy_error": null,
+            "location": "/__w/charts/charts/community/vaultwarden",
+            "latest_version": "1.0.1",
+            "latest_app_version": "1.28.1",
+            "latest_human_version": "1.28.1_1.0.1",
+            "last_update": "2023-04-04 06:53:15",
+            "name": "vaultwarden",
+            "recommended": false,
+            "title": "Vaultwarden",
+            "icon": "https://raw.githubusercontent.com/dani-garcia/vaultwarden/main/src/static/images/vaultwarden-icon.png",
+            "icon_url": null
+        }
+    },
+    "enterprise": {
+        "minio": {
+            "app_readme": "<h1>MinIO</h1>\n<p><a href=\"https://min.io\">MinIO</a> is a High Performance Object Storage released under Apache License v2.0.\nIt is API compatible with Amazon S3 cloud storage service. Use MinIO to build high performance infrastructure\nfor machine learning, analytics and application data workloads.</p>\n<blockquote>\n<p>During the installation process, a container will be launched with <strong>root</strong> privileges. This is required\nin order to apply the correct permissions to the MinIO data directory. Afterward, the <code>MinIO</code> container\nwill run as a <strong>non</strong>-root user (<code>568</code>).\nSame applies to the <code>postgres</code> container. This will run afterwards as a <strong>non</strong>-root user (<code>999</code>).\nOn each upgrade, a container will be launched with <strong>root</strong> privileges in order to apply the correct\npermissions to the <code>postgres</code> backups directory. Container that performs the backup will run as a <strong>non</strong>-root user (<code>999</code>) afterwards.\nKeep in mind the permissions on the backup directory will be changed to <code>999:999</code> on <strong>every</strong> update.\nBut will only be changed once for the <code>MinIO</code> and <code>postgres</code> data directories.</p>\n</blockquote>\n<p>When Multi Mode is enabled and entries contain <code>://</code> (url) will enable Host Networking. Regardless of the selection in the <code>Networking</code> section.</p>",
+            "categories": [
+                "storage",
+                "object-storage",
+                "S3"
+            ],
+            "description": "High Performance, Kubernetes Native Object Storage",
+            "healthy": true,
+            "healthy_error": null,
+            "location": "/__w/charts/charts/enterprise/minio",
+            "latest_version": "1.0.1",
+            "latest_app_version": "2023-03-24",
+            "latest_human_version": "2023-03-24_1.0.1",
+            "last_update": "2023-04-05 14:57:38",
+            "name": "minio",
+            "recommended": false,
+            "title": "MinIO",
+            "icon_url": "https://min.io/resources/img/logo/MINIO_wordmark.png"
         }
     }
 }
