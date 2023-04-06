@@ -12,8 +12,8 @@ def newer_mapping(image_tags):
         return {}
 
     return {
-        'tags': {key: f'{version}'},
-        'app_version': f'{version}',
+        'tags': {key: version'},
+        'app_version': version',
     }
 
 
