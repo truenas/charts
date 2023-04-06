@@ -166,7 +166,9 @@ questions:
     group: Storage Configuration
     schema:
       type: list
-      default: []
+      default: [{"type": "ixVolume", "mountPath": "/data1", "datasetName": "data1"}]
+      empty: false
+      required: true
       items:
         - variable: item
           label: Storage Item
@@ -175,6 +177,9 @@ questions:
             attrs:
               - variable: type
                 label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
                 schema:
                   type: string
                   immutable: true
@@ -182,9 +187,9 @@ questions:
                   default: ixVolume
                   enum:
                     - value: hostPath
-                      description: Host Path
+                      description: Host Path (Path that already exists on the system)
                     - value: ixVolume
-                      description: ixVolume
+                      description: ixVolume (Dataset created automatically by the system)
               - variable: mountPath
                 label: Mount Path
                 description: The path inside the container to mount the storage.
