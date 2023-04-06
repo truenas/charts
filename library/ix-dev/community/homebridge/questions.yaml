@@ -187,15 +187,18 @@ questions:
             attrs:
               - variable: type
                 label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
                 schema:
                   type: string
                   default: ixVolume
                   required: true
                   enum:
-                    - value: ixVolume
-                      description: ixVolume
                     - value: hostPath
-                      description: hostPath
+                      description: Host Path (Path that already exists on the system)
+                    - value: ixVolume
+                      description: ixVolume (Dataset created automatically by the system)
               - variable: hostPath
                 label: Host Path
                 schema:
