@@ -86,7 +86,7 @@
             "latest_version": "1.0.0",
             "latest_app_version": "3.0.10.1567",
             "latest_human_version": "3.0.10.1567_1.0.0",
-            "last_update": null,
+            "last_update": "2023-04-07 17:42:39",
             "name": "sonarr",
             "recommended": false,
             "title": "Sonarr",
@@ -148,6 +148,25 @@
             "recommended": false,
             "title": "Pi-hole",
             "icon_url": "https://github.com/pi-hole/graphics/raw/master/Vortex/Vortex_Vertical_wordmark_lightmode.png?raw=true)"
+        },
+        "radarr": {
+            "app_readme": "<h1>Radarr</h1>\n<p><a href=\"https://github.com/Radarr/Radarr\">Radarr</a> is a movie collection manager for Usenet and BitTorrent users.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Radarr</code> directories.\nAfterward, the <code>Radarr</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>",
+            "categories": [
+                "media",
+                "movies"
+            ],
+            "description": "Radarr is a movie collection manager for Usenet and BitTorrent users.",
+            "healthy": true,
+            "healthy_error": null,
+            "location": "/__w/charts/charts/charts/radarr",
+            "latest_version": "1.0.0",
+            "latest_app_version": "4.3.2.6857",
+            "latest_human_version": "4.3.2.6857_1.0.0",
+            "last_update": null,
+            "name": "radarr",
+            "recommended": false,
+            "title": "Radarr",
+            "icon_url": "https://raw.githubusercontent.com/Radarr/Radarr/develop/Logo/256.png"
         },
         "wg-easy": {
             "app_readme": "<h1>WG-Easy</h1>\n<p><a href=\"https://github.com/WeeJeWel/wg-easy\">WG-Easy (WireGuard Easy)</a> is the easiest way to install &amp; manage WireGuard!</p>",
