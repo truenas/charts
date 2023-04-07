@@ -1,0 +1,21 @@
+radarrConfig:
+  additionalEnvs:
+    - name: RADARR__AUTHENTICATION_METHOD
+      value: some-long-api-key
+    - name: RADARR__LOG_LEVEL
+      value: error
+
+radarrNetwork:
+  webPort: 31000
+
+radarrStorage:
+  config:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/config
+  additionalStorages:
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/action_movies
+    mountPath: /action_movies
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/adventure_movies
+    mountPath: /adventure_movies
