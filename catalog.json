@@ -73,6 +73,25 @@
             "title": "Emby Server",
             "icon_url": "https://images-na.ssl-images-amazon.com/images/I/41NwssJC1iL.png"
         },
+        "sonarr": {
+            "app_readme": "<h1>Sonarr</h1>\n<p><a href=\"https://github.com/Sonarr/Sonarr\">Sonarr</a> is a PVR for Usenet and BitTorrent users. It can monitor multiple RSS feeds for new episodes of your favorite shows and will grab, sort and rename them.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Sonarr</code> directories.\nAfterward, the <code>Sonarr</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>",
+            "categories": [
+                "media",
+                "series"
+            ],
+            "description": "Sonarr is a PVR for Usenet and BitTorrent users.",
+            "healthy": true,
+            "healthy_error": null,
+            "location": "/__w/charts/charts/charts/sonarr",
+            "latest_version": "1.0.0",
+            "latest_app_version": "3.0.10.1567",
+            "latest_human_version": "3.0.10.1567_1.0.0",
+            "last_update": null,
+            "name": "sonarr",
+            "recommended": false,
+            "title": "Sonarr",
+            "icon_url": "https://raw.githubusercontent.com/Sonarr/Sonarr/develop/Logo/256.png"
+        },
         "diskoverdata": {
             "app_readme": "<p>DiskOver App for TrueNAS SCALE</p>",
             "categories": [
@@ -281,7 +300,7 @@
             "latest_version": "1.0.3",
             "latest_app_version": "4.5.2",
             "latest_human_version": "4.5.2_1.0.3",
-            "last_update": "2023-04-04 14:36:31",
+            "last_update": "2023-04-07 17:25:51",
             "name": "qbittorrent",
             "recommended": false,
             "title": "qBittorrent",
@@ -300,7 +319,7 @@
             "latest_version": "1.0.3",
             "latest_app_version": "1.7.1",
             "latest_human_version": "1.7.1_1.0.3",
-            "last_update": "2023-03-30 13:03:27",
+            "last_update": "2023-04-07 17:25:51",
             "name": "chia",
             "recommended": false,
             "title": "Chia",
@@ -320,7 +339,7 @@
             "latest_version": "1.0.3",
             "latest_app_version": "v0.19.1",
             "latest_human_version": "v0.19.1_1.0.3",
-            "last_update": "2023-04-06 12:43:34",
+            "last_update": "2023-04-07 17:25:51",
             "name": "ipfs",
             "recommended": false,
             "title": "IPFS",
@@ -339,7 +358,7 @@
             "latest_version": "1.0.2",
             "latest_app_version": "1.28.1",
             "latest_human_version": "1.28.1_1.0.2",
-            "last_update": "2023-04-06 12:43:34",
+            "last_update": "2023-04-07 17:25:51",
             "name": "vaultwarden",
             "recommended": false,
             "title": "Vaultwarden",
