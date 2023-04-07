@@ -1,14 +1,14 @@
 groups:
-  - name: Vaultwarden Configuration
-    description: Configure Vaultwarden
+  - name: IPFS Configuration
+    description: Configure IPFS
   - name: User and Group Configuration
-    description: Configure User and Group for Vaultwarden
+    description: Configure User and Group for IPFS
   - name: Network Configuration
-    description: Configure Network for Vaultwarden
+    description: Configure Network for IPFS
   - name: Storage Configuration
-    description: Configure Storage for Vaultwarden
+    description: Configure Storage for IPFS
   - name: Resources Configuration
-    description: Configure Resources for Vaultwarden
+    description: Configure Resources for IPFS
 
 portals:
   web_portal:
@@ -19,33 +19,18 @@ portals:
     ports:
       - "$kubernetes-resource_configmap_portal_port"
     path: "$kubernetes-resource_configmap_portal_path"
-  admin_portal:
-    protocols:
-      - "$kubernetes-resource_configmap_portal_protocol"
-    host:
-      - "$kubernetes-resource_configmap_portal_host"
-    ports:
-      - "$kubernetes-resource_configmap_portal_port"
-    path: "$kubernetes-resource_configmap_portal_admin_path"
 
 questions:
-  - variable: vaultwardenConfig
+
+  - variable: ipfsConfig
     label: ""
-    group: Vaultwarden Configuration
+    group: IPFS Configuration
     schema:
       type: dict
       attrs:
-        - variable: adminToken
-          label: Admin Token
-          description: Setting this, will enable the admin portal
-          schema:
-            type: string
-            private: true
-            max_length: 20
-            default: ""
         - variable: additionalEnvs
           label: Additional Environment Variables
-          description: Configure additional environment variables for Vaultwarden.
+          description: Configure additional environment variables for IPFS.
           schema:
             type: list
             default: []
@@ -66,7 +51,7 @@ questions:
                         type: string
                         required: true
 
-  - variable: vaultwardenRunAs
+  - variable: ipfsRunAs
     label: ""
     group: User and Group Configuration
     schema:
@@ -74,7 +59,7 @@ questions:
       attrs:
         - variable: user
           label: User ID
-          description: The user id that Vaultwarden will run as.
+          description: The user id that IPFS will run as.
           schema:
             type: int
             min: 1
@@ -82,93 +67,80 @@ questions:
             required: true
         - variable: group
           label: Group ID
-          description: The group id that Vaultwarden will run as.
+          description: The group id that IPFS will run as.
           schema:
             type: int
             min: 1
             default: 568
             required: true
 
-  - variable: vaultwardenNetwork
+  - variable: ipfsNetwork
     label: ""
     group: Network Configuration
     schema:
       type: dict
       attrs:
-        - variable: webPort
-          label: Web Port
-          description: The port for the Vaultwarden Web UI.
+        - variable: apiPort
+          label: API Port
+          description: The port for the IPFS API (And WebUI).
           schema:
             type: int
             default: 30000
             min: 9000
             max: 65535
             required: true
-        - variable: wsEnabled
-          label: Enable Websocket
-          schema:
-            type: boolean
-            default: true
-        - variable: wsPort
-          label: Websocket Port
-          description: The port for the Vaultwarden Websocket.
+        - variable: swarmPort
+          label: Swarm Port
+          description: The port for the IPFS Swarm. Both TCP and UDP
           schema:
             type: int
-            show_if: [["wsEnabled", "=", true]]
             default: 30001
+            min: 9000
+            max: 65535
+            required: true
+        - variable: gatewayPort
+          label: Gateway Port
+          description: The port for the IPFS Gateway.
+          schema:
+            type: int
+            default: 30002
             min: 9000
             max: 65535
             required: true
         - variable: hostNetwork
           label: Host Network
           description: |
-            Bind to the host network. It's recommended to keep this disabled.</br>
+            Bind to the host network. It's recommended to keep this disabled.
           schema:
             type: boolean
             default: false
-        - variable: domain
-          label: Domain
-          description: |
-            The domain to use for Vaultwarden </br>
-            Format is: https://sub.domain.tld:port
-          schema:
-            type: string
-            default: ""
-        - variable: certificateID
-          label: Certificate
-          description: |
-            The certificate to use for Vaultwarden </br>
-            Using the Rocket method for TLS setup is NOT recommended </br>
-            Prefer a reverse proxy with a valid certificate </br>
-          schema:
-            type: int
-            "null": true
-            $ref:
-              - "definitions/certificate"
 
-  - variable: vaultwardenStorage
+  - variable: ipfsStorage
     label: ""
     group: Storage Configuration
     schema:
       type: dict
       attrs:
         - variable: data
-          label: Vaultwarden Data Storage
-          description: The path to store Vaultwarden attachments, icons, etc.
+          label: IPFS Data Storage
+          description: The path to store IPFS data.
           schema:
             type: dict
             attrs:
               - variable: type
                 label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
                 schema:
                   type: string
                   required: true
                   default: ixVolume
                   enum:
                     - value: hostPath
-                      description: Host Path
+                      description: Host Path (Path that already exists on the system)
                     - value: ixVolume
-                      description: ixVolume
+                      description: ixVolume (Dataset created automatically by the system)
               - variable: datasetName
                 label: Dataset Name
                 schema:
@@ -187,23 +159,26 @@ questions:
                   show_if: [["type", "=", "hostPath"]]
                   immutable: true
                   required: true
-        - variable: pgData
-          label: Vaultwarden Postgres Data Storage
-          description: The path to store Vaultwarden Postgres Data.
+        - variable: staging
+          label: IPFS Staging Storage
+          description: The path to store IPFS staging storage.
           schema:
             type: dict
             attrs:
               - variable: type
                 label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
                 schema:
                   type: string
                   required: true
                   default: ixVolume
                   enum:
                     - value: hostPath
-                      description: Host Path
+                      description: Host Path (Path that already exists on the system)
                     - value: ixVolume
-                      description: ixVolume
+                      description: ixVolume (Dataset created automatically by the system)
               - variable: datasetName
                 label: Dataset Name
                 schema:
@@ -212,42 +187,7 @@ questions:
                   required: true
                   hidden: true
                   immutable: true
-                  default: pgData
-                  $ref:
-                    - "normalize/ixVolume"
-              - variable: hostPath
-                label: Host Path
-                schema:
-                  type: hostpath
-                  show_if: [["type", "=", "hostPath"]]
-                  immutable: true
-                  required: true
-        - variable: pgBackup
-          label: Vaultwarden Postgres Backup Storage
-          description: The path to store Vaultwarden Postgres Backup.
-          schema:
-            type: dict
-            attrs:
-              - variable: type
-                label: Type
-                schema:
-                  type: string
-                  required: true
-                  default: ixVolume
-                  enum:
-                    - value: hostPath
-                      description: Host Path
-                    - value: ixVolume
-                      description: ixVolume
-              - variable: datasetName
-                label: Dataset Name
-                schema:
-                  type: string
-                  show_if: [["type", "=", "ixVolume"]]
-                  required: true
-                  hidden: true
-                  immutable: true
-                  default: pgBackup
+                  default: staging
                   $ref:
                     - "normalize/ixVolume"
               - variable: hostPath
@@ -271,14 +211,14 @@ questions:
             attrs:
               - variable: cpu
                 label: CPU
-                description: CPU limit for Vaultwarden.
+                description: CPU limit for IPFS.
                 schema:
                   type: string
                   default: 4000m
                   required: true
               - variable: memory
                 label: Memory
-                description: Memory limit for Vaultwarden.
+                description: Memory limit for IPFS.
                 schema:
                   type: string
                   default: 8Gi
