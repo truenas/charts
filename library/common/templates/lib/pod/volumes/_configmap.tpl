@@ -19,6 +19,10 @@ objectData: The object data to be used to render the volume.
   {{- end -}}
 
   {{- if $expandName -}}
+    {{- $object := (get $rootCtx.Values.configmap $objectName) -}}
+    {{- if not $object -}}
+      {{- fail (printf "Persistence - Expected configmap [%s] defined in <objectName> to exist" $objectName) -}}
+    {{- end -}}
     {{- $objectName = (printf "%s-%s" (include "ix.v1.common.lib.chart.names.fullname" $rootCtx) $objectName) -}}
   {{- end -}}
 

@@ -33,3 +33,60 @@ tests:
     asserts:
       - failedTemplate:
           errorMessage: Persistence - Expected <type> to be one of [emptyDir, hostPath, ixVolume, secret, configmap, device], but got [not-a-type]
+
+  - it: should fail with non-existent configmap
+    set:
+      configmap:
+        my-configmap:
+          enabled: true
+          data:
+            foo: bar
+      persistence:
+        volume1:
+          enabled: true
+          type: configmap
+          mountPath: /mnt/volume1
+          objectName: my-non-existent-configmap
+      image: &image
+        repository: nginx
+        tag: 1.17.6
+        pullPolicy: IfNotPresent
+      workload: &workload
+        main:
+          enabled: true
+          primary: true
+          type: Deployment
+          podSpec:
+            containers:
+              main:
+                enabled: true
+                primary: true
+                probes:
+                  liveness:
+                    enabled: false
+                  readiness:
+                    enabled: false
+                  startup:
+                    enabled: false
+    asserts:
+      - failedTemplate:
+          errorMessage: Persistence - Expected configmap [my-non-existent-configmap] defined in <objectName> to exist
+
+  - it: should fail with non-existent secret
+    set:
+      secret:
+        my-secret:
+          enabled: true
+          data:
+            foo: bar
+      persistence:
+        volume1:
+          enabled: true
+          type: secret
+          mountPath: /mnt/volume1
+          objectName: my-non-existent-secret
+      image: *image
+      workload: *workload
+    asserts:
+      - failedTemplate:
+          errorMessage: Persistence - Expected secret [my-non-existent-secret] defined in <objectName> to exist
