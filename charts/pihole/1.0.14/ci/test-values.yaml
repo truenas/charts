@@ -5,8 +5,7 @@ appVolumeMounts:
   dnsmasq:
     emptyDir: true
     mountPath: /etc/dnsmasq.d
-dhcp: false
-dhcp_port: 32003
+dhcp: true
 dnsConfig:
   options: []
 dns_tcp_port: 32001
@@ -14,7 +13,6 @@ dns_udp_port: 32002
 emptyDirVolumes: true
 environmentVariables: []
 extraAppVolumeMounts: []
-hostNetwork: false
 ownerGID: 568
 ownerUID: 568
 password: admin123

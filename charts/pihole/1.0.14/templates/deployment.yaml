@@ -27,7 +27,13 @@ spec:
         {{- include "common.labels.selectorLabels" . | nindent 8 }}
       annotations: {{ include "common.annotations" . | nindent 8 }}
     spec:
-      hostNetwork: {{ .Values.hostNetwork }}
+      {{/*
+       Host network is pretty much a requirement for apps like this.
+       Because NodePort can't bind ports like 53(DNS) or 67(DHCP)
+       and the majority of devices do not have option to change the port.
+      */}}
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
       containers:
         - name: {{ .Chart.Name }}
           {{ include "common.resources.limitation" . | nindent 10 }}
@@ -39,12 +45,8 @@ spec:
           {{ end }}
           securityContext:
             capabilities:
-            {{ if .Values.hostNetwork }}
               {{/* This is needed to be able to bind 53(DNS) and 67(DHCP) ports */}}
               add: ["NET_ADMIN"]
-            {{ else }}
-              add: []
-            {{ end }}
           ports:
             - name: web
               containerPort: {{ .Values.web_port }}
