@@ -30,7 +30,7 @@
             "latest_version": "1.0.77",
             "latest_app_version": "2023.4.2",
             "latest_human_version": "2023.4.2_1.0.77",
-            "last_update": "2023-04-07 17:50:37",
+            "last_update": "2023-04-10 15:27:14",
             "name": "home-assistant",
             "recommended": false,
             "title": "Home Assistant",
@@ -72,25 +72,6 @@
             "recommended": false,
             "title": "Emby Server",
             "icon_url": "https://images-na.ssl-images-amazon.com/images/I/41NwssJC1iL.png"
-        },
-        "sonarr": {
-            "app_readme": "<h1>Sonarr</h1>\n<p><a href=\"https://github.com/Sonarr/Sonarr\">Sonarr</a> is a PVR for Usenet and BitTorrent users. It can monitor multiple RSS feeds for new episodes of your favorite shows and will grab, sort and rename them.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Sonarr</code> directories.\nAfterward, the <code>Sonarr</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>",
-            "categories": [
-                "media",
-                "series"
-            ],
-            "description": "Sonarr is a PVR for Usenet and BitTorrent users.",
-            "healthy": true,
-            "healthy_error": null,
-            "location": "/__w/charts/charts/charts/sonarr",
-            "latest_version": "1.0.0",
-            "latest_app_version": "3.0.10.1567",
-            "latest_human_version": "3.0.10.1567_1.0.0",
-            "last_update": "2023-04-07 17:42:39",
-            "name": "sonarr",
-            "recommended": false,
-            "title": "Sonarr",
-            "icon_url": "https://raw.githubusercontent.com/Sonarr/Sonarr/develop/Logo/256.png"
         },
         "diskoverdata": {
             "app_readme": "<p>DiskOver App for TrueNAS SCALE</p>",
@@ -148,25 +129,6 @@
             "recommended": false,
             "title": "Pi-hole",
             "icon_url": "https://github.com/pi-hole/graphics/raw/master/Vortex/Vortex_Vertical_wordmark_lightmode.png?raw=true)"
-        },
-        "radarr": {
-            "app_readme": "<h1>Radarr</h1>\n<p><a href=\"https://github.com/Radarr/Radarr\">Radarr</a> is a movie collection manager for Usenet and BitTorrent users.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Radarr</code> directories.\nAfterward, the <code>Radarr</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>",
-            "categories": [
-                "media",
-                "movies"
-            ],
-            "description": "Radarr is a movie collection manager for Usenet and BitTorrent users.",
-            "healthy": true,
-            "healthy_error": null,
-            "location": "/__w/charts/charts/charts/radarr",
-            "latest_version": "1.0.0",
-            "latest_app_version": "4.3.2.6857",
-            "latest_human_version": "4.3.2.6857_1.0.0",
-            "last_update": "2023-04-07 17:43:54",
-            "name": "radarr",
-            "recommended": false,
-            "title": "Radarr",
-            "icon_url": "https://raw.githubusercontent.com/Radarr/Radarr/develop/Logo/256.png"
         },
         "wg-easy": {
             "app_readme": "<h1>WG-Easy</h1>\n<p><a href=\"https://github.com/WeeJeWel/wg-easy\">WG-Easy (WireGuard Easy)</a> is the easiest way to install &amp; manage WireGuard!</p>",
@@ -325,6 +287,25 @@
             "title": "qBittorrent",
             "icon_url": "https://upload.wikimedia.org/wikipedia/commons/9/9e/Qbittorrent_logo.png"
         },
+        "sonarr": {
+            "app_readme": "<h1>Sonarr</h1>\n<p><a href=\"https://github.com/Sonarr/Sonarr\">Sonarr</a> is a PVR for Usenet and BitTorrent users. It can monitor multiple RSS feeds for new episodes of your favorite shows and will grab, sort and rename them.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Sonarr</code> directories.\nAfterward, the <code>Sonarr</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>",
+            "categories": [
+                "media",
+                "series"
+            ],
+            "description": "Sonarr is a PVR for Usenet and BitTorrent users.",
+            "healthy": true,
+            "healthy_error": null,
+            "location": "/__w/charts/charts/community/sonarr",
+            "latest_version": "1.0.0",
+            "latest_app_version": "3.0.10.1567",
+            "latest_human_version": "3.0.10.1567_1.0.0",
+            "last_update": null,
+            "name": "sonarr",
+            "recommended": false,
+            "title": "Sonarr",
+            "icon_url": "https://raw.githubusercontent.com/Sonarr/Sonarr/develop/Logo/256.png"
+        },
         "chia": {
             "app_readme": "<h1>Chia</h1>\n<p>This container runs as <code>root</code> user.</p>\n<p>When a port is set to &lt; 9000. Host Networking is enabled automatically.</p>\n<blockquote>\n<p>Also NodePort services turn to ClusterIP services, to avoid attempts to bind ports twice.</p>\n</blockquote>\n<p>Key file is stored in <code>/plots/keyfile</code> and is generated automatically, <strong>only</strong> if the file does not exist.\nIf you want to use your own <code>keyfile</code>, you can create a file called <code>keyfile</code> in the <code>/plots</code> directory and it will be used instead.</p>\n<blockquote>\n<p>When set on <code>harvester</code> mode <code>keys</code> variable is set to <code>none</code> and no generation is performed.</p>\n</blockquote>",
             "categories": [
@@ -343,6 +324,25 @@
             "recommended": false,
             "title": "Chia",
             "icon_url": "https://www.chia.net/wp-content/uploads/2022/09/chia-logo.svg"
+        },
+        "radarr": {
+            "app_readme": "<h1>Radarr</h1>\n<p><a href=\"https://github.com/Radarr/Radarr\">Radarr</a> is a movie collection manager for Usenet and BitTorrent users.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Radarr</code> directories.\nAfterward, the <code>Radarr</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>",
+            "categories": [
+                "media",
+                "movies"
+            ],
+            "description": "Radarr is a movie collection manager for Usenet and BitTorrent users.",
+            "healthy": true,
+            "healthy_error": null,
+            "location": "/__w/charts/charts/community/radarr",
+            "latest_version": "1.0.0",
+            "latest_app_version": "4.3.2.6857",
+            "latest_human_version": "4.3.2.6857_1.0.0",
+            "last_update": null,
+            "name": "radarr",
+            "recommended": false,
+            "title": "Radarr",
+            "icon_url": "https://raw.githubusercontent.com/Radarr/Radarr/develop/Logo/256.png"
         },
         "ipfs": {
             "app_readme": "<h1>IPFS</h1>\n<p><a href=\"https://ipfs.tech\">Interplanetary Filesystem</a> - the Web3 standard for content-addressing, interoperable with HTTP</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the ipfs directories.\nAfterward, the <code>ipfs</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).</p>\n</blockquote>",
