@@ -1,6 +1,6 @@
 lidarrConfig:
   additionalEnvs:
-    - name: LIDARR__AUTHENTICATION_METHOD
+    - name: LIDARR__API_KEY
       value: some-long-api-key
     - name: LIDARR__LOG_LEVEL
       value: error
