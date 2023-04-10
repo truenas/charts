@@ -1,0 +1,11 @@
+lidarrNetwork:
+  webPort: 31000
+
+lidarrRunAs:
+  user: 1000
+  group: 1000
+
+lidarrStorage:
+  config:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/config

@@ -1,0 +1,21 @@
+lidarrConfig:
+  additionalEnvs:
+    - name: LIDARR__AUTHENTICATION_METHOD
+      value: some-long-api-key
+    - name: LIDARR__LOG_LEVEL
+      value: error
+
+lidarrNetwork:
+  webPort: 31000
+
+lidarrStorage:
+  config:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/config
+  additionalStorages:
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/pop_music
+    mountPath: /pop_music
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/country_music
+    mountPath: /country_music
