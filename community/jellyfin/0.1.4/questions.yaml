@@ -1,0 +1,115 @@
+groups:
+  - name: "Jellyfin Configuration"
+    description: "Configure Jellyfin"
+  - name: "Networking"
+    description: "Configure Networking for Jellyfin"
+  - name: "Storage"
+    description: "Configure Storage for Jellyfin"
+  - name: "Resource Reservation"
+    description: "Specify resources to be allocated to workload"
+
+questions:
+  - variable: hostNetwork
+    label: "Enable Host Network"
+    group: "Networking"
+    schema:
+      type: boolean
+      default: false
+
+  # Specify GPU configuration
+  - variable: gpuConfiguration
+    label: "GPU Configuration"
+    group: "Resource Reservation"
+    schema:
+      type: dict
+      $ref:
+        - "definitions/gpuConfiguration"
+      attrs: []
+
+  # Port configuration
+  - variable: jellyfinServerHttp
+    label: "Configure Jellyfin Server HTTP Service"
+    group: "Networking"
+    schema:
+      show_if: [[ "hostNetwork", "!=", true]]
+      type: dict
+      attrs:
+        - variable: port
+          label: "Port to expose for Jellyfin Server UI"
+          schema:
+            type: int
+            min: 9000
+            max: 65535
+            default: 8096
+
+  - variable: appVolumeMounts
+    label: "Jellyfin Storage"
+    group: "Storage"
+    schema:
+      type: dict
+      attrs:
+        - variable: config
+          label: "Config"
+          schema:
+            type: dict
+            attrs:
+            - variable: datasetName
+              label: "Jellyfin Server Config Volume Name"
+              schema:
+                type: string
+                $ref:
+                  - "normalize/ixVolume"
+                show_if: [["hostPathEnabled", "=", false]]
+                default: "ix-jellyfin_config"
+                editable: false
+                hidden: true
+            - variable: mountPath
+              label: "Jellyfin Server Config Mount Path"
+              description: "Path where the volume will be mounted inside the pod"
+              schema:
+                type: path
+                editable: false
+                hidden: true
+                default: "/config"
+            - variable: hostPathEnabled
+              label: "Enable Host Path for Jellyfin Server Config Volume"
+              schema:
+                type: boolean
+                default: false
+                show_subquestions_if: true
+                subquestions:
+                  - variable: hostPath
+                    label: "Host Path for Jellyfin Server Config Volume"
+                    schema:
+                      type: hostpath
+                      required: true
+
+  - variable: extraAppVolumeMounts
+    label: "Jellyfin Server Extra Host Path Volumes"
+    group: "Storage"
+    schema:
+      type: list
+      items:
+        - variable: extraAppVolume
+          label: "Extra Host Path Volume"
+          schema:
+            type: dict
+            attrs:
+              - variable: mountPath
+                label: "Mount Path inside the container"
+                schema:
+                  type: path
+                  required: true
+                  default: "/media"
+              - variable: hostPath
+                label: "Host Path"
+                description: "Host path"
+                schema:
+                  type: hostpath
+                  required: true
+              - variable: readOnly
+                label: "Read Only"
+                description: "Mount hostpath in read-only mode"
+                schema:
+                  type: boolean
+                  default: false

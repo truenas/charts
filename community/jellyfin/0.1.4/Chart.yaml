@@ -1,0 +1,20 @@
+name: jellyfin
+description: Jellyfin is the volunteer-built media solution that puts you in control of your media.
+annotations:
+  title: jellyfin
+type: application
+version: 0.1.4
+apiVersion: v2
+appVersion: "10.8.9"
+kubeVersion: ">=1.16.0-0"
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.0.3
+home: https://jellyfin.org/
+icon: https://jellyfin.org/images/logo.svg
+sources:
+  - https://github.com/jellyfin/jellyfin
+keywords:
+  - media
+  - jellyfin

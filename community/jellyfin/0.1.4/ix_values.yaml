@@ -1,0 +1,7 @@
+image:
+  repository: jellyfin/jellyfin
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+resources: {}
+
