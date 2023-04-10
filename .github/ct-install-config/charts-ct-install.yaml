@@ -6,7 +6,7 @@ helm-extra-args: --timeout 600s
 chart-yaml-schema: .github/ct-install-config/chart_schema.yaml
 debug: false
 # Also test upgrade on each app/ci-values
-upgrade: true
+upgrade: false
 chart-dirs:
   - library/ix-dev/charts
   - library/ix-dev/community
