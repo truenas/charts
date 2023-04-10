@@ -14,15 +14,14 @@ workload:
           securityContext:
             runAsUser: {{ .Values.radarrRunAs.user }}
             runAsGroup: {{ .Values.radarrRunAs.group }}
-          {{ with .Values.radarrConfig.additionalEnvs }}
           env:
+            RADARR__PORT: {{ .Values.radarrNetwork.webPort }}
+            RADARR__INSTANCE_NAME: {{ .Values.radarrConfig.instanceName }}
+          {{ with .Values.radarrConfig.additionalEnvs }}
             {{ range $env := . }}
             {{ $env.name }}: {{ $env.value }}
             {{ end }}
           {{ end }}
-          env:
-            RADARR__PORT: {{ .Values.radarrNetwork.webPort }}
-            RADARR__INSTANCE_NAME: {{ .Values.radarrConfig.instanceName }}
           probes:
             liveness:
               enabled: true
