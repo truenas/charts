@@ -1,0 +1,10 @@
+jellyfinNetwork:
+  hostNetwork: true
+
+jellyfinStorage:
+  config:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/config
+  cache:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/cache

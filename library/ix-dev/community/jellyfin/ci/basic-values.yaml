@@ -1,0 +1,14 @@
+jellyfinNetwork:
+  webPort: 31000
+
+jellyfinRunAs:
+  user: 1000
+  group: 1000
+
+jellyfinStorage:
+  config:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/config
+  cache:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/cache
