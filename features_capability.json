@@ -1,4 +1,8 @@
 {
+  "normalize/acl": {
+    "stable": {"min":  "23.10-ALPHA"},
+    "nightlies": {"min":  "23.10-MASTER-somever"}
+  },
   "normalize/interfaceConfiguration": {
     "stable": {"min":  "20.12-ALPHA"},
     "nightlies": {"min":  "20.10-MASTER-somever"}
