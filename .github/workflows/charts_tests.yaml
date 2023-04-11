@@ -20,7 +20,7 @@ jobs:
         helm-version:
           - v3.9.4
           - v3.10.3
-          - v3.11.1
+          - v3.11.2
     steps:
       - name: Checkout
         uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
@@ -45,21 +45,52 @@ jobs:
         run: |
           ct lint --config .github/ct-install-config/charts-ct-lint.yaml
 
+  list-changed:
+    needs:
+      - lint
+    name: List Changed Charts
+    runs-on: ubuntu-22.04
+    outputs:
+      changed_json: ${{ steps.list-changed.outputs.changed_json }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
+        with:
+          # Depth 0 is required for chart-testing to work properly
+          fetch-depth: 0
+
+      - name: Set up chart-testing
+        uses: helm/chart-testing-action@afea100a513515fbd68b0e72a7bb0ae34cb62aec # tag=v2.3.1
+
+      - name: List Changed Charts
+        id: list-changed
+        shell: bash
+        run: |
+          changed_json=$(ct list-changed \
+            --config .github/ct-install-config/charts-ct-install.yaml | \
+            jq --raw-input '.' | jq --compact-output --slurp '.')
+
+          echo "changed_json=$changed_json" >> $GITHUB_OUTPUT
+          echo 'Detected changes in the following charts:'
+          echo "$changed_json" | jq --raw-output '.[]'
+
   install:
     needs:
       - lint
-    name: Install Charts
+      - list-changed
+    name: Install Chart
     runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
       matrix:
-        # We run tests on k3s version of latest SCALE release, SCALE nightly and manually defined "latest"
-        k3s-version:
-          - v1.25.3+k3s1
+        chart: ${{ fromJson(needs.list-changed.outputs.changed_json) }}
         # We run tests on Helm version of latest SCALE release, SCALE nightly and manually defined "latest"
         helm-version:
           - v3.9.4
-          - v3.11.1
+          - v3.11.2
+        # We run tests on k3s version of latest SCALE release, SCALE nightly and manually defined "latest"
+        k3s-version:
+          - v1.25.3+k3s1
 
     steps:
       - name: Checkout
@@ -120,5 +151,6 @@ jobs:
           k3d-args: --k3s-arg --disable=metrics-server@server:*
 
       - name: Run chart-testing (install)
+        shell: bash
         run: |
-          ct install --config .github/ct-install-config/charts-ct-install.yaml
+          ct install --config .github/ct-install-config/charts-ct-install.yaml --charts ${{ matrix.chart }}
