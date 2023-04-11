@@ -1,0 +1,7 @@
+adguardStorage:
+  work:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/work
+  conf:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/conf
