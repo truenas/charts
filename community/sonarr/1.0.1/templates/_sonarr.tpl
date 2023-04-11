@@ -14,15 +14,14 @@ workload:
           securityContext:
             runAsUser: {{ .Values.sonarrRunAs.user }}
             runAsGroup: {{ .Values.sonarrRunAs.group }}
-          {{ with .Values.sonarrConfig.additionalEnvs }}
           env:
+            SONARR__PORT: {{ .Values.sonarrNetwork.webPort }}
+            SONARR__INSTANCE_NAME: {{ .Values.sonarrConfig.instanceName }}
+          {{ with .Values.sonarrConfig.additionalEnvs }}
             {{ range $env := . }}
             {{ $env.name }}: {{ $env.value }}
             {{ end }}
           {{ end }}
-          env:
-            SONARR__PORT: {{ .Values.sonarrNetwork.webPort }}
-            SONARR__INSTANCE_NAME: {{ .Values.sonarrConfig.instanceName }}
           probes:
             liveness:
               enabled: true

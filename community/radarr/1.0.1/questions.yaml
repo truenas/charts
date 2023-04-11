@@ -1,14 +1,14 @@
 groups:
-  - name: Sonarr Configuration
-    description: Configure Sonarr
+  - name: Radarr Configuration
+    description: Configure Radarr
   - name: User and Group Configuration
-    description: Configure User and Group for Sonarr
+    description: Configure User and Group for Radarr
   - name: Network Configuration
-    description: Configure Network for Sonarr
+    description: Configure Network for Radarr
   - name: Storage Configuration
-    description: Configure Storage for Sonarr
+    description: Configure Storage for Radarr
   - name: Resources Configuration
-    description: Configure Resources for Sonarr
+    description: Configure Resources for Radarr
 
 portals:
   web_portal:
@@ -21,22 +21,22 @@ portals:
     path: "$kubernetes-resource_configmap_portal_path"
 
 questions:
-  - variable: sonarrConfig
+  - variable: radarrConfig
     label: ""
-    group: Sonarr Configuration
+    group: Radarr Configuration
     schema:
       type: dict
       attrs:
         - variable: instanceName
           label: Instance Name
-          description: The name of the Sonarr instance.
+          description: The name of the Radarr instance.
           schema:
             type: string
-            default: Sonarr
+            default: "Radarr"
             required: true
         - variable: additionalEnvs
           label: Additional Environment Variables
-          description: Configure additional environment variables for Sonarr.
+          description: Configure additional environment variables for Radarr.
           schema:
             type: list
             default: []
@@ -57,7 +57,7 @@ questions:
                         type: string
                         required: true
 
-  - variable: sonarrRunAs
+  - variable: radarrRunAs
     label: ""
     group: User and Group Configuration
     schema:
@@ -65,7 +65,7 @@ questions:
       attrs:
         - variable: user
           label: User ID
-          description: The user id that Sonarr will run as.
+          description: The user id that Radarr will run as.
           schema:
             type: int
             min: 1
@@ -73,14 +73,14 @@ questions:
             required: true
         - variable: group
           label: Group ID
-          description: The group id that Sonarr will run as.
+          description: The group id that Radarr will run as.
           schema:
             type: int
             min: 1
             default: 568
             required: true
 
-  - variable: sonarrNetwork
+  - variable: radarrNetwork
     label: ""
     group: Network Configuration
     schema:
@@ -88,7 +88,7 @@ questions:
       attrs:
         - variable: webPort
           label: Web Port
-          description: The port for the Sonarr Web UI.
+          description: The port for the Radarr Web UI.
           schema:
             type: int
             default: 30000
@@ -103,15 +103,15 @@ questions:
             type: boolean
             default: false
 
-  - variable: sonarrStorage
+  - variable: radarrStorage
     label: ""
     group: Storage Configuration
     schema:
       type: dict
       attrs:
         - variable: config
-          label: Sonarr Config Storage
-          description: The path to store Sonarr Configuration.
+          label: Radarr Config Storage
+          description: The path to store Radarr Configuration.
           schema:
             type: dict
             attrs:
@@ -123,11 +123,11 @@ questions:
                 schema:
                   type: string
                   required: true
-                  default: ixVolume
+                  default: "ixVolume"
                   enum:
-                    - value: hostPath
+                    - value: "hostPath"
                       description: Host Path (Path that already exists on the system)
-                    - value: ixVolume
+                    - value: "ixVolume"
                       description: ixVolume (Dataset created automatically by the system)
               - variable: datasetName
                 label: Dataset Name
@@ -137,7 +137,7 @@ questions:
                   required: true
                   hidden: true
                   immutable: true
-                  default: config
+                  default: "config"
                   $ref:
                     - "normalize/ixVolume"
               - variable: hostPath
@@ -149,7 +149,7 @@ questions:
                   required: true
         - variable: additionalStorages
           label: Additional Storage
-          description: Additional storage for Sonarr.
+          description: Additional storage for Radarr.
           schema:
             type: list
             default: []
@@ -167,11 +167,11 @@ questions:
                       schema:
                         type: string
                         required: true
-                        default: ixVolume
+                        default: "ixVolume"
                         enum:
-                          - value: hostPath
+                          - value: "hostPath"
                             description: Host Path (Path that already exists on the system)
-                          - value: ixVolume
+                          - value: "ixVolume"
                             description: ixVolume (Dataset created automatically by the system)
                     - variable: mountPath
                       label: Mount Path
@@ -211,15 +211,15 @@ questions:
             attrs:
               - variable: cpu
                 label: CPU
-                description: CPU limit for Sonarr.
+                description: CPU limit for Radarr.
                 schema:
                   type: string
-                  default: 4000m
+                  default: "4000m"
                   required: true
               - variable: memory
                 label: Memory
-                description: Memory limit for Sonarr.
+                description: Memory limit for Radarr.
                 schema:
                   type: string
-                  default: 8Gi
+                  default: "8Gi"
                   required: true

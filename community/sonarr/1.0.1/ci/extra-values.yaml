@@ -1,6 +1,6 @@
 sonarrConfig:
   additionalEnvs:
-    - name: SONARR__AUTHENTICATION_METHOD
+    - name: SONARR__API_KEY
       value: some-long-api-key
     - name: SONARR__LOG_LEVEL
       value: error
