@@ -216,7 +216,7 @@ questions:
                   required: true
                   hidden: true
                   immutable: true
-                  default: "cache"
+                  default: "transcodes"
                   $ref:
                     - "normalize/ixVolume"
               - variable: hostPath
