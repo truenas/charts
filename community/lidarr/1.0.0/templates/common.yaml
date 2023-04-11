@@ -1,0 +1,9 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "lidarr.workload" $ | fromYaml) -}}
+
+{{/* Create the configmap for portal manually*/}}
+{{- include "lidarr.portal" $ -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}
