@@ -1,5 +1,4 @@
 # Default values for ix-chart.
-
 image:
   repository: nginx
   pullPolicy: IfNotPresent
@@ -43,3 +42,5 @@ securityContext:
   capabilities: []
 tty: true
 stdin: true
+# CI Enabled
+ci: true
