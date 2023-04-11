@@ -32,7 +32,7 @@ questions:
           description: The name of the Radarr instance.
           schema:
             type: string
-            default: Radarr
+            default: "Radarr"
             required: true
         - variable: additionalEnvs
           label: Additional Environment Variables
@@ -123,11 +123,11 @@ questions:
                 schema:
                   type: string
                   required: true
-                  default: ixVolume
+                  default: "ixVolume"
                   enum:
-                    - value: hostPath
+                    - value: "hostPath"
                       description: Host Path (Path that already exists on the system)
-                    - value: ixVolume
+                    - value: "ixVolume"
                       description: ixVolume (Dataset created automatically by the system)
               - variable: datasetName
                 label: Dataset Name
@@ -137,7 +137,7 @@ questions:
                   required: true
                   hidden: true
                   immutable: true
-                  default: config
+                  default: "config"
                   $ref:
                     - "normalize/ixVolume"
               - variable: hostPath
@@ -167,11 +167,11 @@ questions:
                       schema:
                         type: string
                         required: true
-                        default: ixVolume
+                        default: "ixVolume"
                         enum:
-                          - value: hostPath
+                          - value: "hostPath"
                             description: Host Path (Path that already exists on the system)
-                          - value: ixVolume
+                          - value: "ixVolume"
                             description: ixVolume (Dataset created automatically by the system)
                     - variable: mountPath
                       label: Mount Path
@@ -214,12 +214,12 @@ questions:
                 description: CPU limit for Radarr.
                 schema:
                   type: string
-                  default: 4000m
+                  default: "4000m"
                   required: true
               - variable: memory
                 label: Memory
                 description: Memory limit for Radarr.
                 schema:
                   type: string
-                  default: 8Gi
+                  default: "8Gi"
                   required: true
