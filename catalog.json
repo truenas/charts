@@ -49,7 +49,7 @@
             "latest_version": "1.0.0",
             "latest_app_version": "8.7.0",
             "latest_human_version": "8.7.0_1.0.0",
-            "last_update": null,
+            "last_update": "2023-04-11 15:33:26",
             "name": "elastic-search",
             "recommended": false,
             "title": "Elastic Search",
@@ -401,6 +401,25 @@
             "recommended": false,
             "title": "IPFS",
             "icon_url": "https://avatars.githubusercontent.com/u/10536621"
+        },
+        "adguard-home": {
+            "app_readme": "<h1>AdGuard Home</h1>\n<p>During the setup wizard, AdGuard Home presents an option to select on which port the web interface will be available.\n(Defaults to 80. Which is a privileged port and also usually the TrueNAS SCALE UI uses that port)\nBecause of that, App will force the webUI to listen to port 30000 (or the port selected by user in the TrueNAS SCALE UI).</p>\n<p>If you select a different port in the wizard, the Dashboard will not work initially but\nafter a couple of minutes container will automatically restart and the Dashboard will\nbe available on the port you selected on the TrueNAS SCALE UI.</p>\n<blockquote>\n<ul>\n<li>AdGuard runs as <code>root</code> user.</li>\n<li>AdGuard runs with host networking enabled.</li>\n</ul>\n</blockquote>",
+            "categories": [
+                "dns",
+                "adblock"
+            ],
+            "description": "Free and open source, powerful network-wide ads & trackers blocking DNS server.",
+            "healthy": true,
+            "healthy_error": null,
+            "location": "/__w/charts/charts/community/adguard-home",
+            "latest_version": "1.0.0",
+            "latest_app_version": "v0.107.26",
+            "latest_human_version": "v0.107.26_1.0.0",
+            "last_update": null,
+            "name": "adguard-home",
+            "recommended": false,
+            "title": "AdGuard Home",
+            "icon_url": "https://github.com/AdguardTeam/AdGuardHome/raw/master/doc/adguard_home_darkmode.svg"
         },
         "vaultwarden": {
             "app_readme": "<h1>Vaultwarden</h1>\n<p><a href=\"https://github.com/dani-garcia/vaultwarden\">Vaultwarden</a> Alternative implementation of the <code>Bitwarden</code> server API written in Rust and compatible with upstream Bitwarden clients</p>\n<blockquote>\n<p>During the installation process, a container will be launched with <strong>root</strong> privileges. This is required\nin order to apply the correct permissions to the <code>Vaultwarden</code> data directory. Afterward, the <code>Vaultwarden</code> container\nwill run as a <strong>non</strong>-root user (default <code>568</code>).\nSame applies to the <code>postgres</code> container. This will run afterwards as a <strong>non</strong>-root user (<code>999</code>).\nOn each upgrade, a container will be launched with <strong>root</strong> privileges in order to apply the correct\npermissions to the <code>postgres</code> <strong>backups</strong> directory. Container that performs the backup will run as a <strong>non</strong>-root user (<code>999</code>) afterwards.\nKeep in mind the permissions on the backup directory will be changed to <code>999:999</code> on <strong>every</strong> update.\nBut will only be changed once for the <code>Vaultwarden</code> and <code>postgres</code> data directories.</p>\n</blockquote>\n<p>While the option to use <code>Rocket</code> for TLS is there, it is not\n<a href=\"https://github.com/dani-garcia/vaultwarden/wiki/Enabling-HTTPS#via-rocket\">recommended</a>.\nInstead, use a reverse proxy to handle TLS termination.</p>\n<p>Using <code>HTTPS</code> is <strong>required</strong> for the most of the features to work (correctly).</p>",
