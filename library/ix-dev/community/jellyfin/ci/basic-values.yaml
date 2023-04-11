@@ -12,3 +12,11 @@ jellyfinStorage:
   cache:
     type: hostPath
     hostPath: /mnt/{{ .Release.Namespace }}/cache
+  transcodes:
+    type: emptyDir
+    medium: Memory
+    size: 1Gi
+
+# TODO: Test on a GPU-enabled system
+# jellyfinGPU:
+#   nvidia.com/gpu: 1

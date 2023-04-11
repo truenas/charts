@@ -15,7 +15,9 @@ workload:
             runAsUser: {{ .Values.jellyfinRunAs.user }}
             runAsGroup: {{ .Values.jellyfinRunAs.group }}
           env:
-            JELLYFIN_PublishedServerUrl: {{ .Values.jellyfinConfig.publishedServerUrl | default "" }}
+            {{ with .Values.jellyfinConfig.publishedServerUrl }}
+            JELLYFIN_PublishedServerUrl: {{ . | quote }}
+            {{ end }}
           {{ with .Values.jellyfinConfig.additionalEnvs }}
             {{ range $env := . }}
             {{ $env.name }}: {{ $env.value }}
@@ -24,7 +26,6 @@ workload:
           probes:
             liveness:
               enabled: true
-              # TODO: Check if there is any https setting in the jellyfin UI
               type: http
               port: 8096
               path: /health
@@ -85,6 +86,22 @@ persistence:
           mountPath: /cache
         01-permissions:
           mountPath: /mnt/directories/cache
+  transcode:
+    enabled: true
+    type: {{ .Values.jellyfinStorage.transcodes.type }}
+    datasetName: {{ .Values.jellyfinStorage.transcodes.datasetName | default "" }}
+    hostPath: {{ .Values.jellyfinStorage.transcodes.hostPath | default "" }}
+    medium: {{ .Values.jellyfinStorage.transcodes.medium | default "" }}
+    {{/* Size of the emptyDir */}}
+    size: {{ .Values.jellyfinStorage.transcodes.size | default "" }}
+    targetSelector:
+      jellyfin:
+        jellyfin:
+          mountPath: /config/transcodes
+        {{ if ne .Values.jellyfinStorage.transcodes.type "emptyDir" }}
+        01-permissions:
+          mountPath: /mnt/directories/transcodes
+        {{ end }}
   tmp:
     enabled: true
     type: emptyDir
@@ -105,4 +122,15 @@ persistence:
         01-permissions:
           mountPath: /mnt/directories{{ $storage.mountPath }}
   {{- end }}
+{{ with .Values.jellyfinGPU }}
+  {{ if gt (. | len) 1 }}
+    {{- fail "Jellyfin - Max [1] GPUs allowed" -}}
+  {{ end }}
+scaleGPU:
+  - gpu:
+      {{ . | keys | first }}: {{ . | values | first }}
+    targetSelector:
+      jellyfin:
+        - jellyfin
+{{ end }}
 {{- end -}}

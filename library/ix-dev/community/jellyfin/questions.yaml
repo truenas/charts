@@ -185,6 +185,71 @@ questions:
                   show_if: [["type", "=", "hostPath"]]
                   immutable: true
                   required: true
+        - variable: transcodes
+          label: Jellyfin Transcodes Storage
+          description: The path to store Jellyfin Transcodes.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.</br>
+                  emptyDir: Is a temporary directory that will be created on the disk or in memory.
+                schema:
+                  type: string
+                  required: true
+                  default: "ixVolume"
+                  enum:
+                    - value: "hostPath"
+                      description: Host Path (Path that already exists on the system)
+                    - value: "ixVolume"
+                      description: ixVolume (Dataset created automatically by the system)
+                    - value: "emptyDir"
+                      description: emptyDir (Temporary directory created on the disk or in memory)
+              - variable: datasetName
+                label: Dataset Name
+                schema:
+                  type: string
+                  show_if: [["type", "=", "ixVolume"]]
+                  required: true
+                  hidden: true
+                  immutable: true
+                  default: "cache"
+                  $ref:
+                    - "normalize/ixVolume"
+              - variable: hostPath
+                label: Host Path
+                schema:
+                  type: hostpath
+                  show_if: [["type", "=", "hostPath"]]
+                  immutable: true
+                  required: true
+              - variable: medium
+                label: emptyDir Medium
+                description: |
+                  Disk: Creates a temporary directory on the disk.</br>
+                  Memory: Creates a temporary directory in memory.
+                schema:
+                  type: string
+                  show_if: [["type", "=", "emptyDir"]]
+                  default: ""
+                  enum:
+                    - value: ""
+                      description: Disk (Temporary directory created on the disk)
+                    - value: "Memory"
+                      description: Memory (Temporary directory created in memory)
+              - variable: size
+                label: emptyDir Size Limit
+                description: |
+                  The maximum size of the temporary directory.</br>
+                  For example: 2Gi
+                schema:
+                  type: string
+                  show_if: [["type", "=", "emptyDir"]]
+                  default: "2Gi"
+
         - variable: additionalStorages
           label: Additional Storage
           description: Additional storage for Jellyfin.
@@ -261,3 +326,12 @@ questions:
                   type: string
                   default: "8Gi"
                   required: true
+
+  - variable: jellyfinGPU
+    group: Resources Configuration
+    label: GPU Configuration
+    schema:
+      type: dict
+      $ref:
+        - "definitions/gpuConfiguration"
+      attrs: []

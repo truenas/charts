@@ -11,6 +11,7 @@ resources:
 jellyfinConfig:
   publishedServerUrl: ''
   additionalEnvs: []
+jellyfinGPU: {}
 jellyfinNetwork:
   webPort: 30000
   hostNetwork: false
@@ -26,7 +27,10 @@ jellyfinStorage:
     type: ixVolume
     hostPath: ''
     datasetName: cache
-  # TODO: transcode dir
+  transcodes:
+    type: ixVolume
+    hostPath: ''
+    datasetName: transcodes
+    medium: ''
+    size: ''
   additionalStorages: []
-
-# TODO: gpu support
