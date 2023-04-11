@@ -17,7 +17,7 @@ vaultwardenNetwork:
   wsEnabled: true
   wsPort: 30001
   hostNetwork: false
-  certificateID: ''
+  certificateID: 0
   domain: ''
 
 vaultwardenRunAs:
