@@ -1,0 +1,25 @@
+name: gitea
+description: Gitea - Git with a cup of tea
+annotations:
+  title: Gitea
+type: application
+version: 1.0.0
+apiVersion: v2
+appVersion: '1.19.0'
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.0.3
+home: https://gitea.io/en-us
+icon: https://gitea.com/assets/img/logo.svg
+sources:
+  - https://gitea.io/en-us
+  - https://github.com/truenas/charts/tree/master/community/gitea
+  - https://docs.gitea.io/en-us/install-with-docker-rootless
+keywords:
+  - git
+  - gitea

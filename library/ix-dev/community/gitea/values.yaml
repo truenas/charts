@@ -1,0 +1,44 @@
+image:
+  repository: gitea/gitea
+  pullPolicy: IfNotPresent
+  tag: 1.19.0-rootless
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+giteaConfig:
+  additionalEnvs: []
+
+giteaNetwork:
+  webPort: 30000
+  sshPort: 30001
+  certificateID: ""
+  rootURL: ""
+  hostNetwork: false
+
+# FIXME: Currently only user 1000 works.
+# Any other uid is not mapped to the internal "git" user.
+# https://github.com/go-gitea/gitea/issues/23632
+giteaRunAs:
+  user: 1000
+  group: 1000
+
+giteaStorage:
+  data:
+    type: ixVolume
+    hostPath: ""
+    datasetName: data
+  config:
+    type: ixVolume
+    hostPath: ""
+    datasetName: config
+  pgData:
+    type: ixVolume
+    hostPath: ""
+    datasetName: pgData
+  pgBackup:
+    type: ixVolume
+    hostPath: ""
+    datasetName: pgBackup
