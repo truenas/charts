@@ -1,7 +1,7 @@
 image:
   repository: docker.elastic.co/elasticsearch/elasticsearch
   pullPolicy: IfNotPresent
-  tag: '8.7.0'
+  tag: 8.7.0
 
 resources:
   limits:
@@ -9,7 +9,7 @@ resources:
     memory: 8Gi
 
 esConfig:
-  password: ""
+  password: ''
   heapSize: 512m
   nodeName: elastic_search_node
   additionalEnvs: []
@@ -22,7 +22,7 @@ esRunAs:
 esNetwork:
   httpPort: 30000
   hostNetwork: false
-  certificateID: ""
+  certificateID: ''
 
 esStorage:
   data:
