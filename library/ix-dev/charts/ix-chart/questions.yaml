@@ -494,6 +494,7 @@ questions:
                   Format: 100Mi, 1Gi, 2Gi etc
                 schema:
                   type: string
+                  valid_chars: "^([+-]?[0-9.]+)([eEinumkKMGTP]*[-+]?[0-9]*)$"
 
   # Volumes
   - variable: volumes
