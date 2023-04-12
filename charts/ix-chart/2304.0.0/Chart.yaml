@@ -1,0 +1,20 @@
+name: ix-chart
+description: A Helm chart for deploying simple workloads Kubernetes
+annotations:
+  title: ix-chart
+type: application
+version: 2304.0.0
+apiVersion: v2
+appVersion: v1
+kubeVersion: ">=1.16.0-0"
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+dependencies:
+  - name: common
+    repository: file://../../../common/2207.0.0
+    version: 2207.0.0
+home: https://www.truenas.com/
+icon: https://www.ixsystems.com/wp-content/uploads/2021/06/ix_logo_200x47.png
+keywords: []
+sources: []

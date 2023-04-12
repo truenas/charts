@@ -9,13 +9,13 @@
             "healthy": true,
             "healthy_error": null,
             "location": "/__w/charts/charts/charts/ix-chart",
-            "latest_version": "2212.0.1",
+            "latest_version": "2304.0.0",
             "latest_app_version": "v1",
-            "latest_human_version": "v1_2212.0.1",
-            "last_update": "2022-12-19 11:37:56",
+            "latest_human_version": "v1_2304.0.0",
+            "last_update": "2023-04-11 15:36:44",
             "name": "ix-chart",
             "recommended": false,
-            "title": "Ix-chart",
+            "title": "ix-chart",
             "icon_url": null
         },
         "home-assistant": {
@@ -415,7 +415,7 @@
             "latest_version": "1.0.0",
             "latest_app_version": "v0.107.26",
             "latest_human_version": "v0.107.26_1.0.0",
-            "last_update": null,
+            "last_update": "2023-04-11 15:36:31",
             "name": "adguard-home",
             "recommended": false,
             "title": "AdGuard Home",
@@ -440,6 +440,25 @@
             "title": "Vaultwarden",
             "icon": "https://raw.githubusercontent.com/dani-garcia/vaultwarden/main/src/static/images/vaultwarden-icon.png",
             "icon_url": null
+        },
+        "gitea": {
+            "app_readme": "<h1>Gitea</h1>\n<p><a href=\"https://gitea.io/en-us\">Gitea</a> - Git with a cup of tea</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>gitea</code> directories.\nAfterward, the <code>gitea</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nSame applies to the <code>postgres</code> container. This will run afterwards as a <strong>non</strong>-root user (<code>999</code>).\nOn each upgrade, a container will be launched with <strong>root</strong> privileges in order to apply the correct\npermissions to the <code>postgres</code> <strong>backups</strong> directory. Container that performs the backup will run as a <strong>non</strong>-root user (<code>999</code>) afterwards.\nKeep in mind the permissions on the backup directory will be changed to <code>999:999</code> on <strong>every</strong> update.\nBut will only be changed once for the <code>gitea</code> and <code>postgres</code> data directories.</p>\n</blockquote>\n<p>On initial startup a setup wizard will be launched with settings for <code>database</code>, <code>ports</code>, <code>path</code>, and <code>domain</code> prefilled.\nKeep them as they are, fill anything you want in the optional settings section and click on <code>Install Gitea</code>.</p>",
+            "categories": [
+                "git",
+                "gitea"
+            ],
+            "description": "Gitea - Git with a cup of tea",
+            "healthy": true,
+            "healthy_error": null,
+            "location": "/__w/charts/charts/community/gitea",
+            "latest_version": "1.0.0",
+            "latest_app_version": "1.19.0",
+            "latest_human_version": "1.19.0_1.0.0",
+            "last_update": null,
+            "name": "gitea",
+            "recommended": false,
+            "title": "Gitea",
+            "icon_url": "https://gitea.com/assets/img/logo.svg"
         }
     },
     "enterprise": {
