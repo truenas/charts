@@ -13,7 +13,8 @@ objectData: The object data to be used to render the container.
 - name: {{ $k | quote }}
     {{- if not (kindIs "map" $v) -}}
       {{- $value := "" -}}
-      {{- if $v -}} {{/* Only tpl non-empty values */}}
+      {{/* Only tpl valid values, there are cases that empty values after merges can be "<nil>" */}}
+      {{- if not (kindIs "invalid" $v) -}}
         {{- $value = tpl (toString $v) $rootCtx -}}
       {{- end }}
   value: {{ $value | quote }}
