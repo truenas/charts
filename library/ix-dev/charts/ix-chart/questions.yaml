@@ -487,6 +487,13 @@ questions:
                 schema:
                   type: path
                   required: true
+              - variable: sizeLimit
+                label: "Size Limit"
+                description: |
+                  Optional - Size of the memory backed volume.</br>
+                  Format: 100Mi, 1Gi, 2Gi etc
+                schema:
+                  type: string
 
   # Volumes
   - variable: volumes
