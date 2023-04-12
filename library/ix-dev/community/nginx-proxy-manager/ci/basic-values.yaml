@@ -1,0 +1,14 @@
+npmNetwork:
+  webPort: 31000
+
+npmRunAs:
+  user: 1000
+  group: 1000
+
+npmStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/data
+  certs:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/certs

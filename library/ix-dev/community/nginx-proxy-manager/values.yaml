@@ -1,0 +1,32 @@
+image:
+  repository: jc21/nginx-proxy-manager
+  pullPolicy: IfNotPresent
+  tag: '2.10.2'
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+npmConfig:
+  additionalEnvs: []
+npmNetwork:
+  webPort: 30000
+  httpPort: 30001
+  httpsPort: 30002
+  hostNetwork: false
+npmStorage:
+  data:
+    type: ixVolume
+    hostPath: ''
+    datasetName: data
+  certs:
+    type: ixVolume
+    hostPath: ''
+    datasetName: certs
+
+notes:
+  custom: |
+    Default credentials:
+    -  username: admin@example.com
+    -  password: changeme
