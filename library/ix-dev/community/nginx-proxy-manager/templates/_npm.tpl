@@ -30,6 +30,8 @@ workload:
                 # Needed for: Nginx Service
                 - FOWNER
           fixedEnv:
+            # FIXME: Revisit once upstream irons out some issues in regarids with PUID.
+            # Make sure 568 PUID works before exposing
             PUID: 1000
           env:
             DISABLE_IPV6: true
