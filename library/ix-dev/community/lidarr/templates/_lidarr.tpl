@@ -14,15 +14,14 @@ workload:
           securityContext:
             runAsUser: {{ .Values.lidarrRunAs.user }}
             runAsGroup: {{ .Values.lidarrRunAs.group }}
-          {{ with .Values.lidarrConfig.additionalEnvs }}
           env:
+            LIDARR__PORT: {{ .Values.lidarrNetwork.webPort }}
+            LIDARR__INSTANCE_NAME: {{ .Values.lidarrConfig.instanceName }}
+          {{ with .Values.lidarrConfig.additionalEnvs }}
             {{ range $env := . }}
             {{ $env.name }}: {{ $env.value }}
             {{ end }}
           {{ end }}
-          env:
-            LIDARR__PORT: {{ .Values.lidarrNetwork.webPort }}
-            LIDARR__INSTANCE_NAME: {{ .Values.lidarrConfig.instanceName }}
           probes:
             liveness:
               enabled: true
