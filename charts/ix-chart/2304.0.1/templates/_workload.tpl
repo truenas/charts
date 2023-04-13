@@ -52,6 +52,13 @@ Pod specification
 {{- define "podSepc" }}
 restartPolicy: {{ template "restartPolicy" . }}
 hostNetwork: {{ template "hostNetworkingConfiguration" . }}
+{{- if hasKey .Values "global" }}
+  {{- if hasKey .Values.global "ixChartContext" }}
+    {{- if .Values.global.ixChartContext.addNvidiaRuntimeClass }}
+runtimeClassName: {{ .Values.global.ixChartContext.nvidiaRuntimeClassName }}
+    {{- end }}
+  {{- end }}
+{{- end }}
 containers:
 - name: {{ .Chart.Name }}
   {{ include "common.resources.limitation" . | nindent 2 }}
