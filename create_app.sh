@@ -6,7 +6,7 @@ YQ_PATH="/tmp/yq"
 BASE_PATH="library/ix-dev"
 
 if [[ ! -f "$YQ_PATH" ]]; then
-  wget "https://github.com/mikefarah/yq/releases/download/${VERSION}/${BINARY}" -O "$YQ_PATH" && \
+  wget -q "https://github.com/mikefarah/yq/releases/download/${VERSION}/${BINARY}" -O "$YQ_PATH" && \
   chmod +x "$YQ_PATH"
 fi
 

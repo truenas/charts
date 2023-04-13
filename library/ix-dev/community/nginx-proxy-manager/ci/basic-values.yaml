@@ -1,9 +1,7 @@
 npmNetwork:
   webPort: 31000
-
-npmRunAs:
-  user: 1000
-  group: 1000
+  httpPort: 31001
+  httpsPort: 31002
 
 npmStorage:
   data:

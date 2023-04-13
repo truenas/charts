@@ -2,12 +2,10 @@ image:
   repository: jc21/nginx-proxy-manager
   pullPolicy: IfNotPresent
   tag: '2.10.2'
-
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
-
 npmConfig:
   additionalEnvs: []
 npmNetwork:
@@ -24,7 +22,6 @@ npmStorage:
     type: ixVolume
     hostPath: ''
     datasetName: certs
-
 notes:
   custom: |
     Default credentials:

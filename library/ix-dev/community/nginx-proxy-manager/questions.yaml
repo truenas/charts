@@ -1,14 +1,14 @@
 groups:
-  - name: Sonarr Configuration
-    description: Configure Sonarr
+  - name: Nginx Proxy Manager Configuration
+    description: Configure Nginx Proxy Manager
   - name: User and Group Configuration
-    description: Configure User and Group for Sonarr
+    description: Configure User and Group for Nginx Proxy Manager
   - name: Network Configuration
-    description: Configure Network for Sonarr
+    description: Configure Network for Nginx Proxy Manager
   - name: Storage Configuration
-    description: Configure Storage for Sonarr
+    description: Configure Storage for Nginx Proxy Manager
   - name: Resources Configuration
-    description: Configure Resources for Sonarr
+    description: Configure Resources for Nginx Proxy Manager
 
 portals:
   web_portal:
@@ -21,22 +21,25 @@ portals:
     path: "$kubernetes-resource_configmap_portal_path"
 
 questions:
-  - variable: sonarrConfig
+  - variable: TZ
+    group: Nginx Proxy Manager Configuration
+    label: Timezone
+    schema:
+      type: string
+      default: Etc/UTC
+      required: true
+      $ref:
+        - definitions/timezone
+
+  - variable: npmConfig
     label: ""
-    group: Sonarr Configuration
+    group: Nginx Proxy Manager Configuration
     schema:
       type: dict
       attrs:
-        - variable: instanceName
-          label: Instance Name
-          description: The name of the Sonarr instance.
-          schema:
-            type: string
-            default: "Sonarr"
-            required: true
         - variable: additionalEnvs
           label: Additional Environment Variables
-          description: Configure additional environment variables for Sonarr.
+          description: Configure additional environment variables for Nginx Proxy Manager.
           schema:
             type: list
             default: []
@@ -57,30 +60,7 @@ questions:
                         type: string
                         required: true
 
-  - variable: sonarrRunAs
-    label: ""
-    group: User and Group Configuration
-    schema:
-      type: dict
-      attrs:
-        - variable: user
-          label: User ID
-          description: The user id that Sonarr will run as.
-          schema:
-            type: int
-            min: 1
-            default: 568
-            required: true
-        - variable: group
-          label: Group ID
-          description: The group id that Sonarr will run as.
-          schema:
-            type: int
-            min: 1
-            default: 568
-            required: true
-
-  - variable: sonarrNetwork
+  - variable: npmNetwork
     label: ""
     group: Network Configuration
     schema:
@@ -88,10 +68,31 @@ questions:
       attrs:
         - variable: webPort
           label: Web Port
-          description: The port for the Sonarr Web UI.
+          description: The port for the Nginx Proxy Manager Web UI.
           schema:
             type: int
+            show_if: [["hostNetwork", "=", false]]
             default: 30000
+            min: 9000
+            max: 65535
+            required: true
+        - variable: httpPort
+          label: HTTP Port
+          description: The HTTP port for the Nginx Proxy Manager.
+          schema:
+            type: int
+            show_if: [["hostNetwork", "=", false]]
+            default: 30001
+            min: 9000
+            max: 65535
+            required: true
+        - variable: httpsPort
+          label: HTTPS Port
+          description: The HTTP port for the Nginx Proxy Manager.
+          schema:
+            type: int
+            show_if: [["hostNetwork", "=", false]]
+            default: 30002
             min: 9000
             max: 65535
             required: true
@@ -103,15 +104,15 @@ questions:
             type: boolean
             default: false
 
-  - variable: sonarrStorage
+  - variable: npmStorage
     label: ""
     group: Storage Configuration
     schema:
       type: dict
       attrs:
-        - variable: config
-          label: Sonarr Config Storage
-          description: The path to store Sonarr Configuration.
+        - variable: data
+          label: Nginx Proxy Manager Data Storage
+          description: The path to store Nginx Proxy Manager Data.
           schema:
             type: dict
             attrs:
@@ -137,7 +138,7 @@ questions:
                   required: true
                   hidden: true
                   immutable: true
-                  default: "config"
+                  default: "data"
                   $ref:
                     - "normalize/ixVolume"
               - variable: hostPath
@@ -147,56 +148,44 @@ questions:
                   show_if: [["type", "=", "hostPath"]]
                   immutable: true
                   required: true
-        - variable: additionalStorages
-          label: Additional Storage
-          description: Additional storage for Sonarr.
+        - variable: certs
+          label: Nginx Proxy Manager Certificate Storage
+          description: The path to store Nginx Proxy Manager Certificate.
           schema:
-            type: list
-            default: []
-            items:
-              - variable: storageEntry
-                label: Storage Entry
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
                 schema:
-                  type: dict
-                  attrs:
-                    - variable: type
-                      label: Type
-                      description: |
-                        ixVolume: Is dataset created automatically by the system.</br>
-                        Host Path: Is a path that already exists on the system.
-                      schema:
-                        type: string
-                        required: true
-                        default: "ixVolume"
-                        enum:
-                          - value: "hostPath"
-                            description: Host Path (Path that already exists on the system)
-                          - value: "ixVolume"
-                            description: ixVolume (Dataset created automatically by the system)
-                    - variable: mountPath
-                      label: Mount Path
-                      description: The path inside the container to mount the storage.
-                      schema:
-                        type: path
-                        required: true
-                    - variable: hostPath
-                      label: Host Path
-                      description: The host path to use for storage.
-                      schema:
-                        type: hostpath
-                        show_if: [["type", "=", "hostPath"]]
-                        required: true
-                    - variable: datasetName
-                      label: Dataset Name
-                      description: The name of the dataset to use for storage.
-                      schema:
-                        type: string
-                        show_if: [["type", "=", "ixVolume"]]
-                        required: true
-                        immutable: true
-                        default: "storage_entry"
-                        $ref:
-                          - "normalize/ixVolume"
+                  type: string
+                  required: true
+                  default: "ixVolume"
+                  enum:
+                    - value: "hostPath"
+                      description: Host Path (Path that already exists on the system)
+                    - value: "ixVolume"
+                      description: ixVolume (Dataset created automatically by the system)
+              - variable: datasetName
+                label: Dataset Name
+                schema:
+                  type: string
+                  show_if: [["type", "=", "ixVolume"]]
+                  required: true
+                  hidden: true
+                  immutable: true
+                  default: "certs"
+                  $ref:
+                    - "normalize/ixVolume"
+              - variable: hostPath
+                label: Host Path
+                schema:
+                  type: hostpath
+                  show_if: [["type", "=", "hostPath"]]
+                  immutable: true
+                  required: true
 
   - variable: resources
     group: Resources Configuration
@@ -211,14 +200,14 @@ questions:
             attrs:
               - variable: cpu
                 label: CPU
-                description: CPU limit for Sonarr.
+                description: CPU limit for Nginx Proxy Manager.
                 schema:
                   type: string
                   default: "4000m"
                   required: true
               - variable: memory
                 label: Memory
-                description: Memory limit for Sonarr.
+                description: Memory limit for Nginx Proxy Manager.
                 schema:
                   type: string
                   default: "8Gi"
