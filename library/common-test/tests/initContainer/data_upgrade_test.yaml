@@ -128,7 +128,7 @@ tests:
                 value: "002"
               - name: "UMASK_SET"
                 value: "002"
-              - name: NVIDIA_DRIVER_CAPABILITIES
+              - name: NVIDIA_VISIBLE_DEVICES
                 value: "void"
               - name: "S6_READ_ONLY_ROOT"
                 value: "1"
