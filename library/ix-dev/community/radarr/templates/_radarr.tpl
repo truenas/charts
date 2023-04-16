@@ -27,21 +27,17 @@ workload:
               enabled: true
               type: http
               port: "{{ .Values.radarrNetwork.webPort }}"
-              path: /
-              # FIXME: Next release will include this endpoint without auth
-              # path: /ping
+              path: /ping
             readiness:
               enabled: true
               type: http
               port: "{{ .Values.radarrNetwork.webPort }}"
-              path: /
-              # path: /ping
+              path: /ping
             startup:
               enabled: true
               type: http
               port: "{{ .Values.radarrNetwork.webPort }}"
-              path: /
-              # path: /ping
+              path: /ping
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
                                                         "UID" .Values.radarrRunAs.user
