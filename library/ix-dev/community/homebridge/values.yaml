@@ -16,10 +16,9 @@ hbStorage:
 
 hbNetwork:
   webPort: 30000
-  hostNetwork: false
 
 scaleExternalInterface: []
 
 hbConfig:
-  enableAvahi: true
+  enableAvahi: false
   additionalEnvs: []

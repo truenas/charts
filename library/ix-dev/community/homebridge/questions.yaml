@@ -79,11 +79,6 @@ questions:
             max: 65535
             required: true
             default: 30000
-        - variable: hostNetwork
-          label: Host Network
-          schema:
-            type: boolean
-            default: true
 
   - variable: scaleExternalInterface
     description: Add External Interfaces

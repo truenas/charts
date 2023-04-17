@@ -7,7 +7,7 @@ hbNetwork:
   webPort: 30000
 
 hbConfig:
-  enableAvahi: false
+  enableAvahi: true
   additionalEnvs:
     - name: HOMEBRIDGE_CONFIG_UI_THEME
       value: blue

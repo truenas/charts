@@ -5,7 +5,7 @@ workload:
     primary: true
     type: Deployment
     podSpec:
-      hostNetwork: {{ .Values.hbNetwork.hostNetwork }}
+      hostNetwork: false
       containers:
         homebridge:
           enabled: true
