@@ -5,7 +5,7 @@ workload:
     primary: true
     type: Deployment
     podSpec:
-      hostNetwork: {{ .Values.npmNetwork.hostNetwork }}
+      hostNetwork: false
       securityContext:
         fsGroup: 1000
       containers:

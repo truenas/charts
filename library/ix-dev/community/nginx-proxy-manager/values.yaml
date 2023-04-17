@@ -12,7 +12,6 @@ npmNetwork:
   webPort: 30000
   httpPort: 30001
   httpsPort: 30002
-  hostNetwork: false
 npmStorage:
   data:
     type: ixVolume

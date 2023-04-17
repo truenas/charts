@@ -71,7 +71,6 @@ questions:
           description: The port for the Nginx Proxy Manager Web UI.
           schema:
             type: int
-            show_if: [["hostNetwork", "=", false]]
             default: 30000
             min: 9000
             max: 65535
@@ -81,7 +80,6 @@ questions:
           description: The HTTP port for the Nginx Proxy Manager.
           schema:
             type: int
-            show_if: [["hostNetwork", "=", false]]
             default: 30001
             min: 9000
             max: 65535
@@ -91,18 +89,10 @@ questions:
           description: The HTTP port for the Nginx Proxy Manager.
           schema:
             type: int
-            show_if: [["hostNetwork", "=", false]]
             default: 30002
             min: 9000
             max: 65535
             required: true
-        - variable: hostNetwork
-          label: Host Network
-          description: |
-            Bind to the host network. It's recommended to keep this disabled.</br>
-          schema:
-            type: boolean
-            default: false
 
   - variable: npmStorage
     label: ""
