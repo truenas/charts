@@ -17,6 +17,7 @@ tailscaleConfig:
   acceptDns: false
   extraArgs: []
   extraDaemonArgs: []
+  additionalEnvs: []
 
 tailscaleNetwork:
   hostNetwork: false

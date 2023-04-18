@@ -119,6 +119,13 @@ persistence:
       tailscale:
         tailscale:
           mountPath: /var/run
+  cache:
+    enabled: true
+    type: emptyDir
+    targetSelector:
+      tailscale:
+        tailscale:
+          mountPath: /.cache
 
 {{/* Secret */}}
 secret:

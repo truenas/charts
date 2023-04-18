@@ -1,6 +1,6 @@
 # FIXME: Find a way to have a test key for CI testing
 tailscaleConfig:
-  authkey: 'somekey'
+  authkey: 'tskey-auth-abcd123CNTRL-abcde12345abcde12345abcde12345ab'
   hostname: 'test-host'
   advertiseExitNode: true
   userspace: true
