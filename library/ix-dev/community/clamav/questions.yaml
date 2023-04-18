@@ -81,19 +81,11 @@ questions:
     schema:
       type: dict
       attrs:
-        - variable: hostNetwork
-          label: Host Network
-          description: |
-            Bind to the host network. It's recommended to keep this disabled.
-          schema:
-            type: boolean
-            default: false
         - variable: clamdPort
           label: ClamD Port
           description: The port for the ClamAV ClamD
           schema:
             type: int
-            show_if: [["hostNetwork", "=", false]]
             default: 30000
             min: 9000
             max: 65535
@@ -103,7 +95,6 @@ questions:
           description: The port for the ClamAV MilterD
           schema:
             type: int
-            show_if: [["hostNetwork", "=", false]]
             default: 30001
             min: 9000
             max: 65535

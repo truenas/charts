@@ -5,7 +5,7 @@ workload:
     primary: true
     type: Deployment
     podSpec:
-      hostNetwork: {{ .Values.clamavNetwork.hostNetwork }}
+      hostNetwork: false
       containers:
         clamav:
           enabled: true
