@@ -1,0 +1,6 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "tailscale.workload" $ | fromYaml) -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}

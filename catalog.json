@@ -49,7 +49,7 @@
             "latest_version": "1.0.2",
             "latest_app_version": "8.7.0",
             "latest_human_version": "8.7.0_1.0.2",
-            "last_update": "2023-04-12 13:31:20",
+            "last_update": "2023-04-19 22:29:44",
             "name": "elastic-search",
             "recommended": false,
             "title": "Elastic Search",
@@ -381,6 +381,25 @@
             "recommended": false,
             "title": "Chia",
             "icon_url": "https://www.chia.net/wp-content/uploads/2022/09/chia-logo.svg"
+        },
+        "tailscale": {
+            "app_readme": "<h1>Tailscale</h1>\n<p><a href=\"https://tailscale.com\">Tailscale</a> Secure remote access to shared resources</p>\n<ul>\n<li>When <code>Userspace</code> is <strong>disabled</strong>, <code>Tailscale</code> will run as root, with <code>/dev/net/tun</code> device mounted from the host.</li>\n<li>When <code>Userspace</code> is <strong>enabled</strong>, <code>Tailscale</code> will run as a non-root user.</li>\n</ul>",
+            "categories": [
+                "vpn",
+                "tailscale"
+            ],
+            "description": "Secure remote access to shared resources",
+            "healthy": true,
+            "healthy_error": null,
+            "location": "/__w/charts/charts/community/tailscale",
+            "latest_version": "1.0.0",
+            "latest_app_version": "v1.38.4",
+            "latest_human_version": "v1.38.4_1.0.0",
+            "last_update": null,
+            "name": "tailscale",
+            "recommended": false,
+            "title": "Tailscale",
+            "icon_url": "https://avatars.githubusercontent.com/u/48932923"
         },
         "radarr": {
             "app_readme": "<h1>Radarr</h1>\n<p><a href=\"https://github.com/Radarr/Radarr\">Radarr</a> is a movie collection manager for Usenet and BitTorrent users.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Radarr</code> directories.\nAfterward, the <code>Radarr</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>",
