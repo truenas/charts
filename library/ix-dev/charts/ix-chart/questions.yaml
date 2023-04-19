@@ -495,6 +495,7 @@ questions:
                 schema:
                   type: string
                   valid_chars: "^([+-]?[0-9.]+)([eEinumkKMGTP]*[-+]?[0-9]*)$"
+                  default: "512Mi"
 
   # Volumes
   - variable: volumes
