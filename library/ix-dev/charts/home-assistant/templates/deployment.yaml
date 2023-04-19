@@ -72,8 +72,7 @@ spec:
             - name: web
               containerPort: 8123
           readinessProbe:
-            httpGet:
-              path: /
+            tcpSocket:
               port: 8123
             initialDelaySeconds: 10
             periodSeconds: 10
@@ -81,8 +80,7 @@ spec:
             failureThreshold: 5
             successThreshold: 2
           livenessProbe:
-            httpGet:
-              path: /
+            tcpSocket:
               port: 8123
             initialDelaySeconds: 10
             periodSeconds: 10
@@ -90,8 +88,7 @@ spec:
             failureThreshold: 5
             successThreshold: 1
           startupProbe:
-            httpGet:
-              path: /
+            tcpSocket:
               port: 8123
             initialDelaySeconds: 10
             periodSeconds: 5
