@@ -30,7 +30,7 @@
             "latest_version": "1.0.79",
             "latest_app_version": "2023.4.5",
             "latest_human_version": "2023.4.5_1.0.79",
-            "last_update": "2023-04-15 08:38:05",
+            "last_update": "2023-04-19 12:32:55",
             "name": "home-assistant",
             "recommended": false,
             "title": "Home Assistant",
@@ -200,7 +200,7 @@
             "latest_version": "1.7.38",
             "latest_app_version": "1.32.0.6950",
             "latest_human_version": "1.32.0.6950_1.7.38",
-            "last_update": "2023-04-13 12:39:59",
+            "last_update": "2023-04-19 12:32:55",
             "name": "plex",
             "recommended": false,
             "title": "Plex",
@@ -459,6 +459,25 @@
             "title": "Vaultwarden",
             "icon": "https://raw.githubusercontent.com/dani-garcia/vaultwarden/main/src/static/images/vaultwarden-icon.png",
             "icon_url": null
+        },
+        "nginx-proxy-manager": {
+            "app_readme": "<h1>Nginx Proxy Manager</h1>\n<p><a href=\"https://nginxproxymanager.com\">Nginx Proxy Manager</a> Expose your services easily and securely</p>\n<blockquote>\n<p>Application requires to run as root. This is a limitation of the application.</p>\n</blockquote>",
+            "categories": [
+                "media",
+                "series"
+            ],
+            "description": "Expose your services easily and securely",
+            "healthy": true,
+            "healthy_error": null,
+            "location": "/__w/charts/charts/community/nginx-proxy-manager",
+            "latest_version": "1.0.0",
+            "latest_app_version": "2.10.2",
+            "latest_human_version": "2.10.2_1.0.0",
+            "last_update": null,
+            "name": "nginx-proxy-manager",
+            "recommended": false,
+            "title": "Nginx Proxy Manager",
+            "icon_url": "https://nginxproxymanager.com/logo.png"
         },
         "gitea": {
             "app_readme": "<h1>Gitea</h1>\n<p><a href=\"https://gitea.io/en-us\">Gitea</a> - Git with a cup of tea</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>gitea</code> directories.\nAfterward, the <code>gitea</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nSame applies to the <code>postgres</code> container. This will run afterwards as a <strong>non</strong>-root user (<code>999</code>).\nOn each upgrade, a container will be launched with <strong>root</strong> privileges in order to apply the correct\npermissions to the <code>postgres</code> <strong>backups</strong> directory. Container that performs the backup will run as a <strong>non</strong>-root user (<code>999</code>) afterwards.\nKeep in mind the permissions on the backup directory will be changed to <code>999:999</code> on <strong>every</strong> update.\nBut will only be changed once for the <code>gitea</code> and <code>postgres</code> data directories.</p>\n</blockquote>\n<p>On initial startup a setup wizard will be launched with settings for <code>database</code>, <code>ports</code>, <code>path</code>, and <code>domain</code> prefilled.\nKeep them as they are, fill anything you want in the optional settings section and click on <code>Install Gitea</code>.</p>",

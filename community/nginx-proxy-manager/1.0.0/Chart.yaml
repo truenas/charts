@@ -1,0 +1,25 @@
+name: nginx-proxy-manager
+description: Expose your services easily and securely
+annotations:
+  title: Nginx Proxy Manager
+type: application
+version: 1.0.0
+apiVersion: v2
+appVersion: '2.10.2'
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.0.5
+home: https://nginxproxymanager.com/
+icon: https://nginxproxymanager.com/logo.png
+sources:
+  - https://nginxproxymanager.com/
+  - https://github.com/truenas/charts/tree/master/community/nginx-proxy-manager
+  - https://hub.docker.com/r/jc21/nginx-proxy-manager
+keywords:
+  - nginx
+  - proxy
