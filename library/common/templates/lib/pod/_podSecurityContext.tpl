@@ -39,7 +39,7 @@ objectData: The object data to be used to render the Pod.
   {{- end -}}
 
   {{- if $gpuAdded -}}
-    {{- $_ := set $secContext "supplementalGroups" (concat $secContext.supplementalGroups (list 44)) -}}
+    {{- $_ := set $secContext "supplementalGroups" (concat $secContext.supplementalGroups (list 44 107)) -}}
   {{- end -}}
 
   {{- $portRange := fromJson (include "ix.v1.common.lib.helpers.securityContext.getPortRange" (dict "rootCtx" $rootCtx "objectData" $objectData)) -}}
@@ -47,7 +47,7 @@ objectData: The object data to be used to render the Pod.
     {{- $_ := set $secContext "sysctls" (mustAppend $secContext.sysctls (dict "name" "net.ipv4.ip_unprivileged_port_start" "value" (printf "%v" $portRange.low))) -}}
   {{- end -}}
 
-  {{- if not $secContext.fsGroup -}}
+  {{- if or (kindIs "invalid" $secContext.fsGroup) (eq (toString $secContext.fsGroup) "") -}}
     {{- fail "Pod - Expected non-empty <fsGroup>" -}}
   {{- end -}}
 
