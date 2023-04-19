@@ -21,7 +21,6 @@ workload:
             ELASTIC_PASSWORD: {{ .Values.esConfig.password }}
             ES_SETTING_HTTP_PORT: {{ .Values.esNetwork.httpPort }}
             ES_SETTING_NODE_NAME: {{ .Values.esConfig.nodeName }}
-            ES_SETTING_NODE_ROLES: master
             ES_SETTING_DISCOVERY_TYPE: single-node
             ES_SETTING_XPACK_SECURITY_ENABLED: true
             {{/* Transport is not used on single nodes */}}
