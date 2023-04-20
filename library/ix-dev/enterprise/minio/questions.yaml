@@ -60,7 +60,7 @@ questions:
             Can't be changed after initial install.
           schema:
             type: int
-            min: 1
+            min: 568
             default: 568
             immutable: true
             required: true
@@ -71,7 +71,7 @@ questions:
             Can't be changed after initial install.
           schema:
             type: int
-            min: 1
+            min: 568
             default: 568
             immutable: true
             required: true

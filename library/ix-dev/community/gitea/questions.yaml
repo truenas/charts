@@ -63,7 +63,7 @@ questions:
           description: The user id that Gitea will run as.
           schema:
             type: int
-            min: 1
+            min: 568
             # FIXME: See values.yaml
             hidden: true
             editable: false
@@ -74,7 +74,7 @@ questions:
           description: The group id that Gitea will run as.
           schema:
             type: int
-            min: 1
+            min: 568
             # FIXME: See values.yaml
             hidden: true
             editable: false
