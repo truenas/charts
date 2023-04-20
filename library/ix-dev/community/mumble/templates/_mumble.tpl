@@ -91,4 +91,27 @@ persistence:
           mountPath: /data
         01-permissions:
           mountPath: /mnt/directories/data
+
+  {{- if .Values.mumbleNetwork.certificateID }}
+  cert:
+    enabled: true
+    type: secret
+    objectName: mumble-cert
+    defaultMode: "0600"
+    items:
+      - key: tls.key
+        path: private.key
+      - key: tls.crt
+        path: public.crt
+    targetSelector:
+      mumble:
+        mumble:
+          mountPath: /certs
+          readOnly: true
+
+scaleCertificate:
+  mumble-cert:
+    enabled: true
+    id: {{ .Values.mumbleNetwork.certificateID }}
+    {{- end -}}
 {{- end -}}

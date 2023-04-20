@@ -108,6 +108,14 @@ questions:
             min: 9000
             max: 65535
             required: true
+        - variable: certificateID
+          label: Certificate
+          description: The certificate to use for Mumble
+          schema:
+            type: int
+            "null": true
+            $ref:
+              - "definitions/certificate"
 
   - variable: mumbleStorage
     label: ""

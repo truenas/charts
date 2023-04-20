@@ -5,10 +5,9 @@ configmap:
   mumble-config:
     enabled: true
     data:
-      # TODO: Certificates
       {{ if .Values.mumbleNetwork.certificateID }}
-      MUMBLE_CONFIG_sslCert: /certs/cert.pem
-      MUMBLE_CONFIG_sslKey: /certs/key.pem
+      MUMBLE_CONFIG_sslCert: /certs/public.crt
+      MUMBLE_CONFIG_sslKey: /certs/private.key
       {{ end }}
       MUMBLE_CONFIG_database: /data/mumble-server.sqlite
       MUMBLE_CONFIG_port: {{ .Values.mumbleNetwork.serverPort | quote }}
