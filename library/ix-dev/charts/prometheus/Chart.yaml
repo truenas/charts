@@ -1,0 +1,25 @@
+name: prometheus
+description: The Prometheus monitoring system and time series database.
+annotations:
+  title: Prometheus
+type: application
+version: 1.0.0
+apiVersion: v2
+appVersion: v2.43.0
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.0.3
+home: https://prometheus.io
+icon: https://avatars.githubusercontent.com/u/3380462
+sources:
+  - https://github.com/prometheus/prometheus
+  - https://github.com/truenas/charts/tree/master/charts/prometheus
+  - https://prometheus.io
+keywords:
+  - metrics
+  - prometheus

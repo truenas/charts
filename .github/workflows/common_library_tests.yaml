@@ -3,7 +3,10 @@ name: Common Library Tests
 on:
   pull_request:
     paths:
-      - library/**
+      - library/common/**
+      - library/common-test/**
+      - .github/ct-install-config/common*.yaml
+      - '!.github/ct-install-config/charts*'
       - .github/workflows/common_library_tests.yaml
 
 jobs:
@@ -21,7 +24,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
         with:
-          fetch-depth: 1
+          # Depth 0 is required for chart-testing to work properly
+          fetch-depth: 0
 
       - name: Install Helm
         uses: azure/setup-helm@5119fcb9089d432beecbf79bb2c7915207344b78 # tag=v3
@@ -38,10 +42,7 @@ jobs:
       - name: Run chart-testing (lint)
         id: lint
         run: |
-          ct lint --config .github/ct-install-config/ct-lint.yaml \
-                  --lint-conf .github/ct-install-config/lint-conf.yaml \
-                  --charts library/common-test \
-                  --debug
+          ct lint --config .github/ct-install-config/common-ct-lint.yaml
 
   unittest:
     needs:
@@ -49,7 +50,7 @@ jobs:
     name: Unit Tests
     runs-on: ubuntu-22.04
     env:
-      helmUnitVersion: 0.2.11
+      helmUnitVersion: 0.3.0
     strategy:
       fail-fast: false
       matrix:
@@ -61,7 +62,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
         with:
-          fetch-depth: 1
+          # Depth 0 is required for chart-testing to work properly
+          fetch-depth: 0
 
       - name: Install Helm
         uses: azure/setup-helm@f382f75448129b3be48f8121b9857be18d815a82 # tag=v3
@@ -72,15 +74,15 @@ jobs:
         shell: bash
         run: |
           # Retry helm plugin install
-          helm plugin install https://github.com/quintush/helm-unittest --version v${helmUnitVersion} || \
-          helm plugin install https://github.com/quintush/helm-unittest --version v${helmUnitVersion} || \
-          helm plugin install https://github.com/quintush/helm-unittest --version v${helmUnitVersion} || \
-          helm plugin install https://github.com/quintush/helm-unittest --version v${helmUnitVersion}
+          helm plugin install https://github.com/helm-unittest/helm-unittest --version v${helmUnitVersion} || \
+          helm plugin install https://github.com/helm-unittest/helm-unittest --version v${helmUnitVersion} || \
+          helm plugin install https://github.com/helm-unittest/helm-unittest --version v${helmUnitVersion} || \
+          helm plugin install https://github.com/helm-unittest/helm-unittest --version v${helmUnitVersion}
 
           # Run tests
           cd library/common-test/
           helm dependency update
-          helm unittest --helm3 -f "tests/*/*.yaml" .
+          helm unittest -f "tests/*/*.yaml" .
 
   install:
     needs:
@@ -111,7 +113,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
         with:
-          fetch-depth: 1
+          # Depth 0 is required for chart-testing to work properly
+          fetch-depth: 0
 
       - name: Install Helm
         uses: azure/setup-helm@f382f75448129b3be48f8121b9857be18d815a82 # tag=v3
@@ -164,33 +167,14 @@ jobs:
           # Flags found here https://github.com/k3d-io/k3d
           k3d-args: --k3s-arg --disable=metrics-server@server:*
 
-        # Install Kail to grab logs from tests, as there are cases ct-install fail to output logs
-      - name: Install Kail
-        run: |
-          export KAIL_VERSION=v0.16.1
-          wget https://github.com/boz/kail/releases/download/${KAIL_VERSION}/kail_${KAIL_VERSION}_linux_amd64.tar.gz
-          tar -xvzf kail_${KAIL_VERSION}_linux_amd64.tar.gz
-          chmod +x kail
-
       - name: Run chart-testing (install)
         run: |
+          # This is done to improve speed of the tests, so we can run tests in parallel
           # Move all ci values on a temp location (or skip if already moved from another matrix job)
           mv library/common-test/ci library/common-test/runtests || echo "Nothing to move"
 
           # Move one values.yaml to the correct location to run the test
           mv -f library/common-test/runtests/${{ matrix.values }} library/common-test/values.yaml
 
-          # Stat kail on the background to grab logs from tests
-          ./kail --ignore-ns kube-system >> /tmp/output.log &
-
           # Actually run the test
-          ct install  --config .github/ct-install-config/ct-install.yaml \
-                      --charts library/common-test \
-                      --debug || (echo -e "\n\n--===PODLOGS===--\n\n" && \
-                                  cat /tmp/output.log && \
-                                  rm -f /tmp/output.log && exit 1)
-
-          kill $!
-          echo -e "\n\n--===PODLOGS===--\n\n"
-          cat  /tmp/output.log
-          rm -f /tmp/output.log
+          ct install --config .github/ct-install-config/common-ct-install.yaml

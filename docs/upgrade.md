@@ -21,7 +21,7 @@ For such custom scenarios, TrueNAS SCALE allows to stop workloads specifically
 before a snapshot is taken of an application's volumes. Workloads in this case can
 add the following annotation to the deployment/statefulset:
 
-```
+```yaml
 "ix.upgrade.scale.down.workload": true
 ```
 

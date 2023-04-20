@@ -1,0 +1,16 @@
+appVolumeMounts:
+  config:
+    emptyDir: true
+    mountPath: /config
+embyServerHttp:
+  port: 32496
+emptyDirVolumes: true
+environmentVariables: []
+extraAppVolumeMounts:
+- hostPath: /mnt/extras/something
+  mountPath: /mnt/extras
+  readOnly: true
+gpuConfiguration: {}
+hostNetwork: false
+updateStrategy: Recreate
+global: {}

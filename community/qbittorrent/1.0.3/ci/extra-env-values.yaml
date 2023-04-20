@@ -1,0 +1,20 @@
+qbitConfig:
+  additionalEnvs:
+    - name: "TESTVAR"
+      value: "SOMEVALUE"
+    - name: "TESTVAR2"
+      value: "SOMEVALUE2"
+
+qbitNetwork:
+  webPort: 31000
+  btPort: 32444
+
+qbitStorage:
+  downloads:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/downloads
+    datasetName: ""
+  config:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/config
+    datasetName: ""

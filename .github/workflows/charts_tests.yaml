@@ -1,0 +1,156 @@
+name: Charts Tests
+
+on:
+  pull_request:
+    paths:
+      - library/**
+      - '!library/common'
+      - '!library/common-test'
+      - .github/ct-install-config/**
+      - '!.github/ct-install-config/common*'
+      - .github/workflows/charts_test.yaml
+
+jobs:
+  lint:
+    name: Lint Charts
+    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        helm-version:
+          - v3.9.4
+          - v3.10.3
+          - v3.11.2
+    steps:
+      - name: Checkout
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
+        with:
+          # Depth 0 is required for chart-testing to work properly
+          fetch-depth: 0
+
+      - name: Install Helm
+        uses: azure/setup-helm@5119fcb9089d432beecbf79bb2c7915207344b78 # tag=v3
+        with:
+          version: ${{ matrix.helm-version }}
+
+      - uses: actions/setup-python@2c3dd9e7e29afd70cc0950079bde6c979d1f69f9 # tag=v4
+        with:
+          python-version: "3.10"
+
+      - name: Set up chart-testing
+        uses: helm/chart-testing-action@e8788873172cb653a90ca2e819d79d65a66d4e76 # tag=v2.4.0
+
+      - name: Run chart-testing (lint)
+        id: lint
+        run: |
+          ct lint --config .github/ct-install-config/charts-ct-lint.yaml
+
+  list-changed:
+    needs:
+      - lint
+    name: List Changed Charts
+    runs-on: ubuntu-22.04
+    outputs:
+      changed_json: ${{ steps.list-changed.outputs.changed_json }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
+        with:
+          # Depth 0 is required for chart-testing to work properly
+          fetch-depth: 0
+
+      - name: Set up chart-testing
+        uses: helm/chart-testing-action@afea100a513515fbd68b0e72a7bb0ae34cb62aec # tag=v2.3.1
+
+      - name: List Changed Charts
+        id: list-changed
+        shell: bash
+        run: |
+          changed_json=$(ct list-changed \
+            --config .github/ct-install-config/charts-ct-install.yaml | \
+            jq --raw-input '.' | jq --compact-output --slurp '.')
+
+          echo "changed_json=$changed_json" >> $GITHUB_OUTPUT
+          echo 'Detected changes in the following charts:'
+          echo "$changed_json" | jq --raw-output '.[]'
+
+  install:
+    needs:
+      - lint
+      - list-changed
+    name: Install Chart
+    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        chart: ${{ fromJson(needs.list-changed.outputs.changed_json) }}
+        # We run tests on Helm version of latest SCALE release, SCALE nightly and manually defined "latest"
+        helm-version:
+          - v3.9.4
+          - v3.11.2
+        # We run tests on k3s version of latest SCALE release, SCALE nightly and manually defined "latest"
+        k3s-version:
+          - v1.25.3+k3s1
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
+        with:
+          # Depth 0 is required for chart-testing to work properly
+          fetch-depth: 0
+
+      - name: Install Helm
+        uses: azure/setup-helm@f382f75448129b3be48f8121b9857be18d815a82 # tag=v3
+        with:
+          version: ${{ matrix.helm-version }}
+
+      - uses: actions/setup-python@2c3dd9e7e29afd70cc0950079bde6c979d1f69f9 # tag=v4
+        with:
+          python-version: "3.10"
+
+      - name: Set up chart-testing
+        uses: helm/chart-testing-action@afea100a513515fbd68b0e72a7bb0ae34cb62aec # tag=v2.3.1
+
+      - name: Create k3d cluster - Attempt 1/3
+        continue-on-error: true
+        id: createc1
+        uses: nolar/setup-k3d-k3s@293b8e5822a20bc0d5bcdd4826f1a665e72aba96 # tag=v1.0.9
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          version: ${{ matrix.k3s-version }}
+          # Flags found here https://github.com/k3d-io/k3d
+          k3d-args: --k3s-arg --disable=metrics-server@server:*
+
+      - name: Wait 10 second to retry
+        if: steps.createc1.outcome=='failure'
+        run: |
+          sleep 10
+      - name: Create k3d cluster - Attempt 2/3
+        continue-on-error: true
+        if: steps.createc1.outcome=='failure'
+        id: createc2
+        uses: nolar/setup-k3d-k3s@293b8e5822a20bc0d5bcdd4826f1a665e72aba96 # tag=v1.0.9
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          version: ${{ matrix.k3s-version }}
+          # Flags found here https://github.com/k3d-io/k3d
+          k3d-args: --k3s-arg --disable=metrics-server@server:*
+
+      - name: Wait 10 second to retry
+        if: steps.createc2.outcome=='failure'
+        run: |
+          sleep 10
+      - name: Create k3d cluster - Attempt 3/3
+        id: createc3
+        if: steps.createc2.outcome=='failure'
+        uses: nolar/setup-k3d-k3s@293b8e5822a20bc0d5bcdd4826f1a665e72aba96 # tag=v1.0.9
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          version: ${{ matrix.k3s-version }}
+          # Flags found here https://github.com/k3d-io/k3d
+          k3d-args: --k3s-arg --disable=metrics-server@server:*
+
+      - name: Run chart-testing (install)
+        shell: bash
+        run: |
+          ct install --config .github/ct-install-config/charts-ct-install.yaml --charts ${{ matrix.chart }}

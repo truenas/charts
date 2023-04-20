@@ -1,0 +1,28 @@
+image:
+  repository: adguard/adguardhome
+  tag: v0.107.26
+  pullPolicy: IfNotPresent
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+adguardNetwork:
+  webPort: 30000
+  enableDHCP: false
+
+# FIXME: See _adguard.tpl
+# adguardRunAs:
+#   user: 568
+#   group: 568
+
+adguardStorage:
+  work:
+    type: ixVolume
+    hostPath: ""
+    datasetName: work
+  conf:
+    type: ixVolume
+    hostPath: ""
+    datasetName: conf

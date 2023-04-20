@@ -1,0 +1,8 @@
+esStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/data
+
+esConfig:
+  password: some-secret
+  nodeName: Elastic Search Basic

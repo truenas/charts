@@ -1,0 +1,16 @@
+giteaStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/data
+  config:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/config
+  pgData:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/pgData
+  pgBackup:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/pgBackup
+
+giteaNetwork:
+  rootURL: http://localhost:30000

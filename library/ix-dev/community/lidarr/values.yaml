@@ -1,0 +1,25 @@
+image:
+  repository: ghcr.io/onedr0p/lidarr-develop
+  pullPolicy: IfNotPresent
+  tag: '1.1.3.2982'
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+lidarrConfig:
+  instanceName: Lidarr
+  additionalEnvs: []
+lidarrNetwork:
+  webPort: 30000
+  hostNetwork: false
+lidarrRunAs:
+  user: 568
+  group: 568
+lidarrStorage:
+  config:
+    type: ixVolume
+    hostPath: ''
+    datasetName: config
+  additionalStorages: []

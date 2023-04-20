@@ -20,6 +20,7 @@ workload:
     primary: true
     type: CronJob
     schedule: "*/1 * * * *"
+    ttlSecondsAfterFinished: 0
     podSpec:
       restartPolicy: OnFailure
       containers:
