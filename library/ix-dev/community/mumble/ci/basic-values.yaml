@@ -1,0 +1,11 @@
+mumbleConfig:
+  serverPassword: supersecret
+  superUserPassword: superuser
+  iceSecretRead: letmelook
+  iceSecretWrite: letmechangestuff
+  welcomeText: Welcome to Mumble Test!
+
+mumbleStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/data
