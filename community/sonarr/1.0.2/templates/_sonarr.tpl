@@ -73,6 +73,13 @@ persistence:
           mountPath: /config
         01-permissions:
           mountPath: /mnt/directories/config
+  tmp:
+    enabled: true
+    type: emptyDir
+    targetSelector:
+      sonarr:
+        sonarr:
+          mountPath: /tmp
   {{- range $idx, $storage := .Values.sonarrStorage.additionalStorages }}
   {{ printf "sonarr-%v" (int $idx) }}:
     enabled: true
