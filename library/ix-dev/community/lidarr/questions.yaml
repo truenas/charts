@@ -68,7 +68,7 @@ questions:
           description: The user id that Lidarr will run as.
           schema:
             type: int
-            min: 1
+            min: 568
             default: 568
             required: true
         - variable: group
@@ -76,7 +76,7 @@ questions:
           description: The group id that Lidarr will run as.
           schema:
             type: int
-            min: 1
+            min: 568
             default: 568
             required: true
 
