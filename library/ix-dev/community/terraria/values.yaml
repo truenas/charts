@@ -8,6 +8,8 @@ vanillaImage:
   pullPolicy: IfNotPresent
   tag: vanilla-1.4.4.9
 
+ci: false
+
 resources:
   limits:
     cpu: 4000m

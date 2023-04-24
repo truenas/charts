@@ -31,15 +31,15 @@ workload:
             # Probes are disabled because it fills the logs with
             # "login attemps"
             liveness:
-              enabled: false
+              enabled: {{ .Values.ci }}
               type: tcp
               port: "{{ .Values.terrariaNetwork.serverPort }}"
             readiness:
-              enabled: false
+              enabled: {{ .Values.ci }}
               type: tcp
               port: "{{ .Values.terrariaNetwork.serverPort }}"
             startup:
-              enabled: false
+              enabled: {{ .Values.ci }}
               type: tcp
               port: "{{ .Values.terrariaNetwork.serverPort }}"
 
