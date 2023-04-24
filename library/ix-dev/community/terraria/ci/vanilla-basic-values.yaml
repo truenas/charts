@@ -18,10 +18,10 @@ terrariaConfig:
 # Enable probes on CI runs only,
 # so we can check if the container is ready
 workload:
-  main:
+  terraria:
     podSpec:
       containers:
-        main:
+        terraria:
           probes:
             liveness:
               enabled: true
