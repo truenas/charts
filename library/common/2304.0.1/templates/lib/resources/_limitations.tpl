@@ -9,11 +9,11 @@ resources:
     cpu: {{ .Values.cpuLimit }}
     memory: {{ .Values.memLimit }}
 {{ end }}
-  requests:
-    cpu: 10m
-    memory: 50Mi
 {{ if .Values.gpuConfiguration }}
     {{ toYaml .Values.gpuConfiguration | nindent 4 }}
 {{ end }}
+  requests:
+    cpu: 10m
+    memory: 50Mi
 {{ end }}
 {{ end }}
