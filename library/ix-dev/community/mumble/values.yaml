@@ -8,6 +8,8 @@ resources:
     cpu: 4000m
     memory: 8Gi
 
+ci: false
+
 mumbleConfig:
   serverPassword: ''
   superUserPassword: ''
