@@ -9,3 +9,18 @@ mumbleStorage:
   data:
     type: hostPath
     hostPath: /mnt/{{ .Release.Name }}/data
+
+# Enable probes on CI runs only,
+# so we can check if the container is ready
+workload:
+  main:
+    podSpec:
+      containers:
+        main:
+          probes:
+            liveness:
+              enabled: true
+            readiness:
+              enabled: true
+            startup:
+              enabled: true

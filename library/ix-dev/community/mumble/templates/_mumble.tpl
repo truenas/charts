@@ -27,16 +27,18 @@ workload:
             {{ end }}
           {{ end }}
           probes:
+            # Probes are disabled because it fills the logs with
+            # "connection attemps"
             liveness:
-              enabled: true
+              enabled: false
               type: tcp
               port: "{{ .Values.mumbleNetwork.serverPort }}"
             readiness:
-              enabled: true
+              enabled: false
               type: tcp
               port: "{{ .Values.mumbleNetwork.serverPort }}"
             startup:
-              enabled: true
+              enabled: false
               type: tcp
               port: "{{ .Values.mumbleNetwork.serverPort }}"
       initContainers:

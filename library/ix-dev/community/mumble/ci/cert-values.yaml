@@ -98,3 +98,18 @@ ixCertificates:
       qQ+66XnfsA9G/bu4MDS9AX83iahD9IdLXQAy8I19prAbpVumKegPbMnNYNB/TYEc
       3G15AKCXo7jjOUtHY01DCQ==
       -----END PRIVATE KEY-----
+
+# Enable probes on CI runs only,
+# so we can check if the container is ready
+workload:
+  main:
+    podSpec:
+      containers:
+        main:
+          probes:
+            liveness:
+              enabled: true
+            readiness:
+              enabled: true
+            startup:
+              enabled: true
