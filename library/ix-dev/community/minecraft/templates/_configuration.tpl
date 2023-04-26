@@ -80,5 +80,4 @@ configmap:
     {{- fail (printf "Minecraft - Expected [Level Type] to be one of [%s], but got [%s]" (join ", " $lvlTypes) .Values.mcConfig.levelType) -}}
   {{- end -}}
 
-
 {{- end -}}
