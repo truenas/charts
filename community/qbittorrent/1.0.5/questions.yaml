@@ -1,14 +1,14 @@
 groups:
-  - name: Lidarr Configuration
-    description: Configure Lidarr
+  - name: qBittorrent Configuration
+    description: Configure qBittorrent
   - name: User and Group Configuration
-    description: Configure User and Group for Lidarr
+    description: Configure User and Group for qBittorrent
   - name: Network Configuration
-    description: Configure Network for Lidarr
+    description: Configure Network for qBittorrent
   - name: Storage Configuration
-    description: Configure Storage for Lidarr
+    description: Configure Storage for qBittorrent
   - name: Resources Configuration
-    description: Configure Resources for Lidarr
+    description: Configure Resources for qBittorrent
 
 portals:
   web_portal:
@@ -21,22 +21,15 @@ portals:
     path: "$kubernetes-resource_configmap_portal_path"
 
 questions:
-  - variable: lidarrConfig
+  - variable: qbitConfig
     label: ""
-    group: Lidarr Configuration
+    group: qBittorrent Configuration
     schema:
       type: dict
       attrs:
-        - variable: instanceName
-          label: Instance Name
-          description: The name of the Lidarr instance.
-          schema:
-            type: string
-            default: "Lidarr"
-            required: true
         - variable: additionalEnvs
           label: Additional Environment Variables
-          description: Configure additional environment variables for Lidarr.
+          description: Configure additional environment variables for qBittorrent.
           schema:
             type: list
             default: []
@@ -57,7 +50,7 @@ questions:
                         type: string
                         required: true
 
-  - variable: lidarrRunAs
+  - variable: qbitRunAs
     label: ""
     group: User and Group Configuration
     schema:
@@ -65,22 +58,22 @@ questions:
       attrs:
         - variable: user
           label: User ID
-          description: The user id that Lidarr will run as.
+          description: The user id that qBittorrent will run as.
           schema:
             type: int
-            min: 568
+            min: 2
             default: 568
             required: true
         - variable: group
           label: Group ID
-          description: The group id that Lidarr will run as.
+          description: The group id that qBittorrent will run as.
           schema:
             type: int
-            min: 568
+            min: 2
             default: 568
             required: true
 
-  - variable: lidarrNetwork
+  - variable: qbitNetwork
     label: ""
     group: Network Configuration
     schema:
@@ -88,10 +81,19 @@ questions:
       attrs:
         - variable: webPort
           label: Web Port
-          description: The port for the Lidarr Web UI.
+          description: The port for the qBittorrent Web UI.
           schema:
             type: int
             default: 30000
+            min: 9000
+            max: 65535
+            required: true
+        - variable: btPort
+          label: BT Port
+          description: The port for the qBittorrent BitTorrent protocol. Both TCP and UDP
+          schema:
+            type: int
+            default: 50413
             min: 9000
             max: 65535
             required: true
@@ -103,15 +105,15 @@ questions:
             type: boolean
             default: false
 
-  - variable: lidarrStorage
+  - variable: qbitStorage
     label: ""
     group: Storage Configuration
     schema:
       type: dict
       attrs:
-        - variable: config
-          label: Lidarr Config Storage
-          description: The path to store Lidarr Configuration.
+        - variable: downloads
+          label: qBittorrent Downloads Storage
+          description: The path to store qBittorrent Downloads.
           schema:
             type: dict
             attrs:
@@ -123,11 +125,11 @@ questions:
                 schema:
                   type: string
                   required: true
-                  default: "ixVolume"
+                  default: ixVolume
                   enum:
-                    - value: "hostPath"
+                    - value: hostPath
                       description: Host Path (Path that already exists on the system)
-                    - value: "ixVolume"
+                    - value: ixVolume
                       description: ixVolume (Dataset created automatically by the system)
               - variable: datasetName
                 label: Dataset Name
@@ -137,7 +139,7 @@ questions:
                   required: true
                   hidden: true
                   immutable: true
-                  default: "config"
+                  default: downloads
                   $ref:
                     - "normalize/ixVolume"
               - variable: hostPath
@@ -147,60 +149,48 @@ questions:
                   show_if: [["type", "=", "hostPath"]]
                   immutable: true
                   required: true
-        - variable: additionalStorages
-          label: Additional Storage
-          description: Additional storage for Lidarr.
+        - variable: config
+          label: qBittorrent Config Storage
+          description: The path to store qBittorrent Configuration.
           schema:
-            type: list
-            default: []
-            items:
-              - variable: storageEntry
-                label: Storage Entry
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
                 schema:
-                  type: dict
-                  attrs:
-                    - variable: type
-                      label: Type
-                      description: |
-                        ixVolume: Is dataset created automatically by the system.</br>
-                        Host Path: Is a path that already exists on the system.
-                      schema:
-                        type: string
-                        required: true
-                        default: "ixVolume"
-                        enum:
-                          - value: "hostPath"
-                            description: Host Path (Path that already exists on the system)
-                          - value: "ixVolume"
-                            description: ixVolume (Dataset created automatically by the system)
-                    - variable: mountPath
-                      label: Mount Path
-                      description: The path inside the container to mount the storage.
-                      schema:
-                        type: path
-                        required: true
-                    - variable: hostPath
-                      label: Host Path
-                      description: The host path to use for storage.
-                      schema:
-                        type: hostpath
-                        show_if: [["type", "=", "hostPath"]]
-                        required: true
-                    - variable: datasetName
-                      label: Dataset Name
-                      description: The name of the dataset to use for storage.
-                      schema:
-                        type: string
-                        show_if: [["type", "=", "ixVolume"]]
-                        required: true
-                        immutable: true
-                        default: "storage_entry"
-                        $ref:
-                          - "normalize/ixVolume"
+                  type: string
+                  required: true
+                  default: ixVolume
+                  enum:
+                    - value: hostPath
+                      description: Host Path (Path that already exists on the system)
+                    - value: ixVolume
+                      description: ixVolume (Dataset created automatically by the system)
+              - variable: datasetName
+                label: Dataset Name
+                schema:
+                  type: string
+                  show_if: [["type", "=", "ixVolume"]]
+                  required: true
+                  hidden: true
+                  immutable: true
+                  default: config
+                  $ref:
+                    - "normalize/ixVolume"
+              - variable: hostPath
+                label: Host Path
+                schema:
+                  type: hostpath
+                  show_if: [["type", "=", "hostPath"]]
+                  immutable: true
+                  required: true
 
   - variable: resources
+    label: Resources Configuration
     group: Resources Configuration
-    label: ""
     schema:
       type: dict
       attrs:
@@ -211,15 +201,15 @@ questions:
             attrs:
               - variable: cpu
                 label: CPU
-                description: CPU limit for Lidarr.
+                description: CPU limit for qBittorrent.
                 schema:
                   type: string
-                  default: "4000m"
+                  default: 4000m
                   required: true
               - variable: memory
                 label: Memory
-                description: Memory limit for Lidarr.
+                description: Memory limit for qBittorrent.
                 schema:
                   type: string
-                  default: "8Gi"
+                  default: 8Gi
                   required: true
