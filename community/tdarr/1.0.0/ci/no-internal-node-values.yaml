@@ -1,0 +1,16 @@
+tdarrConfig:
+  nodeName: ''
+  internalNode: false
+tdarrStorage:
+  server:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/server
+  configs:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/configs
+  logs:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/logs
+  transcodes:
+    type: emptyDir
+    size: 1Gi
