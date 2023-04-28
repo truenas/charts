@@ -1,8 +1,8 @@
 runAsContext:
   - userName: mumble
     groupName: mumble
-    gid: 10000
-    uid: 10000
+    gid: 1000
+    uid: 1000
     description: Mumble runs as non-root user.
 capabilities: []
 hostMounts: []
