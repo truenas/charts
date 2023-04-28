@@ -487,6 +487,15 @@ questions:
                 schema:
                   type: path
                   required: true
+              - variable: sizeLimit
+                label: "Size Limit"
+                description: |
+                  Optional - Size of the memory backed volume.</br>
+                  Format: 100Mi, 1Gi, 2Gi etc
+                schema:
+                  type: string
+                  valid_chars: "^([+-]?[0-9.]+)([eEinumkKMGTP]*[-+]?[0-9]*)$"
+                  default: "512Mi"
 
   # Volumes
   - variable: volumes

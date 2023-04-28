@@ -23,6 +23,9 @@ volumes:
   - name: ix-emptydir-volume-{{ $.Release.Name }}-{{ $index }}
     emptyDir:
       medium: Memory
+      {{- with $emptyDirConfiguration.sizeLimit }}
+      sizeLimit: {{ . }}
+      {{- end }}
 {{- end }}
 {{- end }}
 {{- end }}
