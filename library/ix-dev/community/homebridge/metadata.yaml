@@ -1,0 +1,16 @@
+runAsContext:
+  - userName: root
+    groupName: root
+    gid: 0
+    uid: 0
+    description: Homebridge runs as root user.
+capabilities:
+  - name: CHOWN
+    description: Homebridge is able to chown files. (Only with avahi enabled)
+  - name: DAC_OVERRIDE
+    description: Homebridge is able to bypass permission checks.
+  - name: SETGID
+    description: Homebridge is able to set group ID for it's sub-processes.
+  - name: SETUID
+    description: Homebridge is able to set user ID for it's sub-processes.
+hostMounts: []
