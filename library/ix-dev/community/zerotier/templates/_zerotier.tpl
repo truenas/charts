@@ -32,8 +32,8 @@ workload:
               add:
                 {{/* Most of those capabilities are normally added by default in conainers
                 But by default, in common, we drop all of them. So here we add some of them
-                as they are needed, because zerotier starts as root but drops privs for the
-                process running the zerotier binary */}}
+                as they are needed, because zerotier starts as root but drops privs for some
+                of the processes running by the zerotier binary */}}
                 - AUDIT_WRITE
                 - CHOWN
                 - DAC_OVERRIDE
