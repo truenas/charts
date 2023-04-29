@@ -1,0 +1,7 @@
+overseerrNetwork:
+  webPort: 31000
+
+overseerrStorage:
+  config:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/config

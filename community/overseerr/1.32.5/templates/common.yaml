@@ -1,0 +1,9 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "overseerr.workload" $ | fromYaml) -}}
+
+{{/* Create the configmap for portal manually*/}}
+{{- include "overseerr.portal" $ -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}
