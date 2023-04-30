@@ -24,17 +24,17 @@ workload:
             liveness:
               enabled: true
               type: http
-              port: "{{ .Values.overseerrNetwork.webPort }}"
+              port: 5055
               path: /ping
             readiness:
               enabled: true
               type: http
-              port: "{{ .Values.overseerrNetwork.webPort }}"
+              port: 5055
               path: /ping
             startup:
               enabled: true
               type: http
-              port: "{{ .Values.overseerrNetwork.webPort }}"
+              port: 5055
               path: /ping
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
