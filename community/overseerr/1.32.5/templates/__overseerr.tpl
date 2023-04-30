@@ -15,7 +15,7 @@ workload:
             runAsUser: {{ .Values.overseerrRunAs.user }}
             runAsGroup: {{ .Values.overseerrRunAs.group }}
           env:
-            OVERSEERR__PORT: {{ .Values.overseerrNetwork.webPort }}
+            PORT: {{ .Values.overseerrNetwork.webPort }}
             OVERSEERR__INSTANCE_NAME: {{ .Values.overseerrConfig.instanceName }}
           {{ with .Values.overseerrConfig.additionalEnvs }}
             {{ range $env := . }}
