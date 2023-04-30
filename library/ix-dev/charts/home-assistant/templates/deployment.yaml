@@ -71,6 +71,9 @@ spec:
           ports:
             - name: web
               containerPort: 8123
+            {{- if not .Values.hostNetwork }}
+              hostPort: null
+            {{- end }}
           readinessProbe:
             tcpSocket:
               port: 8123

@@ -31,12 +31,21 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
           - name: emby
             protocol: TCP
             containerPort: 8096
+          {{- if not .Values.hostNetwork }}
+            hostPort: null
+          {{- end }}
           - name: emby-dlna
             protocol: UDP
             containerPort: 1900
+          {{- if not .Values.hostNetwork }}
+            hostPort: null
+          {{- end }}
           - name: emby-lnd
             protocol: UDP
             containerPort: 7359
+          {{- if not .Values.hostNetwork }}
+            hostPort: null
+          {{- end }}
           env:
             - name: KUBE_NAMESPACE
               valueFrom:

@@ -50,8 +50,14 @@ spec:
             - name: udp
               containerPort: {{ .Values.wgUDPPort }}
               protocol: UDP
+            {{- if not .Values.hostNetwork }}
+              hostPort: null
+            {{- end }}
             - name: web
               containerPort: {{ .Values.webUIPort }}
+            {{- if not .Values.hostNetwork }}
+              hostPort: null
+            {{- end }}
           env:
             {{ $wgeasy := .Values.wgeasy }}
             {{ $envList := (default list .Values.environmentVariables) }}
