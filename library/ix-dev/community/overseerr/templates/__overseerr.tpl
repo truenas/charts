@@ -15,6 +15,7 @@ workload:
             runAsUser: {{ .Values.overseerrRunAs.user }}
             runAsGroup: {{ .Values.overseerrRunAs.group }}
           env:
+            PORT: {{ .Values.overseerrNetwork.webPort }}
           {{ with .Values.overseerrConfig.additionalEnvs }}
             {{ range $env := . }}
             {{ $env.name }}: {{ $env.value }}
@@ -24,17 +25,17 @@ workload:
             liveness:
               enabled: true
               type: http
-              port: 5055
+              port: {{ .Values.overseerrNetwork.webPort }}
               path: /ping
             readiness:
               enabled: true
               type: http
-              port: 5055
+              port: {{ .Values.overseerrNetwork.webPort }}
               path: /ping
             startup:
               enabled: true
               type: http
-              port: 5055
+              port: {{ .Values.overseerrNetwork.webPort }}
               path: /ping
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
@@ -55,7 +56,6 @@ service:
         enabled: true
         primary: true
         port: {{ .Values.overseerrNetwork.webPort }}
-        targetPort: 5055
         nodePort: {{ .Values.overseerrNetwork.webPort }}
         targetSelector: overseerr
 
