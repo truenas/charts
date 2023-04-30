@@ -16,7 +16,6 @@ workload:
             runAsGroup: {{ .Values.overseerrRunAs.group }}
           env:
             PORT: {{ .Values.overseerrNetwork.webPort }}
-            CONFIG_DIRECTORY: {{ .Values.overseerrStorage.config.hostPath }}
             OVERSEERR__INSTANCE_NAME: {{ .Values.overseerrConfig.instanceName }}
           {{ with .Values.overseerrConfig.additionalEnvs }}
             {{ range $env := . }}
