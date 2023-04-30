@@ -70,7 +70,7 @@ persistence:
     targetSelector:
       overseerr:
         overseerr:
-          mountPath: /config
+          mountPath: /app/config
         01-permissions:
           mountPath: /mnt/directories/config
   tmp:
