@@ -15,8 +15,6 @@ workload:
             runAsUser: {{ .Values.overseerrRunAs.user }}
             runAsGroup: {{ .Values.overseerrRunAs.group }}
           env:
-            PORT: {{ .Values.overseerrNetwork.webPort }}
-            OVERSEERR__INSTANCE_NAME: {{ .Values.overseerrConfig.instanceName }}
           {{ with .Values.overseerrConfig.additionalEnvs }}
             {{ range $env := . }}
             {{ $env.name }}: {{ $env.value }}
@@ -57,7 +55,7 @@ service:
         enabled: true
         primary: true
         port: {{ .Values.overseerrNetwork.webPort }}
-        nodePort: {{ .Values.overseerrNetwork.webPort }}
+        nodePort: 5055
         targetSelector: overseerr
 
 {{/* Persistence */}}
