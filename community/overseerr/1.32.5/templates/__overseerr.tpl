@@ -54,8 +54,8 @@ service:
       webui:
         enabled: true
         primary: true
-        port: {{ .Values.overseerrNetwork.webPort }}
-        nodePort: 5055
+        port: 5055
+        nodePort: {{ .Values.overseerrNetwork.webPort }}
         targetSelector: overseerr
 
 {{/* Persistence */}}
