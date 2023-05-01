@@ -3,13 +3,14 @@ description: Plex Media Server
 annotations:
   title: Plex
 type: application
-version: 1.7.41
+version: 1.7.42
 apiVersion: v2
 appVersion: 1.32.0.6973
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: truenas
     url: https://www.truenas.com/
+    email: dev@ixsystems.com
 dependencies:
   - name: common
     repository: file://../../../common/2304.0.1

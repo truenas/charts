@@ -3,13 +3,14 @@ description: The Prometheus monitoring system and time series database.
 annotations:
   title: Prometheus
 type: application
-version: 1.0.1
+version: 1.0.2
 apiVersion: v2
 appVersion: v2.43.0
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: truenas
     url: https://www.truenas.com/
+    email: dev@ixsystems.com
 dependencies:
   - name: common
     repository: file://../../../common

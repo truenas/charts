@@ -3,13 +3,14 @@ description: Home Assistant App for TrueNAS SCALE
 annotations:
   title: Home Assistant
 type: application
-version: 1.0.84
+version: 1.0.85
 apiVersion: v2
 appVersion: 2023.4.6
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: truenas
     url: https://www.truenas.com/
+    email: dev@ixsystems.com
 dependencies:
   - name: common
     repository: file://../../../common/2304.0.1
