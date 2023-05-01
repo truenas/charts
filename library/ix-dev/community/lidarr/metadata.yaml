@@ -1,0 +1,8 @@
+runAsContext:
+  - userName: lidarr
+    groupName: lidarr
+    gid: 568
+    uid: 568
+    description: Lidarr can run as any non-root user.
+capabilities: []
+hostMounts: []
