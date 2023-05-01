@@ -32,10 +32,10 @@ spec:
     spec:
       {{ if .Values.hostNetwork }}
       hostNetwork: true
-      dnsPoliy: ClusterFirstWithHostNet
+      dnsPolicy: ClusterFirstWithHostNet
       {{ else }}
       hostNetwork: false
-      dnsPoliy: ClusterFirst
+      dnsPolicy: ClusterFirst
       {{ end }}
       initContainers:
         - name: init-postgresdb
