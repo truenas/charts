@@ -3,17 +3,18 @@ description: Secure remote access to shared resources
 annotations:
   title: Tailscale
 type: application
-version: 1.0.0
+version: 1.0.1
 apiVersion: v2
 appVersion: 'v1.38.4'
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: truenas
     url: https://www.truenas.com/
+    email: dev@ixsystems.com
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.0.5
+    version: 1.0.6
 home: https://tailscale.com/
 icon: https://avatars.githubusercontent.com/u/48932923
 sources:

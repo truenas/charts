@@ -20,8 +20,8 @@ annotations:
   title: str(required=True)
 ---
 maintainer:
-  name: str()
-  email: str(required=False)
+  name: str(required=True)
+  email: str(required=True)
   url: str(required=True)
 ---
 dependency:
