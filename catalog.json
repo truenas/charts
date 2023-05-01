@@ -11,13 +11,20 @@
             "healthy": true,
             "healthy_error": null,
             "location": "/__w/charts/charts/charts/diskoverdata",
-            "latest_version": "1.0.7",
+            "latest_version": "1.0.8",
             "latest_app_version": "2.0.1",
-            "latest_human_version": "2.0.1_1.0.7",
+            "latest_human_version": "2.0.1_1.0.8",
             "last_update": "2023-04-24 11:08:11",
             "name": "diskoverdata",
             "recommended": false,
             "title": "Diskover Data",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
             "icon_url": "http://www.diskoverdata.com/wp-content/uploads/2019/09/diskover.png"
         },
         "home-assistant": {
@@ -29,13 +36,20 @@
             "healthy": true,
             "healthy_error": null,
             "location": "/__w/charts/charts/charts/home-assistant",
-            "latest_version": "1.0.84",
+            "latest_version": "1.0.85",
             "latest_app_version": "2023.4.6",
-            "latest_human_version": "2023.4.6_1.0.84",
-            "last_update": "2023-05-01 18:08:00",
+            "latest_human_version": "2023.4.6_1.0.85",
+            "last_update": "2023-05-01 16:02:53",
             "name": "home-assistant",
             "recommended": false,
             "title": "Home Assistant",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
             "icon_url": "https://avatars.githubusercontent.com/u/13844975?s=200&v=4"
         },
         "minio": {
@@ -55,6 +69,7 @@
             "name": "minio",
             "recommended": false,
             "title": "Minio",
+            "maintainers": [],
             "icon_url": "https://min.io/resources/img/logo/MINIO_wordmark.png"
         },
         "photoprism": {
@@ -66,13 +81,20 @@
             "healthy": true,
             "healthy_error": null,
             "location": "/__w/charts/charts/charts/photoprism",
-            "latest_version": "1.0.16",
+            "latest_version": "1.0.17",
             "latest_app_version": "221118",
-            "latest_human_version": "221118_1.0.16",
+            "latest_human_version": "221118_1.0.17",
             "last_update": "2023-04-24 11:08:11",
             "name": "photoprism",
             "recommended": false,
             "title": "PhotoPrism",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
             "icon_url": "https://photoprism.app/static/icons/logo.svg"
         },
         "plex": {
@@ -84,13 +106,20 @@
             "healthy": true,
             "healthy_error": null,
             "location": "/__w/charts/charts/charts/plex",
-            "latest_version": "1.7.41",
+            "latest_version": "1.7.42",
             "latest_app_version": "1.32.0.6973",
-            "latest_human_version": "1.32.0.6973_1.7.41",
+            "latest_human_version": "1.32.0.6973_1.7.42",
             "last_update": "2023-04-24 11:08:11",
             "name": "plex",
             "recommended": false,
             "title": "Plex",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
             "icon_url": "https://www.plex.tv/wp-content/uploads/2018/01/pmp-icon-1.png"
         },
         "ix-chart": {
@@ -102,13 +131,20 @@
             "healthy": true,
             "healthy_error": null,
             "location": "/__w/charts/charts/charts/ix-chart",
-            "latest_version": "2304.0.4",
+            "latest_version": "2304.0.5",
             "latest_app_version": "v1",
-            "latest_human_version": "v1_2304.0.4",
-            "last_update": "2023-04-24 11:08:11",
+            "latest_human_version": "v1_2304.0.5",
+            "last_update": "2023-04-28 12:56:20",
             "name": "ix-chart",
             "recommended": false,
             "title": "ix-chart",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
             "icon_url": null
         },
         "nextcloud": {
@@ -120,13 +156,20 @@
             "healthy": true,
             "healthy_error": null,
             "location": "/__w/charts/charts/charts/nextcloud",
-            "latest_version": "1.6.23",
+            "latest_version": "1.6.24",
             "latest_app_version": "26.0.1",
-            "latest_human_version": "26.0.1_1.6.23",
+            "latest_human_version": "26.0.1_1.6.24",
             "last_update": "2023-04-24 11:08:11",
             "name": "nextcloud",
             "recommended": false,
             "title": "Nextcloud",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
             "icon_url": "https://cdn.rawgit.com/docker-library/docs/defa5ffc7123177acd60ddef6e16bddf694cc35f/nextcloud/logo.svg"
         },
         "wg-easy": {
@@ -140,13 +183,20 @@
             "healthy": true,
             "healthy_error": null,
             "location": "/__w/charts/charts/charts/wg-easy",
-            "latest_version": "1.0.3",
+            "latest_version": "1.0.4",
             "latest_app_version": "7",
-            "latest_human_version": "7_1.0.3",
+            "latest_human_version": "7_1.0.4",
             "last_update": "2023-04-24 11:08:11",
             "name": "wg-easy",
             "recommended": false,
             "title": "WG Easy",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
             "icon_url": "https://raw.githubusercontent.com/WeeJeWel/wg-easy/master/src/www/img/logo.png"
         },
         "elastic-search": {
@@ -159,13 +209,20 @@
             "healthy": true,
             "healthy_error": null,
             "location": "/__w/charts/charts/charts/elastic-search",
-            "latest_version": "1.0.2",
+            "latest_version": "1.0.3",
             "latest_app_version": "8.7.0",
-            "latest_human_version": "8.7.0_1.0.2",
+            "latest_human_version": "8.7.0_1.0.3",
             "last_update": "2023-04-19 22:29:44",
             "name": "elastic-search",
             "recommended": false,
             "title": "Elastic Search",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
             "icon_url": "https://images.contentstack.io/v3/assets/bltefdd0b53724fa2ce/blt280217a63b82a734/6202d3378b1f312528798412/elastic-logo.svg"
         },
         "collabora": {
@@ -179,13 +236,20 @@
             "healthy": true,
             "healthy_error": null,
             "location": "/__w/charts/charts/charts/collabora",
-            "latest_version": "1.2.9",
+            "latest_version": "1.2.10",
             "latest_app_version": "21.11.4.1.1",
-            "latest_human_version": "21.11.4.1.1_1.2.9",
+            "latest_human_version": "21.11.4.1.1_1.2.10",
             "last_update": "2023-04-24 11:08:11",
             "name": "collabora",
             "recommended": false,
             "title": "Collabora",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
             "icon_url": "https://avatars.githubusercontent.com/u/22418908?s=200&v=4"
         },
         "syncthing": {
@@ -198,13 +262,20 @@
             "healthy": true,
             "healthy_error": null,
             "location": "/__w/charts/charts/charts/syncthing",
-            "latest_version": "1.0.23",
+            "latest_version": "1.0.24",
             "latest_app_version": "1.23.4",
-            "latest_human_version": "1.23.4_1.0.23",
+            "latest_human_version": "1.23.4_1.0.24",
             "last_update": "2023-04-24 11:08:11",
             "name": "syncthing",
             "recommended": false,
             "title": "Syncthing",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
             "icon_url": "https://play-lh.googleusercontent.com/KIy_dqUdZqcsTq4GDstHrHwLRvu60gT3v0p41gw792BC6OxamNhUw2eIy0-LI05qNEA=w240-h480"
         },
         "emby": {
@@ -216,13 +287,20 @@
             "healthy": true,
             "healthy_error": null,
             "location": "/__w/charts/charts/charts/emby",
-            "latest_version": "1.0.20",
+            "latest_version": "1.0.21",
             "latest_app_version": "4.7.11.0",
-            "latest_human_version": "4.7.11.0_1.0.20",
+            "latest_human_version": "4.7.11.0_1.0.21",
             "last_update": "2023-04-24 11:08:11",
             "name": "emby",
             "recommended": false,
             "title": "Emby Server",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
             "icon_url": "https://images-na.ssl-images-amazon.com/images/I/41NwssJC1iL.png"
         },
         "storj": {
@@ -237,13 +315,20 @@
             "healthy": true,
             "healthy_error": null,
             "location": "/__w/charts/charts/charts/storj",
-            "latest_version": "1.0.8",
+            "latest_version": "1.0.9",
             "latest_app_version": "v1.68.2",
-            "latest_human_version": "v1.68.2_1.0.8",
+            "latest_human_version": "v1.68.2_1.0.9",
             "last_update": "2023-04-24 11:08:11",
             "name": "storj",
             "recommended": false,
             "title": "Storj",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
             "icon_url": "https://assets-global.website-files.com/602eda09fc78afc76e9706b6/60917835a05862243e7de9af_logo.svg"
         },
         "netdata": {
@@ -255,13 +340,20 @@
             "healthy": true,
             "healthy_error": null,
             "location": "/__w/charts/charts/charts/netdata",
-            "latest_version": "1.0.18",
+            "latest_version": "1.0.19",
             "latest_app_version": "v1.38.1",
-            "latest_human_version": "v1.38.1_1.0.18",
+            "latest_human_version": "v1.38.1_1.0.19",
             "last_update": "2023-04-24 11:08:11",
             "name": "netdata",
             "recommended": false,
             "title": "Netdata",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
             "icon_url": "https://netdata.github.io/helmchart/logo.png"
         },
         "prometheus": {
@@ -274,13 +366,20 @@
             "healthy": true,
             "healthy_error": null,
             "location": "/__w/charts/charts/charts/prometheus",
-            "latest_version": "1.0.1",
+            "latest_version": "1.0.2",
             "latest_app_version": "v2.43.0",
-            "latest_human_version": "v2.43.0_1.0.1",
+            "latest_human_version": "v2.43.0_1.0.2",
             "last_update": "2023-04-20 13:31:52",
             "name": "prometheus",
             "recommended": false,
             "title": "Prometheus",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
             "icon_url": "https://avatars.githubusercontent.com/u/3380462"
         },
         "pihole": {
@@ -293,13 +392,20 @@
             "healthy": true,
             "healthy_error": null,
             "location": "/__w/charts/charts/charts/pihole",
-            "latest_version": "1.0.16",
+            "latest_version": "1.0.17",
             "latest_app_version": "2023.02.2",
-            "latest_human_version": "2023.02.2_1.0.16",
+            "latest_human_version": "2023.02.2_1.0.17",
             "last_update": "2023-04-24 11:08:11",
             "name": "pihole",
             "recommended": false,
             "title": "Pi-hole",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
             "icon_url": "https://github.com/pi-hole/graphics/raw/master/Vortex/Vortex_Vertical_wordmark_lightmode.png?raw=true)"
         }
     },
@@ -316,13 +422,20 @@
             "healthy": true,
             "healthy_error": null,
             "location": "/__w/charts/charts/community/qbittorrent",
-            "latest_version": "1.0.5",
+            "latest_version": "1.0.6",
             "latest_app_version": "4.5.2",
-            "latest_human_version": "4.5.2_1.0.5",
+            "latest_human_version": "4.5.2_1.0.6",
             "last_update": "2023-04-26 15:00:54",
             "name": "qbittorrent",
             "recommended": false,
             "title": "qBittorrent",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
             "icon_url": "https://upload.wikimedia.org/wikipedia/commons/9/9e/Qbittorrent_logo.png"
         },
         "chia": {
@@ -335,13 +448,20 @@
             "healthy": true,
             "healthy_error": null,
             "location": "/__w/charts/charts/community/chia",
-            "latest_version": "1.0.4",
+            "latest_version": "1.0.5",
             "latest_app_version": "1.7.1",
-            "latest_human_version": "1.7.1_1.0.4",
+            "latest_human_version": "1.7.1_1.0.5",
             "last_update": "2023-04-11 15:25:54",
             "name": "chia",
             "recommended": false,
             "title": "Chia",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
             "icon_url": "https://www.chia.net/wp-content/uploads/2022/09/chia-logo.svg"
         },
         "radarr": {
@@ -354,13 +474,20 @@
             "healthy": true,
             "healthy_error": null,
             "location": "/__w/charts/charts/community/radarr",
-            "latest_version": "1.0.5",
+            "latest_version": "1.0.6",
             "latest_app_version": "4.4.4.7068",
-            "latest_human_version": "4.4.4.7068_1.0.5",
+            "latest_human_version": "4.4.4.7068_1.0.6",
             "last_update": "2023-04-26 15:00:54",
             "name": "radarr",
             "recommended": false,
             "title": "Radarr",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
             "icon_url": "https://raw.githubusercontent.com/Radarr/Radarr/develop/Logo/256.png"
         },
         "nginx-proxy-manager": {
@@ -373,13 +500,20 @@
             "healthy": true,
             "healthy_error": null,
             "location": "/__w/charts/charts/community/nginx-proxy-manager",
-            "latest_version": "1.0.0",
+            "latest_version": "1.0.1",
             "latest_app_version": "2.10.2",
-            "latest_human_version": "2.10.2_1.0.0",
+            "latest_human_version": "2.10.2_1.0.1",
             "last_update": "2023-04-19 22:26:54",
             "name": "nginx-proxy-manager",
             "recommended": false,
             "title": "Nginx Proxy Manager",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
             "icon_url": "https://nginxproxymanager.com/logo.png"
         },
         "lidarr": {
@@ -392,13 +526,20 @@
             "healthy": true,
             "healthy_error": null,
             "location": "/__w/charts/charts/community/lidarr",
-            "latest_version": "1.0.3",
+            "latest_version": "1.0.4",
             "latest_app_version": "1.1.3.2982",
-            "latest_human_version": "1.1.3.2982_1.0.3",
+            "latest_human_version": "1.1.3.2982_1.0.4",
             "last_update": "2023-04-26 15:00:54",
             "name": "lidarr",
             "recommended": false,
             "title": "Lidarr",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
             "icon_url": "https://raw.githubusercontent.com/Lidarr/Lidarr/develop/Logo/256.png"
         },
         "gitea": {
@@ -411,13 +552,20 @@
             "healthy": true,
             "healthy_error": null,
             "location": "/__w/charts/charts/community/gitea",
-            "latest_version": "1.0.1",
+            "latest_version": "1.0.2",
             "latest_app_version": "1.19.0",
-            "latest_human_version": "1.19.0_1.0.1",
+            "latest_human_version": "1.19.0_1.0.2",
             "last_update": "2023-04-20 13:31:52",
             "name": "gitea",
             "recommended": false,
             "title": "Gitea",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
             "icon_url": "https://gitea.com/assets/img/logo.svg"
         },
         "tdarr": {
@@ -431,13 +579,20 @@
             "healthy": true,
             "healthy_error": null,
             "location": "/__w/charts/charts/community/tdarr",
-            "latest_version": "1.0.0",
+            "latest_version": "1.0.1",
             "latest_app_version": "2.00.20.1",
-            "latest_human_version": "2.00.20.1_1.0.0",
+            "latest_human_version": "2.00.20.1_1.0.1",
             "last_update": "2023-04-26 16:35:52",
             "name": "tdarr",
             "recommended": false,
             "title": "Tdarr",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
             "icon_url": "https://home.tdarr.io/static/media/logo3-min.246d6df4.png"
         },
         "vaultwarden": {
@@ -450,13 +605,20 @@
             "healthy": true,
             "healthy_error": null,
             "location": "/__w/charts/charts/community/vaultwarden",
-            "latest_version": "1.0.4",
+            "latest_version": "1.0.5",
             "latest_app_version": "1.28.1",
-            "latest_human_version": "1.28.1_1.0.4",
+            "latest_human_version": "1.28.1_1.0.5",
             "last_update": "2023-04-20 13:31:52",
             "name": "vaultwarden",
             "recommended": false,
             "title": "Vaultwarden",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
             "icon": "https://raw.githubusercontent.com/dani-garcia/vaultwarden/main/src/static/images/vaultwarden-icon.png",
             "icon_url": null
         },
@@ -470,13 +632,20 @@
             "healthy": true,
             "healthy_error": null,
             "location": "/__w/charts/charts/community/tailscale",
-            "latest_version": "1.0.0",
+            "latest_version": "1.0.1",
             "latest_app_version": "v1.38.4",
-            "latest_human_version": "v1.38.4_1.0.0",
+            "latest_human_version": "v1.38.4_1.0.1",
             "last_update": "2023-04-19 22:34:28",
             "name": "tailscale",
             "recommended": false,
             "title": "Tailscale",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
             "icon_url": "https://avatars.githubusercontent.com/u/48932923"
         },
         "sonarr": {
@@ -489,13 +658,20 @@
             "healthy": true,
             "healthy_error": null,
             "location": "/__w/charts/charts/community/sonarr",
-            "latest_version": "1.0.3",
+            "latest_version": "1.0.4",
             "latest_app_version": "3.0.10.1567",
-            "latest_human_version": "3.0.10.1567_1.0.3",
+            "latest_human_version": "3.0.10.1567_1.0.4",
             "last_update": "2023-04-26 15:00:54",
             "name": "sonarr",
             "recommended": false,
             "title": "Sonarr",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
             "icon_url": "https://raw.githubusercontent.com/Sonarr/Sonarr/develop/Logo/256.png"
         },
         "adguard-home": {
@@ -508,13 +684,20 @@
             "healthy": true,
             "healthy_error": null,
             "location": "/__w/charts/charts/community/adguard-home",
-            "latest_version": "1.0.0",
+            "latest_version": "1.0.1",
             "latest_app_version": "v0.107.26",
-            "latest_human_version": "v0.107.26_1.0.0",
+            "latest_human_version": "v0.107.26_1.0.1",
             "last_update": "2023-04-11 15:36:31",
             "name": "adguard-home",
             "recommended": false,
             "title": "AdGuard Home",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
             "icon_url": "https://github.com/AdguardTeam/AdGuardHome/raw/master/doc/adguard_home_darkmode.svg"
         },
         "ipfs": {
@@ -528,13 +711,20 @@
             "healthy": true,
             "healthy_error": null,
             "location": "/__w/charts/charts/community/ipfs",
-            "latest_version": "1.0.4",
+            "latest_version": "1.0.5",
             "latest_app_version": "v0.19.1",
-            "latest_human_version": "v0.19.1_1.0.4",
+            "latest_human_version": "v0.19.1_1.0.5",
             "last_update": "2023-04-20 13:31:52",
             "name": "ipfs",
             "recommended": false,
             "title": "IPFS",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
             "icon_url": "https://avatars.githubusercontent.com/u/10536621"
         }
     },
@@ -550,13 +740,20 @@
             "healthy": true,
             "healthy_error": null,
             "location": "/__w/charts/charts/enterprise/minio",
-            "latest_version": "1.0.5",
+            "latest_version": "1.0.6",
             "latest_app_version": "2023-03-24",
-            "latest_human_version": "2023-03-24_1.0.5",
+            "latest_human_version": "2023-03-24_1.0.6",
             "last_update": "2023-04-20 13:31:52",
             "name": "minio",
             "recommended": false,
             "title": "MinIO",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
             "icon_url": "https://min.io/resources/img/logo/MINIO_wordmark.png"
         }
     }
