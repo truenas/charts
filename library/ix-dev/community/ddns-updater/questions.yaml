@@ -100,6 +100,9 @@ questions:
           description: Providers to obtain the public IP address (IPv4 and/or IPv6)
           schema:
             type: list
+            min: 1
+            required: true
+            empty: false
             default: [{"provider": "all", "placeholder": "placeholder"}]
             items:
               - variable: provider
@@ -128,6 +131,9 @@ questions:
           description: Providers to obtain the public IP address (IPv4 and/or IPv6)
           schema:
             type: list
+            min: 1
+            required: true
+            empty: false
             default: [{"provider": "all", "custom": ""}]
             items:
               - variable: provider
@@ -162,6 +168,9 @@ questions:
           description: Providers to obtain the public IPv4 address
           schema:
             type: list
+            min: 1
+            required: true
+            empty: false
             default: [{"provider": "all", "custom": ""}]
             items:
               - variable: provider
@@ -190,6 +199,9 @@ questions:
           description: Providers to obtain the public IPv6 address
           schema:
             type: list
+            min: 1
+            required: true
+            empty: false
             default: [{"provider": "all", "custom": ""}]
             items:
               - variable: provider
@@ -218,6 +230,9 @@ questions:
           description: Fetcher types to obtain the public IP address
           schema:
             type: list
+            min: 1
+            required: true
+            empty: false
             default: [{"provider": "all", "placeholder": "placeholder"}]
             items:
               - variable: provider
@@ -241,6 +256,134 @@ questions:
                   default: placeholder
                   required: true
                   hidden: true
+        - variable: config
+          label: Configuration
+          description: |
+            Configuration for DDNS Updater.</br>
+            Cloudflare - https://github.com/qdm12/ddns-updater/blob/master/docs/cloudflare.md </br>
+            DD24 - https://github.com/qdm12/ddns-updater/blob/master/docs/dd24.md </br>
+          schema:
+            type: list
+            min: 1
+            required: true
+            empty: false
+            default: []
+            items:
+              - variable: configEntry
+                label: Configuration Entry
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: provider
+                      label: Provider
+                      schema:
+                        type: string
+                        required: true
+                        enum:
+                          - value: cloudflare
+                            description: Cloudflare
+                          - value: dd24
+                            description: DD24
+                    # Common to all providers
+                    - variable: domain
+                      label: Domain
+                      description: |
+                        Domain </br>
+                        For example: example.com
+                      schema:
+                        type: string
+                        required: true
+                    - variable: ipVersion
+                      label: IP Version
+                      description: |
+                        IP Version. </br>
+                        For example: IPv4
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "cloudflare"]]
+                        default: ""
+                        enum:
+                          - value: ipv4
+                            description: IPv4
+                          - value: ipv6
+                            description: IPv6
+                          - value: ""
+                            description: IPv4 and IPv6
+                    - variable: host
+                      label: Host
+                      description: |
+                        Host. </br>
+                        For example: "@"
+                      schema:
+                        type: string
+                        default: "@"
+                        required: true
+
+                    # Cloudflare
+                    - variable: cfZoneID
+                      label: Cloudflare Zone ID
+                      description: |
+                        Cloudflare Zone ID. </br>
+                        You can find it in the Overview tab of your domain.
+                      schema:
+                        type: string
+                        required: true
+                        show_if: [["provider", "=", "cloudflare"]]
+                    - variable: cfTtl
+                      label: Cloudflare TTL
+                      description: |
+                        Cloudflare TTL. </br>
+                        1 = Automatic </br>
+                        600 = 10 minutes
+                      schema:
+                        type: int
+                        min: 1
+                        required: true
+                        show_if: [["provider", "=", "cloudflare"]]
+                        default: 1
+                    - variable: cfProxied
+                      label: Cloudflare Proxied
+                      description: |
+                        Cloudflare Proxied. </br>
+                        True = Proxied </br>
+                        False = DNS Only
+                      schema:
+                        type: boolean
+                        show_if: [["provider", "=", "cloudflare"]]
+                        default: false
+                    - variable: cfToken
+                      label: Cloudflare Token
+                      description: Cloudflare Token.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "cloudflare"]]
+                    - variable: cfUserServiceKey
+                      label: Cloudflare User Service Key
+                      description: Cloudflare User Service Key.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "cloudflare"]]
+                    - variable: cfEmail
+                      label: Cloudflare Email
+                      description: Cloudflare Email.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "cloudflare"]]
+                    - variable: cfApiKey
+                      label: Cloudflare API Key
+                      description: Cloudflare API Key.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "cloudflare"]]
+
+                    # DD24
+                    - variable: dd24Password
+                      label: DD24 Password
+                      description: DD24 Password.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "dd24"]]
+
         - variable: additionalEnvs
           label: Additional Environment Variables
           description: Configure additional environment variables for DDNS Updater.

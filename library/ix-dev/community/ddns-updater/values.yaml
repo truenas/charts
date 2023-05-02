@@ -27,6 +27,16 @@ ddnsConfig:
       custom: ""
   publicIpFetchers:
     - provider: all
+  config: []
+    # - provider: cloudflare
+    #   host: "@"
+    #   domain: example.com
+    #   ipVersion: ""
+    #   cfZoneID: asd
+    #   cfTtl: 1
+    #   cfProxied: false
+    #   cfToken: asd
+
   additionalEnvs: []
 ddnsNetwork:
   webPort: 30000

@@ -10,66 +10,16 @@ configmap:
       BACKUP_PERIOD: {{ .Values.ddnsConfig.backupPeriod | quote }}
       UPDATE_COOLDOWN_PERIOD: {{ .Values.ddnsConfig.updateCooldownPeriod | quote }}
       PUBLICIP_DNS_TIMEOUT: {{ .Values.ddnsConfig.publicIpDnsTimeout | quote }}
-      PUBLICIP_DNS_PROVIDERS: {{ include "ddns.getProviders" (dict "providerList" .Values.ddnsConfig.publicIpDnsProviders) }}
-      PUBLICIP_HTTP_PROVIDERS: {{ include "ddns.getProviders" (dict "providerList" .Values.ddnsConfig.publicIpHttpProviders) }}
-      PUBLICIPV4_HTTP_PROVIDERS: {{ include "ddns.getProviders" (dict "providerList" .Values.ddnsConfig.publicIpv4HttpProviders) }}
-      PUBLICIPV6_HTTP_PROVIDERS: {{ include "ddns.getProviders" (dict "providerList" .Values.ddnsConfig.publicIpv6HttpProviders) }}
-      PUBLICIP_FETCHERS: {{ include "ddns.getProviders" (dict "providerList" .Values.ddnsConfig.publicIpFetchers) }}
+      PUBLICIP_DNS_PROVIDERS: {{ include "ddns.getPublicIpProviders" (dict "providerList" .Values.ddnsConfig.publicIpDnsProviders) }}
+      PUBLICIP_HTTP_PROVIDERS: {{ include "ddns.getPublicIpProviders" (dict "providerList" .Values.ddnsConfig.publicIpHttpProviders) }}
+      PUBLICIPV4_HTTP_PROVIDERS: {{ include "ddns.getPublicIpProviders" (dict "providerList" .Values.ddnsConfig.publicIpv4HttpProviders) }}
+      PUBLICIPV6_HTTP_PROVIDERS: {{ include "ddns.getPublicIpProviders" (dict "providerList" .Values.ddnsConfig.publicIpv6HttpProviders) }}
+      PUBLICIP_FETCHERS: {{ include "ddns.getPublicIpProviders" (dict "providerList" .Values.ddnsConfig.publicIpFetchers) }}
+      {{ $config := include "ddns.generateConfig" $ | fromYaml }}
+      CONFIG: {{ $config | toJson | quote }}
 {{- end -}}
 
-{{- define "ddns.validation" -}}
-
-  {{- include "ddns.validateDictsList" (dict "text" "Public IP DNS Providers"
-                                            "list" .Values.ddnsConfig.publicIpDnsProviders
-                                            "valid" (list "all" "cloudflare" "google")) -}}
-
-  {{- include "ddns.validateDictsList" (dict "text" "Public IP HTTP Providers"
-                                            "list" .Values.ddnsConfig.publicIpHttpProviders
-                                            "valid" (list "all" "custom" "opendns" "ifconfig" "ipinfo" "ddnss" "google")) -}}
-
-  {{- include "ddns.validateDictsList" (dict "text" "Public IPv4 HTTP Providers"
-                                            "list" .Values.ddnsConfig.publicIpv4HttpProviders
-                                            "valid" (list "all" "custom" "ipify" "noip")) -}}
-
-  {{- include "ddns.validateDictsList" (dict "text" "Public IPv6 HTTP Providers"
-                                            "list" .Values.ddnsConfig.publicIpv6HttpProviders
-                                            "valid" (list "all" "custom" "ipify" "noip")) -}}
-
-  {{- include "ddns.validateDictsList" (dict "text" "Public IP Fetchers"
-                                            "list" .Values.ddnsConfig.publicIpFetchers
-                                            "valid" (list "all" "http" "dns")) -}}
-{{- end -}}
-
-{{- define "ddns.validateDictsList" -}}
-  {{- $text := .text -}}
-  {{- $list := .list -}}
-  {{- $valid := .valid -}}
-  {{- $type := .type -}}
-
-  {{- if not $list -}}
-    {{- fail (printf "DDNS Updater - Expected non-empty [%v]" $text) -}}
-  {{- end -}}
-
-  {{- range $list -}}
-    {{- if not (mustHas .provider $valid) -}}
-      {{- fail (printf "DDNS Updater - [%v] valid values are [%v], but got [%v]" $text (join ", " $valid) .provider) -}}
-    {{- end -}}
-
-    {{- if eq .provider "all" -}}
-      {{- if ne (len $list) 1 -}}
-        {{- fail (printf "DDNS Updater - [%v] cannot contain other values when [all] is selected" $text) -}}
-      {{- end -}}
-    {{- end -}}
-
-    {{- if eq .provider "custom" -}}
-      {{- if not .custom -}}
-        {{- fail (printf "DDNS Updater - [%v] expected non-empty [Custom Value]" $text) -}}
-      {{- end -}}
-    {{- end -}}
-  {{- end -}}
-{{- end -}}
-
-{{- define "ddns.getProviders" -}}
+{{- define "ddns.getPublicIpProviders" -}}
   {{- $providerList := .providerList -}}
   {{- $return := list -}}
 
@@ -82,4 +32,25 @@ configmap:
   {{- end -}}
 
   {{- join "," $return -}}
+{{- end -}}
+
+{{/* Generates configuration in yaml
+    and then it gets converted to single line
+    JSON and passed as an env variable
+*/}}
+{{- define "ddns.generateConfig" -}}
+settings:
+  {{- range $item := .Values.ddnsConfig.config }}
+  - provider: {{ $item.provider }}
+    host: {{ $item.host | required (printf "DDNS Updater - Expected non-empty [Host] for %v provider" $item.provider) | quote }}
+    domain: {{ $item.domain | required (printf "DDNS Updater - Expected non-empty [Domain] for %v provider" $item.provider) | quote }}
+    ip_version: {{ $item.ipVersion | default "" | quote }}
+    {{- if eq $item.provider "cloudflare" }}
+      {{- include "ddns.config.cloudflare" (dict "item" $item) | trim | nindent 4 }}
+    {{- else if eq $item.provider "dd24" -}}
+      {{- include "ddns.config.dd24" (dict "item" $item) -}}
+    {{- else -}}
+      {{- fail (printf "DDNS Updater - Config Provider [%v] is not supported" $item.provider) -}}
+    {{- end -}}
+  {{- end -}}
 {{- end -}}
