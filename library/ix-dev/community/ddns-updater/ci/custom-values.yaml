@@ -1,0 +1,24 @@
+ddnsStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/data
+
+ddnsConfig:
+  period: 1m
+  backupPeriod: 1h
+  updateCooldownPeriod: 1m
+  httpTimeout: 10s
+  publicIpDnsTimeout: 3s
+  publicIpDnsProviders:
+    - provider: all
+  publicIpHttpProviders:
+    - provider: custom
+      custom: "https://example.com"
+  publicIpv4HttpProviders:
+    - provider: custom
+      custom: "https://example.com"
+  publicIpv6HttpProviders:
+    - provider: custom
+      custom: "https://example.com"
+  publicIpFetchers:
+    - provider: all
