@@ -17,7 +17,7 @@ workload:
           env:
             PORT: {{ .Values.overseerrNetwork.webPort }}
           fixedEnv:
-            TZ: {{ .Values.overseerrTZ }}
+            TZ: {{ .Values.TZ }}
           envList:
           {{ with .Values.overseerrConfig.additionalEnvs }}
             {{ range $env := . }}
