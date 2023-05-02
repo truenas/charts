@@ -1,0 +1,23 @@
+image:
+  repository: qmcgaw/ddns-updater
+  pullPolicy: IfNotPresent
+  tag: latest
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+ddnsConfig:
+  additionalEnvs: []
+ddnsNetwork:
+  webPort: 30000
+  hostNetwork: false
+ddnsRunAs:
+  user: 568
+  group: 568
+ddnsStorage:
+  data:
+    type: ixVolume
+    hostPath: ''
+    datasetName: data
