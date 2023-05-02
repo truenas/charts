@@ -9,6 +9,13 @@ resources:
     memory: 8Gi
 
 ddnsConfig:
+  period: 5m
+  backupPeriod: 24h
+  updateCooldownPeriod: 5m
+  httpTimeout: 10s
+  publicIpDnsTimeout: 3s
+  publicIpDnsProviders:
+    - all
   additionalEnvs: []
 ddnsNetwork:
   webPort: 30000

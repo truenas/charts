@@ -37,6 +37,83 @@ questions:
     schema:
       type: dict
       attrs:
+        - variable: period
+          label: Update Period
+          description: |
+            Default period of IP address check, following this format:</br>
+            5m = 5 minutes</br>
+            1h = 1 hour</br>
+            1h30m = 1 hour 30 minutes
+          schema:
+            type: string
+            default: 5m
+            required: true
+        - variable: updateCooldownPeriod
+          label: Update Cooldown Period
+          description: |
+            Duration to cooldown between updates for each record.
+            This is useful to avoid being rate limited or banned,
+            following this format:</br>
+            5m = 5 minutes</br>
+            1h = 1 hour</br>
+            1h30m = 1 hour 30 minutes
+          schema:
+            type: string
+            default: 5m
+            required: true
+        - variable: backupPeriod
+          label: Backup Period
+          description: |
+            Set to a period to enable zip backups of data/config.json and
+            data/updates.json in a zip file following this format:</br>
+            0 = disabled</br>
+            10h = 10 hours</br>
+            20h30m = 20 hours 30 minutes
+          schema:
+            type: string
+            default: 24h
+            required: true
+        - variable: httpTimeout
+          label: HTTP Timeout
+          description: |
+            Default timeout for HTTP requests, following this format:</br>
+            10s = 10 seconds</br>
+            1m = 1 minute</br>
+            1m30s = 1 minute 30 seconds
+          schema:
+            type: string
+            default: 10s
+            required: true
+        - variable: publicIpDnsTimeout
+          label: Public IP DNS Timeout
+          description: |
+            Public IP DNS query timeout, following this format:</br>
+            3s = 3 seconds</br>
+            1m = 1 minute</br>
+            1m30s = 1 minute 30 seconds
+          schema:
+            type: string
+            default: 3s
+            required: true
+        - variable: publicIpDnsProviders
+          label: Public IP DNS Providers
+          description: Providers to obtain the public IP address (IPv4 and/or IPv6)
+          schema:
+            type: list
+            default: ["all"]
+            items:
+              - variable: provider
+                label: Provider
+                schema:
+                  type: string
+                  required: true
+                  enum:
+                    - value: all
+                      description: All providers
+                    - value: google
+                      description: Google
+                    - value: cloudflare
+                      description: Cloudflare
         - variable: additionalEnvs
           label: Additional Environment Variables
           description: Configure additional environment variables for DDNS Updater.

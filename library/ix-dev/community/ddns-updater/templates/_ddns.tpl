@@ -16,6 +16,11 @@ workload:
             runAsGroup: {{ .Values.ddnsRunAs.group }}
           env:
             LISTENING_PORT: {{ .Values.ddnsNetwork.webPort }}
+            DATADIR: /updater/data
+            BACKUP_DIRECTORY: /updater/data/backup
+          envFrom:
+            - configMapRef:
+                name: ddns-config
           envList:
           {{ with .Values.ddnsConfig.additionalEnvs }}
             {{ range $env := . }}
