@@ -18,6 +18,7 @@ workload:
             LISTENING_PORT: {{ .Values.ddnsNetwork.webPort }}
             DATADIR: /updater/data
             BACKUP_DIRECTORY: /updater/data
+            # TODO: SHOUTRRR variables
           envFrom:
             - configMapRef:
                 name: ddns-config

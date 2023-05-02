@@ -1,5 +1,5 @@
 {{/* https://github.com/qdm12/ddns-updater/blob/master/docs/dd24.md */}}
-{{- define "ddns.config.cloudflare" -}}
+{{- define "ddns.config.dd24" -}}
   {{- $item := .item }}
 password: {{ $item.dd24Password | required "DDNS Updater - Expected non-empty [Password] for dd24 provider" }}
 {{- end -}}
