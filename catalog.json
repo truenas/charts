@@ -673,6 +673,33 @@
             "tags": [],
             "icon_url": "https://avatars.githubusercontent.com/u/48932923"
         },
+        "jellyfin": {
+            "app_readme": "<h1>Jellyfin</h1>\n<p><a href=\"https://jellyfin.org/\">Jellyfin</a> is a Free Software Media System that puts you in control of managing and streaming your media.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Jellyfin</code> directories.\nAfterward, the <code>Jellyfin</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>",
+            "categories": [
+                "media",
+                "streaming"
+            ],
+            "description": "Jellyfin is a Free Software Media System that puts you in control of managing and streaming your media.",
+            "healthy": true,
+            "healthy_error": null,
+            "location": "/__w/charts/charts/community/jellyfin",
+            "latest_version": "1.0.0",
+            "latest_app_version": "10.8.10",
+            "latest_human_version": "10.8.10_1.0.0",
+            "last_update": null,
+            "name": "jellyfin",
+            "recommended": false,
+            "title": "Jellyfin",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [],
+            "icon_url": "https://jellyfin.org/images/logo.svg"
+        },
         "sonarr": {
             "app_readme": "<h1>Sonarr</h1>\n<p><a href=\"https://github.com/Sonarr/Sonarr\">Sonarr</a> is a PVR for Usenet and BitTorrent users. It can monitor multiple RSS feeds for new episodes of your favorite shows and will grab, sort and rename them.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Sonarr</code> directories.\nAfterward, the <code>Sonarr</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>",
             "categories": [
