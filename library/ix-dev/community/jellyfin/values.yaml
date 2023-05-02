@@ -1,0 +1,36 @@
+image:
+  repository: jellyfin/jellyfin
+  pullPolicy: IfNotPresent
+  tag: '10.8.10'
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+jellyfinConfig:
+  publishedServerUrl: ''
+  additionalEnvs: []
+jellyfinGPU: {}
+jellyfinNetwork:
+  webPort: 30000
+  hostNetwork: false
+jellyfinRunAs:
+  user: 568
+  group: 568
+jellyfinStorage:
+  config:
+    type: ixVolume
+    hostPath: ''
+    datasetName: config
+  cache:
+    type: ixVolume
+    hostPath: ''
+    datasetName: cache
+  transcodes:
+    type: ixVolume
+    hostPath: ''
+    datasetName: transcodes
+    medium: ''
+    size: ''
+  additionalStorages: []
