@@ -3,6 +3,8 @@ image:
   pullPolicy: IfNotPresent
   tag: latest
 
+ci: false
+
 resources:
   limits:
     cpu: 4000m

@@ -17,7 +17,7 @@ workload:
           env:
             LISTENING_PORT: {{ .Values.ddnsNetwork.webPort }}
             DATADIR: /updater/data
-            BACKUP_DIRECTORY: /updater/data/backup
+            BACKUP_DIRECTORY: /updater/data
           envFrom:
             - configMapRef:
                 name: ddns-config
@@ -29,19 +29,19 @@ workload:
           {{ end }}
           probes:
             liveness:
-              enabled: true
+              enabled: {{ not .Values.ci }}
               type: exec
               command:
                 - /updater/app
                 - healthcheck
             readiness:
-              enabled: true
+              enabled: {{ not .Values.ci }}
               type: exec
               command:
                 - /updater/app
                 - healthcheck
             startup:
-              enabled: true
+              enabled: {{ not .Values.ci }}
               type: exec
               command:
                 - /updater/app

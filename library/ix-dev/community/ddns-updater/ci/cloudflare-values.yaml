@@ -1,0 +1,38 @@
+ddnsStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/data
+
+# This disables probes.
+# As we can't have for each provider
+# an api key, we just run through CI
+# for the linting.
+ci: true
+
+ddnsConfig:
+  config:
+    - provider: cloudflare
+      host: "@"
+      domain: example.com
+      ipVersion: ""
+      cfZoneID: zoneid
+      cfTtl: 1
+      cfProxied: false
+      cfToken: token
+    # https://github.com/qdm12/ddns-updater/pull/462
+    # - provider: cloudflare
+    #   host: "@"
+    #   domain: example.com
+    #   ipVersion: ""
+    #   cfZoneID: zoneid
+    #   cfTtl: 1
+    #   cfProxied: false
+    #   cfUserServiceKey: v1.0.0-abcdef
+    - provider: cloudflare
+      host: "@"
+      domain: example.com
+      ipVersion: ""
+      cfZoneID: zoneid
+      cfTtl: 1
+      cfEmail: email@example.com
+      cfApiKey: api_key
