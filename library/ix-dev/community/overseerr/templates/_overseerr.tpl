@@ -16,7 +16,8 @@ workload:
             runAsGroup: {{ .Values.overseerrRunAs.group }}
           env:
             PORT: {{ .Values.overseerrNetwork.webPort }}
-            TZ: {{ .Values.TZ }}
+          fixedEnv:
+            TZ: {{ .Values.overseerrTZ }}
           envList:
           {{ with .Values.overseerrConfig.additionalEnvs }}
             {{ range $env := . }}
@@ -82,16 +83,4 @@ persistence:
       overseerr:
         overseerr:
           mountPath: /tmp
-  {{ printf "overseerr-%v" (int $idx) }}:
-    enabled: true
-    type: {{ $storage.type }}
-    datasetName: {{ $storage.datasetName | default "" }}
-    hostPath: {{ $storage.hostPath | default "" }}
-    targetSelector:
-      overseerr:
-        overseerr:
-          mountPath: {{ $storage.mountPath }}
-        01-permissions:
-          mountPath: /mnt/directories{{ $storage.mountPath }}
-  {{- end }}
 {{- end -}}

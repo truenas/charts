@@ -57,7 +57,7 @@ questions:
                         type: string
                         required: true
 
-  - variable: TZ
+  - variable: overseerrTZ
     group: Overseerr Configuration
     label: Timezone
     schema:
