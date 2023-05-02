@@ -3,12 +3,14 @@ description: Overseerr is a free and open source software application for managi
 annotations:
   title: Overseerr
 type: application
-version: 1.32.5
+version: 1.0.0
 apiVersion: v2
+appVersion: '1.32.5'
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: truenas
     url: https://www.truenas.com/
+    email: dev@ixsystems.com
 dependencies:
   - name: common
     repository: file://../../../common

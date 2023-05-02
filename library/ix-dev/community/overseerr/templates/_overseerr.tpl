@@ -16,9 +16,12 @@ workload:
             runAsGroup: {{ .Values.overseerrRunAs.group }}
           env:
             PORT: {{ .Values.overseerrNetwork.webPort }}
+            TZ: {{ .Values.TZ }}
+          envList:
           {{ with .Values.overseerrConfig.additionalEnvs }}
             {{ range $env := . }}
-            {{ $env.name }}: {{ $env.value }}
+            - name: {{ $env.name }}
+              value: {{ $env.value }}
             {{ end }}
           {{ end }}
           probes:
@@ -26,17 +29,17 @@ workload:
               enabled: true
               type: http
               port: {{ .Values.overseerrNetwork.webPort }}
-              path: /ping
+              path: /api/v1/status
             readiness:
               enabled: true
               type: http
               port: {{ .Values.overseerrNetwork.webPort }}
-              path: /ping
+              path: /api/v1/status
             startup:
               enabled: true
               type: http
               port: {{ .Values.overseerrNetwork.webPort }}
-              path: /ping
+              path: /api/v1/status
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
                                                         "UID" .Values.overseerrRunAs.user
@@ -79,7 +82,6 @@ persistence:
       overseerr:
         overseerr:
           mountPath: /tmp
-  {{- range $idx, $storage := .Values.overseerrStorage.additionalStorages }}
   {{ printf "overseerr-%v" (int $idx) }}:
     enabled: true
     type: {{ $storage.type }}
