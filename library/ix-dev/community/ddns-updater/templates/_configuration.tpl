@@ -45,10 +45,10 @@ settings:
     host: {{ $item.host | required (printf "DDNS Updater - Expected non-empty [Host] for %v provider" $item.provider) | quote }}
     domain: {{ $item.domain | required (printf "DDNS Updater - Expected non-empty [Domain] for %v provider" $item.provider) | quote }}
     ip_version: {{ $item.ipVersion | default "" | quote }}
-    {{- if eq $item.provider "cloudflare" }}
-      {{- include "ddns.config.cloudflare" (dict "item" $item) | trim | nindent 4 }}
+    {{- if eq $item.provider "cloudflare" -}}
+      {{- include "ddns.config.cloudflare" (dict "item" $item) | trim | nindent 4 -}}
     {{- else if eq $item.provider "dd24" -}}
-      {{- include "ddns.config.dd24" (dict "item" $item) -}}
+      {{- include "ddns.config.dd24" (dict "item" $item) | trim | nindent 4 -}}
     {{- else -}}
       {{- fail (printf "DDNS Updater - Config Provider [%v] is not supported" $item.provider) -}}
     {{- end -}}
