@@ -15,7 +15,18 @@ ddnsConfig:
   httpTimeout: 10s
   publicIpDnsTimeout: 3s
   publicIpDnsProviders:
-    - all
+    - provider: all
+  publicIpHttpProviders:
+    - provider: all
+      custom: ""
+  publicIpv4HttpProviders:
+    - provider: all
+      custom: ""
+  publicIpv6HttpProviders:
+    - provider: all
+      custom: ""
+  publicIpFetchers:
+    - provider: all
   additionalEnvs: []
 ddnsNetwork:
   webPort: 30000

@@ -100,7 +100,7 @@ questions:
           description: Providers to obtain the public IP address (IPv4 and/or IPv6)
           schema:
             type: list
-            default: ["all"]
+            default: [{"provider": "all", "placeholder": "placeholder"}]
             items:
               - variable: provider
                 label: Provider
@@ -114,6 +114,133 @@ questions:
                       description: Google
                     - value: cloudflare
                       description: Cloudflare
+              # Workaround for a UI bug that is fixed in the next release
+              # (Single items in a dict inside a list was getting converted to a list of strings)
+              - variable: placeholder
+                label: placeholder
+                schema:
+                  type: string
+                  default: placeholder
+                  required: true
+                  hidden: true
+        - variable: publicIpHttpProviders
+          label: Public IP HTTP Providers
+          description: Providers to obtain the public IP address (IPv4 and/or IPv6)
+          schema:
+            type: list
+            default: [{"provider": "all", "custom": ""}]
+            items:
+              - variable: provider
+                label: Provider
+                schema:
+                  type: string
+                  required: true
+                  enum:
+                    - value: all
+                      description: All providers
+                    - value: opendns
+                      description: opendns
+                    - value: ifconfig
+                      description: ifconfig
+                    - value: ipinfo
+                      description: ipinfo
+                    - value: ddnss
+                      description: ddnss
+                    - value: google
+                      description: google
+                    - value: custom
+                      description: Custom Provider
+              - variable: custom
+                label: Custom Value
+                schema:
+                  type: string
+                  show_if: [["provider", "=", "custom"]]
+                  default: ""
+                  required: true
+        - variable: publicIpv4HttpProviders
+          label: Public IPv4 HTTP Providers
+          description: Providers to obtain the public IPv4 address
+          schema:
+            type: list
+            default: [{"provider": "all", "custom": ""}]
+            items:
+              - variable: provider
+                label: Provider
+                schema:
+                  type: string
+                  required: true
+                  enum:
+                    - value: all
+                      description: All providers
+                    - value: ipify
+                      description: ipify
+                    - value: noip
+                      description: noip
+                    - value: custom
+                      description: Custom Provider
+              - variable: custom
+                label: Custom Value
+                schema:
+                  type: string
+                  show_if: [["provider", "=", "custom"]]
+                  default: ""
+                  required: true
+        - variable: publicIpv6HttpProviders
+          label: Public IPv6 HTTP Providers
+          description: Providers to obtain the public IPv6 address
+          schema:
+            type: list
+            default: [{"provider": "all", "custom": ""}]
+            items:
+              - variable: provider
+                label: Provider
+                schema:
+                  type: string
+                  required: true
+                  enum:
+                    - value: all
+                      description: All providers
+                    - value: ipify
+                      description: ipify
+                    - value: noip
+                      description: noip
+                    - value: custom
+                      description: Custom Provider
+              - variable: custom
+                label: Custom Value
+                schema:
+                  type: string
+                  show_if: [["provider", "=", "custom"]]
+                  default: ""
+                  required: true
+        - variable: publicIpFetchers
+          label: Public IP Fetchers
+          description: Fetcher types to obtain the public IP address
+          schema:
+            type: list
+            default: [{"provider": "all", "placeholder": "placeholder"}]
+            items:
+              - variable: provider
+                label: Fetcher
+                schema:
+                  type: string
+                  required: true
+                  enum:
+                    - value: all
+                      description: All providers
+                    - value: http
+                      description: HTTP
+                    - value: dns
+                      description: DNS
+              # Workaround for a UI bug that is fixed in the next release
+              # (Single items in a dict inside a list was getting converted to a list of strings)
+              - variable: placeholder
+                label: placeholder
+                schema:
+                  type: string
+                  default: placeholder
+                  required: true
+                  hidden: true
         - variable: additionalEnvs
           label: Additional Environment Variables
           description: Configure additional environment variables for DDNS Updater.

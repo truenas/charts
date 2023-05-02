@@ -10,24 +10,76 @@ configmap:
       BACKUP_PERIOD: {{ .Values.ddnsConfig.backupPeriod | quote }}
       UPDATE_COOLDOWN_PERIOD: {{ .Values.ddnsConfig.updateCooldownPeriod | quote }}
       PUBLICIP_DNS_TIMEOUT: {{ .Values.ddnsConfig.publicIpDnsTimeout | quote }}
-      PUBLICIP_DNS_PROVIDERS: {{ join "," .Values.ddnsConfig.publicIpDnsProviders | quote }}
+      PUBLICIP_DNS_PROVIDERS: {{ include "ddns.getProviders" (dict "providerList" .Values.ddnsConfig.publicIpDnsProviders) }}
+      PUBLICIP_HTTP_PROVIDERS: {{ include "ddns.getProviders" (dict "providerList" .Values.ddnsConfig.publicIpHttpProviders) }}
+      PUBLICIPV4_HTTP_PROVIDERS: {{ include "ddns.getProviders" (dict "providerList" .Values.ddnsConfig.publicIpv4HttpProviders) }}
+      PUBLICIPV6_HTTP_PROVIDERS: {{ include "ddns.getProviders" (dict "providerList" .Values.ddnsConfig.publicIpv6HttpProviders) }}
+      PUBLICIP_FETCHERS: {{ include "ddns.getProviders" (dict "providerList" .Values.ddnsConfig.publicIpFetchers) }}
 {{- end -}}
 
 {{- define "ddns.validation" -}}
-  {{- if not .Values.ddnsConfig.publicIpDnsProviders -}}
-    {{- fail "DDNS Updater - Expected non-empty [Public IP DNS Providers]" -}}
+
+  {{- include "ddns.validateDictsList" (dict "text" "Public IP DNS Providers"
+                                            "list" .Values.ddnsConfig.publicIpDnsProviders
+                                            "valid" (list "all" "cloudflare" "google")) -}}
+
+  {{- include "ddns.validateDictsList" (dict "text" "Public IP HTTP Providers"
+                                            "list" .Values.ddnsConfig.publicIpHttpProviders
+                                            "valid" (list "all" "custom" "opendns" "ifconfig" "ipinfo" "ddnss" "google")) -}}
+
+  {{- include "ddns.validateDictsList" (dict "text" "Public IPv4 HTTP Providers"
+                                            "list" .Values.ddnsConfig.publicIpv4HttpProviders
+                                            "valid" (list "all" "custom" "ipify" "noip")) -}}
+
+  {{- include "ddns.validateDictsList" (dict "text" "Public IPv6 HTTP Providers"
+                                            "list" .Values.ddnsConfig.publicIpv6HttpProviders
+                                            "valid" (list "all" "custom" "ipify" "noip")) -}}
+
+  {{- include "ddns.validateDictsList" (dict "text" "Public IP Fetchers"
+                                            "list" .Values.ddnsConfig.publicIpFetchers
+                                            "valid" (list "all" "http" "dns")) -}}
+{{- end -}}
+
+{{- define "ddns.validateDictsList" -}}
+  {{- $text := .text -}}
+  {{- $list := .list -}}
+  {{- $valid := .valid -}}
+  {{- $type := .type -}}
+
+  {{- if not $list -}}
+    {{- fail (printf "DDNS Updater - Expected non-empty [%v]" $text) -}}
   {{- end -}}
-  {{- if (mustHas "all" .Values.ddnsConfig.publicIpDnsProviders) -}}
-    {{- if ne (len .Values.ddnsConfig.publicIpDnsProviders) 1 -}}
-      {{- fail "DDNS Updater - [Public IP DNS Providers] cannot contain other DNS Providers when [all] is selected" -}}
+
+  {{- range $list -}}
+    {{- if not (mustHas .provider $valid) -}}
+      {{- fail (printf "DDNS Updater - [%v] valid values are [%v], but got [%v]" $text (join ", " $valid) .provider) -}}
+    {{- end -}}
+
+    {{- if eq .provider "all" -}}
+      {{- if ne (len $list) 1 -}}
+        {{- fail (printf "DDNS Updater - [%v] cannot contain other values when [all] is selected" $text) -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- if eq .provider "custom" -}}
+      {{- if not .custom -}}
+        {{- fail (printf "DDNS Updater - [%v] expected non-empty [Custom Value]" $text) -}}
+      {{- end -}}
     {{- end -}}
   {{- end -}}
-  {{- $publicIpDnsProviders := (list "google" "cloudflare" "all") -}}
-  {{- range .Values.ddnsConfig.publicIpDnsProviders -}}
-    {{- if not (mustHas . $publicIpDnsProviders) -}}
-      {{- fail (printf "DDNS Updater - [Public IP DNS Providers] valid values are [%v], but got [%v]" (join ", " $publicIpDnsProviders) .) -}}
+{{- end -}}
+
+{{- define "ddns.getProviders" -}}
+  {{- $providerList := .providerList -}}
+  {{- $return := list -}}
+
+  {{- range $providerList -}}
+    {{- if eq .provider "custom" -}}
+      {{- $return = append $return .custom -}}
+    {{- else -}}
+      {{- $return = append $return .provider -}}
     {{- end -}}
   {{- end -}}
 
-
+  {{- join "," $return -}}
 {{- end -}}
