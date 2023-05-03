@@ -20,7 +20,7 @@ questions:
           description: The password for the Mumble Server.
           schema:
             type: string
-            default: ''
+            empty: false
             required: true
             private: true
         - variable: superUserPassword
@@ -28,7 +28,7 @@ questions:
           description: The password for the Mumble Super User.
           schema:
             type: string
-            default: ''
+            empty: false
             required: true
             private: true
         - variable: iceSecretRead
@@ -36,7 +36,7 @@ questions:
           description: The Ice Secret for Read Operations.
           schema:
             type: string
-            default: ''
+            empty: false
             required: true
             private: true
         - variable: iceSecretWrite
@@ -44,7 +44,7 @@ questions:
           description: The Ice Secret for Write Operations.
           schema:
             type: string
-            default: ''
+            empty: false
             required: true
             private: true
         - variable: users
