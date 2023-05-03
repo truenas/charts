@@ -345,6 +345,8 @@ questions:
                             description: LuaDNS
                           - value: namecheap
                             description: Namecheap
+                          - value: njalla
+                            description: Njalla
                     # Common to all providers
                     - variable: domain
                       label: Domain
@@ -883,6 +885,23 @@ questions:
                       schema:
                         type: boolean
                         show_if: [["provider", "=", "namecheap"]]
+                        default: false
+
+                    # Njalla
+                    - variable: njallaKey
+                      label: Njalla Key
+                      description: Njalla Key.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "njalla"]]
+                        required: true
+                        empty: false
+                    - variable: njallaProviderIP
+                      label: Njalla Provider IP
+                      description: Njalla Provider IP.
+                      schema:
+                        type: boolean
+                        show_if: [["provider", "=", "njalla"]]
                         default: false
 
         - variable: additionalEnvs
