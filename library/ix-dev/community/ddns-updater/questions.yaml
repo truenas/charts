@@ -321,6 +321,8 @@ questions:
                             description: DynDNS
                           - value: dynu
                             description: Dynu
+                          - value: dynv6
+                            description: DynV6
                     # Common to all providers
                     - variable: domain
                       label: Domain
@@ -645,6 +647,23 @@ questions:
                       schema:
                         type: boolean
                         show_if: [["provider", "=", "dynu"]]
+                        default: false
+
+                    # DynV6
+                    - variable: dynv6Token
+                      label: DynV6 Token
+                      description: DynV6 Token
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "dynv6"]]
+                        required: true
+                        empty: false
+                    - variable: dynv6ProviderIP
+                      label: DynV6 Provider IP
+                      description: DynV6 Provider IP.
+                      schema:
+                        type: boolean
+                        show_if: [["provider", "=", "dynv6"]]
                         default: false
 
         - variable: additionalEnvs
