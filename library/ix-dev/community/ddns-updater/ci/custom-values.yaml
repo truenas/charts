@@ -10,9 +10,9 @@ ddnsConfig:
   backupPeriod: 1h
   updateCooldownPeriod: 1m
   httpTimeout: 10s
-  shoutrrrAddresses:
-    - discord://token@id
-    - gotify://gotify-host/token
+  # shoutrrrAddresses:
+  #   - discord://token@id
+  #   - gotify://gotify-host/token
   publicIpDnsTimeout: 3s
   publicIpDnsProviders:
     - provider: all
