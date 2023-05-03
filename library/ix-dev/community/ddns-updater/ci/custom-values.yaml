@@ -10,6 +10,7 @@ ddnsConfig:
   httpTimeout: 10s
   shoutrrrAddresses:
     - discord://token@id
+    - gotify://gotify-host/token
   publicIpDnsTimeout: 3s
   publicIpDnsProviders:
     - provider: all
@@ -28,5 +29,10 @@ ddnsConfig:
     - provider: dreamhost
       host: "@"
       domain: example.com
-      ipVersion: ""
+      ipVersion: ipv6
+      dreamHostKey: abcdefgh12345678
+    - provider: dreamhost
+      host: "@"
+      domain: example.com
+      ipVersion: ipv4
       dreamHostKey: abcdefgh12345678
