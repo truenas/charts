@@ -349,6 +349,8 @@ questions:
                             description: Njalla
                           - value: noip
                             description: NoIP
+                          - value: opendns
+                            description: OpenDNS
                     # Common to all providers
                     - variable: domain
                       label: Domain
@@ -929,6 +931,31 @@ questions:
                       schema:
                         type: boolean
                         show_if: [["provider", "=", "noip"]]
+                        default: false
+
+                    # OpenDNS
+                    - variable: opendnsUsername
+                      label: OpenDNS Username
+                      description: OpenDNS Username.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "opendns"]]
+                        required: true
+                        empty: false
+                    - variable: opendnsPassword
+                      label: OpenDNS Password
+                      description: OpenDNS Password.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "opendns"]]
+                        required: true
+                        empty: false
+                    - variable: opendnsProviderIP
+                      label: OpenDNS Provider IP
+                      description: OpenDNS Provider IP.
+                      schema:
+                        type: boolean
+                        show_if: [["provider", "=", "opendns"]]
                         default: false
 
         - variable: additionalEnvs
