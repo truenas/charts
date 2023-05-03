@@ -70,6 +70,8 @@ settings:
       {{- include "ddns.config.duckdns" (dict "item" $item) | trim | nindent 4 -}}
     {{- else if eq $item.provider "dyndns" -}}
       {{- include "ddns.config.dyndns" (dict "item" $item) | trim | nindent 4 -}}
+    {{- else if eq $item.provider "dynu" -}}
+      {{- include "ddns.config.dynu" (dict "item" $item) | trim | nindent 4 -}}
     {{- else -}}
       {{- fail (printf "DDNS Updater - Config Provider [%v] is not supported" $item.provider) -}}
     {{- end -}}

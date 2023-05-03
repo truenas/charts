@@ -319,6 +319,8 @@ questions:
                             description: Duck DNS
                           - value: dyndns
                             description: DynDNS
+                          - value: dynu
+                            description: Dynu
                     # Common to all providers
                     - variable: domain
                       label: Domain
@@ -612,6 +614,37 @@ questions:
                       schema:
                         type: boolean
                         show_if: [["provider", "=", "dyndns"]]
+                        default: false
+
+                    # Dynu
+                    - variable: dynuUsername
+                      label: Dynu Username
+                      description: Dynu Username.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "dynu"]]
+                        required: true
+                        empty: false
+                    - variable: dynuPassword
+                      label: Dynu Password
+                      description: Dynu Password.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "dynu"]]
+                        required: true
+                        empty: false
+                    - variable: dynuGroup
+                      label: Dynu Group
+                      description: Dynu Group.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "dynu"]]
+                    - variable: dynuProviderIP
+                      label: Dynu Provider IP
+                      description: Dynu Provider IP.
+                      schema:
+                        type: boolean
+                        show_if: [["provider", "=", "dynu"]]
                         default: false
 
         - variable: additionalEnvs
