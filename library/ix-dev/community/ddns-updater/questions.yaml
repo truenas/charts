@@ -95,6 +95,21 @@ questions:
             type: string
             default: 3s
             required: true
+        - variable: shoutrrrAddresses
+          label: Shoutrrr Addresses
+          description: |
+            List of Shoutrrr addresses to send notifications to. </br>
+            See https://containrrr.dev/shoutrrr/0.7/services/overview/ for more information.
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: address
+                label: Address
+                schema:
+                  type: string
+                  required: true
+                  empty: false
         - variable: publicIpDnsProviders
           label: Public IP DNS Providers
           description: Providers to obtain the public IP address (IPv4 and/or IPv6)

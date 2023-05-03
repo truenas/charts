@@ -9,6 +9,7 @@ configmap:
       HTTP_TIMEOUT: {{ .Values.ddnsConfig.httpTimeout | quote }}
       BACKUP_PERIOD: {{ .Values.ddnsConfig.backupPeriod | quote }}
       UPDATE_COOLDOWN_PERIOD: {{ .Values.ddnsConfig.updateCooldownPeriod | quote }}
+      SHOUTRRR_ADDRESSES: {{ join "," .Values.ddnsConfig.shoutrrrAddresses | quote }}
       PUBLICIP_DNS_TIMEOUT: {{ .Values.ddnsConfig.publicIpDnsTimeout | quote }}
       PUBLICIP_DNS_PROVIDERS: {{ include "ddns.getPublicIpProviders" (dict "providerList" .Values.ddnsConfig.publicIpDnsProviders) }}
       PUBLICIP_HTTP_PROVIDERS: {{ include "ddns.getPublicIpProviders" (dict "providerList" .Values.ddnsConfig.publicIpHttpProviders) }}

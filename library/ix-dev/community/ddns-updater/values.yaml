@@ -15,6 +15,7 @@ ddnsConfig:
   backupPeriod: 24h
   updateCooldownPeriod: 5m
   httpTimeout: 10s
+  shoutrrrAddresses: []
   publicIpDnsTimeout: 3s
   publicIpDnsProviders:
     - provider: all
