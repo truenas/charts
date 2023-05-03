@@ -351,6 +351,10 @@ questions:
                             description: NoIP
                           - value: opendns
                             description: OpenDNS
+                          - value: ovh
+                            description: OVH
+                          - value: porkbun
+                            description: Porkbun
                     # Common to all providers
                     - variable: domain
                       label: Domain
@@ -957,6 +961,33 @@ questions:
                         type: boolean
                         show_if: [["provider", "=", "opendns"]]
                         default: false
+
+                    # OVH
+
+                    # Porkbun
+                    - variable: porkbunApiKey
+                      label: Porkbun API Key
+                      description: Porkbun API Key.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "porkbun"]]
+                        required: true
+                        empty: false
+                    - variable: porkbunSecretApiKey
+                      label: Porkbun Secret API Key
+                      description: Porkbun Secret API Key.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "porkbun"]]
+                        required: true
+                        empty: false
+                    - variable: porkbunTtl
+                      label: Porkbun TTL
+                      description: Porkbun TTL.
+                      schema:
+                        type: int
+                        show_if: [["provider", "=", "porkbun"]]
+                        default: 3600
 
         - variable: additionalEnvs
           label: Additional Environment Variables
