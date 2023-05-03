@@ -74,6 +74,8 @@ settings:
       {{- include "ddns.config.dynu" (dict "item" $item) | trim | nindent 4 -}}
     {{- else if eq $item.provider "dynv6" -}}
       {{- include "ddns.config.dynv6" (dict "item" $item) | trim | nindent 4 -}}
+    {{- else if eq $item.provider "freedns" -}}
+      {{- include "ddns.config.freedns" (dict "item" $item) | trim | nindent 4 -}}
     {{- else -}}
       {{- fail (printf "DDNS Updater - Config Provider [%v] is not supported" $item.provider) -}}
     {{- end -}}
