@@ -339,6 +339,8 @@ questions:
                             description: Infomaniak
                           - value: inwx
                             description: INWX
+                          - value: linode
+                            description: Linode
                     # Common to all providers
                     - variable: domain
                       label: Domain
@@ -831,6 +833,16 @@ questions:
                       schema:
                         type: string
                         show_if: [["provider", "=", "inwx"]]
+                        required: true
+                        empty: false
+
+                    # Linode
+                    - variable: linodeToken
+                      label: Linode Token
+                      description: Linode Token.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "linode"]]
                         required: true
                         empty: false
 

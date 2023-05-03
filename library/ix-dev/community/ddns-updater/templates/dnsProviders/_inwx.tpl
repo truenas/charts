@@ -11,6 +11,6 @@ ddnsConfig:
       domain: "example.com"             - Required
       host: "@"                         - Required - Valid value ("@" or subdomain)
       ipVersion: ""                     - Required - Valid values (ipv4/ipv6/"")
-      inwxUsername: user          - Required
-      inwxPassword: password      - Required
+      inwxUsername: user                - Required
+      inwxPassword: password            - Required
 */}}
