@@ -337,6 +337,8 @@ questions:
                             description: He.net
                           - value: infomaniak
                             description: Infomaniak
+                          - value: inwx
+                            description: INWX
                     # Common to all providers
                     - variable: domain
                       label: Domain
@@ -813,6 +815,24 @@ questions:
                         type: boolean
                         show_if: [["provider", "=", "infomaniak"]]
                         default: false
+
+                    # INWX
+                    - variable: inwxUsername
+                      label: INWX Username
+                      description: INWX Username.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "inwx"]]
+                        required: true
+                        empty: false
+                    - variable: inwxPassword
+                      label: INWX Password
+                      description: INWX Password.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "inwx"]]
+                        required: true
+                        empty: false
 
         - variable: additionalEnvs
           label: Additional Environment Variables
