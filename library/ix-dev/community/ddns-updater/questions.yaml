@@ -313,6 +313,8 @@ questions:
                             description: DNS Pod
                           - value: dondominio
                             description: Don Dominio
+                          - value: dreamhost
+                            description: Dreamhost
                     # Common to all providers
                     - variable: domain
                       label: Domain
@@ -553,6 +555,16 @@ questions:
                       schema:
                         type: string
                         show_if: [["provider", "=", "dondominio"]]
+                        required: true
+                        empty: false
+
+                    # Dreamhost
+                    - variable: dreamhostKey
+                      label: Dreamhost Key
+                      description: Dreamhost Key.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "dreamhost"]]
                         required: true
                         empty: false
 
