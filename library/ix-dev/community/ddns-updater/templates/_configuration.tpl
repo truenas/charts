@@ -40,6 +40,9 @@ configmap:
     JSON and passed as an env variable
 */}}
 {{- define "ddns.generateConfig" -}}
+{{- if not .Values.ddnsConfig.config -}}
+  {{- fail "DDNS Updater - Expected at least 1 item in DNS Provider COnfiguration" -}}
+{{- end -}}
 {{- $providers := (list "aliyun" "allinkl" "cloudflare" "dd24" "ddnss" "digitalocean"
                         "dnsomatic" "dnspod" "dondominio" "dreamhost" "duckdns" "dyn"
                         "dynu" "dynv6" "freedns" "gandi" "gcp" "godaddy" "google" "he"
