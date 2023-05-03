@@ -15,23 +15,23 @@ ddnsConfig:
       host: "@"
       domain: example.com
       ipVersion: ""
-      cfZoneID: zoneid
-      cfTtl: 1
-      cfProxied: false
-      cfToken: token
+      cloudflareZoneID: zoneid
+      cloudflareTtl: 1
+      cloudflareProxied: false
+      cloudflareToken: token
     - provider: cloudflare
       host: "@"
       domain: example.com
       ipVersion: ""
-      cfZoneID: zoneid
-      cfTtl: 1
-      cfProxied: false
-      cfUserServiceKey: v1.0.0-abcdef
+      cloudflareZoneID: zoneid
+      cloudflareTtl: 1
+      cloudflareProxied: false
+      cloudflareUserServiceKey: v1.0.0-abcdef
     - provider: cloudflare
       host: "@"
       domain: example.com
       ipVersion: ""
-      cfZoneID: zoneid
-      cfTtl: 1
-      cfEmail: email@example.com
-      cfApiKey: api_key
+      cloudflareZoneID: zoneid
+      cloudflareTtl: 1
+      cloudflareEmail: email@example.com
+      cloudflareApiKey: api_key

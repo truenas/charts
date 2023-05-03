@@ -360,7 +360,7 @@ questions:
                           - value: servercow
                             description: Servercow
                           - value: spdyn
-                            description: SPDyn
+                            description: Spdyn.de
                           - value: strato
                             description: Strato
                           - value: variomedia
@@ -439,7 +439,7 @@ questions:
                         empty: false
 
                     # Cloudflare
-                    - variable: cfZoneID
+                    - variable: cloudflareZoneID
                       label: Cloudflare Zone ID
                       description: |
                         Cloudflare Zone ID. </br>
@@ -448,7 +448,7 @@ questions:
                         type: string
                         required: true
                         show_if: [["provider", "=", "cloudflare"]]
-                    - variable: cfTtl
+                    - variable: cloudflareTtl
                       label: Cloudflare TTL
                       description: |
                         Cloudflare TTL. </br>
@@ -460,7 +460,7 @@ questions:
                         required: true
                         show_if: [["provider", "=", "cloudflare"]]
                         default: 1
-                    - variable: cfProxied
+                    - variable: cloudflareProxied
                       label: Cloudflare Proxied
                       description: |
                         Cloudflare Proxied. </br>
@@ -470,25 +470,25 @@ questions:
                         type: boolean
                         show_if: [["provider", "=", "cloudflare"]]
                         default: false
-                    - variable: cfToken
+                    - variable: cloudflareToken
                       label: Cloudflare Token
                       description: Cloudflare Token.
                       schema:
                         type: string
                         show_if: [["provider", "=", "cloudflare"]]
-                    - variable: cfUserServiceKey
+                    - variable: cloudflareUserServiceKey
                       label: Cloudflare User Service Key
                       description: Cloudflare User Service Key.
                       schema:
                         type: string
                         show_if: [["provider", "=", "cloudflare"]]
-                    - variable: cfEmail
+                    - variable: cloudflareEmail
                       label: Cloudflare Email
                       description: Cloudflare Email.
                       schema:
                         type: string
                         show_if: [["provider", "=", "cloudflare"]]
-                    - variable: cfApiKey
+                    - variable: cloudflareApiKey
                       label: Cloudflare API Key
                       description: Cloudflare API Key.
                       schema:
@@ -1056,7 +1056,38 @@ questions:
                         show_if: [["provider", "=", "servercow"]]
                         default: false
 
-                    # SPDyn TODO:
+                    # Spdyn.de
+                    - variable: spdynToken
+                      label: Spdyn.de Token
+                      description: Spdyn.de Token.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "spdyn"]]
+                        required: true
+                        empty: false
+                    - variable: spdynUsername
+                      label: Spdyn.de Username
+                      description: Spdyn.de Username.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "spdyn"]]
+                        required: true
+                        empty: false
+                    - variable: spdynPassword
+                      label: Spdyn.de Password
+                      description: Spdyn.de Password.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "spdyn"]]
+                        required: true
+                        empty: false
+                    - variable: spdynProviderIP
+                      label: Spdyn.de Provider IP
+                      description: Spdyn.de Provider IP.
+                      schema:
+                        type: boolean
+                        show_if: [["provider", "=", "spdyn"]]
+                        default: false
 
                     # Strato
                     - variable: stratoPassword
