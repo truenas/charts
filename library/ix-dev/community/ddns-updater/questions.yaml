@@ -355,6 +355,8 @@ questions:
                             description: OVH
                           - value: porkbun
                             description: Porkbun
+                          - value: selfhosted.de
+                            description: Selfhosted.de
                     # Common to all providers
                     - variable: domain
                       label: Domain
@@ -988,6 +990,31 @@ questions:
                         type: int
                         show_if: [["provider", "=", "porkbun"]]
                         default: 3600
+
+                    # Selfhosted.de
+                    - variable: selfhostedUsername
+                      label: Selfhosted.de Username
+                      description: Selfhosted.de Username.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "selfhosted"]]
+                        required: true
+                        empty: false
+                    - variable: selfhostedPassword
+                      label: Selfhosted.de Password
+                      description: Selfhosted.de Password.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "selfhosted"]]
+                        required: true
+                        empty: false
+                    - variable: selfhostedProviderIP
+                      label: Selfhosted.de Provider IP
+                      description: Selfhosted.de Provider IP.
+                      schema:
+                        type: boolean
+                        show_if: [["provider", "=", "selfhosted"]]
+                        default: false
 
         - variable: additionalEnvs
           label: Additional Environment Variables

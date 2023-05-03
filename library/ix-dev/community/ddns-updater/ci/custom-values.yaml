@@ -24,3 +24,14 @@ ddnsConfig:
       custom: "https://example.com"
   publicIpFetchers:
     - provider: all
+  config:
+    - provider: dreamhost
+      host: "@"
+      domain: example.com
+      ipVersion: ipv4
+      dreamHostKey: abcdefgh12345678
+    - provider: dreamhost
+      host: "@"
+      domain: example.com
+      ipVersion: ipv6
+      dreamHostKey: abcdefgh12345678
