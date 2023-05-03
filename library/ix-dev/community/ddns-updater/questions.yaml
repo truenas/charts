@@ -325,6 +325,8 @@ questions:
                             description: DynV6
                           - value: freedns
                             description: FreeDNS
+                          - value: gandi
+                            description: Gandi
                     # Common to all providers
                     - variable: domain
                       label: Domain
@@ -677,6 +679,24 @@ questions:
                         show_if: [["provider", "=", "freedns"]]
                         required: true
                         empty: false
+
+                    # Gandi
+                    - variable: gandiKey
+                      label: Gandi Key
+                      description: Gandi Key.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "gandi"]]
+                        required: true
+                        empty: false
+                    - variable: gandiTtl
+                      label: Gandi TTL
+                      description: Gandi TTL.
+                      schema:
+                        type: int
+                        show_if: [["provider", "=", "gandi"]]
+                        default: 3600
+                        required: true
 
         - variable: additionalEnvs
           label: Additional Environment Variables
