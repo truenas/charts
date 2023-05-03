@@ -11,7 +11,7 @@ app_key: {{ $item.ovhAppKey | required "DDNS Updater - Expected non-empty [App K
 app_secret: {{ $item.ovhAppSecret | required "DDNS Updater - Expected non-empty [App Secret] for OVH provider on [api] mode"}}
 consumer_key: {{ $item.ovhConsumerKey | required "DDNS Updater - Expected non-empty [Consumer Key] for OVH provider on [api] mode" }}
 {{- else -}}
-  {{- fail (prinf "DDNS Updater - Expected [Mode] to be one of [Dynamic, API], but got [%v]" $item.ovhMode) -}}
+  {{- fail (printf "DDNS Updater - Expected [Mode] to be one of [Dynamic, API], but got [%v]" $item.ovhMode) -}}
 {{- end }}
 provider_ip: {{ $item.ovhProviderIP }}
 {{- end -}}
