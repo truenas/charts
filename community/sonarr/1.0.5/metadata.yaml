@@ -1,0 +1,8 @@
+runAsContext:
+  - userName: sonarr
+    groupName: sonarr
+    gid: 568
+    uid: 568
+    description: Sonarr can run as any non-root user.
+capabilities: []
+hostMounts: []

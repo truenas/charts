@@ -1,0 +1,14 @@
+runAsContext:
+  - userName: root
+    groupName: root
+    gid: 0
+    uid: 0
+    description: Tailscale requires root privileges to start the tailscaled process (Only when userspace is disabled)
+capabilities:
+  - name: NET_ADMIN
+    description: Tailscale requires NET_ADMIN to configure the VPN interface, modify routes, etc.
+  - name: NET_RAW
+    description: Tailscale requires NET_RAW to use raw sockets and proxying
+hostMounts:
+  - hostPath: /dev/tun
+    description: Required to access the TUN device (Only when userspace is disabled)
