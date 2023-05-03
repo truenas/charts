@@ -11,8 +11,8 @@ ci: true
 
 ddnsConfig:
   config:
-    - provider: dnspod
+    - provider: freedns
       host: "@"
       domain: example.com
       ipVersion: ""
-      dnsPodToken: token
+      freeDnsToken: token
