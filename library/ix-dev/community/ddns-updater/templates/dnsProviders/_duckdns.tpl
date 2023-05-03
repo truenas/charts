@@ -9,7 +9,7 @@ ddnsConfig:
   config:
     - provider: duckdns         - Required
       domain: "example.com"     - Required
-      host: "@"                 - Required - Valid value ("@" or subdomain)
+      host: "subdomain"         - Required - Valid value (subdomain)
       ipVersion: ""             - Required - Valid values (ipv4/ipv6/"")
       duckdnsToken: token       - Required
       duckdnsProviderIP: true   - Required - Valid values (true/false)

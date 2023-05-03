@@ -331,6 +331,8 @@ questions:
                             description: GCP
                           - value: godaddy
                             description: GoDaddy
+                          - value: google
+                            description: Google
                     # Common to all providers
                     - variable: domain
                       label: Domain
@@ -747,6 +749,26 @@ questions:
                         show_if: [["provider", "=", "godaddy"]]
                         required: true
                         empty: false
+
+                    # Google
+                    - variable: googleUsername
+                      label: Google Username
+                      description: Google Username.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "google"]]
+                        required: true
+                        empty: false
+                    - variable: googlePassword
+                      label: Google Password
+                      description: Google Password.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "google"]]
+                        required: true
+                        empty: false
+
+
         - variable: additionalEnvs
           label: Additional Environment Variables
           description: Configure additional environment variables for DDNS Updater.
