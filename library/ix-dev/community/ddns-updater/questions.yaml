@@ -282,6 +282,7 @@ questions:
             DDNSS - https://github.com/qdm12/ddns-updater/blob/master/docs/ddnss.md </br>
             Digital Ocean - https://github.com/qdm12/ddns-updater/blob/master/docs/digitalocean.md </br>
             DNS O Matic - https://github.com/qdm12/ddns-updater/blob/master/docs/dnsomatic.md
+            DNS Pod - https://github.com/qdm12/ddns-updater/blob/master/docs/dnspod.md
           schema:
             type: list
             min: 1
@@ -314,6 +315,8 @@ questions:
                             description: Digital Ocean
                           - value: dnsomatic
                             description: DNS O Matic
+                          - value: dnspod
+                            description: DNS Pod
                     # Common to all providers
                     - variable: domain
                       label: Domain
@@ -520,6 +523,16 @@ questions:
                         type: boolean
                         show_if: [["provider", "=", "dnsomatic"]]
                         default: false
+
+                    # DNS Pod
+                    - variable: dnsPodToken
+                      label: DNS Pod Token
+                      description: DNS Pod Token.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "dnspod"]]
+                        required: true
+                        empty: false
 
         - variable: additionalEnvs
           label: Additional Environment Variables

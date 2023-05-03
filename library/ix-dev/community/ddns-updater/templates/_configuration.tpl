@@ -60,6 +60,8 @@ settings:
       {{- include "ddns.config.digitalocean" (dict "item" $item) | trim | nindent 4 -}}
     {{- else if eq $item.provider "dnsomatic" -}}
       {{- include "ddns.config.dnsomatic" (dict "item" $item) | trim | nindent 4 -}}
+    {{- else if eq $item.provider "dnspod" -}}
+      {{- include "ddns.config.dnspod" (dict "item" $item) | trim | nindent 4 -}}
     {{- else -}}
       {{- fail (printf "DDNS Updater - Config Provider [%v] is not supported" $item.provider) -}}
     {{- end -}}
