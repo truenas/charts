@@ -282,6 +282,8 @@ questions:
                         enum:
                           - value: aliyun
                             description: Aliyun
+                          - value: allinkl
+                            description: All-Inkl
                           - value: cloudflare
                             description: Cloudflare
                           - value: dd24
@@ -336,6 +338,22 @@ questions:
                         type: string
                         required: true
                         show_if: [["provider", "=", "aliyun"]]
+
+                    # All-Inkl
+                    - variable: allinklUsername
+                      label: All-Inkl Username
+                      description: All-Inkl Username.
+                      schema:
+                        type: string
+                        required: true
+                        show_if: [["provider", "=", "allinkl"]]
+                    - variable: allinklPassword
+                      label: All-Inkl Password
+                      description: All-Inkl Password.
+                      schema:
+                        type: string
+                        required: true
+                        show_if: [["provider", "=", "allinkl"]]
 
                     # Cloudflare
                     - variable: cfZoneID
