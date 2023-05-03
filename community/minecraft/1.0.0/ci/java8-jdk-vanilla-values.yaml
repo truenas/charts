@@ -1,0 +1,13 @@
+mcStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/data
+
+mcConfig:
+  imageSelector: j8jdkImage
+  eula: true
+  version: 1.16.5
+
+mcNetwork:
+  serverPort: 30000
+  rconPort: 30001

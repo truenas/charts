@@ -330,7 +330,7 @@
             "latest_version": "1.0.10",
             "latest_app_version": "v1.68.2",
             "latest_human_version": "v1.68.2_1.0.10",
-            "last_update": "2023-05-01 16:31:27",
+            "last_update": "2023-05-03 11:34:48",
             "name": "storj",
             "recommended": false,
             "title": "Storj",
@@ -589,6 +589,32 @@
             ],
             "tags": [],
             "icon_url": "https://gitea.com/assets/img/logo.svg"
+        },
+        "minecraft": {
+            "app_readme": "<h1>Minecraft</h1>\n<p><a href=\"https://www.minecraft.net/en-us\">Minecraft</a> is a sandbox game</p>\n<blockquote>\n<p>Application requires to run as root.</p>\n</blockquote>\n<p>Depending on the <code>Type</code> of server selected, you might need to add additional\ncustom environment variables to the application.</p>\n<p>More info can be found <a href=\"https://itzg.github.io/docker-minecraft-docs/java/server-types/bukkit-spigot/\">here</a>\nSelect the type on the sidebar.</p>\n<p>Note that some values are only applicable during the world generation.\nMore info can be found <a href=\"https://itzg.github.io/docker-minecraft-docs/\">here</a></p>",
+            "categories": [
+                "minecraft"
+            ],
+            "description": "Minecraft is a sandbox game",
+            "healthy": true,
+            "healthy_error": null,
+            "location": "/__w/charts/charts/community/minecraft",
+            "latest_version": "1.0.0",
+            "latest_app_version": "2023.3.0",
+            "latest_human_version": "2023.3.0_1.0.0",
+            "last_update": null,
+            "name": "minecraft",
+            "recommended": false,
+            "title": "Minecraft",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [],
+            "icon_url": "https://www.minecraft.net/content/dam/games/minecraft/logos/logo-minecraft.svg"
         },
         "tdarr": {
             "app_readme": "<h1>Tdarr</h1>\n<p><a href=\"https://home.tdarr.io/\">Tdarr</a> is a Distributed Transcoding System</p>\n<ul>\n<li>App runs as <code>root</code> user</li>\n</ul>",
