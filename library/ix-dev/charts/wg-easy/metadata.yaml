@@ -8,7 +8,7 @@ capabilities:
   - name: CHOWN
     description: WG Easy is able to chown files.
   - name: FOWNER
-    description: WG Easy is able bypass permission checks for it's sub-processes.
+    description: WG Easy is able to bypass permission checks for it's sub-processes.
   - name: SYS_CHROOT
     description: WG Easy is able to use chroot.
   - name: MKNOD

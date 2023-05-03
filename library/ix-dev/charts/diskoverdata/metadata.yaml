@@ -13,7 +13,7 @@ capabilities:
   - name: CHOWN
     description: Diskover and Elastic Search are able to chown files.
   - name: FOWNER
-    description: Diskover and Elastic Search are able bypass permission checks for it's sub-processes.
+    description: Diskover and Elastic Search are able to bypass permission checks for it's sub-processes.
   - name: SYS_CHROOT
     description: Diskover and Elastic Search are able to use chroot.
   - name: MKNOD

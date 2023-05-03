@@ -8,7 +8,7 @@ capabilities:
   - name: CHOWN
     description: Emby is able to chown files.
   - name: FOWNER
-    description: Emby is able bypass permission checks for it's sub-processes.
+    description: Emby is able to bypass permission checks for it's sub-processes.
   - name: SYS_CHROOT
     description: Emby is able to use chroot.
   - name: MKNOD

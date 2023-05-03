@@ -8,7 +8,7 @@ capabilities:
   - name: CHOWN
     description: Storj is able to chown files.
   - name: FOWNER
-    description: Storj is able bypass permission checks for it's sub-processes.
+    description: Storj is able to bypass permission checks for it's sub-processes.
   - name: SYS_CHROOT
     description: Storj is able to use chroot.
   - name: MKNOD

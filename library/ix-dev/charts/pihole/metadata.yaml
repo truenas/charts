@@ -8,7 +8,7 @@ capabilities:
   - name: CHOWN
     description: Pi-hole is able to chown files.
   - name: FOWNER
-    description: Pi-hole is able bypass permission checks for it's sub-processes.
+    description: Pi-hole is able to bypass permission checks for it's sub-processes.
   - name: SYS_CHROOT
     description: Pi-hole is able to use chroot.
   - name: MKNOD

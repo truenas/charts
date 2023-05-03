@@ -8,7 +8,7 @@ capabilities:
   - name: CHOWN
     description: Plex is able to chown files.
   - name: FOWNER
-    description: Plex is able bypass permission checks for it's sub-processes.
+    description: Plex is able to bypass permission checks for it's sub-processes.
   - name: SYS_CHROOT
     description: Plex is able to use chroot.
   - name: MKNOD

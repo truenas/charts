@@ -18,7 +18,7 @@ capabilities:
   - name: CHOWN
     description: Nextcloud, Nginx and Postgres are able to chown files.
   - name: FOWNER
-    description: Nextcloud, Nginx and Postgres are able bypass permission checks for it's sub-processes.
+    description: Nextcloud, Nginx and Postgres are able to bypass permission checks for it's sub-processes.
   - name: SYS_CHROOT
     description: Nextcloud, Nginx and Postgres are able to use chroot.
   - name: MKNOD

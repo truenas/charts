@@ -8,7 +8,7 @@ capabilities:
   - name: CHOWN
     description: Photoprism is able to chown files.
   - name: FOWNER
-    description: Photoprism is able bypass permission checks for it's sub-processes.
+    description: Photoprism is able to bypass permission checks for it's sub-processes.
   - name: SYS_CHROOT
     description: Photoprism is able to use chroot.
   - name: MKNOD

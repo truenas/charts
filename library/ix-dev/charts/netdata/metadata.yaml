@@ -8,7 +8,7 @@ capabilities:
   - name: CHOWN
     description: Netdata is able to chown files.
   - name: FOWNER
-    description: Netdata is able bypass permission checks for it's sub-processes.
+    description: Netdata is able to bypass permission checks for it's sub-processes.
   - name: SYS_CHROOT
     description: Netdata is able to use chroot.
   - name: MKNOD
@@ -43,4 +43,4 @@ hostMounts:
   - hostPath: /etc/group
     description: Required to read the group information.
   - hostPath: /proc
-    description: Required to read the process information.
+    description: Required to read the processes information.

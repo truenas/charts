@@ -13,7 +13,7 @@ capabilities:
   - name: CHOWN
     description: Home Assistant and Postgres are able to chown files.
   - name: FOWNER
-    description: Home Assistant and Postgres are able bypass permission checks for it's sub-processes.
+    description: Home Assistant and Postgres are able to bypass permission checks for it's sub-processes.
   - name: SYS_CHROOT
     description: Home Assistant and Postgres are able to use chroot.
   - name: MKNOD

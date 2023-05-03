@@ -13,7 +13,7 @@ capabilities:
   - name: CHOWN
     description: Collabora and Nginx are able to chown files.
   - name: FOWNER
-    description: Collabora and Nginx are able bypass permission checks for it's sub-processes.
+    description: Collabora and Nginx are able to bypass permission checks for it's sub-processes.
   - name: SYS_CHROOT
     description: Collabora and Nginx are able to use chroot.
   - name: MKNOD
