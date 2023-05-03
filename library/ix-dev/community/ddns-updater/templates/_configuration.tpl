@@ -43,7 +43,7 @@ configmap:
 {{- $providers := (list "aliyun" "allinkl" "cloudflare" "dd24" "ddnss" "digitalocean"
                         "dnsomatic" "dnspod" "dondominio" "dreamhost" "duckdns" "dyn"
                         "dynu" "dynv6" "freedns" "gandi" "gcp" "godaddy" "google" "he"
-                        "infomaniak" "inwx" "linode") }}
+                        "infomaniak" "inwx" "linode" "luadns") }}
 settings:
   {{- range $item := .Values.ddnsConfig.config -}}
     {{- if not (mustHas $item.provider $providers) -}}
