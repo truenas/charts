@@ -1,0 +1,18 @@
+runAsContext:
+  - userName: root
+    groupName: root
+    gid: 0
+    uid: 0
+    description: Minecraft requires root privileges to start the Minecraft process
+capabilities:
+  - name: CHOWN
+    description: Minecraft is able to chown files.
+  - name: DAC_OVERRIDE
+    description: Minecraft is able to bypass permission checks.
+  - name: FOWNER
+    description: Minecraft is able bypass permission checks for it's sub-processes.
+  - name: SETGID
+    description: Minecraft is able to set group ID for it's sub-processes.
+  - name: SETUID
+    description: Minecraft is able to set user ID for it's sub-processes.
+hostMounts: []
