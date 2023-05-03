@@ -315,6 +315,8 @@ questions:
                             description: Don Dominio
                           - value: dreamhost
                             description: Dreamhost
+                          - value: duckdns
+                            description: Duck DNS
                     # Common to all providers
                     - variable: domain
                       label: Domain
@@ -567,6 +569,23 @@ questions:
                         show_if: [["provider", "=", "dreamhost"]]
                         required: true
                         empty: false
+
+                    # Duck DNS
+                    - variable: duckdnsToken
+                      label: Duck DNS Token
+                      description: Duck DNS Token.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "duckdns"]]
+                        required: true
+                        empty: false
+                    - variable: duckdnsProviderIP
+                      label: Duck DNS Provider IP
+                      description: Duck DNS Provider IP.
+                      schema:
+                        type: boolean
+                        show_if: [["provider", "=", "duckdns"]]
+                        default: false
 
         - variable: additionalEnvs
           label: Additional Environment Variables

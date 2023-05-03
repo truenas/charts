@@ -66,6 +66,8 @@ settings:
       {{- include "ddns.config.dondominio" (dict "item" $item) | trim | nindent 4 -}}
     {{- else if eq $item.provider "dreamhost" -}}
       {{- include "ddns.config.dreamhost" (dict "item" $item) | trim | nindent 4 -}}
+    {{- else if eq $item.provider "duckdns" -}}
+      {{- include "ddns.config.duckdns" (dict "item" $item) | trim | nindent 4 -}}
     {{- else -}}
       {{- fail (printf "DDNS Updater - Config Provider [%v] is not supported" $item.provider) -}}
     {{- end -}}
