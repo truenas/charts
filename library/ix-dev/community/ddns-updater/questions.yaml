@@ -343,6 +343,8 @@ questions:
                             description: Linode
                           - value: luadns
                             description: LuaDNS
+                          - value: namecheap
+                            description: Namecheap
                     # Common to all providers
                     - variable: domain
                       label: Domain
@@ -865,6 +867,23 @@ questions:
                         show_if: [["provider", "=", "luadns"]]
                         required: true
                         empty: false
+
+                    # Namecheap
+                    - variable: namecheapPassword
+                      label: Namecheap Password
+                      description: Namecheap Password.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "namecheap"]]
+                        required: true
+                        empty: false
+                    - variable: namecheapProviderIP
+                      label: Namecheap Provider IP
+                      description: Namecheap Provider IP.
+                      schema:
+                        type: boolean
+                        show_if: [["provider", "=", "namecheap"]]
+                        default: false
 
         - variable: additionalEnvs
           label: Additional Environment Variables
