@@ -260,8 +260,12 @@ questions:
           label: Configuration
           description: |
             Configuration for DDNS Updater.</br>
+            Aliyun - https://github.com/qdm12/ddns-updater/blob/master/docs/aliyun.md </br>
+            All-Inkl - https://github.com/qdm12/ddns-updater/blob/master/docs/allinkl.md </br>
             Cloudflare - https://github.com/qdm12/ddns-updater/blob/master/docs/cloudflare.md </br>
             DD24 - https://github.com/qdm12/ddns-updater/blob/master/docs/dd24.md </br>
+            DDNSS - https://github.com/qdm12/ddns-updater/blob/master/docs/ddnss.md </br>
+
           schema:
             type: list
             min: 1
@@ -288,6 +292,9 @@ questions:
                             description: Cloudflare
                           - value: dd24
                             description: DD24
+                          - value: ddnss
+                            description: DDNSS
+
                     # Common to all providers
                     - variable: domain
                       label: Domain
@@ -297,6 +304,7 @@ questions:
                       schema:
                         type: string
                         required: true
+                        empty: false
                     - variable: ipVersion
                       label: IP Version
                       description: |
@@ -322,6 +330,7 @@ questions:
                         type: string
                         default: "@"
                         required: true
+                        empty: false
 
                     # Aliyun
                     - variable: aliyunAccessKey
@@ -329,15 +338,17 @@ questions:
                       description: Aliyun Access Key.
                       schema:
                         type: string
-                        required: true
                         show_if: [["provider", "=", "aliyun"]]
+                        required: true
+                        empty: false
                     - variable: aliyunSecretKey
                       label: Aliyun Secret Key
                       description: Aliyun Secret Key.
                       schema:
                         type: string
-                        required: true
                         show_if: [["provider", "=", "aliyun"]]
+                        required: true
+                        empty: false
 
                     # All-Inkl
                     - variable: allinklUsername
@@ -345,15 +356,17 @@ questions:
                       description: All-Inkl Username.
                       schema:
                         type: string
-                        required: true
                         show_if: [["provider", "=", "allinkl"]]
+                        required: true
+                        empty: false
                     - variable: allinklPassword
                       label: All-Inkl Password
                       description: All-Inkl Password.
                       schema:
                         type: string
-                        required: true
                         show_if: [["provider", "=", "allinkl"]]
+                        required: true
+                        empty: false
 
                     # Cloudflare
                     - variable: cfZoneID
@@ -419,6 +432,40 @@ questions:
                       schema:
                         type: string
                         show_if: [["provider", "=", "dd24"]]
+                        required: true
+                        empty: false
+
+                    # DDNSS
+                    - variable: ddnssUsername
+                      label: DDNSS Username
+                      description: DDNSS Username.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "ddnss"]]
+                        required: true
+                        empty: false
+                    - variable: ddnssPassword
+                      label: DDNSS Password
+                      description: DDNSS Password.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "ddnss"]]
+                        required: true
+                        empty: false
+                    - variable: ddnssProviderIP
+                      label: DDNSS Provider IP
+                      description: DDNSS Provider IP.
+                      schema:
+                        type: boolean
+                        show_if: [["provider", "=", "ddnss"]]
+                        default: false
+                    - variable: ddnssDualStack
+                      label: DDNSS Dual Stack
+                      description: DDNSS Dual Stack.
+                      schema:
+                        type: boolean
+                        show_if: [["provider", "=", "ddnss"]]
+                        default: false
 
         - variable: additionalEnvs
           label: Additional Environment Variables
