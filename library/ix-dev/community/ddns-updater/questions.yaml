@@ -327,6 +327,8 @@ questions:
                             description: FreeDNS
                           - value: gandi
                             description: Gandi
+                          - value: gcp
+                            description: GCP
                     # Common to all providers
                     - variable: domain
                       label: Domain
@@ -698,6 +700,33 @@ questions:
                         default: 3600
                         required: true
 
+                    # GCP
+                    - variable: gcpProject
+                      label: GCP Project
+                      description: GCP Project.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "gcp"]]
+                        required: true
+                        empty: false
+                    - variable: gcpZone
+                      label: GCP Zone
+                      description: GCP Zone.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "gcp"]]
+                        required: true
+                        empty: false
+                    - variable: gcpCredentials
+                      label: GCP Credentials
+                      description: |
+                        GCP Credentials.</br>
+                        Paste the JSON content in this field
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "gcp"]]
+                        required: true
+                        empty: false
         - variable: additionalEnvs
           label: Additional Environment Variables
           description: Configure additional environment variables for DDNS Updater.
