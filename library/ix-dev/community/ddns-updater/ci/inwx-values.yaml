@@ -12,7 +12,7 @@ ci: true
 ddnsConfig:
   config:
     - provider: inwx
-      host: "@"
+      host: subdomain
       domain: example.com
       ipVersion: ""
       inwxUsername: username
