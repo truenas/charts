@@ -1075,7 +1075,30 @@ questions:
                         show_if: [["provider", "=", "strato"]]
                         default: false
 
-                    # Variomedia TODO:
+                    # Variomedia
+                    - variable: variomediaPassword
+                      label: Variomedia Password
+                      description: Variomedia Password.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "variomedia"]]
+                        required: true
+                        empty: false
+                    - variable: variomediaEmail
+                      label: Variomedia Email
+                      description: Variomedia Email.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "variomedia"]]
+                        required: true
+                        empty: false
+                    - variable: variomediaProviderIP
+                      label: Variomedia Provider IP
+                      description: Variomedia Provider IP.
+                      schema:
+                        type: boolean
+                        show_if: [["provider", "=", "variomedia"]]
+                        default: false
 
         - variable: additionalEnvs
           label: Additional Environment Variables
