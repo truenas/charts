@@ -49,6 +49,8 @@ settings:
       {{- include "ddns.config.cloudflare" (dict "item" $item) | trim | nindent 4 -}}
     {{- else if eq $item.provider "dd24" -}}
       {{- include "ddns.config.dd24" (dict "item" $item) | trim | nindent 4 -}}
+    {{- else if eq $item.provider "aliyun" -}}
+      {{- include "ddns.config.aliyun" (dict "item" $item) | trim | nindent 4 -}}
     {{- else -}}
       {{- fail (printf "DDNS Updater - Config Provider [%v] is not supported" $item.provider) -}}
     {{- end -}}

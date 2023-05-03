@@ -280,6 +280,8 @@ questions:
                         type: string
                         required: true
                         enum:
+                          - value: aliyun
+                            description: Aliyun
                           - value: cloudflare
                             description: Cloudflare
                           - value: dd24
@@ -318,6 +320,22 @@ questions:
                         type: string
                         default: "@"
                         required: true
+
+                    # Aliyun
+                    - variable: aliyunAccessKey
+                      label: Aliyun Access Key
+                      description: Aliyun Access Key.
+                      schema:
+                        type: string
+                        required: true
+                        show_if: [["provider", "=", "aliyun"]]
+                    - variable: aliyunSecretKey
+                      label: Aliyun Secret Key
+                      description: Aliyun Secret Key.
+                      schema:
+                        type: string
+                        required: true
+                        show_if: [["provider", "=", "aliyun"]]
 
                     # Cloudflare
                     - variable: cfZoneID
