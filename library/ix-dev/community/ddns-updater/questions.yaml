@@ -779,6 +779,13 @@ questions:
                         show_if: [["provider", "=", "he"]]
                         required: true
                         empty: false
+                    - variable: heProviderIP
+                      label: He.net Provider IP
+                      description: He.net Provider IP.
+                      schema:
+                        type: boolean
+                        show_if: [["provider", "=", "he"]]
+                        default: false
 
         - variable: additionalEnvs
           label: Additional Environment Variables
