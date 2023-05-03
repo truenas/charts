@@ -11,8 +11,9 @@ ci: true
 
 ddnsConfig:
   config:
-    - provider: he
+    - provider: google
       host: "@"
       domain: example.com
       ipVersion: ""
-      hePassword: password
+      googleUsername: username
+      googlePassword: password

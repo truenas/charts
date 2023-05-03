@@ -333,6 +333,8 @@ questions:
                             description: GoDaddy
                           - value: google
                             description: Google
+                          - value: he
+                            description: He.net
                     # Common to all providers
                     - variable: domain
                       label: Domain
@@ -768,6 +770,15 @@ questions:
                         required: true
                         empty: false
 
+                    # He.net
+                    - variable: hePassword
+                      label: He.net Password
+                      description: He.net Password.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "he"]]
+                        required: true
+                        empty: false
 
         - variable: additionalEnvs
           label: Additional Environment Variables

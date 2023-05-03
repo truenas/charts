@@ -1,7 +1,7 @@
 {{/* https://github.com/qdm12/ddns-updater/blob/master/docs/google.md */}}
 {{- define "ddns.config.google" -}}
   {{- $item := .item }}
-uesrname: {{ $item.googleUsername | required "DDNS Updater - Expected non-empty [Username] for Google provider" }}
+username: {{ $item.googleUsername | required "DDNS Updater - Expected non-empty [Username] for Google provider" }}
 password: {{ $item.googlePassword | required "DDNS Updater - Expected non-empty [Password] for Google provider" }}
 {{- end -}}
 {{/*
