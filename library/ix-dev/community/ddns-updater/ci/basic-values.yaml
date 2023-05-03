@@ -1,4 +1,0 @@
-ddnsStorage:
-  data:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/data
