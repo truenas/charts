@@ -11,9 +11,9 @@ ci: true
 
 ddnsConfig:
   config:
-    - provider: dyndns
+    - provider: dyn
       host: "@"
       domain: example.com
-      dyndnsClientKey: key
-      dyndnsUsername: user
-      dyndnsProviderIP: false
+      dynClientKey: key
+      dynUsername: user
+      dynProviderIP: false

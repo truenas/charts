@@ -41,7 +41,7 @@ configmap:
 */}}
 {{- define "ddns.generateConfig" -}}
 {{- $providers := (list "aliyun" "allinkl" "cloudflare" "dd24" "ddnss" "digitalocean"
-                        "dnsomatic" "dnspod" "dondominio" "dreamhost" "duckdns" "dyndns"
+                        "dnsomatic" "dnspod" "dondominio" "dreamhost" "duckdns" "dyn"
                         "dynu" "dynv6" "freedns" "gandi" "gcp" "godaddy" "google" "he"
                         "infomaniak" "inwx") }}
 settings:

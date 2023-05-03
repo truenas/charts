@@ -317,7 +317,7 @@ questions:
                             description: Dreamhost
                           - value: duckdns
                             description: Duck DNS
-                          - value: dyndns
+                          - value: dyn
                             description: DynDNS
                           - value: dynu
                             description: Dynu
@@ -610,28 +610,28 @@ questions:
                         default: false
 
                     # DynDNS
-                    - variable: dyndnsClientKey
+                    - variable: dynClientKey
                       label: DynDNS Client Key
                       description: DynDNS Client Key.
                       schema:
                         type: string
-                        show_if: [["provider", "=", "dyndns"]]
+                        show_if: [["provider", "=", "dyn"]]
                         required: true
                         empty: false
-                    - variable: dysndnsUsername
+                    - variable: dynUsername
                       label: DynDNS Username
                       description: DynDNS Username.
                       schema:
                         type: string
-                        show_if: [["provider", "=", "dyndns"]]
+                        show_if: [["provider", "=", "dyn"]]
                         required: true
                         empty: false
-                    - variable: dyndnsProviderIP
+                    - variable: dynProviderIP
                       label: DynDNS Provider IP
                       description: DynDNS Provider IP.
                       schema:
                         type: boolean
-                        show_if: [["provider", "=", "dyndns"]]
+                        show_if: [["provider", "=", "dyn"]]
                         default: false
 
                     # Dynu
