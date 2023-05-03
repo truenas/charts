@@ -21,19 +21,22 @@ portals:
     path: "$kubernetes-resource_configmap_portal_path"
 
 questions:
+  - variable: TZ
+    group: Overseerr Configuration
+    label: Timezone
+    schema:
+      type: string
+      default: Etc/UTC
+      required: true
+      $ref:
+        - definitions/timezone
+
   - variable: overseerrConfig
     label: ""
     group: Overseerr Configuration
     schema:
       type: dict
       attrs:
-        - variable: instanceName
-          label: Instance Name
-          description: The name of the Overseerr instance.
-          schema:
-            type: string
-            default: "Overseerr"
-            required: true
         - variable: additionalEnvs
           label: Additional Environment Variables
           description: Configure additional environment variables for Overseerr.
@@ -56,16 +59,6 @@ questions:
                       schema:
                         type: string
                         required: true
-
-  - variable: TZ
-    group: Overseerr Configuration
-    label: Timezone
-    schema:
-      type: string
-      default: Etc/UTC
-      required: true
-      $ref:
-        - definitions/timezone
 
   - variable: overseerrRunAs
     label: ""
@@ -171,14 +164,14 @@ questions:
             attrs:
               - variable: cpu
                 label: CPU
-                description: CPU limit for Radarr.
+                description: CPU limit for Overseerr.
                 schema:
                   type: string
                   default: "4000m"
                   required: true
               - variable: memory
                 label: Memory
-                description: Memory limit for Radarr.
+                description: Memory limit for Overseerr.
                 schema:
                   type: string
                   default: "8Gi"

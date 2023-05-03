@@ -16,8 +16,6 @@ workload:
             runAsGroup: {{ .Values.overseerrRunAs.group }}
           env:
             PORT: {{ .Values.overseerrNetwork.webPort }}
-          fixedEnv:
-            TZ: {{ .Values.TZ }}
           envList:
           {{ with .Values.overseerrConfig.additionalEnvs }}
             {{ range $env := . }}

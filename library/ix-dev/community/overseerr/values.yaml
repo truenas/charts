@@ -9,7 +9,6 @@ resources:
     memory: 8Gi
 
 overseerrConfig:
-  instanceName: Overseer
   additionalEnvs: []
 
 overseerrNetwork:
