@@ -972,7 +972,57 @@ questions:
                         show_if: [["provider", "=", "opendns"]]
                         default: false
 
-                    # OVH TODO:
+                    # OVH
+                    - variable: ovhMode
+                      label: OVH Mode
+                      description: OVH Mode.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "ovh"]]
+                        default: dynamic
+                        required: true
+                        enum:
+                          - value: dynamic
+                            description: Dynamic
+                          - value: api
+                            description: API
+                    - variable: ovhUsername
+                      label: OVH Username
+                      description: OVH Username.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "ovh"]]
+                    - variable: ovhPassword
+                      label: OVH Password
+                      description: OVH Password.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "ovh"]]
+                    - variable: ovhApiEndpoint
+                      label: OVH API Endpoint
+                      description: OVH API Endpoint.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "ovh"]]
+                        default: ovh-eu
+                    - variable: ovhAppKey
+                      label: OVH Application Key
+                      description: OVH Application Key.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "ovh"]]
+                    - variable: ovhAppSecret
+                      label: OVH Application Secret
+                      description: OVH Application Secret.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "ovh"]]
+                    - variable: ovhConsumerKey
+                      label: OVH Consumer Key
+                      description: OVH Consumer Key.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "ovh"]]
 
                     # Porkbun
                     - variable: porkbunApiKey
