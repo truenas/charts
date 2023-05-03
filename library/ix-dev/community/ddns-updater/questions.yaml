@@ -266,6 +266,7 @@ questions:
             DD24 - https://github.com/qdm12/ddns-updater/blob/master/docs/dd24.md </br>
             DDNSS - https://github.com/qdm12/ddns-updater/blob/master/docs/ddnss.md </br>
             Digital Ocean - https://github.com/qdm12/ddns-updater/blob/master/docs/digitalocean.md </br>
+            DNS O Matic - https://github.com/qdm12/ddns-updater/blob/master/docs/dnsomatic.md
           schema:
             type: list
             min: 1
@@ -296,6 +297,8 @@ questions:
                             description: DDNSS
                           - value: digitalocean
                             description: Digital Ocean
+                          - value: dnsomatic
+                            description: DNS O Matic
                     # Common to all providers
                     - variable: domain
                       label: Domain
@@ -477,6 +480,31 @@ questions:
                         show_if: [["provider", "=", "digitalocean"]]
                         required: true
                         empty: false
+
+                    # DNS O Matic
+                    - variable: dnsOMaticUsername
+                      label: DNS O Matic Username
+                      description: DNS O Matic Username.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "dnsomatic"]]
+                        required: true
+                        empty: false
+                    - variable: dnsOMaticPassword
+                      label: DNS O Matic Password
+                      description: DNS O Matic Password.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "dnsomatic"]]
+                        required: true
+                        empty: false
+                    - variable: dnsOMaticProviderIP
+                      label: DNS O Matic Provider IP
+                      description: DNS O Matic Provider IP.
+                      schema:
+                        type: boolean
+                        show_if: [["provider", "=", "dnsomatic"]]
+                        default: false
 
         - variable: additionalEnvs
           label: Additional Environment Variables
