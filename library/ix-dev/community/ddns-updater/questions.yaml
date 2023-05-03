@@ -347,6 +347,8 @@ questions:
                             description: Namecheap
                           - value: njalla
                             description: Njalla
+                          - value: noip
+                            description: NoIP
                     # Common to all providers
                     - variable: domain
                       label: Domain
@@ -902,6 +904,31 @@ questions:
                       schema:
                         type: boolean
                         show_if: [["provider", "=", "njalla"]]
+                        default: false
+
+                    # NoIP
+                    - variable: noipUsername
+                      label: NoIP Username
+                      description: NoIP Username.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "noip"]]
+                        required: true
+                        empty: false
+                    - variable: noipPassword
+                      label: NoIP Password
+                      description: NoIP Password.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "noip"]]
+                        required: true
+                        empty: false
+                    - variable: noipProviderIP
+                      label: NoIP Provider IP
+                      description: NoIP Provider IP.
+                      schema:
+                        type: boolean
+                        show_if: [["provider", "=", "noip"]]
                         default: false
 
         - variable: additionalEnvs
