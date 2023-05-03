@@ -40,48 +40,18 @@ configmap:
     JSON and passed as an env variable
 */}}
 {{- define "ddns.generateConfig" -}}
+{{- $providers := (list "aliyun" "allinkl" "cloudflare" "dd24" "ddnss" "digitalocean"
+                        "dnsomatic" "dnspod" "dondominio" "dreamhost" "duckdns" "dyndns"
+                        "dynu" "dynv6" "freedns" "gandi" "gcp" "godaddy") }}
 settings:
-  {{- range $item := .Values.ddnsConfig.config }}
+  {{- range $item := .Values.ddnsConfig.config -}}
+    {{- if not (mustHas $item.provider $providers) -}}
+      {{- fail (printf "DDNS Updater - DNS Provider [%v] is not supported" $item.provider) -}}
+    {{- end }}
   - provider: {{ $item.provider }}
     host: {{ $item.host | required (printf "DDNS Updater - Expected non-empty [Host] for %v provider" $item.provider) | quote }}
     domain: {{ $item.domain | required (printf "DDNS Updater - Expected non-empty [Domain] for %v provider" $item.provider) | quote }}
     ip_version: {{ $item.ipVersion | default "" | quote }}
-    {{- if eq $item.provider "cloudflare" -}}
-      {{- include "ddns.config.cloudflare" (dict "item" $item) | trim | nindent 4 -}}
-    {{- else if eq $item.provider "dd24" -}}
-      {{- include "ddns.config.dd24" (dict "item" $item) | trim | nindent 4 -}}
-    {{- else if eq $item.provider "aliyun" -}}
-      {{- include "ddns.config.aliyun" (dict "item" $item) | trim | nindent 4 -}}
-    {{- else if eq $item.provider "allinkl" -}}
-      {{- include "ddns.config.allinkl" (dict "item" $item) | trim | nindent 4 -}}
-    {{- else if eq $item.provider "ddnss" -}}
-      {{- include "ddns.config.ddnss" (dict "item" $item) | trim | nindent 4 -}}
-    {{- else if eq $item.provider "digitalocean" -}}
-      {{- include "ddns.config.digitalocean" (dict "item" $item) | trim | nindent 4 -}}
-    {{- else if eq $item.provider "dnsomatic" -}}
-      {{- include "ddns.config.dnsomatic" (dict "item" $item) | trim | nindent 4 -}}
-    {{- else if eq $item.provider "dnspod" -}}
-      {{- include "ddns.config.dnspod" (dict "item" $item) | trim | nindent 4 -}}
-    {{- else if eq $item.provider "dondominio" -}}
-      {{- include "ddns.config.dondominio" (dict "item" $item) | trim | nindent 4 -}}
-    {{- else if eq $item.provider "dreamhost" -}}
-      {{- include "ddns.config.dreamhost" (dict "item" $item) | trim | nindent 4 -}}
-    {{- else if eq $item.provider "duckdns" -}}
-      {{- include "ddns.config.duckdns" (dict "item" $item) | trim | nindent 4 -}}
-    {{- else if eq $item.provider "dyndns" -}}
-      {{- include "ddns.config.dyndns" (dict "item" $item) | trim | nindent 4 -}}
-    {{- else if eq $item.provider "dynu" -}}
-      {{- include "ddns.config.dynu" (dict "item" $item) | trim | nindent 4 -}}
-    {{- else if eq $item.provider "dynv6" -}}
-      {{- include "ddns.config.dynv6" (dict "item" $item) | trim | nindent 4 -}}
-    {{- else if eq $item.provider "freedns" -}}
-      {{- include "ddns.config.freedns" (dict "item" $item) | trim | nindent 4 -}}
-    {{- else if eq $item.provider "gandi" -}}
-      {{- include "ddns.config.gandi" (dict "item" $item) | trim | nindent 4 -}}
-    {{- else if eq $item.provider "gcp" -}}
-      {{- include "ddns.config.gcp" (dict "item" $item) | trim | nindent 4 -}}
-    {{- else -}}
-      {{- fail (printf "DDNS Updater - Config Provider [%v] is not supported" $item.provider) -}}
-    {{- end -}}
+    {{- include (printf "ddns.config.%v" $item.provider) (dict "item" $item) | trim | nindent 4 -}}
   {{- end -}}
 {{- end -}}

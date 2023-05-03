@@ -11,8 +11,9 @@ ci: true
 
 ddnsConfig:
   config:
-    - provider: duckdns
-      host: subdomain
+    - provider: godaddy
+      host: "@"
       domain: example.com
-      duckdnsToken: abcd1234-abcd-1234-abcd-abcd1234abcd
-      duckdnsProviderIP: false
+      ipVersion: ""
+      godaddyKey: key
+      godaddySecret: abcDE12345_abcde12345abcde12345AB

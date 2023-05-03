@@ -329,6 +329,8 @@ questions:
                             description: Gandi
                           - value: gcp
                             description: GCP
+                          - value: godaddy
+                            description: GoDaddy
                     # Common to all providers
                     - variable: domain
                       label: Domain
@@ -725,6 +727,24 @@ questions:
                       schema:
                         type: string
                         show_if: [["provider", "=", "gcp"]]
+                        required: true
+                        empty: false
+
+                    # GoDaddy
+                    - variable: godaddyKey
+                      label: GoDaddy Key
+                      description: GoDaddy Key.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "godaddy"]]
+                        required: true
+                        empty: false
+                    - variable: godaddySecret
+                      label: GoDaddy Secret
+                      description: GoDaddy Secret.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "godaddy"]]
                         required: true
                         empty: false
         - variable: additionalEnvs
