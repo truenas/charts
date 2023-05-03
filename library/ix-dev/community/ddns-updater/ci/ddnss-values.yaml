@@ -19,3 +19,10 @@ ddnsConfig:
       ddnssPassword: password
       ddnssProviderIP: false
       ddnssDualStack: true
+    - provider: ddnss
+      host: "@"
+      domain: example.com
+      ipVersion: ""
+      ddnssUsername: username
+      ddnssPassword: password
+      ddnssProviderIP: true
