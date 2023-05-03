@@ -18,22 +18,22 @@ api_key: {{ $item.cloudflareApiKey }}
 {{/*
 ddnsConfig:
   config:
-    - provider: cloudflare      - Required
-      domain: "example.com"     - Required
-      host: "@"                 - Required - Valid value ("@")
-      ipVersion: ""             - Required - Valid values (ipv4/ipv6/"")
-      cloudflareZoneID: id              - Required
-      cloudflareTtl: 1                  - Required - Valid values (>=1)
-      cloudflareProxied: false          - Required - Valid values (true/false)
+    - provider: cloudflare                        - Required
+      domain: "example.com"                       - Required
+      host: "@"                                   - Required - Valid value ("@")
+      ipVersion: ""                               - Required - Valid values (ipv4/ipv6/"")
+      cloudflareZoneID: id                        - Required
+      cloudflareTtl: 1                            - Required - Valid values (>=1)
+      cloudflareProxied: false                    - Required - Valid values (true/false)
 
       # One of the following is required
       # Token
-      cloudflareToken: token
+      cloudflareToken: token                      - Required
 
       # User service key
-      cloudflareUserServiceKey: user_service_key
+      cloudflareUserServiceKey: user_service_key  - Required
 
       # Email and API key
-      cloudflareEmail: email
-      cloudflareApiKey: api_key
+      cloudflareEmail: email                      - Required
+      cloudflareApiKey: api_key                   - Required
 */}}
