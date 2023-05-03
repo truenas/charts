@@ -1,4 +1,4 @@
-{{/* https://github.com/qdm12/ddns-updater/blob/master/docs/porkbun.md */}}
+{{/* https://github.com/qdm12/ddns-updater/blob/master/docs/selfhosted.de.md */}}
 {{- define "ddns.config.selfhosted.de" -}}
   {{- $item := .item }}
 username: {{ $item.selfhosteddeUsername | required "DDNS Updater - Expected non-empty [Username] for Selfhosted.de provider" }}

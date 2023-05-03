@@ -357,6 +357,8 @@ questions:
                             description: Porkbun
                           - value: selfhosted.de
                             description: Selfhosted.de
+                          - value: servercow
+                            description: Servercow
                     # Common to all providers
                     - variable: domain
                       label: Domain
@@ -1014,6 +1016,38 @@ questions:
                       schema:
                         type: boolean
                         show_if: [["provider", "=", "selfhosted"]]
+                        default: false
+
+                    # Servercow
+                    - variable: servercowUsername
+                      label: Servercow Username
+                      description: Servercow Username.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "servercow"]]
+                        required: true
+                        empty: false
+                    - variable: servercowPassword
+                      label: Servercow Password
+                      description: Servercow Password.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "servercow"]]
+                        required: true
+                        empty: false
+                    - variable: servercowTtl
+                      label: Servercow TTL
+                      description: Servercow TTL.
+                      schema:
+                        type: int
+                        show_if: [["provider", "=", "servercow"]]
+                        default: 120
+                    - variable: servercowProviderIP
+                      label: Servercow Provider IP
+                      description: Servercow Provider IP.
+                      schema:
+                        type: boolean
+                        show_if: [["provider", "=", "servercow"]]
                         default: false
 
         - variable: additionalEnvs
