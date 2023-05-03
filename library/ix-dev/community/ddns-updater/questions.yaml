@@ -275,14 +275,8 @@ questions:
           label: Configuration
           description: |
             Configuration for DDNS Updater.</br>
-            Aliyun - https://github.com/qdm12/ddns-updater/blob/master/docs/aliyun.md </br>
-            All-Inkl - https://github.com/qdm12/ddns-updater/blob/master/docs/allinkl.md </br>
-            Cloudflare - https://github.com/qdm12/ddns-updater/blob/master/docs/cloudflare.md </br>
-            DD24 - https://github.com/qdm12/ddns-updater/blob/master/docs/dd24.md </br>
-            DDNSS - https://github.com/qdm12/ddns-updater/blob/master/docs/ddnss.md </br>
-            Digital Ocean - https://github.com/qdm12/ddns-updater/blob/master/docs/digitalocean.md </br>
-            DNS O Matic - https://github.com/qdm12/ddns-updater/blob/master/docs/dnsomatic.md
-            DNS Pod - https://github.com/qdm12/ddns-updater/blob/master/docs/dnspod.md
+            Choose your provider in the following link for more information </br>
+            https://github.com/qdm12/ddns-updater#configuration
           schema:
             type: list
             min: 1
@@ -317,6 +311,8 @@ questions:
                             description: DNS O Matic
                           - value: dnspod
                             description: DNS Pod
+                          - value: dondominio
+                            description: Don Dominio
                     # Common to all providers
                     - variable: domain
                       label: Domain
@@ -531,6 +527,32 @@ questions:
                       schema:
                         type: string
                         show_if: [["provider", "=", "dnspod"]]
+                        required: true
+                        empty: false
+
+                    # Don Dominio
+                    - variable: donDominioUsername
+                      label: Don Dominio Username
+                      description: Don Dominio Username.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "dondominio"]]
+                        required: true
+                        empty: false
+                    - variable: donDominioPassword
+                      label: Don Dominio Password
+                      description: Don Dominio Password.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "dondominio"]]
+                        required: true
+                        empty: false
+                    - variable: donDominioName
+                      label: Don Dominio Name
+                      description: Don Dominio Name.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "dondominio"]]
                         required: true
                         empty: false
 
