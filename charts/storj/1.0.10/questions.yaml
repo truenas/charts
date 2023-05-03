@@ -32,12 +32,16 @@ questions:
       required: true
   - variable: nodePort
     label: "Node Port for Storj"
+    description: |
+      This port will be used for both TCP and UDP traffic. </br>
+      Note that this port must be open on your firewall and that internal
+      Storj port will not be affected by this change, but only the external (Node Port)
     group: Networking
     schema:
       type: int
       min: 9000
       max: 65535
-      default: 20988
+      default: 28967
       required: true
 
   - variable: dnsConfig
