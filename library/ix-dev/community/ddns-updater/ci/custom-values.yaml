@@ -4,16 +4,16 @@ ddnsStorage:
     hostPath: /mnt/{{ .Release.Name }}/data
 
 ddnsConfig:
-  period: 1m
-  backupPeriod: 1h
-  updateCooldownPeriod: 1m
-  httpTimeout: 10s
+  # period: 1m
+  # backupPeriod: 1h
+  # updateCooldownPeriod: 1m
+  # httpTimeout: 10s
   # shoutrrrAddresses:
   #   - discord://token@id
   #   - gotify://gotify-host/token
-  publicIpDnsTimeout: 3s
-  publicIpDnsProviders:
-    - provider: all
+  # publicIpDnsTimeout: 3s
+  # publicIpDnsProviders:
+  #   - provider: all
   # publicIpHttpProviders:
   #   - provider: custom
   #     custom: https://ifconfig.io/ip
@@ -23,8 +23,8 @@ ddnsConfig:
   # publicIpv6HttpProviders:
   #   - provider: custom
   #     custom: https://api6.ipify.org
-  publicIpFetchers:
-    - provider: all
+  # publicIpFetchers:
+  #   - provider: all
   config:
     - provider: dreamhost
       host: "@"
