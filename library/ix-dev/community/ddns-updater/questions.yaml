@@ -265,7 +265,7 @@ questions:
             Cloudflare - https://github.com/qdm12/ddns-updater/blob/master/docs/cloudflare.md </br>
             DD24 - https://github.com/qdm12/ddns-updater/blob/master/docs/dd24.md </br>
             DDNSS - https://github.com/qdm12/ddns-updater/blob/master/docs/ddnss.md </br>
-
+            Digital Ocean - https://github.com/qdm12/ddns-updater/blob/master/docs/digitalocean.md </br>
           schema:
             type: list
             min: 1
@@ -294,7 +294,8 @@ questions:
                             description: DD24
                           - value: ddnss
                             description: DDNSS
-
+                          - value: digitalocean
+                            description: Digital Ocean
                     # Common to all providers
                     - variable: domain
                       label: Domain
@@ -466,6 +467,16 @@ questions:
                         type: boolean
                         show_if: [["provider", "=", "ddnss"]]
                         default: false
+
+                    # Digital Ocean
+                    - variable: digitalOceanToken
+                      label: Digital Ocean Token
+                      description: Digital Ocean Token
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "digitalocean"]]
+                        required: true
+                        empty: false
 
         - variable: additionalEnvs
           label: Additional Environment Variables

@@ -55,6 +55,8 @@ settings:
       {{- include "ddns.config.allinkl" (dict "item" $item) | trim | nindent 4 -}}
     {{- else if eq $item.provider "ddnss" -}}
       {{- include "ddns.config.ddnss" (dict "item" $item) | trim | nindent 4 -}}
+    {{- else if eq $item.provider "digitalocean" -}}
+      {{- include "ddns.config.digitalocean" (dict "item" $item) | trim | nindent 4 -}}
     {{- else -}}
       {{- fail (printf "DDNS Updater - Config Provider [%v] is not supported" $item.provider) -}}
     {{- end -}}
