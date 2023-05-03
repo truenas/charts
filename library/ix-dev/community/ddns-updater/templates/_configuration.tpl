@@ -44,7 +44,8 @@ configmap:
                         "dnsomatic" "dnspod" "dondominio" "dreamhost" "duckdns" "dyn"
                         "dynu" "dynv6" "freedns" "gandi" "gcp" "godaddy" "google" "he"
                         "infomaniak" "inwx" "linode" "luadns" "namecheap" "njalla" "noip"
-                        "opendns" "ovh" "porkbun" "selfhost.de" "servercow") }}
+                        "opendns" "ovh" "porkbun" "selfhost.de" "servercow" "spdyn"
+                        "strato" "variomedia") }}
 settings:
   {{- range $item := .Values.ddnsConfig.config -}}
     {{- if not (mustHas $item.provider $providers) -}}

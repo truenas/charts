@@ -359,6 +359,12 @@ questions:
                             description: Selfhosted.de
                           - value: servercow
                             description: Servercow
+                          - value: spdyn
+                            description: SPDyn
+                          - value: strato
+                            description: Strato
+                          - value: variomedia
+                            description: Variomedia
                     # Common to all providers
                     - variable: domain
                       label: Domain
@@ -966,7 +972,7 @@ questions:
                         show_if: [["provider", "=", "opendns"]]
                         default: false
 
-                    # OVH
+                    # OVH TODO:
 
                     # Porkbun
                     - variable: porkbunApiKey
@@ -1049,6 +1055,27 @@ questions:
                         type: boolean
                         show_if: [["provider", "=", "servercow"]]
                         default: false
+
+                    # SPDyn TODO:
+
+                    # Strato
+                    - variable: stratoPassword
+                      label: Strato Password
+                      description: Strato Password.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "strato"]]
+                        required: true
+                        empty: false
+                    - variable: stratoProviderIP
+                      label: Strato Provider IP
+                      description: Strato Provider IP.
+                      schema:
+                        type: boolean
+                        show_if: [["provider", "=", "strato"]]
+                        default: false
+
+                    # Variomedia TODO:
 
         - variable: additionalEnvs
           label: Additional Environment Variables
