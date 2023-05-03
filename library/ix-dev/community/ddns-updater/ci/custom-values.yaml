@@ -15,13 +15,13 @@ ddnsConfig:
     - provider: all
   publicIpHttpProviders:
     - provider: custom
-      custom: "https://example.com"
+      custom: https://ifconfig.io/ip
   publicIpv4HttpProviders:
     - provider: custom
-      custom: "https://example.com"
+      custom: https://api.ipify.org
   publicIpv6HttpProviders:
     - provider: custom
-      custom: "https://example.com"
+      custom: https://api6.ipify.org
   publicIpFetchers:
     - provider: all
   config:
