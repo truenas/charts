@@ -31,14 +31,21 @@ ddnsConfig:
   #     custom: https://api6.ipify.org
   # publicIpFetchers:
   #   - provider: all
+  # config:
+  #   - provider: dreamhost
+  #     host: "@"
+  #     domain: example.com
+  #     ipVersion: ipv6
+  #     dreamHostKey: abcdefgh12345678
+  #   - provider: dreamhost
+  #     host: "@"
+  #     domain: example.com
+  #     ipVersion: ipv4
+  #     dreamHostKey: abcdefgh12345678
   config:
-    - provider: dreamhost
+    - provider: aliyun
       host: "@"
       domain: example.com
-      ipVersion: ipv6
-      dreamHostKey: abcdefgh12345678
-    - provider: dreamhost
-      host: "@"
-      domain: example.com
-      ipVersion: ipv4
-      dreamHostKey: abcdefgh12345678
+      ipVersion: ""
+      aliyunAccessKey: key
+      aliyunSecret: secret
