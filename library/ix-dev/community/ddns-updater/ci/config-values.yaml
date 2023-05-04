@@ -26,17 +26,17 @@ ddnsConfig:
   publicIpFetchers:
     - provider: all
 
-  # shoutrrrAddresses:
-  #   - discord://token@id
-  #   - gotify://gotify-host/token
-  # publicIpDnsProviders:
-  #   - provider: all
-  # publicIpHttpProviders:
-  #   - provider: custom
-  #     custom: https://ifconfig.io/ip
-  # publicIpv4HttpProviders:
-  #   - provider: custom
-  #     custom: https://api.ipify.org
-  # publicIpv6HttpProviders:
-  #   - provider: custom
-  #     custom: https://api6.ipify.org
+  shoutrrrAddresses:
+    - discord://token@id
+    - gotify://gotify-host/token
+  publicIpDnsProviders:
+    - provider: all
+  publicIpHttpProviders:
+    - provider: custom
+      custom: https://ifconfig.io/ip
+  publicIpv4HttpProviders:
+    - provider: custom
+      custom: https://api.ipify.org
+  publicIpv6HttpProviders:
+    - provider: custom
+      custom: https://api6.ipify.org
