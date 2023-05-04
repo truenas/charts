@@ -37,240 +37,6 @@ questions:
     schema:
       type: dict
       attrs:
-        - variable: period
-          label: Update Period
-          description: |
-            Default period of IP address check, following this format:</br>
-            5m = 5 minutes</br>
-            1h = 1 hour</br>
-            1h30m = 1 hour 30 minutes
-          schema:
-            type: string
-            default: 5m
-            required: true
-        - variable: updateCooldownPeriod
-          label: Update Cooldown Period
-          description: |
-            Duration to cooldown between updates for each record.
-            This is useful to avoid being rate limited or banned,
-            following this format:</br>
-            5m = 5 minutes</br>
-            1h = 1 hour</br>
-            1h30m = 1 hour 30 minutes
-          schema:
-            type: string
-            default: 5m
-            required: true
-        - variable: backupPeriod
-          label: Backup Period
-          description: |
-            Set to a period to enable zip backups of data/config.json and
-            data/updates.json in a zip file following this format:</br>
-            0 = disabled</br>
-            10h = 10 hours</br>
-            20h30m = 20 hours 30 minutes
-          schema:
-            type: string
-            default: 24h
-            required: true
-        - variable: httpTimeout
-          label: HTTP Timeout
-          description: |
-            Default timeout for HTTP requests, following this format:</br>
-            10s = 10 seconds</br>
-            1m = 1 minute</br>
-            1m30s = 1 minute 30 seconds
-          schema:
-            type: string
-            default: 10s
-            required: true
-        - variable: publicIpDnsTimeout
-          label: Public IP DNS Timeout
-          description: |
-            Public IP DNS query timeout, following this format:</br>
-            3s = 3 seconds</br>
-            1m = 1 minute</br>
-            1m30s = 1 minute 30 seconds
-          schema:
-            type: string
-            default: 3s
-            required: true
-        - variable: shoutrrrAddresses
-          label: Shoutrrr Addresses
-          description: |
-            List of Shoutrrr addresses to send notifications to. </br>
-            See https://containrrr.dev/shoutrrr/0.7/services/overview/ for more information.
-          schema:
-            type: list
-            default: []
-            items:
-              - variable: address
-                label: Address
-                schema:
-                  type: string
-                  required: true
-                  empty: false
-        - variable: publicIpDnsProviders
-          label: Public IP DNS Providers
-          description: Providers to obtain the public IP address (IPv4 and/or IPv6)
-          schema:
-            type: list
-            min: 1
-            required: true
-            empty: false
-            default: [{"provider": "all", "placeholder": "placeholder"}]
-            items:
-              - variable: provider
-                label: Provider
-                schema:
-                  type: string
-                  required: true
-                  enum:
-                    - value: all
-                      description: All providers
-                    - value: google
-                      description: Google
-                    - value: cloudflare
-                      description: Cloudflare
-              # Workaround for a UI bug that is fixed in the next release
-              # (Single items in a dict inside a list was getting converted to a list of strings)
-              - variable: placeholder
-                label: placeholder
-                schema:
-                  type: string
-                  default: placeholder
-                  required: true
-                  hidden: true
-        - variable: publicIpHttpProviders
-          label: Public IP HTTP Providers
-          description: Providers to obtain the public IP address (IPv4 and/or IPv6)
-          schema:
-            type: list
-            min: 1
-            required: true
-            empty: false
-            default: [{"provider": "all", "custom": ""}]
-            items:
-              - variable: provider
-                label: Provider
-                schema:
-                  type: string
-                  required: true
-                  enum:
-                    - value: all
-                      description: All providers
-                    - value: opendns
-                      description: opendns
-                    - value: ifconfig
-                      description: ifconfig
-                    - value: ipinfo
-                      description: ipinfo
-                    - value: ddnss
-                      description: ddnss
-                    - value: google
-                      description: google
-                    - value: custom
-                      description: Custom Provider
-              - variable: custom
-                label: Custom Value
-                schema:
-                  type: string
-                  show_if: [["provider", "=", "custom"]]
-                  default: ""
-                  required: true
-        - variable: publicIpv4HttpProviders
-          label: Public IPv4 HTTP Providers
-          description: Providers to obtain the public IPv4 address
-          schema:
-            type: list
-            min: 1
-            required: true
-            empty: false
-            default: [{"provider": "all", "custom": ""}]
-            items:
-              - variable: provider
-                label: Provider
-                schema:
-                  type: string
-                  required: true
-                  enum:
-                    - value: all
-                      description: All providers
-                    - value: ipify
-                      description: ipify
-                    - value: noip
-                      description: noip
-                    - value: custom
-                      description: Custom Provider
-              - variable: custom
-                label: Custom Value
-                schema:
-                  type: string
-                  show_if: [["provider", "=", "custom"]]
-                  default: ""
-                  required: true
-        - variable: publicIpv6HttpProviders
-          label: Public IPv6 HTTP Providers
-          description: Providers to obtain the public IPv6 address
-          schema:
-            type: list
-            min: 1
-            required: true
-            empty: false
-            default: [{"provider": "all", "custom": ""}]
-            items:
-              - variable: provider
-                label: Provider
-                schema:
-                  type: string
-                  required: true
-                  enum:
-                    - value: all
-                      description: All providers
-                    - value: ipify
-                      description: ipify
-                    - value: noip
-                      description: noip
-                    - value: custom
-                      description: Custom Provider
-              - variable: custom
-                label: Custom Value
-                schema:
-                  type: string
-                  show_if: [["provider", "=", "custom"]]
-                  default: ""
-                  required: true
-        - variable: publicIpFetchers
-          label: Public IP Fetchers
-          description: Fetcher types to obtain the public IP address
-          schema:
-            type: list
-            min: 1
-            required: true
-            empty: false
-            default: [{"provider": "all", "placeholder": "placeholder"}]
-            items:
-              - variable: provider
-                label: Fetcher
-                schema:
-                  type: string
-                  required: true
-                  enum:
-                    - value: all
-                      description: All providers
-                    - value: http
-                      description: HTTP
-                    - value: dns
-                      description: DNS
-              # Workaround for a UI bug that is fixed in the next release
-              # (Single items in a dict inside a list was getting converted to a list of strings)
-              - variable: placeholder
-                label: placeholder
-                schema:
-                  type: string
-                  default: placeholder
-                  required: true
-                  hidden: true
         - variable: config
           label: DNS Provider Configuration
           description: |
@@ -411,9 +177,9 @@ questions:
                         show_if: [["provider", "=", "aliyun"]]
                         required: true
                         empty: false
-                    - variable: aliyunSecretKey
-                      label: Aliyun Secret Key
-                      description: Aliyun Secret Key.
+                    - variable: aliyunSecret
+                      label: Aliyun Secret
+                      description: Aliyun Secret.
                       schema:
                         type: string
                         show_if: [["provider", "=", "aliyun"]]
@@ -609,7 +375,7 @@ questions:
                         empty: false
 
                     # Dreamhost
-                    - variable: dreamhostKey
+                    - variable: dreamHostKey
                       label: Dreamhost Key
                       description: Dreamhost Key.
                       schema:
@@ -1180,6 +946,267 @@ questions:
                         type: boolean
                         show_if: [["provider", "=", "variomedia"]]
                         default: false
+
+        - variable: period
+          label: Update Period
+          description: |
+            Default period of IP address check, following this format:</br>
+            5m = 5 minutes</br>
+            1h = 1 hour</br>
+            1h30m = 1 hour 30 minutes
+          schema:
+            type: string
+            default: 5m
+            required: true
+        - variable: updateCooldownPeriod
+          label: Update Cooldown Period
+          description: |
+            Duration to cooldown between updates for each record.
+            This is useful to avoid being rate limited or banned,
+            following this format:</br>
+            5m = 5 minutes</br>
+            1h = 1 hour</br>
+            1h30m = 1 hour 30 minutes
+          schema:
+            type: string
+            default: 5m
+            required: true
+        - variable: backupPeriod
+          label: Backup Period
+          description: |
+            Set to a period to enable zip backups of data/config.json and
+            data/updates.json in a zip file following this format:</br>
+            0 = disabled</br>
+            10h = 10 hours</br>
+            20h30m = 20 hours 30 minutes
+          schema:
+            type: string
+            default: 24h
+            required: true
+        - variable: httpTimeout
+          label: HTTP Timeout
+          description: |
+            Default timeout for HTTP requests, following this format:</br>
+            10s = 10 seconds</br>
+            1m = 1 minute</br>
+            1m30s = 1 minute 30 seconds
+          schema:
+            type: string
+            default: 10s
+            required: true
+        - variable: publicIpDnsTimeout
+          label: Public IP DNS Timeout
+          description: |
+            Public IP DNS query timeout, following this format:</br>
+            3s = 3 seconds</br>
+            1m = 1 minute</br>
+            1m30s = 1 minute 30 seconds
+          schema:
+            type: string
+            default: 3s
+            required: true
+        - variable: shoutrrrAddresses
+          label: Shoutrrr Addresses
+          description: |
+            List of Shoutrrr addresses to send notifications to. </br>
+            See https://containrrr.dev/shoutrrr/0.7/services/overview/ for more information.
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: address
+                label: Address
+                schema:
+                  type: string
+                  required: true
+                  empty: false
+        - variable: publicIpDnsProviders
+          label: Public IP DNS Providers
+          description: Providers to obtain the public IP address (IPv4 and/or IPv6)
+          schema:
+            type: list
+            min: 1
+            required: true
+            empty: false
+            default: [{"provider": "all", "placeholder": "placeholder"}]
+            items:
+              - variable: publicIpDnsProviderEntry
+                label: Public IP DNS Provider Entry
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: provider
+                      label: Provider
+                      schema:
+                        type: string
+                        required: true
+                        enum:
+                          - value: all
+                            description: All providers
+                          - value: google
+                            description: Google
+                          - value: cloudflare
+                            description: Cloudflare
+                    # Workaround for a UI bug that is fixed in the next release
+                    # (Single items in a dict inside a list was getting converted to a list of strings)
+                    - variable: placeholder
+                      label: placeholder
+                      schema:
+                        type: string
+                        default: placeholder
+                        required: true
+                        hidden: true
+        - variable: publicIpHttpProviders
+          label: Public IP HTTP Providers
+          description: Providers to obtain the public IP address (IPv4 and/or IPv6)
+          schema:
+            type: list
+            min: 1
+            required: true
+            empty: false
+            default: [{"provider": "all", "custom": ""}]
+            items:
+              - variable: publicIpHttpProviderEntry
+                label: Public IP HTTP Provider Entry
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: provider
+                      label: Provider
+                      schema:
+                        type: string
+                        required: true
+                        enum:
+                          - value: all
+                            description: All providers
+                          - value: opendns
+                            description: opendns
+                          - value: ifconfig
+                            description: ifconfig
+                          - value: ipinfo
+                            description: ipinfo
+                          - value: ddnss
+                            description: ddnss
+                          - value: google
+                            description: google
+                          - value: custom
+                            description: Custom Provider
+                    - variable: custom
+                      label: Custom Value
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "custom"]]
+                        default: ""
+                        required: true
+        - variable: publicIpv4HttpProviders
+          label: Public IPv4 HTTP Providers
+          description: Providers to obtain the public IPv4 address
+          schema:
+            type: list
+            min: 1
+            required: true
+            empty: false
+            default: [{"provider": "all", "custom": ""}]
+            items:
+              - variable: publicIpv4HttpProviderEntry
+                label: Public IPv4 HTTP Provider Entry
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: provider
+                      label: Provider
+                      schema:
+                        type: string
+                        required: true
+                        enum:
+                          - value: all
+                            description: All providers
+                          - value: ipify
+                            description: ipify
+                          - value: noip
+                            description: noip
+                          - value: custom
+                            description: Custom Provider
+                    - variable: custom
+                      label: Custom Value
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "custom"]]
+                        default: ""
+                        required: true
+        - variable: publicIpv6HttpProviders
+          label: Public IPv6 HTTP Providers
+          description: Providers to obtain the public IPv6 address
+          schema:
+            type: list
+            min: 1
+            required: true
+            empty: false
+            default: [{"provider": "all", "custom": ""}]
+            items:
+              - variable: publicIpv6HttpProviderEntry
+                label: Public IPv6 HTTP Provider Entry
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: provider
+                      label: Provider
+                      schema:
+                        type: string
+                        required: true
+                        enum:
+                          - value: all
+                            description: All providers
+                          - value: ipify
+                            description: ipify
+                          - value: noip
+                            description: noip
+                          - value: custom
+                            description: Custom Provider
+                    - variable: custom
+                      label: Custom Value
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "custom"]]
+                        default: ""
+                        required: true
+        - variable: publicIpFetchers
+          label: Public IP Fetchers
+          description: Fetcher types to obtain the public IP address
+          schema:
+            type: list
+            min: 1
+            required: true
+            empty: false
+            default: [{"provider": "all", "placeholder": "placeholder"}]
+            items:
+              - variable: publicIpFetcherEntry
+                label: Public IP Fetcher Entry
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: provider
+                      label: Fetcher
+                      schema:
+                        type: string
+                        required: true
+                        enum:
+                          - value: all
+                            description: All providers
+                          - value: http
+                            description: HTTP
+                          - value: dns
+                            description: DNS
+                    # Workaround for a UI bug that is fixed in the next release
+                    # (Single items in a dict inside a list was getting converted to a list of strings)
+                    - variable: placeholder
+                      label: placeholder
+                      schema:
+                        type: string
+                        default: placeholder
+                        required: true
+                        hidden: true
+
 
         - variable: additionalEnvs
           label: Additional Environment Variables

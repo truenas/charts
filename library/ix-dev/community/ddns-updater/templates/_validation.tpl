@@ -30,7 +30,13 @@
     {{- fail (printf "DDNS Updater - Expected non-empty [%v]" $text) -}}
   {{- end -}}
 
+  {{- $userProviders := list -}}
   {{- range $list -}}
+    {{- if mustHas .provider $userProviders -}}
+      {{- fail (printf "DDNS Updater - Expected unique values in [%v], but got [%v] more than once" $text .provider) -}}
+    {{- end -}}
+    {{- $userProviders = mustAppend $userProviders .provider -}}
+
     {{- if not (mustHas .provider $valid) -}}
       {{- fail (printf "DDNS Updater - [%v] valid values are [%v], but got [%v]" $text (join ", " $valid) .provider) -}}
     {{- end -}}
