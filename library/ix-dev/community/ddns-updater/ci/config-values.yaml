@@ -9,6 +9,10 @@ ddnsStorage:
 # for the linting.
 ci: true
 
+ddnsRunAs:
+  user: 1000
+  group: 1000
+
 ddnsConfig:
   config:
     - provider: allinkl
