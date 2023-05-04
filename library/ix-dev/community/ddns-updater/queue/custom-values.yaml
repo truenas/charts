@@ -10,6 +10,13 @@ ddnsStorage:
 ci: true
 
 ddnsConfig:
+  config:
+    - provider: aliyun
+      host: "@"
+      domain: example.com
+      ipVersion: ""
+      aliyunAccessKey: key
+      aliyunSecret: secret
   # period: 1m
   # backupPeriod: 1h
   # updateCooldownPeriod: 1m
@@ -42,10 +49,3 @@ ddnsConfig:
   #     domain: example.com
   #     ipVersion: ipv4
   #     dreamHostKey: abcdefgh12345678
-  config:
-    - provider: aliyun
-      host: "@"
-      domain: example.com
-      ipVersion: ""
-      aliyunAccessKey: key
-      aliyunSecret: secret

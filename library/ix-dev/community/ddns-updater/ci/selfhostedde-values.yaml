@@ -11,17 +11,17 @@ ci: true
 
 ddnsConfig:
   config:
-    - provider: selfhosted.de
+    - provider: selfhost.de
       host: "@"
       domain: example.com
       ipVersion: ""
-      selfhosteddeUsername: username
-      selfhosteddePassword: password
-      selfhosteddeProviderIP: true
-    - provider: selfhosted.de
+      selfhostdeUsername: username
+      selfhostdePassword: password
+      selfhostdeProviderIP: true
+    - provider: selfhost.de
       host: "@"
       domain: example.com
       ipVersion: ""
-      selfhosteddeUsername: username
-      selfhosteddePassword: password
-      selfhosteddeProviderIP: false
+      selfhostdeUsername: username
+      selfhostdePassword: password
+      selfhostdeProviderIP: false

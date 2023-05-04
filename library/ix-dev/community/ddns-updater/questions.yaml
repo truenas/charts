@@ -355,8 +355,8 @@ questions:
                             description: OVH
                           - value: porkbun
                             description: Porkbun
-                          - value: selfhosted.de
-                            description: Selfhosted.de
+                          - value: selfhost.de
+                            description: Selfhost.de
                           - value: servercow
                             description: Servercow
                           - value: spdyn
@@ -1049,29 +1049,29 @@ questions:
                         show_if: [["provider", "=", "porkbun"]]
                         default: 3600
 
-                    # Selfhosted.de
-                    - variable: selfhostedUsername
-                      label: Selfhosted.de Username
-                      description: Selfhosted.de Username.
+                    # Selfhost.de
+                    - variable: selfhostdeUsername
+                      label: Selfhost.de Username
+                      description: Selfhost.de Username.
                       schema:
                         type: string
-                        show_if: [["provider", "=", "selfhosted"]]
+                        show_if: [["provider", "=", "selfhost.de"]]
                         required: true
                         empty: false
-                    - variable: selfhostedPassword
-                      label: Selfhosted.de Password
-                      description: Selfhosted.de Password.
+                    - variable: selfhostdePassword
+                      label: Selfhost.de Password
+                      description: Selfhost.de Password.
                       schema:
                         type: string
-                        show_if: [["provider", "=", "selfhosted"]]
+                        show_if: [["provider", "=", "selfhost.de"]]
                         required: true
                         empty: false
-                    - variable: selfhostedProviderIP
-                      label: Selfhosted.de Provider IP
-                      description: Selfhosted.de Provider IP.
+                    - variable: selfhostdeProviderIP
+                      label: Selfhost.de Provider IP
+                      description: Selfhost.de Provider IP.
                       schema:
                         type: boolean
-                        show_if: [["provider", "=", "selfhosted"]]
+                        show_if: [["provider", "=", "selfhost.de"]]
                         default: false
 
                     # Servercow
