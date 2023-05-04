@@ -24,7 +24,8 @@ workload:
           envList:
           {{ with .Values.ddnsConfig.additionalEnvs }}
             {{ range $env := . }}
-            {{ $env.name }}: {{ $env.value }}
+            - name: {{ $env.name }}
+              value: {{ $env.value }}
             {{ end }}
           {{ end }}
           probes:

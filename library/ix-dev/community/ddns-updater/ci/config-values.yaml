@@ -40,3 +40,9 @@ ddnsConfig:
   publicIpv6HttpProviders:
     - provider: custom
       custom: https://api6.ipify.org
+
+  additionalEnvs:
+    - name: LOG_LEVEL
+      value: debug
+    - name: LOG_CALLER
+      value: short
