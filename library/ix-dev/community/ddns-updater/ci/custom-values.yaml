@@ -11,20 +11,24 @@ ci: true
 
 ddnsConfig:
   config:
-    - provider: aliyun
-      host: subdomain
+    - provider: allinkl
+      host: "@"
       domain: example.com
       ipVersion: ""
-      aliyunAccessKey: key
-      aliyunSecret: secret
-  # period: 1m
-  # backupPeriod: 1h
-  # updateCooldownPeriod: 1m
-  # httpTimeout: 10s
+      allinklUsername: user
+      allinklPassword: pass
+
+  period: 1m
+  backupPeriod: 1h
+  updateCooldownPeriod: 10m
+  publicIpDnsTimeout: 3s
+  httpTimeout: 15s
+  publicIpFetchers:
+    - provider: all
+
   # shoutrrrAddresses:
   #   - discord://token@id
   #   - gotify://gotify-host/token
-  # publicIpDnsTimeout: 3s
   # publicIpDnsProviders:
   #   - provider: all
   # publicIpHttpProviders:
@@ -36,16 +40,3 @@ ddnsConfig:
   # publicIpv6HttpProviders:
   #   - provider: custom
   #     custom: https://api6.ipify.org
-  # publicIpFetchers:
-  #   - provider: all
-  # config:
-  #   - provider: dreamhost
-  #     host: subdomain
-  #     domain: example.com
-  #     ipVersion: ipv6
-  #     dreamHostKey: abcdefgh12345678
-  #   - provider: dreamhost
-  #     host: subdomain
-  #     domain: example.com
-  #     ipVersion: ipv4
-  #     dreamHostKey: abcdefgh12345678
