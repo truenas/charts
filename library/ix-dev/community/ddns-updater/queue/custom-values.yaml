@@ -12,7 +12,7 @@ ci: true
 ddnsConfig:
   config:
     - provider: aliyun
-      host: "@"
+      host: subdomain
       domain: example.com
       ipVersion: ""
       aliyunAccessKey: key
@@ -40,12 +40,12 @@ ddnsConfig:
   #   - provider: all
   # config:
   #   - provider: dreamhost
-  #     host: "@"
+  #     host: subdomain
   #     domain: example.com
   #     ipVersion: ipv6
   #     dreamHostKey: abcdefgh12345678
   #   - provider: dreamhost
-  #     host: "@"
+  #     host: subdomain
   #     domain: example.com
   #     ipVersion: ipv4
   #     dreamHostKey: abcdefgh12345678
