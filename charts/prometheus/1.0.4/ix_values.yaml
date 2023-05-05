@@ -1,7 +1,7 @@
 image:
   repository: prom/prometheus
   pullPolicy: IfNotPresent
-  tag: v2.43.0
+  tag: v2.43.1
 
 resources:
   limits:
@@ -10,7 +10,7 @@ resources:
 
 prometheusConfig:
   retentionTime: 15d
-  retentionSize: ""
+  retentionSize: ''
   walCompression: true
   additionalEnvs: []
   additionalArgs: []
