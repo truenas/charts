@@ -1,0 +1,9 @@
+# FIXME: Find a way to have test keys for CI testing
+# We need an authToken(aka API key) network(s) and identityPublic/identitySecret
+zerotierConfig:
+  authToken: some auth token
+  identitySecret: some identity secret
+  identityPublic: some identity public
+  networks:
+    - some net id
+    - some other net id

@@ -42,7 +42,7 @@
             "latest_version": "1.0.88",
             "latest_app_version": "2023.5.2",
             "latest_human_version": "2023.5.2_1.0.88",
-            "last_update": "2023-05-04 11:22:55",
+            "last_update": "2023-05-07 15:37:00",
             "name": "home-assistant",
             "recommended": false,
             "title": "Home Assistant",
@@ -752,6 +752,34 @@
             ],
             "tags": [],
             "icon_url": "https://avatars.githubusercontent.com/u/48932923"
+        },
+        "zerotier": {
+            "app_readme": "<h1>Zerotier</h1>\n<p><a href=\"https://www.zerotier.com\">Zerotier</a> Securely connect any device, anywhere.</p>",
+            "categories": [
+                "vpn",
+                "zerotier"
+            ],
+            "description": "Securely connect any device, anywhere.",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://www.zerotier.com",
+            "location": "/__w/charts/charts/community/zerotier",
+            "latest_version": "1.0.0",
+            "latest_app_version": "1.10.6",
+            "latest_human_version": "1.10.6_1.0.0",
+            "last_update": null,
+            "name": "zerotier",
+            "recommended": false,
+            "title": "Zerotier",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [],
+            "icon_url": "https://avatars.githubusercontent.com/u/4173285"
         },
         "jellyfin": {
             "app_readme": "<h1>Jellyfin</h1>\n<p><a href=\"https://jellyfin.org/\">Jellyfin</a> is a Free Software Media System that puts you in control of managing and streaming your media.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Jellyfin</code> directories.\nAfterward, the <code>Jellyfin</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>",
