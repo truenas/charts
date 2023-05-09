@@ -1,0 +1,27 @@
+ddnsStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/data
+
+# This disables probes.
+# As we can't have for each provider
+# an api key, we just run through CI
+# for the linting.
+ci: true
+
+ddnsConfig:
+  config:
+    - provider: noip
+      host: "@"
+      domain: example.com
+      ipVersion: ""
+      noipUsername: username
+      noipPassword: password
+      noipProviderIP: true
+    - provider: noip
+      host: "@"
+      domain: example.com
+      ipVersion: ""
+      noipUsername: username
+      noipPassword: password
+      noipProviderIP: false

@@ -1,0 +1,8 @@
+runAsContext:
+  - userName: ddns-updater
+    groupName: ddns-updater
+    gid: 568
+    uid: 568
+    description: DDNS Updater runs as any non-root user.
+capabilities: []
+hostMounts: []

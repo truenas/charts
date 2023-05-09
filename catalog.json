@@ -42,7 +42,7 @@
             "latest_version": "1.0.89",
             "latest_app_version": "2023.5.2",
             "latest_human_version": "2023.5.2_1.0.89",
-            "last_update": "2023-05-07 15:37:00",
+            "last_update": "2023-05-09 11:21:40",
             "name": "home-assistant",
             "recommended": false,
             "title": "Home Assistant",
@@ -118,7 +118,7 @@
             "latest_version": "1.7.45",
             "latest_app_version": "1.32.1.6999",
             "latest_human_version": "1.32.1.6999_1.7.45",
-            "last_update": "2023-05-09 11:06:50",
+            "last_update": "2023-05-09 11:21:40",
             "name": "plex",
             "recommended": false,
             "title": "Plex",
@@ -201,7 +201,7 @@
             "latest_version": "1.0.6",
             "latest_app_version": "7",
             "latest_human_version": "7_1.0.6",
-            "last_update": "2023-05-03 13:56:14",
+            "last_update": "2023-05-09 11:21:40",
             "name": "wg-easy",
             "recommended": false,
             "title": "WG Easy",
@@ -286,7 +286,7 @@
             "latest_version": "1.0.26",
             "latest_app_version": "1.23.4",
             "latest_human_version": "1.23.4_1.0.26",
-            "last_update": "2023-05-03 13:56:14",
+            "last_update": "2023-05-09 11:21:40",
             "name": "syncthing",
             "recommended": false,
             "title": "Syncthing",
@@ -313,7 +313,7 @@
             "latest_version": "1.0.23",
             "latest_app_version": "4.7.11.0",
             "latest_human_version": "4.7.11.0_1.0.23",
-            "last_update": "2023-05-03 13:56:14",
+            "last_update": "2023-05-09 11:21:40",
             "name": "emby",
             "recommended": false,
             "title": "Emby Server",
@@ -554,6 +554,36 @@
             ],
             "tags": [],
             "icon_url": "https://static.wikia.nocookie.net/terraria_gamepedia/images/a/a4/NewPromoLogo.png/revision/latest"
+        },
+        "ddns-updater": {
+            "app_readme": "<h1>DDNS Updater</h1>\n<p><a href=\"https://github.com/qdm12/ddns-updater\">DDNS Updater</a> is a lightweight universal DDNS Updater with web UI</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>DDNS Updater</code> directories.\nAfterward, the <code>DDNS Updater</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>",
+            "categories": [
+                "network"
+            ],
+            "description": "Lightweight universal DDNS Updater with web UI",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://github.com/qdm12/ddns-updater",
+            "location": "/__w/charts/charts/community/ddns-updater",
+            "latest_version": "1.0.0",
+            "latest_app_version": "latest",
+            "latest_human_version": "latest_1.0.0",
+            "last_update": null,
+            "name": "ddns-updater",
+            "recommended": false,
+            "title": "DDNS Updater",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [
+                "ddns",
+                "ddns-updater"
+            ],
+            "icon_url": "https://raw.githubusercontent.com/qdm12/ddns-updater/master/readme/ddnsgopher.svg"
         },
         "radarr": {
             "app_readme": "<h1>Radarr</h1>\n<p><a href=\"https://github.com/Radarr/Radarr\">Radarr</a> is a movie collection manager for Usenet and BitTorrent users.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Radarr</code> directories.\nAfterward, the <code>Radarr</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>",
