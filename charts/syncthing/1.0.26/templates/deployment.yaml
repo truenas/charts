@@ -41,12 +41,21 @@ spec:
           ports:
             - name: web
               containerPort: 8384
+              {{ if not .Values.hostNetwork }}
+              hostPort: null
+              {{ end }}
             - name: tcp
               containerPort: 22000
               protocol: TCP
+              {{ if not .Values.hostNetwork }}
+              hostPort: null
+              {{ end }}
             - name: udp
               containerPort: 22000
               protocol: UDP
+              {{ if not .Values.hostNetwork }}
+              hostPort: null
+              {{ end }}
           readinessProbe:
             httpGet:
               path: /rest/noauth/health

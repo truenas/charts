@@ -37,25 +37,45 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
             containerPort: 32400
           {{- if .Values.hostNetwork }}
             hostPort: {{ .Values.plexServiceTCP.port }}
+          {{- else }}
+            hostPort: null
           {{- end }}
           - name: plex-dlna
             protocol: TCP
             containerPort: 32469
+          {{- if not .Values.hostNetwork }}
+            hostPort: null
+          {{- end }}
           - name: plex-dlna-udp
             protocol: UDP
             containerPort: 1900
+          {{- if not .Values.hostNetwork }}
+            hostPort: null
+          {{- end }}
           - name: plex-gdm1
             protocol: UDP
             containerPort: 32410
+          {{- if not .Values.hostNetwork }}
+            hostPort: null
+          {{- end }}
           - name: plex-gdm2
             protocol: UDP
             containerPort: 32412
+          {{- if not .Values.hostNetwork }}
+            hostPort: null
+          {{- end }}
           - name: plex-gdm3
             protocol: UDP
             containerPort: 32413
+          {{- if not .Values.hostNetwork }}
+            hostPort: null
+          {{- end }}
           - name: plex-gdm4
             protocol: UDP
             containerPort: 32414
+          {{- if not .Values.hostNetwork }}
+            hostPort: null
+          {{- end }}
           env:
             - name: KUBE_NAMESPACE
               valueFrom:
