@@ -1,0 +1,10 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "ddns.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "ddns.configuration" $ | fromYaml) -}}
+
+{{/* Create the configmap for portal manually*/}}
+{{- include "ddns.portal" $ -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}
