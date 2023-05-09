@@ -500,6 +500,33 @@
             "tags": [],
             "icon_url": "https://www.chia.net/wp-content/uploads/2022/09/chia-logo.svg"
         },
+        "overseerr": {
+            "app_readme": "<h1>Overseerr</h1>\n<p><a href=\"https://github.com/sct/overseerr\">Overseerr</a> is a free and open source software application for managing requests for your media library. It integrates with your existing services, such as Sonarr, Radarr, and Plex!</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Overseerr</code> directories.\nAfterward, the <code>Overseerr</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>",
+            "categories": [
+                "media"
+            ],
+            "description": "Overseerr is a free and open source software application for managing requests for your media library.",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://github.com/sct/overseerr",
+            "location": "/__w/charts/charts/community/overseerr",
+            "latest_version": "1.0.0",
+            "latest_app_version": "1.32.5",
+            "latest_human_version": "1.32.5_1.0.0",
+            "last_update": null,
+            "name": "overseerr",
+            "recommended": false,
+            "title": "Overseerr",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [],
+            "icon_url": "https://raw.githubusercontent.com/sct/overseerr/develop/public/os_icon.svg"
+        },
         "terraria": {
             "app_readme": "<h1>Terraria</h1>\n<p><a href=\"https://terraria.org/\">Terraria</a> is a land of adventure! A land of mystery! A land that's yours to shape, defend, and enjoy.</p>\n<p>This applies only for the <code>TShock</code> image.\nOn the first run, you have to check the logs to get the server token. You will find something like this:</p>\n<p><code>text\nLogin before join enabled. Users may be prompted for an account specific password instead of a server password on connect.\nLogin using UUID enabled. Users automatically login via UUID.\nA malicious server can easily steal a user's UUID. You may consider turning this option off if you run a public server.\nTShock Notice: setup-code.txt is still present, and the code located in that file will be used.\nTo setup the server, join the game and type /setup 424041\nThis token will display until disabled by verification. (/setup)</code></p>\n<p>Join the server and run <code>/setup &lt;token&gt;</code></p>",
             "categories": [
@@ -767,7 +794,7 @@
             "latest_version": "1.0.0",
             "latest_app_version": "1.10.6",
             "latest_human_version": "1.10.6_1.0.0",
-            "last_update": null,
+            "last_update": "2023-05-07 15:37:49",
             "name": "zerotier",
             "recommended": false,
             "title": "Zerotier",
