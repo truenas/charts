@@ -41,7 +41,6 @@ questions:
           schema:
             type: string
             private: true
-            max_length: 20
             default: ""
         - variable: additionalEnvs
           label: Additional Environment Variables
