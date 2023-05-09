@@ -118,7 +118,7 @@
             "latest_version": "1.7.44",
             "latest_app_version": "1.32.1.6999",
             "latest_human_version": "1.32.1.6999_1.7.44",
-            "last_update": "2023-05-03 13:56:14",
+            "last_update": "2023-05-09 11:06:50",
             "name": "plex",
             "recommended": false,
             "title": "Plex",
@@ -370,7 +370,7 @@
             "latest_version": "1.0.21",
             "latest_app_version": "v1.39.0",
             "latest_human_version": "v1.39.0_1.0.21",
-            "last_update": "2023-05-03 13:56:14",
+            "last_update": "2023-05-09 11:06:50",
             "name": "netdata",
             "recommended": false,
             "title": "Netdata",
@@ -947,6 +947,34 @@
             ],
             "tags": [],
             "icon_url": "https://avatars.githubusercontent.com/u/10536621"
+        },
+        "clamav": {
+            "app_readme": "<h1>ClamAV</h1>\n<p><a href=\"https://www.clamav.net/\">ClamAV</a> - ClamAV\u00ae is an open-source antivirus engine for detecting trojans, viruses, malware &amp; other malicious threats.</p>\n<ul>\n<li>App runs as <code>root</code> user</li>\n</ul>",
+            "categories": [
+                "anti-virus",
+                "clamav"
+            ],
+            "description": "ClamAV is an open source (GPLv2) anti-virus toolkit.",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://www.clamav.net/",
+            "location": "/__w/charts/charts/community/clamav",
+            "latest_version": "1.0.0",
+            "latest_app_version": "1.0.1",
+            "latest_human_version": "1.0.1_1.0.0",
+            "last_update": null,
+            "name": "clamav",
+            "recommended": false,
+            "title": "Clam AV",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [],
+            "icon_url": "https://raw.githubusercontent.com/micahsnyder/clamav-documentation/main/src/images/logo.png"
         }
     },
     "enterprise": {
