@@ -15,9 +15,10 @@ workload:
             runAsUser: {{ .Values.ipfsRunAs.user }}
             runAsGroup: {{ .Values.ipfsRunAs.group }}
           {{ with .Values.ipfsConfig.additionalEnvs }}
-          env:
+          envList:
             {{ range $env := . }}
-            {{ $env.name }}: {{ $env.value }}
+            - name: {{ $env.name }}
+              value: {{ $env.value }}
             {{ end }}
           {{ end }}
           probes:
