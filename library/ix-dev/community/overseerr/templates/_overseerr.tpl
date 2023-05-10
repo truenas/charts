@@ -16,8 +16,8 @@ workload:
             runAsGroup: {{ .Values.overseerrRunAs.group }}
           env:
             PORT: {{ .Values.overseerrNetwork.webPort }}
-          envList:
           {{ with .Values.overseerrConfig.additionalEnvs }}
+          envList:
             {{ range $env := . }}
             - name: {{ $env.name }}
               value: {{ $env.value }}

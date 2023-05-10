@@ -19,8 +19,10 @@ workload:
             JELLYFIN_PublishedServerUrl: {{ . | quote }}
             {{ end }}
           {{ with .Values.jellyfinConfig.additionalEnvs }}
+          envList:
             {{ range $env := . }}
-            {{ $env.name }}: {{ $env.value }}
+            - name: {{ $env.name }}
+              values: {{ $env.value }}
             {{ end }}
           {{ end }}
           probes:

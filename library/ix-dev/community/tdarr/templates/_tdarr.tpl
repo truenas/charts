@@ -33,8 +33,8 @@ workload:
             serverIP: {{ .Values.tdarrConfig.serverIP }}
           fixedEnv:
             PUID: {{ .Values.tdarrID.user }}
-          envList:
           {{ with .Values.tdarrConfig.additionalEnvs }}
+          envList:
             {{ range $env := . }}
             - name: {{ $env.name }}
               value: {{ $env.value }}

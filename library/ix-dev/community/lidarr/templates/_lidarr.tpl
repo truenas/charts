@@ -18,8 +18,10 @@ workload:
             LIDARR__PORT: {{ .Values.lidarrNetwork.webPort }}
             LIDARR__INSTANCE_NAME: {{ .Values.lidarrConfig.instanceName }}
           {{ with .Values.lidarrConfig.additionalEnvs }}
+          envList:
             {{ range $env := . }}
-            {{ $env.name }}: {{ $env.value }}
+            - name: {{ $env.name }}
+              value: {{ $env.value }}
             {{ end }}
           {{ end }}
           probes:

@@ -18,8 +18,10 @@ workload:
             SONARR__PORT: {{ .Values.sonarrNetwork.webPort }}
             SONARR__INSTANCE_NAME: {{ .Values.sonarrConfig.instanceName }}
           {{ with .Values.sonarrConfig.additionalEnvs }}
+          envList:
             {{ range $env := . }}
-            {{ $env.name }}: {{ $env.value }}
+            - name: {{ $env.name }}
+              value: {{ $env.value }}
             {{ end }}
           {{ end }}
           probes:

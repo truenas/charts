@@ -37,8 +37,10 @@ workload:
             DISABLE_IPV6: true
             DB_SQLITE_FILE: /data/database.sqlite
           {{ with .Values.npmConfig.additionalEnvs }}
+          envList:
             {{ range $env := . }}
-            {{ $env.name }}: {{ $env.value }}
+            - name: {{ $env.name }}
+              value: {{ $env.value }}
             {{ end }}
           {{ end }}
           probes:
