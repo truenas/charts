@@ -6,7 +6,7 @@ import sys
 from catalog_update.upgrade_strategy import semantic_versioning
 
 # Minor part of version is considered "stable" when it is an even number
-RE_STABLE_VERSION = re.compile(r'[0-9]+\.[0-9]+[02468]+\.[0-9]+')
+RE_STABLE_VERSION = re.compile(r'v[0-9]+\.[0-9]+[02468]+\.[0-9]+')
 
 
 def newer_mapping(image_tags):
