@@ -32,8 +32,10 @@ workload:
             ES_SETTING_XPACK_SECURITY_HTTP_SSL_CERTIFICATE__AUTHORITIES: /usr/share/elasticsearch/config/certs/ca.crt
             {{ end }}
           {{ with .Values.esConfig.additionalEnvs }}
+          envList:
             {{ range $env := . }}
-            {{ $env.name }}: {{ $env.value }}
+            - name: {{ $env.name }}
+              value: {{ $env.value }}
             {{ end }}
           {{ end }}
           probes:
