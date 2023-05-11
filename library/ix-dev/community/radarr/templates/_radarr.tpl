@@ -18,8 +18,10 @@ workload:
             RADARR__PORT: {{ .Values.radarrNetwork.webPort }}
             RADARR__INSTANCE_NAME: {{ .Values.radarrConfig.instanceName }}
           {{ with .Values.radarrConfig.additionalEnvs }}
+          envList:
             {{ range $env := . }}
-            {{ $env.name }}: {{ $env.value }}
+            - name: {{ $env.name }}
+              value: {{ $env.value }}
             {{ end }}
           {{ end }}
           probes:

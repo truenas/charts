@@ -15,9 +15,10 @@ workload:
             runAsUser: {{ .Values.qbitRunAs.user }}
             runAsGroup: {{ .Values.qbitRunAs.group }}
           {{ with .Values.qbitConfig.additionalEnvs }}
-          env:
+          envList:
             {{ range $env := . }}
-            {{ $env.name }}: {{ $env.value }}
+            - name: {{ $env.name }}
+              value: {{ $env.value }}
             {{ end }}
           {{ end }}
           envFrom:

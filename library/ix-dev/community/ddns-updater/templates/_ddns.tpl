@@ -21,8 +21,8 @@ workload:
           envFrom:
             - configMapRef:
                 name: ddns-config
-          envList:
           {{ with .Values.ddnsConfig.additionalEnvs }}
+          envList:
             {{ range $env := . }}
             - name: {{ $env.name }}
               value: {{ $env.value }}

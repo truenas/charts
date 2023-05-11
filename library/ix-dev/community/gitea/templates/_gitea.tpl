@@ -20,9 +20,10 @@ workload:
             - configMapRef:
                 name: gitea-config
           {{ with .Values.giteaConfig.additionalEnvs }}
-          env:
+          envList:
             {{ range $env := . }}
-            {{ $env.name }}: {{ $env.value }}
+            - name: {{ $env.name }}
+              value: {{ $env.value }}
             {{ end }}
           {{ end }}
           probes:

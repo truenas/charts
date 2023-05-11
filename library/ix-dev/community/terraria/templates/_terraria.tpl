@@ -20,8 +20,8 @@ workload:
             runAsGroup: 0
             runAsNonRoot: false
             readOnlyRootFilesystem: false
-          envList:
           {{ with .Values.terrariaConfig.additionalEnvs }}
+          envList:
             {{ range $env := . }}
             - name: {{ $env.name }}
               value: {{ $env.value }}

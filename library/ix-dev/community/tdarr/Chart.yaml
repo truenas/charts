@@ -3,7 +3,7 @@ description: Tdarr is a Distributed Transcoding System
 annotations:
   title: Tdarr
 type: application
-version: 1.0.2
+version: 1.0.3
 apiVersion: v2
 appVersion: '2.00.20.1'
 kubeVersion: '>=1.16.0-0'
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.0.6
+    version: 1.0.7
 home: https://home.tdarr.io/
 icon: https://home.tdarr.io/static/media/logo3-min.246d6df4.png
 sources:
