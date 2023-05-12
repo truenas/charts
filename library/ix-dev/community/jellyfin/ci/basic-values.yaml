@@ -17,6 +17,8 @@ jellyfinStorage:
     medium: Memory
     size: 1Gi
 
-# TODO: Test on a GPU-enabled system
-# jellyfinGPU:
-#   nvidia.com/gpu: 1
+# Make sure installation don't fail when 0 GPU are assigned
+jellyfinGPU:
+  nvidia.com/gpu: 0
+  intel.com/gpu: 0
+# TODO: Test assigning GPUs on a GPU-enabled system

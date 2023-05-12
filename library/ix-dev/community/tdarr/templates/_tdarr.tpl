@@ -131,14 +131,13 @@ persistence:
   {{- end }}
 
 {{ with .Values.tdarrGPU }}
-  {{ if gt (. | len) 1 }}
-    {{- fail "Tdarr - Max [1] GPUs allowed" -}}
-  {{ end }}
 scaleGPU:
+  {{ range $key, $value := . }}
   - gpu:
-      {{ . | keys | first }}: {{ . | values | first }}
+      {{ $key }}: {{ $value }}
     targetSelector:
       tdarr:
         - tdarr
+  {{ end }}
 {{ end }}
 {{- end -}}
