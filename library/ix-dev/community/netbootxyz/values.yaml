@@ -1,0 +1,29 @@
+image:
+  repository: netbootxyz/netbootxyz
+  pullPolicy: IfNotPresent
+  tag: 0.6.7-nbxyz25
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+nbxyzConfig:
+  additionalEnvs: []
+nbxyzNetwork:
+  # Applies only if hostNetwork is false
+  webPort: 30000
+  # Applies only if hostNetwork is false
+  tftpPort: 30001
+  # Applies always
+  assetsPort: 30002
+  hostNetwork: true
+nbxyzStorage:
+  config:
+    type: ixVolume
+    hostPath: ''
+    datasetName: config
+  assets:
+    type: ixVolume
+    hostPath: ''
+    datasetName: assets

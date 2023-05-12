@@ -1,0 +1,10 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "nbxyz.configuration" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "nbxyz.workload" $ | fromYaml) -}}
+
+{{/* Create the configmap for portal manually*/}}
+{{- include "nbxyz.portal" $ -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}
