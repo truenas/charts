@@ -125,14 +125,13 @@ persistence:
           mountPath: /mnt/directories{{ $storage.mountPath }}
   {{- end }}
 {{ with .Values.jellyfinGPU }}
-  {{ if gt (. | len) 1 }}
-    {{- fail "Jellyfin - Max [1] GPUs allowed" -}}
-  {{ end }}
 scaleGPU:
+  {{ range $key, $value := . }}
   - gpu:
-      {{ . | keys | first }}: {{ . | values | first }}
+      {{ $key }}: {{ $value }}
     targetSelector:
       jellyfin:
         - jellyfin
+  {{ end }}
 {{ end }}
 {{- end -}}
