@@ -13,7 +13,7 @@
             "latest_version": "1.0.27",
             "latest_app_version": "1.23.4",
             "latest_human_version": "1.23.4_1.0.27",
-            "last_update": "2023-05-09 11:21:40",
+            "last_update": "2023-05-11 16:20:35",
             "name": "syncthing",
             "recommended": false,
             "title": "Syncthing",
@@ -28,6 +28,10 @@
                 "backup",
                 "sync",
                 "file-sharing"
+            ],
+            "sources": [
+                "https://syncthing.net",
+                "https://github.com/truenas/charts/tree/master/library/ix-dev/charts/syncthing"
             ],
             "icon_url": "https://play-lh.googleusercontent.com/KIy_dqUdZqcsTq4GDstHrHwLRvu60gT3v0p41gw792BC6OxamNhUw2eIy0-LI05qNEA=w240-h480"
         },
@@ -44,7 +48,7 @@
             "latest_version": "1.2.12",
             "latest_app_version": "21.11.4.1.1",
             "latest_human_version": "21.11.4.1.1_1.2.12",
-            "last_update": "2023-05-03 13:56:14",
+            "last_update": "2023-05-11 16:20:35",
             "name": "collabora",
             "recommended": false,
             "title": "Collabora",
@@ -59,6 +63,10 @@
                 "office",
                 "documents",
                 "collaboration"
+            ],
+            "sources": [
+                "https://github.com/CollaboraOnline/online.git",
+                "https://hub.docker.com/r/collabora/code"
             ],
             "icon_url": "https://avatars.githubusercontent.com/u/22418908?s=200&v=4"
         },
@@ -82,6 +90,10 @@
             "title": "Minio",
             "maintainers": [],
             "tags": [],
+            "sources": [
+                "https://github.com/minio/minio",
+                "https://github.com/minio/charts"
+            ],
             "icon_url": "https://min.io/resources/img/logo/MINIO_wordmark.png"
         },
         "home-assistant": {
@@ -97,7 +109,7 @@
             "latest_version": "1.0.90",
             "latest_app_version": "2023.5.2",
             "latest_human_version": "2023.5.2_1.0.90",
-            "last_update": "2023-05-09 11:21:40",
+            "last_update": "2023-05-11 16:20:35",
             "name": "home-assistant",
             "recommended": false,
             "title": "Home Assistant",
@@ -111,6 +123,10 @@
             "tags": [
                 "home-automation",
                 "assistant"
+            ],
+            "sources": [
+                "https://github.com/home-assistant/home-assistant",
+                "https://github.com/truenas/charts/tree/master/library/ix-dev/charts/home-assistant"
             ],
             "icon_url": "https://avatars.githubusercontent.com/u/13844975?s=200&v=4"
         },
@@ -127,7 +143,7 @@
             "latest_version": "1.0.10",
             "latest_app_version": "2.0.1",
             "latest_human_version": "2.0.1_1.0.10",
-            "last_update": "2023-05-03 13:56:14",
+            "last_update": "2023-05-11 16:20:35",
             "name": "diskoverdata",
             "recommended": false,
             "title": "Diskover Data",
@@ -141,6 +157,10 @@
             "tags": [
                 "storage",
                 "discovery"
+            ],
+            "sources": [
+                "https://github.com/diskoverdata/diskover-community",
+                "https://github.com/truenas/charts/tree/master/library/ix-dev/charts/diskoverdata"
             ],
             "icon_url": "http://www.diskoverdata.com/wp-content/uploads/2019/09/diskover.png"
         },
@@ -157,7 +177,7 @@
             "latest_version": "1.0.22",
             "latest_app_version": "v1.39.0",
             "latest_human_version": "v1.39.0_1.0.22",
-            "last_update": "2023-05-09 11:06:50",
+            "last_update": "2023-05-11 16:20:35",
             "name": "netdata",
             "recommended": false,
             "title": "Netdata",
@@ -170,6 +190,10 @@
             ],
             "tags": [
                 "netdata"
+            ],
+            "sources": [
+                "https://github.com/netdata/helmchart",
+                "https://github.com/netdata/netdata"
             ],
             "icon_url": "https://netdata.github.io/helmchart/logo.png"
         },
@@ -186,7 +210,7 @@
             "latest_version": "1.7.46",
             "latest_app_version": "1.32.1.6999",
             "latest_human_version": "1.32.1.6999_1.7.46",
-            "last_update": "2023-05-09 11:21:40",
+            "last_update": "2023-05-11 16:20:35",
             "name": "plex",
             "recommended": false,
             "title": "Plex",
@@ -204,6 +228,10 @@
                 "tv",
                 "streaming"
             ],
+            "sources": [
+                "https://hub.docker.com/r/plexinc/pms-docker/",
+                "https://github.com/k8s-at-home/charts/tree/master/charts/plex"
+            ],
             "icon_url": "https://www.plex.tv/wp-content/uploads/2018/01/pmp-icon-1.png"
         },
         "wg-easy": {
@@ -219,7 +247,7 @@
             "latest_version": "1.0.7",
             "latest_app_version": "7",
             "latest_human_version": "7_1.0.7",
-            "last_update": "2023-05-09 11:21:40",
+            "last_update": "2023-05-11 16:20:35",
             "name": "wg-easy",
             "recommended": false,
             "title": "WG Easy",
@@ -233,6 +261,10 @@
             "tags": [
                 "vpn",
                 "wireguard"
+            ],
+            "sources": [
+                "https://github.com/WeeJeWel/wg-easy",
+                "https://github.com/truenas/charts/tree/master/library/ix-dev/charts/wg-easy"
             ],
             "icon_url": "https://raw.githubusercontent.com/WeeJeWel/wg-easy/master/src/www/img/logo.png"
         },
@@ -249,7 +281,7 @@
             "latest_version": "1.0.12",
             "latest_app_version": "v1.68.2",
             "latest_human_version": "v1.68.2_1.0.12",
-            "last_update": "2023-05-03 13:56:14",
+            "last_update": "2023-05-11 16:20:35",
             "name": "storj",
             "recommended": false,
             "title": "Storj",
@@ -264,6 +296,10 @@
                 "networking",
                 "financial",
                 "file-sharing"
+            ],
+            "sources": [
+                "https://www.storj.io",
+                "https://github.com/truenas/charts/tree/master/library/ix-dev/charts/storj"
             ],
             "icon_url": "https://assets-global.website-files.com/602eda09fc78afc76e9706b6/60917835a05862243e7de9af_logo.svg"
         },
@@ -280,7 +316,7 @@
             "latest_version": "1.6.26",
             "latest_app_version": "26.0.1",
             "latest_human_version": "26.0.1_1.6.26",
-            "last_update": "2023-05-03 13:56:14",
+            "last_update": "2023-05-11 16:20:35",
             "name": "nextcloud",
             "recommended": false,
             "title": "Nextcloud",
@@ -295,6 +331,11 @@
                 "nextcloud",
                 "storage",
                 "sync"
+            ],
+            "sources": [
+                "https://github.com/nextcloud/docker",
+                "https://github.com/nextcloud/helm",
+                "https://github.com/truenas/charts/tree/master/library/ix-dev/charts/nextcloud"
             ],
             "icon_url": "https://cdn.rawgit.com/docker-library/docs/defa5ffc7123177acd60ddef6e16bddf694cc35f/nextcloud/logo.svg"
         },
@@ -311,7 +352,7 @@
             "latest_version": "2304.0.7",
             "latest_app_version": "v1",
             "latest_human_version": "v1_2304.0.7",
-            "last_update": "2023-05-03 13:56:14",
+            "last_update": "2023-05-11 16:20:35",
             "name": "ix-chart",
             "recommended": false,
             "title": "ix-chart",
@@ -323,6 +364,7 @@
                 }
             ],
             "tags": [],
+            "sources": [],
             "icon_url": null
         },
         "elastic-search": {
@@ -338,7 +380,7 @@
             "latest_version": "1.0.6",
             "latest_app_version": "8.7.1",
             "latest_human_version": "8.7.1_1.0.6",
-            "last_update": "2023-05-03 13:56:14",
+            "last_update": "2023-05-11 16:20:35",
             "name": "elastic-search",
             "recommended": false,
             "title": "Elastic Search",
@@ -353,6 +395,11 @@
                 "elastic",
                 "search",
                 "storage"
+            ],
+            "sources": [
+                "https://www.elastic.co/",
+                "https://github.com/truenas/charts/tree/master/charts/elastic-search",
+                "https://www.elastic.co/guide/en/elasticsearch/reference/master/docker.html#docker-configuration-methods"
             ],
             "icon_url": "https://images.contentstack.io/v3/assets/bltefdd0b53724fa2ce/blt280217a63b82a734/6202d3378b1f312528798412/elastic-logo.svg"
         },
@@ -369,7 +416,7 @@
             "latest_version": "1.0.5",
             "latest_app_version": "v2.43.1",
             "latest_human_version": "v2.43.1_1.0.5",
-            "last_update": "2023-05-05 09:25:34",
+            "last_update": "2023-05-11 16:20:35",
             "name": "prometheus",
             "recommended": false,
             "title": "Prometheus",
@@ -383,6 +430,11 @@
             "tags": [
                 "metrics",
                 "storage"
+            ],
+            "sources": [
+                "https://github.com/prometheus/prometheus",
+                "https://github.com/truenas/charts/tree/master/charts/prometheus",
+                "https://prometheus.io"
             ],
             "icon_url": "https://avatars.githubusercontent.com/u/3380462"
         },
@@ -399,7 +451,7 @@
             "latest_version": "1.0.19",
             "latest_app_version": "221118",
             "latest_human_version": "221118_1.0.19",
-            "last_update": "2023-05-03 13:56:14",
+            "last_update": "2023-05-11 16:20:35",
             "name": "photoprism",
             "recommended": false,
             "title": "PhotoPrism",
@@ -413,6 +465,10 @@
             "tags": [
                 "photos",
                 "image"
+            ],
+            "sources": [
+                "https://photoprism.app/",
+                "https://github.com/truenas/charts/tree/master/library/ix-dev/charts/photoprism"
             ],
             "icon_url": "https://photoprism.app/static/icons/logo.svg"
         },
@@ -429,7 +485,7 @@
             "latest_version": "1.0.19",
             "latest_app_version": "2023.02.2",
             "latest_human_version": "2023.02.2_1.0.19",
-            "last_update": "2023-05-03 13:56:14",
+            "last_update": "2023-05-11 16:20:35",
             "name": "pihole",
             "recommended": false,
             "title": "Pi-hole",
@@ -443,6 +499,10 @@
             "tags": [
                 "dns",
                 "adblock"
+            ],
+            "sources": [
+                "https://pi-hole.net/",
+                "https://github.com/truenas/charts/tree/master/library/ix-dev/charts/pihole"
             ],
             "icon_url": "https://github.com/pi-hole/graphics/raw/master/Vortex/Vortex_Vertical_wordmark_lightmode.png?raw=true)"
         },
@@ -459,7 +519,7 @@
             "latest_version": "1.0.24",
             "latest_app_version": "4.7.11.0",
             "latest_human_version": "4.7.11.0_1.0.24",
-            "last_update": "2023-05-09 11:21:40",
+            "last_update": "2023-05-11 16:20:35",
             "name": "emby",
             "recommended": false,
             "title": "Emby Server",
@@ -476,6 +536,9 @@
                 "series",
                 "tv",
                 "streaming"
+            ],
+            "sources": [
+                "https://hub.docker.com/r/emby/embyserver"
             ],
             "icon_url": "https://images-na.ssl-images-amazon.com/images/I/41NwssJC1iL.png"
         }
@@ -495,7 +558,7 @@
             "latest_version": "1.0.8",
             "latest_app_version": "2023-03-24",
             "latest_human_version": "2023-03-24_1.0.8",
-            "last_update": "2023-05-03 13:56:14",
+            "last_update": "2023-05-11 16:20:35",
             "name": "minio",
             "recommended": false,
             "title": "MinIO",
@@ -510,6 +573,10 @@
                 "object-storage",
                 "S3",
                 "file-sharing"
+            ],
+            "sources": [
+                "https://github.com/minio/minio",
+                "https://github.com/truenas/charts/tree/master/enterprise/minio"
             ],
             "icon_url": "https://min.io/resources/img/logo/MINIO_wordmark.png"
         }
@@ -528,7 +595,7 @@
             "latest_version": "1.0.1",
             "latest_app_version": "latest",
             "latest_human_version": "latest_1.0.1",
-            "last_update": "2023-05-09 13:50:04",
+            "last_update": "2023-05-11 16:20:35",
             "name": "ddns-updater",
             "recommended": false,
             "title": "DDNS Updater",
@@ -541,6 +608,11 @@
             ],
             "tags": [
                 "ddns"
+            ],
+            "sources": [
+                "https://github.com/qdm12/ddns-updater",
+                "https://github.com/truenas/charts/tree/master/community/ddns-updater",
+                "https://hub.docker.com/r/qmcgaw/ddns-updater"
             ],
             "icon_url": "https://raw.githubusercontent.com/qdm12/ddns-updater/master/readme/ddnsgopher.svg"
         },
@@ -557,7 +629,7 @@
             "latest_version": "1.0.8",
             "latest_app_version": "1.28.1",
             "latest_human_version": "1.28.1_1.0.8",
-            "last_update": "2023-05-09 11:05:21",
+            "last_update": "2023-05-11 16:20:35",
             "name": "vaultwarden",
             "recommended": false,
             "title": "Vaultwarden",
@@ -571,6 +643,10 @@
             "tags": [
                 "password",
                 "manager"
+            ],
+            "sources": [
+                "https://github.com/dani-garcia/vaultwarden",
+                "https://github.com/truenas/charts/tree/master/community/vaultwarden"
             ],
             "icon_url": null,
             "icon": "https://raw.githubusercontent.com/dani-garcia/vaultwarden/main/src/static/images/vaultwarden-icon.png"
@@ -588,7 +664,7 @@
             "latest_version": "1.0.1",
             "latest_app_version": "1.4.4.9",
             "latest_human_version": "1.4.4.9_1.0.1",
-            "last_update": "2023-05-05 19:20:46",
+            "last_update": "2023-05-11 16:20:35",
             "name": "terraria",
             "recommended": false,
             "title": "Terraria",
@@ -603,6 +679,11 @@
                 "world",
                 "building",
                 "adventure"
+            ],
+            "sources": [
+                "https://terraria.org/",
+                "https://github.com/truenas/charts/tree/master/community/terraria",
+                "https://github.com/ryansheehan/terraria"
             ],
             "icon_url": "https://static.wikia.nocookie.net/terraria_gamepedia/images/a/a4/NewPromoLogo.png/revision/latest"
         },
@@ -619,7 +700,7 @@
             "latest_version": "1.0.1",
             "latest_app_version": "2023.3.0",
             "latest_human_version": "2023.3.0_1.0.1",
-            "last_update": "2023-05-03 11:56:13",
+            "last_update": "2023-05-11 16:20:35",
             "name": "minecraft",
             "recommended": false,
             "title": "Minecraft",
@@ -633,6 +714,11 @@
             "tags": [
                 "world",
                 "building"
+            ],
+            "sources": [
+                "https://www.minecraft.net/en-us",
+                "https://github.com/truenas/charts/tree/master/community/minecraft",
+                "https://github.com/itzg/docker-minecraft-server"
             ],
             "icon_url": "https://www.minecraft.net/content/dam/games/minecraft/logos/logo-minecraft.svg"
         },
@@ -649,7 +735,7 @@
             "latest_version": "1.0.4",
             "latest_app_version": "1.19.0",
             "latest_human_version": "1.19.0_1.0.4",
-            "last_update": "2023-05-03 13:56:14",
+            "last_update": "2023-05-11 16:20:35",
             "name": "gitea",
             "recommended": false,
             "title": "Gitea",
@@ -662,6 +748,11 @@
             ],
             "tags": [
                 "git"
+            ],
+            "sources": [
+                "https://gitea.io/en-us",
+                "https://github.com/truenas/charts/tree/master/community/gitea",
+                "https://docs.gitea.io/en-us/install-with-docker-rootless"
             ],
             "icon_url": "https://gitea.com/assets/img/logo.svg"
         },
@@ -678,7 +769,7 @@
             "latest_version": "1.0.8",
             "latest_app_version": "4.5.2",
             "latest_human_version": "4.5.2_1.0.8",
-            "last_update": "2023-05-03 13:56:14",
+            "last_update": "2023-05-11 16:20:35",
             "name": "qbittorrent",
             "recommended": false,
             "title": "qBittorrent",
@@ -692,6 +783,11 @@
             "tags": [
                 "torrent",
                 "download"
+            ],
+            "sources": [
+                "https://github.com/onedr0p/containers/tree/main/apps/qbittorrent",
+                "https://github.com/truenas/charts/tree/master/community/qbittorrent",
+                "https://www.qbittorrent.org/"
             ],
             "icon_url": "https://upload.wikimedia.org/wikipedia/commons/9/9e/Qbittorrent_logo.png"
         },
@@ -708,7 +804,7 @@
             "latest_version": "1.0.3",
             "latest_app_version": "v0.107.26",
             "latest_human_version": "v0.107.26_1.0.3",
-            "last_update": "2023-05-03 13:56:14",
+            "last_update": "2023-05-11 16:20:35",
             "name": "adguard-home",
             "recommended": false,
             "title": "AdGuard Home",
@@ -722,6 +818,11 @@
             "tags": [
                 "dns",
                 "adblock"
+            ],
+            "sources": [
+                "https://github.com/AdguardTeam/AdGuardHome",
+                "https://github.com/truenas/charts/tree/master/library/ix-dev/community/adguard-home",
+                "https://hub.docker.com/r/adguard/adguardhome"
             ],
             "icon_url": "https://github.com/AdguardTeam/AdGuardHome/raw/master/doc/adguard_home_darkmode.svg"
         },
@@ -738,7 +839,7 @@
             "latest_version": "1.0.3",
             "latest_app_version": "v1.40.0",
             "latest_human_version": "v1.40.0_1.0.3",
-            "last_update": "2023-05-03 13:56:14",
+            "last_update": "2023-05-11 16:20:35",
             "name": "tailscale",
             "recommended": false,
             "title": "Tailscale",
@@ -751,6 +852,11 @@
             ],
             "tags": [
                 "vpn"
+            ],
+            "sources": [
+                "https://tailscale.com/",
+                "https://github.com/truenas/charts/tree/master/community/tailscale",
+                "https://hub.docker.com/r/tailscale/tailscale"
             ],
             "icon_url": "https://avatars.githubusercontent.com/u/48932923"
         },
@@ -767,7 +873,7 @@
             "latest_version": "1.0.1",
             "latest_app_version": "10.8.10",
             "latest_human_version": "10.8.10_1.0.1",
-            "last_update": "2023-05-02 15:25:00",
+            "last_update": "2023-05-11 16:20:35",
             "name": "jellyfin",
             "recommended": false,
             "title": "Jellyfin",
@@ -785,6 +891,11 @@
                 "tv",
                 "streaming"
             ],
+            "sources": [
+                "https://hub.docker.com/r/jellyfin/jellyfin",
+                "https://github.com/truenas/charts/tree/master/community/jellyfin",
+                "https://jellyfin.org/"
+            ],
             "icon_url": "https://jellyfin.org/images/logo.svg"
         },
         "mumble": {
@@ -800,7 +911,7 @@
             "latest_version": "1.0.1",
             "latest_app_version": "v1.4.230",
             "latest_human_version": "v1.4.230_1.0.1",
-            "last_update": "2023-05-05 19:22:12",
+            "last_update": "2023-05-11 16:20:35",
             "name": "mumble",
             "recommended": false,
             "title": "Mumble",
@@ -813,6 +924,11 @@
             ],
             "tags": [
                 "voice"
+            ],
+            "sources": [
+                "https://github.com/mumble-voip/mumble-docker",
+                "https://github.com/truenas/charts/tree/master/community/mumble",
+                "https://www.mumble.info/"
             ],
             "icon_url": "https://github.com/mumble-voip/mumble/blob/master/icons/mumble.svg"
         },
@@ -829,7 +945,7 @@
             "latest_version": "1.0.1",
             "latest_app_version": "1.10.6",
             "latest_human_version": "1.10.6_1.0.1",
-            "last_update": "2023-05-07 15:37:49",
+            "last_update": "2023-05-11 16:20:35",
             "name": "zerotier",
             "recommended": false,
             "title": "Zerotier",
@@ -842,6 +958,11 @@
             ],
             "tags": [
                 "vpn"
+            ],
+            "sources": [
+                "https://www.zerotier.com",
+                "https://github.com/truenas/charts/tree/master/community/zerotier",
+                "https://hub.docker.com/r/zerotier/zerotier"
             ],
             "icon_url": "https://avatars.githubusercontent.com/u/4173285"
         },
@@ -858,7 +979,7 @@
             "latest_version": "1.0.9",
             "latest_app_version": "v0.20.0",
             "latest_human_version": "v0.20.0_1.0.9",
-            "last_update": "2023-05-10 13:33:34",
+            "last_update": "2023-05-11 16:20:35",
             "name": "ipfs",
             "recommended": false,
             "title": "IPFS",
@@ -872,6 +993,11 @@
             "tags": [
                 "file-sharing",
                 "kubo"
+            ],
+            "sources": [
+                "https://github.com/ipfs/kubo",
+                "https://github.com/truenas/charts/tree/master/community/ipfs",
+                "https://ipfs.tech/"
             ],
             "icon_url": "https://avatars.githubusercontent.com/u/10536621"
         },
@@ -888,7 +1014,7 @@
             "latest_version": "1.0.8",
             "latest_app_version": "1.8.0",
             "latest_human_version": "1.8.0_1.0.8",
-            "last_update": "2023-05-04 11:22:55",
+            "last_update": "2023-05-11 16:20:35",
             "name": "chia",
             "recommended": false,
             "title": "Chia",
@@ -902,6 +1028,11 @@
             "tags": [
                 "blockchain",
                 "hard-drive"
+            ],
+            "sources": [
+                "https://github.com/Chia-Network/chia-docker",
+                "https://github.com/truenas/charts/tree/master/library/ix-dev/community/chia",
+                "https://www.chia.net/"
             ],
             "icon_url": "https://www.chia.net/wp-content/uploads/2022/09/chia-logo.svg"
         },
@@ -918,7 +1049,7 @@
             "latest_version": "1.0.6",
             "latest_app_version": "3.0.10.1567",
             "latest_human_version": "3.0.10.1567_1.0.6",
-            "last_update": "2023-05-03 13:56:14",
+            "last_update": "2023-05-11 16:20:35",
             "name": "sonarr",
             "recommended": false,
             "title": "Sonarr",
@@ -931,6 +1062,11 @@
             ],
             "tags": [
                 "series"
+            ],
+            "sources": [
+                "https://github.com/onedr0p/containers/tree/main/apps/sonarr",
+                "https://github.com/truenas/charts/tree/master/community/sonarr",
+                "https://github.com/Sonarr/Sonarr"
             ],
             "icon_url": "https://raw.githubusercontent.com/Sonarr/Sonarr/develop/Logo/256.png"
         },
@@ -947,7 +1083,7 @@
             "latest_version": "1.0.1",
             "latest_app_version": "1.0.1",
             "latest_human_version": "1.0.1_1.0.1",
-            "last_update": "2023-05-09 11:07:49",
+            "last_update": "2023-05-11 16:20:35",
             "name": "clamav",
             "recommended": false,
             "title": "Clam AV",
@@ -960,6 +1096,11 @@
             ],
             "tags": [
                 "anti-virus"
+            ],
+            "sources": [
+                "https://docs.clamav.net/",
+                "https://github.com/truenas/charts/tree/master/community/clamav",
+                "https://www.clamav.net/"
             ],
             "icon_url": "https://raw.githubusercontent.com/micahsnyder/clamav-documentation/main/src/images/logo.png"
         },
@@ -976,7 +1117,7 @@
             "latest_version": "1.0.1",
             "latest_app_version": "1.32.5",
             "latest_human_version": "1.32.5_1.0.1",
-            "last_update": "2023-05-09 11:00:46",
+            "last_update": "2023-05-11 16:20:35",
             "name": "overseerr",
             "recommended": false,
             "title": "Overseerr",
@@ -993,6 +1134,11 @@
                 "requests",
                 "series"
             ],
+            "sources": [
+                "https://hub.docker.com/r/sctx/overseerr",
+                "https://github.com/truenas/charts/tree/master/community/overseer",
+                "https://github.com/sct/overseerr"
+            ],
             "icon_url": "https://raw.githubusercontent.com/sct/overseerr/develop/public/os_icon.svg"
         },
         "radarr": {
@@ -1008,7 +1154,7 @@
             "latest_version": "1.0.8",
             "latest_app_version": "4.4.4.7068",
             "latest_human_version": "4.4.4.7068_1.0.8",
-            "last_update": "2023-05-03 13:56:14",
+            "last_update": "2023-05-11 16:20:35",
             "name": "radarr",
             "recommended": false,
             "title": "Radarr",
@@ -1021,6 +1167,11 @@
             ],
             "tags": [
                 "movies"
+            ],
+            "sources": [
+                "https://github.com/onedr0p/containers/tree/main/apps/radarr",
+                "https://github.com/truenas/charts/tree/master/community/radarr",
+                "https://github.com/Radarr/Radarr"
             ],
             "icon_url": "https://raw.githubusercontent.com/Radarr/Radarr/develop/Logo/256.png"
         },
@@ -1037,7 +1188,7 @@
             "latest_version": "1.0.3",
             "latest_app_version": "2.00.20.1",
             "latest_human_version": "2.00.20.1_1.0.3",
-            "last_update": "2023-05-03 13:56:14",
+            "last_update": "2023-05-11 16:20:35",
             "name": "tdarr",
             "recommended": false,
             "title": "Tdarr",
@@ -1051,6 +1202,11 @@
             "tags": [
                 "encode",
                 "transcode"
+            ],
+            "sources": [
+                "https://home.tdarr.io/",
+                "https://github.com/truenas/charts/tree/master/community/tdarr",
+                "https://docs.tdarr.io/docs"
             ],
             "icon_url": "https://home.tdarr.io/static/media/logo3-min.246d6df4.png"
         },
@@ -1067,7 +1223,7 @@
             "latest_version": "1.0.3",
             "latest_app_version": "2.10.2",
             "latest_human_version": "2.10.2_1.0.3",
-            "last_update": "2023-05-03 13:56:14",
+            "last_update": "2023-05-11 16:20:35",
             "name": "nginx-proxy-manager",
             "recommended": false,
             "title": "Nginx Proxy Manager",
@@ -1081,6 +1237,11 @@
             "tags": [
                 "reverse",
                 "proxy"
+            ],
+            "sources": [
+                "https://nginxproxymanager.com/",
+                "https://github.com/truenas/charts/tree/master/community/nginx-proxy-manager",
+                "https://hub.docker.com/r/jc21/nginx-proxy-manager"
             ],
             "icon_url": "https://nginxproxymanager.com/logo.png"
         },
@@ -1097,7 +1258,7 @@
             "latest_version": "1.0.6",
             "latest_app_version": "1.1.3.2982",
             "latest_human_version": "1.1.3.2982_1.0.6",
-            "last_update": "2023-05-03 13:56:14",
+            "last_update": "2023-05-11 16:20:35",
             "name": "lidarr",
             "recommended": false,
             "title": "Lidarr",
@@ -1110,6 +1271,11 @@
             ],
             "tags": [
                 "music"
+            ],
+            "sources": [
+                "https://github.com/onedr0p/containers/tree/main/apps/lidarr",
+                "https://github.com/truenas/charts/tree/master/charts/lidarr",
+                "https://github.com/Lidarr/Lidarr"
             ],
             "icon_url": "https://raw.githubusercontent.com/Lidarr/Lidarr/develop/Logo/256.png"
         }
