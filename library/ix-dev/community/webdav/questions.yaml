@@ -9,7 +9,7 @@ groups:
     description: Configure Storage for WebDAV
   - name: Resources Configuration
     description: Configure Resources for WebDAV
-#TODO:
+
 questions:
   - variable: webdavConfig
     label: ""
@@ -25,7 +25,7 @@ questions:
             default: "none"
             enum:
               - value: "none"
-                description: None
+                description: No Authentication
               - value: "basic"
                 description: Basic Authentication
         - variable: username
