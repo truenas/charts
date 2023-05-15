@@ -65,7 +65,7 @@ workload:
                                                         "UID" 9069
                                                         "GID" 9069
                                                         "mode" "check"
-                                                        "chmod" (ternary "757" "" .Values.tftpConfig.allowCreate)
+                                                        "chmod" (ternary "757" "555" .Values.tftpConfig.allowCreate)
                                                         "type" "init") | nindent 8 }}
 
 
