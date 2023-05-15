@@ -1,4 +1,4 @@
-{{- define "nbxyz.configuration" -}}
+{{- define "tftp.configuration" -}}
 configmap:
   init:
     enabled: true

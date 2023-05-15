@@ -1,7 +1,0 @@
-nbxyzStorage:
-  config:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/config
-  assets:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/assets

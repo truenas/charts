@@ -1,12 +1,12 @@
 groups:
-  - name: Netboot.xyz Configuration
-    description: Configure Netboot.xyz
+  - name: TFTP Configuration
+    description: Configure TFTP
   - name: Network Configuration
-    description: Configure Network for Netboot.xyz
+    description: Configure Network for TFTP
   - name: Storage Configuration
-    description: Configure Storage for Netboot.xyz
+    description: Configure Storage for TFTP
   - name: Resources Configuration
-    description: Configure Resources for Netboot.xyz
+    description: Configure Resources for TFTP
 
 portals:
   web_portal:
@@ -19,15 +19,25 @@ portals:
     path: "$kubernetes-resource_configmap_portal_path"
 
 questions:
-  - variable: nbxyzConfig
+  - variable: TZ
+    group: TFTP Configuration
+    label: Timezone
+    schema:
+      type: string
+      default: Etc/UTC
+      required: true
+      $ref:
+        - definitions/timezone
+
+  - variable: tftpConfig
     label: ""
-    group: Netboot.xyz Configuration
+    group: TFTP Configuration
     schema:
       type: dict
       attrs:
         - variable: additionalEnvs
           label: Additional Environment Variables
-          description: Configure additional environment variables for Netboot.xyz.
+          description: Configure additional environment variables for TFTP.
           schema:
             type: list
             default: []
@@ -48,7 +58,7 @@ questions:
                         type: string
                         required: true
 
-  - variable: nbxyzNetwork
+  - variable: tftpNetwork
     label: ""
     group: Network Configuration
     schema:
@@ -61,18 +71,6 @@ questions:
           schema:
             type: boolean
             default: true
-        - variable: webPort
-          label: Web Port
-          description: |
-            The port for the Netboot.xyz Web UI.
-            When hostNetwork is enabled, the web port will be 3000.
-          schema:
-            type: int
-            default: 30000
-            show_if: [["hostNetwork", "=", false]]
-            min: 9000
-            max: 65535
-            required: true
         - variable: tftpPort
           label: TFTP Port
           description: |
@@ -85,25 +83,16 @@ questions:
             min: 9000
             max: 65535
             required: true
-        - variable: assetsPort
-          label: Assets Port
-          description: The port for the Netboot.xyz assets.
-          schema:
-            type: int
-            default: 30002
-            min: 9000
-            max: 65535
-            required: true
 
-  - variable: nbxyzStorage
+  - variable: tftpStorage
     label: ""
     group: Storage Configuration
     schema:
       type: dict
       attrs:
-        - variable: config
-          label: Netboot.xyz Config Storage
-          description: The path to store Netboot.xyz Configuration.
+        - variable: tftpboot
+          label: TFTP Boot Storage
+          description: The path to store TFTP Boot files.
           schema:
             type: dict
             attrs:
@@ -129,45 +118,7 @@ questions:
                   required: true
                   hidden: true
                   immutable: true
-                  default: "config"
-                  $ref:
-                    - "normalize/ixVolume"
-              - variable: hostPath
-                label: Host Path
-                schema:
-                  type: hostpath
-                  show_if: [["type", "=", "hostPath"]]
-                  immutable: true
-                  required: true
-        - variable: assets
-          label: Netboot.xyz Asset Storage
-          description: The path to store Netboot.xyz Assets.
-          schema:
-            type: dict
-            attrs:
-              - variable: type
-                label: Type
-                description: |
-                  ixVolume: Is dataset created automatically by the system.</br>
-                  Host Path: Is a path that already exists on the system.
-                schema:
-                  type: string
-                  required: true
-                  default: "ixVolume"
-                  enum:
-                    - value: "hostPath"
-                      description: Host Path (Path that already exists on the system)
-                    - value: "ixVolume"
-                      description: ixVolume (Dataset created automatically by the system)
-              - variable: datasetName
-                label: Dataset Name
-                schema:
-                  type: string
-                  show_if: [["type", "=", "ixVolume"]]
-                  required: true
-                  hidden: true
-                  immutable: true
-                  default: "assets"
+                  default: "tftpboot"
                   $ref:
                     - "normalize/ixVolume"
               - variable: hostPath
@@ -191,14 +142,14 @@ questions:
             attrs:
               - variable: cpu
                 label: CPU
-                description: CPU limit for Netboot.xyz.
+                description: CPU limit for TFTP.
                 schema:
                   type: string
                   default: "4000m"
                   required: true
               - variable: memory
                 label: Memory
-                description: Memory limit for Netboot.xyz.
+                description: Memory limit for TFTP.
                 schema:
                   type: string
                   default: "8Gi"

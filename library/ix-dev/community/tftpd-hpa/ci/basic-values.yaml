@@ -1,0 +1,4 @@
+tftpdStorage:
+  tftpboot:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/tftpboot
