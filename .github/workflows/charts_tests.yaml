@@ -20,7 +20,7 @@ jobs:
         helm-version:
           - v3.9.4
           - v3.10.3
-          - v3.11.2
+          - v3.11.3
     steps:
       - name: Checkout
         uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
@@ -87,7 +87,7 @@ jobs:
         # We run tests on Helm version of latest SCALE release, SCALE nightly and manually defined "latest"
         helm-version:
           - v3.9.4
-          - v3.11.2
+          - v3.11.3
         # We run tests on k3s version of latest SCALE release, SCALE nightly and manually defined "latest"
         k3s-version:
           - v1.25.3+k3s1
