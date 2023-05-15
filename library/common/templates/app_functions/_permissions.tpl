@@ -10,6 +10,7 @@ GID: GID to change permissions to
   {{- $type := .type | default "install" -}}
   {{- $containerName := .containerName | default "permissions" -}}
   {{- $mode := .mode | default "always" -}}
+  {{- $chmod := .chmod | default "" -}}
   {{- $UID := .UID -}}
   {{- $GID := .GID -}}
 
@@ -59,23 +60,24 @@ GID: GID to change permissions to
 
         echo "Current Permissions on ["$dir"]:"
         stat -c "%u %g" "$dir"
+        stat -c "%a" "$dir"
 
       {{- if eq $mode "check" }} {{/* If mode is check, check parent dir */}}
         if [ $(stat -c %u "$dir") -eq {{ $UID }} ] && [ $(stat -c %g "$dir") -eq {{ $GID }} ]; then
-          echo "Permissions are correct. Skipping..."
-          fix_perms="false"
+          echo "Ownership is correct. Skipping..."
+          fix_owner="false"
         else
-          echo "Permissions are incorrect. Fixing..."
-          fix_perms="true"
+          echo "Ownership is incorrect. Fixing..."
+          fix_owner="true"
         fi
 
       {{- else if eq $mode "always" }} {{/* If mode is always, always fix perms */}}
 
-        fix_perms="true"
+        fix_owner="true"
 
       {{- end }}
 
-        if [ "$fix_perms" = "true" ]; then
+        if [ "$fix_owner" = "true" ]; then
           echo "Changing ownership to {{ $UID }}:{{ $GID }} on: ["$dir"]"
           chown -R {{ $UID }}:{{ $GID }} "$dir"
           echo "Finished changing ownership"
