@@ -9,6 +9,7 @@ resources:
     memory: 8Gi
 
 tftpConfig:
+  allowCreate: true
   additionalEnvs: []
 tftpNetwork:
   hostNetwork: true

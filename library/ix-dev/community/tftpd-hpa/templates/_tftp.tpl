@@ -16,17 +16,18 @@ workload:
             runAsGroup: 0
             runAsNonRoot: false
             readOnlyRootFilesystem: false
-            # capabilities:
-            #   add:
-            #     - CHOWN
-            #     - DAC_OVERRIDE
-            #     - SETUID
-            #     - SETGID
-            #     - FOWNER
-            #     - SYS_CHROOT
-            #     - NET_BIND_SERVICE
+            capabilities:
+              add:
+                - NET_BIND_SERVICE
+                - SETUID
+                - SETGID
+                - SYS_CHROOT
+          env:
+            MAPFILE: ""
+            SECURE: 1
+            CREATE: {{ ternary "1" "0" .Values.tftpConfig.allowCreate }}
           {{ with .Values.tftpConfig.additionalEnvs }}
-            envList:
+          envList:
             {{ range $env := . }}
             - name: {{ $env.name }}
               value: {{ $env.value }}
@@ -57,16 +58,26 @@ workload:
                 - -c
                 - |
                   getent services tftp
+      initContainers:
+      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
+                                                        "UID" 9069
+                                                        "GID" 9069
+                                                        "mode" "check"
+                                                        "chmod" (ternary "757" "" .Values.tftpConfig.allowCreate)
+                                                        "type" "init") | nindent 8 }}
+
 
 {{/* Service */}}
 service:
   tftp:
     enabled: true
+    primary: true
     type: NodePort
     targetSelector: tftp
     ports:
       tftp:
         enabled: true
+        primary: true
         port: {{ .Values.tftpNetwork.tftpPort }}
         nodePort: {{ .Values.tftpNetwork.tftpPort }}
         targetPort: 69
@@ -81,7 +92,9 @@ persistence:
     datasetName: {{ .Values.tftpStorage.tftpboot.datasetName | default "" }}
     hostPath: {{ .Values.tftpStorage.tftpboot.hostPath | default "" }}
     targetSelector:
-      nbxyz:
-        nbxyz:
+      tftp:
+        tftp:
           mountPath: /tftpboot
+        01-permissions:
+          mountPath: /mnt/directories/tftpboot
 {{- end -}}
