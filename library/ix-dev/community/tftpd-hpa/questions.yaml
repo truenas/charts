@@ -86,7 +86,7 @@ questions:
             When hostNetwork is enabled, the port tftp port will be 69.
           schema:
             type: int
-            default: 30001
+            default: 30000
             show_if: [["hostNetwork", "=", false]]
             min: 9000
             max: 65535

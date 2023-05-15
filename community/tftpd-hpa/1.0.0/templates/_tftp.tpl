@@ -24,8 +24,10 @@ workload:
                 - SYS_CHROOT
           env:
             MAPFILE: ""
-            SECURE: 1
-            CREATE: {{ ternary "1" "0" .Values.tftpConfig.allowCreate }}
+            SECURE: "1"
+            CREATE: {{ ternary "1" "0" .Values.tftpConfig.allowCreate  | quote }}
+          fixedEnv:
+            UMASK: {{ ternary "020" "" .Values.tftpConfig.allowCreate  | quote }}
           {{ with .Values.tftpConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
