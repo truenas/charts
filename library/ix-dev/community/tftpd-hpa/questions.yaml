@@ -35,6 +35,14 @@ questions:
     schema:
       type: dict
       attrs:
+        - variable: allowCreate
+          label: Allow Create
+          description: |
+            Allow new files to be created. This is disabled by default.</br>
+            Enabling this will change the permissions of the tftpboot directory to 757.
+          schema:
+            type: boolean
+            default: false
         - variable: additionalEnvs
           label: Additional Environment Variables
           description: Configure additional environment variables for TFTP.
