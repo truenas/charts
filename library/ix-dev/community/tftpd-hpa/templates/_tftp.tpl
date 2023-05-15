@@ -19,8 +19,8 @@ workload:
             capabilities:
               add:
                 - NET_BIND_SERVICE
-                - SETUID
                 - SETGID
+                - SETUID
                 - SYS_CHROOT
           env:
             MAPFILE: ""

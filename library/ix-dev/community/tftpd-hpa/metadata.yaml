@@ -3,20 +3,14 @@ runAsContext:
     groupName: root
     gid: 0
     uid: 0
-    description: Netboot.xyz requires root privileges to start the it's processes.
+    description: TFTP requires root privileges to start the it's processes.
 capabilities:
-  - name: CHOWN
-    description: Netboot.xyz requires this ability to chown files.
-  - name: DAC_OVERRIDE
-    description: Netboot.xyz requires this ability to bypass file permission checks for it's sub-processes.
-  - name: SETUID
-    description: Netboot.xyz requires this ability to switch user for sub-processes.
-  - name: SETGID
-    description: Netboot.xyz requires this ability to switch group for sub-processes.
-  - name: FOWNER
-    description: Netboot.xyz requires this ability to bypass file ownership checks for it's sub-processes.
-  - name: SYS_CHROOT
-    description: Netboot.xyz requires this ability to use chroot for it's sub-processes.
   - name: NET_BIND_SERVICE
-    description: Netboot.xyz requires this ability to bind to port 69 for TFTP.
+    description: TFTP requires this ability to bind to port 69 for TFTP.
+  - name: SETUID
+    description: TFTP requires this ability to switch user for sub-processes.
+  - name: SETGID
+    description: TFTP requires this ability to switch group for sub-processes.
+  - name: SYS_CHROOT
+    description: TFTP requires this ability to use chroot for it's sub-processes.
 hostMounts: []

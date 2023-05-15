@@ -1,8 +1,7 @@
-# Netboot.xyz
+# TFTP
 
-[Netboot.xyz](https://netboot.xyz/) lets you PXE boot various operating system
-installers or utilities from a single tool over the network.
+[TFTP](https://manpages.debian.org/testing/tftpd-hpa/tftpd.8.en.html) is a server for the Trivial File Transfer Protocol.
 
-The app runs as `root` user.
+The app runs as `root` user and drops privileges to `tftp` (9069) user for the TFTP service.
 
 > Note: You need to have configured DHCP server for network boot to work.
