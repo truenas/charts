@@ -1,0 +1,22 @@
+image:
+  repository: 3x3cut0r/tftpd-hpa
+  pullPolicy: IfNotPresent
+  tag: '3.15.4'
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+tftpConfig:
+  allowCreate: true
+  additionalEnvs: []
+tftpNetwork:
+  hostNetwork: true
+  # Only used if hostNetwork is false
+  tftpPort: 30000
+tftpStorage:
+  tftpboot:
+    type: ixVolume
+    hostPath: ''
+    datasetName: tftpboot
