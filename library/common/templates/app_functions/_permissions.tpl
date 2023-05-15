@@ -48,6 +48,9 @@ GID: GID to change permissions to
     capabilities:
       add:
         - CHOWN
+        {{- if $chmod }}
+        - FOWNER
+        {{- end }}
   command: bash
   args:
     - -c
