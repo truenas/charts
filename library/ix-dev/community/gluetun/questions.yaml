@@ -42,6 +42,11 @@ questions:
                 description: Cyberghost
               - value: expressvpn
                 description: ExpressVPN
+              - value: fastestvpn
+                description: FastestVPN
+              - value: hidemyass
+                description: HideMyAss (HMA)
+
         - variable: type
           label: Type
           description: The VPN type to use.
