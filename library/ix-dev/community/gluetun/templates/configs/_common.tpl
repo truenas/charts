@@ -1,4 +1,8 @@
 {{- define "gluetun.configs.common.env" -}}
+  {{/*
+    View available options per provider here
+    https://raw.githubusercontent.com/qdm12/gluetun/master/internal/storage/servers.json
+  */}}
   {{- with .Values.gluetunConfig.serverCountries }}
 SERVER_COUNTRIES: {{ join "," }}
   {{- end }}

@@ -1,7 +1,7 @@
 {{- define "gluetun.airvpn.openvpn.env" -}}
-  {{- include "gluetun.configs.openvpn.env" $ -}}
+  {{/* Continue */}}
 {{- end -}}
 
 {{- define "gluetun.airvpn.wireguard.env" -}}
-  {{- include "gluetun.configs.wireguard.env" $ -}}
+  {{/* Continue */}}
 {{- end -}}

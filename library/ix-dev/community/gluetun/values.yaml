@@ -26,20 +26,24 @@ gluetunStorage:
 gluetunConfig:
   provider: ''
   type: ''
-  openvpnUser: ''
-  openvpnPassword: ''
 
   # - Common Wireguard options
   wireguardPrivateKey: ''
   wireguardPresharedKey: ''
   wireguardAddresses: []
+
   # - Common OpenVPN options
-  # Optional - Alternative place the file in the data dir
+  # Optional - Alternatively place the file in the data dir
   # https://github.com/qdm12/gluetun/wiki/OpenVPN-client-key
+  # Single line, no line breaks, without BEGIN/END
   openvpnKey: ''
-  # Optional - Alternative place the file in the data dir
+  # Optional - Alternatively place the file in the data dir
   # https://github.com/qdm12/gluetun/wiki/OpenVPN-client-key
+  # Single line, no line breaks, without BEGIN/END
   openvpnCert: ''
+
+  openvpnUser: ''
+  openvpnPassword: ''
 
   # - Common options (Optional)
   # https://raw.githubusercontent.com/qdm12/gluetun/master/internal/storage/servers.json

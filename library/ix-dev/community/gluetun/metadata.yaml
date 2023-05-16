@@ -1,8 +1,16 @@
-# runAsContext:
-#   - userName: ipfs
-#     groupName: ipfs
-#     gid: 568
-#     uid: 568
-#     description: IPFS can run as any non-root user.
-# capabilities: []
-# hostMounts: []
+runAsContext:
+  - userName: root
+    groupName: root
+    gid: 0
+    uid: 0
+    description: Gluetun run as root user.
+capabilities:
+  - name: NET_ADMIN
+    description: Gluetun requires NET_ADMIN to configure the VPN interface, modify routes, etc.
+  - name: CHOWN
+    description: Gluetun is able to chown files.
+  - name: DAC_OVERRIDE
+    description: Gluetun is able to bypass permission checks for it's sub-processes.
+hostMounts:
+  - hostPath: /dev/tun
+    description: Required to access the TUN device to create the VPN tunnel.

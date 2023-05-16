@@ -28,6 +28,76 @@ questions:
     schema:
       type: dict
       attrs:
+        - variable: serverCountries
+          label: Server Countries (Optional)
+          description: |
+            The countries to connect to.
+            View available options at https://raw.githubusercontent.com/qdm12/gluetun/master/internal/storage/servers.json
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: country
+                label: Country
+                schema:
+                  type: string
+                  required: true
+        - variable: serverRegions
+          label: Server Regions (Optional)
+          description: |
+            The regions to connect to.
+            View available options at https://raw.githubusercontent.com/qdm12/gluetun/master/internal/storage/servers.json
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: region
+                label: Region
+                schema:
+                  type: string
+                  required: true
+        - variable: serverCities
+          label: Server Cities (Optional)
+          description: |
+            The cities to connect to.
+            View available options at https://raw.githubusercontent.com/qdm12/gluetun/master/internal/storage/servers.json
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: city
+                label: City
+                schema:
+                  type: string
+                  required: true
+        - variable: serverHostnames
+          label: Server Hostnames (Optional)
+          description: |
+            The hostnames to connect to.
+            View available options at https://raw.githubusercontent.com/qdm12/gluetun/master/internal/storage/servers.json
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: hostname
+                label: Hostname
+                schema:
+                  type: string
+                  required: true
+        - variable: serverNames
+          label: Server Names (Optional)
+          description: |
+            The names to connect to.
+            View available options at https://raw.githubusercontent.com/qdm12/gluetun/master/internal/storage/servers.json
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: name
+                label: Name
+                schema:
+                  type: string
+                  required: true
         - variable: additionalEnvs
           label: Additional Environment Variables
           description: Configure additional environment variables for Gluetun.

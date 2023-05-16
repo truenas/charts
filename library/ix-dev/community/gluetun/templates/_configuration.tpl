@@ -7,17 +7,16 @@ configmap:
       VPN_SERVICE_PROVIDER: {{ .Values.gluetunConfig.provider }}
       VPN_TYPE: {{ .Values.gluetunConfig.type }}
 
-      {{- include (printf "gluetun.%v.%v.env" .Values.gluetunConfig.provider .Values.gluetunConfig.type) $ | nindent 6 }}
+      {{/* Include common configuration */}}
       {{- include "gluetun.configs.common.env" $ | nindent 6 }}
 
+      {{/* Include common configuration based on type */}}
       {{- if eq .Values.gluetunConfig.type "openvpn" }}
-        {{- with .Values.gluetunConfig.openvpnUser }}
-      OPENVPN_USER: {{ . }}
-        {{- end }}
-        {{- with .Values.gluetunConfig.openvpnPassword }}
-      OPENVPN_PASSWORD: {{ . }}
-        {{- end }}
+        {{- include "gluetun.configs.openvpn.env" $ }}
       {{- else if eq .Values.gluetunConfig.type "wireguard" }}
-
+        {{- include "gluetun.configs.wireguard.env" $ }}
       {{- end }}
+
+      {{/* Include provider specific configuration */}}
+      {{- include (printf "gluetun.%v.%v.env" .Values.gluetunConfig.provider .Values.gluetunConfig.type) $ | nindent 6 }}
 {{- end -}}
