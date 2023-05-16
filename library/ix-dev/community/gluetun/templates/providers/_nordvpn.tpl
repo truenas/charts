@@ -3,8 +3,8 @@
   {{- include "gluetun.options.required" (dict
                                           "rootCtx" $
                                           "options" (list
-                                                    "wireguardPrivateKey"
-                                                    "wireguardAddresses")) -}}
+                                                    "openvpnUser"
+                                                    "openvpnPassword")) -}}
   {{- include "gluetun.unsupported.server.options" (dict
                                                   "rootCtx" $
                                                   "options" (list
