@@ -3,6 +3,8 @@ image:
   pullPolicy: IfNotPresent
   tag: v3.33.0
 
+ci: false
+
 resources:
   limits:
     cpu: 4000m
@@ -20,7 +22,6 @@ gluetunStorage:
     type: ixVolume
     hostPath: ''
     datasetName: data
-
 
 gluetunConfig:
   provider: ''

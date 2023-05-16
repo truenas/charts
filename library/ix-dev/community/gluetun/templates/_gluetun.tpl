@@ -17,9 +17,12 @@ workload:
             runAsUser: 0
             runAsGroup: 0
             runAsNonRoot: false
+            readOnlyRootFilesystem: false
             capabilities:
               add:
+                - CHOWN
                 - NET_ADMIN
+                - DAC_OVERRIDE
           fixedEnv:
             PUID: {{ .Values.gluetunID.user }}
           envFrom:
@@ -34,26 +37,23 @@ workload:
           {{ end }}
           probes:
             liveness:
-              enabled: true
+              enabled: {{ not .Values.ci }}
               type: exec
               command:
                 - /gluetun-entrypoint
                 - healthcheck
             readiness:
-              enabled: true
+              enabled: {{ not .Values.ci }}
               type: exec
               command:
                 - /gluetun-entrypoint
                 - healthcheck
             startup:
-              enabled: true
+              enabled: {{ not .Values.ci }}
               type: exec
               command:
                 - /gluetun-entrypoint
                 - healthcheck
-
-{{/* Service */}}
-
 
 {{/* Persistence */}}
 persistence:
@@ -74,4 +74,11 @@ persistence:
       gluetun:
         gluetun:
           mountPath: /gluetun
+  temp:
+    enabled: true
+    type: emptyDir
+    targetSelector:
+      gluetun:
+        gluetun:
+          mountPath: /tmp/gluetun
 {{- end -}}
