@@ -1,5 +1,5 @@
 {{/* https://github.com/qdm12/gluetun/wiki/Hidemyass */}}
-{{- define "gluetun.hidemyass.openvpn.env" -}}
+{{- define "gluetun.hidemyass.openvpn.validation" -}}
   {{- include "gluetun.options.required" (dict
                                           "rootCtx" $
                                           "options" (list
@@ -11,6 +11,6 @@
                                                               "serverNames")) -}}
 {{- end -}}
 
-{{- define "gluetun.hidemyass.wireguard.env" -}}
+{{- define "gluetun.hidemyass.wireguard.validation" -}}
   {{- include "gluetun.unsupported.type" $ -}}
 {{- end -}}

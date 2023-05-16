@@ -1,5 +1,5 @@
 {{/* https://github.com/qdm12/gluetun/wiki/ExpressVPN */}}
-{{- define "gluetun.expressvpn.openvpn.env" -}}
+{{- define "gluetun.expressvpn.openvpn.validation" -}}
   {{- include "gluetun.options.required" (dict
                                           "rootCtx" $
                                           "options" (list
@@ -12,6 +12,6 @@
                                                               "serverNames")) -}}
 {{- end -}}
 
-{{- define "gluetun.expressvpn.wireguard.env" -}}
+{{- define "gluetun.expressvpn.wireguard.validation" -}}
   {{- include "gluetun.unsupported.type" $ -}}
 {{- end -}}

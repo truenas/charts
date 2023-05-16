@@ -1,5 +1,5 @@
 {{/* https://github.com/qdm12/gluetun/wiki/IPVanish */}}
-{{- define "gluetun.ipvanish.openvpn.env" -}}
+{{- define "gluetun.ipvanish.openvpn.validation" -}}
   {{- include "gluetun.options.required" (dict
                                           "rootCtx" $
                                           "options" (list
@@ -12,6 +12,6 @@
                                                               "serverNames")) -}}
 {{- end -}}
 
-{{- define "gluetun.ipvanish.wireguard.env" -}}
+{{- define "gluetun.ipvanish.wireguard.validation" -}}
   {{- include "gluetun.unsupported.type" $ -}}
 {{- end -}}

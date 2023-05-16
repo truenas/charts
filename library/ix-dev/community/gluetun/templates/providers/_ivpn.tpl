@@ -1,5 +1,5 @@
 {{/* https://github.com/qdm12/gluetun/wiki/IVPN */}}
-{{- define "gluetun.ivpn.openvpn.env" -}}
+{{- define "gluetun.ivpn.openvpn.validation" -}}
   {{- include "gluetun.options.required" (dict
                                           "rootCtx" $
                                           "options" (list
@@ -11,7 +11,7 @@
                                                             "serverNames")) -}}
 {{- end -}}
 
-{{- define "gluetun.ivpn.wireguard.env" -}}
+{{- define "gluetun.ivpn.wireguard.validation" -}}
   {{- include "gluetun.options.required" (dict
                                           "rootCtx" $
                                           "options" (list

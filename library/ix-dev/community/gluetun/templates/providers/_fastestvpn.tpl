@@ -1,5 +1,5 @@
 {{/* https://github.com/qdm12/gluetun/wiki/FastestVPN */}}
-{{- define "gluetun.fastestvpn.openvpn.env" -}}
+{{- define "gluetun.fastestvpn.openvpn.validation" -}}
   {{- include "gluetun.options.required" (dict
                                           "rootCtx" $
                                           "options" (list
@@ -13,6 +13,6 @@
                                                               "serverNames")) -}}
 {{- end -}}
 
-{{- define "gluetun.fastestvpn.wireguard.env" -}}
+{{- define "gluetun.fastestvpn.wireguard.validation" -}}
   {{- include "gluetun.unsupported.type" $ -}}
 {{- end -}}

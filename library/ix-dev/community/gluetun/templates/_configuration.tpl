@@ -18,5 +18,5 @@ configmap:
       {{- end }}
 
       {{/* Include provider specific configuration */}}
-      {{- include (printf "gluetun.%v.%v.env" .Values.gluetunConfig.provider .Values.gluetunConfig.type) $ | nindent 6 }}
+      {{- include (printf "gluetun.%v.%v.validation" .Values.gluetunConfig.provider .Values.gluetunConfig.type) $ | nindent 6 }}
 {{- end -}}

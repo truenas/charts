@@ -1,5 +1,5 @@
 {{/* https://github.com/qdm12/gluetun/wiki/Cyberghost */}}
-{{- define "gluetun.cyberghost.openvpn.env" -}}
+{{- define "gluetun.cyberghost.openvpn.validation" -}}
   {{- include "gluetun.options.required" (dict
                                           "rootCtx" $
                                           "options" (list
@@ -13,6 +13,6 @@
                                                               "serverNames")) -}}
 {{- end -}}
 
-{{- define "gluetun.cyberghost.wireguard.env" -}}
+{{- define "gluetun.cyberghost.wireguard.validation" -}}
   {{- include "gluetun.unsupported.type" $ -}}
 {{- end -}}

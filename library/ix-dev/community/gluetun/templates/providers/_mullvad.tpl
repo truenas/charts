@@ -1,5 +1,5 @@
 {{/* https://github.com/qdm12/gluetun/wiki/Mullvad */}}
-{{- define "gluetun.mullvad.openvpn.env" -}}
+{{- define "gluetun.mullvad.openvpn.validation" -}}
   {{- include "gluetun.options.required" (dict
                                           "rootCtx" $
                                           "options" (list
@@ -11,7 +11,7 @@
                                                             "serverNames")) -}}
 {{- end -}}
 
-{{- define "gluetun.mullvad.wireguard.env" -}}
+{{- define "gluetun.mullvad.wireguard.validation" -}}
   {{- include "gluetun.options.required" (dict
                                           "rootCtx" $
                                           "options" (list

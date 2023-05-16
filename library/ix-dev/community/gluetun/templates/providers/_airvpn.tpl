@@ -1,9 +1,9 @@
 {{/* https://github.com/qdm12/gluetun/wiki/AirVPN */}}
-{{- define "gluetun.airvpn.openvpn.env" -}}
+{{- define "gluetun.airvpn.openvpn.validation" -}}
   {{/* Continue */}}
 {{- end -}}
 
-{{- define "gluetun.airvpn.wireguard.env" -}}
+{{- define "gluetun.airvpn.wireguard.validation" -}}
   {{- include "gluetun.options.required" (dict
                                           "rootCtx" $
                                           "options" (list
