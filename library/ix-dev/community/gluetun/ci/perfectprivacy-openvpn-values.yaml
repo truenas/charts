@@ -3,7 +3,7 @@ gluetunStorage:
     type: hostPath
     hostPath: /mnt/{{ .Release.Name }}/data
 
-# https://github.com/qdm12/gluetun/wiki/Mullvad
+# https://github.com/qdm12/gluetun/wiki/Perfect-privacy
 gluetunConfig:
   # :9999 is the internal healthcheck endpoint
   # We tell it to probe it self so we can see if it's healthy
