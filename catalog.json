@@ -29,6 +29,7 @@
                 "sync",
                 "file-sharing"
             ],
+            "screenshots": [],
             "sources": [
                 "https://syncthing.net",
                 "https://github.com/truenas/charts/tree/master/library/ix-dev/charts/syncthing"
@@ -64,6 +65,7 @@
                 "documents",
                 "collaboration"
             ],
+            "screenshots": [],
             "sources": [
                 "https://github.com/CollaboraOnline/online.git",
                 "https://hub.docker.com/r/collabora/code"
@@ -90,6 +92,7 @@
             "title": "Minio",
             "maintainers": [],
             "tags": [],
+            "screenshots": [],
             "sources": [
                 "https://github.com/minio/minio",
                 "https://github.com/minio/charts"
@@ -124,6 +127,7 @@
                 "home-automation",
                 "assistant"
             ],
+            "screenshots": [],
             "sources": [
                 "https://github.com/home-assistant/home-assistant",
                 "https://github.com/truenas/charts/tree/master/library/ix-dev/charts/home-assistant"
@@ -158,6 +162,7 @@
                 "storage",
                 "discovery"
             ],
+            "screenshots": [],
             "sources": [
                 "https://github.com/diskoverdata/diskover-community",
                 "https://github.com/truenas/charts/tree/master/library/ix-dev/charts/diskoverdata"
@@ -191,6 +196,7 @@
             "tags": [
                 "netdata"
             ],
+            "screenshots": [],
             "sources": [
                 "https://github.com/netdata/helmchart",
                 "https://github.com/netdata/netdata"
@@ -228,6 +234,7 @@
                 "tv",
                 "streaming"
             ],
+            "screenshots": [],
             "sources": [
                 "https://hub.docker.com/r/plexinc/pms-docker/",
                 "https://github.com/k8s-at-home/charts/tree/master/charts/plex"
@@ -262,6 +269,7 @@
                 "vpn",
                 "wireguard"
             ],
+            "screenshots": [],
             "sources": [
                 "https://github.com/WeeJeWel/wg-easy",
                 "https://github.com/truenas/charts/tree/master/library/ix-dev/charts/wg-easy"
@@ -297,6 +305,7 @@
                 "financial",
                 "file-sharing"
             ],
+            "screenshots": [],
             "sources": [
                 "https://www.storj.io",
                 "https://github.com/truenas/charts/tree/master/library/ix-dev/charts/storj"
@@ -332,6 +341,7 @@
                 "storage",
                 "sync"
             ],
+            "screenshots": [],
             "sources": [
                 "https://github.com/nextcloud/docker",
                 "https://github.com/nextcloud/helm",
@@ -364,6 +374,7 @@
                 }
             ],
             "tags": [],
+            "screenshots": [],
             "sources": [],
             "icon_url": null
         },
@@ -396,6 +407,7 @@
                 "search",
                 "storage"
             ],
+            "screenshots": [],
             "sources": [
                 "https://www.elastic.co/",
                 "https://github.com/truenas/charts/tree/master/charts/elastic-search",
@@ -431,6 +443,7 @@
                 "metrics",
                 "storage"
             ],
+            "screenshots": [],
             "sources": [
                 "https://github.com/prometheus/prometheus",
                 "https://github.com/truenas/charts/tree/master/charts/prometheus",
@@ -466,6 +479,7 @@
                 "photos",
                 "image"
             ],
+            "screenshots": [],
             "sources": [
                 "https://photoprism.app/",
                 "https://github.com/truenas/charts/tree/master/library/ix-dev/charts/photoprism"
@@ -500,6 +514,7 @@
                 "dns",
                 "adblock"
             ],
+            "screenshots": [],
             "sources": [
                 "https://pi-hole.net/",
                 "https://github.com/truenas/charts/tree/master/library/ix-dev/charts/pihole"
@@ -537,6 +552,7 @@
                 "tv",
                 "streaming"
             ],
+            "screenshots": [],
             "sources": [
                 "https://hub.docker.com/r/emby/embyserver"
             ],
@@ -574,6 +590,7 @@
                 "S3",
                 "file-sharing"
             ],
+            "screenshots": [],
             "sources": [
                 "https://github.com/minio/minio",
                 "https://github.com/truenas/charts/tree/master/enterprise/minio"
@@ -609,6 +626,7 @@
             "tags": [
                 "ddns"
             ],
+            "screenshots": [],
             "sources": [
                 "https://github.com/qdm12/ddns-updater",
                 "https://github.com/truenas/charts/tree/master/community/ddns-updater",
@@ -644,6 +662,7 @@
                 "password",
                 "manager"
             ],
+            "screenshots": [],
             "sources": [
                 "https://github.com/dani-garcia/vaultwarden",
                 "https://github.com/truenas/charts/tree/master/community/vaultwarden"
@@ -680,6 +699,7 @@
                 "building",
                 "adventure"
             ],
+            "screenshots": [],
             "sources": [
                 "https://terraria.org/",
                 "https://github.com/truenas/charts/tree/master/community/terraria",
@@ -715,6 +735,7 @@
                 "world",
                 "building"
             ],
+            "screenshots": [],
             "sources": [
                 "https://www.minecraft.net/en-us",
                 "https://github.com/truenas/charts/tree/master/community/minecraft",
@@ -749,6 +770,7 @@
             "tags": [
                 "git"
             ],
+            "screenshots": [],
             "sources": [
                 "https://gitea.io/en-us",
                 "https://github.com/truenas/charts/tree/master/community/gitea",
@@ -784,6 +806,7 @@
                 "torrent",
                 "download"
             ],
+            "screenshots": [],
             "sources": [
                 "https://github.com/onedr0p/containers/tree/main/apps/qbittorrent",
                 "https://github.com/truenas/charts/tree/master/community/qbittorrent",
@@ -819,6 +842,7 @@
                 "dns",
                 "adblock"
             ],
+            "screenshots": [],
             "sources": [
                 "https://github.com/AdguardTeam/AdGuardHome",
                 "https://github.com/truenas/charts/tree/master/library/ix-dev/community/adguard-home",
@@ -853,6 +877,7 @@
             "tags": [
                 "vpn"
             ],
+            "screenshots": [],
             "sources": [
                 "https://tailscale.com/",
                 "https://github.com/truenas/charts/tree/master/community/tailscale",
@@ -891,6 +916,7 @@
                 "tv",
                 "streaming"
             ],
+            "screenshots": [],
             "sources": [
                 "https://hub.docker.com/r/jellyfin/jellyfin",
                 "https://github.com/truenas/charts/tree/master/community/jellyfin",
@@ -925,6 +951,7 @@
             "tags": [
                 "voice"
             ],
+            "screenshots": [],
             "sources": [
                 "https://github.com/mumble-voip/mumble-docker",
                 "https://github.com/truenas/charts/tree/master/community/mumble",
@@ -959,6 +986,7 @@
             "tags": [
                 "vpn"
             ],
+            "screenshots": [],
             "sources": [
                 "https://www.zerotier.com",
                 "https://github.com/truenas/charts/tree/master/community/zerotier",
@@ -994,6 +1022,7 @@
                 "file-sharing",
                 "kubo"
             ],
+            "screenshots": [],
             "sources": [
                 "https://github.com/ipfs/kubo",
                 "https://github.com/truenas/charts/tree/master/community/ipfs",
@@ -1029,6 +1058,7 @@
                 "blockchain",
                 "hard-drive"
             ],
+            "screenshots": [],
             "sources": [
                 "https://github.com/Chia-Network/chia-docker",
                 "https://github.com/truenas/charts/tree/master/library/ix-dev/community/chia",
@@ -1063,6 +1093,7 @@
             "tags": [
                 "series"
             ],
+            "screenshots": [],
             "sources": [
                 "https://github.com/onedr0p/containers/tree/main/apps/sonarr",
                 "https://github.com/truenas/charts/tree/master/community/sonarr",
@@ -1097,6 +1128,7 @@
             "tags": [
                 "anti-virus"
             ],
+            "screenshots": [],
             "sources": [
                 "https://docs.clamav.net/",
                 "https://github.com/truenas/charts/tree/master/community/clamav",
@@ -1134,6 +1166,7 @@
                 "requests",
                 "series"
             ],
+            "screenshots": [],
             "sources": [
                 "https://hub.docker.com/r/sctx/overseerr",
                 "https://github.com/truenas/charts/tree/master/community/overseer",
@@ -1168,6 +1201,7 @@
             "tags": [
                 "movies"
             ],
+            "screenshots": [],
             "sources": [
                 "https://github.com/onedr0p/containers/tree/main/apps/radarr",
                 "https://github.com/truenas/charts/tree/master/community/radarr",
@@ -1203,6 +1237,7 @@
                 "encode",
                 "transcode"
             ],
+            "screenshots": [],
             "sources": [
                 "https://home.tdarr.io/",
                 "https://github.com/truenas/charts/tree/master/community/tdarr",
@@ -1223,7 +1258,7 @@
             "latest_version": "1.0.0",
             "latest_app_version": "1.1.3.2982",
             "latest_human_version": "1.1.3.2982_1.0.0",
-            "last_update": null,
+            "last_update": "2023-05-15 11:13:16",
             "name": "webdav",
             "recommended": false,
             "title": "WebDAv",
@@ -1238,6 +1273,7 @@
                 "webdav",
                 "file-sharing"
             ],
+            "screenshots": [],
             "sources": [
                 "http://www.webdav.org/",
                 "https://github.com/truenas/charts/tree/master/community/webdav"
@@ -1272,6 +1308,7 @@
                 "reverse",
                 "proxy"
             ],
+            "screenshots": [],
             "sources": [
                 "https://nginxproxymanager.com/",
                 "https://github.com/truenas/charts/tree/master/community/nginx-proxy-manager",
@@ -1306,6 +1343,7 @@
             "tags": [
                 "music"
             ],
+            "screenshots": [],
             "sources": [
                 "https://github.com/onedr0p/containers/tree/main/apps/lidarr",
                 "https://github.com/truenas/charts/tree/master/charts/lidarr",
