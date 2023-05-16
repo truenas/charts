@@ -10,7 +10,6 @@ groups:
   - name: Resources Configuration
     description: Configure Resources for Gluetun
 
-
 questions:
   - variable: TZ
     group: Gluetun Configuration
@@ -30,13 +29,19 @@ questions:
       attrs:
         - variable: provider
           label: Provider
-          description: The VPN provider to use.
+          description: |
+            The VPN provider to use.</br>
+            View available providers at https://github.com/qdm12/gluetun/wiki
           schema:
             type: string
             required: true
             enum:
               - value: airvpn
                 description: AirVPN
+              - value: cyberghost
+                description: Cyberghost
+              - value: expressvpn
+                description: ExpressVPN
         - variable: type
           label: Type
           description: The VPN type to use.
@@ -48,6 +53,7 @@ questions:
                 description: OpenVPN
               - value: wireguard
                 description: Wireguard
+
         # Common Wireguard options
         - variable: wireguardPrivateKey
           label: Wireguard Private Key
@@ -96,12 +102,18 @@ questions:
             private: true
         - variable: openvpnUser
           label: OpenVPN User
-          description: The OpenVPN username.
+          description: |
+            The OpenVPN username.</br>
+            Required in some providers.</br>
+            An error will be shown if required and not provided.
           schema:
             type: string
         - variable: openvpnPassword
           label: OpenVPN Password
-          description: The OpenVPN password.
+          description: |
+            The OpenVPN password.</br>
+            Required in some providers.</br>
+            An error will be shown if required and not provided.
           schema:
             type: string
             private: true
@@ -111,6 +123,7 @@ questions:
           label: Server Countries (Optional)
           description: |
             The countries to connect to.</br>
+            Not all providers support this. An error will be shown if not supported.</br>
             View available options at https://raw.githubusercontent.com/qdm12/gluetun/master/internal/storage/servers.json
           schema:
             type: list
@@ -125,6 +138,7 @@ questions:
           label: Server Regions (Optional)
           description: |
             The regions to connect to.</br>
+            Not all providers support this. An error will be shown if not supported.</br>
             View available options at https://raw.githubusercontent.com/qdm12/gluetun/master/internal/storage/servers.json
           schema:
             type: list
@@ -139,6 +153,7 @@ questions:
           label: Server Cities (Optional)
           description: |
             The cities to connect to.</br>
+            Not all providers support this. An error will be shown if not supported.</br>
             View available options at https://raw.githubusercontent.com/qdm12/gluetun/master/internal/storage/servers.json
           schema:
             type: list
@@ -153,6 +168,7 @@ questions:
           label: Server Hostnames (Optional)
           description: |
             The hostnames to connect to.</br>
+            Not all providers support this. An error will be shown if not supported.</br>
             View available options at https://raw.githubusercontent.com/qdm12/gluetun/master/internal/storage/servers.json
           schema:
             type: list
@@ -167,6 +183,7 @@ questions:
           label: Server Names (Optional)
           description: |
             The names to connect to.</br>
+            Not all providers support this. An error will be shown if not supported.</br>
             View available options at https://raw.githubusercontent.com/qdm12/gluetun/master/internal/storage/servers.json
           schema:
             type: list
