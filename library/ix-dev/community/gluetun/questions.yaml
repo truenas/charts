@@ -62,10 +62,14 @@ questions:
                 description: Private Internet Access (PIA)
               - value: privatevpn
                 description: PrivateVPN
+              - value: protonvpn
+                description: ProtonVPN
 
         - variable: type
           label: Type
-          description: The VPN type to use.
+          description: |
+            The VPN type to use.</br>
+            Not all providers support all types.
           schema:
             type: string
             required: true

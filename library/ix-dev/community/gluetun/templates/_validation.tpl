@@ -2,7 +2,7 @@
   {{- $providers := (list "custom" "airvpn" "cyberghost" "expressvpn"
                           "fastestvpn" "hidemyass" "ipvanish" "ivpn"
                           "mullvad" "nordvpn" "perfect privacy" "privado"
-                          "private internet access" "privatevpn") -}}
+                          "private internet access" "privatevpn" "protonvpn") -}}
   {{- if not (mustHas .Values.gluetunConfig.provider $providers) -}}
     {{- fail (printf "Gluetun - Expected [Provider] to be one of [%v], but got [%v]" (join ", " $providers) .Values.gluetunConfig.provider) -}}
   {{- end -}}
