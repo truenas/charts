@@ -12,9 +12,9 @@ configmap:
 
       {{/* Include common configuration based on type */}}
       {{- if eq .Values.gluetunConfig.type "openvpn" }}
-        {{- include "gluetun.configs.openvpn.env" $ }}
+        {{- include "gluetun.configs.openvpn.env" $ | nindent 6 }}
       {{- else if eq .Values.gluetunConfig.type "wireguard" }}
-        {{- include "gluetun.configs.wireguard.env" $ }}
+        {{- include "gluetun.configs.wireguard.env" $ | nindent 6 }}
       {{- end }}
 
       {{/* Include provider specific configuration */}}

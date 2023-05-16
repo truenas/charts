@@ -37,19 +37,19 @@ workload:
           {{ end }}
           probes:
             liveness:
-              enabled: {{ not .Values.ci }}
+              enabled: true
               type: exec
               command:
                 - /gluetun-entrypoint
                 - healthcheck
             readiness:
-              enabled: {{ not .Values.ci }}
+              enabled: true
               type: exec
               command:
                 - /gluetun-entrypoint
                 - healthcheck
             startup:
-              enabled: {{ not .Values.ci }}
+              enabled: true
               type: exec
               command:
                 - /gluetun-entrypoint
