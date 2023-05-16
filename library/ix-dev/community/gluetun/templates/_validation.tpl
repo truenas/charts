@@ -1,6 +1,6 @@
 {{- define "gluetun.validation" -}}
   {{- $providers := (list "custom" "airvpn" "cyberghost" "expressvpn"
-                          "fastestvpn" "hidemyass" "ipvanish") -}}
+                          "fastestvpn" "hidemyass" "ipvanish" "ivpn") -}}
   {{- if not (mustHas .Values.gluetunConfig.provider $providers) -}}
     {{- fail (printf "Gluetun - Expected [Provider] to be one of [%v], but got [%v]" (join ", " $providers) .Values.gluetunConfig.provider) -}}
   {{- end -}}
@@ -11,13 +11,15 @@
   {{- end -}}
 {{- end -}}
 
-{{/* Included by providers that require OpenVPN credentials */}}
-{{- define "gluetun.openvpn.creds.required" -}}
-  {{- if not .Values.gluetunConfig.openvpnUser -}}
-    {{- fail (printf "Gluetun - Provider [%v] requires [User] on type [%v]." .Values.gluetunConfig.provider .Values.gluetunConfig.type) -}}
-  {{- end -}}
-  {{- if not .Values.gluetunConfig.openvpnPassword -}}
-    {{- fail (printf "Gluetun - Provider [%v] requires [Password] on type [%v]." .Values.gluetunConfig.provider .Values.gluetunConfig.type) -}}
+{{/* Included by providers that require specific options */}}
+{{- define "gluetun.options.required" -}}
+  {{- $options := .options -}}
+  {{- $rootCtx := .rootCtx -}}
+
+  {{- range $opt := $options -}}
+    {{- if not (get $rootCtx.Values.gluetunConfig $opt) -}}
+      {{- fail (printf "Gluetun - Provider [%v] requires non-empty [%v] option on type [%v]." $rootCtx.Values.gluetunConfig.provider (title $opt) $rootCtx.Values.gluetunConfig.type) -}}
+    {{- end -}}
   {{- end -}}
 {{- end -}}
 
