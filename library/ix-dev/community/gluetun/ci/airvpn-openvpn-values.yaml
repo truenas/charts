@@ -1,0 +1,11 @@
+gluetunStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/data
+
+# https://github.com/qdm12/gluetun/wiki/AirVPN
+gluetunConfig:
+  provider: airvpn
+  type: openvpn
+  openvpnKey: 'some key'
+  openvpnCert: 'some cert'

@@ -1,0 +1,159 @@
+groups:
+  - name: Gluetun Configuration
+    description: Configure Gluetun
+  - name: User and Group Configuration
+    description: Configure User and Group for Gluetun
+  - name: Network Configuration
+    description: Configure Network for Gluetun
+  - name: Storage Configuration
+    description: Configure Storage for Gluetun
+  - name: Resources Configuration
+    description: Configure Resources for Gluetun
+
+
+questions:
+  - variable: TZ
+    group: Gluetun Configuration
+    label: Timezone
+    schema:
+      type: string
+      default: Etc/UTC
+      required: true
+      $ref:
+        - definitions/timezone
+
+  - variable: gluetunConfig
+    label: ""
+    group: Gluetun Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: additionalEnvs
+          label: Additional Environment Variables
+          description: Configure additional environment variables for Gluetun.
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: env
+                label: Environment Variable
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: name
+                      label: Name
+                      schema:
+                        type: string
+                        required: true
+                    - variable: value
+                      label: Value
+                      schema:
+                        type: string
+                        required: true
+
+  - variable: gluetunID
+    label: ""
+    group: User and Group Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: user
+          label: User ID
+          description: The user id that Gluetun files will be owned by.
+          schema:
+            type: int
+            min: 568
+            default: 568
+            required: true
+        - variable: group
+          label: Group ID
+          description: The group id that Gluetun files will be owned by.
+          schema:
+            type: int
+            min: 568
+            default: 568
+            required: true
+
+  - variable: gluetunNetwork
+    label: ""
+    group: Network Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: hostNetwork
+          label: Host Network
+          description: Bind to the host network.
+          schema:
+            type: boolean
+            default: false
+
+  - variable: gluetunStorage
+    label: ""
+    group: Storage Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: data
+          label: Gluetun Data Storage
+          description: The path to store Gluetun data.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
+                schema:
+                  type: string
+                  required: true
+                  default: ixVolume
+                  enum:
+                    - value: hostPath
+                      description: Host Path (Path that already exists on the system)
+                    - value: ixVolume
+                      description: ixVolume (Dataset created automatically by the system)
+              - variable: datasetName
+                label: Dataset Name
+                schema:
+                  type: string
+                  show_if: [["type", "=", "ixVolume"]]
+                  required: true
+                  hidden: true
+                  immutable: true
+                  default: "data"
+                  $ref:
+                    - "normalize/ixVolume"
+              - variable: hostPath
+                label: Host Path
+                schema:
+                  type: hostpath
+                  show_if: [["type", "=", "hostPath"]]
+                  immutable: true
+                  required: true
+
+  - variable: resources
+    label: ""
+    group: Resources Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: limits
+          label: Limits
+          schema:
+            type: dict
+            attrs:
+              - variable: cpu
+                label: CPU
+                description: CPU limit for Gluetun.
+                schema:
+                  type: string
+                  default: 4000m
+                  required: true
+              - variable: memory
+                label: Memory
+                description: Memory limit for Gluetun.
+                schema:
+                  type: string
+                  default: 8Gi
+                  required: true

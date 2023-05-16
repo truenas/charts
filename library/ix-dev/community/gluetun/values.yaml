@@ -1,0 +1,51 @@
+image:
+  repository: qmcgaw/gluetun
+  pullPolicy: IfNotPresent
+  tag: v3.33.0
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+gluetunNetwork:
+  hostNetwork: false
+
+gluetunID:
+  user: 568
+  group: 568
+
+gluetunStorage:
+  data:
+    type: ixVolume
+    hostPath: ''
+    datasetName: data
+
+
+gluetunConfig:
+  provider: ''
+  type: ''
+  openvpnUser: ''
+  openvpnPassword: ''
+
+  # - Common Wireguard options
+  wireguardPrivateKey: ''
+  wireguardPresharedKey: ''
+  wireguardAddresses: []
+  # - Common OpenVPN options
+  # Optional - Alternative place the file in the data dir
+  # https://github.com/qdm12/gluetun/wiki/OpenVPN-client-key
+  openvpnKey: ''
+  # Optional - Alternative place the file in the data dir
+  # https://github.com/qdm12/gluetun/wiki/OpenVPN-client-key
+  openvpnCert: ''
+
+  # - Common options (Optional)
+  # https://raw.githubusercontent.com/qdm12/gluetun/master/internal/storage/servers.json
+  serverCountries: []
+  serverRegions: []
+  serverCities: []
+  serverHostnames: []
+  serverNames: []
+
+  additionalEnvs: []
