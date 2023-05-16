@@ -8,16 +8,6 @@ groups:
   - name: Resources Configuration
     description: Configure Resources for TFTP
 
-portals:
-  web_portal:
-    protocols:
-      - "$kubernetes-resource_configmap_portal_protocol"
-    host:
-      - "$kubernetes-resource_configmap_portal_host"
-    ports:
-      - "$kubernetes-resource_configmap_portal_port"
-    path: "$kubernetes-resource_configmap_portal_path"
-
 questions:
   - variable: TZ
     group: TFTP Configuration
@@ -40,6 +30,7 @@ questions:
           description: |
             Allow new files to be created. This is disabled by default.</br>
             Enabling this will change the permissions of the tftpboot directory to 757.
+            Disabling this will change the permissions of the tftpboot directory to 555.
           schema:
             type: boolean
             default: false
