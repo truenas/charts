@@ -1,0 +1,18 @@
+gluetunStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/data
+
+# https://github.com/qdm12/gluetun/wiki/PrivateVPN
+gluetunConfig:
+  # :9999 is the internal healthcheck endpoint
+  # We tell it to probe it self so we can see if it's healthy
+  # As it will never connect to actual servers to be able to reach the internet
+  # This is only for CI, healthcheck will fail if configuration is not valid
+  additionalEnvs:
+    - name: HEALTH_TARGET_ADDRESS
+      value: localhost:9999
+  provider: privatevpn
+  type: openvpn
+  openvpnUser: username
+  openvpnPassword: password
