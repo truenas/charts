@@ -1,7 +1,8 @@
 {{- define "gluetun.validation" -}}
   {{- $providers := (list "custom" "airvpn" "cyberghost" "expressvpn"
                           "fastestvpn" "hidemyass" "ipvanish" "ivpn"
-                          "mullvad" "nordvpn" "perfect privacy" "privado") -}}
+                          "mullvad" "nordvpn" "perfect privacy" "privado"
+                          "private internet access") -}}
   {{- if not (mustHas .Values.gluetunConfig.provider $providers) -}}
     {{- fail (printf "Gluetun - Expected [Provider] to be one of [%v], but got [%v]" (join ", " $providers) .Values.gluetunConfig.provider) -}}
   {{- end -}}
@@ -17,9 +18,14 @@
   {{- $options := .options -}}
   {{- $rootCtx := .rootCtx -}}
 
+  {{- $otps := (list "openvpnUser" "openvpnPassword" "wireguardPrivateKey" "wireguardPrivateKey" "wireguardAddresses") -}}
   {{- range $opt := $options -}}
+    {{- if not (mustHas $opt $otps) -}} {{/* Dev validation, to avoid typos early */}}
+      {{- fail (printf "Gluetun - Bad option (%v) passed in provider [%v]." $opt $rootCtx.Values.gluetunConfig.provider) -}}
+    {{- end -}}
+
     {{- if not (get $rootCtx.Values.gluetunConfig $opt) -}}
-      {{- fail (printf "Gluetun - Provider [%v] requires non-empty [%v] option on type [%v]." $rootCtx.Values.gluetunConfig.provider (title $opt) $rootCtx.Values.gluetunConfig.type) -}}
+      {{- fail (printf "Gluetun - Provider [%v] requires non-empty [%v] option on type [%v]." $rootCtx.Values.gluetunConfig.provider $opt $rootCtx.Values.gluetunConfig.type) -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
@@ -34,9 +40,14 @@
   {{- $options := .options -}}
   {{- $rootCtx := .rootCtx -}}
 
+  {{- $otps := (list "serverRegions" "serverCountries" "serverNames" "serverHostnames" "serverCities") -}}
   {{- range $opt := $options -}}
+    {{- if not (mustHas $opt $otps) -}} {{/* Dev validation, to avoid typos early */}}
+      {{- fail (printf "Gluetun - Bad option (%v) passed in provider [%v]." $opt $rootCtx.Values.gluetunConfig.provider) -}}
+    {{- end -}}
+
     {{- if (get $rootCtx.Values.gluetunConfig $opt) -}}
-      {{- fail (printf "Gluetun - Provider [%v] does not support [%v] option." $rootCtx.Values.gluetunConfig.provider (title $opt)) -}}
+      {{- fail (printf "Gluetun - Provider [%v] does not support [%v] option." $rootCtx.Values.gluetunConfig.provider $opt) -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
