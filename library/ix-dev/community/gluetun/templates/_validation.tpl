@@ -18,7 +18,7 @@
   {{- $options := .options -}}
   {{- $rootCtx := .rootCtx -}}
 
-  {{- $otps := (list "openvpnUser" "openvpnPassword" "wireguardPrivateKey" "wireguardPrivateKey" "wireguardAddresses") -}}
+  {{- $otps := (list "openvpnUser" "openvpnPassword" "wireguardPrivateKey" "wireguardPresharedKey" "wireguardAddresses") -}}
   {{- range $opt := $options -}}
     {{- if not (mustHas $opt $otps) -}} {{/* Dev validation, to avoid typos early */}}
       {{- fail (printf "Gluetun - Bad option (%v) passed in provider [%v]." $opt $rootCtx.Values.gluetunConfig.provider) -}}
