@@ -28,10 +28,89 @@ questions:
     schema:
       type: dict
       attrs:
+        - variable: provider
+          label: Provider
+          description: The VPN provider to use.
+          schema:
+            type: string
+            required: true
+            enum:
+              - value: airvpn
+                description: AirVPN
+        - variable: type
+          label: Type
+          description: The VPN type to use.
+          schema:
+            type: string
+            required: true
+            enum:
+              - value: openvpn
+                description: OpenVPN
+              - value: wireguard
+                description: Wireguard
+        # Common Wireguard options
+        - variable: wireguardPrivateKey
+          label: Wireguard Private Key
+          schema:
+            type: string
+            required: true
+        - variable: wireguardPresharedKey
+          label: Wireguard Preshared Key
+          schema:
+            type: string
+            required: true
+        - variable: wireguardAddresses
+          label: Wireguard Addresses
+          schema:
+            type: list
+            required: true
+            empty: false
+            default: []
+            items:
+              - variable: address
+                label: Address
+                schema:
+                  type: string
+                  required: true
+
+        # Common OpenVPN options
+        - variable: openvpnKey
+          label: OpenVPN Key
+          description: |
+            The OpenVPN client key.</br>
+            Single line, no line breaks, without BEGIN/END.</br>
+            Alternatively place the file in the data dir.</br>
+            Check instructions at https://github.com/qdm12/gluetun/wiki/OpenVPN-client-key
+          schema:
+            type: string
+            private: true
+        - variable: openvpnCert
+          label: OpenVPN Certificate
+          description: |
+            The OpenVPN client certificate.</br>
+            Single line, no line breaks, without BEGIN/END.</br>
+            Alternatively place the file in the data dir.</br>
+            Check instructions at https://github.com/qdm12/gluetun/wiki/OpenVPN-client-certificate
+          schema:
+            type: string
+            private: true
+        - variable: openvpnUser
+          label: OpenVPN User
+          description: The OpenVPN username.
+          schema:
+            type: string
+        - variable: openvpnPassword
+          label: OpenVPN Password
+          description: The OpenVPN password.
+          schema:
+            type: string
+            private: true
+
+        # Common options (Optional)
         - variable: serverCountries
           label: Server Countries (Optional)
           description: |
-            The countries to connect to.
+            The countries to connect to.</br>
             View available options at https://raw.githubusercontent.com/qdm12/gluetun/master/internal/storage/servers.json
           schema:
             type: list
@@ -45,7 +124,7 @@ questions:
         - variable: serverRegions
           label: Server Regions (Optional)
           description: |
-            The regions to connect to.
+            The regions to connect to.</br>
             View available options at https://raw.githubusercontent.com/qdm12/gluetun/master/internal/storage/servers.json
           schema:
             type: list
@@ -59,7 +138,7 @@ questions:
         - variable: serverCities
           label: Server Cities (Optional)
           description: |
-            The cities to connect to.
+            The cities to connect to.</br>
             View available options at https://raw.githubusercontent.com/qdm12/gluetun/master/internal/storage/servers.json
           schema:
             type: list
@@ -73,7 +152,7 @@ questions:
         - variable: serverHostnames
           label: Server Hostnames (Optional)
           description: |
-            The hostnames to connect to.
+            The hostnames to connect to.</br>
             View available options at https://raw.githubusercontent.com/qdm12/gluetun/master/internal/storage/servers.json
           schema:
             type: list
@@ -87,7 +166,7 @@ questions:
         - variable: serverNames
           label: Server Names (Optional)
           description: |
-            The names to connect to.
+            The names to connect to.</br>
             View available options at https://raw.githubusercontent.com/qdm12/gluetun/master/internal/storage/servers.json
           schema:
             type: list
