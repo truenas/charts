@@ -6,6 +6,9 @@ configmap:
     data:
       VPN_SERVICE_PROVIDER: {{ .Values.gluetunConfig.provider }}
       VPN_TYPE: {{ .Values.gluetunConfig.type }}
+      PUBLICIP_FILE: /tmp/gluetun/ip
+      {{/* Make VPN interface unique for each app instance */}}
+      VPN_INTERFACE: {{ printf "%vtun0" .Release.Name }}
 
       {{/* Include common configuration */}}
       {{- include "gluetun.configs.common.env" $ | nindent 6 }}
