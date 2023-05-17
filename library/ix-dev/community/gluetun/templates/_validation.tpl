@@ -28,7 +28,9 @@
   {{- $opts := (list "openvpnCert" "openvpnKey" "openvpnCertHostPath"
                       "openvpnKeyHostPath" "openvpnUser" "openvpnPassword"
                       "openvpnKeyPassphrase" "wireguardPrivateKey"
-                      "wireguardPresharedKey" "wireguardAddresses") -}}
+                      "wireguardPublicKey" "wireguardPresharedKey"
+                      "wireguardAddresses" "vpnEndpointIP" "vpnEndpointPort"
+                      "openvpnCustomConfigHostPath") -}}
   {{- range $opt := $options -}}
     {{- if not (mustHas $opt $opts) -}} {{/* Dev validation, to avoid typos early */}}
       {{- fail (printf "Gluetun - Bad option (%v) passed in provider [%v]." $opt $rootCtx.Values.gluetunConfig.provider) -}}
