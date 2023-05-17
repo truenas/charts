@@ -15,6 +15,6 @@ WIREGUARD_ADDRESSES: {{ join "," . }}
 VPN_ENDPOINT_IP: {{ . }}
   {{- end }}
   {{- with .Values.gluetunConfig.vpnEndpointPort }}
-VPN_ENDPOINT_PORT: {{ . }}
+VPN_ENDPOINT_PORT: {{ . | quote }}
   {{- end }}
 {{- end -}}
