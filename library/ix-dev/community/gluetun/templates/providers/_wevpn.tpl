@@ -1,27 +1,21 @@
 {{/* https://github.com/qdm12/gluetun/wiki/WeVPN */}}
 {{- define "gluetun.wevpn.openvpn.validation" -}}
-  {{/* Cert and Key Required */}}
+  {{- $req := list -}}
+
   {{- if eq .Values.gluetunConfig.openvpnCertKeyMethod "file" -}}
-    {{- include "gluetun.options.required" (dict "rootCtx" $
-                                                  "options" (list "openvpnKeyHostPath")) -}}
+    {{- $req = (list "openvpnKeyHostPath") -}}
   {{- else if eq .Values.gluetunConfig.openvpnCertKeyMethod "content" -}}
-    {{- include "gluetun.options.required" (dict "rootCtx" $
-                                                  "options" (list "openvpnKey")) -}}
+    {{- $req = (list "openvpnKey") -}}
   {{- else -}}
     {{- include "gluetun.certkey.required.error" $ -}}
   {{- end -}}
-  {{/* Required */}}
-  {{- include "gluetun.options.required" (dict "rootCtx" $
-                                                "options" (list
-                                                          "openvpnUser"
-                                                          "openvpnPassword")) -}}
 
-  {{/* Unsupported */}}
-  {{- include "gluetun.unsupported.server.options" (dict "rootCtx" $
-                                                          "options" (list
-                                                                    "serverCountries"
-                                                                    "serverRegions"
-                                                                    "serverNames")) -}}
+  {{- $req = concat $req (list "openvpnUser" "openvpnPassword") -}}
+
+  {{- $unsup := (list "serverRegions" "serverCountries" "serverNames") -}}
+
+  {{- include "gluetun.options.required" (dict "rootCtx" $ "options" $req) -}}
+  {{- include "gluetun.unsupported.server.options" (dict "rootCtx" $ "options" $unsup) -}}
 {{- end -}}
 
 {{- define "gluetun.wevpn.wireguard.validation" -}}

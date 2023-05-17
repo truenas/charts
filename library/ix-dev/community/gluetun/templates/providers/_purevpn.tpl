@@ -1,14 +1,11 @@
 {{/* https://github.com/qdm12/gluetun/wiki/PureVPN */}}
 {{- define "gluetun.purevpn.openvpn.validation" -}}
-  {{- include "gluetun.options.required" (dict
-                                          "rootCtx" $
-                                          "options" (list
-                                                    "openvpnUser"
-                                                    "openvpnPassword")) -}}
-  {{- include "gluetun.unsupported.server.options" (dict
-                                                  "rootCtx" $
-                                                  "options" (list
-                                                            "serverNames")) -}}
+  {{- $req := (list "openvpnUser" "openvpnPassword") -}}
+
+  {{- $unsup := (list "serverNames") -}}
+
+  {{- include "gluetun.options.required" (dict "rootCtx" $ "options" $req) -}}
+  {{- include "gluetun.unsupported.server.options" (dict "rootCtx" $ "options" $unsup) -}}
 {{- end -}}
 
 {{- define "gluetun.purevpn.wireguard.validation" -}}

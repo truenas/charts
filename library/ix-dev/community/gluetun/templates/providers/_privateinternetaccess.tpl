@@ -1,15 +1,11 @@
 {{/* https://github.com/qdm12/gluetun/wiki/Private-internet-access */}}
 {{- define "gluetun.private internet access.openvpn.validation" -}}
-  {{- include "gluetun.options.required" (dict
-                                          "rootCtx" $
-                                          "options" (list
-                                                    "openvpnUser"
-                                                    "openvpnPassword")) -}}
-  {{- include "gluetun.unsupported.server.options" (dict
-                                                  "rootCtx" $
-                                                  "options" (list
-                                                            "serverCities"
-                                                            "serverCountries")) -}}
+  {{- $req := (list "openvpnUser" "openvpnPassword") -}}
+
+  {{- $unsup := (list "serverCities" "serverCountries") -}}
+
+  {{- include "gluetun.options.required" (dict "rootCtx" $ "options" $req) -}}
+  {{- include "gluetun.unsupported.server.options" (dict "rootCtx" $ "options" $unsup) -}}
 {{- end -}}
 
 {{- define "gluetun.private internet access.wireguard.validation" -}}

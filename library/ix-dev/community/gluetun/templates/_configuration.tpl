@@ -20,7 +20,7 @@ configmap:
         {{- include "gluetun.configs.wireguard.env" $ | nindent 6 }}
       {{- end }}
 
-      {{/* Include provider specific configuration */}}
+      {{/* Include provider specific validation */}}
       {{- include (printf "gluetun.%v.%v.validation" .Values.gluetunConfig.provider .Values.gluetunConfig.type) $ | nindent 6 }}
 {{- end -}}
 

@@ -1,16 +1,11 @@
 {{/* https://github.com/qdm12/gluetun/wiki/NordVPN */}}
 {{- define "gluetun.nordvpn.openvpn.validation" -}}
-  {{- include "gluetun.options.required" (dict
-                                          "rootCtx" $
-                                          "options" (list
-                                                    "openvpnUser"
-                                                    "openvpnPassword")) -}}
-  {{- include "gluetun.unsupported.server.options" (dict
-                                                  "rootCtx" $
-                                                  "options" (list
-                                                            "serverCountries"
-                                                            "serverCities"
-                                                            "serverNames")) -}}
+  {{- $req := (list "openvpnUser" "openvpnPassword") -}}
+
+  {{- $unsup := (list "serverCountries" "serverCities" "serverNames") -}}
+
+  {{- include "gluetun.options.required" (dict "rootCtx" $ "options" $req) -}}
+  {{- include "gluetun.unsupported.server.options" (dict "rootCtx" $ "options" $unsup) -}}
 {{- end -}}
 
 {{- define "gluetun.nordvpn.wireguard.validation" -}}

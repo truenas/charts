@@ -1,26 +1,18 @@
 {{/* https://github.com/qdm12/gluetun/wiki/Windscribe */}}
 {{- define "gluetun.windscribe.openvpn.validation" -}}
-  {{- include "gluetun.options.required" (dict
-                                          "rootCtx" $
-                                          "options" (list
-                                                    "openvpnUser"
-                                                    "openvpnPassword")) -}}
-  {{- include "gluetun.unsupported.server.options" (dict
-                                                  "rootCtx" $
-                                                  "options" (list
-                                                            "serverCountries"
-                                                            "serverNames")) -}}
+  {{- $req := (list "openvpnUser" "openvpnPassword") -}}
+
+  {{- $unsup := (list "serverCountries" "serverNames") -}}
+
+  {{- include "gluetun.options.required" (dict "rootCtx" $ "options" $req) -}}
+  {{- include "gluetun.unsupported.server.options" (dict "rootCtx" $ "options" $unsup) -}}
 {{- end -}}
 
 {{- define "gluetun.windscribe.wireguard.validation" -}}
-  {{- include "gluetun.options.required" (dict
-                                          "rootCtx" $
-                                          "options" (list
-                                                    "wireguardPrivateKey"
-                                                    "wireguardAddresses")) -}}
-  {{- include "gluetun.unsupported.server.options" (dict
-                                                  "rootCtx" $
-                                                  "options" (list
-                                                            "serverCountries"
-                                                            "serverNames")) -}}
+  {{- $req := (list "wireguardPrivateKey" "wireguardAddresses") -}}
+
+  {{- $unsup := (list "serverCountries" "serverNames") -}}
+
+  {{- include "gluetun.options.required" (dict "rootCtx" $ "options" $req) -}}
+  {{- include "gluetun.unsupported.server.options" (dict "rootCtx" $ "options" $unsup) -}}
 {{- end -}}

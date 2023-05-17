@@ -1,26 +1,19 @@
 {{/* https://github.com/qdm12/gluetun/wiki/AirVPN */}}
 {{- define "gluetun.airvpn.openvpn.validation" -}}
-  {{/* Cert and Key Required */}}
+  {{- $req := list -}}
+
   {{- if eq .Values.gluetunConfig.openvpnCertKeyMethod "file" -}}
-    {{- include "gluetun.options.required" (dict "rootCtx" $
-                                                  "options" (list
-                                                            "openvpnCertHostPath"
-                                                            "openvpnKeyHostPath")) -}}
+    {{- $req = (list "openvpnCertHostPath" "openvpnKeyHostPath") -}}
   {{- else if eq .Values.gluetunConfig.openvpnCertKeyMethod "content" -}}
-    {{- include "gluetun.options.required" (dict "rootCtx" $
-                                                  "options" (list
-                                                            "openvpnCert"
-                                                            "openvpnKey")) -}}
+    {{- $req = (list "openvpnCert" "openvpnKey") -}}
   {{- else -}}
     {{- include "gluetun.certkey.required.error" $ -}}
   {{- end -}}
+
+  {{- include "gluetun.options.required" (dict "rootCtx" $ "options" $req) -}}
 {{- end -}}
 
 {{- define "gluetun.airvpn.wireguard.validation" -}}
-  {{/* Required */}}
-  {{- include "gluetun.options.required" (dict "rootCtx" $
-                                                "options" (list
-                                                          "wireguardPrivateKey"
-                                                          "wireguardPresharedKey"
-                                                          "wireguardAddresses")) -}}
+  {{- $req := (list "wireguardPrivateKey" "wireguardPresharedKey" "wireguardAddresses") -}}
+  {{- include "gluetun.options.required" (dict "rootCtx" $ "options" $req) -}}
 {{- end -}}

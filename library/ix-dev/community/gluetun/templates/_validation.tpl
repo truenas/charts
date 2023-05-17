@@ -63,5 +63,5 @@
 {{- end -}}
 
 {{- define "gluetun.certkey.required.error" -}}
-  {{- fail (printf "Gluetun - Provider [%v] requires [Key and Certificate] either from [File or Content] method on type [openvpn]." .Values.gluetunConfig.provider) -}}
+  {{- fail (printf "Gluetun - Provider [%v] requires [Key and/or Certificate] either from [File or Content] method on type [openvpn]." .Values.gluetunConfig.provider) -}}
 {{- end -}}
