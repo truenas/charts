@@ -36,6 +36,8 @@ questions:
             type: string
             required: true
             enum:
+              - value: custom
+                description: Custom
               - value: airvpn
                 description: AirVPN
               - value: cyberghost
@@ -98,25 +100,62 @@ questions:
               - value: wireguard
                 description: Wireguard
 
+        # Custom provider (openvpn)
+        - variable: openvpnCustomConfigHostPath
+          label: OpenVPN Custom Configuration Host Path
+          description: |
+            The OpenVPN custom configuration host path.</br>
+            Fill this only if type is openvpn.</br>
+          schema:
+            type: hostpath
+            # Ideally we would have a show_if with type=openvpn too
+            show_if: [["provider", "=", "custom"]]
+
+        # Custom provider (wireguard)
+        - variable: vpnEndpointIP
+          label: VPN Endpoint IP
+          description: |
+            The VPN endpoint IP.</br>
+            Fill this only if type is wireguard.</br>
+          schema:
+            type: string
+            # Ideally we would have a show_if with type=wireguard too
+            show_if: [["provider", "=", "custom"]]
+        - variable: vpnEndpointPort
+          label: VPN Endpoint Port
+          description: |
+            The VPN endpoint port.</br>
+            Fill this only if type is wireguard.</br>
+          schema:
+            type: int
+            # Ideally we would have a show_if with type=wireguard too
+            show_if: [["provider", "=", "custom"]]
+        - variable: wireguardPublicKey
+          label: Wireguard Public Key
+          description: |
+            The Wireguard public key.</br>
+            Fill this only if type is wireguard.</br>
+          schema:
+            type: string
+            # Ideally we would have a show_if with type=wireguard too
+            show_if: [["provider", "=", "custom"]]
+            private: true
+
         # Common Wireguard options
         - variable: wireguardPrivateKey
           label: Wireguard Private Key
           schema:
             type: string
             show_if: [["type", "=", "wireguard"]]
-            required: true
         - variable: wireguardPresharedKey
           label: Wireguard Preshared Key
           schema:
             type: string
-            required: true
         - variable: wireguardAddresses
           label: Wireguard Addresses
           schema:
             type: list
             show_if: [["type", "=", "wireguard"]]
-            required: true
-            empty: false
             default: []
             items:
               - variable: address

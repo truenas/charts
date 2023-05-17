@@ -47,6 +47,15 @@ gluetunConfig:
   openvpnCert: ''
   openvpnKeyPassphrase: ''
 
+  # - Custom provider
+  # type: openvpn
+  openvpnCustomConfigHostPath: ''
+
+  # type: wireguard
+  wireguardPublicKey: ''
+  vpnEndpointIP: ''
+  vpnEndpointPort: 0
+
   # - Common options (Optional)
   # https://raw.githubusercontent.com/qdm12/gluetun/master/internal/storage/servers.json
   serverCountries: []

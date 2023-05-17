@@ -82,8 +82,6 @@ persistence:
         gluetun:
           mountPath: /gluetun
   {{ if eq .Values.gluetunConfig.type "openvpn" }}
-    {{ if eq .Values.gluetunConfig.openvpnCertKeyMethod "file" }}
-      {{- include "gluetun.filemount" $ | nindent 2 }}
-    {{ end }}
+    {{- include "gluetun.openvpn.filemount" $ | nindent 2 }}
   {{ end }}
 {{- end -}}

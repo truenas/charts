@@ -14,4 +14,7 @@ OPENVPN_PASSWORD: {{ . }}
   {{- with .Values.gluetunConfig.openvpnKeyPassphrase }}
 OPENVPN_KEY_PASSPHRASE: {{ . }}
   {{- end }}
+  {{- if .Values.gluetunConfig.openvpnCustomConfigHostPath }}
+OPENVPN_CUSTOM_CONFIG: /gluetun/custom.conf
+  {{- end }}
 {{- end -}}
