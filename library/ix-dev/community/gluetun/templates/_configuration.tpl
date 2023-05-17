@@ -23,3 +23,24 @@ configmap:
       {{/* Include provider specific configuration */}}
       {{- include (printf "gluetun.%v.%v.validation" .Values.gluetunConfig.provider .Values.gluetunConfig.type) $ | nindent 6 }}
 {{- end -}}
+
+{{- define "gluetun.filemount" -}}
+  openvpn-certificate:
+    enabled: true
+    type: hostPath
+    hostPath: {{ .Values.gluetunConfig.openvpnCertHostPath }}
+    hostPathType: File
+    targetSelector:
+      gluetun:
+        gluetun:
+          mountPath: /gluetun/client.crt
+  openvpn-key:
+    enabled: true
+    type: hostPath
+    hostPath: {{ .Values.gluetunConfig.openvpnKeyHostPath }}
+    hostPathType: File
+    targetSelector:
+      gluetun:
+        gluetun:
+          mountPath: /gluetun/openvpn_encrypted_key
+{{- end -}}

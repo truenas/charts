@@ -11,4 +11,7 @@ OPENVPN_USER: {{ . }}
   {{- with .Values.gluetunConfig.openvpnPassword }}
 OPENVPN_PASSWORD: {{ . }}
   {{- end }}
+  {{- with .Values.gluetunConfig.openvpnKeyPassphrase }}
+OPENVPN_KEY_PASSPHRASE: {{ . }}
+  {{- end }}
 {{- end -}}

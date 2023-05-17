@@ -65,6 +65,13 @@ persistence:
       gluetun:
         gluetun:
           mountPath: /dev/net/tun
+  temp:
+    enabled: true
+    type: emptyDir
+    targetSelector:
+      gluetun:
+        gluetun:
+          mountPath: /tmp/gluetun
   data:
     enabled: true
     type: {{ .Values.gluetunStorage.data.type }}
@@ -74,11 +81,9 @@ persistence:
       gluetun:
         gluetun:
           mountPath: /gluetun
-  temp:
-    enabled: true
-    type: emptyDir
-    targetSelector:
-      gluetun:
-        gluetun:
-          mountPath: /tmp/gluetun
+  {{ if eq .Values.gluetunConfig.type "openvpn" }}
+    {{ if eq .Values.gluetunConfig.openvpnCertKeyMethod "file" }}
+      {{- include "gluetun.filemount" $ | nindent 2 }}
+    {{ end }}
+  {{ end }}
 {{- end -}}

@@ -1,16 +1,12 @@
-{{/* https://github.com/qdm12/gluetun/wiki/Cyberghost */}}
-{{- define "gluetun.cyberghost.openvpn.validation" -}}
+{{/* https://github.com/qdm12/gluetun/wiki/WeVPN */}}
+{{- define "gluetun.wevpn.openvpn.validation" -}}
   {{/* Cert and Key Required */}}
   {{- if eq .Values.gluetunConfig.openvpnCertKeyMethod "file" -}}
     {{- include "gluetun.options.required" (dict "rootCtx" $
-                                                  "options" (list
-                                                            "openvpnCertHostPath"
-                                                            "openvpnKeyHostPath")) -}}
+                                                  "options" (list "openvpnKeyHostPath")) -}}
   {{- else if eq .Values.gluetunConfig.openvpnCertKeyMethod "content" -}}
     {{- include "gluetun.options.required" (dict "rootCtx" $
-                                                  "options" (list
-                                                            "openvpnCert"
-                                                            "openvpnKey")) -}}
+                                                  "options" (list "openvpnKey")) -}}
   {{- else -}}
     {{- include "gluetun.certkey.required.error" $ -}}
   {{- end -}}
@@ -19,14 +15,15 @@
                                                 "options" (list
                                                           "openvpnUser"
                                                           "openvpnPassword")) -}}
+
   {{/* Unsupported */}}
   {{- include "gluetun.unsupported.server.options" (dict "rootCtx" $
                                                           "options" (list
+                                                                    "serverCountries"
                                                                     "serverRegions"
-                                                                    "serverCities"
                                                                     "serverNames")) -}}
 {{- end -}}
 
-{{- define "gluetun.cyberghost.wireguard.validation" -}}
+{{- define "gluetun.wevpn.wireguard.validation" -}}
   {{- include "gluetun.unsupported.type" $ -}}
 {{- end -}}

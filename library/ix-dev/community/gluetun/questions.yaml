@@ -70,14 +70,25 @@ questions:
                 description: SlickVPN
               - value: surfshark
                 description: Surfshark
-              - value: tor guard
+              - value: torguard
                 description: Tor Guard
+              - value: vpnsecure
+                description: VPNSecure
+              - value: vpn unlimited
+                description: VPN Unlimited
+              - value: vyprvpn
+                description: VyprVPN
+              - value: wevpn
+                description: WeVPN
+              - value: windscribe
+                description: Windscribe
 
         - variable: type
           label: Type
           description: |
             The VPN type to use.</br>
-            Not all providers support all types.
+            Not all providers support all types.</br>
+            An error will be shown if not supported.
           schema:
             type: string
             required: true
@@ -92,6 +103,7 @@ questions:
           label: Wireguard Private Key
           schema:
             type: string
+            show_if: [["type", "=", "wireguard"]]
             required: true
         - variable: wireguardPresharedKey
           label: Wireguard Preshared Key
@@ -102,6 +114,7 @@ questions:
           label: Wireguard Addresses
           schema:
             type: list
+            show_if: [["type", "=", "wireguard"]]
             required: true
             empty: false
             default: []
@@ -113,26 +126,68 @@ questions:
                   required: true
 
         # Common OpenVPN options
+        - variable: openvpnCertKeyMethod
+          label: OpenVPN Certificate and Key Method
+          description: |
+            The method to use for the OpenVPN client certificate and key.</br>
+            - File: Use a file path on the host.</br>
+            - Content: Use the content of the variable.</br>
+            - None: Do not use a certificate and key.</br>
+            This is only required by a small subset of providers.</br>
+            An error will be shown if required and not provided.
+          schema:
+            type: string
+            show_if: [["type", "=", "openvpn"]]
+            default: none
+            required: true
+            enum:
+              - value: file
+                description: File
+              - value: content
+                description: Content
+              - value: none
+                description: None
+
+        # openvpnCertKeyMethod: content
         - variable: openvpnKey
           label: OpenVPN Key
           description: |
             The OpenVPN client key.</br>
             Single line, no line breaks, without BEGIN/END.</br>
-            Alternatively place the file in the data dir.</br>
             Check instructions at https://github.com/qdm12/gluetun/wiki/OpenVPN-client-key
           schema:
             type: string
+            show_if: [["openvpnCertKeyMethod", "=", "content"]]
             private: true
         - variable: openvpnCert
           label: OpenVPN Certificate
           description: |
             The OpenVPN client certificate.</br>
             Single line, no line breaks, without BEGIN/END.</br>
-            Alternatively place the file in the data dir.</br>
             Check instructions at https://github.com/qdm12/gluetun/wiki/OpenVPN-client-certificate
           schema:
             type: string
+            show_if: [["openvpnCertKeyMethod", "=", "content"]]
             private: true
+
+        # openvpnCertKeyMethod: file
+        - variable: openvpnCertHostPath
+          label: OpenVPN Certificate Host Path
+          description: |
+            The OpenVPN client certificate host path.</br>
+            Check instructions at https://github.com/qdm12/gluetun/wiki/OpenVPN-client-certificate
+          schema:
+            type: hostpath
+            show_if: [["openvpnCertKeyMethod", "=", "file"]]
+        - variable: openvpnKeyHostPath
+          label: OpenVPN Key Host Path
+          description: |
+            The OpenVPN client key host path.</br>
+            Check instructions at https://github.com/qdm12/gluetun/wiki/OpenVPN-client-certificate
+          schema:
+            type: hostpath
+            show_if: [["openvpnCertKeyMethod", "=", "file"]]
+
         - variable: openvpnUser
           label: OpenVPN User
           description: |
@@ -141,6 +196,7 @@ questions:
             An error will be shown if required and not provided.
           schema:
             type: string
+            show_if: [["type", "=", "openvpn"]]
         - variable: openvpnPassword
           label: OpenVPN Password
           description: |
@@ -149,6 +205,17 @@ questions:
             An error will be shown if required and not provided.
           schema:
             type: string
+            show_if: [["type", "=", "openvpn"]]
+            private: true
+        - variable: openvpnKeyPassphrase
+          label: OpenVPN Key Passphrase
+          description: |
+            The OpenVPN key passphrase.</br>
+            Required in some providers.</br>
+            An error will be shown if required and not provided.
+          schema:
+            type: string
+            show_if: [["type", "=", "openvpn"]]
             private: true
 
         # Common options (Optional)

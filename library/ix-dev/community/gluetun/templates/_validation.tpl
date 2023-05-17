@@ -3,7 +3,8 @@
                           "fastestvpn" "hidemyass" "ipvanish" "ivpn"
                           "mullvad" "nordvpn" "perfect privacy" "privado"
                           "private internet access" "privatevpn" "protonvpn"
-                          "purevpn" "slickvpn" "surfshark" "torguard") -}}
+                          "purevpn" "slickvpn" "surfshark" "torguard" "vpnsecure"
+                          "vpn unlimited" "vyprvpn" "wevpn" "windscribe") -}}
   {{- if not (mustHas .Values.gluetunConfig.provider $providers) -}}
     {{- fail (printf "Gluetun - Expected [Provider] to be one of [%v], but got [%v]" (join ", " $providers) .Values.gluetunConfig.provider) -}}
   {{- end -}}
@@ -12,6 +13,11 @@
   {{- if not (mustHas .Values.gluetunConfig.type $types) -}}
     {{- fail (printf "Gluetun - Expected [Type] to be one of [%v], but got [%v]" (join ", " $providers) .Values.gluetunConfig.type) -}}
   {{- end -}}
+
+  {{- $methods := (list "none" "file" "content") -}}
+  {{- if not (mustHas .Values.gluetunConfig.openvpnCertKeyMethod $methods) -}}
+    {{- fail (printf "Gluetun - Expected [OpenVPN Cert and Key Method] to be one of [%v], but got [%v]" (join ", " $methods) .Values.gluetunConfig.openvpnCertKeyMethod) -}}
+  {{- end -}}
 {{- end -}}
 
 {{/* Included by providers that require specific options */}}
@@ -19,9 +25,12 @@
   {{- $options := .options -}}
   {{- $rootCtx := .rootCtx -}}
 
-  {{- $otps := (list "openvpnUser" "openvpnPassword" "wireguardPrivateKey" "wireguardPresharedKey" "wireguardAddresses") -}}
+  {{- $opts := (list "openvpnCert" "openvpnKey" "openvpnCertHostPath"
+                      "openvpnKeyHostPath" "openvpnUser" "openvpnPassword"
+                      "openvpnKeyPassphrase" "wireguardPrivateKey"
+                      "wireguardPresharedKey" "wireguardAddresses") -}}
   {{- range $opt := $options -}}
-    {{- if not (mustHas $opt $otps) -}} {{/* Dev validation, to avoid typos early */}}
+    {{- if not (mustHas $opt $opts) -}} {{/* Dev validation, to avoid typos early */}}
       {{- fail (printf "Gluetun - Bad option (%v) passed in provider [%v]." $opt $rootCtx.Values.gluetunConfig.provider) -}}
     {{- end -}}
 
@@ -41,9 +50,9 @@
   {{- $options := .options -}}
   {{- $rootCtx := .rootCtx -}}
 
-  {{- $otps := (list "serverRegions" "serverCountries" "serverNames" "serverHostnames" "serverCities") -}}
+  {{- $opts := (list "serverRegions" "serverCountries" "serverNames" "serverHostnames" "serverCities") -}}
   {{- range $opt := $options -}}
-    {{- if not (mustHas $opt $otps) -}} {{/* Dev validation, to avoid typos early */}}
+    {{- if not (mustHas $opt $opts) -}} {{/* Dev validation, to avoid typos early */}}
       {{- fail (printf "Gluetun - Bad option (%v) passed in provider [%v]." $opt $rootCtx.Values.gluetunConfig.provider) -}}
     {{- end -}}
 
@@ -51,4 +60,8 @@
       {{- fail (printf "Gluetun - Provider [%v] does not support [%v] option." $rootCtx.Values.gluetunConfig.provider $opt) -}}
     {{- end -}}
   {{- end -}}
+{{- end -}}
+
+{{- define "gluetun.certkey.required.error" -}}
+  {{- fail (printf "Gluetun - Provider [%v] requires [Key and Certificate] either from [File or Content] method on type [openvpn]." .Values.gluetunConfig.provider) -}}
 {{- end -}}

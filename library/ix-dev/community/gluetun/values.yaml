@@ -31,17 +31,21 @@ gluetunConfig:
   wireguardAddresses: []
 
   # - Common OpenVPN options
-  # Optional - Alternatively place the file in the data dir
-  # https://github.com/qdm12/gluetun/wiki/OpenVPN-client-key
-  # Single line, no line breaks, without BEGIN/END
-  openvpnKey: ''
-  # Optional - Alternatively place the file in the data dir
-  # https://github.com/qdm12/gluetun/wiki/OpenVPN-client-key
-  # Single line, no line breaks, without BEGIN/END
-  openvpnCert: ''
-
   openvpnUser: ''
   openvpnPassword: ''
+
+  # file | content | none
+  openvpnCertKeyMethod: none
+
+  # openvpnCertKeyMethod: file
+  openvpnCertHostPath: ''
+  openvpnKeyHostPath: ''
+
+  # openvpnCertKeyMethod: content
+  # Single line, no line breaks, without BEGIN/END
+  openvpnKey: ''
+  openvpnCert: ''
+  openvpnKeyPassphrase: ''
 
   # - Common options (Optional)
   # https://raw.githubusercontent.com/qdm12/gluetun/master/internal/storage/servers.json

@@ -1,5 +1,5 @@
-{{/* https://github.com/qdm12/gluetun/wiki/Cyberghost */}}
-{{- define "gluetun.cyberghost.openvpn.validation" -}}
+{{/* https://github.com/qdm12/gluetun/wiki/VPN-Unlimited */}}
+{{- define "gluetun.vpn unlimited.openvpn.validation" -}}
   {{/* Cert and Key Required */}}
   {{- if eq .Values.gluetunConfig.openvpnCertKeyMethod "file" -}}
     {{- include "gluetun.options.required" (dict "rootCtx" $
@@ -22,11 +22,9 @@
   {{/* Unsupported */}}
   {{- include "gluetun.unsupported.server.options" (dict "rootCtx" $
                                                           "options" (list
-                                                                    "serverRegions"
-                                                                    "serverCities"
                                                                     "serverNames")) -}}
 {{- end -}}
 
-{{- define "gluetun.cyberghost.wireguard.validation" -}}
+{{- define "gluetun.vpn unlimited.wireguard.validation" -}}
   {{- include "gluetun.unsupported.type" $ -}}
 {{- end -}}
