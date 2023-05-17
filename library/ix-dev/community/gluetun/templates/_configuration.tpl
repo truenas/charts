@@ -8,7 +8,11 @@ configmap:
       VPN_TYPE: {{ .Values.gluetunConfig.type }}
       PUBLICIP_FILE: /tmp/gluetun/ip
       {{/* Make VPN interface unique for each app instance */}}
-      VPN_INTERFACE: {{ printf "%vtun0" .Release.Name | replace "-" "" | trunc 15 | lower }}
+      {{ $vpnInterface := .Release.Name | replace "-" "" | trunc 15 | lower }}
+      {{ if gt (len $vpnInterface) 15 }}
+        {{ fail "Gluetun - App name is used also for interface name and cannot exceed 15 characters" }}
+      {{ end }}
+      VPN_INTERFACE: {{ $vpnInterface }}
 
       {{/* Include common configuration */}}
       {{- include "gluetun.configs.common.env" $ | nindent 6 }}
