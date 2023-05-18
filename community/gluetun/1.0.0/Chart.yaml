@@ -1,0 +1,24 @@
+name: gluetun
+description: Lightweight swiss-knife-like VPN client to multiple VPN service providers
+annotations:
+  title: Gluetun
+type: application
+version: 1.0.0
+apiVersion: v2
+appVersion: v3.33.0
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.0.7
+home: https://github.com/qdm12/gluetun
+icon: https://raw.githubusercontent.com/qdm12/gluetun/master/title.svg
+sources:
+  - https://github.com/truenas/charts/tree/master/community/gluetun
+  - https://github.com/qdm12/gluetun
+keywords:
+  - vpn

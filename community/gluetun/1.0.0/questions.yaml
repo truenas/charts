@@ -1,0 +1,464 @@
+groups:
+  - name: Gluetun Configuration
+    description: Configure Gluetun
+  - name: User and Group Configuration
+    description: Configure User and Group for Gluetun
+  - name: Network Configuration
+    description: Configure Network for Gluetun
+  - name: Storage Configuration
+    description: Configure Storage for Gluetun
+  - name: Resources Configuration
+    description: Configure Resources for Gluetun
+
+questions:
+  - variable: TZ
+    group: Gluetun Configuration
+    label: Timezone
+    schema:
+      type: string
+      default: Etc/UTC
+      required: true
+      $ref:
+        - definitions/timezone
+
+  - variable: gluetunConfig
+    label: ""
+    group: Gluetun Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: provider
+          label: Provider
+          description: |
+            The VPN provider to use.</br>
+            View available providers at https://github.com/qdm12/gluetun/wiki
+          schema:
+            type: string
+            required: true
+            enum:
+              - value: custom
+                description: Custom
+              - value: airvpn
+                description: AirVPN
+              - value: cyberghost
+                description: Cyberghost
+              - value: expressvpn
+                description: ExpressVPN
+              - value: fastestvpn
+                description: FastestVPN
+              - value: hidemyass
+                description: HideMyAss (HMA)
+              - value: ipvanish
+                description: IPVanish
+              - value: ivpn
+                description: IVPN
+              - value: mullvad
+                description: Mullvad
+              - value: nordvpn
+                description: NordVPN
+              - value: perfect privacy
+                description: Perfect Privacy
+              - value: privado
+                description: Privado
+              - value: private internet access
+                description: Private Internet Access (PIA)
+              - value: privatevpn
+                description: PrivateVPN
+              - value: protonvpn
+                description: ProtonVPN
+              - value: purevpn
+                description: PureVPN
+              - value: slickvpn
+                description: SlickVPN
+              - value: surfshark
+                description: Surfshark
+              - value: torguard
+                description: Tor Guard
+              - value: vpnsecure
+                description: VPNSecure
+              - value: vpn unlimited
+                description: VPN Unlimited
+              - value: vyprvpn
+                description: VyprVPN
+              - value: wevpn
+                description: WeVPN
+              - value: windscribe
+                description: Windscribe
+
+        - variable: type
+          label: Type
+          description: |
+            The VPN type to use.</br>
+            Not all providers support all types.</br>
+            An error will be shown if not supported.
+          schema:
+            type: string
+            required: true
+            enum:
+              - value: openvpn
+                description: OpenVPN
+              - value: wireguard
+                description: Wireguard
+
+        # Custom provider (openvpn)
+        - variable: openvpnCustomConfigHostPath
+          label: OpenVPN Custom Configuration Host Path
+          description: |
+            The OpenVPN custom configuration host path.</br>
+            Fill this only if type is openvpn.</br>
+          schema:
+            type: hostpath
+            # Ideally we would have a show_if with type=openvpn too
+            show_if: [["provider", "=", "custom"]]
+
+        # Custom provider (wireguard)
+        - variable: vpnEndpointIP
+          label: VPN Endpoint IP
+          description: |
+            The VPN endpoint IP.</br>
+            Fill this only if type is wireguard.</br>
+          schema:
+            type: string
+            # Ideally we would have a show_if with type=wireguard too
+            show_if: [["provider", "=", "custom"]]
+        - variable: vpnEndpointPort
+          label: VPN Endpoint Port
+          description: |
+            The VPN endpoint port.</br>
+            Fill this only if type is wireguard.</br>
+          schema:
+            type: int
+            # Ideally we would have a show_if with type=wireguard too
+            show_if: [["provider", "=", "custom"]]
+        - variable: wireguardPublicKey
+          label: Wireguard Public Key
+          description: |
+            The Wireguard public key.</br>
+            Fill this only if type is wireguard.</br>
+          schema:
+            type: string
+            # Ideally we would have a show_if with type=wireguard too
+            show_if: [["provider", "=", "custom"]]
+            private: true
+
+        # Common Wireguard options
+        - variable: wireguardPrivateKey
+          label: Wireguard Private Key
+          schema:
+            type: string
+            show_if: [["type", "=", "wireguard"]]
+        - variable: wireguardPresharedKey
+          label: Wireguard Preshared Key
+          schema:
+            type: string
+        - variable: wireguardAddresses
+          label: Wireguard Addresses
+          schema:
+            type: list
+            show_if: [["type", "=", "wireguard"]]
+            default: []
+            items:
+              - variable: address
+                label: Address
+                schema:
+                  type: string
+                  required: true
+
+        # Common OpenVPN options
+        - variable: openvpnCertKeyMethod
+          label: OpenVPN Certificate and Key Method
+          description: |
+            The method to use for the OpenVPN client certificate and key.</br>
+            - File: Use a file path on the host.</br>
+            - Content: Use the content of the variable.</br>
+            - None: Do not use a certificate and key.</br>
+            This is only required by a small subset of providers.</br>
+            An error will be shown if required and not provided.
+          schema:
+            type: string
+            show_if: [["type", "=", "openvpn"]]
+            default: none
+            required: true
+            enum:
+              - value: file
+                description: File
+              - value: content
+                description: Content
+              - value: none
+                description: None
+
+        # openvpnCertKeyMethod: content
+        - variable: openvpnKey
+          label: OpenVPN Key
+          description: |
+            The OpenVPN client key.</br>
+            Single line, no line breaks, without BEGIN/END.</br>
+            Check instructions at https://github.com/qdm12/gluetun/wiki/OpenVPN-client-key
+          schema:
+            type: string
+            show_if: [["openvpnCertKeyMethod", "=", "content"]]
+            private: true
+        - variable: openvpnCert
+          label: OpenVPN Certificate
+          description: |
+            The OpenVPN client certificate.</br>
+            Single line, no line breaks, without BEGIN/END.</br>
+            Check instructions at https://github.com/qdm12/gluetun/wiki/OpenVPN-client-certificate
+          schema:
+            type: string
+            show_if: [["openvpnCertKeyMethod", "=", "content"]]
+            private: true
+
+        # openvpnCertKeyMethod: file
+        - variable: openvpnCertHostPath
+          label: OpenVPN Certificate Host Path
+          description: |
+            The OpenVPN client certificate host path.</br>
+            Check instructions at https://github.com/qdm12/gluetun/wiki/OpenVPN-client-certificate
+          schema:
+            type: hostpath
+            show_if: [["openvpnCertKeyMethod", "=", "file"]]
+        - variable: openvpnKeyHostPath
+          label: OpenVPN Key Host Path
+          description: |
+            The OpenVPN client key host path.</br>
+            Check instructions at https://github.com/qdm12/gluetun/wiki/OpenVPN-client-certificate
+          schema:
+            type: hostpath
+            show_if: [["openvpnCertKeyMethod", "=", "file"]]
+
+        - variable: openvpnUser
+          label: OpenVPN User
+          description: |
+            The OpenVPN username.</br>
+            Required in some providers.</br>
+            An error will be shown if required and not provided.
+          schema:
+            type: string
+            show_if: [["type", "=", "openvpn"]]
+        - variable: openvpnPassword
+          label: OpenVPN Password
+          description: |
+            The OpenVPN password.</br>
+            Required in some providers.</br>
+            An error will be shown if required and not provided.
+          schema:
+            type: string
+            show_if: [["type", "=", "openvpn"]]
+            private: true
+        - variable: openvpnKeyPassphrase
+          label: OpenVPN Key Passphrase
+          description: |
+            The OpenVPN key passphrase.</br>
+            Required in some providers.</br>
+            An error will be shown if required and not provided.
+          schema:
+            type: string
+            show_if: [["type", "=", "openvpn"]]
+            private: true
+
+        # Common options (Optional)
+        - variable: serverCountries
+          label: Server Countries (Optional)
+          description: |
+            The countries to connect to.</br>
+            Not all providers support this. An error will be shown if not supported.</br>
+            View available options at https://raw.githubusercontent.com/qdm12/gluetun/master/internal/storage/servers.json
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: country
+                label: Country
+                schema:
+                  type: string
+                  required: true
+        - variable: serverRegions
+          label: Server Regions (Optional)
+          description: |
+            The regions to connect to.</br>
+            Not all providers support this. An error will be shown if not supported.</br>
+            View available options at https://raw.githubusercontent.com/qdm12/gluetun/master/internal/storage/servers.json
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: region
+                label: Region
+                schema:
+                  type: string
+                  required: true
+        - variable: serverCities
+          label: Server Cities (Optional)
+          description: |
+            The cities to connect to.</br>
+            Not all providers support this. An error will be shown if not supported.</br>
+            View available options at https://raw.githubusercontent.com/qdm12/gluetun/master/internal/storage/servers.json
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: city
+                label: City
+                schema:
+                  type: string
+                  required: true
+        - variable: serverHostnames
+          label: Server Hostnames (Optional)
+          description: |
+            The hostnames to connect to.</br>
+            Not all providers support this. An error will be shown if not supported.</br>
+            View available options at https://raw.githubusercontent.com/qdm12/gluetun/master/internal/storage/servers.json
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: hostname
+                label: Hostname
+                schema:
+                  type: string
+                  required: true
+        - variable: serverNames
+          label: Server Names (Optional)
+          description: |
+            The names to connect to.</br>
+            Not all providers support this. An error will be shown if not supported.</br>
+            View available options at https://raw.githubusercontent.com/qdm12/gluetun/master/internal/storage/servers.json
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: name
+                label: Name
+                schema:
+                  type: string
+                  required: true
+        - variable: additionalEnvs
+          label: Additional Environment Variables
+          description: Configure additional environment variables for Gluetun.
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: env
+                label: Environment Variable
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: name
+                      label: Name
+                      schema:
+                        type: string
+                        required: true
+                    - variable: value
+                      label: Value
+                      schema:
+                        type: string
+                        required: true
+
+  - variable: gluetunID
+    label: ""
+    group: User and Group Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: user
+          label: User ID
+          description: The user id that Gluetun files will be owned by.
+          schema:
+            type: int
+            min: 568
+            default: 568
+            required: true
+        - variable: group
+          label: Group ID
+          description: The group id that Gluetun files will be owned by.
+          schema:
+            type: int
+            min: 568
+            default: 568
+            required: true
+
+  - variable: gluetunNetwork
+    label: ""
+    group: Network Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: hostNetwork
+          label: Host Network
+          description: Bind to the host network.
+          schema:
+            type: boolean
+            default: false
+
+  - variable: gluetunStorage
+    label: ""
+    group: Storage Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: data
+          label: Gluetun Data Storage
+          description: The path to store Gluetun data.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
+                schema:
+                  type: string
+                  required: true
+                  default: ixVolume
+                  enum:
+                    - value: hostPath
+                      description: Host Path (Path that already exists on the system)
+                    - value: ixVolume
+                      description: ixVolume (Dataset created automatically by the system)
+              - variable: datasetName
+                label: Dataset Name
+                schema:
+                  type: string
+                  show_if: [["type", "=", "ixVolume"]]
+                  required: true
+                  hidden: true
+                  immutable: true
+                  default: "data"
+                  $ref:
+                    - "normalize/ixVolume"
+              - variable: hostPath
+                label: Host Path
+                schema:
+                  type: hostpath
+                  show_if: [["type", "=", "hostPath"]]
+                  immutable: true
+                  required: true
+
+  - variable: resources
+    label: ""
+    group: Resources Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: limits
+          label: Limits
+          schema:
+            type: dict
+            attrs:
+              - variable: cpu
+                label: CPU
+                description: CPU limit for Gluetun.
+                schema:
+                  type: string
+                  default: 4000m
+                  required: true
+              - variable: memory
+                label: Memory
+                description: Memory limit for Gluetun.
+                schema:
+                  type: string
+                  default: 8Gi
+                  required: true
