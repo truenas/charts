@@ -30,34 +30,34 @@ configmap:
 
 {{- define "gluetun.openvpn.filemount" -}}
   {{ if eq .Values.gluetunConfig.openvpnCertKeyMethod "file" }}
-  openvpn-certificate:
-    enabled: true
-    type: hostPath
-    hostPath: {{ .Values.gluetunConfig.openvpnCertHostPath }}
-    hostPathType: File
-    targetSelector:
+openvpn-certificate:
+  enabled: true
+  type: hostPath
+  hostPath: {{ .Values.gluetunConfig.openvpnCertHostPath }}
+  hostPathType: File
+  targetSelector:
+    gluetun:
       gluetun:
-        gluetun:
-          mountPath: /gluetun/client.crt
-  openvpn-key:
-    enabled: true
-    type: hostPath
-    hostPath: {{ .Values.gluetunConfig.openvpnKeyHostPath }}
-    hostPathType: File
-    targetSelector:
+        mountPath: /gluetun/client.crt
+openvpn-key:
+  enabled: true
+  type: hostPath
+  hostPath: {{ .Values.gluetunConfig.openvpnKeyHostPath }}
+  hostPathType: File
+  targetSelector:
+    gluetun:
       gluetun:
-        gluetun:
-          mountPath: /gluetun/openvpn_encrypted_key
+        mountPath: /gluetun/openvpn_encrypted_key
   {{ end }}
   {{ if eq .Values.gluetunConfig.provider "custom" }}
-  custom-conf:
-    enabled: true
-    type: hostPath
-    hostPath: {{ .Values.gluetunConfig.openvpnCustomConfigHostPath }}
-    hostPathType: File
-    targetSelector:
+custom-conf:
+  enabled: true
+  type: hostPath
+  hostPath: {{ .Values.gluetunConfig.openvpnCustomConfigHostPath }}
+  hostPathType: File
+  targetSelector:
+    gluetun:
       gluetun:
-        gluetun:
-          mountPath: /gluetun/custom.conf
+        mountPath: /gluetun/custom.conf
   {{ end }}
 {{- end -}}

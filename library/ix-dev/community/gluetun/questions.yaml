@@ -34,6 +34,7 @@ questions:
             View available providers at https://github.com/qdm12/gluetun/wiki
           schema:
             type: string
+            default: custom
             required: true
             enum:
               - value: custom
@@ -93,6 +94,7 @@ questions:
             An error will be shown if not supported.
           schema:
             type: string
+            default: openvpn
             required: true
             enum:
               - value: openvpn
@@ -108,8 +110,7 @@ questions:
             Fill this only if type is openvpn.</br>
           schema:
             type: hostpath
-            # Ideally we would have a show_if with type=openvpn too
-            show_if: [["provider", "=", "custom"]]
+            show_if: [["provider", "=", "custom"], ["type", "=", "openvpn"]]
 
         # Custom provider (wireguard)
         - variable: vpnEndpointIP
@@ -119,8 +120,7 @@ questions:
             Fill this only if type is wireguard.</br>
           schema:
             type: string
-            # Ideally we would have a show_if with type=wireguard too
-            show_if: [["provider", "=", "custom"]]
+            show_if: [["provider", "=", "custom"], ["type", "=", "wireguard"]]
         - variable: vpnEndpointPort
           label: VPN Endpoint Port
           description: |
@@ -128,8 +128,7 @@ questions:
             Fill this only if type is wireguard.</br>
           schema:
             type: int
-            # Ideally we would have a show_if with type=wireguard too
-            show_if: [["provider", "=", "custom"]]
+            show_if: [["provider", "=", "custom"], ["type", "=", "wireguard"]]
         - variable: wireguardPublicKey
           label: Wireguard Public Key
           description: |
@@ -137,8 +136,7 @@ questions:
             Fill this only if type is wireguard.</br>
           schema:
             type: string
-            # Ideally we would have a show_if with type=wireguard too
-            show_if: [["provider", "=", "custom"]]
+            show_if: [["provider", "=", "custom"], ["type", "=", "wireguard"]]
             private: true
 
         # Common Wireguard options
@@ -151,6 +149,7 @@ questions:
           label: Wireguard Preshared Key
           schema:
             type: string
+            show_if: [["type", "=", "wireguard"]]
         - variable: wireguardAddresses
           label: Wireguard Addresses
           schema:
