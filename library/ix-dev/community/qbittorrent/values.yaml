@@ -20,11 +20,9 @@ qbitRunAs:
 qbitStorage:
   downloads:
     type: ixVolume
-    hostPath: ""
     datasetName: downloads
   config:
     type: ixVolume
-    hostPath: ""
     datasetName: config
 
 notes:

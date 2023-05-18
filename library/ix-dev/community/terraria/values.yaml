@@ -36,9 +36,7 @@ terrariaNetwork:
 terrariaStorage:
   world:
     type: ixVolume
-    hostPath: ''
     datasetName: world
   plugins:
     type: ixVolume
-    hostPath: ''
     datasetName: plugins

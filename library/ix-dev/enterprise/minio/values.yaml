@@ -42,9 +42,7 @@ minioLogging:
     diskCapacityGB: 5
     pgData:
       type: ixVolume
-      hostPath: ''
       datasetName: postgres-data
     pgBackup:
       type: ixVolume
-      hostPath: ''
       datasetName: postgres-backup

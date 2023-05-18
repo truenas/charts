@@ -20,6 +20,5 @@ sonarrRunAs:
 sonarrStorage:
   config:
     type: ixVolume
-    hostPath: ''
     datasetName: config
   additionalStorages: []

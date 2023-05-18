@@ -15,11 +15,9 @@ npmNetwork:
 npmStorage:
   data:
     type: ixVolume
-    hostPath: ''
     datasetName: data
   certs:
     type: ixVolume
-    hostPath: ''
     datasetName: certs
 notes:
   custom: |

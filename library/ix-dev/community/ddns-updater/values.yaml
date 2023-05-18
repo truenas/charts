@@ -50,5 +50,4 @@ ddnsRunAs:
 ddnsStorage:
   data:
     type: ixVolume
-    hostPath: ''
     datasetName: data

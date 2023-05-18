@@ -22,19 +22,15 @@ tdarrID:
 tdarrStorage:
   server:
     type: ixVolume
-    hostPath: ''
     datasetName: server
   configs:
     type: ixVolume
-    hostPath: ''
     datasetName: configs
   logs:
     type: ixVolume
-    hostPath: ''
     datasetName: logs
   transcodes:
     type: ixVolume
-    hostPath: ''
     datasetName: transcodes
     medium: ''
     size: ''

@@ -27,13 +27,10 @@ vaultwardenRunAs:
 vaultwardenStorage:
   data:
     type: ixVolume
-    hostPath: ''
     datasetName: data
   pgData:
     type: ixVolume
-    hostPath: ''
     datasetName: pgData
   pgBackup:
     type: ixVolume
-    hostPath: ''
     datasetName: pgBackup

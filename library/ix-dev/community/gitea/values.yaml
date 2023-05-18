@@ -28,17 +28,13 @@ giteaRunAs:
 giteaStorage:
   data:
     type: ixVolume
-    hostPath: ""
     datasetName: data
   config:
     type: ixVolume
-    hostPath: ""
     datasetName: config
   pgData:
     type: ixVolume
-    hostPath: ""
     datasetName: pgData
   pgBackup:
     type: ixVolume
-    hostPath: ""
     datasetName: pgBackup
