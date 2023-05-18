@@ -1,0 +1,26 @@
+image:
+  repository: sctx/overseerr
+  pullPolicy: IfNotPresent
+  tag: '1.32.5'
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+overseerrConfig:
+  additionalEnvs: []
+
+overseerrNetwork:
+  webPort: 30000
+  hostNetwork: false
+
+overseerrRunAs:
+  user: 568
+  group: 568
+
+overseerrStorage:
+  config:
+    type: ixVolume
+    hostPath: ''
+    datasetName: config

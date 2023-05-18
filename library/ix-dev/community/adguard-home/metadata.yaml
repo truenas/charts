@@ -1,0 +1,12 @@
+runAsContext:
+  - userName: root
+    groupName: root
+    gid: 0
+    uid: 0
+    description: AdGuard Home requires root privileges to bind to privileged ports
+capabilities:
+  - name: NET_BIND_SERVICE
+    description: This is used by the DHCP and DNS service
+  - name: NET_RAW
+    description: This is used by the DHCP service
+hostMounts: []

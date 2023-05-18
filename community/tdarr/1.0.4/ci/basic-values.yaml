@@ -1,0 +1,23 @@
+tdarrConfig:
+  nodeName: My Internal Node
+tdarrID:
+  user: 1001
+  group: 1001
+tdarrStorage:
+  server:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/server
+  configs:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/configs
+  logs:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/logs
+  transcodes:
+    type: emptyDir
+    medium: Memory
+    size: 1Gi
+# Make sure installation don't fail when 0 GPU are assigned
+tdarrGPU:
+  nvidia.com/gpu: 0
+  intel.com/gpu: 0
