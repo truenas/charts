@@ -16,9 +16,9 @@ gluetunConfig:
   type: wireguard
   vpnEndpointIP: 10.10.10.100
   vpnEndpointPort: 51820
-  wireguardPresharedKey: qUIcxwHnWbP3F59HfYnXRGNsdal72JYOOQ/vM5myy7E=
-  wireguardPrivateKey: eF7hBuy7uA/SPIf5ooZcd5MGWjhBxS9z27y6IPP/vGk=
-  wireguardPublicKey: V1JoP9szlZNUryb1mdxuOOFG85BlI9nl3fbax2ufJkE=
-  wireguardAddresses:
-    - 10.0.0.0/16
-    - 172.0.0.0/16
+  # wireguardPresharedKey: qUIcxwHnWbP3F59HfYnXRGNsdal72JYOOQ/vM5myy7E=
+  # wireguardPrivateKey: eF7hBuy7uA/SPIf5ooZcd5MGWjhBxS9z27y6IPP/vGk=
+  # wireguardPublicKey: V1JoP9szlZNUryb1mdxuOOFG85BlI9nl3fbax2ufJkE=
+  # wireguardAddresses:
+  #   - 10.0.0.5/32
+  #   - 172.0.0.10/32

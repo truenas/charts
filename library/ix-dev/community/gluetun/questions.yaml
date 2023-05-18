@@ -145,11 +145,13 @@ questions:
           schema:
             type: string
             show_if: [["type", "=", "wireguard"]]
+            private: true
         - variable: wireguardPresharedKey
           label: Wireguard Preshared Key
           schema:
             type: string
             show_if: [["type", "=", "wireguard"]]
+            private: true
         - variable: wireguardAddresses
           label: Wireguard Addresses
           schema:
@@ -332,6 +334,50 @@ questions:
                 schema:
                   type: string
                   required: true
+        - variable: firewall
+          label: Firewall
+          description: |
+            Turn on or off the container built-in firewall.</br>
+            More info: https://github.com/qdm12/gluetun/wiki/Firewall-options
+          schema:
+            type: boolean
+            default: false
+            show_subquestions_if: true
+            subquestions:
+              - variable: firewallOutboundSubnets
+                label: Firewall Outbound Subnets
+                description: |
+                  The subnets to allow outbound traffic to.
+                schema:
+                  type: list
+                  default: []
+                  items:
+                    - variable: subnet
+                      label: Subnet
+                      schema:
+                        type: string
+                        required: true
+        - variable: dot
+          label: DNS over TLS
+          description: |
+            Turn on or off DNS over TLS.
+          schema:
+            type: boolean
+            default: false
+        - variable: dnsKeepNameserver
+          label: DNS Keep Nameserver
+          description: |
+            Keep the DNS Nameserver.
+          schema:
+            type: boolean
+            default: true
+        - variable: dnsAddress
+          label: DNS Address
+          description: |
+            The DNS address to use.
+          schema:
+            type: string
+
         - variable: additionalEnvs
           label: Additional Environment Variables
           description: Configure additional environment variables for Gluetun.

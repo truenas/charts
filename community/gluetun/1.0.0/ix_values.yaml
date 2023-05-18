@@ -67,6 +67,15 @@ gluetunConfig:
   serverHostnames: []
   serverNames: []
 
+  # - Firewall
+  firewall: false
+  firewallOutboundSubnets: []
+
+  # - DNS
+  dot: false
+  dnsKeepNameserver: false
+  dnsAddress: ''
+
   additionalEnvs: []
 
 # TODO: openvpn file test

@@ -17,5 +17,5 @@ gluetunConfig:
   wireguardPresharedKey: W5vB/24TtUkO8H9Xz6d+0BHruYq99QP2Obc54dxyVaU=
   wireguardPrivateKey: ACTNX9v4t6bN6I207zBvrd/DcJYz8n5+NCjjqPFYEXE=
   wireguardAddresses:
-    - 10.0.0.0/16
-    - 172.0.0.0/16
+    - 10.0.0.5/32
+    - 172.0.0.10/32

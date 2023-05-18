@@ -26,6 +26,17 @@ configmap:
 
       {{/* Include provider specific validation */}}
       {{- include (printf "gluetun.%v.%v.validation" .Values.gluetunConfig.provider .Values.gluetunConfig.type) $ | nindent 6 }}
+      {{/* Firewall */}}
+      FIREWALL: {{ ternary "on" "off" .Values.gluetunConfig.firewall | quote }}
+      {{ if .Values.gluetunConfig.firewall }}
+      FIREWALL_OUTBOUND_SUBNETS: {{ join "," .Values.gluetunConfig.firewallOutboundSubnets }}
+      {{ end }}
+      {{/* DNS */}}
+      DOT: {{ ternary "on" "off" .Values.gluetunConfig.dot | quote }}
+      DNS_KEEP_NAMESERVER: {{ ternary "on" "off" .Values.gluetunConfig.dnsKeepNameserver | quote }}
+      {{ with .Values.gluetunConfig.dnsAddress }}
+      DNS_ADDRESS: {{ . }}
+      {{ end }}
 {{- end -}}
 
 {{- define "gluetun.openvpn.filemount" -}}
