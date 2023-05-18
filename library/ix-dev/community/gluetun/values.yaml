@@ -22,15 +22,18 @@ gluetunStorage:
     datasetName: data
 
 gluetunConfig:
+  # - Required
   provider: ''
   type: ''
 
   # - Common Wireguard options
+  # Required based on provider
   wireguardPrivateKey: ''
   wireguardPresharedKey: ''
   wireguardAddresses: []
 
   # - Common OpenVPN options
+  # Required based on provider
   openvpnUser: ''
   openvpnPassword: ''
 
@@ -42,10 +45,10 @@ gluetunConfig:
   openvpnKeyHostPath: ''
 
   # openvpnCertKeyMethod: content
+  openvpnKeyPassphrase: ''
   # Single line, no line breaks, without BEGIN/END
   openvpnKey: ''
   openvpnCert: ''
-  openvpnKeyPassphrase: ''
 
   # - Custom provider
   # type: openvpn
