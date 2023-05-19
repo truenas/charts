@@ -15,6 +15,10 @@ capabilities:
     description: Gluetun is able to use RAW and PACKET sockets.
   - name: SYS_MODULE
     description: Gluetun is able to load kernel modules.
+  - name: SETUID
+    description: Gluetun is able to set the user ID for it's sub-processes.
+  - name: SETGID
+    description: Gluetun is able to set the group ID for it's sub-processes.
 hostMounts:
   - hostPath: /dev/tun
     description: Required to access the TUN device to create the VPN tunnel.
