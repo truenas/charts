@@ -73,7 +73,7 @@ gluetunConfig:
 
   # - DNS
   dot: false
-  dnsKeepNameserver: false
+  dnsKeepNameserver: true
   dnsAddress: ''
 
   additionalEnvs: []
