@@ -371,12 +371,14 @@ questions:
           schema:
             type: boolean
             default: true
-        - variable: dnsAddress
-          label: DNS Address
-          description: |
-            The DNS address to use.
-          schema:
-            type: string
+            show_subquestions_if: false
+            subquestions:
+              - variable: dnsAddress
+                label: DNS Address
+                description: |
+                  The DNS address to use.
+                schema:
+                  type: string
 
         - variable: additionalEnvs
           label: Additional Environment Variables

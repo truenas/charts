@@ -11,6 +11,10 @@ capabilities:
     description: Gluetun is able to chown files.
   - name: DAC_OVERRIDE
     description: Gluetun is able to bypass permission checks for it's sub-processes.
+  - name: NET_RAW
+    description: Gluetun is able to use RAW and PACKET sockets.
+  - name: SYS_MODULE
+    description: Gluetun is able to load kernel modules.
 hostMounts:
   - hostPath: /dev/tun
     description: Required to access the TUN device to create the VPN tunnel.
