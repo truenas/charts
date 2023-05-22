@@ -25,6 +25,8 @@ workload:
                 - DAC_OVERRIDE
                 - SYS_MODULE
                 - NET_RAW
+                - SETUID
+                - SETGID
           fixedEnv:
             PUID: {{ .Values.gluetunID.user }}
           envFrom:
