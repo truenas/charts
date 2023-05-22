@@ -10,9 +10,9 @@
             "healthy_error": null,
             "home": "https://syncthing.net/",
             "location": "/__w/charts/charts/charts/syncthing",
-            "latest_version": "1.0.27",
+            "latest_version": "1.0.28",
             "latest_app_version": "1.23.4",
-            "latest_human_version": "1.23.4_1.0.27",
+            "latest_human_version": "1.23.4_1.0.28",
             "last_update": "2023-05-11 16:20:35",
             "name": "syncthing",
             "recommended": false,
@@ -29,7 +29,11 @@
                 "sync",
                 "file-sharing"
             ],
-            "screenshots": [],
+            "screenshots": [
+                "https://docs.syncthing.net/_images/gui1.png",
+                "https://docs.syncthing.net/_images/gs1.png",
+                "https://docs.syncthing.net/_images/gs3.png"
+            ],
             "sources": [
                 "https://syncthing.net",
                 "https://github.com/truenas/charts/tree/master/library/ix-dev/charts/syncthing"
@@ -182,7 +186,7 @@
             "latest_version": "1.0.23",
             "latest_app_version": "v1.39.1",
             "latest_human_version": "v1.39.1_1.0.23",
-            "last_update": "2023-05-11 16:20:35",
+            "last_update": "2023-05-19 07:40:59",
             "name": "netdata",
             "recommended": false,
             "title": "Netdata",
@@ -213,9 +217,9 @@
             "healthy_error": null,
             "home": "https://plex.tv/",
             "location": "/__w/charts/charts/charts/plex",
-            "latest_version": "1.7.46",
+            "latest_version": "1.7.47",
             "latest_app_version": "1.32.1.6999",
-            "latest_human_version": "1.32.1.6999_1.7.46",
+            "latest_human_version": "1.32.1.6999_1.7.47",
             "last_update": "2023-05-11 16:20:35",
             "name": "plex",
             "recommended": false,
@@ -234,7 +238,10 @@
                 "tv",
                 "streaming"
             ],
-            "screenshots": [],
+            "screenshots": [
+                "https://support.plex.tv/wp-content/uploads/sites/4/2013/09/Web-Overview-1.png",
+                "https://www.plex.tv/wp-content/uploads/2023/05/pms-devices-image.png"
+            ],
             "sources": [
                 "https://hub.docker.com/r/plexinc/pms-docker/",
                 "https://github.com/k8s-at-home/charts/tree/master/charts/plex"
