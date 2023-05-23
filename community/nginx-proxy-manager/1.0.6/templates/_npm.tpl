@@ -56,6 +56,9 @@ workload:
               enabled: true
               type: exec
               command: /bin/check-health
+              spec:
+                initialDelaySeconds: 30
+                failureThreshold: 120
 {{/* Service */}}
 service:
   npm:
