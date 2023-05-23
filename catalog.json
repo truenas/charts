@@ -13,7 +13,7 @@
             "latest_version": "1.0.28",
             "latest_app_version": "1.23.4",
             "latest_human_version": "1.23.4_1.0.28",
-            "last_update": "2023-05-11 16:20:35",
+            "last_update": "2023-05-22 11:48:19",
             "name": "syncthing",
             "recommended": false,
             "title": "Syncthing",
@@ -50,9 +50,9 @@
             "healthy_error": null,
             "home": "https://github.com/CollaboraOnline/online",
             "location": "/__w/charts/charts/charts/collabora",
-            "latest_version": "1.2.12",
+            "latest_version": "1.2.13",
             "latest_app_version": "21.11.4.1.1",
-            "latest_human_version": "21.11.4.1.1_1.2.12",
+            "latest_human_version": "21.11.4.1.1_1.2.13",
             "last_update": "2023-05-11 16:20:35",
             "name": "collabora",
             "recommended": false,
@@ -69,7 +69,9 @@
                 "documents",
                 "collaboration"
             ],
-            "screenshots": [],
+            "screenshots": [
+                "https://www.collaboraoffice.com/wp-content/uploads/2016/04/LibreOffice_Online_Admin_console_1.png"
+            ],
             "sources": [
                 "https://github.com/CollaboraOnline/online.git",
                 "https://hub.docker.com/r/collabora/code"
@@ -113,9 +115,9 @@
             "healthy_error": null,
             "home": "https://github.com/home-assistant/home-assistant",
             "location": "/__w/charts/charts/charts/home-assistant",
-            "latest_version": "1.0.91",
+            "latest_version": "1.0.92",
             "latest_app_version": "2023.5.3",
-            "latest_human_version": "2023.5.3_1.0.91",
+            "latest_human_version": "2023.5.3_1.0.92",
             "last_update": "2023-05-15 07:08:07",
             "name": "home-assistant",
             "recommended": false,
@@ -131,7 +133,9 @@
                 "home-automation",
                 "assistant"
             ],
-            "screenshots": [],
+            "screenshots": [
+                "https://scotthelme.co.uk/content/images/2021/08/image-12.png"
+            ],
             "sources": [
                 "https://github.com/home-assistant/home-assistant",
                 "https://github.com/truenas/charts/tree/master/library/ix-dev/charts/home-assistant"
@@ -148,9 +152,9 @@
             "healthy_error": null,
             "home": "https://github.com/diskoverdata/diskover-community",
             "location": "/__w/charts/charts/charts/diskoverdata",
-            "latest_version": "1.0.10",
+            "latest_version": "1.0.11",
             "latest_app_version": "2.0.1",
-            "latest_human_version": "2.0.1_1.0.10",
+            "latest_human_version": "2.0.1_1.0.11",
             "last_update": "2023-05-11 16:20:35",
             "name": "diskoverdata",
             "recommended": false,
@@ -166,7 +170,11 @@
                 "storage",
                 "discovery"
             ],
-            "screenshots": [],
+            "screenshots": [
+                "https://www.linuxserver.io/user/pages/content/images/2018/11/image-1.png",
+                "https://camo.githubusercontent.com/62dfd0970129262c413cd9b811a07062526d2f45516ec4f862276c0610fe8f6d/687474703a2f2f7777772e6469736b6f766572646174612e636f6d2f77702d636f6e74656e742f75706c6f6164732f323032312f31302f6469736b6f7665725f76325f63655f73637265656e73686f74312e706e67",
+                "https://camo.githubusercontent.com/6cddd7fa89691d4cf0ba763f10ee100373c3d84338862d0c25cb8f8b4df9728d/687474703a2f2f7777772e6469736b6f766572646174612e636f6d2f77702d636f6e74656e742f75706c6f6164732f323032312f31302f6469736b6f7665725f76325f63655f73637265656e73686f74322e706e67"
+            ],
             "sources": [
                 "https://github.com/diskoverdata/diskover-community",
                 "https://github.com/truenas/charts/tree/master/library/ix-dev/charts/diskoverdata"
@@ -183,9 +191,9 @@
             "healthy_error": null,
             "home": "https://www.netdata.cloud/",
             "location": "/__w/charts/charts/charts/netdata",
-            "latest_version": "1.0.23",
+            "latest_version": "1.0.24",
             "latest_app_version": "v1.39.1",
-            "latest_human_version": "v1.39.1_1.0.23",
+            "latest_human_version": "v1.39.1_1.0.24",
             "last_update": "2023-05-19 07:40:59",
             "name": "netdata",
             "recommended": false,
@@ -200,7 +208,11 @@
             "tags": [
                 "netdata"
             ],
-            "screenshots": [],
+            "screenshots": [
+                "https://user-images.githubusercontent.com/1153921/101509403-f7e59400-3935-11eb-9abd-cbecfa3ee49a.png",
+                "https://user-images.githubusercontent.com/1153921/101508423-e354cc00-3934-11eb-9b33-3ad57a5988b4.png",
+                "https://user-images.githubusercontent.com/24860547/224729853-da525e02-bea5-4665-b1f6-ce389976a27b.png"
+            ],
             "sources": [
                 "https://github.com/netdata/helmchart",
                 "https://github.com/netdata/netdata"
@@ -217,10 +229,10 @@
             "healthy_error": null,
             "home": "https://plex.tv/",
             "location": "/__w/charts/charts/charts/plex",
-            "latest_version": "1.7.47",
-            "latest_app_version": "1.32.1.6999",
-            "latest_human_version": "1.32.1.6999_1.7.47",
-            "last_update": "2023-05-11 16:20:35",
+            "latest_version": "1.7.48",
+            "latest_app_version": "1.32.2.7100",
+            "latest_human_version": "1.32.2.7100_1.7.48",
+            "last_update": "2023-05-23 15:20:24",
             "name": "plex",
             "recommended": false,
             "title": "Plex",
@@ -258,9 +270,9 @@
             "healthy_error": null,
             "home": "https://github.com/WeeJeWel/wg-easy",
             "location": "/__w/charts/charts/charts/wg-easy",
-            "latest_version": "1.0.7",
+            "latest_version": "1.0.8",
             "latest_app_version": "7",
-            "latest_human_version": "7_1.0.7",
+            "latest_human_version": "7_1.0.8",
             "last_update": "2023-05-11 16:20:35",
             "name": "wg-easy",
             "recommended": false,
@@ -276,7 +288,9 @@
                 "vpn",
                 "wireguard"
             ],
-            "screenshots": [],
+            "screenshots": [
+                "https://github.com/wg-easy/wg-easy/raw/master/assets/screenshot.png"
+            ],
             "sources": [
                 "https://github.com/WeeJeWel/wg-easy",
                 "https://github.com/truenas/charts/tree/master/library/ix-dev/charts/wg-easy"
@@ -293,9 +307,9 @@
             "healthy_error": null,
             "home": "https://www.storj.io",
             "location": "/__w/charts/charts/charts/storj",
-            "latest_version": "1.0.12",
+            "latest_version": "1.0.13",
             "latest_app_version": "v1.68.2",
-            "latest_human_version": "v1.68.2_1.0.12",
+            "latest_human_version": "v1.68.2_1.0.13",
             "last_update": "2023-05-11 16:20:35",
             "name": "storj",
             "recommended": false,
@@ -312,7 +326,9 @@
                 "financial",
                 "file-sharing"
             ],
-            "screenshots": [],
+            "screenshots": [
+                "https://storj-s3.bcdn.literatehosting.net/original/2X/c/cce8d25551dedd511a0eb7a52a2220b60e9e1cfb.jpeg"
+            ],
             "sources": [
                 "https://www.storj.io",
                 "https://github.com/truenas/charts/tree/master/library/ix-dev/charts/storj"
@@ -329,9 +345,9 @@
             "healthy_error": null,
             "home": "https://nextcloud.com/",
             "location": "/__w/charts/charts/charts/nextcloud",
-            "latest_version": "1.6.26",
+            "latest_version": "1.6.27",
             "latest_app_version": "26.0.1",
-            "latest_human_version": "26.0.1_1.6.26",
+            "latest_human_version": "26.0.1_1.6.27",
             "last_update": "2023-05-11 16:20:35",
             "name": "nextcloud",
             "recommended": false,
@@ -348,7 +364,11 @@
                 "storage",
                 "sync"
             ],
-            "screenshots": [],
+            "screenshots": [
+                "https://nextcloud.com/media/nextcloud20.png",
+                "https://nextcloud.com/media/search-moodle-course-module.png",
+                "https://nextcloud.com/media/multiple_share_links.png"
+            ],
             "sources": [
                 "https://github.com/nextcloud/docker",
                 "https://github.com/nextcloud/helm",
@@ -432,9 +452,9 @@
             "healthy_error": null,
             "home": "https://prometheus.io",
             "location": "/__w/charts/charts/charts/prometheus",
-            "latest_version": "1.0.6",
+            "latest_version": "1.0.7",
             "latest_app_version": "v2.44.0",
-            "latest_human_version": "v2.44.0_1.0.6",
+            "latest_human_version": "v2.44.0_1.0.7",
             "last_update": "2023-05-15 07:08:07",
             "name": "prometheus",
             "recommended": false,
@@ -450,7 +470,9 @@
                 "metrics",
                 "storage"
             ],
-            "screenshots": [],
+            "screenshots": [
+                "https://prometheus.io/assets/blog/2019-10-08/10kseries8hours-2.12-cpu.png"
+            ],
             "sources": [
                 "https://github.com/prometheus/prometheus",
                 "https://github.com/truenas/charts/tree/master/charts/prometheus",
@@ -468,9 +490,9 @@
             "healthy_error": null,
             "home": "https://photoprism.app/",
             "location": "/__w/charts/charts/charts/photoprism",
-            "latest_version": "1.0.20",
+            "latest_version": "1.0.21",
             "latest_app_version": "230514",
-            "latest_human_version": "230514_1.0.20",
+            "latest_human_version": "230514_1.0.21",
             "last_update": "2023-05-17 13:04:34",
             "name": "photoprism",
             "recommended": false,
@@ -486,7 +508,10 @@
                 "photos",
                 "image"
             ],
-            "screenshots": [],
+            "screenshots": [
+                "https://docs.photoprism.app/developer-guide/ui/img/new-mosaic-view.png",
+                "https://docs.photoprism.app/developer-guide/ui/img/login-redesign.png"
+            ],
             "sources": [
                 "https://photoprism.app/",
                 "https://github.com/truenas/charts/tree/master/library/ix-dev/charts/photoprism"
@@ -503,9 +528,9 @@
             "healthy_error": null,
             "home": "https://pi-hole.net/",
             "location": "/__w/charts/charts/charts/pihole",
-            "latest_version": "1.0.19",
+            "latest_version": "1.0.20",
             "latest_app_version": "2023.02.2",
-            "latest_human_version": "2023.02.2_1.0.19",
+            "latest_human_version": "2023.02.2_1.0.20",
             "last_update": "2023-05-11 16:20:35",
             "name": "pihole",
             "recommended": false,
@@ -521,7 +546,9 @@
                 "dns",
                 "adblock"
             ],
-            "screenshots": [],
+            "screenshots": [
+                "https://wp-cdn.pi-hole.net/wp-content/uploads/2020/04/Dashboard.png"
+            ],
             "sources": [
                 "https://pi-hole.net/",
                 "https://github.com/truenas/charts/tree/master/library/ix-dev/charts/pihole"
@@ -538,9 +565,9 @@
             "healthy_error": null,
             "home": "https://emby.media/",
             "location": "/__w/charts/charts/charts/emby",
-            "latest_version": "1.0.24",
+            "latest_version": "1.0.25",
             "latest_app_version": "4.7.11.0",
-            "latest_human_version": "4.7.11.0_1.0.24",
+            "latest_human_version": "4.7.11.0_1.0.25",
             "last_update": "2023-05-11 16:20:35",
             "name": "emby",
             "recommended": false,
@@ -559,7 +586,10 @@
                 "tv",
                 "streaming"
             ],
-            "screenshots": [],
+            "screenshots": [
+                "https://i.imgur.com/OFBGwvG.png",
+                "https://emby.media/community/uploads/inline/2165/554dfc8f0bc13_MoviesView2.png"
+            ],
             "sources": [
                 "https://hub.docker.com/r/emby/embyserver"
             ],
@@ -578,9 +608,9 @@
             "healthy_error": null,
             "home": "https://min.io",
             "location": "/__w/charts/charts/enterprise/minio",
-            "latest_version": "1.0.8",
+            "latest_version": "1.0.9",
             "latest_app_version": "2023-03-24",
-            "latest_human_version": "2023-03-24_1.0.8",
+            "latest_human_version": "2023-03-24_1.0.9",
             "last_update": "2023-05-11 16:20:35",
             "name": "minio",
             "recommended": false,
@@ -597,7 +627,11 @@
                 "S3",
                 "file-sharing"
             ],
-            "screenshots": [],
+            "screenshots": [
+                "https://github.com/minio/console/blob/master/images/pic3.png",
+                "https://github.com/minio/console/blob/master/images/pic1.png",
+                "https://github.com/minio/console/blob/master/images/pic2.png"
+            ],
             "sources": [
                 "https://github.com/minio/minio",
                 "https://github.com/truenas/charts/tree/master/enterprise/minio"
@@ -616,9 +650,9 @@
             "healthy_error": null,
             "home": "https://github.com/qdm12/ddns-updater",
             "location": "/__w/charts/charts/community/ddns-updater",
-            "latest_version": "1.0.1",
+            "latest_version": "1.0.2",
             "latest_app_version": "latest",
-            "latest_human_version": "latest_1.0.1",
+            "latest_human_version": "latest_1.0.2",
             "last_update": "2023-05-11 16:20:35",
             "name": "ddns-updater",
             "recommended": false,
@@ -633,7 +667,9 @@
             "tags": [
                 "ddns"
             ],
-            "screenshots": [],
+            "screenshots": [
+                "https://raw.githubusercontent.com/qdm12/ddns-updater/master/readme/webui.png"
+            ],
             "sources": [
                 "https://github.com/qdm12/ddns-updater",
                 "https://github.com/truenas/charts/tree/master/community/ddns-updater",
@@ -651,9 +687,9 @@
             "healthy_error": null,
             "home": "https://github.com/dani-garcia/vaultwarden",
             "location": "/__w/charts/charts/community/vaultwarden",
-            "latest_version": "1.0.8",
+            "latest_version": "1.0.9",
             "latest_app_version": "1.28.1",
-            "latest_human_version": "1.28.1_1.0.8",
+            "latest_human_version": "1.28.1_1.0.9",
             "last_update": "2023-05-11 16:20:35",
             "name": "vaultwarden",
             "recommended": false,
@@ -669,7 +705,9 @@
                 "password",
                 "manager"
             ],
-            "screenshots": [],
+            "screenshots": [
+                "https://blog.mukmuk.eu/wp-content/uploads/2021/08/Vaultwarden.jpg"
+            ],
             "sources": [
                 "https://github.com/dani-garcia/vaultwarden",
                 "https://github.com/truenas/charts/tree/master/community/vaultwarden"
@@ -760,9 +798,9 @@
             "healthy_error": null,
             "home": "https://gitea.io/en-us",
             "location": "/__w/charts/charts/community/gitea",
-            "latest_version": "1.0.4",
+            "latest_version": "1.0.5",
             "latest_app_version": "1.19.0",
-            "latest_human_version": "1.19.0_1.0.4",
+            "latest_human_version": "1.19.0_1.0.5",
             "last_update": "2023-05-11 16:20:35",
             "name": "gitea",
             "recommended": false,
@@ -777,7 +815,9 @@
             "tags": [
                 "git"
             ],
-            "screenshots": [],
+            "screenshots": [
+                "https://gitea.io/images/screenshot.png"
+            ],
             "sources": [
                 "https://gitea.io/en-us",
                 "https://github.com/truenas/charts/tree/master/community/gitea",
@@ -795,9 +835,9 @@
             "healthy_error": null,
             "home": "https://www.qbittorrent.org/",
             "location": "/__w/charts/charts/community/qbittorrent",
-            "latest_version": "1.0.8",
+            "latest_version": "1.0.10",
             "latest_app_version": "4.5.2",
-            "latest_human_version": "4.5.2_1.0.8",
+            "latest_human_version": "4.5.2_1.0.10",
             "last_update": "2023-05-11 16:20:35",
             "name": "qbittorrent",
             "recommended": false,
@@ -813,7 +853,9 @@
                 "torrent",
                 "download"
             ],
-            "screenshots": [],
+            "screenshots": [
+                "https://www.addictivetips.com/app/uploads/2019/03/qb-web-ui-e1553049171184.png"
+            ],
             "sources": [
                 "https://github.com/onedr0p/containers/tree/main/apps/qbittorrent",
                 "https://github.com/truenas/charts/tree/master/community/qbittorrent",
@@ -831,9 +873,9 @@
             "healthy_error": null,
             "home": "https://github.com/AdguardTeam/AdGuardHome",
             "location": "/__w/charts/charts/community/adguard-home",
-            "latest_version": "1.0.3",
+            "latest_version": "1.0.4",
             "latest_app_version": "v0.107.26",
-            "latest_human_version": "v0.107.26_1.0.3",
+            "latest_human_version": "v0.107.26_1.0.4",
             "last_update": "2023-05-11 16:20:35",
             "name": "adguard-home",
             "recommended": false,
@@ -849,7 +891,10 @@
                 "dns",
                 "adblock"
             ],
-            "screenshots": [],
+            "screenshots": [
+                "https://assets.ubuntu.com/v1/1febeddd-adguard-main-image.png",
+                "https://assets.ubuntu.com/v1/9eb41b64-adguard-advert-1.png"
+            ],
             "sources": [
                 "https://github.com/AdguardTeam/AdGuardHome",
                 "https://github.com/truenas/charts/tree/master/library/ix-dev/community/adguard-home",
@@ -902,9 +947,9 @@
             "healthy_error": null,
             "home": "https://jellyfin.org/",
             "location": "/__w/charts/charts/community/jellyfin",
-            "latest_version": "1.0.2",
+            "latest_version": "1.0.3",
             "latest_app_version": "10.8.10",
-            "latest_human_version": "10.8.10_1.0.2",
+            "latest_human_version": "10.8.10_1.0.3",
             "last_update": "2023-05-12 12:13:57",
             "name": "jellyfin",
             "recommended": false,
@@ -923,7 +968,10 @@
                 "tv",
                 "streaming"
             ],
-            "screenshots": [],
+            "screenshots": [
+                "https://jellyfin.org/assets/images/10.8-home-4a73a92bf90d1eeffa5081201ca9c7bb.png",
+                "https://jellyfin.org/assets/images/10.8-details-df4f7caaee389ffbaeeaa95b668fa037.png"
+            ],
             "sources": [
                 "https://hub.docker.com/r/jellyfin/jellyfin",
                 "https://github.com/truenas/charts/tree/master/community/jellyfin",
@@ -1011,9 +1059,9 @@
             "healthy_error": null,
             "home": "https://ipfs.tech/",
             "location": "/__w/charts/charts/community/ipfs",
-            "latest_version": "1.0.9",
+            "latest_version": "1.0.10",
             "latest_app_version": "v0.20.0",
-            "latest_human_version": "v0.20.0_1.0.9",
+            "latest_human_version": "v0.20.0_1.0.10",
             "last_update": "2023-05-11 16:20:35",
             "name": "ipfs",
             "recommended": false,
@@ -1029,7 +1077,10 @@
                 "file-sharing",
                 "kubo"
             ],
-            "screenshots": [],
+            "screenshots": [
+                "https://raw.githubusercontent.com/ipfs-shipyard/ipfs-webui/5764ea167a89e8c6bcb6abf83d7e258388e1623d/docs/screenshots/ipfs-webui-files.png",
+                "https://raw.githubusercontent.com/ipfs-shipyard/ipfs-webui/5764ea167a89e8c6bcb6abf83d7e258388e1623d/docs/screenshots/ipfs-webui-settings.png"
+            ],
             "sources": [
                 "https://github.com/ipfs/kubo",
                 "https://github.com/truenas/charts/tree/master/community/ipfs",
@@ -1083,9 +1134,9 @@
             "healthy_error": null,
             "home": "https://github.com/Sonarr/Sonarr",
             "location": "/__w/charts/charts/community/sonarr",
-            "latest_version": "1.0.6",
+            "latest_version": "1.0.7",
             "latest_app_version": "3.0.10.1567",
-            "latest_human_version": "3.0.10.1567_1.0.6",
+            "latest_human_version": "3.0.10.1567_1.0.7",
             "last_update": "2023-05-11 16:20:35",
             "name": "sonarr",
             "recommended": false,
@@ -1100,7 +1151,11 @@
             "tags": [
                 "series"
             ],
-            "screenshots": [],
+            "screenshots": [
+                "https://sonarr.tv/img/features/calendar.png",
+                "https://sonarr.tv/img/features/manualsearch.png",
+                "https://sonarr.tv/img/features/blocklist.png"
+            ],
             "sources": [
                 "https://github.com/onedr0p/containers/tree/main/apps/sonarr",
                 "https://github.com/truenas/charts/tree/master/community/sonarr",
@@ -1153,9 +1208,9 @@
             "healthy_error": null,
             "home": "https://github.com/sct/overseerr",
             "location": "/__w/charts/charts/community/overseerr",
-            "latest_version": "1.0.1",
+            "latest_version": "1.0.2",
             "latest_app_version": "1.32.5",
-            "latest_human_version": "1.32.5_1.0.1",
+            "latest_human_version": "1.32.5_1.0.2",
             "last_update": "2023-05-11 16:20:35",
             "name": "overseerr",
             "recommended": false,
@@ -1173,7 +1228,9 @@
                 "requests",
                 "series"
             ],
-            "screenshots": [],
+            "screenshots": [
+                "https://overseerr.dev/_next/image?url=%2Fscreenshots%2Fscreen_main.jpg&w=3840&q=75"
+            ],
             "sources": [
                 "https://hub.docker.com/r/sctx/overseerr",
                 "https://github.com/truenas/charts/tree/master/community/overseer",
@@ -1191,9 +1248,9 @@
             "healthy_error": null,
             "home": "https://github.com/Radarr/Radarr",
             "location": "/__w/charts/charts/community/radarr",
-            "latest_version": "1.0.8",
+            "latest_version": "1.0.9",
             "latest_app_version": "4.4.4.7068",
-            "latest_human_version": "4.4.4.7068_1.0.8",
+            "latest_human_version": "4.4.4.7068_1.0.9",
             "last_update": "2023-05-11 16:20:35",
             "name": "radarr",
             "recommended": false,
@@ -1208,7 +1265,12 @@
             "tags": [
                 "movies"
             ],
-            "screenshots": [],
+            "screenshots": [
+                "https://radarr.video/img/slider/posters.png",
+                "https://radarr.video/img/features/manualsearch.png",
+                "https://radarr.video/img/features/blacklist.png",
+                "https://radarr.video/img/features/custom-formats-settings.png"
+            ],
             "sources": [
                 "https://github.com/onedr0p/containers/tree/main/apps/radarr",
                 "https://github.com/truenas/charts/tree/master/community/radarr",
@@ -1226,9 +1288,9 @@
             "healthy_error": null,
             "home": "https://home.tdarr.io/",
             "location": "/__w/charts/charts/community/tdarr",
-            "latest_version": "1.0.4",
+            "latest_version": "1.0.5",
             "latest_app_version": "2.00.20.1",
-            "latest_human_version": "2.00.20.1_1.0.4",
+            "latest_human_version": "2.00.20.1_1.0.5",
             "last_update": "2023-05-12 12:13:57",
             "name": "tdarr",
             "recommended": false,
@@ -1244,7 +1306,11 @@
                 "encode",
                 "transcode"
             ],
-            "screenshots": [],
+            "screenshots": [
+                "https://home.tdarr.io/static/media/Stats2-min.a583d8ec.png",
+                "https://home.tdarr.io/static/media/Nodes-min.d8bf11b5.png",
+                "https://home.tdarr.io/static/media/VerdictHistory-min.444965ac.png"
+            ],
             "sources": [
                 "https://home.tdarr.io/",
                 "https://github.com/truenas/charts/tree/master/community/tdarr",
@@ -1297,9 +1363,9 @@
             "healthy_error": null,
             "home": "https://nginxproxymanager.com/",
             "location": "/__w/charts/charts/community/nginx-proxy-manager",
-            "latest_version": "1.0.4",
+            "latest_version": "1.0.5",
             "latest_app_version": "2.10.3",
-            "latest_human_version": "2.10.3_1.0.4",
+            "latest_human_version": "2.10.3_1.0.5",
             "last_update": "2023-05-12 12:11:01",
             "name": "nginx-proxy-manager",
             "recommended": false,
@@ -1315,7 +1381,11 @@
                 "reverse",
                 "proxy"
             ],
-            "screenshots": [],
+            "screenshots": [
+                "https://nginxproxymanager.com/screenshots/login.png",
+                "https://nginxproxymanager.com/screenshots/dashboard.png",
+                "https://nginxproxymanager.com/screenshots/proxy-hosts.png"
+            ],
             "sources": [
                 "https://nginxproxymanager.com/",
                 "https://github.com/truenas/charts/tree/master/community/nginx-proxy-manager",
@@ -1333,9 +1403,9 @@
             "healthy_error": null,
             "home": "https://github.com/Lidarr/Lidarr",
             "location": "/__w/charts/charts/community/lidarr",
-            "latest_version": "1.0.6",
+            "latest_version": "1.0.7",
             "latest_app_version": "1.1.3.2982",
-            "latest_human_version": "1.1.3.2982_1.0.6",
+            "latest_human_version": "1.1.3.2982_1.0.7",
             "last_update": "2023-05-11 16:20:35",
             "name": "lidarr",
             "recommended": false,
@@ -1350,7 +1420,11 @@
             "tags": [
                 "music"
             ],
-            "screenshots": [],
+            "screenshots": [
+                "https://lidarr.audio/img/features/manualsearch.png",
+                "https://lidarr.audio/img/features/metadata.png",
+                "https://lidarr.audio/img/features/import_lists.png"
+            ],
             "sources": [
                 "https://github.com/onedr0p/containers/tree/main/apps/lidarr",
                 "https://github.com/truenas/charts/tree/master/charts/lidarr",
