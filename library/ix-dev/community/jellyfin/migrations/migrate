@@ -5,15 +5,17 @@ import sys
 
 
 def migrate(values):
-    storageKey = 'prometheusStorage'
-    storages = ['data', 'config']
+    storageKey = 'jellyfinStorage'
+    storages = ['config', 'cache', 'transcodes']
+
 
     for storage in storages:
-        if values.get(storageKey).get(storage).get('type') == 'hostPath':
+        check_val = values.get(storageKey, {}).get(storage, {})
+        if not isinstance(check_val, dict) or not check_val or check_val.get('type', 'hostPath') == 'hostPath':
             continue
 
         values[storageKey][storage] = {
-            {key: value for key, value in values[storageKey][storage].items() if key != 'hostPath'}
+            {key: value for key, value in check_val.items() if key != 'hostPath'}
         }
 
     return values
