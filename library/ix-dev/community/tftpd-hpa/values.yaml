@@ -18,5 +18,4 @@ tftpNetwork:
 tftpStorage:
   tftpboot:
     type: ixVolume
-    hostPath: ''
     datasetName: tftpboot
