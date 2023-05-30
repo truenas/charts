@@ -22,5 +22,4 @@ overseerrRunAs:
 overseerrStorage:
   config:
     type: ixVolume
-    hostPath: ''
     datasetName: config

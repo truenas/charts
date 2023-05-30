@@ -19,10 +19,8 @@ chiaConfig:
 chiaStorage:
   data:
     type: ixVolume
-    hostPath: ''
     datasetName: data
   plots:
     type: ixVolume
-    hostPath: /
     datasetName: plots
   additionalVolumes: []

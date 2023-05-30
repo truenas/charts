@@ -26,9 +26,7 @@ prometheusRunAs:
 prometheusStorage:
   data:
     type: ixVolume
-    hostPath: ''
     datasetName: data
   config:
     type: ixVolume
-    hostPath: ''
     datasetName: config

@@ -23,9 +23,7 @@ clamavNetwork:
 clamavStorage:
   sigdb:
     type: ixVolume
-    hostPath: ''
     datasetName: sig-db
   scandir:
     type: ixVolume
-    hostPath: ''
     datasetName: scan-dir

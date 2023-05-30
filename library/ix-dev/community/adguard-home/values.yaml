@@ -20,9 +20,7 @@ adguardNetwork:
 adguardStorage:
   work:
     type: ixVolume
-    hostPath: ""
     datasetName: work
   conf:
     type: ixVolume
-    hostPath: ""
     datasetName: conf

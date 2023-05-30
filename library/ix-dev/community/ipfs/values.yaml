@@ -19,9 +19,7 @@ ipfsRunAs:
 ipfsStorage:
   data:
     type: ixVolume
-    hostPath: ''
     datasetName: data
   staging:
     type: ixVolume
-    hostPath: ''
     datasetName: staging

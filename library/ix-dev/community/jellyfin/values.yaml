@@ -21,15 +21,12 @@ jellyfinRunAs:
 jellyfinStorage:
   config:
     type: ixVolume
-    hostPath: ''
     datasetName: config
   cache:
     type: ixVolume
-    hostPath: ''
     datasetName: cache
   transcodes:
     type: ixVolume
-    hostPath: ''
     datasetName: transcodes
     medium: ''
     size: ''
