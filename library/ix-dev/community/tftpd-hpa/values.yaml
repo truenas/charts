@@ -1,7 +1,7 @@
 image:
-  repository: 3x3cut0r/tftpd-hpa
+  repository: ixsystems/tftpd-hpa
   pullPolicy: IfNotPresent
-  tag: '3.15.4'
+  tag: '1.0.0'
 
 resources:
   limits:

@@ -5,7 +5,7 @@ annotations:
 type: application
 version: 1.0.0
 apiVersion: v2
-appVersion: 3.15.4
+appVersion: 1.0.0
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: truenas
@@ -20,6 +20,7 @@ icon: https://avatars.githubusercontent.com/u/53482242
 sources:
   - https://github.com/truenas/containers/tree/main/apps/tftpd-hpa
   - https://github.com/truenas/charts/tree/master/community/tftpd-hpa
+  - https://hub.docker.com/r/ixsystems/tftpd-hpa
 keywords:
   - tftp
   - netboot
