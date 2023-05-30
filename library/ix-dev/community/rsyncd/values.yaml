@@ -2,7 +2,7 @@
 image:
   repository: ixsystems/rsyncd
   pullPolicy: IfNotPresent
-  tag: '1.0.0-unstable'
+  tag: 'unstable'
 
 resources:
   limits:
@@ -10,7 +10,7 @@ resources:
     memory: 8Gi
 
 rsyncConfig:
-  logging: true
+  logToStdout: true
   maxConnections: 4
   auxParams: []
 rsyncNetwork:

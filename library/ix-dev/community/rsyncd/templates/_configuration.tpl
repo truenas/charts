@@ -1,4 +1,5 @@
 {{- define "rsync.configuration" -}}
+{{- include "rsync.validation" $ }}
 configmap:
   config:
     enabled: true
@@ -9,7 +10,7 @@ configmap:
         pid file = /tmp/rsyncd.pid
 
         max connections = {{ .Values.rsyncConfig.maxConnections }}
-        {{- if .Values.rsyncConfig.logging }}
+        {{- if .Values.rsyncConfig.logToStdout }}
         log file = /dev/stdout
         {{- end }}
 
