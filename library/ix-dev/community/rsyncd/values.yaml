@@ -1,0 +1,19 @@
+# FIXME: Switch to stable tag
+image:
+  repository: ixsystems/rsyncd
+  pullPolicy: IfNotPresent
+  tag: '1.0.0-unstable'
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+rsyncConfig:
+  logging: true
+  maxConnections: 4
+  auxParams: []
+rsyncNetwork:
+  hostNetwork: false
+  rsyncPort: 30000
+# rsyncStorage:
