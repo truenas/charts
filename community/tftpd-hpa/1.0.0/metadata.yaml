@@ -1,0 +1,16 @@
+runAsContext:
+  - userName: root
+    groupName: root
+    gid: 0
+    uid: 0
+    description: TFTP requires root privileges to start it's processes.
+capabilities:
+  - name: NET_BIND_SERVICE
+    description: TFTP requires this ability to bind to port 69 for TFTP.
+  - name: SETUID
+    description: TFTP requires this ability to switch user for sub-processes.
+  - name: SETGID
+    description: TFTP requires this ability to switch group for sub-processes.
+  - name: SYS_CHROOT
+    description: TFTP requires this ability to use chroot for it's sub-processes.
+hostMounts: []
