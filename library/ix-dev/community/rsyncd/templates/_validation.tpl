@@ -16,6 +16,9 @@
     {{- end -}}
   {{- end -}}
 
+  {{- if not .Values.rsyncModules -}}
+    {{- fail "rsync - At least one module must be configured." -}}
+  {{- end -}}
 {{- end -}}
 
 {{- define "rsync.module.validation" -}}
