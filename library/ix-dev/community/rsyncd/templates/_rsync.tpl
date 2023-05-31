@@ -83,4 +83,14 @@ persistence:
           mountPath: /etc/rsyncd.conf
           subPath: rsyncd.conf
           readOnly: true
+  {{- range $idx, $mod := .Values.rsyncModules }}
+  {{ printf "rsyncd-%v" (int $idx) }}:
+    enabled: {{ $mod.enabled }}
+    type: hostPath
+    hostPath: {{ $mod.hostPath | default "" }}
+    targetSelector:
+      rsync:
+        rsync:
+          mountPath: {{ printf "/data/%v" $mod.name }}
+  {{- end }}
 {{- end -}}
