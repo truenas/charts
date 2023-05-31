@@ -12,57 +12,57 @@
     {{- include "rsync.aux.validation" (dict "aux" .) -}}
 
     {{- if mustHas .param $reservedParams -}}
-      {{- fail (printf "rsync - Overriding parameter [%v] is not allowed." .param) -}}
+      {{- fail (printf "Rsync - Overriding parameter [%v] is not allowed." .param) -}}
     {{- end -}}
   {{- end -}}
 
   {{- if not .Values.rsyncModules -}}
-    {{- fail "rsync - At least one module must be configured." -}}
+    {{- fail "Rsync - At least one module must be configured." -}}
   {{- end -}}
 {{- end -}}
 
 {{- define "rsync.module.validation" -}}
   {{- $mod := .mod -}}
   {{- if not $mod.name -}}
-    {{- fail "rsync - [Module Name] is required." -}}
+    {{- fail "Rsync - [Module Name] is required." -}}
   {{- end -}}
 
   {{- if not (mustRegexMatch "^[a-zA-Z0-9]+([_-]*[a-zA-Z0-9]+)+$" $mod.name) -}}
     {{- $allow := "Can include [Letters (a-z, A-Z), Numbers (0,9), Underscore (_), Dash (-).]" -}}
     {{- $disallow := "But cannot start or end with [Underscore (_), Dash (-), Dot (.)]" -}}
-    {{- fail (printf "rsync - Module Name [%v] has invalid naming format. %v %v" $mod.name $allow $disallow) -}}
+    {{- fail (printf "Rsync - Module Name [%v] has invalid naming format. %v %v" $mod.name $allow $disallow) -}}
   {{- end -}}
 
   {{- if not $mod.hostPath -}}
-    {{- fail (printf "rsync - [Host Path] on module [%v] is required." $mod.name) -}}
+    {{- fail (printf "Rsync - [Host Path] on module [%v] is required." $mod.name) -}}
   {{- end -}}
 
   {{- $modes := (list "RO" "RW" "WO") -}}
   {{- if not (mustHas $mod.accessMode $modes) -}}
-    {{- fail (printf "rsync - [Access Mode] must be one of [%v] on module [%v], but got [%v]." (join ", " $modes) $mod.name $mod.accessMode) -}}
+    {{- fail (printf "Rsync - [Access Mode] must be one of [%v] on module [%v], but got [%v]." (join ", " $modes) $mod.name $mod.accessMode) -}}
   {{- end -}}
 
   {{- if kindIs "invalid" $mod.maxConnections -}}
-    {{- fail (printf "rsync - [Max Connections] on module [%v] is required." $mod.name) -}}
+    {{- fail (printf "Rsync - [Max Connections] on module [%v] is required." $mod.name) -}}
   {{- end -}}
 
   {{- if kindIs "invalid" $mod.uid -}}
-    {{- fail (printf "rsync - [User] on module [%v] is required." $mod.name) -}}
+    {{- fail (printf "Rsync - [User] on module [%v] is required." $mod.name) -}}
   {{- end -}}
 
   {{- if kindIs "invalid" $mod.gid -}}
-    {{- fail (printf "rsync - [Group] on module [%v] is required." $mod.name) -}}
+    {{- fail (printf "Rsync - [Group] on module [%v] is required." $mod.name) -}}
   {{- end -}}
 
   {{- range $entry := $mod.hostsAllow -}}
     {{- if not $entry -}}
-      {{- fail (printf "rsync - Entry [%v] in [Hosts Allow] on module [%v] cannot be empty." $entry $mod.name) -}}
+      {{- fail (printf "Rsync - Entry [%v] in [Hosts Allow] on module [%v] cannot be empty." $entry $mod.name) -}}
     {{- end -}}
   {{- end -}}
 
   {{- range $entry := $mod.hostsDeny -}}
     {{- if not $entry -}}
-      {{- fail (printf "rsync - Entry [%v] in [Hosts Deny] on module [%v] cannot be empty." $entry $mod.name) -}}
+      {{- fail (printf "Rsync - Entry [%v] in [Hosts Deny] on module [%v] cannot be empty." $entry $mod.name) -}}
     {{- end -}}
   {{- end -}}
 
@@ -74,10 +74,10 @@
 {{- define "rsync.aux.validation" -}}
   {{- $aux := .aux -}}
   {{- if not $aux.param -}}
-    {{- fail "rsync - Parameter name is required." -}}
+    {{- fail "Rsync - Parameter name is required." -}}
   {{- end -}}
 
   {{- if not $aux.value -}}
-    {{- fail (printf "rsync - Value on parameter [%v] is required." $aux.param) -}}
+    {{- fail (printf "Rsync - Value on parameter [%v] is required." $aux.param) -}}
   {{- end -}}
 {{- end -}}

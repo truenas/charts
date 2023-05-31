@@ -59,6 +59,6 @@ configmap:
     {{- end }}
 
     {{- if not (deepEqual $mods (uniq $mods)) -}}
-      {{- fail "rsync - Module Names must be unique" -}}
+      {{- fail "Rsync - Module Names must be unique" -}}
     {{- end -}}
 {{- end -}}
