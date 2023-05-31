@@ -16,12 +16,14 @@ workload:
             runAsGroup: 0
             runAsNonRoot: false
             readOnlyRootFilesystem: false
-            # capabilities:
-            #   add:
-            #     - NET_BIND_SERVICE
-            #     - SETGID
-            #     - SETUID
-            #     - SYS_CHROOT
+            capabilities:
+              add:
+                - CHOWN
+                - DAC_OVERRIDE
+                - FOWNER
+                - SETGID
+                - SETUID
+                - SYS_CHROOT
           probes:
             liveness:
               enabled: true
@@ -30,7 +32,7 @@ workload:
                 - /bin/sh
                 - -c
                 - |
-                  getent services rsync
+                  pgrep rsync
             readiness:
               enabled: true
               type: exec
@@ -38,7 +40,7 @@ workload:
                 - /bin/sh
                 - -c
                 - |
-                  getent services rsync
+                  pgrep rsync
             startup:
               enabled: true
               type: exec
@@ -46,7 +48,7 @@ workload:
                 - /bin/sh
                 - -c
                 - |
-                  getent services rsync
+                  pgrep rsync
 
 {{/* Service */}}
 service:
@@ -61,7 +63,6 @@ service:
         primary: true
         port: {{ .Values.rsyncNetwork.rsyncPort }}
         nodePort: {{ .Values.rsyncNetwork.rsyncPort }}
-        protocol: udp
         targetSelector: rsync
 
 {{/* Persistence */}}

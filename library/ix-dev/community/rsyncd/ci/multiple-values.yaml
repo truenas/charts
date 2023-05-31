@@ -28,10 +28,10 @@ rsyncModules:
     name: module_name2
     comment: "Comment for module2"
     hostPath: /mnt/{{ .Release.Name }}/module2
-    accessMode: RW
-    maxConnections: 4
-    uid: 1000
-    gid: 1000
+    accessMode: WO
+    maxConnections: 100
+    uid: 568
+    gid: 568
     hostsAllow:
       - 10.10.10.1
       - 10.10.10.2
@@ -43,3 +43,14 @@ rsyncModules:
         value: mod-value1
       - param: mod-param2
         value: mod-value2
+  - enabled: true
+    name: module_name3
+    comment: "Comment for module3"
+    hostPath: /mnt/{{ .Release.Name }}/module3
+    accessMode: RW
+    maxConnections: 0
+    uid: 1000
+    gid: 1000
+    hostsAllow: []
+    hostsDeny: []
+    auxParams: []

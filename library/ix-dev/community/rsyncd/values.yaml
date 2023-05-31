@@ -12,11 +12,7 @@ resources:
 rsyncConfig:
   logToStdout: true
   maxConnections: 4
-  auxParams:
-    - param: test
-      value: test12
-    - param: test
-      value: test12
+  auxParams: []
 rsyncNetwork:
   hostNetwork: false
   rsyncPort: 30000
