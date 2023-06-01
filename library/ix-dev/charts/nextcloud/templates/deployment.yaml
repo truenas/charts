@@ -79,7 +79,9 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
         {{ $envList = mustAppend $envList (dict "name" "NEXTCLOUD_DATA_DIR" "value" .Values.nextcloud.datadir) }}
         {{ if eq (include "nginx.certAvailable" .) "true" }}
         {{ $envList = mustAppend $envList (dict "name" "APACHE_DISABLE_REWRITE_IP" "value" "1") }}
+          {{ if and .Values.nextcloud.host .Values.service.nodePort }}
         {{ $envList = mustAppend $envList (dict "name" "OVERWRITEHOST" "value" (printf "%v:%v" .Values.nextcloud.host .Values.service.nodePort)) }}
+          {{ end }}
         {{ $envList = mustAppend $envList (dict "name" "OVERWRITEPROTOCOL" "value" "https") }}
         {{ $envList = mustAppend $envList (dict "name" "TRUSTED_PROXIES" "value" "127.0.0.1") }}
         {{ end }}
