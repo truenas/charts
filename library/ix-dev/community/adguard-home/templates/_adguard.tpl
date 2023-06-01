@@ -20,6 +20,9 @@ workload:
           # will start initially at port 3000 and after
           # the setup wizard is completed it will switch
           # to user specified port.
+          command:
+            - /sbin/tini
+            - "--"
           args:
             - /opt/adguardhome/AdGuardHome
             - --no-check-update
