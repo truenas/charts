@@ -22,7 +22,7 @@ workload:
           # to user specified port.
           args:
           # If appVersion is 0.107.29 or above add this flag
-          {{- if semverCompare "~0.107.29" (.Chart.AppVersion | replace "v" "") }}
+          {{- if semverCompare "~0.107.29" (.Values.image.tag | replace "v" "") }}
             - /opt/adguardhome/AdGuardHome
           {{- end }}
             - --no-check-update
