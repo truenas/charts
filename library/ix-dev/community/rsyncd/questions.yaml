@@ -84,10 +84,6 @@ questions:
           schema:
             type: dict
             attrs:
-              - variable: enabled
-                label: Enable Module
-                schema:
-                  type: boolean
               - variable: name
                 label: Module Name
                 description: |
@@ -95,113 +91,122 @@ questions:
                 schema:
                   type: string
                   required: true
-              - variable: comment
-                label: Comment
-                description: Describe the module.
+              - variable: enabled
+                label: Enable Module
                 schema:
-                  type: string
-              - variable: hostPath
-                label: Host Path
-                description: |
-                  The path on the host to be shared with the client.</br>
-                  This path must exist on the host.
-                schema:
-                  type: hostpath
-                  immutable: true
-                  required: true
-              - variable: accessMode
-                label: Access Mode
-                description: |
-                  Choose permissions for this rsync module.
-                schema:
-                  type: string
-                  required: true
-                  default: RO
-                  enum:
-                    - value: RO
-                      description: Read Only
-                    - value: RW
-                      description: Read Write
-                    - value: WO
-                      description: Write Only
-              - variable: maxConnections
-                label: Max Connections
-                description: |
-                  Maximum number of simultaneous connections to this module.</br>
-                  0 means unlimited.
-                schema:
-                  type: int
-                  default: 0
-                  min: 0
-                  max: 1000
-              - variable: uid
-                label: UID
-                description: |
-                  The UID to use for this module.</br>
-                schema:
-                  type: int
-                  default: 0
-                  min: 0
-                  max: 65535
-              - variable: gid
-                label: GID
-                description: |
-                  The GID to use for this module.</br>
-                schema:
-                  type: int
-                  default: 0
-                  min: 0
-                  max: 65535
-              - variable: hostsAllow
-                label: Hosts Allow
-                description: |
-                  List of hosts allowed to connect to this module.</br>
-                  Leave empty to allow all hosts.
-                schema:
-                  type: list
-                  default: []
-                  items:
-                    - variable: host
-                      label: Host to allow
+                  type: boolean
+                  default: true
+                  show_subquestions_if: true
+                  subquestions:
+                    - variable: comment
+                      label: Comment
+                      description: Describe the module.
+                      schema:
+                        type: string
+                    - variable: hostPath
+                      label: Host Path
+                      description: |
+                        The path on the host to be shared with the client.</br>
+                        This path must exist on the host.
+                      schema:
+                        type: hostpath
+                        required: true
+                    - variable: accessMode
+                      label: Access Mode
+                      description: |
+                        Choose permissions for this rsync module.
                       schema:
                         type: string
                         required: true
-              - variable: hostsDeny
-                label: Hosts Deny
-                description: |
-                  List of hosts denied to connect to this module.</br>
-                  Leave empty to deny no hosts.
-                schema:
-                  type: list
-                  default: []
-                  items:
-                    - variable: host
-                      label: Host to deny
+                        default: RO
+                        enum:
+                          - value: RO
+                            description: Read Only
+                          - value: RW
+                            description: Read Write
+                          - value: WO
+                            description: Write Only
+                    - variable: maxConnections
+                      label: Max Connections
+                      description: |
+                        Maximum number of simultaneous connections to this module.</br>
+                        0 means unlimited.
                       schema:
-                        type: string
+                        type: int
+                        min: 0
+                        max: 1000
+                        default: 0
                         required: true
-              - variable: auxParams
-                label: Auxillary Parameters
-                description: Configure auxillary parameters for this module.
-                schema:
-                  type: list
-                  default: []
-                  items:
-                    - variable: auxEntry
-                      label: Auxillary Parameter Entry
+                    - variable: uid
+                      label: UID
+                      description: |
+                        The UID to use for this module.</br>
                       schema:
-                        type: dict
-                        attrs:
-                          - variable: param
-                            label: Parameter
+                        type: int
+                        min: 0
+                        max: 65535
+                        default: 568
+                        required: true
+                    - variable: gid
+                      label: GID
+                      description: |
+                        The GID to use for this module.</br>
+                      schema:
+                        type: int
+                        min: 0
+                        max: 65535
+                        default: 568
+                        required: true
+                    - variable: hostsAllow
+                      label: Hosts Allow
+                      description: |
+                        List of hosts allowed to connect to this module.</br>
+                        Leave empty to allow all hosts.
+                      schema:
+                        type: list
+                        default: []
+                        items:
+                          - variable: host
+                            label: Host to allow
                             schema:
                               type: string
                               required: true
-                          - variable: value
-                            label: Value
+                    - variable: hostsDeny
+                      label: Hosts Deny
+                      description: |
+                        List of hosts denied to connect to this module.</br>
+                        Leave empty to deny no hosts.
+                      schema:
+                        type: list
+                        default: []
+                        items:
+                          - variable: host
+                            label: Host to deny
                             schema:
                               type: string
                               required: true
+                    - variable: auxParams
+                      label: Auxillary Parameters
+                      description: Configure auxillary parameters for this module.
+                      schema:
+                        type: list
+                        default: []
+                        items:
+                          - variable: auxEntry
+                            label: Auxillary Parameter Entry
+                            schema:
+                              type: dict
+                              attrs:
+                                - variable: param
+                                  label: Parameter
+                                  schema:
+                                    type: string
+                                    required: true
+                                - variable: value
+                                  label: Value
+                                  schema:
+                                    type: string
+                                    required: true
 
   - variable: resources
     group: Resources Configuration
