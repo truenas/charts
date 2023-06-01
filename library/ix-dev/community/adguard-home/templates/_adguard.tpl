@@ -20,11 +20,11 @@ workload:
           # will start initially at port 3000 and after
           # the setup wizard is completed it will switch
           # to user specified port.
-          command:
-            - /sbin/tini
-            - "--"
           args:
+          # If version is 1.0.6 or above add this flag
+          {{- if semverCompare "~1.0.6" .Chart.Version }}
             - /opt/adguardhome/AdGuardHome
+          {{- end }}
             - --no-check-update
             - --host
             - "0.0.0.0"
