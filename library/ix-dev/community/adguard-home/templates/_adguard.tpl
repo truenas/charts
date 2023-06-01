@@ -21,6 +21,7 @@ workload:
           # the setup wizard is completed it will switch
           # to user specified port.
           args:
+            - /opt/adguardhome/AdGuardHome
             - --no-check-update
             - --host
             - "0.0.0.0"
