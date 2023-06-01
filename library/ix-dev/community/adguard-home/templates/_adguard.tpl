@@ -21,8 +21,8 @@ workload:
           # the setup wizard is completed it will switch
           # to user specified port.
           args:
-          # If version is 1.0.6 or above add this flag
-          {{- if semverCompare "~1.0.6" .Chart.Version }}
+          # If appVersion is 0.107.29 or above add this flag
+          {{- if semverCompare "~0.107.29" (.Chart.AppVersion | replace "v" "") }}
             - /opt/adguardhome/AdGuardHome
           {{- end }}
             - --no-check-update
