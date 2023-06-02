@@ -90,6 +90,10 @@ questions:
                   Module name that matches the name requested by the rsync client.
                 schema:
                   type: string
+                  valid_chars: '^[a-zA-Z0-9]+([_-]*[a-zA-Z0-9]+)+$'
+                  valid_chars_error: |
+                    Module Name, can include [Letters (a-z, A-Z), Numbers (0,9), Underscore (_), Dash (-)],</br>
+                    but cannot start or end with [Underscore (_), Dash (-), Dot (.)]
                   required: true
               - variable: enabled
                 label: Enable Module
