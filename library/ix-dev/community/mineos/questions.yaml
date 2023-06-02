@@ -115,7 +115,7 @@ questions:
             If enabled, and you don't specify a certificate, </br>
             a self-signed certificate will be generated.
           schema:
-            type: bool
+            type: boolean
             default: false
         - variable: certificateID
           label: Certificate
