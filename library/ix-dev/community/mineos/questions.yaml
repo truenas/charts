@@ -1,0 +1,197 @@
+groups:
+  - name: MineOS Configuration
+    description: Configure MineOS
+  - name: Network Configuration
+    description: Configure Network for MineOS
+  - name: Storage Configuration
+    description: Configure Storage for MineOS
+  - name: Resources Configuration
+    description: Configure Resources for MineOS
+
+questions:
+  - variable: mineosConfig
+    label: ""
+    group: MineOS Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: username
+          label: Username
+          description: The username for MineOS WebUI.
+          schema:
+            type: string
+            empty: false
+            required: true
+            private: true
+            valid_chars: ^[a-zA-Z0-9]+$
+            valid_chars_error: |
+              Username can only contain alphanumeric characters [0-9, a-z, A-Z].
+        - variable: password
+          label: Password
+          description: The password for MineOS WebUI.
+          schema:
+            type: string
+            empty: false
+            required: true
+            private: true
+        - variable: terminationGracePeriodSeconds
+          label: Stop Grace Period
+          description: |
+            The time in seconds given to MineOS to stop before it is killed.
+            Killing a MineOS server without a grace period can cause data corruption.
+          schema:
+            type: int
+            empty: false
+            required: true
+            default: 600
+
+  - variable: mineosID
+    label: ""
+    group: User and Group Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: user
+          label: User ID
+          description: The user id that MineOS files will be owned by.
+          schema:
+            type: int
+            min: 568
+            default: 568
+            required: true
+        - variable: group
+          label: Group ID
+          description: The group id that MineOS files will be owned by.
+          schema:
+            type: int
+            min: 568
+            default: 568
+            required: true
+
+  - variable: mineosNetwork
+    label: ""
+    group: Network Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: webPort
+          label: WebUI Port
+          description: The port for MineOS WebUI
+          schema:
+            type: int
+            default: 30000
+            min: 9000
+            max: 65535
+            required: true
+        - variable: mineosPortRangeStart
+          label: Port Range Start
+          description: |
+            The start of the port range for MineOS servers.</br>
+            It will open both TCP and UDP ports.
+          schema:
+            type: int
+            default: 30001
+            min: 9000
+            max: 65535
+            required: true
+        - variable: mineosPortRangeEnd
+          label: Port Range End
+          description: |
+            The end of the port range for MineOS servers.</br>
+            It will open both TCP and UDP ports.</br>
+            Keep in mind that the port range can be at max 10 ports.
+          schema:
+            type: int
+            default: 30002
+            min: 9000
+            max: 65535
+            required: true
+        - variable: useHTTPS
+          label: Use HTTPS
+          description: |
+            Enable HTTPS for MineOS WebUI.</br>
+            If enabled, and you don't specify a certificate, </br>
+            a self-signed certificate will be generated.
+          schema:
+            type: bool
+            default: false
+        - variable: certificateID
+          label: Certificate
+          description: The certificate to use for MineOS WebUI
+          schema:
+            show_if: [["useHTTPS", "=", true]]
+            type: int
+            "null": true
+            $ref:
+              - "definitions/certificate"
+
+  - variable: mineosStorage
+    label: ""
+    group: Storage Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: data
+          label: MineOS Data Storage
+          description: The path to store MineOS Data.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
+                schema:
+                  type: string
+                  required: true
+                  default: ixVolume
+                  enum:
+                    - value: hostPath
+                      description: Host Path (Path that already exists on the system)
+                    - value: ixVolume
+                      description: ixVolume (Dataset created automatically by the system)
+              - variable: datasetName
+                label: Dataset Name
+                schema:
+                  type: string
+                  show_if: [["type", "=", "ixVolume"]]
+                  required: true
+                  hidden: true
+                  immutable: true
+                  default: data
+                  $ref:
+                    - "normalize/ixVolume"
+              - variable: hostPath
+                label: Host Path
+                schema:
+                  type: hostpath
+                  show_if: [["type", "=", "hostPath"]]
+                  immutable: true
+                  required: true
+
+  - variable: resources
+    label: Resources Configuration
+    group: Resources Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: limits
+          label: Limits
+          schema:
+            type: dict
+            attrs:
+              - variable: cpu
+                label: CPU
+                description: CPU limit for MineOS.
+                schema:
+                  type: string
+                  default: 4000m
+                  required: true
+              - variable: memory
+                label: Memory
+                description: Memory limit for MineOS.
+                schema:
+                  type: string
+                  default: 8Gi
+                  required: true

@@ -1,0 +1,28 @@
+image:
+  repository: hexparrot/mineos
+  pullPolicy: IfNotPresent
+  tag: latest
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+mineosConfig:
+  username: ""
+  password: ""
+  terminationGracePeriodSeconds: 240
+  additionalEnvs: []
+mineosID:
+  user: 568
+  group: 568
+mineosNetwork:
+  webPort: 30000
+  mineosPortRangeStart: 30021
+  mineosPortRangeEnd: 30022
+  useHTTPS: false
+  certificateID: 0
+mineosStorage:
+  data:
+    type: ixVolume
+    datasetName: data

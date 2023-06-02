@@ -1,0 +1,8 @@
+mineosConfig:
+  username: myuser
+  password: mypass
+
+mineosStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/data
