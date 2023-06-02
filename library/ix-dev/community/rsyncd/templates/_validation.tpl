@@ -28,7 +28,7 @@
   {{- end -}}
 
   {{- if not (mustRegexMatch "^[a-zA-Z0-9]+([_-]*[a-zA-Z0-9]+)+$" $mod.name) -}}
-    {{- $allow := "Can include [Letters (a-z, A-Z), Numbers (0,9), Underscore (_), Dash (-).]" -}}
+    {{- $allow := "Can include [Letters (a-z, A-Z), Numbers (0,9), Underscore (_), Dash (-)]" -}}
     {{- $disallow := "But cannot start or end with [Underscore (_), Dash (-), Dot (.)]" -}}
     {{- fail (printf "Rsync - Module Name [%v] has invalid naming format. %v %v" $mod.name $allow $disallow) -}}
   {{- end -}}
