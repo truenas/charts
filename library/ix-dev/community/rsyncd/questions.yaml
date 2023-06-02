@@ -18,9 +18,9 @@ questions:
         - variable: logToStdout
           label: Log to Stdout
           description: |
-            Log to stdout instead of a file. This is useful when running in a container.</br>
-            This will override the [log file] parameter. </br>
-            Disable this if you want to pass an aux parameter to the rsync daemon for logging.
+            When enabled it will print log to stdout. This is useful when running in a container.</br>
+            This will set the [log file] parameter to [/dev/stdout]. </br>
+            Disable this if you want to pass an auxillary parameter (for example syslog) to the rsync daemon for logging.
           schema:
             type: boolean
             default: true
