@@ -10,7 +10,6 @@ resources:
     memory: 8Gi
 
 rsyncConfig:
-  logToStdout: true
   maxConnections: 4
   auxParams: []
 rsyncNetwork:

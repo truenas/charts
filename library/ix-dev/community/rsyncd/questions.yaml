@@ -15,15 +15,6 @@ questions:
     schema:
       type: dict
       attrs:
-        - variable: logToStdout
-          label: Log to Stdout
-          description: |
-            When enabled it will print log to stdout. This is useful when running in a container.</br>
-            This will set the [log file] parameter to [/dev/stdout]. </br>
-            Disable this if you want to pass an auxillary parameter (for example syslog) to the rsync daemon for logging.
-          schema:
-            type: boolean
-            default: true
         - variable: auxParams
           label: Auxillary Parameters
           description: Configure auxillary parameters for Rsync.

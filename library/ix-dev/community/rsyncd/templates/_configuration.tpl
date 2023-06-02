@@ -10,9 +10,7 @@ configmap:
         pid file = /tmp/rsyncd.pid
 
         max connections = {{ .Values.rsyncConfig.maxConnections }}
-    {{- if .Values.rsyncConfig.logToStdout }}
         log file = /dev/stdout
-    {{- end }}
 
     {{- range $aux := .Values.rsyncConfig.auxParams }}
         {{ printf "%v = %v" $aux.param $aux.value }}

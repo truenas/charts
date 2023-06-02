@@ -1,12 +1,8 @@
 {{- define "rsync.validation" -}}
   {{- $reservedParams := (list
                           "port" "use chroot" "pid file"
-                          "max connections"
+                          "max connections" "log file"
                           ) -}}
-
-  {{- if .Values.rsyncConfig.logToStdout -}}
-    {{- $reservedParams = mustAppend $reservedParams "log file" -}}
-  {{- end -}}
 
   {{- range .Values.rsyncConfig.auxParams -}}
     {{- include "rsync.aux.validation" (dict "aux" .) -}}
