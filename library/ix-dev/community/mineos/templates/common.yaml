@@ -4,4 +4,7 @@
 {{- include "mineos.validation" $ -}}
 {{- $_ := mustMergeOverwrite .Values (include "mineos.workload" $ | fromYaml) -}}
 
+{{/* Create the configmap for portal manually*/}}
+{{- include "mineos.portal" $ -}}
+
 {{- include "ix.v1.common.loader.apply" . -}}

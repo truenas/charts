@@ -10,6 +10,16 @@ groups:
   - name: Resources Configuration
     description: Configure Resources for MineOS
 
+portals:
+  web_portal:
+    protocols:
+      - "$kubernetes-resource_configmap_portal_protocol"
+    host:
+      - "$kubernetes-resource_configmap_portal_host"
+    ports:
+      - "$kubernetes-resource_configmap_portal_port"
+    path: "$kubernetes-resource_configmap_portal_path"
+
 questions:
   - variable: mineosConfig
     label: ""
@@ -24,7 +34,6 @@ questions:
             type: string
             empty: false
             required: true
-            private: true
             valid_chars: ^[a-zA-Z0-9]+$
             valid_chars_error: |
               Username can only contain alphanumeric characters [0-9, a-z, A-Z].
