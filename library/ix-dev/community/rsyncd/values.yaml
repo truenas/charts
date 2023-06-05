@@ -1,8 +1,7 @@
-# FIXME: Switch to stable tag
 image:
   repository: ixsystems/rsyncd
   pullPolicy: IfNotPresent
-  tag: 'unstable'
+  tag: '1.0.0'
 
 resources:
   limits:
