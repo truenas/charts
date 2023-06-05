@@ -6,3 +6,7 @@ mineosStorage:
   data:
     type: hostPath
     hostPath: /mnt/{{ .Release.Name }}/data
+
+mineosNetwork:
+  mineosPortRangeStart: 30021
+  mineosPortRangeEnd: 30025

@@ -9,8 +9,8 @@ resources:
     memory: 8Gi
 
 mineosConfig:
-  username: ""
-  password: ""
+  username: ''
+  password: ''
   terminationGracePeriodSeconds: 240
   additionalEnvs: []
 mineosID:
