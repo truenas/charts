@@ -44,6 +44,7 @@ questions:
           schema:
             type: int
             empty: false
+            min: 30
             required: true
             default: 600
 

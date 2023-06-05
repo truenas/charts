@@ -1,5 +1,4 @@
 {{- define "mineos.workload" -}}
-{{- include "mineos.validation" $ }}
 workload:
   mineos:
     enabled: true
