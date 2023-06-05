@@ -1,0 +1,20 @@
+runAsContext:
+  - userName: root
+    groupName: root
+    gid: 0
+    uid: 0
+    description: Rsync requires root privileges to start it's processes.
+capabilities:
+  - name: CHOWN
+    description: Rsync requires this ability to change ownership of files.
+  - name: DAC_OVERRIDE
+    description: Rsync requires this ability to override file permissions.
+  - name: FOWNER
+    description: Rsync requires this ability to override file ownership.
+  - name: SETUID
+    description: Rsync requires this ability to switch user for sub-processes.
+  - name: SETGID
+    description: Rsync requires this ability to switch group for sub-processes.
+  - name: SYS_CHROOT
+    description: Rsync requires this ability to use chroot for it's sub-processes.
+hostMounts: []

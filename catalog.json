@@ -376,7 +376,7 @@
             "latest_version": "1.0.22",
             "latest_app_version": "230603",
             "latest_human_version": "230603_1.0.22",
-            "last_update": "2023-05-23 17:11:03",
+            "last_update": "2023-06-05 10:20:26",
             "name": "photoprism",
             "recommended": false,
             "title": "PhotoPrism",
@@ -636,6 +636,42 @@
                 "https://hub.docker.com/r/adguard/adguardhome"
             ],
             "icon_url": "https://github.com/AdguardTeam/AdGuardHome/raw/master/doc/adguard_home_darkmode.svg"
+        },
+        "rsyncd": {
+            "app_readme": "<h1>Rsyncd</h1>\n<p><a href=\"https://rsync.samba.org/\">Rsyncd</a> is an open source utility that provides fast incremental file transfer.</p>",
+            "categories": [
+                "storage"
+            ],
+            "description": "Rsync is an open source utility that provides fast incremental file transfer.",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://github.com/truenas/containers/tree/main/apps/rsyncd",
+            "location": "/__w/charts/charts/community/rsyncd",
+            "latest_version": "1.0.0",
+            "latest_app_version": "1.0.0",
+            "latest_human_version": "1.0.0_1.0.0",
+            "last_update": null,
+            "name": "rsyncd",
+            "recommended": false,
+            "title": "Rsync Daemon",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [
+                "sync",
+                "file transfer"
+            ],
+            "screenshots": [],
+            "sources": [
+                "https://github.com/truenas/containers/tree/main/apps/rsyncd",
+                "https://github.com/truenas/charts/tree/master/community/rsyncd",
+                "https://hub.docker.com/r/ixsystems/rsyncd"
+            ],
+            "icon_url": "https://rsync.samba.org/newrsynclogo.jpg"
         },
         "jellyfin": {
             "app_readme": "<h1>Jellyfin</h1>\n<p><a href=\"https://jellyfin.org/\">Jellyfin</a> is a Free Software Media System that puts you in control of managing and streaming your media.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Jellyfin</code> directories.\nAfterward, the <code>Jellyfin</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>",
