@@ -148,7 +148,6 @@ questions:
                         For example: IPv4
                       schema:
                         type: string
-                        show_if: [["provider", "=", "cloudflare"]]
                         default: ""
                         enum:
                           - value: ipv4
