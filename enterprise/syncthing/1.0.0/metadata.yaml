@@ -1,0 +1,22 @@
+runAsContext:
+  - userName: root
+    groupName: root
+    gid: 0
+    uid: 0
+    description: Syncthing runs as root and starts the syncthing process as a non-root user.
+capabilities:
+  - name: CHOWN
+    description: Syncthing is able to chown files.
+  - name: DAC_OVERRIDE
+    description: Syncthing is able to bypass permission checks.
+  - name: FOWNER
+    description: Syncthing is able bypass permission checks for it's sub-processes.
+  - name: SETUID
+    description: Syncthing is able to set user ID for it's sub-processes.
+  - name: SETGID
+    description: Syncthing is able to set group ID for it's sub-processes.
+  - name: SETPCAP
+    description: Syncthing is able to set process capabilities.
+  - name: SETFCAP
+    description: Syncthing is able to set file capabilities.
+hostMounts: []

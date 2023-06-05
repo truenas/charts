@@ -1502,6 +1502,44 @@
                 "https://github.com/truenas/charts/tree/master/enterprise/minio"
             ],
             "icon_url": "https://min.io/resources/img/logo/MINIO_wordmark.png"
+        },
+        "syncthing": {
+            "app_readme": "<h1>Syncthing</h1>\n<p><a href=\"https://syncthing.net/\">Syncthing</a> is a file synchronization program.</p>\n<p>At each startup of the application, the following settings are applied:</p>\n<ul>\n<li>Disable automatic upgrades</li>\n<li>Disable anonymous usage reporting</li>\n<li>Disable NAT traversal</li>\n<li>Disable global discovery</li>\n<li>Disable local discovery</li>\n<li>Disable relaying</li>\n<li>Disable announcing LAN addresses</li>\n</ul>\n<p>Additionally, the following defaults are set for new synthing \"folders\":</p>\n<ul>\n<li>Max total size of <code>xattr</code>: 10 MiB</li>\n<li>Max size per <code>xattr</code>: 2 MiB</li>\n<li>Enable <code>send</code> and <code>sync</code> of <code>xattr</code></li>\n<li>Enable <code>send</code> and <code>sync</code> of <code>ownership</code></li>\n</ul>",
+            "categories": [
+                "storage"
+            ],
+            "description": "Syncthing is a continuous file synchronization program.",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://syncthing.net/",
+            "location": "/__w/charts/charts/enterprise/syncthing",
+            "latest_version": "1.0.0",
+            "latest_app_version": "1.23.3",
+            "latest_human_version": "1.23.3_1.0.0",
+            "last_update": null,
+            "name": "syncthing",
+            "recommended": false,
+            "title": "Syncthing",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [
+                "sync",
+                "file-sharing"
+            ],
+            "screenshots": [
+                "https://syncthing.net/img/screenshot.png"
+            ],
+            "sources": [
+                "https://syncthing.net/",
+                "https://github.com/syncthing/syncthing",
+                "https://hub.docker.com/r/syncthing/syncthing"
+            ],
+            "icon_url": "https://syncthing.net/img/logo-horizontal.svg"
         }
     }
 }
