@@ -3,7 +3,7 @@ description: Mumble is a free, open source, low latency, high quality voice chat
 annotations:
   title: Mumble
 type: application
-version: 1.0.2
+version: 1.0.3
 apiVersion: v2
 appVersion: 'v1.4.230'
 kubeVersion: '>=1.16.0-0'
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
 - name: common
   repository: file://../../../common
-  version: 1.0.7
+  version: 1.0.8
 home: https://www.mumble.info/
 icon: https://github.com/mumble-voip/mumble/blob/master/icons/mumble.svg?raw=true
 sources:
