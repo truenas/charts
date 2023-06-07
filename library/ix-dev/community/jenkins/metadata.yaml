@@ -1,0 +1,8 @@
+runAsContext:
+  - userName: jenkins
+    groupName: jenkins
+    gid: 1000
+    uid: 1000
+    description: Jenkins runs as a non-root user.
+capabilities: []
+hostMounts: []
