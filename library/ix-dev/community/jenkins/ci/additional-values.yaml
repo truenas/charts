@@ -13,7 +13,7 @@ jenkinsStorage:
 jenkinsConfig:
   jenkinsOpts:
     - useJmx
-    - prefix=/jenkins
+    - sessionTimeout=100
   jenkinsJavaOpts:
     - property: hudson.footerURL
       value: https://jenkins.example.com
