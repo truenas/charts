@@ -17,7 +17,7 @@
   {{- $reservedJenkinsJavaOpts := (list
                                     "jenkins.model.Jenkins.slaveAgentPortEnforce"
                                     "jenkins.model.Jenkins.slaveAgentPort") -}}
-  {{- $reservedJenkinsOpts := (list "httpPort" ) -}}
+  {{- $reservedJenkinsOpts := (list "httpPort") -}}
 
   {{- if and .Values.jenkinsNetwork.https .Values.jenkinsNetwork.certificateID -}}
     {{- $reservedJenkinsOpts = mustAppend $reservedJenkinsOpts "httpsPort" -}}
