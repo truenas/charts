@@ -34,7 +34,7 @@ questions:
             type: string
             empty: false
             required: true
-            valid_chars: ^[a-zA-Z0-9]+$
+            valid_chars: '^[a-zA-Z0-9]+$'
             valid_chars_error: |
               Username can only contain alphanumeric characters [0-9, a-z, A-Z].
         - variable: password
