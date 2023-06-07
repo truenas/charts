@@ -1,0 +1,9 @@
+jenkinsStorage:
+  home:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/home
+
+jenkinsNetwork:
+  http: true
+  agent: true
+  agentPort: 31000
