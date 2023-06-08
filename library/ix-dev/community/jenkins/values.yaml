@@ -13,10 +13,8 @@ jenkinsConfig:
   jenkinsJavaOpts: []
   additionalEnvs: []
 jenkinsNetwork:
-  http: true
-  httpPort: 30000
+  webPort: 32000
   https: false
-  httpsPort: 30001
   certificateID: 0
   agent: false
   agentPort: 50000

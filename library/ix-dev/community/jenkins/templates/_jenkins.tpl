@@ -29,26 +29,24 @@ workload:
             {{ end }}
           {{ end }}
           {{ $scheme := "http" }}
-          {{ $port := .Values.jenkinsNetwork.httpPort }}
-          {{ if not .Values.jenkinsNetwork.http }}
+          {{ if .Values.jenkinsNetwork.certificateID }}
             {{ $scheme = "https" }}
-            {{ $port = .Values.jenkinsNetwork.httpsPort }}
           {{ end }}
           probes:
             liveness:
               enabled: true
               type: {{ $scheme }}
-              port: {{ $port }}
+              port: {{ .Values.jenkinsNetwork.webPort }}
               path: /login
             readiness:
               enabled: true
               type: {{ $scheme }}
-              port: {{ $port }}
+              port: {{ .Values.jenkinsNetwork.webPort }}
               path: /login
             startup:
               enabled: true
               type: {{ $scheme }}
-              port: {{ $port }}
+              port: {{ .Values.jenkinsNetwork.webPort }}
               path: /login
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
@@ -69,17 +67,11 @@ service:
     type: NodePort
     targetSelector: jenkins
     ports:
-      https:
-        enabled: {{ .Values.jenkinsNetwork.https }}
-        primary: {{ .Values.jenkinsNetwork.https }}
-        port: {{ .Values.jenkinsNetwork.httpsPort }}
-        nodePort: {{ .Values.jenkinsNetwork.httpsPort }}
-        targetSelector: jenkins
-      http:
-        enabled: {{ .Values.jenkinsNetwork.http }}
-        primary: {{ not .Values.jenkinsNetwork.https }}
-        port: {{ .Values.jenkinsNetwork.httpPort }}
-        nodePort: {{ .Values.jenkinsNetwork.httpPort }}
+      web:
+        enabled: true
+        primary: true
+        port: {{ .Values.jenkinsNetwork.webPort }}
+        nodePort: {{ .Values.jenkinsNetwork.webPort }}
         targetSelector: jenkins
   agent:
     enabled: {{ .Values.jenkinsNetwork.agent }}

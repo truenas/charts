@@ -4,8 +4,6 @@ jenkinsStorage:
     hostPath: /mnt/{{ .Release.Name }}/home
 
 jenkinsNetwork:
-  http: true
-  https: true
   agent: true
   agentPort: 31000
   certificateID: 1

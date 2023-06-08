@@ -4,8 +4,6 @@ jenkinsStorage:
     hostPath: /mnt/{{ .Release.Name }}/home
 
 jenkinsNetwork:
-  http: false
-  https: true
   certificateID: 1
 
 ixCertificates:

@@ -1,14 +1,12 @@
 {{- define "jenkins.configuration" -}}
 opts:
-  javaOpts:
-    {{- range $opt := .Values.jenkinsConfig.javaOpts }}
-    - -{{ $opt }}
-    {{- end }}
-
   jenkinsOpts:
-    - --httpPort={{ ternary .Values.jenkinsNetwork.httpPort "-1" .Values.jenkinsNetwork.http }}
-    {{- if .Values.jenkinsNetwork.https }}
-    - --httpsPort={{ .Values.jenkinsNetwork.httpsPort }}
+    {{- if  not .Values.jenkinsNetwork.certificateID }}
+    - --httpPort={{ .Values.jenkinsNetwork.webPort }}
+    {{- end -}}
+    {{- if .Values.jenkinsNetwork.certificateID }}
+    - --httpPort=-1
+    - --httpsPort={{ .Values.jenkinsNetwork.webPort }}
     - --httpsKeyStore={{ .Values.jenkinsConstants.keystorePath }}/{{ .Values.jenkinsConstants.keystoreName }}
     - --httpsKeyStorePassword={{ .Values.jenkinsCertRandomPass }}
     {{- end -}}

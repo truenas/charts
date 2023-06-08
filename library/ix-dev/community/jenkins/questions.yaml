@@ -112,35 +112,12 @@ questions:
     schema:
       type: dict
       attrs:
-        - variable: http
-          label: Enable HTTP
-          description: Enable HTTP Port for Jenkins.
-          schema:
-            type: boolean
-            default: true
-        - variable: httpPort
-          label: HTTP Port (Web UI)
-          description: The HTTP port for the Jenkins Web UI.
+        - variable: webPort
+          label: Web Port
+          description: The port for the Jenkins Web UI.
           schema:
             type: int
-            show_if: [["http", "=", true]]
             default: 32000
-            min: 9000
-            max: 65535
-            required: true
-        - variable: https
-          label: Enable HTTPS
-          description: Enable HTTPS Port for Jenkins.
-          schema:
-            type: boolean
-            default: false
-        - variable: httpsPort
-          label: HTTPS Port (Web UI)
-          description: The HTTPS port for the Jenkins Web UI.
-          schema:
-            type: int
-            show_if: [["https", "=", true]]
-            default: 32001
             min: 9000
             max: 65535
             required: true
@@ -149,8 +126,6 @@ questions:
           description: The certificate to use for HTTPS.
           schema:
             type: int
-            show_if: [["https", "=", true]]
-            required: true
             $ref:
               - "definitions/certificate"
         - variable: agent

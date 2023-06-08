@@ -1,7 +1,4 @@
 {{- define "jenkins.validation" -}}
-  {{- if and (not .Values.jenkinsNetwork.http) (not .Values.jenkinsNetwork.https) -}}
-    {{- fail "Jenkins - At least one of [HTTP, HTTPS] must be enabled." -}}
-  {{- end -}}
 
   {{- if not (deepEqual (uniq .Values.jenkinsConfig.jenkinsJavaOpts) .Values.jenkinsConfig.jenkinsJavaOpts) -}}
     {{- fail "Jenkins - Jenkins Java Options must be unique" -}}
@@ -11,15 +8,12 @@
     {{- fail "Jenkins - Jenkins Options must be unique" -}}
   {{- end -}}
 
-  {{- if and .Values.jenkinsNetwork.https (not .Values.jenkinsNetwork.certificateID) -}}
-    {{- fail "Jenkins - You need to select a certificate in order to enable HTTPS" -}}
-  {{- end -}}
   {{- $reservedJenkinsJavaOpts := (list
                                     "jenkins.model.Jenkins.slaveAgentPortEnforce"
                                     "jenkins.model.Jenkins.slaveAgentPort") -}}
   {{- $reservedJenkinsOpts := (list "httpPort") -}}
 
-  {{- if and .Values.jenkinsNetwork.https .Values.jenkinsNetwork.certificateID -}}
+  {{- if .Values.jenkinsNetwork.certificateID -}}
     {{- $reservedJenkinsOpts = mustAppend $reservedJenkinsOpts "httpsPort" -}}
     {{- $reservedJenkinsOpts = mustAppend $reservedJenkinsOpts "httpsKeyStore" -}}
   {{- end -}}
