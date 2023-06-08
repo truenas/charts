@@ -117,7 +117,7 @@ questions:
           description: The port for the Jenkins Web UI.
           schema:
             type: int
-            default: 32000
+            default: 30036
             min: 9000
             max: 65535
             required: true
