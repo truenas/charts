@@ -3,7 +3,7 @@ description: Sonarr is a PVR for Usenet and BitTorrent users.
 annotations:
   title: Sonarr
 type: application
-version: 1.0.8
+version: 1.0.9
 apiVersion: v2
 appVersion: '3.0.10.1567'
 kubeVersion: '>=1.16.0-0'
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.0.7
+    version: 1.0.8
 home: https://github.com/Sonarr/Sonarr
 icon: https://raw.githubusercontent.com/Sonarr/Sonarr/develop/Logo/256.png
 sources:
