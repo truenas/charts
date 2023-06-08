@@ -1,11 +1,12 @@
 name: adguard-home
-description: Free and open source, powerful network-wide ads & trackers blocking DNS server.
+description: Free and open source, powerful network-wide ads & trackers blocking DNS
+  server.
 annotations:
   title: AdGuard Home
 type: application
-version: 1.0.6
+version: 1.0.7
 apiVersion: v2
-appVersion: 'v0.107.29'
+appVersion: 0.107.30
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: truenas
