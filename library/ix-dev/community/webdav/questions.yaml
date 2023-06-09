@@ -41,6 +41,7 @@ questions:
           schema:
             type: string
             show_if: [["authType", "=", "basic"]]
+            private: true
             required: true
         - variable: additionalEnvs
           label: Additional Environment Variables
@@ -77,7 +78,7 @@ questions:
           schema:
             type: int
             min: 2
-            default: 568
+            default: 666
             required: true
         - variable: group
           label: Group ID
@@ -85,7 +86,7 @@ questions:
           schema:
             type: int
             min: 2
-            default: 568
+            default: 666
             required: true
 
   - variable: webdavNetwork
