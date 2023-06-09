@@ -9,9 +9,11 @@ data:
   {{- $protocol := "http" -}}
   {{- if .Values.grafanaNetwork.certificateID -}}
     {{- $protocol = "https" -}}
-    {{- $host = .Values.grafanaNetwork.rootURL -}}
-    {{- $host = ($host | trimPrefix "https://" | trimPrefix "http://" | trimSuffix "/") -}}
-    {{- $host = (mustRegexReplaceAll "(.*):[0-9]+" $host "${1}") -}}
+    {{- if .Values.grafanaNetwork.rootURL -}}
+      {{- $host = .Values.grafanaNetwork.rootURL -}}
+      {{- $host = ($host | trimPrefix "https://" | trimPrefix "http://" | trimSuffix "/") -}}
+      {{- $host = (mustRegexReplaceAll "(.*):[0-9]+" $host "${1}") -}}
+    {{- end -}}
   {{- end }}
   path: "/"
   port: {{ .Values.grafanaNetwork.webPort | quote }}
