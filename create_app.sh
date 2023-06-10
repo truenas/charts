@@ -2,12 +2,14 @@
 
 VERSION="v4.31.1"
 BINARY="yq_linux_amd64"
-YQ_PATH="/tmp/yq"
+YQ_PATH="$(pwd)/yq"
 BASE_PATH="library/ix-dev"
 
 if [[ ! -f "$YQ_PATH" ]]; then
-  wget -q "https://github.com/mikefarah/yq/releases/download/${VERSION}/${BINARY}" -O "$YQ_PATH" && \
-  chmod +x "$YQ_PATH"
+    echo "Downloading yq..."
+    wget -q "https://github.com/mikefarah/yq/releases/download/${VERSION}/${BINARY}" -O "$YQ_PATH" && \
+    chmod +x "$YQ_PATH"
+    echo "Done"
 fi
 
 function check_args(){
