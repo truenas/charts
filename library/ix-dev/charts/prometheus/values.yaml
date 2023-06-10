@@ -16,7 +16,7 @@ prometheusConfig:
   additionalArgs: []
 
 prometheusNetwork:
-  apiPort: 30000
+  apiPort: 30002
   hostNetwork: false
 
 prometheusRunAs:

@@ -92,7 +92,7 @@ questions:
           description: The port for the Gitea WebUI.
           schema:
             type: int
-            default: 30000
+            default: 30008
             min: 9000
             max: 65535
             required: true
@@ -101,7 +101,7 @@ questions:
           description: The port for the Gitea SSH.
           schema:
             type: int
-            default: 30001
+            default: 30009
             min: 9000
             max: 65535
             required: true

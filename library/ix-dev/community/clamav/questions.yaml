@@ -84,7 +84,7 @@ questions:
           description: The port for the ClamAV ClamD
           schema:
             type: int
-            default: 30000
+            default: 30005
             min: 9000
             max: 65535
             required: true
@@ -93,7 +93,7 @@ questions:
           description: The port for the ClamAV MilterD
           schema:
             type: int
-            default: 30001
+            default: 30006
             min: 9000
             max: 65535
             required: true

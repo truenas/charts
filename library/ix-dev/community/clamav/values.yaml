@@ -17,8 +17,8 @@ clamavConfig:
   additionalEnvs: []
 
 clamavNetwork:
-  clamdPort: 30000
-  milterdPort: 30001
+  clamdPort: 30005
+  milterdPort: 30006
 
 clamavStorage:
   sigdb:

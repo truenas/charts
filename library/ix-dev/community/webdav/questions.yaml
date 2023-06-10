@@ -108,7 +108,7 @@ questions:
                 description: The port for HTTP WebDAV.
                 schema:
                   type: int
-                  default: 30000
+                  default: 30034
                   min: 9000
                   max: 65535
                   required: true
@@ -125,7 +125,7 @@ questions:
                 description: The port for HTTPS WebDAV.
                 schema:
                   type: int
-                  default: 30001
+                  default: 30035
                   min: 9000
                   max: 65535
                   required: true

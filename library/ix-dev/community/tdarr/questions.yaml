@@ -110,7 +110,7 @@ questions:
           description: The port for the Tdarr Web UI.
           schema:
             type: int
-            default: 30000
+            default: 30028
             min: 9000
             max: 65535
             required: true
@@ -119,7 +119,7 @@ questions:
           description: The port for the Tdarr Server.
           schema:
             type: int
-            default: 30001
+            default: 30029
             min: 9000
             max: 65535
             required: true

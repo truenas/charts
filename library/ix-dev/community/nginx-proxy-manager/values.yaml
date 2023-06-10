@@ -9,9 +9,9 @@ resources:
 npmConfig:
   additionalEnvs: []
 npmNetwork:
-  webPort: 30000
-  httpPort: 30001
-  httpsPort: 30002
+  webPort: 30020
+  httpPort: 30021
+  httpsPort: 30022
 npmStorage:
   data:
     type: ixVolume

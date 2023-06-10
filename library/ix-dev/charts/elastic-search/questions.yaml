@@ -83,7 +83,7 @@ questions:
           description: The port for the Elastic Search HTTP
           schema:
             type: int
-            default: 30000
+            default: 30003
             min: 9000
             max: 65535
             required: true

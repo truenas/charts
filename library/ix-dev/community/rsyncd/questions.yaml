@@ -56,7 +56,7 @@ questions:
           description: The port for Rsync.
           schema:
             type: int
-            default: 30000
+            default: 30026
             min: 9000
             max: 65535
             required: true

@@ -12,7 +12,7 @@ sonarrConfig:
   instanceName: Sonarr
   additionalEnvs: []
 sonarrNetwork:
-  webPort: 30000
+  webPort: 30027
   hostNetwork: false
 sonarrRunAs:
   user: 568

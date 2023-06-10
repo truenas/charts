@@ -117,7 +117,7 @@ questions:
           description: The port for the Prometheus API (And WebUI).
           schema:
             type: int
-            default: 30000
+            default: 30002
             min: 9000
             max: 65535
             required: true

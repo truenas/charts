@@ -13,9 +13,9 @@ vaultwardenConfig:
   additionalEnvs: []
 
 vaultwardenNetwork:
-  webPort: 30000
+  webPort: 30032
   wsEnabled: true
-  wsPort: 30001
+  wsPort: 30033
   hostNetwork: false
   certificateID: 0
   domain: ''
