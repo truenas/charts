@@ -1,0 +1,19 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{/* Run the validation */}}
+{{- include "jenkins.validation" $ -}}
+
+{{/* Generate a new random pass on each start to password protect certificate */}}
+{{- if .Values.jenkinsNetwork.certificateID -}}
+  {{- $_ := set .Values "jenkinsCertRandomPass" (randAlphaNum 32) -}}
+{{- else if .Values.jenkinsCertRandomPass -}} {{/* Cleanup if no cert is defined */}}
+  {{- $_ := unset .Values "jenkinsCertRandomPass" -}}
+{{- end -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "jenkins.workload" $ | fromYaml) -}}
+
+{{/* Create the configmap for portal manually*/}}
+{{- include "jenkins.portal" $ -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}
