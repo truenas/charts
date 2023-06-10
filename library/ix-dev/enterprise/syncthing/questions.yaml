@@ -162,7 +162,10 @@ questions:
             type: list
             required: true
             empty: false
-            default: []
+            default:
+              - type: "hostPath"
+                mountPath: "/data1"
+                hostPath": ""
             items:
               - variable: storageEntry
                 label: Storage Entry
