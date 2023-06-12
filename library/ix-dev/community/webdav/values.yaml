@@ -16,9 +16,9 @@ webdavConfig:
 webdavNetwork:
   hostNetwork: false
   http: true
-  httpPort: 30000
+  httpPort: 30034
   https: false
-  httpsPort: 30001
+  httpsPort: 30035
   certificateID: 0
 webdavRunAs:
   user: 568

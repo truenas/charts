@@ -12,7 +12,7 @@ radarrConfig:
   instanceName: Radarr
   additionalEnvs: []
 radarrNetwork:
-  webPort: 30000
+  webPort: 30025
   hostNetwork: false
 radarrRunAs:
   user: 568

@@ -9,9 +9,9 @@ resources:
 ipfsConfig:
   additionalEnvs: []
 ipfsNetwork:
-  apiPort: 30000
-  swarmPort: 30001
-  gatewayPort: 30002
+  apiPort: 30010
+  swarmPort: 30011
+  gatewayPort: 30012
   hostNetwork: false
 ipfsRunAs:
   user: 568

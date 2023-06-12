@@ -58,7 +58,7 @@ questions:
             port set here to take effect. (Or wait for the container to restart automatically)
           schema:
             type: int
-            default: 30000
+            default: 30004
             min: 9000
             max: 65535
             required: true

@@ -194,7 +194,7 @@ questions:
           description: The port for the Terraria Server.
           schema:
             type: int
-            default: 30000
+            default: 30030
             min: 9000
             max: 65535
             required: true

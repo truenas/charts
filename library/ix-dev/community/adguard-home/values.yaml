@@ -9,7 +9,7 @@ resources:
     memory: 8Gi
 
 adguardNetwork:
-  webPort: 30000
+  webPort: 30004
   enableDHCP: false
 
 # FIXME: See _adguard.tpl

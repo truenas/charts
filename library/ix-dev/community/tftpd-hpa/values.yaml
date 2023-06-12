@@ -14,7 +14,7 @@ tftpConfig:
 tftpNetwork:
   hostNetwork: true
   # Only used if hostNetwork is false
-  tftpPort: 30000
+  tftpPort: 30031
 tftpStorage:
   tftpboot:
     type: ixVolume
