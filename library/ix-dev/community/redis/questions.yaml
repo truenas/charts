@@ -30,6 +30,8 @@ questions:
             type: string
             required: true
             private: true
+            # Character @ is not allowed in password
+            valid_chars: ^((?!@).)*$
             show_if: [[ "allowEmptyPassword", "=", false ]]
             default: ""
 
