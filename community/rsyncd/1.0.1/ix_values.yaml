@@ -1,0 +1,17 @@
+image:
+  repository: ixsystems/rsyncd
+  pullPolicy: IfNotPresent
+  tag: '1.0.0'
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+rsyncConfig:
+  maxConnections: 4
+  auxParams: []
+rsyncNetwork:
+  hostNetwork: false
+  rsyncPort: 30026
+rsyncModules: []
