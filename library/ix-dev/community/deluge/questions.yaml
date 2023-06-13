@@ -154,7 +154,7 @@ questions:
                   required: true
                   hidden: true
                   immutable: true
-                  default: "data"
+                  default: "config"
                   $ref:
                     - "normalize/ixVolume"
               - variable: hostPath
@@ -192,7 +192,7 @@ questions:
                   required: true
                   hidden: true
                   immutable: true
-                  default: "data"
+                  default: "downloads"
                   $ref:
                     - "normalize/ixVolume"
               - variable: hostPath
