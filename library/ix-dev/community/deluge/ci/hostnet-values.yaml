@@ -1,0 +1,10 @@
+delugeStorage:
+  config:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/config
+  downloads:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/downloads
+
+delugeNetwork:
+  hostNetwork: true

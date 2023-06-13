@@ -37,22 +37,6 @@ questions:
     schema:
       type: dict
       attrs:
-        - variable: plugins
-          label: Deluge Plugins
-          description: Configure Deluge plugins to install.
-          schema:
-            type: list
-            default: []
-            items:
-              - variable: plugin
-                label: Plugin
-                description: |
-                  The plugin name to install.</br>
-                  Example: Deluge-piechart-panel </br>
-                  Example: Deluge-clock-panel 1.0.0
-                schema:
-                  type: string
-                  required: true
         - variable: additionalEnvs
           label: Additional Environment Variables
           description: Configure additional environment variables for Deluge.
@@ -76,7 +60,7 @@ questions:
                         type: string
                         required: true
 
-  - variable: delugeRunAs
+  - variable: delugeID
     label: ""
     group: User and Group Configuration
     schema:
@@ -84,7 +68,7 @@ questions:
       attrs:
         - variable: user
           label: User ID
-          description: The user id that Deluge will run as.
+          description: he user id that Deluge files will be owned by.
           schema:
             type: int
             min: 2
@@ -92,7 +76,7 @@ questions:
             required: true
         - variable: group
           label: Group ID
-          description: The group id that Deluge will run as.
+          description: The group id that Deluge files will be owned by.
           schema:
             type: int
             min: 2
@@ -117,30 +101,24 @@ questions:
           description: The port for the Deluge Web UI.
           schema:
             type: int
-            default: 30037
+            show_if: [["hostNetwork", "=", false]]
+            default: 30038
             min: 9000
             max: 65535
             required: true
-        - variable: certificateID
-          label: Certificate
+        - variable: torrentPort
+          label: Torrent Port
           description: |
-            The certificate to use for Deluge
+            The port for the Deluge Torrent.</br>
+            Applies to both TCP and UDP.
+            (Internal port is always 6881)
           schema:
             type: int
-            "null": true
-            $ref:
-              - "definitions/certificate"
-        - variable: rootURL
-          label: Root URL
-          description: |
-            The root URL for Deluge </br>
-            The URL you use to access Deluge </br>
-            Example: https://Deluge.example.com:30037</br>
-            Example: https://192.168.1.100:30037</br>
-          schema:
-            type: string
-            show_if: [["certificateID", "!=", null]]
-            default: ""
+            show_if: [["hostNetwork", "=", false]]
+            default: 30039
+            min: 9000
+            max: 65535
+            required: true
 
   - variable: delugeStorage
     label: ""
@@ -148,9 +126,47 @@ questions:
     schema:
       type: dict
       attrs:
-        - variable: data
-          label: Deluge Data Storage
-          description: The path to store Deluge Data.
+        - variable: config
+          label: Deluge Config Storage
+          description: The path to store Deluge Configuration.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
+                schema:
+                  type: string
+                  required: true
+                  default: "ixVolume"
+                  enum:
+                    - value: "hostPath"
+                      description: Host Path (Path that already exists on the system)
+                    - value: "ixVolume"
+                      description: ixVolume (Dataset created automatically by the system)
+              - variable: datasetName
+                label: Dataset Name
+                schema:
+                  type: string
+                  show_if: [["type", "=", "ixVolume"]]
+                  required: true
+                  hidden: true
+                  immutable: true
+                  default: "data"
+                  $ref:
+                    - "normalize/ixVolume"
+              - variable: hostPath
+                label: Host Path
+                schema:
+                  type: hostpath
+                  show_if: [["type", "=", "hostPath"]]
+                  immutable: true
+                  required: true
+        - variable: downloads
+          label: Deluge Downloads Storage
+          description: The path to store Deluge Downloads.
           schema:
             type: dict
             attrs:
