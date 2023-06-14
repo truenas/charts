@@ -22,7 +22,7 @@ portals:
 
 questions:
   - variable: wgUDPPort
-    label: WireGuard UPD Node Port for WG-Easy
+    label: WireGuard UDP Node Port for WG-Easy
     group: Networking
     schema:
       type: int
