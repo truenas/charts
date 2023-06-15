@@ -46,6 +46,11 @@ postgresImage:
   tag: "15.2"
   pullPolicy: IfNotPresent
 
+mariadbImage:
+  repository: mariadb
+  tag: "10.6.14"
+  pullPolicy: IfNotPresent
+
 # -- (docs/README.md)
 securityContext:
   container:
