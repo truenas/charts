@@ -1,11 +1,12 @@
 name: grafana
-description: Grafana is the open source analytics & monitoring solution for every database.
+description: Grafana is the open source analytics & monitoring solution for every
+  database.
 annotations:
   title: Grafana
 type: application
-version: 1.0.0
+version: 1.0.1
 apiVersion: v2
-appVersion: '9.5.3'
+appVersion: 10.0.0
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: truenas
