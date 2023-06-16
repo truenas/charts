@@ -29,10 +29,11 @@ resources:
     memory: 8Gi
 
 immichConfig:
-  enableMapbox: false
-  mapboxKey: ''
   disableReverseGeocoding: false
   reverseGeocodingPrecision: 3
+  publicLoginMessage: ''
+  enableML: true
+  enableTypesense: true
 
 immichNetwork:
   webuiPort: 30041
@@ -41,6 +42,9 @@ immichNetwork:
   # in the future.
   serverPort: 20000
   webPort: 20001
+  mlPort: 20002
+  microPort: 20003
+  typesensePort: 20004
 
 immichStorage:
   uploads:

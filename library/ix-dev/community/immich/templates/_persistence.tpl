@@ -55,6 +55,31 @@ persistence:
           mountPath: /usr/src/app/upload/encoded-video
         01-permissions:
           mountPath: /mnt/directories/video
+  microcache:
+    enabled: true
+    type: emptyDir
+    targetSelector:
+      microservices:
+        microservices:
+          mountPath: /microcache
+  {{- if .Values.immichConfig.enableTypesense }}
+  typsense:
+    enabled: true
+    type: emptyDir
+    targetSelector:
+      typesense:
+        typesense:
+          mountPath: /typesense-data
+  {{- end }}
+  {{- if .Values.immichConfig.enableML }}
+  mlcache:
+    enabled: true
+    type: emptyDir
+    targetSelector:
+      machinelearning:
+        machinelearning:
+          mountPath: /mlcache
+  {{- end }}
 
   postgresdata:
     enabled: true

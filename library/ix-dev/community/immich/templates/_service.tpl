@@ -50,5 +50,6 @@ service:
         enabled: true
         primary: true
         port: 5432
+        targetPort: 5432
         targetSelector: postgres
 {{- end -}}
