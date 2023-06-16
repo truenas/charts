@@ -20,6 +20,8 @@ workload:
           envFrom:
             - secretRef:
                 name: immich-creds
+            - secretRef:
+                name: server-creds
             - configMapRef:
                 name: server-config
           probes:

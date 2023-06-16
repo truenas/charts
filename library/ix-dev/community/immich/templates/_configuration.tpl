@@ -34,6 +34,16 @@ secret:
       # REDIS_PASSWORD:
       # REDIS_PORT: "6379"
       # REDIS_DBINDEX: "0"
+
+  server-creds:
+    enabled: true
+    data:
+      {{- if .Values.immichConfig.enableMapbox }}
+      MAPBOX_KEY: {{ .Values.immichConfig.mapboxKey }}
+      {{- end }}
+      # TODO: JWT_SECRET:
+      # TODO: TYPESENSE_API_KEY:
+
 configmap:
   server-config:
     enabled: true
