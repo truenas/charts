@@ -64,7 +64,6 @@ configmap:
       TYPESENSE_ENABLED: {{ .Values.immichConfig.enableTypesense | quote }}
       IMMICH_MACHINE_LEARNING_URL: {{ $mlURL }}
       {{- if .Values.immichConfig.enableTypesense }}
-      TYPESENSE_URL: {{ printf "http://%v-typesense:%v" .Values.immichNetwork.typesensePort }}
       TYPESENSE_PROTOCOL: http
       TYPESENSE_HOST: {{ printf "%v-typesense" $fullname }}
       TYPESENSE_PORT: {{ .Values.immichNetwork.typesensePort }}
