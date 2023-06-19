@@ -1,15 +1,15 @@
-{{- define "immich.web.workload" -}}
+{{- define "immich.proxy.workload" -}}
 workload:
-  web:
+  proxy:
     enabled: true
     type: Deployment
     podSpec:
       hostNetwork: false
       containers:
-        web:
+        proxy:
           enabled: true
           primary: true
-          imageSelector: webImage
+          imageSelector: proxyImage
           securityContext:
             runAsUser: 0
             runAsGroup: 0
@@ -17,23 +17,23 @@ workload:
             readOnlyRootFilesystem: false
           envFrom:
             - configMapRef:
-                name: web-config
+                name: proxy-config
           probes:
             liveness:
               enabled: true
               type: http
-              path: /robots.txt
-              port: {{ .Values.immichNetwork.webPort }}
+              path: /api/server-info/ping
+              port: 8080
             readiness:
               enabled: true
               type: http
-              path: /robots.txt
-              port: {{ .Values.immichNetwork.webPort }}
+              path: /api/server-info/ping
+              port: 8080
             startup:
               enabled: true
               type: http
-              path: /robots.txt
-              port: {{ .Values.immichNetwork.webPort }}
+              path: /api/server-info/ping
+              port: 8080
       initContainers: []
       # TODO: Add init container to wait for server
 {{- end -}}

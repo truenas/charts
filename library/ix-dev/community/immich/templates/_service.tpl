@@ -41,6 +41,43 @@ service:
         protocol: http
         targetSelector: web
 
+  micro:
+    enabled: true
+    type: ClusterIP
+    targetSelector: micro
+    ports:
+      micro:
+        enabled: true
+        primary: true
+        port: {{ .Values.immichNetwork.microPort }}
+        protocol: http
+        targetSelector: micro
+
+  proxy:
+    enabled: true
+    type: ClusterIP
+    targetSelector: proxy
+    ports:
+      proxy:
+        enabled: true
+        primary: true
+        port: {{ .Values.immichNetwork.webuiPort }}
+        targetPort: 8080
+        protocol: http
+        targetSelector: proxy
+
+  typesense:
+    enabled: true
+    type: ClusterIP
+    targetSelector: typesense
+    ports:
+      typesense:
+        enabled: true
+        primary: true
+        port: {{ .Values.immichNetwork.typesensePort }}
+        protocol: http
+        targetSelector: typesense
+
   postgres:
     enabled: true
     type: ClusterIP

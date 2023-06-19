@@ -60,6 +60,7 @@ configmap:
     enabled: true
     data:
       NODE_ENV: production
+      LOG_LEVEL: log
       SERVER_PORT: {{ .Values.immichNetwork.serverPort | quote }}
       TYPESENSE_ENABLED: {{ .Values.immichConfig.enableTypesense | quote }}
       IMMICH_MACHINE_LEARNING_URL: {{ $mlURL }}
@@ -73,6 +74,7 @@ configmap:
     enabled: true
     data:
       NODE_ENV: production
+      LOG_LEVEL: log
       MICROSERVICES_PORT: {{ .Values.immichNetwork.microPort | quote }}
       IMMICH_MACHINE_LEARNING_URL: {{ $mlURL }}
       REVERSE_GEOCODING_DUMP_DIRECTORY: /microcache

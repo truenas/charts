@@ -51,5 +51,4 @@ workload:
       {{- include "ix.v1.common.app.postgresWait" (dict "name" "postgres-wait"
                                                         "secretName" "postgres-creds") | nindent 8 }}
       # TODO: Add init container to wait for redis
-      # TODO: Add init container to wait for server
 {{- end -}}
