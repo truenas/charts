@@ -111,6 +111,7 @@ configmap:
     data:
       NODE_ENV: production
       MACHINE_LEARNING_PORT: {{ .Values.immichNetwork.mlPort | quote }}
+      MACHINE_LEARNING_CACHE_FOLDER: /mlcache
       TRANSFORMERS_CACHE: /mlcache
   {{- end }}
 {{- end -}}

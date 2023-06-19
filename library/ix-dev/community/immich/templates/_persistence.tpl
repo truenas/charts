@@ -9,6 +9,9 @@ persistence:
       server:
         server:
           mountPath: /usr/src/app/upload/library
+      micro:
+        micro:
+          mountPath: /usr/src/app/upload/encoded-video
         01-permissions:
           mountPath: /mnt/directories/library
   uploads:
@@ -20,6 +23,9 @@ persistence:
       server:
         server:
           mountPath: /usr/src/app/upload/upload
+      micro:
+        micro:
+          mountPath: /usr/src/app/upload/encoded-video
         01-permissions:
           mountPath: /mnt/directories/uploads
   thumbs:
@@ -31,6 +37,9 @@ persistence:
       server:
         server:
           mountPath: /usr/src/app/upload/thumbs
+      micro:
+        micro:
+          mountPath: /usr/src/app/upload/encoded-video
         01-permissions:
           mountPath: /mnt/directories/thumbs
   profile:
@@ -42,6 +51,9 @@ persistence:
       server:
         server:
           mountPath: /usr/src/app/upload/profile
+      micro:
+        micro:
+          mountPath: /usr/src/app/upload/encoded-video
         01-permissions:
           mountPath: /mnt/directories/profile
   video:
@@ -52,6 +64,9 @@ persistence:
     targetSelector:
       server:
         server:
+          mountPath: /usr/src/app/upload/encoded-video
+      micro:
+        micro:
           mountPath: /usr/src/app/upload/encoded-video
         01-permissions:
           mountPath: /mnt/directories/video
@@ -80,7 +95,6 @@ persistence:
         machinelearning:
           mountPath: /mlcache
   {{- end }}
-
   postgresdata:
     enabled: true
     type: {{ .Values.immichStorage.pgData.type }}
