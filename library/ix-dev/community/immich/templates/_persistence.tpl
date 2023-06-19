@@ -9,8 +9,8 @@ persistence:
       server:
         server:
           mountPath: /usr/src/app/upload/library
-      micro:
-        micro:
+      microservices:
+        microservices:
           mountPath: /usr/src/app/upload/encoded-video
         01-permissions:
           mountPath: /mnt/directories/library
@@ -23,8 +23,8 @@ persistence:
       server:
         server:
           mountPath: /usr/src/app/upload/upload
-      micro:
-        micro:
+      microservices:
+        microservices:
           mountPath: /usr/src/app/upload/encoded-video
         01-permissions:
           mountPath: /mnt/directories/uploads
@@ -37,8 +37,8 @@ persistence:
       server:
         server:
           mountPath: /usr/src/app/upload/thumbs
-      micro:
-        micro:
+      microservices:
+        microservices:
           mountPath: /usr/src/app/upload/encoded-video
         01-permissions:
           mountPath: /mnt/directories/thumbs
@@ -51,8 +51,8 @@ persistence:
       server:
         server:
           mountPath: /usr/src/app/upload/profile
-      micro:
-        micro:
+      microservices:
+        microservices:
           mountPath: /usr/src/app/upload/encoded-video
         01-permissions:
           mountPath: /mnt/directories/profile
@@ -65,8 +65,8 @@ persistence:
       server:
         server:
           mountPath: /usr/src/app/upload/encoded-video
-      micro:
-        micro:
+      microservices:
+        microservices:
           mountPath: /usr/src/app/upload/encoded-video
         01-permissions:
           mountPath: /mnt/directories/video

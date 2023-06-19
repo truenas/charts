@@ -3,8 +3,11 @@
 {{/* Merge the templates with Values */}}
 {{- $_ := mustMergeOverwrite .Values (include "immich.configuration" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "immich.server.workload" $ | fromYaml) -}}
-{{- $_ := mustMergeOverwrite .Values (include "immich.micro.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "immich.microservices.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "immich.machinelearning.workload" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "immich.web.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "immich.proxy.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "immich.typesense.workload" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "immich.persistence" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "immich.service" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "postgres.workload" $ | fromYaml) -}}

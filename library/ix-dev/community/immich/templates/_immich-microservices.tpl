@@ -1,13 +1,12 @@
-{{- define "immich.micro.workload" -}}
+{{- define "immich.microservices.workload" -}}
 workload:
-  micro:
+  microservices:
     enabled: true
-    primary: true
     type: Deployment
     podSpec:
       hostNetwork: false
       containers:
-        micro:
+        microservices:
           enabled: true
           primary: true
           imageSelector: image

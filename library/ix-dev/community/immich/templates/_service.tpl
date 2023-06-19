@@ -5,7 +5,7 @@ service:
     primary: true
     type: NodePort
     targetSelector: web
-    # FIXME: targetSelector: proxy
+    targetSelector: proxy
     ports:
       proxy:
         enabled: true
@@ -14,7 +14,7 @@ service:
         nodePort: {{ .Values.immichNetwork.webPort }}
         protocol: http
         targetPort: 8080
-        # FIXME: targetSelector: proxy
+        targetSelector: proxy
         targetSelector: web
 
   server:
@@ -41,30 +41,29 @@ service:
         protocol: http
         targetSelector: web
 
-  micro:
+  microservices:
     enabled: true
     type: ClusterIP
-    targetSelector: micro
+    targetSelector: microservices
     ports:
-      micro:
+      microservices:
         enabled: true
         primary: true
-        port: {{ .Values.immichNetwork.microPort }}
+        port: {{ .Values.immichNetwork.microservicesPort }}
         protocol: http
-        targetSelector: micro
+        targetSelector: microservices
 
-  proxy:
+  machinelearning:
     enabled: true
     type: ClusterIP
-    targetSelector: proxy
+    targetSelector: machinelearning
     ports:
-      proxy:
+      machinelearning:
         enabled: true
         primary: true
-        port: {{ .Values.immichNetwork.webuiPort }}
-        targetPort: 8080
+        port: {{ .Values.immichNetwork.machinelearningPort }}
         protocol: http
-        targetSelector: proxy
+        targetSelector: machinelearning
 
   typesense:
     enabled: true
