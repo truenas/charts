@@ -67,7 +67,7 @@ configmap:
       {{- if .Values.immichConfig.enableTypesense }}
       TYPESENSE_PROTOCOL: http
       TYPESENSE_HOST: {{ printf "%v-typesense" $fullname }}
-      TYPESENSE_PORT: {{ .Values.immichNetwork.typesensePort }}
+      TYPESENSE_PORT: {{ .Values.immichNetwork.typesensePort | quote }}
       {{- end }}
 
   micro-config:
@@ -75,7 +75,7 @@ configmap:
     data:
       NODE_ENV: production
       LOG_LEVEL: log
-      MICROSERVICES_PORT: {{ .Values.immichNetwork.microPort | quote }}
+      MICROSERVICES_PORT: {{ .Values.immichNetwork.microservicesPort | quote }}
       IMMICH_MACHINE_LEARNING_URL: {{ $mlURL }}
       REVERSE_GEOCODING_DUMP_DIRECTORY: /microcache
       DISABLE_REVERSE_GEOCODING: {{ .Values.immichConfig.disableReverseGeocoding | quote }}
@@ -87,7 +87,7 @@ configmap:
       TYPESENSE_URL: {{ printf "http://%v-typesense:%v" .Values.immichNetwork.typesensePort }}
       TYPESENSE_PROTOCOL: http
       TYPESENSE_HOST: {{ printf "%v-typesense" $fullname }}
-      TYPESENSE_PORT: {{ .Values.immichNetwork.typesensePort }}
+      TYPESENSE_PORT: {{ .Values.immichNetwork.typesensePort | quote }}
       {{- end }}
 
   web-config:
@@ -112,7 +112,7 @@ configmap:
     enabled: true
     data:
       NODE_ENV: production
-      MACHINE_LEARNING_PORT: {{ .Values.immichNetwork.mlPort | quote }}
+      MACHINE_LEARNING_PORT: {{ .Values.immichNetwork.machinelearningPort | quote }}
       MACHINE_LEARNING_CACHE_FOLDER: /mlcache
       TRANSFORMERS_CACHE: /mlcache
   {{- end }}
