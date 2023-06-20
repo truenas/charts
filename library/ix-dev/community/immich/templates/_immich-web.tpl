@@ -17,6 +17,9 @@ workload:
             runAsGroup: 0
             runAsNonRoot: false
             readOnlyRootFilesystem: false
+          capabilities:
+            add:
+              - SETUID
           envFrom:
             - configMapRef:
                 name: web-config

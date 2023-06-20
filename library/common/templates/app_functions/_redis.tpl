@@ -89,4 +89,5 @@ secretName (required): Name of the secret containing the redis credentials
         echo "Waiting for redis to be ready. Sleeping 2 seconds..."
         sleep 2
       done
+      echo "Redis is ready!"
 {{- end -}}
