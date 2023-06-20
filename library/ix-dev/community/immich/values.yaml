@@ -40,11 +40,11 @@ immichNetwork:
   # Not user configurable, will be hidden on UI
   # Putting it here in case it needs to be configurable
   # in the future.
-  serverPort: 20000
-  webPort: 20001
-  machinelearningPort: 20002
-  microservicesPort: 20003
-  typesensePort: 20004
+  serverPort: 32000
+  webPort: 32001
+  machinelearningPort: 32002
+  microservicesPort: 32003
+  typesensePort: 32004
 
 immichStorage:
   uploads:
