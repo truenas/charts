@@ -39,6 +39,4 @@ workload:
               type: http
               path: /health
               port: {{ .Values.immichNetwork.typesensePort }}
-      initContainers:
-      {{- include "immich.wait.init" (dict "url" $url) | indent 8 }}
 {{- end -}}
