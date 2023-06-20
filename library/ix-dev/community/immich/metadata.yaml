@@ -3,6 +3,6 @@ runAsContext:
     groupName: root
     gid: 0
     uid: 0
-    description: Immich runs as root user.
+    description: Immich runs as root user in order to spawn different sub-processes.
 capabilities: []
 hostMounts: []

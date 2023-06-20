@@ -85,7 +85,10 @@ secretName (required): Name of the secret containing the redis credentials
     - -c
     - |
       echo "Waiting for redis to be ready"
-      until redis-cli -p "$REDIS_PASSWORD" ping | grep -q PONG; do
+      # FIXME: Remove after testing
+      echo "Host: $REDIS_HOST"
+      echo "Pass: $REDIS_PASSWORD"
+      until redis-cli -h "$REDIS_HOST "-p "$REDIS_PASSWORD" ping | grep -q PONG; do
         echo "Waiting for redis to be ready. Sleeping 2 seconds..."
         sleep 2
       done

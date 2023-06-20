@@ -51,6 +51,7 @@ workload:
       initContainers:
       {{- include "ix.v1.common.app.postgresWait" (dict "name" "postgres-wait"
                                                         "secretName" "postgres-creds") | nindent 8 }}
+      {{- include "ix.v1.common.app.redisWait" (dict  "name" "redis-wait"
+                                                      "secretName" "redis-creds") | nindent 8 }}
       {{- include "immich.wait.init" (dict "url" $url) | indent 8 }}
-      # TODO: Add init container to wait for redis
 {{- end -}}

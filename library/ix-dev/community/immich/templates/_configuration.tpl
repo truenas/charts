@@ -44,6 +44,7 @@ secret:
     data:
       ALLOW_EMPTY_PASSWORD: "no"
       REDIS_PASSWORD: {{ $redisPass }}
+      REDIS_HOST: {{ $redisHost }}
 
   {{/* Server & Microservices */}}
   immich-creds:
