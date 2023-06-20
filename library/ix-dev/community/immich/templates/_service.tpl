@@ -77,6 +77,18 @@ service:
         protocol: http
         targetSelector: typesense
 
+  redis:
+    enabled: true
+    type: ClusterIP
+    targetSelector: redis
+    ports:
+      redis:
+        enabled: true
+        primary: true
+        port: 6379
+        targetPort: 6379
+        targetSelector: redis
+
   postgres:
     enabled: true
     type: ClusterIP
