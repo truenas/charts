@@ -18,6 +18,11 @@ workload:
             runAsGroup: 0
             runAsNonRoot: false
             readOnlyRootFilesystem: false
+            capabilities:
+              add:
+                - CHOWN
+                - SETUID
+                - SETGID
           envFrom:
             - configMapRef:
                 name: proxy-config

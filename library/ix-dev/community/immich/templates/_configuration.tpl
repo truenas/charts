@@ -50,6 +50,7 @@ secret:
   immich-creds:
     enabled: true
     data:
+      IMMICH_MACHINE_LEARNING_URL: {{ $mlURL }}
       TYPESENSE_ENABLED: {{ .Values.immichConfig.enableTypesense | quote }}
       TYPESENSE_API_KEY: {{ $typesenseKey }}
       {{- if .Values.immichConfig.enableTypesense }}
@@ -82,7 +83,6 @@ configmap:
       LOG_LEVEL: log
       NODE_ENV: production
       SERVER_PORT: {{ .Values.immichNetwork.serverPort | quote }}
-      IMMICH_MACHINE_LEARNING_URL: {{ $mlURL }}
 
   micro-config:
     enabled: true
@@ -90,7 +90,6 @@ configmap:
       LOG_LEVEL: log
       NODE_ENV: production
       MICROSERVICES_PORT: {{ .Values.immichNetwork.microservicesPort | quote }}
-      IMMICH_MACHINE_LEARNING_URL: {{ $mlURL }}
       DISABLE_REVERSE_GEOCODING: {{ .Values.immichConfig.disableReverseGeocoding | quote }}
       {{- if not .Values.immichConfig.disableReverseGeocoding }}
       REVERSE_GEOCODING_PRECISION: {{ .Values.immichConfig.reverseGeocodingPrecision | quote }}

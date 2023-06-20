@@ -11,7 +11,7 @@ workload:
         machinelearning:
           enabled: true
           primary: true
-          imageSelector: image
+          imageSelector: mlImage
           securityContext:
             runAsUser: 0
             runAsGroup: 0
