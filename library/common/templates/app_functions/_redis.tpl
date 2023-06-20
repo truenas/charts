@@ -41,21 +41,21 @@ resources (required): Resources for the redis container
             command:
               - /bin/sh
               - -c
-              - redis-cli -p "$REDIS_PASSWORD" ping | grep -q PONG
+              - redis-cli -a "$REDIS_PASSWORD" -p ${REDIS_PORT_NUMBER:-6379} ping | grep -q PONG
           readiness:
             enabled: true
             type: exec
             command:
               - /bin/sh
               - -c
-              - redis-cli -p "$REDIS_PASSWORD" ping | grep -q PONG
+              - redis-cli -a "$REDIS_PASSWORD" -p ${REDIS_PORT_NUMBER:-6379} ping | grep -q PONG
           startup:
             enabled: true
             type: exec
             command:
               - /bin/sh
               - -c
-              - redis-cli -p "$REDIS_PASSWORD" ping | grep -q PONG
+              - redis-cli -a "$REDIS_PASSWORD" -p ${REDIS_PORT_NUMBER:-6379} ping | grep -q PONG
 {{- end -}}
 
 {{/* Returns a redis-wait container for waiting for redis to be ready */}}
@@ -85,10 +85,7 @@ secretName (required): Name of the secret containing the redis credentials
     - -c
     - |
       echo "Waiting for redis to be ready"
-      # FIXME: Remove after testing
-      echo "Host: $REDIS_HOST"
-      echo "Pass: $REDIS_PASSWORD"
-      until redis-cli -h "$REDIS_HOST" -p "$REDIS_PASSWORD" ping | grep -q PONG; do
+      until redis-cli -h "$REDIS_HOST" -a "$REDIS_PASSWORD" -p ${REDIS_PORT_NUMBER:-6379} ping | grep -q PONG; do
         echo "Waiting for redis to be ready. Sleeping 2 seconds..."
         sleep 2
       done
