@@ -19,7 +19,7 @@
 
   {{- $mlURL := "false" -}}
   {{- if .Values.immichConfig.enableML -}}
-    {{- $mlURL = printf "http://%v-machinelearning:%v" $fullname .Values.immichNetwork.mlPort -}}
+    {{- $mlURL = printf "http://%v-machinelearning:%v" $fullname .Values.immichNetwork.microservicesPort -}}
   {{- end }}
 
 secret:
@@ -32,10 +32,17 @@ secret:
       POSTGRES_HOST: {{ $dbHost }}
       POSTGRES_URL: {{ $dbURL }}
 
+  {{/* Server & Microservices */}}
   immich-creds:
     enabled: true
     data:
+      TYPESENSE_ENABLED: {{ .Values.immichConfig.enableTypesense | quote }}
       TYPESENSE_API_KEY: {{ $typesenseKey }}
+      {{- if .Values.immichConfig.enableTypesense }}
+      TYPESENSE_PROTOCOL: http
+      TYPESENSE_HOST: {{ printf "%v-typesense" $fullname }}
+      TYPESENSE_PORT: {{ .Values.immichNetwork.typesensePort | quote }}
+      {{- end }}
       DB_USERNAME: {{ $dbUser }}
       DB_PASSWORD: {{ $dbPass }}
       DB_HOSTNAME: {{ $dbHost }}
@@ -59,36 +66,23 @@ configmap:
   server-config:
     enabled: true
     data:
-      NODE_ENV: production
       LOG_LEVEL: log
+      NODE_ENV: production
       SERVER_PORT: {{ .Values.immichNetwork.serverPort | quote }}
-      TYPESENSE_ENABLED: {{ .Values.immichConfig.enableTypesense | quote }}
       IMMICH_MACHINE_LEARNING_URL: {{ $mlURL }}
-      {{- if .Values.immichConfig.enableTypesense }}
-      TYPESENSE_PROTOCOL: http
-      TYPESENSE_HOST: {{ printf "%v-typesense" $fullname }}
-      TYPESENSE_PORT: {{ .Values.immichNetwork.typesensePort | quote }}
-      {{- end }}
 
   micro-config:
     enabled: true
     data:
-      NODE_ENV: production
       LOG_LEVEL: log
+      NODE_ENV: production
       MICROSERVICES_PORT: {{ .Values.immichNetwork.microservicesPort | quote }}
       IMMICH_MACHINE_LEARNING_URL: {{ $mlURL }}
-      REVERSE_GEOCODING_DUMP_DIRECTORY: /microcache
       DISABLE_REVERSE_GEOCODING: {{ .Values.immichConfig.disableReverseGeocoding | quote }}
       {{- if not .Values.immichConfig.disableReverseGeocoding }}
       REVERSE_GEOCODING_PRECISION: {{ .Values.immichConfig.reverseGeocodingPrecision | quote }}
       {{- end }}
-      TYPESENSE_ENABLED: {{ .Values.immichConfig.enableTypesense | quote }}
-      {{- if .Values.immichConfig.enableTypesense }}
-      TYPESENSE_URL: {{ printf "http://%v-typesense:%v" .Values.immichNetwork.typesensePort }}
-      TYPESENSE_PROTOCOL: http
-      TYPESENSE_HOST: {{ printf "%v-typesense" $fullname }}
-      TYPESENSE_PORT: {{ .Values.immichNetwork.typesensePort | quote }}
-      {{- end }}
+      REVERSE_GEOCODING_DUMP_DIRECTORY: /microcache
 
   web-config:
     enabled: true

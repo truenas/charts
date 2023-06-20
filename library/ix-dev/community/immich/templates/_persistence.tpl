@@ -1,5 +1,6 @@
 {{- define "immich.persistence" -}}
 persistence:
+  {{/* Data */}}
   library:
     enabled: true
     type: {{ .Values.immichStorage.library.type }}
@@ -11,9 +12,7 @@ persistence:
           mountPath: /usr/src/app/upload/library
       microservices:
         microservices:
-          mountPath: /usr/src/app/upload/encoded-video
-        01-permissions:
-          mountPath: /mnt/directories/library
+          mountPath: /usr/src/app/upload/library
   uploads:
     enabled: true
     type: {{ .Values.immichStorage.uploads.type }}
@@ -25,9 +24,7 @@ persistence:
           mountPath: /usr/src/app/upload/upload
       microservices:
         microservices:
-          mountPath: /usr/src/app/upload/encoded-video
-        01-permissions:
-          mountPath: /mnt/directories/uploads
+          mountPath: /usr/src/app/upload/upload
   thumbs:
     enabled: true
     type: {{ .Values.immichStorage.thumbs.type }}
@@ -53,9 +50,7 @@ persistence:
           mountPath: /usr/src/app/upload/profile
       microservices:
         microservices:
-          mountPath: /usr/src/app/upload/encoded-video
-        01-permissions:
-          mountPath: /mnt/directories/profile
+          mountPath: /usr/src/app/upload/profile
   video:
     enabled: true
     type: {{ .Values.immichStorage.video.type }}
@@ -68,8 +63,8 @@ persistence:
       microservices:
         microservices:
           mountPath: /usr/src/app/upload/encoded-video
-        01-permissions:
-          mountPath: /mnt/directories/video
+
+  {{/* Caches */}}
   microcache:
     enabled: true
     type: emptyDir
@@ -95,6 +90,8 @@ persistence:
         machinelearning:
           mountPath: /mlcache
   {{- end }}
+
+  {{/* Database */}}
   postgresdata:
     enabled: true
     type: {{ .Values.immichStorage.pgData.type }}
