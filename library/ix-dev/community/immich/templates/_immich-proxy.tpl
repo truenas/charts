@@ -1,6 +1,7 @@
 {{- define "immich.proxy.workload" -}}
 {{- $fullname := (include "ix.v1.common.lib.chart.names.fullname" $) -}}
-{{- $url := printf "http://%v-server:%v/server-info/ping" $fullname .Values.immichNetwork.serverPort }}
+{{- $serverUrl := printf "http://%v-server:%v/server-info/ping" $fullname .Values.immichNetwork.serverPort -}}
+{{- $webUrl := printf "http://%v-web:%v/robots.txt" $fullname .Values.immichNetwork.webPort }}
 workload:
   proxy:
     enabled: true
@@ -37,5 +38,6 @@ workload:
               path: /api/server-info/ping
               port: 8080
       initContainers:
-      {{- include "immich.wait.init" (dict "url" $url) | indent 8 }}
+      {{- include "immich.wait.init" (dict "url" $serverUrl) | indent 8 }}
+      {{- include "immich.wait.init" (dict "url" $webUrl) | indent 8 }}
 {{- end -}}
