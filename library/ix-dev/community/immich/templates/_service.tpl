@@ -53,6 +53,7 @@ service:
         protocol: http
         targetSelector: microservices
 
+  {{- if .Values.immichConfig.enableML }}
   machinelearning:
     enabled: true
     type: ClusterIP
@@ -64,7 +65,9 @@ service:
         port: {{ .Values.immichNetwork.machinelearningPort }}
         protocol: http
         targetSelector: machinelearning
+  {{- end -}}
 
+  {{- if .Values.immichConfig.enableTypesense }}
   typesense:
     enabled: true
     type: ClusterIP
@@ -76,6 +79,7 @@ service:
         port: {{ .Values.immichNetwork.typesensePort }}
         protocol: http
         targetSelector: typesense
+  {{- end }}
 
   redis:
     enabled: true
