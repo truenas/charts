@@ -36,9 +36,7 @@ persistence:
           mountPath: /usr/src/app/upload/thumbs
       microservices:
         microservices:
-          mountPath: /usr/src/app/upload/encoded-video
-        01-permissions:
-          mountPath: /mnt/directories/thumbs
+          mountPath: /usr/src/app/upload/thumbs
   profile:
     enabled: true
     type: {{ .Values.immichStorage.profile.type }}
