@@ -1,7 +1,7 @@
 image:
   repository: jenkins/jenkins
   pullPolicy: IfNotPresent
-  tag: 2.387.3-jdk17
+  tag: '2.401.1-jdk17'
 
 resources:
   limits:
