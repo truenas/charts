@@ -11,6 +11,7 @@
 {{- $_ := mustMergeOverwrite .Values (include "immich.persistence" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "immich.service" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "postgres.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "redis.workload" $ | fromYaml) -}}
 
 {{/* Create the configmap for portal manually*/}}
 {{- include "immich.portal" $ -}}

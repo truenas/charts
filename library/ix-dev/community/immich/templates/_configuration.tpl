@@ -10,6 +10,13 @@
     {{- $dbPass = ((index .data "POSTGRES_PASSWORD") | b64dec) -}}
   {{- end -}}
 
+  {{- $redisHost := (printf "%s-redis" $fullname) -}}
+
+  {{- $redisPass := randAlphaNum 32 -}}
+  {{- with (lookup "v1" "Secret" .Release.Namespace (printf "%s-redis-creds" $fullname)) -}}
+    {{- $redisPass = ((index .data "REDIS_PASSWORD") | b64dec) -}}
+  {{- end -}}
+
   {{- $dbURL := (printf "postgres://%s:%s@%s:5432/%s?sslmode=disable" $dbUser $dbPass $dbHost $dbName) -}}
 
   {{- $typesenseKey := randAlphaNum 32 -}}
@@ -32,6 +39,12 @@ secret:
       POSTGRES_HOST: {{ $dbHost }}
       POSTGRES_URL: {{ $dbURL }}
 
+  redis-creds:
+    enabled: true
+    data:
+      ALLOW_EMPTY_PASSWORD: "no"
+      REDIS_PASSWORD: {{ $redisPass }}
+
   {{/* Server & Microservices */}}
   immich-creds:
     enabled: true
@@ -48,11 +61,10 @@ secret:
       DB_HOSTNAME: {{ $dbHost }}
       DB_DATABASE_NAME: {{ $dbName }}
       DB_PORT: "5432"
-      # TODO: Redis
-      # REDIS_HOSTNAME:
-      # REDIS_PASSWORD:
-      # REDIS_PORT: "6379"
-      # REDIS_DBINDEX: "0"
+      REDIS_HOSTNAME: {{ $redisHost }}
+      REDIS_PASSWORD: {{ $redisPass }}
+      REDIS_PORT: "6379"
+      REDIS_DBINDEX: "0"
 
   {{- if .Values.immichConfig.enableTypesense }}
   typesense-creds:

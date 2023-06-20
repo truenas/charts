@@ -78,7 +78,7 @@ persistence:
       typesense:
         typesense:
           mountPath: /typesense-data
-  {{- end }}
+  {{- end -}}
   {{- if .Values.immichConfig.enableML }}
   mlcache:
     enabled: true
@@ -88,6 +88,20 @@ persistence:
         machinelearning:
           mountPath: /mlcache
   {{- end }}
+  redis:
+    enabled: true
+    type: emptyDir
+    targetSelector:
+      redis:
+        redis:
+          mountPath: /bitnami/redis/data
+  tmp:
+    enabled: true
+    type: emptyDir
+    targetSelector:
+      redis:
+        redis:
+          mountPath: /tmp
 
   {{/* Database */}}
   postgresdata:
