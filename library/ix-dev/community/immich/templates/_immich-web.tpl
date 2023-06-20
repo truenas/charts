@@ -1,4 +1,6 @@
 {{- define "immich.web.workload" -}}
+{{- $fullname := (include "ix.v1.common.lib.chart.names.fullname" $) -}}
+{{- $url := printf "http://%v-server:%v/server-info/ping" $fullname .Values.immichNetwork.serverPort }}
 workload:
   web:
     enabled: true
@@ -34,6 +36,6 @@ workload:
               type: http
               path: /robots.txt
               port: {{ .Values.immichNetwork.webPort }}
-      initContainers: []
-      # TODO: Add init container to wait for server
+      initContainers:
+      {{- include "immich.wait.init" (dict "url" $url) | indent 8 }}
 {{- end -}}

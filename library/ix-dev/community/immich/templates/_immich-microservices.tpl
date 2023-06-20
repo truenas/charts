@@ -1,4 +1,6 @@
 {{- define "immich.microservices.workload" -}}
+{{- $fullname := (include "ix.v1.common.lib.chart.names.fullname" $) -}}
+{{- $url := printf "http://%v-server:%v/server-info/ping" $fullname .Values.immichNetwork.serverPort }}
 workload:
   microservices:
     enabled: true
@@ -49,5 +51,6 @@ workload:
       initContainers:
       {{- include "ix.v1.common.app.postgresWait" (dict "name" "postgres-wait"
                                                         "secretName" "postgres-creds") | nindent 8 }}
+      {{- include "immich.wait.init" (dict "url" $url) | indent 8 }}
       # TODO: Add init container to wait for redis
 {{- end -}}

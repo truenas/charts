@@ -1,4 +1,6 @@
 {{- define "immich.proxy.workload" -}}
+{{- $fullname := (include "ix.v1.common.lib.chart.names.fullname" $) -}}
+{{- $url := printf "http://%v-server:%v/server-info/ping" $fullname .Values.immichNetwork.serverPort }}
 workload:
   proxy:
     enabled: true
@@ -34,6 +36,6 @@ workload:
               type: http
               path: /api/server-info/ping
               port: 8080
-      initContainers: []
-      # TODO: Add init container to wait for server
+      initContainers:
+      {{- include "immich.wait.init" (dict "url" $url) | indent 8 }}
 {{- end -}}

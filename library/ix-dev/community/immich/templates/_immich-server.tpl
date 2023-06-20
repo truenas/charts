@@ -1,4 +1,6 @@
 {{- define "immich.server.workload" -}}
+{{- $fullname := (include "ix.v1.common.lib.chart.names.fullname" $) -}}
+{{- $url := printf "http://%v-typesense:%v/health" $fullname .Values.immichNetwork.typesensePort }}
 workload:
   server:
     enabled: true
@@ -42,4 +44,5 @@ workload:
       {{- include "ix.v1.common.app.postgresWait" (dict "name" "postgres-wait"
                                                         "secretName" "postgres-creds") | nindent 8 }}
       # TODO: Add init container to wait for redis
+      {{- include "immich.wait.init" (dict "url" $url) | indent 8 }}
 {{- end -}}
