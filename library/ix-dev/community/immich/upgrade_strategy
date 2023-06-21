@@ -6,8 +6,16 @@ import sys
 from catalog_update.upgrade_strategy import semantic_versioning
 
 
-IMMICH_RE_STABLE_VERSION = re.compile(r'v[0-9]+\.[0-9]+\.[0-9]+')
-TYPESENSE_RE_STABLE_VERSION = re.compile(r'[0-9]+\.[0-9]+\.[0-9]+')
+ENUMS = {
+    'typesenseImage': {
+        'RE_STABLE_VERSION': re.compile(r'[0-9]+\.[0-9]+\.[0-9]+'),
+        'STRIP_TEXT': ''
+    },
+    'default': {
+        'RE_STABLE_VERSION': re.compile(r'v[0-9]+\.[0-9]+\.[0-9]+'),
+        'STRIP_TEXT': 'v'
+    }
+}
 
 
 def newer_mapping(image_tags):
@@ -18,12 +26,9 @@ def newer_mapping(image_tags):
     }
 
     for key in image_tags.keys():
-        tags = {}
-
-        if key == 'typesenseImage':
-            tags = {t: t for t in image_tags[key] if TYPESENSE_RE_STABLE_VERSION.fullmatch(t)}
-        else:
-            tags = {t.strip('v'): t for t in image_tags[key] if IMMICH_RE_STABLE_VERSION.fullmatch(t)}
+        STRIP_TEXT = ENUMS[key]['STRIP_TEXT'] if key in ENUMS else ENUMS['default']['STRIP_TEXT']
+        RE_STABLE_VERSION = ENUMS[key]['RE_STABLE_VERSION'] if key in ENUMS else ENUMS['default']['RE_STABLE_VERSION']
+        tags = {t.strip(STRIP_TEXT): t for t in image_tags[key] if RE_STABLE_VERSION.fullmatch(t)}
 
         version = semantic_versioning(list(tags))
 
