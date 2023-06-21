@@ -9,8 +9,10 @@ from catalog_update.upgrade_strategy import semantic_versioning
 IMMICH_RE_STABLE_VERSION = re.compile(r'v[0-9]+\.[0-9]+\.[0-9]+')
 TYPESENSE_RE_STABLE_VERSION = re.compile(r'[0-9]+\.[0-9]+\.[0-9]+')
 
+
 def newer_mapping(image_tags):
-    output={
+
+    output = {
         "tags": {},
         "app_version": ""
     }
@@ -23,7 +25,6 @@ def newer_mapping(image_tags):
         else:
             tags = {t.strip('v'): t for t in image_tags[key] if IMMICH_RE_STABLE_VERSION.fullmatch(t)}
 
-
         version = semantic_versioning(list(tags))
 
         if not version:
@@ -35,6 +36,7 @@ def newer_mapping(image_tags):
         output['tags'][key] = tags[version]
 
     return output
+
 
 if __name__ == '__main__':
     try:
