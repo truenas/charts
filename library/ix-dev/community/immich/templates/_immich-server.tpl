@@ -46,6 +46,6 @@ workload:
       {{- include "ix.v1.common.app.redisWait" (dict  "name" "redis-wait"
                                                       "secretName" "redis-creds") | nindent 8 }}
       {{- if .Values.immichConfig.enableTypesense }}
-        {{- include "immich.wait.init" (dict "url" $url) | indent 8 }}
+        {{- include "immich.wait.init" (dict "url" $typesenseUrl) | indent 8 }}
       {{- end }}
 {{- end -}}
