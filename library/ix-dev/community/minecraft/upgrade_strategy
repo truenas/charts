@@ -85,6 +85,7 @@ def newer_mapping(image_tags):
 
     return output
 
+
 if __name__ == '__main__':
     try:
         versions_json = json.loads(sys.stdin.read())
