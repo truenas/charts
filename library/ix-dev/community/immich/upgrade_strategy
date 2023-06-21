@@ -6,13 +6,14 @@ import sys
 from catalog_update.upgrade_strategy import semantic_versioning
 
 
+RE_STABLE_VERSION_BASE = re.compile(r'\d+\.\d+\.\d+')
 ENUMS = {
     'typesenseImage': {
-        'RE_STABLE_VERSION': re.compile(r'[0-9]+\.[0-9]+\.[0-9]+'),
+        'RE_STABLE_VERSION': RE_STABLE_VERSION_BASE,
         'STRIP_TEXT': ''
     },
     'default': {
-        'RE_STABLE_VERSION': re.compile(r'v[0-9]+\.[0-9]+\.[0-9]+'),
+        'RE_STABLE_VERSION': re.compile(rf'v{RE_STABLE_VERSION_BASE}'),
         'STRIP_TEXT': 'v'
     }
 }
