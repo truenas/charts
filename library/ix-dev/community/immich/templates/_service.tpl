@@ -4,18 +4,16 @@ service:
     enabled: true
     primary: true
     type: NodePort
-    targetSelector: web
     targetSelector: proxy
     ports:
       proxy:
         enabled: true
         primary: true
-        port: {{ .Values.immichNetwork.webPort }}
-        nodePort: {{ .Values.immichNetwork.webPort }}
+        port: {{ .Values.immichNetwork.webuiPort }}
+        nodePort: {{ .Values.immichNetwork.webuiPort }}
         protocol: http
         targetPort: 8080
         targetSelector: proxy
-        targetSelector: web
 
   server:
     enabled: true
