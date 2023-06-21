@@ -5,6 +5,7 @@ import sys
 
 from catalog_update.upgrade_strategy import semantic_versioning
 
+
 RE_STABLE_VERSION_BASE = r'[0-9]+\.[0-9]+\.[0-9]+'
 ENUMS = {
     'image': {
