@@ -61,14 +61,17 @@ ENUMS = {
     }
 }
 
+
 def newer_mapping(image_tags):
-    output={
+    output = {
         "tags": {},
         "app_version": ""
     }
 
     for key in image_tags.keys():
-        tags = {t.strip(ENUMS[key]['STRIP_TEXT']): t for t in image_tags[key] if ENUMS[key]['RE_STABLE_VERSION'].fullmatch(t)}
+        STRIP_TEXT = ENUMS[key]['STRIP_TEXT']
+        RE_STABLE_VERSION = ENUMS[key]['RE_STABLE_VERSION']
+        tags = {t.strip(STRIP_TEXT): t for t in image_tags[key] if RE_STABLE_VERSION.fullmatch(t)}
 
         version = semantic_versioning(list(tags))
 
