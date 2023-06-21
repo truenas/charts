@@ -6,11 +6,13 @@ import sys
 from catalog_update.upgrade_strategy import semantic_versioning
 from catalog_update.upgrade_strategy import datetime_versioning
 
+
 ENUMS = {
     'image': {
         'RE_STABLE_VERSION': re.compile(r'RELEASE.\d{4}-\d{2}-\d{2}T\d{2}-\d{2}-\d{2}}Z'),
         'STRIP_TEXT': 'RELEASE.',
-        'function': datetime_versioning
+        'function': datetime_versioning,
+        'function_arg': '%Y-%m-%dT%H-%M-%SZ'
     },
     'logsearchImage': {
         'RE_STABLE_VERSION': re.compile(r'v\d+\.\d+\.\d+'),
@@ -36,7 +38,10 @@ def newer_mapping(image_tags):
             continue
 
         tags = {t.strip(STRIP_TEXT): t for t in image_tags[key] if RE_STABLE_VERSION.fullmatch(t)}
-        version = VERSION_FUNCTION(list(tags))
+        if ENUMS[key].get('function_arg', None):
+            version = VERSION_FUNCTION(list(tags), ENUMS[key].get('function_arg'))
+        else:
+            version = VERSION_FUNCTION(list(tags))
         if not version:
             continue
 
