@@ -26,10 +26,15 @@ def newer_mapping(image_tags):
     }
 
     for key in image_tags.keys():
-        STRIP_TEXT = ENUMS[key]['STRIP_TEXT'] if key in ENUMS else ENUMS['default']['STRIP_TEXT']
-        RE_STABLE_VERSION = ENUMS[key]['RE_STABLE_VERSION'] if key in ENUMS else ENUMS['default']['RE_STABLE_VERSION']
-        tags = {t.strip(STRIP_TEXT): t for t in image_tags[key] if RE_STABLE_VERSION.fullmatch(t)}
+        STRIP_TEXT = ENUMS[key].get('STRIP_TEXT', None) \
+            if key in ENUMS else ENUMS.get('default', None).get('STRIP_TEXT', None)
+        RE_STABLE_VERSION = ENUMS[key].get('RE_STABLE_VERSION') \
+            if key in ENUMS else ENUMS.get('default', None).get('RE_STABLE_VERSION', None)
 
+        if (STRIP_TEXT is None) or (RE_STABLE_VERSION is None):
+            continue
+
+        tags = {t.strip(STRIP_TEXT): t for t in image_tags[key] if RE_STABLE_VERSION.fullmatch(t)}
         version = semantic_versioning(list(tags))
 
         if not version:
