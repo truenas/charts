@@ -69,8 +69,8 @@ def newer_mapping(image_tags):
     }
 
     for key in image_tags.keys():
-        STRIP_TEXT = ENUMS[key]['STRIP_TEXT'] if key in ENUMS else None
-        RE_STABLE_VERSION = ENUMS[key]['RE_STABLE_VERSION'] if key in ENUMS else None
+        STRIP_TEXT = ENUMS[key].get('STRIP_TEXT', None) if key in ENUMS else None
+        RE_STABLE_VERSION = ENUMS[key].get('RE_STABLE_VERSION', None) if key in ENUMS else None
 
         if (STRIP_TEXT is None) or (RE_STABLE_VERSION is None):
             continue
