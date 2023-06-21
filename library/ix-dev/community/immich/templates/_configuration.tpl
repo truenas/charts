@@ -50,7 +50,7 @@ secret:
   immich-creds:
     enabled: true
     data:
-      IMMICH_MACHINE_LEARNING_URL: {{ $mlURL }}
+      IMMICH_MACHINE_LEARNING_URL: {{ $mlURL | quote }}
       TYPESENSE_ENABLED: {{ .Values.immichConfig.enableTypesense | quote }}
       TYPESENSE_API_KEY: {{ $typesenseKey }}
       {{- if .Values.immichConfig.enableTypesense }}
