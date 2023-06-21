@@ -4,10 +4,14 @@
 {{- $_ := mustMergeOverwrite .Values (include "immich.configuration" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "immich.server.workload" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "immich.microservices.workload" $ | fromYaml) -}}
-{{- $_ := mustMergeOverwrite .Values (include "immich.machinelearning.workload" $ | fromYaml) -}}
+{{- if .Values.immichConfig.enableML -}}
+  {{- $_ := mustMergeOverwrite .Values (include "immich.machinelearning.workload" $ | fromYaml) -}}
+{{- end -}}
 {{- $_ := mustMergeOverwrite .Values (include "immich.web.workload" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "immich.proxy.workload" $ | fromYaml) -}}
-{{- $_ := mustMergeOverwrite .Values (include "immich.typesense.workload" $ | fromYaml) -}}
+{{- if .Values.immichConfig.enableTypesense -}}
+  {{- $_ := mustMergeOverwrite .Values (include "immich.typesense.workload" $ | fromYaml) -}}
+{{- end -}}
 {{- $_ := mustMergeOverwrite .Values (include "immich.persistence" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "immich.service" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "postgres.workload" $ | fromYaml) -}}
