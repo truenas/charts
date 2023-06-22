@@ -106,7 +106,7 @@ questions:
             Bind to the host network. It's recommended to keep this disabled.</br>
           schema:
             type: boolean
-            default: false
+            default: true
         - variable: certificateID
           label: Certificate
           description: The certificate to use for MinIO
