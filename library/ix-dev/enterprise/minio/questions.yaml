@@ -120,17 +120,17 @@ questions:
           description: |
             The URL that console will use to reach API</br>
             For example https;//minio1.example.com.</br></br>
-            This field is optional.
           schema:
             type: string
+            required: true
         - variable: consoleUrl
           label: MinIO Browser Redirect URL
           description: |
             The URL that console will provide as a redirect URL</br>
             For example https;//console.example.com.</br></br>
-            This field is optional.
           schema:
             type: string
+            required: true
 
   - variable: enableMultiMode
     label: Enable Multi Mode (SNMD or MNMD)
