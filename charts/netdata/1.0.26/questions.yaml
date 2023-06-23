@@ -1,15 +1,16 @@
 groups:
-  - name: "Configuration"
-    description: "Pihole application configuration"
+  - name: "Container Images"
+    description: "Image to be used for container"
+  - name: "Workload Configuration"
+    description: "Configure workload deployment"
+  - name: "Netdata Configuration"
+    description: "Configure Netdata credentials"
   - name: "Storage"
-    description: "Configure storage for pihole"
-  - name: "Networking"
-    description: "Networking Configuration for pihole"
+    description: "Configure Storage for Netdata"
   - name: "Advanced DNS Settings"
     description: "Configure DNS settings"
   - name: "Resource Limits"
     description: "Set CPU/memory limits for Kubernetes Pod"
-
 
 portals:
   web_portal:
@@ -18,50 +19,9 @@ portals:
     host:
       - "$node_ip"
     ports:
-      - "$variable-web_port"
-    path: "/admin/"
+      - "$variable-service.nodePort"
 
 questions:
-  - variable: web_port
-    label: "Web Port for pihole"
-    group: Networking
-    schema:
-      type: int
-      min: 8000
-      max: 65535
-      default: 20720
-      required: true
-
-  - variable: dhcp
-    label: "Enable DHCP"
-    group: "Networking"
-    schema:
-      type: boolean
-      default: false
-      show_subquestions_if: true
-      subquestions:
-        - variable: dhcp_start
-          label: "DHCP Start Address"
-          group: Networking
-          schema:
-            type: ipaddr
-            cidr: false
-            required: true
-        - variable: dhcp_end
-          label: "DHCP End Address"
-          group: Networking
-          schema:
-            type: ipaddr
-            cidr: false
-            required: true
-        - variable: dhcp_gateway
-          label: "Gateway"
-          group: Networking
-          schema:
-            type: ipaddr
-            cidr: false
-            required: true
-
   - variable: dnsConfig
     label: "DNS Configuration"
     group: "Advanced DNS Settings"
@@ -89,48 +49,9 @@ questions:
                         type: string
                         required: true
 
-  - variable: ownerUID
-    label: "Storage User ID"
-    description: "User ID of the dnsmasq volume being used (application will chown the volume path with specified UID)"
-    group: Configuration
-    schema:
-      type: int
-      default: 568
-      min: 1
-      max: 65535
-
-  - variable: ownerGID
-    label: "Storage Group ID"
-    description: "Group ID of the dnsmasq volume being used (application will chown the volume path with specified GID)"
-    group: Configuration
-    schema:
-      type: int
-      default: 568
-      min: 1
-      max: 65535
-
-  - variable: password
-    label: "Admin password"
-    group: "Configuration"
-    schema:
-      type: string
-      private: true
-      required: true
-      empty: false
-      immutable: true
-
-  - variable: timezone
-    label: "Configure timezone"
-    group: "Configuration"
-    description: "Configure timezone for pihole"
-    schema:
-      type: string
-      $ref:
-        - "definitions/timezone"
-
   - variable: environmentVariables
-    label: "Pihole environment"
-    group: "Configuration"
+    label: "Netdata image environment"
+    group: "Netdata Configuration"
     schema:
       type: list
       default: []
@@ -149,26 +70,43 @@ questions:
                 schema:
                   type: string
 
+  - variable: service
+    description: "Netdata Service Configuration"
+    label: "Netdata Service Configuration"
+    group: "Netdata Configuration"
+    schema:
+      type: dict
+      required: true
+      attrs:
+        - variable: nodePort
+          label: "Node Port to use for Netdata UI"
+          schema:
+            type: int
+            min: 9000
+            max: 65535
+            default: 20489
+            required: true
+
   - variable: appVolumeMounts
-    label: "Pihole Storage"
+    label: "Netdata Storage"
     group: "Storage"
     schema:
       type: dict
       attrs:
-        - variable: config
+        - variable: netdataconfig
           label: "Configuration Volume"
           schema:
             type: dict
             attrs:
               - variable: datasetName
-                label: "Configuration Volume Dataset Name"
+                label: "Configuration Volume Name"
                 schema:
                   type: string
                   hidden: true
                   $ref:
                     - "normalize/ixVolume"
-                  show_if: [["hostPathEnabled", "=", false]]
-                  default: "ix-pihole_config"
+                  show_if: [ [ "hostPathEnabled", "=", false ] ]
+                  default: "ix-config"
                   editable: false
               - variable: mountPath
                 label: "Configuration Mount Path"
@@ -176,55 +114,93 @@ questions:
                 schema:
                   type: path
                   hidden: true
-                  editable: true
-                  default: "/etc/pihole"
+                  editable: false
+                  default: "/etc/netdata"
               - variable: hostPathEnabled
-                label: "Enable Custom Host Path for Pihole Configuration Volume"
+                label: "Enable Host Path for Netdata Configuration Volume"
                 schema:
                   type: boolean
                   default: false
                   show_subquestions_if: true
                   subquestions:
                     - variable: hostPath
-                      label: "Host Path for Pihole Configuration Volume"
+                      label: "Host Path for Netdata Configuration Volume"
                       schema:
                         type: hostpath
                         required: true
-        - variable: dnsmasq
-          label: "DNSMASQ Volume for pihole"
+                        immutable: true
+        - variable: netdatacache
+          label: "Cache Volume"
           schema:
             type: dict
             attrs:
               - variable: datasetName
-                label: "DNSMASQ Volume Dataset Name"
+                label: "Cache Volume Name"
                 schema:
                   type: string
                   hidden: true
                   $ref:
                     - "normalize/ixVolume"
                   show_if: [["hostPathEnabled", "=", false]]
-                  default: "ix-pihole_dnsmasq"
+                  default: "ix-cache"
                   editable: false
               - variable: mountPath
-                label: "DNSMASQ Mount Path"
+                label: "Cache Mount Path"
                 description: "Path where the volume will be mounted inside the pod"
                 schema:
                   type: path
                   hidden: true
-                  editable: true
-                  default: "/etc/dnsmasq.d"
+                  editable: false
+                  default: "/var/cache/netdata"
               - variable: hostPathEnabled
-                label: "Enable Custom Host Path for Pihole DNSMASQ Volume"
+                label: "Enable Host Path for Netdata Cache Volume"
                 schema:
                   type: boolean
                   default: false
                   show_subquestions_if: true
                   subquestions:
                     - variable: hostPath
-                      label: "Host Path for Pihole DNSMASQ Volume"
+                      label: "Host Path for Netdata Cache Volume"
                       schema:
                         type: hostpath
                         required: true
+                        immutable: true
+        - variable: netdatalib
+          label: "Netdata Library Volume"
+          schema:
+            type: dict
+            attrs:
+              - variable: datasetName
+                label: "Netdata Library Volume Name"
+                schema:
+                  type: string
+                  hidden: true
+                  $ref:
+                    - "normalize/ixVolume"
+                  show_if: [ [ "hostPathEnabled", "=", false ] ]
+                  default: "ix-lib"
+                  editable: false
+              - variable: mountPath
+                label: "Netdata Library Mount Path"
+                description: "Path where the volume will be mounted inside the pod"
+                schema:
+                  type: path
+                  hidden: true
+                  editable: false
+                  default: "/var/lib/netdata"
+              - variable: hostPathEnabled
+                label: "Enable Host Path for Netdata Library Volume"
+                schema:
+                  type: boolean
+                  default: false
+                  show_subquestions_if: true
+                  subquestions:
+                    - variable: hostPath
+                      label: "Host Path for Netdata Library Volume"
+                      schema:
+                        type: hostpath
+                        required: true
+                        immutable: true
 
   - variable: extraAppVolumeMounts
     label: "Extra Host Path Volumes"
@@ -234,7 +210,7 @@ questions:
       items:
         - variable: extraAppVolume
           label: "Host Path Volume"
-          description: "Add an extra host path volume for Pihole application"
+          description: "Add an extra host path volume for Netdata application"
           schema:
             type: dict
             attrs:
@@ -258,7 +234,7 @@ questions:
       type: boolean
       default: false
   - variable: cpuLimit
-    label: "CPU Limresource limitsit"
+    label: "CPU Limit"
     description: "CPU resource limit allow  plain integer values with suffix m(milli) e.g 1000m, 100."
     group: "Resource Limits"
     schema:

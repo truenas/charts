@@ -1,14 +1,15 @@
 groups:
   - name: "Configuration"
-    description: "Storj application configuration"
+    description: "Pihole application configuration"
   - name: "Storage"
-    description: "Configure storage for storj"
+    description: "Configure storage for pihole"
   - name: "Networking"
-    description: "Networking Configuration for storj"
+    description: "Networking Configuration for pihole"
   - name: "Advanced DNS Settings"
     description: "Configure DNS settings"
   - name: "Resource Limits"
     description: "Set CPU/memory limits for Kubernetes Pod"
+
 
 portals:
   web_portal:
@@ -17,32 +18,49 @@ portals:
     host:
       - "$node_ip"
     ports:
-      - "$variable-webPort"
-    path: "/"
+      - "$variable-web_port"
+    path: "/admin/"
 
 questions:
-  - variable: webPort
-    label: "Web Port for Storj"
+  - variable: web_port
+    label: "Web Port for pihole"
     group: Networking
     schema:
       type: int
-      min: 9000
+      min: 8000
       max: 65535
-      default: 20909
+      default: 20720
       required: true
-  - variable: nodePort
-    label: "Node Port for Storj"
-    description: |
-      This port will be used for both TCP and UDP traffic. </br>
-      Note that this port must be open on your firewall and that internal
-      Storj port will not be affected by this change, but only the external (Node Port)
-    group: Networking
+
+  - variable: dhcp
+    label: "Enable DHCP"
+    group: "Networking"
     schema:
-      type: int
-      min: 9000
-      max: 65535
-      default: 28967
-      required: true
+      type: boolean
+      default: false
+      show_subquestions_if: true
+      subquestions:
+        - variable: dhcp_start
+          label: "DHCP Start Address"
+          group: Networking
+          schema:
+            type: ipaddr
+            cidr: false
+            required: true
+        - variable: dhcp_end
+          label: "DHCP End Address"
+          group: Networking
+          schema:
+            type: ipaddr
+            cidr: false
+            required: true
+        - variable: dhcp_gateway
+          label: "Gateway"
+          group: Networking
+          schema:
+            type: ipaddr
+            cidr: false
+            required: true
 
   - variable: dnsConfig
     label: "DNS Configuration"
@@ -71,82 +89,47 @@ questions:
                         type: string
                         required: true
 
-  - variable: wallet
-    label: "Configure Wallet for Storj"
-    group: "Configuration"
+  - variable: ownerUID
+    label: "Storage User ID"
+    description: "User ID of the dnsmasq volume being used (application will chown the volume path with specified UID)"
+    group: Configuration
     schema:
-      type: string
-      required: true
-
-  - variable: authToken
-    label: "Configure Auth token for Storj Node"
-    group: "Configuration"
-    schema:
-      type: string
-      required: true
-
-  - variable: email
-    label: "Configure Email for Storj"
-    group: "Configuration"
-    schema:
-      type: string
-      required: true
-
-  - variable: domainAddress
-    label: "Add Your Storage Domain for Storj"
-    group: "Configuration"
-    schema:
-      type: string
-      required: true
-
-  - variable: zksync
-    label: "Opt-in to zkSync"
-    description: Appends --operator.wallet-features=zksync flag to the storagenode command
-    group: "Configuration"
-    schema:
-      type: boolean
-      default: false
-
-  - variable: terminationGracePeriod
-    label: Termination Grace Period
-    description: Optional duration in seconds the pod needs to terminate gracefully.
-    group: "Configuration"
-    schema:
-      type: int
-      min: 30
-      default: 30
-
-  - variable: storageSize
-    label: "Configure Storage Size You Want To Share in GB's"
-    group: Storage
-    schema:
-      type: int
-      min: 500
-      default: 500
-
-  - variable: runAsUser
-    label: "Owner User ID"
-    group: "Configuration"
-    schema:
-      immutable: true
       type: int
       default: 568
       min: 1
       max: 65535
 
-  - variable: runAsGroup
-    label: "Owner Group ID"
-    group: "Configuration"
+  - variable: ownerGID
+    label: "Storage Group ID"
+    description: "Group ID of the dnsmasq volume being used (application will chown the volume path with specified GID)"
+    group: Configuration
     schema:
-      immutable: true
       type: int
       default: 568
       min: 1
       max: 65535
 
+  - variable: password
+    label: "Admin password"
+    group: "Configuration"
+    schema:
+      type: string
+      private: true
+      required: true
+      empty: false
+      immutable: true
+
+  - variable: timezone
+    label: "Configure timezone"
+    group: "Configuration"
+    description: "Configure timezone for pihole"
+    schema:
+      type: string
+      $ref:
+        - "definitions/timezone"
 
   - variable: environmentVariables
-    label: "Storj Extra Environment Variables"
+    label: "Pihole environment"
     group: "Configuration"
     schema:
       type: list
@@ -167,13 +150,13 @@ questions:
                   type: string
 
   - variable: appVolumeMounts
-    label: "Storj Configuration"
+    label: "Pihole Storage"
     group: "Storage"
     schema:
       type: dict
       attrs:
-        - variable: data
-          label: "Configuration Data Volume to Share on Storj"
+        - variable: config
+          label: "Configuration Volume"
           schema:
             type: dict
             attrs:
@@ -185,60 +168,60 @@ questions:
                   $ref:
                     - "normalize/ixVolume"
                   show_if: [["hostPathEnabled", "=", false]]
-                  default: "ix_data"
+                  default: "ix-pihole_config"
                   editable: false
               - variable: mountPath
                 label: "Configuration Mount Path"
-                description: "Path Where the Volume Will be Mounted Inside the Pod"
+                description: "Path where the volume will be mounted inside the pod"
                 schema:
                   type: path
                   hidden: true
-                  editable: false
-                  default: "/app/config"
+                  editable: true
+                  default: "/etc/pihole"
               - variable: hostPathEnabled
-                label: "Enable Custom Host Path for Storj Configuration Volume"
+                label: "Enable Custom Host Path for Pihole Configuration Volume"
                 schema:
                   type: boolean
                   default: false
                   show_subquestions_if: true
                   subquestions:
                     - variable: hostPath
-                      label: "Host Path for Storj Configuration Volume"
+                      label: "Host Path for Pihole Configuration Volume"
                       schema:
                         type: hostpath
                         required: true
-        - variable: identity
-          label: "Configure Identity Volume for Storage Node"
+        - variable: dnsmasq
+          label: "DNSMASQ Volume for pihole"
           schema:
             type: dict
             attrs:
               - variable: datasetName
-                label: "Configure Storj Identity Volume to Allocate"
+                label: "DNSMASQ Volume Dataset Name"
                 schema:
                   type: string
                   hidden: true
                   $ref:
                     - "normalize/ixVolume"
                   show_if: [["hostPathEnabled", "=", false]]
-                  default: "ix_identity"
+                  default: "ix-pihole_dnsmasq"
                   editable: false
               - variable: mountPath
-                label: "Configure Storj Identity Volume to Allocate"
+                label: "DNSMASQ Mount Path"
                 description: "Path where the volume will be mounted inside the pod"
                 schema:
                   type: path
                   hidden: true
-                  editable: false
-                  default: "/app/identity"
+                  editable: true
+                  default: "/etc/dnsmasq.d"
               - variable: hostPathEnabled
-                label: "Enable Custom Host Path for Storj Identity Volume"
+                label: "Enable Custom Host Path for Pihole DNSMASQ Volume"
                 schema:
                   type: boolean
                   default: false
                   show_subquestions_if: true
                   subquestions:
                     - variable: hostPath
-                      label: "Host Path for Storj identity Volume"
+                      label: "Host Path for Pihole DNSMASQ Volume"
                       schema:
                         type: hostpath
                         required: true
@@ -251,13 +234,13 @@ questions:
       items:
         - variable: extraAppVolume
           label: "Host Path Volume"
-          description: "Add an extra host path volume for storj"
+          description: "Add an extra host path volume for Pihole application"
           schema:
             type: dict
             attrs:
               - variable: mountPath
                 label: "Mount Path in Pod"
-                description: "Path where the volume will be mounted inside the pod."
+                description: "Path where the volume will be mounted inside the pod"
                 schema:
                   type: path
                   required: true
@@ -275,7 +258,7 @@ questions:
       type: boolean
       default: false
   - variable: cpuLimit
-    label: "CPU Limresource limitsit"
+    label: "CPU Limit"
     description: "CPU resource limit allow  plain integer values with suffix m(milli) e.g 1000m, 100."
     group: "Resource Limits"
     schema:

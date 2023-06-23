@@ -1,12 +1,10 @@
 groups:
-  - name: "Container Images"
-    description: "Image to be used for container"
-  - name: "Workload Configuration"
-    description: "Configure workload deployment"
-  - name: "Netdata Configuration"
-    description: "Configure Netdata credentials"
+  - name: "Configuration"
+    description: "Syncthing application configuration"
   - name: "Storage"
-    description: "Configure Storage for Netdata"
+    description: "Configure storage for syncthing"
+  - name: "Networking"
+    description: "Networking Configuration for syncthing"
   - name: "Advanced DNS Settings"
     description: "Configure DNS settings"
   - name: "Resource Limits"
@@ -19,9 +17,44 @@ portals:
     host:
       - "$node_ip"
     ports:
-      - "$variable-service.nodePort"
+      - "$variable-web_port"
+    path: "/"
 
 questions:
+  - variable: web_port
+    label: "Web Port for syncthing"
+    group: Networking
+    schema:
+      type: int
+      min: 8000
+      max: 65535
+      default: 20910
+      required: true
+  - variable: tcp_port
+    label: "TCP Port for syncthing"
+    group: Networking
+    schema:
+      type: int
+      min: 8000
+      max: 65535
+      default: 20978
+      required: true
+  - variable: udp_port
+    label: "UDP Port for syncthing"
+    group: Networking
+    schema:
+      type: int
+      min: 8000
+      max: 65535
+      default: 20979
+      required: true
+  - variable: hostNetwork
+    label: "Host Network"
+    group: Networking
+    schema:
+      type: boolean
+      default: false
+
   - variable: dnsConfig
     label: "DNS Configuration"
     group: "Advanced DNS Settings"
@@ -49,12 +82,30 @@ questions:
                         type: string
                         required: true
 
+  - variable: ownerUID
+    label: "Owner User ID"
+    group: Configuration
+    schema:
+      type: int
+      default: 568
+      min: 1
+      max: 65535
+
+  - variable: ownerGID
+    label: "Owner Group ID"
+    group: Configuration
+    schema:
+      type: int
+      default: 568
+      min: 1
+      max: 65535
+
   - variable: environmentVariables
-    label: "Netdata image environment"
-    group: "Netdata Configuration"
+    label: "Syncthing environment"
+    group: "Configuration"
     schema:
       type: list
-      default: []
+      default: [ ]
       items:
         - variable: environmentVariable
           label: "Environment Variable"
@@ -70,43 +121,26 @@ questions:
                 schema:
                   type: string
 
-  - variable: service
-    description: "Netdata Service Configuration"
-    label: "Netdata Service Configuration"
-    group: "Netdata Configuration"
-    schema:
-      type: dict
-      required: true
-      attrs:
-        - variable: nodePort
-          label: "Node Port to use for Netdata UI"
-          schema:
-            type: int
-            min: 9000
-            max: 65535
-            default: 20489
-            required: true
-
   - variable: appVolumeMounts
-    label: "Netdata Storage"
+    label: "Syncthing Storage"
     group: "Storage"
     schema:
       type: dict
       attrs:
-        - variable: netdataconfig
+        - variable: config
           label: "Configuration Volume"
           schema:
             type: dict
             attrs:
               - variable: datasetName
-                label: "Configuration Volume Name"
+                label: "Configuration Volume Dataset Name"
                 schema:
                   type: string
                   hidden: true
                   $ref:
                     - "normalize/ixVolume"
-                  show_if: [ [ "hostPathEnabled", "=", false ] ]
-                  default: "ix-config"
+                  show_if: [["hostPathEnabled", "=", false]]
+                  default: "ix-syncthing_config"
                   editable: false
               - variable: mountPath
                 label: "Configuration Mount Path"
@@ -114,94 +148,22 @@ questions:
                 schema:
                   type: path
                   hidden: true
-                  editable: false
-                  default: "/etc/netdata"
+                  editable: true
+                  default: "/var/syncthing"
               - variable: hostPathEnabled
-                label: "Enable Host Path for Netdata Configuration Volume"
+                label: "Enable Custom Host Path for Syncthing Configuration Volume"
                 schema:
                   type: boolean
                   default: false
                   show_subquestions_if: true
                   subquestions:
                     - variable: hostPath
-                      label: "Host Path for Netdata Configuration Volume"
+                      label: "Host Path for Syncthing Configuration Volume"
                       schema:
                         type: hostpath
                         required: true
-                        immutable: true
-        - variable: netdatacache
-          label: "Cache Volume"
-          schema:
-            type: dict
-            attrs:
-              - variable: datasetName
-                label: "Cache Volume Name"
-                schema:
-                  type: string
-                  hidden: true
-                  $ref:
-                    - "normalize/ixVolume"
-                  show_if: [["hostPathEnabled", "=", false]]
-                  default: "ix-cache"
-                  editable: false
-              - variable: mountPath
-                label: "Cache Mount Path"
-                description: "Path where the volume will be mounted inside the pod"
-                schema:
-                  type: path
-                  hidden: true
-                  editable: false
-                  default: "/var/cache/netdata"
-              - variable: hostPathEnabled
-                label: "Enable Host Path for Netdata Cache Volume"
-                schema:
-                  type: boolean
-                  default: false
-                  show_subquestions_if: true
-                  subquestions:
-                    - variable: hostPath
-                      label: "Host Path for Netdata Cache Volume"
-                      schema:
-                        type: hostpath
-                        required: true
-                        immutable: true
-        - variable: netdatalib
-          label: "Netdata Library Volume"
-          schema:
-            type: dict
-            attrs:
-              - variable: datasetName
-                label: "Netdata Library Volume Name"
-                schema:
-                  type: string
-                  hidden: true
-                  $ref:
-                    - "normalize/ixVolume"
-                  show_if: [ [ "hostPathEnabled", "=", false ] ]
-                  default: "ix-lib"
-                  editable: false
-              - variable: mountPath
-                label: "Netdata Library Mount Path"
-                description: "Path where the volume will be mounted inside the pod"
-                schema:
-                  type: path
-                  hidden: true
-                  editable: false
-                  default: "/var/lib/netdata"
-              - variable: hostPathEnabled
-                label: "Enable Host Path for Netdata Library Volume"
-                schema:
-                  type: boolean
-                  default: false
-                  show_subquestions_if: true
-                  subquestions:
-                    - variable: hostPath
-                      label: "Host Path for Netdata Library Volume"
-                      schema:
-                        type: hostpath
-                        required: true
-                        immutable: true
-
+                        $ref:
+                          - "validations/lockedHostPath"
   - variable: extraAppVolumeMounts
     label: "Extra Host Path Volumes"
     group: "Storage"
@@ -210,7 +172,7 @@ questions:
       items:
         - variable: extraAppVolume
           label: "Host Path Volume"
-          description: "Add an extra host path volume for Netdata application"
+          description: "Add an extra host path volume for Syncthing application"
           schema:
             type: dict
             attrs:
@@ -226,6 +188,8 @@ questions:
                 schema:
                   type: hostpath
                   required: true
+                  $ref:
+                    - "validations/lockedHostPath"
 
   - variable: enableResourceLimits
     label: "Enable Pod resource limits"
@@ -234,7 +198,7 @@ questions:
       type: boolean
       default: false
   - variable: cpuLimit
-    label: "CPU Limresource limitsit"
+    label: "CPU Limit"
     description: "CPU resource limit allow  plain integer values with suffix m(milli) e.g 1000m, 100."
     group: "Resource Limits"
     schema:
@@ -251,3 +215,4 @@ questions:
       show_if: [["enableResourceLimits", "=", true]]
       valid_chars: "^([+-]?[0-9.]+)([eEinumkKMGTP]*[-+]?[0-9]*)$"
       default: "8Gi"
+
