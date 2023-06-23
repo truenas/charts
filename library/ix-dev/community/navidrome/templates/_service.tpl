@@ -1,4 +1,4 @@
-{{- define "navidrome.persistence" -}}
+{{- define "navidrome.service" -}}
 service:
   navidrome:
     enabled: true
