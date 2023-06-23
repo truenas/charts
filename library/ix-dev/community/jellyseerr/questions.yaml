@@ -94,7 +94,7 @@ questions:
           description: The port for the Jellyseerr Web UI.
           schema:
             type: int
-            default: 30023
+            default: 30042
             min: 9000
             max: 65535
             required: true
