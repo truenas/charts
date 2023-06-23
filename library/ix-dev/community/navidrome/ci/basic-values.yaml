@@ -5,3 +5,6 @@ navidromeStorage:
   music:
     type: hostPath
     hostPath: /mnt/{{ .Release.Name }}/music
+
+navidromeConfig:
+  uiWelcomeMessage: 'Welcome to Navidrome!'

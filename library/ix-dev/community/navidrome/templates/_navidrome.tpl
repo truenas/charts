@@ -15,9 +15,10 @@ workload:
             runAsUser: {{ .Values.navidromeRunAs.user }}
             runAsGroup: {{ .Values.navidromeRunAs.group }}
           env:
-            ND_MUSICFOLDER: "/music"
-            ND_DATAFOLDER: "/data"
-            ND_PORT: "{{ .Values.navidromeNetwork.webPort }}"
+            ND_MUSICFOLDER: /music
+            ND_DATAFOLDER: /data
+            ND_PORT: {{ .Values.navidromeNetwork.webPort | quote }}
+            ND_UIWELCOMEMESSAGE: {{ .Values.navidromeConfig.uiWelcomeMessage }}
           {{ with .Values.navidromeConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}

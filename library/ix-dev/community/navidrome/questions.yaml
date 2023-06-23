@@ -27,6 +27,12 @@ questions:
     schema:
       type: dict
       attrs:
+        - variable: uiWelcomeMessage
+          label: Login Screen Welcome Message
+          description: The welcome message to display on the Navidrome Login Screen.
+          schema:
+            type: string
+            default: ""
         - variable: additionalEnvs
           label: Additional Environment Variables
           description: Configure additional environment variables for Navidrome.
