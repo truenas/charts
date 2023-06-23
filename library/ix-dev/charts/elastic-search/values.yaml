@@ -1,7 +1,7 @@
 image:
   repository: docker.elastic.co/elasticsearch/elasticsearch
   pullPolicy: IfNotPresent
-  tag: 8.8.0
+  tag: 8.8.1
 
 resources:
   limits:
@@ -20,7 +20,7 @@ esRunAs:
   group: 1000
 
 esNetwork:
-  httpPort: 30000
+  httpPort: 30003
   hostNetwork: false
   certificateID: ''
 
