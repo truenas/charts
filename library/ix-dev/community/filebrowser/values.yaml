@@ -10,12 +10,15 @@ resources:
 
 filebrowserConfig:
   additionalEnvs: []
+
 filebrowserNetwork:
   webPort: 30044
   hostNetwork: false
+
 filebrowserRunAs:
   user: 568
   group: 568
+
 filebrowserStorage:
   config:
     type: ixVolume
