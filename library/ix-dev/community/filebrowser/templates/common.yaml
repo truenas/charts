@@ -1,0 +1,11 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "filebrowser.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "filebrowser.persistence" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "filebrowser.service" $ | fromYaml) -}}
+
+{{/* Create the configmap for portal manually*/}}
+{{- include "filebrowser.portal" $ -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}
