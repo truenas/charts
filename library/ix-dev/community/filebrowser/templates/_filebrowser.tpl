@@ -49,6 +49,7 @@ workload:
               type: http
               port: "{{ .Values.filebrowserNetwork.webPort }}"
               path: /health
+      # TODO: certs
       initContainers:
         {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
                                                           "UID" .Values.filebrowserRunAs.user
