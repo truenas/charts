@@ -9,15 +9,10 @@ persistence:
       filebrowser:
         filebrowser:
           mountPath: /config
+        02-init-config:
+          mountPath: /config
         01-permissions:
           mountPath: /mnt/directories/config
-  # tmp:
-  #   enabled: true
-  #   type: emptyDir
-  #   targetSelector:
-  #     lidarr:
-  #       lidarr:
-  #         mountPath: /tmp
   {{- range $idx, $storage := .Values.filebrowserStorage.additionalStorages }}
   {{ printf "filebrowser-%v" (int $idx) }}:
     enabled: true
@@ -27,7 +22,7 @@ persistence:
     targetSelector:
       filebrowser:
         filebrowser:
-          mountPath: {{ $storage.mountPath }}
+          mountPath: /data{{ $storage.mountPath }}
         01-permissions:
           mountPath: /mnt/directories{{ $storage.mountPath }}
   {{- end }}

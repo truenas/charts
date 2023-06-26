@@ -1,4 +1,5 @@
 {{- define "filebrowser.workload" -}}
+{{- $configBasePath := "/config" }}
 workload:
   filebrowser:
     enabled: true
@@ -16,11 +17,15 @@ workload:
             runAsGroup: {{ .Values.filebrowserRunAs.group }}
           args:
             - --config
-            - /config/filebrowser.yaml
+            - {{ $configBasePath }}/filebrowser.json
             - --database
-            - /config/filebrowser.db
+            - {{ $configBasePath }}/filebrowser.db
             - --port
             - "{{ .Values.filebrowserNetwork.webPort }}"
+            - --address
+            - "0.0.0.0"
+            - --root
+            - /data
           {{ with .Values.filebrowserConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
@@ -33,21 +38,42 @@ workload:
               enabled: true
               type: http
               port: "{{ .Values.filebrowserNetwork.webPort }}"
-              path: /
+              path: /health
             readiness:
               enabled: true
               type: http
               port: "{{ .Values.filebrowserNetwork.webPort }}"
-              path: /
+              path: /health
             startup:
               enabled: true
               type: http
               port: "{{ .Values.filebrowserNetwork.webPort }}"
-              path: /
+              path: /health
       initContainers:
-      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
-                                                        "UID" .Values.filebrowserRunAs.user
-                                                        "GID" .Values.filebrowserRunAs.group
-                                                        "mode" "check"
-                                                        "type" "init") | nindent 8 }}
+        {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
+                                                          "UID" .Values.filebrowserRunAs.user
+                                                          "GID" .Values.filebrowserRunAs.group
+                                                          "mode" "check"
+                                                          "type" "init") | nindent 8 }}
+        02-init-config:
+          enabled: true
+          type: init
+          imageSelector: image
+          securityContext:
+            runAsUser: {{ .Values.filebrowserRunAs.user }}
+            runAsGroup: {{ .Values.filebrowserRunAs.group }}
+          # Creating the config file if it doesn't exist
+          # This will make the container to log
+          # "Using config file: {{ $configBasePath }}/filebrowser.json"
+          # on startup, so users know where the config is, in case they need it.
+          # Arguments will take precedence over the config file always.
+          # (Like the port, paths, etc we set above.)
+          command:
+            - /bin/sh
+            - -c
+            - |
+              if [ ! -f {{ $configBasePath }}/filebrowser.json ]; then
+                echo "Creating an empty config file"
+                echo '{}' > {{ $configBasePath }}/filebrowser.json
+              fi
 {{- end -}}
