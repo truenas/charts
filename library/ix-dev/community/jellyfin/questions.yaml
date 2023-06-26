@@ -85,15 +85,6 @@ questions:
     schema:
       type: dict
       attrs:
-        - variable: webPort
-          label: Web Port
-          description: The port for the Jellyfin Web UI.
-          schema:
-            type: int
-            default: 30013
-            min: 9000
-            max: 65535
-            required: true
         - variable: hostNetwork
           label: Host Network
           description: |
@@ -102,6 +93,16 @@ questions:
           schema:
             type: boolean
             default: false
+        - variable: webPort
+          label: Web Port
+          description: The port for the Jellyfin Web UI.
+          schema:
+            type: int
+            default: 30013
+            show_if: [["hostNetwork", "=", false]]
+            min: 9000
+            max: 65535
+            required: true
 
   - variable: jellyfinStorage
     label: ""
