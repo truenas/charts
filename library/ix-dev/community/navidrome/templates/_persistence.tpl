@@ -14,7 +14,7 @@ persistence:
   music:
     enabled: true
     type: {{ .Values.navidromeStorage.music.type }}
-    musicsetName: {{ .Values.navidromeStorage.music.musicsetName | default "" }}
+    datasetName: {{ .Values.navidromeStorage.music.datasetName | default "" }}
     hostPath: {{ .Values.navidromeStorage.music.hostPath | default "" }}
     targetSelector:
       navidrome:

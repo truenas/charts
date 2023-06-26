@@ -90,7 +90,7 @@ questions:
           description: The port for the Navidrome Web UI.
           schema:
             type: int
-            default: 30027
+            default: 30043
             min: 9000
             max: 65535
             required: true
@@ -108,9 +108,9 @@ questions:
     schema:
       type: dict
       attrs:
-        - variable: config
-          label: Navidrome Config Storage
-          description: The path to store Navidrome Configuration.
+        - variable: data
+          label: Navidrome Data Storage
+          description: The path to store Navidrome Data.
           schema:
             type: dict
             attrs:
@@ -136,7 +136,45 @@ questions:
                   required: true
                   hidden: true
                   immutable: true
-                  default: "config"
+                  default: "data"
+                  $ref:
+                    - "normalize/ixVolume"
+              - variable: hostPath
+                label: Host Path
+                schema:
+                  type: hostpath
+                  show_if: [["type", "=", "hostPath"]]
+                  immutable: true
+                  required: true
+        - variable: music
+          label: Navidrome Music Storage
+          description: The path to store Navidrome Music.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
+                schema:
+                  type: string
+                  required: true
+                  default: "ixVolume"
+                  enum:
+                    - value: "hostPath"
+                      description: Host Path (Path that already exists on the system)
+                    - value: "ixVolume"
+                      description: ixVolume (Dataset created automatically by the system)
+              - variable: datasetName
+                label: Dataset Name
+                schema:
+                  type: string
+                  show_if: [["type", "=", "ixVolume"]]
+                  required: true
+                  hidden: true
+                  immutable: true
+                  default: "music"
                   $ref:
                     - "normalize/ixVolume"
               - variable: hostPath
