@@ -119,7 +119,7 @@ questions:
           label: MinIO Server URL (API)
           description: |
             The URL that console will use to reach API</br>
-            For example https;//minio1.example.com.</br></br>
+            For example https://minio1.example.com.</br></br>
           schema:
             type: string
             required: true
@@ -127,7 +127,7 @@ questions:
           label: MinIO Browser Redirect URL
           description: |
             The URL that console will provide as a redirect URL</br>
-            For example https;//console.example.com.</br></br>
+            For example https://console.example.com.</br></br>
           schema:
             type: string
             required: true
