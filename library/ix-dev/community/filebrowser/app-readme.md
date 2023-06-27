@@ -21,3 +21,8 @@ over the environment variables and the configuration file:
 - `FB_ADDRESS`/`--address` is set to `0.0.0.0` (It will listen on all interfaces **inside** the container)
 - `FB_DATABASE`/`--database` is set to `/config/filebrowser.db`
 - `FB_CONFIG`/`--config` is set to `/config/filebrowser.json`
+
+Also when a certificate is selected
+
+- `FB_CERT`/`--cert` is set to `/config/certs/tls.crt`
+- `FB_KEY`/`--key` is set to `/config/certs/tls.key`

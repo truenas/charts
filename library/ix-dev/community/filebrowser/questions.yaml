@@ -154,7 +154,10 @@ questions:
           description: Additional storage for Filebrowser.
           schema:
             type: list
-            default: []
+            default:
+              - type: hostPath
+                mountPath: /my_data
+                hostPath: ""
             items:
               - variable: storageEntry
                 label: Storage Entry

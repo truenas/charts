@@ -14,7 +14,13 @@ persistence:
           mountPath: {{ $configBasePath }}
         01-permissions:
           mountPath: /mnt/directories/config
+  {{- if not .Values.filebrowserStorage.additionalStorages -}}
+    {{- fail "Filebrowser - Expected at least 1 additional storage" -}}
+  {{- end -}}
   {{- range $idx, $storage := .Values.filebrowserStorage.additionalStorages }}
+    {{- if not (hasPrefix "/" $storage.mountPath) -}}
+      {{- fail (printf "Filebrowser - Expected [Mount Path] to start with [/], but got [%v]" $storage.mountPath) -}}
+    {{- end }}
   {{ printf "filebrowser-%v" (int $idx) }}:
     enabled: true
     type: {{ $storage.type }}
