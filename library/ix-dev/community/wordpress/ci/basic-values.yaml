@@ -1,0 +1,10 @@
+wpStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/data
+  mariadbData:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/mariadbData
+  mariadbBackup:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/mariadbBackup
