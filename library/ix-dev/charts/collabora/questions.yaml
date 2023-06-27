@@ -46,7 +46,10 @@ questions:
             type: string
             private: true
             default: "changeme"
-            valid_chars: "[a-zA-Z0-9!@#$%^&*?]{8,}"
+            valid_chars: "[a-zA-Z0-9!@#%^&*?]{8,}"
+            valid_chars_error: |
+              Password must be at least 8 characters long</br>
+              Can contain at numbers, letters, and the following characters: !@#%^&*?
             required: true
         - variable: dictionaries
           label: "Dictionaries to use, leave empty to use all"
