@@ -1,0 +1,21 @@
+readarrConfig:
+  additionalEnvs:
+    - name: READARR__API_KEY
+      value: some-long-api-key
+    - name: READARR__LOG_LEVEL
+      value: error
+
+readarrNetwork:
+  webPort: 31000
+
+readarrStorage:
+  config:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/config
+  additionalStorages:
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/pop_music
+    mountPath: /pop_music
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/country_music
+    mountPath: /country_music
