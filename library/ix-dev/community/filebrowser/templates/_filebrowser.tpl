@@ -1,5 +1,6 @@
 {{- define "filebrowser.workload" -}}
-{{- $configBasePath := "/config" }}
+{{- $configBasePath := "/config" -}}
+{{- $scheme := "http" }}
 workload:
   filebrowser:
     enabled: true
@@ -26,6 +27,13 @@ workload:
             - "0.0.0.0"
             - --root
             - /data
+            {{- if .Values.filebrowserNetwork.certificateID }}
+            - --cert
+            - {{ $configBasePath }}/certs/tls.crt
+            - --key
+            - {{ $configBasePath }}/certs/tls.key
+            {{- $scheme = "https" -}}
+            {{- end -}}
           {{ with .Values.filebrowserConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
@@ -36,20 +44,19 @@ workload:
           probes:
             liveness:
               enabled: true
-              type: http
+              type: {{ $scheme }}
               port: "{{ .Values.filebrowserNetwork.webPort }}"
               path: /health
             readiness:
               enabled: true
-              type: http
+              type: {{ $scheme }}
               port: "{{ .Values.filebrowserNetwork.webPort }}"
               path: /health
             startup:
               enabled: true
-              type: http
+              type: {{ $scheme }}
               port: "{{ .Values.filebrowserNetwork.webPort }}"
               path: /health
-      # TODO: certs
       initContainers:
         {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
                                                           "UID" .Values.filebrowserRunAs.user
