@@ -1,0 +1,23 @@
+image:
+  repository: ghcr.io/onedr0p/bazarr
+  pullPolicy: IfNotPresent
+  tag: '1.2.2'
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+bazarrConfig:
+  additionalEnvs: []
+bazarrNetwork:
+  webPort: 30046
+  hostNetwork: false
+bazarrRunAs:
+  user: 568
+  group: 568
+bazarrStorage:
+  config:
+    type: ixVolume
+    datasetName: config
+  additionalStorages: []
