@@ -110,6 +110,12 @@ questions:
           schema:
             type: boolean
             default: false
+        - variable: install_ffmpeg
+          label: "Install smbclient"
+          description: "Automatically Install smbclient when the container starts"
+          schema:
+            type: boolean
+            default: false
 
   - variable: cronjob
     description: "Setup cronjob for nextcloud"
