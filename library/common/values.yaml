@@ -49,6 +49,7 @@ postgresImage:
 mariadbImage:
   repository: mariadb
   tag: "10.6.14"
+  pullPolicy: IfNotPresent
 
 redisImage:
   repository: bitnami/redis
