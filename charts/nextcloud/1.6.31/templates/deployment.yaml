@@ -182,6 +182,20 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
                   ffmpeg || echo "Failed to install ffmpeg"
                   echo "Finished."
         {{- end }}
+        {{- if .Values.nextcloud.install_smbclient }}
+        lifecycle:
+          postStart:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  echo "Installing smbclient..."
+                  apt update && \
+                  apt install -y --no-install-recommends \
+                  smbclient || echo "Failed to install smbclient"
+                  echo "Finished."
+        {{- end }}
 {{ include "common.networking.dnsConfiguration" .Values | nindent 6 }}
       volumes:
         - name: nginx-configuration
