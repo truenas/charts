@@ -219,12 +219,18 @@ questions:
                 description: CPU limit for Rsync.
                 schema:
                   type: string
+                  max_length: 6
                   default: "4000m"
+                  valid_chars: '^(0\\.[1-9]|[1-9][0-9]*)(\\.[0-9]|m?)$'
+                  valid_chars_error: 'Valid CPU limit formats are (Plain Integer - eg. 1), (Float - eg. 0.5), (Milicpu - eg. 500m)'
                   required: true
               - variable: memory
                 label: Memory
                 description: Memory limit for Rsync.
                 schema:
                   type: string
+                  max_length: 12
+                  valid_chars: '^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$'
+                  valid_chars_error: 'Valid Memory limit formats are (Suffixed with E/P/T/G/M/K - eg. 1G), (Suffixed with Ei/Pi/Ti/Gi/Mi/Ki - eg. 1Gi), (Plain Integer in bytes - eg. 1024), (Exponent - eg. 134e6)'
                   default: "8Gi"
                   required: true
