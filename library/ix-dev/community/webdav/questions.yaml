@@ -156,6 +156,8 @@ questions:
           description: Shares for WebDAV.
           schema:
             type: list
+            empty: false
+            required: true
             default: []
             items:
               - variable: shareEntry
@@ -177,6 +179,8 @@ questions:
                         Example: [share1] will be available at [http://<webdav-ip>:<webdav-port>/share1]
                       schema:
                         type: string
+                        valid_chars: '^[a-zA-Z0-9_-]+$'
+                        valid_chars_error: 'Share name can only consist of [Letters(a-z, A-Z), Numbers(0-9), Underscores(_), Dashes(-)]'
                         required: true
                     - variable: description
                       label: Description
