@@ -137,6 +137,21 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
             - name: Host
               value: localhost
         {{- end }}
+        {{- if .Values.nextcloud.install_smbclient }}
+          exec:
+            command:
+              - /bin/sh
+              - -c
+              - |
+                command -v smbclient /dev/null 2>&1 || exit 1
+        {{- else }}
+          httpGet:
+            path: /status.php
+            port: http
+            httpHeaders:
+            - name: Host
+              value: localhost
+        {{- end }}
           initialDelaySeconds: 10
           periodSeconds: 10
           timeoutSeconds: 5
@@ -180,6 +195,20 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
                   apt update && \
                   apt install -y --no-install-recommends \
                   ffmpeg || echo "Failed to install ffmpeg"
+                  echo "Finished."
+        {{- end }}
+        {{- if .Values.nextcloud.install_smbclient }}
+        lifecycle:
+          postStart:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  echo "Installing smbclient..."
+                  apt update && \
+                  apt install -y --no-install-recommends \
+                  smbclient || echo "Failed to install smbclient"
                   echo "Finished."
         {{- end }}
 {{ include "common.networking.dnsConfiguration" .Values | nindent 6 }}
