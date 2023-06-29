@@ -10,12 +10,15 @@ resources:
 
 bazarrConfig:
   additionalEnvs: []
+
 bazarrNetwork:
   webPort: 30046
   hostNetwork: false
+
 bazarrRunAs:
   user: 568
   group: 568
+
 bazarrStorage:
   config:
     type: ixVolume
