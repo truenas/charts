@@ -31,7 +31,7 @@ questions:
             required: true
             private: true
             # Character @ is not allowed in password
-            valid_chars: ^((?!@).)*$
+            valid_chars: '^((?!@).)*$'
             valid_chars_error: "Character @ is not allowed in password"
             show_if: [[ "allowEmptyPassword", "=", false ]]
             default: ""
