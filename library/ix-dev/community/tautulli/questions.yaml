@@ -27,13 +27,6 @@ questions:
     schema:
       type: dict
       attrs:
-        - variable: instanceName
-          label: Instance Name
-          description: The name of the Tautulli instance.
-          schema:
-            type: string
-            default: "Tautulli"
-            required: true
         - variable: additionalEnvs
           label: Additional Environment Variables
           description: Configure additional environment variables for Tautulli.
