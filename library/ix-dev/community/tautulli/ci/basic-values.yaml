@@ -1,0 +1,11 @@
+tautulliNetwork:
+  webPort: 31000
+
+tautulliRunAs:
+  user: 1000
+  group: 1000
+
+tautulliStorage:
+  config:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/config
