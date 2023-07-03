@@ -1,0 +1,14 @@
+bazarrNetwork:
+  webPort: 31000
+
+bazarrStorage:
+  config:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/config
+  additionalStorages:
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/series
+    mountPath: /series
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/movies
+    mountPath: /movies
