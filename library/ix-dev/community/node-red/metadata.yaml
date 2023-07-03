@@ -1,0 +1,8 @@
+runAsContext:
+  - userName: node-red
+    groupName: node-red
+    gid: 1000
+    uid: 1000
+    description: Node-RED runs as a non-root user.
+capabilities: []
+hostMounts: []
