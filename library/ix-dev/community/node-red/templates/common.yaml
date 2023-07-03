@@ -1,0 +1,11 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "nodered.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "nodered.service" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "nodered.persistence" $ | fromYaml) -}}
+
+{{/* Create the configmap for portal manually*/}}
+{{- include "nodered.portal" $ -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}
