@@ -1,0 +1,11 @@
+filebrowserStorage:
+  config:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/config
+  additionalStorages:
+    - type: hostPath
+      hostPath: /mnt/{{ .Release.Name }}/data1
+      mountPath: /data1
+    - type: hostPath
+      hostPath: /mnt/{{ .Release.Name }}/data2
+      mountPath: /data2
