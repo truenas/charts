@@ -1,0 +1,11 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "bazarr.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "bazarr.service" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "bazarr.persistence" $ | fromYaml) -}}
+
+{{/* Create the configmap for portal manually*/}}
+{{- include "bazarr.portal" $ -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}
