@@ -3,7 +3,7 @@ description: WG-Easy is the easiest way to install & manage WireGuard!
 annotations:
   title: WG Easy
 type: application
-version: 1.0.9
+version: 1.0.10
 apiVersion: v2
 appVersion: "7"
 kubeVersion: ">=1.16.0-0"
@@ -19,7 +19,7 @@ home: https://github.com/WeeJeWel/wg-easy
 icon: https://raw.githubusercontent.com/WeeJeWel/wg-easy/master/src/www/img/logo.png
 sources:
   - https://github.com/WeeJeWel/wg-easy
-  - https://github.com/truenas/charts/tree/master/library/ix-dev/charts/wg-easy
+  - https://github.com/truenas/charts/tree/master/charts/wg-easy
 keywords:
   - wireguard
   - network
