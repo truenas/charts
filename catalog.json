@@ -1,22 +1,22 @@
 {
     "charts": {
-        "diskoverdata": {
-            "app_readme": "<p>DiskOver App for TrueNAS SCALE</p>",
+        "home-assistant": {
+            "app_readme": "<p>home-assistant App for TrueNAS SCALE</p>",
             "categories": [
-                "monitoring"
+                "productivity"
             ],
-            "description": "Diskover is used to monitor size/volumes of distributed dataset.",
+            "description": "Home Assistant App for TrueNAS SCALE",
             "healthy": true,
             "healthy_error": null,
-            "home": "https://github.com/diskoverdata/diskover-community",
-            "location": "/__w/charts/charts/charts/diskoverdata",
-            "latest_version": "1.0.11",
-            "latest_app_version": "2.0.1",
-            "latest_human_version": "2.0.1_1.0.11",
-            "last_update": "2023-07-04 20:47:42",
-            "name": "diskoverdata",
+            "home": "https://github.com/home-assistant/home-assistant",
+            "location": "/__w/charts/charts/charts/home-assistant",
+            "latest_version": "1.0.97",
+            "latest_app_version": "2023.6.3",
+            "latest_human_version": "2023.6.3_1.0.97",
+            "last_update": "2023-07-04 20:50:36",
+            "name": "home-assistant",
             "recommended": false,
-            "title": "Diskover Data",
+            "title": "Home Assistant",
             "maintainers": [
                 {
                     "name": "truenas",
@@ -25,57 +25,17 @@
                 }
             ],
             "tags": [
-                "storage",
-                "discovery"
+                "home-automation",
+                "assistant"
             ],
             "screenshots": [
-                "https://www.linuxserver.io/user/pages/content/images/2018/11/image-1.png",
-                "https://camo.githubusercontent.com/62dfd0970129262c413cd9b811a07062526d2f45516ec4f862276c0610fe8f6d/687474703a2f2f7777772e6469736b6f766572646174612e636f6d2f77702d636f6e74656e742f75706c6f6164732f323032312f31302f6469736b6f7665725f76325f63655f73637265656e73686f74312e706e67",
-                "https://camo.githubusercontent.com/6cddd7fa89691d4cf0ba763f10ee100373c3d84338862d0c25cb8f8b4df9728d/687474703a2f2f7777772e6469736b6f766572646174612e636f6d2f77702d636f6e74656e742f75706c6f6164732f323032312f31302f6469736b6f7665725f76325f63655f73637265656e73686f74322e706e67"
+                "https://scotthelme.co.uk/content/images/2021/08/image-12.png"
             ],
             "sources": [
-                "https://github.com/diskoverdata/diskover-community",
-                "https://github.com/truenas/charts/tree/master/library/ix-dev/charts/diskoverdata"
+                "https://github.com/home-assistant/home-assistant",
+                "https://github.com/truenas/charts/tree/master/library/ix-dev/charts/home-assistant"
             ],
-            "icon_url": "http://www.diskoverdata.com/wp-content/uploads/2019/09/diskover.png"
-        },
-        "netdata": {
-            "app_readme": "<p><a href=\"https://www.netdata.cloud/\">Netdata</a> is a fast, easy monitoring and troubleshooting system.</p>",
-            "categories": [
-                "monitoring"
-            ],
-            "description": "Real-time performance monitoring, done right!",
-            "healthy": true,
-            "healthy_error": null,
-            "home": "https://www.netdata.cloud/",
-            "location": "/__w/charts/charts/charts/netdata",
-            "latest_version": "1.0.27",
-            "latest_app_version": "v1.40.1",
-            "latest_human_version": "v1.40.1_1.0.27",
-            "last_update": "2023-07-04 20:47:42",
-            "name": "netdata",
-            "recommended": false,
-            "title": "Netdata",
-            "maintainers": [
-                {
-                    "name": "truenas",
-                    "url": "https://www.truenas.com/",
-                    "email": "dev@ixsystems.com"
-                }
-            ],
-            "tags": [
-                "netdata"
-            ],
-            "screenshots": [
-                "https://user-images.githubusercontent.com/1153921/101509403-f7e59400-3935-11eb-9abd-cbecfa3ee49a.png",
-                "https://user-images.githubusercontent.com/1153921/101508423-e354cc00-3934-11eb-9b33-3ad57a5988b4.png",
-                "https://user-images.githubusercontent.com/24860547/224729853-da525e02-bea5-4665-b1f6-ce389976a27b.png"
-            ],
-            "sources": [
-                "https://github.com/netdata/helmchart",
-                "https://github.com/netdata/netdata"
-            ],
-            "icon_url": "https://netdata.github.io/helmchart/logo.png"
+            "icon_url": "https://avatars.githubusercontent.com/u/13844975?s=200&v=4"
         },
         "minio": {
             "app_readme": "<p><a href=\"https://min.io\">MinIO</a> is a High Performance Object Storage released under Apache License v2.0. It is API compatible with Amazon S3 cloud storage service. Use MinIO to build high performance infrastructure for machine learning, analytics and application data workloads.</p>\n<p><strong>NOTE</strong>\n- On installation, minIO data directory's ownership will be updated to minio:minio.\n- For existing installations that are exhibiting the upgrade to &gt;=1.5.0, the minIO data directory's ownership will be migrated to minio:minio.</p>",
@@ -91,7 +51,7 @@
             "latest_version": "1.7.15",
             "latest_app_version": "2023-03-13",
             "latest_human_version": "2023-03-13_1.7.15",
-            "last_update": "2023-07-04 20:47:42",
+            "last_update": "2023-07-04 20:50:36",
             "name": "minio",
             "recommended": false,
             "title": "Minio",
@@ -103,154 +63,6 @@
                 "https://github.com/minio/charts"
             ],
             "icon_url": "https://min.io/resources/img/logo/MINIO_wordmark.png"
-        },
-        "emby": {
-            "app_readme": "<h1>Emby Server</h1>\n<p>Emby Server is a personal media server with apps on just about every device</p>",
-            "categories": [
-                "media"
-            ],
-            "description": "Emby Server",
-            "healthy": true,
-            "healthy_error": null,
-            "home": "https://emby.media/",
-            "location": "/__w/charts/charts/charts/emby",
-            "latest_version": "1.0.27",
-            "latest_app_version": "4.7.13.0",
-            "latest_human_version": "4.7.13.0_1.0.27",
-            "last_update": "2023-07-04 20:47:42",
-            "name": "emby",
-            "recommended": false,
-            "title": "Emby Server",
-            "maintainers": [
-                {
-                    "name": "truenas",
-                    "url": "https://www.truenas.com/",
-                    "email": "dev@ixsystems.com"
-                }
-            ],
-            "tags": [
-                "entertainment",
-                "movies",
-                "series",
-                "tv",
-                "streaming"
-            ],
-            "screenshots": [
-                "https://i.imgur.com/OFBGwvG.png",
-                "https://emby.media/community/uploads/inline/2165/554dfc8f0bc13_MoviesView2.png"
-            ],
-            "sources": [
-                "https://hub.docker.com/r/emby/embyserver"
-            ],
-            "icon_url": "https://images-na.ssl-images-amazon.com/images/I/41NwssJC1iL.png"
-        },
-        "ix-chart": {
-            "app_readme": "<h1>iX-Chart</h1>\n<p>iX-chart is a chart designed to let user deploy a docker image in a TrueNAS SCALE kubernetes cluster.\nIt provides a mechanism to specify workload type, add external host interfaces in the pods, configure volumes and allocate host resources to the workload.</p>",
-            "categories": [
-                "generic"
-            ],
-            "description": "A Helm chart for deploying simple workloads Kubernetes",
-            "healthy": true,
-            "healthy_error": null,
-            "home": "https://www.truenas.com/",
-            "location": "/__w/charts/charts/charts/ix-chart",
-            "latest_version": "2304.0.7",
-            "latest_app_version": "v1",
-            "latest_human_version": "v1_2304.0.7",
-            "last_update": "2023-07-04 20:47:42",
-            "name": "ix-chart",
-            "recommended": false,
-            "title": "ix-chart",
-            "maintainers": [
-                {
-                    "name": "truenas",
-                    "url": "https://www.truenas.com/",
-                    "email": "dev@ixsystems.com"
-                }
-            ],
-            "tags": [],
-            "screenshots": [],
-            "sources": [],
-            "icon_url": null
-        },
-        "nextcloud": {
-            "app_readme": "<h1>nextcloud</h1>\n<p><a href=\"https://nextcloud.com/\">nextcloud</a> is a file sharing server that puts the control and security of your own data back into your hands.</p>",
-            "categories": [
-                "productivity"
-            ],
-            "description": "A file sharing server that puts the control and security of your own data back into your hands.",
-            "healthy": true,
-            "healthy_error": null,
-            "home": "https://nextcloud.com/",
-            "location": "/__w/charts/charts/charts/nextcloud",
-            "latest_version": "1.6.31",
-            "latest_app_version": "27.0.0",
-            "latest_human_version": "27.0.0_1.6.31",
-            "last_update": "2023-07-04 20:47:42",
-            "name": "nextcloud",
-            "recommended": false,
-            "title": "Nextcloud",
-            "maintainers": [
-                {
-                    "name": "truenas",
-                    "url": "https://www.truenas.com/",
-                    "email": "dev@ixsystems.com"
-                }
-            ],
-            "tags": [
-                "nextcloud",
-                "storage",
-                "sync"
-            ],
-            "screenshots": [
-                "https://nextcloud.com/media/nextcloud20.png",
-                "https://nextcloud.com/media/search-moodle-course-module.png",
-                "https://nextcloud.com/media/multiple_share_links.png"
-            ],
-            "sources": [
-                "https://github.com/nextcloud/docker",
-                "https://github.com/nextcloud/helm",
-                "https://github.com/truenas/charts/tree/master/library/ix-dev/charts/nextcloud"
-            ],
-            "icon_url": "https://cdn.rawgit.com/docker-library/docs/defa5ffc7123177acd60ddef6e16bddf694cc35f/nextcloud/logo.svg"
-        },
-        "photoprism": {
-            "app_readme": "<h1>Photo Prism</h1>\n<p>PhotoPrism is a server-based application for browsing, organizing and sharing your personal photo collection.</p>",
-            "categories": [
-                "media"
-            ],
-            "description": "AI-powered app for browsing, organizing & sharing your photo collection.",
-            "healthy": true,
-            "healthy_error": null,
-            "home": "https://photoprism.app/",
-            "location": "/__w/charts/charts/charts/photoprism",
-            "latest_version": "1.0.26",
-            "latest_app_version": "230625",
-            "latest_human_version": "230625_1.0.26",
-            "last_update": "2023-07-04 20:47:42",
-            "name": "photoprism",
-            "recommended": false,
-            "title": "PhotoPrism",
-            "maintainers": [
-                {
-                    "name": "truenas",
-                    "url": "https://www.truenas.com/",
-                    "email": "dev@ixsystems.com"
-                }
-            ],
-            "tags": [
-                "photos",
-                "image"
-            ],
-            "screenshots": [
-                "https://docs.photoprism.app/developer-guide/ui/img/new-mosaic-view.png",
-                "https://docs.photoprism.app/developer-guide/ui/img/login-redesign.png"
-            ],
-            "sources": [
-                "https://photoprism.app/",
-                "https://github.com/truenas/charts/tree/master/library/ix-dev/charts/photoprism"
-            ],
-            "icon_url": "https://photoprism.app/static/icons/logo.svg"
         },
         "plex": {
             "app_readme": "<h1>Plex</h1>\n<p>Plex chart is a chart designed to deploy plex in a TrueNAS SCALE kubernetes cluster.</p>",
@@ -265,7 +77,7 @@
             "latest_version": "1.7.52",
             "latest_app_version": "1.32.4.7195",
             "latest_human_version": "1.32.4.7195_1.7.52",
-            "last_update": "2023-07-04 20:47:42",
+            "last_update": "2023-07-04 20:50:36",
             "name": "plex",
             "recommended": false,
             "title": "Plex",
@@ -306,7 +118,7 @@
             "latest_version": "1.0.14",
             "latest_app_version": "v1.68.2",
             "latest_human_version": "v1.68.2_1.0.14",
-            "last_update": "2023-07-04 20:47:42",
+            "last_update": "2023-07-04 20:50:36",
             "name": "storj",
             "recommended": false,
             "title": "Storj",
@@ -331,23 +143,23 @@
             ],
             "icon_url": "https://assets-global.website-files.com/602eda09fc78afc76e9706b6/60917835a05862243e7de9af_logo.svg"
         },
-        "prometheus": {
-            "app_readme": "<h1>Prometheus</h1>\n<p><a href=\"https://prometheus.io/\">Prometheus</a> - Monitoring system and time series database.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>prometheus</code> directories.\nAfterward, the <code>prometheus</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAlso an empty configuration file will be created.</p>\n</blockquote>\n<p>The configuration file is located at <code>/config/prometheus.yml</code> inside the container.\nData is stored at <code>/data</code> inside the container.</p>",
+        "pihole": {
+            "app_readme": "<h1>Pihole</h1>\n<p>DNS and Ad-filtering for your network.</p>",
             "categories": [
-                "monitoring"
+                "networking"
             ],
-            "description": "The Prometheus monitoring system and time series database.",
+            "description": "DNS and Ad-filtering for your network.",
             "healthy": true,
             "healthy_error": null,
-            "home": "https://prometheus.io",
-            "location": "/__w/charts/charts/charts/prometheus",
-            "latest_version": "1.0.12",
-            "latest_app_version": "v2.45.0",
-            "latest_human_version": "v2.45.0_1.0.12",
-            "last_update": "2023-07-04 20:48:23",
-            "name": "prometheus",
+            "home": "https://pi-hole.net/",
+            "location": "/__w/charts/charts/charts/pihole",
+            "latest_version": "1.0.21",
+            "latest_app_version": "2023.02.2",
+            "latest_human_version": "2023.02.2_1.0.21",
+            "last_update": "2023-07-04 20:50:36",
+            "name": "pihole",
             "recommended": false,
-            "title": "Prometheus",
+            "title": "Pi-hole",
             "maintainers": [
                 {
                     "name": "truenas",
@@ -356,18 +168,96 @@
                 }
             ],
             "tags": [
-                "metrics",
-                "storage"
+                "dns",
+                "adblock"
             ],
             "screenshots": [
-                "https://prometheus.io/assets/blog/2019-10-08/10kseries8hours-2.12-cpu.png"
+                "https://wp-cdn.pi-hole.net/wp-content/uploads/2020/04/Dashboard.png"
             ],
             "sources": [
-                "https://github.com/prometheus/prometheus",
-                "https://github.com/truenas/charts/tree/master/charts/prometheus",
-                "https://prometheus.io"
+                "https://pi-hole.net/",
+                "https://github.com/truenas/charts/tree/master/library/ix-dev/charts/pihole"
             ],
-            "icon_url": "https://avatars.githubusercontent.com/u/3380462"
+            "icon_url": "https://github.com/pi-hole/graphics/raw/master/Vortex/Vortex_Vertical_wordmark_lightmode.png?raw=true)"
+        },
+        "diskoverdata": {
+            "app_readme": "<p>DiskOver App for TrueNAS SCALE</p>",
+            "categories": [
+                "monitoring"
+            ],
+            "description": "Diskover is used to monitor size/volumes of distributed dataset.",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://github.com/diskoverdata/diskover-community",
+            "location": "/__w/charts/charts/charts/diskoverdata",
+            "latest_version": "1.0.11",
+            "latest_app_version": "2.0.1",
+            "latest_human_version": "2.0.1_1.0.11",
+            "last_update": "2023-07-04 20:50:36",
+            "name": "diskoverdata",
+            "recommended": false,
+            "title": "Diskover Data",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [
+                "storage",
+                "discovery"
+            ],
+            "screenshots": [
+                "https://www.linuxserver.io/user/pages/content/images/2018/11/image-1.png",
+                "https://camo.githubusercontent.com/62dfd0970129262c413cd9b811a07062526d2f45516ec4f862276c0610fe8f6d/687474703a2f2f7777772e6469736b6f766572646174612e636f6d2f77702d636f6e74656e742f75706c6f6164732f323032312f31302f6469736b6f7665725f76325f63655f73637265656e73686f74312e706e67",
+                "https://camo.githubusercontent.com/6cddd7fa89691d4cf0ba763f10ee100373c3d84338862d0c25cb8f8b4df9728d/687474703a2f2f7777772e6469736b6f766572646174612e636f6d2f77702d636f6e74656e742f75706c6f6164732f323032312f31302f6469736b6f7665725f76325f63655f73637265656e73686f74322e706e67"
+            ],
+            "sources": [
+                "https://github.com/diskoverdata/diskover-community",
+                "https://github.com/truenas/charts/tree/master/library/ix-dev/charts/diskoverdata"
+            ],
+            "icon_url": "http://www.diskoverdata.com/wp-content/uploads/2019/09/diskover.png"
+        },
+        "emby": {
+            "app_readme": "<h1>Emby Server</h1>\n<p>Emby Server is a personal media server with apps on just about every device</p>",
+            "categories": [
+                "media"
+            ],
+            "description": "Emby Server",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://emby.media/",
+            "location": "/__w/charts/charts/charts/emby",
+            "latest_version": "1.0.27",
+            "latest_app_version": "4.7.13.0",
+            "latest_human_version": "4.7.13.0_1.0.27",
+            "last_update": "2023-07-04 20:50:36",
+            "name": "emby",
+            "recommended": false,
+            "title": "Emby Server",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [
+                "entertainment",
+                "movies",
+                "series",
+                "tv",
+                "streaming"
+            ],
+            "screenshots": [
+                "https://i.imgur.com/OFBGwvG.png",
+                "https://emby.media/community/uploads/inline/2165/554dfc8f0bc13_MoviesView2.png"
+            ],
+            "sources": [
+                "https://hub.docker.com/r/emby/embyserver"
+            ],
+            "icon_url": "https://images-na.ssl-images-amazon.com/images/I/41NwssJC1iL.png"
         },
         "collabora": {
             "app_readme": "<h1>Collabora Online Development Edition</h1>\n<p>An awesome, Online Office suite image suitable for home use.\nWith the Collabora Online Development Edition (CODE) Docker Image you can host\nyour own online Office Suite at home! This Docker image is aimed at home users\nand contains the latest and greatest developments. Simply integrate it in your\npreferred File Sync and Share (FSS), to easily get your own online Office \nSuite up and running!</p>",
@@ -382,7 +272,7 @@
             "latest_version": "1.2.14",
             "latest_app_version": "21.11.4.1.1",
             "latest_human_version": "21.11.4.1.1_1.2.14",
-            "last_update": "2023-07-04 20:47:42",
+            "last_update": "2023-07-04 20:50:36",
             "name": "collabora",
             "recommended": false,
             "title": "Collabora",
@@ -407,43 +297,6 @@
             ],
             "icon_url": "https://avatars.githubusercontent.com/u/22418908?s=200&v=4"
         },
-        "elastic-search": {
-            "app_readme": "<h1>Elastic Search</h1>\n<blockquote>\n<p>During the installation process, a container will be launched with <strong>root</strong> privileges. This is required\nin order to apply the correct permissions to the <code>Elastic Search</code> data directory. Afterward, the <code>Elastic Search</code> container\nwill run as a <strong>non</strong>-root user (default <code>568</code>).</p>\n</blockquote>\n<p>If you want to apply additional configuration you can by using additional environment variables.</p>\n<p>See the <a href=\"https://www.elastic.co/guide/en/elasticsearch/reference/master/docker.html#docker-configuration-methods\">Elastic Search documentation</a>\nfor more information.</p>",
-            "categories": [
-                "monitoring"
-            ],
-            "description": "Elasticsearch is the distributed, RESTful search and analytics engine at the heart of the Elastic Stack.",
-            "healthy": true,
-            "healthy_error": null,
-            "home": "https://www.elastic.co",
-            "location": "/__w/charts/charts/charts/elastic-search",
-            "latest_version": "1.0.11",
-            "latest_app_version": "8.8.1",
-            "latest_human_version": "8.8.1_1.0.11",
-            "last_update": "2023-07-04 20:48:23",
-            "name": "elastic-search",
-            "recommended": false,
-            "title": "Elastic Search",
-            "maintainers": [
-                {
-                    "name": "truenas",
-                    "url": "https://www.truenas.com/",
-                    "email": "dev@ixsystems.com"
-                }
-            ],
-            "tags": [
-                "elastic",
-                "search",
-                "storage"
-            ],
-            "screenshots": [],
-            "sources": [
-                "https://www.elastic.co/",
-                "https://github.com/truenas/charts/tree/master/charts/elastic-search",
-                "https://www.elastic.co/guide/en/elasticsearch/reference/master/docker.html#docker-configuration-methods"
-            ],
-            "icon_url": "https://images.contentstack.io/v3/assets/bltefdd0b53724fa2ce/blt280217a63b82a734/6202d3378b1f312528798412/elastic-logo.svg"
-        },
         "syncthing": {
             "app_readme": "<h1>Syncthing</h1>\n<p><a href=\"https://syncthing.net/\">syncthing</a> is a continuous file synchronization program. It synchronizes files between two or\nmore computers in real time, safely protected from prying eyes.</p>\n<blockquote>\n<p><strong>WARNING</strong> Do check out https://docs.syncthing.net/users/faq.html#what-things-are-synced to see what is synced.</p>\n</blockquote>",
             "categories": [
@@ -457,7 +310,7 @@
             "latest_version": "1.0.30",
             "latest_app_version": "1.23.5",
             "latest_human_version": "1.23.5_1.0.30",
-            "last_update": "2023-07-04 20:47:42",
+            "last_update": "2023-07-04 20:50:36",
             "name": "syncthing",
             "recommended": false,
             "title": "Syncthing",
@@ -484,6 +337,227 @@
             ],
             "icon_url": "https://play-lh.googleusercontent.com/KIy_dqUdZqcsTq4GDstHrHwLRvu60gT3v0p41gw792BC6OxamNhUw2eIy0-LI05qNEA=w240-h480"
         },
+        "netdata": {
+            "app_readme": "<p><a href=\"https://www.netdata.cloud/\">Netdata</a> is a fast, easy monitoring and troubleshooting system.</p>",
+            "categories": [
+                "monitoring"
+            ],
+            "description": "Real-time performance monitoring, done right!",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://www.netdata.cloud/",
+            "location": "/__w/charts/charts/charts/netdata",
+            "latest_version": "1.0.27",
+            "latest_app_version": "v1.40.1",
+            "latest_human_version": "v1.40.1_1.0.27",
+            "last_update": "2023-07-04 20:50:36",
+            "name": "netdata",
+            "recommended": false,
+            "title": "Netdata",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [
+                "netdata"
+            ],
+            "screenshots": [
+                "https://user-images.githubusercontent.com/1153921/101509403-f7e59400-3935-11eb-9abd-cbecfa3ee49a.png",
+                "https://user-images.githubusercontent.com/1153921/101508423-e354cc00-3934-11eb-9b33-3ad57a5988b4.png",
+                "https://user-images.githubusercontent.com/24860547/224729853-da525e02-bea5-4665-b1f6-ce389976a27b.png"
+            ],
+            "sources": [
+                "https://github.com/netdata/helmchart",
+                "https://github.com/netdata/netdata"
+            ],
+            "icon_url": "https://netdata.github.io/helmchart/logo.png"
+        },
+        "ix-chart": {
+            "app_readme": "<h1>iX-Chart</h1>\n<p>iX-chart is a chart designed to let user deploy a docker image in a TrueNAS SCALE kubernetes cluster.\nIt provides a mechanism to specify workload type, add external host interfaces in the pods, configure volumes and allocate host resources to the workload.</p>",
+            "categories": [
+                "generic"
+            ],
+            "description": "A Helm chart for deploying simple workloads Kubernetes",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://www.truenas.com/",
+            "location": "/__w/charts/charts/charts/ix-chart",
+            "latest_version": "2304.0.7",
+            "latest_app_version": "v1",
+            "latest_human_version": "v1_2304.0.7",
+            "last_update": "2023-07-04 20:50:36",
+            "name": "ix-chart",
+            "recommended": false,
+            "title": "ix-chart",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [],
+            "screenshots": [],
+            "sources": [],
+            "icon_url": null
+        },
+        "nextcloud": {
+            "app_readme": "<h1>nextcloud</h1>\n<p><a href=\"https://nextcloud.com/\">nextcloud</a> is a file sharing server that puts the control and security of your own data back into your hands.</p>",
+            "categories": [
+                "productivity"
+            ],
+            "description": "A file sharing server that puts the control and security of your own data back into your hands.",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://nextcloud.com/",
+            "location": "/__w/charts/charts/charts/nextcloud",
+            "latest_version": "1.6.31",
+            "latest_app_version": "27.0.0",
+            "latest_human_version": "27.0.0_1.6.31",
+            "last_update": "2023-07-04 20:50:36",
+            "name": "nextcloud",
+            "recommended": false,
+            "title": "Nextcloud",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [
+                "nextcloud",
+                "storage",
+                "sync"
+            ],
+            "screenshots": [
+                "https://nextcloud.com/media/nextcloud20.png",
+                "https://nextcloud.com/media/search-moodle-course-module.png",
+                "https://nextcloud.com/media/multiple_share_links.png"
+            ],
+            "sources": [
+                "https://github.com/nextcloud/docker",
+                "https://github.com/nextcloud/helm",
+                "https://github.com/truenas/charts/tree/master/library/ix-dev/charts/nextcloud"
+            ],
+            "icon_url": "https://cdn.rawgit.com/docker-library/docs/defa5ffc7123177acd60ddef6e16bddf694cc35f/nextcloud/logo.svg"
+        },
+        "photoprism": {
+            "app_readme": "<h1>Photo Prism</h1>\n<p>PhotoPrism is a server-based application for browsing, organizing and sharing your personal photo collection.</p>",
+            "categories": [
+                "media"
+            ],
+            "description": "AI-powered app for browsing, organizing & sharing your photo collection.",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://photoprism.app/",
+            "location": "/__w/charts/charts/charts/photoprism",
+            "latest_version": "1.0.26",
+            "latest_app_version": "230625",
+            "latest_human_version": "230625_1.0.26",
+            "last_update": "2023-07-04 20:50:36",
+            "name": "photoprism",
+            "recommended": false,
+            "title": "PhotoPrism",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [
+                "photos",
+                "image"
+            ],
+            "screenshots": [
+                "https://docs.photoprism.app/developer-guide/ui/img/new-mosaic-view.png",
+                "https://docs.photoprism.app/developer-guide/ui/img/login-redesign.png"
+            ],
+            "sources": [
+                "https://photoprism.app/",
+                "https://github.com/truenas/charts/tree/master/library/ix-dev/charts/photoprism"
+            ],
+            "icon_url": "https://photoprism.app/static/icons/logo.svg"
+        },
+        "elastic-search": {
+            "app_readme": "<h1>Elastic Search</h1>\n<blockquote>\n<p>During the installation process, a container will be launched with <strong>root</strong> privileges. This is required\nin order to apply the correct permissions to the <code>Elastic Search</code> data directory. Afterward, the <code>Elastic Search</code> container\nwill run as a <strong>non</strong>-root user (default <code>568</code>).</p>\n</blockquote>\n<p>If you want to apply additional configuration you can by using additional environment variables.</p>\n<p>See the <a href=\"https://www.elastic.co/guide/en/elasticsearch/reference/master/docker.html#docker-configuration-methods\">Elastic Search documentation</a>\nfor more information.</p>",
+            "categories": [
+                "monitoring"
+            ],
+            "description": "Elasticsearch is the distributed, RESTful search and analytics engine at the heart of the Elastic Stack.",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://www.elastic.co",
+            "location": "/__w/charts/charts/charts/elastic-search",
+            "latest_version": "1.0.11",
+            "latest_app_version": "8.8.1",
+            "latest_human_version": "8.8.1_1.0.11",
+            "last_update": "2023-07-04 20:50:36",
+            "name": "elastic-search",
+            "recommended": false,
+            "title": "Elastic Search",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [
+                "elastic",
+                "search",
+                "storage"
+            ],
+            "screenshots": [],
+            "sources": [
+                "https://www.elastic.co/",
+                "https://github.com/truenas/charts/tree/master/charts/elastic-search",
+                "https://www.elastic.co/guide/en/elasticsearch/reference/master/docker.html#docker-configuration-methods"
+            ],
+            "icon_url": "https://images.contentstack.io/v3/assets/bltefdd0b53724fa2ce/blt280217a63b82a734/6202d3378b1f312528798412/elastic-logo.svg"
+        },
+        "prometheus": {
+            "app_readme": "<h1>Prometheus</h1>\n<p><a href=\"https://prometheus.io/\">Prometheus</a> - Monitoring system and time series database.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>prometheus</code> directories.\nAfterward, the <code>prometheus</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAlso an empty configuration file will be created.</p>\n</blockquote>\n<p>The configuration file is located at <code>/config/prometheus.yml</code> inside the container.\nData is stored at <code>/data</code> inside the container.</p>",
+            "categories": [
+                "monitoring"
+            ],
+            "description": "The Prometheus monitoring system and time series database.",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://prometheus.io",
+            "location": "/__w/charts/charts/charts/prometheus",
+            "latest_version": "1.0.12",
+            "latest_app_version": "v2.45.0",
+            "latest_human_version": "v2.45.0_1.0.12",
+            "last_update": "2023-07-04 20:50:36",
+            "name": "prometheus",
+            "recommended": false,
+            "title": "Prometheus",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [
+                "metrics",
+                "storage"
+            ],
+            "screenshots": [
+                "https://prometheus.io/assets/blog/2019-10-08/10kseries8hours-2.12-cpu.png"
+            ],
+            "sources": [
+                "https://github.com/prometheus/prometheus",
+                "https://github.com/truenas/charts/tree/master/charts/prometheus",
+                "https://prometheus.io"
+            ],
+            "icon_url": "https://avatars.githubusercontent.com/u/3380462"
+        },
         "wg-easy": {
             "app_readme": "<h1>WG-Easy</h1>\n<p><a href=\"https://github.com/WeeJeWel/wg-easy\">WG-Easy (WireGuard Easy)</a> is the easiest way to install &amp; manage WireGuard!</p>",
             "categories": [
@@ -497,7 +571,7 @@
             "latest_version": "1.0.9",
             "latest_app_version": "7",
             "latest_human_version": "7_1.0.9",
-            "last_update": "2023-07-04 20:47:42",
+            "last_update": "2023-07-04 20:50:36",
             "name": "wg-easy",
             "recommended": false,
             "title": "WG Easy",
@@ -520,101 +594,27 @@
                 "https://github.com/truenas/charts/tree/master/library/ix-dev/charts/wg-easy"
             ],
             "icon_url": "https://raw.githubusercontent.com/WeeJeWel/wg-easy/master/src/www/img/logo.png"
-        },
-        "pihole": {
-            "app_readme": "<h1>Pihole</h1>\n<p>DNS and Ad-filtering for your network.</p>",
-            "categories": [
-                "networking"
-            ],
-            "description": "DNS and Ad-filtering for your network.",
-            "healthy": true,
-            "healthy_error": null,
-            "home": "https://pi-hole.net/",
-            "location": "/__w/charts/charts/charts/pihole",
-            "latest_version": "1.0.21",
-            "latest_app_version": "2023.02.2",
-            "latest_human_version": "2023.02.2_1.0.21",
-            "last_update": "2023-07-04 20:47:42",
-            "name": "pihole",
-            "recommended": false,
-            "title": "Pi-hole",
-            "maintainers": [
-                {
-                    "name": "truenas",
-                    "url": "https://www.truenas.com/",
-                    "email": "dev@ixsystems.com"
-                }
-            ],
-            "tags": [
-                "dns",
-                "adblock"
-            ],
-            "screenshots": [
-                "https://wp-cdn.pi-hole.net/wp-content/uploads/2020/04/Dashboard.png"
-            ],
-            "sources": [
-                "https://pi-hole.net/",
-                "https://github.com/truenas/charts/tree/master/library/ix-dev/charts/pihole"
-            ],
-            "icon_url": "https://github.com/pi-hole/graphics/raw/master/Vortex/Vortex_Vertical_wordmark_lightmode.png?raw=true)"
-        },
-        "home-assistant": {
-            "app_readme": "<p>home-assistant App for TrueNAS SCALE</p>",
-            "categories": [
-                "productivity"
-            ],
-            "description": "Home Assistant App for TrueNAS SCALE",
-            "healthy": true,
-            "healthy_error": null,
-            "home": "https://github.com/home-assistant/home-assistant",
-            "location": "/__w/charts/charts/charts/home-assistant",
-            "latest_version": "1.0.97",
-            "latest_app_version": "2023.6.3",
-            "latest_human_version": "2023.6.3_1.0.97",
-            "last_update": "2023-07-04 20:47:42",
-            "name": "home-assistant",
-            "recommended": false,
-            "title": "Home Assistant",
-            "maintainers": [
-                {
-                    "name": "truenas",
-                    "url": "https://www.truenas.com/",
-                    "email": "dev@ixsystems.com"
-                }
-            ],
-            "tags": [
-                "home-automation",
-                "assistant"
-            ],
-            "screenshots": [
-                "https://scotthelme.co.uk/content/images/2021/08/image-12.png"
-            ],
-            "sources": [
-                "https://github.com/home-assistant/home-assistant",
-                "https://github.com/truenas/charts/tree/master/library/ix-dev/charts/home-assistant"
-            ],
-            "icon_url": "https://avatars.githubusercontent.com/u/13844975?s=200&v=4"
         }
     },
     "test": {},
     "community": {
-        "adguard-home": {
-            "app_readme": "<h1>AdGuard Home</h1>\n<p>During the setup wizard, AdGuard Home presents an option to select on which port the web interface will be available.\n(Defaults to 80. Which is a privileged port and also usually the TrueNAS SCALE UI uses that port)\nBecause of that, App will force the webUI to listen to port 30000 (or the port selected by user in the TrueNAS SCALE UI).</p>\n<p>If you select a different port in the wizard, the Dashboard will not work initially but\nafter a couple of minutes container will automatically restart and the Dashboard will\nbe available on the port you selected on the TrueNAS SCALE UI.</p>\n<blockquote>\n<ul>\n<li>AdGuard runs as <code>root</code> user.</li>\n<li>AdGuard runs with host networking enabled.</li>\n</ul>\n</blockquote>",
+        "radarr": {
+            "app_readme": "<h1>Radarr</h1>\n<p><a href=\"https://github.com/Radarr/Radarr\">Radarr</a> is a movie collection manager for Usenet and BitTorrent users.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Radarr</code> directories.\nAfterward, the <code>Radarr</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>",
             "categories": [
-                "networking"
+                "media"
             ],
-            "description": "Free and open source, powerful network-wide ads & trackers blocking DNS server.",
+            "description": "Radarr is a movie collection manager for Usenet and BitTorrent users.",
             "healthy": true,
             "healthy_error": null,
-            "home": "https://github.com/AdguardTeam/AdGuardHome",
-            "location": "/__w/charts/charts/community/adguard-home",
-            "latest_version": "1.0.10",
-            "latest_app_version": "0.107.32",
-            "latest_human_version": "0.107.32_1.0.10",
-            "last_update": "2023-07-04 20:48:23",
-            "name": "adguard-home",
+            "home": "https://github.com/Radarr/Radarr",
+            "location": "/__w/charts/charts/community/radarr",
+            "latest_version": "1.0.14",
+            "latest_app_version": "4.5.2.7388",
+            "latest_human_version": "4.5.2.7388_1.0.14",
+            "last_update": "2023-07-04 20:50:36",
+            "name": "radarr",
             "recommended": false,
-            "title": "AdGuard Home",
+            "title": "Radarr",
             "maintainers": [
                 {
                     "name": "truenas",
@@ -623,19 +623,94 @@
                 }
             ],
             "tags": [
-                "dns",
-                "adblock"
+                "movies"
             ],
             "screenshots": [
-                "https://assets.ubuntu.com/v1/1febeddd-adguard-main-image.png",
-                "https://assets.ubuntu.com/v1/9eb41b64-adguard-advert-1.png"
+                "https://radarr.video/img/slider/posters.png",
+                "https://radarr.video/img/features/manualsearch.png",
+                "https://radarr.video/img/features/blacklist.png",
+                "https://radarr.video/img/features/custom-formats-settings.png"
             ],
             "sources": [
-                "https://github.com/AdguardTeam/AdGuardHome",
-                "https://github.com/truenas/charts/tree/master/library/ix-dev/community/adguard-home",
-                "https://hub.docker.com/r/adguard/adguardhome"
+                "https://github.com/onedr0p/containers/tree/main/apps/radarr",
+                "https://github.com/truenas/charts/tree/master/community/radarr",
+                "https://github.com/Radarr/Radarr"
             ],
-            "icon_url": "https://github.com/AdguardTeam/AdGuardHome/raw/master/doc/adguard_home_darkmode.svg"
+            "icon_url": "https://raw.githubusercontent.com/Radarr/Radarr/develop/Logo/256.png"
+        },
+        "ddns-updater": {
+            "app_readme": "<h1>DDNS Updater</h1>\n<p><a href=\"https://github.com/qdm12/ddns-updater\">DDNS Updater</a> is a lightweight universal DDNS Updater with web UI</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>DDNS Updater</code> directories.\nAfterward, the <code>DDNS Updater</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>",
+            "categories": [
+                "networking"
+            ],
+            "description": "Lightweight universal DDNS Updater with web UI",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://github.com/qdm12/ddns-updater",
+            "location": "/__w/charts/charts/community/ddns-updater",
+            "latest_version": "1.0.7",
+            "latest_app_version": "v2.5.0",
+            "latest_human_version": "v2.5.0_1.0.7",
+            "last_update": "2023-07-04 20:50:36",
+            "name": "ddns-updater",
+            "recommended": false,
+            "title": "DDNS Updater",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [
+                "ddns"
+            ],
+            "screenshots": [
+                "https://raw.githubusercontent.com/qdm12/ddns-updater/master/readme/webui.png"
+            ],
+            "sources": [
+                "https://github.com/qdm12/ddns-updater",
+                "https://github.com/truenas/charts/tree/master/community/ddns-updater",
+                "https://hub.docker.com/r/qmcgaw/ddns-updater"
+            ],
+            "icon_url": "https://raw.githubusercontent.com/qdm12/ddns-updater/master/readme/ddnsgopher.svg"
+        },
+        "gitea": {
+            "app_readme": "<h1>Gitea</h1>\n<p><a href=\"https://gitea.io/en-us\">Gitea</a> - Git with a cup of tea</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>gitea</code> directories.\nAfterward, the <code>gitea</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nSame applies to the <code>postgres</code> container. This will run afterwards as a <strong>non</strong>-root user (<code>999</code>).\nOn each upgrade, a container will be launched with <strong>root</strong> privileges in order to apply the correct\npermissions to the <code>postgres</code> <strong>backups</strong> directory. Container that performs the backup will run as a <strong>non</strong>-root user (<code>999</code>) afterwards.\nKeep in mind the permissions on the backup directory will be changed to <code>999:999</code> on <strong>every</strong> update.\nBut will only be changed once for the <code>gitea</code> and <code>postgres</code> data directories.</p>\n</blockquote>\n<p>On initial startup a setup wizard will be launched with settings for <code>database</code>, <code>ports</code>, <code>path</code>, and <code>domain</code> prefilled.\nKeep them as they are, fill anything you want in the optional settings section and click on <code>Install Gitea</code>.</p>",
+            "categories": [
+                "productivity"
+            ],
+            "description": "Gitea - Git with a cup of tea",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://gitea.io/en-us",
+            "location": "/__w/charts/charts/community/gitea",
+            "latest_version": "1.0.9",
+            "latest_app_version": "1.19.0",
+            "latest_human_version": "1.19.0_1.0.9",
+            "last_update": "2023-07-04 20:50:36",
+            "name": "gitea",
+            "recommended": false,
+            "title": "Gitea",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [
+                "git"
+            ],
+            "screenshots": [
+                "https://gitea.io/images/screenshot.png"
+            ],
+            "sources": [
+                "https://gitea.io/en-us",
+                "https://github.com/truenas/charts/tree/master/community/gitea",
+                "https://docs.gitea.io/en-us/install-with-docker-rootless"
+            ],
+            "icon_url": "https://gitea.com/assets/img/logo.svg"
         },
         "redis": {
             "app_readme": "<h1>Redis</h1>\n<p><a href=\"https://redis.io/\">Redis</a>. The open source, in-memory data store used by millions of developers as a database, cache, streaming engine, and message broker.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Redis</code> directories.\nAfterward, the <code>Redis</code> container will run as a <strong>non</strong>-root user (<code>1001</code>) and root group.\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match <code>1001</code> user.</p>\n</blockquote>",
@@ -650,7 +725,7 @@
             "latest_version": "1.0.0",
             "latest_app_version": "7.0.11",
             "latest_human_version": "7.0.11_1.0.0",
-            "last_update": "2023-07-04 20:47:42",
+            "last_update": "2023-07-04 20:50:36",
             "name": "redis",
             "recommended": false,
             "title": "Redis",
@@ -672,6 +747,45 @@
             ],
             "icon_url": "https://avatars.githubusercontent.com/u/1529926?s=200&v=4"
         },
+        "sonarr": {
+            "app_readme": "<h1>Sonarr</h1>\n<p><a href=\"https://github.com/Sonarr/Sonarr\">Sonarr</a> is a PVR for Usenet and BitTorrent users. It can monitor multiple RSS feeds for new episodes of your favorite shows and will grab, sort and rename them.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Sonarr</code> directories.\nAfterward, the <code>Sonarr</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>",
+            "categories": [
+                "media"
+            ],
+            "description": "Sonarr is a PVR for Usenet and BitTorrent users.",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://github.com/Sonarr/Sonarr",
+            "location": "/__w/charts/charts/community/sonarr",
+            "latest_version": "1.0.11",
+            "latest_app_version": "3.0.10.1567",
+            "latest_human_version": "3.0.10.1567_1.0.11",
+            "last_update": "2023-07-04 20:50:36",
+            "name": "sonarr",
+            "recommended": false,
+            "title": "Sonarr",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [
+                "series"
+            ],
+            "screenshots": [
+                "https://sonarr.tv/img/features/calendar.png",
+                "https://sonarr.tv/img/features/manualsearch.png",
+                "https://sonarr.tv/img/features/blocklist.png"
+            ],
+            "sources": [
+                "https://github.com/onedr0p/containers/tree/main/apps/sonarr",
+                "https://github.com/truenas/charts/tree/master/community/sonarr",
+                "https://github.com/Sonarr/Sonarr"
+            ],
+            "icon_url": "https://raw.githubusercontent.com/Sonarr/Sonarr/develop/Logo/256.png"
+        },
         "lidarr": {
             "app_readme": "<h1>Lidarr</h1>\n<p><a href=\"https://github.com/Lidarr/Lidarr\">Lidarr</a> is a music collection manager for Usenet and BitTorrent users.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Lidarr</code> directories.\nAfterward, the <code>Lidarr</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>",
             "categories": [
@@ -685,7 +799,7 @@
             "latest_version": "1.0.11",
             "latest_app_version": "1.1.3.2982",
             "latest_human_version": "1.1.3.2982_1.0.11",
-            "last_update": "2023-07-04 20:48:23",
+            "last_update": "2023-07-04 20:50:36",
             "name": "lidarr",
             "recommended": false,
             "title": "Lidarr",
@@ -711,6 +825,423 @@
             ],
             "icon_url": "https://raw.githubusercontent.com/Lidarr/Lidarr/develop/Logo/256.png"
         },
+        "jenkins": {
+            "app_readme": "<h1>Jenkins</h1>\n<p><a href=\"https://www.jenkins.io/\">Jenkins</a>. The leading open source automation server, Jenkins provides hundreds of\nplugins to support building, deploying and automating any project.</p>\n<blockquote>\n<p>When application is installed and on each startup, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Jenkins</code> directories.\nAfterward, the <code>Jenkins</code> container will run as a <strong>non</strong>-root user (<code>1000</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the user and group (<code>1000</code>).</p>\n</blockquote>",
+            "categories": [
+                "productivity"
+            ],
+            "description": "Jenkins is a leading open source automation server,",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://www.jenkins.io/",
+            "location": "/__w/charts/charts/community/jenkins",
+            "latest_version": "1.0.2",
+            "latest_app_version": "2.401.1",
+            "latest_human_version": "2.401.1_1.0.2",
+            "last_update": "2023-07-04 20:50:36",
+            "name": "jenkins",
+            "recommended": false,
+            "title": "Jenkins",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [
+                "automation",
+                "ci/cd"
+            ],
+            "screenshots": [
+                "https://assets.digitalocean.com/articles/jcasc_docker/step4a.png",
+                "https://assets.digitalocean.com/articles/jcasc_docker/step7a.png"
+            ],
+            "sources": [
+                "https://hub.docker.com/r/jenkins/jenkins",
+                "https://github.com/jenkinsci/jenkins",
+                "https://www.jenkins.io/"
+            ],
+            "icon_url": "https://camo.githubusercontent.com/1babb15d046739f64d24c9a3424dd912a88683894f6f2307a969501ad84739f8/68747470733a2f2f7777772e6a656e6b696e732e696f2f696d616765732f6a656e6b696e732d6c6f676f2d7469746c652d6461726b2e737667"
+        },
+        "qbittorrent": {
+            "app_readme": "<h1>qBittorrent</h1>\n<p>The <a href=\"https://www.qbittorrent.org/\">qBittorrent</a> project aims to provide an open-source software alternative to \u00b5Torrent.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the qBittorrent directories.\nAfterward, the <code>qBittorrent</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).</p>\n</blockquote>",
+            "categories": [
+                "media"
+            ],
+            "description": "The qBittorrent project aims to provide an open-source software alternative to \u00b5Torrent.",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://www.qbittorrent.org/",
+            "location": "/__w/charts/charts/community/qbittorrent",
+            "latest_version": "1.0.15",
+            "latest_app_version": "4.5.4",
+            "latest_human_version": "4.5.4_1.0.15",
+            "last_update": "2023-07-04 20:50:36",
+            "name": "qbittorrent",
+            "recommended": false,
+            "title": "qBittorrent",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [
+                "torrent",
+                "download"
+            ],
+            "screenshots": [
+                "https://www.addictivetips.com/app/uploads/2019/03/qb-web-ui-e1553049171184.png"
+            ],
+            "sources": [
+                "https://github.com/onedr0p/containers/tree/main/apps/qbittorrent",
+                "https://github.com/truenas/charts/tree/master/community/qbittorrent",
+                "https://www.qbittorrent.org/"
+            ],
+            "icon_url": "https://upload.wikimedia.org/wikipedia/commons/9/9e/Qbittorrent_logo.png"
+        },
+        "readarr": {
+            "app_readme": "<h1>Readarr</h1>\n<p><a href=\"https://github.com/Readarr/Readarr\">Readarr</a> is an ebook and audiobook collection manager for Usenet and BitTorrent users.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Readarr</code> directories.\nAfterward, the <code>Readarr</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>",
+            "categories": [
+                "media"
+            ],
+            "description": "Readarr is an ebook and audiobook collection manager for Usenet and BitTorrent users.",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://github.com/Readarr/Readarr",
+            "location": "/__w/charts/charts/community/readarr",
+            "latest_version": "1.0.0",
+            "latest_app_version": "0.1.9.1905",
+            "latest_human_version": "0.1.9.1905_1.0.0",
+            "last_update": "2023-07-04 20:50:36",
+            "name": "readarr",
+            "recommended": false,
+            "title": "Readarr",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [
+                "ebook",
+                "audiobook"
+            ],
+            "screenshots": [
+                "https://readarr.com/img/features/manualsearch.png",
+                "https://readarr.com/img/features/calibre.png",
+                "https://readarr.com/img/features/calendar.png"
+            ],
+            "sources": [
+                "https://github.com/onedr0p/containers/tree/main/apps/readarr",
+                "https://github.com/truenas/charts/tree/master/library/ix-dev/community/readarr",
+                "https://github.com/Readarr/Readarr"
+            ],
+            "icon_url": "https://raw.githubusercontent.com/Readarr/Readarr/develop/Logo/256.png"
+        },
+        "tftpd-hpa": {
+            "app_readme": "<h1>TFTP</h1>\n<p><a href=\"https://manpages.debian.org/testing/tftpd-hpa/tftpd.8.en.html\">TFTP</a> is a server for the Trivial File Transfer Protocol.</p>\n<p>The app runs as <code>root</code> user and drops privileges to <code>tftp</code> (9069) user for the TFTP service.</p>\n<blockquote>\n<p>On every application start, a container will be launched with <strong>root</strong> privileges.\nThis will check the parent directory permissions and ownership.\nIf there is a mismatch it will apply the correct permissions to the TFTP directories.\nWhen \"Allow Create\" is checked, the above container will also check and <code>chmod</code> if needed\nto <code>757</code> the TFTP directories and to <code>555</code> when not checked.\nAfterward, the <code>TFTP</code> container will run as a <strong>root</strong> user, dropping privileges\nto <code>tftp</code> (9069) user for the TFTP service.\nNote: You need to have configured DHCP server for network boot to work.</p>\n</blockquote>",
+            "categories": [
+                "networking"
+            ],
+            "description": "A lightweight tftp-server",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://github.com/truenas/containers/tree/main/apps/tftpd-hpa",
+            "location": "/__w/charts/charts/community/tftpd-hpa",
+            "latest_version": "1.0.2",
+            "latest_app_version": "1.0.0",
+            "latest_human_version": "1.0.0_1.0.2",
+            "last_update": "2023-07-04 20:50:36",
+            "name": "tftpd-hpa",
+            "recommended": false,
+            "title": "TFTP Server",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [
+                "tftp"
+            ],
+            "screenshots": [],
+            "sources": [
+                "https://github.com/truenas/containers/tree/main/apps/tftpd-hpa",
+                "https://github.com/truenas/charts/tree/master/community/tftpd-hpa",
+                "https://hub.docker.com/r/ixsystems/tftpd-hpa"
+            ],
+            "icon_url": "https://avatars.githubusercontent.com/u/53482242"
+        },
+        "komga": {
+            "app_readme": "<h1>Komga</h1>\n<p><a href=\"https://github.com/gotson/komga\">Komga</a> is a free and open source comics/mangas server.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Komga</code> directories.\nAfterward, the <code>Komga</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>",
+            "categories": [
+                "media"
+            ],
+            "description": "Komga is a free and open source comics/mangas server.",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://komga.org",
+            "location": "/__w/charts/charts/community/komga",
+            "latest_version": "1.0.0",
+            "latest_app_version": "1.1.0",
+            "latest_human_version": "1.1.0_1.0.0",
+            "last_update": "2023-07-04 20:51:14",
+            "name": "komga",
+            "recommended": false,
+            "title": "Komga",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [
+                "comics",
+                "mangas"
+            ],
+            "screenshots": [
+                "https://noted.lol/content/images/size/w1000/2023/01/komga-self-hosted-series.png"
+            ],
+            "sources": [
+                "https://github.com/gotson/komga",
+                "https://github.com/truenas/charts/tree/master/library/ix-dev/community/komga",
+                "https://hub.docker.com/r/gotson/komga"
+            ],
+            "icon_url": "https://komga.org/assets/media/logo.svg"
+        },
+        "zerotier": {
+            "app_readme": "<h1>Zerotier</h1>\n<p><a href=\"https://www.zerotier.com\">Zerotier</a> Securely connect any device, anywhere.</p>",
+            "categories": [
+                "networking"
+            ],
+            "description": "Securely connect any device, anywhere.",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://www.zerotier.com",
+            "location": "/__w/charts/charts/community/zerotier",
+            "latest_version": "1.0.3",
+            "latest_app_version": "1.10.6",
+            "latest_human_version": "1.10.6_1.0.3",
+            "last_update": "2023-07-04 20:50:36",
+            "name": "zerotier",
+            "recommended": false,
+            "title": "Zerotier",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [
+                "vpn"
+            ],
+            "screenshots": [],
+            "sources": [
+                "https://www.zerotier.com",
+                "https://github.com/truenas/charts/tree/master/community/zerotier",
+                "https://hub.docker.com/r/zerotier/zerotier"
+            ],
+            "icon_url": "https://avatars.githubusercontent.com/u/4173285"
+        },
+        "bazarr": {
+            "app_readme": "<h1>Bazarr</h1>\n<p><a href=\"https://www.bazarr.media/\">Bazarr</a> is a companion application to Sonarr and Radarr. It manages and downloads subtitles based on your requirements.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Bazarr</code> directories.\nAfterward, the <code>Bazarr</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>",
+            "categories": [
+                "media"
+            ],
+            "description": "Bazarr is a companion application to Sonarr and Radarr. It manages and downloads subtitles based on your requirements.",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://www.bazarr.media/",
+            "location": "/__w/charts/charts/community/bazarr",
+            "latest_version": "1.0.0",
+            "latest_app_version": "1.2.2",
+            "latest_human_version": "1.2.2_1.0.0",
+            "last_update": "2023-07-04 20:50:36",
+            "name": "bazarr",
+            "recommended": false,
+            "title": "Bazarr",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [
+                "subtitles"
+            ],
+            "screenshots": [
+                "https://www.bazarr.media/assets/img/manual.png",
+                "https://www.bazarr.media/assets/img/upgrade.png"
+            ],
+            "sources": [
+                "https://github.com/onedr0p/containers/tree/main/apps/bazarr",
+                "https://github.com/truenas/charts/tree/master/library/ix-dev/community/bazarr",
+                "https://github.com/morpheus65535/bazarr"
+            ],
+            "icon_url": "https://github.com/morpheus65535/bazarr/blob/master/frontend/public/images/logo128.png?raw=true"
+        },
+        "mumble": {
+            "app_readme": "<h1>Mumble</h1>\n<p><a href=\"https://www.mumble.info/\">Mumble</a> is an Open Source, Low Latency, High Quality Voice Chat Home Downloads Documentation Blog Contribute About</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Mumble</code> directories.\nAfterward, the <code>Mumble</code> container will run as a <strong>non</strong>-root user (<code>1000</code>, Cannot change).</p>\n</blockquote>\n<p>You can change the server configuration by adding additional environment variables.\nPrefix the configuration variable with <code>MUMBLE_CONFIG_</code> and it will be added to the configuration file.\nView the <a href=\"https://wiki.mumble.info/wiki/Murmur.ini\">Mumble Configuration File</a> for more information.</p>\n<p>For example you can set <code>autobanAttempts</code> like this:</p>\n<ul>\n<li>Name: <code>MUMBLE_CONFIG_autobanAttempts</code></li>\n<li>Value: <code>5</code></li>\n</ul>",
+            "categories": [
+                "productivity"
+            ],
+            "description": "Mumble is a free, open source, low latency, high quality voice chat application.",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://www.mumble.info/",
+            "location": "/__w/charts/charts/community/mumble",
+            "latest_version": "1.0.5",
+            "latest_app_version": "v1.4.230",
+            "latest_human_version": "v1.4.230_1.0.5",
+            "last_update": "2023-07-04 20:50:36",
+            "name": "mumble",
+            "recommended": false,
+            "title": "Mumble",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [
+                "voice"
+            ],
+            "screenshots": [],
+            "sources": [
+                "https://github.com/mumble-voip/mumble-docker",
+                "https://github.com/truenas/charts/tree/master/community/mumble",
+                "https://www.mumble.info/"
+            ],
+            "icon_url": "https://github.com/mumble-voip/mumble/blob/master/icons/mumble.svg?raw=true"
+        },
+        "filebrowser": {
+            "app_readme": "<h1>Filebrowser</h1>\n<p><a href=\"https://filebrowser.org\">Filebrowser</a> provides a file managing interface within a specified directory and it can be used to upload, delete, preview, rename and edit your files.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Filebrowser</code> directories.\nAfterward, the <code>Filebrowser</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>\n<p>You can configure further the settings by using Environment Variables.\nSee <a href=\"https://filebrowser.org/cli/filebrowser\">Filebrowser Documentation</a> for more information.\nUse the format <code>FB_OPTION_NAME</code> where the option name is the name of the option you want to set.</p>\n<p>You can also edit the configuration file <code>/config/filebrowser.json</code>.</p>\n<p>Note that the following options are already set and will always take precedence\nover the environment variables and the configuration file:</p>\n<ul>\n<li><code>FB_ROOT</code>/<code>--root</code> is set to <code>/data</code> (Any additional volume mounted will be under this directory)</li>\n<li><code>FB_PORT</code>/<code>--port</code> is set to <code>30044</code> (Or the port you configured in the installation wizard)</li>\n<li><code>FB_ADDRESS</code>/<code>--address</code> is set to <code>0.0.0.0</code> (It will listen on all interfaces <strong>inside</strong> the container)</li>\n<li><code>FB_DATABASE</code>/<code>--database</code> is set to <code>/config/filebrowser.db</code></li>\n<li><code>FB_CONFIG</code>/<code>--config</code> is set to <code>/config/filebrowser.json</code></li>\n</ul>\n<p>Also when a certificate is selected</p>\n<ul>\n<li><code>FB_CERT</code>/<code>--cert</code> is set to <code>/config/certs/tls.crt</code></li>\n<li><code>FB_KEY</code>/<code>--key</code> is set to <code>/config/certs/tls.key</code></li>\n</ul>",
+            "categories": [
+                "storage"
+            ],
+            "description": "File Browser provides a file managing interface within a specified directory and it can be used to upload, delete, preview, rename and edit your files.",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://filebrowser.org",
+            "location": "/__w/charts/charts/community/filebrowser",
+            "latest_version": "1.0.1",
+            "latest_app_version": "v2.23.0",
+            "latest_human_version": "v2.23.0_1.0.1",
+            "last_update": "2023-07-04 20:50:36",
+            "name": "filebrowser",
+            "recommended": false,
+            "title": "File Browser",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [
+                "files",
+                "browser"
+            ],
+            "screenshots": [
+                "https://3149836655-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-M8KDxOujDoPpJyJJ5_i%2Fuploads%2Fgit-blob-b6cab252432e211dec693fc77d036c15259a8087%2F1.PNG?alt=media",
+                "https://3149836655-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-M8KDxOujDoPpJyJJ5_i%2Fuploads%2Fgit-blob-9390768b0cbb83b1e7da55c0ae13ecd2d8fcb114%2F2.PNG?alt=media",
+                "https://3149836655-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-M8KDxOujDoPpJyJJ5_i%2Fuploads%2Fgit-blob-dfc8d803dcd6546622888f399d94af9c6bbdbe60%2F6.PNG?alt=media"
+            ],
+            "sources": [
+                "https://github.com/filebrowser/filebrowser",
+                "https://github.com/truenas/charts/tree/master/library/ix-dev/community/filebrowser",
+                "https://hub.docker.com/r/filebrowser/filebrowser"
+            ],
+            "icon_url": "https://raw.githubusercontent.com/filebrowser/logo/master/banner.png"
+        },
+        "tdarr": {
+            "app_readme": "<h1>Tdarr</h1>\n<p><a href=\"https://home.tdarr.io/\">Tdarr</a> is a Distributed Transcoding System</p>\n<ul>\n<li>App runs as <code>root</code> user</li>\n</ul>",
+            "categories": [
+                "media"
+            ],
+            "description": "Tdarr is a Distributed Transcoding System",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://home.tdarr.io/",
+            "location": "/__w/charts/charts/community/tdarr",
+            "latest_version": "1.0.9",
+            "latest_app_version": "2.00.20.1",
+            "latest_human_version": "2.00.20.1_1.0.9",
+            "last_update": "2023-07-04 20:50:36",
+            "name": "tdarr",
+            "recommended": false,
+            "title": "Tdarr",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [
+                "encode",
+                "transcode"
+            ],
+            "screenshots": [
+                "https://home.tdarr.io/static/media/Stats2-min.a583d8ec.png",
+                "https://home.tdarr.io/static/media/Nodes-min.d8bf11b5.png",
+                "https://home.tdarr.io/static/media/VerdictHistory-min.444965ac.png"
+            ],
+            "sources": [
+                "https://home.tdarr.io/",
+                "https://github.com/truenas/charts/tree/master/community/tdarr",
+                "https://docs.tdarr.io/docs"
+            ],
+            "icon_url": "https://home.tdarr.io/static/media/logo3-min.246d6df4.png"
+        },
+        "ipfs": {
+            "app_readme": "<h1>IPFS</h1>\n<p><a href=\"https://ipfs.tech\">Interplanetary Filesystem</a> - the Web3 standard for content-addressing, interoperable with HTTP</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the ipfs directories.\nAfterward, the <code>ipfs</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).</p>\n</blockquote>",
+            "categories": [
+                "storage"
+            ],
+            "description": "Interplanetary Filesystem - the Web3 standard for content-addressing, interoperable with HTTP",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://ipfs.tech/",
+            "location": "/__w/charts/charts/community/ipfs",
+            "latest_version": "1.0.14",
+            "latest_app_version": "v0.20.0",
+            "latest_human_version": "v0.20.0_1.0.14",
+            "last_update": "2023-07-04 20:50:36",
+            "name": "ipfs",
+            "recommended": false,
+            "title": "IPFS",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [
+                "file-sharing",
+                "kubo"
+            ],
+            "screenshots": [
+                "https://raw.githubusercontent.com/ipfs-shipyard/ipfs-webui/5764ea167a89e8c6bcb6abf83d7e258388e1623d/docs/screenshots/ipfs-webui-files.png",
+                "https://raw.githubusercontent.com/ipfs-shipyard/ipfs-webui/5764ea167a89e8c6bcb6abf83d7e258388e1623d/docs/screenshots/ipfs-webui-settings.png"
+            ],
+            "sources": [
+                "https://github.com/ipfs/kubo",
+                "https://github.com/truenas/charts/tree/master/community/ipfs",
+                "https://ipfs.tech/"
+            ],
+            "icon_url": "https://avatars.githubusercontent.com/u/10536621"
+        },
         "tautulli": {
             "app_readme": "<h1>Tautulli</h1>\n<p><a href=\"https://tautulli.com/\">Tautulli</a> is a python based web application for monitoring, analytics and notifications for Plex Media Server.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Tautulli</code> directories.\nAfterward, the <code>Tautulli</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>",
             "categories": [
@@ -724,7 +1255,7 @@
             "latest_version": "1.0.0",
             "latest_app_version": "2.12.4",
             "latest_human_version": "2.12.4_1.0.0",
-            "last_update": "2023-07-04 20:47:42",
+            "last_update": "2023-07-04 20:50:36",
             "name": "tautulli",
             "recommended": false,
             "title": "Tautulli",
@@ -752,23 +1283,23 @@
             ],
             "icon_url": "https://avatars.githubusercontent.com/u/34385001"
         },
-        "sonarr": {
-            "app_readme": "<h1>Sonarr</h1>\n<p><a href=\"https://github.com/Sonarr/Sonarr\">Sonarr</a> is a PVR for Usenet and BitTorrent users. It can monitor multiple RSS feeds for new episodes of your favorite shows and will grab, sort and rename them.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Sonarr</code> directories.\nAfterward, the <code>Sonarr</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>",
+        "terraria": {
+            "app_readme": "<h1>Terraria</h1>\n<p><a href=\"https://terraria.org/\">Terraria</a> is a land of adventure! A land of mystery! A land that's yours to shape, defend, and enjoy.</p>\n<p>This applies only for the <code>TShock</code> image.\nOn the first run, you have to check the logs to get the server token. You will find something like this:</p>\n<p><code>text\nLogin before join enabled. Users may be prompted for an account specific password instead of a server password on connect.\nLogin using UUID enabled. Users automatically login via UUID.\nA malicious server can easily steal a user's UUID. You may consider turning this option off if you run a public server.\nTShock Notice: setup-code.txt is still present, and the code located in that file will be used.\nTo setup the server, join the game and type /setup 424041\nThis token will display until disabled by verification. (/setup)</code></p>\n<p>Join the server and run <code>/setup &lt;token&gt;</code></p>",
             "categories": [
-                "media"
+                "games"
             ],
-            "description": "Sonarr is a PVR for Usenet and BitTorrent users.",
+            "description": "Terraria is a land of adventure! A land of mystery! A land that's yours to shape, defend, and enjoy.",
             "healthy": true,
             "healthy_error": null,
-            "home": "https://github.com/Sonarr/Sonarr",
-            "location": "/__w/charts/charts/community/sonarr",
-            "latest_version": "1.0.11",
-            "latest_app_version": "3.0.10.1567",
-            "latest_human_version": "3.0.10.1567_1.0.11",
-            "last_update": "2023-07-04 20:48:23",
-            "name": "sonarr",
+            "home": "https://terraria.org/",
+            "location": "/__w/charts/charts/community/terraria",
+            "latest_version": "1.0.5",
+            "latest_app_version": "1.4.4.9",
+            "latest_human_version": "1.4.4.9_1.0.5",
+            "last_update": "2023-07-04 20:50:36",
+            "name": "terraria",
             "recommended": false,
-            "title": "Sonarr",
+            "title": "Terraria",
             "maintainers": [
                 {
                     "name": "truenas",
@@ -777,130 +1308,17 @@
                 }
             ],
             "tags": [
-                "series"
-            ],
-            "screenshots": [
-                "https://sonarr.tv/img/features/calendar.png",
-                "https://sonarr.tv/img/features/manualsearch.png",
-                "https://sonarr.tv/img/features/blocklist.png"
-            ],
-            "sources": [
-                "https://github.com/onedr0p/containers/tree/main/apps/sonarr",
-                "https://github.com/truenas/charts/tree/master/community/sonarr",
-                "https://github.com/Sonarr/Sonarr"
-            ],
-            "icon_url": "https://raw.githubusercontent.com/Sonarr/Sonarr/develop/Logo/256.png"
-        },
-        "qbittorrent": {
-            "app_readme": "<h1>qBittorrent</h1>\n<p>The <a href=\"https://www.qbittorrent.org/\">qBittorrent</a> project aims to provide an open-source software alternative to \u00b5Torrent.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the qBittorrent directories.\nAfterward, the <code>qBittorrent</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).</p>\n</blockquote>",
-            "categories": [
-                "media"
-            ],
-            "description": "The qBittorrent project aims to provide an open-source software alternative to \u00b5Torrent.",
-            "healthy": true,
-            "healthy_error": null,
-            "home": "https://www.qbittorrent.org/",
-            "location": "/__w/charts/charts/community/qbittorrent",
-            "latest_version": "1.0.15",
-            "latest_app_version": "4.5.4",
-            "latest_human_version": "4.5.4_1.0.15",
-            "last_update": "2023-07-04 20:48:23",
-            "name": "qbittorrent",
-            "recommended": false,
-            "title": "qBittorrent",
-            "maintainers": [
-                {
-                    "name": "truenas",
-                    "url": "https://www.truenas.com/",
-                    "email": "dev@ixsystems.com"
-                }
-            ],
-            "tags": [
-                "torrent",
-                "download"
-            ],
-            "screenshots": [
-                "https://www.addictivetips.com/app/uploads/2019/03/qb-web-ui-e1553049171184.png"
-            ],
-            "sources": [
-                "https://github.com/onedr0p/containers/tree/main/apps/qbittorrent",
-                "https://github.com/truenas/charts/tree/master/community/qbittorrent",
-                "https://www.qbittorrent.org/"
-            ],
-            "icon_url": "https://upload.wikimedia.org/wikipedia/commons/9/9e/Qbittorrent_logo.png"
-        },
-        "vaultwarden": {
-            "app_readme": "<h1>Vaultwarden</h1>\n<p><a href=\"https://github.com/dani-garcia/vaultwarden\">Vaultwarden</a> Alternative implementation of the <code>Bitwarden</code> server API written in Rust and compatible with upstream Bitwarden clients</p>\n<blockquote>\n<p>During the installation process, a container will be launched with <strong>root</strong> privileges. This is required\nin order to apply the correct permissions to the <code>Vaultwarden</code> data directory. Afterward, the <code>Vaultwarden</code> container\nwill run as a <strong>non</strong>-root user (default <code>568</code>).\nSame applies to the <code>postgres</code> container. This will run afterwards as a <strong>non</strong>-root user (<code>999</code>).\nOn each upgrade, a container will be launched with <strong>root</strong> privileges in order to apply the correct\npermissions to the <code>postgres</code> <strong>backups</strong> directory. Container that performs the backup will run as a <strong>non</strong>-root user (<code>999</code>) afterwards.\nKeep in mind the permissions on the backup directory will be changed to <code>999:999</code> on <strong>every</strong> update.\nBut will only be changed once for the <code>Vaultwarden</code> and <code>postgres</code> data directories.</p>\n</blockquote>\n<p>While the option to use <code>Rocket</code> for TLS is there, it is not\n<a href=\"https://github.com/dani-garcia/vaultwarden/wiki/Enabling-HTTPS#via-rocket\">recommended</a>.\nInstead, use a reverse proxy to handle TLS termination.</p>\n<p>Using <code>HTTPS</code> is <strong>required</strong> for the most of the features to work (correctly).</p>",
-            "categories": [
-                "security"
-            ],
-            "description": "Alternative implementation of the Bitwarden server API written in Rust and compatible with upstream Bitwarden clients.",
-            "healthy": true,
-            "healthy_error": null,
-            "home": "https://github.com/dani-garcia/vaultwarden",
-            "location": "/__w/charts/charts/community/vaultwarden",
-            "latest_version": "1.0.13",
-            "latest_app_version": "1.28.1",
-            "latest_human_version": "1.28.1_1.0.13",
-            "last_update": "2023-07-04 20:48:23",
-            "name": "vaultwarden",
-            "recommended": false,
-            "title": "Vaultwarden",
-            "maintainers": [
-                {
-                    "name": "truenas",
-                    "url": "https://www.truenas.com/",
-                    "email": "dev@ixsystems.com"
-                }
-            ],
-            "tags": [
-                "password",
-                "manager"
-            ],
-            "screenshots": [
-                "https://blog.mukmuk.eu/wp-content/uploads/2021/08/Vaultwarden.jpg"
-            ],
-            "sources": [
-                "https://github.com/dani-garcia/vaultwarden",
-                "https://github.com/truenas/charts/tree/master/community/vaultwarden"
-            ],
-            "icon_url": null,
-            "icon": "https://raw.githubusercontent.com/dani-garcia/vaultwarden/main/src/static/images/vaultwarden-icon.png"
-        },
-        "webdav": {
-            "app_readme": "<h1>WebDAV</h1>\n<p><a href=\"http://webdav.org/\">WebDAV</a> is a set of extensions to the HTTP protocol which allows users to collaboratively edit and manage files on remote web servers.</p>\n<blockquote>\n<p>When application is installed and <code>Fix Permissions</code> is selected on at least 1 share\na container will be launched with <strong>root</strong> privileges. This is required in order to apply\nthe correct permissions to the <code>WebDAV</code> shares/directories.\nAfterward, the <code>WebDAV</code> container will run as a <strong>non</strong>-root user (Default: <code>666</code>).\n<code>Chown</code> will only apply if the parent directory does not match the configured user and group.</p>\n</blockquote>",
-            "categories": [
-                "file-sharing"
-            ],
-            "description": "WebDAV is a set of extensions to the HTTP protocol which allows users to collaboratively edit and manage files on remote web servers.",
-            "healthy": true,
-            "healthy_error": null,
-            "home": "http://www.webdav.org/",
-            "location": "/__w/charts/charts/community/webdav",
-            "latest_version": "1.0.4",
-            "latest_app_version": "1.1.3.2982",
-            "latest_human_version": "1.1.3.2982_1.0.4",
-            "last_update": "2023-07-04 20:48:23",
-            "name": "webdav",
-            "recommended": false,
-            "title": "WebDAv",
-            "maintainers": [
-                {
-                    "name": "truenas",
-                    "url": "https://www.truenas.com/",
-                    "email": "dev@ixsystems.com"
-                }
-            ],
-            "tags": [
-                "webdav",
-                "file-sharing"
+                "world",
+                "building",
+                "adventure"
             ],
             "screenshots": [],
             "sources": [
-                "http://www.webdav.org/",
-                "https://github.com/truenas/charts/tree/master/community/webdav"
+                "https://terraria.org/",
+                "https://github.com/truenas/charts/tree/master/community/terraria",
+                "https://github.com/ryansheehan/terraria"
             ],
-            "icon_url": "http://www.webdav.org/images/webdav-logo.jpg"
+            "icon_url": "https://static.wikia.nocookie.net/terraria_gamepedia/images/a/a4/NewPromoLogo.png/revision/latest"
         },
         "overseerr": {
             "app_readme": "<h1>Overseerr</h1>\n<p><a href=\"https://github.com/sct/overseerr\">Overseerr</a> is a free and open source software application for managing requests for your media library. It integrates with your existing services, such as Sonarr, Radarr, and Plex!</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Overseerr</code> directories.\nAfterward, the <code>Overseerr</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>",
@@ -915,7 +1333,7 @@
             "latest_version": "1.0.7",
             "latest_app_version": "1.33.0",
             "latest_human_version": "1.33.0_1.0.7",
-            "last_update": "2023-07-04 20:48:23",
+            "last_update": "2023-07-04 20:50:36",
             "name": "overseerr",
             "recommended": false,
             "title": "Overseerr",
@@ -942,23 +1360,63 @@
             ],
             "icon_url": "https://raw.githubusercontent.com/sct/overseerr/develop/public/os_icon.svg"
         },
-        "terraria": {
-            "app_readme": "<h1>Terraria</h1>\n<p><a href=\"https://terraria.org/\">Terraria</a> is a land of adventure! A land of mystery! A land that's yours to shape, defend, and enjoy.</p>\n<p>This applies only for the <code>TShock</code> image.\nOn the first run, you have to check the logs to get the server token. You will find something like this:</p>\n<p><code>text\nLogin before join enabled. Users may be prompted for an account specific password instead of a server password on connect.\nLogin using UUID enabled. Users automatically login via UUID.\nA malicious server can easily steal a user's UUID. You may consider turning this option off if you run a public server.\nTShock Notice: setup-code.txt is still present, and the code located in that file will be used.\nTo setup the server, join the game and type /setup 424041\nThis token will display until disabled by verification. (/setup)</code></p>\n<p>Join the server and run <code>/setup &lt;token&gt;</code></p>",
+        "nginx-proxy-manager": {
+            "app_readme": "<h1>Nginx Proxy Manager</h1>\n<p><a href=\"https://nginxproxymanager.com\">Nginx Proxy Manager</a> Expose your services easily and securely</p>\n<blockquote>\n<p>Application requires to run as root. This is a limitation of the application.</p>\n</blockquote>",
+            "categories": [
+                "networking"
+            ],
+            "description": "Expose your services easily and securely",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://nginxproxymanager.com/",
+            "location": "/__w/charts/charts/community/nginx-proxy-manager",
+            "latest_version": "1.0.10",
+            "latest_app_version": "2.10.3",
+            "latest_human_version": "2.10.3_1.0.10",
+            "last_update": "2023-07-04 20:50:36",
+            "name": "nginx-proxy-manager",
+            "recommended": false,
+            "title": "Nginx Proxy Manager",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [
+                "reverse",
+                "proxy"
+            ],
+            "screenshots": [
+                "https://nginxproxymanager.com/screenshots/login.png",
+                "https://nginxproxymanager.com/screenshots/dashboard.png",
+                "https://nginxproxymanager.com/screenshots/proxy-hosts.png"
+            ],
+            "sources": [
+                "https://nginxproxymanager.com/",
+                "https://github.com/truenas/charts/tree/master/community/nginx-proxy-manager",
+                "https://hub.docker.com/r/jc21/nginx-proxy-manager"
+            ],
+            "icon_url": "https://nginxproxymanager.com/logo.png"
+        },
+        "minecraft": {
+            "app_readme": "<h1>Minecraft</h1>\n<p><a href=\"https://www.minecraft.net/en-us\">Minecraft</a> is a sandbox game</p>\n<blockquote>\n<p>Application requires to run as root.</p>\n</blockquote>\n<p>Depending on the <code>Type</code> of server selected, you might need to add additional\ncustom environment variables to the application.</p>\n<p>More info can be found <a href=\"https://itzg.github.io/docker-minecraft-docs/java/server-types/bukkit-spigot/\">here</a>\nSelect the type on the sidebar.</p>\n<p>Note that some values are only applicable during the world generation.\nMore info can be found <a href=\"https://itzg.github.io/docker-minecraft-docs/\">here</a></p>",
             "categories": [
                 "games"
             ],
-            "description": "Terraria is a land of adventure! A land of mystery! A land that's yours to shape, defend, and enjoy.",
+            "description": "Minecraft is a sandbox game",
             "healthy": true,
             "healthy_error": null,
-            "home": "https://terraria.org/",
-            "location": "/__w/charts/charts/community/terraria",
-            "latest_version": "1.0.5",
-            "latest_app_version": "1.4.4.9",
-            "latest_human_version": "1.4.4.9_1.0.5",
-            "last_update": "2023-07-04 20:48:23",
-            "name": "terraria",
+            "home": "https://www.minecraft.net/en-us",
+            "location": "/__w/charts/charts/community/minecraft",
+            "latest_version": "1.0.4",
+            "latest_app_version": "2023.3.0",
+            "latest_human_version": "2023.3.0_1.0.4",
+            "last_update": "2023-07-04 20:50:36",
+            "name": "minecraft",
             "recommended": false,
-            "title": "Terraria",
+            "title": "Minecraft",
             "maintainers": [
                 {
                     "name": "truenas",
@@ -968,34 +1426,33 @@
             ],
             "tags": [
                 "world",
-                "building",
-                "adventure"
+                "building"
             ],
             "screenshots": [],
             "sources": [
-                "https://terraria.org/",
-                "https://github.com/truenas/charts/tree/master/community/terraria",
-                "https://github.com/ryansheehan/terraria"
+                "https://www.minecraft.net/en-us",
+                "https://github.com/truenas/charts/tree/master/community/minecraft",
+                "https://github.com/itzg/docker-minecraft-server"
             ],
-            "icon_url": "https://static.wikia.nocookie.net/terraria_gamepedia/images/a/a4/NewPromoLogo.png/revision/latest"
+            "icon_url": "https://www.minecraft.net/content/dam/games/minecraft/logos/logo-minecraft.svg"
         },
-        "ddns-updater": {
-            "app_readme": "<h1>DDNS Updater</h1>\n<p><a href=\"https://github.com/qdm12/ddns-updater\">DDNS Updater</a> is a lightweight universal DDNS Updater with web UI</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>DDNS Updater</code> directories.\nAfterward, the <code>DDNS Updater</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>",
+        "chia": {
+            "app_readme": "<h1>Chia</h1>\n<p>This container runs as <code>root</code> user.</p>\n<p>When a port is set to &lt; 9000. Host Networking is enabled automatically.</p>\n<blockquote>\n<p>Also NodePort services turn to ClusterIP services, to avoid attempts to bind ports twice.</p>\n</blockquote>\n<p>Key file is stored in <code>/plots/keyfile</code> and is generated automatically, <strong>only</strong> if the file does not exist.\nIf you want to use your own <code>keyfile</code>, you can create a file called <code>keyfile</code> in the <code>/plots</code> directory and it will be used instead.</p>\n<blockquote>\n<p>When set on <code>harvester</code> mode <code>keys</code> variable is set to <code>none</code> and no generation is performed.</p>\n</blockquote>",
             "categories": [
-                "networking"
+                "financial"
             ],
-            "description": "Lightweight universal DDNS Updater with web UI",
+            "description": "Chia is a modern cryptocurrency built from scratch, designed to be efficient, decentralized, and secure.",
             "healthy": true,
             "healthy_error": null,
-            "home": "https://github.com/qdm12/ddns-updater",
-            "location": "/__w/charts/charts/community/ddns-updater",
-            "latest_version": "1.0.7",
-            "latest_app_version": "v2.5.0",
-            "latest_human_version": "v2.5.0_1.0.7",
-            "last_update": "2023-07-04 20:48:23",
-            "name": "ddns-updater",
+            "home": "https://www.chia.net/",
+            "location": "/__w/charts/charts/community/chia",
+            "latest_version": "1.0.12",
+            "latest_app_version": "1.8.1",
+            "latest_human_version": "1.8.1_1.0.12",
+            "last_update": "2023-07-04 20:50:36",
+            "name": "chia",
             "recommended": false,
-            "title": "DDNS Updater",
+            "title": "Chia",
             "maintainers": [
                 {
                     "name": "truenas",
@@ -1004,171 +1461,16 @@
                 }
             ],
             "tags": [
-                "ddns"
-            ],
-            "screenshots": [
-                "https://raw.githubusercontent.com/qdm12/ddns-updater/master/readme/webui.png"
-            ],
-            "sources": [
-                "https://github.com/qdm12/ddns-updater",
-                "https://github.com/truenas/charts/tree/master/community/ddns-updater",
-                "https://hub.docker.com/r/qmcgaw/ddns-updater"
-            ],
-            "icon_url": "https://raw.githubusercontent.com/qdm12/ddns-updater/master/readme/ddnsgopher.svg"
-        },
-        "jellyseerr": {
-            "app_readme": "<h1>Jellyseerr</h1>\n<p><a href=\"https://github.com/Fallenbagel/jellyseerr\">Jellyseerr</a> is a free and open source software application for managing requests for your media library.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Jellyseerr</code> directories.\nAfterward, the <code>Jellyseerr</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>",
-            "categories": [
-                "media"
-            ],
-            "description": "Jellyseerr is a free and open source software application for managing requests for your media library.",
-            "healthy": true,
-            "healthy_error": null,
-            "home": "https://github.com/Fallenbagel/jellyseerr",
-            "location": "/__w/charts/charts/community/jellyseerr",
-            "latest_version": "1.0.1",
-            "latest_app_version": "1.5.0",
-            "latest_human_version": "1.5.0_1.0.1",
-            "last_update": "2023-07-04 20:48:23",
-            "name": "jellyseerr",
-            "recommended": false,
-            "title": "Jellyseerr",
-            "maintainers": [
-                {
-                    "name": "truenas",
-                    "url": "https://www.truenas.com/",
-                    "email": "dev@ixsystems.com"
-                }
-            ],
-            "tags": [
-                "tv",
-                "movies",
-                "requests",
-                "series"
-            ],
-            "screenshots": [
-                "https://github.com/Fallenbagel/jellyseerr/raw/develop/public/preview.jpg"
-            ],
-            "sources": [
-                "https://github.com/Fallenbagel/jellyseerr",
-                "https://github.com/truenas/charts/tree/master/community/jellyseerr",
-                "https://hub.docker.com/r/fallenbagel/jellyseerr"
-            ],
-            "icon_url": "https://github.com/Fallenbagel/jellyseerr/raw/develop/public/logo_full.svg"
-        },
-        "deluge": {
-            "app_readme": "<h1>Deluge</h1>\n<p><a href=\"https://deluge-torrent.org/\">Deluge</a> is a lightweight, Free Software, cross-platform BitTorrent client.</p>",
-            "categories": [
-                "media"
-            ],
-            "description": "Deluge is a lightweight, Free Software, cross-platform BitTorrent client.",
-            "healthy": true,
-            "healthy_error": null,
-            "home": "https://deluge-torrent.org",
-            "location": "/__w/charts/charts/community/deluge",
-            "latest_version": "1.0.1",
-            "latest_app_version": "9.5.3",
-            "latest_human_version": "9.5.3_1.0.1",
-            "last_update": "2023-07-04 20:48:23",
-            "name": "deluge",
-            "recommended": false,
-            "title": "Deluge",
-            "maintainers": [
-                {
-                    "name": "truenas",
-                    "url": "https://www.truenas.com/",
-                    "email": "dev@ixsystems.com"
-                }
-            ],
-            "tags": [
-                "torrent",
-                "download"
+                "blockchain",
+                "hard-drive"
             ],
             "screenshots": [],
             "sources": [
-                "https://hub.docker.com/r/linuxserver/deluge",
-                "https://github.com/truenas/charts/tree/master/community/deluge",
-                "https://deluge-torrent.org/"
+                "https://github.com/Chia-Network/chia-docker",
+                "https://github.com/truenas/charts/tree/master/library/ix-dev/community/chia",
+                "https://www.chia.net/"
             ],
-            "icon_url": "https://deluge-torrent.org/images/deluge_logo.png"
-        },
-        "grafana": {
-            "app_readme": "<h1>Grafana</h1>\n<p><a href=\"https://grafana.com/\">Grafana</a> is the open source analytics &amp; monitoring solution for every database.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Grafana</code> directories.\nAfterward, the <code>Grafana</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>\n<p>Additional configuration can be made by adding additional environment variables\nHere is the available <a href=\"https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/\">configuration documentation</a></p>\n<p>Use the following syntax:\n<code>GF_&lt;SECTION-NAME&gt;_&lt;KEY-NAME&gt;</code></p>\n<p>Example:\n<code>GF_SMTP_ENABLED</code></p>",
-            "categories": [
-                "productivity"
-            ],
-            "description": "Grafana is the open source analytics & monitoring solution for every database.",
-            "healthy": true,
-            "healthy_error": null,
-            "home": "https://grafana.com",
-            "location": "/__w/charts/charts/community/grafana",
-            "latest_version": "1.0.3",
-            "latest_app_version": "10.0.1",
-            "latest_human_version": "10.0.1_1.0.3",
-            "last_update": "2023-07-04 20:48:23",
-            "name": "grafana",
-            "recommended": false,
-            "title": "Grafana",
-            "maintainers": [
-                {
-                    "name": "truenas",
-                    "url": "https://www.truenas.com/",
-                    "email": "dev@ixsystems.com"
-                }
-            ],
-            "tags": [
-                "analytics",
-                "monitoring",
-                "metrics",
-                "dashboards"
-            ],
-            "screenshots": [
-                "https://grafana.com/static/img/grafana/showcase_visualize.jpg",
-                "https://grafana.com/static/img/screenshots/Modal_dashboards.png"
-            ],
-            "sources": [
-                "https://hub.docker.com/r/grafana/grafana",
-                "https://github.com/truenas/charts/tree/master/community/grafana",
-                "https://github.com/grafana"
-            ],
-            "icon_url": "https://www.gravatar.com/avatar/31cea69afa424609b2d83621b4d47f1d?s=120&r=g&d=404"
-        },
-        "navidrome": {
-            "app_readme": "<h1>Navidrome</h1>\n<p><a href=\"https://www.navidrome.org/\">Navidrome</a> is a personal streaming service</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Navidrome</code> directories.\nAfterward, the <code>Navidrome</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>\n<p>Additional configuration options can be defined via environment variables.\nSee more information on the <a href=\"https://www.navidrome.org/docs/usage/configuration-options\">Navidrome Documentation</a></p>",
-            "categories": [
-                "media"
-            ],
-            "description": "Navidrome is a personal streaming service",
-            "healthy": true,
-            "healthy_error": null,
-            "home": "https://www.navidrome.org/",
-            "location": "/__w/charts/charts/community/navidrome",
-            "latest_version": "1.0.1",
-            "latest_app_version": "0.49.3",
-            "latest_human_version": "0.49.3_1.0.1",
-            "last_update": "2023-07-04 20:48:23",
-            "name": "navidrome",
-            "recommended": false,
-            "title": "Navidrome",
-            "maintainers": [
-                {
-                    "name": "truenas",
-                    "url": "https://www.truenas.com/",
-                    "email": "dev@ixsystems.com"
-                }
-            ],
-            "tags": [
-                "music"
-            ],
-            "screenshots": [
-                "https://noted.lol/content/images/size/w1000/2022/05/navidrome-self-hosted-main-1.png"
-            ],
-            "sources": [
-                "https://hub.docker.com/r/deluan/navidrome",
-                "https://github.com/truenas/charts/tree/master/community/navidrome",
-                "https://github.com/navidrome/navidrome/"
-            ],
-            "icon_url": "https://github.com/navidrome/navidrome/raw/master/resources/logo-192x192.png"
+            "icon_url": "https://www.chia.net/wp-content/uploads/2022/09/chia-logo.svg"
         },
         "wordpress": {
             "app_readme": "<h1>Wordpress</h1>\n<p><a href=\"https://wordpress.org/\">Wordpress</a> is a web content management system.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>wordpress</code> directories.\nAfterward, the <code>wordpress</code> container will run as a <strong>non</strong>-root user (<code>33</code>).\nSame applies to the <code>mariadb</code> container. This will run afterwards as a <strong>non</strong>-root user (<code>999</code>).\nOn each upgrade, a container will be launched with <strong>root</strong> privileges in order to apply the correct\npermissions to the <code>mariadb</code> <strong>backups</strong> directory. Container that performs the backup will run as a <strong>non</strong>-root user (<code>999</code>) afterwards.\nKeep in mind the permissions on the backup directory will be changed to <code>999:999</code> on <strong>every</strong> update.\nBut will only be changed once for the <code>wordpress</code> and <code>mariadb</code> data directories.</p>\n</blockquote>",
@@ -1183,7 +1485,7 @@
             "latest_version": "1.0.0",
             "latest_app_version": "1.19.0",
             "latest_human_version": "1.19.0_1.0.0",
-            "last_update": "2023-07-04 20:47:42",
+            "last_update": "2023-07-04 20:50:36",
             "name": "wordpress",
             "recommended": false,
             "title": "Wordpress",
@@ -1210,301 +1512,6 @@
             ],
             "icon_url": "https://github.com/WordPress/WordPress/blob/master/wp-admin/images/wordpress-logo.png?raw=true"
         },
-        "zerotier": {
-            "app_readme": "<h1>Zerotier</h1>\n<p><a href=\"https://www.zerotier.com\">Zerotier</a> Securely connect any device, anywhere.</p>",
-            "categories": [
-                "networking"
-            ],
-            "description": "Securely connect any device, anywhere.",
-            "healthy": true,
-            "healthy_error": null,
-            "home": "https://www.zerotier.com",
-            "location": "/__w/charts/charts/community/zerotier",
-            "latest_version": "1.0.3",
-            "latest_app_version": "1.10.6",
-            "latest_human_version": "1.10.6_1.0.3",
-            "last_update": "2023-07-04 20:48:23",
-            "name": "zerotier",
-            "recommended": false,
-            "title": "Zerotier",
-            "maintainers": [
-                {
-                    "name": "truenas",
-                    "url": "https://www.truenas.com/",
-                    "email": "dev@ixsystems.com"
-                }
-            ],
-            "tags": [
-                "vpn"
-            ],
-            "screenshots": [],
-            "sources": [
-                "https://www.zerotier.com",
-                "https://github.com/truenas/charts/tree/master/community/zerotier",
-                "https://hub.docker.com/r/zerotier/zerotier"
-            ],
-            "icon_url": "https://avatars.githubusercontent.com/u/4173285"
-        },
-        "filebrowser": {
-            "app_readme": "<h1>Filebrowser</h1>\n<p><a href=\"https://filebrowser.org\">Filebrowser</a> provides a file managing interface within a specified directory and it can be used to upload, delete, preview, rename and edit your files.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Filebrowser</code> directories.\nAfterward, the <code>Filebrowser</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>\n<p>You can configure further the settings by using Environment Variables.\nSee <a href=\"https://filebrowser.org/cli/filebrowser\">Filebrowser Documentation</a> for more information.\nUse the format <code>FB_OPTION_NAME</code> where the option name is the name of the option you want to set.</p>\n<p>You can also edit the configuration file <code>/config/filebrowser.json</code>.</p>\n<p>Note that the following options are already set and will always take precedence\nover the environment variables and the configuration file:</p>\n<ul>\n<li><code>FB_ROOT</code>/<code>--root</code> is set to <code>/data</code> (Any additional volume mounted will be under this directory)</li>\n<li><code>FB_PORT</code>/<code>--port</code> is set to <code>30044</code> (Or the port you configured in the installation wizard)</li>\n<li><code>FB_ADDRESS</code>/<code>--address</code> is set to <code>0.0.0.0</code> (It will listen on all interfaces <strong>inside</strong> the container)</li>\n<li><code>FB_DATABASE</code>/<code>--database</code> is set to <code>/config/filebrowser.db</code></li>\n<li><code>FB_CONFIG</code>/<code>--config</code> is set to <code>/config/filebrowser.json</code></li>\n</ul>\n<p>Also when a certificate is selected</p>\n<ul>\n<li><code>FB_CERT</code>/<code>--cert</code> is set to <code>/config/certs/tls.crt</code></li>\n<li><code>FB_KEY</code>/<code>--key</code> is set to <code>/config/certs/tls.key</code></li>\n</ul>",
-            "categories": [
-                "storage"
-            ],
-            "description": "File Browser provides a file managing interface within a specified directory and it can be used to upload, delete, preview, rename and edit your files.",
-            "healthy": true,
-            "healthy_error": null,
-            "home": "https://filebrowser.org",
-            "location": "/__w/charts/charts/community/filebrowser",
-            "latest_version": "1.0.1",
-            "latest_app_version": "v2.23.0",
-            "latest_human_version": "v2.23.0_1.0.1",
-            "last_update": "2023-07-04 20:48:23",
-            "name": "filebrowser",
-            "recommended": false,
-            "title": "File Browser",
-            "maintainers": [
-                {
-                    "name": "truenas",
-                    "url": "https://www.truenas.com/",
-                    "email": "dev@ixsystems.com"
-                }
-            ],
-            "tags": [
-                "files",
-                "browser"
-            ],
-            "screenshots": [
-                "https://3149836655-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-M8KDxOujDoPpJyJJ5_i%2Fuploads%2Fgit-blob-b6cab252432e211dec693fc77d036c15259a8087%2F1.PNG?alt=media",
-                "https://3149836655-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-M8KDxOujDoPpJyJJ5_i%2Fuploads%2Fgit-blob-9390768b0cbb83b1e7da55c0ae13ecd2d8fcb114%2F2.PNG?alt=media",
-                "https://3149836655-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-M8KDxOujDoPpJyJJ5_i%2Fuploads%2Fgit-blob-dfc8d803dcd6546622888f399d94af9c6bbdbe60%2F6.PNG?alt=media"
-            ],
-            "sources": [
-                "https://github.com/filebrowser/filebrowser",
-                "https://github.com/truenas/charts/tree/master/library/ix-dev/community/filebrowser",
-                "https://hub.docker.com/r/filebrowser/filebrowser"
-            ],
-            "icon_url": "https://raw.githubusercontent.com/filebrowser/logo/master/banner.png"
-        },
-        "gitea": {
-            "app_readme": "<h1>Gitea</h1>\n<p><a href=\"https://gitea.io/en-us\">Gitea</a> - Git with a cup of tea</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>gitea</code> directories.\nAfterward, the <code>gitea</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nSame applies to the <code>postgres</code> container. This will run afterwards as a <strong>non</strong>-root user (<code>999</code>).\nOn each upgrade, a container will be launched with <strong>root</strong> privileges in order to apply the correct\npermissions to the <code>postgres</code> <strong>backups</strong> directory. Container that performs the backup will run as a <strong>non</strong>-root user (<code>999</code>) afterwards.\nKeep in mind the permissions on the backup directory will be changed to <code>999:999</code> on <strong>every</strong> update.\nBut will only be changed once for the <code>gitea</code> and <code>postgres</code> data directories.</p>\n</blockquote>\n<p>On initial startup a setup wizard will be launched with settings for <code>database</code>, <code>ports</code>, <code>path</code>, and <code>domain</code> prefilled.\nKeep them as they are, fill anything you want in the optional settings section and click on <code>Install Gitea</code>.</p>",
-            "categories": [
-                "productivity"
-            ],
-            "description": "Gitea - Git with a cup of tea",
-            "healthy": true,
-            "healthy_error": null,
-            "home": "https://gitea.io/en-us",
-            "location": "/__w/charts/charts/community/gitea",
-            "latest_version": "1.0.9",
-            "latest_app_version": "1.19.0",
-            "latest_human_version": "1.19.0_1.0.9",
-            "last_update": "2023-07-04 20:48:23",
-            "name": "gitea",
-            "recommended": false,
-            "title": "Gitea",
-            "maintainers": [
-                {
-                    "name": "truenas",
-                    "url": "https://www.truenas.com/",
-                    "email": "dev@ixsystems.com"
-                }
-            ],
-            "tags": [
-                "git"
-            ],
-            "screenshots": [
-                "https://gitea.io/images/screenshot.png"
-            ],
-            "sources": [
-                "https://gitea.io/en-us",
-                "https://github.com/truenas/charts/tree/master/community/gitea",
-                "https://docs.gitea.io/en-us/install-with-docker-rootless"
-            ],
-            "icon_url": "https://gitea.com/assets/img/logo.svg"
-        },
-        "jenkins": {
-            "app_readme": "<h1>Jenkins</h1>\n<p><a href=\"https://www.jenkins.io/\">Jenkins</a>. The leading open source automation server, Jenkins provides hundreds of\nplugins to support building, deploying and automating any project.</p>\n<blockquote>\n<p>When application is installed and on each startup, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Jenkins</code> directories.\nAfterward, the <code>Jenkins</code> container will run as a <strong>non</strong>-root user (<code>1000</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the user and group (<code>1000</code>).</p>\n</blockquote>",
-            "categories": [
-                "productivity"
-            ],
-            "description": "Jenkins is a leading open source automation server,",
-            "healthy": true,
-            "healthy_error": null,
-            "home": "https://www.jenkins.io/",
-            "location": "/__w/charts/charts/community/jenkins",
-            "latest_version": "1.0.2",
-            "latest_app_version": "2.401.1",
-            "latest_human_version": "2.401.1_1.0.2",
-            "last_update": "2023-07-04 20:48:23",
-            "name": "jenkins",
-            "recommended": false,
-            "title": "Jenkins",
-            "maintainers": [
-                {
-                    "name": "truenas",
-                    "url": "https://www.truenas.com/",
-                    "email": "dev@ixsystems.com"
-                }
-            ],
-            "tags": [
-                "automation",
-                "ci/cd"
-            ],
-            "screenshots": [
-                "https://assets.digitalocean.com/articles/jcasc_docker/step4a.png",
-                "https://assets.digitalocean.com/articles/jcasc_docker/step7a.png"
-            ],
-            "sources": [
-                "https://hub.docker.com/r/jenkins/jenkins",
-                "https://github.com/jenkinsci/jenkins",
-                "https://www.jenkins.io/"
-            ],
-            "icon_url": "https://camo.githubusercontent.com/1babb15d046739f64d24c9a3424dd912a88683894f6f2307a969501ad84739f8/68747470733a2f2f7777772e6a656e6b696e732e696f2f696d616765732f6a656e6b696e732d6c6f676f2d7469746c652d6461726b2e737667"
-        },
-        "bazarr": {
-            "app_readme": "<h1>Bazarr</h1>\n<p><a href=\"https://www.bazarr.media/\">Bazarr</a> is a companion application to Sonarr and Radarr. It manages and downloads subtitles based on your requirements.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Bazarr</code> directories.\nAfterward, the <code>Bazarr</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>",
-            "categories": [
-                "media"
-            ],
-            "description": "Bazarr is a companion application to Sonarr and Radarr. It manages and downloads subtitles based on your requirements.",
-            "healthy": true,
-            "healthy_error": null,
-            "home": "https://www.bazarr.media/",
-            "location": "/__w/charts/charts/community/bazarr",
-            "latest_version": "1.0.0",
-            "latest_app_version": "1.2.2",
-            "latest_human_version": "1.2.2_1.0.0",
-            "last_update": "2023-07-04 20:47:42",
-            "name": "bazarr",
-            "recommended": false,
-            "title": "Bazarr",
-            "maintainers": [
-                {
-                    "name": "truenas",
-                    "url": "https://www.truenas.com/",
-                    "email": "dev@ixsystems.com"
-                }
-            ],
-            "tags": [
-                "subtitles"
-            ],
-            "screenshots": [
-                "https://www.bazarr.media/assets/img/manual.png",
-                "https://www.bazarr.media/assets/img/upgrade.png"
-            ],
-            "sources": [
-                "https://github.com/onedr0p/containers/tree/main/apps/bazarr",
-                "https://github.com/truenas/charts/tree/master/library/ix-dev/community/bazarr",
-                "https://github.com/morpheus65535/bazarr"
-            ],
-            "icon_url": "https://github.com/morpheus65535/bazarr/blob/master/frontend/public/images/logo128.png?raw=true"
-        },
-        "tailscale": {
-            "app_readme": "<h1>Tailscale</h1>\n<p><a href=\"https://tailscale.com\">Tailscale</a> Secure remote access to shared resources</p>\n<ul>\n<li>When <code>Userspace</code> is <strong>disabled</strong>, <code>Tailscale</code> will run as root, with <code>/dev/net/tun</code> device mounted from the host.</li>\n<li>When <code>Userspace</code> is <strong>enabled</strong>, <code>Tailscale</code> will run as a non-root user.</li>\n</ul>",
-            "categories": [
-                "networking"
-            ],
-            "description": "Secure remote access to shared resources",
-            "healthy": true,
-            "healthy_error": null,
-            "home": "https://tailscale.com/",
-            "location": "/__w/charts/charts/community/tailscale",
-            "latest_version": "1.0.6",
-            "latest_app_version": "v1.42.0",
-            "latest_human_version": "v1.42.0_1.0.6",
-            "last_update": "2023-07-04 20:48:23",
-            "name": "tailscale",
-            "recommended": false,
-            "title": "Tailscale",
-            "maintainers": [
-                {
-                    "name": "truenas",
-                    "url": "https://www.truenas.com/",
-                    "email": "dev@ixsystems.com"
-                }
-            ],
-            "tags": [
-                "vpn"
-            ],
-            "screenshots": [],
-            "sources": [
-                "https://tailscale.com/",
-                "https://github.com/truenas/charts/tree/master/community/tailscale",
-                "https://hub.docker.com/r/tailscale/tailscale"
-            ],
-            "icon_url": "https://avatars.githubusercontent.com/u/48932923"
-        },
-        "minecraft": {
-            "app_readme": "<h1>Minecraft</h1>\n<p><a href=\"https://www.minecraft.net/en-us\">Minecraft</a> is a sandbox game</p>\n<blockquote>\n<p>Application requires to run as root.</p>\n</blockquote>\n<p>Depending on the <code>Type</code> of server selected, you might need to add additional\ncustom environment variables to the application.</p>\n<p>More info can be found <a href=\"https://itzg.github.io/docker-minecraft-docs/java/server-types/bukkit-spigot/\">here</a>\nSelect the type on the sidebar.</p>\n<p>Note that some values are only applicable during the world generation.\nMore info can be found <a href=\"https://itzg.github.io/docker-minecraft-docs/\">here</a></p>",
-            "categories": [
-                "games"
-            ],
-            "description": "Minecraft is a sandbox game",
-            "healthy": true,
-            "healthy_error": null,
-            "home": "https://www.minecraft.net/en-us",
-            "location": "/__w/charts/charts/community/minecraft",
-            "latest_version": "1.0.4",
-            "latest_app_version": "2023.3.0",
-            "latest_human_version": "2023.3.0_1.0.4",
-            "last_update": "2023-07-04 20:48:23",
-            "name": "minecraft",
-            "recommended": false,
-            "title": "Minecraft",
-            "maintainers": [
-                {
-                    "name": "truenas",
-                    "url": "https://www.truenas.com/",
-                    "email": "dev@ixsystems.com"
-                }
-            ],
-            "tags": [
-                "world",
-                "building"
-            ],
-            "screenshots": [],
-            "sources": [
-                "https://www.minecraft.net/en-us",
-                "https://github.com/truenas/charts/tree/master/community/minecraft",
-                "https://github.com/itzg/docker-minecraft-server"
-            ],
-            "icon_url": "https://www.minecraft.net/content/dam/games/minecraft/logos/logo-minecraft.svg"
-        },
-        "tftpd-hpa": {
-            "app_readme": "<h1>TFTP</h1>\n<p><a href=\"https://manpages.debian.org/testing/tftpd-hpa/tftpd.8.en.html\">TFTP</a> is a server for the Trivial File Transfer Protocol.</p>\n<p>The app runs as <code>root</code> user and drops privileges to <code>tftp</code> (9069) user for the TFTP service.</p>\n<blockquote>\n<p>On every application start, a container will be launched with <strong>root</strong> privileges.\nThis will check the parent directory permissions and ownership.\nIf there is a mismatch it will apply the correct permissions to the TFTP directories.\nWhen \"Allow Create\" is checked, the above container will also check and <code>chmod</code> if needed\nto <code>757</code> the TFTP directories and to <code>555</code> when not checked.\nAfterward, the <code>TFTP</code> container will run as a <strong>root</strong> user, dropping privileges\nto <code>tftp</code> (9069) user for the TFTP service.\nNote: You need to have configured DHCP server for network boot to work.</p>\n</blockquote>",
-            "categories": [
-                "networking"
-            ],
-            "description": "A lightweight tftp-server",
-            "healthy": true,
-            "healthy_error": null,
-            "home": "https://github.com/truenas/containers/tree/main/apps/tftpd-hpa",
-            "location": "/__w/charts/charts/community/tftpd-hpa",
-            "latest_version": "1.0.2",
-            "latest_app_version": "1.0.0",
-            "latest_human_version": "1.0.0_1.0.2",
-            "last_update": "2023-07-04 20:48:23",
-            "name": "tftpd-hpa",
-            "recommended": false,
-            "title": "TFTP Server",
-            "maintainers": [
-                {
-                    "name": "truenas",
-                    "url": "https://www.truenas.com/",
-                    "email": "dev@ixsystems.com"
-                }
-            ],
-            "tags": [
-                "tftp"
-            ],
-            "screenshots": [],
-            "sources": [
-                "https://github.com/truenas/containers/tree/main/apps/tftpd-hpa",
-                "https://github.com/truenas/charts/tree/master/community/tftpd-hpa",
-                "https://hub.docker.com/r/ixsystems/tftpd-hpa"
-            ],
-            "icon_url": "https://avatars.githubusercontent.com/u/53482242"
-        },
         "jellyfin": {
             "app_readme": "<h1>Jellyfin</h1>\n<p><a href=\"https://jellyfin.org/\">Jellyfin</a> is a Free Software Media System that puts you in control of managing and streaming your media.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Jellyfin</code> directories.\nAfterward, the <code>Jellyfin</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>",
             "categories": [
@@ -1518,7 +1525,7 @@
             "latest_version": "1.0.8",
             "latest_app_version": "10.8.10",
             "latest_human_version": "10.8.10_1.0.8",
-            "last_update": "2023-07-04 20:48:23",
+            "last_update": "2023-07-04 20:50:36",
             "name": "jellyfin",
             "recommended": false,
             "title": "Jellyfin",
@@ -1547,23 +1554,23 @@
             ],
             "icon_url": "https://jellyfin.org/images/logo.svg"
         },
-        "readarr": {
-            "app_readme": "<h1>Readarr</h1>\n<p><a href=\"https://github.com/Readarr/Readarr\">Readarr</a> is an ebook and audiobook collection manager for Usenet and BitTorrent users.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Readarr</code> directories.\nAfterward, the <code>Readarr</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>",
+        "navidrome": {
+            "app_readme": "<h1>Navidrome</h1>\n<p><a href=\"https://www.navidrome.org/\">Navidrome</a> is a personal streaming service</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Navidrome</code> directories.\nAfterward, the <code>Navidrome</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>\n<p>Additional configuration options can be defined via environment variables.\nSee more information on the <a href=\"https://www.navidrome.org/docs/usage/configuration-options\">Navidrome Documentation</a></p>",
             "categories": [
                 "media"
             ],
-            "description": "Readarr is an ebook and audiobook collection manager for Usenet and BitTorrent users.",
+            "description": "Navidrome is a personal streaming service",
             "healthy": true,
             "healthy_error": null,
-            "home": "https://github.com/Readarr/Readarr",
-            "location": "/__w/charts/charts/community/readarr",
-            "latest_version": "1.0.0",
-            "latest_app_version": "0.1.9.1905",
-            "latest_human_version": "0.1.9.1905_1.0.0",
-            "last_update": "2023-07-04 20:47:42",
-            "name": "readarr",
+            "home": "https://www.navidrome.org/",
+            "location": "/__w/charts/charts/community/navidrome",
+            "latest_version": "1.0.1",
+            "latest_app_version": "0.49.3",
+            "latest_human_version": "0.49.3_1.0.1",
+            "last_update": "2023-07-04 20:50:36",
+            "name": "navidrome",
             "recommended": false,
-            "title": "Readarr",
+            "title": "Navidrome",
             "maintainers": [
                 {
                     "name": "truenas",
@@ -1572,38 +1579,35 @@
                 }
             ],
             "tags": [
-                "ebook",
-                "audiobook"
+                "music"
             ],
             "screenshots": [
-                "https://readarr.com/img/features/manualsearch.png",
-                "https://readarr.com/img/features/calibre.png",
-                "https://readarr.com/img/features/calendar.png"
+                "https://noted.lol/content/images/size/w1000/2022/05/navidrome-self-hosted-main-1.png"
             ],
             "sources": [
-                "https://github.com/onedr0p/containers/tree/main/apps/readarr",
-                "https://github.com/truenas/charts/tree/master/library/ix-dev/community/readarr",
-                "https://github.com/Readarr/Readarr"
+                "https://hub.docker.com/r/deluan/navidrome",
+                "https://github.com/truenas/charts/tree/master/community/navidrome",
+                "https://github.com/navidrome/navidrome/"
             ],
-            "icon_url": "https://raw.githubusercontent.com/Readarr/Readarr/develop/Logo/256.png"
+            "icon_url": "https://github.com/navidrome/navidrome/raw/master/resources/logo-192x192.png"
         },
-        "chia": {
-            "app_readme": "<h1>Chia</h1>\n<p>This container runs as <code>root</code> user.</p>\n<p>When a port is set to &lt; 9000. Host Networking is enabled automatically.</p>\n<blockquote>\n<p>Also NodePort services turn to ClusterIP services, to avoid attempts to bind ports twice.</p>\n</blockquote>\n<p>Key file is stored in <code>/plots/keyfile</code> and is generated automatically, <strong>only</strong> if the file does not exist.\nIf you want to use your own <code>keyfile</code>, you can create a file called <code>keyfile</code> in the <code>/plots</code> directory and it will be used instead.</p>\n<blockquote>\n<p>When set on <code>harvester</code> mode <code>keys</code> variable is set to <code>none</code> and no generation is performed.</p>\n</blockquote>",
+        "adguard-home": {
+            "app_readme": "<h1>AdGuard Home</h1>\n<p>During the setup wizard, AdGuard Home presents an option to select on which port the web interface will be available.\n(Defaults to 80. Which is a privileged port and also usually the TrueNAS SCALE UI uses that port)\nBecause of that, App will force the webUI to listen to port 30000 (or the port selected by user in the TrueNAS SCALE UI).</p>\n<p>If you select a different port in the wizard, the Dashboard will not work initially but\nafter a couple of minutes container will automatically restart and the Dashboard will\nbe available on the port you selected on the TrueNAS SCALE UI.</p>\n<blockquote>\n<ul>\n<li>AdGuard runs as <code>root</code> user.</li>\n<li>AdGuard runs with host networking enabled.</li>\n</ul>\n</blockquote>",
             "categories": [
-                "financial"
+                "networking"
             ],
-            "description": "Chia is a modern cryptocurrency built from scratch, designed to be efficient, decentralized, and secure.",
+            "description": "Free and open source, powerful network-wide ads & trackers blocking DNS server.",
             "healthy": true,
             "healthy_error": null,
-            "home": "https://www.chia.net/",
-            "location": "/__w/charts/charts/community/chia",
-            "latest_version": "1.0.12",
-            "latest_app_version": "1.8.1",
-            "latest_human_version": "1.8.1_1.0.12",
-            "last_update": "2023-07-04 20:48:23",
-            "name": "chia",
+            "home": "https://github.com/AdguardTeam/AdGuardHome",
+            "location": "/__w/charts/charts/community/adguard-home",
+            "latest_version": "1.0.10",
+            "latest_app_version": "0.107.32",
+            "latest_human_version": "0.107.32_1.0.10",
+            "last_update": "2023-07-04 20:50:36",
+            "name": "adguard-home",
             "recommended": false,
-            "title": "Chia",
+            "title": "AdGuard Home",
             "maintainers": [
                 {
                     "name": "truenas",
@@ -1612,73 +1616,37 @@
                 }
             ],
             "tags": [
-                "blockchain",
-                "hard-drive"
-            ],
-            "screenshots": [],
-            "sources": [
-                "https://github.com/Chia-Network/chia-docker",
-                "https://github.com/truenas/charts/tree/master/library/ix-dev/community/chia",
-                "https://www.chia.net/"
-            ],
-            "icon_url": "https://www.chia.net/wp-content/uploads/2022/09/chia-logo.svg"
-        },
-        "ipfs": {
-            "app_readme": "<h1>IPFS</h1>\n<p><a href=\"https://ipfs.tech\">Interplanetary Filesystem</a> - the Web3 standard for content-addressing, interoperable with HTTP</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the ipfs directories.\nAfterward, the <code>ipfs</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).</p>\n</blockquote>",
-            "categories": [
-                "storage"
-            ],
-            "description": "Interplanetary Filesystem - the Web3 standard for content-addressing, interoperable with HTTP",
-            "healthy": true,
-            "healthy_error": null,
-            "home": "https://ipfs.tech/",
-            "location": "/__w/charts/charts/community/ipfs",
-            "latest_version": "1.0.14",
-            "latest_app_version": "v0.20.0",
-            "latest_human_version": "v0.20.0_1.0.14",
-            "last_update": "2023-07-04 20:48:23",
-            "name": "ipfs",
-            "recommended": false,
-            "title": "IPFS",
-            "maintainers": [
-                {
-                    "name": "truenas",
-                    "url": "https://www.truenas.com/",
-                    "email": "dev@ixsystems.com"
-                }
-            ],
-            "tags": [
-                "file-sharing",
-                "kubo"
+                "dns",
+                "adblock"
             ],
             "screenshots": [
-                "https://raw.githubusercontent.com/ipfs-shipyard/ipfs-webui/5764ea167a89e8c6bcb6abf83d7e258388e1623d/docs/screenshots/ipfs-webui-files.png",
-                "https://raw.githubusercontent.com/ipfs-shipyard/ipfs-webui/5764ea167a89e8c6bcb6abf83d7e258388e1623d/docs/screenshots/ipfs-webui-settings.png"
+                "https://assets.ubuntu.com/v1/1febeddd-adguard-main-image.png",
+                "https://assets.ubuntu.com/v1/9eb41b64-adguard-advert-1.png"
             ],
             "sources": [
-                "https://github.com/ipfs/kubo",
-                "https://github.com/truenas/charts/tree/master/community/ipfs",
-                "https://ipfs.tech/"
+                "https://github.com/AdguardTeam/AdGuardHome",
+                "https://github.com/truenas/charts/tree/master/library/ix-dev/community/adguard-home",
+                "https://hub.docker.com/r/adguard/adguardhome"
             ],
-            "icon_url": "https://avatars.githubusercontent.com/u/10536621"
+            "icon_url": "https://github.com/AdguardTeam/AdGuardHome/raw/master/doc/adguard_home_darkmode.svg"
         },
-        "clamav": {
-            "app_readme": "<h1>ClamAV</h1>\n<p><a href=\"https://www.clamav.net/\">ClamAV</a> - ClamAV\u00ae is an open-source antivirus engine for detecting trojans, viruses, malware &amp; other malicious threats.</p>\n<ul>\n<li>App runs as <code>root</code> user</li>\n</ul>",
+        "jellyseerr": {
+            "app_readme": "<h1>Jellyseerr</h1>\n<p><a href=\"https://github.com/Fallenbagel/jellyseerr\">Jellyseerr</a> is a free and open source software application for managing requests for your media library.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Jellyseerr</code> directories.\nAfterward, the <code>Jellyseerr</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>",
             "categories": [
-                "security"
+                "media"
             ],
-            "description": "ClamAV is an open source (GPLv2) anti-virus toolkit.",
+            "description": "Jellyseerr is a free and open source software application for managing requests for your media library.",
             "healthy": true,
             "healthy_error": null,
-            "home": "https://www.clamav.net/",
-            "location": "/__w/charts/charts/community/clamav",
-            "latest_version": "1.0.5",
-            "latest_app_version": "1.0.1",
-            "latest_human_version": "1.0.1_1.0.5",
-            "last_update": "2023-07-04 20:48:23",
-            "name": "clamav",
+            "home": "https://github.com/Fallenbagel/jellyseerr",
+            "location": "/__w/charts/charts/community/jellyseerr",
+            "latest_version": "1.0.1",
+            "latest_app_version": "1.5.0",
+            "latest_human_version": "1.5.0_1.0.1",
+            "last_update": "2023-07-04 20:50:36",
+            "name": "jellyseerr",
             "recommended": false,
-            "title": "Clam AV",
+            "title": "Jellyseerr",
             "maintainers": [
                 {
                     "name": "truenas",
@@ -1687,15 +1655,20 @@
                 }
             ],
             "tags": [
-                "anti-virus"
+                "tv",
+                "movies",
+                "requests",
+                "series"
             ],
-            "screenshots": [],
+            "screenshots": [
+                "https://github.com/Fallenbagel/jellyseerr/raw/develop/public/preview.jpg"
+            ],
             "sources": [
-                "https://docs.clamav.net/",
-                "https://github.com/truenas/charts/tree/master/community/clamav",
-                "https://www.clamav.net/"
+                "https://github.com/Fallenbagel/jellyseerr",
+                "https://github.com/truenas/charts/tree/master/community/jellyseerr",
+                "https://hub.docker.com/r/fallenbagel/jellyseerr"
             ],
-            "icon_url": "https://raw.githubusercontent.com/micahsnyder/clamav-documentation/main/src/images/logo.png"
+            "icon_url": "https://github.com/Fallenbagel/jellyseerr/raw/develop/public/logo_full.svg"
         },
         "rsyncd": {
             "app_readme": "<h1>Rsyncd</h1>\n<p><a href=\"https://rsync.samba.org/\">Rsyncd</a> is an open source utility that provides fast incremental file transfer.</p>",
@@ -1710,7 +1683,7 @@
             "latest_version": "1.0.2",
             "latest_app_version": "1.0.0",
             "latest_human_version": "1.0.0_1.0.2",
-            "last_update": "2023-07-04 20:48:23",
+            "last_update": "2023-07-04 20:50:36",
             "name": "rsyncd",
             "recommended": false,
             "title": "Rsync Daemon",
@@ -1733,23 +1706,61 @@
             ],
             "icon_url": "https://rsync.samba.org/newrsynclogo.jpg"
         },
-        "mumble": {
-            "app_readme": "<h1>Mumble</h1>\n<p><a href=\"https://www.mumble.info/\">Mumble</a> is an Open Source, Low Latency, High Quality Voice Chat Home Downloads Documentation Blog Contribute About</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Mumble</code> directories.\nAfterward, the <code>Mumble</code> container will run as a <strong>non</strong>-root user (<code>1000</code>, Cannot change).</p>\n</blockquote>\n<p>You can change the server configuration by adding additional environment variables.\nPrefix the configuration variable with <code>MUMBLE_CONFIG_</code> and it will be added to the configuration file.\nView the <a href=\"https://wiki.mumble.info/wiki/Murmur.ini\">Mumble Configuration File</a> for more information.</p>\n<p>For example you can set <code>autobanAttempts</code> like this:</p>\n<ul>\n<li>Name: <code>MUMBLE_CONFIG_autobanAttempts</code></li>\n<li>Value: <code>5</code></li>\n</ul>",
+        "vaultwarden": {
+            "app_readme": "<h1>Vaultwarden</h1>\n<p><a href=\"https://github.com/dani-garcia/vaultwarden\">Vaultwarden</a> Alternative implementation of the <code>Bitwarden</code> server API written in Rust and compatible with upstream Bitwarden clients</p>\n<blockquote>\n<p>During the installation process, a container will be launched with <strong>root</strong> privileges. This is required\nin order to apply the correct permissions to the <code>Vaultwarden</code> data directory. Afterward, the <code>Vaultwarden</code> container\nwill run as a <strong>non</strong>-root user (default <code>568</code>).\nSame applies to the <code>postgres</code> container. This will run afterwards as a <strong>non</strong>-root user (<code>999</code>).\nOn each upgrade, a container will be launched with <strong>root</strong> privileges in order to apply the correct\npermissions to the <code>postgres</code> <strong>backups</strong> directory. Container that performs the backup will run as a <strong>non</strong>-root user (<code>999</code>) afterwards.\nKeep in mind the permissions on the backup directory will be changed to <code>999:999</code> on <strong>every</strong> update.\nBut will only be changed once for the <code>Vaultwarden</code> and <code>postgres</code> data directories.</p>\n</blockquote>\n<p>While the option to use <code>Rocket</code> for TLS is there, it is not\n<a href=\"https://github.com/dani-garcia/vaultwarden/wiki/Enabling-HTTPS#via-rocket\">recommended</a>.\nInstead, use a reverse proxy to handle TLS termination.</p>\n<p>Using <code>HTTPS</code> is <strong>required</strong> for the most of the features to work (correctly).</p>",
+            "categories": [
+                "security"
+            ],
+            "description": "Alternative implementation of the Bitwarden server API written in Rust and compatible with upstream Bitwarden clients.",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://github.com/dani-garcia/vaultwarden",
+            "location": "/__w/charts/charts/community/vaultwarden",
+            "latest_version": "1.0.13",
+            "latest_app_version": "1.28.1",
+            "latest_human_version": "1.28.1_1.0.13",
+            "last_update": "2023-07-04 20:50:36",
+            "name": "vaultwarden",
+            "recommended": false,
+            "title": "Vaultwarden",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [
+                "password",
+                "manager"
+            ],
+            "screenshots": [
+                "https://blog.mukmuk.eu/wp-content/uploads/2021/08/Vaultwarden.jpg"
+            ],
+            "sources": [
+                "https://github.com/dani-garcia/vaultwarden",
+                "https://github.com/truenas/charts/tree/master/community/vaultwarden"
+            ],
+            "icon_url": null,
+            "icon": "https://raw.githubusercontent.com/dani-garcia/vaultwarden/main/src/static/images/vaultwarden-icon.png"
+        },
+        "grafana": {
+            "app_readme": "<h1>Grafana</h1>\n<p><a href=\"https://grafana.com/\">Grafana</a> is the open source analytics &amp; monitoring solution for every database.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Grafana</code> directories.\nAfterward, the <code>Grafana</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>\n<p>Additional configuration can be made by adding additional environment variables\nHere is the available <a href=\"https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/\">configuration documentation</a></p>\n<p>Use the following syntax:\n<code>GF_&lt;SECTION-NAME&gt;_&lt;KEY-NAME&gt;</code></p>\n<p>Example:\n<code>GF_SMTP_ENABLED</code></p>",
             "categories": [
                 "productivity"
             ],
-            "description": "Mumble is a free, open source, low latency, high quality voice chat application.",
+            "description": "Grafana is the open source analytics & monitoring solution for every database.",
             "healthy": true,
             "healthy_error": null,
-            "home": "https://www.mumble.info/",
-            "location": "/__w/charts/charts/community/mumble",
-            "latest_version": "1.0.5",
-            "latest_app_version": "v1.4.230",
-            "latest_human_version": "v1.4.230_1.0.5",
-            "last_update": "2023-07-04 20:48:23",
-            "name": "mumble",
+            "home": "https://grafana.com",
+            "location": "/__w/charts/charts/community/grafana",
+            "latest_version": "1.0.3",
+            "latest_app_version": "10.0.1",
+            "latest_human_version": "10.0.1_1.0.3",
+            "last_update": "2023-07-04 20:50:36",
+            "name": "grafana",
             "recommended": false,
-            "title": "Mumble",
+            "title": "Grafana",
             "maintainers": [
                 {
                     "name": "truenas",
@@ -1758,33 +1769,39 @@
                 }
             ],
             "tags": [
-                "voice"
+                "analytics",
+                "monitoring",
+                "metrics",
+                "dashboards"
             ],
-            "screenshots": [],
+            "screenshots": [
+                "https://grafana.com/static/img/grafana/showcase_visualize.jpg",
+                "https://grafana.com/static/img/screenshots/Modal_dashboards.png"
+            ],
             "sources": [
-                "https://github.com/mumble-voip/mumble-docker",
-                "https://github.com/truenas/charts/tree/master/community/mumble",
-                "https://www.mumble.info/"
+                "https://hub.docker.com/r/grafana/grafana",
+                "https://github.com/truenas/charts/tree/master/community/grafana",
+                "https://github.com/grafana"
             ],
-            "icon_url": "https://github.com/mumble-voip/mumble/blob/master/icons/mumble.svg?raw=true"
+            "icon_url": "https://www.gravatar.com/avatar/31cea69afa424609b2d83621b4d47f1d?s=120&r=g&d=404"
         },
-        "nginx-proxy-manager": {
-            "app_readme": "<h1>Nginx Proxy Manager</h1>\n<p><a href=\"https://nginxproxymanager.com\">Nginx Proxy Manager</a> Expose your services easily and securely</p>\n<blockquote>\n<p>Application requires to run as root. This is a limitation of the application.</p>\n</blockquote>",
+        "tailscale": {
+            "app_readme": "<h1>Tailscale</h1>\n<p><a href=\"https://tailscale.com\">Tailscale</a> Secure remote access to shared resources</p>\n<ul>\n<li>When <code>Userspace</code> is <strong>disabled</strong>, <code>Tailscale</code> will run as root, with <code>/dev/net/tun</code> device mounted from the host.</li>\n<li>When <code>Userspace</code> is <strong>enabled</strong>, <code>Tailscale</code> will run as a non-root user.</li>\n</ul>",
             "categories": [
                 "networking"
             ],
-            "description": "Expose your services easily and securely",
+            "description": "Secure remote access to shared resources",
             "healthy": true,
             "healthy_error": null,
-            "home": "https://nginxproxymanager.com/",
-            "location": "/__w/charts/charts/community/nginx-proxy-manager",
-            "latest_version": "1.0.10",
-            "latest_app_version": "2.10.3",
-            "latest_human_version": "2.10.3_1.0.10",
-            "last_update": "2023-07-04 20:48:23",
-            "name": "nginx-proxy-manager",
+            "home": "https://tailscale.com/",
+            "location": "/__w/charts/charts/community/tailscale",
+            "latest_version": "1.0.6",
+            "latest_app_version": "v1.42.0",
+            "latest_human_version": "v1.42.0_1.0.6",
+            "last_update": "2023-07-04 20:50:36",
+            "name": "tailscale",
             "recommended": false,
-            "title": "Nginx Proxy Manager",
+            "title": "Tailscale",
             "maintainers": [
                 {
                     "name": "truenas",
@@ -1793,20 +1810,15 @@
                 }
             ],
             "tags": [
-                "reverse",
-                "proxy"
+                "vpn"
             ],
-            "screenshots": [
-                "https://nginxproxymanager.com/screenshots/login.png",
-                "https://nginxproxymanager.com/screenshots/dashboard.png",
-                "https://nginxproxymanager.com/screenshots/proxy-hosts.png"
-            ],
+            "screenshots": [],
             "sources": [
-                "https://nginxproxymanager.com/",
-                "https://github.com/truenas/charts/tree/master/community/nginx-proxy-manager",
-                "https://hub.docker.com/r/jc21/nginx-proxy-manager"
+                "https://tailscale.com/",
+                "https://github.com/truenas/charts/tree/master/community/tailscale",
+                "https://hub.docker.com/r/tailscale/tailscale"
             ],
-            "icon_url": "https://nginxproxymanager.com/logo.png"
+            "icon_url": "https://avatars.githubusercontent.com/u/48932923"
         },
         "mineos": {
             "app_readme": "<h1>MineOS</h1>\n<p><a href=\"https://github.com/hexparrot/mineos-node\">MineOS</a> is a server front-end to ease managing Minecraft administrative tasks.</p>",
@@ -1821,7 +1833,7 @@
             "latest_version": "1.0.2",
             "latest_app_version": "latest",
             "latest_human_version": "latest_1.0.2",
-            "last_update": "2023-07-04 20:48:23",
+            "last_update": "2023-07-04 20:50:36",
             "name": "mineos",
             "recommended": false,
             "title": "MineOS",
@@ -1844,23 +1856,23 @@
             ],
             "icon_url": "https://camo.githubusercontent.com/bfcc53b6de495c0f2d9d5699afea18b7319529933c5cd38f1e0cf55377df725f/68747470733a2f2f7669676e65747465322e77696b69612e6e6f636f6f6b69652e6e65742f6c6f74722d6d696e6563726166742d6d6f642d6578696c65732f696d616765732f662f66322f4d696e6563726166745f7365727665725f73657475702e706e672f7265766973696f6e2f6c61746573743f63623d3230313630393131313732353537"
         },
-        "tdarr": {
-            "app_readme": "<h1>Tdarr</h1>\n<p><a href=\"https://home.tdarr.io/\">Tdarr</a> is a Distributed Transcoding System</p>\n<ul>\n<li>App runs as <code>root</code> user</li>\n</ul>",
+        "webdav": {
+            "app_readme": "<h1>WebDAV</h1>\n<p><a href=\"http://webdav.org/\">WebDAV</a> is a set of extensions to the HTTP protocol which allows users to collaboratively edit and manage files on remote web servers.</p>\n<blockquote>\n<p>When application is installed and <code>Fix Permissions</code> is selected on at least 1 share\na container will be launched with <strong>root</strong> privileges. This is required in order to apply\nthe correct permissions to the <code>WebDAV</code> shares/directories.\nAfterward, the <code>WebDAV</code> container will run as a <strong>non</strong>-root user (Default: <code>666</code>).\n<code>Chown</code> will only apply if the parent directory does not match the configured user and group.</p>\n</blockquote>",
             "categories": [
-                "media"
+                "file-sharing"
             ],
-            "description": "Tdarr is a Distributed Transcoding System",
+            "description": "WebDAV is a set of extensions to the HTTP protocol which allows users to collaboratively edit and manage files on remote web servers.",
             "healthy": true,
             "healthy_error": null,
-            "home": "https://home.tdarr.io/",
-            "location": "/__w/charts/charts/community/tdarr",
-            "latest_version": "1.0.9",
-            "latest_app_version": "2.00.20.1",
-            "latest_human_version": "2.00.20.1_1.0.9",
-            "last_update": "2023-07-04 20:48:23",
-            "name": "tdarr",
+            "home": "http://www.webdav.org/",
+            "location": "/__w/charts/charts/community/webdav",
+            "latest_version": "1.0.4",
+            "latest_app_version": "1.1.3.2982",
+            "latest_human_version": "1.1.3.2982_1.0.4",
+            "last_update": "2023-07-04 20:50:36",
+            "name": "webdav",
             "recommended": false,
-            "title": "Tdarr",
+            "title": "WebDAv",
             "maintainers": [
                 {
                     "name": "truenas",
@@ -1869,38 +1881,33 @@
                 }
             ],
             "tags": [
-                "encode",
-                "transcode"
+                "webdav",
+                "file-sharing"
             ],
-            "screenshots": [
-                "https://home.tdarr.io/static/media/Stats2-min.a583d8ec.png",
-                "https://home.tdarr.io/static/media/Nodes-min.d8bf11b5.png",
-                "https://home.tdarr.io/static/media/VerdictHistory-min.444965ac.png"
-            ],
+            "screenshots": [],
             "sources": [
-                "https://home.tdarr.io/",
-                "https://github.com/truenas/charts/tree/master/community/tdarr",
-                "https://docs.tdarr.io/docs"
+                "http://www.webdav.org/",
+                "https://github.com/truenas/charts/tree/master/community/webdav"
             ],
-            "icon_url": "https://home.tdarr.io/static/media/logo3-min.246d6df4.png"
+            "icon_url": "http://www.webdav.org/images/webdav-logo.jpg"
         },
-        "radarr": {
-            "app_readme": "<h1>Radarr</h1>\n<p><a href=\"https://github.com/Radarr/Radarr\">Radarr</a> is a movie collection manager for Usenet and BitTorrent users.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Radarr</code> directories.\nAfterward, the <code>Radarr</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>",
+        "clamav": {
+            "app_readme": "<h1>ClamAV</h1>\n<p><a href=\"https://www.clamav.net/\">ClamAV</a> - ClamAV\u00ae is an open-source antivirus engine for detecting trojans, viruses, malware &amp; other malicious threats.</p>\n<ul>\n<li>App runs as <code>root</code> user</li>\n</ul>",
             "categories": [
-                "media"
+                "security"
             ],
-            "description": "Radarr is a movie collection manager for Usenet and BitTorrent users.",
+            "description": "ClamAV is an open source (GPLv2) anti-virus toolkit.",
             "healthy": true,
             "healthy_error": null,
-            "home": "https://github.com/Radarr/Radarr",
-            "location": "/__w/charts/charts/community/radarr",
-            "latest_version": "1.0.14",
-            "latest_app_version": "4.5.2.7388",
-            "latest_human_version": "4.5.2.7388_1.0.14",
-            "last_update": "2023-07-04 20:48:23",
-            "name": "radarr",
+            "home": "https://www.clamav.net/",
+            "location": "/__w/charts/charts/community/clamav",
+            "latest_version": "1.0.5",
+            "latest_app_version": "1.0.1",
+            "latest_human_version": "1.0.1_1.0.5",
+            "last_update": "2023-07-04 20:50:36",
+            "name": "clamav",
             "recommended": false,
-            "title": "Radarr",
+            "title": "Clam AV",
             "maintainers": [
                 {
                     "name": "truenas",
@@ -1909,20 +1916,51 @@
                 }
             ],
             "tags": [
-                "movies"
+                "anti-virus"
             ],
-            "screenshots": [
-                "https://radarr.video/img/slider/posters.png",
-                "https://radarr.video/img/features/manualsearch.png",
-                "https://radarr.video/img/features/blacklist.png",
-                "https://radarr.video/img/features/custom-formats-settings.png"
-            ],
+            "screenshots": [],
             "sources": [
-                "https://github.com/onedr0p/containers/tree/main/apps/radarr",
-                "https://github.com/truenas/charts/tree/master/community/radarr",
-                "https://github.com/Radarr/Radarr"
+                "https://docs.clamav.net/",
+                "https://github.com/truenas/charts/tree/master/community/clamav",
+                "https://www.clamav.net/"
             ],
-            "icon_url": "https://raw.githubusercontent.com/Radarr/Radarr/develop/Logo/256.png"
+            "icon_url": "https://raw.githubusercontent.com/micahsnyder/clamav-documentation/main/src/images/logo.png"
+        },
+        "deluge": {
+            "app_readme": "<h1>Deluge</h1>\n<p><a href=\"https://deluge-torrent.org/\">Deluge</a> is a lightweight, Free Software, cross-platform BitTorrent client.</p>",
+            "categories": [
+                "media"
+            ],
+            "description": "Deluge is a lightweight, Free Software, cross-platform BitTorrent client.",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://deluge-torrent.org",
+            "location": "/__w/charts/charts/community/deluge",
+            "latest_version": "1.0.1",
+            "latest_app_version": "9.5.3",
+            "latest_human_version": "9.5.3_1.0.1",
+            "last_update": "2023-07-04 20:50:36",
+            "name": "deluge",
+            "recommended": false,
+            "title": "Deluge",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [
+                "torrent",
+                "download"
+            ],
+            "screenshots": [],
+            "sources": [
+                "https://hub.docker.com/r/linuxserver/deluge",
+                "https://github.com/truenas/charts/tree/master/community/deluge",
+                "https://deluge-torrent.org/"
+            ],
+            "icon_url": "https://deluge-torrent.org/images/deluge_logo.png"
         }
     },
     "enterprise": {
@@ -1939,7 +1977,7 @@
             "latest_version": "1.0.14",
             "latest_app_version": "2023-03-24",
             "latest_human_version": "2023-03-24_1.0.14",
-            "last_update": "2023-07-04 20:48:23",
+            "last_update": "2023-07-04 20:50:36",
             "name": "minio",
             "recommended": false,
             "title": "MinIO",
@@ -1979,7 +2017,7 @@
             "latest_version": "1.0.2",
             "latest_app_version": "1.23.3",
             "latest_human_version": "1.23.3_1.0.2",
-            "last_update": "2023-07-04 20:48:23",
+            "last_update": "2023-07-04 20:50:36",
             "name": "syncthing",
             "recommended": false,
             "title": "Syncthing",
