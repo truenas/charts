@@ -13,9 +13,10 @@ workload:
           imageSelector: {{ .Values.noderedConfig.imageSelector }}
           # https://github.com/node-red/node-red-docker/wiki/Permissions-and-Persistence
           securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
+            runAsUser: 0
+            runAsGroup: 0
             # TODO: Remove
+            runAsNonRoot: false
             readOnlyRootFilesystem: false
           args:
           - -D
