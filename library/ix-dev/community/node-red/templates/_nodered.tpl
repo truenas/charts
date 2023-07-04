@@ -13,14 +13,8 @@ workload:
           imageSelector: {{ .Values.noderedConfig.imageSelector }}
           # https://github.com/node-red/node-red-docker/wiki/Permissions-and-Persistence
           securityContext:
-            runAsUser: 0
-            runAsGroup: 0
-            # TODO: Remove
-            runAsNonRoot: false
-            readOnlyRootFilesystem: false
-          args:
-          - -D
-          - logging.console.level=trace
+            runAsUser: 1000
+            runAsGroup: 1000
           env:
             PORT: {{ .Values.noderedNetwork.webPort }}
             NODE_RED_ENABLE_SAFE_MODE: {{ .Values.noderedConfig.safeMode }}
@@ -40,7 +34,6 @@ workload:
                 - /bin/sh
                 - -c
                 - |
-                  sed -i 's/\/\///g' /healthcheck.js
                   node /healthcheck.js
             readiness:
               enabled: true
@@ -49,7 +42,6 @@ workload:
                 - /bin/sh
                 - -c
                 - |
-                  sed -i 's/\/\///g' /healthcheck.js
                   node /healthcheck.js
             startup:
               enabled: true
@@ -58,7 +50,6 @@ workload:
                 - /bin/sh
                 - -c
                 - |
-                  sed -i 's/\/\///g' /healthcheck.js
                   node /healthcheck.js
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
