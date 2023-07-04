@@ -122,21 +122,34 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
           failureThreshold: 5
           successThreshold: 1
         startupProbe:
-        {{- if .Values.nextcloud.install_ffmpeg }}
+        {{ $cmds := list }}
+        {{ if .Values.nextcloud.install_ffmpeg }}
+          {{ $cmds = mustAppend $cmds "ffmpeg" }}
+        {{ end }}
+        {{ if .Values.nextcloud.install_smbclient }}
+          {{ $cmds = mustAppend $cmds "smbclient" }}
+        {{ end }}
+        {{ if $cmds }}
           exec:
             command:
               - /bin/sh
               - -c
               - |
-                command -v ffmpeg /dev/null 2>&1 || exit 1
-        {{- else }}
+                commands_to_check={{ join " " $cmds }}
+                for comm in $commands_to_check; do
+                  if ! command -v $comm /dev/null 2>&1; then
+                    echo "Command $comm not found"
+                    exit 1
+                  fi
+                done
+        {{ else }}
           httpGet:
             path: /status.php
             port: http
             httpHeaders:
             - name: Host
               value: localhost
-        {{- end }}
+        {{ end }}
           initialDelaySeconds: 10
           periodSeconds: 10
           timeoutSeconds: 5
@@ -168,7 +181,7 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
         - name: extrappvolume-{{ $index }}
           mountPath: {{ $hostPathConfiguration.mountPath }}
         {{ end }}
-        {{- if .Values.nextcloud.install_ffmpeg }}
+        {{ if $cmds }}
         lifecycle:
           postStart:
             exec:
@@ -176,12 +189,12 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
                 - /bin/sh
                 - -c
                 - |
-                  echo "Installing ffmpeg..."
+                  echo "Installing {{ join " " $cmds }}..."
                   apt update && \
                   apt install -y --no-install-recommends \
-                  ffmpeg || echo "Failed to install ffmpeg"
+                  {{ join " " $cmds }} || echo "Failed to install binary/binaries"
                   echo "Finished."
-        {{- end }}
+        {{ end }}
 {{ include "common.networking.dnsConfiguration" .Values | nindent 6 }}
       volumes:
         - name: nginx-configuration
