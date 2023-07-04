@@ -3,7 +3,7 @@ description: High Performance, Kubernetes Native Object Storage
 annotations:
   title: MinIO
 type: application
-version: 1.0.13
+version: 1.0.14
 apiVersion: v2
 appVersion: '2023-03-24'
 kubeVersion: '>=1.16.0-0'
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.0.8
+    version: 1.0.9
 home: https://min.io
 icon: https://min.io/resources/img/logo/MINIO_wordmark.png
 sources:
