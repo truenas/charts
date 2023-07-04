@@ -15,6 +15,9 @@ workload:
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
+          args:
+          - -D
+          - logging.console.level=trace
           env:
             PORT: {{ .Values.noderedNetwork.webPort }}
             NODE_RED_ENABLE_SAFE_MODE: {{ .Values.noderedConfig.safeMode }}
