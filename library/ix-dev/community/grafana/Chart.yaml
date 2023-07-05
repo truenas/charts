@@ -3,7 +3,7 @@ description: Grafana is the open source analytics & monitoring solution for ever
 annotations:
   title: Grafana
 type: application
-version: 1.0.3
+version: 1.0.4
 apiVersion: v2
 appVersion: 10.0.1
 kubeVersion: '>=1.16.0-0'
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.0.9
+    version: 1.0.10
 home: https://grafana.com
 icon: https://www.gravatar.com/avatar/31cea69afa424609b2d83621b4d47f1d?s=120&r=g&d=404
 sources:
