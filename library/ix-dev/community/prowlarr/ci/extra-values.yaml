@@ -1,0 +1,21 @@
+prowlarrConfig:
+  additionalEnvs:
+    - name: PROWLARR__API_KEY
+      value: some-long-api-key
+    - name: PROWLARR__LOG_LEVEL
+      value: error
+
+prowlarrNetwork:
+  webPort: 31000
+
+prowlarrStorage:
+  config:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/config
+  additionalStorages:
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/data1
+    mountPath: /data1
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/data2
+    mountPath: /data2

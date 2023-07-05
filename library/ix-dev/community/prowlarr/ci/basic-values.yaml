@@ -1,0 +1,11 @@
+prowlarrNetwork:
+  webPort: 31000
+
+prowlarrRunAs:
+  user: 1000
+  group: 1000
+
+prowlarrStorage:
+  config:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/config
