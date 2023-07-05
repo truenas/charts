@@ -3,7 +3,7 @@ description: AI-powered app for browsing, organizing & sharing your photo collec
 annotations:
   title: PhotoPrism
 type: application
-version: 1.0.26
+version: 1.0.27
 apiVersion: v2
 appVersion: '230625'
 kubeVersion: '>=1.16.0-0'
@@ -19,6 +19,6 @@ home: https://photoprism.app/
 icon: https://photoprism.app/static/icons/logo.svg
 sources:
   - https://photoprism.app/
-  - https://github.com/truenas/charts/tree/master/library/ix-dev/charts/photoprism
+  - https://github.com/truenas/charts/tree/master/charts/photoprism
 keywords:
   - media
