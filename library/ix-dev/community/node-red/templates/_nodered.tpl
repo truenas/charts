@@ -34,7 +34,7 @@ workload:
                 - /bin/sh
                 - -c
                 - |
-                  node /healthcheck.js
+                  NODE_OPTIONS=--dns-result-order=ipv4first node /healthcheck.js
             readiness:
               enabled: true
               type: exec
@@ -42,7 +42,7 @@ workload:
                 - /bin/sh
                 - -c
                 - |
-                  node /healthcheck.js
+                  NODE_OPTIONS=--dns-result-order=ipv4first node /healthcheck.js
             startup:
               enabled: true
               type: exec
@@ -50,7 +50,7 @@ workload:
                 - /bin/sh
                 - -c
                 - |
-                  node /healthcheck.js
+                  NODE_OPTIONS=--dns-result-order=ipv4first node /healthcheck.js
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
                                                         "UID" 1000

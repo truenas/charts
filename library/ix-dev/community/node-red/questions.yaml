@@ -99,7 +99,7 @@ questions:
           description: The port for the Node-RED Web UI.
           schema:
             type: int
-            default: 30045
+            default: 30049
             min: 9000
             max: 65535
             required: true
