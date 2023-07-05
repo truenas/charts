@@ -51,6 +51,11 @@ mariadbImage:
   tag: "10.6.14"
   pullPolicy: IfNotPresent
 
+redisImage:
+  repository: bitnami/redis
+  tag: "7.0.11"
+  pullPolicy: IfNotPresent
+
 # -- (docs/README.md)
 securityContext:
   container:
