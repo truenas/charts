@@ -4,7 +4,7 @@ description: A file sharing server that puts the control and security of your ow
 annotations:
   title: Nextcloud
 type: application
-version: 1.6.32
+version: 1.6.33
 apiVersion: v2
 appVersion: 27.0.0
 kubeVersion: '>=1.16.0-0'
@@ -21,7 +21,7 @@ icon: https://cdn.rawgit.com/docker-library/docs/defa5ffc7123177acd60ddef6e16bdd
 sources:
   - https://github.com/nextcloud/docker
   - https://github.com/nextcloud/helm
-  - https://github.com/truenas/charts/tree/master/library/ix-dev/charts/nextcloud
+  - https://github.com/truenas/charts/tree/master/charts/nextcloud
 keywords:
   - nextcloud
   - storage
