@@ -1,0 +1,26 @@
+name: immich
+description: Immich
+annotations:
+  title: Immich
+type: application
+version: 1.0.0
+apiVersion: v2
+appVersion: '1.61.1'
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.0.10
+home: https://immich.app
+icon: https://github.com/immich-app/immich/raw/main/design/immich-logo.svg
+sources:
+  - https://immich.app
+  - https://github.com/truenas/charts/tree/master/community/immich
+  - https://github.com/immich-app/immich
+keywords:
+  - photos
+  - backup
