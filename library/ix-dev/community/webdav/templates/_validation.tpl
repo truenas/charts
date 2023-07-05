@@ -34,7 +34,7 @@
     {{- end -}}
   {{- end -}}
 
-  {{- if deepEqual $names (uniq $names) -}}
-    {{- fail (printf "WebDAV - Expected Share names to be unique, but got []" (join ", " $names)) -}}
+  {{- if not (deepEqual $names (uniq $names)) -}}
+    {{- fail (printf "WebDAV - Expected Share names to be unique, but got [%v]" (join ", " $names)) -}}
   {{- end -}}
 {{- end -}}
