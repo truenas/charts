@@ -16,6 +16,7 @@ workload:
             runAsGroup: {{ .Values.autobrrRunAs.group }}
           env:
             AUTOBRR__PORT: {{ .Values.autobrrNetwork.webPort }}
+            AUTOBRR__HOST: "0.0.0.0"
           {{ with .Values.autobrrConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
