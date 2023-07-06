@@ -1,0 +1,173 @@
+groups:
+  - name: Tailscale Configuration
+    description: Configure Tailscale
+  - name: Network Configuration
+    description: Configure Network for Tailscale
+  - name: Resources Configuration
+    description: Configure Resources for Tailscale
+
+questions:
+  - variable: tailscaleConfig
+    label: ""
+    group: Tailscale Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: authkey
+          label: Auth Key
+          description: |
+            The auth key for Tailscale.</br>
+            Same as `--authkey` flag.
+          schema:
+            type: string
+            default: ""
+            required: true
+            private: true
+        - variable: hostname
+          label: Hostname
+          description: |
+            The hostname for Tailscale Node.</br>
+            Only lowercase letters, numbers, and hyphens are allowed.</br>
+            Same as `--hostname` flag.
+          schema:
+            type: string
+            default: "truenas-scale"
+            required: true
+        - variable: advertiseRoutes
+          label: Advertise Routes
+          description: |
+            The routes to advertise.</br>
+            Same as `--advertise-routes` flag.
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: routeEntry
+                label: Route
+                schema:
+                  type: string
+                  required: true
+        - variable: advertiseExitNode
+          label: Advertise Exit Node
+          description: |
+            Advertise as Exit Node.</br>
+            Same as `--advertise-exit-node` flag.
+          schema:
+            type: boolean
+            default: false
+        - variable: userspace
+          label: Userspace
+          description: Userspace for Tailscale.
+          schema:
+            type: boolean
+            default: true
+        - variable: acceptDns
+          label: Accept DNS
+          description: |
+            Accept DNS.</br>
+            Same as `--accept-dns` flag.
+          schema:
+            type: boolean
+            default: false
+        - variable: extraArgs
+          label: Extra Arguments
+          description: Extra arguments for Tailscale.
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: argEntry
+                label: Argument
+                schema:
+                  type: string
+                  required: true
+        - variable: extraDaemonArgs
+          label: Extra Daemon Arguments
+          description: Extra arguments for Tailscale daemon.
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: DaemonArgEntry
+                label: Daemon Argument
+                schema:
+                  type: string
+                  required: true
+
+        - variable: additionalEnvs
+          label: Additional Environment Variables
+          description: Configure additional environment variables for Tailscale.
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: env
+                label: Environment Variable
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: name
+                      label: Name
+                      schema:
+                        type: string
+                        required: true
+                    - variable: value
+                      label: Value
+                      schema:
+                        type: string
+                        required: true
+
+  - variable: tailscaleNetwork
+    label: ""
+    group: Network Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: hostNetwork
+          label: Host Network
+          description: |
+            Bind to the host network. It's recommended to keep this disabled.</br>
+          schema:
+            type: boolean
+            default: false
+
+  - variable: resources
+    group: Resources Configuration
+    label: ""
+    schema:
+      type: dict
+      attrs:
+        - variable: limits
+          label: Limits
+          schema:
+            type: dict
+            attrs:
+              - variable: cpu
+                label: CPU
+                description: CPU limit for Tailscale.
+                schema:
+                  type: string
+                  max_length: 6
+                  valid_chars: '^(0\.[1-9]|[1-9][0-9]*)(\.[0-9]|m?)$'
+                  valid_chars_error: |
+                    Valid CPU limit formats are</br>
+                    - Plain Integer - eg. 1</br>
+                    - Float - eg. 0.5</br>
+                    - Milicpu - eg. 500m
+                  default: "4000m"
+                  required: true
+              - variable: memory
+                label: Memory
+                description: Memory limit for Tailscale.
+                schema:
+                  type: string
+                  max_length: 12
+                  valid_chars: '^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$'
+                  valid_chars_error: |
+                    Valid Memory limit formats are</br>
+                    - Suffixed with E/P/T/G/M/K - eg. 1G</br>
+                    - Suffixed with Ei/Pi/Ti/Gi/Mi/Ki - eg. 1Gi</br>
+                    - Plain Integer in bytes - eg. 1024</br>
+                    - Exponent - eg. 134e6
+                  default: "8Gi"
+                  required: true

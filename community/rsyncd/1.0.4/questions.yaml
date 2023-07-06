@@ -1,0 +1,245 @@
+groups:
+  - name: Rsync Configuration
+    description: Configure Rsync
+  - name: Network Configuration
+    description: Configure Network for Rsync
+  - name: Module Configuration
+    description: Configure Modules for Rsync
+  - name: Resources Configuration
+    description: Configure Resources for Rsync
+
+questions:
+  - variable: rsyncConfig
+    label: ""
+    group: Rsync Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: auxParams
+          label: Auxillary Parameters
+          description: Configure auxillary parameters for Rsync.
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: auxEntry
+                label: Auxillary Parameter Entry
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: param
+                      label: Parameter
+                      schema:
+                        type: string
+                        required: true
+                    - variable: value
+                      label: Value
+                      schema:
+                        type: string
+                        required: true
+
+  - variable: rsyncNetwork
+    label: ""
+    group: Network Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: hostNetwork
+          label: Host Network
+          description: |
+            Bind to the host network. It's recommended to keep this disabled.</br>
+          schema:
+            type: boolean
+            default: false
+        - variable: rsyncPort
+          label: Rsync Port
+          description: The port for Rsync.
+          schema:
+            type: int
+            default: 30026
+            min: 9000
+            max: 65535
+            required: true
+
+  - variable: rsyncModules
+    label: ""
+    group: Module Configuration
+    schema:
+      type: list
+      default: []
+      empty: false
+      required: true
+      items:
+        - variable: module
+          label: Rsync Module
+          schema:
+            type: dict
+            attrs:
+              - variable: name
+                label: Module Name
+                description: |
+                  Module name that matches the name requested by the rsync client.
+                schema:
+                  type: string
+                  valid_chars: '^[a-zA-Z0-9]+([_-]*[a-zA-Z0-9]+)+$'
+                  valid_chars_error: |
+                    Module Name, can include [Letters (a-z, A-Z), Numbers (0,9), Underscore (_), Dash (-)],</br>
+                    but cannot start or end with [Underscore (_), Dash (-), Dot (.)]
+                  required: true
+              - variable: enabled
+                label: Enable Module
+                schema:
+                  type: boolean
+                  default: true
+                  show_subquestions_if: true
+                  subquestions:
+                    - variable: comment
+                      label: Comment
+                      description: Describe the module.
+                      schema:
+                        type: string
+                    - variable: hostPath
+                      label: Host Path
+                      description: |
+                        The path on the host to be shared with the client.</br>
+                        This path must exist on the host.
+                      schema:
+                        type: hostpath
+                        required: true
+                    - variable: accessMode
+                      label: Access Mode
+                      description: |
+                        Choose permissions for this rsync module.
+                      schema:
+                        type: string
+                        required: true
+                        default: RO
+                        enum:
+                          - value: RO
+                            description: Read Only
+                          - value: RW
+                            description: Read Write
+                          - value: WO
+                            description: Write Only
+                    - variable: maxConnections
+                      label: Max Connections
+                      description: |
+                        Maximum number of simultaneous connections to this module.</br>
+                        0 means unlimited.
+                      schema:
+                        type: int
+                        min: 0
+                        max: 1000
+                        default: 0
+                        required: true
+                    - variable: uid
+                      label: UID
+                      description: |
+                        The UID to use for this module.</br>
+                      schema:
+                        type: int
+                        min: 0
+                        max: 65535
+                        default: 568
+                        required: true
+                    - variable: gid
+                      label: GID
+                      description: |
+                        The GID to use for this module.</br>
+                      schema:
+                        type: int
+                        min: 0
+                        max: 65535
+                        default: 568
+                        required: true
+                    - variable: hostsAllow
+                      label: Hosts Allow
+                      description: |
+                        List of hosts allowed to connect to this module.</br>
+                        Leave empty to allow all hosts.
+                      schema:
+                        type: list
+                        default: []
+                        items:
+                          - variable: host
+                            label: Host to allow
+                            schema:
+                              type: string
+                              required: true
+                    - variable: hostsDeny
+                      label: Hosts Deny
+                      description: |
+                        List of hosts denied to connect to this module.</br>
+                        Leave empty to deny no hosts.
+                      schema:
+                        type: list
+                        default: []
+                        items:
+                          - variable: host
+                            label: Host to deny
+                            schema:
+                              type: string
+                              required: true
+                    - variable: auxParams
+                      label: Auxillary Parameters
+                      description: Configure auxillary parameters for this module.
+                      schema:
+                        type: list
+                        default: []
+                        items:
+                          - variable: auxEntry
+                            label: Auxillary Parameter Entry
+                            schema:
+                              type: dict
+                              attrs:
+                                - variable: param
+                                  label: Parameter
+                                  schema:
+                                    type: string
+                                    required: true
+                                - variable: value
+                                  label: Value
+                                  schema:
+                                    type: string
+                                    required: true
+
+  - variable: resources
+    group: Resources Configuration
+    label: ""
+    schema:
+      type: dict
+      attrs:
+        - variable: limits
+          label: Limits
+          schema:
+            type: dict
+            attrs:
+              - variable: cpu
+                label: CPU
+                description: CPU limit for Rsync.
+                schema:
+                  type: string
+                  max_length: 6
+                  valid_chars: '^(0\.[1-9]|[1-9][0-9]*)(\.[0-9]|m?)$'
+                  valid_chars_error: |
+                    Valid CPU limit formats are</br>
+                    - Plain Integer - eg. 1</br>
+                    - Float - eg. 0.5</br>
+                    - Milicpu - eg. 500m
+                  default: "4000m"
+                  required: true
+              - variable: memory
+                label: Memory
+                description: Memory limit for Rsync.
+                schema:
+                  type: string
+                  max_length: 12
+                  valid_chars: '^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$'
+                  valid_chars_error: |
+                    Valid Memory limit formats are</br>
+                    - Suffixed with E/P/T/G/M/K - eg. 1G</br>
+                    - Suffixed with Ei/Pi/Ti/Gi/Mi/Ki - eg. 1Gi</br>
+                    - Plain Integer in bytes - eg. 1024</br>
+                    - Exponent - eg. 134e6
+                  default: "8Gi"
+                  required: true
