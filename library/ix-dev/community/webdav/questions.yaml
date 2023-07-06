@@ -156,6 +156,8 @@ questions:
           description: Shares for WebDAV.
           schema:
             type: list
+            empty: false
+            required: true
             default: []
             items:
               - variable: shareEntry
@@ -177,6 +179,8 @@ questions:
                         Example: [share1] will be available at [http://<webdav-ip>:<webdav-port>/share1]
                       schema:
                         type: string
+                        valid_chars: '^[a-zA-Z0-9_-]+$'
+                        valid_chars_error: 'Share name can only consist of [Letters(a-z, A-Z), Numbers(0-9), Underscores(_), Dashes(-)]'
                         required: true
                     - variable: description
                       label: Description
@@ -203,7 +207,7 @@ questions:
                       description: |
                         Enable permission fix for the share.</br>
                         This will fix the permissions of the share on startup.</br>
-                        This will change the owner of the share to the user and group specified in [User and Group Configuration].
+                        This will change the owner of the share to the user and group specified in [User and Group Configuration].</br>
                         Note: This will still change permissions even if [Read Only] for the share is enabled.
                       schema:
                         type: boolean
@@ -225,6 +229,13 @@ questions:
                 description: CPU limit for WebDAV.
                 schema:
                   type: string
+                  max_length: 6
+                  valid_chars: '^(0\.[1-9]|[1-9][0-9]*)(\.[0-9]|m?)$'
+                  valid_chars_error: |
+                    Valid CPU limit formats are</br>
+                    - Plain Integer - eg. 1</br>
+                    - Float - eg. 0.5</br>
+                    - Milicpu - eg. 500m
                   default: "4000m"
                   required: true
               - variable: memory
@@ -232,5 +243,13 @@ questions:
                 description: Memory limit for WebDAV.
                 schema:
                   type: string
+                  max_length: 12
+                  valid_chars: '^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$'
+                  valid_chars_error: |
+                    Valid Memory limit formats are</br>
+                    - Suffixed with E/P/T/G/M/K - eg. 1G</br>
+                    - Suffixed with Ei/Pi/Ti/Gi/Mi/Ki - eg. 1Gi</br>
+                    - Plain Integer in bytes - eg. 1024</br>
+                    - Exponent - eg. 134e6
                   default: "8Gi"
                   required: true

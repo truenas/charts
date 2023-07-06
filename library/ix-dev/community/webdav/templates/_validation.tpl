@@ -26,9 +26,15 @@
     {{- fail "WebDAV - Expected at least 1 [Share] to be configured" -}}
   {{- end -}}
 
+  {{- $names := list -}}
   {{- range .Values.webdavStorage.shares -}}
+    {{- $names = mustAppend $names .name -}}
     {{- if not (mustRegexMatch "^[a-zA-Z0-9_-]+$" .name) -}}
       {{- fail "WebDAV - Expected [Share] name to only consist of [Letters(a-z, A-Z), Numbers(0-9), Underscores(_), Dashes(-)]" -}}
     {{- end -}}
+  {{- end -}}
+
+  {{- if not (deepEqual $names (uniq $names)) -}}
+    {{- fail (printf "WebDAV - Expected Share names to be unique, but got [%v]" (join ", " $names)) -}}
   {{- end -}}
 {{- end -}}
