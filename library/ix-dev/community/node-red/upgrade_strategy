@@ -1,0 +1,71 @@
+#!/usr/bin/python3
+import json
+import re
+import sys
+
+from catalog_update.upgrade_strategy import semantic_versioning
+
+RE_STABLE_VERSION_BASE = r'\d+\.\d+\.\d+'
+ENUMS = {
+    'node18Image': {
+        'RE_STABLE_VERSION': re.compile(rf'{RE_STABLE_VERSION_BASE}-18'),
+        'STRIP_TEXT': '-18'
+    },
+    'node18MinimalImage': {
+        'RE_STABLE_VERSION': re.compile(rf'{RE_STABLE_VERSION_BASE}-18-minimal'),
+        'STRIP_TEXT': '-18-minimal'
+    },
+    'node16Image': {
+        'RE_STABLE_VERSION': re.compile(rf'{RE_STABLE_VERSION_BASE}-16'),
+        'STRIP_TEXT': '-16'
+    },
+    'node16MinimalImage': {
+        'RE_STABLE_VERSION': re.compile(rf'{RE_STABLE_VERSION_BASE}-16-minimal'),
+        'STRIP_TEXT': '-16-minimal'
+    },
+    'node14Image': {
+        'RE_STABLE_VERSION': re.compile(rf'{RE_STABLE_VERSION_BASE}-14'),
+        'STRIP_TEXT': '-14'
+    },
+    'node14MinimalImage': {
+        'RE_STABLE_VERSION': re.compile(rf'{RE_STABLE_VERSION_BASE}-14-minimal'),
+        'STRIP_TEXT': '-14-minimal'
+    }
+}
+
+
+def newer_mapping(image_tags):
+    output = {
+        "tags": {},
+        "app_version": ""
+    }
+
+    for key in image_tags.keys():
+        STRIP_TEXT = ENUMS[key].get('STRIP_TEXT', None) if key in ENUMS else None
+        RE_STABLE_VERSION = ENUMS[key].get('RE_STABLE_VERSION', None) if key in ENUMS else None
+
+        if (STRIP_TEXT is None) or (RE_STABLE_VERSION is None):
+            continue
+
+        tags = {t.strip(STRIP_TEXT): t for t in image_tags[key] if RE_STABLE_VERSION.fullmatch(t)}
+        version = semantic_versioning(list(tags))
+
+        if not version:
+            continue
+
+        # 16 is the "default" (Also tied to latest tag)
+        if key == 'node16Image':
+            output['app_version'] = version
+
+        output['tags'][key] = tags[version]
+
+    return output
+
+
+if __name__ == '__main__':
+    try:
+        versions_json = json.loads(sys.stdin.read())
+    except ValueError:
+        raise ValueError('Invalid json specified')
+
+    print(json.dumps(newer_mapping(versions_json)))
