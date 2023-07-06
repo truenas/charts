@@ -1,0 +1,11 @@
+autobrrNetwork:
+  webPort: 31000
+
+autobrrRunAs:
+  user: 1000
+  group: 1000
+
+autobrrStorage:
+  config:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/config

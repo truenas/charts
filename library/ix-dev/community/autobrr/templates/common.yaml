@@ -1,0 +1,11 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "autobrr.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "autobrr.service" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "autobrr.persistence" $ | fromYaml) -}}
+
+{{/* Create the configmap for portal manually*/}}
+{{- include "autobrr.portal" $ -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}
