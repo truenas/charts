@@ -291,6 +291,28 @@ questions:
                   show_if: [["type", "=", "hostPath"]]
                   immutable: true
                   required: true
+        - variable: additionalLibraries
+          label: Additional Libraries
+          description: |
+            Additional libraries for Immich.</br>
+            Internal mountPath will be the same as your hostPath</br>
+            https://immich.app/docs/features/read-only-gallery
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: storageEntry
+                label: Storage Entry
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: hostPath
+                      label: Host Path
+                      description: The host path to use for storage.
+                      schema:
+                        type: hostpath
+                        show_if: [["type", "=", "hostPath"]]
+                        required: true
         - variable: pgData
           label: Immich Postgres Data Storage
           description: The path to store Immich Postgres Data.
