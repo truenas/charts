@@ -311,7 +311,6 @@ questions:
                       description: The host path to use for storage.
                       schema:
                         type: hostpath
-                        show_if: [["type", "=", "hostPath"]]
                         required: true
         - variable: pgData
           label: Immich Postgres Data Storage
