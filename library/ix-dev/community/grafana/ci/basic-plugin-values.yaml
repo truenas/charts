@@ -1,0 +1,16 @@
+grafanaStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/data
+  additionalStorages:
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/logs
+    mountPath: /logs
+
+grafanaConfig:
+  plugins:
+    - grafana-piechart-panel
+    - grafana-clock-panel 1.0.0
+  additionalEnvs:
+    - name: GF_PATHS_LOGS
+      value: /logs

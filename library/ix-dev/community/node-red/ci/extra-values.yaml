@@ -1,0 +1,21 @@
+noderedConfig:
+  safeMode: true
+  enableProjects: true
+  additionalEnvs:
+  - name: NODE_OPTIONS
+    value: --max-old-space-size=256
+
+noderedNetwork:
+  webPort: 31000
+
+noderedStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/data
+  additionalStorages:
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/customData
+    mountPath: /customData
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/customFiles
+    mountPath: /customFiles

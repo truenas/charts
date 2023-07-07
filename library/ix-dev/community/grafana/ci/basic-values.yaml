@@ -1,0 +1,8 @@
+grafanaStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/data
+
+grafanaRunAs:
+  user: 1000
+  group: 1000

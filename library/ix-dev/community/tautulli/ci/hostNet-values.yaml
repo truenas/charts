@@ -1,0 +1,8 @@
+tautulliNetwork:
+  webPort: 30000
+  hostNetwork: true
+
+tautulliStorage:
+  config:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/config

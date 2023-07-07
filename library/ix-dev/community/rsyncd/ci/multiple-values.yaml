@@ -1,0 +1,56 @@
+rsyncConfig:
+  auxParams:
+    - param: test-param
+      value: test-value
+    - param: test-param2
+      value: test-value2
+rsyncModules:
+  - enabled: true
+    name: module_name1
+    comment: "Comment for module"
+    hostPath: /mnt/{{ .Release.Name }}/module1
+    accessMode: RW
+    maxConnections: 0
+    uid: 0
+    gid: 0
+    hostsAllow:
+      - 10.10.10.1
+      - 10.10.10.2
+    hostsDeny:
+      - 11.10.10.1
+      - 11.10.10.2
+    auxParams:
+      - param: mod-param1
+        value: mod-value1
+      - param: mod-param2
+        value: mod-value2
+  - enabled: true
+    name: module_name2
+    comment: "Comment for module2"
+    hostPath: /mnt/{{ .Release.Name }}/module2
+    accessMode: WO
+    maxConnections: 100
+    uid: 568
+    gid: 568
+    hostsAllow:
+      - 10.10.10.1
+      - 10.10.10.2
+    hostsDeny:
+      - 11.10.10.1
+      - 11.10.10.2
+    auxParams:
+      - param: mod-param1
+        value: mod-value1
+      - param: mod-param2
+        value: mod-value2
+  - enabled: true
+    name: module_name3
+    comment: "Comment for module3"
+    hostPath: /mnt/{{ .Release.Name }}/module3
+    accessMode: RW
+    maxConnections: 0
+    uid: 1000
+    gid: 1000
+    hostsAllow: []
+    hostsDeny: []
+    auxParams: []

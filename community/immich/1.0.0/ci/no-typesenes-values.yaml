@@ -1,0 +1,25 @@
+immichStorage:
+  uploads:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/uploads
+  library:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/library
+  thumbs:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/thumbs
+  profile:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/profile
+  video:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/video
+  pgData:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/pgData
+  pgBackup:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/pgBackup
+
+immichConfig:
+  enableTypesense: false

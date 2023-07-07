@@ -1,0 +1,11 @@
+navidromeStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/data
+  music:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/music
+
+navidromeRunAs:
+  user: 1000
+  group: 1000

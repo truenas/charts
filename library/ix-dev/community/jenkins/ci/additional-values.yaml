@@ -1,0 +1,27 @@
+jenkinsStorage:
+  home:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/home
+  additionalStorages:
+    - type: hostPath
+      hostPath: /mnt/{{ .Release.Name }}/jenkinsWorkspace1
+      mountPath: /workspace1
+    - type: hostPath
+      hostPath: /mnt/{{ .Release.Name }}/jenkinsWorkspace2
+      mountPath: /workspace2
+
+jenkinsConfig:
+  jenkinsOpts:
+    - useJmx
+    - sessionTimeout=100
+  jenkinsJavaOpts:
+    - property: hudson.footerURL
+      value: https://jenkins.example.com
+    - property: jenkins.CLI.disabled
+      value: "true"
+
+  additionalEnvs:
+    - name: PLUGINS_FORCE_UPGRADE
+      value: "true"
+    - name: TRY_UPGRADE_IF_NO_MARKER
+      value: "true"

@@ -1,0 +1,18 @@
+runAsContext:
+  - userName: root
+    groupName: root
+    gid: 0
+    uid: 0
+    description: MineOS runs as root user
+capabilities:
+  - name: CHOWN
+    description: MineOS requires this ability to change ownership of files.
+  - name: DAC_OVERRIDE
+    description: MineOS requires this ability to bypass file permissions.
+  - name: FOWNER
+    description: MineOS requires this ability to bypass file permissions for it's sub-processes.
+  - name: SETGID
+    description: MineOS requires this ability to switch group for sub-processes.
+  - name: SETUID
+    description: MineOS requires this ability to switch user for sub-processes.
+hostMounts: []

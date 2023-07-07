@@ -1,0 +1,8 @@
+noderedNetwork:
+  webPort: 30000
+  hostNetwork: true
+
+noderedStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/data

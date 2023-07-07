@@ -3,9 +3,9 @@ description: Syncthing is a continuous file synchronization program.
 annotations:
   title: Syncthing
 type: application
-version: 1.0.27
+version: 1.0.31
 apiVersion: v2
-appVersion: 1.23.4
+appVersion: 1.23.6
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: truenas
@@ -19,7 +19,7 @@ home: https://syncthing.net/
 icon: https://play-lh.googleusercontent.com/KIy_dqUdZqcsTq4GDstHrHwLRvu60gT3v0p41gw792BC6OxamNhUw2eIy0-LI05qNEA=w240-h480
 sources:
   - https://syncthing.net
-  - https://github.com/truenas/charts/tree/master/library/ix-dev/charts/syncthing
+  - https://github.com/truenas/charts/tree/master/charts/syncthing
 keywords:
   - storage
   - backup

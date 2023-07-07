@@ -1,0 +1,14 @@
+runAsContext:
+  - userName: root
+    groupName: root
+    gid: 0
+    uid: 0
+    description: Immich runs as root user in order to spawn different sub-processes.
+capabilities:
+  - name: CHOWN
+    description: Immich Proxy is able to chown files.
+  - name: SETUID
+    description: Immich Proxy and Web is able to set user ID for it's sub-processes.
+  - name: SETGID
+    description: Immich Proxy and Web is able to set group ID for it's sub-processes.
+hostMounts: []

@@ -1,0 +1,30 @@
+image:
+  repository: deluan/navidrome
+  pullPolicy: IfNotPresent
+  tag: '0.49.3'
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+navidromeConfig:
+  uiWelcomeMessage: ''
+  additionalEnvs: []
+
+navidromeNetwork:
+  webPort: 30043
+  hostNetwork: false
+
+navidromeRunAs:
+  user: 568
+  group: 568
+
+navidromeStorage:
+  data:
+    type: ixVolume
+    datasetName: data
+  music:
+    type: ixVolume
+    datasetName: music
+  additionalStorages: []

@@ -1,0 +1,21 @@
+komgaConfig:
+  additionalEnvs:
+    - name: KOMGA_SESSIONTIMEOUT
+      value: 2d
+    - name: KOMGA_DELETE_EMPTY_READ_LISTS
+      value: false
+
+komgaNetwork:
+  webPort: 31000
+
+komgaStorage:
+  config:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/config
+  additionalStorages:
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/comics
+    mountPath: /comics
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/mangas
+    mountPath: /mangas

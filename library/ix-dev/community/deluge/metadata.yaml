@@ -1,0 +1,18 @@
+runAsContext:
+  - userName: root
+    groupName: root
+    gid: 0
+    uid: 0
+    description: Deluge requires root privileges to start the Deluge process
+capabilities:
+  - name: CHOWN
+    description: Deluge is able to chown files.
+  - name: DAC_OVERRIDE
+    description: Deluge is able to bypass permission checks.
+  - name: FOWNER
+    description: Deluge is able bypass permission checks for it's sub-processes.
+  - name: SETGID
+    description: Deluge is able to set group ID for it's sub-processes.
+  - name: SETUID
+    description: Deluge is able to set user ID for it's sub-processes.
+hostMounts: []

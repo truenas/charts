@@ -1,0 +1,10 @@
+noderedConfig:
+  imageSelector: node14Image
+
+noderedNetwork:
+  webPort: 31000
+
+noderedStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/data

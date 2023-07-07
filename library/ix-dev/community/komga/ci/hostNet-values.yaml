@@ -1,0 +1,8 @@
+komgaNetwork:
+  webPort: 30000
+  hostNetwork: true
+
+komgaStorage:
+  config:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/config
