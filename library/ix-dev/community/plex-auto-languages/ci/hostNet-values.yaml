@@ -1,0 +1,13 @@
+ci: true
+
+palNetwork:
+  hostNetwork: true
+
+palConfig:
+  plexURL: http://plex:32400
+  plexToken: some-token
+
+palStorage:
+  config:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/config
