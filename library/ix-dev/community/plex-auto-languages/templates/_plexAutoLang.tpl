@@ -5,7 +5,7 @@ workload:
     primary: true
     type: Deployment
     podSpec:
-      hostNetwork: {{ .Values.palNetwork.hostNetwork }}
+      hostNetwork: false
       containers:
         pal:
           enabled: true
