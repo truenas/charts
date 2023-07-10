@@ -88,20 +88,6 @@ questions:
             default: 568
             required: true
 
-  - variable: palNetwork
-    label: ""
-    group: Network Configuration
-    schema:
-      type: dict
-      attrs:
-        - variable: hostNetwork
-          label: Host Network
-          description: |
-            Bind to the host network. It's recommended to keep this disabled.</br>
-          schema:
-            type: boolean
-            default: false
-
   - variable: palStorage
     label: ""
     group: Storage Configuration
