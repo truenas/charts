@@ -61,7 +61,20 @@ persistence:
       microservices:
         microservices:
           mountPath: /usr/src/app/upload/encoded-video
-
+  {{- range $idx, $storage := .Values.immichStorage.additionalLibraries }}
+  {{ printf "immich-%v" (int $idx) }}:
+    enabled: true
+    type: hostPath
+    hostPath: {{ $storage.hostPath | default "" }}
+    # Host path and mount path MUST be the same
+    targetSelector:
+      server:
+        server:
+          mountPath: {{ $storage.hostPath }}
+      microservices:
+        microservices:
+          mountPath: {{ $storage.hostPath }}
+  {{- end }}
   {{/* Caches */}}
   microcache:
     enabled: true
