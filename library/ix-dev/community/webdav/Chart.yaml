@@ -1,9 +1,9 @@
 name: webdav
 description: WebDAV is a set of extensions to the HTTP protocol which allows users to collaboratively edit and manage files on remote web servers.
 annotations:
-  title: WebDAv
+  title: WebDAV
 type: application
-version: 1.0.6
+version: 1.0.7
 apiVersion: v2
 appVersion: '1.1.3.2982'
 kubeVersion: '>=1.16.0-0'
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.0.10
+    version: 1.0.11
 home: http://www.webdav.org/
 icon: http://www.webdav.org/images/webdav-logo.jpg
 sources:
