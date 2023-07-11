@@ -3,7 +3,7 @@ description: The qBittorrent project aims to provide an open-source software alt
 annotations:
   title: qBittorrent
 type: application
-version: 1.0.17
+version: 1.0.18
 apiVersion: v2
 appVersion: 4.5.4
 kubeVersion: '>=1.16.0-0'
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.0.10
+    version: 1.0.11
 home: https://www.qbittorrent.org/
 icon: https://upload.wikimedia.org/wikipedia/commons/9/9e/Qbittorrent_logo.png
 sources:

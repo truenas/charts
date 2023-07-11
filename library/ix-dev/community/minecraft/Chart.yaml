@@ -3,7 +3,7 @@ description: Minecraft is a sandbox game
 annotations:
   title: Minecraft
 type: application
-version: 1.0.7
+version: 1.0.8
 apiVersion: v2
 appVersion: 2023.7.0
 kubeVersion: '>=1.16.0-0'
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.0.10
+    version: 1.0.11
 home: https://www.minecraft.net/en-us
 icon: https://www.minecraft.net/content/dam/games/minecraft/logos/logo-minecraft.svg
 sources:

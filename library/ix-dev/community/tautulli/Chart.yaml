@@ -3,7 +3,7 @@ description: Tautulli is a python based web application for monitoring, analytic
 annotations:
   title: Tautulli
 type: application
-version: 1.0.2
+version: 1.0.3
 apiVersion: v2
 appVersion: '2.12.4'
 kubeVersion: '>=1.16.0-0'
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.0.10
+    version: 1.0.11
 home: https://tautulli.com/
 icon: https://avatars.githubusercontent.com/u/34385001
 sources:
