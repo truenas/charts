@@ -1,0 +1,11 @@
+homarrNetwork:
+  webPort: 30000
+  hostNetwork: true
+
+homarrStorage:
+  configs:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/configs
+  icons:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/icons

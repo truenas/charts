@@ -1,0 +1,11 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "homarr.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "homarr.persistence" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "homarr.service" $ | fromYaml) -}}
+
+{{/* Create the configmap for portal manually*/}}
+{{- include "homarr.portal" $ -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}
