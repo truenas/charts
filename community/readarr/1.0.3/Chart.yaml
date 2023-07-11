@@ -1,11 +1,12 @@
 name: readarr
-description: Readarr is an ebook and audiobook collection manager for Usenet and BitTorrent users.
+description: Readarr is an ebook and audiobook collection manager for Usenet and BitTorrent
+  users.
 annotations:
   title: Readarr
 type: application
-version: 1.0.2
+version: 1.0.3
 apiVersion: v2
-appVersion: '0.1.9.1905'
+appVersion: 0.2.2.1943
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: truenas
@@ -14,7 +15,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.0.10
+    version: 1.0.11
 home: https://github.com/Readarr/Readarr
 icon: https://raw.githubusercontent.com/Readarr/Readarr/develop/Logo/256.png
 sources:
