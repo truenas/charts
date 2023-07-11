@@ -21,6 +21,16 @@ persistence:
         syncthing:
           mountPath: /configure.sh
           subPath: configure.sh
+  truenas-logo:
+    enabled: true
+    type: configmap
+    objectName: syncthing-truenas-logo
+    defaultMode: "0770"
+    targetSelector:
+      syncthing:
+        syncthing:
+          mountPath: /var/truenas/assets/gui/default/assets/img/logo-horizontal.svg
+          subPath: logo-horizontal.svg
 
   {{- if not .Values.syncthingStorage.additionalStorages -}}
     {{- fail "Syncthing - Expected at least one additional storage defined" -}}
