@@ -3,7 +3,7 @@ description: Lightweight universal DDNS Updater with web UI
 annotations:
   title: DDNS Updater
 type: application
-version: 1.0.9
+version: 1.0.10
 apiVersion: v2
 appVersion: 'v2.5.0'
 kubeVersion: '>=1.16.0-0'
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.0.10
+    version: 1.0.11
 home: https://github.com/qdm12/ddns-updater
 icon: https://raw.githubusercontent.com/qdm12/ddns-updater/master/readme/ddnsgopher.svg
 sources:

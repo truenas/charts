@@ -3,7 +3,7 @@ description: Navidrome is a personal streaming service
 annotations:
   title: Navidrome
 type: application
-version: 1.0.3
+version: 1.0.4
 apiVersion: v2
 appVersion: '0.49.3'
 kubeVersion: '>=1.16.0-0'
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.0.10
+    version: 1.0.11
 home: https://www.navidrome.org/
 icon: https://github.com/navidrome/navidrome/raw/master/resources/logo-192x192.png
 sources:
