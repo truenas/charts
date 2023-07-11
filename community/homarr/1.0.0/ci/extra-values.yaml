@@ -1,0 +1,23 @@
+homarrConfig:
+  password: secret
+  additionalEnvs:
+    - name: DISABLE_EDIT_MODE
+      value: true
+
+homarrNetwork:
+  webPort: 31000
+
+homarrStorage:
+  configs:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/configs
+  icons:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/icons
+  additionalStorages:
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/data1
+    mountPath: /data1
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/data2
+    mountPath: /data2
