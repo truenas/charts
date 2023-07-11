@@ -1,0 +1,25 @@
+name: vaultwarden
+description: Alternative implementation of the Bitwarden server API written in Rust and compatible with upstream Bitwarden clients.
+annotations:
+  title: Vaultwarden
+type: application
+version: 1.0.18
+apiVersion: v2
+appVersion: 1.29.0
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.0.11
+home: https://github.com/dani-garcia/vaultwarden
+icon: https://raw.githubusercontent.com/dani-garcia/vaultwarden/main/src/static/images/vaultwarden-icon.png
+sources:
+  - https://github.com/dani-garcia/vaultwarden
+  - https://github.com/truenas/charts/tree/master/community/vaultwarden
+keywords:
+  - password
+  - manager
