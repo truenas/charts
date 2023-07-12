@@ -66,6 +66,7 @@ tests:
                       fieldPath: metadata.name
                   VAR8: ""
                   VAR9: false
+                  VAR10: 100000514
     asserts:
       - documentIndex: &deploymentDoc 2
         isKind:
@@ -141,6 +142,12 @@ tests:
           content:
             name: VAR9
             value: "false"
+      - documentIndex: *deploymentDoc
+        contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: VAR10
+            value: "100000514"
 
   # Failures
   - it: it should fail invalid ref

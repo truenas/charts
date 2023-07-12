@@ -35,6 +35,8 @@ tests:
                     value: "{{ .Values.some_other_value }}"
                   - name: env3
                     value: ""
+                  - name: env4
+                    value: 100000514
     asserts:
       - documentIndex: &deploymentDoc 0
         isKind:
@@ -60,6 +62,12 @@ tests:
           content:
             name: env3
             value: ""
+      - documentIndex: *deploymentDoc
+        contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: env4
+            value: "100000514"
 
   # Failures
   - it: it should fail with empty name
