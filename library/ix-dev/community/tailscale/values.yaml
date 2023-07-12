@@ -1,7 +1,7 @@
 image:
   repository: tailscale/tailscale
   pullPolicy: IfNotPresent
-  tag: 'v1.42.0'
+  tag: v1.44.0
 
 resources:
   limits:
