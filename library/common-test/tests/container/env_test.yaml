@@ -67,6 +67,7 @@ tests:
                   VAR8: ""
                   VAR9: false
                   VAR10: 100000514
+                  VAR11: 1000text00514
     asserts:
       - documentIndex: &deploymentDoc 2
         isKind:
@@ -148,6 +149,12 @@ tests:
           content:
             name: VAR10
             value: "100000514"
+      - documentIndex: *deploymentDoc
+        contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: VAR11
+            value: "1000text00514"
 
   # Failures
   - it: it should fail invalid ref
