@@ -54,9 +54,6 @@ workload:
                 {{ if .Values.adguardNetwork.enableDHCP }}
                 - NET_RAW
                 {{ end }}
-          # FIXME: Switch to exec probe after this issue is solved, also note that healthcheck
-          # is only available on "edge" tag, as of 27/03/2023
-          # https://github.com/AdguardTeam/AdGuardHome/issues/3290#issuecomment-1485451976
           probes:
             liveness:
               enabled: true
