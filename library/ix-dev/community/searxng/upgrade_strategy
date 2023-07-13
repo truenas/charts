@@ -1,0 +1,31 @@
+#!/usr/bin/python3
+import json
+import re
+import sys
+
+from catalog_update.upgrade_strategy import datetime_versioning
+
+
+RE_STABLE_VERSION = re.compile(r'\d{4}.\d{1,2}.\d{1,2}-.+')
+
+
+def newer_mapping(image_tags):
+    key = list(image_tags.keys())[0]
+    tags = {t.split('-')[0]: t for t in image_tags[key] if RE_STABLE_VERSION.fullmatch(t)}
+    version = datetime_versioning(list(tags), '%Y.%m.%d')
+    if not version:
+        return {}
+
+    return {
+        'tags': {key: tags[version]},
+        'app_version': version,
+    }
+
+
+if __name__ == '__main__':
+    try:
+        versions_json = json.loads(sys.stdin.read())
+    except ValueError:
+        raise ValueError('Invalid json specified')
+
+    print(json.dumps(newer_mapping(versions_json)))
