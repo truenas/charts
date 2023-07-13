@@ -22,7 +22,10 @@ workload:
           # to user specified port.
           args:
           # If appVersion is 0.107.29 or above add this flag
-          {{- if semverCompare "~0.107.29" (.Values.image.tag | replace "v" "") }}
+          # AND appVersion is below 0.107.34
+          {{- if and
+            (semverCompare "~0.107.29" (.Values.image.tag | replace "v" ""))
+            (not (semverCompare "~0.107.34" (.Values.image.tag | replace "v" ""))) }}
             - /opt/adguardhome/AdGuardHome
           {{- end }}
             - --no-check-update
@@ -51,9 +54,6 @@ workload:
                 {{ if .Values.adguardNetwork.enableDHCP }}
                 - NET_RAW
                 {{ end }}
-          # FIXME: Switch to exec probe after this issue is solved, also note that healthcheck
-          # is only available on "edge" tag, as of 27/03/2023
-          # https://github.com/AdguardTeam/AdGuardHome/issues/3290#issuecomment-1485451976
           probes:
             liveness:
               enabled: true
