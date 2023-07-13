@@ -35,6 +35,10 @@
     "stable": {"min": "21.04-ALPHA"},
     "nightlies": {"min": "21.02-MASTER"}
   },
+  "definitions/port": {
+    "stable": {"min": "23.10-BETA.1"},
+    "nightlies": {"min": "23.10-MASTER"}
+  },
   "validations/containerImage": {
     "stable": {"min": "21.06-BETA"},
     "nightlies": {"min": "21.04-MASTER"}
