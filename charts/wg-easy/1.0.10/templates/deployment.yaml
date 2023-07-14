@@ -62,6 +62,7 @@ spec:
             {{ $wgeasy := .Values.wgeasy }}
             {{ $envList := (default list .Values.environmentVariables) }}
             {{ $envList = mustAppend $envList (dict "name" "WG_HOST" "value" $wgeasy.host) }}
+            {{ $envList = mustAppend $envList (dict "name" "WG_DEVICE" "value" $wgeasy.netinterf) }}
             {{ $envList = mustAppend $envList (dict "name" "PASSWORD" "value" $wgeasy.password) }}
             {{ $envList = mustAppend $envList (dict "name" "WG_PORT" "value" .Values.wgUDPPort) }}
             {{ $envList = mustAppend $envList (dict "name" "PORT" "value" .Values.webUIPort) }}

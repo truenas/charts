@@ -12,6 +12,7 @@ wgUDPPort: 30290
 webUIPort: 30921
 wgeasy:
   host: wg.domain.com
+  netinterf: en0
   password: secret
   client_mtu: 1420
   keep_alive: 5
