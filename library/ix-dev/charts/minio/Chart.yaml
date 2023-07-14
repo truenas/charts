@@ -12,9 +12,9 @@ maintainers:
     url: https://www.truenas.com/
     email: dev@ixsystems.com
 dependencies:
-- name: common
-  repository: file://../../../common/2304.0.1
-  version: 2304.0.1
+  - name: common
+    repository: file://../../../common/2304.0.1
+    version: 2304.0.1
 home: https://min.io
 icon: https://min.io/resources/img/logo/MINIO_wordmark.png
 sources:
