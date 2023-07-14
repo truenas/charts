@@ -64,6 +64,33 @@ spec:
               containerPort: {{ .Values.service.nodePort | int }}
             - name: console
               containerPort: {{ .Values.service.consolePort | int }}
+          readinessProbe:
+            httpGet:
+              path: /minio/health/live
+              port: {{ .Values.service.consolePort | int }}
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 5
+            successThreshold: 2
+          livenessProbe:
+            httpGet:
+              path: /minio/health/live
+              port: {{ .Values.service.consolePort | int }}
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 5
+            successThreshold: 1
+          startupProbe:
+            httpGet:
+              path: /minio/health/live
+              port: {{ .Values.service.consolePort | int }}
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 60
+            successThreshold: 1
           env:
             {{ $secretName := (include "minio.secretName" .) }}
             {{ $envList := (default list .Values.environmentVariables) }}
