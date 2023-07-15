@@ -359,8 +359,8 @@ questions:
       type: boolean
       default: false
   - variable: cpuLimit
-    label: "CPU Limresource limitsit"
-    description: "CPU resource limit allow  plain integer values with suffix m(milli) e.g 1000m, 100."
+    label: "CPU Limit"
+    description: "CPU resource limit allow plain integer values with suffix m(milli) e.g 1000m, 100."
     group: "Resource Limits"
     schema:
       type: string
