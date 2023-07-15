@@ -19,7 +19,7 @@ webdavNetwork:
   httpPort: 30034
   https: false
   httpsPort: 30035
-  certificateID: 0
+  certificateID: null
 webdavRunAs:
   user: 568
   group: 568

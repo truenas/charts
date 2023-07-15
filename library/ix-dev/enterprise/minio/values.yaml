@@ -24,7 +24,7 @@ minioRunAs:
 minioNetwork:
   apiPort: 30000
   webPort: 30001
-  certificateID: 0
+  certificateID: null
   hostNetwork: true
   serverUrl: ''
   consoleUrl: ''

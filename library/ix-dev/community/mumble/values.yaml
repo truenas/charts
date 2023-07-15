@@ -21,7 +21,7 @@ mumbleConfig:
 mumbleNetwork:
   serverPort: 30018
   icePort: 30019
-  certificateID: 0
+  certificateID: null
 mumbleStorage:
   data:
     type: ixVolume

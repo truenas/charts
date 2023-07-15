@@ -15,7 +15,7 @@ jenkinsConfig:
 jenkinsNetwork:
   webPort: 30036
   https: false
-  certificateID: 0
+  certificateID: null
   agent: false
   agentPort: 50000
   hostNetwork: false
