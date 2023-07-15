@@ -135,7 +135,7 @@ questions:
                 label: Schedule
                 schema:
                   type: string
-                  default: "1 */24 * * *"
+                  default: "*/15 * * * *"
                   empty: false
 
   # Update strategy
