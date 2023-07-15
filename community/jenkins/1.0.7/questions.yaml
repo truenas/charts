@@ -1,0 +1,291 @@
+groups:
+  - name: Jenkins Configuration
+    description: Configure Jenkins
+  - name: User and Group Configuration
+    description: Configure User and Group for Jenkins
+  - name: Network Configuration
+    description: Configure Network for Jenkins
+  - name: Storage Configuration
+    description: Configure Storage for Jenkins
+  - name: Resources Configuration
+    description: Configure Resources for Jenkins
+
+portals:
+  web_portal:
+    protocols:
+      - "$kubernetes-resource_configmap_portal_protocol"
+    host:
+      - "$kubernetes-resource_configmap_portal_host"
+    ports:
+      - "$kubernetes-resource_configmap_portal_port"
+    path: "$kubernetes-resource_configmap_portal_path"
+
+questions:
+  - variable: TZ
+    group: Jenkins Configuration
+    label: Timezone
+    schema:
+      type: string
+      default: Etc/UTC
+      required: true
+      $ref:
+        - definitions/timezone
+
+  - variable: jenkinsConfig
+    label: ""
+    group: Jenkins Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: jenkinsJavaOpts
+          label: Additional Jenkins Java Options
+          description: |
+            Configure additional jenkins java options for Jenkins.</br>
+            See https://www.jenkins.io/doc/book/managing/system-properties
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: jenkinsJavaOpt
+                label: Jenkins Java Option
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: property
+                      label: Property
+                      description: |
+                        The property to set, see https://www.jenkins.io/doc/book/managing/system-properties </br>
+                        The prefix [-D] is automatically added.
+                      schema:
+                        type: string
+                        required: true
+                    - variable: value
+                      description: |
+                        The value to set for the property.</br>
+                      label: Value
+                      schema:
+                        type: string
+                        required: true
+        - variable: jenkinsOpts
+          label: Additional Jenkins Options
+          description: |
+            Configure additional jenkins options for Jenkins. </br>
+            see https://www.jenkins.io/doc/book/installing/initial-settings
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: jenkinsOption
+                label: Jenkins Option
+                description: |
+                  The option to set, see https://www.jenkins.io/doc/book/installing/initial-settings </br>
+                  The prefix [--] is automatically added.
+                schema:
+                  type: string
+                  required: true
+        - variable: additionalEnvs
+          label: Additional Environment Variables
+          description: Configure additional environment variables for Jenkins.
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: env
+                label: Environment Variable
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: name
+                      label: Name
+                      schema:
+                        type: string
+                        required: true
+                    - variable: value
+                      label: Value
+                      schema:
+                        type: string
+                        required: true
+
+  - variable: jenkinsNetwork
+    label: ""
+    group: Network Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: webPort
+          label: Web Port
+          description: The port for the Jenkins Web UI.
+          schema:
+            type: int
+            default: 30036
+            min: 9000
+            max: 65535
+            required: true
+        - variable: certificateID
+          label: Certificate
+          description: The certificate to use for HTTPS.
+          schema:
+            type: int
+            "null": true
+            $ref:
+              - "definitions/certificate"
+        - variable: agent
+          label: Enable Agent
+          description: Enable Agent Port for Jenkins.
+          schema:
+            type: boolean
+            default: false
+        - variable: agentPort
+          label: Agent Port
+          description: The port for the Jenkins Agent.
+          schema:
+            type: int
+            show_if: [["agent", "=", true]]
+            default: 50000
+            min: 9000
+            max: 65535
+            required: true
+        - variable: hostNetwork
+          label: Host Network
+          description: |
+            Bind to the host network. It's recommended to keep this disabled.</br>
+          schema:
+            type: boolean
+            default: false
+
+  - variable: jenkinsStorage
+    label: ""
+    group: Storage Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: home
+          label: Jenkins Home Storage
+          description: The path to store Jenkins Home Directory.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
+                schema:
+                  type: string
+                  required: true
+                  default: "ixVolume"
+                  enum:
+                    - value: "hostPath"
+                      description: Host Path (Path that already exists on the system)
+                    - value: "ixVolume"
+                      description: ixVolume (Dataset created automatically by the system)
+              - variable: datasetName
+                label: Dataset Name
+                schema:
+                  type: string
+                  show_if: [["type", "=", "ixVolume"]]
+                  required: true
+                  hidden: true
+                  immutable: true
+                  default: "home"
+                  $ref:
+                    - "normalize/ixVolume"
+              - variable: hostPath
+                label: Host Path
+                schema:
+                  type: hostpath
+                  show_if: [["type", "=", "hostPath"]]
+                  immutable: true
+                  required: true
+
+        - variable: additionalStorages
+          label: Additional Storage
+          description: Additional storage for Jenkins.
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: storageEntry
+                label: Storage Entry
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: type
+                      label: Type
+                      description: |
+                        ixVolume: Is dataset created automatically by the system.</br>
+                        Host Path: Is a path that already exists on the system.
+                      schema:
+                        type: string
+                        required: true
+                        default: "ixVolume"
+                        enum:
+                          - value: "hostPath"
+                            description: Host Path (Path that already exists on the system)
+                          - value: "ixVolume"
+                            description: ixVolume (Dataset created automatically by the system)
+                    - variable: mountPath
+                      label: Mount Path
+                      description: The path inside the container to mount the storage.
+                      schema:
+                        type: path
+                        required: true
+                    - variable: hostPath
+                      label: Host Path
+                      description: The host path to use for storage.
+                      schema:
+                        type: hostpath
+                        show_if: [["type", "=", "hostPath"]]
+                        required: true
+                    - variable: datasetName
+                      label: Dataset Name
+                      description: The name of the dataset to use for storage.
+                      schema:
+                        type: string
+                        show_if: [["type", "=", "ixVolume"]]
+                        required: true
+                        immutable: true
+                        default: "storage_entry"
+                        $ref:
+                          - "normalize/ixVolume"
+
+  - variable: resources
+    group: Resources Configuration
+    label: ""
+    schema:
+      type: dict
+      attrs:
+        - variable: limits
+          label: Limits
+          schema:
+            type: dict
+            attrs:
+              - variable: cpu
+                label: CPU
+                description: CPU limit for Jenkins.
+                schema:
+                  type: string
+                  max_length: 6
+                  valid_chars: '^(0\.[1-9]|[1-9][0-9]*)(\.[0-9]|m?)$'
+                  valid_chars_error: |
+                    Valid CPU limit formats are</br>
+                    - Plain Integer - eg. 1</br>
+                    - Float - eg. 0.5</br>
+                    - Milicpu - eg. 500m
+                  default: "4000m"
+                  required: true
+              - variable: memory
+                label: Memory
+                description: Memory limit for Jenkins.
+                schema:
+                  type: string
+                  max_length: 12
+                  valid_chars: '^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$'
+                  valid_chars_error: |
+                    Valid Memory limit formats are</br>
+                    - Suffixed with E/P/T/G/M/K - eg. 1G</br>
+                    - Suffixed with Ei/Pi/Ti/Gi/Mi/Ki - eg. 1Gi</br>
+                    - Plain Integer in bytes - eg. 1024</br>
+                    - Exponent - eg. 134e6
+                  default: "8Gi"
+                  required: true
