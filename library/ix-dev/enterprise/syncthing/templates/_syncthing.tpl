@@ -33,6 +33,8 @@ workload:
           env:
             PCAP: cap_chown,cap_dac_override,cap_fowner+ep
             STGUIADDRESS: "0.0.0.0:{{ .Values.syncthingNetwork.webPort }}"
+            # Set a custom override for the GUI assets
+            STGUIASSETS: /var/truenas/assets/gui
             # Disable automatic upgrades
             STNOUPGRADE: "true"
           fixedEnv:
@@ -66,113 +68,4 @@ workload:
       initContainers:
         {{- include "syncthing.certContainer" $ | nindent 8 -}}
       {{- end }}
-{{/* Service */}}
-service:
-  syncthing-web:
-    enabled: true
-    primary: true
-    type: NodePort
-    targetSelector: syncthing
-    ports:
-      webui:
-        enabled: true
-        primary: true
-        port: {{ .Values.syncthingNetwork.webPort }}
-        nodePort: {{ .Values.syncthingNetwork.webPort }}
-        targetSelector: syncthing
-  syncthing-discovery:
-    # Only enable this service if local discovery is enabled
-    enabled: {{ .Values.syncthingConfig.localDiscovery }}
-    type: NodePort
-    targetSelector: syncthing
-    ports:
-      discovery:
-        enabled: true
-        port: {{ .Values.syncthingNetwork.localDiscoveryPort }}
-        nodePort: {{ .Values.syncthingNetwork.localDiscoveryPort }}
-        targetPort: 21017
-        protocol: udp
-        targetSelector: syncthing
-  syncthing-transfer:
-    enabled: true
-    type: NodePort
-    targetSelector: syncthing
-    ports:
-      tcp:
-        enabled: true
-        primary: true
-        port: {{ .Values.syncthingNetwork.tcpPort }}
-        nodePort: {{ .Values.syncthingNetwork.tcpPort }}
-        targetPort: 22000
-        targetSelector: syncthing
-      quic:
-        enabled: true
-        port: {{ .Values.syncthingNetwork.quicPort }}
-        nodePort: {{ .Values.syncthingNetwork.quicPort }}
-        targetPort: 22000
-        protocol: udp
-        targetSelector: syncthing
-
-{{/* Persistence */}}
-persistence:
-  home:
-    enabled: true
-    type: {{ .Values.syncthingStorage.home.type }}
-    datasetName: {{ .Values.syncthingStorage.home.datasetName | default "" }}
-    hostPath: {{ .Values.syncthingStorage.home.hostPath | default "" }}
-    targetSelector:
-      syncthing:
-        syncthing:
-          mountPath: /var/syncthing
-        01-certs:
-          mountPath: /var/syncthing
-  configure:
-    enabled: true
-    type: configmap
-    objectName: syncthing-configure
-    defaultMode: "0770"
-    targetSelector:
-      syncthing:
-        syncthing:
-          mountPath: /configure.sh
-          subPath: configure.sh
-
-  {{- if not .Values.syncthingStorage.additionalStorages -}}
-    {{- fail "Syncthing - Expected at least one additional storage defined" -}}
-  {{- end -}}
-
-  {{- range $idx, $storage := .Values.syncthingStorage.additionalStorages }}
-  {{ printf "sync-%v" (int $idx) }}:
-    enabled: true
-    type: {{ $storage.type }}
-    datasetName: {{ $storage.datasetName | default "" }}
-    hostPath: {{ $storage.hostPath | default "" }}
-    targetSelector:
-      syncthing:
-        syncthing:
-          mountPath: {{ $storage.mountPath }}
-  {{- end }}
-
-  {{- if .Values.syncthingNetwork.certificateID }}
-  certs:
-    enabled: true
-    type: secret
-    objectName: syncthing-cert
-    defaultMode: "0600"
-    items:
-      - key: tls.key
-        path: https-key.pem
-      - key: tls.crt
-        path: https-cert.pem
-    targetSelector:
-      syncthing:
-        01-certs:
-          mountPath: /certs
-          readOnly: true
-
-scaleCertificate:
-  syncthing-cert:
-    enabled: true
-    id: {{ .Values.syncthingNetwork.certificateID }}
-    {{- end -}}
 {{- end -}}
