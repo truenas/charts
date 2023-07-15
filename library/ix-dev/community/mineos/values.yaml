@@ -21,7 +21,7 @@ mineosNetwork:
   mineosPortRangeStart: 30016
   mineosPortRangeEnd: 30017
   useHTTPS: false
-  certificateID: 0
+  certificateID: null
 mineosStorage:
   data:
     type: ixVolume

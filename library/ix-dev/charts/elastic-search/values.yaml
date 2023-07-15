@@ -22,7 +22,7 @@ esRunAs:
 esNetwork:
   httpPort: 30003
   hostNetwork: false
-  certificateID: ''
+  certificateID: null
 
 esStorage:
   data:
