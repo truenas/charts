@@ -88,6 +88,13 @@ questions:
             required: true
             $ref:
               - "definitions/nodeIP"
+        - variable: netinterf
+          label: Listen Interface (Device)
+          description: Set the interface where WireGuard sould listen for incoming connections.
+          schema:
+            type: string
+            required: true
+            default: "en0"
         - variable: password
           label: Password for WebUI
           description: When set, requires a password when logging in to the Web UI.
