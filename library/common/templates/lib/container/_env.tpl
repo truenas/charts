@@ -15,9 +15,12 @@ objectData: The object data to be used to render the container.
       {{- $value := "" -}}
       {{/* Only tpl valid values, there are cases that empty values after merges can be "<nil>" */}}
       {{- if not (kindIs "invalid" $v) -}}
-        {{- $value = tpl (toString $v) $rootCtx -}}
+        {{- $value = $v -}}
+        {{- if kindIs "string" $v -}}
+          {{- $value = tpl $v $rootCtx -}}
+        {{- end -}}
       {{- end }}
-  value: {{ $value | quote }}
+  value: {{ include "ix.v1.common.helper.makeIntOrNoop" $value | quote }}
     {{- else if kindIs "map" $v }}
   valueFrom:
       {{- $refs := (list "configMapKeyRef" "secretKeyRef" "fieldRef") -}}
