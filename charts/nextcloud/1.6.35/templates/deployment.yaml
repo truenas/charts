@@ -62,7 +62,7 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
             httpHeaders:
             - name: Host
               value: localhost
-          initialDelaySeconds: 10
+          initialDelaySeconds: 30
           periodSeconds: 5
           timeoutSeconds: 2
           failureThreshold: 60
@@ -150,10 +150,10 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
             - name: Host
               value: localhost
         {{ end }}
-          initialDelaySeconds: 10
-          periodSeconds: 10
-          timeoutSeconds: 5
-          failureThreshold: 5
+          initialDelaySeconds: 60
+          periodSeconds: 5
+          timeoutSeconds: 2
+          failureThreshold: 120
           successThreshold: 1
         volumeMounts:
         - name: nextcloud-data
