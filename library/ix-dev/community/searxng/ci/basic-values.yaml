@@ -1,0 +1,10 @@
+searxngConfig:
+  instanceName: SearXNG-Test
+
+searxngNetwork:
+  webPort: 31000
+
+searxngStorage:
+  config:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/config

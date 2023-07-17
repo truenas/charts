@@ -1,0 +1,14 @@
+searxngNetwork:
+  webPort: 31000
+
+searxngStorage:
+  config:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/config
+  additionalStorages:
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/data1
+    mountPath: /data1
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/data2
+    mountPath: /data2
