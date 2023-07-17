@@ -1,10 +1,9 @@
 name: bazarr
-description: Bazarr is a companion application to Sonarr and Radarr. It manages and
-  downloads subtitles based on your requirements.
+description: Bazarr is a companion application to Sonarr and Radarr. It manages and downloads subtitles based on your requirements.
 annotations:
   title: Bazarr
 type: application
-version: 1.0.4
+version: 1.0.5
 apiVersion: v2
 appVersion: 1.2.3
 kubeVersion: '>=1.16.0-0'
@@ -15,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.0.11
+    version: 1.0.12
 home: https://www.bazarr.media/
 icon: https://github.com/morpheus65535/bazarr/blob/master/frontend/public/images/logo128.png?raw=true
 sources:
