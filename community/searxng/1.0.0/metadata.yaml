@@ -1,0 +1,12 @@
+runAsContext:
+  - userName: searxng
+    groupName: searxng
+    gid: 0
+    uid: 0
+    description: SearXNG requires root privileges to start it's sub-processes.
+capabilities:
+  - name: SETUID
+    description: SearXNG requires this ability to switch user for sub-processes.
+  - name: SETGID
+    description: SearXNG requires this ability to switch group for sub-processes.
+hostMounts: []
