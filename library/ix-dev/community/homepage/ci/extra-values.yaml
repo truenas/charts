@@ -1,0 +1,21 @@
+homepageConfig:
+  additionalEnvs:
+    - name: HOMEPAGE_VAR_SOMETHING
+      value: some-value
+    - name: HOMEPAGE_FILE_SOMETHING
+      value: /some/path
+
+homepageNetwork:
+  webPort: 31000
+
+homepageStorage:
+  config:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/config
+  additionalStorages:
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/data1
+    mountPath: /data1
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/data2
+    mountPath: /data2

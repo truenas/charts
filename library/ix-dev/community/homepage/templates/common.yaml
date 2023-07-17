@@ -1,0 +1,15 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "homepage.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "homepage.persistence" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "homepage.service" $ | fromYaml) -}}
+{{/* FIXME: https://github.com/benphelps/homepage/pull/1627
+Currently it fills logs with errors failing to retrieve ingresses / traefik ingresses
+{{- $_ := mustMergeOverwrite .Values (include "homepage.rbac" $ | fromYaml) -}}
+*/}}
+
+{{/* Create the configmap for portal manually*/}}
+{{- include "homepage.portal" $ -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}

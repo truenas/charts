@@ -1,0 +1,26 @@
+image:
+  repository: ghcr.io/benphelps/homepage
+  pullPolicy: IfNotPresent
+  tag: v0.6.21
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+homepageConfig:
+  additionalEnvs: []
+
+homepageNetwork:
+  webPort: 30054
+  hostNetwork: false
+
+homepageRunAs:
+  user: 568
+  group: 568
+
+homepageStorage:
+  config:
+    type: ixVolume
+    datasetName: config
+  additionalStorages: []
