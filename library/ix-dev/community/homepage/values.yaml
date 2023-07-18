@@ -15,10 +15,6 @@ homepageNetwork:
   webPort: 30054
   hostNetwork: false
 
-homepageRunAs:
-  user: 568
-  group: 568
-
 homepageStorage:
   config:
     type: ixVolume
