@@ -17,6 +17,7 @@ workload:
           env:
             PLEX_URL: {{ .Values.palConfig.plexURL }}
             PLEX_TOKEN: {{ .Values.palConfig.plexToken }}
+            CONTAINERIZED: "true"
           {{ with .Values.palConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
