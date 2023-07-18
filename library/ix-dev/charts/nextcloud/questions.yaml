@@ -138,7 +138,10 @@ questions:
             default: false
         - variable: max_upload_size
           label: "Max Upload Size (Giga Bytes)"
-          description: "Maximum upload size in GB"
+          description: |
+            Applies the timeout to the following settings:</br>
+            - client_max_body_size in nginx</br>
+            - post_max_size and upload_max_filesize in php</br>
           schema:
             type: int
             default: 3
