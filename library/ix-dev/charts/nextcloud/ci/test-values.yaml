@@ -12,12 +12,12 @@ environmentVariables: []
 ixChartContext: {}
 nginxConfig:
   proxy_timeouts: 120
-  client_max_body_size: 5G
 nextcloud:
   datadir: /var/www/html/data
   host: nextcloud.kube.home
   install_ffmpeg: true
   install_smbclient: true
+  max_upload_size: 5
   password: changeme
   username: admin
 postgresAppVolumeMounts:

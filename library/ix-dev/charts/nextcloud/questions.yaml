@@ -85,13 +85,6 @@ questions:
             type: int
             default: 60
             required: true
-        - variable: client_max_body_size
-          label: "Client Max body size (Giga Bytes)"
-          description: "Max body size in Giga Bytes"
-          schema:
-            type: int
-            default: 3
-            required: true
 
   - variable: nextcloud
     description: "Nextcloud configuration details"
@@ -143,6 +136,13 @@ questions:
           schema:
             type: boolean
             default: false
+        - variable: max_upload_size
+          label: "Max Upload Size (Giga Bytes)"
+          description: "Maximum upload size in GB"
+          schema:
+            type: int
+            default: 3
+            required: true
 
   - variable: cronjob
     description: "Setup cronjob for nextcloud"
