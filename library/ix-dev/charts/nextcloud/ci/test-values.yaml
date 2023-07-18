@@ -10,6 +10,9 @@ dnsConfig:
 emptyDirVolumes: true
 environmentVariables: []
 ixChartContext: {}
+nginxConfig:
+  proxy_timeouts: 120
+  client_max_body_size: 5G
 nextcloud:
   datadir: /var/www/html/data
   host: nextcloud.kube.home

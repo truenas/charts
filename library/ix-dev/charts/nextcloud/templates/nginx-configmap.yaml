@@ -24,7 +24,7 @@ data:
         ssl_certificate_key '/etc/nginx-certs/private.key';
 
         # maximum 3GB Upload File; change to fit your needs
-        client_max_body_size 3G;
+        client_max_body_size {{ .Values.nginxConfig.client_max_body_size | default 3 }}G;
 
         add_header Strict-Transport-Security "max-age=15552000; includeSubDomains; preload" always;
 
@@ -59,9 +59,10 @@ data:
           proxy_set_header X-Forwarded-Port  $server_port;
 
           # Proxy timeouts
-          proxy_connect_timeout              60s;
-          proxy_send_timeout                 60s;
-          proxy_read_timeout                 60s;
+          {{- $timeout := .Values.nginxConfig.proxy_timeouts | default 60 -}}
+          proxy_connect_timeout              {{ $timeout }}s;
+          proxy_send_timeout                 {{ $timeout }}s;
+          proxy_read_timeout                 {{ $timeout }}s;
         }
       }
     }
