@@ -30,8 +30,9 @@ workload:
                 - SETGID
                 - SETFCAP
                 - SETPCAP
+                - SYS_ADMIN
           env:
-            PCAP: cap_chown,cap_dac_override,cap_fowner+ep
+            PCAP: cap_sys_admin,cap_chown,cap_dac_override,cap_fowner+ep
             STGUIADDRESS: "0.0.0.0:{{ .Values.syncthingNetwork.webPort }}"
             # Set a custom override for the GUI assets
             STGUIASSETS: /var/truenas/assets/gui
