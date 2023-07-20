@@ -14,8 +14,8 @@ sabnzbdStorage:
     hostPath: /mnt/{{ .Release.Namespace }}/config
   additionalStorages:
   - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/pop_music
-    mountPath: /pop_music
+    hostPath: /mnt/{{ .Release.Namespace }}/data1
+    mountPath: /data1
   - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/country_music
-    mountPath: /country_music
+    hostPath: /mnt/{{ .Release.Namespace }}/data2
+    mountPath: /data2
