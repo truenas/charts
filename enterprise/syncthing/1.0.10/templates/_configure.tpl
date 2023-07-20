@@ -49,6 +49,7 @@ configmap:
         setConfig defaults folder sync-ownership set -- 1
         setConfig defaults folder send-xattrs set -- 1
         setConfig defaults folder sync-xattrs set -- 1
+        setConfig defaults folder ignore-perms set -- 1
   syncthing-truenas-logo:
     enabled: true
     data:
