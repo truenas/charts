@@ -1,0 +1,12 @@
+pgadminNetwork:
+  webPort: 30000
+  hostNetwork: true
+
+pgadminConfig:
+  adminEmail: some@email.com
+  adminPassword: somepassword
+
+pgadminStorage:
+  config:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/config
