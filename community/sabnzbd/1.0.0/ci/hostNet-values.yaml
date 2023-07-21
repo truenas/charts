@@ -1,0 +1,8 @@
+sabnzbdNetwork:
+  webPort: 30000
+  hostNetwork: true
+
+sabnzbdStorage:
+  config:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/config
