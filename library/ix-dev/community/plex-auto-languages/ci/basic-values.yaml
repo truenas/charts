@@ -1,0 +1,14 @@
+ci: true
+
+palRunAs:
+  user: 1000
+  group: 1000
+
+palConfig:
+  plexURL: http://plex:32400
+  plexToken: some-token
+
+palStorage:
+  config:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/config
