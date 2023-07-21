@@ -4,5 +4,7 @@ runAsContext:
     gid: 5050
     uid: 5050
     description: pgAdmin runs as a non-root user.
-capabilities: []
+capabilities:
+  - name: NET_BIND_SERVICE
+    description: pgAdmin requires this ability to bind to privileged ports.
 hostMounts: []
