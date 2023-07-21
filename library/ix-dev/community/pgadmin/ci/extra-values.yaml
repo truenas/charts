@@ -1,0 +1,18 @@
+pgadminConfig:
+  adminEmail: some@email.com
+  adminPassword: somepassword
+
+pgadminNetwork:
+  webPort: 31000
+
+pgadminStorage:
+  config:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/config
+  additionalStorages:
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/db1
+    mountPath: /db1
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/db2
+    mountPath: /db2
