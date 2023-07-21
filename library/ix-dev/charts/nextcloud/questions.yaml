@@ -83,6 +83,7 @@ questions:
             - proxy_read_timeout</br>
           schema:
             type: int
+            min: 30
             default: 60
             required: true
 
@@ -145,6 +146,7 @@ questions:
           schema:
             type: int
             default: 3
+            min: 1
             required: true
 
   - variable: cronjob
