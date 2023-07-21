@@ -141,7 +141,7 @@ questions:
       For Multi Node Multi Drive (MNMD), the entry will look like this:</br>
       Example Entry - https://minio{1...3}.example.com:30000/data{1...4}</br></br>
       Note that each host must use the same port number and the same number of storage items.</br>
-      In both cases /data{1..4} is the directories to be used for MinIO.
+      In both cases /data{1...4} is the directories to be used for MinIO.
       You have to add additional storage for each data entry.
     schema:
       type: boolean
