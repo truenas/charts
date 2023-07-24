@@ -15,6 +15,11 @@
     {{- $dbPass = ((index .data "POSTGRES_PASSWORD") | b64dec) -}}
   {{- end -}}
 
+  {{/* Temporary set dynamic db details on values,
+  so we can print them on the notes */}}
+  {{- $_ := set .Values "vaultwardenDbPass" $dbPass -}}
+  {{- $_ := set .Values "vaultwardenDbHost" $dbHost -}}
+
   {{ $dbURL := (printf "postgres://%s:%s@%s:5432/%s?sslmode=disable" $dbUser $dbPass $dbHost $dbName) }}
 secret:
   postgres-creds:
