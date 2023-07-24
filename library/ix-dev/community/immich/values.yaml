@@ -69,3 +69,21 @@ immichStorage:
   pgBackup:
     type: ixVolume
     datasetName: pgBackup
+
+notes:
+  custom: |
+    ## Database
+    You can connect to the database using the PGAdmin App from the catalog
+
+    <details>
+      <summary>Database Details</summary>
+
+      - Database: `immich`
+      - Username: `immich`
+      - Password: `{{ .Values.immichDbPass }}`
+      - Host:     `{{ .Values.immichDbHost }}.{{ .Release.Namespace }}.svc.cluster.local`
+      - Port:     `5432`
+
+    </details>
+    {{- $_ := unset .Values "immichDbPass" }}
+    {{- $_ := unset .Values "immichDbHost" }}
