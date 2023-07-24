@@ -26,7 +26,7 @@
 
   {{- $mlURL := "false" -}}
   {{- if .Values.immichConfig.enableML -}}
-    {{- $mlURL = printf "http://%v-machinelearning:%v" $fullname .Values.immichNetwork.microservicesPort -}}
+    {{- $mlURL = printf "http://%v-machinelearning:%v" $fullname .Values.immichNetwork.machinelearningPort -}}
   {{- end }}
 
 secret:
