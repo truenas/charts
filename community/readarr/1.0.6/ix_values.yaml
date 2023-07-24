@@ -1,25 +1,23 @@
 image:
-  repository: ghcr.io/onedr0p/bazarr
+  repository: ghcr.io/onedr0p/readarr-develop
   pullPolicy: IfNotPresent
-  tag: 1.2.3
+  tag: 0.2.4.1999
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-bazarrConfig:
+readarrConfig:
+  instanceName: Readarr
   additionalEnvs: []
-
-bazarrNetwork:
-  webPort: 30046
+readarrNetwork:
+  webPort: 30045
   hostNetwork: false
-
-bazarrRunAs:
+readarrRunAs:
   user: 568
   group: 568
-
-bazarrStorage:
+readarrStorage:
   config:
     type: ixVolume
     datasetName: config
