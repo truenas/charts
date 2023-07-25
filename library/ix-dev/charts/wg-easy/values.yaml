@@ -15,7 +15,7 @@ podOptions:
 wgNetwork:
   udpPort: 30057
   webPort: 30058
-  hostNetwork: false
+  hostNetwork: true
 
 wgConfig:
   host: ''
