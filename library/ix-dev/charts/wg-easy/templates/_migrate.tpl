@@ -51,12 +51,12 @@
 
     {{- $conf := .Values.appVolumeMounts.config -}}
     {{- if $conf.hostPathEnabled -}}
-      {{- $_ := set .Values.wgStorage.config (dict
+      {{- $_ := set .Values.wgStorage "config" (dict
                                                 "type" "hostPath"
                                                 "hostPath" $conf.hostPath
                                               ) -}}
     {{- else -}}
-      {{- $_ := set .Values.wgStorage.config (dict
+      {{- $_ := set .Values.wgStorage "config" (dict
                                                 "type" "ixVolume"
                                                 "datasetName" $conf.datasetName
                                               ) -}}
@@ -74,6 +74,6 @@
                                         "hostPath" $item.hostPath
                                         ) -}}
     {{- end -}}
-    {{- $_ := set $.Values.wgStorage.additionalStorages $items -}}
+    {{- $_ := set $.Values.wgStorage "additionalStorages" $items -}}
   {{- end -}}
 {{- end -}}
