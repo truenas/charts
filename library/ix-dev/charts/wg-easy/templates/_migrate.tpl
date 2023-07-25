@@ -55,6 +55,11 @@
                                                 "type" "hostPath"
                                                 "hostPath" $conf.hostPath
                                               ) -}}
+    {{- else if $conf.emptyDir -}} {{/* CI case only */}}
+      {{- $_ := set .Values.wgStorage "config" (dict
+                                                "type" "hostPath"
+                                                "hostPath" (printf "/mnt/%s/config" $.Release.Name)
+                                              ) -}}
     {{- else -}}
       {{- $_ := set .Values.wgStorage "config" (dict
                                                 "type" "ixVolume"
