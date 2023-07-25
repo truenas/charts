@@ -1,7 +1,7 @@
 {{- define "wgeasy.migrate" -}}
   {{/* If this key is missing we have already migrated */}}
   {{- if hasKey .Values "wgUDPPort" -}}
-
+    {{- fail (toYaml .Values) -}}
     {{/* Migrate Resources */}}
     {{- if not .Values.resources -}}
       {{- $_ := set .Values "resources" dict -}}
@@ -80,5 +80,7 @@
                                         ) -}}
     {{- end -}}
     {{- $_ := set $.Values.wgStorage "additionalStorages" $items -}}
+    {{- fail (toYaml .Values) -}}
+
   {{- end -}}
 {{- end -}}
