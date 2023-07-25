@@ -1,7 +1,288 @@
 {
     "charts": {
+<<<<<<< HEAD
         "photoprism": {
             "app_readme": "<h1>Photo Prism</h1>\n<p>PhotoPrism is a server-based application for browsing, organizing and sharing your personal photo collection.</p>",
+=======
+        "prometheus": {
+            "app_readme": "<h1>Prometheus</h1>\n<p><a href=\"https://prometheus.io/\">Prometheus</a> - Monitoring system and time series database.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>prometheus</code> directories.\nAfterward, the <code>prometheus</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAlso an empty configuration file will be created.</p>\n</blockquote>\n<p>The configuration file is located at <code>/config/prometheus.yml</code> inside the container.\nData is stored at <code>/data</code> inside the container.</p>",
+            "categories": [
+                "monitoring"
+            ],
+            "description": "The Prometheus monitoring system and time series database.",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://prometheus.io",
+            "location": "/__w/charts/charts/charts/prometheus",
+            "latest_version": "1.0.23",
+            "latest_app_version": "v2.47.2",
+            "latest_human_version": "v2.47.2_1.0.23",
+            "last_update": "2023-10-28 18:49:10",
+            "name": "prometheus",
+            "recommended": false,
+            "title": "Prometheus",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [
+                "metrics",
+                "storage"
+            ],
+            "screenshots": [
+                "https://media.sys.truenas.net/apps/prometheus/screenshots/screenshot1.png"
+            ],
+            "sources": [
+                "https://github.com/prometheus/prometheus",
+                "https://github.com/truenas/charts/tree/master/charts/prometheus",
+                "https://prometheus.io"
+            ],
+            "icon_url": "https://media.sys.truenas.net/apps/prometheus/icons/icon.png"
+        },
+        "elastic-search": {
+            "app_readme": "<h1>Elastic Search</h1>\n<blockquote>\n<p>During the installation process, a container will be launched with <strong>root</strong> privileges. This is required\nin order to apply the correct permissions to the <code>Elastic Search</code> data directory. Afterward, the <code>Elastic Search</code> container\nwill run as a <strong>non</strong>-root user (default <code>568</code>).</p>\n</blockquote>\n<p>If you want to apply additional configuration you can by using additional environment variables.</p>\n<p>See the <a href=\"https://www.elastic.co/guide/en/elasticsearch/reference/master/docker.html#docker-configuration-methods\">Elastic Search documentation</a>\nfor more information.</p>",
+            "categories": [
+                "monitoring"
+            ],
+            "description": "Elasticsearch is the distributed, RESTful search and analytics engine at the heart of the Elastic Stack.",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://www.elastic.co",
+            "location": "/__w/charts/charts/charts/elastic-search",
+            "latest_version": "1.0.29",
+            "latest_app_version": "8.11.0",
+            "latest_human_version": "8.11.0_1.0.29",
+            "last_update": "2023-11-08 12:52:59",
+            "name": "elastic-search",
+            "recommended": false,
+            "title": "Elastic Search",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [
+                "elastic",
+                "search",
+                "storage"
+            ],
+            "screenshots": [],
+            "sources": [
+                "https://www.elastic.co/",
+                "https://github.com/truenas/charts/tree/master/charts/elastic-search",
+                "https://www.elastic.co/guide/en/elasticsearch/reference/master/docker.html#docker-configuration-methods"
+            ],
+            "icon_url": "https://media.sys.truenas.net/apps/elastic-search/icons/icon.svg"
+        },
+        "wg-easy": {
+            "app_readme": "<h1>WG-Easy</h1>\n<p><a href=\"https://github.com/WeeJeWel/wg-easy\">WG-Easy (WireGuard Easy)</a> is the easiest way to install &amp; manage WireGuard!</p>",
+            "categories": [
+                "networking"
+            ],
+            "description": "WG-Easy is the easiest way to install & manage WireGuard!",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://github.com/WeeJeWel/wg-easy",
+            "location": "/__w/charts/charts/charts/wg-easy",
+            "latest_version": "1.0.12",
+            "latest_app_version": "7",
+            "latest_human_version": "7_1.0.12",
+            "last_update": "2023-10-19 04:50:58",
+            "name": "wg-easy",
+            "recommended": false,
+            "title": "WG Easy",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [
+                "vpn",
+                "wireguard"
+            ],
+            "screenshots": [
+                "https://media.sys.truenas.net/apps/wg-easy/screenshots/screenshot1.png"
+            ],
+            "sources": [
+                "https://github.com/WeeJeWel/wg-easy",
+                "https://github.com/truenas/charts/tree/master/charts/wg-easy"
+            ],
+            "icon_url": "https://media.sys.truenas.net/apps/wg-easy/icons/icon.png"
+        },
+        "syncthing": {
+            "app_readme": "<h1>Syncthing</h1>\n<p><a href=\"https://syncthing.net/\">syncthing</a> is a continuous file synchronization program. It synchronizes files between two or\nmore computers in real time, safely protected from prying eyes.</p>\n<blockquote>\n<p><strong>WARNING</strong> Do check out https://docs.syncthing.net/users/faq.html#what-things-are-synced to see what is synced.</p>\n</blockquote>",
+            "categories": [
+                "storage"
+            ],
+            "description": "Syncthing is a continuous file synchronization program.",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://syncthing.net/",
+            "location": "/__w/charts/charts/charts/syncthing",
+            "latest_version": "1.0.36",
+            "latest_app_version": "1.26.0",
+            "latest_human_version": "1.26.0_1.0.36",
+            "last_update": "2023-11-07 13:48:16",
+            "name": "syncthing",
+            "recommended": false,
+            "title": "Syncthing",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [
+                "backup",
+                "sync",
+                "file-sharing"
+            ],
+            "screenshots": [
+                "https://media.sys.truenas.net/apps/syncthing/screenshots/screenshot1.png",
+                "https://media.sys.truenas.net/apps/syncthing/screenshots/screenshot2.png",
+                "https://media.sys.truenas.net/apps/syncthing/screenshots/screenshot3.png",
+                "https://media.sys.truenas.net/apps/syncthing/screenshots/screenshot4.png"
+            ],
+            "sources": [
+                "https://syncthing.net",
+                "https://github.com/truenas/charts/tree/master/charts/syncthing"
+            ],
+            "icon_url": "https://media.sys.truenas.net/apps/syncthing/icons/icon.svg"
+        },
+        "diskoverdata": {
+            "app_readme": "<p>DiskOver App for TrueNAS SCALE</p>",
+            "categories": [
+                "monitoring"
+            ],
+            "description": "Diskover is used to monitor size/volumes of distributed dataset.",
+            "healthy": true,
+            "healthy_error": null,
+<<<<<<< HEAD
+            "home": "https://github.com/diskoverdata/diskover-community",
+            "location": "/__w/charts/charts/charts/diskoverdata",
+            "latest_version": "1.0.14",
+            "latest_app_version": "2.0.1",
+            "latest_human_version": "2.0.1_1.0.14",
+            "last_update": "2023-10-19 04:50:58",
+            "name": "diskoverdata",
+=======
+            "home": "https://github.com/WeeJeWel/wg-easy",
+            "location": "/__w/charts/charts/charts/wg-easy",
+            "latest_version": "2.0.0",
+            "latest_app_version": "7",
+            "latest_human_version": "7_1.0.10",
+            "last_update": "2023-07-26 08:13:46",
+            "name": "wg-easy",
+>>>>>>> d66d0d87 (add 2.)
+            "recommended": false,
+            "title": "Diskover Data",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [
+                "storage",
+                "discovery"
+            ],
+            "screenshots": [
+                "https://media.sys.truenas.net/apps/diskoverdata/screenshots/screenshot1.png",
+                "https://media.sys.truenas.net/apps/diskoverdata/screenshots/screenshot2.png",
+                "https://media.sys.truenas.net/apps/diskoverdata/screenshots/screenshot3.png"
+            ],
+            "sources": [
+                "https://github.com/diskoverdata/diskover-community",
+                "https://github.com/truenas/charts/tree/master/charts/diskoverdata"
+            ],
+            "icon_url": "https://media.sys.truenas.net/apps/diskoverdata/icons/icon.png"
+        },
+        "minio": {
+            "app_readme": "<p><a href=\"https://min.io\">MinIO</a> is a High Performance Object Storage released under Apache License v2.0. It is API compatible with Amazon S3 cloud storage service. Use MinIO to build high performance infrastructure for machine learning, analytics and application data workloads.</p>\n<p><strong>NOTE</strong>\n- On installation, minIO data directory's ownership will be updated to minio:minio.\n- For existing installations that are exhibiting the upgrade to &gt;=1.5.0, the minIO data directory's ownership will be migrated to minio:minio.</p>",
+            "categories": [
+                "storage",
+                "S3"
+            ],
+            "description": "High Performance, Kubernetes Native Object Storage",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://min.io",
+            "location": "/__w/charts/charts/charts/minio",
+            "latest_version": "1.7.20",
+            "latest_app_version": "2023-03-13",
+            "latest_human_version": "2023-03-13_1.7.20",
+            "last_update": "2023-11-02 14:04:59",
+            "name": "minio",
+            "recommended": false,
+            "title": "MinIO",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [],
+            "screenshots": [
+                "https://media.sys.truenas.net/apps/minio/screenshots/screenshot1.png",
+                "https://media.sys.truenas.net/apps/minio/screenshots/screenshot2.png",
+                "https://media.sys.truenas.net/apps/minio/screenshots/screenshot3.png"
+            ],
+            "sources": [
+                "https://github.com/minio/minio",
+                "https://github.com/minio/charts"
+            ],
+            "icon_url": "https://media.sys.truenas.net/apps/minio/icons/icon.png"
+        },
+        "home-assistant": {
+            "app_readme": "<p>home-assistant App for TrueNAS SCALE</p>",
+            "categories": [
+                "productivity"
+            ],
+            "description": "Home Assistant App for TrueNAS SCALE",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://github.com/home-assistant/home-assistant",
+            "location": "/__w/charts/charts/charts/home-assistant",
+            "latest_version": "1.0.119",
+            "latest_app_version": "2023.11.1",
+            "latest_human_version": "2023.11.1_1.0.119",
+            "last_update": "2023-11-06 12:56:51",
+            "name": "home-assistant",
+            "recommended": false,
+            "title": "Home Assistant",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [
+                "home-automation",
+                "assistant"
+            ],
+            "screenshots": [
+                "https://media.sys.truenas.net/apps/home-assistant/screenshots/screenshot1.png"
+            ],
+            "sources": [
+                "https://github.com/home-assistant/home-assistant",
+                "https://github.com/truenas/charts/tree/master/charts/home-assistant"
+            ],
+            "icon_url": "https://media.sys.truenas.net/apps/home-assistant/icons/icon.png"
+        },
+        "emby": {
+            "app_readme": "<h1>Emby Server</h1>\n<p>Emby Server is a personal media server with apps on just about every device</p>",
+>>>>>>> e2df5abe (add 2.)
             "categories": [
                 "media"
             ],
