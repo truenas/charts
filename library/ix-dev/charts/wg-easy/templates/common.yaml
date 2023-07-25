@@ -1,6 +1,6 @@
-{{/* Apply helm migrations
+{{/* Apply helm migrations */}}
 {{- include "wgeasy.migrate" . -}}
-*/}}
+
 {{- include "ix.v1.common.loader.init" . -}}
 
 {{/* Merge the templates with Values */}}
