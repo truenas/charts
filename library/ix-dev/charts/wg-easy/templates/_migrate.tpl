@@ -20,8 +20,8 @@
     {{- if not .Values.wgNetwork -}}
       {{- $_ := set .Values "wgNetwork" dict -}}
     {{- end -}}
-    {{- $_ := set .Values.wgNetwork "udpPort" .Values.wgUDPPort -}}
-    {{- $_ := set .Values.wgNetwork "webPort" .Values.webPort -}}
+    {{- $_ := set .Values.wgNetwork "udpPort" (.Values.wgUDPPort | default 30057) -}}
+    {{- $_ := set .Values.wgNetwork "webPort" (.Values.webPort | default 30058) -}}
     {{- $_ := set .Values.wgNetwork "hostNetwork" .Values.hostNetwork -}}
 
     {{/* Migrate Config */}}
@@ -79,7 +79,5 @@
                                         ) -}}
     {{- end -}}
     {{- $_ := set $.Values.wgStorage "additionalStorages" $items -}}
-    {{- fail (toYaml .Values) -}}
-
   {{- end -}}
 {{- end -}}
