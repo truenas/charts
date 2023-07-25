@@ -35,7 +35,7 @@
       {{- $_ := set .Values.wgConfig "password" (.Values.wgeasy.password | default "") -}}
       {{- $_ := set .Values.wgConfig "keepAlive" .Values.wgeasy.keep_alive -}}
       {{- $_ := set .Values.wgConfig "clientMTU" .Values.wgeasy.client_mtu -}}
-      {{- $_ := set .Values.wgConfig "clientAddressRange" .Values.wgeasy.client_adderss_range -}}
+      {{- $_ := set .Values.wgConfig "clientAddressRange" .Values.wgeasy.client_address_range -}}
       {{- $_ := set .Values.wgConfig "clientDNSServer" .Values.wgeasy.client_dns_server -}}
       {{- $_ := set .Values.wgConfig "allowedIPs" .Values.wgeasy.allowed_ips -}}
       {{- $_ := set .Values.wgConfig "additionalEnvs" (.Values.environmentVariables | default list) -}}
