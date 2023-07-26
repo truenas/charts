@@ -9,7 +9,7 @@ def migrate(values):
     oldVersion = upgradeMeta.get('oldChartVersion', None)
     newVersion = upgradeMeta.get('newChartVersion', None)
 
-    # TODO: Is the raise exception the right way to handle this?
+    # TODO: Is the raise exception the right way to handle abort upgrade/migration?
     if oldVersion is None or newVersion is None:
         raise Exception('Missing upgrade metadata')
 
@@ -17,12 +17,18 @@ def migrate(values):
     if oldVersion.startswith('2'):
         return values
 
+    if oldVersion.startswith('1') and newVersion.startswith('1'):
+        return values
+
     # If the new (target) version is 2.x.x and the old version is 1.x.x
     # We have to migrate
     if newVersion.startswith('2') and oldVersion.startswith('1'):
-        # But only if the old version is 1.0.11
-        if oldVersion != '1.0.11':
-            raise Exception(f'Migration to 2.x.x is only allowed from 1.0.11, not {oldVersion}')
+        # But only if the old version is 1.0.11 or higher
+        oldVersionParts = oldVersion.split('.')
+        if len(oldVersionParts) != 3:
+            raise Exception(f'Invalid version {oldVersion}')
+        if int(oldVersionParts[2]) < 11:
+            raise Exception(f'Migration to 2.x.x is only allowed from 1.0.11 or higher')
 
     migratedKeys = []
     newValues = values.copy()
@@ -119,9 +125,9 @@ if __name__ == '__main__':
     if len(sys.argv) != 2:
         exit(1)
 
-    # with open(sys.argv[1], 'r') as f:
-    #     print(json.dumps(migrate(json.loads(f.read()))))
+    with open(sys.argv[1], 'r') as f:
+        print(json.dumps(migrate(json.loads(f.read()))))
 
-    if os.path.exists(sys.argv[1]):
-        with open(sys.argv[1], 'r') as f:
-            print(json.dumps(migrate(json.loads(f.read()))))
+    # if os.path.exists(sys.argv[1]):
+    #     with open(sys.argv[1], 'r') as f:
+    #         print(json.dumps(migrate(json.loads(f.read()))))
