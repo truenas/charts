@@ -5,9 +5,24 @@ import sys
 
 
 def migrate(values):
-    # If this key is missing we have already migrated
-    if 'wgUDPPort' not in values:
+    upgradeMeta = values.get('global', {}).get('ixChartContext', {}).get('upgradeMetadata', {})
+    oldVersion = upgradeMeta.get('oldChartVersion', None)
+    newVersion = upgradeMeta.get('newChartVersion', None)
+
+    # TODO: Is the raise exception the right way to handle this?
+    if oldVersion is None or newVersion is None:
+        raise Exception('Missing upgrade metadata')
+
+    # If the old version is 2.x.x, we have nothing to do
+    if oldVersion.startswith('2'):
         return values
+
+    # If the new (target) version is 2.x.x and the old version is 1.x.x
+    # We have to migrate
+    if newVersion.startswith('2') and oldVersion.startswith('1'):
+        # But only if the old version is 1.0.11
+        if oldVersion != '1.0.11':
+            raise Exception(f'Migration to 2.x.x is only allowed from 1.0.11, not {oldVersion}')
 
     migratedKeys = []
     newValues = values.copy()
