@@ -15,7 +15,7 @@ grafanaConfig:
 grafanaNetwork:
   hostNetwork: false
   webPort: 30037
-  certificateID:
+  certificateID: null
   rootURL: ''
 
 grafanaRunAs:
