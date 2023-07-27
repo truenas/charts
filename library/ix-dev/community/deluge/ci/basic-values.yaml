@@ -5,3 +5,6 @@ delugeStorage:
   downloads:
     type: hostPath
     hostPath: /mnt/{{ .Release.Name }}/downloads
+
+delugeNetwork:
+  exposeDaemon: true
