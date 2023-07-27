@@ -9,8 +9,6 @@ persistence:
       tmm:
         tmm:
           mountPath: /data
-        01-permissions:
-          mountPath: /mnt/directories/data
   tmp:
     enabled: true
     type: emptyDir
@@ -28,7 +26,5 @@ persistence:
       tmm:
         tmm:
           mountPath: {{ $storage.mountPath }}
-        01-permissions:
-          mountPath: /mnt/directories{{ $storage.mountPath }}
   {{- end }}
 {{- end -}}
