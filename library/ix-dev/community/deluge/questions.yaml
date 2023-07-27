@@ -108,7 +108,7 @@ questions:
             required: true
         - variable: exposeDaemon
           label: Expose Daemon Port
-          description: Expose the Deluge Daemon port</br>
+          description: Expose the Deluge Daemon port
           schema:
             type: boolean
             default: false
