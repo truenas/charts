@@ -10,8 +10,8 @@ tmmStorage:
     hostPath: /mnt/{{ .Release.Namespace }}/data
   additionalStorages:
   - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/pop_music
-    mountPath: /pop_music
+    hostPath: /mnt/{{ .Release.Namespace }}/tv-shows
+    mountPath: /tv-shows
   - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/country_music
-    mountPath: /country_music
+    hostPath: /mnt/{{ .Release.Namespace }}/movies
+    mountPath: /movies
