@@ -10,6 +10,11 @@
     {{- $dbPass = ((index .data "POSTGRES_PASSWORD") | b64dec) -}}
   {{- end -}}
 
+  {{/* Temporary set dynamic db details on values,
+  so we can print them on the notes */}}
+  {{- $_ := set .Values "immichDbPass" $dbPass -}}
+  {{- $_ := set .Values "immichDbHost" $dbHost -}}
+
   {{- $redisHost := (printf "%s-redis" $fullname) -}}
 
   {{- $redisPass := randAlphaNum 32 -}}
