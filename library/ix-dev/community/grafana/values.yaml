@@ -1,7 +1,7 @@
 image:
   repository: grafana/grafana
   pullPolicy: IfNotPresent
-  tag: 10.0.2
+  tag: 10.0.3
 
 resources:
   limits:
@@ -15,7 +15,7 @@ grafanaConfig:
 grafanaNetwork:
   hostNetwork: false
   webPort: 30037
-  certificateID: null
+  certificateID:
   rootURL: ''
 
 grafanaRunAs:
