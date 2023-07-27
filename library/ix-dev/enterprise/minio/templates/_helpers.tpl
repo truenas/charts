@@ -39,7 +39,26 @@
   {{- end -}}
 
   {{- if and (ne (len .Values.minioStorage) 1) (not .Values.minioMultiMode) -}}
-    {{- fail "Expected Multi Mode to be enabled, when more than 1 storage items added" -}}
+    {{- fail "Expected Multi Mode to be enabled, when more than 1 storage mountPaths added" -}}
+  {{- end -}}
+
+  {{- range $item := .Values.minioMultiMode -}}
+    {{- if hasPrefix "/" $item -}}
+      {{- if or (contains "{" $item) (contains "}" $item) -}}
+        {{- if not (contains "..." $item) -}}
+          {{- fail "Expected Multi Mode Item to have 3 dots when its a path with expansion eg [/some_path{1...4}]" -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- $mountPaths := list -}}
+  {{- range $item := .Values.minioStorage -}}
+    {{- $mountPaths = mustAppend $mountPaths $item.mountPath -}}
+  {{- end -}}
+
+  {{- if not (deepEqual ($mountPaths) (uniq $mountPaths)) -}}
+    {{- fail (printf "Expected mountPaths to be unique, but got [%v]" (join ", " $mountPaths)) -}}
   {{- end -}}
 {{- end -}}
 
