@@ -26,13 +26,13 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
             containerPort: 8000
             protocol: TCP
           - name: nginx-https
-            containerPort: 443
+            containerPort: {{ .Values.service.nodePort }}
             protocol: TCP
         livenessProbe:
           httpGet:
             scheme: HTTPS
             path: /status.php
-            port: 443
+            port: {{ .Values.service.nodePort }}
             httpHeaders:
             - name: Host
               value: localhost
@@ -45,7 +45,7 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
           httpGet:
             scheme: HTTPS
             path: /status.php
-            port: 443
+            port: {{ .Values.service.nodePort }}
             httpHeaders:
             - name: Host
               value: localhost
@@ -58,7 +58,7 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
           httpGet:
             scheme: HTTPS
             path: /status.php
-            port: 443
+            port: {{ .Values.service.nodePort }}
             httpHeaders:
             - name: Host
               value: localhost
@@ -77,6 +77,7 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
         {{ $envList = mustAppend $envList (dict "name" "POSTGRES_HOST" "value" (printf "%s:5432" (include "common.names.fullname" $postgres_values))) }}
         {{ $envList = mustAppend $envList (dict "name" "POSTGRES_DB" "value" (include "postgres.DatabaseName" .)) }}
         {{ $envList = mustAppend $envList (dict "name" "NEXTCLOUD_DATA_DIR" "value" .Values.nextcloud.datadir) }}
+        {{ $envList = mustAppend $envList (dict "name" "PHP_UPLOAD_LIMIT" "value" (printf "%vG" (.Values.nextcloud.max_upload_size | default 3))) }}
         {{ if eq (include "nginx.certAvailable" .) "true" }}
         {{ $envList = mustAppend $envList (dict "name" "APACHE_DISABLE_REWRITE_IP" "value" "1") }}
           {{ if and .Values.nextcloud.host .Values.service.nodePort }}
