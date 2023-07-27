@@ -9,8 +9,8 @@
     {{- $args = mustAppend $args "--advertise-exit-node" -}}
   {{- end -}}
 
-  {{- with .Values.tailscaleConfig.extraArgs -}}
-    {{- $args = mustAppend $args . -}}
+  {{- range $arg := .Values.tailscaleConfig.extraArgs -}}
+    {{- $args = mustAppend $args $arg -}}
   {{- end -}}
 
   {{- if $args -}}
