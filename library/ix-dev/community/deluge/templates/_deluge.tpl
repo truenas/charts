@@ -64,12 +64,14 @@ service:
         nodePort: {{ .Values.delugeNetwork.webPort }}
         targetPort: 8112
         targetSelector: deluge
+      {{- if .Values.delugeNetwork.exposeDaemon }}
       daemon:
-        enabled: {{ .Values.delugeNetwork.exposeDaemon }}
+        enabled: true
         port: {{ .Values.delugeNetwork.daemonPort }}
         nodePort: {{ .Values.delugeNetwork.daemonPort }}
         targetPort: 58846
         targetSelector: deluge
+      {{- end }}
   torrent:
     enabled: true
     type: NodePort
