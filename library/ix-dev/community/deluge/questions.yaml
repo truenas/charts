@@ -106,6 +106,25 @@ questions:
             min: 9000
             max: 65535
             required: true
+        - variable: exposeDaemon
+          label: Expose Daemon Port
+          description: Expose the Deluge Daemon port
+          schema:
+            type: boolean
+            default: false
+            show_if: [["hostNetwork", "=", false]]
+        - variable: daemonPort
+          label: Daemon Port
+          description: |
+            The port for the Deluge Daemon.</br>
+            (Internal port is always 58846)
+          schema:
+            type: int
+            show_if: [["exposeDaemon", "=", true]]
+            default: 58846
+            min: 9000
+            max: 65535
+            required: true
         - variable: torrentPort
           label: Torrent Port
           description: |
