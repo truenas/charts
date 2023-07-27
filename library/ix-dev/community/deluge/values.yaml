@@ -15,6 +15,8 @@ delugeNetwork:
   hostNetwork: false
   webPort: 30038
   torrentPort: 30039
+  exposeDaemon: false
+  daemonPort: 58846
 
 delugeID:
   user: 568
