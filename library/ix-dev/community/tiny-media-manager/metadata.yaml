@@ -1,0 +1,14 @@
+runAsContext:
+  - userName: root
+    groupName: root
+    gid: 0
+    uid: 0
+    description: tinyMediaManager runs as root user
+capabilities:
+  - name: CHOWN
+    description: tinyMediaManager is able to chown files.
+  - name: SETGID
+    description: tinyMediaManager is able to set group ID for it's sub-processes.
+  - name: SETUID
+    description: tinyMediaManager is able to set user ID for it's sub-processes.
+hostMounts: []
