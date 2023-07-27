@@ -94,13 +94,6 @@ questions:
             min: 9000
             max: 65535
             required: true
-        - variable: hostNetwork
-          label: Host Network
-          description: |
-            Bind to the host network. It's recommended to keep this disabled.</br>
-          schema:
-            type: boolean
-            default: false
 
   - variable: tmmStorage
     label: ""

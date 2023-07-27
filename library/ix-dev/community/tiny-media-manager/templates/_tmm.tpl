@@ -5,7 +5,7 @@ workload:
     primary: true
     type: Deployment
     podSpec:
-      hostNetwork: {{ .Values.tmmNetwork.hostNetwork }}
+      hostNetwork: false
       securityContext:
         fsGroup: {{ .Values.tmmID.group }}
       containers:
