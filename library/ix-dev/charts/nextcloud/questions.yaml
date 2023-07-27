@@ -66,6 +66,27 @@ questions:
       $ref:
         - "definitions/certificate"
 
+  - variable: nginxConfig
+    description: "Configure Nginx for Nextcloud"
+    label: "Nginx Configuration"
+    group: "Nextcloud Configuration"
+    schema:
+      type: dict
+      show_if: [["certificate", "!=", null]]
+      attrs:
+        - variable: proxy_timeouts
+          label: "Proxy timeouts (Seconds)"
+          description: |
+            Applies the timeout to the following settings:</br>
+            - proxy_connect_timeout</br>
+            - proxy_send_timeout</br>
+            - proxy_read_timeout</br>
+          schema:
+            type: int
+            min: 30
+            default: 60
+            required: true
+
   - variable: nextcloud
     description: "Nextcloud configuration details"
     label: "Nextcloud Configuration"
@@ -116,6 +137,17 @@ questions:
           schema:
             type: boolean
             default: false
+        - variable: max_upload_size
+          label: "Max Upload Size (Giga Bytes)"
+          description: |
+            Applies the timeout to the following settings:</br>
+            - client_max_body_size in nginx</br>
+            - post_max_size and upload_max_filesize in php</br>
+          schema:
+            type: int
+            default: 3
+            min: 1
+            required: true
 
   - variable: cronjob
     description: "Setup cronjob for nextcloud"
