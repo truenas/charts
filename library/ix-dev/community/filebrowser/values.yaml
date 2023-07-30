@@ -1,7 +1,7 @@
 image:
   repository: filebrowser/filebrowser
   pullPolicy: IfNotPresent
-  tag: v2.23.0
+  tag: v2.24.0
 
 resources:
   limits:
@@ -13,7 +13,7 @@ filebrowserConfig:
 
 filebrowserNetwork:
   webPort: 30044
-  certificateID: null
+  certificateID:
   hostNetwork: false
 
 filebrowserRunAs:
