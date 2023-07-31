@@ -18,6 +18,7 @@ nextcloud:
   install_ffmpeg: true
   install_smbclient: true
   max_upload_size: 5
+  opcache_memory_consumption: 128
   password: changeme
   username: admin
 postgresAppVolumeMounts:

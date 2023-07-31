@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "nextcloud-configuration"
+data:
+  opcache.ini: |
+    opcache.memory_consumption={{ .Values.nextcloud.opcache_memory_consumption }}
