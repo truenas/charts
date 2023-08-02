@@ -33,25 +33,31 @@
         {{/* Set the name of the secret */}}
         {{- $_ := set $objectData "name" $objectName -}}
         {{- $_ := set $objectData "shortName" $name -}}
+
         {{- if eq $objectData.type "smb-pv-pvc" -}}
           {{ $_ := set $objectData "provisioner" "smb.csi.k8s.io" }}
           {{ $_ := set $objectData "driver" "smb.csi.k8s.io" }}
+          {{ $_ := set $objectData "existingClaim" $objectName }}
+
+          {{/* Validate SMB CSI */}}
           {{/* TODO: Validate mountOptions */}}
+          {{- include "ix.v1.common.lib.storage.nfsCSI.validation" (dict "rootCtx" $ "objectData" $objectData) -}}
+
           {{/* TODO: Create secret with creds */}}
           {{- include "ix.v1.common.class.pv" (dict "rootCtx" $ "objectData" $objectData) -}}
 
         {{- else if eq $objectData.type "nfs-pv-pvc" -}}
           {{ $_ := set $objectData "provisioner" "nfs.csi.k8s.io" }}
           {{ $_ := set $objectData "driver" "nfs.csi.k8s.io" }}
+          {{ $_ := set $objectData "existingClaim" $objectName }}
 
           {{/* Validate NFS CSI */}}
+          {{/* TODO: Validate mountOptions */}}
           {{- include "ix.v1.common.lib.storage.nfsCSI.validation" (dict "rootCtx" $ "objectData" $objectData) -}}
 
-          {{/* TODO: Validate mountOptions */}}
           {{- include "ix.v1.common.class.pv" (dict "rootCtx" $ "objectData" $objectData) -}}
-
-
         {{- end -}}
+
         {{/* Call class to create the object */}}
         {{- include "ix.v1.common.class.pvc" (dict "rootCtx" $ "objectData" $objectData) -}}
       {{- end -}}
