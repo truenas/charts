@@ -1,0 +1,20 @@
+{{/* NFS CSI */}}
+{{/* Call this template:
+{{ include "ix.v1.common.lib.storage.nfsCSI" (dict "rootCtx" $ "objectData" $objectData) }}
+
+rootCtx: The root context of the chart.
+objectData:
+  driver: The name of the driver.
+  server: The server address.
+  path: The path to the NFS share.
+*/}}
+{{- define "ix.v1.common.lib.storage.nfsCSI" -}}
+  {{- $rootCtx := .rootCtx -}}
+  {{- $objectData := .objectData }}
+csi:
+  driver: {{ $objectData.driver }}
+  volumeHandle:
+  volumeAttributes:
+    server: {{ tpl $objectData.server $rootCtx }}
+    share: {{ tpl $objectData.path $rootCtx }}
+{{- end -}}

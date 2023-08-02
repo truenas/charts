@@ -2,6 +2,26 @@ suite: persistence validation test
 templates:
   - common.yaml
 tests:
+  - it: should fail with annotations not a dict
+    set:
+      persistence:
+        volume1:
+          enabled: true
+          annotations: not-a-dict
+    asserts:
+      - failedTemplate:
+          errorMessage: Persistence - Expected <annotations> to be a dictionary, but got [string]
+
+  - it: should fail with labels not a dict
+    set:
+      persistence:
+        volume1:
+          enabled: true
+          labels: not-a-dict
+    asserts:
+      - failedTemplate:
+          errorMessage: Persistence - Expected <labels> to be a dictionary, but got [string]
+
   - it: should fail with pod targetSelector not a map
     set:
       workload:
@@ -32,7 +52,32 @@ tests:
           type: not-a-type
     asserts:
       - failedTemplate:
-          errorMessage: Persistence - Expected <type> to be one of [emptyDir, hostPath, ixVolume, secret, configmap, device], but got [not-a-type]
+          errorMessage: Persistence - Expected <type> to be one of [smb-pv-pvc, nfs-pv-pvc, ix-zfs-pvc, pvc, emptyDir, hostPath, ixVolume, secret, configmap, device], but got [not-a-type]
+
+  - it: should fail with invalid accessMode
+    set:
+      persistence:
+        volume1:
+          enabled: true
+          type: ix-zfs-pvc
+          accessModes:
+            - not-an-access-mode
+    asserts:
+      - failedTemplate:
+          errorMessage: Persistent Volume Claim - Expected <accessModes> entry to be one of [ReadWriteOnce, ReadOnlyMany, ReadWriteMany, ReadWriteOncePod], but got [not-an-access-mode]
+
+  - it: should fail without storageClassName in ixChartContext
+    set:
+      global:
+        ixChartContext:
+          storageClassName: ""
+      persistence:
+        volume1:
+          enabled: true
+          type: ix-zfs-pvc
+    asserts:
+      - failedTemplate:
+          errorMessage: Persistent Volume Claim - Expected non-empty <global.ixChartContext.storageClassName> on [ix-zfs-pvc] type
 
   - it: should fail with non-existent configmap
     set:
@@ -90,3 +135,45 @@ tests:
     asserts:
       - failedTemplate:
           errorMessage: Persistence - Expected secret [my-non-existent-secret] defined in <objectName> to exist
+
+  - it: should fail without server on nfs-pv-pvc
+    set:
+      persistence:
+        volume1:
+          enabled: true
+          type: nfs-pv-pvc
+    asserts:
+      - failedTemplate:
+          errorMessage: NFS CSI - Expected <server> to be non-empty
+
+  - it: should fail without path on nfs-pv-pvc
+    set:
+      persistence:
+        volume1:
+          enabled: true
+          type: nfs-pv-pvc
+          server: my-server.local
+    asserts:
+      - failedTemplate:
+          errorMessage: NFS CSI - Expected <path> to be non-empty
+
+  - it: should fail without server on smb-pv-pvc
+    set:
+      persistence:
+        volume1:
+          enabled: true
+          type: smb-pv-pvc
+    asserts:
+      - failedTemplate:
+          errorMessage: SMB CSI - Expected <server> to be non-empty
+
+  - it: should fail without path on smb-pv-pvc
+    set:
+      persistence:
+        volume1:
+          enabled: true
+          type: smb-pv-pvc
+          server: my-server.local
+    asserts:
+      - failedTemplate:
+          errorMessage: SMB CSI - Expected <path> to be non-empty

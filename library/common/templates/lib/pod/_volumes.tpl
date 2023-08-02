@@ -15,7 +15,6 @@ objectData: The object data to be used to render the Pod.
 
       {{- $_ := set $persistence "shortName" $name -}}
       {{- $_ := set $persistence "type" ($persistence.type | default $rootCtx.Values.fallbackDefaults.persistenceType) -}}
-      {{- include "ix.v1.common.lib.persistence.validation" (dict "rootCtx" $rootCtx "objectData" $persistence) -}}
 
       {{- $selected := false -}}
 
@@ -53,6 +52,8 @@ objectData: The object data to be used to render the Pod.
           {{- include "ix.v1.common.lib.pod.volume.emptyDir" (dict "rootCtx" $rootCtx "objectData" $persistence) | trim | nindent 0 -}}
         {{- else if eq "device" $type -}}
           {{- include "ix.v1.common.lib.pod.volume.device" (dict "rootCtx" $rootCtx "objectData" $persistence) | trim | nindent 0 -}}
+        {{- else if (mustHas $type (list "smb-pv-pvc" "nfs-pv-pvc" "ix-zfs-pvc" "pvc")) -}}
+          {{- include "ix.v1.common.lib.pod.volume.pvc" (dict "rootCtx" $rootCtx "objectData" $persistence) | trim | nindent 0 -}}
         {{- end -}}
 
       {{- end -}}
