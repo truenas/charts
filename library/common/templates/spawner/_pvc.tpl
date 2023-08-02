@@ -41,7 +41,7 @@
 
           {{/* Validate SMB CSI */}}
           {{/* TODO: Validate mountOptions */}}
-          {{- include "ix.v1.common.lib.storage.nfsCSI.validation" (dict "rootCtx" $ "objectData" $objectData) -}}
+          {{- include "ix.v1.common.lib.storage.smbCSI.validation" (dict "rootCtx" $ "objectData" $objectData) -}}
 
           {{/* TODO: Create secret with creds */}}
           {{- include "ix.v1.common.class.pv" (dict "rootCtx" $ "objectData" $objectData) -}}
