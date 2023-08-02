@@ -101,4 +101,4 @@ persistence:
     type: pvc
     mountPath: /pvcscempty
     readOnly: false
-    storageClass: "-"
+    storageClass: ""
