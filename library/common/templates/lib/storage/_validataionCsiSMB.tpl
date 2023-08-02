@@ -21,6 +21,12 @@ objectData:
     {{- fail "SMB CSI - Expected <path> to be non-empty" -}}
   {{- end -}}
 
+  {{- if hasKey $rootCtx.Values.global "ixChartContext" -}}
+    {{- if not $rootCtx.Values.global.ixChartContext.hasSMBCSI -}}
+      {{- fail "SMB CSI - Not supported CSI" -}}
+    {{- end -}}
+  {{- end -}}
+
   {{/* TODO: Allow only specific opts?
   {{- $validOpts := list -}}
   {{- range $opt := $objectData.mountOptions -}}

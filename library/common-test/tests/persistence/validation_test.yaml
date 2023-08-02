@@ -177,3 +177,31 @@ tests:
     asserts:
       - failedTemplate:
           errorMessage: SMB CSI - Expected <path> to be non-empty
+
+  - it: should fail without CSI when in ixChartContext on smb-pv-pvc
+    set:
+      global:
+        ixChartContext: {}
+      persistence:
+        volume1:
+          enabled: true
+          type: smb-pv-pvc
+          server: my-server.local
+          path: /share
+    asserts:
+      - failedTemplate:
+          errorMessage: SMB CSI - Not supported CSI
+
+  - it: should fail without CSI when in ixChartContext on nfs-pv-pvc
+    set:
+      global:
+        ixChartContext: {}
+      persistence:
+        volume1:
+          enabled: true
+          type: nfs-pv-pvc
+          server: my-server.local
+          path: /share
+    asserts:
+      - failedTemplate:
+          errorMessage: NFS CSI - Not supported CSI
