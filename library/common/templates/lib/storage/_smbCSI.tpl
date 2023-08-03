@@ -15,7 +15,7 @@ csi:
   driver: {{ $objectData.driver }}
   volumeHandle:
   volumeAttributes:
-    source: {{ printf "%v/%v" (tpl $objectData.server $rootCtx) (tpl $objectData.path $rootCtx) }}
+    source: {{ printf "//%v/%v" (tpl $objectData.server $rootCtx) (tpl $objectData.path $rootCtx) }}
   nodeStageSecretRef:
     name: {{ $objectData.name }}
     namespace: {{ $rootCtx.Release.Namespace }}

@@ -230,3 +230,17 @@ tests:
     asserts:
       - failedTemplate:
           errorMessage: SMB CSI - Expected <password> to be non-empty
+
+  - it: should fail with server starting with // on smb-pv-pvc
+    set:
+      persistence:
+        volume1:
+          enabled: true
+          type: smb-pv-pvc
+          server: //my-server.local
+          path: /share
+          username: my-user
+          password: my-password
+    asserts:
+      - failedTemplate:
+          errorMessage: SMB CSI - Did not expect <server> to start with [//]

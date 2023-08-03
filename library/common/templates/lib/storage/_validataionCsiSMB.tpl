@@ -26,6 +26,10 @@ objectData:
     {{- end -}}
   {{- end -}}
 
+  {{- if hasPrefix "//" $objectData.server -}}
+    {{- fail "SMB CSI - Did not expect <server> to start with [//]" -}}
+  {{- end -}}
+
   {{/* TODO: Allow only specific opts?
   {{- $validOpts := list -}}
   {{- range $opt := $objectData.mountOptions -}}
