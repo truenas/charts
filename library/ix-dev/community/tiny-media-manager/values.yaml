@@ -1,0 +1,26 @@
+image:
+  repository: tinymediamanager/tinymediamanager
+  pullPolicy: IfNotPresent
+  tag: 4.3.12
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+tmmConfig:
+  password: ''
+  additionalEnvs: []
+
+tmmNetwork:
+  webPort: 30057
+
+tmmID:
+  user: 568
+  group: 568
+
+tmmStorage:
+  config:
+    type: ixVolume
+    datasetName: data
+  additionalStorages: []
