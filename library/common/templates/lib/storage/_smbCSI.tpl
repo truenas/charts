@@ -17,6 +17,6 @@ csi:
   volumeAttributes:
     source: {{ printf "%v/%v" (tpl $objectData.server $rootCtx) (tpl $objectData.path $rootCtx) }}
   nodeStageSecretRef:
-    name: # TODO:
+    name: {{ $objectData.name }}
     namespace: {{ $rootCtx.Release.Namespace }}
 {{- end -}}

@@ -37,24 +37,35 @@
         {{- if eq $objectData.type "smb-pv-pvc" -}}
           {{ $_ := set $objectData "provisioner" "smb.csi.k8s.io" }}
           {{ $_ := set $objectData "driver" "smb.csi.k8s.io" }}
-          {{ $_ := set $objectData "existingClaim" $objectName }}
 
           {{/* Validate SMB CSI */}}
           {{/* TODO: Validate mountOptions */}}
           {{- include "ix.v1.common.lib.storage.smbCSI.validation" (dict "rootCtx" $ "objectData" $objectData) -}}
 
-          {{/* TODO: Create secret with creds */}}
+          {{/* Create secret with creds */}}
+          {{- $secretData := (dict
+                                "name" $objectData.name
+                                "labels" ($objectData.labels | default dict)
+                                "labels" ($objectData.annotations | default dict)
+                                "data" (dict "username" $objectData.username "password" $objectData.password)
+                              ) -}}
+          {{- with $objectData.domain -}}
+            {{- $_ := set $secretData.data "domain" . -}}
+          {{- end -}}
+          {{- include "ix.v1.common.class.secret" (dict "rootCtx" $ "objectData" $secretData) -}}
+
+          {{/* Create the PV */}}
           {{- include "ix.v1.common.class.pv" (dict "rootCtx" $ "objectData" $objectData) -}}
 
         {{- else if eq $objectData.type "nfs-pv-pvc" -}}
           {{ $_ := set $objectData "provisioner" "nfs.csi.k8s.io" }}
           {{ $_ := set $objectData "driver" "nfs.csi.k8s.io" }}
-          {{ $_ := set $objectData "existingClaim" $objectName }}
 
           {{/* Validate NFS CSI */}}
           {{/* TODO: Validate mountOptions */}}
           {{- include "ix.v1.common.lib.storage.nfsCSI.validation" (dict "rootCtx" $ "objectData" $objectData) -}}
 
+          {{/* Create the PV */}}
           {{- include "ix.v1.common.class.pv" (dict "rootCtx" $ "objectData" $objectData) -}}
         {{- end -}}
 

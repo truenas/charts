@@ -62,9 +62,9 @@ spec:
     {{- end -}}
   {{- end -}}
   {{- if eq "smb-pv-pvc" $objectData.type -}}
-    {{- include "ix.v1.common.lib.storage.smbCSI" (dict "rootCtx" $ "objectData" $objectData) | trim | nindent 2 -}}
+    {{- include "ix.v1.common.lib.storage.smbCSI" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 -}}
   {{- else if eq "nfs-pv-pvc" $objectData.type -}}
-    {{- include "ix.v1.common.lib.storage.nfsCSI" (dict "rootCtx" $ "objectData" $objectData) | trim | nindent 2 -}}
+    {{- include "ix.v1.common.lib.storage.nfsCSI" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 -}}
   {{- end -}}
 {{- end -}}
 

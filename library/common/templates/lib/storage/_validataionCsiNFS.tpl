@@ -13,17 +13,16 @@ objectData:
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
-  {{- if not $objectData.server -}}
-    {{- fail "NFS CSI - Expected <server> to be non-empty" -}}
-  {{- end -}}
-
-  {{- if not $objectData.path -}}
-    {{- fail "NFS CSI - Expected <path> to be non-empty" -}}
-  {{- end -}}
-
   {{- if hasKey $rootCtx.Values.global "ixChartContext" -}}
     {{- if not $rootCtx.Values.global.ixChartContext.hasNFSCSI -}}
       {{- fail "NFS CSI - Not supported CSI" -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- $required := (list "server" "path") -}}
+  {{- range $item := $required -}}
+    {{- if not (get $objectData $item) -}}
+      {{- fail (printf "NFS CSI - Expected <%v> to be non-empty" $item) -}}
     {{- end -}}
   {{- end -}}
 

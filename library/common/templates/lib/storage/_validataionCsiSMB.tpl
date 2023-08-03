@@ -13,17 +13,16 @@ objectData:
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
-  {{- if not $objectData.server -}}
-    {{- fail "SMB CSI - Expected <server> to be non-empty" -}}
-  {{- end -}}
-
-  {{- if not $objectData.path -}}
-    {{- fail "SMB CSI - Expected <path> to be non-empty" -}}
-  {{- end -}}
-
   {{- if hasKey $rootCtx.Values.global "ixChartContext" -}}
     {{- if not $rootCtx.Values.global.ixChartContext.hasSMBCSI -}}
       {{- fail "SMB CSI - Not supported CSI" -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- $required := (list "server" "path" "username" "password") -}}
+  {{- range $item := $required -}}
+    {{- if not (get $objectData $item) -}}
+      {{- fail (printf "SMB CSI - Expected <%v> to be non-empty" $item) -}}
     {{- end -}}
   {{- end -}}
 
