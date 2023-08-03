@@ -1,0 +1,17 @@
+tmmConfig:
+  password: secret
+
+tmmNetwork:
+  webPort: 31000
+
+tmmStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/data
+  additionalStorages:
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/tv-shows
+    mountPath: /tv-shows
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/movies
+    mountPath: /movies
