@@ -187,7 +187,7 @@ tests:
           enabled: true
           type: smb-pv-pvc
           server: my-server.local
-          path: /share
+          path: share
     asserts:
       - failedTemplate:
           errorMessage: SMB CSI - Not supported CSI
@@ -201,7 +201,7 @@ tests:
           enabled: true
           type: nfs-pv-pvc
           server: my-server.local
-          path: /share
+          path: share
     asserts:
       - failedTemplate:
           errorMessage: NFS CSI - Not supported CSI
@@ -213,7 +213,7 @@ tests:
           enabled: true
           type: smb-pv-pvc
           server: my-server.local
-          path: /share
+          path: share
     asserts:
       - failedTemplate:
           errorMessage: SMB CSI - Expected <username> to be non-empty
@@ -225,7 +225,7 @@ tests:
           enabled: true
           type: smb-pv-pvc
           server: my-server.local
-          path: /share
+          path: share
           username: my-user
     asserts:
       - failedTemplate:
@@ -238,9 +238,35 @@ tests:
           enabled: true
           type: smb-pv-pvc
           server: //my-server.local
-          path: /share
+          path: share
           username: my-user
           password: my-password
     asserts:
       - failedTemplate:
           errorMessage: SMB CSI - Did not expect <server> to start with [//]
+
+  - it: should fail with path starting with / on smb-pv-pvc
+    set:
+      persistence:
+        volume1:
+          enabled: true
+          type: smb-pv-pvc
+          server: my-server.local
+          path: /share
+          username: my-user
+          password: my-password
+    asserts:
+      - failedTemplate:
+          errorMessage: SMB CSI - Did not expect <path> to start with [/]
+
+  - it: should fail with path starting with / on nfs-pv-pvc
+    set:
+      persistence:
+        volume1:
+          enabled: true
+          type: nfs-pv-pvc
+          server: //my-server.local
+          path: share
+    asserts:
+      - failedTemplate:
+          errorMessage: NFS CSI - Expected <path> to start with [/]

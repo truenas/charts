@@ -14,7 +14,7 @@ tests:
           enabled: true
           type: smb-pv-pvc
           server: my-server
-          path: /some/path
+          path: some/path
           username: my-user
           password: my-password
     asserts:

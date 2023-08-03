@@ -26,6 +26,10 @@ objectData:
     {{- end -}}
   {{- end -}}
 
+  {{- if not (hasPrefix "/" $objectData.path) -}}
+    {{- fail "NFS CSI - Expected <path> to start with [/]" -}}
+  {{- end -}}
+
   {{/* TODO: Allow only specific opts?
   {{- $validOpts := list -}}
   {{- range $opt := $objectData.mountOptions -}}

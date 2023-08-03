@@ -46,7 +46,7 @@
           {{- $secretData := (dict
                                 "name" $objectData.name
                                 "labels" ($objectData.labels | default dict)
-                                "labels" ($objectData.annotations | default dict)
+                                "annotations" ($objectData.annotations | default dict)
                                 "data" (dict "username" $objectData.username "password" $objectData.password)
                               ) -}}
           {{- with $objectData.domain -}}
