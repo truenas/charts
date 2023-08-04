@@ -13,7 +13,8 @@ objectData:
   {{- $objectData := .objectData }}
 csi:
   driver: {{ $objectData.driver }}
-  volumeHandle:
+  {{/* Create a unique handle, server/share#release-app-volumeName */}}
+  volumeHandle: {{ printf "%s/%s#%s" $objectData.server $objectData.path $objectData.name }}
   volumeAttributes:
     source: {{ printf "//%v/%v" (tpl $objectData.server $rootCtx) (tpl $objectData.path $rootCtx) }}
   nodeStageSecretRef:
