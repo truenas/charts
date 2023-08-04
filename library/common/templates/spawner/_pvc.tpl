@@ -39,7 +39,6 @@
           {{ $_ := set $objectData "driver" "smb.csi.k8s.io" }}
 
           {{/* Validate SMB CSI */}}
-          {{/* TODO: Validate mountOptions */}}
           {{- include "ix.v1.common.lib.storage.smbCSI.validation" (dict "rootCtx" $ "objectData" $objectData) -}}
 
           {{/* Create secret with creds */}}
@@ -62,7 +61,6 @@
           {{ $_ := set $objectData "driver" "nfs.csi.k8s.io" }}
 
           {{/* Validate NFS CSI */}}
-          {{/* TODO: Validate mountOptions */}}
           {{- include "ix.v1.common.lib.storage.nfsCSI.validation" (dict "rootCtx" $ "objectData" $objectData) -}}
 
           {{/* Create the PV */}}

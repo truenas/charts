@@ -4,7 +4,6 @@ templates:
 release:
   namespace: release-namespace
 tests:
-# TODO: volume tests
 # TODO: volumeMount tests
   - it: should create nfs pv with csi
     set:
