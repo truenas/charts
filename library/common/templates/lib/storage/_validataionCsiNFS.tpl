@@ -7,7 +7,7 @@ objectData:
   driver: The name of the driver.
   mountOptions: The mount options.
   server: The server address.
-  path: The path to the NFS share.
+  share: The share to the NFS share.
 */}}
 {{- define "ix.v1.common.lib.storage.nfsCSI.validation" -}}
   {{- $rootCtx := .rootCtx -}}
@@ -19,15 +19,15 @@ objectData:
     {{- end -}}
   {{- end -}}
 
-  {{- $required := (list "server" "path") -}}
+  {{- $required := (list "server" "share") -}}
   {{- range $item := $required -}}
     {{- if not (get $objectData $item) -}}
       {{- fail (printf "NFS CSI - Expected <%v> to be non-empty" $item) -}}
     {{- end -}}
   {{- end -}}
 
-  {{- if not (hasPrefix "/" $objectData.path) -}}
-    {{- fail "NFS CSI - Expected <path> to start with [/]" -}}
+  {{- if not (hasPrefix "/" $objectData.share) -}}
+    {{- fail "NFS CSI - Expected <share> to start with [/]" -}}
   {{- end -}}
 
   {{/* TODO: Allow only specific opts?

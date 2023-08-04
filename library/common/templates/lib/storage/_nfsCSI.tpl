@@ -6,7 +6,7 @@ rootCtx: The root context of the chart.
 objectData:
   driver: The name of the driver.
   server: The server address.
-  path: The path to the NFS share.
+  share: The share to the NFS share.
 */}}
 {{- define "ix.v1.common.lib.storage.nfsCSI" -}}
   {{- $rootCtx := .rootCtx -}}
@@ -14,8 +14,8 @@ objectData:
 csi:
   driver: {{ $objectData.driver }}
   {{/* Create a unique handle, server/share#release-app-volumeName */}}
-  volumeHandle: {{ printf "%s%s#%s" $objectData.server $objectData.path $objectData.name }}
+  volumeHandle: {{ printf "%s%s#%s" $objectData.server $objectData.share $objectData.name }}
   volumeAttributes:
     server: {{ tpl $objectData.server $rootCtx }}
-    share: {{ tpl $objectData.path $rootCtx }}
+    share: {{ tpl $objectData.share $rootCtx }}
 {{- end -}}

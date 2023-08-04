@@ -87,5 +87,3 @@ tests:
             app.kubernetes.io/managed-by: Helm
             app.kubernetes.io/version: *appVer
             app.kubernetes.io/name: common-test
-
-# TODO: Test PV Metadata

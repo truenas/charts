@@ -14,12 +14,12 @@ tests:
           enabled: true
           type: nfs-pv-pvc
           server: my-server
-          path: /my-path
+          share: /my-path
         my-volume2:
           enabled: true
           type: nfs-pv-pvc
           server: my-server
-          path: /my-path
+          share: /my-path
           mountOptions:
             - hard
             - nfsvers={{ .Values.version }}
@@ -86,14 +86,14 @@ tests:
           enabled: true
           type: smb-pv-pvc
           server: my-server
-          path: my-share
+          share: my-share
           username: my-user
           password: my-password
         my-volume2:
           enabled: true
           type: smb-pv-pvc
           server: my-server
-          path: my-share
+          share: my-share
           username: my-user2
           password: my-password2
           mountOptions:

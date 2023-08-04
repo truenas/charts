@@ -9,12 +9,12 @@ tests:
           enabled: true
           type: nfs-pv-pvc
           server: my-server
-          path: /some/path
+          share: /some/path
         my-volume2:
           enabled: true
           type: smb-pv-pvc
           server: my-server
-          path: some/path
+          share: some/path
           username: my-user
           password: my-password
     asserts:

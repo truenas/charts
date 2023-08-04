@@ -155,7 +155,7 @@ tests:
           server: my-server.local
     asserts:
       - failedTemplate:
-          errorMessage: NFS CSI - Expected <path> to be non-empty
+          errorMessage: NFS CSI - Expected <share> to be non-empty
 
   - it: should fail without server on smb-pv-pvc
     set:
@@ -176,7 +176,7 @@ tests:
           server: my-server.local
     asserts:
       - failedTemplate:
-          errorMessage: SMB CSI - Expected <path> to be non-empty
+          errorMessage: SMB CSI - Expected <share> to be non-empty
 
   - it: should fail without CSI when in ixChartContext on smb-pv-pvc
     set:
@@ -187,7 +187,7 @@ tests:
           enabled: true
           type: smb-pv-pvc
           server: my-server.local
-          path: share
+          share: share
     asserts:
       - failedTemplate:
           errorMessage: SMB CSI - Not supported CSI
@@ -201,7 +201,7 @@ tests:
           enabled: true
           type: nfs-pv-pvc
           server: my-server.local
-          path: share
+          share: share
     asserts:
       - failedTemplate:
           errorMessage: NFS CSI - Not supported CSI
@@ -213,7 +213,7 @@ tests:
           enabled: true
           type: smb-pv-pvc
           server: my-server.local
-          path: share
+          share: share
     asserts:
       - failedTemplate:
           errorMessage: SMB CSI - Expected <username> to be non-empty
@@ -225,7 +225,7 @@ tests:
           enabled: true
           type: smb-pv-pvc
           server: my-server.local
-          path: share
+          share: share
           username: my-user
     asserts:
       - failedTemplate:
@@ -238,7 +238,7 @@ tests:
           enabled: true
           type: smb-pv-pvc
           server: //my-server.local
-          path: share
+          share: share
           username: my-user
           password: my-password
     asserts:
@@ -252,12 +252,12 @@ tests:
           enabled: true
           type: smb-pv-pvc
           server: my-server.local
-          path: /share
+          share: /share
           username: my-user
           password: my-password
     asserts:
       - failedTemplate:
-          errorMessage: SMB CSI - Did not expect <path> to start with [/]
+          errorMessage: SMB CSI - Did not expect <share> to start with [/]
 
   - it: should fail with path starting with / on nfs-pv-pvc
     set:
@@ -266,7 +266,7 @@ tests:
           enabled: true
           type: nfs-pv-pvc
           server: //my-server.local
-          path: share
+          share: share
     asserts:
       - failedTemplate:
-          errorMessage: NFS CSI - Expected <path> to start with [/]
+          errorMessage: NFS CSI - Expected <share> to start with [/]

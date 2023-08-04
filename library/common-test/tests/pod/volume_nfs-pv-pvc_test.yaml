@@ -15,12 +15,12 @@ tests:
           enabled: true
           type: nfs-pv-pvc
           server: my-server
-          path: /my-path
+          share: /my-path
         my-volume2:
           enabled: true
           type: nfs-pv-pvc
           server: my-server
-          path: /my-path
+          share: /my-path
     asserts:
       - documentIndex: &pvDoc 0
         isKind:

@@ -15,14 +15,14 @@ tests:
           enabled: true
           type: smb-pv-pvc
           server: my-server
-          path: my-share
+          share: my-share
           username: my-user
           password: my-pass
         my-volume2:
           enabled: true
           type: smb-pv-pvc
           server: my-server2
-          path: my-share2
+          share: my-share2
           username: my-user2
           password: my-pass2
     asserts:

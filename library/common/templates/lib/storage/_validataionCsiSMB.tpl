@@ -7,7 +7,7 @@ objectData:
   driver: The name of the driver.
   mountOptions: The mount options.
   server: The server address.
-  path: The path to the SMB share.
+  share: The share to the SMB share.
 */}}
 {{- define "ix.v1.common.lib.storage.smbCSI.validation" -}}
   {{- $rootCtx := .rootCtx -}}
@@ -19,7 +19,7 @@ objectData:
     {{- end -}}
   {{- end -}}
 
-  {{- $required := (list "server" "path" "username" "password") -}}
+  {{- $required := (list "server" "share" "username" "password") -}}
   {{- range $item := $required -}}
     {{- if not (get $objectData $item) -}}
       {{- fail (printf "SMB CSI - Expected <%v> to be non-empty" $item) -}}
@@ -30,8 +30,8 @@ objectData:
     {{- fail "SMB CSI - Did not expect <server> to start with [//]" -}}
   {{- end -}}
 
-  {{- if hasPrefix "/" $objectData.path -}}
-    {{- fail "SMB CSI - Did not expect <path> to start with [/]" -}}
+  {{- if hasPrefix "/" $objectData.share -}}
+    {{- fail "SMB CSI - Did not expect <share> to start with [/]" -}}
   {{- end -}}
 
   {{/* TODO: Allow only specific opts?

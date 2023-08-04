@@ -22,7 +22,7 @@ tests:
           enabled: true
           type: nfs-pv-pvc
           server: my-server
-          path: /my-path
+          share: /my-path
           labels:
             label1: "{{ .Values.label1 }}"
             label2: label2
@@ -69,7 +69,7 @@ tests:
           enabled: true
           type: nfs-pv-pvc
           server: my-server
-          path: /my-path
+          share: /my-path
           retain: true
     asserts:
       - documentIndex: *pvDoc
@@ -112,7 +112,7 @@ tests:
           enabled: true
           type: smb-pv-pvc
           server: my-server
-          path: my-path
+          share: my-path
           username: my-user
           password: my-password
           labels:
@@ -191,7 +191,7 @@ tests:
           enabled: true
           type: smb-pv-pvc
           server: my-server
-          path: my-path
+          share: my-path
           username: my-user
           password: my-password
           retain: true
