@@ -1,26 +1,25 @@
 image:
-  repository: gotson/komga
+  repository: fallenbagel/jellyseerr
   pullPolicy: IfNotPresent
-  tag: 1.2.1
+  tag: 1.6.0
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-komgaConfig:
+jellyseerrConfig:
   additionalEnvs: []
 
-komgaNetwork:
-  webPort: 30048
+jellyseerrNetwork:
+  webPort: 30042
   hostNetwork: false
 
-komgaRunAs:
+jellyseerrRunAs:
   user: 568
   group: 568
 
-komgaStorage:
+jellyseerrStorage:
   config:
     type: ixVolume
     datasetName: config
-  additionalStorages: []
