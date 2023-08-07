@@ -17,7 +17,10 @@ workload:
             runAsGroup: 0
             runAsNonRoot: false
             readOnlyRootFilesystem: false
-          command: start-microservices.sh
+          command: /bin/sh
+          args:
+            - -c
+            - start-microservices.sh
           envFrom:
             - secretRef:
                 name: immich-creds
