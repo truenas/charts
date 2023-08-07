@@ -1,14 +1,15 @@
-{{- define "immich.microservices.workload" -}}
+{{- define "immich.server.workload" -}}
 {{- $fullname := (include "ix.v1.common.lib.chart.names.fullname" $) -}}
-{{- $url := printf "http://%v-server:%v/server-info/ping" $fullname .Values.immichNetwork.serverPort }}
+{{- $typesenseUrl := printf "http://%v-typesense:%v/health" $fullname .Values.immichNetwork.typesensePort }}
 workload:
-  microservices:
+  server:
     enabled: true
+    primary: true
     type: Deployment
     podSpec:
       hostNetwork: false
       containers:
-        microservices:
+        server:
           enabled: true
           primary: true
           imageSelector: image
@@ -17,41 +18,37 @@ workload:
             runAsGroup: 0
             runAsNonRoot: false
             readOnlyRootFilesystem: false
-          args: start-microservices.sh
+          command: /bin/sh
+          args:
+            - -c
+            - /usr/src/app/start-server.sh
           envFrom:
             - secretRef:
                 name: immich-creds
             - configMapRef:
-                name: micro-config
+                name: server-config
           probes:
             liveness:
               enabled: true
-              type: exec
-              command:
-                - /bin/sh
-                - -c
-                - |
-                  ps -a | grep -v grep | grep -q microservices
+              type: http
+              path: /server-info/ping
+              port: {{ .Values.immichNetwork.serverPort }}
             readiness:
               enabled: true
-              type: exec
-              command:
-                - /bin/sh
-                - -c
-                - |
-                  ps -a | grep -v grep | grep -q microservices
+              type: http
+              path: /server-info/ping
+              port: {{ .Values.immichNetwork.serverPort }}
             startup:
               enabled: true
-              type: exec
-              command:
-                - /bin/sh
-                - -c
-                - |
-                  ps -a | grep -v grep | grep -q microservices
+              type: http
+              path: /server-info/ping
+              port: {{ .Values.immichNetwork.serverPort }}
       initContainers:
       {{- include "ix.v1.common.app.postgresWait" (dict "name" "postgres-wait"
                                                         "secretName" "postgres-creds") | nindent 8 }}
       {{- include "ix.v1.common.app.redisWait" (dict  "name" "redis-wait"
                                                       "secretName" "redis-creds") | nindent 8 }}
-      {{- include "immich.wait.init" (dict "url" $url) | indent 8 }}
+      {{- if .Values.immichConfig.enableTypesense }}
+        {{- include "immich.wait.init" (dict "url" $typesenseUrl) | indent 8 }}
+      {{- end }}
 {{- end -}}
