@@ -17,7 +17,10 @@ workload:
             runAsGroup: 0
             runAsNonRoot: false
             readOnlyRootFilesystem: false
-          args: start-microservices.sh
+          command: /bin/sh
+          args:
+            - -c
+            - /usr/src/app/start-microservices.sh
           envFrom:
             - secretRef:
                 name: immich-creds
@@ -26,28 +29,16 @@ workload:
           probes:
             liveness:
               enabled: true
-              type: exec
-              command:
-                - /bin/sh
-                - -c
-                - |
-                  ps -a | grep -v grep | grep -q microservices
+              type: tcp
+              port: {{ .Values.immichNetwork.microservicesPort }}
             readiness:
               enabled: true
-              type: exec
-              command:
-                - /bin/sh
-                - -c
-                - |
-                  ps -a | grep -v grep | grep -q microservices
+              type: tcp
+              port: {{ .Values.immichNetwork.microservicesPort }}
             startup:
               enabled: true
-              type: exec
-              command:
-                - /bin/sh
-                - -c
-                - |
-                  ps -a | grep -v grep | grep -q microservices
+              type: tcp
+              port: {{ .Values.immichNetwork.microservicesPort }}
       initContainers:
       {{- include "ix.v1.common.app.postgresWait" (dict "name" "postgres-wait"
                                                         "secretName" "postgres-creds") | nindent 8 }}
