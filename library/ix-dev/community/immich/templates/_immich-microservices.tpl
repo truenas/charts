@@ -17,7 +17,8 @@ workload:
             runAsGroup: 0
             runAsNonRoot: false
             readOnlyRootFilesystem: false
-          args: start-microservices.sh
+          command: start.sh
+          args: microservices
           envFrom:
             - secretRef:
                 name: immich-creds
@@ -25,7 +26,8 @@ workload:
                 name: micro-config
           probes:
             liveness:
-              enabled: true
+              # FIXME: Find new probe for microservices, ps is missing now
+              enabled: false
               type: exec
               command:
                 - /bin/sh
@@ -33,7 +35,8 @@ workload:
                 - |
                   ps -a | grep -v grep | grep -q microservices
             readiness:
-              enabled: true
+              # FIXME: Find new probe for microservices, ps is missing now
+              enabled: false
               type: exec
               command:
                 - /bin/sh
@@ -41,7 +44,8 @@ workload:
                 - |
                   ps -a | grep -v grep | grep -q microservices
             startup:
-              enabled: true
+              # FIXME: Find new probe for microservices, ps is missing now
+              enabled: false
               type: exec
               command:
                 - /bin/sh
