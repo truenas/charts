@@ -148,6 +148,15 @@ questions:
             default: 3
             min: 1
             required: true
+        - variable: opcache_memory_consumption
+          label: "Opcache Memory Consumption (Mega Bytes)"
+          description: "Configures the memory consumption of the opcache"
+          schema:
+            type: int
+            min: 128
+            max: 1024
+            default: 128
+            required: true
 
   - variable: cronjob
     description: "Setup cronjob for nextcloud"
