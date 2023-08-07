@@ -18,8 +18,7 @@ workload:
             runAsGroup: 0
             runAsNonRoot: false
             readOnlyRootFilesystem: false
-          command: start.sh
-          args: immich
+          command: start-server.sh
           envFrom:
             - secretRef:
                 name: immich-creds
