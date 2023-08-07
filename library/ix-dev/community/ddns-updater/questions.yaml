@@ -175,6 +175,7 @@ questions:
                         type: string
                         show_if: [["provider", "=", "aliyun"]]
                         required: true
+                        private: true
                         empty: false
                     - variable: aliyunSecret
                       label: Aliyun Secret
@@ -183,6 +184,7 @@ questions:
                         type: string
                         show_if: [["provider", "=", "aliyun"]]
                         required: true
+                        private: true
                         empty: false
 
                     # All-Inkl
@@ -201,6 +203,7 @@ questions:
                         type: string
                         show_if: [["provider", "=", "allinkl"]]
                         required: true
+                        private: true
                         empty: false
 
                     # Cloudflare
@@ -212,6 +215,7 @@ questions:
                       schema:
                         type: string
                         required: true
+                        private: true
                         show_if: [["provider", "=", "cloudflare"]]
                     - variable: cloudflareTtl
                       label: Cloudflare TTL
@@ -240,12 +244,14 @@ questions:
                       description: Cloudflare Token.
                       schema:
                         type: string
+                        private: true
                         show_if: [["provider", "=", "cloudflare"]]
                     - variable: cloudflareUserServiceKey
                       label: Cloudflare User Service Key
                       description: Cloudflare User Service Key.
                       schema:
                         type: string
+                        private: true
                         show_if: [["provider", "=", "cloudflare"]]
                     - variable: cloudflareEmail
                       label: Cloudflare Email
@@ -268,6 +274,7 @@ questions:
                         type: string
                         show_if: [["provider", "=", "dd24"]]
                         required: true
+                        private: true
                         empty: false
 
                     # DDNSS
@@ -285,6 +292,7 @@ questions:
                       schema:
                         type: string
                         show_if: [["provider", "=", "ddnss"]]
+                        private: true
                         required: true
                         empty: false
                     - variable: ddnssProviderIP
@@ -310,6 +318,7 @@ questions:
                         type: string
                         show_if: [["provider", "=", "digitalocean"]]
                         required: true
+                        private: true
                         empty: false
 
                     # DNS O Matic
@@ -328,6 +337,7 @@ questions:
                         type: string
                         show_if: [["provider", "=", "dnsomatic"]]
                         required: true
+                        private: true
                         empty: false
                     - variable: dnsOMaticProviderIP
                       label: DNS O Matic Provider IP
@@ -345,6 +355,7 @@ questions:
                         type: string
                         show_if: [["provider", "=", "dnspod"]]
                         required: true
+                        private: true
                         empty: false
 
                     # Don Dominio
@@ -363,6 +374,7 @@ questions:
                         type: string
                         show_if: [["provider", "=", "dondominio"]]
                         required: true
+                        private: true
                         empty: false
                     - variable: donDominioName
                       label: Don Dominio Name
@@ -381,6 +393,7 @@ questions:
                         type: string
                         show_if: [["provider", "=", "dreamhost"]]
                         required: true
+                        private: true
                         empty: false
 
                     # Duck DNS
@@ -391,6 +404,7 @@ questions:
                         type: string
                         show_if: [["provider", "=", "duckdns"]]
                         required: true
+                        private: true
                         empty: false
                     - variable: duckdnsProviderIP
                       label: Duck DNS Provider IP
@@ -408,6 +422,7 @@ questions:
                         type: string
                         show_if: [["provider", "=", "dyn"]]
                         required: true
+                        private: true
                         empty: false
                     - variable: dynUsername
                       label: DynDNS Username
@@ -441,6 +456,7 @@ questions:
                         type: string
                         show_if: [["provider", "=", "dynu"]]
                         required: true
+                        private: true
                         empty: false
                     - variable: dynuGroup
                       label: Dynu Group
@@ -464,6 +480,7 @@ questions:
                         type: string
                         show_if: [["provider", "=", "dynv6"]]
                         required: true
+                        private: true
                         empty: false
                     - variable: dynv6ProviderIP
                       label: DynV6 Provider IP
@@ -491,6 +508,7 @@ questions:
                         type: string
                         show_if: [["provider", "=", "gandi"]]
                         required: true
+                        private: true
                         empty: false
                     - variable: gandiTtl
                       label: Gandi TTL
@@ -527,6 +545,7 @@ questions:
                         type: string
                         show_if: [["provider", "=", "gcp"]]
                         required: true
+                        private: true
                         empty: false
 
                     # GoDaddy
@@ -537,6 +556,7 @@ questions:
                         type: string
                         show_if: [["provider", "=", "godaddy"]]
                         required: true
+                        private: true
                         empty: false
                     - variable: godaddySecret
                       label: GoDaddy Secret
@@ -545,6 +565,7 @@ questions:
                         type: string
                         show_if: [["provider", "=", "godaddy"]]
                         required: true
+                        private: true
                         empty: false
 
                     # Google
@@ -563,6 +584,7 @@ questions:
                         type: string
                         show_if: [["provider", "=", "google"]]
                         required: true
+                        private: true
                         empty: false
 
                     # He.net
@@ -573,6 +595,7 @@ questions:
                         type: string
                         show_if: [["provider", "=", "he"]]
                         required: true
+                        private: true
                         empty: false
                     - variable: heProviderIP
                       label: He.net Provider IP
@@ -598,6 +621,7 @@ questions:
                         type: string
                         show_if: [["provider", "=", "infomaniak"]]
                         required: true
+                        private: true
                         empty: false
                     - variable: infomaniakProviderIP
                       label: Infomaniak Provider IP
@@ -622,6 +646,7 @@ questions:
                       schema:
                         type: string
                         show_if: [["provider", "=", "inwx"]]
+                        private: true
                         required: true
                         empty: false
 
@@ -633,6 +658,7 @@ questions:
                         type: string
                         show_if: [["provider", "=", "linode"]]
                         required: true
+                        private: true
                         empty: false
 
                     # LuaDNS
@@ -643,6 +669,7 @@ questions:
                         type: string
                         show_if: [["provider", "=", "luadns"]]
                         required: true
+                        private: true
                         empty: false
                     - variable: luadnsEmail
                       label: LuaDNS Email
@@ -661,6 +688,7 @@ questions:
                         type: string
                         show_if: [["provider", "=", "namecheap"]]
                         required: true
+                        private: true
                         empty: false
                     - variable: namecheapProviderIP
                       label: Namecheap Provider IP
@@ -678,6 +706,7 @@ questions:
                         type: string
                         show_if: [["provider", "=", "njalla"]]
                         required: true
+                        private: true
                         empty: false
                     - variable: njallaProviderIP
                       label: Njalla Provider IP
@@ -703,6 +732,7 @@ questions:
                         type: string
                         show_if: [["provider", "=", "noip"]]
                         required: true
+                        private: true
                         empty: false
                     - variable: noipProviderIP
                       label: NoIP Provider IP
@@ -728,6 +758,7 @@ questions:
                         type: string
                         show_if: [["provider", "=", "opendns"]]
                         required: true
+                        private: true
                         empty: false
                     - variable: opendnsProviderIP
                       label: OpenDNS Provider IP
@@ -762,6 +793,7 @@ questions:
                       description: OVH Password.
                       schema:
                         type: string
+                        private: true
                         show_if: [["provider", "=", "ovh"]]
                     - variable: ovhApiEndpoint
                       label: OVH API Endpoint
@@ -775,18 +807,21 @@ questions:
                       description: OVH Application Key.
                       schema:
                         type: string
+                        private: true
                         show_if: [["provider", "=", "ovh"]]
                     - variable: ovhAppSecret
                       label: OVH Application Secret
                       description: OVH Application Secret.
                       schema:
                         type: string
+                        private: true
                         show_if: [["provider", "=", "ovh"]]
                     - variable: ovhConsumerKey
                       label: OVH Consumer Key
                       description: OVH Consumer Key.
                       schema:
                         type: string
+                        private: true
                         show_if: [["provider", "=", "ovh"]]
 
                     # Porkbun
@@ -797,6 +832,7 @@ questions:
                         type: string
                         show_if: [["provider", "=", "porkbun"]]
                         required: true
+                        private: true
                         empty: false
                     - variable: porkbunSecretApiKey
                       label: Porkbun Secret API Key
@@ -805,6 +841,7 @@ questions:
                         type: string
                         show_if: [["provider", "=", "porkbun"]]
                         required: true
+                        private: true
                         empty: false
                     - variable: porkbunTtl
                       label: Porkbun TTL
@@ -830,6 +867,7 @@ questions:
                         type: string
                         show_if: [["provider", "=", "selfhost.de"]]
                         required: true
+                        private: true
                         empty: false
                     - variable: selfhostdeProviderIP
                       label: Selfhost.de Provider IP
@@ -855,6 +893,7 @@ questions:
                         type: string
                         show_if: [["provider", "=", "servercow"]]
                         required: true
+                        private: true
                         empty: false
                     - variable: servercowTtl
                       label: Servercow TTL
@@ -879,6 +918,7 @@ questions:
                         type: string
                         show_if: [["provider", "=", "spdyn"]]
                         required: true
+                        private: true
                         empty: false
                     - variable: spdynUsername
                       label: Spdyn.de Username
@@ -895,6 +935,7 @@ questions:
                         type: string
                         show_if: [["provider", "=", "spdyn"]]
                         required: true
+                        private: true
                         empty: false
                     - variable: spdynProviderIP
                       label: Spdyn.de Provider IP
@@ -912,6 +953,7 @@ questions:
                         type: string
                         show_if: [["provider", "=", "strato"]]
                         required: true
+                        private: true
                         empty: false
                     - variable: stratoProviderIP
                       label: Strato Provider IP
@@ -929,6 +971,7 @@ questions:
                         type: string
                         show_if: [["provider", "=", "variomedia"]]
                         required: true
+                        private: true
                         empty: false
                     - variable: variomediaEmail
                       label: Variomedia Email
