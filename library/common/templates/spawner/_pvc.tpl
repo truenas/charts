@@ -35,11 +35,22 @@
         {{- $_ := set $objectData "shortName" $name -}}
 
         {{- if eq $objectData.type "smb-pv-pvc" -}}
-          {{ $_ := set $objectData "provisioner" "smb.csi.k8s.io" }}
-          {{ $_ := set $objectData "driver" "smb.csi.k8s.io" }}
-
           {{/* Validate SMB CSI */}}
           {{- include "ix.v1.common.lib.storage.smbCSI.validation" (dict "rootCtx" $ "objectData" $objectData) -}}
+
+          {{- $hashValues := (printf "%s-%s" $objectData.server $objectData.share) -}}
+          {{- if $objectData.domain -}}
+            {{- $hashValues = (printf "%s-%s" $hashValues $objectData.domain) -}}
+          {{- end -}}
+
+          {{/* Create a unique name taking into account server and share,
+              without this, changing one of those values is not possible */}}
+          {{- $hash := adler32sum $hashValues -}}
+          {{- $_ := set $objectData "name" (printf "%s-%v" $objectName $hash) -}}
+
+          {{- $_ := set $objectData "provisioner" "smb.csi.k8s.io" -}}
+          {{- $_ := set $objectData "driver" "smb.csi.k8s.io" -}}
+          {{- $_ := set $objectData "storageClass" $objectData.name -}}
 
           {{/* Create secret with creds */}}
           {{- $secretData := (dict
@@ -57,11 +68,18 @@
           {{- include "ix.v1.common.class.pv" (dict "rootCtx" $ "objectData" $objectData) -}}
 
         {{- else if eq $objectData.type "nfs-pv-pvc" -}}
-          {{ $_ := set $objectData "provisioner" "nfs.csi.k8s.io" }}
-          {{ $_ := set $objectData "driver" "nfs.csi.k8s.io" }}
-
           {{/* Validate NFS CSI */}}
           {{- include "ix.v1.common.lib.storage.nfsCSI.validation" (dict "rootCtx" $ "objectData" $objectData) -}}
+
+          {{- $hashValues := (printf "%s-%s" $objectData.server $objectData.share) -}}
+          {{/* Create a unique name taking into account server and share,
+              without this, changing one of those values is not possible */}}
+          {{- $hash := adler32sum $hashValues -}}
+          {{- $_ := set $objectData "name" (printf "%s-%v" $objectName $hash) -}}
+
+          {{- $_ := set $objectData "provisioner" "nfs.csi.k8s.io" -}}
+          {{- $_ := set $objectData "driver" "nfs.csi.k8s.io" -}}
+          {{- $_ := set $objectData "storageClass" $objectData.name -}}
 
           {{/* Create the PV */}}
           {{- include "ix.v1.common.class.pv" (dict "rootCtx" $ "objectData" $objectData) -}}

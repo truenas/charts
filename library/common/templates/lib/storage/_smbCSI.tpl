@@ -13,7 +13,7 @@ objectData:
   {{- $objectData := .objectData }}
 csi:
   driver: {{ $objectData.driver }}
-  {{/* Create a unique handle, server/share#release-app-volumeName */}}
+  {{- /* Create a unique handle, server/share#release-app-volumeName */}}
   volumeHandle: {{ printf "%s/%s#%s" $objectData.server $objectData.share $objectData.name }}
   volumeAttributes:
     source: {{ printf "//%v/%v" (tpl $objectData.server $rootCtx) (tpl $objectData.share $rootCtx) }}
