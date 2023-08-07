@@ -154,6 +154,7 @@ questions:
           schema:
             type: int
             min: 128
+            max: 1024
             default: 128
             required: true
 
