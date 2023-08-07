@@ -29,18 +29,15 @@ workload:
           probes:
             liveness:
               enabled: true
-              type: http
-              path: /
+              type: tcp
               port: {{ .Values.immichNetwork.microservicesPort }}
             readiness:
               enabled: true
-              type: http
-              path: /
+              type: tcp
               port: {{ .Values.immichNetwork.microservicesPort }}
             startup:
               enabled: true
-              type: http
-              path: /
+              type: tcp
               port: {{ .Values.immichNetwork.microservicesPort }}
       initContainers:
       {{- include "ix.v1.common.app.postgresWait" (dict "name" "postgres-wait"
