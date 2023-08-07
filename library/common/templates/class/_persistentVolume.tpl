@@ -67,5 +67,3 @@ spec:
     {{- include "ix.v1.common.lib.storage.nfsCSI" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 -}}
   {{- end -}}
 {{- end -}}
-
-{{/* TODO: Unit Test all this */}}
