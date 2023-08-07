@@ -21,7 +21,7 @@ workload:
           command: /bin/sh
           args:
             - -c
-            - start-server.sh
+            - /usr/src/app/start-server.sh
           envFrom:
             - secretRef:
                 name: immich-creds

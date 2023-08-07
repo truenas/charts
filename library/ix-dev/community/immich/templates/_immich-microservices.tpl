@@ -20,7 +20,7 @@ workload:
           command: /bin/sh
           args:
             - -c
-            - start-microservices.sh
+            - /usr/src/app/start-microservices.sh
           envFrom:
             - secretRef:
                 name: immich-creds
