@@ -201,7 +201,7 @@ tests:
           enabled: true
           type: nfs-pv-pvc
           server: my-server.local
-          share: share
+          share: /share
     asserts:
       - failedTemplate:
           errorMessage: NFS CSI - Not supported CSI
@@ -265,8 +265,68 @@ tests:
         volume1:
           enabled: true
           type: nfs-pv-pvc
-          server: //my-server.local
+          server: my-server.local
           share: share
     asserts:
       - failedTemplate:
           errorMessage: NFS CSI - Expected <share> to start with [/]
+
+  - it: should fail with empty key on mountOptions in nfs-pv-pvc
+    set:
+      persistence:
+        volume1:
+          enabled: true
+          type: nfs-pv-pvc
+          server: my-server.local
+          share: /share
+          mountOptions:
+            - key: ""
+    asserts:
+      - failedTemplate:
+          errorMessage: NFS CSI - Expected key in <mountOptions> to be non-empty
+
+  - it: should fail with empty key on mountOptions in smb-pv-pvc
+    set:
+      persistence:
+        volume1:
+          enabled: true
+          type: smb-pv-pvc
+          server: my-server.local
+          share: share
+          username: my-user
+          password: my-password
+          mountOptions:
+            - key: ""
+    asserts:
+      - failedTemplate:
+          errorMessage: SMB CSI - Expected key in <mountOptions> to be non-empty
+
+  - it: should fail with item in mountOptions not a map in smb-pv-pvc
+    set:
+      persistence:
+        volume1:
+          enabled: true
+          type: smb-pv-pvc
+          server: my-server.local
+          share: share
+          username: my-user
+          password: my-password
+          mountOptions:
+            - not-a-map
+    asserts:
+      - failedTemplate:
+          errorMessage: SMB CSI - Expected <mountOption> item to be a dict, but got [string]
+
+  - it: should fail with item in mountOptions not a map in nfs-pv-pvc
+    set:
+      persistence:
+        volume1:
+          enabled: true
+          type: nfs-pv-pvc
+          server: my-server.local
+          share: /share
+          mountOptions:
+            - not-a-map
+    asserts:
+      - failedTemplate:
+          errorMessage: NFS CSI - Expected <mountOption> item to be a dict, but got [string]

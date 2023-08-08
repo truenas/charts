@@ -57,8 +57,12 @@ spec:
     {{- include "ix.v1.common.lib.pvc.accessModes" (dict "rootCtx" $rootCtx "objectData" $objectData "caller" "Persistent Volume") | trim | nindent 4 -}}
   {{- if $objectData.mountOptions }}
   mountOptions:
-    {{- range $opt := $objectData.mountOptions }}
-    - {{ tpl $opt $rootCtx }}
+    {{- range $opt := $objectData.mountOptions -}}
+      {{- if $opt.value }}
+    - {{ printf "%s=%s" (tpl $opt.key $rootCtx) (tpl (include "ix.v1.common.helper.makeIntOrNoop" $opt.value) $rootCtx) }}
+      {{- else }}
+    - {{ tpl $opt.key $rootCtx }}
+      {{- end -}}
     {{- end -}}
   {{- end -}}
   {{- if eq "smb-pv-pvc" $objectData.type -}}

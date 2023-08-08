@@ -19,8 +19,9 @@ tests:
           server: my-server2
           share: /my-path2
           mountOptions:
-            - hard
-            - nfsvers={{ .Values.version }}
+            - key: hard
+            - key: nfsvers
+              value: '{{ .Values.version }}'
     asserts:
       - documentIndex: &pvDoc 0
         isKind:
@@ -96,8 +97,11 @@ tests:
           username: my-user2
           password: my-password2
           mountOptions:
-            - hard
-            - vers={{ .Values.version }}
+            - key: hard
+            - key: uid
+              value: 99999999999
+            - key: vers
+              value: '{{ .Values.version }}'
     asserts:
       - documentIndex: &secretDoc 0
         isKind:
@@ -166,6 +170,7 @@ tests:
               - ReadWriteOnce
             mountOptions:
               - hard
+              - uid=99999999999
               - vers=3.0
             csi:
               driver: smb.csi.k8s.io
