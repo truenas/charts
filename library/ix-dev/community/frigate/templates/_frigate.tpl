@@ -69,6 +69,6 @@ workload:
                   echo '        - path: rtsp://127.0.0.1:554/rtsp'
                   echo '          roles:'
                   echo '            - detect'
-                } /config/config.yml
+                } > /config/config.yml
               fi
 {{- end -}}
