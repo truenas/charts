@@ -10,6 +10,7 @@ resources:
 
 frigateConfig:
   additionalEnvs: []
+
 frigateNetwork:
   hostNetwork: false
   # Port numbers ignored if hostNetwork is true
@@ -20,6 +21,9 @@ frigateNetwork:
   rtspPort: 30060
   enableWebRtc: false
   webRtcPort: 30061
+
+frigateGPU: {}
+
 frigateStorage:
   media:
     type: ixVolume
@@ -28,10 +32,8 @@ frigateStorage:
     type: ixVolume
     datasetName: config
   cache:
-    medium: Memory
-    size: 1Gi
+    size: 1
   additionalStorages: []
 
+
 # TODO: device config (usb)
-# TODO: Gpu config
-# TODO: check if image is different for nvidia

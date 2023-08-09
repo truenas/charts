@@ -31,7 +31,7 @@ persistence:
     enabled: true
     type: emptyDir
     medium: Memory
-    size: {{ .Values.frigateStorage.cache.size | default "" }}
+    size: {{ printf "%vGi" .Values.frigateStorage.cache.size }}
     targetSelector:
       frigate:
         frigate:

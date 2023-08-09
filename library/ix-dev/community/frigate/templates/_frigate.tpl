@@ -71,4 +71,14 @@ workload:
                   echo '            - detect'
                 } > /config/config.yml
               fi
+  {{- with .Values.frigateGPU }}
+scaleGPU:
+    {{- range $key, $value := . }}
+  - gpu:
+      {{ $key }}: {{ $value }}
+    targetSelector:
+      frigate:
+        - frigate
+    {{- end }}
+  {{- end -}}
 {{- end -}}

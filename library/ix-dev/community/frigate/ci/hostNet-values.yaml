@@ -12,4 +12,4 @@ frigateStorage:
     type: hostPath
     hostPath: /mnt/{{ .Release.Namespace }}/media
   cache:
-    size: 2Gi
+    size: 2
