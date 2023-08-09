@@ -64,6 +64,5 @@ service:
         targetPort: 8555
         protocol: udp
         targetSelector: frigate
-    {{ end }}
   {{ end }}
 {{- end -}}
