@@ -1,0 +1,26 @@
+frigateNetwork:
+  webPort: 31000
+  enableRtmp: true
+  rtmpPort: 31001
+  enableRtsp: true
+  rtspPort: 31002
+  enableWebRtc: true
+  webRtcPort: 31003
+
+
+frigateStorage:
+  config:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/config
+  media:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/media
+  cache:
+    size: 2Gi
+  additionalStorages:
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/clips
+    mountPath: /clips
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/snapshots
+    mountPath: /snapshots
