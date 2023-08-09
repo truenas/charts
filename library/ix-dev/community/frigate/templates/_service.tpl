@@ -16,7 +16,6 @@ service:
   {{ if .Values.frigateNetwork.enableRtmp }}
   rtmp:
     enabled: true
-    primary: true
     type: NodePort
     targetSelector: frigate
     ports:
@@ -31,7 +30,6 @@ service:
   {{ if .Values.frigateNetwork.enableRtsp }}
   rtsp:
     enabled: true
-    primary: true
     type: NodePort
     targetSelector: frigate
     ports:
@@ -46,7 +44,6 @@ service:
   {{ if .Values.frigateNetwork.enableWebRtc }}
   webrtc:
     enabled: true
-    primary: true
     type: NodePort
     targetSelector: frigate
     ports:
