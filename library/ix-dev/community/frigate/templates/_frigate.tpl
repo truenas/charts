@@ -19,6 +19,8 @@ workload:
             capabilities:
               add:
                 - CHOWN
+                - DAC_OVERRIDE
+                - FOWNER
           {{ with .Values.frigateConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
