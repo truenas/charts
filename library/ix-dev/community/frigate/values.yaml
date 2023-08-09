@@ -1,0 +1,37 @@
+image:
+  repository: ghcr.io/blakeblackshear/frigate
+  pullPolicy: IfNotPresent
+  tag: 0.12.1
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+frigateConfig:
+  additionalEnvs: []
+frigateNetwork:
+  hostNetwork: false
+  # Port numbers ignored if hostNetwork is true
+  webPort: 30058
+  enableRtmp: false
+  rtmpPort: 30059
+  enableRtsp: false
+  rtspPort: 30060
+  enableWebRtc: false
+  webRtcPort: 30061
+frigateStorage:
+  media:
+    type: ixVolume
+    datasetName: media
+  config:
+    type: ixVolume
+    datasetName: config
+  cache:
+    medium: Memory
+    size: 1Gi
+  additionalStorages: []
+
+# TODO: device config (usb)
+# TODO: Gpu config
+# TODO: check if image is different for nvidia
