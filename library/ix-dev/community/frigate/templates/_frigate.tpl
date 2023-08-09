@@ -58,17 +58,17 @@ workload:
             - -c
             - |
               if [ ! -f /config/config.yml ]; then
-                cat <<EOF > /config/config.yml
-                mqtt:
-                  enabled: false
-                cameras:
-                  dummy:
-                    enabled: false
-                    ffmpeg:
-                      inputs:
-                        - path: rtsp://127.0.0.1:554/rtsp
-                          roles:
-                            - detect
-                EOF
+                {
+                  echo 'mqtt:'
+                  echo '  enabled: false'
+                  echo 'cameras:'
+                  echo '  dummy:'
+                  echo '    enabled: false'
+                  echo '    ffmpeg:'
+                  echo '      inputs:'
+                  echo '        - path: rtsp://127.0.0.1:554/rtsp'
+                  echo '          roles:'
+                  echo '            - detect'
+                } /config/config.yml
               fi
 {{- end -}}
