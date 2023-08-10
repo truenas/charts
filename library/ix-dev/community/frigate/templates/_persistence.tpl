@@ -55,7 +55,6 @@ persistence:
         frigate:
           mountPath: /dev/bus/usb
   {{- end -}}
-  {{- if .Values.frigateStorage.additionalStorages }}
   {{- range $idx, $storage := .Values.frigateStorage.additionalStorages }}
   {{ printf "frigate-%v" (int $idx) }}:
     enabled: true
