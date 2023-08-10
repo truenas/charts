@@ -31,11 +31,31 @@ persistence:
     enabled: true
     type: emptyDir
     medium: Memory
-    size: {{ printf "%vGi" .Values.frigateStorage.cache.size }}
+    size: {{ printf "%vGi" .Values.frigateStorage.cache.sizeGiB }}
     targetSelector:
       frigate:
         frigate:
           mountPath: /tmp/cache
+  shm:
+    enabled: true
+    type: emptyDir
+    medium: Memory
+    size: {{ printf "%vMi" .Values.frigateStorage.shm.sizeMiB }}
+    targetSelector:
+      frigate:
+        frigate:
+          mountPath: /dev/shm
+  {{- if .Values.frigateConfig.mountUSBBus }}
+  usb-bus:
+    enabled: true
+    type: hostPath
+    hostPath: /dev/bus/usb
+    targetSelector:
+      frigate:
+        frigate:
+          mountPath: /dev/bus/usb
+  {{- end -}}
+  {{- if .Values.frigateStorage.additionalStorages }}
   {{- range $idx, $storage := .Values.frigateStorage.additionalStorages }}
   {{ printf "frigate-%v" (int $idx) }}:
     enabled: true

@@ -25,6 +25,15 @@ questions:
     schema:
       type: dict
       attrs:
+        - variable: mountUSBBus
+          label: Mount USB Bus
+          description: |
+            Mount the USB bus to the container.</br>
+            This is required if you want to use USB devices, like Coral</br>
+            This will mount the USB bus to /dev/bus/usb inside the container.
+          schema:
+            type: boolean
+            default: false
         - variable: additionalEnvs
           label: Additional Environment Variables
           description: Configure additional environment variables for Frigate.
@@ -217,13 +226,28 @@ questions:
           schema:
             type: dict
             attrs:
-              - variable: size (GigaBytes)
-                label: Size
+              - variable: sizeGiB
+                label: Size (GiB)
                 description: The size of RAM is allowed to Frigate to use as cache
                 schema:
                   type: int
                   max: 4
                   default: 1
+                  required: true
+        - variable: shm
+          label: Frigate /dev/shm Storage
+          schema:
+            type: dict
+            attrs:
+              - variable: sizeMiB
+                label: Size (MiB)
+                description: |
+                  The size of RAM is allowed to Frigate to use as /dev/shm</br>
+                  https://docs.frigate.video/frigate/installation/#calculating-required-shm-size
+                schema:
+                  type: int
+                  max: 2048
+                  default: 64
                   required: true
         - variable: additionalStorages
           label: Additional Storage

@@ -9,6 +9,7 @@ resources:
     memory: 8Gi
 
 frigateConfig:
+  mountUSBBus: false
   additionalEnvs: []
 
 frigateNetwork:
@@ -32,9 +33,7 @@ frigateStorage:
     type: ixVolume
     datasetName: config
   cache:
-    size: 1
+    sizeGiB: 1
+  shm:
+    sizeMiB: 64
   additionalStorages: []
-
-
-# TODO: device config (usb)
-# TODO: /dev/shm
