@@ -34,17 +34,17 @@ workload:
             liveness:
               enabled: true
               type: http
-              port: "{{ .Values.frigateNetwork.webPort }}"
+              port: 5000
               path: /api
             readiness:
               enabled: true
               type: http
-              port: "{{ .Values.frigateNetwork.webPort }}"
+              port: 5000
               path: /api
             startup:
               enabled: true
               type: http
-              port: "{{ .Values.frigateNetwork.webPort }}"
+              port: 5000
               path: /api
       initContainers:
         01-init:
