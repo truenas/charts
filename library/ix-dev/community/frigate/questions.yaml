@@ -97,7 +97,7 @@ questions:
                 schema:
                   type: int
                   default: 30059
-                  show_if: [["enableRtmp", "=", false]]
+                  show_if: [["enableRtmp", "=", true]]
                   min: 9000
                   max: 65535
                   required: true
@@ -115,7 +115,7 @@ questions:
                 schema:
                   type: int
                   default: 30060
-                  show_if: [["enableRtsp", "=", false]]
+                  show_if: [["enableRtsp", "=", true]]
                   min: 9000
                   max: 65535
                   required: true
@@ -134,7 +134,7 @@ questions:
                 schema:
                   type: int
                   default: 30061
-                  show_if: [["enableWebRtc", "=", false]]
+                  show_if: [["enableWebRtc", "=", true]]
                   min: 9000
                   max: 65535
                   required: true
