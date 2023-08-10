@@ -16,6 +16,10 @@ workload:
             runAsGroup: 0
             runAsNonRoot: false
             readOnlyRootFilesystem: false
+            {{- if .Values.frigateConfig.mountUSBBus }}
+            privileged: true
+            allowPrivilegeEscalation: true
+            {{- end }}
             capabilities:
               add:
                 - CHOWN

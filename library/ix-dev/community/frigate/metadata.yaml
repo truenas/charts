@@ -3,7 +3,7 @@ runAsContext:
     groupName: root
     gid: 0
     uid: 0
-    description: Frigate runs as root user.
+    description: Frigate runs as root user. When USB Bus is mounted, it is able to escalate privileges.
 capabilities:
   - name: CHOWN
     description: Frigate is able to chown files.
