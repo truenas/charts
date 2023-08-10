@@ -11,4 +11,8 @@ capabilities:
     description: Frigate are able to bypass permission checks for it's sub-processes.
   - name: DAC_OVERRIDE
     description: Frigate is able to bypass permission checks.
+  - name: SETGID
+    description: Frigate is able to set group ID for it's sub-processes.
+  - name: SETUID
+    description: Frigate is able to set user ID for it's sub-processes.
 hostMounts: []

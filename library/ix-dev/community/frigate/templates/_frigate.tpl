@@ -21,6 +21,8 @@ workload:
                 - CHOWN
                 - DAC_OVERRIDE
                 - FOWNER
+                - SETUID
+                - SETGID
           {{ with .Values.frigateConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
