@@ -1,0 +1,351 @@
+groups:
+  - name: Frigate Configuration
+    description: Configure Frigate
+  - name: Network Configuration
+    description: Configure Network for Frigate
+  - name: Storage Configuration
+    description: Configure Storage for Frigate
+  - name: Resources Configuration
+    description: Configure Resources for Frigate
+
+portals:
+  web_portal:
+    protocols:
+      - "$kubernetes-resource_configmap_portal_protocol"
+    host:
+      - "$kubernetes-resource_configmap_portal_host"
+    ports:
+      - "$kubernetes-resource_configmap_portal_port"
+    path: "$kubernetes-resource_configmap_portal_path"
+
+questions:
+  - variable: frigateConfig
+    label: ""
+    group: Frigate Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: mountUSBBus
+          label: Mount USB Bus
+          description: |
+            Mount the USB bus to the container.</br>
+            This is required if you want to use USB devices, like Coral</br>
+            This will mount the USB bus to /dev/bus/usb inside the container.
+          schema:
+            type: boolean
+            default: false
+        - variable: additionalEnvs
+          label: Additional Environment Variables
+          description: Configure additional environment variables for Frigate.
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: env
+                label: Environment Variable
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: name
+                      label: Name
+                      schema:
+                        type: string
+                        required: true
+                    - variable: value
+                      label: Value
+                      schema:
+                        type: string
+                        required: true
+
+  - variable: frigateNetwork
+    label: ""
+    group: Network Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: hostNetwork
+          label: Host Network
+          description: |
+            Bind to the host network. It's recommended to keep this disabled.</br>
+          schema:
+            type: boolean
+            default: false
+            show_subquestions_if: false
+            subquestions:
+              - variable: webPort
+                label: Web Port
+                description: |
+                  The port for the Frigate Web UI.</br>
+                  Internal port: 5000
+                schema:
+                  type: int
+                  default: 30058
+                  min: 9000
+                  max: 65535
+                  required: true
+              - variable: enableRtmp
+                label: Enable RTMP
+                description: Enable RTMP for Frigate.
+                schema:
+                  type: boolean
+                  default: false
+              - variable: rtmpPort
+                label: RTMP Port
+                description: |
+                  The RTMP port for Frigate.</br>
+                  Internal port: 1935
+                schema:
+                  type: int
+                  default: 30059
+                  show_if: [["enableRtmp", "=", true]]
+                  min: 9000
+                  max: 65535
+                  required: true
+              - variable: enableRtsp
+                label: Enable RTSP
+                description: Enable RTSP for Frigate.
+                schema:
+                  type: boolean
+                  default: false
+              - variable: rtspPort
+                label: RTSP Port
+                description: |
+                  The RTSP port for Frigate.</br>
+                  Internal port: 8554
+                schema:
+                  type: int
+                  default: 30060
+                  show_if: [["enableRtsp", "=", true]]
+                  min: 9000
+                  max: 65535
+                  required: true
+              - variable: enableWebRtc
+                label: Enable WebRTC
+                description: Enable WebRTC for Frigate.
+                schema:
+                  type: boolean
+                  default: false
+              - variable: webRtcPort
+                label: WebRTC Port
+                description: |
+                  The WebRTC port for Frigate.</br>
+                  Internal port: 8555</br>
+                  Applies to both TCP and UDP.
+                schema:
+                  type: int
+                  default: 30061
+                  show_if: [["enableWebRtc", "=", true]]
+                  min: 9000
+                  max: 65535
+                  required: true
+
+  - variable: frigateStorage
+    label: ""
+    group: Storage Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: config
+          label: Frigate Config Storage
+          description: The path to store Frigate Configuration.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
+                schema:
+                  type: string
+                  required: true
+                  default: "ixVolume"
+                  enum:
+                    - value: "hostPath"
+                      description: Host Path (Path that already exists on the system)
+                    - value: "ixVolume"
+                      description: ixVolume (Dataset created automatically by the system)
+              - variable: datasetName
+                label: Dataset Name
+                schema:
+                  type: string
+                  show_if: [["type", "=", "ixVolume"]]
+                  required: true
+                  hidden: true
+                  immutable: true
+                  default: "config"
+                  $ref:
+                    - "normalize/ixVolume"
+              - variable: hostPath
+                label: Host Path
+                schema:
+                  type: hostpath
+                  show_if: [["type", "=", "hostPath"]]
+                  immutable: true
+                  required: true
+        - variable: media
+          label: Frigate Media Storage
+          description: The path to store Frigate Media.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
+                schema:
+                  type: string
+                  required: true
+                  default: "ixVolume"
+                  enum:
+                    - value: "hostPath"
+                      description: Host Path (Path that already exists on the system)
+                    - value: "ixVolume"
+                      description: ixVolume (Dataset created automatically by the system)
+              - variable: datasetName
+                label: Dataset Name
+                schema:
+                  type: string
+                  show_if: [["type", "=", "ixVolume"]]
+                  required: true
+                  hidden: true
+                  immutable: true
+                  default: "config"
+                  $ref:
+                    - "normalize/ixVolume"
+              - variable: hostPath
+                label: Host Path
+                schema:
+                  type: hostpath
+                  show_if: [["type", "=", "hostPath"]]
+                  immutable: true
+                  required: true
+        - variable: cache
+          label: Frigate Cache Storage
+          schema:
+            type: dict
+            attrs:
+              - variable: sizeGiB
+                label: Size (GiB)
+                description: The size of RAM is allowed to Frigate to use as cache
+                schema:
+                  type: int
+                  max: 4
+                  default: 1
+                  required: true
+        - variable: shm
+          label: Frigate /dev/shm Storage
+          schema:
+            type: dict
+            attrs:
+              - variable: sizeMiB
+                label: Size (MiB)
+                description: |
+                  The size of RAM is allowed to Frigate to use as /dev/shm</br>
+                  https://docs.frigate.video/frigate/installation/#calculating-required-shm-size
+                schema:
+                  type: int
+                  max: 2048
+                  default: 64
+                  required: true
+        - variable: additionalStorages
+          label: Additional Storage
+          description: Additional storage for Frigate.
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: storageEntry
+                label: Storage Entry
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: type
+                      label: Type
+                      description: |
+                        ixVolume: Is dataset created automatically by the system.</br>
+                        Host Path: Is a path that already exists on the system.
+                      schema:
+                        type: string
+                        required: true
+                        default: "ixVolume"
+                        enum:
+                          - value: "hostPath"
+                            description: Host Path (Path that already exists on the system)
+                          - value: "ixVolume"
+                            description: ixVolume (Dataset created automatically by the system)
+                    - variable: mountPath
+                      label: Mount Path
+                      description: The path inside the container to mount the storage.
+                      schema:
+                        type: path
+                        required: true
+                    - variable: hostPath
+                      label: Host Path
+                      description: The host path to use for storage.
+                      schema:
+                        type: hostpath
+                        show_if: [["type", "=", "hostPath"]]
+                        required: true
+                    - variable: datasetName
+                      label: Dataset Name
+                      description: The name of the dataset to use for storage.
+                      schema:
+                        type: string
+                        show_if: [["type", "=", "ixVolume"]]
+                        required: true
+                        immutable: true
+                        default: "storage_entry"
+                        $ref:
+                          - "normalize/ixVolume"
+
+  - variable: resources
+    group: Resources Configuration
+    label: ""
+    schema:
+      type: dict
+      attrs:
+        - variable: limits
+          label: Limits
+          schema:
+            type: dict
+            attrs:
+              - variable: cpu
+                label: CPU
+                description: CPU limit for Frigate.
+                schema:
+                  type: string
+                  max_length: 6
+                  valid_chars: '^(0\.[1-9]|[1-9][0-9]*)(\.[0-9]|m?)$'
+                  valid_chars_error: |
+                    Valid CPU limit formats are</br>
+                    - Plain Integer - eg. 1</br>
+                    - Float - eg. 0.5</br>
+                    - Milicpu - eg. 500m
+                  default: "4000m"
+                  required: true
+              - variable: memory
+                label: Memory
+                description: Memory limit for Frigate.
+                schema:
+                  type: string
+                  max_length: 12
+                  valid_chars: '^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$'
+                  valid_chars_error: |
+                    Valid Memory limit formats are</br>
+                    - Suffixed with E/P/T/G/M/K - eg. 1G</br>
+                    - Suffixed with Ei/Pi/Ti/Gi/Mi/Ki - eg. 1Gi</br>
+                    - Plain Integer in bytes - eg. 1024</br>
+                    - Exponent - eg. 134e6
+                  default: "8Gi"
+                  required: true
+
+  - variable: frigateGPU
+    group: Resources Configuration
+    label: GPU Configuration
+    schema:
+      type: dict
+      $ref:
+        - "definitions/gpuConfiguration"
+      attrs: []

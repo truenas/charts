@@ -1,0 +1,11 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "frigate.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "frigate.service" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "frigate.persistence" $ | fromYaml) -}}
+
+{{/* Create the configmap for portal manually*/}}
+{{- include "frigate.portal" $ -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}
