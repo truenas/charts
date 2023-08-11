@@ -12,11 +12,9 @@ workload:
           primary: true
           imageSelector: image
           securityContext:
-            # runAsUser: 1000
-            # runAsGroup: 1000
+            runAsUser: 1000
+            runAsGroup: 1000
             readOnlyRootFilesystem: false
-            runAsUser: {{ .Values.plankaRunAs.user }}
-            runAsGroup: {{ .Values.plankaRunAs.group }}
           env:
             PORT: {{ .Values.plankaNetwork.webPort }}
           envFrom:
@@ -49,8 +47,8 @@ workload:
               path: /
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
-                                                        "UID" .Values.plankaRunAs.user
-                                                        "GID" .Values.plankaRunAs.group
+                                                        "UID" 1000
+                                                        "GID" 1000
                                                         "mode" "check"
                                                         "type" "init") | nindent 8 }}
       {{- include "ix.v1.common.app.postgresWait" (dict "name" "postgres-wait"

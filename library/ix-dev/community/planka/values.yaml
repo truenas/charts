@@ -9,15 +9,13 @@ resources:
     memory: 8Gi
 
 plankaConfig:
+  trustProxy: false
+  baseURL: http://localhost:30062
   additionalEnvs: []
 
 plankaNetwork:
   webPort: 30062
   hostNetwork: false
-
-plankaRunAs:
-  user: 568
-  group: 568
 
 plankaStorage:
   avatars:
@@ -39,6 +37,10 @@ plankaStorage:
 
 notes:
   custom: |
+    Default credentials:
+      - Username: `demo@demo.demo`
+      - Password: `demo`
+
     ## Database
     You can connect to the database using the pgAdmin App from the catalog
 
