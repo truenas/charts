@@ -15,7 +15,7 @@
     {{- $dbPass = ((index .data "POSTGRES_PASSWORD") | b64dec) -}}
   {{- end -}}
 
-  {{- $dbURL := (printf "postgres://%s:%s@%s:5432/%s?sslmode=disable" $dbUser $dbPass $dbHost $dbName) -}}
+  {{- $dbURL := (printf "%s:%s@%s:5432/%s?sslmode=disable" $dbUser $dbPass $dbHost $dbName) -}}
   {{/* Temporary set dynamic db details on values,
   so we can print them on the notes */}}
   {{- $_ := set .Values "plankaDbPass" $dbPass -}}
@@ -26,7 +26,7 @@ secret:
     enabled: true
     data:
       SECRET_KEY: {{ $secretKey }}
-      DATABASE_URL: {{ $dbURL }}
+      DATABASE_URL: {{ printf "postgresql://%s" $dbURL }}
 
   postgres-creds:
     enabled: true
@@ -35,12 +35,13 @@ secret:
       POSTGRES_DB: {{ $dbName }}
       POSTGRES_PASSWORD: {{ $dbPass }}
       POSTGRES_HOST: {{ $dbHost }}
-      POSTGRES_URL: {{ $dbURL }}
+      POSTGRES_URL: {{ printf "postgres://%s" $dbURL }}
 
 configmap:
   planka:
     enabled: true
     data:
-      BASE_URL: # TODO:
-      TRUST_PROXY: # TODO:
+      NODE_ENV: production
+      BASE_URL: {{ .Values.plankaConfig.baseURL }}
+      TRUST_PROXY: {{ ternary "1" "0" .Values.plankaConfig.trustProxy | quote }}
 {{- end -}}

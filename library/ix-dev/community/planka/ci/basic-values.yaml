@@ -5,6 +5,9 @@ plankaRunAs:
   user: 1000
   group: 1000
 
+plankaConfig:
+  baseURL: http://localhost:31000
+
 plankaStorage:
   avatars:
     type: hostPath

@@ -12,8 +12,11 @@ workload:
           primary: true
           imageSelector: image
           securityContext:
-            runAsUser: {{ .Values.plankaRunAs.user }}
-            runAsGroup: {{ .Values.plankaRunAs.group }}
+            runAsUser: 1000
+            runAsGroup: 1000
+            readOnlyRootFilesystem: false
+            # runAsUser: {{ .Values.plankaRunAs.user }}
+            # runAsGroup: {{ .Values.plankaRunAs.group }}
           env:
             PORT: {{ .Values.plankaNetwork.webPort }}
           envFrom:
