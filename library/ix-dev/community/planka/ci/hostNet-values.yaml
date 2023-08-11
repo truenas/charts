@@ -1,0 +1,20 @@
+plankaNetwork:
+  webPort: 30000
+  hostNetwork: true
+
+plankaStorage:
+  avatars:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/avatars
+  backgroundImages:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/bg-img
+  attachments:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/attachments
+  pgData:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/pgData
+  pgBackup:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/pgBackup
