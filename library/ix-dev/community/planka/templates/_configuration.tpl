@@ -37,6 +37,12 @@ secret:
       POSTGRES_HOST: {{ $dbHost }}
       POSTGRES_URL: {{ printf "postgres://%s" $dbURL }}
 
+{{- if or
+        (not hasPrefix "http://" .Values.plankaConfig.baseURL)
+        (not hasPrefix "https://" .Values.plankaConfig.baseURL) -}}
+  {{- fail "Planka - Expected [Base URL] to start with [http://] or [https://]" -}}
+{{- end }}
+
 configmap:
   planka:
     enabled: true
