@@ -1,0 +1,18 @@
+runAsContext:
+  - userName: root
+    groupName: root
+    gid: 0
+    uid: 0
+    description: Frigate runs as root user. When USB Bus is mounted, it is able to escalate privileges.
+capabilities:
+  - name: CHOWN
+    description: Frigate is able to chown files.
+  - name: FOWNER
+    description: Frigate are able to bypass permission checks for it's sub-processes.
+  - name: DAC_OVERRIDE
+    description: Frigate is able to bypass permission checks.
+  - name: SETGID
+    description: Frigate is able to set group ID for it's sub-processes.
+  - name: SETUID
+    description: Frigate is able to set user ID for it's sub-processes.
+hostMounts: []
