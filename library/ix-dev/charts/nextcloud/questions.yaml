@@ -148,6 +148,23 @@ questions:
             default: 3
             min: 1
             required: true
+        - variable: max_execution_time
+          label: "Max Execution Time (Seconds)"
+          description: "Configures the max execution time of php"
+          schema:
+            type: int
+            default: 30
+            min: 30
+            required: true
+        - variable: php_memory_limit
+          label: "PHP Memory Limit (Mega Bytes)"
+          description: "Configures the memory limit of php"
+          schema:
+            type: int
+            default: 512
+            min: 128
+            max: 4096
+            required: true
         - variable: opcache_memory_consumption
           label: "Opcache Memory Consumption (Mega Bytes)"
           description: "Configures the memory consumption of the opcache"
