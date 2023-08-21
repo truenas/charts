@@ -28,8 +28,8 @@ groups:
 
 questions:
   - variable: enableUIPortal
-    label: "Enable WebUI Portal (only supported in TrueNAS SCALE Bluefin)"
-    description: "Enable webui portal for easier access to workload ( Only valid for TrueNAS SCALE Bluefin )"
+    label: "Enable WebUI Portal"
+    description: "Enable webui portal for easier access to workload (Only valid for TrueNAS SCALE Bluefin and later)"
     group: "Portal Configuration"
     schema:
       type: boolean
