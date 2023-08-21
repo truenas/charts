@@ -41,11 +41,19 @@ data:
         }
 
         location = /.well-known/carddav {
+          {{ if .Values.nginxConfig.use443 }}
+          return 301 $scheme://$host/remote.php/dav;
+          {{ else }}
           return 301 $scheme://$host:$server_port/remote.php/dav;
+          {{ end }}
         }
 
         location = /.well-known/caldav {
+          {{ if .Values.nginxConfig.use443 }}
+          return 301 $scheme://$host/remote.php/dav;
+          {{ else }}
           return 301 $scheme://$host:$server_port/remote.php/dav;
+          {{ end }}
         }
 
         location / {
@@ -62,7 +70,11 @@ data:
           proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
           proxy_set_header X-Forwarded-Proto https;
           proxy_set_header X-Forwarded-Host  $host;
+          {{ if .Values.nginxConfig.use443 }}
+          proxy_set_header X-Forwarded-Port  443;
+          {{ else }}
           proxy_set_header X-Forwarded-Port  $server_port;
+          {{ end }}
 
           # Proxy timeouts
           proxy_connect_timeout              {{ $timeout }}s;
