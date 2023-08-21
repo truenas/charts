@@ -87,7 +87,7 @@ questions:
             default: 60
             required: true
         - variable: use443
-          label: "Use 443 for URL generation"
+          label: "Use 443 for URL rewrites"
           description: |
             If enabled, the URL rewrite will use port 443 instead of the configured.</br>
             Note that Nextcloud will still listen on the configured port. (Default 9001)
