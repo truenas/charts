@@ -22,7 +22,16 @@ persistence:
           mountPath: /mnt/extra-addons
         01-permissions:
           mountPath: /mnt/directories/odoo_addons
-
+  config:
+    enabled: true
+    type: secret
+    objectName: odoo-config
+    targetSelector:
+      odoo:
+        odoo:
+          mountPath: /etc/odoo/odoo.conf
+          readOnly: true
+          subPath: odoo.conf
   # Postgres
   postgresdata:
     enabled: true
