@@ -86,14 +86,23 @@ questions:
             min: 30
             default: 60
             required: true
-        - variable: use443
-          label: "Use 443 for URL rewrites"
+        - variable: useDifferentAccessPort
+          label: "Use different port for URL rewrites"
           description: |
-            If enabled, the URL rewrite will use port 443 instead of the configured.</br>
-            Note that Nextcloud will still listen on the configured port. (Default 9001)
+            If enabled, the URL rewrite will use [Access Port] defined below instead of the [Node Port].</br>
+            Note that Nextcloud will still listen on the [Node Port]. (Default 9001)
           schema:
             type: boolean
             default: false
+        - variable: externalPort
+          label: "Access Port"
+          schema:
+            type: int
+            show_if: [["useDifferentAccessPort", "=", true]]
+            min: 443
+            max: 65535
+            default: 443
+            required: true
 
   - variable: nextcloud
     description: "Nextcloud configuration details"

@@ -6,6 +6,11 @@ data:
   protocol: {{ include "nginx.scheme" . }}
   {{ $timeout := 60 }}
   {{ $size := .Values.nextcloud.max_upload_size | default 3 }}
+  {{ $externalPort := printf ":%v" .Values.nginxConfig.externalPort }}
+  {{/* If its 443, do not append it on the rewrite at all */}}
+  {{ if eq $externalPort ":443" }}
+    {{ $externalPort = "" }}
+  {{ end }}
   {{/* Safely access key as it is conditionaly shown */}}
   {{ if hasKey .Values "nginxConfig" }}
     {{ $timeout = .Values.nginxConfig.proxy_timeouts | default 60 }}
@@ -41,16 +46,16 @@ data:
         }
 
         location = /.well-known/carddav {
-          {{ if .Values.nginxConfig.use443 }}
-          return 301 $scheme://$host/remote.php/dav;
+          {{ if .Values.nginxConfig.useDifferentAccessPort }}
+          return 301 $scheme://$host{{ $externalPort }}/remote.php/dav;
           {{ else }}
           return 301 $scheme://$host:$server_port/remote.php/dav;
           {{ end }}
         }
 
         location = /.well-known/caldav {
-          {{ if .Values.nginxConfig.use443 }}
-          return 301 $scheme://$host/remote.php/dav;
+          {{ if .Values.nginxConfig.useDifferentAccessPort }}
+          return 301 $scheme://$host{{ $externalPort }}/remote.php/dav;
           {{ else }}
           return 301 $scheme://$host:$server_port/remote.php/dav;
           {{ end }}
@@ -70,8 +75,8 @@ data:
           proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
           proxy_set_header X-Forwarded-Proto https;
           proxy_set_header X-Forwarded-Host  $host;
-          {{ if .Values.nginxConfig.use443 }}
-          proxy_set_header X-Forwarded-Port  443;
+          {{ if .Values.nginxConfig.useDifferentAccessPort }}
+          proxy_set_header X-Forwarded-Port  {{ .Values.nginxConfig.externalPort }};
           {{ else }}
           proxy_set_header X-Forwarded-Port  $server_port;
           {{ end }}
