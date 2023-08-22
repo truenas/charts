@@ -31,7 +31,7 @@ questions:
             The URL that Planka will be accessible from.
             Example: http://server.ip:30062
           schema:
-            type: string
+            type: uri
             default: ""
             required: true
         - variable: trustProxy
