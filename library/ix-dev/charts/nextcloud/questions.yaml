@@ -94,8 +94,8 @@ questions:
           schema:
             type: boolean
             default: false
-        - variable: externalPort
-          label: "Access Port"
+        - variable: externalAccessPort
+          label: "External Access Port"
           schema:
             type: int
             show_if: [["useDifferentAccessPort", "=", true]]
