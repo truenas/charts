@@ -11,6 +11,8 @@ persistence:
           mountPath: /var/lib/odoo
         01-permissions:
           mountPath: /mnt/directories/odoo_data
+        03-db-init:
+          mountPath: /var/lib/odoo
   addons:
     enabled: true
     type: {{ .Values.odooStorage.addons.type }}
@@ -22,6 +24,8 @@ persistence:
           mountPath: /mnt/extra-addons
         01-permissions:
           mountPath: /mnt/directories/odoo_addons
+        03-db-init:
+          mountPath: /mnt/extra-addons
   tmp:
     enabled: true
     type: emptyDir
@@ -29,6 +33,9 @@ persistence:
       odoo:
         odoo:
           mountPath: /tmp
+        03-db-init:
+          mountPath: /tmp
+
   config:
     enabled: true
     type: secret
@@ -36,6 +43,10 @@ persistence:
     targetSelector:
       odoo:
         odoo:
+          mountPath: /etc/odoo/odoo.conf
+          readOnly: true
+          subPath: odoo.conf
+        03-db-init:
           mountPath: /etc/odoo/odoo.conf
           readOnly: true
           subPath: odoo.conf

@@ -4,8 +4,7 @@
 
   {{- $dbHost := (printf "%s-postgres" $fullname) -}}
   {{- $dbUser := "odoo" -}}
-  {{/* https://github.com/odoo/odoo/issues/12850 */}}
-  {{- $dbName := "postgres" -}}
+  {{- $dbName := "odoo" -}}
 
   {{- $dbPass := (randAlphaNum 32) -}}
   {{- with (lookup "v1" "Secret" .Release.Namespace (printf "%s-postgres-creds" $fullname)) -}}

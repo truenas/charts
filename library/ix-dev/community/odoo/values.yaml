@@ -32,6 +32,11 @@ odooStorage:
 
 notes:
   custom: |
+    # Initial Admin Credentials
+
+    - Username: `admin`
+    - Password: `admin`
+
     ## Database
     You can connect to the database using the pgAdmin App from the catalog
 
