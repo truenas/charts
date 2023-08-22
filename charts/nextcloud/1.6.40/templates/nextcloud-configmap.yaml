@@ -5,3 +5,6 @@ metadata:
 data:
   opcache.ini: |
     opcache.memory_consumption={{ .Values.nextcloud.opcache_memory_consumption }}
+
+  php.ini: |
+    max_execution_time={{ .Values.nextcloud.max_execution_time }}
