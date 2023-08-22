@@ -16,10 +16,6 @@ odooNetwork:
   webPort: 30062
   hostNetwork: false
 
-odooRunAs:
-  user: 1000
-  group: 1000
-
 odooStorage:
   data:
     type: ixVolume

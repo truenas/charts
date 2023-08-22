@@ -12,8 +12,8 @@ workload:
           primary: true
           imageSelector: image
           securityContext:
-            runAsUser: {{ .Values.odooRunAs.user }}
-            runAsGroup: {{ .Values.odooRunAs.group }}
+            runAsUser: 101
+            runAsGroup: 101
           env:
             ODOO_RC: /etc/odoo/odoo.conf
           {{ with .Values.odooConfig.additionalEnvs }}
@@ -41,8 +41,8 @@ workload:
               port: {{ .Values.odooNetwork.webPort }}
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
-                                                        "UID" .Values.odooRunAs.user
-                                                        "GID" .Values.odooRunAs.group
+                                                        "UID" 101
+                                                        "GID" 101
                                                         "type" "install") | nindent 8 }}
       {{- include "ix.v1.common.app.postgresWait" (dict "name" "postgres-wait"
                                                         "secretName" "postgres-creds") | nindent 8 }}
