@@ -46,9 +46,10 @@ workload:
                                                         "type" "install") | nindent 8 }}
       {{- include "ix.v1.common.app.postgresWait" (dict "name" "02-postgres-wait"
                                                         "secretName" "postgres-creds") | nindent 8 }}
+        {{- if .Release.IsInstall }} {{/* If we use type: install it will run before the postgres wait and fail */}}
         03-db-init:
           enabled: true
-          type: install
+          type: init
           imageSelector: image
           securityContext:
             runAsUser: 101
@@ -63,4 +64,5 @@ workload:
                             --stop-after-init \
                             --without-demo=all \
                             --init=base
+        {{- end -}}
 {{- end -}}
