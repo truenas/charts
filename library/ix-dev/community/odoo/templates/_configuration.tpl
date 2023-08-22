@@ -32,6 +32,7 @@ secret:
                               "http_port"  "xmlrpc" "xmlrpc_port" "xmlrpc_interface"
                               "db_port" "db_host" "db_name" "db_user" "db_sslmode"
                               "db_password") -}}
+  {{- $userKeys := list -}}
   odoo-config:
     enabled: true
     data:
@@ -55,6 +56,10 @@ secret:
           {{- if (mustHas $opt.key $reservedKeys) -}}
             {{- fail (printf "Odoo - Key [%v] is not allowed to be modified") -}}
           {{- end -}}
+          {{- $userKeys = mustAppend $userKeys $opt.key -}}
           {{- printf "%s = %s" $opt.key $opt.value | nindent 8 -}}
         {{- end -}}
+  {{- if not (deepEqual $userKeys (uniq $userKeys)) -}}
+    {{- fail (printf "Odoo - Additional configuration keys must be unique, but got [%v]" (join ", " $userKeys)) -}}
+  {{- end -}}
 {{- end -}}

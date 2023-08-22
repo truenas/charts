@@ -22,6 +22,13 @@ persistence:
           mountPath: /mnt/extra-addons
         01-permissions:
           mountPath: /mnt/directories/odoo_addons
+  tmp:
+    enabled: true
+    type: emptyDir
+    targetSelector:
+      odoo:
+        odoo:
+          mountPath: /tmp
   config:
     enabled: true
     type: secret
