@@ -18,6 +18,8 @@ nextcloud:
   install_ffmpeg: true
   install_smbclient: true
   max_upload_size: 5
+  max_execution_time: 30
+  php_memory_limit: 512
   opcache_memory_consumption: 128
   password: changeme
   username: admin

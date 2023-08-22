@@ -78,6 +78,7 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
         {{ $envList = mustAppend $envList (dict "name" "POSTGRES_DB" "value" (include "postgres.DatabaseName" .)) }}
         {{ $envList = mustAppend $envList (dict "name" "NEXTCLOUD_DATA_DIR" "value" .Values.nextcloud.datadir) }}
         {{ $envList = mustAppend $envList (dict "name" "PHP_UPLOAD_LIMIT" "value" (printf "%vG" (.Values.nextcloud.max_upload_size | default 3))) }}
+        {{ $envList = mustAppend $envList (dict "name" "PHP_MEMORY_LIMIT" "value" (printf "%vM" (.Values.nextcloud.php_memory_limit | default 512))) }}
         {{ if eq (include "nginx.certAvailable" .) "true" }}
         {{ $envList = mustAppend $envList (dict "name" "APACHE_DISABLE_REWRITE_IP" "value" "1") }}
           {{ if and .Values.nextcloud.host .Values.service.nodePort }}
@@ -183,6 +184,11 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
           # after the default opcache file nextcloud provides.
           mountPath: /usr/local/etc/php/conf.d/opcache-z-99.ini
           subPath: opcache.ini
+        - name: nextcloud-configuration
+          # We use -z-99 to ensure that this file is loaded
+          # after the default php config file nextcloud provides.
+          mountPath: /usr/local/etc/php/conf.d/nextcloud-z-99.ini
+          subPath: php.ini
         {{ range $index, $hostPathConfiguration := .Values.extraAppVolumeMounts }}
         - name: extrappvolume-{{ $index }}
           mountPath: {{ $hostPathConfiguration.mountPath }}
