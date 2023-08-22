@@ -44,7 +44,6 @@ secret:
         ; Network Details
         http_enable = True
         http_port = {{ .Values.odooNetwork.webPort }}
-        http_interface = ''
         ; Database Details
         db_port = 5432
         db_host = {{ $dbHost }}
