@@ -157,9 +157,9 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
               value: localhost
         {{ end }}
           initialDelaySeconds: 60
-          periodSeconds: 5
+          periodSeconds: 10
           timeoutSeconds: 2
-          failureThreshold: 120
+          failureThreshold: 100
           successThreshold: 1
         volumeMounts:
         - name: nextcloud-data
