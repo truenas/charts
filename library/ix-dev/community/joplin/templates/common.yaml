@@ -3,6 +3,7 @@
 {{/* Merge the templates with Values */}}
 {{- $_ := mustMergeOverwrite .Values (include "joplin.service" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "joplin.persistence" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "joplin.configuration" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "postgres.workload" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "joplin.workload" $ | fromYaml) -}}
 
