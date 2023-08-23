@@ -4,7 +4,7 @@
 
 > When application is installed, a container will be launched with **root** privileges.
 > This is required in order to apply the correct permissions to the `odoo` directories.
-> Afterward, the `odo` container will run as a **non**-root user (`101`).
+> Afterward, the `odoo` container will run as a **non**-root user (`101`).
 > Same applies to the `postgres` container. This will run afterwards as a **non**-root user (`999`).
 > On each upgrade, a container will be launched with **root** privileges in order to apply the correct
 > permissions to the `postgres` **backups** directory. Container that performs the backup will run as a **non**-root user (`999`) afterwards.
