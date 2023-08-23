@@ -16,7 +16,9 @@ workload:
             runAsGroup: {{ .Values.joplinRunAs.group }}
           env:
             APP_PORT: {{ .Values.joplinNetwork.webPort }}
-            APP_BASE_URL: {{ .Values.joplinConfig.baseURL }}
+            #TODO: Adapt portal to parse the baseURL
+            #TODO: Probably have to hardcode pod's hostname for CI runs to have a valid URL
+            APP_BASE_URL: {{ .Values.joplinConfig.baseUrl }}
             DB_CLIENT: pg
             POSTGRES_PORT: 5432
             POSTGRES_HOST:

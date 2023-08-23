@@ -27,7 +27,7 @@ questions:
     schema:
       type: dict
       attrs:
-        - variable: baseURL
+        - variable: baseUrl
           label: Base URL
           description: |
             The base URL for Joplin.</br>
