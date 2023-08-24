@@ -12,12 +12,13 @@ workload:
           primary: true
           imageSelector: image
           securityContext:
-            runAsUser: 1001
-            runAsGroup: 1001
+            runAsUser: 0
+            runAsGroup: 0
+            runAsNonRoot: false
+            readOnlyRootFilesystem: false
           env:
             APP_PORT: {{ .Values.joplinNetwork.webPort }}
             #TODO: Adapt portal to parse the baseURL
-            #TODO: Probably have to hardcode pod's hostname for CI runs to have a valid URL
             APP_BASE_URL: {{ .Values.joplinConfig.baseUrl }}
             DB_CLIENT: pg
             POSTGRES_PORT: 5432
@@ -50,16 +51,22 @@ workload:
               type: http
               port: {{ .Values.joplinNetwork.webPort }}
               path: /api/ping
+              httpHeaders:
+                Host: '{{ .Values.joplinConfig.baseUrl | replace "https://" "" | replace "http://" "" }}'
             readiness:
               enabled: true
               type: http
               port: {{ .Values.joplinNetwork.webPort }}
               path: /api/ping
+              httpHeaders:
+                Host: '{{ .Values.joplinConfig.baseUrl | replace "https://" "" | replace "http://" "" }}'
             startup:
               enabled: true
               type: http
               port: {{ .Values.joplinNetwork.webPort }}
               path: /api/ping
+              httpHeaders:
+                Host: '{{ .Values.joplinConfig.baseUrl | replace "https://" "" | replace "http://" "" }}'
       initContainers:
       {{- include "ix.v1.common.app.postgresWait" (dict "name" "postgres-wait"
                                                         "secretName" "postgres-creds") | nindent 8 }}
