@@ -17,7 +17,6 @@ workload:
             readOnlyRootFilesystem: false
           env:
             APP_PORT: {{ .Values.joplinNetwork.webPort }}
-            #TODO: Adapt portal to parse the baseURL
             APP_BASE_URL: {{ .Values.joplinConfig.baseUrl }}
             DB_CLIENT: pg
             POSTGRES_PORT: 5432
