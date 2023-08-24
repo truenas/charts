@@ -50,21 +50,21 @@ workload:
               port: {{ .Values.joplinNetwork.webPort }}
               path: /api/ping
               httpHeaders:
-                Host: '{{ .Values.joplinConfig.baseUrl | replace "https://" "" | replace "http://" "" }}'
+                Host: '{{ .Values.joplinConfig.baseUrl | trimPrefix "https://" | trimPrefix "http://" | trimSuffix "/" }}'
             readiness:
               enabled: true
               type: http
               port: {{ .Values.joplinNetwork.webPort }}
               path: /api/ping
               httpHeaders:
-                Host: '{{ .Values.joplinConfig.baseUrl | replace "https://" "" | replace "http://" "" }}'
+                Host: '{{ .Values.joplinConfig.baseUrl | trimPrefix "https://" | trimPrefix "http://" | trimSuffix "/" }}'
             startup:
               enabled: true
               type: http
               port: {{ .Values.joplinNetwork.webPort }}
               path: /api/ping
               httpHeaders:
-                Host: '{{ .Values.joplinConfig.baseUrl | replace "https://" "" | replace "http://" "" }}'
+                Host: '{{ .Values.joplinConfig.baseUrl | trimPrefix "https://" | trimPrefix "http://" | trimSuffix "/" }}'
       initContainers:
       {{- include "ix.v1.common.app.postgresWait" (dict "name" "postgres-wait"
                                                         "secretName" "postgres-creds") | nindent 8 }}
