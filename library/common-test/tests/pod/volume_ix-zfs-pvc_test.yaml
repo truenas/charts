@@ -1,0 +1,30 @@
+suite: pod ix-zfs-pvc volume test
+templates:
+  - common.yaml
+tests:
+  - it: should pass with pvc volume
+    set:
+      global:
+        ixChartContext:
+          storageClassName: ix-storage-class-releasename
+      workload:
+        workload-name1:
+          enabled: true
+          primary: true
+          type: Deployment
+          podSpec: {}
+      persistence:
+        pvc-vol:
+          enabled: true
+          type: ix-zfs-pvc
+    asserts:
+      - documentIndex: &deploymentDoc 1
+        isKind:
+          of: Deployment
+      - documentIndex: *deploymentDoc
+        contains:
+          path: spec.template.spec.volumes
+          content:
+            name: pvc-vol
+            persistentVolumeClaim:
+              claimName: release-name-common-test-pvc-vol

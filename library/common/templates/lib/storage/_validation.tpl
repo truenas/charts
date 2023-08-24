@@ -10,7 +10,7 @@ objectData:
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
-  {{- $types := (list "emptyDir" "hostPath" "ixVolume" "secret" "configmap" "device") -}}
+  {{- $types := (list "smb-pv-pvc" "nfs-pv-pvc" "ix-zfs-pvc" "pvc" "emptyDir" "hostPath" "ixVolume" "secret" "configmap" "device") -}}
   {{- if not (mustHas $objectData.type $types) -}}
     {{- fail (printf "Persistence - Expected <type> to be one of [%s], but got [%s]" (join ", " $types) $objectData.type) -}}
   {{- end -}}
