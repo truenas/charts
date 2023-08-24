@@ -1,19 +1,5 @@
 {{- define "joplin.persistence" -}}
 persistence:
-  logs:
-    enabled: true
-    type: emptyDir
-    targetSelector:
-      joplin:
-        joplin:
-          mountPath: /home/joplin/packages/server/logs
-  temp:
-    enabled: true
-    type: emptyDir
-    targetSelector:
-      joplin:
-        joplin:
-          mountPath: /home/joplin/packages/server/temp
   postgresdata:
     enabled: true
     type: {{ .Values.joplinStorage.pgData.type }}

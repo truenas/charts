@@ -12,9 +12,8 @@ workload:
           primary: true
           imageSelector: image
           securityContext:
-            runAsUser: 0
-            runAsGroup: 0
-            runAsNonRoot: false
+            runAsUser: 1001
+            runAsGroup: 1001
             readOnlyRootFilesystem: false
           env:
             APP_PORT: {{ .Values.joplinNetwork.webPort }}
