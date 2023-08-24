@@ -16,10 +16,6 @@ joplinNetwork:
   webPort: 30063
   hostNetwork: false
 
-joplinRunAs:
-  user: 568
-  group: 568
-
 joplinStorage:
   pgData:
     type: ixVolume

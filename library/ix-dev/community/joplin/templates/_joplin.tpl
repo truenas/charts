@@ -12,8 +12,8 @@ workload:
           primary: true
           imageSelector: image
           securityContext:
-            runAsUser: {{ .Values.joplinRunAs.user }}
-            runAsGroup: {{ .Values.joplinRunAs.group }}
+            runAsUser: 1001
+            runAsGroup: 1001
           env:
             APP_PORT: {{ .Values.joplinNetwork.webPort }}
             #TODO: Adapt portal to parse the baseURL

@@ -1,8 +1,6 @@
 groups:
   - name: Joplin Configuration
     description: Configure Joplin
-  - name: User and Group Configuration
-    description: Configure User and Group for Joplin
   - name: Network Configuration
     description: Configure Network for Joplin
   - name: Storage Configuration
@@ -60,29 +58,6 @@ questions:
                       schema:
                         type: string
                         required: true
-
-  - variable: joplinRunAs
-    label: ""
-    group: User and Group Configuration
-    schema:
-      type: dict
-      attrs:
-        - variable: user
-          label: User ID
-          description: The user id that Joplin will run as.
-          schema:
-            type: int
-            min: 2
-            default: 568
-            required: true
-        - variable: group
-          label: Group ID
-          description: The group id that Joplin will run as.
-          schema:
-            type: int
-            min: 2
-            default: 568
-            required: true
 
   - variable: joplinNetwork
     label: ""
