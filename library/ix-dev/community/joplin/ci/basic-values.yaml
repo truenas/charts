@@ -1,10 +1,6 @@
 joplinNetwork:
   webPort: 31000
 
-joplinRunAs:
-  user: 1000
-  group: 1000
-
 joplinStorage:
   pgData:
     type: hostPath
