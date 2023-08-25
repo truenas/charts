@@ -133,7 +133,6 @@ questions:
             (Internal port is always 6881)
           schema:
             type: int
-            show_if: [["hostNetwork", "=", false]]
             default: 30039
             min: 9000
             max: 65535
