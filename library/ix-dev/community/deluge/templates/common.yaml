@@ -1,6 +1,8 @@
 {{- include "ix.v1.common.loader.init" . -}}
 
 {{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "deluge.service" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "deluge.persistence" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "deluge.workload" $ | fromYaml) -}}
 
 {{/* Create the configmap for portal manually*/}}
