@@ -4,9 +4,9 @@ description: pgAdmin is the most popular and feature rich Open Source administra
 annotations:
   title: pgAdmin
 type: application
-version: 1.0.1
+version: 1.0.2
 apiVersion: v2
-appVersion: '7.5'
+appVersion: '7.6'
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: truenas
@@ -15,7 +15,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.0.12
+    version: 1.1.0
 home: https://www.pgadmin.org/
 icon: https://avatars.githubusercontent.com/u/113517144
 sources:
