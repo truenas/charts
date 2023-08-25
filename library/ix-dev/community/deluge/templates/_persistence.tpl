@@ -9,6 +9,8 @@ persistence:
       deluge:
         deluge:
           mountPath: /config
+        config:
+          mountPath: /config
   downloads:
     enabled: true
     type: {{ .Values.delugeStorage.downloads.type }}

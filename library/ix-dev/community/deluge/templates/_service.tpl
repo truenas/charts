@@ -31,13 +31,11 @@ service:
         primary: true
         port: {{ .Values.delugeNetwork.torrentPort }}
         nodePort: {{ .Values.delugeNetwork.torrentPort }}
-        targetPort: 6881
         targetSelector: deluge
       udp:
         enabled: true
         port: {{ .Values.delugeNetwork.torrentPort }}
         nodePort: {{ .Values.delugeNetwork.torrentPort }}
-        targetPort: 6881
         protocol: udp
         targetSelector: deluge
 {{- end -}}
