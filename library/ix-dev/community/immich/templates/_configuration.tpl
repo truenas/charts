@@ -29,10 +29,7 @@
     {{- $typesenseKey = ((index .data "TYPESENSE_API_KEY") | b64dec) -}}
   {{- end -}}
 
-  {{- $mlURL := "false" -}}
-  {{- if .Values.immichConfig.enableML -}}
-    {{- $mlURL = printf "http://%v-machinelearning:%v" $fullname .Values.immichNetwork.machinelearningPort -}}
-  {{- end }}
+  {{- $mlURL := printf "http://%v-machinelearning:%v" $fullname .Values.immichNetwork.machinelearningPort }}
 
 secret:
   postgres-creds:
@@ -55,7 +52,10 @@ secret:
   immich-creds:
     enabled: true
     data:
+      IMMICH_MACHINE_LEARNING_ENABLED: {{ .Values.immichConfig.enableML | quote }}
+      {{- if .Values.immichConfig.enableML }}
       IMMICH_MACHINE_LEARNING_URL: {{ $mlURL | quote }}
+      {{- end }}
       TYPESENSE_ENABLED: {{ .Values.immichConfig.enableTypesense | quote }}
       TYPESENSE_API_KEY: {{ $typesenseKey }}
       {{- if .Values.immichConfig.enableTypesense }}
