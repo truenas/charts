@@ -25,6 +25,17 @@ service:
         nodePort: {{ .Values.fireflyNetwork.importerPort }}
         targetPort: 8080
         targetSelector: firefly-importer
+  redis:
+    enabled: true
+    type: ClusterIP
+    targetSelector: redis
+    ports:
+      redis:
+        enabled: true
+        primary: true
+        port: 6379
+        targetPort: 6379
+        targetSelector: redis
   # Postgres
   postgres:
     enabled: true
