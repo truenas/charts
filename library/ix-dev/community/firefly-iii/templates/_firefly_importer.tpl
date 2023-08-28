@@ -17,7 +17,7 @@ workload:
             readOnlyRootFilesystem: false
           envFrom:
             - secretRef:
-                name: import-config
+                name: importer-config
           {{ with .Values.fireflyConfig.additionalImporterEnvs }}
           envList:
             {{ range $env := . }}
