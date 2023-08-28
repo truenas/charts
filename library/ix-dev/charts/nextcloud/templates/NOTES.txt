@@ -1,3 +1,16 @@
-1. Get the nextcloud URL by running:
+## Database
+You can connect to the database using the pgAdmin App from the catalog
 
-  echo http://{{ .Values.nextcloud.host }}:{{ .Values.service.nodePort }}/
+<details>
+  <summary>Database Details</summary>
+
+  - Database: `nextcloud`
+  - Username: `{{ .Values.nextcloudDbUser | b64dec }}`
+  - Password: `{{ .Values.nextcloudDbPass | b64dec }}`
+  - Host:     `{{ .Values.nextcloudDbHost }}.{{ .Release.Namespace }}.svc.cluster.local`
+  - Port:     `5432`
+
+</details>
+{{- $_ := unset .Values "nextcloudDbUser" }}
+{{- $_ := unset .Values "nextcloudDbPass" }}
+{{- $_ := unset .Values "nextcloudDbHost" }}
