@@ -8,7 +8,7 @@ persistence:
     targetSelector:
       firefly:
         firefly:
-          mountPath: /var/lib/firefly
+          mountPath: /var/www/html/storage/upload
   tmp:
     enabled: true
     type: emptyDir
