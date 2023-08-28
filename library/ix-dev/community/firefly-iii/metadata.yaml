@@ -12,4 +12,6 @@ runAsContext:
 capabilities:
   - name: CHOWN
     description: Firefly III is able to chown files.
+  - name: FOWNER
+    description: Firefly III is able to bypass permission checks.
 hostMounts: []

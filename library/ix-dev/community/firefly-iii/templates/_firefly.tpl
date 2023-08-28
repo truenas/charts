@@ -19,6 +19,7 @@ workload:
             capabilities:
               add:
                 - CHOWN
+                - FOWNER
           envFrom:
             - secretRef:
                 name: firefly-config
