@@ -6,6 +6,7 @@ workload:
     type: CronJob
     schedule: "0 3 * * *"
     podSpec:
+      restartPolicy: OnFailure
       containers:
         firefly-cron:
           enabled: true
@@ -13,18 +14,16 @@ workload:
           imageSelector: bashImage
           env:
             CRON_TOKEN:
-              valueFrom:
-                secretKeyRef:
-                  name: firefly-config
-                  key: STATIC_CRON_TOKEN
+              secretKeyRef:
+                name: firefly-config
+                key: STATIC_CRON_TOKEN
           probes:
+            startup:
+              enabled: false
+            readiness:
+              enabled: false
             liveness:
-              startup:
-                enabled: false
-              readiness:
-                enabled: false
-              liveness:
-                enabled: false
+              enabled: false
           command:
             - /bin/bash
           args:
