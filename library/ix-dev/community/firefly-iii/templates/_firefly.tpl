@@ -16,6 +16,9 @@ workload:
             runAsGroup: 0
             runAsNonRoot: false
             readOnlyRootFilesystem: false
+            capabilities:
+              add:
+                - CHOWN
           envFrom:
             - secretRef:
                 name: firefly-config

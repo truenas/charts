@@ -9,5 +9,7 @@ runAsContext:
     gid: 999
     uid: 999
     description: Postgres runs as a non-root user.
-capabilities: []
+capabilities:
+  - name: CHOWN
+    description: Firefly III is able to chown files.
 hostMounts: []
