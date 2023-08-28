@@ -65,7 +65,6 @@ secret:
       REDIS_PASSWORD: {{ $redisPass }}
       REDIS_DB: 0
       REDIS_CACHE_DB: 1
-      APP_ENV: production
       APP_KEY: {{ $appKey }}
       STATIC_CRON_TOKEN: {{ $cronToken }}
 {{- end -}}
