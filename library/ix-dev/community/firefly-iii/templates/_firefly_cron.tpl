@@ -6,7 +6,7 @@ workload:
     type: CronJob
     schedule: "0 3 * * *"
     podSpec:
-      restartPolicy: OnFailure
+      restartPolicy: Never
       containers:
         firefly-cron:
           enabled: true
