@@ -6,6 +6,9 @@
 {{- $_ := mustMergeOverwrite .Values (include "firefly.persistence" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "firefly.workload" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "firefly.cron" $ | fromYaml) -}}
+{{- if .Values.fireflyConfig.enableImporter -}}
+  {{- $_ := mustMergeOverwrite .Values (include "firefly.importer" $ | fromYaml) -}}
+{{- end -}}
 {{- $_ := mustMergeOverwrite .Values (include "postgres.workload" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "redis.workload" $ | fromYaml) -}}
 

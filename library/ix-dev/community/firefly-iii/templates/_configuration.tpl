@@ -53,18 +53,27 @@ secret:
     data:
       DB_CONNECTION: pgsql
       DB_HOST: {{ $dbHost }}
-      DB_PORT: 5432
+      DB_PORT: "5432"
       DB_DATABASE: {{ $dbName }}
       DB_USERNAME: {{ $dbUser }}
       DB_PASSWORD: {{ $dbPass }}
       CACHE_DRIVER: redis
       SESSION_DRIVER: redis
       REDIS_HOST: {{ $redisHost }}
-      REDIS_PORT: 6379
+      REDIS_PORT: "6379"
       REDIS_USERNAME: default
       REDIS_PASSWORD: {{ $redisPass }}
-      REDIS_DB: 0
-      REDIS_CACHE_DB: 1
+      REDIS_DB: "0"
+      REDIS_CACHE_DB: "1"
+      APP_URL: {{ .Values.fireflyConfig.appUrl }}
       APP_KEY: {{ $appKey }}
       STATIC_CRON_TOKEN: {{ $cronToken }}
+
+  importer-config:
+    enabled:
+    data:
+      FIREFLY_III_URL: http://{{ $fullname }}:{{ .Values.fireflyNetwork.webPort }}
+      VANITY_URL: {{ .Values.fireflyConfig.appUrl }}
+
+
 {{- end -}}

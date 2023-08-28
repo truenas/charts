@@ -26,11 +26,51 @@ questions:
     schema:
       type: dict
       attrs:
+        - variable: appUrl
+          label: Firefly III URL
+          description: |
+            The base URL for Firefly III.</br>
+            Examples:</br>
+            https://firefly.example.com
+            http://192.168.1.100:30064
+          schema:
+            type: uri
+            default: ""
+            required: true
         - variable: additionalEnvs
           label: Additional Environment Variables
           description: Configure additional environment variables for Firefly III.
           schema:
             type: list
+            default: []
+            items:
+              - variable: env
+                label: Environment Variable
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: name
+                      label: Name
+                      schema:
+                        type: string
+                        required: true
+                    - variable: value
+                      label: Value
+                      schema:
+                        type: string
+                        required: true
+        - variable: enableImporter
+          label: Enable Firefly III Data Importer
+          description: Enable Firefly III Data Importer.
+          schema:
+            type: boolean
+            default: false
+        - variable: additionalImporterEnvs
+          label: Additional Data Importer Environment Variables
+          description: Configure additional environment variables for Firefly III Data Importer.
+          schema:
+            type: list
+            show_if: [["enableImporter", "=", true]]
             default: []
             items:
               - variable: env

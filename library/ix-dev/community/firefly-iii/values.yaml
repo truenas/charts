@@ -14,7 +14,10 @@ resources:
     memory: 8Gi
 
 fireflyConfig:
+  appUrl: http://localhost:30064
   additionalEnvs: []
+  enableImporter: false
+  additionalImporterEnvs: []
 
 fireflyNetwork:
   webPort: 30064

@@ -1,13 +1,12 @@
-{{- define "firefly.workload" -}}
+{{- define "firefly.importer" -}}
+{{- $fullname := (include "ix.v1.common.lib.chart.names.fullname" $) }}
 workload:
-  firefly:
+  firefly-importer:
     enabled: true
-    primary: true
     type: Deployment
     podSpec:
-      hostNetwork: {{ .Values.fireflyNetwork.hostNetwork }}
       containers:
-        firefly:
+        firefly-importer:
           enabled: true
           primary: true
           imageSelector: image
@@ -18,8 +17,8 @@ workload:
             readOnlyRootFilesystem: false
           envFrom:
             - secretRef:
-                name: firefly-config
-          {{ with .Values.fireflyConfig.additionalEnvs }}
+                name: import-config
+          {{ with .Values.fireflyConfig.additionalImporterEnvs }}
           envList:
             {{ range $env := . }}
             - name: {{ $env.name }}
@@ -45,6 +44,4 @@ workload:
       initContainers:
       {{- include "ix.v1.common.app.postgresWait" (dict "name" "postgres-wait"
                                                         "secretName" "postgres-creds") | nindent 8 }}
-      {{- include "ix.v1.common.app.redisWait" (dict  "name" "redis-wait"
-                                                      "secretName" "redis-creds") | nindent 8 }}
 {{- end -}}
