@@ -13,6 +13,18 @@ service:
         nodePort: {{ .Values.fireflyNetwork.webPort }}
         targetPort: 8080
         targetSelector: firefly
+  firefly-importer:
+    enabled: {{ .Values.fireflyConfig.enableImporter }}
+    type: NodePort
+    targetSelector: firefly-importer
+    ports:
+      webui:
+        enabled: true
+        primary: true
+        port: {{ .Values.fireflyNetwork.importerPort }}
+        nodePort: {{ .Values.fireflyNetwork.importerPort }}
+        targetPort: 8080
+        targetSelector: firefly-importer
   # Postgres
   postgres:
     enabled: true

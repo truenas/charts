@@ -21,6 +21,7 @@ fireflyConfig:
 
 fireflyNetwork:
   webPort: 30064
+  importerPort: 30065
   hostNetwork: false
 
 fireflyStorage:
@@ -30,6 +31,12 @@ fireflyStorage:
 
 notes:
   custom: |
+    {{- if .Values.fireflyConfig.enableImporter }}
+    ## Data Importer
+
+    You can reach data importer at http://<ip>:{{ .Values.fireflyNetwork.importerPort }}
+    {{- end }}
+
     ## Database
     You can connect to the database using the pgAdmin App from the catalog
 
