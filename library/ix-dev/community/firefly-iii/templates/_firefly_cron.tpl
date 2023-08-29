@@ -7,6 +7,7 @@ workload:
     schedule: "0 3 * * *"
     podSpec:
       restartPolicy: Never
+      backoffLimit: 2
       containers:
         firefly-cron:
           enabled: true
@@ -25,9 +26,21 @@ workload:
             liveness:
               enabled: false
           command:
-            - /bin/bash
+            - bash
           args:
             - -c
             - |
-              curl {{ $fullname }}:{{ .Values.fireflyNetwork.webPort }}/api/v1/cron/$(CRON_TOKEN)
+              until wget --spider --quiet --timeout=3 --tries=1 \
+                {{ $fullname }}:{{ .Values.fireflyNetwork.webPort }}/health; do
+                echo "Waiting for Firefly to start..."
+                sleep 2
+              done
+              if wget --spider --quiet --timeout=3 --tries=1 \
+                {{ $fullname }}:{{ .Values.fireflyNetwork.webPort }}/api/v1/cron/$(CRON_TOKEN);
+              then
+                echo "Cron job successfully executed"
+              else
+                echo "Cron job failed"
+                exit 1
+              fi
 {{- end -}}
