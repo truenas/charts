@@ -70,10 +70,8 @@ secret:
       STATIC_CRON_TOKEN: {{ $cronToken }}
 
   importer-config:
-    enabled:
+    enabled: true
     data:
       FIREFLY_III_URL: http://{{ $fullname }}:{{ .Values.fireflyNetwork.webPort }}
       VANITY_URL: {{ .Values.fireflyConfig.appUrl }}
-
-
 {{- end -}}

@@ -16,6 +16,9 @@ persistence:
       firefly:
         firefly:
           mountPath: /tmp
+      firefly-importer:
+        firefly-importer:
+          mountPath: /tmp
 
   # Postgres
   postgresdata:

@@ -11,11 +11,11 @@ runAsContext:
     description: Postgres runs as a non-root user.
 capabilities:
   - name: CHOWN
-    description: Firefly III is able to chown files.
+    description: Firefly III and Firefly Data Importer is able to chown files.
   - name: FOWNER
-    description: Firefly III is able to bypass permission checks.
+    description: Firefly III and Firefly Data Importer is able to bypass permission checks.
   - name: SETUID
-    description: Firefly III is able to set user ID for it's sub-processes.
+    description: Firefly III and Firefly Data Importer is able to set user ID for it's sub-processes.
   - name: SETGID
-    description: Firefly III is able to set group ID for it's sub-processes.
+    description: Firefly III and Firefly Data Importer is able to set group ID for it's sub-processes.
 hostMounts: []
