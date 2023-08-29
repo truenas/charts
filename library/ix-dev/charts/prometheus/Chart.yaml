@@ -3,7 +3,7 @@ description: The Prometheus monitoring system and time series database.
 annotations:
   title: Prometheus
 type: application
-version: 1.0.17
+version: 1.0.18
 apiVersion: v2
 appVersion: v2.46.0
 kubeVersion: '>=1.16.0-0'
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.0.12
+    version: 1.1.0
 home: https://prometheus.io
 icon: https://avatars.githubusercontent.com/u/3380462
 sources:

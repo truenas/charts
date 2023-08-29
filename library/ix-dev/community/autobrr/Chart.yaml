@@ -3,7 +3,7 @@ description: Autobrr is the modern download automation tool for torrents and use
 annotations:
   title: Autobrr
 type: application
-version: 1.0.3
+version: 1.0.4
 apiVersion: v2
 appVersion: 1.28.0
 kubeVersion: '>=1.16.0-0'
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.0.12
+    version: 1.1.0
 home: https://github.com/autobrr/autobrr
 icon: https://github.com/autobrr/autobrr/raw/develop/.github/images/logo.png
 sources:
