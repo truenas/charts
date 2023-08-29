@@ -28,6 +28,13 @@ fireflyStorage:
   uploads:
     type: ixVolume
     datasetName: uploads
+  pgData:
+    type: ixVolume
+    hostPath: pgData
+  pgBackup:
+    type: ixVolume
+    hostPath: pgBackup
+
 
 notes:
   custom: |
