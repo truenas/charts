@@ -37,17 +37,17 @@ workload:
               enabled: true
               type: http
               path: /health
-              port: {{ .Values.fireflyNetwork.webPort }}
+              port: 8080
             readiness:
               enabled: true
               type: http
               path: /health
-              port: {{ .Values.fireflyNetwork.webPort }}
+              port: 8080
             startup:
               enabled: true
               type: http
               path: /health
-              port: {{ .Values.fireflyNetwork.webPort }}
+              port: 8080
       initContainers:
       {{- include "ix.v1.common.app.postgresWait" (dict "name" "postgres-wait"
                                                         "secretName" "postgres-creds") | nindent 8 }}
