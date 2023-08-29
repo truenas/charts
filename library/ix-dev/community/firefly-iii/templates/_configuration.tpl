@@ -73,6 +73,6 @@ secret:
     enabled: true
     data:
       FIREFLY_III_URL: http://{{ $fullname }}:{{ .Values.fireflyNetwork.webPort }}
-      EXPECT_SECURE_URL: false
+      EXPECT_SECURE_URL: "false"
       VANITY_URL: {{ .Values.fireflyConfig.appUrl | trimSuffix "/" }}
 {{- end -}}
