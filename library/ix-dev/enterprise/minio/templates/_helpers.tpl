@@ -42,7 +42,12 @@
     {{- fail "Expected Multi Mode to be enabled, when more than 1 storage mountPaths added" -}}
   {{- end -}}
 
+  {{- $notAllowedKeys := (list "server") -}} {{/* Extend if needed */}}
   {{- range $item := .Values.minioMultiMode -}}
+    {{- if (mustHas $item $notAllowedKeys) -}}
+      {{- fail (printf "Key [%v] is not allowed as a Multi Mode argument" $item) -}}
+    {{- end -}}
+
     {{- if hasPrefix "/" $item -}}
       {{- if or (contains "{" $item) (contains "}" $item) -}}
         {{- if not (contains "..." $item) -}}
