@@ -1,10 +1,9 @@
 name: overseerr
-description: Overseerr is a free and open source software application for managing
-  requests for your media library.
+description: Overseerr is a free and open source software application for managing requests for your media library.
 annotations:
   title: Overseerr
 type: application
-version: 1.0.13
+version: 1.0.14
 apiVersion: v2
 appVersion: 1.33.2
 kubeVersion: '>=1.16.0-0'
@@ -15,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.0.12
+    version: 1.1.0
 home: https://github.com/sct/overseerr
 icon: https://raw.githubusercontent.com/sct/overseerr/develop/public/os_icon.svg
 sources:
