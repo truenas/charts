@@ -20,6 +20,8 @@ workload:
               add:
                 - CHOWN
                 - FOWNER
+                - SETUID
+                - SETGID
           envFrom:
             - secretRef:
                 name: firefly-config
