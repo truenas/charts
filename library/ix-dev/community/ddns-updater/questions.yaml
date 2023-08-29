@@ -823,6 +823,13 @@ questions:
                         type: string
                         private: true
                         show_if: [["provider", "=", "ovh"]]
+                    - variable: ovhProviderIP
+                      label: OVH Provider IP
+                      description: OVH Provider IP.
+                      schema:
+                        type: boolean
+                        show_if: [["provider", "=", "ovh"]]
+                        default: false
 
                     # Porkbun
                     - variable: porkbunApiKey
