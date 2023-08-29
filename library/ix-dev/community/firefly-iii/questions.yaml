@@ -104,6 +104,15 @@ questions:
             min: 9000
             max: 65535
             required: true
+        - variable: importerPort
+          label: Data Importer Port
+          description: The port for the Firefly III Data Importer WebUI.
+          schema:
+            type: int
+            default: 30065
+            min: 9000
+            max: 65535
+            required: true
         - variable: hostNetwork
           label: Host Network
           description: |
