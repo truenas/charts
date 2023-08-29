@@ -1,0 +1,14 @@
+fireflyNetwork:
+  appUrl: http://localhost:31000
+  webPort: 31000
+
+fireflyStorage:
+  uploads:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/uploads
+  pgData:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/pgData
+  pgBackup:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/pgBackup

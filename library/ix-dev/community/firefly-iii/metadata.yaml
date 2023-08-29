@@ -1,0 +1,31 @@
+runAsContext:
+  - userName: root
+    groupName: root
+    gid: 0
+    uid: 0
+    description: Firefly III runs as root user
+  - userName: root
+    groupName: root
+    gid: 0
+    uid: 0
+    description: Firefly III Data Importer runs as root user
+  - userName: postgres
+    groupName: postgres
+    gid: 999
+    uid: 999
+    description: Postgres runs as a non-root user.
+  - userName: redis
+    groupName: redis
+    gid: 1001
+    uid: 0
+    description: Redis runs as a non-root user and root group.
+capabilities:
+  - name: CHOWN
+    description: Firefly III and Firefly Data Importer is able to chown files.
+  - name: FOWNER
+    description: Firefly III and Firefly Data Importer is able to bypass permission checks.
+  - name: SETUID
+    description: Firefly III and Firefly Data Importer is able to set user ID for it's sub-processes.
+  - name: SETGID
+    description: Firefly III and Firefly Data Importer is able to set group ID for it's sub-processes.
+hostMounts: []
