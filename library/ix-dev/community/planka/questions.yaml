@@ -28,8 +28,10 @@ questions:
         - variable: baseURL
           label: BaseURL
           description: |
-            The URL that Planka will be accessible from.
-            Example: http://server.ip:30062
+            The URL that Planka will be accessible from.</br>
+            Example: </br>
+            http://server.ip:30062</br>
+            https://planka.example.com
           schema:
             type: uri
             default: ""
