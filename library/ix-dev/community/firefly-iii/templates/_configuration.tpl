@@ -70,7 +70,7 @@ secret:
       STATIC_CRON_TOKEN: {{ $cronToken }}
 
   importer-config:
-    enabled: true
+    enabled: {{ .Values.fireflyConfig.importer.enabled }}
     data:
       FIREFLY_III_URL: http://{{ $fullname }}:{{ .Values.fireflyNetwork.webPort }}
       EXPECT_SECURE_URL: "false"
