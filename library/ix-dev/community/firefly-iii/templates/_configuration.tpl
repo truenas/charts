@@ -65,7 +65,7 @@ secret:
       REDIS_PASSWORD: {{ $redisPass }}
       REDIS_DB: "0"
       REDIS_CACHE_DB: "1"
-      APP_URL: {{ .Values.fireflyConfig.appUrl }}
+      APP_URL: {{ .Values.fireflyConfig.appUrl | trimSuffix "/" }}
       APP_KEY: {{ $appKey }}
       STATIC_CRON_TOKEN: {{ $cronToken }}
 
@@ -73,5 +73,5 @@ secret:
     enabled: true
     data:
       FIREFLY_III_URL: http://{{ $fullname }}:{{ .Values.fireflyNetwork.webPort }}
-      VANITY_URL: {{ .Values.fireflyConfig.appUrl }}
+      VANITY_URL: {{ .Values.fireflyConfig.appUrl | trimSuffix "/" }}
 {{- end -}}
