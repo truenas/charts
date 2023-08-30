@@ -9,7 +9,12 @@ fallbackDefaults:
   probeType: http
   serviceProtocol: tcp
   serviceType: ClusterIP
-  persistenceType: emptyDir # TODO: Maybe something else?
+  persistenceType: emptyDir
+  pvcRetain: false
+  pvcSize: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClass: ""
   probeTimeouts:
     liveness:
       initialDelaySeconds: 10

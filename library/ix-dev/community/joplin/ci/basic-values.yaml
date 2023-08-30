@@ -1,0 +1,10 @@
+joplinNetwork:
+  webPort: 31000
+
+joplinStorage:
+  pgData:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/pgData
+  pgBackup:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/pgBackup

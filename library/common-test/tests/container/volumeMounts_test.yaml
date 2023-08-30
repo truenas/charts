@@ -55,8 +55,24 @@ tests:
           type: emptyDir
           mountPath: "{{ .Values.some_path }}"
           targetSelectAll: true
+        nfs-vol-pvc:
+          enabled: true
+          type: nfs-pv-pvc
+          server: my-server
+          share: /my-path
+          mountPath: /nfs-mount
+          targetSelectAll: true
+        smb-vol-pvc:
+          enabled: true
+          type: smb-pv-pvc
+          server: my-server
+          share: my-share
+          username: my-user
+          password: my-pass
+          mountPath: /smb-mount
+          targetSelectAll: true
     asserts:
-      - documentIndex: &deploymentDoc 0
+      - documentIndex: &deploymentDoc 5
         isKind:
           of: Deployment
       - documentIndex: *deploymentDoc
@@ -71,12 +87,40 @@ tests:
             readOnly: false
       - documentIndex: *deploymentDoc
         contains:
+          path: spec.template.spec.containers[0].volumeMounts
+          content:
+            name: nfs-vol-pvc
+            mountPath: /nfs-mount
+            readOnly: false
+      - documentIndex: *deploymentDoc
+        contains:
+          path: spec.template.spec.containers[0].volumeMounts
+          content:
+            name: smb-vol-pvc
+            mountPath: /smb-mount
+            readOnly: false
+      - documentIndex: *deploymentDoc
+        contains:
           path: spec.template.spec.containers[1].volumeMounts
           content:
             name: shared-vol
             mountPath: /some/path
             readOnly: false
-      - documentIndex: &jobDoc 1
+      - documentIndex: *deploymentDoc
+        contains:
+          path: spec.template.spec.containers[1].volumeMounts
+          content:
+            name: nfs-vol-pvc
+            mountPath: /nfs-mount
+            readOnly: false
+      - documentIndex: *deploymentDoc
+        contains:
+          path: spec.template.spec.containers[1].volumeMounts
+          content:
+            name: smb-vol-pvc
+            mountPath: /smb-mount
+            readOnly: false
+      - documentIndex: &jobDoc 6
         isKind:
           of: Job
       - documentIndex: *jobDoc
@@ -91,10 +135,38 @@ tests:
             readOnly: false
       - documentIndex: *jobDoc
         contains:
+          path: spec.template.spec.containers[0].volumeMounts
+          content:
+            name: nfs-vol-pvc
+            mountPath: /nfs-mount
+            readOnly: false
+      - documentIndex: *jobDoc
+        contains:
+          path: spec.template.spec.containers[0].volumeMounts
+          content:
+            name: smb-vol-pvc
+            mountPath: /smb-mount
+            readOnly: false
+      - documentIndex: *jobDoc
+        contains:
           path: spec.template.spec.containers[1].volumeMounts
           content:
             name: shared-vol
             mountPath: /some/path
+            readOnly: false
+      - documentIndex: *jobDoc
+        contains:
+          path: spec.template.spec.containers[1].volumeMounts
+          content:
+            name: nfs-vol-pvc
+            mountPath: /nfs-mount
+            readOnly: false
+      - documentIndex: *jobDoc
+        contains:
+          path: spec.template.spec.containers[1].volumeMounts
+          content:
+            name: smb-vol-pvc
+            mountPath: /smb-mount
             readOnly: false
 
   - it: should pass with volume on primary workload and container

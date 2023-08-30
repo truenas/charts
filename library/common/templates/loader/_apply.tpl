@@ -25,10 +25,14 @@
   {{/* Render External Interface(s) */}}
   {{- include "ix.v1.common.spawner.externalInterface" . | nindent 0 -}}
 
+  {{/* Render PVC(s) */}}
+  {{- include "ix.v1.common.spawner.pvc" . | nindent 0 -}}
+
   {{/* Render Workload(s) */}}
   {{- include "ix.v1.common.spawner.workload" . | nindent 0 -}}
 
   {{/* Render Services(s) */}}
   {{- include "ix.v1.common.spawner.service" . | nindent 0 -}}
+
 
 {{- end -}}

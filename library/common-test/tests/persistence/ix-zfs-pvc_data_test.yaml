@@ -1,0 +1,37 @@
+suite: ix-zfs-pvc data name test
+templates:
+  - common.yaml
+tests:
+  - it: should create ix-zfs-pvc
+    set:
+      global:
+        ixChartContext:
+          storageClassName: ix-storage-class-releasename
+      persistence:
+        my-volume1:
+          enabled: true
+          type: ix-zfs-pvc
+    asserts:
+      - documentIndex: &pvcDoc 0
+        isKind:
+          of: PersistentVolumeClaim
+      - documentIndex: *pvcDoc
+        equal:
+          path: spec.storageClassName
+          value: ix-storage-class-releasename
+
+  - it: should ignore storageClass defined on the object on type ix-zfs-pvc
+    set:
+      global:
+        ixChartContext:
+          storageClassName: ix-storage-class-releasename
+      persistence:
+        my-volume1:
+          enabled: true
+          type: ix-zfs-pvc
+          storageClass: some-storage-class
+    asserts:
+      - documentIndex: *pvcDoc
+        equal:
+          path: spec.storageClassName
+          value: ix-storage-class-releasename

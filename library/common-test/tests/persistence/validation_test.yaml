@@ -2,6 +2,26 @@ suite: persistence validation test
 templates:
   - common.yaml
 tests:
+  - it: should fail with annotations not a dict
+    set:
+      persistence:
+        volume1:
+          enabled: true
+          annotations: not-a-dict
+    asserts:
+      - failedTemplate:
+          errorMessage: Persistence - Expected <annotations> to be a dictionary, but got [string]
+
+  - it: should fail with labels not a dict
+    set:
+      persistence:
+        volume1:
+          enabled: true
+          labels: not-a-dict
+    asserts:
+      - failedTemplate:
+          errorMessage: Persistence - Expected <labels> to be a dictionary, but got [string]
+
   - it: should fail with pod targetSelector not a map
     set:
       workload:
@@ -32,7 +52,32 @@ tests:
           type: not-a-type
     asserts:
       - failedTemplate:
-          errorMessage: Persistence - Expected <type> to be one of [emptyDir, hostPath, ixVolume, secret, configmap, device], but got [not-a-type]
+          errorMessage: Persistence - Expected <type> to be one of [smb-pv-pvc, nfs-pv-pvc, ix-zfs-pvc, pvc, emptyDir, hostPath, ixVolume, secret, configmap, device], but got [not-a-type]
+
+  - it: should fail with invalid accessMode
+    set:
+      persistence:
+        volume1:
+          enabled: true
+          type: ix-zfs-pvc
+          accessModes:
+            - not-an-access-mode
+    asserts:
+      - failedTemplate:
+          errorMessage: Persistent Volume Claim - Expected <accessModes> entry to be one of [ReadWriteOnce, ReadOnlyMany, ReadWriteMany, ReadWriteOncePod], but got [not-an-access-mode]
+
+  - it: should fail without storageClassName in ixChartContext
+    set:
+      global:
+        ixChartContext:
+          storageClassName: ""
+      persistence:
+        volume1:
+          enabled: true
+          type: ix-zfs-pvc
+    asserts:
+      - failedTemplate:
+          errorMessage: Persistent Volume Claim - Expected non-empty <global.ixChartContext.storageClassName> on [ix-zfs-pvc] type
 
   - it: should fail with non-existent configmap
     set:
@@ -90,3 +135,198 @@ tests:
     asserts:
       - failedTemplate:
           errorMessage: Persistence - Expected secret [my-non-existent-secret] defined in <objectName> to exist
+
+  - it: should fail without server on nfs-pv-pvc
+    set:
+      persistence:
+        volume1:
+          enabled: true
+          type: nfs-pv-pvc
+    asserts:
+      - failedTemplate:
+          errorMessage: NFS CSI - Expected <server> to be non-empty
+
+  - it: should fail without share on nfs-pv-pvc
+    set:
+      persistence:
+        volume1:
+          enabled: true
+          type: nfs-pv-pvc
+          server: my-server.local
+    asserts:
+      - failedTemplate:
+          errorMessage: NFS CSI - Expected <share> to be non-empty
+
+  - it: should fail without server on smb-pv-pvc
+    set:
+      persistence:
+        volume1:
+          enabled: true
+          type: smb-pv-pvc
+    asserts:
+      - failedTemplate:
+          errorMessage: SMB CSI - Expected <server> to be non-empty
+
+  - it: should fail without share on smb-pv-pvc
+    set:
+      persistence:
+        volume1:
+          enabled: true
+          type: smb-pv-pvc
+          server: my-server.local
+    asserts:
+      - failedTemplate:
+          errorMessage: SMB CSI - Expected <share> to be non-empty
+
+  - it: should fail without CSI when in ixChartContext on smb-pv-pvc
+    set:
+      global:
+        ixChartContext: {}
+      persistence:
+        volume1:
+          enabled: true
+          type: smb-pv-pvc
+          server: my-server.local
+          share: share
+    asserts:
+      - failedTemplate:
+          errorMessage: SMB CSI - Not supported CSI
+
+  - it: should fail without CSI when in ixChartContext on nfs-pv-pvc
+    set:
+      global:
+        ixChartContext: {}
+      persistence:
+        volume1:
+          enabled: true
+          type: nfs-pv-pvc
+          server: my-server.local
+          share: /share
+    asserts:
+      - failedTemplate:
+          errorMessage: NFS CSI - Not supported CSI
+
+  - it: should fail without username smb-pv-pvc
+    set:
+      persistence:
+        volume1:
+          enabled: true
+          type: smb-pv-pvc
+          server: my-server.local
+          share: share
+    asserts:
+      - failedTemplate:
+          errorMessage: SMB CSI - Expected <username> to be non-empty
+
+  - it: should fail without password on smb-pv-pvc
+    set:
+      persistence:
+        volume1:
+          enabled: true
+          type: smb-pv-pvc
+          server: my-server.local
+          share: share
+          username: my-user
+    asserts:
+      - failedTemplate:
+          errorMessage: SMB CSI - Expected <password> to be non-empty
+
+  - it: should fail with server starting with // on smb-pv-pvc
+    set:
+      persistence:
+        volume1:
+          enabled: true
+          type: smb-pv-pvc
+          server: //my-server.local
+          share: share
+          username: my-user
+          password: my-password
+    asserts:
+      - failedTemplate:
+          errorMessage: SMB CSI - Did not expect <server> to start with [//]
+
+  - it: should fail with share starting with / on smb-pv-pvc
+    set:
+      persistence:
+        volume1:
+          enabled: true
+          type: smb-pv-pvc
+          server: my-server.local
+          share: /share
+          username: my-user
+          password: my-password
+    asserts:
+      - failedTemplate:
+          errorMessage: SMB CSI - Did not expect <share> to start with [/]
+
+  - it: should fail with share starting with / on nfs-pv-pvc
+    set:
+      persistence:
+        volume1:
+          enabled: true
+          type: nfs-pv-pvc
+          server: my-server.local
+          share: share
+    asserts:
+      - failedTemplate:
+          errorMessage: NFS CSI - Expected <share> to start with [/]
+
+  - it: should fail with empty key on mountOptions in nfs-pv-pvc
+    set:
+      persistence:
+        volume1:
+          enabled: true
+          type: nfs-pv-pvc
+          server: my-server.local
+          share: /share
+          mountOptions:
+            - key: ""
+    asserts:
+      - failedTemplate:
+          errorMessage: NFS CSI - Expected key in <mountOptions> to be non-empty
+
+  - it: should fail with empty key on mountOptions in smb-pv-pvc
+    set:
+      persistence:
+        volume1:
+          enabled: true
+          type: smb-pv-pvc
+          server: my-server.local
+          share: share
+          username: my-user
+          password: my-password
+          mountOptions:
+            - key: ""
+    asserts:
+      - failedTemplate:
+          errorMessage: SMB CSI - Expected key in <mountOptions> to be non-empty
+
+  - it: should fail with item in mountOptions not a map in smb-pv-pvc
+    set:
+      persistence:
+        volume1:
+          enabled: true
+          type: smb-pv-pvc
+          server: my-server.local
+          share: share
+          username: my-user
+          password: my-password
+          mountOptions:
+            - not-a-map
+    asserts:
+      - failedTemplate:
+          errorMessage: SMB CSI - Expected <mountOption> item to be a dict, but got [string]
+
+  - it: should fail with item in mountOptions not a map in nfs-pv-pvc
+    set:
+      persistence:
+        volume1:
+          enabled: true
+          type: nfs-pv-pvc
+          server: my-server.local
+          share: /share
+          mountOptions:
+            - not-a-map
+    asserts:
+      - failedTemplate:
+          errorMessage: NFS CSI - Expected <mountOption> item to be a dict, but got [string]

@@ -1,0 +1,54 @@
+image:
+  repository: vaultwarden/server
+  pullPolicy: IfNotPresent
+  tag: 1.29.1
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+vaultwardenConfig:
+  adminToken: ''
+  additionalEnvs: []
+
+vaultwardenNetwork:
+  webPort: 30032
+  wsEnabled: true
+  wsPort: 30033
+  hostNetwork: false
+  certificateID: null
+  domain: ''
+
+vaultwardenRunAs:
+  user: 568
+  group: 568
+
+vaultwardenStorage:
+  data:
+    type: ixVolume
+    datasetName: data
+  pgData:
+    type: ixVolume
+    datasetName: pgData
+  pgBackup:
+    type: ixVolume
+    datasetName: pgBackup
+
+notes:
+  custom: |
+    ## Database
+    You can connect to the database using the pgAdmin App from the catalog
+
+    <details>
+      <summary>Database Details</summary>
+
+      - Database: `vaultwarden`
+      - Username: `vaultwarden`
+      - Password: `{{ .Values.vaultwardenDbPass }}`
+      - Host:     `{{ .Values.vaultwardenDbHost }}.{{ .Release.Namespace }}.svc.cluster.local`
+      - Port:     `5432`
+
+    </details>
+    {{- $_ := unset .Values "vaultwardenDbPass" }}
+    {{- $_ := unset .Values "vaultwardenDbHost" }}

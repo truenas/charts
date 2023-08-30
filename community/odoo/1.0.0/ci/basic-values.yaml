@@ -1,0 +1,16 @@
+odooNetwork:
+  webPort: 31000
+
+odooStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/data
+  addons:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/addons
+  pgData:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/pgData
+  pgBackup:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/pgBackup

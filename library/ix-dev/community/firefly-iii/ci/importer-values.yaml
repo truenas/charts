@@ -1,0 +1,18 @@
+fireflyConfig:
+  appUrl: http://localhost:31000
+  enableImporter: true
+
+fireflyNetwork:
+  webPort: 31000
+  importerPort: 31001
+
+fireflyStorage:
+  uploads:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/uploads
+  pgData:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/pgData
+  pgBackup:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/pgBackup
