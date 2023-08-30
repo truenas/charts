@@ -1,0 +1,25 @@
+name: joplin
+description: Joplin is an open source note-taking app. Capture your thoughts and securely access them from any device
+annotations:
+  title: Joplin
+type: application
+version: 1.0.0
+apiVersion: v2
+appVersion: 2.12.1-beta
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.1.0
+home: https://joplinapp.org/
+icon: https://raw.githubusercontent.com/laurent22/joplin/dev/Assets/LinuxIcons/256x256.png
+sources:
+  - https://github.com/laurent22/joplin
+  - https://github.com/truenas/charts/tree/master/library/ix-dev/community/joplin
+  - https://hub.docker.com/r/joplin/server/
+keywords:
+  - notes
