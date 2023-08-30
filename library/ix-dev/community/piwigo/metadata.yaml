@@ -1,0 +1,20 @@
+runAsContext:
+  - userName: root
+    groupName: root
+    gid: 0
+    uid: 0
+    description: Piwigo run as root user
+capabilities:
+  - name: CHOWN
+    description: Piwigo is able to chown files.
+  - name: DAC_OVERRIDE
+    description: Piwigo is able to bypass permission checks.
+  - name: FOWNER
+    description: Piwigo is able bypass permission checks for it's sub-processes.
+  - name: NET_BIND_SERVICE
+    description: Piwigo requires this ability to bind to port 80 within the container.
+  - name: SETGID
+    description: Piwigo is able to set group ID for it's sub-processes.
+  - name: SETUID
+    description: Piwigo is able to set user ID for it's sub-processes.
+hostMounts: []
