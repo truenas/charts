@@ -1,0 +1,23 @@
+odooNetwork:
+  webPort: 31000
+
+odooConfig:
+  additionalConf:
+    - key: workers
+      value: "0"
+    - key: log_level
+      value: "info"
+
+odooStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/data
+  addons:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/addons
+  pgData:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/pgData
+  pgBackup:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/pgBackup
