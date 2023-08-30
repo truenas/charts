@@ -190,6 +190,10 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
           # after the default php config file nextcloud provides.
           mountPath: /usr/local/etc/php/conf.d/nextcloud-z-99.ini
           subPath: php.ini
+        - name: nextcloud-configuration
+          # https://github.com/nextcloud/docker/issues/1796
+          mountPath: /etc/apache2/conf-enabled/limitrequestbody.conf
+          subPath: limitrequestbody.conf
         {{ range $index, $hostPathConfiguration := .Values.extraAppVolumeMounts }}
         - name: extrappvolume-{{ $index }}
           mountPath: {{ $hostPathConfiguration.mountPath }}
