@@ -1,0 +1,47 @@
+image:
+  repository: joplin/server
+  pullPolicy: IfNotPresent
+  tag: 2.12.1-beta
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+joplinConfig:
+  baseUrl: http://localhost:30063
+  additionalEnvs: []
+
+joplinNetwork:
+  webPort: 30063
+  hostNetwork: false
+
+joplinStorage:
+  pgData:
+    type: ixVolume
+    datasetName: pgData
+  pgBackup:
+    type: ixVolume
+    datasetName: pgBackup
+
+notes:
+  custom: |
+    ## Default Credentials
+      - Username: `admin@localhost`
+      - Password: `admin`
+
+    ## Database
+    You can connect to the database using the pgAdmin App from the catalog
+
+    <details>
+      <summary>Database Details</summary>
+
+      - Database: `joplin`
+      - Username: `joplin`
+      - Password: `{{ .Values.joplinDbPass }}`
+      - Host:     `{{ .Values.joplinDbHost }}.{{ .Release.Namespace }}.svc.cluster.local`
+      - Port:     `5432`
+
+    </details>
+    {{- $_ := unset .Values "joplinDbPass" }}
+    {{- $_ := unset .Values "joplinDbHost" }}
