@@ -83,7 +83,11 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
         {{ if eq (include "nginx.certAvailable" .) "true" }}
         {{ $envList = mustAppend $envList (dict "name" "APACHE_DISABLE_REWRITE_IP" "value" "1") }}
           {{ if and .Values.nextcloud.host .Values.service.nodePort }}
+            {{ if .Values.nginxConfig.use443 }}
+        {{ $envList = mustAppend $envList (dict "name" "OVERWRITEHOST" "value" .Values.nextcloud.host) }}
+            {{ else }}
         {{ $envList = mustAppend $envList (dict "name" "OVERWRITEHOST" "value" (printf "%v:%v" .Values.nextcloud.host .Values.service.nodePort)) }}
+            {{ end }}
           {{ end }}
         {{ $envList = mustAppend $envList (dict "name" "OVERWRITEPROTOCOL" "value" "https") }}
         {{ $envList = mustAppend $envList (dict "name" "TRUSTED_PROXIES" "value" "127.0.0.1") }}
@@ -154,9 +158,9 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
               value: localhost
         {{ end }}
           initialDelaySeconds: 60
-          periodSeconds: 5
+          periodSeconds: 10
           timeoutSeconds: 2
-          failureThreshold: 120
+          failureThreshold: 100
           successThreshold: 1
         volumeMounts:
         - name: nextcloud-data

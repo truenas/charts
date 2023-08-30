@@ -12,6 +12,8 @@ environmentVariables: []
 ixChartContext: {}
 nginxConfig:
   proxy_timeouts: 120
+  useDifferentAccessPort: true
+  externalPort: 443
 nextcloud:
   datadir: /var/www/html/data
   host: nextcloud.kube.home
