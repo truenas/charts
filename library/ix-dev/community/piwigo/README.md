@@ -5,7 +5,7 @@ publish and manage your collection of pictures.
 
 > When application is installed, a container will be launched with **root** privileges.
 > This is required in order to apply the correct permissions to the `mariadb` directories.
-> Afterwards `mariad` will start as a **non**-root user (`999`).>
+> Afterwards `mariadb` will start as a **non**-root user (`999`).>
 > On each upgrade, a container will be launched with **root** privileges in order to
 > apply the correct permissions to the `mariadb` **backups** directory.
 > Container that performs the backup will run as a **non**-root user (`999`) afterwards.
