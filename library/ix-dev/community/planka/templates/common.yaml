@@ -1,0 +1,13 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "planka.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "planka.service" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "planka.persistence" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "planka.configuration" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "postgres.workload" $ | fromYaml) -}}
+
+{{/* Create the configmap for portal manually*/}}
+{{- include "planka.portal" $ -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}

@@ -1,0 +1,29 @@
+plankaNetwork:
+  webPort: 31000
+
+plankaConfig:
+  baseURL: http://localhost:31000
+
+plankaStorage:
+  avatars:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/avatars
+  backgroundImages:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/bg-img
+  attachments:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/attachments
+  pgData:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/pgData
+  pgBackup:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/pgBackup
+  additionalStorages:
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/data1
+    mountPath: /data1
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/data2
+    mountPath: /data2
