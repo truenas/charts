@@ -38,3 +38,21 @@ giteaStorage:
   pgBackup:
     type: ixVolume
     datasetName: pgBackup
+
+notes:
+  custom: |
+    ## Database
+    You can connect to the database using the pgAdmin App from the catalog
+
+    <details>
+      <summary>Database Details</summary>
+
+      - Database: `gitea`
+      - Username: `gitea`
+      - Password: `{{ .Values.giteaDbPass }}`
+      - Host:     `{{ .Values.giteaDbHost }}.{{ .Release.Namespace }}.svc.cluster.local`
+      - Port:     `5432`
+
+    </details>
+    {{- $_ := unset .Values "giteaDbPass" }}
+    {{- $_ := unset .Values "giteaDbHost" }}
