@@ -1,0 +1,26 @@
+piwiNetwork:
+  webPort: 31000
+
+piwiConfig:
+  language: en_GB
+  adminName: admin
+  adminMail: admin@example.com
+  adminPass: admin
+
+piwiID:
+  user: 1000
+  group: 1000
+
+piwiStorage:
+  config:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/config
+  gallery:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/gallery
+  mariadbData:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/mariadbData
+  mariadbBackup:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/mariadbBackup
