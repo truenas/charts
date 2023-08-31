@@ -31,7 +31,8 @@ questions:
           label: Admin Name
           description: |
             The admin name for Piwigo.</br>
-            Only used when Piwigo is first installed.
+            Only used when Piwigo is first installed.</br>
+            You can change it later in the Piwigo WebUI.
           schema:
             type: string
             required: true
@@ -41,7 +42,8 @@ questions:
           label: Admin Mail
           description: |
             The admin mail for Piwigo.</br>
-            Only used when Piwigo is first installed.
+            Only used when Piwigo is first installed.</br>
+            You can change it later in the Piwigo WebUI.
           schema:
             type: string
             required: true
@@ -51,7 +53,8 @@ questions:
           label: Admin Password
           description: |
             The admin password for Piwigo.</br>
-            Only used when Piwigo is first installed.
+            Only used when Piwigo is first installed.</br>
+            You can change it later in the Piwigo WebUI.
           schema:
             type: string
             required: true

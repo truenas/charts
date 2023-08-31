@@ -22,6 +22,9 @@ secret:
       MARIADB_ROOT_PASSWORD: {{ $dbRootPass }}
       MARIADB_HOST: {{ $dbHost }}
 
+  {{- if not (mustRegexMatch "^.+@.+\\..+$" .Values.piwiConfig.adminMail) -}}
+    {{- fail (printf "Piwigo - Mail [%s] is not valid." .Values.piwiConfig.adminMail) -}}
+  {{- end -}}
   {{- $installArgs := (list
       (printf "language=%s" .Values.piwiConfig.language)
       (printf "dbhost=%s" $dbHost)
