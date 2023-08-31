@@ -11,7 +11,18 @@
   {{- with (lookup "v1" "Secret" .Release.Namespace (printf "%s-mariadb-creds" $fullname)) -}}
     {{- $dbPass = ((index .data "MARIADB_PASSWORD") | b64dec) -}}
     {{- $dbRootPass = ((index .data "MARIADB_ROOT_PASSWORD") | b64dec) -}}
-  {{- end -}}
+  {{- end }}
+secret:
+  mariadb-creds:
+    enabled: true
+    data:
+      MARIADB_USER: {{ $dbUser }}
+      MARIADB_DATABASE: {{ $dbName }}
+      MARIADB_PASSWORD: {{ $dbPass }}
+      MARIADB_ROOT_PASSWORD: {{ $dbRootPass }}
+      MARIADB_HOST: {{ $dbHost }}
+
+  {{- if .Release.IsInstall -}}
   {{- $installArgs := (list
       (printf "language=%s" .Values.piwiConfig.language)
       (printf "dbhost=%s" $dbHost)
@@ -25,18 +36,9 @@
       (printf "admin_mail=%s" .Values.piwiConfig.adminMail)
       "install=Start+installation"
   ) }}
-secret:
-  mariadb-creds:
-    enabled: true
-    data:
-      MARIADB_USER: {{ $dbUser }}
-      MARIADB_DATABASE: {{ $dbName }}
-      MARIADB_PASSWORD: {{ $dbPass }}
-      MARIADB_ROOT_PASSWORD: {{ $dbRootPass }}
-      MARIADB_HOST: {{ $dbHost }}
-
   piwigo-creds:
     enabled: true
     data:
       INSTALL_STRING: {{ join "&" $installArgs }}
+  {{- end -}}
 {{- end -}}
