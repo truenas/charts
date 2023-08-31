@@ -38,7 +38,8 @@
           {{/* Validate SMB CSI */}}
           {{- include "ix.v1.common.lib.storage.smbCSI.validation" (dict "rootCtx" $ "objectData" $objectData) -}}
 
-          {{- $hashValues := (printf "%s-%s" $objectData.server $objectData.share) -}}
+          {{- $size := $objectData.size | default $.Values.fallbackDefaults.pvcSize -}}
+          {{- $hashValues := (printf "%s-%s-%s" $size $objectData.server $objectData.share) -}}
           {{- if $objectData.domain -}}
             {{- $hashValues = (printf "%s-%s" $hashValues $objectData.domain) -}}
           {{- end -}}
@@ -71,7 +72,8 @@
           {{/* Validate NFS CSI */}}
           {{- include "ix.v1.common.lib.storage.nfsCSI.validation" (dict "rootCtx" $ "objectData" $objectData) -}}
 
-          {{- $hashValues := (printf "%s-%s" $objectData.server $objectData.share) -}}
+          {{- $size := $objectData.size | default $.Values.fallbackDefaults.pvcSize -}}
+          {{- $hashValues := (printf "%s-%s-%s" $size $objectData.server $objectData.share) -}}
           {{/* Create a unique name taking into account server and share,
               without this, changing one of those values is not possible */}}
           {{- $hash := adler32sum $hashValues -}}
