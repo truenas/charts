@@ -1,7 +1,7 @@
 image:
   repository: gitea/gitea
   pullPolicy: IfNotPresent
-  tag: 1.19.0-rootless
+  tag: 1.20.3-rootless
 
 resources:
   limits:
@@ -14,8 +14,8 @@ giteaConfig:
 giteaNetwork:
   webPort: 30008
   sshPort: 30009
-  certificateID: null
-  rootURL: ""
+  certificateID:
+  rootURL: ''
   hostNetwork: false
 
 # FIXME: Currently only user 1000 works.
