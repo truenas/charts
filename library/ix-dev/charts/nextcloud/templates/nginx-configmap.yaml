@@ -82,7 +82,7 @@ data:
           proxy_set_header X-Forwarded-Proto https;
           proxy_set_header X-Forwarded-Host  $host;
           {{ if $useDiffAccessPort }}
-          proxy_set_header X-Forwarded-Port  {{ $externalAccessPort | trimPrefix ":" }};
+          proxy_set_header X-Forwarded-Port  {{ $externalAccessPort | default "443" | trimPrefix ":" }};
           {{ else }}
           proxy_set_header X-Forwarded-Port  $server_port;
           {{ end }}
