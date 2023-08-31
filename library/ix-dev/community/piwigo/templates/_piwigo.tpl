@@ -26,9 +26,11 @@ workload:
                 - NET_BIND_SERVICE
                 - SETGID
                 - SETUID
+          {{- if .Release.IsInstall }}
           envFrom:
             - secretRef:
                 name: piwigo-creds
+          {{- end }}
           fixedEnv:
             PUID: {{ .Values.piwiID.user }}
           {{ with .Values.piwiConfig.additionalEnvs }}
