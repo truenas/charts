@@ -26,11 +26,9 @@ workload:
                 - NET_BIND_SERVICE
                 - SETGID
                 - SETUID
-          {{- if .Release.IsInstall }}
           envFrom:
             - secretRef:
                 name: piwigo-creds
-          {{- end }}
           fixedEnv:
             PUID: {{ .Values.piwiID.user }}
           {{ with .Values.piwiConfig.additionalEnvs }}
@@ -57,7 +55,6 @@ workload:
               type: http
               path: /ws.php?method=pwg.session.getStatus
               port: 80
-          {{- if .Release.IsInstall }}
           lifecycle:
             postStart:
               type: exec
@@ -69,11 +66,17 @@ workload:
                     echo "Waiting for Piwigo to start..."
                     sleep 1
                   done
-                  until curl --silent --fail http://localhost:80/install.php | grep "Piwigo is already installed"; then
-                    echo "Attempting to install Piwigo..."
-                    curl -X POST -d "${INSTALL_STRING}" http://localhost:80/install.php
-                  done
-          {{- end }}
+                  if curl --silent --fail http://localhost:80/install.php | grep "Piwigo is already installed"; then
+                    echo "Piwigo is already installed, skipping installation"
+                    exit 0
+                  fi
+                  echo "Installing Piwigo..."
+                  curl -X POST -d "${INSTALL_STRING}" http://localhost:80/install.php
+                  if curl --silent --fail http://localhost:80/install.php | grep "Piwigo is already installed"; then
+                    echo "Piwigo is already installed, skipping installation"
+                    exit 0
+                  fi
+                  exit 1
       initContainers:
       {{- include "ix.v1.common.app.mariadbWait" (dict "name" "mariadb-wait"
                                                        "secretName" "mariadb-creds") | nindent 8 }}

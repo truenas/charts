@@ -22,7 +22,6 @@ secret:
       MARIADB_ROOT_PASSWORD: {{ $dbRootPass }}
       MARIADB_HOST: {{ $dbHost }}
 
-  {{- if .Release.IsInstall -}}
   {{- $installArgs := (list
       (printf "language=%s" .Values.piwiConfig.language)
       (printf "dbhost=%s" $dbHost)
@@ -40,5 +39,4 @@ secret:
     enabled: true
     data:
       INSTALL_STRING: {{ join "&" $installArgs }}
-  {{- end -}}
 {{- end -}}
