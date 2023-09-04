@@ -55,13 +55,13 @@ questions:
           label: Unifi Protect Verify SSL
           description: Verify SSL certificate of Unifi Protect instance
           schema:
-            type: bool
+            type: boolean
             default: true
         - variable: skipMissing
           label: Skip Missing
           description: If set, events which are 'missing' at the start will be ignored.
           schema:
-            type: bool
+            type: boolean
             default: false
         - variable: ignoreCameras
           label: Ignore Cameras
