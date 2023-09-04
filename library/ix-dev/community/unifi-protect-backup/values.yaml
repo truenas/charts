@@ -16,15 +16,15 @@ upbConfig:
   unifiProtectVerifySsl: true
   skipMissing: false
   ignoreCameras: []
-  detectionTypes: []
+  detectionTypes:
+    - motion
+    - person
+    - vehicle
+    - ring
   rcloneDestination: ''
   rcloneArgs: []
   rclonePurgeArgs: []
   additionalEnvs: []
-
-upbRunAs:
-  user: 568
-  group: 568
 
 upbStorage:
   config:

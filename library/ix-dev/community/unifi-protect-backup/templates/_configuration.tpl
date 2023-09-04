@@ -1,6 +1,6 @@
 {{- define "upb.configuration" -}}
 secret:
-  ufp-creds:
+  upb-creds:
     enabled: true
     data:
       UFP_USERNAME: {{ .Values.upbConfig.unifiProtectUsername | quote }}
@@ -10,7 +10,7 @@ secret:
       UFP_SSL_VERIFY: {{ .Values.upbConfig.unifiProtectVerifySsl | quote }}
 
 configmap:
-  ufp-config:
+  upb-config:
     enabled: true
     data:
       SQLITE_PATH: /config/database/events.sqlite

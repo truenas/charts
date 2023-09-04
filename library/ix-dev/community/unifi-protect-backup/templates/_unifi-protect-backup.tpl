@@ -12,9 +12,21 @@ workload:
           primary: true
           imageSelector: image
           securityContext:
-            runAsUser: {{ .Values.upbRunAs.user }}
-            runAsGroup: {{ .Values.upbRunAs.group }}
-          env:
+            runAsUser: 0
+            runAsGroup: 0
+            runAsNonRoot: false
+            readOnlyRootFilesystem: false
+            capabilities:
+              add:
+                - CHOWN
+                - FOWNER
+                - SETUID
+                - SETGID
+          envFrom:
+            - configMapRef:
+                name: upb-config
+            - secretRef:
+                name: upb-creds
           {{ with .Values.upbConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
@@ -30,10 +42,4 @@ workload:
               enabled: false
             startup:
               enabled: false
-      initContainers:
-      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
-                                                        "UID" .Values.upbRunAs.user
-                                                        "GID" .Values.upbRunAs.group
-                                                        "mode" "check"
-                                                        "type" "init") | nindent 8 }}
 {{- end -}}

@@ -4,10 +4,6 @@ upbConfig:
   unifiProtectAddress: '192.168.1.100'
   rcloneDestination: 'gdrive:unifi-protect-backup'
 
-upbRunAs:
-  user: 1000
-  group: 1000
-
 upbStorage:
   config:
     type: hostPath

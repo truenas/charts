@@ -1,8 +1,6 @@
 groups:
   - name: Unifi Protect Backup Configuration
     description: Configure Unifi Protect Backup
-  - name: User and Group Configuration
-    description: Configure User and Group for Unifi Protect Backup
   - name: Storage Configuration
     description: Configure Storage for Unifi Protect Backup
   - name: Resources Configuration
@@ -163,29 +161,6 @@ questions:
                       schema:
                         type: string
                         required: true
-
-  - variable: upbRunAs
-    label: ""
-    group: User and Group Configuration
-    schema:
-      type: dict
-      attrs:
-        - variable: user
-          label: User ID
-          description: The user id that Unifi Protect Backup will run as.
-          schema:
-            type: int
-            min: 2
-            default: 568
-            required: true
-        - variable: group
-          label: Group ID
-          description: The group id that Unifi Protect Backup will run as.
-          schema:
-            type: int
-            min: 2
-            default: 568
-            required: true
 
   - variable: upbStorage
     label: ""
