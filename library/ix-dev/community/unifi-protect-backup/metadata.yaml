@@ -7,8 +7,6 @@ runAsContext:
 capabilities:
   - name: CHOWN
     description: Unifi Protect Backup is able to chown files.
-  - name: DAC_OVERRIDE
-    description: Unifi Protect Backup is able to bypass permission checks.
   - name: FOWNER
     description: Unifi Protect Backup is able bypass permission checks for it's sub-processes.
   - name: SETGID
