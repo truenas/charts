@@ -15,7 +15,7 @@ workload:
             runAsUser: {{ .Values.upbRunAs.user }}
             runAsGroup: {{ .Values.upbRunAs.group }}
           env:
-          {{ with .Values.recyclarrConfig.additionalEnvs }}
+          {{ with .Values.upbConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
             - name: {{ $env.name }}
