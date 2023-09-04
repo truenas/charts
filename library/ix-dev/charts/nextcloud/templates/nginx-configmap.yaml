@@ -6,14 +6,20 @@ data:
   protocol: {{ include "nginx.scheme" . }}
   {{ $timeout := 60 }}
   {{ $size := .Values.nextcloud.max_upload_size | default 3 }}
-  {{ $externalAccessPort := printf ":%v" .Values.nginxConfig.externalAccessPort }}
+
+  {{ $useDiffAccessPort := false }}
+  {{ $externalAccessPort := "" }}
+
+  {{/* Safely access key as it is conditionaly shown */}}
+  {{ if hasKey .Values "nginxConfig" }}
+    {{ $useDiffAccessPort = .Values.useDifferentAccessPort }}
+    {{ $externalAccessPort = printf ":%v" .Values.nginxConfig.externalAccessPort }}
+    {{ $timeout = .Values.nginxConfig.proxy_timeouts | default 60 }}
+  {{ end }}
+
   {{/* If its 443, do not append it on the rewrite at all */}}
   {{ if eq $externalAccessPort ":443" }}
     {{ $externalAccessPort = "" }}
-  {{ end }}
-  {{/* Safely access key as it is conditionaly shown */}}
-  {{ if hasKey .Values "nginxConfig" }}
-    {{ $timeout = .Values.nginxConfig.proxy_timeouts | default 60 }}
   {{ end }}
   nginx.conf: |-
     events {}
@@ -46,7 +52,7 @@ data:
         }
 
         location = /.well-known/carddav {
-          {{ if .Values.nginxConfig.useDifferentAccessPort }}
+          {{ if $useDiffAccessPort }}
           return 301 $scheme://$host{{ $externalAccessPort }}/remote.php/dav;
           {{ else }}
           return 301 $scheme://$host:$server_port/remote.php/dav;
@@ -54,7 +60,7 @@ data:
         }
 
         location = /.well-known/caldav {
-          {{ if .Values.nginxConfig.useDifferentAccessPort }}
+          {{ if $useDiffAccessPort }}
           return 301 $scheme://$host{{ $externalAccessPort }}/remote.php/dav;
           {{ else }}
           return 301 $scheme://$host:$server_port/remote.php/dav;
@@ -75,8 +81,8 @@ data:
           proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
           proxy_set_header X-Forwarded-Proto https;
           proxy_set_header X-Forwarded-Host  $host;
-          {{ if .Values.nginxConfig.useDifferentAccessPort }}
-          proxy_set_header X-Forwarded-Port  {{ .Values.nginxConfig.externalAccessPort }};
+          {{ if $useDiffAccessPort }}
+          proxy_set_header X-Forwarded-Port  {{ $externalAccessPort | default "443" | trimPrefix ":" }};
           {{ else }}
           proxy_set_header X-Forwarded-Port  $server_port;
           {{ end }}
