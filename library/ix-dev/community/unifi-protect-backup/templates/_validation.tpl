@@ -3,7 +3,7 @@
   {{- $validTypes := (list "motion" "person" "vehicle" "ring") -}}
   {{- range $type := .Values.upbConfig.detectionTypes -}}
     {{- if not (mustHas $type $validTypes) -}}
-      {{- fail (pritnf "Unifi Protect Backup - Expected Detection type to be one of [%s], but got [%s]" (join ", " $validTypes) $type) -}}
+      {{- fail (printf "Unifi Protect Backup - Expected Detection type to be one of [%s], but got [%s]" (join ", " $validTypes) $type) -}}
     {{- end -}}
   {{- end -}}
 
