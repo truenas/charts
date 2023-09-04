@@ -18,6 +18,17 @@ tests:
           type: nfs-pv-pvc
           server: my-server2
           share: /my-path2
+          size: 2Gi
+          mountOptions:
+            - key: hard
+            - key: nfsvers
+              value: '{{ .Values.version }}'
+        my-volume3:
+          enabled: true
+          type: nfs-pv-pvc
+          server: my-server2
+          share: /my-path2
+          size: 3Gi
           mountOptions:
             - key: hard
             - key: nfsvers
@@ -33,12 +44,12 @@ tests:
             capacity:
               storage: 1Gi
             persistentVolumeReclaimPolicy: Delete
-            storageClassName: release-name-common-test-my-volume1-1088882375
+            storageClassName: release-name-common-test-my-volume1-1451165653
             accessModes:
               - ReadWriteOnce
             csi:
               driver: nfs.csi.k8s.io
-              volumeHandle: my-server/my-path#release-name-common-test-my-volume1-1088882375
+              volumeHandle: my-server/my-path#release-name-common-test-my-volume1-1451165653
               volumeAttributes:
                 server: my-server
                 share: /my-path
@@ -54,7 +65,7 @@ tests:
             resources:
               requests:
                 storage: 1Gi
-            storageClassName: release-name-common-test-my-volume1-1088882375
+            storageClassName: release-name-common-test-my-volume1-1451165653
       - documentIndex: &otherPvDoc 2
         isKind:
           of: PersistentVolume
@@ -63,9 +74,9 @@ tests:
           path: spec
           value:
             capacity:
-              storage: 1Gi
+              storage: 2Gi
             persistentVolumeReclaimPolicy: Delete
-            storageClassName: release-name-common-test-my-volume2-1303447339
+            storageClassName: release-name-common-test-my-volume2-1702692922
             accessModes:
               - ReadWriteOnce
             mountOptions:
@@ -73,10 +84,58 @@ tests:
               - nfsvers=4.1
             csi:
               driver: nfs.csi.k8s.io
-              volumeHandle: my-server2/my-path2#release-name-common-test-my-volume2-1303447339
+              volumeHandle: my-server2/my-path2#release-name-common-test-my-volume2-1702692922
               volumeAttributes:
                 server: my-server2
                 share: /my-path2
+      - documentIndex: &otherPvcDoc 3
+        isKind:
+          of: PersistentVolumeClaim
+      - documentIndex: *otherPvcDoc
+        equal:
+          path: spec
+          value:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 2Gi
+            storageClassName: release-name-common-test-my-volume2-1702692922
+      - documentIndex: &thirdPvDoc 4
+        isKind:
+          of: PersistentVolume
+      - documentIndex: *thirdPvDoc
+        equal:
+          path: spec
+          value:
+            capacity:
+              storage: 3Gi
+            persistentVolumeReclaimPolicy: Delete
+            storageClassName: release-name-common-test-my-volume3-1704265787
+            accessModes:
+              - ReadWriteOnce
+            mountOptions:
+              - hard
+              - nfsvers=4.1
+            csi:
+              driver: nfs.csi.k8s.io
+              volumeHandle: my-server2/my-path2#release-name-common-test-my-volume3-1704265787
+              volumeAttributes:
+                server: my-server2
+                share: /my-path2
+      - documentIndex: &thirdPvcDoc 5
+        isKind:
+          of: PersistentVolumeClaim
+      - documentIndex: *thirdPvcDoc
+        equal:
+          path: spec
+          value:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 3Gi
+            storageClassName: release-name-common-test-my-volume3-1704265787
 
   - it: should create smb pv with csi
     set:
@@ -96,6 +155,21 @@ tests:
           share: my-share2
           username: my-user2
           password: my-password2
+          size: 2Gi
+          mountOptions:
+            - key: hard
+            - key: uid
+              value: 99999999999
+            - key: vers
+              value: '{{ .Values.version }}'
+        my-volume3:
+          enabled: true
+          type: smb-pv-pvc
+          server: my-server2
+          share: my-share2
+          username: my-user2
+          password: my-password2
+          size: 3Gi
           mountOptions:
             - key: hard
             - key: uid
@@ -122,16 +196,16 @@ tests:
             capacity:
               storage: 1Gi
             persistentVolumeReclaimPolicy: Delete
-            storageClassName: release-name-common-test-my-volume1-1117390590
+            storageClassName: release-name-common-test-my-volume1-1479673868
             accessModes:
               - ReadWriteOnce
             csi:
               driver: smb.csi.k8s.io
-              volumeHandle: my-server/my-share#release-name-common-test-my-volume1-1117390590
+              volumeHandle: my-server/my-share#release-name-common-test-my-volume1-1479673868
               volumeAttributes:
                 source: //my-server/my-share
               nodeStageSecretRef:
-                name: release-name-common-test-my-volume1-1117390590
+                name: release-name-common-test-my-volume1-1479673868
                 namespace: release-namespace
       - documentIndex: &pvcDoc 2
         isKind:
@@ -145,7 +219,7 @@ tests:
             resources:
               requests:
                 storage: 1Gi
-            storageClassName: release-name-common-test-my-volume1-1117390590
+            storageClassName: release-name-common-test-my-volume1-1479673868
       - documentIndex: &otherSecretDoc 3
         isKind:
           of: Secret
@@ -163,9 +237,9 @@ tests:
           path: spec
           value:
             capacity:
-              storage: 1Gi
+              storage: 2Gi
             persistentVolumeReclaimPolicy: Delete
-            storageClassName: release-name-common-test-my-volume2-1335560034
+            storageClassName: release-name-common-test-my-volume2-1734805617
             accessModes:
               - ReadWriteOnce
             mountOptions:
@@ -174,11 +248,11 @@ tests:
               - vers=3.0
             csi:
               driver: smb.csi.k8s.io
-              volumeHandle: my-server2/my-share2#release-name-common-test-my-volume2-1335560034
+              volumeHandle: my-server2/my-share2#release-name-common-test-my-volume2-1734805617
               volumeAttributes:
                 source: //my-server2/my-share2
               nodeStageSecretRef:
-                name: release-name-common-test-my-volume2-1335560034
+                name: release-name-common-test-my-volume2-1734805617
                 namespace: release-namespace
       - documentIndex: &otherPvcDoc 5
         isKind:
@@ -191,5 +265,52 @@ tests:
               - ReadWriteOnce
             resources:
               requests:
-                storage: 1Gi
-            storageClassName: release-name-common-test-my-volume2-1335560034
+                storage: 2Gi
+            storageClassName: release-name-common-test-my-volume2-1734805617
+      - documentIndex: &thirdSecretDoc 6
+        isKind:
+          of: Secret
+      - documentIndex: *thirdSecretDoc
+        equal:
+          path: stringData
+          value:
+            username: my-user2
+            password: my-password2
+      - documentIndex: &thirdPvDoc 7
+        isKind:
+          of: PersistentVolume
+      - documentIndex: *thirdPvDoc
+        equal:
+          path: spec
+          value:
+            capacity:
+              storage: 3Gi
+            persistentVolumeReclaimPolicy: Delete
+            storageClassName: release-name-common-test-my-volume3-1736378482
+            accessModes:
+              - ReadWriteOnce
+            mountOptions:
+              - hard
+              - uid=99999999999
+              - vers=3.0
+            csi:
+              driver: smb.csi.k8s.io
+              volumeHandle: my-server2/my-share2#release-name-common-test-my-volume3-1736378482
+              volumeAttributes:
+                source: //my-server2/my-share2
+              nodeStageSecretRef:
+                name: release-name-common-test-my-volume3-1736378482
+                namespace: release-namespace
+      - documentIndex: &thirdPvcDoc 8
+        isKind:
+          of: PersistentVolumeClaim
+      - documentIndex: *thirdPvcDoc
+        equal:
+          path: spec
+          value:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 3Gi
+            storageClassName: release-name-common-test-my-volume3-1736378482

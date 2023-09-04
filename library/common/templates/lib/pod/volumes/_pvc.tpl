@@ -14,7 +14,8 @@ objectData: The object data to be used to render the volume.
   {{- end -}}
 
   {{- if mustHas $objectData.type (list "nfs-pv-pvc" "smb-pv-pvc") -}}
-    {{- $hashValues := (printf "%s-%s" $objectData.server $objectData.share) -}}
+    {{- $size := $objectData.size | default $rootCtx.Values.fallbackDefaults.pvcSize -}}
+    {{- $hashValues := (printf "%s-%s-%s" $size $objectData.server $objectData.share) -}}
     {{- if $objectData.domain -}}
       {{- $hashValues = (printf "%s-%s" $hashValues $objectData.domain) -}}
     {{- end -}}
