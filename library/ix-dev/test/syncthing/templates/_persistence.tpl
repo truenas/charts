@@ -38,10 +38,26 @@ persistence:
 
   {{- range $idx, $storage := .Values.syncthingStorage.additionalStorages }}
   {{ printf "sync-%v" (int $idx) }}:
+    {{- $size := "" -}}
+    {{- if $storage.size -}}
+      {{- $size = (printf "%vGi" $storage.size) -}}
+    {{- end }}
     enabled: true
     type: {{ $storage.type }}
     datasetName: {{ $storage.datasetName | default "" }}
     hostPath: {{ $storage.hostPath | default "" }}
+    server: {{ $storage.server | default "" }}
+    share: {{ $storage.share | default "" }}
+    username: {{ $storage.username | default "" }}
+    password: {{ $storage.password | default "" }}
+    size: {{ $size }}
+    {{- with $storage.mountOptions }}
+    mountOptions:
+      {{- range $opt := . }}
+      - key: {{ $opt.key | default "" }}
+        value: {{ $opt.value | default "" }}
+      {{- end }}
+    {{- end }}
     targetSelector:
       syncthing:
         syncthing:

@@ -155,6 +155,7 @@ questions:
                   show_if: [["type", "=", "hostPath"]]
                   immutable: true
                   required: true
+
         - variable: additionalStorages
           label: Additional Storage
           description: Additional storage for Syncthing.
@@ -180,10 +181,11 @@ questions:
                         type: string
                         required: true
                         default: "hostPath"
-                        hidden: true
                         enum:
                           - value: "hostPath"
                             description: Host Path (Path that already exists on the system)
+                          - value: "smb-pv-pvc"
+                            description: SMB Share (Mounts a persistent volume claim to a SMB share)
                     - variable: mountPath
                       label: Mount Path
                       description: The path inside the container to mount the storage.
@@ -197,6 +199,65 @@ questions:
                         type: hostpath
                         show_if: [["type", "=", "hostPath"]]
                         required: true
+                    - variable: server
+                      label: Server
+                      description: The server for the SMB share.
+                      schema:
+                        type: string
+                        show_if: [["type", "=", "smb-pv-pvc"]]
+                        required: true
+                    - variable: share
+                      label: Share
+                      description: The share name for the SMB share.
+                      schema:
+                        type: string
+                        show_if: [["type", "=", "smb-pv-pvc"]]
+                        required: true
+                    - variable: username
+                      label: Username
+                      description: The username for the SMB share.
+                      schema:
+                        type: string
+                        show_if: [["type", "=", "smb-pv-pvc"]]
+                        required: true
+                    - variable: password
+                      label: Password
+                      description: The password for the SMB share.
+                      schema:
+                        type: string
+                        show_if: [["type", "=", "smb-pv-pvc"]]
+                        required: true
+                        private: true
+                    - variable: size
+                      label: Size (in Gi)
+                      description: The size of the volume quota.
+                      schema:
+                        type: int
+                        show_if: [["type", "=", "smb-pv-pvc"]]
+                        required: true
+                        min: 1
+                        default: 1
+                    - variable: mountOptions
+                      label: Mount Options
+                      description: Mount options for the SMB share.
+                      schema:
+                        type: list
+                        show_if: [["type", "=", "smb-pv-pvc"]]
+                        items:
+                          - variable: mountOption
+                            label: Mount Option
+                            schema:
+                              type: dict
+                              attrs:
+                                - variable: key
+                                  label: Key
+                                  schema:
+                                    type: string
+                                    required: true
+                                - variable: value
+                                  label: Value
+                                  schema:
+                                    type: string
 
   - variable: resources
     group: Resources Configuration
