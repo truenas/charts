@@ -1,0 +1,9 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "upb.validation" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "upb.configuration" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "upb.persistence" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "upb.workload" $ | fromYaml) -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}
