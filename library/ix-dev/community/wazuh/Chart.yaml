@@ -1,0 +1,25 @@
+name: wazuh
+description: Wazuh is an open source security platform
+  apps.
+annotations:
+  title: Wazuh
+type: application
+version: 1.0.0
+apiVersion: v2
+appVersion: 4.8.0
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.1.0
+home: https://wazuh.com/
+icon: https://avatars.githubusercontent.com/u/13752566
+sources:
+  - https://github.com/truenas/charts/tree/master/community/wazuh
+  - https://github.com/wazuh/wazuh-docker/
+keywords:
+  - security
