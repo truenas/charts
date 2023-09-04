@@ -26,6 +26,10 @@ upbConfig:
   rclonePurgeArgs: []
   additionalEnvs: []
 
+upbID:
+  user: 568
+  group: 568
+
 upbStorage:
   config:
     type: ixVolume

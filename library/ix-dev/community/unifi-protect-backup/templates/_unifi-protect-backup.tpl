@@ -6,6 +6,8 @@ workload:
     type: Deployment
     podSpec:
       hostNetwork: false
+      securityContext:
+        fsGroup: {{ .Values.upbID.group }}
       containers:
         unifi-protect:
           enabled: true
@@ -22,6 +24,8 @@ workload:
                 - FOWNER
                 - SETUID
                 - SETGID
+          fixedEnv:
+            PUID: {{ .Values.upbID.user }}
           envFrom:
             - configMapRef:
                 name: upb-config
