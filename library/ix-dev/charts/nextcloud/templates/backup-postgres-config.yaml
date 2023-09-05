@@ -6,10 +6,13 @@ metadata:
     rollme: {{ randAlphaNum 5 | quote }}
 data:
   entrypoint.sh: |-
-    #!/bin/sh
-    cmd="/docker-entrypoint.sh postgres"
-    eval "${cmd}" & disown;
-    until pg_isready; do
-      sleep 5;
-    done;
-    pg_dump -U $POSTGRES_USER -d {{ template "postgres.DatabaseName" . }} > /postgres_backups/$BACKUP_NAME;
+    #!/bin/bash
+    echo "Fetching password from config.php"
+    # sed removes ' and , and => and dbpassword and spaces'
+    DBPASS=$(cat /nc-config/config.php | grep "dbpassword" | sed "s/dbpassword\| \|'\|,\|=>//g")
+
+    until pg_isready -U ${POSTGRES_USER} -h ${POSTGRES_HOST}; do sleep 2; done
+
+    # pg_dump will use the password from the PGPASSWORD environment variable
+    echo "Creating backup of ${POSTGRES_DB} database"
+    PGPASSWORD=${DBPASS} pg_dump -U $POSTGRES_USER -d ${POSTGRES_DB} --host=${POSTGRES_HOST} > /postgres_backups/$BACKUP_NAME;
