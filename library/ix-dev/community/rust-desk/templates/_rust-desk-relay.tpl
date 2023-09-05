@@ -26,19 +26,13 @@ workload:
             liveness:
               enabled: true
               type: tcp
-              port: "{{ .Values.rustNetwork.natTypeTestPort }}"
+              port: "{{ .Values.rustNetwork.relayPort }}"
             readiness:
               enabled: true
               type: tcp
-              port: "{{ .Values.rustNetwork.natTypeTestPort }}"
+              port: "{{ .Values.rustNetwork.relayPort }}"
             startup:
               enabled: true
               type: tcp
-              port: "{{ .Values.rustNetwork.natTypeTestPort }}"
-      initContainers:
-      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
-                                                        "UID" .Values.rustRunAs.user
-                                                        "GID" .Values.rustRunAs.group
-                                                        "mode" "check"
-                                                        "type" "init") | nindent 8 }}
+              port: "{{ .Values.rustNetwork.relayPort }}"
 {{- end -}}
