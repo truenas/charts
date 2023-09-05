@@ -1,5 +1,7 @@
 {{- define "rust-server.workload" -}}
-{{- $fullname := (include "ix.v1.common.lib.chart.names.fullname" $) }}
+{{- $fullname := (include "ix.v1.common.lib.chart.names.fullname" $) -}}
+{{- $relay := (printf "%s-relay:%v" $fullname .Values.rustNetwork.relayPort) -}}
+{{- $relays := mustAppend .Values.rustConfig.additionalRelayServers $relay }}
 workload:
   server:
     enabled: true
@@ -19,7 +21,7 @@ workload:
             - hbbs
           args:
             - -r
-            - {{ printf "%s-relay:%d" $fullname .Values.rustNetwork.relayPort }}
+            - "{{ join "," $relays }}"
           {{ with .Values.rustConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
@@ -31,15 +33,15 @@ workload:
             liveness:
               enabled: true
               type: tcp
-              port: "{{ .Values.rustNetwork.natTypeTestPort }}"
+              port: 21115
             readiness:
               enabled: true
               type: tcp
-              port: "{{ .Values.rustNetwork.natTypeTestPort }}"
+              port: 21115
             startup:
               enabled: true
               type: tcp
-              port: "{{ .Values.rustNetwork.natTypeTestPort }}"
+              port: 21115
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
                                                         "UID" .Values.rustRunAs.user

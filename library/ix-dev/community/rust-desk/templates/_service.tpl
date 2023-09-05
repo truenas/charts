@@ -1,7 +1,7 @@
 {{- define "rust.service" -}}
 # https://rustdesk.com/docs/en/self-host/rustdesk-server-oss/docker/
 service:
-  server:
+  server1:
     enabled: true
     primary: true
     type: NodePort
@@ -14,6 +14,17 @@ service:
         nodePort: {{ .Values.rustNetwork.natTypeTestPort }}
         targetPort: 21115
         targetSelector: server
+      web-clients:
+        enabled: {{ .Values.rustNetwork.enableWebClientPorts }}
+        port: {{ .Values.rustNetwork.serverWebClientsPort }}
+        nodePort: {{ .Values.rustNetwork.serverWebClientsPort }}
+        targetPort: 21118
+        targetSelector: server
+  server2:
+    enabled: true
+    type: NodePort
+    targetSelector: server
+    ports:
       tcp-hole-punch:
         enabled: true
         port: {{ .Values.rustNetwork.idRegHolePunchPort }}
@@ -26,12 +37,6 @@ service:
         nodePort: {{ .Values.rustNetwork.idRegHolePunchPort }}
         targetPort: 21116
         protocol: udp
-        targetSelector: server
-      web-clients:
-        enabled: {{ .Values.rustNetwork.enableWebClientPorts }}
-        port: {{ .Values.rustNetwork.serverWebClientsPort }}
-        nodePort: {{ .Values.rustNetwork.serverWebClientsPort }}
-        targetPort: 21118
         targetSelector: server
   relay:
     enabled: true

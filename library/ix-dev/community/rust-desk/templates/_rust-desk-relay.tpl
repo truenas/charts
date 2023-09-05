@@ -26,13 +26,13 @@ workload:
             liveness:
               enabled: true
               type: tcp
-              port: "{{ .Values.rustNetwork.relayPort }}"
+              port: 21117
             readiness:
               enabled: true
               type: tcp
-              port: "{{ .Values.rustNetwork.relayPort }}"
+              port: 21117
             startup:
               enabled: true
               type: tcp
-              port: "{{ .Values.rustNetwork.relayPort }}"
+              port: 21117
 {{- end -}}

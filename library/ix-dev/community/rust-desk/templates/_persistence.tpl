@@ -9,11 +9,11 @@ persistence:
       server:
         server:
           mountPath: /root
+        01-permissions:
+          mountPath: /mnt/directories/data
       relay:
         relay:
           mountPath: /root
-        01-permissions:
-          mountPath: /mnt/directories/data
   {{- range $idx, $storage := .Values.rustStorage.additionalStorages }}
   {{ printf "rust-%v" (int $idx) }}:
     enabled: true
@@ -24,10 +24,10 @@ persistence:
       server:
         server:
           mountPath: {{ $storage.mountPath }}
+        01-permissions:
+          mountPath: /mnt/directories{{ $storage.mountPath }}
       relay:
         relay:
           mountPath: {{ $storage.mountPath }}
-        01-permissions:
-          mountPath: /mnt/directories{{ $storage.mountPath }}
   {{- end }}
 {{- end -}}
