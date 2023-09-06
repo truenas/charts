@@ -1,0 +1,13 @@
+upbConfig:
+  unifiProtectUsername: 'user'
+  unifiProtectPassword: 'pass'
+  unifiProtectAddress: '192.168.1.100'
+  rcloneDestination: 'gdrive:unifi-protect-backup'
+
+upbStorage:
+  config:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/config
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/data
