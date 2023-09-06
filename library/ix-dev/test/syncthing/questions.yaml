@@ -213,6 +213,12 @@ questions:
                         type: string
                         show_if: [["type", "=", "smb-pv-pvc"]]
                         required: true
+                    - variable: domain
+                      label: Domain (Optional)
+                      description: The domain for the SMB share.
+                      schema:
+                        type: string
+                        show_if: [["type", "=", "smb-pv-pvc"]]
                     - variable: username
                       label: Username
                       description: The username for the SMB share.
@@ -237,27 +243,6 @@ questions:
                         required: true
                         min: 1
                         default: 1
-                    - variable: mountOptions
-                      label: Mount Options
-                      description: Mount options for the SMB share.
-                      schema:
-                        type: list
-                        show_if: [["type", "=", "smb-pv-pvc"]]
-                        items:
-                          - variable: mountOption
-                            label: Mount Option
-                            schema:
-                              type: dict
-                              attrs:
-                                - variable: key
-                                  label: Key
-                                  schema:
-                                    type: string
-                                    required: true
-                                - variable: value
-                                  label: Value
-                                  schema:
-                                    type: string
 
   - variable: resources
     group: Resources Configuration
