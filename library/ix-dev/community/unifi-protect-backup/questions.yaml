@@ -1,0 +1,362 @@
+groups:
+  - name: Unifi Protect Backup Configuration
+    description: Configure Unifi Protect Backup
+  - name: User and Group Configuration
+    description: Configure User and Group for Unifi Protect Backup
+  - name: Storage Configuration
+    description: Configure Storage for Unifi Protect Backup
+  - name: Resources Configuration
+    description: Configure Resources for Unifi Protect Backup
+
+questions:
+  - variable: TZ
+    group: Unifi Protect Backup Configuration
+    label: Timezone
+    schema:
+      type: string
+      default: Etc/UTC
+      required: true
+      $ref:
+        - definitions/timezone
+
+  - variable: upbConfig
+    label: ""
+    group: Unifi Protect Backup Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: unifiProtectUsername
+          label: Unifi Protect Username
+          description: Username to login to Unifi Protect instance
+          schema:
+            type: string
+            required: true
+        - variable: unifiProtectPassword
+          label: Unifi Protect Password
+          description: Password for Unifi Protect user
+          schema:
+            type: string
+            required: true
+            private: true
+        - variable: unifiProtectAddress
+          label: Unifi Protect Address
+          description: Address of Unifi Protect instance
+          schema:
+            type: string
+            required: true
+        - variable: unifiProtectPort
+          label: Unifi Protect Port
+          description: Port of Unifi Protect instance
+          schema:
+            type: int
+            min: 1
+            max: 65535
+            required: true
+            default: 443
+        - variable: unifiProtectVerifySsl
+          label: Unifi Protect Verify SSL
+          description: Verify SSL certificate of Unifi Protect instance
+          schema:
+            type: boolean
+            default: true
+        - variable: skipMissing
+          label: Skip Missing
+          description: If set, events which are 'missing' at the start will be ignored.
+          schema:
+            type: boolean
+            default: false
+        - variable: ignoreCameras
+          label: Ignore Cameras
+          description: IDs of cameras for which events should not be backed up. One per line.
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: id
+                label: Camera ID
+                schema:
+                  type: string
+                  required: true
+        - variable: detectionTypes
+          label: Detection Types
+          description: Types of detections to back up. One per line.
+          schema:
+            type: list
+            default:
+              - motion
+              - person
+              - vehicle
+              - ring
+            items:
+              - variable: type
+                label: Detection Type
+                schema:
+                  type: string
+                  required: true
+                  enum:
+                    - value: "motion"
+                      description: Motion
+                    - value: "person"
+                      description: Person
+                    - value: "vehicle"
+                      description: Vehicle
+                    - value: "ring"
+                      description: Ring
+        - variable: rcloneDestination
+          label: Rclone Destination
+          description: |
+            Rclone destination path in the format {rclone-remote}:{path-on-remote} </br.>
+            E.g. `gdrive:/backups/unifi_protect`
+          schema:
+            type: string
+            required: true
+        - variable: rcloneArgs
+          label: Rclone Arguments
+          description: |
+            Optional extra arguments to pass to rclone rcat directly. One per line</br>
+            Common usage for this would be to set a bandwidth limit</br>
+            E.g. --bwlimit 8M
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: arg
+                label: Argument
+                schema:
+                  type: string
+                  required: true
+        - variable: rclonePurgeArgs
+          label: Rclone Purge Arguments
+          description: |
+            Optional extra arguments to pass to rclone delete. One per line</br>
+            Common usage for this would be to execute a permanent delete
+            instead of using the recycle bin on a destination.</br>
+            Google Drive example: --drive-use-trash=false
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: arg
+                label: Argument
+                schema:
+                  type: string
+                  required: true
+        - variable: additionalEnvs
+          label: Additional Environment Variables
+          description: Configure additional environment variables for Unifi Protect Backup.
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: env
+                label: Environment Variable
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: name
+                      label: Name
+                      schema:
+                        type: string
+                        required: true
+                    - variable: value
+                      label: Value
+                      schema:
+                        type: string
+                        required: true
+
+  - variable: upbID
+    label: ""
+    group: User and Group Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: user
+          label: User ID
+          description: The user id that Unifi Protect Backup files will be owned by.
+          schema:
+            type: int
+            min: 568
+            default: 568
+            required: true
+        - variable: group
+          label: Group ID
+          description: The group id that Unifi Protect Backup files will be owned by.
+          schema:
+            type: int
+            min: 568
+            default: 568
+            required: true
+
+  - variable: upbStorage
+    label: ""
+    group: Storage Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: config
+          label: Unifi Protect Backup Config Storage
+          description: The path to store Unifi Protect Backup Configuration.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
+                schema:
+                  type: string
+                  required: true
+                  default: "ixVolume"
+                  enum:
+                    - value: "hostPath"
+                      description: Host Path (Path that already exists on the system)
+                    - value: "ixVolume"
+                      description: ixVolume (Dataset created automatically by the system)
+              - variable: datasetName
+                label: Dataset Name
+                schema:
+                  type: string
+                  show_if: [["type", "=", "ixVolume"]]
+                  required: true
+                  hidden: true
+                  immutable: true
+                  default: "config"
+                  $ref:
+                    - "normalize/ixVolume"
+              - variable: hostPath
+                label: Host Path
+                schema:
+                  type: hostpath
+                  show_if: [["type", "=", "hostPath"]]
+                  immutable: true
+                  required: true
+        - variable: data
+          label: Unifi Protect Backup Data Storage
+          description: The path to store Unifi Protect Backup Data.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
+                schema:
+                  type: string
+                  required: true
+                  default: "ixVolume"
+                  enum:
+                    - value: "hostPath"
+                      description: Host Path (Path that already exists on the system)
+                    - value: "ixVolume"
+                      description: ixVolume (Dataset created automatically by the system)
+              - variable: datasetName
+                label: Dataset Name
+                schema:
+                  type: string
+                  show_if: [["type", "=", "ixVolume"]]
+                  required: true
+                  hidden: true
+                  immutable: true
+                  default: "data"
+                  $ref:
+                    - "normalize/ixVolume"
+              - variable: hostPath
+                label: Host Path
+                schema:
+                  type: hostpath
+                  show_if: [["type", "=", "hostPath"]]
+                  immutable: true
+                  required: true
+        - variable: additionalStorages
+          label: Additional Storage
+          description: Additional storage for Unifi Protect Backup.
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: storageEntry
+                label: Storage Entry
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: type
+                      label: Type
+                      description: |
+                        ixVolume: Is dataset created automatically by the system.</br>
+                        Host Path: Is a path that already exists on the system.
+                      schema:
+                        type: string
+                        required: true
+                        default: "ixVolume"
+                        enum:
+                          - value: "hostPath"
+                            description: Host Path (Path that already exists on the system)
+                          - value: "ixVolume"
+                            description: ixVolume (Dataset created automatically by the system)
+                    - variable: mountPath
+                      label: Mount Path
+                      description: The path inside the container to mount the storage.
+                      schema:
+                        type: path
+                        required: true
+                    - variable: hostPath
+                      label: Host Path
+                      description: The host path to use for storage.
+                      schema:
+                        type: hostpath
+                        show_if: [["type", "=", "hostPath"]]
+                        required: true
+                    - variable: datasetName
+                      label: Dataset Name
+                      description: The name of the dataset to use for storage.
+                      schema:
+                        type: string
+                        show_if: [["type", "=", "ixVolume"]]
+                        required: true
+                        immutable: true
+                        default: "storage_entry"
+                        $ref:
+                          - "normalize/ixVolume"
+
+  - variable: resources
+    group: Resources Configuration
+    label: ""
+    schema:
+      type: dict
+      attrs:
+        - variable: limits
+          label: Limits
+          schema:
+            type: dict
+            attrs:
+              - variable: cpu
+                label: CPU
+                description: CPU limit for Unifi Protect Backup.
+                schema:
+                  type: string
+                  max_length: 6
+                  valid_chars: '^(0\.[1-9]|[1-9][0-9]*)(\.[0-9]|m?)$'
+                  valid_chars_error: |
+                    Valid CPU limit formats are</br>
+                    - Plain Integer - eg. 1</br>
+                    - Float - eg. 0.5</br>
+                    - Milicpu - eg. 500m
+                  default: "4000m"
+                  required: true
+              - variable: memory
+                label: Memory
+                description: Memory limit for Unifi Protect Backup.
+                schema:
+                  type: string
+                  max_length: 12
+                  valid_chars: '^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$'
+                  valid_chars_error: |
+                    Valid Memory limit formats are</br>
+                    - Suffixed with E/P/T/G/M/K - eg. 1G</br>
+                    - Suffixed with Ei/Pi/Ti/Gi/Mi/Ki - eg. 1Gi</br>
+                    - Plain Integer in bytes - eg. 1024</br>
+                    - Exponent - eg. 134e6
+                  default: "8Gi"
+                  required: true
