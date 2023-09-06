@@ -29,6 +29,16 @@ portals:
     path: "$kubernetes-resource_configmap_portal_admin_path"
 
 questions:
+  - variable: TZ
+    group: Vaultwarden Configuration
+    label: Timezone
+    schema:
+      type: string
+      default: Etc/UTC
+      required: true
+      $ref:
+        - definitions/timezone
+
   - variable: vaultwardenConfig
     label: ""
     group: Vaultwarden Configuration
