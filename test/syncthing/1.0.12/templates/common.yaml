@@ -1,0 +1,12 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{/* Merge the templates with Values  */}}
+{{- $_ := mustMergeOverwrite .Values (include "syncthing.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "syncthing.persistence" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "syncthing.service" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "syncthing.configure" $ | fromYaml) -}}
+
+{{/* Create the configmap for portal manually*/}}
+{{- include "syncthing.portal" $ -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}
