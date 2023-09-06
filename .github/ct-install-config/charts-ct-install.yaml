@@ -9,6 +9,7 @@ debug: false
 upgrade: true
 chart-dirs:
   - library/ix-dev/charts
+  - library/ix-dev/test
   - library/ix-dev/community
   - library/ix-dev/enterprise
 excluded-charts:
