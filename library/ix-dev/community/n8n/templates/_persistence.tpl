@@ -17,29 +17,6 @@ persistence:
         n8n:
           mountPath: /tmp
 
-  {{- if .Values.n8nNetwork.certificateID }}
-  cert:
-    enabled: true
-    type: secret
-    objectName: n8n-cert
-    defaultMode: "0600"
-    items:
-      - key: tls.key
-        path: tls.key
-      - key: tls.crt
-        path: tls.crt
-    targetSelector:
-      n8n:
-        n8n:
-          mountPath: /certs
-          readOnly: true
-
-scaleCertificate:
-  n8n-cert:
-    enabled: true
-    id: {{ .Values.n8nNetwork.certificateID }}
-    {{- end }}
-
   # Postgres
   postgresdata:
     enabled: true
@@ -70,4 +47,26 @@ scaleCertificate:
         # Permissions container
         permissions:
           mountPath: /mnt/directories/postgres_backup
+  {{- if .Values.n8nNetwork.certificateID }}
+  cert:
+    enabled: true
+    type: secret
+    objectName: n8n-cert
+    defaultMode: "0600"
+    items:
+      - key: tls.key
+        path: tls.key
+      - key: tls.crt
+        path: tls.crt
+    targetSelector:
+      n8n:
+        n8n:
+          mountPath: /certs
+          readOnly: true
+
+scaleCertificate:
+  n8n-cert:
+    enabled: true
+    id: {{ .Values.n8nNetwork.certificateID }}
+    {{- end }}
 {{- end -}}
