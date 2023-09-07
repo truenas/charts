@@ -1,4 +1,4 @@
-{{- define "firefly.service" -}}
+{{- define "n8n.service" -}}
 service:
   n8n:
     enabled: true
