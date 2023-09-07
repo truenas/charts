@@ -22,14 +22,11 @@ spec:
       - name: {{ .Chart.Name }}-postgres-backup
         image: {{ template "postgres.imageName" . }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
-        # template includes POSTGRES_USER
         env: {{ include "postgres.envVariableConfiguration" $values | nindent 10 }}
           - name: BACKUP_NAME
             value: {{ template "postgres.backupName" . }}
           - name: POSTGRES_HOST
             value: {{ $dbHost }}
-          - name: POSTGRES_DB
-            value: {{ template "postgres.DatabaseName" . }}
         volumeMounts: {{ include "postgres.volumeMountsConfiguration" $values | nindent 10 }}
           - name: backup-script-configmap
             mountPath: /bin/backup_entrypoint.sh
