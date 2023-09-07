@@ -15,7 +15,7 @@ kind: ConfigMap
 metadata:
   name: portal
 data:
-  port: {{ $port }}
+  port: {{ $port | quote }}
   path: "/"
   protocol: {{ $protocol }}
   host: {{ $host }}
