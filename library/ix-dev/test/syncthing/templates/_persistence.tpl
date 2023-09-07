@@ -52,8 +52,10 @@ persistence:
     username: {{ $storage.username | default "" }}
     password: {{ $storage.password | default "" }}
     size: {{ $size }}
+    {{- if eq $storage.type "smb-pv-pvc" }}
     mountOptions:
       - key: noperm
+    {{- end }}
     targetSelector:
       syncthing:
         syncthing:
