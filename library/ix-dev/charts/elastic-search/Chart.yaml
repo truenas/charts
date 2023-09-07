@@ -1,11 +1,12 @@
 name: elastic-search
-description: Elasticsearch is the distributed, RESTful search and analytics engine at the heart of the Elastic Stack.
+description: Elasticsearch is the distributed, RESTful search and analytics engine
+  at the heart of the Elastic Stack.
 annotations:
   title: Elastic Search
 type: application
-version: 1.0.20
+version: 1.0.21
 apiVersion: v2
-appVersion: 8.9.1
+appVersion: 8.9.2
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: truenas
@@ -14,7 +15,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.1.0
+    version: 1.1.1
 home: https://www.elastic.co
 icon: https://images.contentstack.io/v3/assets/bltefdd0b53724fa2ce/blt280217a63b82a734/6202d3378b1f312528798412/elastic-logo.svg
 sources:
