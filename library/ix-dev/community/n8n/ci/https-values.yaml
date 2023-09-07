@@ -9,6 +9,9 @@ n8nStorage:
     type: hostPath
     hostPath: /mnt/{{ .Release.Name }}/pgBackup
 
+n8nConfig:
+  webHost: localhost:31000
+
 n8nNetwork:
   webPort: 31000
   certificateID: 1

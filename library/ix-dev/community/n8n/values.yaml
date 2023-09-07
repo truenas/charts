@@ -9,6 +9,7 @@ resources:
     memory: 8Gi
 
 n8nConfig:
+  webHost: localhost:30068
   additionalEnvs: []
 
 n8nNetwork:
