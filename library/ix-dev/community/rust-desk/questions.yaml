@@ -17,6 +17,14 @@ questions:
     schema:
       type: dict
       attrs:
+        - variable: allowOnlyEncryptedConnections
+          label: Allow Only Encrypted Connections
+          description: |
+            Allow only encrypted connections.</br>
+            Clients have to use the generated key to connect to the server.
+          schema:
+            type: boolean
+            default: false
         - variable: additionalRelayServers
           label: Additional Relay Servers
           description: |

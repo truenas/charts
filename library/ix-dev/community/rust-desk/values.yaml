@@ -9,6 +9,7 @@ resources:
     memory: 8Gi
 
 rustConfig:
+  allowOnlyEncryptedConnections: false
   additionalRelayServers: []
   additionalEnvs: []
 

@@ -22,6 +22,9 @@ workload:
           args:
             - -r
             - "{{ join "," $relays }}"
+          {{ if .Values.rustConfig.allowOnlyEncryptedConnections }}
+            - -k
+            - _
           {{ with .Values.rustConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}

@@ -15,6 +15,11 @@ workload:
             runAsGroup: {{ .Values.rustRunAs.group }}
           command:
             - hbbr
+          {{ if .Values.rustConfig.allowOnlyEncryptedConnections }}
+          args:
+            - -k
+            - _
+          {{ end }}
           {{ with .Values.rustConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
