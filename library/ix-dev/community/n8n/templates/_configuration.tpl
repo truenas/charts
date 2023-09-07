@@ -71,7 +71,9 @@ configmap:
   n8n-config:
     enabled: true
     data:
+      NODE_ENV: production
       N8N_PORT: {{ .Values.n8nNetwork.webPort | quote }}
+      N8N_HOST: {{ .Values.n8nConfig.webHost | quote }}
       GENERIC_TIMEZONE: {{ .Values.TZ }}
       N8N_PROTOCOL: {{ $prot }}
       N8N_USER_FOLDER: "/data"

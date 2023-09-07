@@ -1,5 +1,7 @@
 {{- include "ix.v1.common.loader.init" . -}}
 
+{{- include "n8n.validation" $ -}}
+
 {{/* Merge the templates with Values */}}
 {{- $_ := mustMergeOverwrite .Values (include "n8n.configuration" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "n8n.service" $ | fromYaml) -}}

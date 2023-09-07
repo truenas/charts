@@ -35,7 +35,7 @@ persistence:
           readOnly: true
 
 scaleCertificate:
-  vaultwarden-cert:
+  n8n-cert:
     enabled: true
     id: {{ .Values.n8nNetwork.certificateID }}
     {{- end }}
