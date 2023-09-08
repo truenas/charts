@@ -12,6 +12,10 @@ n8nStorage:
 n8nConfig:
   webHost: localhost
 
+n8nRunAs:
+  user: 1001
+  group: 1001
+
 n8nNetwork:
   webPort: 31000
   certificateID: 1

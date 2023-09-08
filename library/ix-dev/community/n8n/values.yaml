@@ -12,6 +12,10 @@ n8nConfig:
   webHost: localhost
   additionalEnvs: []
 
+n8nRunAs:
+  user: 568
+  group: 568
+
 n8nNetwork:
   webPort: 30068
   certificateID:
@@ -25,8 +29,7 @@ n8nStorage:
     type: ixVolume
     hostPath: pgData
   pgBackup:
-    type: ixVolumedocker run -it -v $(pwd):/workspace ixsystems/catalog_validation
-
+    type: ixVolume
     hostPath: pgBackup
   additionalStorages: []
 
