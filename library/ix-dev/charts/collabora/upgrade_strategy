@@ -3,16 +3,26 @@ import json
 import sys
 import re
 
-from catalog_update.upgrade_strategy import semantic_versioning
+from catalog_update.upgrade_strategy import datetime_versioning
 
 
-RE_STABLE_VERSION = re.compile(r'^\d+\.\d+\.\d+\.\d+\.\d+$')
+RE_STABLE_VERSION = re.compile(r'^(\d+\.){4}\d+$')
 
 
 def newer_mapping(image_tags):
     key = list(image_tags.keys())[0]
-    tags = {t: t for t in image_tags[key] if RE_STABLE_VERSION.fullmatch(t)}
-    version = semantic_versioning(list(tags))
+    tempTags = {t: t for t in image_tags[key] if RE_STABLE_VERSION.fullmatch(t)}
+    tags = {}
+    for tag in tempTags:
+        tag = tag.split('.')
+        for i in range(len(tag)):
+            # Add leading zero to single digit numbers
+            if len(tag[i]) == 1:
+                tag[i] = '0' + tag[i]
+        tag = '.'.join(tag)
+        tags[tag] = tag
+
+    version = datetime_versioning(list(tags), '%y.%m.%d.%H.%M')
     if not version:
         return {}
 
@@ -23,9 +33,11 @@ def newer_mapping(image_tags):
 
 
 if __name__ == '__main__':
-    try:
-        versions_json = json.loads(sys.stdin.read())
-    except ValueError:
-        raise ValueError('Invalid json specified')
+    # try:
+    #     versions_json = json.loads(sys.stdin.read())
+    # except ValueError:
+    #     raise ValueError('Invalid json specified')
 
+    with open('test.json') as f:
+        versions_json = json.load(f)
     print(json.dumps(newer_mapping(versions_json)))
