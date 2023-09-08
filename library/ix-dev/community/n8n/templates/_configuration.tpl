@@ -72,6 +72,7 @@ configmap:
     enabled: true
     data:
       NODE_ENV: production
+      N8N_PATH: /
       N8N_PORT: {{ .Values.n8nNetwork.webPort | quote }}
       N8N_HOST: {{ .Values.n8nConfig.webHost | quote }}
       GENERIC_TIMEZONE: {{ .Values.TZ }}
