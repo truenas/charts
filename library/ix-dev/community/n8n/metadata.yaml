@@ -9,5 +9,10 @@ runAsContext:
     gid: 999
     uid: 999
     description: Postgres runs as a non-root user.
+  - userName: redis
+    groupName: redis
+    gid: 1001
+    uid: 0
+    description: Redis runs as a non-root user and root group.
 capabilities: []
 hostMounts: []
