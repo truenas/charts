@@ -9,6 +9,8 @@ persistence:
       n8n:
         n8n:
           mountPath: /data
+        01-permissions:
+          mountPath: /mnt/directories/data
   tmp:
     enabled: true
     type: emptyDir
@@ -16,7 +18,19 @@ persistence:
       n8n:
         n8n:
           mountPath: /tmp
-
+  {{- range $idx, $storage := .Values.n8nStorage.additionalStorages }}
+  {{ printf "n8n-%v" (int $idx) }}:
+    enabled: true
+    type: {{ $storage.type }}
+    datasetName: {{ $storage.datasetName | default "" }}
+    hostPath: {{ $storage.hostPath | default "" }}
+    targetSelector:
+      n8n:
+        n8n:
+          mountPath: {{ $storage.mountPath }}
+        01-permissions:
+          mountPath: /mnt/directories{{ $storage.mountPath }}
+  {{- end }}
   # Postgres
   postgresdata:
     enabled: true

@@ -27,6 +27,7 @@ n8nStorage:
   pgBackup:
     type: ixVolume
     hostPath: pgBackup
+  additionalStorages: []
 
 notes:
   custom: |
