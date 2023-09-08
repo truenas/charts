@@ -35,12 +35,6 @@ n8nStorage:
 
 notes:
   custom: |
-    {{- if .Values.n8nConfig.enableImporter }}
-    ## Data Importer
-
-    You can reach data importer at http://<ip>:{{ .Values.n8nNetwork.importerPort }}
-    {{- end }}
-
     ## Database
     You can connect to the database using the pgAdmin App from the catalog
 
