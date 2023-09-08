@@ -1,11 +1,12 @@
 name: redis
-description: Redis. The open source, in-memory data store used by millions of developers as a database, cache, streaming engine, and message broker.
+description: Redis. The open source, in-memory data store used by millions of developers
+  as a database, cache, streaming engine, and message broker.
 annotations:
   title: Redis
 type: application
-version: 1.0.7
+version: 1.0.8
 apiVersion: v2
-appVersion: 7.2.0
+appVersion: 7.2.1
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: truenas
