@@ -29,19 +29,23 @@ workload:
             {{ end }}
           {{ end }}
           probes:
+              {{ $prot := "http" }}
+            {{ if .Values.n8nNetwork.certificateID }}
+              {{ $prot = "https" }}
+            {{ end }}
             liveness:
               enabled: true
-              type: http
+              type: {{ $prot }}
               path: /healthz
               port: {{ .Values.n8nNetwork.webPort }}
             readiness:
               enabled: true
-              type: http
+              type: {{ $prot }}
               path: /healthz
               port: {{ .Values.n8nNetwork.webPort }}
             startup:
               enabled: true
-              type: http
+              type: {{ $prot }}
               path: /healthz
               port: {{ .Values.n8nNetwork.webPort }}
       initContainers:
