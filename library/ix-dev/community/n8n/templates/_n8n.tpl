@@ -12,8 +12,8 @@ workload:
           primary: true
           imageSelector: image
           securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
+            runAsUser: 568
+            runAsGroup: 568
             runAsNonRoot: false
             readOnlyRootFilesystem: false
           envFrom:
@@ -50,8 +50,8 @@ workload:
               port: {{ .Values.n8nNetwork.webPort }}
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
-                                                        "UID" 1000
-                                                        "GID" 1000
+                                                        "UID" 568
+                                                        "GID" 568
                                                         "mode" "check"
                                                         "type" "init") | nindent 8 }}
       {{- include "ix.v1.common.app.redisWait" (dict  "name" "02-redis-wait"
