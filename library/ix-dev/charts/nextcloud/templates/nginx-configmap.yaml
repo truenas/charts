@@ -12,7 +12,7 @@ data:
 
   {{/* Safely access key as it is conditionaly shown */}}
   {{ if hasKey .Values "nginxConfig" }}
-    {{ $useDiffAccessPort = .Values.useDifferentAccessPort }}
+    {{ $useDiffAccessPort = .Values.nginxConf.useDifferentAccessPort }}
     {{ $externalAccessPort = printf ":%v" .Values.nginxConfig.externalAccessPort }}
     {{ $timeout = .Values.nginxConfig.proxy_timeouts | default 60 }}
   {{ end }}
