@@ -33,11 +33,9 @@ def newer_mapping(image_tags):
 
 
 if __name__ == '__main__':
-    # try:
-    #     versions_json = json.loads(sys.stdin.read())
-    # except ValueError:
-    #     raise ValueError('Invalid json specified')
+    try:
+        versions_json = json.loads(sys.stdin.read())
+    except ValueError:
+        raise ValueError('Invalid json specified')
 
-    with open('test.json') as f:
-        versions_json = json.load(f)
     print(json.dumps(newer_mapping(versions_json)))
