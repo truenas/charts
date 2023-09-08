@@ -48,15 +48,13 @@ persistence:
     hostPath: {{ $storage.hostPath | default "" }}
     server: {{ $storage.server | default "" }}
     share: {{ $storage.share | default "" }}
+    domain: {{ $storage.domain | default "" }}
     username: {{ $storage.username | default "" }}
     password: {{ $storage.password | default "" }}
     size: {{ $size }}
-    {{- with $storage.mountOptions }}
+    {{- if eq $storage.type "smb-pv-pvc" }}
     mountOptions:
-      {{- range $opt := . }}
-      - key: {{ $opt.key | default "" }}
-        value: {{ $opt.value | default "" }}
-      {{- end }}
+      - key: noperm
     {{- end }}
     targetSelector:
       syncthing:
