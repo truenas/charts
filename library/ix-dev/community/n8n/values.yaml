@@ -9,7 +9,7 @@ resources:
     memory: 8Gi
 
 n8nConfig:
-  webHost: localhost:30068
+  webHost: localhost
   additionalEnvs: []
 
 n8nNetwork:
@@ -25,7 +25,8 @@ n8nStorage:
     type: ixVolume
     hostPath: pgData
   pgBackup:
-    type: ixVolume
+    type: ixVolumedocker run -it -v $(pwd):/workspace ixsystems/catalog_validation
+
     hostPath: pgBackup
   additionalStorages: []
 

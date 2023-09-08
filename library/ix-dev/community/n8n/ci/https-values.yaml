@@ -10,7 +10,7 @@ n8nStorage:
     hostPath: /mnt/{{ .Release.Name }}/pgBackup
 
 n8nConfig:
-  webHost: localhost:31000
+  webHost: localhost
 
 n8nNetwork:
   webPort: 31000
