@@ -3,9 +3,9 @@ description: Lidarr is a music collection manager for Usenet and BitTorrent user
 annotations:
   title: Lidarr
 type: application
-version: 1.0.21
+version: 1.0.22
 apiVersion: v2
-appVersion: 1.4.0.3554
+appVersion: 1.4.2.3576
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: truenas
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.1.0
+    version: 1.1.1
 home: https://github.com/Lidarr/Lidarr
 icon: https://raw.githubusercontent.com/Lidarr/Lidarr/develop/Logo/256.png
 sources:
