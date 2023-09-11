@@ -9,13 +9,6 @@ persistence:
       kavita:
         kavita:
           mountPath: /kavita/config
-  tmp:
-    enabled: true
-    type: emptyDir
-    targetSelector:
-      kavita:
-        kavita:
-          mountPath: /tmp
 
   {{- range $idx, $storage := .Values.kavitaStorage.additionalStorages }}
   {{ printf "kavita-%v" (int $idx) }}:
