@@ -46,10 +46,6 @@ secret:
       REDIS_PASSWORD: {{ $redisPass }}
       REDIS_HOST: {{ $redisHost }}
 
-  {{- $prot := "http" -}}
-  {{- if .Values.n8nNetwork.certificateID -}}
-    {{- $prot = "https" -}}
-  {{- end }}
   n8n-creds:
     enabled: true
     data:
@@ -67,6 +63,10 @@ secret:
       QUEUE_BULL_REDIS_HOST: {{ $redisHost }}
       QUEUE_BULL_REDIS_PORT: "6379"
 
+{{- $prot := "http" -}}
+{{- if .Values.n8nNetwork.certificateID -}}
+  {{- $prot = "https" -}}
+{{- end }}
 configmap:
   n8n-config:
     enabled: true
