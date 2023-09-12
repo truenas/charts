@@ -41,7 +41,7 @@ configmap:
       PAPERLESS_DATA_DIR: /usr/src/paperless/data
       PAPERLESS_MEDIA_ROOT: /usr/src/paperless/media
       PAPERLESS_CONSUMPTION_DIR: /usr/src/paperless/consume
-      PAPERLESS_TRASH_DIR: {{ ternary "/usr/src/paperless/trash" "" .Values.paperlessConfig.enableTrash }}
+      PAPERLESS_TRASH_DIR: {{ ternary "/usr/src/paperless/trash" nil .Values.paperlessConfig.enableTrash }}
 
 secret:
   postgres-creds:

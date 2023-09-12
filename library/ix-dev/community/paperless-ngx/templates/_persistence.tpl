@@ -28,7 +28,7 @@ persistence:
         paperless:
           mountPath: /usr/src/paperless/consume
   trash:
-    enabled: true
+    enabled: {{ .Values.paperlessConfig.enableTrash }}
     type: {{ .Values.paperlessStorage.trash.type }}
     datasetName: {{ .Values.paperlessStorage.trash.datasetName | default "" }}
     hostPath: {{ .Values.paperlessStorage.trash.hostPath | default "" }}

@@ -269,7 +269,6 @@ questions:
           label: Paperless-ngx Trash Storage
           description: |
             The path to store Paperless-ngx Trash.</br>
-            This is only used when the trash feature is enabled.
           schema:
             type: dict
             attrs:
