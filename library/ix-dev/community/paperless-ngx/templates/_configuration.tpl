@@ -44,6 +44,22 @@ configmap:
       PAPERLESS_TRASH_DIR: {{ ternary "/usr/src/paperless/trash" "" .Values.paperlessConfig.enableTrash }}
 
 secret:
+  postgres-creds:
+    enabled: true
+    data:
+      POSTGRES_USER: {{ $dbUser }}
+      POSTGRES_DB: {{ $dbName }}
+      POSTGRES_PASSWORD: {{ $dbPass }}
+      POSTGRES_HOST: {{ $dbHost }}
+      POSTGRES_URL: {{ $dbURL }}
+
+  redis-creds:
+    enabled: true
+    data:
+      ALLOW_EMPTY_PASSWORD: "no"
+      REDIS_PASSWORD: {{ $redisPass }}
+      REDIS_HOST: {{ $redisHost }}
+
   paperless-creds:
     enabled: true
     data:

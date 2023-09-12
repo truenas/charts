@@ -2,6 +2,7 @@
 
 {{/* Merge the templates with Values */}}
 {{- $_ := mustMergeOverwrite .Values (include "paperless.service" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "paperless.configuration" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "paperless.persistence" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "paperless.workload" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "postgres.workload" $ | fromYaml) -}}
