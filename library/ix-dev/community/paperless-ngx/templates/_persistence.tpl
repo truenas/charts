@@ -9,8 +9,6 @@ persistence:
       paperless:
         paperless:
           mountPath: /usr/src/paperless/data
-        01-permissions:
-          mountPath: /mnt/directories/data
   media:
     enabled: true
     type: {{ .Values.paperlessStorage.media.type }}
@@ -20,8 +18,6 @@ persistence:
       paperless:
         paperless:
           mountPath: /usr/src/paperless/media
-        01-permissions:
-          mountPath: /mnt/directories/media
   consume:
     enabled: true
     type: {{ .Values.paperlessStorage.consume.type }}
@@ -31,8 +27,6 @@ persistence:
       paperless:
         paperless:
           mountPath: /usr/src/paperless/consume
-        01-permissions:
-          mountPath: /mnt/directories/consume
   trash:
     enabled: {{ .Values.paperlessConfig.enableTrash }}
     type: {{ .Values.paperlessStorage.trash.type }}
@@ -42,8 +36,6 @@ persistence:
       paperless:
         paperless:
           mountPath: /usr/src/paperless/trash
-        01-permissions:
-          mountPath: /mnt/directories/trash
   tmp:
     enabled: true
     type: emptyDir
@@ -61,8 +53,6 @@ persistence:
       paperless:
         paperless:
           mountPath: {{ $storage.mountPath }}
-        01-permissions:
-          mountPath: /mnt/directories{{ $storage.mountPath }}
   {{- end }}
 
   postgresdata:
