@@ -1,0 +1,7 @@
+kavitaNetwork:
+  webPort: 31000
+
+kavitaStorage:
+  config:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/config

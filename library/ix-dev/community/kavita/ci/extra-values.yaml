@@ -1,0 +1,14 @@
+kavitaNetwork:
+  webPort: 31000
+
+kavitaStorage:
+  config:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/config
+  additionalStorages:
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/manga
+    mountPath: /manga
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/comic
+    mountPath: /comic
