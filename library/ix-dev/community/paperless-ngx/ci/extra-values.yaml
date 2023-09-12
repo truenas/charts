@@ -5,6 +5,7 @@ paperlessConfig:
   adminUser: admin
   adminPassword: supersecretpassword
   adminMail: admin@example.com
+  enableTrash: false
   additionalEnvs:
     - name: PAPERLESS_OCR_LANGUAGES
       value: deu+eng
