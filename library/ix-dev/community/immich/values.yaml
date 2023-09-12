@@ -21,7 +21,7 @@ mlImage:
 typesenseImage:
   repository: typesense/typesense
   pullPolicy: IfNotPresent
-  tag: 0.25.0
+  tag: 0.25.1
 
 resources:
   limits:
