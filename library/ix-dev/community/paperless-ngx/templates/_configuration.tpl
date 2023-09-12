@@ -36,8 +36,8 @@ configmap:
       PAPERLESS_TIME_ZONE: {{ .Values.TZ }}
       PAPERLESS_BIND_ADDR: "0.0.0.0"
       PAPERLESS_PORT: {{ .Values.paperlessNetwork.webPort | quote }}
-      USERMAP_UID: {{ .Values.paperlessRunAs.user | quote }}
-      USERMAP_GID: {{ .Values.paperlessRunAs.group | quote }}
+      USERMAP_UID: {{ .Values.paperlessID.user | quote }}
+      USERMAP_GID: {{ .Values.paperlessID.group | quote }}
       PAPERLESS_DATA_DIR: /usr/src/paperless/data
       PAPERLESS_MEDIA_ROOT: /usr/src/paperless/media
       PAPERLESS_CONSUMPTION_DIR: /usr/src/paperless/consume

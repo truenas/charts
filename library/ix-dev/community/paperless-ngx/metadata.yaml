@@ -1,14 +1,9 @@
 runAsContext:
-  - userName: paperless
-    groupName: paperless
-    gid: 568
-    uid: 568
-    description: Paperless-ngx can run as any non-root user.
   - userName: root
     groupName: root
     gid: 0
     uid: 0
-    description: Firefly III Data Importer runs as root user
+    description: Paperless-ngx can runs as root user.
   - userName: postgres
     groupName: postgres
     gid: 999
@@ -19,5 +14,15 @@ runAsContext:
     gid: 1001
     uid: 0
     description: Redis runs as a non-root user and root group.
-capabilities: []
+capabilities:
+  - name: CHOWN
+    description: Paperless-ngx is able to chown files.
+  - name: DAC_OVERRIDE
+    description: Paperless-ngx is able to bypass permission checks.
+  - name: FOWNER
+    description: Paperless-ngx is able bypass permission checks for it's sub-processes.
+  - name: SETGID
+    description: Paperless-ngx is able to set group ID for it's sub-processes.
+  - name: SETUID
+    description: Paperless-ngx is able to set user ID for it's sub-processes.
 hostMounts: []

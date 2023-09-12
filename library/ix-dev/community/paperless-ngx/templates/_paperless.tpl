@@ -12,8 +12,17 @@ workload:
           primary: true
           imageSelector: image
           securityContext:
-            runAsUser: {{ .Values.paperlessRunAs.user }}
-            runAsGroup: {{ .Values.paperlessRunAs.group }}
+            runAsUser: 0
+            runAsGroup: 0
+            runAsNonRoot: false
+            readOnlyRootFilesystem: false
+            capabilities:
+              add:
+                - CHOWN
+                - DAC_OVERRIDE
+                - FOWNER
+                - SETGID
+                - SETUID
           envFrom:
             - secretRef:
                 name: paperless-creds
@@ -43,11 +52,6 @@ workload:
               port: {{ .Values.paperlessNetwork.webPort }}
               path: /
       initContainers:
-      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
-                                                        "UID" .Values.paperlessRunAs.user
-                                                        "GID" .Values.paperlessRunAs.group
-                                                        "mode" "check"
-                                                        "type" "init") | nindent 8 }}
       {{- include "ix.v1.common.app.redisWait" (dict  "name" "02-redis-wait"
                                                       "secretName" "redis-creds") | nindent 8 }}
       {{- include "ix.v1.common.app.postgresWait" (dict "name" "03-postgres-wait"

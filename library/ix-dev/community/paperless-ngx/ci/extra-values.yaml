@@ -6,12 +6,12 @@ paperlessConfig:
   adminPassword: supersecretpassword
   adminMail: admin@example.com
   additionalEnvs:
-    - name: PAPERLESS_OCR_LANGUAGE
+    - name: PAPERLESS_OCR_LANGUAGES
       value: deu+eng
     - name: PAPERLESS_OCR_MODE
       value: redo
 
-paperlessRunAs:
+paperlessID:
   user: 1001
   group: 1001
 
