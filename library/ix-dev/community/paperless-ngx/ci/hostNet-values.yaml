@@ -1,0 +1,28 @@
+paperlessNetwork:
+  webPort: 31000
+  hostNetwork: true
+
+paperlessConfig:
+  adminUser: admin
+  adminPassword: supersecretpassword
+  adminMail: admin@example.com
+
+paperlessStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/data
+  media:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/media
+  consume:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/consume
+  trash:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/trash
+  pgData:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/pgData
+  pgBackup:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/pgBackup
