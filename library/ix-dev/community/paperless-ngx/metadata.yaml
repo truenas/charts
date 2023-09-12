@@ -1,0 +1,23 @@
+runAsContext:
+  - userName: paperless
+    groupName: paperless
+    gid: 568
+    uid: 568
+    description: Paperless-ngx can run as any non-root user.
+  - userName: root
+    groupName: root
+    gid: 0
+    uid: 0
+    description: Firefly III Data Importer runs as root user
+  - userName: postgres
+    groupName: postgres
+    gid: 999
+    uid: 999
+    description: Postgres runs as a non-root user.
+  - userName: redis
+    groupName: redis
+    gid: 1001
+    uid: 0
+    description: Redis runs as a non-root user and root group.
+capabilities: []
+hostMounts: []
