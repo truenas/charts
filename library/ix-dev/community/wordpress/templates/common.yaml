@@ -6,6 +6,9 @@
 {{- $_ := mustMergeOverwrite .Values (include "wordpress.service" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "wordpress.workload" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "wordpress.mariadb.workload" $ | fromYaml) -}}
+{{- if .Values.wpConfig.enableCronJob -}}
+  {{- $_ := mustMergeOverwrite .Values (include "wordpress.cron" $ | fromYaml) -}}
+{{- end -}}
 
 {{/* Create the configmap for portal manually*/}}
 {{- include "wordpress.portal" $ -}}

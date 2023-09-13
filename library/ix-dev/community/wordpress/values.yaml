@@ -9,6 +9,8 @@ resources:
     memory: 8Gi
 
 wpConfig:
+  enableCronJob: true
+  cronSchedule: "*/15 * * * *"
   additionalEnvs: []
 
 wpNetwork:

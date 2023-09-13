@@ -30,4 +30,9 @@ secret:
       WORDPRESS_DB_NAME: {{ $dbName }}
       WORDPRESS_DB_USER: {{ $dbUser }}
       WORDPRESS_DB_PASSWORD: {{ $dbPass }}
+      {{/* Disable On Page Load Cron when k8s CronJob is enabled */}}
+      {{- if .Values.wpConfig.enableCronJob }}
+      WORDPRESS_CONFIG_EXTRA: |
+          define( 'DISABLE_WP_CRON', true );
+      {{- end -}}
 {{- end -}}

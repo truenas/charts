@@ -33,6 +33,22 @@ questions:
     schema:
       type: dict
       attrs:
+        - variable: enableCronJob
+          label: Enable CronJob
+          description: |
+            Enable CronJob for Wordpress executed by Kubernetes scheduler.</br>
+            This will also disable running cron on page load.
+          schema:
+            type: boolean
+            default: false
+        - variable: cronSchedule
+          label: Cron Schedule
+          description: Cron schedule for Wordpress CronJob.
+          schema:
+            type: string
+            default: "*/15 * * * *"
+            show_if: [["enableCronJob", "=", true]]
+            required: true
         - variable: additionalEnvs
           label: Additional Environment Variables
           description: Configure additional environment variables for Wordpress.

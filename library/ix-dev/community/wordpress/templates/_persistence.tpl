@@ -11,6 +11,9 @@ persistence:
           mountPath: /var/www/html
         01-permissions:
           mountPath: /mnt/directories/data
+      wordpress-cron:
+        wordpress-cron:
+          mountPath: /var/www/html
   {{- range $idx, $storage := .Values.wpStorage.additionalStorages }}
   {{ printf "wp-%v" (int $idx) }}:
     enabled: true
