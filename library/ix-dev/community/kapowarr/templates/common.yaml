@@ -1,0 +1,11 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "kapowarr.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "kapowarr.service" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "kapowarr.persistence" $ | fromYaml) -}}
+
+{{/* Create the configmap for portal manually*/}}
+{{- include "kapowarr.portal" $ -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}
