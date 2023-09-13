@@ -2,6 +2,8 @@
 
 {{/* Merge the templates with Values */}}
 {{- $_ := mustMergeOverwrite .Values (include "wordpress.configuration" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "wordpress.persistence" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "wordpress.service" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "wordpress.workload" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "wordpress.mariadb.workload" $ | fromYaml) -}}
 
