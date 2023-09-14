@@ -1,3 +1,3 @@
 # Cloudflared
 
-[Cloudflared](https://github.com/cloudflare/cloudflared) is an ebook and audiobook collection manager for Usenet and BitTorrent users.
+[Cloudflared](https://github.com/cloudflare/cloudflared) is a client for Cloudflare Tunnel, a daemon that exposes private services through the Cloudflare edge.
