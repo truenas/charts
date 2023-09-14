@@ -25,13 +25,17 @@ workload:
           args:
             - tunnel
             - --no-autoupdate
-            {{ range $arg := $addArgs }}
-            {{- if (mustHas $arg $reservedArgs) -}}
-              {{- fail (printf "Cloudflared - Argument [%s] is already applied" $arg) -}}
-            {{- end }}
+            {{ if not .Values.ci }}
+              {{ range $arg := $addArgs }}
+              {{- if (mustHas $arg $reservedArgs) -}}
+                {{- fail (printf "Cloudflared - Argument [%s] is already applied" $arg) -}}
+              {{- end }}
             - {{ $arg }}
-            {{ end }}
+              {{ end }}
             - run
+            {{ else }}
+            - --hello-world
+            {{ end }}
           env:
             TUNNEL_TOKEN: {{ .Values.cloudflaredConfig.tunnelToken }}
           {{ with .Values.cloudflaredConfig.additionalEnvs }}
