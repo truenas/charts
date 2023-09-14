@@ -1,0 +1,63 @@
+image:
+  repository: paperlessngx/paperless-ngx
+  pullPolicy: IfNotPresent
+  tag: 1.17.4
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+paperlessConfig:
+  adminUser: ''
+  adminPassword: ''
+  adminMail: ''
+  enableTrash: true
+  additionalEnvs: []
+
+paperlessNetwork:
+  webPort: 30070
+  hostNetwork: false
+
+paperlessID:
+  user: 568
+  group: 568
+
+paperlessStorage:
+  data:
+    type: ixVolume
+    datasetName: data
+  media:
+    type: ixVolume
+    datasetName: media
+  consume:
+    type: ixVolume
+    datasetName: consume
+  trash:
+    type: ixVolume
+    datasetName: trash
+  pgData:
+    type: ixVolume
+    datasetName: pgData
+  pgBackup:
+    type: ixVolume
+    datasetName: pgBackup
+  additionalStorages: []
+
+notes:
+  custom: |
+    ## Database
+    You can connect to the database using the pgAdmin App from the catalog
+
+    <details>
+      <summary>Database Details</summary>
+
+      - Database: `paperless`
+      - Username: `paperless`
+      - Password: `{{ .Values.paperlessDbPass }}`
+      - Host:     `{{ .Values.paperlessDbHost }}.{{ .Release.Namespace }}.svc.cluster.local`
+      - Port:     `5432`
+
+    </details>
+    {{- $_ := unset .Values "paperlessDbPass" }}
+    {{- $_ := unset .Values "paperlessDbHost" }}

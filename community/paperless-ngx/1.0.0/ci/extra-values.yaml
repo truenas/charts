@@ -1,0 +1,44 @@
+paperlessNetwork:
+  webPort: 31000
+
+paperlessConfig:
+  adminUser: admin
+  adminPassword: supersecretpassword
+  adminMail: admin@example.com
+  enableTrash: false
+  additionalEnvs:
+    - name: PAPERLESS_OCR_LANGUAGES
+      value: deu+eng
+    - name: PAPERLESS_OCR_MODE
+      value: redo
+
+paperlessID:
+  user: 1001
+  group: 1001
+
+paperlessStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/data
+  media:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/media
+  consume:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/consume
+  trash:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/trash
+  pgData:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/pgData
+  pgBackup:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/pgBackup
+  additionalStorages:
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/data1
+    mountPath: /data1
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/data2
+    mountPath: /data2
