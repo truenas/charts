@@ -1,0 +1,8 @@
+cloudflaredNetwork:
+  hostNetwork: true
+
+cloudflaredStorage:
+  additionalStorages:
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/data1
+    mountPath: /data1

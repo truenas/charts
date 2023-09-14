@@ -1,0 +1,21 @@
+image:
+  repository: cloudflare/cloudflared
+  pullPolicy: IfNotPresent
+  tag: 2023.8.2
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+cloudflaredConfig:
+  tunnelToken: ''
+  additionalArgs: []
+  additionalEnvs: []
+
+cloudflaredNetwork:
+  hostNetwork: false
+
+cloudflaredRunAs:
+  user: 568
+  group: 568
