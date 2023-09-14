@@ -33,7 +33,7 @@ workload:
             {{ end }}
             - run
           env:
-            TUNEL_TOKEN: {{ .Values.cloudflaredConfig.tunnelToken }}
+            TUNNEL_TOKEN: {{ .Values.cloudflaredConfig.tunnelToken }}
           {{ with .Values.cloudflaredConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
