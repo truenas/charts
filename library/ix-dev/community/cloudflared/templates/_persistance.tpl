@@ -10,7 +10,5 @@ persistence:
       cloudflared:
         cloudflared:
           mountPath: {{ $storage.mountPath }}
-        01-permissions:
-          mountPath: /mnt/directories{{ $storage.mountPath }}
   {{- end }}
 {{- end -}}
