@@ -27,9 +27,9 @@ workload:
             - --no-autoupdate
             {{ if not .Values.ci }}
               {{ range $arg := $addArgs }}
-              {{- if (mustHas $arg $reservedArgs) -}}
-                {{- fail (printf "Cloudflared - Argument [%s] is already applied" $arg) -}}
-              {{- end }}
+                {{- if (mustHas $arg $reservedArgs) -}}
+                  {{- fail (printf "Cloudflared - Argument [%s] is already applied" $arg) -}}
+                {{- end }}
             - {{ $arg }}
               {{ end }}
             - run
