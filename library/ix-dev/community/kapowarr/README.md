@@ -1,6 +1,6 @@
 # Kapowarr
 
-[Kapowarr](https://github.com/Casvt/Kapowarr) is a software to build and manage a comic book library, fitting in the *arr suite of software.
+[Kapowarr](https://casvt.github.io/Kapowarr/) is a software to build and manage a comic book library, fitting in the *arr suite of software.
 
 > When application is installed, a container will be launched with **root** privileges.
 > This is required in order to apply the correct permissions to the `Kapowarr` directories.
