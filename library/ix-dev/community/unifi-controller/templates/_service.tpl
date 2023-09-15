@@ -6,13 +6,13 @@ service:
     type: NodePort
     targetSelector: unifi
     ports:
-      https:
+      web-https:
         enabled: true
         primary: true
         port: {{ .Values.unifiNetwork.webHttpsPort }}
         nodePort: {{ .Values.unifiNetwork.webHttpsPort }}
         targetSelector: unifi
-      http:
+      web-http:
         enabled: {{ .Values.unifiNetwork.enableWebHttp }}
         port: {{ .Values.unifiNetwork.webHttpPort }}
         nodePort: {{ .Values.unifiNetwork.webHttpPort }}
@@ -22,13 +22,13 @@ service:
     type: NodePort
     targetSelector: unifi
     ports:
-      https:
+      portal-https:
         enabled: true
         primary: true
         port: {{ .Values.unifiNetwork.portalHttpsPort }}
         nodePort: {{ .Values.unifiNetwork.portalHttpsPort }}
         targetSelector: unifi
-      http:
+      portal-http:
         enabled: {{ .Values.unifiNetwork.enablePortalHttp }}
         port: {{ .Values.unifiNetwork.portalHttpPort }}
         nodePort: {{ .Values.unifiNetwork.portalHttpPort }}
