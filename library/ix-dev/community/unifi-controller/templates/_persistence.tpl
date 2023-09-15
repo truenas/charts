@@ -30,5 +30,28 @@ persistence:
           mountPath: {{ $storage.mountPath }}
         01-permissions:
           mountPath: /mnt/directories{{ $storage.mountPath }}
-  {{- end }}
+  {{- end -}}
+
+  {{- if .Values.unifiNetwork.certificateID }}
+  cert:
+    enabled: true
+    type: secret
+    objectName: unifi-cert
+    defaultMode: "0600"
+    items:
+      - key: tls.key
+        path: private.key
+      - key: tls.crt
+        path: public.crt
+    targetSelector:
+      unifi:
+        unifi:
+          mountPath: /unifi/cert
+          readOnly: true
+
+scaleCertificate:
+  unifi-cert:
+    enabled: true
+    id: {{ .Values.unifiNetwork.certificateID }}
+    {{- end -}}
 {{- end -}}
