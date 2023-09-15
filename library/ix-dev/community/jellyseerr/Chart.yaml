@@ -1,11 +1,12 @@
 name: jellyseerr
-description: Jellyseerr is a free and open source software application for managing requests for your media library.
+description: Jellyseerr is a free and open source software application for managing
+  requests for your media library.
 annotations:
   title: Jellyseerr
 type: application
-version: 1.0.7
+version: 1.0.8
 apiVersion: v2
-appVersion: 1.6.0
+appVersion: 1.7.0
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: truenas
@@ -14,7 +15,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.1.0
+    version: 1.1.1
 home: https://github.com/Fallenbagel/jellyseerr
 icon: https://github.com/Fallenbagel/jellyseerr/raw/develop/public/logo_full.svg
 sources:
