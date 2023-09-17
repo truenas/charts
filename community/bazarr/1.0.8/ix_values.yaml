@@ -1,23 +1,25 @@
 image:
-  repository: recyclarr/recyclarr
+  repository: ghcr.io/onedr0p/bazarr
   pullPolicy: IfNotPresent
-  tag: 5.4.2
+  tag: 1.3.0
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-recyclarrConfig:
-  createConfig: true
-  cronSchedule: '@daily'
+bazarrConfig:
   additionalEnvs: []
 
-recyclarrRunAs:
+bazarrNetwork:
+  webPort: 30046
+  hostNetwork: false
+
+bazarrRunAs:
   user: 568
   group: 568
 
-recyclarrStorage:
+bazarrStorage:
   config:
     type: ixVolume
     datasetName: config
