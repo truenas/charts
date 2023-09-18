@@ -22,8 +22,8 @@ workload:
             PORTAL_HTTP_PORT: {{ .Values.unifiNetwork.portalHttpPort }}
             PORTAL_HTTPS_PORT: {{ .Values.unifiNetwork.portalHttpsPort }}
             {{- if .Values.unifiNetwork.certificateID }}
-            CERTNAME: public.crt
-            CERT_PRIVATE_NAME: private.key
+            CERTNAME: cert.pem
+            CERT_PRIVATE_NAME: privkey.pem
             CERT_IS_CHAIN: true
             {{- end }}
           {{ with .Values.unifiConfig.additionalEnvs }}
@@ -68,7 +68,11 @@ workload:
             - -c
           args:
             - |
-              echo "Copying certificates to /unifi/certs"
-              cp --force --verbose /ix/cert/* /unifi/cert/ || echo "Failed to copy certificates"
+              certdir=/unifi/cert
+              echo "Copying certificates to $certdir"
+              mkdir -p $certdir
+              cp --force --verbose /ix/cert/private.key $certdir/privkey.pem
+              cp --force --verbose /ix/cert/public.crt $certdir/cert.pem
+              cp --force --verbose /ix/cert/public.crt $certdir/chain.pem
       {{- end -}}
 {{- end -}}
