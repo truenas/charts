@@ -11,7 +11,7 @@ RE_STABLE_VERSION = re.compile(r'^(\d+\.){4}\d+$')
 
 def newer_mapping(image_tags):
     key = list(image_tags.keys())[0]
-    temp_tags = {t: t for t in image_tags[key] if RE_STABLE_VERSION.fullmatch(t)}
+    temp_tags = {t.strip('v'): t for t in image_tags[key] if RE_STABLE_VERSION.fullmatch(t)}
     tags = {}
     for tag in temp_tags:
         tag = tag.split('.')
