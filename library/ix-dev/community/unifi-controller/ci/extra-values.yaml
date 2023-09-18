@@ -1,0 +1,12 @@
+unifiStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/data
+  additionalStorages:
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/init.d
+    mountPath: /unifi/init.d
+
+unifiNetwork:
+  enableWebHttp: true
+  enablePortalHttp: true
