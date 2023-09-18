@@ -16,6 +16,9 @@ def newer_mapping(image_tags):
     for tag in temp_tags:
         tag = tag.split('.')
         for i in range(len(tag)):
+            # Ignore the first two parts as they are supposed to have leading zeros
+            if i in [0, 1]:
+                continue
             # Add leading zero to single digit numbers
             if len(tag[i]) == 1:
                 tag[i] = '0' + tag[i]
@@ -26,9 +29,21 @@ def newer_mapping(image_tags):
     if not version:
         return {}
 
+    cleanVersion = ""
+    for idx, part in enumerate(version.split('.')):
+        # Ignore the first two parts as they are supposed to have leading zeros
+        if idx in [0, 1]:
+            cleanVersion += part + '.'
+            continue
+        # Remove leading zero
+        cleanVersion += part.lstrip('0') + '.'
+
+    # Remove trailing dot
+    cleanVersion = cleanVersion.rstrip('.')
+
     return {
-        'tags': {key: tags[version]},
-        'app_version': version,
+        'tags': {key: cleanVersion},
+        'app_version': cleanVersion,
     }
 
 
