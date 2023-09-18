@@ -52,4 +52,23 @@ workload:
                                                         "GID" 999
                                                         "mode" "check"
                                                         "type" "init") | nindent 8 }}
+      {{- if .Values.unifiNetwork.certificateID }}
+        # Unifi chowns the files on startup, and if we mount them directly
+        # from the secret, it will fail to start. So we make copy.
+        02-certs:
+          enabled: true
+          type: init
+          imageSelector: image
+          securityContext:
+            runAsUser: 999
+            runAsGroup: 999
+            readOnlyRootFilesystem: false
+          command:
+            - /bin/sh
+            - -c
+          args:
+            - |
+              echo "Copying certificates to /unifi/certs"
+              cp --verbose /ix/cert/* /unifi/cert/ || echo "Failed to copy certificates"
+      {{- end -}}
 {{- end -}}

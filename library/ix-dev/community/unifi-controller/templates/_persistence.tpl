@@ -11,6 +11,9 @@ persistence:
           mountPath: /unifi
         01-permissions:
           mountPath: /mnt/directories/unifi
+        02-certs:
+          mountPath: /unifi
+          readOnly: true
   tmp:
     enabled: true
     type: emptyDir
@@ -45,8 +48,8 @@ persistence:
         path: public.crt
     targetSelector:
       unifi:
-        unifi:
-          mountPath: /unifi/cert
+        02-certs:
+          mountPath: /ix/cert
           readOnly: true
 
 scaleCertificate:
