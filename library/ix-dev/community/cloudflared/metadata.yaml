@@ -1,0 +1,8 @@
+runAsContext:
+  - userName: cloudflared
+    groupName: cloudflared
+    gid: 568
+    uid: 568
+    description: Cloudflared can run as any non-root user.
+capabilities: []
+hostMounts: []
