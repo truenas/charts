@@ -14,6 +14,15 @@ persistence:
         02-certs:
           mountPath: /unifi
           readOnly: true
+  unifirun:
+    enabled: true
+    type: emptyDir
+    targetSelector:
+      unifi:
+        unifi:
+          mountPath: /unifi/run
+        02-certs:
+          mountPath: /unifi/run
   tmp:
     enabled: true
     type: emptyDir

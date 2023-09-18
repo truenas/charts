@@ -69,6 +69,6 @@ workload:
           args:
             - |
               echo "Copying certificates to /unifi/certs"
-              cp --verbose /ix/cert/* /unifi/cert/ || echo "Failed to copy certificates"
+              cp --force --verbose /ix/cert/* /unifi/cert/ || echo "Failed to copy certificates"
       {{- end -}}
 {{- end -}}
