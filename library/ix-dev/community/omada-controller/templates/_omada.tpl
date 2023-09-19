@@ -18,6 +18,13 @@ workload:
             runAsGroup: 0
             runAsNonRoot: false
             readOnlyRootFilesystem: false
+            capabilities:
+              add:
+              - CHOWN
+              - DAC_OVERRIDE
+              - FOWNER
+              - SETUID
+              - SETGID
           fixedEnv:
             PUID: {{ .Values.omadaID.user }}
           env:
