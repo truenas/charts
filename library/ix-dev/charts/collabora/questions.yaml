@@ -71,7 +71,10 @@ questions:
               - "definitions/nodeIP"
 
   - variable: certificate
-    description: "Collabora Certificate"
+    description: |
+      Collabora Certificate</br>
+      If you do not choose a certificate and do not configure an external reverse proxy</br>
+      you might have to adjust the extra_params.
     label: "Certificate"
     group: "Collabora Configuration"
     schema:
