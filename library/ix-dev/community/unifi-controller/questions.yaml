@@ -1,8 +1,6 @@
 groups:
   - name: Unifi Controller Configuration
     description: Configure Unifi Controller
-  - name: User and Group Configuration
-    description: Configure User and Group for Unifi Controller
   - name: Network Configuration
     description: Configure Network for Unifi Controller
   - name: Storage Configuration
@@ -118,10 +116,7 @@ questions:
             required: true
         - variable: certificateID
           label: Certificate
-          description: |
-            The certificate to use for Unifi Controller </br>
-            Using the Rocket method for TLS setup is NOT recommended </br>
-            Prefer a reverse proxy with a valid certificate </br>
+          description: The certificate to use for Unifi Controller
           schema:
             type: int
             "null": true
