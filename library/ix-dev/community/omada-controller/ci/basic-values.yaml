@@ -1,0 +1,11 @@
+omadaStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/data
+  logs:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/logs
+
+omadaID:
+  user: 1001
+  group: 1001

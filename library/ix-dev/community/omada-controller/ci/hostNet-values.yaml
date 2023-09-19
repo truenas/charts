@@ -1,0 +1,10 @@
+omadaStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/data
+  logs:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/logs
+
+omadaNetwork:
+  hostNetwork: true
