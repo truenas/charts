@@ -1,0 +1,10 @@
+runAsContext:
+  - userName: root
+    groupName: root
+    gid: 0
+    uid: 0
+    description: Omada Controller runs as root user.
+capabilities:
+  - name: CHOWN
+    description: Omada Controller is able to chown files.
+hostMounts: []
