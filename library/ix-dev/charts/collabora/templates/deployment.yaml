@@ -15,6 +15,7 @@ spec:
       labels: {{ include "common.labels.selectorLabels" . | nindent 8 }}
     spec:
       containers:
+        {{ if .Values.certificate }}
         - name: {{ .Chart.Name }}-nginx
           image: {{ printf "%s:%s" .Values.nginx.image.repository .Values.nginx.image.tag }}
           imagePullPolicy: {{ .Values.nginx.image.pullPolicy }}
@@ -66,6 +67,7 @@ spec:
             timeoutSeconds: 2
             failureThreshold: 60
             successThreshold: 1
+        {{ end }}
         - name: {{ .Chart.Name }}
           {{ include "common.resources.limitation" . | nindent 10 }}
           {{ include "common.containers.imageConfig" .Values.image | nindent 10 }}
@@ -120,6 +122,7 @@ spec:
           {{ $envList = mustAppend $envList (dict "name" "password" "valueFromSecret" true "secretName" $secretName "secretKey" "password") }}
           {{ include "common.containers.allEnvironmentVariables" (dict "environmentVariables" $envList) | nindent 10 }}
       volumes:
+        {{ if .Values.certificate }}
         - name: configuration
           configMap:
             defaultMode: 0700
@@ -127,6 +130,7 @@ spec:
         - name: certs
           secret:
             secretName: {{ include "secretName" . }}
+        {{ end }}
       {{ range $index, $hostPathConfiguration := .Values.extraAppVolumeMounts }}
         - name: extrappvolume-{{ $index }}
           hostPath:
