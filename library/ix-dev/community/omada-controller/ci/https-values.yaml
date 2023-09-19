@@ -6,8 +6,15 @@ omadaStorage:
     type: hostPath
     hostPath: /mnt/{{ .Release.Namespace }}/logs
 
+# CI has a lower port rage of 30000
 omadaNetwork:
   certificateID: 1
+  appDiscoveryPort: 30001
+  discoveryPort: 30002
+  managerV1Port: 30003
+  adoptV1Port: 30004
+  upgradeV1Port: 30005
+  managerV2Port: 30006
 
 ixCertificates:
   "1":
