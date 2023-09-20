@@ -1,0 +1,25 @@
+image:
+  repository: ghcr.io/logseq/logseq-webapp
+  pullPolicy: IfNotPresent
+  # No versioned tags provided
+  tag: latest
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+logseqConfig:
+  additionalEnvs: []
+
+logseqNetwork:
+  webPort: 30079
+  certificateID:
+  hostNetwork: false
+
+logseqRunAs:
+  user: 568
+  group: 568
+
+logseqStorage:
+  additionalStorages: []
