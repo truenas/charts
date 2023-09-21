@@ -15,7 +15,7 @@
   {{- end -}}
 
   {{- if not $found -}}
-    {{- fail (printf "Briefkasten - At least one auth provider [%s] must be enabled" (join ", " $providers)) -}}
+    {{- fail (printf "Briefkasten - One or more auth provider [%s] must be enabled" (join ", " $providers)) -}}
   {{- end -}}
 
   {{- if $smtp.enabled -}}
