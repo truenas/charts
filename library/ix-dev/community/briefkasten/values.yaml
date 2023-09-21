@@ -11,6 +11,30 @@ resources:
 
 briefkastenConfig:
   url: http://localhost:30080
+  smtp:
+    enabled: false
+    server: ''
+    from: ''
+  github:
+    enabled: false
+    id: ''
+    secret: ''
+  google:
+    enabled: false
+    id: ''
+    secret: ''
+  keycloak:
+    enabled: false
+    name: ''
+    id: ''
+    secret: ''
+    issuer: ''
+  authentik:
+    enabled: false
+    name: ''
+    id: ''
+    secret: ''
+    issuer: ''
   additionalEnvs: []
 
 briefkastenNetwork:

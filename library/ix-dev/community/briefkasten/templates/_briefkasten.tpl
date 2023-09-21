@@ -46,8 +46,7 @@ workload:
       initContainers:
       {{- include "ix.v1.common.app.postgresWait" (dict "name" "01-postgres-wait"
                                                         "secretName" "postgres-creds") | nindent 8 }}
-        {{- if .Release.IsInstall }} {{/* If we use type: install it will run before the postgres wait and fail */}}
-        02-seed-db:
+        02-migrate-db:
           enabled: true
           type: init
           imageSelector: image
@@ -64,12 +63,8 @@ workload:
             - /bin/sh
             - -c
             - |
-              echo "Seeding database"
-              until pnpm db:push; do
-                echo "DB Seed failed... Retrying in 5s..."
-                sleep 5
-              done
-              echo "DB Seed successful. Application will now start"
+              echo "Migrating database"
+              pnpm db:push || (echo "DB migration failed..." && exit 1)
+              echo "DB migration successful. Application will now start"
               exit 0
-        {{- end -}}
 {{- end -}}
