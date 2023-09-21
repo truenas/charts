@@ -1,7 +1,7 @@
 {{- define "logseq.portal" -}}
 {{- $protocol := "http" -}}
 {{- if .Values.logseqNetwork.certificateID -}}
-  {{- $protocol = "http" -}}
+  {{- $protocol = "https" -}}
 {{- end }}
 ---
 apiVersion: v1
