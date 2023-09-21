@@ -44,6 +44,32 @@ workload:
               port: {{ .Values.briefkastenNetwork.webPort }}
               path: /
       initContainers:
-      {{- include "ix.v1.common.app.postgresWait" (dict "name" "postgres-wait"
+      {{- include "ix.v1.common.app.postgresWait" (dict "name" "01-postgres-wait"
                                                         "secretName" "postgres-creds") | nindent 8 }}
+        {{- if .Release.IsInstall }} {{/* If we use type: install it will run before the postgres wait and fail */}}
+        02-seed-db:
+          enabled: true
+          type: init
+          imageSelector: image
+          securityContext:
+            runAsUser: 1001
+            runAsGroup: 1001
+            readOnlyRootFilesystem: false
+          envFrom:
+            - secretRef:
+                name: briefkasten
+            - configMapRef:
+                name: briefkasten
+          command:
+            - /bin/sh
+            - -c
+            - |
+              echo "Seeding database"
+              until pnpm db:push; do
+                echo "DB Seed failed... Retrying in 5s..."
+                sleep 5
+              done
+              echo "DB Seed successful. Application will now start"
+              exit 0
+        {{- end -}}
 {{- end -}}
