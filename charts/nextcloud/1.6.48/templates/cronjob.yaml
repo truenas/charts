@@ -57,7 +57,7 @@ spec:
                 mountPath: /var/www/html
                 subPath: "html"
               - name: nextcloud-data
-                mountPath: {{ .Values.nextcloud.datadir }}
+                mountPath: /var/www/html/data
                 subPath: "data"
               - name: nextcloud-data
                 mountPath: /var/www/html/config
@@ -71,6 +71,10 @@ spec:
               - name: nextcloud-data
                 mountPath: /var/www/html/themes
                 subPath: "themes"
+              {{ if ne .Values.nextcloud.datadir "/var/www/html/data" }}
+              - name: nextcloud-userdata
+                mountPath: {{ .Values.nextcloud.datadir }}
+              {{ end }}
           volumes:
           {{ if .Values.appVolumeMounts }}
           {{- include "common.storage.configureAppVolumes" .Values | nindent 12 }}

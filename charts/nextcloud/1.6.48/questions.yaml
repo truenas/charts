@@ -137,7 +137,7 @@ questions:
             required: true
         - variable: datadir
           label: "Nextcloud data directory"
-          description: "Configures the data directory where nextcloud stores all files from the users"
+          description: "Configures the data directory where nextcloud stores all files from the users (inside the container). When changing this, make sure to specify a host path for Nextcloud User Data Volume in the section storage."
           schema:
             type: path
             default: "/var/www/html/data"
@@ -282,6 +282,43 @@ questions:
                   subquestions:
                     - variable: hostPath
                       label: "Host Path for Nextcloud Data Volume"
+                      schema:
+                        type: hostpath
+                        required: true
+        - variable: nextcloud-userdata
+          label: "Nextcloud User Data Volume"
+          schema:
+            type: dict
+            show_if: [[ "nextcloud.datadir", "!=", "/var/www/html/data" ]]
+            attrs:
+              - variable: datasetName
+                label: "Nextcloud User Data Volume Name"
+                schema:
+                  type: string
+                  hidden: true
+                  $ref:
+                    - "normalize/ixVolume"
+                  show_if: [["hostPathEnabled", "=", false]]
+                  default: "ix-nextcloud_userdata"
+                  editable: false
+              - variable: mountPath
+                label: "Nextcloud UserData Mount Path"
+                description: "Path where the volume will be mounted inside the pod"
+                schema:
+                  type: path
+                  hidden: true
+                  editable: false
+                  default: nextcloud.datadir
+              - variable: hostPathEnabled
+                label: "Enable Host Path for Nextcloud User Data Volume"
+                description: "Path on host that will be mounted at the location of the Nextcloud data directory in the container. Set this only if you moved the Nextcloud data directory out of /var/www/html/"
+                schema:
+                  type: boolean
+                  default: false
+                  show_subquestions_if: true
+                  subquestions:
+                    - variable: hostPath
+                      label: "Host Path for Nextcloud User Data Volume"
                       schema:
                         type: hostpath
                         required: true
