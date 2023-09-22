@@ -13,6 +13,8 @@ def newer_mapping(image_tags):
     key = list(image_tags.keys())[0]
     temp_tags = {t: t for t in image_tags[key] if RE_STABLE_VERSION.fullmatch(t)}
     tags = {}
+
+    # Format tags so they can be parsed by datetime_versioning
     for tag in temp_tags:
         tag = tag.split('.')
         for i in range(len(tag)):
@@ -25,18 +27,20 @@ def newer_mapping(image_tags):
         tag = '.'.join(tag)
         tags[tag] = tag
 
-    version = datetime_versioning(list(tags), '%y.%m.%d.%H.%M')
+    # Get the latest version
+    version = datetime_versioning(list(tags), '%y.%m.%H.%M.%S')
     if not version:
         return {}
 
     cleanVersion = ""
+    # Covert the tag back to the original format
     for idx, part in enumerate(version.split('.')):
         # Ignore the first two parts as they are supposed to have leading zeros
         if idx in [0, 1]:
             cleanVersion += part + '.'
             continue
-        # Remove leading zero
-        cleanVersion += part.lstrip('0') + '.'
+        if len(part) == 2 and part[0] == '0':
+            cleanVersion += part[1] + '.'
 
     # Remove trailing dot
     cleanVersion = cleanVersion.rstrip('.')
