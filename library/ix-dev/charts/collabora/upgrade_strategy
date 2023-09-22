@@ -28,7 +28,7 @@ def newer_mapping(image_tags):
         tags[tag] = tag
 
     # Get the latest version
-    version = datetime_versioning(list(tags), '%y.%m.%S.%H.%M')
+    version = datetime_versioning(list(tags), '%y.%m.%H.%M.%S')
     if not version:
         return {}
 
@@ -52,10 +52,9 @@ def newer_mapping(image_tags):
 
 
 if __name__ == '__main__':
-    # try:
-    #     versions_json = json.loads(sys.stdin.read())
-    # except ValueError:
-    #     raise ValueError('Invalid json specified')
-    with open('test.json') as f:
-        versions_json = json.load(f)
+    try:
+        versions_json = json.loads(sys.stdin.read())
+    except ValueError:
+        raise ValueError('Invalid json specified')
+
     print(json.dumps(newer_mapping(versions_json)))
