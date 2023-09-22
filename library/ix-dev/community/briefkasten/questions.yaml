@@ -238,7 +238,7 @@ questions:
           description: The port for the Briefkasten Web UI.
           schema:
             type: int
-            default: 30062
+            default: 30080
             min: 9000
             max: 65535
             required: true

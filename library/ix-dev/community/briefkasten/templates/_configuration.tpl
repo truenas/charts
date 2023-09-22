@@ -71,6 +71,7 @@ configmap:
     enabled: true
     data:
       NEXTAUTH_URL: {{ .Values.briefkastenConfig.url }}
+      NEXTAUTH_URL_INTERNAL: http://127.0.0.1:{{ .Values.briefkastenNetwork.webPort }}
       PORT: {{ .Values.briefkastenNetwork.webPort | quote }}
       NODE_ENV: production
 {{- end -}}
