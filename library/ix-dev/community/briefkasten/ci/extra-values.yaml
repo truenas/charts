@@ -1,0 +1,24 @@
+briefkastenNetwork:
+  webPort: 31000
+
+briefkastenConfig:
+  url: http://localhost:31000
+  smtp:
+    enabled: true
+    server: some.smtp.server:587
+    from: briefkasten@example.com
+
+briefkastenStorage:
+  pgData:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/pgData
+  pgBackup:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/pgBackup
+  additionalStorages:
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/data1
+    mountPath: /data1
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/data2
+    mountPath: /data2

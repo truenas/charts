@@ -1,0 +1,14 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "briefkasten.validation" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "briefkasten.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "briefkasten.service" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "briefkasten.persistence" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "briefkasten.configuration" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "postgres.workload" $ | fromYaml) -}}
+
+{{/* Create the configmap for portal manually*/}}
+{{- include "briefkasten.portal" $ -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}
