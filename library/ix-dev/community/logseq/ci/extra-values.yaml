@@ -1,0 +1,11 @@
+logseqNetwork:
+  webPort: 31000
+
+logseqStorage:
+  additionalStorages:
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/data1
+    mountPath: /data1
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/data2
+    mountPath: /data2
