@@ -1,7 +1,7 @@
 image:
   pullPolicy: IfNotPresent
   repository: collabora/code
-  tag: 22.05.12.2.1
+  tag: 23.05.4.2.1
 nginx:
   image:
     pullPolicy: IfNotPresent
