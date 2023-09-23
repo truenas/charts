@@ -1,22 +1,22 @@
 image:
   repository: altran1502/immich-server
   pullPolicy: IfNotPresent
-  tag: v1.79.0
+  tag: v1.79.1
 
 webImage:
   repository: altran1502/immich-web
   pullPolicy: IfNotPresent
-  tag: v1.79.0
+  tag: v1.79.1
 
 proxyImage:
   repository: altran1502/immich-proxy
   pullPolicy: IfNotPresent
-  tag: v1.79.0
+  tag: v1.79.1
 
 mlImage:
   repository: altran1502/immich-machine-learning
   pullPolicy: IfNotPresent
-  tag: v1.79.0
+  tag: v1.79.1
 
 typesenseImage:
   repository: typesense/typesense
