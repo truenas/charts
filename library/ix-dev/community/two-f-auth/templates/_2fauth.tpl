@@ -14,6 +14,7 @@ workload:
           securityContext:
             runAsUser: {{ .Values.twofauthRunAs.user }}
             runAsGroup: {{ .Values.twofauthRunAs.group }}
+            readOnlyRootFilesystem: false
           envFrom:
             - secretRef:
                 name: twofauth-creds
@@ -31,17 +32,17 @@ workload:
               enabled: true
               type: http
               port: 8000
-              path: /
+              path: /infos
             readiness:
               enabled: true
               type: http
               port: 8000
-              path: /
+              path: /infos
             startup:
               enabled: true
               type: http
               port: 8000
-              path: /
+              path: /infos
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
                                                         "UID" .Values.twofauthRunAs.user

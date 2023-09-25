@@ -17,8 +17,11 @@ configmap:
   twofauth-config:
     enabled: true
     data:
-      APP_ENV: production
+      # When this is set to production, it initialize automatically
+      # Because it waits for user input in the console.
+      APP_ENV: local
       APP_NAME: {{ .Values.twofauthConfig.appName }}
       APP_URL: {{ .Values.twofauthConfig.appUrl }}
-      DB_DATABASE: /2fauth/db/database.sqlite
+      # It is symlinked to /2fauth/database.sqlite
+      DB_DATABASE: /srv/database/database.sqlite
 {{- end -}}
