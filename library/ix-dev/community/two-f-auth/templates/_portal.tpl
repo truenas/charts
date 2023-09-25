@@ -29,7 +29,7 @@ metadata:
   name: portal
 data:
   path: "/"
-  port: {{ $port }}
+  port: {{ $port | quote }}
   protocol: {{ $protocol }}
   host: {{ $host }}
 {{- end -}}
