@@ -7,7 +7,7 @@ config:
   extra_params: --o:welcome.enable=false --o:user_interface.mode=notebookbar --o:ssl.termination=true
     --o:ssl.enable=false --o:net.proto=IPv4 --o:net.post_allow.host[0]=.+ --o:storage.wopi.host[0]=.+
   password: changeme
-  server_name: ssh.sonicaj.com:49980
+  server_name: ssh.sonicaj.com
   timezone: Asia/Karachi
   username: admin
 ixChartContext:
