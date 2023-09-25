@@ -32,6 +32,6 @@ configmap:
       {{- end }}
       WEBAUTHN_USER_VERIFICATION: {{ .Values.twofauthConfig.webauthnUserVerification }}
       {{- with .Values.twofauthConfig.trustedProxies }}
-      TRUSTED_PROXIES: {{ join "," . }}
+      TRUSTED_PROXIES: {{ join "," . | quote }}
       {{- end -}}
 {{- end -}}
