@@ -117,7 +117,11 @@ spec:
           {{ $envList = mustAppend $envList (dict "name" "dictionaries" "value" $envConfig.dictionaries) }}
           {{ $envList = mustAppend $envList (dict "name" "extra_params" "value" $envConfig.extra_params) }}
           {{ $envList = mustAppend $envList (dict "name" "DONT_GEN_SSL_CERT" "value" "true") }}
-          {{ $envList = mustAppend $envList (dict "name" "server_name" "value" (printf "%v:%v" $envConfig.server_name .Values.nodePort)) }}
+          {{ if not (contains ":" $envConfig.server_name) }}
+            {{ $envList = mustAppend $envList (dict "name" "server_name" "value" (printf "%v:%v" $envConfig.server_name .Values.nodePort)) }}
+          {{ else }}
+            {{ $envList = mustAppend $envList (dict "name" "server_name" "value" (printf "%v" $envConfig.server_name)) }}
+          {{ end }}
           {{ $envList = mustAppend $envList (dict "name" "username" "valueFromSecret" true "secretName" $secretName "secretKey" "username") }}
           {{ $envList = mustAppend $envList (dict "name" "password" "valueFromSecret" true "secretName" $secretName "secretKey" "password") }}
           {{ include "common.containers.allEnvironmentVariables" (dict "environmentVariables" $envList) | nindent 10 }}
