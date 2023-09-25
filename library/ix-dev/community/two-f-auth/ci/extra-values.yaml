@@ -3,11 +3,13 @@ twofauthConfig:
   authProxyHeaderUser: X-Forwarded-User
   authProxyHeaderEmail: X-Forwarded-Email
   webauthnUserVerification: required
+  trustedProxies:
+    - "*"
   additionalEnvs:
     - name: LOG_LEVEL
       value: notice
     - name: IS_DEMO_APP
-      value: true
+      value: "true"
 
 
 twofauthNetwork:
