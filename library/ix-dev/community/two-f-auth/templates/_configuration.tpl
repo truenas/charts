@@ -20,8 +20,18 @@ configmap:
       # When this is set to production, it initialize automatically
       # Because it waits for user input in the console.
       APP_ENV: local
-      APP_NAME: {{ .Values.twofauthConfig.appName }}
-      APP_URL: {{ .Values.twofauthConfig.appUrl }}
       # It is symlinked to /2fauth/database.sqlite
       DB_DATABASE: /srv/database/database.sqlite
+      APP_NAME: {{ .Values.twofauthConfig.appName }}
+      APP_URL: {{ .Values.twofauthConfig.appUrl }}
+      SITE_OWNER: {{ .Values.twofauthConfig.siteOwnerEmail }}
+      AUTHENTICATION_GUARD: {{ .Values.twofauthConfig.authenticationGuard }}
+      {{- if eq .Values.twofauthConfig.authenticationGuard "reverse-proxy-guard" }}
+      AUTH_PROXY_HEADER_FOR_USER: {{ .Values.twofauthConfig.authProxyHeaderUser }}
+      AUTH_PROXY_HEADER_FOR_EMAIL: {{ .Values.twofauthConfig.authProxyHeaderEmail }}
+      {{- end }}
+      WEBAUTHN_USER_VERIFICATION: {{ .Values.twofauthConfig.webauthnUserVerification }}
+      {{- with .Values.twofauthConfig.trustedProxies }}
+      TRUSTED_PROXIES: {{ join "," . }}
+      {{- end -}}
 {{- end -}}
