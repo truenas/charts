@@ -12,8 +12,8 @@ workload:
           primary: true
           imageSelector: image
           securityContext:
-            runAsUser: {{ .Values.twofauthRunAs.user }}
-            runAsGroup: {{ .Values.twofauthRunAs.group }}
+            runAsUser: 1000
+            runAsGroup: 1000
             readOnlyRootFilesystem: false
           envFrom:
             - secretRef:
@@ -45,8 +45,8 @@ workload:
               path: /infos
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
-                                                        "UID" .Values.twofauthRunAs.user
-                                                        "GID" .Values.twofauthRunAs.group
+                                                        "UID" 1000
+                                                        "GID" 1000
                                                         "mode" "check"
                                                         "type" "init") | nindent 8 }}
 {{- end -}}
