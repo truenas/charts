@@ -1,11 +1,12 @@
 name: jellyfin
-description: Jellyfin is a Free Software Media System that puts you in control of managing and streaming your media.
+description: Jellyfin is a Free Software Media System that puts you in control of
+  managing and streaming your media.
 annotations:
   title: Jellyfin
 type: application
-version: 1.0.13
+version: 1.0.14
 apiVersion: v2
-appVersion: '10.8.10'
+appVersion: 10.8.11
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: truenas
@@ -14,7 +15,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.1.0
+    version: 1.1.1
 home: https://jellyfin.org/
 icon: https://jellyfin.org/images/logo.svg
 sources:
