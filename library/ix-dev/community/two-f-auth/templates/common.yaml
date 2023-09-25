@@ -1,7 +1,8 @@
 {{- include "ix.v1.common.loader.init" . -}}
 
-{{/* Merge the templates with Values */}}
 {{- include "twofauth.validation" $ -}}
+
+{{/* Merge the templates with Values */}}
 {{- $_ := mustMergeOverwrite .Values (include "twofauth.configuration" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "twofauth.persistence" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "twofauth.service" $ | fromYaml) -}}
