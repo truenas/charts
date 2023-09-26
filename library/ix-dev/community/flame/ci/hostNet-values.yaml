@@ -1,0 +1,11 @@
+flameConfig:
+  password: password
+
+flameNetwork:
+  webPort: 30000
+  hostNetwork: true
+
+flameStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/data
