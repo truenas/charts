@@ -3,7 +3,10 @@ nodePort: 31980
 config:
   DONT_GEN_SSL_CERT: 'true'
   dictionaries: de_DE en_GB en_US es_ES fr_FR it nl pt_BR pt_PT ru
-  domain: nextcloud\.domain\.tld|othernextcloud\.domain\.tld
+  enableWebUI: true
+  aliasgroup1:
+    - nextcloud.domain.tld
+    - othernextcloud.domain.tld
   extra_params: --o:welcome.enable=false --o:user_interface.mode=notebookbar --o:ssl.termination=true
     --o:ssl.enable=false --o:net.proto=IPv4 --o:net.post_allow.host[0]=.+ --o:storage.wopi.host[0]=.+
   password: changeme
