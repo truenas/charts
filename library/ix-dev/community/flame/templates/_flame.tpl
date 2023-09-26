@@ -15,6 +15,7 @@ workload:
             # FIXME: https://github.com/pawelmalak/flame/pull/356
             runAsUser: 0
             runAsGroup: 0
+            runAsNonRoot: false
             readOnlyRootFilesystem: false
             capabilities:
               add:
