@@ -20,6 +20,8 @@ workload:
             capabilities:
               add:
                 - CHOWN
+                - DAC_OVERRIDE
+                - FOWNER
           envFrom:
             - secretRef:
                 name: flame-config
