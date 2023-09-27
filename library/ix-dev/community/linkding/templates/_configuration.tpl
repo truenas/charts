@@ -18,7 +18,7 @@
 
   {{- $secret := randAlphaNum 64 -}}
   {{- with (lookup "v1" "Secret" .Release.Namespace (printf "%s-linkding-secret" $fullname)) -}}
-    {{- $dbPass = ((index .data "secretkey.txt") | b64dec) -}}
+    {{- $secret = ((index .data "secretkey.txt") | b64dec) -}}
   {{- end }}
 
 secret:
