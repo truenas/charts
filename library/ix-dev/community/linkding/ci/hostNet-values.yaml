@@ -1,9 +1,6 @@
 linkdingNetwork:
   webPort: 31000
-
-linkdingRunAs:
-  user: 1000
-  group: 1000
+  hostNetwork: true
 
 linkdingConfig:
   username: admin

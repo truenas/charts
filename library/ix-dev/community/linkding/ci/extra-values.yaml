@@ -1,0 +1,29 @@
+linkdingNetwork:
+  webPort: 31000
+
+linkdingConfig:
+  enableAuthProxy: true
+  authProxyUsernameHeader: HTTP_REMOTE_USER
+  authProxyLogoutUrl: https://example.com/logout
+  disableBackgroundTasks: true
+  disableUrlValidation: true
+  csrfTrustedOrigins:
+    - https://example.com
+
+linkdingStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/data
+  pgData:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/pgData
+  pgBackup:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/pgBackup
+  additionalStorages:
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/data1
+    mountPath: /data1
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/data2
+    mountPath: /data2
