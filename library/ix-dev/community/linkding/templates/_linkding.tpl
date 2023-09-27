@@ -15,11 +15,6 @@ workload:
             runAsUser: {{ .Values.linkdingRunAs.user }}
             runAsGroup: {{ .Values.linkdingRunAs.group }}
             readOnlyRootFilesystem: false
-            capabilities:
-              add:
-                - CHOWN
-                - DAC_OVERRIDE
-                - FOWNER
           envFrom:
             - secretRef:
                 name: linkding
