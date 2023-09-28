@@ -1,0 +1,14 @@
+runAsContext:
+  - userName: root
+    groupName: root
+    gid: 0
+    uid: 0
+    description: Flame runs as a root user.
+capabilities:
+  - name: CHOWN
+    description: Flame is able to chown files.
+  - name: FOWNER
+    description: Flame is able to bypass permission checks.
+  - name: DAC_OVERRIDE
+    description: Flame is able to bypass permission checks.
+hostMounts: []
