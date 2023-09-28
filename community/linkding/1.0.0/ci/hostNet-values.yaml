@@ -1,0 +1,18 @@
+linkdingNetwork:
+  webPort: 31000
+  hostNetwork: true
+
+linkdingConfig:
+  username: admin
+  password: admin
+
+linkdingStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/data
+  pgData:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/pgData
+  pgBackup:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/pgBackup

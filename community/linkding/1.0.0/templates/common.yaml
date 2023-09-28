@@ -1,0 +1,15 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{- include "linkding.validation" $ -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "linkding.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "linkding.service" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "linkding.persistence" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "linkding.configuration" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "postgres.workload" $ | fromYaml) -}}
+
+{{/* Create the configmap for portal manually*/}}
+{{- include "linkding.portal" $ -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}
