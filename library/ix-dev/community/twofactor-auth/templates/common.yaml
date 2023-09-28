@@ -1,0 +1,14 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{- include "twofauth.validation" $ -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "twofauth.configuration" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "twofauth.persistence" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "twofauth.service" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "twofauth.workload" $ | fromYaml) -}}
+
+{{/* Create the configmap for portal manually*/}}
+{{- include "twofauth.portal" $ -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}
