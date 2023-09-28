@@ -5,11 +5,17 @@ workload:
     primary: true
     type: Deployment
     podSpec:
-      hostNetwork: false
+      hostNetwork: {{ .Values.fscrawlerNetwork.hostNetwork }}
+      command:
+        - fscrawler
+      args:
+        - {{ .Values.fsCrawlerConfig.jobName }}
       containers:
         fscrawler:
           enabled: true
           primary: true
+          tty: true
+          stdin: true
           imageSelector: {{ .Values.fscrawlerConfig.imageSelector }}
           securityContext:
             runAsUser: {{ .Values.fscrawlerRunAs.user }}

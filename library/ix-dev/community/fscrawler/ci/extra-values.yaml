@@ -1,0 +1,11 @@
+fscrawlerStorage:
+  jobs:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/jobs
+  additionalStorages:
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/data1
+    mountPath: /data1
+  - type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/data2
+    mountPath: /data2

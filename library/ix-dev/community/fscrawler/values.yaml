@@ -25,7 +25,11 @@ resources:
 
 fscrawlerConfig:
   imageSelector: ocr7Image
+  jobName: test
   additionalEnvs: []
+
+fscrawlerNetwork:
+  hostNetwork: false
 
 fscrawlerStorage:
   jobs:
