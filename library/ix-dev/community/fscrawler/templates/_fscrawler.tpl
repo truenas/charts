@@ -18,8 +18,10 @@ workload:
           stdin: true
           imageSelector: {{ .Values.fscrawlerConfig.imageSelector }}
           securityContext:
-            runAsUser: {{ .Values.fscrawlerRunAs.user }}
-            runAsGroup: {{ .Values.fscrawlerRunAs.group }}
+            runAsUser: 0
+            runAsGroup: 0
+            runAsNonRoot: false
+            readOnlyRootFilesystem: false
           {{ with .Values.fscrawlerConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
