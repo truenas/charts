@@ -1,3 +1,8 @@
+fscrawlerConfig:
+  jobName: test
+  restart: true
+  loop: 2
+
 fscrawlerStorage:
   jobs:
     type: hostPath

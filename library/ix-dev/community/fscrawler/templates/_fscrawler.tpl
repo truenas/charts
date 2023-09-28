@@ -6,21 +6,24 @@ workload:
     type: Deployment
     podSpec:
       hostNetwork: {{ .Values.fscrawlerNetwork.hostNetwork }}
-      command:
-        - fscrawler
-      args:
-        - --config_dir
-        - /jobs
-        - {{ .Values.fscrawlerConfig.jobName | quote }}
-        - --loop
-        - {{ .Values.fscrawlerConfig.loop | quote }}
-        - --restart
       containers:
         fscrawler:
           enabled: true
           primary: true
           tty: true
           stdin: true
+          command:
+            - fscrawler
+          args:
+            - {{ .Values.fscrawlerConfig.jobName | quote }}
+            - --loop
+            - {{ .Values.fscrawlerConfig.loop | quote }}
+            {{- if .Values.fscrawlerConfig.restart }}
+            - --restart
+            {{- end -}}
+            {{- if .Values.fscrawlerNetwork.enableERestApiService }}
+            - --rest
+            {{- end }}
           imageSelector: {{ .Values.fscrawlerConfig.imageSelector }}
           securityContext:
             runAsUser: 0
