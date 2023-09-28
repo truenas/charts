@@ -9,7 +9,7 @@ workload:
       command:
         - fscrawler
       args:
-        - {{ .Values.fsCrawlerConfig.jobName }}
+        - {{ .Values.fscrawlerConfig.jobName }}
       containers:
         fscrawler:
           enabled: true
