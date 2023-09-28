@@ -9,7 +9,12 @@ workload:
       command:
         - fscrawler
       args:
-        - {{ .Values.fscrawlerConfig.jobName }}
+        - --config_dir
+        - /jobs
+        - {{ .Values.fscrawlerConfig.jobName | quote }}
+        - --loop
+        - {{ .Values.fscrawlerConfig.loop | quote }}
+        - --restart
       containers:
         fscrawler:
           enabled: true

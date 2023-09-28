@@ -8,7 +8,7 @@ persistence:
     targetSelector:
       fscrawler:
         fscrawler:
-          mountPath: /root/.fscrawler
+          mountPath: /jobs
   {{- range $idx, $storage := .Values.fscrawlerStorage.additionalStorages }}
   {{ printf "fscrawler-%v" (int $idx) }}:
     enabled: true

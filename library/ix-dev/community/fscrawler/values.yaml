@@ -26,6 +26,8 @@ resources:
 fscrawlerConfig:
   imageSelector: ocr7Image
   jobName: test
+  restart: false
+  loop: -1
   additionalEnvs: []
 
 fscrawlerNetwork:

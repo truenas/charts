@@ -46,6 +46,33 @@ questions:
                 description: Without OCR Support - Elasticsearch 7
               - value: "noocr6Image"
                 description: Without OCR Support - Elasticsearch 6
+        - variable: jobName
+          label: Job Name
+          description: The name of the FSCrawler job.
+          schema:
+            type: string
+            default: ""
+            required: true
+        - variable: loop
+          label: Loop
+          description: |
+            The number of times to run the job.</br>
+            https://fscrawler.readthedocs.io/en/latest/admin/cli-options.html#loop </br>
+            -1 means run forever. </br>
+            0 means never run. </br>
+          schema:
+            type: integer
+            default: -1
+            required: true
+            min: -1
+        - variable: restart
+          label: Restart
+          description: |
+            Restart the job from the beginning.</br>
+            https://fscrawler.readthedocs.io/en/latest/admin/cli-options.html#restart
+          schema:
+            type: boolean
+            default: false
         - variable: additionalEnvs
           label: Additional Environment Variables
           description: Configure additional environment variables for FSCrawler.
