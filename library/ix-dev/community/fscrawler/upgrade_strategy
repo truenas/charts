@@ -1,0 +1,62 @@
+#!/usr/bin/python3
+import json
+import re
+import sys
+
+from catalog_update.upgrade_strategy import semantic_versioning
+
+RE_STABLE_VERSION_BASE = r'\d+\.\d+'
+ENUMS = {
+    'ocr7Image': {
+        'RE_STABLE_VERSION': re.compile(rf'{RE_STABLE_VERSION_BASE}-ocr-es7'),
+        'STRIP_TEXT': '-ocr-es7'
+    },
+    'ocr6Image': {
+        'RE_STABLE_VERSION': re.compile(rf'{RE_STABLE_VERSION_BASE}-ocr-es6'),
+        'STRIP_TEXT': '-ocr-es6'
+    },
+    'noocr7Image': {
+        'RE_STABLE_VERSION': re.compile(rf'{RE_STABLE_VERSION_BASE}-noocr-es7'),
+        'STRIP_TEXT': '-noocr-es7'
+    },
+    'noocr6Image': {
+        'RE_STABLE_VERSION': re.compile(rf'{RE_STABLE_VERSION_BASE}-noocr-es6'),
+        'STRIP_TEXT': '-noocr-es6'
+    },
+}
+
+
+def newer_mapping(image_tags):
+    output = {
+        "tags": {},
+        "app_version": ""
+    }
+
+    for key in image_tags.keys():
+        STRIP_TEXT = ENUMS[key].get('STRIP_TEXT', None) if key in ENUMS else None
+        RE_STABLE_VERSION = ENUMS[key].get('RE_STABLE_VERSION', None) if key in ENUMS else None
+
+        if (STRIP_TEXT is None) or (RE_STABLE_VERSION is None):
+            continue
+
+        tags = {t.strip(STRIP_TEXT): t for t in image_tags[key] if RE_STABLE_VERSION.fullmatch(t)}
+        version = semantic_versioning(list(tags))
+
+        if not version:
+            continue
+
+        if key == 'ocr7Image':
+            output['app_version'] = version
+
+        output['tags'][key] = tags[version]
+
+    return output
+
+
+if __name__ == '__main__':
+    try:
+        versions_json = json.loads(sys.stdin.read())
+    except ValueError:
+        raise ValueError('Invalid json specified')
+
+    print(json.dumps(newer_mapping(versions_json)))

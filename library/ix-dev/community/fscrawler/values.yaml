@@ -1,0 +1,34 @@
+ocr7Image:
+  repository: dadoonet/fscrawler
+  pullPolicy: IfNotPresent
+  tag: 2.9-ocr-es7
+
+ocr6Image:
+  repository: dadoonet/fscrawler
+  pullPolicy: IfNotPresent
+  tag: 2.9-ocr-es6
+
+noocr7Image:
+  repository: dadoonet/fscrawler
+  pullPolicy: IfNotPresent
+  tag: 2.9-noocr-es7
+
+noocr6Image:
+  repository: dadoonet/fscrawler
+  pullPolicy: IfNotPresent
+  tag: 2.9-noocr-es6
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+fscrawlerConfig:
+  imageSelector: ocr7Image
+  additionalEnvs: []
+
+fscrawlerStorage:
+  jobs:
+    type: ixVolume
+    datasetName: jobs
+  additionalStorages: []
