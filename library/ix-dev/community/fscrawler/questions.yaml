@@ -61,7 +61,7 @@ questions:
             -1 means run forever. </br>
             0 means never run. </br>
           schema:
-            type: integer
+            type: int
             default: -1
             required: true
             min: -1
