@@ -1,7 +1,7 @@
 image:
   repository: 2fauth/2fauth
   pullPolicy: IfNotPresent
-  tag: 4.2.2
+  tag: 4.2.3
 
 resources:
   limits:
@@ -11,7 +11,7 @@ resources:
 twofauthConfig:
   appName: 2FAuth
   appUrl: http://localhost:30081
-  siteOwnerEmail: 'admin@example.com'
+  siteOwnerEmail: admin@example.com
   authenticationGuard: web-guard
   authProxyHeaderUser: ''
   authProxyHeaderEmail: ''

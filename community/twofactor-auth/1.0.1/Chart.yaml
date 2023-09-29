@@ -1,11 +1,12 @@
 name: twofactor-auth
-description: 2FAuth is a web based self-hosted alternative to One Time Passcode (OTP) generators like Google Authenticator, designed for both mobile and desktop.
+description: 2FAuth is a web based self-hosted alternative to One Time Passcode (OTP)
+  generators like Google Authenticator, designed for both mobile and desktop.
 annotations:
   title: 2FAuth
 type: application
-version: 1.0.0
+version: 1.0.1
 apiVersion: v2
-appVersion: 4.2.2
+appVersion: 4.2.3
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: truenas
