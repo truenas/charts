@@ -5,12 +5,13 @@ configmap:
     data:
       # A default config file that users will need to edit
       _settings.example.yaml: |
+        # It will be updated automatically on every start based on the configuration
         name: {{ .Values.fscrawlerConfig.jobName }}
         elasticsearch:
           username: elastic
-          password: password
+          password: <password>
           nodes:
-            - url: http://node_ip:9200
+            - url: http://<node_ip>:<port>
         {{- if .Values.fscrawlerNetwork.enableRestApiService }}
         rest:
           url: http://0.0.0.0:{{ .Values.fscrawlerNetwork.restPort }}/fscrawler

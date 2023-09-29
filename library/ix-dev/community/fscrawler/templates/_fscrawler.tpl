@@ -61,9 +61,7 @@ workload:
             - -c
             - |
               {{- $j := .Values.fscrawlerConfig.jobName }}
-              if [ ! -f /root/.fscrawler/{{ $j }}/_settings.example.yaml ]; then
-                mkdir -p /root/.fscrawler/{{ $j }}
-                {{/* Copy an example settings file to the config directory */}}
-                cp /example/_settings.example.yaml /root/.fscrawler/{{ $j }}/_settings.example.yaml
-              fi
+              mkdir -p /root/.fscrawler/{{ $j }}
+              {{/* Copy/Overwrite an example settings file to the config directory */}}
+              cp -f /example/_settings.example.yaml /root/.fscrawler/{{ $j }}/_settings.example.yaml
 {{- end -}}
