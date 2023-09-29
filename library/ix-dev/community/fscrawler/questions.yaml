@@ -35,7 +35,7 @@ questions:
             - Without OCR Support: 0.5GB
           schema:
             type: string
-            default: "ocr7Image"
+            default: "ocrImage"
             required: true
             enum:
               - value: "ocrImage"
