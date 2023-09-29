@@ -21,7 +21,7 @@ workload:
             {{- if .Values.fscrawlerConfig.restart }}
             - --restart
             {{- end -}}
-            {{- if .Values.fscrawlerNetwork.enableERestApiService }}
+            {{- if .Values.fscrawlerNetwork.enableRestApiService }}
             - --rest
             {{- end }}
           imageSelector: {{ .Values.fscrawlerConfig.imageSelector }}
@@ -45,4 +45,25 @@ workload:
               enabled: false
             startup:
               enabled: false
+      initContainers:
+        config:
+          enabled: true
+          type: init
+          imageSelector: {{ .Values.fscrawlerConfig.imageSelector }}
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
+            runAsNonRoot: false
+            readOnlyRootFilesystem: false
+          command:
+            - /bin/sh
+          args:
+            - -c
+            - |
+              {{- $j := .Values.fscrawlerConfig.jobName }}
+              if [ ! -f /root/.fscrawler/{{ $j }}/_settings.yaml ]; then
+                mkdir -p /root/.fscrawler/{{ $j }}
+                {{/* Copy an example settings file to the config directory */}}
+                cp /example/_settings.example.yaml /root/.fscrawler/{{ $j }}/_settings.example.yaml
+              fi
 {{- end -}}

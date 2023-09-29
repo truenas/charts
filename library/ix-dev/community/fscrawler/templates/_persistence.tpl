@@ -9,6 +9,17 @@ persistence:
       fscrawler:
         fscrawler:
           mountPath: /root/.fscrawler
+        config:
+          mountPath: /root/.fscrawler
+  default-config:
+    enabled: true
+    type: configmap
+    objectName: example-config
+    targetSelector:
+      fscrawler:
+        config:
+          mountPath: /example/_settings.example.yaml
+          subPath: _settings.example.yaml
   {{- range $idx, $storage := .Values.fscrawlerStorage.additionalStorages }}
   {{ printf "fscrawler-%v" (int $idx) }}:
     enabled: true

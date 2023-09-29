@@ -47,10 +47,15 @@ notes:
     {{ $path }}
     ```
 
+    Until a valid job file is created, the FSCrawler container be in the Deploying state.
+    A stop and start of the container will be required after the job file is created.
+
     {{- if .Values.fscrawlerNetwork.enableRestApiService }}
     Rest API Service is enabled. You have to include the following configuration in your job file:
 
     ```yaml
+
+    # Your _settings.yaml file
     name: {{ .Values.fscrawlerConfig.jobName | quote }}
     rest:
       url: http://0.0.0.0:{{ .Values.fscrawlerNetwork.restPort }}/fscrawler
