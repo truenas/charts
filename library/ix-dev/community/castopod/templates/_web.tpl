@@ -1,5 +1,6 @@
 {{- define "castopod.web.workload" -}}
-{{- $fullname := (include "ix.v1.common.lib.chart.names.fullname" $) }}
+{{- $fullname := (include "ix.v1.common.lib.chart.names.fullname" $) -}}
+{{- $backend := printf "%s-castopod" $fullname }}
 workload:
   web:
     enabled: true
@@ -22,7 +23,7 @@ workload:
                 - SETGID
                 - SETUID
           env:
-            CP_APP_HOSTNAME: {{ printf "%s-castopod" $fullname }}
+            CP_APP_HOSTNAME: {{ $backend }}
             CP_TIMEOUT: {{ .Values.castopodConfig.webTimeout }}
             CP_MAX_BODY_SIZE: {{ printf "%vM" .Values.castopodConfig.webMaxBodySize }}
           probes:
@@ -51,8 +52,8 @@ workload:
           args:
             - -c
             - |
-              until nc -vz "$CP_APP_HOSTNAME" 9000; do
-                echo "Waiting for backend to be ready at [$CP_APP_HOSTNAME:9000]"
+              until nc -vz "{{ $backend }}" 9000; do
+                echo "Waiting for backend to be ready at [{{ $backend }}:9000]"
                 sleep 1
               done
 {{- end -}}
