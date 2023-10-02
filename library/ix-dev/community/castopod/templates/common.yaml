@@ -2,9 +2,10 @@
 
 {{/* Merge the templates with Values */}}
 {{- $_ := mustMergeOverwrite .Values (include "castopod.configuration" $ | fromYaml) -}}
-{{- $_ := mustMergeOverwrite .Values (include "castopod.workload" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "castopod.persistence" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "castopod.service" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "castopod.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "castopod.web.workload" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "mariadb.workload" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "redis.workload" $ | fromYaml) -}}
 

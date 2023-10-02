@@ -1,17 +1,28 @@
 {{- define "castopod.service" -}}
 service:
-  castopod:
+  castopod-web:
     enabled: true
     primary: true
     type: NodePort
-    targetSelector: castopod
+    targetSelector: web
     ports:
       webui:
         enabled: true
         primary: true
         port: {{ .Values.castopodNetwork.webPort }}
         nodePort: {{ .Values.castopodNetwork.webPort }}
-        targetPort: 8000
+        targetPort: 80
+        targetSelector: web
+  castopod:
+    enabled: true
+    type: ClusterIP
+    targetSelector: castopod
+    ports:
+      webui:
+        enabled: true
+        primary: true
+        port: 9000
+        targetPort: 9000
         targetSelector: castopod
   mariadb:
     enabled: true

@@ -9,6 +9,9 @@ persistence:
       castopod:
         castopod:
           mountPath: /var/www/castopod/public/media
+      web:
+        web:
+          mountPath: /var/www/html/media
   tmp:
     enabled: true
     type: emptyDir
