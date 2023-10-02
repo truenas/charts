@@ -58,7 +58,11 @@ configmap:
   castopod-config:
     enabled: true
     data:
+      CP_TIMEOUT: {{ .Values.castopodConfig.webTimeout }}
+      CP_MAX_BODY_SIZE: {{ printf "%vM" .Values.castopodConfig.webMaxBodySize }}
+      CP_PHP_MEMORY_LIMIT: {{ printf "%vM" .Values.castopodConfig.phpMemoryLimit }}
       CP_BASEURL: {{ .Values.castopodConfig.baseUrl }}
       CP_MEDIAURL: {{ .Values.castopodConfig.baseUrl }}
-      CP_DISABLE_HTTPS: "1"
+      CP_DISABLE_HTTPS: {{ ternary "1" "0" .Values.castopodConfig.disableHttpsRedirect }}
+      CP_ENABLE_2FA: {{ .Values.castopodConfig.enable2fa }}
 {{- end -}}

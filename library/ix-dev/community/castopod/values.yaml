@@ -16,6 +16,9 @@ castopodConfig:
   baseUrl: http://localhost:30085
   webTimeout: 900
   webMaxBodySize: 512
+  phpMemoryLimit: 512
+  enable2fa: false
+  disableHttpsRedirect: false
   additionalEnvs: []
 
 castopodNetwork:

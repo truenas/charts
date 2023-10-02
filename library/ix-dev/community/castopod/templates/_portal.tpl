@@ -1,4 +1,9 @@
 {{- define "castopod.portal" -}}
+  {{- $adminPath := "/cp-admin" -}}
+  {{- if $.Release.IsInstall -}}
+    {{- $adminPath = "/cp-install" -}}
+  {{- end -}}
+
   {{- $host := "$node_ip" -}}
   {{- $port := "" -}}
   {{- $protocol := "http" -}}
@@ -29,7 +34,11 @@ metadata:
   name: portal
 data:
   path: /
+  admin: {{ $adminPath }}
   port: {{ $port | quote }}
   protocol: {{ $protocol }}
   host: {{ $host }}
+
 {{- end -}}
+
+#TODO: Add cp-admin/cp-install
