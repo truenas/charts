@@ -16,35 +16,43 @@ workload:
             runAsGroup: 0
             runAsNonRoot: false
             readOnlyRootFilesystem: false
-          #   capabilities:
-          #     add:
-          #       - CHOWN
-          #       - DAC_OVERRIDE
-          #       - FOWNER
-          #       - NET_BIND_SERVICE
-          #       - SETGID
-          #       - SETUID
+            capabilities:
+              add:
+                - CHOWN
+                - SETGID
+                - SETUID
           env:
-            CP_HOST_BACK: {{ printf "%s-castopod" $fullname }}
+            CP_APP_HOSTNAME: {{ printf "%s-castopod" $fullname }}
+            CP_TIMEOUT: {{ .Values.castopodConfig.webTimeout }}
+            CP_MAX_BODY_SIZE: {{ printf "%vM" .Values.castopodConfig.webMaxBodySize }}
           probes:
             liveness:
-              enabled: false
+              enabled: true
               type: http
-              path: /
-              port: 8000
+              path: /health
+              port: 80
             readiness:
-              enabled: false
+              enabled: true
               type: http
-              path: /
-              port: 8000
+              path: /health
+              port: 80
             startup:
-              enabled: false
+              enabled: true
               type: http
-              path: /
-              port: 8000
+              path: /health
+              port: 80
       initContainers:
-      {{- include "ix.v1.common.app.redisWait" (dict  "name" "01-redis-wait"
-                                                      "secretName" "redis-creds") | nindent 8 }}
-      {{- include "ix.v1.common.app.mariadbWait" (dict "name" "02-mariadb-wait"
-                                                       "secretName" "mariadb-creds") | nindent 8 }}
+        wait-server:
+          enabled: true
+          type: init
+          imageSelector: bashImage
+          command:
+            - bash
+          args:
+            - -c
+            - |
+              until nc -vz "$CP_APP_HOSTNAME" 9000; do
+                echo "Waiting for backend to be ready at [$CP_APP_HOSTNAME:9000]"
+                sleep 1
+              done
 {{- end -}}

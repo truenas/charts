@@ -18,10 +18,9 @@ workload:
             readOnlyRootFilesystem: false
             capabilities:
               add:
-          #       - CHOWN
-          #       - DAC_OVERRIDE
-          #       - FOWNER
-          #       - NET_BIND_SERVICE
+                - CHOWN
+                - DAC_OVERRIDE
+                - FOWNER
                 - SETGID
                 - SETUID
           envFrom:
@@ -38,20 +37,17 @@ workload:
           {{ end }}
           probes:
             liveness:
-              enabled: false
-              type: http
-              path: /
-              port: 8000
+              enabled: true
+              type: tcp
+              port: 9000
             readiness:
-              enabled: false
-              type: http
-              path: /
-              port: 8000
+              enabled: true
+              type: tcp
+              port: 9000
             startup:
-              enabled: false
-              type: http
-              path: /
-              port: 8000
+              enabled: true
+              type: tcp
+              port: 9000
       initContainers:
       {{- include "ix.v1.common.app.redisWait" (dict  "name" "01-redis-wait"
                                                       "secretName" "redis-creds") | nindent 8 }}

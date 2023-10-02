@@ -60,4 +60,5 @@ configmap:
     data:
       CP_BASEURL: {{ .Values.castopodConfig.baseUrl }}
       CP_MEDIAURL: {{ .Values.castopodConfig.baseUrl }}
+      CP_DISABLE_HTTPS: "1"
 {{- end -}}
