@@ -68,7 +68,7 @@ questions:
           label: Enable 2FA
           description: Enable 2FA for Castopod.
           schema:
-            type: bool
+            type: boolean
             default: false
         - variable: disableHttpsRedirect
           label: Disable HTTPS Redirect
@@ -76,7 +76,7 @@ questions:
             Disable HTTPS redirect for Castopod. </br>
             This is useful if you are using a reverse proxy with HTTPS.
           schema:
-            type: bool
+            type: boolean
             default: true
         - variable: additionalEnvs
           label: Additional Environment Variables
