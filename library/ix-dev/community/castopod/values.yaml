@@ -18,7 +18,7 @@ castopodConfig:
   webMaxBodySize: 512
   phpMemoryLimit: 512
   enable2fa: false
-  disableHttpsRedirect: false
+  disableHttpsRedirect: true
   additionalEnvs: []
 
 castopodNetwork:
