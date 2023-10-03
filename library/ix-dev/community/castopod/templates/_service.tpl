@@ -13,12 +13,12 @@ service:
         nodePort: {{ .Values.castopodNetwork.webPort }}
         targetPort: 80
         targetSelector: web
-  castopod:
+  castopod-api:
     enabled: true
     type: ClusterIP
     targetSelector: castopod
     ports:
-      webui:
+      api:
         enabled: true
         primary: true
         port: 9000
