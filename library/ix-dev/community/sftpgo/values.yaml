@@ -19,6 +19,12 @@ sftpgoConfig:
 
 sftpgoNetwork:
   webPort: 30086
+  sftpdEnabled: false
+  sftpdPort: 30087
+  ftpdEnabled: false
+  ftpdPort: 30088
+  webdavEnabled: false
+  webdavPort: 30089
   hostNetwork: false
 
 sftpgoRunAs:

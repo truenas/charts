@@ -99,6 +99,13 @@ questions:
     schema:
       type: dict
       attrs:
+        - variable: hostNetwork
+          label: Host Network
+          description: |
+            Bind to the host network. It's recommended to keep this disabled.</br>
+          schema:
+            type: boolean
+            default: false
         - variable: webPort
           label: Web Port
           description: The port for the SFTPGo Web UI.
@@ -108,13 +115,54 @@ questions:
             min: 9000
             max: 65535
             required: true
-        - variable: hostNetwork
-          label: Host Network
-          description: |
-            Bind to the host network. It's recommended to keep this disabled.</br>
+        - variable: sftpdEnabled
+          label: SFTP Enabled
+          description: Enable SFTP.
           schema:
             type: boolean
             default: false
+        - variable: sftpdPort
+          label: SFTP Port
+          description: The port for SFTP.
+          schema:
+            type: int
+            default: 30087
+            min: 9000
+            max: 65535
+            required: true
+            show_if: [["sftpdEnabled", "=", true]]
+        - variable: ftpdEnabled
+          label: FTP Enabled
+          description: Enable FTP.
+          schema:
+            type: boolean
+            default: false
+        - variable: ftpdPort
+          label: FTP Port
+          description: The port for FTP.
+          schema:
+            type: int
+            default: 30088
+            min: 9000
+            max: 65535
+            required: true
+            show_if: [["ftpdEnabled", "=", true]]
+        - variable: webdavEnabled
+          label: WebDAV Enabled
+          description: Enable WebDAV.
+          schema:
+            type: boolean
+            default: false
+        - variable: webdavPort
+          label: WebDAV Port
+          description: The port for WebDAV.
+          schema:
+            type: int
+            default: 30089
+            min: 9000
+            max: 65535
+            required: true
+            show_if: [["webdavEnabled", "=", true]]
 
   - variable: sftpgoStorage
     label: ""
