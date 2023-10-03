@@ -1,0 +1,17 @@
+sftpgoNetwork:
+  webPort: 31000
+
+sftpgoRunAs:
+  user: 1100
+  group: 1100
+
+sftpgoStorage:
+  config:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/config
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/data
+  backups:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/backups
