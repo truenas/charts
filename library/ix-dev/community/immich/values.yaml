@@ -29,8 +29,6 @@ resources:
     memory: 8Gi
 
 immichConfig:
-  disableReverseGeocoding: false
-  reverseGeocodingPrecision: 3
   publicLoginMessage: ''
   enableML: true
   enableTypesense: true
