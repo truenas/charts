@@ -38,7 +38,4 @@ data:
   port: {{ $port | quote }}
   protocol: {{ $protocol }}
   host: {{ $host }}
-
 {{- end -}}
-
-#TODO: Add cp-admin/cp-install
