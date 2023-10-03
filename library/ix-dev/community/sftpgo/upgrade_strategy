@@ -5,21 +5,38 @@ import sys
 
 from catalog_update.upgrade_strategy import semantic_versioning
 
-
-RE_STABLE_VERSION = re.compile(r'v\d+\.\d+\.\d+')
+RE_STABLE_VERSION_BASE = r'v\d+\.\d+\.\d+'
+ENUMS = {
+    'image': {
+        'RE_STABLE_VERSION': re.compile(rf'{RE_STABLE_VERSION_BASE}'),
+    },
+    'pluginsImage': {
+        'RE_STABLE_VERSION': re.compile(rf'{RE_STABLE_VERSION_BASE}-plugins'),
+    },
+}
 
 
 def newer_mapping(image_tags):
-    key = list(image_tags.keys())[0]
-    tags = {t.strip('v'): t for t in image_tags[key] if RE_STABLE_VERSION.fullmatch(t)}
-    version = semantic_versioning(list(tags))
-    if not version:
-        return {}
-
-    return {
-        'tags': {key: tags[version]},
-        'app_version': version,
+    output = {
+        "tags": {},
+        "app_version": ""
     }
+
+    for key in image_tags.keys():
+        RE_STABLE_VERSION = ENUMS[key].get('RE_STABLE_VERSION', None) if key in ENUMS else None
+
+        tags = {t.strip('v').strip('-plugins'): t for t in image_tags[key] if RE_STABLE_VERSION.fullmatch(t)}
+        version = semantic_versioning(list(tags))
+
+        if not version:
+            continue
+
+        if key == 'image':
+            output['app_version'] = version
+
+        output['tags'][key] = tags[version]
+
+    return output
 
 
 if __name__ == '__main__':
