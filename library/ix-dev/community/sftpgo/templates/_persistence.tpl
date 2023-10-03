@@ -2,9 +2,9 @@
 persistence:
   config:
     enabled: true
-    type: {{ .Values.readarrStorage.config.type }}
-    datasetName: {{ .Values.readarrStorage.config.datasetName | default "" }}
-    hostPath: {{ .Values.readarrStorage.config.hostPath | default "" }}
+    type: {{ .Values.sftpgoStorage.config.type }}
+    datasetName: {{ .Values.sftpgoStorage.config.datasetName | default "" }}
+    hostPath: {{ .Values.sftpgoStorage.config.hostPath | default "" }}
     targetSelector:
       sftpgo:
         sftpgo:
@@ -13,9 +13,9 @@ persistence:
           mountPath: /mnt/directories/config
   data:
     enabled: true
-    type: {{ .Values.readarrStorage.data.type }}
-    datasetName: {{ .Values.readarrStorage.data.datasetName | default "" }}
-    hostPath: {{ .Values.readarrStorage.data.hostPath | default "" }}
+    type: {{ .Values.sftpgoStorage.data.type }}
+    datasetName: {{ .Values.sftpgoStorage.data.datasetName | default "" }}
+    hostPath: {{ .Values.sftpgoStorage.data.hostPath | default "" }}
     targetSelector:
       sftpgo:
         sftpgo:
@@ -24,9 +24,9 @@ persistence:
           mountPath: /mnt/directories/data
   backups:
     enabled: true
-    type: {{ .Values.readarrStorage.backup.type }}
-    datasetName: {{ .Values.readarrStorage.backup.datasetName | default "" }}
-    hostPath: {{ .Values.readarrStorage.backup.hostPath | default "" }}
+    type: {{ .Values.sftpgoStorage.backup.type }}
+    datasetName: {{ .Values.sftpgoStorage.backup.datasetName | default "" }}
+    hostPath: {{ .Values.sftpgoStorage.backup.hostPath | default "" }}
     targetSelector:
       sftpgo:
         sftpgo:
@@ -40,7 +40,7 @@ persistence:
       sftpgo:
         sftpgo:
           mountPath: /tmp
-  {{- range $idx, $storage := .Values.readarrStorage.additionalStorages }}
+  {{- range $idx, $storage := .Values.sftpgoStorage.additionalStorages }}
   {{ printf "sftpgo-%v" (int $idx) }}:
     enabled: true
     type: {{ $storage.type }}
