@@ -24,9 +24,9 @@ persistence:
           mountPath: /mnt/directories/data
   backups:
     enabled: true
-    type: {{ .Values.sftpgoStorage.backup.type }}
-    datasetName: {{ .Values.sftpgoStorage.backup.datasetName | default "" }}
-    hostPath: {{ .Values.sftpgoStorage.backup.hostPath | default "" }}
+    type: {{ .Values.sftpgoStorage.backups.type }}
+    datasetName: {{ .Values.sftpgoStorage.backups.datasetName | default "" }}
+    hostPath: {{ .Values.sftpgoStorage.backups.hostPath | default "" }}
     targetSelector:
       sftpgo:
         sftpgo:
