@@ -95,10 +95,6 @@ configmap:
       LOG_LEVEL: log
       NODE_ENV: production
       MICROSERVICES_PORT: {{ .Values.immichNetwork.microservicesPort | quote }}
-      DISABLE_REVERSE_GEOCODING: {{ .Values.immichConfig.disableReverseGeocoding | quote }}
-      {{- if not .Values.immichConfig.disableReverseGeocoding }}
-      REVERSE_GEOCODING_PRECISION: {{ .Values.immichConfig.reverseGeocodingPrecision | quote }}
-      {{- end }}
       REVERSE_GEOCODING_DUMP_DIRECTORY: /microcache
 
   web-config:

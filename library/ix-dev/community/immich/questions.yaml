@@ -35,28 +35,6 @@ questions:
     schema:
       type: dict
       attrs:
-        - variable: disableReverseGeocoding
-          label: Disable Reverse Geocoding
-          schema:
-            type: boolean
-            default: false
-            show_subquestions_if: true
-            subquestions:
-              - variable: reverseGeocodingPrecision
-                label: Reverse Geocoding Precision
-                description: |
-                  The precision of the reverse geocoding. The higher the number, the more precise the reverse geocoding will be.</br>
-                  This ranges from 0-3 with 3 being the most precise</br>
-                  - 3 - Cities > 500 population: ~200MB RAM</br>
-                  - 2 - Cities > 1000 population: ~150MB RAM</br>
-                  - 1 - Cities > 5000 population: ~80MB RAM</br>
-                  - 0 - Cities > 15000 population: ~40MB RAM
-                schema:
-                  type: int
-                  default: 3
-                  min: 0
-                  max: 3
-                  required: true
         - variable: publicLoginMessage
           label: Public Login Message
           description: |
