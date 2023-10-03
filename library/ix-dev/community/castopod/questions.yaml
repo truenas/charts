@@ -35,11 +35,13 @@ questions:
       attrs:
         - variable: baseUrl
           label: Base URL
-          description: The base URL for Castopod.
+          description: |
+            The base URL for Castopod.</br>
+            Example: http://your.server.ip:30085
           schema:
             type: uri
             required: true
-            default: http://your.server.ip:30085
+            default: ""
         - variable: webTimeout
           label: Web Timeout
           description: The timeout for Castopod requests in seconds.

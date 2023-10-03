@@ -1,6 +1,6 @@
 {{- define "castopod.web.workload" -}}
 {{- $fullname := (include "ix.v1.common.lib.chart.names.fullname" $) -}}
-{{- $backend := printf "%s-castopod" $fullname }}
+{{- $backend := printf "%s-castopod-api" $fullname }}
 workload:
   web:
     enabled: true
