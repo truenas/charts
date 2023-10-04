@@ -18,14 +18,23 @@ sftpgoConfig:
   additionalEnvs: []
 
 sftpgoNetwork:
-  webPort: 30086
-  sftpdEnabled: false
-  sftpdPort: 30087
-  ftpdEnabled: false
-  ftpdPort: 30088
-  webdavEnabled: false
-  webdavPort: 30089
   hostNetwork: false
+  webPort: 30086
+  sftpdServices:
+    - enabled: true
+      port: 30087
+    - enabled: true
+      port: 30088
+  ftpdServices:
+    - enabled: true
+      port: 30087
+    - enabled: true
+      port: 30088
+  webdavServices:
+    - enabled: true
+      port: 30087
+    - enabled: true
+      port: 30088
 
 sftpgoRunAs:
   user: 568

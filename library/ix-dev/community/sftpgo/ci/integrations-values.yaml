@@ -1,11 +1,20 @@
 sftpgoNetwork:
   webPort: 31000
-  sftpdEnabled: true
-  sftpdPort: 30087
-  ftpdEnabled: true
-  ftpdPort: 30088
-  webdavEnabled: true
-  webdavPort: 30089
+  sftpdServices:
+    - enabled: true
+      port: 31001
+    - enabled: true
+      port: 31002
+  ftpdServices:
+    - enabled: true
+      port: 31003
+    - enabled: true
+      port: 31004
+  webdavServices:
+    - enabled: true
+      port: 31005
+    - enabled: true
+      port: 31006
 
 sftpgoRunAs:
   user: 1100

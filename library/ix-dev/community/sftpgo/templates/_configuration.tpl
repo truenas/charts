@@ -4,24 +4,32 @@ configmap:
     enabled: true
     data:
       SFTPGO_CONFIG_DIR: /var/lib/sftpgo
-      SFTPGO_DATA_PROVIDER__USERS_BASE_DIR: /srv/sftpgo/data
-      SFTPGO_DATA_PROVIDER__BACKUPS_PATH: /srv/sftpgo/backups
+      # SFTPGO_DATA_PROVIDER__USERS_BASE_DIR: /srv/sftpgo/data
+      # SFTPGO_DATA_PROVIDER__BACKUPS_PATH: /srv/sftpgo/backups
+      SFTPGO_DATA_PROVIDER__BACKUPS_PATH: /double_underscore
+      SFTPGO_DATA_PROVIDER_BACKUPS_PATH: /single_underscore
       SFTPGO_GRACE_TIME: {{ .Values.sftpgoConfig.graceTime | quote }}
       SFTPGO_HTTPD__BINDINGS__0__PORT: {{ .Values.sftpgoNetwork.webPort | quote }}
       SFTPGO_HTTPD__BINDINGS__0__ADDRESS: ''
       SFTPGO_HTTPD__BINDINGS__0__ENABLE_WEB_ADMIN: "true"
-      {{- if .Values.sftpgoNetwork.sftpdEnabled }}
-      SFTPGO_SFTPD__BINDINGS__0__PORT: {{ .Values.sftpgoNetwork.sftpdPort | quote }}
-      SFTPGO_SFTPD__BINDINGS__0__ADDRESS: ''
-      {{- end -}}
-      {{- if .Values.sftpgoNetwork.ftpdEnabled }}
-      SFTPGO_FTPD__BINDINGS__0__PORT: {{ .Values.sftpgoNetwork.ftpdPort | quote }}
-      SFTPGO_FTPD__BINDINGS__0__ADDRESS: ''
-      {{- end -}}
-      {{- if .Values.sftpgoNetwork.webdavEnabled }}
-      SFTPGO_WEBDAV__BINDINGS__0__PORT: {{ .Values.sftpgoNetwork.webdavPort | quote }}
-      SFTPGO_WEBDAV__BINDINGS__0__ADDRESS: ''
-      {{- end -}}
+    {{/* SFTPD */}}
+    {{- $enabledServices := (include "sftpgo.svc.enabled" (dict "rootCtx" $ "type" "sftpd") | fromJsonArray) -}}
+    {{- range $idx, $svc := $enabledServices }}
+      SFTPGO_SFTPD__BINDINGS__{{ $idx }}__PORT: {{ $svc.port | quote }}
+      SFTPGO_SFTPD__BINDINGS__{{ $idx }}__ADDRESS: ''
+    {{- end -}}
+    {{/* FTPD */}}
+    {{- $enabledServices := (include "sftpgo.svc.enabled" (dict "rootCtx" $ "type" "ftpd") | fromJsonArray) -}}
+    {{- range $idx, $svc := $enabledServices }}
+      SFTPGO_FTPD__BINDINGS__{{ $idx }}__PORT: {{ $svc.port | quote }}
+      SFTPGO_FTPD__BINDINGS__{{ $idx }}__ADDRESS: ''
+    {{- end -}}
+    {{/* WEBDAV */}}
+    {{- $enabledServices := (include "sftpgo.svc.enabled" (dict "rootCtx" $ "type" "webdav") | fromJsonArray) -}}
+    {{- range $idx, $svc := $enabledServices }}
+      SFTPGO_WEBDAV__BINDINGS__{{ $idx }}__PORT: {{ $svc.port | quote }}
+      SFTPGO_WEBDAV__BINDINGS__{{ $idx }}__ADDRESS: ''
+    {{- end -}}
 {{- end -}}
 # TODO: Mount single certificate if available to all integrations?
 # Integrations that support certificate file:
