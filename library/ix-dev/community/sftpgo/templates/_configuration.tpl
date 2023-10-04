@@ -4,10 +4,8 @@ configmap:
     enabled: true
     data:
       SFTPGO_CONFIG_DIR: /var/lib/sftpgo
-      # SFTPGO_DATA_PROVIDER__USERS_BASE_DIR: /srv/sftpgo/data
-      # SFTPGO_DATA_PROVIDER__BACKUPS_PATH: /srv/sftpgo/backups
-      SFTPGO_DATA_PROVIDER__BACKUPS_PATH: /double_underscore
-      SFTPGO_DATA_PROVIDER_BACKUPS_PATH: /single_underscore
+      SFTPGO_DATA_PROVIDER__USERS_BASE_DIR: /srv/sftpgo/data
+      SFTPGO_DATA_PROVIDER__BACKUPS_PATH: /srv/sftpgo/backups
       SFTPGO_GRACE_TIME: {{ .Values.sftpgoConfig.graceTime | quote }}
       SFTPGO_HTTPD__BINDINGS__0__PORT: {{ .Values.sftpgoNetwork.webPort | quote }}
       SFTPGO_HTTPD__BINDINGS__0__ADDRESS: ''
