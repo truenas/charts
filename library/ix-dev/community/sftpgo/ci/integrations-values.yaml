@@ -10,6 +10,9 @@ sftpgoNetwork:
       port: 31003
     - enabled: true
       port: 31004
+  ftpdPassivePortRange:
+    start: 31100
+    end: 31101
   webdavServices:
     - enabled: true
       port: 31005

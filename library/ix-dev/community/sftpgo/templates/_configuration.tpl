@@ -22,6 +22,10 @@ configmap:
       SFTPGO_FTPD__BINDINGS__{{ $idx }}__PORT: {{ $svc.port | quote }}
       SFTPGO_FTPD__BINDINGS__{{ $idx }}__ADDRESS: ''
     {{- end -}}
+    {{- if $enabledServices }}
+      SFTPGO_FTPD__PASSIVE_PORT_RANGE__START: {{ .Values.sftpgoNetwork.ftpdPassivePortRange.start | quote }}
+      SFTPGO_FTPD__PASSIVE_PORT_RANGE__END: {{ .Values.sftpgoNetwork.ftpdPassivePortRange.end | quote }}
+    {{- end -}}
     {{/* WEBDAV */}}
     {{- $enabledServices := (include "sftpgo.svc.enabled" (dict "rootCtx" $ "type" "webdav") | fromJsonArray) -}}
     {{- range $idx, $svc := $enabledServices }}

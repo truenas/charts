@@ -37,23 +37,3 @@
 
   {{- $enabledServices | toJson -}}
 {{- end -}}
-
-{{- define "sftgo.svc.validation" -}}
-  {{- $ports := list -}}
-  {{- $ports = append $ports .Values.sftpgoNetwork.webPort -}}
-
-  {{- range $k, $v := .Values.sftpgoNetwork -}}
-    {{- if (hasSuffix "Services" $k) -}}
-      {{- range $idx, $svc := $v -}}
-        {{- if $svc.enabled -}}
-          {{- $ports = append $ports $svc.port -}}
-        {{- end -}}
-      {{- end -}}
-    {{- end -}}
-  {{- end -}}
-
-  {{- if not (deepEqual ($ports | uniq) $ports) -}}
-    {{- fail (printf "SFTPGo - Expected ports to be unique for all services, ports defined [%s]" (join ", " $ports)) -}}
-  {{- end -}}
-
-{{- end -}}

@@ -22,6 +22,9 @@ sftpgoNetwork:
   webPort: 30086
   sftpdServices: []
   ftpdServices: []
+  ftpdPassivePortRange:
+    start: 50000
+    end: 50001
   webdavServices: []
 
 sftpgoRunAs:

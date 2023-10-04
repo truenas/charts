@@ -169,6 +169,31 @@ questions:
                         min: 9000
                         max: 65535
                         required: true
+        - variable: ftpdPassivePortRange
+          label: FTPD Passive Port Range
+          description: The port range for FTPD passive connections.
+          schema:
+            type: dict
+            show_if: [["ftpdServices", "!=", []]]
+            attrs:
+              - variable: start
+                label: Start
+                description: The start of the port range.
+                schema:
+                  type: int
+                  default: 50000
+                  min: 9000
+                  max: 65535
+                  required: true
+              - variable: end
+                label: End
+                description: The end of the port range.
+                schema:
+                  type: int
+                  default: 50001
+                  min: 9000
+                  max: 65535
+                  required: true
         - variable: webdavServices
           label: WebDAV Services
           description: Enable one or more WebDAV services.
