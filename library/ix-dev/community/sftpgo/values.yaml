@@ -20,12 +20,12 @@ sftpgoConfig:
 sftpgoNetwork:
   hostNetwork: false
   webPort: 30086
+  webdavdServices: []
   sftpdServices: []
   ftpdServices: []
   ftpdPassivePortRange:
     start: 50000
     end: 50001
-  webdavServices: []
 
 sftpgoRunAs:
   user: 568

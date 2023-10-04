@@ -10,29 +10,31 @@ configmap:
       SFTPGO_HTTPD__BINDINGS__0__PORT: {{ .Values.sftpgoNetwork.webPort | quote }}
       SFTPGO_HTTPD__BINDINGS__0__ADDRESS: ''
       SFTPGO_HTTPD__BINDINGS__0__ENABLE_WEB_ADMIN: "true"
-    {{/* SFTPD */}}
-    {{- $enabledServices := (include "sftpgo.svc.enabled" (dict "rootCtx" $ "type" "sftpd") | fromJsonArray) -}}
-    {{- range $idx, $svc := $enabledServices }}
+  {{/* SFTPD */}}
+  {{- $enabledServices := (include "sftpgo.svc.enabled" (dict "rootCtx" $ "type" "sftpd") | fromJsonArray) -}}
+  {{- range $idx, $svc := $enabledServices }}
       SFTPGO_SFTPD__BINDINGS__{{ $idx }}__PORT: {{ $svc.port | quote }}
       SFTPGO_SFTPD__BINDINGS__{{ $idx }}__ADDRESS: ''
-    {{- end -}}
-    {{/* FTPD */}}
-    {{- $enabledServices := (include "sftpgo.svc.enabled" (dict "rootCtx" $ "type" "ftpd") | fromJsonArray) -}}
-    {{- range $idx, $svc := $enabledServices }}
+  {{- end -}}
+  {{/* FTPD */}}
+  {{- $enabledServices := (include "sftpgo.svc.enabled" (dict "rootCtx" $ "type" "ftpd") | fromJsonArray) -}}
+  {{- range $idx, $svc := $enabledServices }}
       SFTPGO_FTPD__BINDINGS__{{ $idx }}__PORT: {{ $svc.port | quote }}
       SFTPGO_FTPD__BINDINGS__{{ $idx }}__ADDRESS: ''
-    {{- end -}}
-    {{- if $enabledServices }}
+  {{- end -}}
+  {{- if $enabledServices }}
       SFTPGO_FTPD__PASSIVE_PORT_RANGE__START: {{ .Values.sftpgoNetwork.ftpdPassivePortRange.start | quote }}
       SFTPGO_FTPD__PASSIVE_PORT_RANGE__END: {{ .Values.sftpgoNetwork.ftpdPassivePortRange.end | quote }}
-    {{- end -}}
-    {{/* WEBDAV */}}
-    {{- $enabledServices := (include "sftpgo.svc.enabled" (dict "rootCtx" $ "type" "webdav") | fromJsonArray) -}}
-    {{- range $idx, $svc := $enabledServices }}
+  {{- end -}}
+  {{/* WEBDAV */}}
+  {{- $enabledServices := (include "sftpgo.svc.enabled" (dict "rootCtx" $ "type" "webdavd") | fromJsonArray) -}}
+  {{- range $idx, $svc := $enabledServices }}
       SFTPGO_WEBDAVD__BINDINGS__{{ $idx }}__PORT: {{ $svc.port | quote }}
       SFTPGO_WEBDAVD__BINDINGS__{{ $idx }}__ADDRESS: ''
-    {{- end -}}
+  {{- end -}}
 {{- end -}}
+
+
 # TODO: Mount single certificate if available to all integrations?
 # Integrations that support certificate file:
 # - HTTPD

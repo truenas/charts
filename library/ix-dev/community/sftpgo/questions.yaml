@@ -115,27 +115,54 @@ questions:
             min: 9000
             max: 65535
             required: true
-        - variable: sftpdServices
-          label: SFTPD Services
-          description: Enable one or more SFTPD services.
+        - variable: webdavdServices
+          label: WebDAVd Services
+          description: Enable one or more WebDAVd services.
           schema:
             type: list
             default: []
             items:
-              - variable: sftpdServiceEntry
-                label: SFTPD Service Entry
+              - variable: webdavdServiceEntry
+                label: WebDAVd Service Entry
                 schema:
                   type: dict
                   attrs:
                     - variable: enabled
                       label: Enabled
-                      description: Enable this SFTPD service.
+                      description: Enable this WebDAVd service.
                       schema:
                         type: boolean
                         default: false
                     - variable: port
                       label: Port
-                      description: The port for SFTPD.
+                      description: The port for WebDAVd.
+                      schema:
+                        type: int
+                        default: 30089
+                        min: 9000
+                        max: 65535
+                        required: true
+        - variable: sftpdServices
+          label: SFTPd Services
+          description: Enable one or more SFTPd services.
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: sftpdServiceEntry
+                label: SFTPd Service Entry
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: enabled
+                      label: Enabled
+                      description: Enable this SFTPd service.
+                      schema:
+                        type: boolean
+                        default: false
+                    - variable: port
+                      label: Port
+                      description: The port for SFTPd.
                       schema:
                         type: int
                         default: 30087
@@ -143,26 +170,26 @@ questions:
                         max: 65535
                         required: true
         - variable: ftpdServices
-          label: FTPD Services
-          description: Enable one or more FTPD services.
+          label: FTPd Services
+          description: Enable one or more FTPd services.
           schema:
             type: list
             default: []
             items:
               - variable: ftpdServiceEntry
-                label: FTPD Service Entry
+                label: FTPd Service Entry
                 schema:
                   type: dict
                   attrs:
                     - variable: enabled
                       label: Enabled
-                      description: Enable this FTPD service.
+                      description: Enable this FTPd service.
                       schema:
                         type: boolean
                         default: false
                     - variable: port
                       label: Port
-                      description: The port for FTPD.
+                      description: The port for FTPd.
                       schema:
                         type: int
                         default: 30088
@@ -170,8 +197,8 @@ questions:
                         max: 65535
                         required: true
         - variable: ftpdPassivePortRange
-          label: FTPD Passive Port Range
-          description: The port range for FTPD passive connections.
+          label: FTPd Passive Port Range
+          description: The port range for FTPd passive connections.
           schema:
             type: dict
             show_if: [["ftpdServices", "!=", []]]
@@ -194,33 +221,6 @@ questions:
                   min: 9000
                   max: 65535
                   required: true
-        - variable: webdavServices
-          label: WebDAV Services
-          description: Enable one or more WebDAV services.
-          schema:
-            type: list
-            default: []
-            items:
-              - variable: webdavServiceEntry
-                label: WebDAV Service Entry
-                schema:
-                  type: dict
-                  attrs:
-                    - variable: enabled
-                      label: Enabled
-                      description: Enable this WebDAV service.
-                      schema:
-                        type: boolean
-                        default: false
-                    - variable: port
-                      label: Port
-                      description: The port for WebDAV.
-                      schema:
-                        type: int
-                        default: 30089
-                        min: 9000
-                        max: 65535
-                        required: true
 
   - variable: sftpgoStorage
     label: ""
