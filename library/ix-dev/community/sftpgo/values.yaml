@@ -20,21 +20,9 @@ sftpgoConfig:
 sftpgoNetwork:
   hostNetwork: false
   webPort: 30086
-  sftpdServices:
-    - enabled: true
-      port: 30087
-    - enabled: true
-      port: 30088
-  ftpdServices:
-    - enabled: true
-      port: 30087
-    - enabled: true
-      port: 30088
-  webdavServices:
-    - enabled: true
-      port: 30087
-    - enabled: true
-      port: 30088
+  sftpdServices: []
+  ftpdServices: []
+  webdavServices: []
 
 sftpgoRunAs:
   user: 568
