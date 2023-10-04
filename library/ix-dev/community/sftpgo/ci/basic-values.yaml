@@ -7,11 +7,8 @@ sftpgoRunAs:
 
 sftpgoStorage:
   config:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/config
+    type: pvc
   data:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/data
+    type: pvc
   backups:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/backups
+    type: pvc

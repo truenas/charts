@@ -29,8 +29,8 @@ configmap:
     {{/* WEBDAV */}}
     {{- $enabledServices := (include "sftpgo.svc.enabled" (dict "rootCtx" $ "type" "webdav") | fromJsonArray) -}}
     {{- range $idx, $svc := $enabledServices }}
-      SFTPGO_WEBDAV__BINDINGS__{{ $idx }}__PORT: {{ $svc.port | quote }}
-      SFTPGO_WEBDAV__BINDINGS__{{ $idx }}__ADDRESS: ''
+      SFTPGO_WEBDAVD__BINDINGS__{{ $idx }}__PORT: {{ $svc.port | quote }}
+      SFTPGO_WEBDAVD__BINDINGS__{{ $idx }}__ADDRESS: ''
     {{- end -}}
 {{- end -}}
 # TODO: Mount single certificate if available to all integrations?
