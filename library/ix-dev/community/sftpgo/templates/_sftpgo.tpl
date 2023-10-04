@@ -26,19 +26,23 @@ workload:
             {{ end }}
           {{ end }}
           probes:
+            {{- $protocol := "http" -}}
+            {{- if .Values.sftpgoNetwork.certificateID -}}
+              {{- $protocol = "https" -}}
+            {{- end }}
             liveness:
               enabled: true
-              type: http
+              type: {{ $protocol }}
               port: {{ .Values.sftpgoNetwork.webPort }}
               path: /healthz
             readiness:
               enabled: true
-              type: http
+              type: {{ $protocol }}
               port: {{ .Values.sftpgoNetwork.webPort }}
               path: /healthz
             startup:
               enabled: true
-              type: http
+              type: {{ $protocol }}
               port: {{ .Values.sftpgoNetwork.webPort }}
               path: /healthz
       initContainers:

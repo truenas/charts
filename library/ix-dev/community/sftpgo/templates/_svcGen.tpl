@@ -21,17 +21,18 @@
   {{- end -}}
 {{- end -}}
 
-
 {{- define "sftpgo.svc.enabled" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $type := .type -}}
 
   {{- $services := (get $rootCtx.Values.sftpgoNetwork (printf "%sServices" $type)) -}}
-  {{- $enabledServices := list -}}
 
-  {{- range $idx, $svc := $services -}}
-    {{- if $svc.enabled -}}
-      {{- $enabledServices = append $enabledServices $svc -}}
+  {{- $enabledServices := list -}}
+  {{- if $services -}}
+    {{- range $idx, $svc := $services -}}
+      {{- if $svc.enabled -}}
+        {{- $enabledServices = append $enabledServices $svc -}}
+      {{- end -}}
     {{- end -}}
   {{- end -}}
 

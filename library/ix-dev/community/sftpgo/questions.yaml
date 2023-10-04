@@ -106,6 +106,14 @@ questions:
           schema:
             type: boolean
             default: false
+        - variable: certificateID
+          label: Certificate
+          description: The certificate to use for SFTPGo WebUI
+          schema:
+            type: int
+            "null": true
+            $ref:
+              - "definitions/certificate"
         - variable: webPort
           label: Web Port
           description: The port for the SFTPGo Web UI.

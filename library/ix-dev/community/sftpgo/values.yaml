@@ -19,6 +19,7 @@ sftpgoConfig:
 
 sftpgoNetwork:
   hostNetwork: false
+  certificateID:
   webPort: 30086
   webdavdServices: []
   sftpdServices: []

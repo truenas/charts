@@ -10,6 +10,11 @@ configmap:
       SFTPGO_HTTPD__BINDINGS__0__PORT: {{ .Values.sftpgoNetwork.webPort | quote }}
       SFTPGO_HTTPD__BINDINGS__0__ADDRESS: ''
       SFTPGO_HTTPD__BINDINGS__0__ENABLE_WEB_ADMIN: "true"
+  {{- if .Values.sftpgoNetwork.certificateID }}
+      SFTPGO_HTTPD__BINDINGS__0__ENABLE_HTTPS: "true"
+      SFTPGO_HTTPD__BINDINGS__0__CERTIFICATE_FILE: /srv/sftpgo/certs/public.crt
+      SFTPGO_HTTPD__BINDINGS__0__CERTIFICATE_KEY_FILE: /srv/sftpgo/certs/private.key
+  {{- end -}}
   {{/* SFTPD */}}
   {{- $enabledServices := (include "sftpgo.svc.enabled" (dict "rootCtx" $ "type" "sftpd") | fromJsonArray) -}}
   {{- range $idx, $svc := $enabledServices }}

@@ -52,5 +52,27 @@ persistence:
           mountPath: {{ $storage.mountPath }}
         01-permissions:
           mountPath: /mnt/directories{{ $storage.mountPath }}
-  {{- end }}
+  {{- end -}}
+  {{- if .Values.sftpgoNetwork.certificateID }}
+  cert:
+    enabled: true
+    type: secret
+    objectName: sftpgo-cert
+    defaultMode: "0600"
+    items:
+      - key: tls.key
+        path: private.key
+      - key: tls.crt
+        path: public.crt
+    targetSelector:
+      sftpgo:
+        sftpgo:
+          mountPath: /srv/sftpgo/certs
+          readOnly: true
+
+scaleCertificate:
+  sftpgo-cert:
+    enabled: true
+    id: {{ .Values.sftpgoNetwork.certificateID }}
+    {{- end -}}
 {{- end -}}
