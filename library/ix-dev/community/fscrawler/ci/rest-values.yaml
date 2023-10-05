@@ -1,0 +1,11 @@
+fscrawlerConfig:
+  jobName: test
+
+fscrawlerNetwork:
+  enableRestApiService: true
+  restPort: 31000
+
+fscrawlerStorage:
+  jobs:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/jobs
