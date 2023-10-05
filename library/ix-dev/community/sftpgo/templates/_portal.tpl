@@ -1,4 +1,8 @@
 {{- define "sftpgo.portal" -}}
+{{- $protocol := "http" -}}
+{{- if .Values.sftpgoNetwork.certificateID -}}
+  {{- $protocol = "https" -}}
+{{- end }}
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -7,6 +11,6 @@ metadata:
 data:
   path: "/web/admin"
   port: {{ .Values.sftpgoNetwork.webPort | quote }}
-  protocol: http
+  protocol: {{ $protocol | quote }}
   host: $node_ip
 {{- end -}}
