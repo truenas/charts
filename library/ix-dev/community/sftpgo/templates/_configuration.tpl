@@ -38,12 +38,3 @@ configmap:
       SFTPGO_WEBDAVD__BINDINGS__{{ $idx }}__ADDRESS: ''
   {{- end -}}
 {{- end -}}
-
-
-# TODO: Mount single certificate if available to all integrations?
-# Integrations that support certificate file:
-# - HTTPD
-# - FTPD
-# - WebDAV
-
-# TODO: If httpd has https, switch to https probes
