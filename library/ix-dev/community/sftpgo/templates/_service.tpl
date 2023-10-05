@@ -14,5 +14,5 @@ service:
         targetSelector: sftpgo
   {{- include "sftpgo.svc.gen" (dict "rootCtx" $ "type" "sftpd") | nindent 2 }}
   {{- include "sftpgo.svc.gen" (dict "rootCtx" $ "type" "ftpd") | nindent 2 }}
-  {{- include "sftpgo.svc.gen" (dict "rootCtx" $ "type" "webdav") | nindent 2 }}
+  {{- include "sftpgo.svc.gen" (dict "rootCtx" $ "type" "webdavd") | nindent 2 }}
 {{- end -}}
