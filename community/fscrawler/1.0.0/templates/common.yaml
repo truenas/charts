@@ -1,0 +1,9 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "fscrawler.configuration" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "fscrawler.service" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "fscrawler.persistence" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "fscrawler.workload" $ | fromYaml) -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}
