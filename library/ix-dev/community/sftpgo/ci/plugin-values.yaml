@@ -1,0 +1,31 @@
+sftpgoNetwork:
+  webPort: 31000
+  sftpdServices:
+    - enabled: true
+      port: 31001
+    - enabled: true
+      port: 31002
+  ftpdServices:
+    - enabled: true
+      port: 31003
+    - enabled: true
+      port: 31004
+  ftpdPassivePortRange:
+    start: 31100
+    end: 31101
+  webdavServices:
+    - enabled: true
+      port: 31005
+    - enabled: true
+      port: 31006
+
+sftpgoConfig:
+  imageSelector: pluginsImage
+
+sftpgoStorage:
+  config:
+    type: pvc
+  data:
+    type: pvc
+  backups:
+    type: pvc
