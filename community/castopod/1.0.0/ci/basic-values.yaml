@@ -1,0 +1,16 @@
+castopodConfig:
+  baseUrl: http://localhost:31000
+
+castopodNetwork:
+  webPort: 31000
+
+castopodStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/data
+  mariadbData:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/mariadbData
+  mariadbBackup:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/mariadbBackup
