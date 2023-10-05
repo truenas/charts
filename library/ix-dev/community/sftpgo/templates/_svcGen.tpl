@@ -19,7 +19,7 @@
       nodePort: {{ $svc.port }}
       targetSelector: sftpgo
   {{- end -}}
-  {{- if eq $type "ftpd" -}}
+  {{- if and $enabledServices (eq $type "ftpd") -}}
     {{- $start := int $rootCtx.Values.sftpgoNetwork.ftpdPassivePortRange.start -}}
     {{- $end := int $rootCtx.Values.sftpgoNetwork.ftpdPassivePortRange.end -}}
     {{- $end = int (add1 $end) -}}
