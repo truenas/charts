@@ -1,11 +1,12 @@
 name: ipfs
-description: Interplanetary Filesystem - the Web3 standard for content-addressing, interoperable with HTTP
+description: Interplanetary Filesystem - the Web3 standard for content-addressing,
+  interoperable with HTTP
 annotations:
   title: IPFS
 type: application
-version: 1.0.21
+version: 1.0.22
 apiVersion: v2
-appVersion: v0.22.0
+appVersion: v0.23.0
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: truenas
@@ -14,7 +15,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.1.0
+    version: 1.1.1
 home: https://ipfs.tech/
 icon: https://avatars.githubusercontent.com/u/10536621
 sources:
