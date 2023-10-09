@@ -12,11 +12,9 @@ workload:
           primary: true
           imageSelector: image
           securityContext:
-            runAsUser: {{ .Values.drawioRunAs.user }}
-            runAsGroup: {{ .Values.drawioRunAs.group }}
+            runAsUser: 1000
+            runAsGroup: 999
             readOnlyRootFilesystem: false
-          env:
-            DRAWIO_USE_HTTP: {{ ternary "1" "0" .Values.drawioNetwork.useHttp}}
           {{ with .Values.drawioConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
@@ -25,25 +23,19 @@ workload:
             {{ end }}
           {{ end }}
           probes:
-            {{- $port := 8080 -}}
-            {{- $protocol := "http" -}}
-            {{- if not .Values.drawioNetwork.useHttp -}}
-              {{- $protocol = "https" -}}
-              {{- $port = 8443 -}}
-            {{- end }}
             liveness:
               enabled: true
-              type: {{ $protocol }}
-              port: {{ $port }}
+              type: http
+              port: 8080
               path: /
             readiness:
               enabled: true
-              type: {{ $protocol }}
-              port: {{ $port }}
+              type: http
+              port: 8080
               path: /
             startup:
               enabled: true
-              type: {{ $protocol }}
-              port: {{ $port }}
+              type: http
+              port: 8080
               path: /
 {{- end -}}

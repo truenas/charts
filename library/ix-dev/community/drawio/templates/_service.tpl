@@ -6,11 +6,17 @@ service:
     type: NodePort
     targetSelector: drawio
     ports:
-      webui:
+      http:
         enabled: true
         primary: true
-        port: {{ .Values.drawioNetwork.webPort }}
-        nodePort: {{ .Values.drawioNetwork.webPort }}
-        targetPort: {{ ternary 8080 8443 .Values.drawioNetwork.useHttp }}
+        port: {{ .Values.drawioNetwork.httpPort }}
+        nodePort: {{ .Values.drawioNetwork.httpPort }}
+        targetPort: 8080
+        targetSelector: drawio
+      https:
+        enabled: true
+        port: {{ .Values.drawioNetwork.httpsPort }}
+        nodePort: {{ .Values.drawioNetwork.httpsPort }}
+        targetPort: 8443
         targetSelector: drawio
 {{- end -}}

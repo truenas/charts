@@ -1,8 +1,8 @@
 runAsContext:
   - userName: drawio
     groupName: drawio
-    gid: 568
-    uid: 568
-    description: Draw.IO can run as any non-root user.
+    gid: 1000
+    uid: 999
+    description: Draw.IO can runs as a non-root user.
 capabilities: []
 hostMounts: []

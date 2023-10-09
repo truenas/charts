@@ -12,8 +12,8 @@ drawioConfig:
   additionalEnvs: []
 
 drawioNetwork:
-  webPort: 30090
-  useHttp: true
+  httpPort: 30090
+  httpsPort: 30091
   hostNetwork: false
 
 drawioRunAs:
