@@ -15,6 +15,8 @@ workload:
             runAsUser: {{ .Values.drawioRunAs.user }}
             runAsGroup: {{ .Values.drawioRunAs.group }}
             readOnlyRootFilesystem: false
+          env:
+            DRAWIO_USE_HTTP: {{ ternary "1" "0" .Values.drawioNetwork.useHttp}}
           {{ with .Values.drawioConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
@@ -23,19 +25,25 @@ workload:
             {{ end }}
           {{ end }}
           probes:
+            {{- $port := 8080 -}}
+            {{- $protocol := "http" -}}
+            {{- if not .Values.drawioNetwork.useHttp -}}
+              {{- $protocol = "https" -}}
+              {{- $port = 8443 -}}
+            {{- end }}
             liveness:
               enabled: true
-              type: http
-              port: 8080
+              type: {{ $protocol }}
+              port: {{ $port }}
               path: /
             readiness:
               enabled: true
-              type: http
-              port: 8080
+              type: {{ $protocol }}
+              port: {{ $port }}
               path: /
             startup:
               enabled: true
-              type: http
-              port: 8080
+              type: {{ $protocol }}
+              port: {{ $port }}
               path: /
 {{- end -}}
