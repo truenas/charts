@@ -28,6 +28,8 @@ resources:
     cpu: 4000m
     memory: 8Gi
 
+immichGPU: {}
+
 immichConfig:
   publicLoginMessage: ''
   enableML: true

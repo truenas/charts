@@ -45,4 +45,15 @@ workload:
       {{- include "ix.v1.common.app.redisWait" (dict  "name" "redis-wait"
                                                       "secretName" "redis-creds") | nindent 8 }}
       {{- include "immich.wait.init" (dict "url" $url) | indent 8 }}
+
+{{- with .Values.immichGPU }}
+scaleGPU:
+  {{- range $key, $value := . }}
+  - gpu:
+      {{ $key }}: {{ $value }}
+    targetSelector:
+      microservices:
+        - microservices
+  {{- end -}}
+{{- end -}}
 {{- end -}}
