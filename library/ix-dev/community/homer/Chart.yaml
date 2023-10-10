@@ -1,0 +1,26 @@
+name: homer
+description: Homer is a dead simple static HOMepage for your servER to keep your services on hand, from a simple yaml configuration file.
+annotations:
+  title: Homer
+type: application
+version: 1.0.0
+apiVersion: v2
+appVersion: v23.09.1
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.1.1
+home: https://github.com/bastienwirtz/homer
+icon: https://raw.githubusercontent.com//bastienwirtz/homer/main/public/logo.png
+sources:
+  - https://hub.docker.com/r/b4bz/homer
+  - https://github.com/truenas/charts/tree/master/library/ix-dev/community/homer
+  - https://github.com/bastienwirtz/homer
+keywords:
+  - dashboard
+  - homepage
