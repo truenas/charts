@@ -1,10 +1,10 @@
 {{- define "homer.persistence" -}}
 persistence:
-  config:
+  assets:
     enabled: true
-    type: {{ .Values.homerStorage.config.type }}
-    datasetName: {{ .Values.homerStorage.config.datasetName | default "" }}
-    hostPath: {{ .Values.homerStorage.config.hostPath | default "" }}
+    type: {{ .Values.homerStorage.assets.type }}
+    datasetName: {{ .Values.homerStorage.assets.datasetName | default "" }}
+    hostPath: {{ .Values.homerStorage.assets.hostPath | default "" }}
     targetSelector:
       homer:
         homer:

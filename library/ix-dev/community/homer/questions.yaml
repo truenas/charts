@@ -108,9 +108,9 @@ questions:
     schema:
       type: dict
       attrs:
-        - variable: config
-          label: Homer Config Storage
-          description: The path to store Homer Configuration.
+        - variable: assets
+          label: Homer Assets Storage
+          description: The path to store Homer Assets.
           schema:
             type: dict
             attrs:
@@ -136,7 +136,7 @@ questions:
                   required: true
                   hidden: true
                   immutable: true
-                  default: "config"
+                  default: "assets"
                   $ref:
                     - "normalize/ixVolume"
               - variable: hostPath

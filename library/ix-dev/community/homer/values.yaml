@@ -21,7 +21,7 @@ homerRunAs:
   group: 568
 
 homerStorage:
-  config:
+  assets:
     type: ixVolume
-    datasetName: config
+    datasetName: assets
   additionalStorages: []

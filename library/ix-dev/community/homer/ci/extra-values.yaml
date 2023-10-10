@@ -5,7 +5,7 @@ homerNetwork:
   webPort: 31000
 
 homerStorage:
-  config:
+  assets:
     type: pvc
   additionalStorages:
   - type: pvc
