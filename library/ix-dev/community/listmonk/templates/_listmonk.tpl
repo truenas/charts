@@ -54,12 +54,10 @@ workload:
             - secretRef:
                 name: listmonk-creds
           command:
-            - /listmonk/listmonk
+            - /bin/sh
           args:
-          {{- if .Release.IsInstall }}
-            - --install
-          {{- else }}
-            - --upgrade
-          {{- end }}
-            - --yes
+            - -c
+            - |
+              /listmonk/listmonk --install --idempotent --yes
+              /listmonk/listmonk --upgrade --yes
 {{- end -}}
