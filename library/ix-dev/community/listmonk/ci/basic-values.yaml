@@ -11,5 +11,4 @@ listmonkStorage:
   pgData:
     type: pvc
   pgBackup:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/pgbackup
+    type: emptyDir
