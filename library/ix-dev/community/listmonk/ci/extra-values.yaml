@@ -1,6 +1,10 @@
 listmonkNetwork:
   webPort: 31000
 
+listmonkConfig:
+  adminUsername: admin
+  adminPassword: password
+
 listmonkStorage:
   uploads:
     type: pvc
