@@ -29,17 +29,17 @@ workload:
               enabled: true
               type: http
               port: {{ .Values.listmonkNetwork.webPort }}
-              path: /
+              path: /health
             readiness:
               enabled: true
               type: http
               port: {{ .Values.listmonkNetwork.webPort }}
-              path: /
+              path: /health
             startup:
               enabled: true
               type: http
               port: {{ .Values.listmonkNetwork.webPort }}
-              path: /
+              path: /health
       initContainers:
       {{- include "ix.v1.common.app.postgresWait" (dict "name" "01-postgres-wait"
                                                         "secretName" "postgres-creds") | nindent 8 }}
