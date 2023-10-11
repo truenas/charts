@@ -1,0 +1,15 @@
+listmonkNetwork:
+  webPort: 31000
+
+listmonkStorage:
+  uploads:
+    type: pvc
+  pgData:
+    type: pvc
+  pgBackup:
+    type: pvc
+  additionalStorages:
+  - type: pvc
+    mountPath: /data1
+  - type: pvc
+    mountPath: /data2
