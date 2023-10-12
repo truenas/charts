@@ -1,0 +1,25 @@
+name: linkding
+description: Linkding is a bookmark manager that you can host yourself.
+annotations:
+  title: Linkding
+type: application
+version: 1.0.2
+apiVersion: v2
+appVersion: 1.22.1
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.1.1
+home: https://github.com/sissbruecker/linkding
+icon: https://github.com/sissbruecker/linkding/raw/master/docs/header.svg
+sources:
+  - https://github.com/truenas/charts/tree/master/library/ix-dev/community/linkding
+  - https://github.com/sissbruecker/linkding
+  - https://hub.docker.com/r/sissbruecker/linkding/
+keywords:
+  - bookmark

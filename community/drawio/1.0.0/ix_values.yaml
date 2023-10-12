@@ -1,0 +1,20 @@
+image:
+  repository: jgraph/drawio
+  pullPolicy: IfNotPresent
+  tag: 22.0.3
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+drawioConfig:
+  additionalEnvs: []
+
+drawioNetwork:
+  httpPort: 30090
+  httpsPort: 30091
+  hostNetwork: false
+
+drawioStorage:
+  additionalStorages: []

@@ -1,0 +1,58 @@
+image:
+  repository: sissbruecker/linkding
+  pullPolicy: IfNotPresent
+  tag: 1.22.1
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+linkdingConfig:
+  username: ''
+  password: ''
+  disableBackgroundTasks: false
+  disableUrlValidation: false
+  enableAuthProxy: false
+  authProxyUsernameHeader: ''
+  authProxyLogoutUrl: ''
+  csrfTrustedOrigins: []
+  additionalEnvs: []
+
+linkdingNetwork:
+  webPort: 30083
+  hostNetwork: false
+
+linkdingRunAs:
+  user: 568
+  group: 568
+
+linkdingStorage:
+  data:
+    type: ixVolume
+    datasetName: data
+  additionalStorages: []
+  pgData:
+    type: ixVolume
+    datasetName: pgData
+  pgBackup:
+    type: ixVolume
+    datasetName: pgBackup
+
+notes:
+  custom: |
+    ## Database
+    You can connect to the database using the pgAdmin App from the catalog
+
+    <details>
+      <summary>Database Details</summary>
+
+      - Database: `linkding`
+      - Username: `linkding`
+      - Password: `{{ .Values.linkdingDbPass }}`
+      - Host:     `{{ .Values.linkdingDbHost }}.{{ .Release.Namespace }}.svc.cluster.local`
+      - Port:     `5432`
+
+    </details>
+    {{- $_ := unset .Values "linkdingDbPass" }}
+    {{- $_ := unset .Values "linkdingDbHost" }}

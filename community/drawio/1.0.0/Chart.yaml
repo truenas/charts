@@ -1,0 +1,26 @@
+name: drawio
+description: Draw.io is a whiteboarding / diagramming software application.
+annotations:
+  title: Draw.IO
+type: application
+version: 1.0.0
+apiVersion: v2
+appVersion: 22.0.3
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.1.1
+home: https://www.drawio.com
+icon: https://avatars.githubusercontent.com/u/1769238
+sources:
+  - https://hub.docker.com/r/jgraph/drawio
+  - https://github.com/truenas/charts/tree/master/library/ix-dev/community/drawio
+  - https://github.com/jgraph/drawio
+keywords:
+  - diagram
+  - whiteboard

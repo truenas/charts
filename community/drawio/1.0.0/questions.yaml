@@ -1,0 +1,185 @@
+groups:
+  - name: Draw.io Configuration
+    description: Configure Draw.io
+  - name: Network Configuration
+    description: Configure Network for Draw.io
+  - name: Storage Configuration
+    description: Configure Storage for Draw.io
+  - name: Resources Configuration
+    description: Configure Resources for Draw.io
+
+portals:
+  web_portal:
+    protocols:
+      - "$kubernetes-resource_configmap_portal_protocol"
+    host:
+      - "$kubernetes-resource_configmap_portal_host"
+    ports:
+      - "$kubernetes-resource_configmap_portal_port"
+    path: "$kubernetes-resource_configmap_portal_path"
+
+questions:
+  - variable: drawioConfig
+    label: ""
+    group: Draw.io Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: additionalEnvs
+          label: Additional Environment Variables
+          description: Configure additional environment variables for Draw.io.
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: env
+                label: Environment Variable
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: name
+                      label: Name
+                      schema:
+                        type: string
+                        required: true
+                    - variable: value
+                      label: Value
+                      schema:
+                        type: string
+                        required: true
+
+  - variable: drawioNetwork
+    label: ""
+    group: Network Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: hostNetwork
+          label: Host Network
+          description: |
+            Bind to the host network. It's recommended to keep this disabled.</br>
+          schema:
+            type: boolean
+            default: false
+        - variable: httpPort
+          label: HTTP Port
+          description: |
+            The HTTP port for the Draw.io Web UI.
+            You have to append [/?offline=1&https=0] to the URL
+          schema:
+            type: int
+            default: 30090
+            show_if: [["hostNetwork", "=", false]]
+            min: 9000
+            max: 65535
+            required: true
+        - variable: httpsPort
+          label: HTTPS Port
+          description: |
+            The HTTPS port for the Draw.io Web UI.
+            You have to append [/?offline=1] to the URL
+          schema:
+            type: int
+            default: 30091
+            show_if: [["hostNetwork", "=", false]]
+            min: 9000
+            max: 65535
+            required: true
+
+  - variable: drawioStorage
+    label: ""
+    group: Storage Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: additionalStorages
+          label: Additional Storage
+          description: Additional storage for Draw.io.
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: storageEntry
+                label: Storage Entry
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: type
+                      label: Type
+                      description: |
+                        ixVolume: Is dataset created automatically by the system.</br>
+                        Host Path: Is a path that already exists on the system.
+                      schema:
+                        type: string
+                        required: true
+                        default: "ixVolume"
+                        enum:
+                          - value: "hostPath"
+                            description: Host Path (Path that already exists on the system)
+                          - value: "ixVolume"
+                            description: ixVolume (Dataset created automatically by the system)
+                    - variable: mountPath
+                      label: Mount Path
+                      description: The path inside the container to mount the storage.
+                      schema:
+                        type: path
+                        required: true
+                    - variable: hostPath
+                      label: Host Path
+                      description: The host path to use for storage.
+                      schema:
+                        type: hostpath
+                        show_if: [["type", "=", "hostPath"]]
+                        required: true
+                    - variable: datasetName
+                      label: Dataset Name
+                      description: The name of the dataset to use for storage.
+                      schema:
+                        type: string
+                        show_if: [["type", "=", "ixVolume"]]
+                        required: true
+                        immutable: true
+                        default: "storage_entry"
+                        $ref:
+                          - "normalize/ixVolume"
+
+  - variable: resources
+    group: Resources Configuration
+    label: ""
+    schema:
+      type: dict
+      attrs:
+        - variable: limits
+          label: Limits
+          schema:
+            type: dict
+            attrs:
+              - variable: cpu
+                label: CPU
+                description: CPU limit for Draw.io.
+                schema:
+                  type: string
+                  max_length: 6
+                  valid_chars: '^(0\.[1-9]|[1-9][0-9]*)(\.[0-9]|m?)$'
+                  valid_chars_error: |
+                    Valid CPU limit formats are</br>
+                    - Plain Integer - eg. 1</br>
+                    - Float - eg. 0.5</br>
+                    - Milicpu - eg. 500m
+                  default: "4000m"
+                  required: true
+              - variable: memory
+                label: Memory
+                description: Memory limit for Draw.io.
+                schema:
+                  type: string
+                  max_length: 12
+                  valid_chars: '^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$'
+                  valid_chars_error: |
+                    Valid Memory limit formats are</br>
+                    - Suffixed with E/P/T/G/M/K - eg. 1G</br>
+                    - Suffixed with Ei/Pi/Ti/Gi/Mi/Ki - eg. 1Gi</br>
+                    - Plain Integer in bytes - eg. 1024</br>
+                    - Exponent - eg. 134e6
+                  default: "8Gi"
+                  required: true
