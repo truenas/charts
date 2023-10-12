@@ -1,0 +1,10 @@
+homerNetwork:
+  webPort: 31000
+
+homerRunAs:
+  user: 1000
+  group: 1000
+
+homerStorage:
+  assets:
+    type: pvc

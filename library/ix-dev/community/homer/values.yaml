@@ -1,0 +1,27 @@
+image:
+  repository: b4bz/homer
+  pullPolicy: IfNotPresent
+  tag: v23.09.1
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+homerConfig:
+  initAssets: false
+  additionalEnvs: []
+
+homerNetwork:
+  webPort: 30092
+  hostNetwork: false
+
+homerRunAs:
+  user: 568
+  group: 568
+
+homerStorage:
+  assets:
+    type: ixVolume
+    datasetName: assets
+  additionalStorages: []
