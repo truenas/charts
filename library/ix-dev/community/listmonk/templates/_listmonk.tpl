@@ -41,9 +41,14 @@ workload:
               port: {{ .Values.listmonkNetwork.webPort }}
               path: /health
       initContainers:
-      {{- include "ix.v1.common.app.postgresWait" (dict "name" "01-postgres-wait"
+      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
+                                                        "UID" .Values.listmonkRunAs.user
+                                                        "GID" .Values.listmonkRunAs.group
+                                                        "mode" "check"
+                                                        "type" "init") | nindent 8 }}
+      {{- include "ix.v1.common.app.postgresWait" (dict "name" "02-postgres-wait"
                                                         "secretName" "postgres-creds") | nindent 8 }}
-        02-db:
+        03-db:
           enabled: true
           type: init
           imageSelector: image
