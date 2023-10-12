@@ -1,0 +1,8 @@
+runAsContext:
+  - userName: metube
+    groupName: metube
+    gid: 568
+    uid: 568
+    description: MeTube can run as any non-root user.
+capabilities: []
+hostMounts: []
