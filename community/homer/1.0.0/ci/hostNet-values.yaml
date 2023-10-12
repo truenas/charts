@@ -1,0 +1,7 @@
+homerNetwork:
+  webPort: 30000
+  hostNetwork: true
+
+homerStorage:
+  assets:
+    type: pvc
