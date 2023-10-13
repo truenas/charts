@@ -1,0 +1,27 @@
+image:
+  repository: alexta69/metube
+  pullPolicy: IfNotPresent
+  tag: '2023-10-08'
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+metubeConfig:
+  defaultTheme: auto
+  additionalEnvs: []
+
+metubeNetwork:
+  webPort: 30094
+  hostNetwork: false
+
+metubeRunAs:
+  user: 568
+  group: 568
+
+metubeStorage:
+  downloads:
+    type: ixVolume
+    datasetName: downloads
+  additionalStorages: []
