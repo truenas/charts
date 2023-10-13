@@ -1,0 +1,8 @@
+runAsContext:
+  - userName: distribution
+    groupName: distribution
+    gid: 568
+    uid: 568
+    description: Distribution can run as any non-root user.
+capabilities: []
+hostMounts: []

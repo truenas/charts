@@ -47,4 +47,10 @@ workload:
               type: {{ $protocol }}
               port: {{ .Values.distributionNetwork.apiPort }}
               path: /
+      initContainers:
+      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
+                                                        "UID" .Values.distributionRunAs.user
+                                                        "GID" .Values.distributionRunAs.group
+                                                        "mode" "check"
+                                                        "type" "init") | nindent 8 }}
 {{- end -}}
