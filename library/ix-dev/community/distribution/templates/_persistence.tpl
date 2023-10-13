@@ -1,5 +1,14 @@
 {{- define "distribution.persistence" -}}
 persistence:
+  data:
+    enabled: true
+    type: {{ .Values.distributionStorage.data.type }}
+    datasetName: {{ .Values.distributionStorage.data.datasetName | default "" }}
+    hostPath: {{ .Values.distributionStorage.data.hostPath | default "" }}
+    targetSelector:
+      distribution:
+        distribution:
+          mountPath: /var/lib/registry
   tmp:
     enabled: true
     type: emptyDir
