@@ -8,8 +8,6 @@ configmap:
       {{- if .Values.distributionNetwork.certificateID }}
       REGISTRY_HTTP_TLS_CERTIFICATE: /certs/tls.crt
       REGISTRY_HTTP_TLS_KEY: /certs/tls.key
-      # TODO: Host https://registry.surge.sh/about/configuration/#http
-      # REGISTRY_HTTP_HOST:
       {{- end }}
       {{- if .Values.distributionConfig.basicAuthUsers }}
       REGISTRY_HTPASSWD_REALM: basic-realm
