@@ -2,6 +2,10 @@ distributionNetwork:
   apiPort: 31000
   certificateID: 1
 
+distributionStorage:
+  data:
+    type: pvc
+
 ixCertificates:
   "1":
     certificate: |

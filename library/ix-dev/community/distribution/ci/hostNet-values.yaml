@@ -1,9 +1,6 @@
 distributionNetwork:
-  apiPort: 31000
-
-distributionRunAs:
-  user: 1000
-  group: 1000
+  apiPort: 30000
+  hostNetwork: true
 
 distributionStorage:
   data:

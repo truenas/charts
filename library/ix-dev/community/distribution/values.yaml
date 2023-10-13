@@ -9,6 +9,7 @@ resources:
     memory: 8Gi
 
 distributionConfig:
+  basicAuthUsers: []
   additionalEnvs: []
 
 distributionNetwork:
@@ -21,4 +22,7 @@ distributionRunAs:
   group: 568
 
 distributionStorage:
+  data:
+    type: ixVolume
+    datasetName: data
   additionalStorages: []

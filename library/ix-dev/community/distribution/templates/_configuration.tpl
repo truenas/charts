@@ -14,5 +14,8 @@ secret:
   distribution-creds:
     enabled: true
     data:
-      KEY: VALUE
+      htpasswd: |
+        {{- range $idx, $v := .Values.distributionConfig.basicAuthUsers }}
+        {{- htpasswd $v.user $v.pass | nindent 8 }}
+        {{- end -}}
 {{- end -}}
