@@ -28,6 +28,22 @@ persistence:
           mountPath: {{ $storage.mountPath }}
   {{- end -}}
 
+  {{- if .Values.distributionConfig.basicAuthUsers }}
+  htpasswd:
+    enabled: true
+    type: secret
+    objectName: distribution-htpasswd
+    defaultMode: "0600"
+    items:
+      - key: htpasswd
+        path: htpasswd
+    targetSelector:
+      distribution:
+        distribution:
+          mountPath: /auth
+          readOnly: true
+  {{- end -}}
+
   {{- if .Values.distributionNetwork.certificateID }}
   cert:
     enabled: true
@@ -50,4 +66,5 @@ scaleCertificate:
     enabled: true
     id: {{ .Values.distributionNetwork.certificateID }}
     {{- end -}}
+
 {{- end -}}

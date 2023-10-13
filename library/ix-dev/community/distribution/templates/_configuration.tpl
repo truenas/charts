@@ -9,7 +9,12 @@ configmap:
       REGISTRY_HTTP_TLS_CERTIFICATE: /certs/tls.crt
       REGISTRY_HTTP_TLS_KEY: /certs/tls.key
       {{- end }}
+      {{- if .Values.distributionConfig.basicAuthUsers }}
+      REGISTRY_HTPASSWD_REALM: basic-realm
+      REGISTRY_HTPASSWD_PATH: /auth/htpasswd
+      {{- end -}}
 
+{{- if .Values.distributionConfig.basicAuthUsers }}
 secret:
   distribution-creds:
     enabled: true
@@ -18,4 +23,5 @@ secret:
         {{- range $idx, $v := .Values.distributionConfig.basicAuthUsers }}
         {{- htpasswd $v.user $v.pass | nindent 8 }}
         {{- end -}}
+{{- end -}}
 {{- end -}}
