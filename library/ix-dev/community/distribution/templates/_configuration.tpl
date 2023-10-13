@@ -16,10 +16,12 @@ configmap:
       REGISTRY_HTPASSWD_PATH: /auth/htpasswd
       {{- end -}}
 
-  {{- $secretKey := randAlphaNum 32 -}}
-  {{- with (lookup "v1" "Secret" .Release.Namespace (printf "%s-distribution" $fullname)) -}}
-    {{- $secretKey = ((index .data "REGISTRY_HTTP_SECRET") | b64dec) -}}
-  {{- end -}}
+{{- $fullname := (include "ix.v1.common.lib.chart.names.fullname" $) -}}
+
+{{- $secretKey := randAlphaNum 32 -}}
+{{- with (lookup "v1" "Secret" .Release.Namespace (printf "%s-distribution" $fullname)) -}}
+  {{- $secretKey = ((index .data "REGISTRY_HTTP_SECRET") | b64dec) -}}
+{{- end -}}
 
 secret:
   distribution-creds:
