@@ -30,17 +30,17 @@ workload:
             liveness:
               enabled: true
               type: http
-              port: "{{ .Values.metubeNetwork.webPort }}"
+              port: {{ .Values.metubeNetwork.webPort }}
               path: /
             readiness:
               enabled: true
               type: http
-              port: "{{ .Values.metubeNetwork.webPort }}"
+              port: {{ .Values.metubeNetwork.webPort }}
               path: /
             startup:
               enabled: true
               type: http
-              port: "{{ .Values.metubeNetwork.webPort }}"
+              port: {{ .Values.metubeNetwork.webPort }}
               path: /
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
