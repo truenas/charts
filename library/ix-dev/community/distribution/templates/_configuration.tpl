@@ -21,7 +21,7 @@ configmap:
 {{- $secretKey := randAlphaNum 32 -}}
 {{- with (lookup "v1" "Secret" .Release.Namespace (printf "%s-distribution" $fullname)) -}}
   {{- $secretKey = ((index .data "REGISTRY_HTTP_SECRET") | b64dec) -}}
-{{- end -}}
+{{- end }}
 
 secret:
   distribution-creds:
