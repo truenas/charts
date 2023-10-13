@@ -126,11 +126,21 @@ questions:
     schema:
       type: dict
       attrs:
+        - variable: useFilesystemBackend
+          label: Use Filesystem Backend
+          description: |
+            Use filesystem backend for Distribution.</br>
+            If disabled, you will need to configure a backend for Distribution.</br>
+            Either with environment variables or with a configuration file.
+          schema:
+            type: boolean
+            default: true
         - variable: data
           label: Distribution Data Storage
           description: The path to store Distribution data.
           schema:
             type: dict
+            show_if: [["useFilesystemBackend", "=", true]]
             attrs:
               - variable: type
                 label: Type

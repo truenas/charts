@@ -1,5 +1,6 @@
 {{- define "distribution.persistence" -}}
 persistence:
+  {{- if .Values.distributionStorage.useFilesystemBackend }}
   data:
     enabled: true
     type: {{ .Values.distributionStorage.data.type }}
@@ -9,6 +10,8 @@ persistence:
       distribution:
         distribution:
           mountPath: /var/lib/registry
+  {{- end }}
+
   tmp:
     enabled: true
     type: emptyDir

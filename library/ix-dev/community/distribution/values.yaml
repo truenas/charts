@@ -22,6 +22,7 @@ distributionRunAs:
   group: 568
 
 distributionStorage:
+  useFilesystemBackend: true
   data:
     type: ixVolume
     datasetName: data

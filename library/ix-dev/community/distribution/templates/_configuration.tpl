@@ -11,15 +11,17 @@ configmap:
     enabled: true
     data:
       REGISTRY_HTTP_ADDR: {{ printf "0.0.0.0:%v" .Values.distributionNetwork.apiPort }}
+      {{- if .Values.distributionStorage.useFilesystemBackend }}
       REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY: /var/lib/registry
+      {{- end -}}
       {{- if .Values.distributionNetwork.certificateID }}
       REGISTRY_HTTP_TLS_CERTIFICATE: /certs/tls.crt
       REGISTRY_HTTP_TLS_KEY: /certs/tls.key
-      {{- end }}
+      {{- end -}}
       {{- if .Values.distributionConfig.basicAuthUsers }}
       REGISTRY_HTPASSWD_REALM: basic-realm
       REGISTRY_HTPASSWD_PATH: /auth/htpasswd
-      {{- end -}}
+      {{- end }}
 
 secret:
   distribution-creds:
