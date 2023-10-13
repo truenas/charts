@@ -19,26 +19,26 @@ persistence:
           mountPath: {{ $storage.mountPath }}
   {{- end -}}
 
-#   {{- if .Values.distributionNetwork.certificateID }}
-#   cert:
-#     enabled: true
-#     type: secret
-#     objectName: distribution-cert
-#     defaultMode: "0600"
-#     items:
-#       - key: tls.key
-#         path: tls.key
-#       - key: tls.crt
-#         path: tls.crt
-#     targetSelector:
-#       distribution:
-#         distribution:
-#           mountPath: /etc/nginx/certs
-#           readOnly: true
+  {{- if .Values.distributionNetwork.certificateID }}
+  cert:
+    enabled: true
+    type: secret
+    objectName: distribution-cert
+    defaultMode: "0600"
+    items:
+      - key: tls.key
+        path: tls.key
+      - key: tls.crt
+        path: tls.crt
+    targetSelector:
+      distribution:
+        distribution:
+          mountPath: /certs
+          readOnly: true
 
-# scaleCertificate:
-#   distribution-cert:
-#     enabled: true
-#     id: {{ .Values.distributionNetwork.certificateID }}
-#     {{- end -}}
+scaleCertificate:
+  distribution-cert:
+    enabled: true
+    id: {{ .Values.distributionNetwork.certificateID }}
+    {{- end -}}
 {{- end -}}
