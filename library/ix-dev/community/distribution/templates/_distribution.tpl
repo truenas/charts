@@ -16,6 +16,8 @@ workload:
             runAsGroup: {{ .Values.distributionRunAs.group }}
             readOnlyRootFilesystem: false
           envFrom:
+            - secretRef:
+                name: distribution-creds
             - configMapRef:
                 name: distribution-config
           {{ with .Values.distributionConfig.additionalEnvs }}
