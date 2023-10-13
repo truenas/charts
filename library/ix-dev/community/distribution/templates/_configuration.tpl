@@ -3,7 +3,7 @@ configmap:
   distribution-config:
     enabled: true
     data:
-      REGISTRY_HTTP_ADDR: {{ printf "0.0.0.0:%s" .Values.distributionNetwork.apiPort }}
+      REGISTRY_HTTP_ADDR: {{ printf "0.0.0.0:%v" .Values.distributionNetwork.apiPort }}
       REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY: /var/lib/registry
       {{- if .Values.distributionNetwork.certificateID }}
       REGISTRY_HTTP_TLS_CERTIFICATE: /certs/tls.crt
