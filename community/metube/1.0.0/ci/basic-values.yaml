@@ -1,0 +1,10 @@
+metubeNetwork:
+  webPort: 31000
+
+metubeRunAs:
+  user: 1000
+  group: 1000
+
+metubeStorage:
+  downloads:
+    type: pvc

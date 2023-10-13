@@ -1,0 +1,11 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "metube.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "metube.service" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "metube.persistence" $ | fromYaml) -}}
+
+{{/* Create the configmap for portal manually*/}}
+{{- include "metube.portal" $ -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}

@@ -1,0 +1,14 @@
+metubeConfig:
+  defaultTheme: light
+
+metubeNetwork:
+  webPort: 31000
+
+metubeStorage:
+  downloads:
+    type: pvc
+  additionalStorages:
+  - type: pvc
+    mountPath: /data1
+  - type: pvc
+    mountPath: /data2
