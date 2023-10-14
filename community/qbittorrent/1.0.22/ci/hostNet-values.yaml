@@ -1,0 +1,10 @@
+qbitNetwork:
+  webPort: 30000
+  btPort: 32555
+  hostNetwork: true
+
+qbitStorage:
+  downloads:
+    type: pvc
+  config:
+    type: pvc

@@ -1,0 +1,13 @@
+qbitNetwork:
+  webPort: 31000
+  btPort: 32444
+
+qbitRunAs:
+  user: 1000
+  group: 1000
+
+qbitStorage:
+  downloads:
+    type: pvc
+  config:
+    type: pvc
