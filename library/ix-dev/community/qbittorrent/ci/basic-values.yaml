@@ -8,10 +8,6 @@ qbitRunAs:
 
 qbitStorage:
   downloads:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/downloads
-    datasetName: ""
+    type: pvc
   config:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/config
-    datasetName: ""
+    type: pvc

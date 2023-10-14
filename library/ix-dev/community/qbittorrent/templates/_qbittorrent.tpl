@@ -104,4 +104,17 @@ persistence:
           mountPath: /downloads
         01-permissions:
           mountPath: /mnt/directories/downloads
+  {{- range $idx, $storage := .Values.qbitStorage.additionalStorages }}
+  {{ printf "qbittorrent-%v" (int $idx) }}:
+    enabled: true
+    type: {{ $storage.type }}
+    datasetName: {{ $storage.datasetName | default "" }}
+    hostPath: {{ $storage.hostPath | default "" }}
+    targetSelector:
+      qbittorrent:
+        qbittorrent:
+          mountPath: {{ $storage.mountPath }}
+        01-permissions:
+          mountPath: /mnt/directories/{{ printf "qbittorrent-%v" (int $idx) }}
+  {{- end }}
 {{- end -}}
