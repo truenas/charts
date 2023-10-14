@@ -1,0 +1,26 @@
+name: listmonk
+description: Listmonk is a self-hosted newsletter and mailing list manager.
+annotations:
+  title: Listmonk
+type: application
+version: 1.0.0
+apiVersion: v2
+appVersion: v2.5.1
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.1.1
+home: https://listmonk.app/
+icon: https://listmonk.app/static/images/logo.svg
+sources:
+  - https://hub.docker.com/r/listmonk/listmonk
+  - https://github.com/knadh/listmonk
+  - https://github.com/truenas/charts/tree/master/library/ix-dev/community/listmonk
+keywords:
+  - mailing-list
+  - newsletter
