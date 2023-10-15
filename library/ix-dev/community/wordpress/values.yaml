@@ -1,7 +1,7 @@
 image:
   repository: wordpress
   pullPolicy: IfNotPresent
-  tag: 6.3.1
+  tag: 6.3.2
 
 resources:
   limits:
@@ -10,7 +10,7 @@ resources:
 
 wpConfig:
   enableCronJob: true
-  cronSchedule: "*/15 * * * *"
+  cronSchedule: '*/15 * * * *'
   additionalEnvs: []
 
 wpNetwork:

@@ -1,11 +1,12 @@
 name: metube
-description: MeTube is a web GUI for youtube-dl (using the yt-dlp fork) with playlist support.
+description: MeTube is a web GUI for youtube-dl (using the yt-dlp fork) with playlist
+  support.
 annotations:
   title: MeTube
 type: application
-version: 1.0.1
+version: 1.0.2
 apiVersion: v2
-appVersion: '2023-10-03'
+appVersion: '2023-10-14'
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: truenas
