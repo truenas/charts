@@ -27,19 +27,16 @@ workload:
           probes:
             liveness:
               enabled: true
-              type: http
+              type: tcp
               port: {{ .Values.transmissionNetwork.webPort }}
-              path: /
             readiness:
               enabled: true
-              type: http
+              type: tcp
               port: {{ .Values.transmissionNetwork.webPort }}
-              path: /
             startup:
               enabled: true
-              type: http
+              type: tcp
               port: {{ .Values.transmissionNetwork.webPort }}
-              path: /
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
                                                         "UID" .Values.transmissionRunAs.user

@@ -21,10 +21,10 @@ transmissionRunAs:
   group: 568
 
 transmissionStorage:
-  downloads:
-    type: ixVolume
-    datasetName: downloads
   config:
     type: ixVolume
     datasetName: config
+  downloads:
+    type: ixVolume
+    datasetName: downloads
   additionalStorages: []

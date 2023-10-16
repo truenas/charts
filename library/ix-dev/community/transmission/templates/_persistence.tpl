@@ -33,6 +33,6 @@ persistence:
         transmission:
           mountPath: {{ $storage.mountPath }}
         01-permissions:
-          mountPath: /mnt/directories/{{ printf "transmission-%v" (int $idx) }}
+          mountPath: /mnt/directories{{ $storage.mountPath }}
   {{- end }}
 {{- end -}}
