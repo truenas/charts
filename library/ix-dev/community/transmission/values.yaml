@@ -1,0 +1,30 @@
+image:
+  repository: ghcr.io/onedr0p/transmission
+  pullPolicy: IfNotPresent
+  tag: 4.0.4
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+transmissionConfig:
+  additionalEnvs: []
+
+transmissionNetwork:
+  webPort: 30096
+  peerPort: 50413
+  hostNetwork: false
+
+transmissionRunAs:
+  user: 568
+  group: 568
+
+transmissionStorage:
+  downloads:
+    type: ixVolume
+    datasetName: downloads
+  config:
+    type: ixVolume
+    datasetName: config
+  additionalStorages: []
