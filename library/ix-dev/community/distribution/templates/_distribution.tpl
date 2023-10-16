@@ -14,7 +14,7 @@ workload:
           securityContext:
             runAsUser: {{ .Values.distributionRunAs.user }}
             runAsGroup: {{ .Values.distributionRunAs.group }}
-            readOnlyRootFilesystem: false
+            # readOnlyRootFilesystem: false
           envFrom:
             - secretRef:
                 name: distribution-creds
