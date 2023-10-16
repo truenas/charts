@@ -11,17 +11,28 @@ persistence:
           mountPath: /config
         01-permissions:
           mountPath: /mnt/directories/config
-  downloads:
+  download-complete:
     enabled: true
-    type: {{ .Values.transmissionStorage.downloads.type }}
-    datasetName: {{ .Values.transmissionStorage.downloads.datasetName | default "" }}
-    hostPath: {{ .Values.transmissionStorage.downloads.hostPath | default "" }}
+    type: {{ .Values.transmissionStorage.downloadsComplete.type }}
+    datasetName: {{ .Values.transmissionStorage.downloadsComplete.datasetName | default "" }}
+    hostPath: {{ .Values.transmissionStorage.downloadsComplete.hostPath | default "" }}
     targetSelector:
       transmission:
         transmission:
-          mountPath: /downloads
+          mountPath: /downloads/complete
         01-permissions:
-          mountPath: /mnt/directories/downloads
+          mountPath: /mnt/directories/complete
+  download-incomplete:
+    enabled: true
+    type: {{ .Values.transmissionStorage.downloadsIncomplete.type }}
+    datasetName: {{ .Values.transmissionStorage.downloadsIncomplete.datasetName | default "" }}
+    hostPath: {{ .Values.transmissionStorage.downloadsIncomplete.hostPath | default "" }}
+    targetSelector:
+      transmission:
+        transmission:
+          mountPath: /downloads/inccomplete
+        01-permissions:
+          mountPath: /mnt/directories/inccomplete
   {{- range $idx, $storage := .Values.transmissionStorage.additionalStorages }}
   {{ printf "transmission-%v" (int $idx) }}:
     enabled: true

@@ -24,9 +24,12 @@ transmissionStorage:
   config:
     type: ixVolume
     datasetName: config
-  downloads:
+  downloadsComplete:
     type: ixVolume
-    datasetName: downloads
+    datasetName: downloads-complete
+  downloadsIncomplete:
+    type: ixVolume
+    datasetName: downloads-incomplete
   additionalStorages: []
 
 notes:

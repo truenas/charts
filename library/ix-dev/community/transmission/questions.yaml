@@ -149,9 +149,9 @@ questions:
                   show_if: [["type", "=", "hostPath"]]
                   immutable: true
                   required: true
-        - variable: downloads
-          label: Transmission Downloads Storage
-          description: The path to store Transmission Downloads.
+        - variable: downloadsComplete
+          label: Transmission Complete Downloads Storage
+          description: The path to store Transmission Complete Downloads.
           schema:
             type: dict
             attrs:
@@ -177,7 +177,45 @@ questions:
                   required: true
                   hidden: true
                   immutable: true
-                  default: "downloads"
+                  default: "downloads-complete"
+                  $ref:
+                    - "normalize/ixVolume"
+              - variable: hostPath
+                label: Host Path
+                schema:
+                  type: hostpath
+                  show_if: [["type", "=", "hostPath"]]
+                  immutable: true
+                  required: true
+        - variable: downloadsIncomplete
+          label: Transmission Incomplete Downloads Storage
+          description: The path to store Transmission Incomplete Downloads.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
+                schema:
+                  type: string
+                  required: true
+                  default: ixVolume
+                  enum:
+                    - value: hostPath
+                      description: Host Path (Path that already exists on the system)
+                    - value: ixVolume
+                      description: ixVolume (Dataset created automatically by the system)
+              - variable: datasetName
+                label: Dataset Name
+                schema:
+                  type: string
+                  show_if: [["type", "=", "ixVolume"]]
+                  required: true
+                  hidden: true
+                  immutable: true
+                  default: "downloads-incomplete"
                   $ref:
                     - "normalize/ixVolume"
               - variable: hostPath
