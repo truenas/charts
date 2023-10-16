@@ -12,9 +12,9 @@ transmissionNetwork:
 transmissionStorage:
   config:
     type: pvc
-  downloads-complete:
+  downloadsComplete:
     type: pvc
-  downloads-incomplete:
+  downloadsIncomplete:
     type: pvc
   additionalStorages:
   - type: pvc
