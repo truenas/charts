@@ -30,9 +30,9 @@ persistence:
     targetSelector:
       transmission:
         transmission:
-          mountPath: /downloads/inccomplete
+          mountPath: /downloads/incomplete
         01-permissions:
-          mountPath: /mnt/directories/inccomplete
+          mountPath: /mnt/directories/incomplete
   {{- range $idx, $storage := .Values.transmissionStorage.additionalStorages }}
   {{ printf "transmission-%v" (int $idx) }}:
     enabled: true
