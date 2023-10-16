@@ -5,7 +5,7 @@ kind: ConfigMap
 metadata:
   name: portal
 data:
-  path: "/"
+  path: "/transmission/web"
   port: {{ .Values.transmissionNetwork.webPort | quote }}
   protocol: http
   host: $node_ip
