@@ -4,6 +4,10 @@ sonarrConfig:
       value: 200
     - name: TRANSMISSION__SPEED_LIMIT_UP
       value: 100
+    - name: TRANSMISSION__RPC_PASSWORD
+      value: "password"
+    - name: TRANSMISSION__RPC_USERNAME
+      value: "username"
 
 transmissionNetwork:
   webPort: 31000
