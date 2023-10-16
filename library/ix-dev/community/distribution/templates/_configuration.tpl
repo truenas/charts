@@ -19,8 +19,8 @@ configmap:
       REGISTRY_HTTP_TLS_KEY: /certs/tls.key
       {{- end -}}
       {{- if .Values.distributionConfig.basicAuthUsers }}
-      REGISTRY_HTPASSWD_REALM: basic-realm
-      REGISTRY_HTPASSWD_PATH: /auth/htpasswd
+      REGISTRY_AUTH_HTPASSWD_REALM: basic-realm
+      REGISTRY_AUTH_HTPASSWD_PATH: /auth/htpasswd
       {{- end }}
 
 secret:

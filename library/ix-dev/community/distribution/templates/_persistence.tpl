@@ -10,6 +10,8 @@ persistence:
       distribution:
         distribution:
           mountPath: /var/lib/registry
+        01-permissions:
+          mountPath: /mnt/directories/registry
   {{- end }}
 
   tmp:
@@ -29,6 +31,8 @@ persistence:
       distribution:
         distribution:
           mountPath: {{ $storage.mountPath }}
+        01-permissions:
+          mountPath: /mnt/directories{{ $storage.mountPath }}
   {{- end -}}
 
   {{- if .Values.distributionConfig.basicAuthUsers }}
