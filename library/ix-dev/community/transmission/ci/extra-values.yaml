@@ -8,6 +8,8 @@ sonarrConfig:
       value: "password"
     - name: TRANSMISSION__RPC_USERNAME
       value: "username"
+    - name: TRANSMISSION__RPC_AUTHENTICATION_REQUIRED
+      value: "true"
 
 transmissionNetwork:
   webPort: 31000
