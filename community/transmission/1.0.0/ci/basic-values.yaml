@@ -1,0 +1,15 @@
+transmissionNetwork:
+  webPort: 31000
+  peerPort: 31001
+
+transmissionRunAs:
+  user: 1000
+  group: 1000
+
+transmissionStorage:
+  config:
+    type: pvc
+  downloadsComplete:
+    type: pvc
+  downloadsIncomplete:
+    type: pvc
