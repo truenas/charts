@@ -14,6 +14,7 @@ workload:
           securityContext:
             runAsUser: 33
             runAsGroup: 33
+            readOnlyRootFilesystem: false
             capabilities:
               add:
                 - NET_BIND_SERVICE
