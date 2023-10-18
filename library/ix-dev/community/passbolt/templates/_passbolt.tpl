@@ -32,21 +32,26 @@ workload:
           {{ end }}
           probes:
             {{- $port := 8080 -}}
+            {{- $protocol := "http" -}}
             {{- if .Values.passboltNetwork.certificateID -}}
               {{- $port = 4433 -}}
+              {{- $protocol = "https" -}}
             {{- end }}
             liveness:
               enabled: true
-              type: tcp
+              type: {{ $protocol }}
               port: {{ $port }}
+              path: /
             readiness:
               enabled: true
-              type: tcp
+              type: {{ $protocol }}
               port: {{ $port }}
+              path: /
             startup:
               enabled: true
-              type: tcp
+              type: {{ $protocol }}
               port: {{ $port }}
+              path: /
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
                                                         "UID" 33
