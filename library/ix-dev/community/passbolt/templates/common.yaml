@@ -6,9 +6,6 @@
 {{- $_ := mustMergeOverwrite .Values (include "passbolt.service" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "passbolt.workload" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "passbolt.mariadb.workload" $ | fromYaml) -}}
-{{- if .Values.wpConfig.enableCronJob -}}
-  {{- $_ := mustMergeOverwrite .Values (include "passbolt.cron" $ | fromYaml) -}}
-{{- end -}}
 
 {{/* Create the configmap for portal manually*/}}
 {{- include "passbolt.portal" $ -}}

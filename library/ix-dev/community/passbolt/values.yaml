@@ -1,0 +1,32 @@
+image:
+  repository: passbolt/passbolt
+  pullPolicy: IfNotPresent
+  tag: 4.3.0-1-ce-non-root
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+passboltConfig:
+  additionalEnvs: []
+
+passboltNetwork:
+  webPort: 30097
+  certificateID:
+  hostNetwork: false
+
+passboltStorage:
+  gpg:
+    type: ixVolume
+    datasetName: gpg
+  jwt:
+    type: ixVolume
+    datasetName: jwt
+  mariadbData:
+    type: ixVolume
+    datasetName: mariadbData
+  mariadbBackup:
+    type: ixVolume
+    datasetName: mariadbBackup
+  additionalStorages: []

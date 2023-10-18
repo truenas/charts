@@ -1,4 +1,4 @@
-{{- define "wordpress.mariadb.workload" -}}
+{{- define "passbolt.mariadb.workload" -}}
 workload:
 {{- include "ix.v1.common.app.mariadb" (dict "secretName" "mariadb-creds"
                                               "resources" .Values.resources

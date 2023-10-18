@@ -1,0 +1,12 @@
+passboltStorage:
+  gpg:
+    type: pvc
+  jwt:
+    type: pvc
+  mariadbData:
+    type: pvc
+  mariadbBackup:
+    type: emptyDir
+
+passboltNetwork:
+  webPort: 31000
