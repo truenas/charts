@@ -18,7 +18,20 @@ persistence:
       passbolt:
         passbolt:
           mountPath: /etc/passbolt/jwt
-
+  tmp:
+    enabled: true
+    type: emptyDir
+    targetSelector:
+      passbolt:
+        passbolt:
+          mountPath: /tmp
+  varrun:
+    enabled: true
+    type: emptyDir
+    targetSelector:
+      passbolt:
+        passbolt:
+          mountPath: /var/run
   {{- range $idx, $storage := .Values.passboltStorage.additionalStorages }}
   {{ printf "passbolt-%v" (int $idx) }}:
     enabled: true
@@ -32,13 +45,6 @@ persistence:
         01-permissions:
           mountPath: /mnt/directories{{ $storage.mountPath }}
   {{- end }}
-  tmp:
-    enabled: true
-    type: emptyDir
-    targetSelector:
-      passbolt:
-        passbolt:
-          mountPath: /tmp
 
   mariadbdata:
     enabled: true
