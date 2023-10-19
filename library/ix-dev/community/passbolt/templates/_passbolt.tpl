@@ -12,8 +12,8 @@ workload:
           primary: true
           imageSelector: image
           securityContext:
-            runAsUser: 33
-            runAsGroup: 33
+            runAsUser: 568
+            runAsGroup: 568
             readOnlyRootFilesystem: false
           envFrom:
             - secretRef:
@@ -51,32 +51,9 @@ workload:
               path: /healthcheck/status
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
-                                                        "UID" 33
-                                                        "GID" 33
+                                                        "UID" 568
+                                                        "GID" 568
                                                         "type" "install") | nindent 8 }}
       {{- include "ix.v1.common.app.mariadbWait" (dict "name" "02-mariadb-wait"
                                                        "secretName" "mariadb-creds") | nindent 8 }}
-      {{- if .Release.IsInstall }}
-        03-init-user:
-          enabled: true
-          type: init
-          imageSelector: image
-          securityContext:
-            runAsUser: 33
-            runAsGroup: 33
-            readOnlyRootFilesystem: false
-          envFrom:
-            - secretRef:
-                name: passbolt-creds
-            - configMapRef:
-                name: passbolt-config
-          command:
-            - /bin/sh
-            - -c
-            - |
-              /usr/share/php/passbolt/bin/cake passbolt register_user -r admin \
-              -f {{ .Values.passboltConfig.adminFirstName }} \
-              -l {{ .Values.passboltConfig.adminLastName }} \
-              -u {{ .Values.passboltConfig.adminEmail }}
-      {{- end -}}
 {{- end -}}
