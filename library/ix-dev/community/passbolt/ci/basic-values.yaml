@@ -1,3 +1,13 @@
+
+passboltNetwork:
+  webPort: 31000
+  appUrl: http://localhost:31000
+
+passboltConfig:
+  adminEmail: admin@example.com
+  adminFirstName: John
+  adminLastName: Doe
+
 passboltStorage:
   gpg:
     type: pvc
@@ -7,6 +17,3 @@ passboltStorage:
     type: pvc
   mariadbBackup:
     type: emptyDir
-
-passboltNetwork:
-  webPort: 31000

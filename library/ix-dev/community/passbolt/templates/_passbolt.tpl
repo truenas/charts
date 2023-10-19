@@ -15,9 +15,6 @@ workload:
             runAsUser: 33
             runAsGroup: 33
             readOnlyRootFilesystem: false
-            capabilities:
-              add:
-                - NET_BIND_SERVICE
           envFrom:
             - secretRef:
                 name: passbolt-creds
@@ -41,22 +38,45 @@ workload:
               enabled: true
               type: {{ $protocol }}
               port: {{ $port }}
-              path: /
+              path: /healthcheck/status
             readiness:
               enabled: true
               type: {{ $protocol }}
               port: {{ $port }}
-              path: /
+              path: /healthcheck/status
             startup:
               enabled: true
               type: {{ $protocol }}
               port: {{ $port }}
-              path: /
+              path: /healthcheck/status
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
                                                         "UID" 33
                                                         "GID" 33
                                                         "type" "install") | nindent 8 }}
-      {{- include "ix.v1.common.app.mariadbWait" (dict "name" "mariadb-wait"
+      {{- include "ix.v1.common.app.mariadbWait" (dict "name" "02-mariadb-wait"
                                                        "secretName" "mariadb-creds") | nindent 8 }}
+      {{- if .Release.IsInstall }}
+        03-init-user:
+          enabled: true
+          type: init
+          imageSelector: image
+          securityContext:
+            runAsUser: 33
+            runAsGroup: 33
+            readOnlyRootFilesystem: false
+          envFrom:
+            - secretRef:
+                name: passbolt-creds
+            - configMapRef:
+                name: passbolt-config
+          command:
+            - /bin/sh
+            - -c
+            - |
+              /usr/share/php/passbolt/bin/cake passbolt register_user -r admin \
+              -f {{ .Values.passboltConfig.adminFirstName }} \
+              -l {{ .Values.passboltConfig.adminLastName }} \
+              -u {{ .Values.passboltConfig.adminEmail }}
+      {{- end -}}
 {{- end -}}
