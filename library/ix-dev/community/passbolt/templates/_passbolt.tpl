@@ -12,8 +12,8 @@ workload:
           primary: true
           imageSelector: image
           securityContext:
-            runAsUser: 568
-            runAsGroup: 568
+            runAsUser: 33
+            runAsGroup: 33
             readOnlyRootFilesystem: false
           envFrom:
             - secretRef:
@@ -51,8 +51,8 @@ workload:
               path: /healthcheck/status
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
-                                                        "UID" 568
-                                                        "GID" 568
+                                                        "UID" 33
+                                                        "GID" 33
                                                         "type" "install") | nindent 8 }}
       {{- include "ix.v1.common.app.mariadbWait" (dict "name" "02-mariadb-wait"
                                                        "secretName" "mariadb-creds") | nindent 8 }}
