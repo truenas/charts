@@ -4,7 +4,7 @@ description: File Browser provides a file managing interface within a specified 
 annotations:
   title: File Browser
 type: application
-version: 1.0.11
+version: 1.0.12
 apiVersion: v2
 appVersion: 2.25.0
 kubeVersion: '>=1.16.0-0'
@@ -17,7 +17,7 @@ dependencies:
     repository: file://../../../common
     version: 1.1.1
 home: https://filebrowser.org
-icon: https://raw.githubusercontent.com/filebrowser/logo/master/banner.png
+icon: https://media.sys.truenas.net/apps/filebrowser/icons/icon.png
 sources:
   - https://github.com/filebrowser/filebrowser
   - https://github.com/truenas/charts/tree/master/library/ix-dev/community/filebrowser

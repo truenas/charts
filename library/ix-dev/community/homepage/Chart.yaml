@@ -3,7 +3,7 @@ description: Homepage is a modern, secure, highly customizable application dashb
 annotations:
   title: Homepage
 type: application
-version: 1.0.12
+version: 1.0.13
 apiVersion: v2
 appVersion: 0.7.1
 kubeVersion: '>=1.16.0-0'
@@ -16,7 +16,7 @@ dependencies:
     repository: file://../../../common
     version: 1.1.1
 home: https://gethomepage.dev/
-icon: https://gethomepage.dev/favicon.svg
+icon: https://media.sys.truenas.net/apps/homepage/icons/icon.png
 sources:
   - https://gethomepage.dev/
   - https://github.com/truenas/charts/tree/master/community/homepage

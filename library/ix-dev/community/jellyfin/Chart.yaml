@@ -4,7 +4,7 @@ description: Jellyfin is a Free Software Media System that puts you in control o
 annotations:
   title: Jellyfin
 type: application
-version: 1.0.14
+version: 1.0.15
 apiVersion: v2
 appVersion: 10.8.11
 kubeVersion: '>=1.16.0-0'
@@ -17,7 +17,7 @@ dependencies:
     repository: file://../../../common
     version: 1.1.1
 home: https://jellyfin.org/
-icon: https://jellyfin.org/images/logo.svg
+icon: https://media.sys.truenas.net/apps/jellyfin/icons/icon.svg
 sources:
   - https://hub.docker.com/r/jellyfin/jellyfin
   - https://github.com/truenas/charts/tree/master/community/jellyfin

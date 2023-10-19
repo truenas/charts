@@ -4,7 +4,7 @@ description: Free and open source, powerful network-wide ads & trackers blocking
 annotations:
   title: AdGuard Home
 type: application
-version: 1.0.22
+version: 1.0.23
 apiVersion: v2
 appVersion: 0.107.39
 kubeVersion: '>=1.16.0-0'
@@ -17,7 +17,7 @@ dependencies:
     repository: file://../../../common
     version: 1.1.1
 home: https://github.com/AdguardTeam/AdGuardHome
-icon: https://github.com/AdguardTeam/AdGuardHome/raw/master/doc/adguard_home_darkmode.svg
+icon: https://media.sys.truenas.net/apps/adguard-home/icons/icon.svg
 sources:
   - https://github.com/AdguardTeam/AdGuardHome
   - https://github.com/truenas/charts/tree/master/community/adguard-home

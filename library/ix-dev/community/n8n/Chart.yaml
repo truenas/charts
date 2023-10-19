@@ -3,7 +3,7 @@ description: n8n is an extendable workflow automation tool.
 annotations:
   title: n8n
 type: application
-version: 1.0.10
+version: 1.0.11
 apiVersion: v2
 appVersion: 1.11.1
 kubeVersion: '>=1.16.0-0'
@@ -16,7 +16,7 @@ dependencies:
     repository: file://../../../common
     version: 1.1.1
 home: https://n8n.io/
-icon: https://avatars.githubusercontent.com/u/45487711
+icon: https://media.sys.truenas.net/apps/n8n/icons/icon.png
 sources:
   - https://github.com/n8n-io/n8n
   - https://github.com/truenas/charts/tree/master/community/n8n

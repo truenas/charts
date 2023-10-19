@@ -3,7 +3,7 @@ description: Real-time performance monitoring, done right!
 annotations:
   title: Netdata
 type: application
-version: 1.0.34
+version: 1.0.35
 apiVersion: v2
 appVersion: v1.43.0
 kubeVersion: '>=1.16.0-0'
@@ -16,7 +16,7 @@ dependencies:
     repository: file://../../../common/2304.0.1
     version: 2304.0.1
 home: https://www.netdata.cloud/
-icon: https://netdata.github.io/helmchart/logo.png
+icon: https://media.sys.truenas.net/apps/netdata/icons/icon.png
 sources:
   - https://github.com/netdata/helmchart
   - https://github.com/netdata/netdata
