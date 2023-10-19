@@ -5,7 +5,7 @@ workload:
     primary: true
     type: Deployment
     podSpec:
-      hostNetwork: false
+      hostNetwork: {{ .Values.passboltNetwork.hostNetwork }}
       containers:
         passbolt:
           enabled: true
