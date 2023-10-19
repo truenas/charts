@@ -1,9 +1,8 @@
-
 passboltNetwork:
   webPort: 31000
-  appUrl: http://localhost:31000
 
 passboltConfig:
+  appUrl: http://localhost:31000
   adminEmail: admin@example.com
   adminFirstName: John
   adminLastName: Doe

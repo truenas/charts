@@ -36,7 +36,7 @@ configmap:
   passbolt-config:
     enabled: true
     data:
-      APP_FULL_BASE_URL:
+      APP_FULL_BASE_URL: {{ .Values.passboltConfig.appUrl }}
       GNUPGHOME: /var/lib/passbolt/.gnupg
       PASSBOLT_GPG_SERVER_KEY_PUBLIC: /etc/passbolt/gpg/serverkey.asc
       PASSBOLT_GPG_SERVER_KEY_PRIVATE: /etc/passbolt/gpg/serverkey_private.asc

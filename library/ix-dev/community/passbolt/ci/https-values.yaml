@@ -1,12 +1,11 @@
-
 passboltConfig:
+  appUrl: https://localhost:31000
   adminEmail: admin@example.com
   adminFirstName: John
   adminLastName: Doe
 
 passboltNetwork:
   webPort: 31000
-  appUrl: https://localhost:31000
   certificateID: 1
 
 passboltStorage:
