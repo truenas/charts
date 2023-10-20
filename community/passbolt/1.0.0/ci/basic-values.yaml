@@ -1,0 +1,15 @@
+passboltNetwork:
+  webPort: 31000
+
+passboltConfig:
+  appUrl: http://localhost:31000
+
+passboltStorage:
+  gpg:
+    type: pvc
+  jwt:
+    type: pvc
+  mariadbData:
+    type: pvc
+  mariadbBackup:
+    type: emptyDir
