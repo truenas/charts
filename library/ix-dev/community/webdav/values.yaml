@@ -1,7 +1,7 @@
 image:
   repository: httpd
   pullPolicy: IfNotPresent
-  tag: '2.4.57'
+  tag: 2.4.58
 
 resources:
   limits:
@@ -19,7 +19,7 @@ webdavNetwork:
   httpPort: 30034
   https: false
   httpsPort: 30035
-  certificateID: null
+  certificateID:
 webdavRunAs:
   user: 568
   group: 568
