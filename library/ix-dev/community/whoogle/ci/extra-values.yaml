@@ -1,4 +1,9 @@
 whoogleConfig:
+  redirects:
+  - src: domain.tld
+    dst: other-domain.tld
+  - src: example.com
+    dst: other-example.com
   additionalEnvs:
     - name: WHOOGLE_USER
       value: some-user
@@ -9,8 +14,6 @@ whoogleNetwork:
   webPort: 31000
 
 whoogleStorage:
-#   config:
-#     type: pvc
   additionalStorages:
   - type: pvc
     mountPath: /data1

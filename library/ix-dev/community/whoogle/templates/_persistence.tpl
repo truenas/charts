@@ -2,6 +2,8 @@
 persistence:
   config:
     enabled: true
+    # Upstream also has this dir
+    # in an tmpfs directory
     type: emptyDir
     targetSelector:
       whoogle:

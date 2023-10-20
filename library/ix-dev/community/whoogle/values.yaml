@@ -9,6 +9,7 @@ resources:
     memory: 8Gi
 
 whoogleConfig:
+  redirects: []
   additionalEnvs: []
 
 whoogleNetwork:
@@ -16,7 +17,4 @@ whoogleNetwork:
   hostNetwork: false
 
 whoogleStorage:
-  config:
-    type: ixVolume
-    datasetName: config
   additionalStorages: []

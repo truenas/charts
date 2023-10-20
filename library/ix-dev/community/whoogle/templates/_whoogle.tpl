@@ -1,4 +1,8 @@
 {{- define "whoogle.workload" -}}
+  {{- $redirects := list -}}
+  {{- range $r := .Values.whoogleConfig.redirects -}}
+    {{- $redirects = append $redirects (printf "%s:%s" $r.src $r.dst) -}}
+  {{- end }}
 workload:
   whoogle:
     enabled: true
@@ -19,6 +23,9 @@ workload:
             readOnlyRootFilesystem: false
           env:
             EXPOSE_PORT: {{ .Values.whoogleNetwork.webPort }}
+            {{- with $redirects }}
+            WHOOGLE_REDIRECTS: {{ join "," $redirects }}
+            {{- end -}}
           {{ with .Values.whoogleConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}

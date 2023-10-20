@@ -6,3 +6,5 @@
 > This is required in order to apply the correct permissions to the `Whoogle` directories.
 > Afterward, the `Whoogle` container will run as a **non**-root user (`927`).
 > All mounted storage(s) will be `chown`ed only if the parent directory does not match the configured user.
+
+See [Whoogle's Docs](https://github.com/benbusby/whoogle-search?tab=readme-ov-file#environment-variables) for a list of available environment variables.
