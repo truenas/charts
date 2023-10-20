@@ -63,6 +63,13 @@ questions:
     schema:
       type: dict
       attrs:
+        - variable: hostNetwork
+          label: Host Network
+          description: |
+            Bind to the host network. It's recommended to keep this disabled.</br>
+          schema:
+            type: boolean
+            default: false
         - variable: webPort
           label: Web Port
           description: The port for the Passbolt WebUI.
@@ -73,13 +80,6 @@ questions:
             min: 9000
             max: 65535
             required: true
-        - variable: hostNetwork
-          label: Host Network
-          description: |
-            Bind to the host network. It's recommended to keep this disabled.</br>
-          schema:
-            type: boolean
-            default: false
         - variable: certificateID
           label: Certificate
           description: The certificate to use for Passbolt.
@@ -161,7 +161,7 @@ questions:
                   required: true
                   hidden: true
                   immutable: true
-                  default: gpg
+                  default: jwt
                   $ref:
                     - "normalize/ixVolume"
               - variable: hostPath

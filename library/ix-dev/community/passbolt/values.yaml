@@ -37,7 +37,7 @@ notes:
     ## Register admin user
 
     Connect to the container's shell and run the following command replacing the
-    values (user@example.com, first_name, last_name) with your own values.
+    values (`user@example.com`, `first_name`, `last_name`) with your own values.
 
     ```shell
     /usr/share/php/passbolt/bin/cake passbolt register_user -r admin \

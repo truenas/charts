@@ -9,6 +9,8 @@ persistence:
       passbolt:
         passbolt:
           mountPath: /etc/passbolt/gpg
+        01-permissions:
+          mountPath: /mnt/directories/gpg
   jwt:
     enabled: true
     type: {{ .Values.passboltStorage.jwt.type }}
@@ -18,6 +20,8 @@ persistence:
       passbolt:
         passbolt:
           mountPath: /etc/passbolt/jwt
+        01-permissions:
+          mountPath: /mnt/directories/jwt
   tmp:
     enabled: true
     type: emptyDir
