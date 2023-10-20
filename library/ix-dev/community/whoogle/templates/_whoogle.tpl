@@ -6,7 +6,8 @@ workload:
     type: Deployment
     podSpec:
       hostNetwork: {{ .Values.whoogleNetwork.hostNetwork }}
-      fsGroup: 927
+      securityContext:
+        fsGroup: 927
       containers:
         whoogle:
           enabled: true
