@@ -21,7 +21,7 @@ portals:
     path: "$kubernetes-resource_configmap_portal_path"
 
 questions:
-  - variable: WhoogleConfig
+  - variable: whoogleConfig
     label: ""
     group: Whoogle Configuration
     schema:
@@ -78,7 +78,7 @@ questions:
                         type: string
                         required: true
 
-  - variable: WhoogleNetwork
+  - variable: whoogleNetwork
     label: ""
     group: Network Configuration
     schema:
@@ -101,7 +101,7 @@ questions:
             type: boolean
             default: false
 
-  - variable: WhoogleStorage
+  - variable: whoogleStorage
     label: ""
     group: Storage Configuration
     schema:
