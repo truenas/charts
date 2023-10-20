@@ -1,16 +1,5 @@
 {{- define "whoogle.persistence" -}}
 persistence:
-  # config:
-  #   enabled: true
-  #   type: {{ .Values.whoogleStorage.config.type }}
-  #   datasetName: {{ .Values.whoogleStorage.config.datasetName | default "" }}
-  #   hostPath: {{ .Values.whoogleStorage.config.hostPath | default "" }}
-  #   targetSelector:
-  #     whoogle:
-  #       whoogle:
-  #         mountPath: /config
-  #       01-permissions:
-  #         mountPath: /mnt/directories/config
   config:
     enabled: true
     type: emptyDir
@@ -39,6 +28,8 @@ persistence:
       whoogle:
         whoogle:
           mountPath: /var/lib/tor
+        # emptyDir is by default 0:fsGroup
+        # But for this directory we need to set it to 927:927
         01-permissions:
           mountPath: /mnt/directories/varlibtor
   {{- range $idx, $storage := .Values.whoogleStorage.additionalStorages }}
