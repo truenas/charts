@@ -15,10 +15,6 @@ whoogleNetwork:
   webPort: 30098
   hostNetwork: false
 
-whoogleRunAs:
-  user: 568
-  group: 568
-
 whoogleStorage:
   config:
     type: ixVolume
