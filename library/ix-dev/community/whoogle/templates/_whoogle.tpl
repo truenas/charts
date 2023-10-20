@@ -14,6 +14,7 @@ workload:
           securityContext:
             runAsUser: {{ .Values.whoogleRunAs.user }}
             runAsGroup: {{ .Values.whoogleRunAs.group }}
+            readOnlyRootFilesystem: false
           env:
             EXPOSE_PORT: {{ .Values.whoogleNetwork.webPort }}
           {{ with .Values.whoogleConfig.additionalEnvs }}
