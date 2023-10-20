@@ -1,0 +1,26 @@
+image:
+  repository: benbusby/whoogle-search
+  pullPolicy: IfNotPresent
+  tag: 0.3.7.2260
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+whoogleConfig:
+  additionalEnvs: []
+
+whoogleNetwork:
+  webPort: 30098
+  hostNetwork: false
+
+whoogleRunAs:
+  user: 568
+  group: 568
+
+whoogleStorage:
+  config:
+    type: ixVolume
+    datasetName: config
+  additionalStorages: []
