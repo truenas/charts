@@ -39,6 +39,8 @@ persistence:
       whoogle:
         whoogle:
           mountPath: /var/lib/tor
+        01-permissions:
+          mountPath: /mnt/directories/varlibtor
   {{- range $idx, $storage := .Values.whoogleStorage.additionalStorages }}
   {{ printf "whoogle-%v" (int $idx) }}:
     enabled: true
