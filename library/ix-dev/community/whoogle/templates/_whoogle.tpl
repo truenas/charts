@@ -12,8 +12,8 @@ workload:
           primary: true
           imageSelector: image
           securityContext:
-            runAsUser: {{ .Values.whoogleRunAs.user }}
-            runAsGroup: {{ .Values.whoogleRunAs.group }}
+            runAsUser: 102
+            runAsGroup: 102
             readOnlyRootFilesystem: false
           env:
             EXPOSE_PORT: {{ .Values.whoogleNetwork.webPort }}
@@ -42,8 +42,8 @@ workload:
               path: /healthz
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
-                                                        "UID" .Values.whoogleRunAs.user
-                                                        "GID" .Values.whoogleRunAs.group
+                                                        "UID" 102
+                                                        "GID" 102
                                                         "mode" "check"
                                                         "type" "init") | nindent 8 }}
 {{- end -}}
