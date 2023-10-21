@@ -1,25 +1,22 @@
 image:
-  repository: gotson/komga
+  repository: searxng/searxng
   pullPolicy: IfNotPresent
-  tag: 1.6.1
+  tag: 2023.10.20-01b5b9cb8
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-komgaConfig:
+searxngConfig:
+  instanceName: SearXNG
   additionalEnvs: []
 
-komgaNetwork:
-  webPort: 30048
+searxngNetwork:
+  webPort: 30053
   hostNetwork: false
 
-komgaRunAs:
-  user: 568
-  group: 568
-
-komgaStorage:
+searxngStorage:
   config:
     type: ixVolume
     datasetName: config

@@ -1,22 +1,23 @@
 image:
-  repository: searxng/searxng
+  repository: recyclarr/recyclarr
   pullPolicy: IfNotPresent
-  tag: 2023.10.13-efada7cba
+  tag: 6.0.2
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-searxngConfig:
-  instanceName: SearXNG
+recyclarrConfig:
+  createConfig: true
+  cronSchedule: '@daily'
   additionalEnvs: []
 
-searxngNetwork:
-  webPort: 30053
-  hostNetwork: false
+recyclarrRunAs:
+  user: 568
+  group: 568
 
-searxngStorage:
+recyclarrStorage:
   config:
     type: ixVolume
     datasetName: config
