@@ -25,6 +25,36 @@ questions:
     schema:
       type: dict
       attrs:
+        - variable: defaultAdminEmail
+          label: Default Admin Email
+          description: The default admin email for Planka.
+          schema:
+            type: string
+            default: ""
+        - variable: defaultAdminName
+          label: Default Admin Name
+          description: The default admin name for Planka.
+          schema:
+            type: string
+            default: ""
+            show_if: [["defaultAdminEmail", "!=", ""]]
+            required: true
+        - variable: defaultAdminPassword
+          label: Default Admin Password
+          description: The default admin password for Planka.
+          schema:
+            type: string
+            default: ""
+            show_if: [["defaultAdminEmail", "!=", ""]]
+            required: true
+        - variable: defaultAdminUsername
+          label: Default Admin Username
+          description: The default admin username for Planka.
+          schema:
+            type: string
+            default: ""
+            show_if: [["defaultAdminEmail", "!=", ""]]
+            required: true
         - variable: baseURL
           label: BaseURL
           description: |
