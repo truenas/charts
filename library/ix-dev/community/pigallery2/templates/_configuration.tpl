@@ -5,7 +5,7 @@ configmap:
     data:
       # While its marked as temporary folder, it is not to be thrown away.
       # It stores the thumbnails and other generated files.
-      Media-tempFolder: /app/data/tmp
+      Media-tempFolder: /app/data/thumbnails
       Media-folder: /app/data/media
       Database-sqlite-DBFileName: sqlite.db
       Database-dbFolder: /app/data/db
