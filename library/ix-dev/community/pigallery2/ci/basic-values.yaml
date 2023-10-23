@@ -1,0 +1,16 @@
+pigalleryNetwork:
+  webPort: 31000
+
+pigalleryRunAs:
+  user: 1000
+  group: 1000
+
+pigalleryStorage:
+  config:
+    type: pvc
+  db:
+    type: pvc
+  media:
+    type: pvc
+  thumbnails:
+    type: pvc
