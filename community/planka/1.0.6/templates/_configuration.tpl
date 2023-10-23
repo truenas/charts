@@ -27,6 +27,12 @@ secret:
     data:
       SECRET_KEY: {{ $secretKey }}
       DATABASE_URL: {{ printf "postgresql://%s" $dbURL }}
+      {{- if .Values.plankaConfig.defaultAdminEmail }}
+      DEFAULT_ADMIN_EMAIL: {{ .Values.plankaConfig.defaultAdminEmail }}
+      DEFAULT_ADMIN_PASSWORD: {{ .Values.plankaConfig.defaultAdminPassword }}
+      DEFAULT_ADMIN_NAME: {{ .Values.plankaConfig.defaultAdminName }}
+      DEFAULT_ADMIN_USERNAME: {{ .Values.plankaConfig.defaultAdminUsername }}
+      {{- end }}
 
   postgres-creds:
     enabled: true

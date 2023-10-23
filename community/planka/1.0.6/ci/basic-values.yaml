@@ -2,6 +2,10 @@ plankaNetwork:
   webPort: 31000
 
 plankaConfig:
+  defaultAdminEmail: admin@example.com
+  defaultAdminName: John Doe
+  defaultAdminPassword: password
+  defaultAdminUsername: admin
   baseURL: http://localhost:31000
 
 plankaStorage:
