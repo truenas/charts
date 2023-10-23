@@ -4,7 +4,7 @@ pigalleryConfig:
     - name: Server-Log-level
       value: debug
     - name: Server-Log-sqlLevel
-      value: debug
+      value: all
 
 pigalleryNetwork:
   webPort: 31000
