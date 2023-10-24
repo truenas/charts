@@ -1,0 +1,13 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "freshrss.configuration" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "freshrss.persistence" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "freshrss.service" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "freshrss.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "freshrss.postgres.workload" $ | fromYaml) -}}
+
+{{/* Create the configmap for portal manually*/}}
+{{- include "freshrss.portal" $ -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}

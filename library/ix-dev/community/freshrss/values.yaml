@@ -1,0 +1,54 @@
+image:
+  repository: freshrss/freshrss
+  pullPolicy: IfNotPresent
+  tag: 1.22.0
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+freshrssConfig:
+  instanceName: freshrss
+  additionalEnvs: []
+
+freshrssNetwork:
+  webPort: 31000
+  hostNetwork: false
+
+freshrssRunAs:
+  user: 568
+  group: 568
+
+freshrssStorage:
+  data:
+    type: ixVolume
+    datasetName: data
+  extensions:
+    type: ixVolume
+    datasetName: extensions
+  additionalStorages: []
+  pgData:
+    type: ixVolume
+    datasetName: pgData
+  pgBackup:
+    type: ixVolume
+    datasetName: pgBackup
+
+notes:
+  custom: |
+    ## Database
+    You can connect to the database using the pgAdmin App from the catalog
+
+    <details>
+      <summary>Database Details</summary>
+
+      - Database: `freshrss`
+      - Username: `freshrss`
+      - Password: `{{ .Values.freshrssDbPass }}`
+      - Host:     `{{ .Values.freshrssDbHost }}.{{ .Release.Namespace }}.svc.cluster.local`
+      - Port:     `5432`
+
+    </details>
+    {{- $_ := unset .Values "freshrssDbPass" }}
+    {{- $_ := unset .Values "freshrssDbHost" }}

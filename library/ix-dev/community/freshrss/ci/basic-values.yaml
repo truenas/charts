@@ -1,0 +1,16 @@
+freshrssNetwork:
+  webPort: 31000
+
+freshrssRunAs:
+  user: 1000
+  group: 1000
+
+freshrssStorage:
+  data:
+    type: pvc
+  extensions:
+    type: pvc
+  pgData:
+    type: pvc
+  pgBackup:
+    type: pvc
