@@ -38,17 +38,17 @@ workload:
               enabled: true
               type: http
               port: {{ .Values.freshrssNetwork.webPort }}
-              path: /i
+              path: /i/
             readiness:
               enabled: true
               type: http
               port: {{ .Values.freshrssNetwork.webPort }}
-              path: /i
+              path: /i/
             startup:
               enabled: true
               type: http
               port: {{ .Values.freshrssNetwork.webPort }}
-              path: /i
+              path: /i/
       initContainers:
       {{- include "ix.v1.common.app.postgresWait" (dict "name" "01-postgres-wait"
                                                         "secretName" "postgres-creds") | nindent 8 }}
