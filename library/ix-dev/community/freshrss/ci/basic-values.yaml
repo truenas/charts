@@ -1,10 +1,6 @@
 freshrssNetwork:
   webPort: 31000
 
-freshrssRunAs:
-  user: 1000
-  group: 1000
-
 freshrssStorage:
   data:
     type: pvc

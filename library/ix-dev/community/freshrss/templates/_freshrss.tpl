@@ -6,14 +6,16 @@ workload:
     type: Deployment
     podSpec:
       hostNetwork: {{ .Values.freshrssNetwork.hostNetwork }}
+      securityContext:
+        fsGroup: 33
       containers:
         freshrss:
           enabled: true
           primary: true
           imageSelector: image
           securityContext:
-            runAsUser: {{ .Values.freshrssRunAs.user }}
-            runAsGroup: {{ .Values.freshrssRunAs.group }}
+            runAsUser: 33
+            runAsGroup: 33
           envFrom:
             - secretRef:
                 name: freshrss-creds
@@ -44,8 +46,8 @@ workload:
               path: /i
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
-                                                        "UID" .Values.freshrssRunAs.user
-                                                        "GID" .Values.freshrssRunAs.group
+                                                        "UID" 33
+                                                        "GID" 33
                                                         "mode" "check"
                                                         "type" "init") | nindent 8 }}
       {{- include "ix.v1.common.app.postgresWait" (dict "name" "02-postgres-wait"

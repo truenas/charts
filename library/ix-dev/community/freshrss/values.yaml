@@ -16,10 +16,6 @@ freshrssNetwork:
   webPort: 31000
   hostNetwork: false
 
-freshrssRunAs:
-  user: 568
-  group: 568
-
 freshrssStorage:
   data:
     type: ixVolume
