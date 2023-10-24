@@ -1,0 +1,13 @@
+pigalleryNetwork:
+  webPort: 30000
+  hostNetwork: true
+
+pigalleryStorage:
+  config:
+    type: pvc
+  db:
+    type: pvc
+  media:
+    type: pvc
+  thumbnails:
+    type: pvc
