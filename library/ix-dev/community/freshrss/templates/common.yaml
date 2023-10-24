@@ -6,6 +6,9 @@
 {{- $_ := mustMergeOverwrite .Values (include "freshrss.service" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "freshrss.workload" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "freshrss.postgres.workload" $ | fromYaml) -}}
+{{- if .Values.freshrssConfig.enableCron -}}
+  {{- $_ := mustMergeOverwrite .Values (include "freshrss.cron" $ | fromYaml) -}}
+{{- end -}}
 
 {{/* Create the configmap for portal manually*/}}
 {{- include "freshrss.portal" $ -}}

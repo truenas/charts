@@ -48,6 +48,6 @@ configmap:
       FRESHRSS_ENV: production
       LISTEN: {{ .Values.freshrssNetwork.webPort | quote }}
       DATA_PATH: /var/www/FreshRSS/data
-
-      #TODO: CRON
+      # We use k8s cron instead of the in-container cron
+      CRON_MIN: ""
 {{- end -}}

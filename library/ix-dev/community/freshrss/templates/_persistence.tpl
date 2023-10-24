@@ -9,8 +9,9 @@ persistence:
       freshrss:
         freshrss:
           mountPath: /var/www/FreshRSS/data
-        01-permissions:
-          mountPath: /mnt/directories/data
+      freshrss-cron:
+        freshrss-cron:
+          mountPath: /var/www/FreshRSS/data
   extensions:
     enabled: true
     type: {{ .Values.freshrssStorage.extensions.type }}
@@ -20,8 +21,12 @@ persistence:
       freshrss:
         freshrss:
           mountPath: /var/www/FreshRSS/extensions
-        01-permissions:
-          mountPath: /mnt/directories/extensions
+      freshrss:
+        freshrss:
+          mountPath: /var/www/FreshRSS/extensions
+      freshrss-cron:
+        freshrss-cron:
+          mountPath: /var/www/FreshRSS/extensions
   tmp:
     enabled: true
     type: emptyDir
@@ -39,8 +44,9 @@ persistence:
       freshrss:
         freshrss:
           mountPath: {{ $storage.mountPath }}
-        01-permissions:
-          mountPath: /mnt/directories{{ $storage.mountPath }}
+      freshrss-cron:
+        freshrss-cron:
+          mountPath: {{ $storage.mountPath }}
   {{- end }}
 
   {{/* Database */}}

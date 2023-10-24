@@ -11,6 +11,8 @@ resources:
 freshrssConfig:
   defaultAdmin: ''
   defaultAdminPass: ''
+  enableCron: false
+  cronSchedule: ''
   additionalEnvs: []
 
 freshrssNetwork:
