@@ -46,9 +46,9 @@ persistence:
   {{/* Database */}}
   postgresdata:
     enabled: true
-    type: {{ .Values.briefkastenStorage.pgData.type }}
-    datasetName: {{ .Values.briefkastenStorage.pgData.datasetName | default "" }}
-    hostPath: {{ .Values.briefkastenStorage.pgData.hostPath | default "" }}
+    type: {{ .Values.freshrss.pgData.type }}
+    datasetName: {{ .Values.freshrss.pgData.datasetName | default "" }}
+    hostPath: {{ .Values.freshrss.pgData.hostPath | default "" }}
     targetSelector:
       # Postgres pod
       postgres:
@@ -61,9 +61,9 @@ persistence:
           mountPath: /mnt/directories/postgres_data
   postgresbackup:
     enabled: true
-    type: {{ .Values.briefkastenStorage.pgBackup.type }}
-    datasetName: {{ .Values.briefkastenStorage.pgBackup.datasetName | default "" }}
-    hostPath: {{ .Values.briefkastenStorage.pgBackup.hostPath | default "" }}
+    type: {{ .Values.freshrss.pgBackup.type }}
+    datasetName: {{ .Values.freshrss.pgBackup.datasetName | default "" }}
+    hostPath: {{ .Values.freshrss.pgBackup.hostPath | default "" }}
     targetSelector:
       # Postgres backup pod
       postgresbackup:
