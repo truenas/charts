@@ -29,10 +29,13 @@ secret:
   freshrss-creds:
     enabled: true
     data:
-      DB_HOST: {{ $dbHost }}
-      DB_BASE: {{ $dbName }}
-      DB_USER: {{ $dbUser }}
-      DB_PASSWORD: {{ $dbPass }}
+      FRESHRSS_INSTALL: |
+        --default_user admin
+        --db-type pgsql
+        --db-base {{ $dbName }}
+        --db-host {{ $dbHost }}
+        --db-user {{ $dbUser }}
+        --db-password {{ $dbPass }}
 configmap:
   freshrss-config:
     enabled: true
@@ -43,3 +46,28 @@ configmap:
 
       #TODO: CRON
 {{- end -}}
+
+# cz
+# de
+# el
+# en-us
+# en
+# es
+# fa
+# fr
+# he
+# hu
+# id
+# it
+# ja
+# ko
+# lv
+# nl
+# oc
+# pl
+# pt-br
+# ru
+# sk
+# tr
+# zh-cn
+# zh-tw
