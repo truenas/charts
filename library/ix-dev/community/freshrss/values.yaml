@@ -9,6 +9,8 @@ resources:
     memory: 8Gi
 
 freshrssConfig:
+  defaultAdmin: ''
+  defaultAdminPass: ''
   additionalEnvs: []
 
 freshrssNetwork:

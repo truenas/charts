@@ -29,13 +29,18 @@ secret:
   freshrss-creds:
     enabled: true
     data:
+      # This is only used on the first install
       FRESHRSS_INSTALL: |
-        --default_user admin
+        --default_user {{ .Values.freshrssConfig.defaultAdmin }}
         --db-type pgsql
         --db-base {{ $dbName }}
         --db-host {{ $dbHost }}
         --db-user {{ $dbUser }}
         --db-password {{ $dbPass }}
+      # This is only used on the first install
+      FRESHRSS_USER: |
+        --user {{ .Values.freshrssConfig.defaultAdmin }}
+        --password {{ .Values.freshrssConfig.defaultAdminPass }}
 configmap:
   freshrss-config:
     enabled: true
@@ -46,28 +51,3 @@ configmap:
 
       #TODO: CRON
 {{- end -}}
-
-# cz
-# de
-# el
-# en-us
-# en
-# es
-# fa
-# fr
-# he
-# hu
-# id
-# it
-# ja
-# ko
-# lv
-# nl
-# oc
-# pl
-# pt-br
-# ru
-# sk
-# tr
-# zh-cn
-# zh-tw
