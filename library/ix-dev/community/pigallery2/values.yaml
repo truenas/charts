@@ -1,0 +1,42 @@
+image:
+  repository: bpatrik/pigallery2
+  pullPolicy: IfNotPresent
+  tag: 2.0.0
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+pigalleryConfig:
+  applicationTitle: PiGallery 2
+  additionalEnvs: []
+
+pigalleryNetwork:
+  webPort: 30099
+  hostNetwork: false
+
+pigalleryRunAs:
+  user: 568
+  group: 568
+
+pigalleryStorage:
+  config:
+    type: ixVolume
+    datasetName: config
+  db:
+    type: ixVolume
+    datasetName: db
+  media:
+    type: ixVolume
+    datasetName: media
+  thumbnails:
+    type: ixVolume
+    datasetName: thumbnails
+  additionalStorages: []
+
+notes:
+  custom: |
+    Default credentials:
+      - Username: `admin`
+      - Password: `admin`
