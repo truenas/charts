@@ -66,6 +66,8 @@ backupChownMode (optional): Whether to chown the backup directory or
         (dict
           "UID" 999
           "GID" 999
+          "type" "install"
+          "containerName" "permissions"
         ) | nindent 6 }}
 
   {{- $enableBackupJob := false -}}
@@ -126,6 +128,7 @@ postgresbackup:
         "GID" 999
         "type" "init"
         "mode" $backupChownMode
+        "containerName" "permissions"
       ) | nindent 6 }}
 {{- end -}}
 
