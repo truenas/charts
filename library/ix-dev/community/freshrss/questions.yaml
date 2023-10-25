@@ -51,6 +51,7 @@ questions:
             default: ""
             required: true
             immutable: true
+            private: true
         - variable: enableCron
           label: Enable Cron
           description: Enable cron for FreshRSS.
