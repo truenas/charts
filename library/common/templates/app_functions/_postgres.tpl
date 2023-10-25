@@ -205,3 +205,21 @@ postgresbackup:
       permissions:
         mountPath: /mnt/directories/postgres_backup
 {{- end -}}
+
+{{/* Returns service entry for postgres */}}
+{{/* Call this template:
+{{ include "ix.v1.common.app.postgresService" . }}
+*/}}
+{{- define "ix.v1.common.app.postgresService" -}}
+postgres:
+  enabled: true
+  type: ClusterIP
+  targetSelector: postgres
+  ports:
+    postgres:
+      enabled: true
+      primary: true
+      port: 5432
+      targetPort: 5432
+      targetSelector: postgres
+{{- end -}}
