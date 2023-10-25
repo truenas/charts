@@ -18,6 +18,7 @@ backupChownMode (optional): Whether to chown the backup directory or
   {{- $backupChownMode := .backupChownMode | default "check" -}}
   {{- $ixChartContext := .ixChartContext -}}
   {{- $resources := (required "Postgres - Resources are required" .resources) }}
+
 {{ $name }}:
   enabled: true
   type: Deployment
@@ -61,20 +62,23 @@ backupChownMode (optional): Whether to chown the backup directory or
               - -c
               - "until pg_isready -U ${POSTGRES_USER} -h localhost; do sleep 2; done"
     initContainers:
-    {{- include "ix.v1.common.app.permissions" (dict "UID" 999 "GID" 999) | nindent 6 }}
-{{- $enableBackupJob := false -}}
-{{- if hasKey $ixChartContext "isUpgrade" -}}
-  {{- if $ixChartContext.isUpgrade -}}
+      {{- include "ix.v1.common.app.permissions"
+        (dict
+          "UID" 999
+          "GID" 999
+        ) | nindent 6 }}
+
+  {{- $enableBackupJob := false -}}
+  {{- if hasKey $ixChartContext "isUpgrade" -}}
+    {{- if $ixChartContext.isUpgrade -}}
+      {{- $enableBackupJob = true -}}
+    {{- end -}}
+  {{- else -}}
+    {{/* If the key is not present in ixChartContext, means we
+      are outside SCALE (Probably CI), let upgrade job run */}}
     {{- $enableBackupJob = true -}}
-  {{- end -}}
-{{- else -}}
-  {{/*
-    If the key is not present in ixChartContext,
-    means we are outside SCALE (Probably CI),
-    let upgrade job run
-  */}}
-  {{- $enableBackupJob = true -}}
-{{- end }}
+  {{- end }}
+
 postgresbackup:
   enabled: {{ $enableBackupJob }}
   type: Job
@@ -116,7 +120,13 @@ postgresbackup:
             pg_dump --dbname=${POSTGRES_URL} --file {{ $backupPath }}/${POSTGRES_DB}_$(date +%Y-%m-%d_%H-%M-%S).sql || echo "Failed to create backup"
             echo "Backup finished"
     initContainers:
-    {{- include "ix.v1.common.app.permissions" (dict "UID" 999 "GID" 999 "type" "init" "mode" $backupChownMode) | nindent 6 }}
+    {{- include "ix.v1.common.app.permissions"
+      (dict
+        "UID" 999
+        "GID" 999
+        "type" "init"
+        "mode" $backupChownMode
+      ) | nindent 6 }}
 {{- end -}}
 
 {{/* Returns a postgres-wait container for waiting for postgres to be ready */}}
@@ -130,6 +140,7 @@ secretName (required): Name of the secret containing the postgres credentials
 {{- define "ix.v1.common.app.postgresWait" -}}
   {{- $name := .name | default "postgres-wait" -}}
   {{- $secretName := (required "Postgres-Wait - Secret Name is required" .secretName) }}
+
 {{ $name }}:
   enabled: true
   type: init
