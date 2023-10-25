@@ -161,3 +161,47 @@ secretName (required): Name of the secret containing the postgres credentials
         sleep 2
       done
 {{- end -}}
+
+{{/* Returns persistence entries for postgres */}}
+{{/* Call this template:
+{{ include "ix.v1.common.app.postgresPersistence" (dict "pgData" .Values.storage.pgData "pgBackup" .Values.storage.pgBackup) }}
+
+pgData (required): Data persistence configuration
+pgBackup (required): Data persistence configuration for backup
+*/}}
+
+{{- define "ix.v1.common.app.postgresPersistence" -}}
+  {{- $data := .pgData -}}
+  {{- $backup := .pgBackup }}
+
+  {{- if not $data -}}
+    {{- fail "Postgres - Data persistence configuration is required" -}}
+  {{- end -}}
+
+  {{- if not $backup -}}
+    {{- fail "Postgres - Backup persistence configuration is required" -}}
+  {{- end -}}
+
+postgresdata:
+  enabled: true
+  type: {{ $data.type }}
+  datasetName: {{ $data.datasetName | default "" }}
+  hostPath: {{ $data.hostPath | default "" }}
+  targetSelector:
+    postgres:
+      postgres:
+        mountPath: /var/lib/postgresql/data
+      permissions:
+        mountPath: /mnt/directories/postgres_data
+postgresbackup:
+  enabled: true
+  type: {{ $backup.type }}
+  datasetName: {{ $backup.datasetName | default "" }}
+  hostPath: {{ $backup.hostPath | default "" }}
+  targetSelector:
+    postgresbackup:
+      postgresbackup:
+        mountPath: /postgres_backup
+      permissions:
+        mountPath: /mnt/directories/postgres_backup
+{{- end -}}
