@@ -329,11 +329,14 @@ questions:
                         type: string
                         required: true
                         default: "ixVolume"
+                        immutable: true
                         enum:
                           - value: "hostPath"
                             description: Host Path (Path that already exists on the system)
                           - value: "ixVolume"
                             description: ixVolume (Dataset created automatically by the system)
+                          - value: "smb-pv-pvc"
+                            description: SMB Share (Mounts a persistent volume claim to a SMB share)
                     - variable: mountPath
                       label: Mount Path
                       description: The path inside the container to mount the storage.
@@ -358,6 +361,50 @@ questions:
                         default: "storage_entry"
                         $ref:
                           - "normalize/ixVolume"
+                    - variable: server
+                      label: Server
+                      description: The server for the SMB share.
+                      schema:
+                        type: string
+                        show_if: [["type", "=", "smb-pv-pvc"]]
+                        required: true
+                    - variable: share
+                      label: Share
+                      description: The share name for the SMB share.
+                      schema:
+                        type: string
+                        show_if: [["type", "=", "smb-pv-pvc"]]
+                        required: true
+                    - variable: domain
+                      label: Domain (Optional)
+                      description: The domain for the SMB share.
+                      schema:
+                        type: string
+                        show_if: [["type", "=", "smb-pv-pvc"]]
+                    - variable: username
+                      label: Username
+                      description: The username for the SMB share.
+                      schema:
+                        type: string
+                        show_if: [["type", "=", "smb-pv-pvc"]]
+                        required: true
+                    - variable: password
+                      label: Password
+                      description: The password for the SMB share.
+                      schema:
+                        type: string
+                        show_if: [["type", "=", "smb-pv-pvc"]]
+                        required: true
+                        private: true
+                    - variable: size
+                      label: Size (in Gi)
+                      description: The size of the volume quota.
+                      schema:
+                        type: int
+                        show_if: [["type", "=", "smb-pv-pvc"]]
+                        required: true
+                        min: 1
+                        default: 1
 
   - variable: resources
     group: Resources Configuration
