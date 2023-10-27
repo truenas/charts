@@ -109,6 +109,7 @@ questions:
                 schema:
                   type: string
                   required: true
+                  immutable: true
                   default: ixVolume
                   enum:
                     - value: hostPath
@@ -147,6 +148,7 @@ questions:
                 schema:
                   type: string
                   required: true
+                  immutable: true
                   default: ixVolume
                   enum:
                     - value: hostPath
@@ -185,6 +187,7 @@ questions:
                 schema:
                   type: string
                   required: true
+                  immutable: true
                   default: ixVolume
                   enum:
                     - value: hostPath
@@ -223,6 +226,7 @@ questions:
                 schema:
                   type: string
                   required: true
+                  immutable: true
                   default: ixVolume
                   enum:
                     - value: hostPath
