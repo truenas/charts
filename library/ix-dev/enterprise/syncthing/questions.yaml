@@ -131,6 +131,7 @@ questions:
                 schema:
                   type: string
                   required: true
+                  immutable: true
                   default: "ixVolume"
                   enum:
                     - value: "hostPath"
@@ -176,10 +177,12 @@ questions:
                       label: Type
                       description: |
                         Host Path: Is a path that already exists on the system.
+                        SMB Share: Mounts a persistent volume claim to a SMB share.
                       schema:
                         type: string
                         required: true
                         default: "hostPath"
+                        immutable: true
                         enum:
                           - value: "hostPath"
                             description: Host Path (Path that already exists on the system)
