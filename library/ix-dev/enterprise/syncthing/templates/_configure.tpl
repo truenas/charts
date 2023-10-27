@@ -26,7 +26,7 @@ configmap:
         done
 
         function setConfig() {
-          syncthing cli --home "$configDir" config $@
+          syncthing cli --home "$configDir" config "$@"
         }
 
         # Now we can use the syncthing cli (wrapper around the API) to set the defaults.
