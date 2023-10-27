@@ -36,6 +36,10 @@ persistence:
           mountPath: /tmp
   {{- range $idx, $storage := .Values.freshrssStorage.additionalStorages }}
   {{ printf "freshrss-%v" (int $idx) }}:
+    {{- $size := "" -}}
+    {{- if $storage.size -}}
+      {{- $size = (printf "%vGi" $storage.size) -}}
+    {{- end }}
     enabled: true
     type: {{ $storage.type }}
     datasetName: {{ $storage.datasetName | default "" }}
