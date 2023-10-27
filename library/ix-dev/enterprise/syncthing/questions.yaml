@@ -176,7 +176,7 @@ questions:
                     - variable: type
                       label: Type
                       description: |
-                        Host Path: Is a path that already exists on the system.
+                        Host Path: Is a path that already exists on the system.</br>
                         SMB Share: Mounts a persistent volume claim to a SMB share.
                       schema:
                         type: string
