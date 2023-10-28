@@ -31,37 +31,10 @@ persistence:
       briefkasten:
         briefkasten:
           mountPath: {{ $storage.mountPath }}
-  {{- end }}
+  {{- end -}}
 
-  {{/* Database */}}
-  postgresdata:
-    enabled: true
-    type: {{ .Values.briefkastenStorage.pgData.type }}
-    datasetName: {{ .Values.briefkastenStorage.pgData.datasetName | default "" }}
-    hostPath: {{ .Values.briefkastenStorage.pgData.hostPath | default "" }}
-    targetSelector:
-      # Postgres pod
-      postgres:
-        # Postgres container
-        postgres:
-          mountPath: /var/lib/postgresql/data
-        # Postgres - Permissions container
-        # Different than the 01-permissions
-        permissions:
-          mountPath: /mnt/directories/postgres_data
-  postgresbackup:
-    enabled: true
-    type: {{ .Values.briefkastenStorage.pgBackup.type }}
-    datasetName: {{ .Values.briefkastenStorage.pgBackup.datasetName | default "" }}
-    hostPath: {{ .Values.briefkastenStorage.pgBackup.hostPath | default "" }}
-    targetSelector:
-      # Postgres backup pod
-      postgresbackup:
-        # Postgres backup container
-        postgresbackup:
-          mountPath: /postgres_backup
-        # Postgres - Permissions container
-        # Different than the 01-permissions
-        permissions:
-          mountPath: /mnt/directories/postgres_backup
+  {{- include "ix.v1.common.app.postgresPersistence"
+      (dict "pgData" .Values.briefkastenStorage.pgData
+            "pgBackup" .Values.briefkastenStorage.pgBackup
+      ) | nindent 2 }}
 {{- end -}}
