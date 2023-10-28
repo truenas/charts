@@ -116,6 +116,7 @@ questions:
                 schema:
                   type: string
                   required: true
+                  immutable: true
                   default: "ixVolume"
                   enum:
                     - value: "hostPath"
@@ -154,6 +155,7 @@ questions:
                 schema:
                   type: string
                   required: true
+                  immutable: true
                   default: "ixVolume"
                   enum:
                     - value: "hostPath"
@@ -192,6 +194,7 @@ questions:
                 schema:
                   type: string
                   required: true
+                  immutable: true
                   default: "ixVolume"
                   enum:
                     - value: "hostPath"
@@ -232,7 +235,8 @@ questions:
                       label: Type
                       description: |
                         ixVolume: Is dataset created automatically by the system.</br>
-                        Host Path: Is a path that already exists on the system.
+                        Host Path: Is a path that already exists on the system.</br>
+                        SMB Share: Is a SMB share that is mounted to a persistent volume claim.
                       schema:
                         type: string
                         required: true
