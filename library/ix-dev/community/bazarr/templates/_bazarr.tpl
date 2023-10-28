@@ -31,17 +31,17 @@ workload:
               enabled: true
               type: http
               port: "{{ .Values.bazarrNetwork.webPort }}"
-              path: /api
+              path: /api/swagger.json
             readiness:
               enabled: true
               type: http
               port: "{{ .Values.bazarrNetwork.webPort }}"
-              path: /api
+              path: /api/swagger.json
             startup:
               enabled: true
               type: http
               port: "{{ .Values.bazarrNetwork.webPort }}"
-              path: /api
+              path: /api/swagger.json
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
                                                         "UID" .Values.bazarrRunAs.user
