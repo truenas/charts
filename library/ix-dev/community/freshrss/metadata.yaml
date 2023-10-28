@@ -1,0 +1,14 @@
+runAsContext:
+  - userName: root
+    groupName: root
+    gid: 0
+    uid: 0
+    description: FreshRSS runs as root user
+capabilities:
+  - name: CHOWN
+    description: FreshRSS is able to chown files.
+  - name: SETGID
+    description: FreshRSS is able to set group ID for it's sub-processes.
+  - name: SETUID
+    description: FreshRSS is able to set user ID for it's sub-processes.
+hostMounts: []
