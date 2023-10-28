@@ -1,0 +1,364 @@
+groups:
+  - name: Deluge Configuration
+    description: Configure Deluge
+  - name: User and Group Configuration
+    description: Configure User and Group for Deluge
+  - name: Network Configuration
+    description: Configure Network for Deluge
+  - name: Storage Configuration
+    description: Configure Storage for Deluge
+  - name: Resources Configuration
+    description: Configure Resources for Deluge
+
+portals:
+  web_portal:
+    protocols:
+      - "$kubernetes-resource_configmap_portal_protocol"
+    host:
+      - "$kubernetes-resource_configmap_portal_host"
+    ports:
+      - "$kubernetes-resource_configmap_portal_port"
+    path: "$kubernetes-resource_configmap_portal_path"
+
+questions:
+  - variable: TZ
+    group: Deluge Configuration
+    label: Timezone
+    schema:
+      type: string
+      default: Etc/UTC
+      required: true
+      $ref:
+        - definitions/timezone
+
+  - variable: delugeConfig
+    label: ""
+    group: Deluge Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: additionalEnvs
+          label: Additional Environment Variables
+          description: Configure additional environment variables for Deluge.
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: env
+                label: Environment Variable
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: name
+                      label: Name
+                      schema:
+                        type: string
+                        required: true
+                    - variable: value
+                      label: Value
+                      schema:
+                        type: string
+                        required: true
+
+  - variable: delugeID
+    label: ""
+    group: User and Group Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: user
+          label: User ID
+          description: he user id that Deluge files will be owned by.
+          schema:
+            type: int
+            min: 2
+            default: 568
+            required: true
+        - variable: group
+          label: Group ID
+          description: The group id that Deluge files will be owned by.
+          schema:
+            type: int
+            min: 2
+            default: 568
+            required: true
+
+  - variable: delugeNetwork
+    label: ""
+    group: Network Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: hostNetwork
+          label: Host Network
+          description: |
+            Bind to the host network. It's recommended to keep this disabled.</br>
+          schema:
+            type: boolean
+            default: false
+        - variable: webPort
+          label: Web Port
+          description: |
+            The port for the Deluge Web UI.</br>
+            (The internal port is always 8112)
+          schema:
+            type: int
+            show_if: [["hostNetwork", "=", false]]
+            default: 30038
+            min: 9000
+            max: 65535
+            required: true
+        - variable: exposeDaemon
+          label: Expose Daemon Port
+          description: Expose the Deluge Daemon port
+          schema:
+            type: boolean
+            default: false
+            show_if: [["hostNetwork", "=", false]]
+        - variable: daemonPort
+          label: Daemon Port
+          description: |
+            The port for the Deluge Daemon.</br>
+            (Internal port is always 58846)
+          schema:
+            type: int
+            show_if: [["exposeDaemon", "=", true]]
+            default: 58846
+            min: 9000
+            max: 65535
+            required: true
+        - variable: torrentPort
+          label: Torrent Port
+          description: |
+            The port for the Deluge Torrent.</br>
+            Applies to both TCP and UDP.
+          schema:
+            type: int
+            default: 30039
+            min: 9000
+            max: 65535
+            required: true
+
+  - variable: delugeStorage
+    label: ""
+    group: Storage Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: config
+          label: Deluge Config Storage
+          description: The path to store Deluge Configuration.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
+                schema:
+                  type: string
+                  required: true
+                  immutable: true
+                  default: "ixVolume"
+                  enum:
+                    - value: "hostPath"
+                      description: Host Path (Path that already exists on the system)
+                    - value: "ixVolume"
+                      description: ixVolume (Dataset created automatically by the system)
+              - variable: datasetName
+                label: Dataset Name
+                schema:
+                  type: string
+                  show_if: [["type", "=", "ixVolume"]]
+                  required: true
+                  hidden: true
+                  immutable: true
+                  default: "config"
+                  $ref:
+                    - "normalize/ixVolume"
+              - variable: hostPath
+                label: Host Path
+                schema:
+                  type: hostpath
+                  show_if: [["type", "=", "hostPath"]]
+                  immutable: true
+                  required: true
+        - variable: downloads
+          label: Deluge Downloads Storage
+          description: The path to store Deluge Downloads.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
+                schema:
+                  type: string
+                  required: true
+                  immutable: true
+                  default: "ixVolume"
+                  enum:
+                    - value: "hostPath"
+                      description: Host Path (Path that already exists on the system)
+                    - value: "ixVolume"
+                      description: ixVolume (Dataset created automatically by the system)
+              - variable: datasetName
+                label: Dataset Name
+                schema:
+                  type: string
+                  show_if: [["type", "=", "ixVolume"]]
+                  required: true
+                  hidden: true
+                  immutable: true
+                  default: "downloads"
+                  $ref:
+                    - "normalize/ixVolume"
+              - variable: hostPath
+                label: Host Path
+                schema:
+                  type: hostpath
+                  show_if: [["type", "=", "hostPath"]]
+                  immutable: true
+                  required: true
+        - variable: additionalStorages
+          label: Additional Storage
+          description: Additional storage for Deluge.
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: storageEntry
+                label: Storage Entry
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: type
+                      label: Type
+                      description: |
+                        ixVolume: Is dataset created automatically by the system.</br>
+                        Host Path: Is a path that already exists on the system.</br>
+                        SMB Share: Is a SMB share that is mounted to a persistent volume claim.
+                      schema:
+                        type: string
+                        required: true
+                        default: "ixVolume"
+                        immutable: true
+                        enum:
+                          - value: "hostPath"
+                            description: Host Path (Path that already exists on the system)
+                          - value: "ixVolume"
+                            description: ixVolume (Dataset created automatically by the system)
+                          - value: "smb-pv-pvc"
+                            description: SMB Share (Mounts a persistent volume claim to a SMB share)
+                    - variable: mountPath
+                      label: Mount Path
+                      description: The path inside the container to mount the storage.
+                      schema:
+                        type: path
+                        required: true
+                    - variable: hostPath
+                      label: Host Path
+                      description: The host path to use for storage.
+                      schema:
+                        type: hostpath
+                        show_if: [["type", "=", "hostPath"]]
+                        required: true
+                    - variable: datasetName
+                      label: Dataset Name
+                      description: The name of the dataset to use for storage.
+                      schema:
+                        type: string
+                        show_if: [["type", "=", "ixVolume"]]
+                        required: true
+                        immutable: true
+                        default: "storage_entry"
+                        $ref:
+                          - "normalize/ixVolume"
+                    - variable: server
+                      label: Server
+                      description: The server for the SMB share.
+                      schema:
+                        type: string
+                        show_if: [["type", "=", "smb-pv-pvc"]]
+                        required: true
+                    - variable: share
+                      label: Share
+                      description: The share name for the SMB share.
+                      schema:
+                        type: string
+                        show_if: [["type", "=", "smb-pv-pvc"]]
+                        required: true
+                    - variable: domain
+                      label: Domain (Optional)
+                      description: The domain for the SMB share.
+                      schema:
+                        type: string
+                        show_if: [["type", "=", "smb-pv-pvc"]]
+                    - variable: username
+                      label: Username
+                      description: The username for the SMB share.
+                      schema:
+                        type: string
+                        show_if: [["type", "=", "smb-pv-pvc"]]
+                        required: true
+                    - variable: password
+                      label: Password
+                      description: The password for the SMB share.
+                      schema:
+                        type: string
+                        show_if: [["type", "=", "smb-pv-pvc"]]
+                        required: true
+                        private: true
+                    - variable: size
+                      label: Size (in Gi)
+                      description: The size of the volume quota.
+                      schema:
+                        type: int
+                        show_if: [["type", "=", "smb-pv-pvc"]]
+                        required: true
+                        min: 1
+                        default: 1
+
+  - variable: resources
+    group: Resources Configuration
+    label: ""
+    schema:
+      type: dict
+      attrs:
+        - variable: limits
+          label: Limits
+          schema:
+            type: dict
+            attrs:
+              - variable: cpu
+                label: CPU
+                description: CPU limit for Deluge.
+                schema:
+                  type: string
+                  max_length: 6
+                  valid_chars: '^(0\.[1-9]|[1-9][0-9]*)(\.[0-9]|m?)$'
+                  valid_chars_error: |
+                    Valid CPU limit formats are</br>
+                    - Plain Integer - eg. 1</br>
+                    - Float - eg. 0.5</br>
+                    - Milicpu - eg. 500m
+                  default: "4000m"
+                  required: true
+              - variable: memory
+                label: Memory
+                description: Memory limit for Deluge.
+                schema:
+                  type: string
+                  max_length: 12
+                  valid_chars: '^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$'
+                  valid_chars_error: |
+                    Valid Memory limit formats are</br>
+                    - Suffixed with E/P/T/G/M/K - eg. 1G</br>
+                    - Suffixed with Ei/Pi/Ti/Gi/Mi/Ki - eg. 1Gi</br>
+                    - Plain Integer in bytes - eg. 1024</br>
+                    - Exponent - eg. 134e6
+                  default: "8Gi"
+                  required: true

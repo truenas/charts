@@ -1,0 +1,421 @@
+groups:
+  - name: Omada Controller Configuration
+    description: Configure Omada Controller
+  - name: User and Group Configuration
+    description: Configure User and Group for Omada Controller
+  - name: Network Configuration
+    description: Configure Network for Omada Controller
+  - name: Storage Configuration
+    description: Configure Storage for Omada Controller
+  - name: Resources Configuration
+    description: Configure Resources for Omada Controller
+
+portals:
+  web_portal:
+    protocols:
+      - "$kubernetes-resource_configmap_portal_protocol"
+    host:
+      - "$kubernetes-resource_configmap_portal_host"
+    ports:
+      - "$kubernetes-resource_configmap_portal_port"
+    path: "$kubernetes-resource_configmap_portal_path"
+
+questions:
+  - variable: TZ
+    group: Omada Controller Configuration
+    label: Timezone
+    schema:
+      type: string
+      default: Etc/UTC
+      required: true
+      $ref:
+        - definitions/timezone
+
+  - variable: omadaConfig
+    label: ""
+    group: Omada Controller Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: additionalEnvs
+          label: Additional Environment Variables
+          description: Configure additional environment variables for Omada Controller.
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: env
+                label: Environment Variable
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: name
+                      label: Name
+                      schema:
+                        type: string
+                        required: true
+                    - variable: value
+                      label: Value
+                      schema:
+                        type: string
+                        required: true
+
+  - variable: omadaID
+    label: ""
+    group: User and Group Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: user
+          label: User ID
+          description: The user id that Omada Controller files will be owned by.
+          schema:
+            type: int
+            min: 568
+            default: 568
+            required: true
+        - variable: group
+          label: Group ID
+          description: The group id that Omada Controller files will be owned by.
+          schema:
+            type: int
+            min: 568
+            default: 568
+            required: true
+
+  - variable: omadaNetwork
+    label: ""
+    group: Network Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: manageHttpPort
+          label: Manage HTTP Port
+          description: The port to use for Omada Controller HTTP management.
+          schema:
+            type: int
+            default: 30076
+            min: 9000
+            max: 65535
+            required: true
+        - variable: manageHttpsPort
+          label: Manage HTTPS Port
+          description: The port to use for Omada Controller HTTPS management.
+          schema:
+            type: int
+            default: 30077
+            min: 9000
+            max: 65535
+            required: true
+        - variable: portalHttpPort
+          label: Portal HTTP Port
+          description: The port to use for Omada Controller HTTP portal.
+          schema:
+            type: int
+            default: 30078
+            min: 9000
+            max: 65535
+            required: true
+        - variable: portalHttpsPort
+          label: Portal HTTPS Port
+          description: The port to use for Omada Controller HTTPS portal.
+          schema:
+            type: int
+            default: 30079
+            min: 9000
+            max: 65535
+            required: true
+        - variable: appDiscoveryPort
+          label: App Discovery Port
+          description: The port to use for Omada Controller App Discovery.
+          schema:
+            type: int
+            default: 27001
+            min: 9000
+            max: 65535
+            required: true
+        - variable: discoveryPort
+          label: Discovery Port
+          description: The port to use for Omada Controller Discovery.
+          schema:
+            type: int
+            default: 29810
+            min: 9000
+            max: 65535
+            required: true
+        - variable: managerV1Port
+          label: Manager v1 Port
+          description: The port to use for Omada Controller Manager v1.
+          schema:
+            type: int
+            default: 29811
+            min: 9000
+            max: 65535
+            required: true
+        - variable: adoptV1Port
+          label: Adopt v1 Port
+          description: The port to use for Omada Controller Adopt v1.
+          schema:
+            type: int
+            default: 29812
+            min: 9000
+            max: 65535
+            required: true
+        - variable: upgradeV1Port
+          label: Upgrade v1 Port
+          description: The port to use for Omada Controller Upgrade v1.
+          schema:
+            type: int
+            default: 29813
+            min: 9000
+            max: 65535
+            required: true
+        - variable: managerV2Port
+          label: Manager v2 Port
+          description: The port to use for Omada Controller Manager v2.
+          schema:
+            type: int
+            default: 29814
+            min: 9000
+            max: 65535
+            required: true
+        - variable: certificateID
+          label: Certificate
+          description: The certificate to use for Omada Controller </br>
+          schema:
+            type: int
+            "null": true
+            $ref:
+              - "definitions/certificate"
+        - variable: hostNetwork
+          label: Host Network
+          description: |
+            Bind to the host network. </br>s
+            This might be required for specific features to work.
+          schema:
+            type: boolean
+            default: false
+
+  - variable: omadaStorage
+    label: ""
+    group: Storage Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: data
+          label: Omada Controller Data Storage
+          description: The path to store Omada Controller Data.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
+                schema:
+                  type: string
+                  required: true
+                  immutable: true
+                  default: "ixVolume"
+                  enum:
+                    - value: "hostPath"
+                      description: Host Path (Path that already exists on the system)
+                    - value: "ixVolume"
+                      description: ixVolume (Dataset created automatically by the system)
+              - variable: datasetName
+                label: Dataset Name
+                schema:
+                  type: string
+                  show_if: [["type", "=", "ixVolume"]]
+                  required: true
+                  hidden: true
+                  immutable: true
+                  default: "data"
+                  $ref:
+                    - "normalize/ixVolume"
+              - variable: hostPath
+                label: Host Path
+                schema:
+                  type: hostpath
+                  show_if: [["type", "=", "hostPath"]]
+                  immutable: true
+                  required: true
+        - variable: logs
+          label: Omada Controller Logs Storage
+          description: The path to store Omada Controller Logs.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
+                schema:
+                  type: string
+                  required: true
+                  immutable: true
+                  default: "ixVolume"
+                  enum:
+                    - value: "hostPath"
+                      description: Host Path (Path that already exists on the system)
+                    - value: "ixVolume"
+                      description: ixVolume (Dataset created automatically by the system)
+              - variable: datasetName
+                label: Dataset Name
+                schema:
+                  type: string
+                  show_if: [["type", "=", "ixVolume"]]
+                  required: true
+                  hidden: true
+                  immutable: true
+                  default: "logs"
+                  $ref:
+                    - "normalize/ixVolume"
+              - variable: hostPath
+                label: Host Path
+                schema:
+                  type: hostpath
+                  show_if: [["type", "=", "hostPath"]]
+                  immutable: true
+                  required: true
+        - variable: additionalStorages
+          label: Additional Storage
+          description: Additional storage for Omada Controller.
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: storageEntry
+                label: Storage Entry
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: type
+                      label: Type
+                      description: |
+                        ixVolume: Is dataset created automatically by the system.</br>
+                        Host Path: Is a path that already exists on the system.</br>
+                        SMB Share: Is a SMB share that is mounted to a persistent volume claim.
+                      schema:
+                        type: string
+                        required: true
+                        default: "ixVolume"
+                        immutable: true
+                        enum:
+                          - value: "hostPath"
+                            description: Host Path (Path that already exists on the system)
+                          - value: "ixVolume"
+                            description: ixVolume (Dataset created automatically by the system)
+                          - value: "smb-pv-pvc"
+                            description: SMB Share (Mounts a persistent volume claim to a SMB share)
+                    - variable: mountPath
+                      label: Mount Path
+                      description: The path inside the container to mount the storage.
+                      schema:
+                        type: path
+                        required: true
+                    - variable: hostPath
+                      label: Host Path
+                      description: The host path to use for storage.
+                      schema:
+                        type: hostpath
+                        show_if: [["type", "=", "hostPath"]]
+                        required: true
+                    - variable: datasetName
+                      label: Dataset Name
+                      description: The name of the dataset to use for storage.
+                      schema:
+                        type: string
+                        show_if: [["type", "=", "ixVolume"]]
+                        required: true
+                        immutable: true
+                        default: "storage_entry"
+                        $ref:
+                          - "normalize/ixVolume"
+                    - variable: server
+                      label: Server
+                      description: The server for the SMB share.
+                      schema:
+                        type: string
+                        show_if: [["type", "=", "smb-pv-pvc"]]
+                        required: true
+                    - variable: share
+                      label: Share
+                      description: The share name for the SMB share.
+                      schema:
+                        type: string
+                        show_if: [["type", "=", "smb-pv-pvc"]]
+                        required: true
+                    - variable: domain
+                      label: Domain (Optional)
+                      description: The domain for the SMB share.
+                      schema:
+                        type: string
+                        show_if: [["type", "=", "smb-pv-pvc"]]
+                    - variable: username
+                      label: Username
+                      description: The username for the SMB share.
+                      schema:
+                        type: string
+                        show_if: [["type", "=", "smb-pv-pvc"]]
+                        required: true
+                    - variable: password
+                      label: Password
+                      description: The password for the SMB share.
+                      schema:
+                        type: string
+                        show_if: [["type", "=", "smb-pv-pvc"]]
+                        required: true
+                        private: true
+                    - variable: size
+                      label: Size (in Gi)
+                      description: The size of the volume quota.
+                      schema:
+                        type: int
+                        show_if: [["type", "=", "smb-pv-pvc"]]
+                        required: true
+                        min: 1
+                        default: 1
+
+  - variable: resources
+    group: Resources Configuration
+    label: ""
+    schema:
+      type: dict
+      attrs:
+        - variable: limits
+          label: Limits
+          schema:
+            type: dict
+            attrs:
+              - variable: cpu
+                label: CPU
+                description: CPU limit for Omada Controller.
+                schema:
+                  type: string
+                  max_length: 6
+                  valid_chars: '^(0\.[1-9]|[1-9][0-9]*)(\.[0-9]|m?)$'
+                  valid_chars_error: |
+                    Valid CPU limit formats are</br>
+                    - Plain Integer - eg. 1</br>
+                    - Float - eg. 0.5</br>
+                    - Milicpu - eg. 500m
+                  default: "4000m"
+                  required: true
+              - variable: memory
+                label: Memory
+                description: Memory limit for Omada Controller.
+                schema:
+                  type: string
+                  max_length: 12
+                  valid_chars: '^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$'
+                  valid_chars_error: |
+                    Valid Memory limit formats are</br>
+                    - Suffixed with E/P/T/G/M/K - eg. 1G</br>
+                    - Suffixed with Ei/Pi/Ti/Gi/Mi/Ki - eg. 1Gi</br>
+                    - Plain Integer in bytes - eg. 1024</br>
+                    - Exponent - eg. 134e6
+                  default: "8Gi"
+                  required: true
