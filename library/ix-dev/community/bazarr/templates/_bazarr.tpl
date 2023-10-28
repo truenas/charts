@@ -31,17 +31,17 @@ workload:
               enabled: true
               type: http
               port: "{{ .Values.bazarrNetwork.webPort }}"
-              path: /ping
+              path: /api
             readiness:
               enabled: true
               type: http
               port: "{{ .Values.bazarrNetwork.webPort }}"
-              path: /ping
+              path: /api
             startup:
               enabled: true
               type: http
               port: "{{ .Values.bazarrNetwork.webPort }}"
-              path: /ping
+              path: /api
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
                                                         "UID" .Values.bazarrRunAs.user
