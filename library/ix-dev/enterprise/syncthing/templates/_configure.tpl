@@ -26,7 +26,7 @@ configmap:
         done
 
         function setConfig() {
-          syncthing cli --home "$configDir" config $@
+          syncthing cli --home "$configDir" config "$@"
         }
 
         # Now we can use the syncthing cli (wrapper around the API) to set the defaults.
@@ -50,6 +50,7 @@ configmap:
         setConfig defaults folder send-xattrs set -- 1
         setConfig defaults folder sync-xattrs set -- 1
         setConfig defaults folder ignore-perms set -- 1
+        setConfig defaults folder path set -- ""
   syncthing-truenas-logo:
     enabled: true
     data:
