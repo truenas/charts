@@ -21,7 +21,7 @@ portals:
     path: "$kubernetes-resource_configmap_portal_path"
 
 questions:
-  - variable: MeTubeConfig
+  - variable: metubeConfig
     label: ""
     group: MeTube Configuration
     schema:
@@ -64,7 +64,7 @@ questions:
                         type: string
                         required: true
 
-  - variable: MeTubeRunAs
+  - variable: metubeRunAs
     label: ""
     group: User and Group Configuration
     schema:
@@ -87,7 +87,7 @@ questions:
             default: 568
             required: true
 
-  - variable: MeTubeNetwork
+  - variable: metubeNetwork
     label: ""
     group: Network Configuration
     schema:
@@ -110,7 +110,7 @@ questions:
             type: boolean
             default: false
 
-  - variable: MeTubeStorage
+  - variable: metubeStorage
     label: ""
     group: Storage Configuration
     schema:
