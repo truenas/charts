@@ -4,9 +4,9 @@ description: Prowlarr is an indexer manager/proxy to integrate with your various
 annotations:
   title: Prowlarr
 type: application
-version: 1.1.1
+version: 1.1.2
 apiVersion: v2
-appVersion: 1.10.0.4047
+appVersion: 1.10.1.4059
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: truenas
@@ -15,7 +15,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.1.1
+    version: 1.2.0
 home: https://prowlarr.com/
 icon: https://media.sys.truenas.net/apps/prowlarr/icons/icon.png
 sources:

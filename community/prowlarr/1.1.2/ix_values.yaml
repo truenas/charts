@@ -1,22 +1,26 @@
 image:
-  repository: searxng/searxng
+  repository: ghcr.io/onedr0p/prowlarr-develop
   pullPolicy: IfNotPresent
-  tag: 2023.10.27-dbe94f111
+  tag: 1.10.1.4059
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-searxngConfig:
-  instanceName: SearXNG
+prowlarrConfig:
+  instanceName: Prowlarr
   additionalEnvs: []
 
-searxngNetwork:
-  webPort: 30053
+prowlarrNetwork:
+  webPort: 30050
   hostNetwork: false
 
-searxngStorage:
+prowlarrRunAs:
+  user: 568
+  group: 568
+
+prowlarrStorage:
   config:
     type: ixVolume
     datasetName: config
