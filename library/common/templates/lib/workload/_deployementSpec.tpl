@@ -11,7 +11,14 @@ objectData:
   {{- $objectData := .objectData -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $strategy := $objectData.strategy | default "Recreate" }}
-replicas: {{ $objectData.replicas | default 1 }}
+  {{- $replicas := 1 -}}
+  {{- if hasKey $objectData "replicas" -}}
+    {{- $replicas = $objectData.replicas -}}
+  {{- end -}}
+  {{- if (include "ix.v1.common.helper.isStopped" $rootCtx) -}}
+    {{- $replicas = 0 -}}
+  {{- end }}
+replicas: {{ $replicas }}
 revisionHistoryLimit: {{ $objectData.revisionHistoryLimit | default 3 }}
 strategy:
   type: {{ $strategy }}

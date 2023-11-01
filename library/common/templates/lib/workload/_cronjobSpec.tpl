@@ -14,12 +14,17 @@ objectData:
 {{- define "ix.v1.common.lib.workload.cronjobSpec" -}}
   {{- $objectData := .objectData -}}
   {{- $rootCtx := .rootCtx -}}
+  {{- $suspend := $objectData.suspend | default false -}}
+  {{- if (include "ix.v1.common.helper.isStopped" $rootCtx) -}}
+    {{- $suspend = true -}}
+  {{- end }}
 timeZone: {{ (tpl ($objectData.timezone | default $rootCtx.Values.TZ) $rootCtx) | quote }}
 schedule: {{ (tpl $objectData.schedule $rootCtx) | quote }}
 concurrencyPolicy: {{ $objectData.concurrencyPolicy | default "Forbid" }}
 failedJobsHistoryLimit: {{ $objectData.failedJobsHistoryLimit | default 1 }}
 successfulJobsHistoryLimit: {{ $objectData.successfulJobsHistoryLimit | default 3 }}
 startingDeadlineSeconds: {{ $objectData.startingDeadlineSeconds | default nil }}
+suspend: {{ $suspend }}
 jobTemplate:
   spec:
     {{- include "ix.v1.common.lib.workload.jobSpec" (dict "rootCtx" $rootCtx "objectData" $objectData) | nindent 4 }}

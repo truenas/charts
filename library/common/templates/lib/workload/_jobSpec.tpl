@@ -13,10 +13,17 @@ objectData:
 {{- define "ix.v1.common.lib.workload.jobSpec" -}}
   {{- $objectData := .objectData -}}
   {{- $rootCtx := .rootCtx -}}
+  {{- $parallelism := 1 -}}
+  {{- if hasKey $objectData "parallelism" -}}
+    {{- $parallelism = $objectData.parallelism -}}
+  {{- end -}}
+  {{- if (include "ix.v1.common.helper.isStopped" $rootCtx) -}}
+    {{- $parallelism = 0 -}}
+  {{- end }}
 backoffLimit: {{ $objectData.backoffLimit | default 5 }}
 completionMode: {{ $objectData.completionMode | default "NonIndexed" }}
 completions: {{ $objectData.completions | default nil }}
-parallelism: {{ $objectData.parallelism | default 1 }}
+parallelism: {{ $parallelism }}
 ttlSecondsAfterFinished: {{ $objectData.ttlSecondsAfterFinished | default 120 }}
   {{- with $objectData.activeDeadlineSeconds }}
 activeDeadlineSeconds: {{ . }}
