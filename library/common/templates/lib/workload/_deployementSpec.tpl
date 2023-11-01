@@ -10,7 +10,7 @@ objectData:
 {{- define "ix.v1.common.lib.workload.deploymentSpec" -}}
   {{- $objectData := .objectData -}}
   {{- $rootCtx := .rootCtx -}}
-  {{- $strategy := $objectData.strategy | default "Recreate" }}
+  {{- $strategy := $objectData.strategy | default "Recreate" -}}
   {{- $replicas := 1 -}}
   {{- if hasKey $objectData "replicas" -}}
     {{- $replicas = $objectData.replicas -}}
