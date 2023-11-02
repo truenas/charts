@@ -4,9 +4,9 @@ description: Unifi Protect Backup is a python based tool for backing up UniFi Pr
 annotations:
   title: Unifi Protect Backup
 type: application
-version: 1.1.1
+version: 1.1.2
 apiVersion: v2
-appVersion: 0.9.5
+appVersion: 0.10.1
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: truenas
@@ -15,7 +15,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.1.1
+    version: 1.2.0
 home: https://github.com/ep1cman/unifi-protect-backup
 icon: https://media.sys.truenas.net/apps/unifi-protect-backup/icons/icon.png
 sources:
