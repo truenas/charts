@@ -3,7 +3,7 @@ description: Rust Desk is an open-source remote desktop, and alternative to Team
 annotations:
   title: Rust Desk
 type: application
-version: 1.1.1
+version: 1.1.2
 apiVersion: v2
 appVersion: '1.1.8-2'
 kubeVersion: '>=1.16.0-0'
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.1.1
+    version: 1.2.1
 home: https://rustdesk.com
 icon: https://media.sys.truenas.net/apps/rust-desk/icons/icon.png
 sources:

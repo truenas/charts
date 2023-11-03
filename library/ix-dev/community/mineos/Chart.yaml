@@ -3,7 +3,7 @@ description: MineOS is a server front-end to ease managing Minecraft administrat
 annotations:
   title: MineOS
 type: application
-version: 1.0.11
+version: 1.0.12
 apiVersion: v2
 appVersion: 'latest'
 kubeVersion: '>=1.16.0-0'
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.1.1
+    version: 1.2.1
 home: https://github.com/hexparrot/mineos-node
 icon: https://media.sys.truenas.net/apps/mineos/icons/icon.png
 sources:

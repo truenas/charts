@@ -3,7 +3,7 @@ description: FreshRSS is a free, self-hostable news aggregator
 annotations:
   title: FreshRSS
 type: application
-version: 1.0.1
+version: 1.0.2
 apiVersion: v2
 appVersion: 1.22.1
 kubeVersion: '>=1.16.0-0'
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.2.0
+    version: 1.2.1
 home: https://freshrss.org/
 icon: https://media.sys.truenas.net/apps/freshrss/icons/icon.png
 sources:

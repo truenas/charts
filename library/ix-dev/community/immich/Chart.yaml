@@ -3,7 +3,7 @@ description: Immich
 annotations:
   title: Immich
 type: application
-version: 1.0.33
+version: 1.0.34
 apiVersion: v2
 appVersion: 1.84.0
 kubeVersion: '>=1.16.0-0'
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.2.0
+    version: 1.2.1
 home: https://immich.app
 icon: https://media.sys.truenas.net/apps/immich/icons/icon.svg
 sources:

@@ -1,10 +1,9 @@
 name: pgadmin
-description: pgAdmin is the most popular and feature rich Open Source administration
-  and development platform for PostgreSQL
+description: pgAdmin is the most popular and feature rich Open Source administration and development platform for PostgreSQL
 annotations:
   title: pgAdmin
 type: application
-version: 1.1.1
+version: 1.1.2
 apiVersion: v2
 appVersion: '7.8'
 kubeVersion: '>=1.16.0-0'
@@ -15,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.1.1
+    version: 1.2.1
 home: https://www.pgadmin.org/
 icon: https://media.sys.truenas.net/apps/pgadmin/icons/icon.png
 sources:

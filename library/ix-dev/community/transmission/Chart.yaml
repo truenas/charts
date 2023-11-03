@@ -3,7 +3,7 @@ description: Transmission is designed for easy, powerful use.
 annotations:
   title: Transmission
 type: application
-version: 1.1.1
+version: 1.1.2
 apiVersion: v2
 appVersion: 4.0.4
 kubeVersion: '>=1.16.0-0'
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.1.1
+    version: 1.2.1
 home: https://transmissionbt.com/
 icon: https://media.sys.truenas.net/apps/transmission/icons/icon.png
 sources:

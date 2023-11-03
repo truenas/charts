@@ -3,7 +3,7 @@ description: Odoo is a suite of web based open source business apps.
 annotations:
   title: Odoo
 type: application
-version: 1.0.2
+version: 1.0.3
 apiVersion: v2
 appVersion: '16.0'
 kubeVersion: '>=1.16.0-0'
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.1.1
+    version: 1.2.1
 home: https://www.odoo.com/
 icon: https://media.sys.truenas.net/apps/odoo/icons/icon.png
 sources:

@@ -1,10 +1,9 @@
 name: qbittorrent
-description: The qBittorrent project aims to provide an open-source software alternative
-  to µTorrent.
+description: The qBittorrent project aims to provide an open-source software alternative to µTorrent.
 annotations:
   title: qBittorrent
 type: application
-version: 1.1.1
+version: 1.1.2
 apiVersion: v2
 appVersion: 4.6.0
 kubeVersion: '>=1.16.0-0'
@@ -15,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.1.1
+    version: 1.2.1
 home: https://www.qbittorrent.org/
 icon: https://media.sys.truenas.net/apps/qbittorrent/icons/icon.png
 sources:

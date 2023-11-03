@@ -3,7 +3,7 @@ description: Expose your services easily and securely
 annotations:
   title: Nginx Proxy Manager
 type: application
-version: 1.0.18
+version: 1.0.19
 apiVersion: v2
 appVersion: 2.10.4
 kubeVersion: '>=1.16.0-0'
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.1.1
+    version: 1.2.1
 home: https://nginxproxymanager.com/
 icon: https://media.sys.truenas.net/apps/nginx-proxy-manager/icons/icon.png
 sources:

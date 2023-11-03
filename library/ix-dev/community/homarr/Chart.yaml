@@ -1,10 +1,9 @@
 name: homarr
-description: Homarr is a sleek, modern dashboard that puts all of your apps and services
-  at your fingertips.
+description: Homarr is a sleek, modern dashboard that puts all of your apps and services at your fingertips.
 annotations:
   title: Homarr
 type: application
-version: 1.1.1
+version: 1.1.2
 apiVersion: v2
 appVersion: 0.13.4
 kubeVersion: '>=1.16.0-0'
@@ -15,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.1.1
+    version: 1.2.1
 home: https://homarr.dev/
 icon: https://media.sys.truenas.net/apps/homarr/icons/icon.svg
 sources:

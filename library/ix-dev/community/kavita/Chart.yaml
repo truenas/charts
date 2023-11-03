@@ -3,7 +3,7 @@ description: Kavita is a fast, feature rich, cross platform reading server.
 annotations:
   title: Kavita
 type: application
-version: 1.1.1
+version: 1.1.2
 apiVersion: v2
 appVersion: 0.7.8
 kubeVersion: '>=1.16.0-0'
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.1.1
+    version: 1.2.1
 home: https://www.kavitareader.com/
 icon: https://media.sys.truenas.net/apps/kavita/icons/icon.png
 sources:

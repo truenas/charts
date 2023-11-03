@@ -1,10 +1,9 @@
 name: joplin
-description: Joplin is an open source note-taking app. Capture your thoughts and securely
-  access them from any device
+description: Joplin is an open source note-taking app. Capture your thoughts and securely access them from any device
 annotations:
   title: Joplin
 type: application
-version: 1.0.5
+version: 1.0.6
 apiVersion: v2
 appVersion: 2.13.3
 kubeVersion: '>=1.16.0-0'
@@ -15,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.2.0
+    version: 1.2.1
 home: https://joplinapp.org/
 icon: https://media.sys.truenas.net/apps/joplin/icons/icon.png
 sources:

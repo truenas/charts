@@ -3,7 +3,7 @@ description: Linkding is a bookmark manager that you can host yourself.
 annotations:
   title: Linkding
 type: application
-version: 1.1.2
+version: 1.1.3
 apiVersion: v2
 appVersion: 1.22.2
 kubeVersion: '>=1.16.0-0'
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.1.1
+    version: 1.2.1
 home: https://github.com/sissbruecker/linkding
 icon: https://media.sys.truenas.net/apps/linkding/icons/icon.svg
 sources:
