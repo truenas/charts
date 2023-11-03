@@ -1,0 +1,13 @@
+runAsContext:
+  - userName: mealie
+    groupName: mealie
+    gid: 568
+    uid: 568
+    description: Mealie can runs as any non-root user.
+  - userName: postgres
+    groupName: postgres
+    gid: 999
+    uid: 999
+    description: Postgres runs as a non-root user.
+capabilities: []
+hostMounts: []

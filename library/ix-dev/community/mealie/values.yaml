@@ -16,6 +16,10 @@ mealieConfig:
   baseURL: ''
   additionalEnvs: []
 
+mealieRunAs:
+  user: 568
+  group: 568
+
 mealieNetwork:
   webPort: 31001
   hostNetwork: false
