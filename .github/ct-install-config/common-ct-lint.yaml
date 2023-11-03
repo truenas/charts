@@ -1,6 +1,6 @@
 remote: origin
 target-branch: master
-helm-extra-args: --timeout 600s --debug
+helm-extra-args: --debug
 lint-conf: .github/ct-install-config/lint-conf.yaml
 chart-yaml-schema: .github/ct-install-config/chart_schema.yaml
 # Check that the version in Chart.yaml is incremented
