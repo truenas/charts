@@ -9,7 +9,9 @@ mealieConfig:
   defaultAdminPassword: supersecret
   baseURL: http://localhost:31000
 
-briefkastenStorage:
+mealieStorage:
+  data:
+    type: pvc
   pgData:
     type: pvc
   pgBackup:
