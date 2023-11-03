@@ -12,10 +12,11 @@ workload:
           primary: true
           imageSelector: image
           securityContext:
-            # TODO: Check if we can use arbitrary user IDs
-            runAsUser: 911
-            runAsGroup: 911
+            runAsUser: {{ .Values.mealieRunAs.user }}
+            runAsGroup: {{ .Values.mealieRunAs.group }}
             readOnlyRootFilesystem: false
+          fixedEnv:
+            PUID: {{ .Values.mealieRunAs.user }}
           envFrom:
             - secretRef:
                 name: mealie

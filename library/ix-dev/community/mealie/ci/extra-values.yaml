@@ -8,6 +8,10 @@ mealieConfig:
   defaultAdminPassword: supersecret
   baseURL: http://localhost:31000
 
+mealieRunAs:
+  user: 1000
+  group: 1000
+
 mealieStorage:
   pgData:
     type: pvc
