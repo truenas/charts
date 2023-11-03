@@ -491,50 +491,51 @@ questions:
                               type: dict
                               show_if: [["aclEnable", "=", true]]
                               attrs: []
-                    - variable: server
-                      label: Server
-                      description: The server for the SMB share.
+                    - variable: smbConfig
+                      label: SMB Share Configuration
+                      description: The configuration for the SMB Share.
                       schema:
-                        type: string
+                        type: dict
                         show_if: [["type", "=", "smb-pv-pvc"]]
-                        required: true
-                    - variable: share
-                      label: Share
-                      description: The share name for the SMB share.
-                      schema:
-                        type: string
-                        show_if: [["type", "=", "smb-pv-pvc"]]
-                        required: true
-                    - variable: domain
-                      label: Domain (Optional)
-                      description: The domain for the SMB share.
-                      schema:
-                        type: string
-                        show_if: [["type", "=", "smb-pv-pvc"]]
-                    - variable: username
-                      label: Username
-                      description: The username for the SMB share.
-                      schema:
-                        type: string
-                        show_if: [["type", "=", "smb-pv-pvc"]]
-                        required: true
-                    - variable: password
-                      label: Password
-                      description: The password for the SMB share.
-                      schema:
-                        type: string
-                        show_if: [["type", "=", "smb-pv-pvc"]]
-                        required: true
-                        private: true
-                    - variable: size
-                      label: Size (in Gi)
-                      description: The size of the volume quota.
-                      schema:
-                        type: int
-                        show_if: [["type", "=", "smb-pv-pvc"]]
-                        required: true
-                        min: 1
-                        default: 1
+                        attrs:
+                          - variable: server
+                            label: Server
+                            description: The server for the SMB share.
+                            schema:
+                              type: string
+                              required: true
+                          - variable: share
+                            label: Share
+                            description: The share name for the SMB share.
+                            schema:
+                              type: string
+                              required: true
+                          - variable: domain
+                            label: Domain (Optional)
+                            description: The domain for the SMB share.
+                            schema:
+                              type: string
+                          - variable: username
+                            label: Username
+                            description: The username for the SMB share.
+                            schema:
+                              type: string
+                              required: true
+                          - variable: password
+                            label: Password
+                            description: The password for the SMB share.
+                            schema:
+                              type: string
+                              required: true
+                              private: true
+                          - variable: size
+                            label: Size (in Gi)
+                            description: The size of the volume quota.
+                            schema:
+                              type: int
+                              required: true
+                              min: 1
+                              default: 1
 
   - variable: resources
     group: Resources Configuration
