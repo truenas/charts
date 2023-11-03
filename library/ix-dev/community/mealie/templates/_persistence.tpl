@@ -15,7 +15,7 @@ persistence:
         mealie:
           mountPath: /tmp
   {{- range $idx, $storage := .Values.mealieStorage.additionalStorages }}
-  {{ printf "mealie-%v" (int $idx) }}:
+  {{ printf "mealie-%v:" (int $idx) }}
     enabled: true
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 2 }}
     targetSelector:
