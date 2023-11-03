@@ -13,6 +13,8 @@ mealieRunAs:
   group: 1000
 
 mealieStorage:
+  data:
+    type: pvc
   pgData:
     type: pvc
   pgBackup:

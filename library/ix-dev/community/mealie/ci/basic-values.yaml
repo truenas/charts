@@ -9,6 +9,8 @@ mealieConfig:
   baseURL: http://localhost:31000
 
 mealieStorage:
+  data:
+    type: pvc
   pgData:
     type: pvc
   pgBackup:
