@@ -71,9 +71,15 @@ persistence:
       server:
         server:
           mountPath: {{ $storage.hostPath }}
+          {{ if $storage.readOnly }}
+          readOnly: {{ $storage.readOnly }}
+          {{ end }}
       microservices:
         microservices:
           mountPath: {{ $storage.hostPath }}
+          {{ if $storage.readOnly }}
+          readOnly: {{ $storage.readOnly }}
+          {{ end }}
   {{- end }}
   {{/* Caches */}}
   microcache:

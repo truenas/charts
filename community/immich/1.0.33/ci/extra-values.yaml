@@ -17,6 +17,7 @@ immichStorage:
   additionalLibraries:
     - hostPath: /mnt/{{ .Release.Name }}/additionalLibrary1
     - hostPath: /mnt/{{ .Release.Name }}/additionalLibrary2
+      readOnly: true
   pgData:
     type: hostPath
     hostPath: /mnt/{{ .Release.Name }}/pgData

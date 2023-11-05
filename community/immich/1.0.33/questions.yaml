@@ -295,6 +295,12 @@ questions:
                       schema:
                         type: hostpath
                         required: true
+                    - variable: readOnly
+                      label: "Read Only"
+                      description: "Mount host path in read-only mode"
+                      schema:
+                        type: boolean
+                        default: false
         - variable: pgData
           label: Immich Postgres Data Storage
           description: The path to store Immich Postgres Data.
