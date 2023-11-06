@@ -68,35 +68,9 @@ persistence:
           mountPath: /mnt/directories{{ $storage.mountPath }}
   {{- end }}
 
-  {{/* Database */}}
-  postgresdata:
-    enabled: true
-    type: {{ .Values.plankaStorage.pgData.type }}
-    datasetName: {{ .Values.plankaStorage.pgData.datasetName | default "" }}
-    hostPath: {{ .Values.plankaStorage.pgData.hostPath | default "" }}
-    targetSelector:
-      # Postgres pod
-      postgres:
-        # Postgres container
-        postgres:
-          mountPath: /var/lib/postgresql/data
-        # Postgres - Permissions container
-        # Different than the 01-permissions
-        permissions:
-          mountPath: /mnt/directories/postgres_data
-  postgresbackup:
-    enabled: true
-    type: {{ .Values.plankaStorage.pgBackup.type }}
-    datasetName: {{ .Values.plankaStorage.pgBackup.datasetName | default "" }}
-    hostPath: {{ .Values.plankaStorage.pgBackup.hostPath | default "" }}
-    targetSelector:
-      # Postgres backup pod
-      postgresbackup:
-        # Postgres backup container
-        postgresbackup:
-          mountPath: /postgres_backup
-        # Postgres - Permissions container
-        # Different than the 01-permissions
-        permissions:
-          mountPath: /mnt/directories/postgres_backup
+
+  {{- include "ix.v1.common.app.postgresPersistence"
+      (dict "pgData" .Values.plankaStorage.pgData
+            "pgBackup" .Values.plankaStorage.pgBackup
+      ) | nindent 2 }}
 {{- end -}}
