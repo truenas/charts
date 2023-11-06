@@ -4,45 +4,12 @@ workload:
 
 {{/* Service */}}
 service:
-  postgres:
-    enabled: true
-    type: ClusterIP
-    targetSelector: postgres
-    ports:
-      postgres:
-        enabled: true
-        primary: true
-        port: 5432
-        targetSelector: postgres
+  {{- include "ix.v1.common.app.postgresService" $ | nindent 2 }}
 
 {{/* Persistence */}}
 persistence:
-  postgresdata:
-    enabled: true
-    type: {{ .Values.minioLogging.logsearch.pgData.type }}
-    datasetName: {{ .Values.minioLogging.logsearch.pgData.datasetName | default "" }}
-    hostPath: {{ .Values.minioLogging.logsearch.pgData.hostPath | default "" }}
-    targetSelector:
-      # Postgres pod
-      postgres:
-        # Postgres container
-        postgres:
-          mountPath: /var/lib/postgresql/data
-        # Permissions container
-        permissions:
-          mountPath: /mnt/directories/postgres_data
-  postgresbackup:
-    enabled: true
-    type: {{ .Values.minioLogging.logsearch.pgBackup.type }}
-    datasetName: {{ .Values.minioLogging.logsearch.pgBackup.datasetName | default "" }}
-    hostPath: {{ .Values.minioLogging.logsearch.pgBackup.hostPath | default "" }}
-    targetSelector:
-      # Postgres backup pod
-      postgresbackup:
-        # Postgres backup container
-        postgresbackup:
-          mountPath: /postgres_backup
-        # Permissions container
-        permissions:
-          mountPath: /mnt/directories/postgres_backup
+  {{- include "ix.v1.common.app.postgresPersistence"
+      (dict "pgData" .Values.minioLogging.logsearch.pgData
+            "pgBackup" .Values.minioLogging.logsearch.pgBackup
+      ) | nindent 2 }}
 {{- end -}}
