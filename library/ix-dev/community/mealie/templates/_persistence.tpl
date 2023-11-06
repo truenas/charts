@@ -2,7 +2,7 @@
 persistence:
   data:
     enabled: true
-    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.mealieStorage.data) | nindent 2 }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.mealieStorage.data) | nindent 4 }}
     targetSelector:
       mealie:
         mealie:
@@ -17,7 +17,7 @@ persistence:
   {{- range $idx, $storage := .Values.mealieStorage.additionalStorages }}
   {{ printf "mealie-%v:" (int $idx) }}
     enabled: true
-    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 2 }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       mealie:
         mealie:
