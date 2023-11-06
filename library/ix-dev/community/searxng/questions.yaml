@@ -127,6 +127,7 @@ questions:
                         type: string
                         required: true
                         immutable: true
+                        hidden: true
                         default: "config"
                     - variable: aclEntries
                       label: ACL Configuration
