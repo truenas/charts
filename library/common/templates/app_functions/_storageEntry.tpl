@@ -60,18 +60,18 @@
     {{- end -}}
   {{- end }}
 
-  type: {{ $storage.type }}
-  size: {{ $size }}
-  hostPath: {{ $hostPath }}
-  datasetName: {{ $datasetName }}
-  readOnly: {{ $readOnly }}
-  server: {{ $server }}
-  share: {{ $share }}
-  domain: {{ $domain }}
-  username: {{ $username }}
-  password: {{ $password }}
-  {{- if eq $storage.type "smb-pv-pvc" }}
-  mountOptions:
-    - key: noperm
-  {{- end }}
+type: {{ $storage.type }}
+size: {{ $size }}
+hostPath: {{ $hostPath }}
+datasetName: {{ $datasetName }}
+readOnly: {{ $readOnly }}
+server: {{ $server }}
+share: {{ $share }}
+domain: {{ $domain }}
+username: {{ $username }}
+password: {{ $password }}
+{{- if eq $storage.type "smb-pv-pvc" }}
+mountOptions:
+  - key: noperm
+{{- end }}
 {{- end -}}
