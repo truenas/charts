@@ -12,15 +12,6 @@ service:
         port: {{ .Values.joplinNetwork.webPort }}
         nodePort: {{ .Values.joplinNetwork.webPort }}
         targetSelector: joplin
-  postgres:
-    enabled: true
-    type: ClusterIP
-    targetSelector: postgres
-    ports:
-      postgres:
-        enabled: true
-        primary: true
-        port: 5432
-        targetPort: 5432
-        targetSelector: postgres
+  {{- include "ix.v1.common.app.postgresService" $ | nindent 2 }}
+
 {{- end -}}
