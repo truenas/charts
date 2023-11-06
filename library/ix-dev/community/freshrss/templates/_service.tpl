@@ -12,17 +12,6 @@ service:
         port: {{ .Values.freshrssNetwork.webPort }}
         nodePort: {{ .Values.freshrssNetwork.webPort }}
         targetSelector: freshrss
+  {{- include "ix.v1.common.app.postgresService" $ | nindent 2 }}
 
-  {{/* Database */}}
-  postgres:
-    enabled: true
-    type: ClusterIP
-    targetSelector: postgres
-    ports:
-      postgres:
-        enabled: true
-        primary: true
-        port: 5432
-        targetPort: 5432
-        targetSelector: postgres
 {{- end -}}
