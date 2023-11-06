@@ -189,11 +189,27 @@ questions:
                   show_if: [["type", "=", "hostPath"]]
                   immutable: true
                   required: true
+        - variable: downloadsDir
+          label: Downloads Directory (In-Container)
+          description: The directory inside the container to store downloads.
+          schema:
+            type: path
+            default: /downloads/complete
+            required: true
+            immutable: true
+        - variable: enableIncompleteDir
+          label: Enable Incomplete Directory
+          description: Enable incomplete directory.
+          schema:
+            type: boolean
+            default: true
+            immutable: true
         - variable: downloadsIncomplete
           label: Transmission Incomplete Downloads Storage
           description: The path to store Transmission Incomplete Downloads.
           schema:
             type: dict
+            show_if: [["enableIncompleteDir", "=", true]]
             attrs:
               - variable: type
                 label: Type
@@ -228,6 +244,15 @@ questions:
                   show_if: [["type", "=", "hostPath"]]
                   immutable: true
                   required: true
+        - variable: incompleteDir
+          label: Incomplete Directory (In-Container)
+          description: The directory inside the container to store incomplete downloads.
+          schema:
+            type: path
+            default: /downloads/incomplete
+            show_if: [["enableIncompleteDir", "=", true]]
+            required: true
+            immutable: true
         - variable: additionalStorages
           label: Additional Storage
           description: Transmission additional storage
