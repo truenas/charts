@@ -71,34 +71,8 @@ persistence:
           mountPath: {{ $storage.mountPath }}
   {{- end }}
 
-  postgresdata:
-    enabled: true
-    type: {{ .Values.paperlessStorage.pgData.type }}
-    datasetName: {{ .Values.paperlessStorage.pgData.datasetName | default "" }}
-    hostPath: {{ .Values.paperlessStorage.pgData.hostPath | default "" }}
-    targetSelector:
-      # Postgres pod
-      postgres:
-        # Postgres container
-        postgres:
-          mountPath: /var/lib/postgresql/data
-        # Postgres - Permissions container
-        # Different than the 01-permissions
-        permissions:
-          mountPath: /mnt/directories/postgres_data
-  postgresbackup:
-    enabled: true
-    type: {{ .Values.paperlessStorage.pgBackup.type }}
-    datasetName: {{ .Values.paperlessStorage.pgBackup.datasetName | default "" }}
-    hostPath: {{ .Values.paperlessStorage.pgBackup.hostPath | default "" }}
-    targetSelector:
-      # Postgres backup pod
-      postgresbackup:
-        # Postgres backup container
-        postgresbackup:
-          mountPath: /postgres_backup
-        # Postgres - Permissions container
-        # Different than the 01-permissions
-        permissions:
-          mountPath: /mnt/directories/postgres_backup
+  {{- include "ix.v1.common.app.postgresPersistence"
+      (dict "pgData" .Values.paperlessStorage.pgData
+            "pgBackup" .Values.paperlessStorage.pgBackup
+      ) | nindent 2 }}
 {{- end -}}
