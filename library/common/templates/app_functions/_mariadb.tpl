@@ -70,6 +70,11 @@ backupChownMode (optional): Whether to chown the backup directory or
   {{- if $ixChartContext.isUpgrade -}}
     {{- $enableBackupJob = true -}}
   {{- end -}}
+  {{- if hasKey $ixChartContext "isStopped" -}}
+    {{- if $ixChartContext.isStopped -}}
+      {{- fail "Application must be running before upgrade. This is to ensure the database backup will be able to complete." -}}
+    {{- end -}}
+  {{- end -}}
 {{- else -}}
   {{/*
     If the key is not present in ixChartContext,
