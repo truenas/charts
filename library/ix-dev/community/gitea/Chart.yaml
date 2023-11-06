@@ -3,7 +3,7 @@ description: Gitea - Git with a cup of tea
 annotations:
   title: Gitea
 type: application
-version: 1.0.21
+version: 1.0.22
 apiVersion: v2
 appVersion: 1.20.5
 kubeVersion: '>=1.16.0-0'
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.1.1
+    version: 1.2.1
 home: https://gitea.io/en-us
 icon: https://media.sys.truenas.net/apps/gitea/icons/icon.svg
 sources:
