@@ -3,7 +3,7 @@ persistence:
   config:
     enabled: true
     {{- include "searxng.storage.ci.migration" (dict "storage" .Values.searxngStorage.config) }}
-    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.searxngStorage.config) | nindent 2 }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.searxngStorage.config) | nindent 4 }}
     targetSelector:
       searxng:
         searxng:
@@ -21,7 +21,7 @@ persistence:
   {{ printf "searxng-%v:" (int $idx) }}
     enabled: true
     {{- include "searxng.storage.ci.migration" (dict "storage" $storage) }}
-    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 2 }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       searxng:
         searxng:
