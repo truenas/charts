@@ -20,6 +20,7 @@ transmissionStorage:
     type: pvc
   downloadsComplete:
     type: pvc
+  enableIncompleteDir: false
   downloadsIncomplete:
     type: pvc
   additionalStorages:

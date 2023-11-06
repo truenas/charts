@@ -27,9 +27,12 @@ transmissionStorage:
   downloadsComplete:
     type: ixVolume
     datasetName: downloads-complete
+  downloadDir: /downloads/complete
+  enableIncompleteDir: true
   downloadsIncomplete:
     type: ixVolume
     datasetName: downloads-incomplete
+  incompleteDir: /downloads/incomplete
   additionalStorages: []
 
 notes:
