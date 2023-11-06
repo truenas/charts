@@ -192,9 +192,7 @@ pgBackup (required): Data persistence configuration for backup
 
 postgresdata:
   enabled: true
-  type: {{ $data.type }}
-  datasetName: {{ $data.datasetName | default "" }}
-  hostPath: {{ $data.hostPath | default "" }}
+  {{- include "ix.v1.common.app.storageOptions" (dict "storage" $data) | nindent 2 }}
   targetSelector:
     postgres:
       postgres:
@@ -203,9 +201,7 @@ postgresdata:
         mountPath: /mnt/directories/postgres_data
 postgresbackup:
   enabled: true
-  type: {{ $backup.type }}
-  datasetName: {{ $backup.datasetName | default "" }}
-  hostPath: {{ $backup.hostPath | default "" }}
+  {{- include "ix.v1.common.app.storageOptions" (dict "storage" $backup) | nindent 2 }}
   targetSelector:
     postgresbackup:
       postgresbackup:
