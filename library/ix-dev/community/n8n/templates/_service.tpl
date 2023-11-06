@@ -24,15 +24,6 @@ service:
         port: 6379
         targetPort: 6379
         targetSelector: redis
-  # Postgres
-  postgres:
-    enabled: true
-    type: ClusterIP
-    targetSelector: postgres
-    ports:
-      postgres:
-        enabled: true
-        primary: true
-        port: 5432
-        targetSelector: postgres
+  {{- include "ix.v1.common.app.postgresService" $ | nindent 2 }}
+
 {{- end -}}
