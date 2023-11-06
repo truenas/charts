@@ -12,15 +12,5 @@ service:
         port: {{ .Values.linkdingNetwork.webPort }}
         nodePort: {{ .Values.linkdingNetwork.webPort }}
         targetSelector: linkding
-  postgres:
-    enabled: true
-    type: ClusterIP
-    targetSelector: postgres
-    ports:
-      postgres:
-        enabled: true
-        primary: true
-        port: 5432
-        targetPort: 5432
-        targetSelector: postgres
+  {{- include "ix.v1.common.app.postgresService" $ | nindent 2 }}
 {{- end -}}
