@@ -52,17 +52,23 @@
     {{- if $conf.hostPathEnabled -}}
       {{- $_ := set .Values.wgStorage "config" (dict
                                                 "type" "hostPath"
-                                                "hostPath" $conf.hostPath
+                                                "hostPathConfig" (dict
+                                                  "hostPath" $conf.hostPath
+                                                )
                                               ) -}}
     {{- else if $conf.emptyDir -}} {{/* CI case only */}}
       {{- $_ := set .Values.wgStorage "config" (dict
                                                 "type" "hostPath"
-                                                "hostPath" (printf "/mnt/%s/config" $.Release.Name)
+                                                "hostPathConfig" (dict
+                                                  "hostPath" (printf "/mnt/%s/config" $.Release.Name)
+                                                )
                                               ) -}}
     {{- else -}}
       {{- $_ := set .Values.wgStorage "config" (dict
                                                 "type" "ixVolume"
-                                                "datasetName" $conf.datasetName
+                                                "ixVolumeConfig" (dict
+                                                  "datasetName" $conf.datasetName
+                                                )
                                               ) -}}
     {{- end -}}
 
@@ -75,8 +81,10 @@
       {{- $items := mustAppend $items (dict
                                         "type" "hostPath"
                                         "mountPath" $item.mountPath
-                                        "hostPath" $item.hostPath
-                                        ) -}}
+                                        "hostPathConfig" (dict
+                                          "hostPath" $item.hostPath
+                                        )
+                                      ) -}}
     {{- end -}}
     {{- $_ := set $.Values.wgStorage "additionalStorages" $items -}}
   {{- end -}}

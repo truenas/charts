@@ -9,7 +9,6 @@ def migrate(values):
     oldVersion = upgradeMeta.get('oldChartVersion', None)
     newVersion = upgradeMeta.get('newChartVersion', None)
 
-    # TODO: Is the raise exception the right way to handle abort upgrade/migration?
     if oldVersion is None or newVersion is None:
         raise Exception('Missing upgrade metadata')
 
@@ -30,93 +29,65 @@ def migrate(values):
         if int(oldVersionParts[2]) < 11:
             raise Exception(f'Migration to 2.x.x is only allowed from 1.0.11 or higher')
 
-    migratedKeys = []
-    newValues = values.copy()
-
-    # Migrate Resources
-    newValues['resources'] = {
-        'limits': {
-            'cpu': values.get('cpuLimit', '4000m'),
-            'memory': values.get('memoryLimit', '8Gi'),
+    # Create an empty dict, so we can throw away the old values, instead of deleting each key
+    newValues = {}
+    newValues.update({
+        # Migrate Network
+        'wgNetwork': {
+            'udpPort': values['wgUDPPort'],
+            'webPort': values['webUIPort'],
+            'hostNetwork': values['hostNetwork'],
         },
-    }
-
-    migratedKeys.append('cpuLimit')
-    migratedKeys.append('memoryLimit')
-    migratedKeys.append('enableResourceLimits')
-
-    # Migration Network
-    newValues['wgNetwork'] = {
-        'udpPort': values['wgUDPPort'],
-        'webPort': values['webUIPort'],
-        'hostNetwork': values['hostNetwork']
-    }
-
-    migratedKeys.append('wgUDPPort')
-    migratedKeys.append('webUIPort')
-    migratedKeys.append('hostNetwork')
-
-    # Migrate DNS
-    newValues['podOptions'] = {
-        'dnsConfig': {
-            'options': []
-        }
-    }
-    for opt in values.get('dnsConfig', {}).get('options', []):
-        newValues['podOptions']['dnsConfig']['options'].append({
-            'name': opt['name'],
-            'value': opt['value'],
-        })
-
-    migratedKeys.append('dnsConfig')
-
-    # Migrate Config
-    newValues['wgConfig'] = {
-        'host': values['wgeasy']['host'],
-        'password': values['wgeasy'].get('password',''),
-        'keepAlive': values['wgeasy']['keep_alive'],
-        'clientMTU': values['wgeasy']['client_mtu'],
-        'clientAddressRange': values['wgeasy']['client_address_range'],
-        'clientDNSServer': values['wgeasy']['client_dns_server'],
-        'allowedIPs': values['wgeasy']['allowed_ips'],
-        'additionalEnvs': values.get('environmentVariables', []),
-    }
-
-    migratedKeys.append('wgeasy')
-    migratedKeys.append('environmentVariables')
-
-    # Migrate Storage
-    newValues['wgStorage'] = {}
-    configStorage = values['appVolumeMounts']['config']
-    if configStorage['hostPathEnabled']:
-        newValues['wgStorage']['config'] = {
-            'type': 'hostPath',
-            'hostPath': configStorage['hostPath'],
-        }
-    else:
-        newValues['wgStorage']['config'] = {
-            'type': 'ixVolume',
-            'datasetName': configStorage['datasetName'],
-        }
-
-    migratedKeys.append('appVolumeMounts')
-
-    # Migrate Additional Storage
-    newValues['wgStorage']['additionalStorages'] = []
-    for extraStorage in values['extraAppVolumeMounts']:
-        if extraStorage:
-            newValues['wgStorage']['additionalStorages'].append({
+        # Migrate Resources
+        'resources': {
+            'limits': {
+                'cpu': values.get('cpuLimit', '4000m'),
+                'memory': values.get('memLimit', '8Gi'),
+            }
+        },
+        # Migrate DNS
+        'podOptions': {
+            'dnsConfig': {
+                'options': [
+                    {'name': name, 'value': value}
+                    for name, value in values.get('dnsConfig', {}).get('options', []).items()
+                ]
+            }
+        },
+        # Migrate Config
+        'wgConfig': {
+            'host': values['wgeasy']['host'],
+            'password': values['wgeasy'].get('password', ''),
+            'keepAlive': values['wgeasy']['keep_alive'],
+            'clientMTU': values['wgeasy']['client_mtu'],
+            'clientAddressRange': values['wgeasy']['client_address_range'],
+            'clientDNSServer': values['wgeasy']['client_dns_server'],
+            'allowedIPs': values['wgeasy']['allowed_ips'],
+            'additionalEnvs': values.get('environmentVariables', []),
+        },
+        # Migrate Storage
+        'wgStorage': {
+            'config': {
                 'type': 'hostPath',
-                'mountPath': extraStorage['mountPath'],
-                'hostPath': extraStorage['hostPath'],
-            })
-
-    migratedKeys.append('extraAppVolumeMounts')
-
-    # Clean up old keys
-    for key in migratedKeys:
-        if key in newValues:
-            del newValues[key]
+                'hostPathConfig': {
+                    'hostPath': values['appVolumeMounts']['config']['hostPath']
+                },
+            } if values['appVolumeMounts']['config']['hostPathEnabled'] else {
+                'type': 'ixVolume',
+                'ixVolumeConfig': {
+                    'datasetName': values['appVolumeMounts']['config']['datasetName'],
+                },
+            },
+            'additionalStorages': [
+                {
+                    'type': 'hostPath',
+                    'hostPathConfig': {'hostPath': e['hostPath']},
+                    'mountPath': e['mountPath'],
+                }
+                for e in values.get('extraAppVolumeMounts', [])
+            ],
+        },
+    })
 
     return newValues
 

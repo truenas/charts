@@ -2,9 +2,7 @@
 persistence:
   config:
     enabled: true
-    type: {{ .Values.wgStorage.config.type }}
-    datasetName: {{ .Values.wgStorage.config.datasetName | default "" }}
-    hostPath: {{ .Values.wgStorage.config.hostPath | default "" }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.wgStorage.config) | nindent 4 }}
     targetSelector:
       wgeasy:
         wgeasy:
@@ -17,11 +15,9 @@ persistence:
         wgeasy:
           mountPath: /tmp
   {{- range $idx, $storage := .Values.wgStorage.additionalStorages }}
-  {{ printf "wgeasy-%v" (int $idx) }}:
+  {{ printf "wgeasy-%v:" (int $idx) }}
     enabled: true
-    type: {{ $storage.type }}
-    datasetName: {{ $storage.datasetName | default "" }}
-    hostPath: {{ $storage.hostPath | default "" }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       wgeasy:
         wgeasy:
