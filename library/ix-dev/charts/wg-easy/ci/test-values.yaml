@@ -1,7 +1,6 @@
 wgStorage:
   config:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/config
+    type: pvc
 
 wgConfig:
   host: wg.domain.com
