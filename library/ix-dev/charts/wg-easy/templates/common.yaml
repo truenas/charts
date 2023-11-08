@@ -1,4 +1,5 @@
 {{/* Apply helm migrations */}}
+{{- include "wgeasy.migration" . -}}
 {{- include "wgeasy.migrate" . -}}
 
 {{- include "ix.v1.common.loader.init" . -}}

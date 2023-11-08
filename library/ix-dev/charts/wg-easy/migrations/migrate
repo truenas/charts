@@ -4,34 +4,10 @@ import os
 import sys
 
 
-def migrate(values):
-    upgradeMeta = values.get('global', {}).get('ixChartContext', {}).get('upgradeMetadata', {})
-    oldVersion = upgradeMeta.get('oldChartVersion', None)
-    newVersion = upgradeMeta.get('newChartVersion', None)
-
-    if oldVersion is None or newVersion is None:
-        raise Exception('Missing upgrade metadata')
-
-    # If the old version is 2.x.x, we have nothing to do
-    if oldVersion.startswith('2'):
-        return values
-
-    if oldVersion.startswith('1') and newVersion.startswith('1'):
-        return values
-
-    # If the new (target) version is 2.x.x and the old version is 1.x.x
-    # We have to migrate
-    if newVersion.startswith('2') and oldVersion.startswith('1'):
-        # But only if the old version is 1.0.11 or higher
-        oldVersionParts = oldVersion.split('.')
-        if len(oldVersionParts) != 3:
-            raise Exception(f'Invalid version {oldVersion}')
-        if int(oldVersionParts[2]) < 11:
-            raise Exception(f'Migration to 2.x.x is only allowed from 1.0.11 or higher')
-
-    # Create an empty dict, so we can throw away the old values, instead of deleting each key
-    newValues = {}
-    newValues.update({
+def migrate_common_lib(values):
+    # Create a new dict, so we can throw away
+    # the old values, instead of deleting each key
+    newValues = {
         # Migrate Network
         'wgNetwork': {
             'udpPort': values['wgUDPPort'],
@@ -87,9 +63,18 @@ def migrate(values):
                 for e in values.get('extraAppVolumeMounts', [])
             ],
         },
-    })
+    }
+
 
     return newValues
+
+def migrate(values):
+    if not 'wgeasy' in values.keys():
+        return values
+
+
+    return migrate_common_lib(values)
+
 
 
 if __name__ == '__main__':

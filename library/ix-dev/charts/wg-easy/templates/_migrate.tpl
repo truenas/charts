@@ -1,6 +1,6 @@
 {{- define "wgeasy.migrate" -}}
   {{/* If this key is missing we have already migrated */}}
-  {{- if hasKey .Values "wgUDPPort" -}}
+  {{- if hasKey .Values "wgeasy" -}}
     {{/* Migrate Resources */}}
     {{- if not .Values.resources -}}
       {{- $_ := set .Values "resources" dict -}}
