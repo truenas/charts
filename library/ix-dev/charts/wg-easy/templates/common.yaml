@@ -1,8 +1,7 @@
 {{/* Apply helm migrations */}}
-{{- include "wgeasy.migration" . -}}
-{{- include "wgeasy.migrate" . -}}
-
 {{- include "ix.v1.common.loader.init" . -}}
+
+{{- include "wgeasy.migration" . -}}
 
 {{/* Merge the templates with Values */}}
 {{- $_ := mustMergeOverwrite .Values (include "wgeasy.workload" $ | fromYaml) -}}
