@@ -1,4 +1,4 @@
-{{- define "wgeasy.migratio.checksn" -}}
+{{- define "wgeasy.migration.checks" -}}
   {{/* Safely access the context, so it wont block CI */}}
   {{- if hasKey .Values.global "ixChartContext" -}}
     {{- if not .Values.global.ixChartContext.upgradeMetadata -}}
