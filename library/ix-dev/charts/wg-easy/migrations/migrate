@@ -49,8 +49,8 @@ def migrate(values):
         'podOptions': {
             'dnsConfig': {
                 'options': [
-                    {'name': name, 'value': value}
-                    for name, value in values.get('dnsConfig', {}).get('options', []).items()
+                    {'name': opt['name'], 'value': opt['value']}
+                    for opt in values.get('dnsConfig', {}).get('options', [])
                 ]
             }
         },
