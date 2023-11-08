@@ -1,8 +1,8 @@
-{{- define "wgeasy.migration" -}}
+{{- define "wgeasy.migratio.checksn" -}}
   {{/* Safely access the context, so it wont block CI */}}
   {{- if hasKey .Values.global "ixChartContext" -}}
     {{- if not .Values.global.ixChartContext.upgradeMetadata -}}
-      {{- fail "Upgrade Metadata is missing. Cannot procceed" -}}
+      {{- fail "Upgrade Metadata is missing. Cannot proceed" -}}
     {{- end -}}
 
     {{- $oldChartVersion := .Values.global.ixChartContext.upgradeMetadata.oldChartVersion -}}
