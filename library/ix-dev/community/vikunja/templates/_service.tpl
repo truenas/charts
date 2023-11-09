@@ -1,17 +1,37 @@
 {{- define "vikunja.service" -}}
 service:
-  vikunja:
+  vikunja-proxy:
     enabled: true
-    primary: true
     type: NodePort
-    targetSelector: vikunja
+    targetSelector: vikunja-proxy
     ports:
       webui:
         enabled: true
         primary: true
         port: {{ .Values.vikunjaNetwork.webPort }}
         nodePort: {{ .Values.vikunjaNetwork.webPort }}
-        targetSelector: vikunja
+        targetSelector: vikunja-proxy
+  vikunja-api:
+    enabled: true
+    primary: true
+    type: ClusterIP
+    targetSelector: vikunja-api
+    ports:
+      api:
+        enabled: true
+        primary: true
+        port: {{ .Values.vikunjaPorts.api }}
+        targetSelector: vikunja-api
+  vikunja-frontend:
+    enabled: true
+    type: ClusterIP
+    targetSelector: vikunja-frontend
+    ports:
+      webui:
+        enabled: true
+        primary: true
+        port: {{ .Values.vikunjaPorts.frontHttp }}
+        targetSelector: vikunja-frontend
   redis:
     enabled: true
     type: ClusterIP
