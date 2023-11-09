@@ -45,36 +45,12 @@ persistence:
         01-permissions:
           mountPath: /mnt/directories{{ $storage.mountPath }}
   {{- end }}
-  # Postgres
-  postgresdata:
-    enabled: true
-    type: {{ .Values.n8nStorage.pgData.type }}
-    datasetName: {{ .Values.n8nStorage.pgData.datasetName | default "" }}
-    hostPath: {{ .Values.n8nStorage.pgData.hostPath | default "" }}
-    targetSelector:
-      # Postgres pod
-      postgres:
-        # Postgres container
-        postgres:
-          mountPath: /var/lib/postgresql/data
-        # Permissions container
-        permissions:
-          mountPath: /mnt/directories/postgres_data
-  # Postgres backup
-  postgresbackup:
-    enabled: true
-    type: {{ .Values.n8nStorage.pgBackup.type }}
-    datasetName: {{ .Values.n8nStorage.pgBackup.datasetName | default "" }}
-    hostPath: {{ .Values.n8nStorage.pgBackup.hostPath | default "" }}
-    targetSelector:
-      # Postgres backup pod
-      postgresbackup:
-        # Postgres backup container
-        postgresbackup:
-          mountPath: /postgres_backup
-        # Permissions container
-        permissions:
-          mountPath: /mnt/directories/postgres_backup
+
+  {{- include "ix.v1.common.app.postgresPersistence"
+      (dict "pgData" .Values.n8nStorage.pgData
+            "pgBackup" .Values.n8nStorage.pgBackup
+      ) | nindent 2 }}
+
   {{- if .Values.n8nNetwork.certificateID }}
   cert:
     enabled: true
