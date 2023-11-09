@@ -1,0 +1,30 @@
+sonarrConfig:
+  additionalEnvs:
+    - name: TRANSMISSION__SPEED_LIMIT_DOWN
+      value: 200
+    - name: TRANSMISSION__SPEED_LIMIT_UP
+      value: 100
+    - name: TRANSMISSION__RPC_PASSWORD
+      value: "password"
+    - name: TRANSMISSION__RPC_USERNAME
+      value: "username"
+    - name: TRANSMISSION__RPC_AUTHENTICATION_REQUIRED
+      value: "true"
+
+transmissionNetwork:
+  webPort: 31000
+  peerPort: 31001
+
+transmissionStorage:
+  config:
+    type: pvc
+  downloadsComplete:
+    type: pvc
+  enableIncompleteDir: false
+  downloadsIncomplete:
+    type: pvc
+  additionalStorages:
+  - type: pvc
+    mountPath: /data1
+  - type: pvc
+    mountPath: /data2
