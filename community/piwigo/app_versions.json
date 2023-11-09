@@ -1,0 +1,1074 @@
+{
+    "1.1.1": {
+        "healthy": true,
+        "supported": true,
+        "healthy_error": null,
+        "location": "/__w/charts/charts/community/piwigo/1.1.1",
+        "last_update": "2023-10-28 18:49:10",
+        "required_features": [
+            "normalize/ixVolume"
+        ],
+        "human_version": "13.8.0_1.1.1",
+        "version": "1.1.1",
+        "chart_metadata": {
+            "name": "piwigo",
+            "description": "Piwigo is a photo gallery software for the web that comes with powerful features to publish and manage your collection of pictures.",
+            "annotations": {
+                "title": "Piwigo"
+            },
+            "type": "application",
+            "version": "1.1.1",
+            "apiVersion": "v2",
+            "appVersion": "13.8.0",
+            "kubeVersion": ">=1.16.0-0",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "dependencies": [
+                {
+                    "name": "common",
+                    "repository": "file://../../../common",
+                    "version": "1.1.1"
+                }
+            ],
+            "home": "https://piwigo.org",
+            "icon": "https://media.sys.truenas.net/apps/piwigo/icons/icon.svg",
+            "sources": [
+                "https://hub.docker.com/r/linuxserver/piwigo",
+                "https://github.com/truenas/charts/tree/master/community/piwigo"
+            ],
+            "keywords": [
+                "gallery",
+                "photo"
+            ]
+        },
+        "app_metadata": {
+            "runAsContext": [
+                {
+                    "userName": "root",
+                    "groupName": "root",
+                    "gid": 0,
+                    "uid": 0,
+                    "description": "Piwigo run as root user"
+                }
+            ],
+            "capabilities": [
+                {
+                    "name": "CHOWN",
+                    "description": "Piwigo is able to chown files."
+                },
+                {
+                    "name": "DAC_OVERRIDE",
+                    "description": "Piwigo is able to bypass permission checks."
+                },
+                {
+                    "name": "FOWNER",
+                    "description": "Piwigo is able bypass permission checks for it's sub-processes."
+                },
+                {
+                    "name": "NET_BIND_SERVICE",
+                    "description": "Piwigo requires this ability to bind to port 80 within the container."
+                },
+                {
+                    "name": "SETGID",
+                    "description": "Piwigo is able to set group ID for it's sub-processes."
+                },
+                {
+                    "name": "SETUID",
+                    "description": "Piwigo is able to set user ID for it's sub-processes."
+                }
+            ],
+            "hostMounts": []
+        },
+        "schema": {
+            "groups": [
+                {
+                    "name": "Piwigo Configuration",
+                    "description": "Configure Piwigo"
+                },
+                {
+                    "name": "User and Group Configuration",
+                    "description": "Configure User and Group for Piwigo"
+                },
+                {
+                    "name": "Network Configuration",
+                    "description": "Configure Network for Piwigo"
+                },
+                {
+                    "name": "Storage Configuration",
+                    "description": "Configure Storage for Piwigo"
+                },
+                {
+                    "name": "Resources Configuration",
+                    "description": "Configure Resources for Piwigo"
+                }
+            ],
+            "portals": {
+                "web_portal": {
+                    "protocols": [
+                        "$kubernetes-resource_configmap_portal_protocol"
+                    ],
+                    "host": [
+                        "$kubernetes-resource_configmap_portal_host"
+                    ],
+                    "ports": [
+                        "$kubernetes-resource_configmap_portal_port"
+                    ],
+                    "path": "$kubernetes-resource_configmap_portal_path"
+                }
+            },
+            "questions": [
+                {
+                    "variable": "piwiConfig",
+                    "label": "",
+                    "group": "Piwigo Configuration",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "adminName",
+                                "label": "Admin Name",
+                                "description": "The admin name for Piwigo.</br>\nOnly used when Piwigo is first installed.</br>\nYou can change it later in the Piwigo WebUI.\n",
+                                "schema": {
+                                    "type": "string",
+                                    "required": true,
+                                    "immutable": true,
+                                    "default": ""
+                                }
+                            },
+                            {
+                                "variable": "adminMail",
+                                "label": "Admin Mail",
+                                "description": "The admin mail for Piwigo.</br>\nOnly used when Piwigo is first installed.</br>\nYou can change it later in the Piwigo WebUI.\n",
+                                "schema": {
+                                    "type": "string",
+                                    "required": true,
+                                    "immutable": true,
+                                    "default": ""
+                                }
+                            },
+                            {
+                                "variable": "adminPass",
+                                "label": "Admin Password",
+                                "description": "The admin password for Piwigo.</br>\nOnly used when Piwigo is first installed.</br>\nYou can change it later in the Piwigo WebUI.\n",
+                                "schema": {
+                                    "type": "string",
+                                    "required": true,
+                                    "immutable": true,
+                                    "password": true,
+                                    "default": ""
+                                }
+                            },
+                            {
+                                "variable": "language",
+                                "label": "Language",
+                                "description": "The language for Piwigo.</br>\nOnly used when Piwigo is first installed.\n",
+                                "schema": {
+                                    "type": "string",
+                                    "required": true,
+                                    "immutable": true,
+                                    "default": "en_UK",
+                                    "enum": [
+                                        {
+                                            "value": "af_ZA",
+                                            "description": "Afrikaans [ZA]"
+                                        },
+                                        {
+                                            "value": "es_AR",
+                                            "description": "Argentina [AR]"
+                                        },
+                                        {
+                                            "value": "az_AZ",
+                                            "description": "Az\u0259rbaycanca [AZ]"
+                                        },
+                                        {
+                                            "value": "id_ID",
+                                            "description": "Bahasa Indonesia [ID]"
+                                        },
+                                        {
+                                            "value": "pt_BR",
+                                            "description": "Brasil [BR]"
+                                        },
+                                        {
+                                            "value": "br_FR",
+                                            "description": "Brezhoneg [FR]"
+                                        },
+                                        {
+                                            "value": "ca_ES",
+                                            "description": "Catal\u00e0 [CA]"
+                                        },
+                                        {
+                                            "value": "da_DK",
+                                            "description": "Dansk [DK]"
+                                        },
+                                        {
+                                            "value": "de_DE",
+                                            "description": "Deutsch [DE]"
+                                        },
+                                        {
+                                            "value": "dv_MV",
+                                            "description": "Dhivehi [MV]"
+                                        },
+                                        {
+                                            "value": "en_GB",
+                                            "description": "English [GB]"
+                                        },
+                                        {
+                                            "value": "en_UK",
+                                            "description": "English [UK]"
+                                        },
+                                        {
+                                            "value": "en_US",
+                                            "description": "English [US]"
+                                        },
+                                        {
+                                            "value": "es_ES",
+                                            "description": "Espa\u00f1ol [ES]"
+                                        },
+                                        {
+                                            "value": "eo_EO",
+                                            "description": "Esperanto [EO]"
+                                        },
+                                        {
+                                            "value": "et_EE",
+                                            "description": "Estonian [EE]"
+                                        },
+                                        {
+                                            "value": "eu_ES",
+                                            "description": "Euskara [ES]"
+                                        },
+                                        {
+                                            "value": "fi_FI",
+                                            "description": "Finnish [FI]"
+                                        },
+                                        {
+                                            "value": "fr_FR",
+                                            "description": "Fran\u00e7ais [FR]"
+                                        },
+                                        {
+                                            "value": "fr_CA",
+                                            "description": "Fran\u00e7ais [QC]"
+                                        },
+                                        {
+                                            "value": "ga_IE",
+                                            "description": "Gaeilge [IE]"
+                                        },
+                                        {
+                                            "value": "gl_ES",
+                                            "description": "Galego [ES]"
+                                        },
+                                        {
+                                            "value": "hr_HR",
+                                            "description": "Hrvatski [HR]"
+                                        },
+                                        {
+                                            "value": "it_IT",
+                                            "description": "Italiano [IT]"
+                                        },
+                                        {
+                                            "value": "lv_LV",
+                                            "description": "Latvie\u0161u [LV]"
+                                        },
+                                        {
+                                            "value": "lt_LT",
+                                            "description": "Lietuviu [LT]"
+                                        },
+                                        {
+                                            "value": "lb_LU",
+                                            "description": "L\u00ebtzebuergesch [LU]"
+                                        },
+                                        {
+                                            "value": "hu_HU",
+                                            "description": "Magyar [HU]"
+                                        },
+                                        {
+                                            "value": "ms_MY",
+                                            "description": "Malay [MY]"
+                                        },
+                                        {
+                                            "value": "es_MX",
+                                            "description": "M\u00e9xico [MX]"
+                                        },
+                                        {
+                                            "value": "nl_NL",
+                                            "description": "Nederlands [NL]"
+                                        },
+                                        {
+                                            "value": "nb_NO",
+                                            "description": "Norsk bokm\u00e5l [NO]"
+                                        },
+                                        {
+                                            "value": "nn_NO",
+                                            "description": "Norwegian nynorsk [NO]"
+                                        },
+                                        {
+                                            "value": "pl_PL",
+                                            "description": "Polski [PL]"
+                                        },
+                                        {
+                                            "value": "pt_PT",
+                                            "description": "Portugu\u00eas [PT]"
+                                        },
+                                        {
+                                            "value": "ro_RO",
+                                            "description": "Rom\u00e2n\u0103 [RO]"
+                                        },
+                                        {
+                                            "value": "sk_SK",
+                                            "description": "Slovensky [SK]"
+                                        },
+                                        {
+                                            "value": "sl_SI",
+                                            "description": "Sloven\u0161cina [SI]"
+                                        },
+                                        {
+                                            "value": "sh_RS",
+                                            "description": "Srpski [SR]"
+                                        },
+                                        {
+                                            "value": "sv_SE",
+                                            "description": "Svenska [SE]"
+                                        },
+                                        {
+                                            "value": "vi_VN",
+                                            "description": "Ti\u1ebfng Vi\u1ec7t [VN]"
+                                        },
+                                        {
+                                            "value": "tr_TR",
+                                            "description": "T\u00fcrk\u00e7e [TR]"
+                                        },
+                                        {
+                                            "value": "wo_SN",
+                                            "description": "Wolof [SN]"
+                                        },
+                                        {
+                                            "value": "is_IS",
+                                            "description": "\u00cdslenska [IS]"
+                                        },
+                                        {
+                                            "value": "cs_CZ",
+                                            "description": "\u010cesky [CZ]"
+                                        },
+                                        {
+                                            "value": "el_GR",
+                                            "description": "\u0395\u03bb\u03bb\u03b7\u03bd\u03b9\u03ba\u03ac [GR]"
+                                        },
+                                        {
+                                            "value": "bg_BG",
+                                            "description": "\u0411\u044a\u043b\u0433\u0430\u0440\u0441\u043a\u0438 [BG]"
+                                        },
+                                        {
+                                            "value": "mk_MK",
+                                            "description": "\u041c\u0430\u043a\u0435\u0434\u043e\u043d\u0441\u043a\u0438 [MK]"
+                                        },
+                                        {
+                                            "value": "mn_MN",
+                                            "description": "\u041c\u043e\u043d\u0433\u043e\u043b [MN]"
+                                        },
+                                        {
+                                            "value": "ru_RU",
+                                            "description": "\u0420\u0443\u0441\u0441\u043a\u0438\u0439 [RU]"
+                                        },
+                                        {
+                                            "value": "sr_RS",
+                                            "description": "\u0421\u0440\u043f\u0441\u043a\u0438 [SR]"
+                                        },
+                                        {
+                                            "value": "uk_UA",
+                                            "description": "\u0423\u043a\u0440\u0430\u0457\u043d\u0441\u044c\u043a\u0430 [UA]"
+                                        },
+                                        {
+                                            "value": "he_IL",
+                                            "description": "\u05e2\u05d1\u05e8\u05d9\u05ea [IL]"
+                                        },
+                                        {
+                                            "value": "ar_EG",
+                                            "description": "\u0627\u0644\u0639\u0631\u0628\u064a\u0629 (\u0645\u0635"
+                                        },
+                                        {
+                                            "value": "ar_SA",
+                                            "description": "\u0627\u0644\u0639\u0631\u0628\u064a\u0629 [AR]"
+                                        },
+                                        {
+                                            "value": "ar_MA",
+                                            "description": "\u0627\u0644\u0639\u0631\u0628\u064a\u0629 [MA]"
+                                        },
+                                        {
+                                            "value": "fa_IR",
+                                            "description": "\u067e\u0627\u0631\u0633\u06cc [IR]"
+                                        },
+                                        {
+                                            "value": "kok_IN",
+                                            "description": "\u0915\u094b\u0902\u0915\u0923\u0940 [IN]"
+                                        },
+                                        {
+                                            "value": "bn_IN",
+                                            "description": "\u09ac\u09be\u0982\u09b2\u09be[IN]"
+                                        },
+                                        {
+                                            "value": "gu_IN",
+                                            "description": "\u0a97\u0ac1\u0a9c\u0ab0\u0abe\u0aa4\u0ac0[IN]"
+                                        },
+                                        {
+                                            "value": "ta_IN",
+                                            "description": "\u0ba4\u0bae\u0bbf\u0bb4\u0bcd [IN]"
+                                        },
+                                        {
+                                            "value": "kn_IN",
+                                            "description": "\u0c95\u0ca8\u0ccd\u0ca8\u0ca1 [IN]"
+                                        },
+                                        {
+                                            "value": "th_TH",
+                                            "description": "\u0e20\u0e32\u0e29\u0e32\u0e44\u0e17\u0e22 [TH]"
+                                        },
+                                        {
+                                            "value": "ka_GE",
+                                            "description": "\u10e5\u10d0\u10e0\u10d7\u10e3\u10da\u10d8 [GE]"
+                                        },
+                                        {
+                                            "value": "km_KH",
+                                            "description": "\u1781\u17d2\u1798\u17c2\u179a [KH]"
+                                        },
+                                        {
+                                            "value": "zh_TW",
+                                            "description": "\u4e2d\u6587 (\u7e41\u9ad4) [TW]"
+                                        },
+                                        {
+                                            "value": "zh_HK",
+                                            "description": "\u4e2d\u6587 (\u9999\u6e2f) [HK]"
+                                        },
+                                        {
+                                            "value": "ja_JP",
+                                            "description": "\u65e5\u672c\u8a9e [JP]"
+                                        },
+                                        {
+                                            "value": "zh_CN",
+                                            "description": "\u7b80\u4f53\u4e2d\u6587 [CN]"
+                                        },
+                                        {
+                                            "value": "ko_KR",
+                                            "description": "\ud55c\uad6d\uc5b4 [KR]"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "additionalEnvs",
+                                "label": "Additional Environment Variables",
+                                "description": "Configure additional environment variables for Piwigo.",
+                                "schema": {
+                                    "type": "list",
+                                    "default": [],
+                                    "items": [
+                                        {
+                                            "variable": "env",
+                                            "label": "Environment Variable",
+                                            "schema": {
+                                                "type": "dict",
+                                                "attrs": [
+                                                    {
+                                                        "variable": "name",
+                                                        "label": "Name",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "required": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "value",
+                                                        "label": "Value",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "required": true
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "piwiID",
+                    "label": "",
+                    "group": "User and Group Configuration",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "user",
+                                "label": "User ID",
+                                "description": "The user id that Piwigo files will be owned by.",
+                                "schema": {
+                                    "type": "int",
+                                    "min": 2,
+                                    "default": 568,
+                                    "required": true
+                                }
+                            },
+                            {
+                                "variable": "group",
+                                "label": "Group ID",
+                                "description": "The group id that Piwigo files will be owned by.",
+                                "schema": {
+                                    "type": "int",
+                                    "min": 2,
+                                    "default": 568,
+                                    "required": true
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "piwiNetwork",
+                    "label": "",
+                    "group": "Network Configuration",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "webPort",
+                                "label": "Web Port",
+                                "description": "The port for the Piwigo WebUI.",
+                                "schema": {
+                                    "type": "int",
+                                    "default": 30066,
+                                    "min": 9000,
+                                    "max": 65535,
+                                    "required": true
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "piwiStorage",
+                    "label": "",
+                    "group": "Storage Configuration",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "config",
+                                "label": "Piwigo Configuration Storage",
+                                "description": "The path to store Piwigo configuration.",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "type",
+                                            "label": "Type",
+                                            "description": "ixVolume: Is dataset created automatically by the system.</br>\nHost Path: Is a path that already exists on the system.\n",
+                                            "schema": {
+                                                "type": "string",
+                                                "required": true,
+                                                "immutable": true,
+                                                "default": "ixVolume",
+                                                "enum": [
+                                                    {
+                                                        "value": "hostPath",
+                                                        "description": "Host Path (Path that already exists on the system)"
+                                                    },
+                                                    {
+                                                        "value": "ixVolume",
+                                                        "description": "ixVolume (Dataset created automatically by the system)"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "variable": "datasetName",
+                                            "label": "Dataset Name",
+                                            "schema": {
+                                                "type": "string",
+                                                "show_if": [
+                                                    [
+                                                        "type",
+                                                        "=",
+                                                        "ixVolume"
+                                                    ]
+                                                ],
+                                                "required": true,
+                                                "hidden": true,
+                                                "immutable": true,
+                                                "default": "config",
+                                                "$ref": [
+                                                    "normalize/ixVolume"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "variable": "hostPath",
+                                            "label": "Host Path",
+                                            "schema": {
+                                                "type": "hostpath",
+                                                "show_if": [
+                                                    [
+                                                        "type",
+                                                        "=",
+                                                        "hostPath"
+                                                    ]
+                                                ],
+                                                "immutable": true,
+                                                "required": true
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "gallery",
+                                "label": "Piwigo Gallery Storage",
+                                "description": "The path to store Piwigo gallery.",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "type",
+                                            "label": "Type",
+                                            "description": "ixVolume: Is dataset created automatically by the system.</br>\nHost Path: Is a path that already exists on the system.\n",
+                                            "schema": {
+                                                "type": "string",
+                                                "required": true,
+                                                "immutable": true,
+                                                "default": "ixVolume",
+                                                "enum": [
+                                                    {
+                                                        "value": "hostPath",
+                                                        "description": "Host Path (Path that already exists on the system)"
+                                                    },
+                                                    {
+                                                        "value": "ixVolume",
+                                                        "description": "ixVolume (Dataset created automatically by the system)"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "variable": "datasetName",
+                                            "label": "Dataset Name",
+                                            "schema": {
+                                                "type": "string",
+                                                "show_if": [
+                                                    [
+                                                        "type",
+                                                        "=",
+                                                        "ixVolume"
+                                                    ]
+                                                ],
+                                                "required": true,
+                                                "hidden": true,
+                                                "immutable": true,
+                                                "default": "gallery",
+                                                "$ref": [
+                                                    "normalize/ixVolume"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "variable": "hostPath",
+                                            "label": "Host Path",
+                                            "schema": {
+                                                "type": "hostpath",
+                                                "show_if": [
+                                                    [
+                                                        "type",
+                                                        "=",
+                                                        "hostPath"
+                                                    ]
+                                                ],
+                                                "immutable": true,
+                                                "required": true
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "mariadbData",
+                                "label": "Piwigo MariaDB Data Storage",
+                                "description": "The path to store Piwigo MariaDB Data.",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "type",
+                                            "label": "Type",
+                                            "description": "ixVolume: Is dataset created automatically by the system.</br>\nHost Path: Is a path that already exists on the system.\n",
+                                            "schema": {
+                                                "type": "string",
+                                                "required": true,
+                                                "immutable": true,
+                                                "default": "ixVolume",
+                                                "enum": [
+                                                    {
+                                                        "value": "hostPath",
+                                                        "description": "Host Path (Path that already exists on the system)"
+                                                    },
+                                                    {
+                                                        "value": "ixVolume",
+                                                        "description": "ixVolume (Dataset created automatically by the system)"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "variable": "datasetName",
+                                            "label": "Dataset Name",
+                                            "schema": {
+                                                "type": "string",
+                                                "show_if": [
+                                                    [
+                                                        "type",
+                                                        "=",
+                                                        "ixVolume"
+                                                    ]
+                                                ],
+                                                "required": true,
+                                                "hidden": true,
+                                                "immutable": true,
+                                                "default": "mariadbData",
+                                                "$ref": [
+                                                    "normalize/ixVolume"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "variable": "hostPath",
+                                            "label": "Host Path",
+                                            "schema": {
+                                                "type": "hostpath",
+                                                "show_if": [
+                                                    [
+                                                        "type",
+                                                        "=",
+                                                        "hostPath"
+                                                    ]
+                                                ],
+                                                "immutable": true,
+                                                "required": true
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "mariadbBackup",
+                                "label": "Piwigo MariaDB Backup Storage",
+                                "description": "The path to store Piwigo MariaDB Backup.",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "type",
+                                            "label": "Type",
+                                            "description": "ixVolume: Is dataset created automatically by the system.</br>\nHost Path: Is a path that already exists on the system.\n",
+                                            "schema": {
+                                                "type": "string",
+                                                "required": true,
+                                                "immutable": true,
+                                                "default": "ixVolume",
+                                                "enum": [
+                                                    {
+                                                        "value": "hostPath",
+                                                        "description": "Host Path (Path that already exists on the system)"
+                                                    },
+                                                    {
+                                                        "value": "ixVolume",
+                                                        "description": "ixVolume (Dataset created automatically by the system)"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "variable": "datasetName",
+                                            "label": "Dataset Name",
+                                            "schema": {
+                                                "type": "string",
+                                                "show_if": [
+                                                    [
+                                                        "type",
+                                                        "=",
+                                                        "ixVolume"
+                                                    ]
+                                                ],
+                                                "required": true,
+                                                "hidden": true,
+                                                "immutable": true,
+                                                "default": "mariadbBackup",
+                                                "$ref": [
+                                                    "normalize/ixVolume"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "variable": "hostPath",
+                                            "label": "Host Path",
+                                            "schema": {
+                                                "type": "hostpath",
+                                                "show_if": [
+                                                    [
+                                                        "type",
+                                                        "=",
+                                                        "hostPath"
+                                                    ]
+                                                ],
+                                                "immutable": true,
+                                                "required": true
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "additionalStorages",
+                                "label": "Additional Storage",
+                                "description": "Additional storage for Piwigo.",
+                                "schema": {
+                                    "type": "list",
+                                    "default": [],
+                                    "items": [
+                                        {
+                                            "variable": "storageEntry",
+                                            "label": "Storage Entry",
+                                            "schema": {
+                                                "type": "dict",
+                                                "attrs": [
+                                                    {
+                                                        "variable": "type",
+                                                        "label": "Type",
+                                                        "description": "ixVolume: Is dataset created automatically by the system.</br>\nHost Path: Is a path that already exists on the system.</br>\nSMB Share: Is a SMB share that is mounted to a persistent volume claim.\n",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "required": true,
+                                                            "default": "ixVolume",
+                                                            "immutable": true,
+                                                            "enum": [
+                                                                {
+                                                                    "value": "hostPath",
+                                                                    "description": "Host Path (Path that already exists on the system)"
+                                                                },
+                                                                {
+                                                                    "value": "ixVolume",
+                                                                    "description": "ixVolume (Dataset created automatically by the system)"
+                                                                },
+                                                                {
+                                                                    "value": "smb-pv-pvc",
+                                                                    "description": "SMB Share (Mounts a persistent volume claim to a SMB share)"
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "mountPath",
+                                                        "label": "Mount Path",
+                                                        "description": "The path inside the container to mount the storage.",
+                                                        "schema": {
+                                                            "type": "path",
+                                                            "required": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "hostPath",
+                                                        "label": "Host Path",
+                                                        "description": "The host path to use for storage.",
+                                                        "schema": {
+                                                            "type": "hostpath",
+                                                            "show_if": [
+                                                                [
+                                                                    "type",
+                                                                    "=",
+                                                                    "hostPath"
+                                                                ]
+                                                            ],
+                                                            "required": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "datasetName",
+                                                        "label": "Dataset Name",
+                                                        "description": "The name of the dataset to use for storage.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "type",
+                                                                    "=",
+                                                                    "ixVolume"
+                                                                ]
+                                                            ],
+                                                            "required": true,
+                                                            "immutable": true,
+                                                            "default": "storage_entry",
+                                                            "$ref": [
+                                                                "normalize/ixVolume"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "server",
+                                                        "label": "Server",
+                                                        "description": "The server for the SMB share.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "type",
+                                                                    "=",
+                                                                    "smb-pv-pvc"
+                                                                ]
+                                                            ],
+                                                            "required": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "share",
+                                                        "label": "Share",
+                                                        "description": "The share name for the SMB share.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "type",
+                                                                    "=",
+                                                                    "smb-pv-pvc"
+                                                                ]
+                                                            ],
+                                                            "required": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "domain",
+                                                        "label": "Domain (Optional)",
+                                                        "description": "The domain for the SMB share.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "type",
+                                                                    "=",
+                                                                    "smb-pv-pvc"
+                                                                ]
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "username",
+                                                        "label": "Username",
+                                                        "description": "The username for the SMB share.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "type",
+                                                                    "=",
+                                                                    "smb-pv-pvc"
+                                                                ]
+                                                            ],
+                                                            "required": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "password",
+                                                        "label": "Password",
+                                                        "description": "The password for the SMB share.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "type",
+                                                                    "=",
+                                                                    "smb-pv-pvc"
+                                                                ]
+                                                            ],
+                                                            "required": true,
+                                                            "private": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "size",
+                                                        "label": "Size (in Gi)",
+                                                        "description": "The size of the volume quota.",
+                                                        "schema": {
+                                                            "type": "int",
+                                                            "show_if": [
+                                                                [
+                                                                    "type",
+                                                                    "=",
+                                                                    "smb-pv-pvc"
+                                                                ]
+                                                            ],
+                                                            "required": true,
+                                                            "min": 1,
+                                                            "default": 1
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "resources",
+                    "label": "",
+                    "group": "Resources Configuration",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "limits",
+                                "label": "Limits",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "cpu",
+                                            "label": "CPU",
+                                            "description": "CPU limit for Piwigo.",
+                                            "schema": {
+                                                "type": "string",
+                                                "max_length": 6,
+                                                "valid_chars": "^(0\\.[1-9]|[1-9][0-9]*)(\\.[0-9]|m?)$",
+                                                "valid_chars_error": "Valid CPU limit formats are</br>\n- Plain Integer - eg. 1</br>\n- Float - eg. 0.5</br>\n- Milicpu - eg. 500m\n",
+                                                "default": "4000m",
+                                                "required": true
+                                            }
+                                        },
+                                        {
+                                            "variable": "memory",
+                                            "label": "Memory",
+                                            "description": "Memory limit for Piwigo.",
+                                            "schema": {
+                                                "type": "string",
+                                                "max_length": 12,
+                                                "valid_chars": "^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$",
+                                                "valid_chars_error": "Valid Memory limit formats are</br>\n- Suffixed with E/P/T/G/M/K - eg. 1G</br>\n- Suffixed with Ei/Pi/Ti/Gi/Mi/Ki - eg. 1Gi</br>\n- Plain Integer in bytes - eg. 1024</br>\n- Exponent - eg. 134e6\n",
+                                                "default": "8Gi",
+                                                "required": true
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "app_readme": "<h1>Piwigo</h1>\n<p><a href=\"https://piwigo.org/\">Piwigo</a> is a photo gallery software for the web that comes with powerful features to\npublish and manage your collection of pictures.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>mariadb</code> directories.\nAfterwards <code>mariadb</code> will start as a <strong>non</strong>-root user (<code>999</code>).&gt;\nOn each upgrade, a container will be launched with <strong>root</strong> privileges in order to\napply the correct permissions to the <code>mariadb</code> <strong>backups</strong> directory.\nContainer that performs the backup will run as a <strong>non</strong>-root user (<code>999</code>) afterwards.\nKeep in mind the permissions on the backup directory will be changed to <code>999:999</code> on <strong>every</strong> update.\nBut will only be changed once for the <code>mariadb</code> data directories.</p>\n</blockquote>",
+        "detailed_readme": "<h1>Piwigo</h1>\n<p><a href=\"https://piwigo.org/\">Piwigo</a> is a photo gallery software for the web that comes with powerful features to\npublish and manage your collection of pictures.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>mariadb</code> directories.\nAfterwards <code>mariadb</code> will start as a <strong>non</strong>-root user (<code>999</code>).&gt;\nOn each upgrade, a container will be launched with <strong>root</strong> privileges in order to\napply the correct permissions to the <code>mariadb</code> <strong>backups</strong> directory.\nContainer that performs the backup will run as a <strong>non</strong>-root user (<code>999</code>) afterwards.\nKeep in mind the permissions on the backup directory will be changed to <code>999:999</code> on <strong>every</strong> update.\nBut will only be changed once for the <code>mariadb</code> data directories.</p>\n</blockquote>",
+        "changelog": null
+    }
+}

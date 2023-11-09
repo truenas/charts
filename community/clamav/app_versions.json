@@ -1,0 +1,430 @@
+{
+    "1.0.12": {
+        "healthy": true,
+        "supported": true,
+        "healthy_error": null,
+        "location": "/__w/charts/charts/community/clamav/1.0.12",
+        "last_update": "2023-10-28 18:49:10",
+        "required_features": [
+            "normalize/ixVolume"
+        ],
+        "human_version": "1.0.1_1.0.12",
+        "version": "1.0.12",
+        "chart_metadata": {
+            "name": "clamav",
+            "description": "ClamAV is an open source (GPLv2) anti-virus toolkit.",
+            "annotations": {
+                "title": "Clam AV"
+            },
+            "type": "application",
+            "version": "1.0.12",
+            "apiVersion": "v2",
+            "appVersion": "1.0.1",
+            "kubeVersion": ">=1.16.0-0",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "dependencies": [
+                {
+                    "name": "common",
+                    "repository": "file://../../../common",
+                    "version": "1.1.1"
+                }
+            ],
+            "home": "https://www.clamav.net/",
+            "icon": "https://media.sys.truenas.net/apps/clamav/icons/icon.png",
+            "sources": [
+                "https://docs.clamav.net/",
+                "https://github.com/truenas/charts/tree/master/community/clamav",
+                "https://www.clamav.net/"
+            ],
+            "keywords": [
+                "anti-virus",
+                "clamav"
+            ]
+        },
+        "app_metadata": {
+            "runAsContext": [
+                {
+                    "userName": "root",
+                    "groupName": "root",
+                    "gid": 0,
+                    "uid": 0,
+                    "description": "ClamAV runs as root user."
+                }
+            ],
+            "capabilities": [
+                {
+                    "name": "CHOWN",
+                    "description": "ClamAV is able to chown files."
+                },
+                {
+                    "name": "FOWNER",
+                    "description": "ClamAV is able bypass permission checks for it's sub-processes."
+                },
+                {
+                    "name": "DAC_OVERRIDE",
+                    "description": "ClamAV is able to bypass permission checks."
+                },
+                {
+                    "name": "SETGID",
+                    "description": "ClamAV is able to set group ID for it's sub-processes."
+                },
+                {
+                    "name": "SETUID",
+                    "description": "ClamAV is able to set user ID for it's sub-processes."
+                }
+            ],
+            "hostMounts": []
+        },
+        "schema": {
+            "groups": [
+                {
+                    "name": "ClamAV Configuration",
+                    "description": "Configure ClamAV"
+                },
+                {
+                    "name": "Network Configuration",
+                    "description": "Configure Network for ClamAV"
+                },
+                {
+                    "name": "Storage Configuration",
+                    "description": "Configure Storage for ClamAV"
+                },
+                {
+                    "name": "Resources Configuration",
+                    "description": "Configure Resources for ClamAV"
+                }
+            ],
+            "questions": [
+                {
+                    "variable": "clamavConfig",
+                    "label": "",
+                    "group": "ClamAV Configuration",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "disableClamd",
+                                "label": "Disable ClamD",
+                                "description": "Do not start Clam daemon",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "variable": "disableFreshClamd",
+                                "label": "Disable FreshClamD",
+                                "description": "Do not start the FreshClam daemon",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "variable": "disableMilterd",
+                                "label": "Disable MilterD",
+                                "description": "Do not start the ClamAV-Milter daemon",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            },
+                            {
+                                "variable": "clamdStartupTimeout",
+                                "label": "ClamD Startup Timeout",
+                                "description": "Seconds to wait for ClamD to start",
+                                "schema": {
+                                    "type": "int",
+                                    "default": 1800,
+                                    "required": true
+                                }
+                            },
+                            {
+                                "variable": "freshclamChecks",
+                                "label": "Fresh Clam Checks",
+                                "description": "Times to check per day for a new database.",
+                                "schema": {
+                                    "type": "int",
+                                    "default": 1,
+                                    "min": 1,
+                                    "max": 50,
+                                    "required": true
+                                }
+                            },
+                            {
+                                "variable": "additionalEnvs",
+                                "label": "Additional Environment Variables",
+                                "description": "Configure additional environment variables for ClamAV.",
+                                "schema": {
+                                    "type": "list",
+                                    "default": [],
+                                    "items": [
+                                        {
+                                            "variable": "env",
+                                            "label": "Environment Variable",
+                                            "schema": {
+                                                "type": "dict",
+                                                "attrs": [
+                                                    {
+                                                        "variable": "name",
+                                                        "label": "Name",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "required": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "value",
+                                                        "label": "Value",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "required": true
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "clamavNetwork",
+                    "label": "",
+                    "group": "Network Configuration",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "clamdPort",
+                                "label": "ClamD Port",
+                                "description": "The port for the ClamAV ClamD",
+                                "schema": {
+                                    "type": "int",
+                                    "default": 30005,
+                                    "min": 9000,
+                                    "max": 65535,
+                                    "required": true
+                                }
+                            },
+                            {
+                                "variable": "milterdPort",
+                                "label": "MilterD Port",
+                                "description": "The port for the ClamAV MilterD",
+                                "schema": {
+                                    "type": "int",
+                                    "default": 30006,
+                                    "min": 9000,
+                                    "max": 65535,
+                                    "required": true
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "clamavStorage",
+                    "label": "",
+                    "group": "Storage Configuration",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "sigdb",
+                                "label": "ClamAV Signature Database Storage",
+                                "description": "The path to store ClamAV Signature Database.",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "type",
+                                            "label": "Type",
+                                            "description": "ixVolume: Is dataset created automatically by the system.</br>\nHost Path: Is a path that already exists on the system.\n",
+                                            "schema": {
+                                                "type": "string",
+                                                "required": true,
+                                                "immutable": true,
+                                                "default": "ixVolume",
+                                                "enum": [
+                                                    {
+                                                        "value": "hostPath",
+                                                        "description": "Host Path (Path that already exists on the system)"
+                                                    },
+                                                    {
+                                                        "value": "ixVolume",
+                                                        "description": "ixVolume (Dataset created automatically by the system)"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "variable": "datasetName",
+                                            "label": "Dataset Name",
+                                            "schema": {
+                                                "type": "string",
+                                                "show_if": [
+                                                    [
+                                                        "type",
+                                                        "=",
+                                                        "ixVolume"
+                                                    ]
+                                                ],
+                                                "required": true,
+                                                "hidden": true,
+                                                "immutable": true,
+                                                "default": "sig-db",
+                                                "$ref": [
+                                                    "normalize/ixVolume"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "variable": "hostPath",
+                                            "label": "Host Path",
+                                            "schema": {
+                                                "type": "hostpath",
+                                                "show_if": [
+                                                    [
+                                                        "type",
+                                                        "=",
+                                                        "hostPath"
+                                                    ]
+                                                ],
+                                                "immutable": true,
+                                                "required": true
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "scandir",
+                                "label": "ClamAV Scan Storage",
+                                "description": "The path to store ClamAV Scan storage.",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "type",
+                                            "label": "Type",
+                                            "description": "ixVolume: Is dataset created automatically by the system.</br>\nHost Path: Is a path that already exists on the system.\n",
+                                            "schema": {
+                                                "type": "string",
+                                                "required": true,
+                                                "immutable": true,
+                                                "default": "ixVolume",
+                                                "enum": [
+                                                    {
+                                                        "value": "hostPath",
+                                                        "description": "Host Path (Path that already exists on the system)"
+                                                    },
+                                                    {
+                                                        "value": "ixVolume",
+                                                        "description": "ixVolume (Dataset created automatically by the system)"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "variable": "datasetName",
+                                            "label": "Dataset Name",
+                                            "schema": {
+                                                "type": "string",
+                                                "show_if": [
+                                                    [
+                                                        "type",
+                                                        "=",
+                                                        "ixVolume"
+                                                    ]
+                                                ],
+                                                "required": true,
+                                                "hidden": true,
+                                                "immutable": true,
+                                                "default": "scan-dir",
+                                                "$ref": [
+                                                    "normalize/ixVolume"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "variable": "hostPath",
+                                            "label": "Host Path",
+                                            "schema": {
+                                                "type": "hostpath",
+                                                "show_if": [
+                                                    [
+                                                        "type",
+                                                        "=",
+                                                        "hostPath"
+                                                    ]
+                                                ],
+                                                "immutable": true,
+                                                "required": true
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "resources",
+                    "label": "",
+                    "group": "Resources Configuration",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "limits",
+                                "label": "Limits",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "cpu",
+                                            "label": "CPU",
+                                            "description": "CPU limit for ClamAV.",
+                                            "schema": {
+                                                "type": "string",
+                                                "max_length": 6,
+                                                "valid_chars": "^(0\\.[1-9]|[1-9][0-9]*)(\\.[0-9]|m?)$",
+                                                "valid_chars_error": "Valid CPU limit formats are</br>\n- Plain Integer - eg. 1</br>\n- Float - eg. 0.5</br>\n- Milicpu - eg. 500m\n",
+                                                "default": "4000m",
+                                                "required": true
+                                            }
+                                        },
+                                        {
+                                            "variable": "memory",
+                                            "label": "Memory",
+                                            "description": "Memory limit for ClamAV.",
+                                            "schema": {
+                                                "type": "string",
+                                                "max_length": 12,
+                                                "valid_chars": "^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$",
+                                                "valid_chars_error": "Valid Memory limit formats are</br>\n- Suffixed with E/P/T/G/M/K - eg. 1G</br>\n- Suffixed with Ei/Pi/Ti/Gi/Mi/Ki - eg. 1Gi</br>\n- Plain Integer in bytes - eg. 1024</br>\n- Exponent - eg. 134e6\n",
+                                                "default": "8Gi",
+                                                "required": true
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "app_readme": "<h1>ClamAV</h1>\n<p><a href=\"https://www.clamav.net/\">ClamAV</a> - ClamAV\u00ae is an open-source antivirus engine for detecting trojans, viruses, malware &amp; other malicious threats.</p>\n<ul>\n<li>App runs as <code>root</code> user</li>\n</ul>",
+        "detailed_readme": "<h1>ClamAV</h1>\n<p><a href=\"https://www.clamav.net/\">ClamAV</a> - ClamAV\u00ae is an open-source antivirus engine for detecting trojans, viruses, malware &amp; other malicious threats.</p>\n<ul>\n<li>App runs as <code>root</code> user</li>\n</ul>",
+        "changelog": null
+    }
+}

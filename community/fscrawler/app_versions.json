@@ -1,0 +1,569 @@
+{
+    "1.1.1": {
+        "healthy": true,
+        "supported": true,
+        "healthy_error": null,
+        "location": "/__w/charts/charts/community/fscrawler/1.1.1",
+        "last_update": "2023-10-28 18:49:10",
+        "required_features": [
+            "normalize/ixVolume",
+            "definitions/timezone"
+        ],
+        "human_version": "2.9_1.1.1",
+        "version": "1.1.1",
+        "chart_metadata": {
+            "name": "fscrawler",
+            "description": "FSCrawler is a crawler that helps to index binary documents such as PDF, Open Office, MS Office.",
+            "annotations": {
+                "title": "FSCrawler"
+            },
+            "type": "application",
+            "version": "1.1.1",
+            "apiVersion": "v2",
+            "appVersion": "2.9",
+            "kubeVersion": ">=1.16.0-0",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "dependencies": [
+                {
+                    "name": "common",
+                    "repository": "file://../../../common",
+                    "version": "1.1.1"
+                }
+            ],
+            "home": "https://fscrawler.readthedocs.io/",
+            "icon": "https://localhost/no-icon",
+            "sources": [
+                "https://github.com/dadoonet/fscrawler",
+                "https://github.com/truenas/charts/tree/master/community/fscrawler",
+                "https://hub.docker.com/r/dadoonet/fscrawler",
+                "https://fscrawler.readthedocs.io/"
+            ],
+            "keywords": [
+                "index",
+                "crawler"
+            ]
+        },
+        "app_metadata": {
+            "runAsContext": [
+                {
+                    "userName": "root",
+                    "groupName": "root",
+                    "gid": 0,
+                    "uid": 0,
+                    "description": "FSCrawler runs as a root user."
+                }
+            ],
+            "capabilities": [],
+            "hostMounts": []
+        },
+        "schema": {
+            "groups": [
+                {
+                    "name": "FSCrawler Configuration",
+                    "description": "Configure FSCrawler"
+                },
+                {
+                    "name": "Network Configuration",
+                    "description": "Configure Network for FSCrawler"
+                },
+                {
+                    "name": "Storage Configuration",
+                    "description": "Configure Storage for FSCrawler"
+                },
+                {
+                    "name": "Resources Configuration",
+                    "description": "Configure Resources for FSCrawler"
+                }
+            ],
+            "questions": [
+                {
+                    "variable": "TZ",
+                    "group": "FSCrawler Configuration",
+                    "label": "Timezone",
+                    "schema": {
+                        "type": "string",
+                        "default": "America/Los_Angeles",
+                        "required": true,
+                        "$ref": [
+                            "definitions/timezone"
+                        ],
+                        "enum": [
+                            {
+                                "value": "Asia/Damascus",
+                                "description": "'Asia/Damascus' timezone"
+                            },
+                            {
+                                "value": "Asia/Saigon",
+                                "description": "'Asia/Saigon' timezone"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "fscrawlerConfig",
+                    "label": "",
+                    "group": "FSCrawler Configuration",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "imageSelector",
+                                "label": "Image",
+                                "description": "The image to use for FSCrawler.</br>\nImages with OCR support are a lot larger than images without OCR support.</br>\nApproximate image sizes:</br>\n- With OCR Support: 1.2GB</br>\n- Without OCR Support: 0.5GB\n",
+                                "schema": {
+                                    "type": "string",
+                                    "default": "ocrImage",
+                                    "required": true,
+                                    "enum": [
+                                        {
+                                            "value": "ocrImage",
+                                            "description": "With OCR Support - Elasticsearch 7 and 8"
+                                        },
+                                        {
+                                            "value": "noocrImage",
+                                            "description": "Without OCR Support - Elasticsearch 7 and 8"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "jobName",
+                                "label": "Job Name",
+                                "description": "The name of the FSCrawler job to run. </br>\nA _settings.yaml file in the directory named after the job name will have to be manually created.\n",
+                                "schema": {
+                                    "type": "string",
+                                    "default": "",
+                                    "required": true
+                                }
+                            },
+                            {
+                                "variable": "loop",
+                                "label": "Loop",
+                                "description": "The number of times to run the job.</br>\nhttps://fscrawler.readthedocs.io/en/latest/admin/cli-options.html#loop </br>\n-1 means run forever. </br>\n0 means never run. </br>\n",
+                                "schema": {
+                                    "type": "int",
+                                    "default": -1,
+                                    "required": true,
+                                    "min": -1
+                                }
+                            },
+                            {
+                                "variable": "restart",
+                                "label": "Restart",
+                                "description": "Restart the job from the beginning.</br>\nhttps://fscrawler.readthedocs.io/en/latest/admin/cli-options.html#restart\n",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "variable": "additionalEnvs",
+                                "label": "Additional Environment Variables",
+                                "description": "Configure additional environment variables for FSCrawler.",
+                                "schema": {
+                                    "type": "list",
+                                    "default": [],
+                                    "items": [
+                                        {
+                                            "variable": "env",
+                                            "label": "Environment Variable",
+                                            "schema": {
+                                                "type": "dict",
+                                                "attrs": [
+                                                    {
+                                                        "variable": "name",
+                                                        "label": "Name",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "required": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "value",
+                                                        "label": "Value",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "required": true
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "fscrawlerNetwork",
+                    "label": "",
+                    "group": "Network Configuration",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "enableRestApiService",
+                                "label": "Enable Rest API Service",
+                                "description": "Enable Rest API Service for FSCrawler.</br>\nhttps://fscrawler.readthedocs.io/en/latest/admin/fs/rest.html</br>\nAdditional configuration is needed in the job file. Check the Notes card\nafter installation for more information.\n",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "variable": "restPort",
+                                "label": "Rest Port",
+                                "description": "The port to use for the Rest API Service.",
+                                "schema": {
+                                    "type": "int",
+                                    "show_if": [
+                                        [
+                                            "enableRestApiService",
+                                            "=",
+                                            true
+                                        ]
+                                    ],
+                                    "default": 30084,
+                                    "min": 9000,
+                                    "max": 65535,
+                                    "required": true
+                                }
+                            },
+                            {
+                                "variable": "hostNetwork",
+                                "label": "Host Network",
+                                "description": "Bind to the host network. It's recommended to keep this disabled.\n",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "fscrawlerStorage",
+                    "label": "",
+                    "group": "Storage Configuration",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "jobs",
+                                "label": "FSCrawler Jobs Storage",
+                                "description": "The path to store FSCrawler Jobs.",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "type",
+                                            "label": "Type",
+                                            "description": "ixVolume: Is dataset created automatically by the system.</br>\nHost Path: Is a path that already exists on the system.\n",
+                                            "schema": {
+                                                "type": "string",
+                                                "required": true,
+                                                "immutable": true,
+                                                "default": "ixVolume",
+                                                "enum": [
+                                                    {
+                                                        "value": "hostPath",
+                                                        "description": "Host Path (Path that already exists on the system)"
+                                                    },
+                                                    {
+                                                        "value": "ixVolume",
+                                                        "description": "ixVolume (Dataset created automatically by the system)"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "variable": "datasetName",
+                                            "label": "Dataset Name",
+                                            "schema": {
+                                                "type": "string",
+                                                "show_if": [
+                                                    [
+                                                        "type",
+                                                        "=",
+                                                        "ixVolume"
+                                                    ]
+                                                ],
+                                                "required": true,
+                                                "hidden": true,
+                                                "immutable": true,
+                                                "default": "jobs",
+                                                "$ref": [
+                                                    "normalize/ixVolume"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "variable": "hostPath",
+                                            "label": "Host Path",
+                                            "schema": {
+                                                "type": "hostpath",
+                                                "show_if": [
+                                                    [
+                                                        "type",
+                                                        "=",
+                                                        "hostPath"
+                                                    ]
+                                                ],
+                                                "immutable": true,
+                                                "required": true
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "additionalStorages",
+                                "label": "Additional Storage",
+                                "description": "Additional storage for FSCrawler.",
+                                "schema": {
+                                    "type": "list",
+                                    "default": [],
+                                    "items": [
+                                        {
+                                            "variable": "storageEntry",
+                                            "label": "Storage Entry",
+                                            "schema": {
+                                                "type": "dict",
+                                                "attrs": [
+                                                    {
+                                                        "variable": "type",
+                                                        "label": "Type",
+                                                        "description": "ixVolume: Is dataset created automatically by the system.</br>\nHost Path: Is a path that already exists on the system.</br>\nSMB Share: Is a SMB share that is mounted to a persistent volume claim.\n",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "required": true,
+                                                            "default": "ixVolume",
+                                                            "immutable": true,
+                                                            "enum": [
+                                                                {
+                                                                    "value": "hostPath",
+                                                                    "description": "Host Path (Path that already exists on the system)"
+                                                                },
+                                                                {
+                                                                    "value": "ixVolume",
+                                                                    "description": "ixVolume (Dataset created automatically by the system)"
+                                                                },
+                                                                {
+                                                                    "value": "smb-pv-pvc",
+                                                                    "description": "SMB Share (Mounts a persistent volume claim to a SMB share)"
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "mountPath",
+                                                        "label": "Mount Path",
+                                                        "description": "The path inside the container to mount the storage.",
+                                                        "schema": {
+                                                            "type": "path",
+                                                            "required": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "hostPath",
+                                                        "label": "Host Path",
+                                                        "description": "The host path to use for storage.",
+                                                        "schema": {
+                                                            "type": "hostpath",
+                                                            "show_if": [
+                                                                [
+                                                                    "type",
+                                                                    "=",
+                                                                    "hostPath"
+                                                                ]
+                                                            ],
+                                                            "required": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "datasetName",
+                                                        "label": "Dataset Name",
+                                                        "description": "The name of the dataset to use for storage.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "type",
+                                                                    "=",
+                                                                    "ixVolume"
+                                                                ]
+                                                            ],
+                                                            "required": true,
+                                                            "immutable": true,
+                                                            "default": "storage_entry",
+                                                            "$ref": [
+                                                                "normalize/ixVolume"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "server",
+                                                        "label": "Server",
+                                                        "description": "The server for the SMB share.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "type",
+                                                                    "=",
+                                                                    "smb-pv-pvc"
+                                                                ]
+                                                            ],
+                                                            "required": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "share",
+                                                        "label": "Share",
+                                                        "description": "The share name for the SMB share.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "type",
+                                                                    "=",
+                                                                    "smb-pv-pvc"
+                                                                ]
+                                                            ],
+                                                            "required": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "domain",
+                                                        "label": "Domain (Optional)",
+                                                        "description": "The domain for the SMB share.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "type",
+                                                                    "=",
+                                                                    "smb-pv-pvc"
+                                                                ]
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "username",
+                                                        "label": "Username",
+                                                        "description": "The username for the SMB share.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "type",
+                                                                    "=",
+                                                                    "smb-pv-pvc"
+                                                                ]
+                                                            ],
+                                                            "required": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "password",
+                                                        "label": "Password",
+                                                        "description": "The password for the SMB share.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "type",
+                                                                    "=",
+                                                                    "smb-pv-pvc"
+                                                                ]
+                                                            ],
+                                                            "required": true,
+                                                            "private": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "size",
+                                                        "label": "Size (in Gi)",
+                                                        "description": "The size of the volume quota.",
+                                                        "schema": {
+                                                            "type": "int",
+                                                            "show_if": [
+                                                                [
+                                                                    "type",
+                                                                    "=",
+                                                                    "smb-pv-pvc"
+                                                                ]
+                                                            ],
+                                                            "required": true,
+                                                            "min": 1,
+                                                            "default": 1
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "resources",
+                    "group": "Resources Configuration",
+                    "label": "",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "limits",
+                                "label": "Limits",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "cpu",
+                                            "label": "CPU",
+                                            "description": "CPU limit for FSCrawler.",
+                                            "schema": {
+                                                "type": "string",
+                                                "max_length": 6,
+                                                "valid_chars": "^(0\\.[1-9]|[1-9][0-9]*)(\\.[0-9]|m?)$",
+                                                "valid_chars_error": "Valid CPU limit formats are</br>\n- Plain Integer - eg. 1</br>\n- Float - eg. 0.5</br>\n- Milicpu - eg. 500m\n",
+                                                "default": "4000m",
+                                                "required": true
+                                            }
+                                        },
+                                        {
+                                            "variable": "memory",
+                                            "label": "Memory",
+                                            "description": "Memory limit for FSCrawler.",
+                                            "schema": {
+                                                "type": "string",
+                                                "max_length": 12,
+                                                "valid_chars": "^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$",
+                                                "valid_chars_error": "Valid Memory limit formats are</br>\n- Suffixed with E/P/T/G/M/K - eg. 1G</br>\n- Suffixed with Ei/Pi/Ti/Gi/Mi/Ki - eg. 1Gi</br>\n- Plain Integer in bytes - eg. 1024</br>\n- Exponent - eg. 134e6\n",
+                                                "default": "8Gi",
+                                                "required": true
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "app_readme": "<h1>FSCrawler</h1>\n<p><a href=\"https://fscrawler.readthedocs.io/\">FSCrawler</a> is a crawler that helps to index binary documents such as PDF, Open Office, MS Office.</p>",
+        "detailed_readme": "<h1>FSCrawler</h1>\n<p><a href=\"https://fscrawler.readthedocs.io/\">FSCrawler</a> is a crawler that helps to index binary documents such as PDF, Open Office, MS Office.</p>",
+        "changelog": null
+    }
+}

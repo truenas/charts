@@ -1,0 +1,554 @@
+{
+    "1.1.2": {
+        "healthy": true,
+        "supported": true,
+        "healthy_error": null,
+        "location": "/__w/charts/charts/community/filebrowser/1.1.2",
+        "last_update": "2023-11-03 10:53:23",
+        "required_features": [
+            "normalize/ixVolume",
+            "definitions/certificate"
+        ],
+        "human_version": "2.26.0_1.1.2",
+        "version": "1.1.2",
+        "chart_metadata": {
+            "name": "filebrowser",
+            "description": "File Browser provides a file managing interface within a specified directory and it can be used to upload, delete, preview, rename and edit your files.",
+            "annotations": {
+                "title": "File Browser"
+            },
+            "type": "application",
+            "version": "1.1.2",
+            "apiVersion": "v2",
+            "appVersion": "2.26.0",
+            "kubeVersion": ">=1.16.0-0",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "dependencies": [
+                {
+                    "name": "common",
+                    "repository": "file://../../../common",
+                    "version": "1.2.1"
+                }
+            ],
+            "home": "https://filebrowser.org",
+            "icon": "https://media.sys.truenas.net/apps/filebrowser/icons/icon.png",
+            "sources": [
+                "https://github.com/filebrowser/filebrowser",
+                "https://github.com/truenas/charts/tree/master/library/ix-dev/community/filebrowser",
+                "https://hub.docker.com/r/filebrowser/filebrowser"
+            ],
+            "keywords": [
+                "files",
+                "browser"
+            ]
+        },
+        "app_metadata": {
+            "runAsContext": [
+                {
+                    "userName": "filebrowser",
+                    "groupName": "filebrowser",
+                    "gid": 568,
+                    "uid": 568,
+                    "description": "Filebrowser can run as any non-root user."
+                }
+            ],
+            "capabilities": [],
+            "hostMounts": []
+        },
+        "schema": {
+            "groups": [
+                {
+                    "name": "Filebrowser Configuration",
+                    "description": "Configure Filebrowser"
+                },
+                {
+                    "name": "User and Group Configuration",
+                    "description": "Configure User and Group for Filebrowser"
+                },
+                {
+                    "name": "Network Configuration",
+                    "description": "Configure Network for Filebrowser"
+                },
+                {
+                    "name": "Storage Configuration",
+                    "description": "Configure Storage for Filebrowser"
+                },
+                {
+                    "name": "Resources Configuration",
+                    "description": "Configure Resources for Filebrowser"
+                }
+            ],
+            "portals": {
+                "web_portal": {
+                    "protocols": [
+                        "$kubernetes-resource_configmap_portal_protocol"
+                    ],
+                    "host": [
+                        "$kubernetes-resource_configmap_portal_host"
+                    ],
+                    "ports": [
+                        "$kubernetes-resource_configmap_portal_port"
+                    ],
+                    "path": "$kubernetes-resource_configmap_portal_path"
+                }
+            },
+            "questions": [
+                {
+                    "variable": "filebrowserConfig",
+                    "label": "",
+                    "group": "Filebrowser Configuration",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "additionalEnvs",
+                                "label": "Additional Environment Variables",
+                                "description": "Configure additional environment variables for Filebrowser.",
+                                "schema": {
+                                    "type": "list",
+                                    "default": [],
+                                    "items": [
+                                        {
+                                            "variable": "env",
+                                            "label": "Environment Variable",
+                                            "schema": {
+                                                "type": "dict",
+                                                "attrs": [
+                                                    {
+                                                        "variable": "name",
+                                                        "label": "Name",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "required": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "value",
+                                                        "label": "Value",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "required": true
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "filebrowserRunAs",
+                    "label": "",
+                    "group": "User and Group Configuration",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "user",
+                                "label": "User ID",
+                                "description": "The user id that Filebrowser will run as.",
+                                "schema": {
+                                    "type": "int",
+                                    "min": 2,
+                                    "default": 568,
+                                    "required": true
+                                }
+                            },
+                            {
+                                "variable": "group",
+                                "label": "Group ID",
+                                "description": "The group id that Filebrowser will run as.",
+                                "schema": {
+                                    "type": "int",
+                                    "min": 2,
+                                    "default": 568,
+                                    "required": true
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "filebrowserNetwork",
+                    "label": "",
+                    "group": "Network Configuration",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "webPort",
+                                "label": "Web Port",
+                                "description": "The port for the Filebrowser Web UI.",
+                                "schema": {
+                                    "type": "int",
+                                    "default": 30044,
+                                    "min": 9000,
+                                    "max": 65535,
+                                    "required": true
+                                }
+                            },
+                            {
+                                "variable": "certificateID",
+                                "label": "Certificate",
+                                "description": "The certificate to use for Filebrowser.\n",
+                                "schema": {
+                                    "type": "int",
+                                    "null": true,
+                                    "$ref": [
+                                        "definitions/certificate"
+                                    ],
+                                    "enum": [
+                                        {
+                                            "value": null,
+                                            "description": "No Certificate"
+                                        }
+                                    ],
+                                    "default": null
+                                }
+                            },
+                            {
+                                "variable": "hostNetwork",
+                                "label": "Host Network",
+                                "description": "Bind to the host network. It's recommended to keep this disabled.</br>\n",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "filebrowserStorage",
+                    "label": "",
+                    "group": "Storage Configuration",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "config",
+                                "label": "Filebrowser Config Storage",
+                                "description": "The path to store Filebrowser Configuration.",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "type",
+                                            "label": "Type",
+                                            "description": "ixVolume: Is dataset created automatically by the system.</br>\nHost Path: Is a path that already exists on the system.\n",
+                                            "schema": {
+                                                "type": "string",
+                                                "required": true,
+                                                "immutable": true,
+                                                "default": "ixVolume",
+                                                "enum": [
+                                                    {
+                                                        "value": "hostPath",
+                                                        "description": "Host Path (Path that already exists on the system)"
+                                                    },
+                                                    {
+                                                        "value": "ixVolume",
+                                                        "description": "ixVolume (Dataset created automatically by the system)"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "variable": "datasetName",
+                                            "label": "Dataset Name",
+                                            "schema": {
+                                                "type": "string",
+                                                "show_if": [
+                                                    [
+                                                        "type",
+                                                        "=",
+                                                        "ixVolume"
+                                                    ]
+                                                ],
+                                                "required": true,
+                                                "hidden": true,
+                                                "immutable": true,
+                                                "default": "config",
+                                                "$ref": [
+                                                    "normalize/ixVolume"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "variable": "hostPath",
+                                            "label": "Host Path",
+                                            "schema": {
+                                                "type": "hostpath",
+                                                "show_if": [
+                                                    [
+                                                        "type",
+                                                        "=",
+                                                        "hostPath"
+                                                    ]
+                                                ],
+                                                "immutable": true,
+                                                "required": true
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "additionalStorages",
+                                "label": "Additional Storage",
+                                "description": "Additional storage for Filebrowser.",
+                                "schema": {
+                                    "type": "list",
+                                    "default": [
+                                        {
+                                            "type": "hostPath",
+                                            "mountPath": "/my_data",
+                                            "hostPath": ""
+                                        }
+                                    ],
+                                    "items": [
+                                        {
+                                            "variable": "storageEntry",
+                                            "label": "Storage Entry",
+                                            "schema": {
+                                                "type": "dict",
+                                                "attrs": [
+                                                    {
+                                                        "variable": "type",
+                                                        "label": "Type",
+                                                        "description": "ixVolume: Is dataset created automatically by the system.</br>\nHost Path: Is a path that already exists on the system.</br>\nSMB Share: Is a SMB share that is mounted to a persistent volume claim.\n",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "required": true,
+                                                            "default": "ixVolume",
+                                                            "immutable": true,
+                                                            "enum": [
+                                                                {
+                                                                    "value": "hostPath",
+                                                                    "description": "Host Path (Path that already exists on the system)"
+                                                                },
+                                                                {
+                                                                    "value": "ixVolume",
+                                                                    "description": "ixVolume (Dataset created automatically by the system)"
+                                                                },
+                                                                {
+                                                                    "value": "smb-pv-pvc",
+                                                                    "description": "SMB Share (Mounts a persistent volume claim to a SMB share)"
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "mountPath",
+                                                        "label": "Mount Path",
+                                                        "description": "The path inside the container to mount the storage.",
+                                                        "schema": {
+                                                            "type": "path",
+                                                            "required": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "hostPath",
+                                                        "label": "Host Path",
+                                                        "description": "The host path to use for storage.",
+                                                        "schema": {
+                                                            "type": "hostpath",
+                                                            "show_if": [
+                                                                [
+                                                                    "type",
+                                                                    "=",
+                                                                    "hostPath"
+                                                                ]
+                                                            ],
+                                                            "required": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "datasetName",
+                                                        "label": "Dataset Name",
+                                                        "description": "The name of the dataset to use for storage.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "type",
+                                                                    "=",
+                                                                    "ixVolume"
+                                                                ]
+                                                            ],
+                                                            "required": true,
+                                                            "immutable": true,
+                                                            "default": "storage_entry",
+                                                            "$ref": [
+                                                                "normalize/ixVolume"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "server",
+                                                        "label": "Server",
+                                                        "description": "The server for the SMB share.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "type",
+                                                                    "=",
+                                                                    "smb-pv-pvc"
+                                                                ]
+                                                            ],
+                                                            "required": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "share",
+                                                        "label": "Share",
+                                                        "description": "The share name for the SMB share.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "type",
+                                                                    "=",
+                                                                    "smb-pv-pvc"
+                                                                ]
+                                                            ],
+                                                            "required": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "domain",
+                                                        "label": "Domain (Optional)",
+                                                        "description": "The domain for the SMB share.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "type",
+                                                                    "=",
+                                                                    "smb-pv-pvc"
+                                                                ]
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "username",
+                                                        "label": "Username",
+                                                        "description": "The username for the SMB share.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "type",
+                                                                    "=",
+                                                                    "smb-pv-pvc"
+                                                                ]
+                                                            ],
+                                                            "required": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "password",
+                                                        "label": "Password",
+                                                        "description": "The password for the SMB share.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "type",
+                                                                    "=",
+                                                                    "smb-pv-pvc"
+                                                                ]
+                                                            ],
+                                                            "required": true,
+                                                            "private": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "size",
+                                                        "label": "Size (in Gi)",
+                                                        "description": "The size of the volume quota.",
+                                                        "schema": {
+                                                            "type": "int",
+                                                            "show_if": [
+                                                                [
+                                                                    "type",
+                                                                    "=",
+                                                                    "smb-pv-pvc"
+                                                                ]
+                                                            ],
+                                                            "required": true,
+                                                            "min": 1,
+                                                            "default": 1
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "resources",
+                    "group": "Resources Configuration",
+                    "label": "",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "limits",
+                                "label": "Limits",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "cpu",
+                                            "label": "CPU",
+                                            "description": "CPU limit for Filebrowser.",
+                                            "schema": {
+                                                "type": "string",
+                                                "max_length": 6,
+                                                "valid_chars": "^(0\\.[1-9]|[1-9][0-9]*)(\\.[0-9]|m?)$",
+                                                "valid_chars_error": "Valid CPU limit formats are</br>\n- Plain Integer - eg. 1</br>\n- Float - eg. 0.5</br>\n- Milicpu - eg. 500m\n",
+                                                "default": "4000m",
+                                                "required": true
+                                            }
+                                        },
+                                        {
+                                            "variable": "memory",
+                                            "label": "Memory",
+                                            "description": "Memory limit for Filebrowser.",
+                                            "schema": {
+                                                "type": "string",
+                                                "max_length": 12,
+                                                "valid_chars": "^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$",
+                                                "valid_chars_error": "Valid Memory limit formats are</br>\n- Suffixed with E/P/T/G/M/K - eg. 1G</br>\n- Suffixed with Ei/Pi/Ti/Gi/Mi/Ki - eg. 1Gi</br>\n- Plain Integer in bytes - eg. 1024</br>\n- Exponent - eg. 134e6\n",
+                                                "default": "8Gi",
+                                                "required": true
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "app_readme": "<h1>Filebrowser</h1>\n<p><a href=\"https://filebrowser.org\">Filebrowser</a> provides a file managing interface within a specified directory and it can be used to upload, delete, preview, rename and edit your files.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Filebrowser</code> directories.\nAfterward, the <code>Filebrowser</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>\n<p>You can configure further the settings by using Environment Variables.\nSee <a href=\"https://filebrowser.org/cli/filebrowser\">Filebrowser Documentation</a> for more information.\nUse the format <code>FB_OPTION_NAME</code> where the option name is the name of the option you want to set.</p>\n<p>You can also edit the configuration file <code>/config/filebrowser.json</code>.</p>\n<p>Note that the following options are already set and will always take precedence\nover the environment variables and the configuration file:</p>\n<ul>\n<li><code>FB_ROOT</code>/<code>--root</code> is set to <code>/data</code> (Any additional volume mounted will be under this directory)</li>\n<li><code>FB_PORT</code>/<code>--port</code> is set to <code>30044</code> (Or the port you configured in the installation wizard)</li>\n<li><code>FB_ADDRESS</code>/<code>--address</code> is set to <code>0.0.0.0</code> (It will listen on all interfaces <strong>inside</strong> the container)</li>\n<li><code>FB_DATABASE</code>/<code>--database</code> is set to <code>/config/filebrowser.db</code></li>\n<li><code>FB_CONFIG</code>/<code>--config</code> is set to <code>/config/filebrowser.json</code></li>\n</ul>\n<p>Also when a certificate is selected</p>\n<ul>\n<li><code>FB_CERT</code>/<code>--cert</code> is set to <code>/config/certs/tls.crt</code></li>\n<li><code>FB_KEY</code>/<code>--key</code> is set to <code>/config/certs/tls.key</code></li>\n</ul>",
+        "detailed_readme": "<h1>Filebrowser</h1>\n<p><a href=\"https://filebrowser.org\">Filebrowser</a> provides a file managing interface within a specified directory and it can be used to upload, delete, preview, rename and edit your files.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Filebrowser</code> directories.\nAfterward, the <code>Filebrowser</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>\n<p>You can configure further the settings by using Environment Variables.\nSee <a href=\"https://filebrowser.org/cli/filebrowser\">Filebrowser Documentation</a> for more information.\nUse the format <code>FB_OPTION_NAME</code> where the option name is the name of the option you want to set.</p>\n<p>You can also edit the configuration file <code>/config/filebrowser.json</code>.</p>\n<p>Note that the following options are already set and will always take precedence\nover the environment variables and the configuration file:</p>\n<ul>\n<li><code>FB_ROOT</code>/<code>--root</code> is set to <code>/data</code> (Any additional volume mounted will be under this directory)</li>\n<li><code>FB_PORT</code>/<code>--port</code> is set to <code>30044</code> (Or the port you configured in the installation wizard)</li>\n<li><code>FB_ADDRESS</code>/<code>--address</code> is set to <code>0.0.0.0</code> (It will listen on all interfaces <strong>inside</strong> the container)</li>\n<li><code>FB_DATABASE</code>/<code>--database</code> is set to <code>/config/filebrowser.db</code></li>\n<li><code>FB_CONFIG</code>/<code>--config</code> is set to <code>/config/filebrowser.json</code></li>\n</ul>\n<p>Also when a certificate is selected</p>\n<ul>\n<li><code>FB_CERT</code>/<code>--cert</code> is set to <code>/config/certs/tls.crt</code></li>\n<li><code>FB_KEY</code>/<code>--key</code> is set to <code>/config/certs/tls.key</code></li>\n</ul>",
+        "changelog": null
+    }
+}

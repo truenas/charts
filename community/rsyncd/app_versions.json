@@ -1,0 +1,429 @@
+{
+    "1.0.8": {
+        "healthy": true,
+        "supported": true,
+        "healthy_error": null,
+        "location": "/__w/charts/charts/community/rsyncd/1.0.8",
+        "last_update": "2023-10-19 04:50:58",
+        "required_features": [],
+        "human_version": "1.0.0_1.0.8",
+        "version": "1.0.8",
+        "chart_metadata": {
+            "name": "rsyncd",
+            "description": "Rsync is an open source utility that provides fast incremental file transfer.",
+            "annotations": {
+                "title": "Rsync Daemon"
+            },
+            "type": "application",
+            "version": "1.0.8",
+            "apiVersion": "v2",
+            "appVersion": "1.0.0",
+            "kubeVersion": ">=1.16.0-0",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "dependencies": [
+                {
+                    "name": "common",
+                    "repository": "file://../../../common",
+                    "version": "1.1.1"
+                }
+            ],
+            "home": "https://github.com/truenas/containers/tree/main/apps/rsyncd",
+            "icon": "https://media.sys.truenas.net/apps/rsyncd/icons/icon.png",
+            "sources": [
+                "https://github.com/truenas/containers/tree/main/apps/rsyncd",
+                "https://github.com/truenas/charts/tree/master/community/rsyncd",
+                "https://hub.docker.com/r/ixsystems/rsyncd"
+            ],
+            "keywords": [
+                "rsync",
+                "sync"
+            ]
+        },
+        "app_metadata": {
+            "runAsContext": [
+                {
+                    "userName": "root",
+                    "groupName": "root",
+                    "gid": 0,
+                    "uid": 0,
+                    "description": "Rsync requires root privileges to start it's processes."
+                }
+            ],
+            "capabilities": [
+                {
+                    "name": "CHOWN",
+                    "description": "Rsync requires this ability to change ownership of files."
+                },
+                {
+                    "name": "DAC_OVERRIDE",
+                    "description": "Rsync requires this ability to override file permissions."
+                },
+                {
+                    "name": "FOWNER",
+                    "description": "Rsync requires this ability to override file ownership."
+                },
+                {
+                    "name": "SETUID",
+                    "description": "Rsync requires this ability to switch user for sub-processes."
+                },
+                {
+                    "name": "SETGID",
+                    "description": "Rsync requires this ability to switch group for sub-processes."
+                },
+                {
+                    "name": "SYS_CHROOT",
+                    "description": "Rsync requires this ability to use chroot for it's sub-processes."
+                }
+            ],
+            "hostMounts": []
+        },
+        "schema": {
+            "groups": [
+                {
+                    "name": "Rsync Configuration",
+                    "description": "Configure Rsync"
+                },
+                {
+                    "name": "Network Configuration",
+                    "description": "Configure Network for Rsync"
+                },
+                {
+                    "name": "Module Configuration",
+                    "description": "Configure Modules for Rsync"
+                },
+                {
+                    "name": "Resources Configuration",
+                    "description": "Configure Resources for Rsync"
+                }
+            ],
+            "questions": [
+                {
+                    "variable": "rsyncConfig",
+                    "label": "",
+                    "group": "Rsync Configuration",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "auxParams",
+                                "label": "Auxillary Parameters",
+                                "description": "Configure auxillary parameters for Rsync.",
+                                "schema": {
+                                    "type": "list",
+                                    "default": [],
+                                    "items": [
+                                        {
+                                            "variable": "auxEntry",
+                                            "label": "Auxillary Parameter Entry",
+                                            "schema": {
+                                                "type": "dict",
+                                                "attrs": [
+                                                    {
+                                                        "variable": "param",
+                                                        "label": "Parameter",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "required": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "value",
+                                                        "label": "Value",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "required": true
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "rsyncNetwork",
+                    "label": "",
+                    "group": "Network Configuration",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "hostNetwork",
+                                "label": "Host Network",
+                                "description": "Bind to the host network. It's recommended to keep this disabled.</br>\n",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "variable": "rsyncPort",
+                                "label": "Rsync Port",
+                                "description": "The port for Rsync.",
+                                "schema": {
+                                    "type": "int",
+                                    "default": 30026,
+                                    "min": 9000,
+                                    "max": 65535,
+                                    "required": true
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "rsyncModules",
+                    "label": "",
+                    "group": "Module Configuration",
+                    "schema": {
+                        "type": "list",
+                        "default": [],
+                        "empty": false,
+                        "required": true,
+                        "items": [
+                            {
+                                "variable": "module",
+                                "label": "Rsync Module",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "name",
+                                            "label": "Module Name",
+                                            "description": "Module name that matches the name requested by the rsync client.\n",
+                                            "schema": {
+                                                "type": "string",
+                                                "valid_chars": "^[a-zA-Z0-9]+([_-]*[a-zA-Z0-9]+)+$",
+                                                "valid_chars_error": "Module Name, can include [Letters (a-z, A-Z), Numbers (0,9), Underscore (_), Dash (-)],</br>\nbut cannot start or end with [Underscore (_), Dash (-), Dot (.)]\n",
+                                                "required": true
+                                            }
+                                        },
+                                        {
+                                            "variable": "enabled",
+                                            "label": "Enable Module",
+                                            "schema": {
+                                                "type": "boolean",
+                                                "default": true,
+                                                "show_subquestions_if": true,
+                                                "subquestions": [
+                                                    {
+                                                        "variable": "comment",
+                                                        "label": "Comment",
+                                                        "description": "Describe the module.",
+                                                        "schema": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "hostPath",
+                                                        "label": "Host Path",
+                                                        "description": "The path on the host to be shared with the client.</br>\nThis path must exist on the host.\n",
+                                                        "schema": {
+                                                            "type": "hostpath",
+                                                            "required": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "accessMode",
+                                                        "label": "Access Mode",
+                                                        "description": "Choose permissions for this rsync module.\n",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "required": true,
+                                                            "default": "RO",
+                                                            "enum": [
+                                                                {
+                                                                    "value": "RO",
+                                                                    "description": "Read Only"
+                                                                },
+                                                                {
+                                                                    "value": "RW",
+                                                                    "description": "Read Write"
+                                                                },
+                                                                {
+                                                                    "value": "WO",
+                                                                    "description": "Write Only"
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "maxConnections",
+                                                        "label": "Max Connections",
+                                                        "description": "Maximum number of simultaneous connections to this module.</br>\n0 means unlimited.\n",
+                                                        "schema": {
+                                                            "type": "int",
+                                                            "min": 0,
+                                                            "max": 1000,
+                                                            "default": 0,
+                                                            "required": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "uid",
+                                                        "label": "UID",
+                                                        "description": "The UID to use for this module.</br>\n",
+                                                        "schema": {
+                                                            "type": "int",
+                                                            "min": 0,
+                                                            "max": 65535,
+                                                            "default": 568,
+                                                            "required": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "gid",
+                                                        "label": "GID",
+                                                        "description": "The GID to use for this module.</br>\n",
+                                                        "schema": {
+                                                            "type": "int",
+                                                            "min": 0,
+                                                            "max": 65535,
+                                                            "default": 568,
+                                                            "required": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "hostsAllow",
+                                                        "label": "Hosts Allow",
+                                                        "description": "List of hosts allowed to connect to this module.</br>\nLeave empty to allow all hosts.\n",
+                                                        "schema": {
+                                                            "type": "list",
+                                                            "default": [],
+                                                            "items": [
+                                                                {
+                                                                    "variable": "host",
+                                                                    "label": "Host to allow",
+                                                                    "schema": {
+                                                                        "type": "string",
+                                                                        "required": true
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "hostsDeny",
+                                                        "label": "Hosts Deny",
+                                                        "description": "List of hosts denied to connect to this module.</br>\nLeave empty to deny no hosts.\n",
+                                                        "schema": {
+                                                            "type": "list",
+                                                            "default": [],
+                                                            "items": [
+                                                                {
+                                                                    "variable": "host",
+                                                                    "label": "Host to deny",
+                                                                    "schema": {
+                                                                        "type": "string",
+                                                                        "required": true
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "auxParams",
+                                                        "label": "Auxillary Parameters",
+                                                        "description": "Configure auxillary parameters for this module.",
+                                                        "schema": {
+                                                            "type": "list",
+                                                            "default": [],
+                                                            "items": [
+                                                                {
+                                                                    "variable": "auxEntry",
+                                                                    "label": "Auxillary Parameter Entry",
+                                                                    "schema": {
+                                                                        "type": "dict",
+                                                                        "attrs": [
+                                                                            {
+                                                                                "variable": "param",
+                                                                                "label": "Parameter",
+                                                                                "schema": {
+                                                                                    "type": "string",
+                                                                                    "required": true
+                                                                                }
+                                                                            },
+                                                                            {
+                                                                                "variable": "value",
+                                                                                "label": "Value",
+                                                                                "schema": {
+                                                                                    "type": "string",
+                                                                                    "required": true
+                                                                                }
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "resources",
+                    "group": "Resources Configuration",
+                    "label": "",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "limits",
+                                "label": "Limits",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "cpu",
+                                            "label": "CPU",
+                                            "description": "CPU limit for Rsync.",
+                                            "schema": {
+                                                "type": "string",
+                                                "max_length": 6,
+                                                "valid_chars": "^(0\\.[1-9]|[1-9][0-9]*)(\\.[0-9]|m?)$",
+                                                "valid_chars_error": "Valid CPU limit formats are</br>\n- Plain Integer - eg. 1</br>\n- Float - eg. 0.5</br>\n- Milicpu - eg. 500m\n",
+                                                "default": "4000m",
+                                                "required": true
+                                            }
+                                        },
+                                        {
+                                            "variable": "memory",
+                                            "label": "Memory",
+                                            "description": "Memory limit for Rsync.",
+                                            "schema": {
+                                                "type": "string",
+                                                "max_length": 12,
+                                                "valid_chars": "^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$",
+                                                "valid_chars_error": "Valid Memory limit formats are</br>\n- Suffixed with E/P/T/G/M/K - eg. 1G</br>\n- Suffixed with Ei/Pi/Ti/Gi/Mi/Ki - eg. 1Gi</br>\n- Plain Integer in bytes - eg. 1024</br>\n- Exponent - eg. 134e6\n",
+                                                "default": "8Gi",
+                                                "required": true
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "app_readme": "<h1>Rsyncd</h1>\n<p><a href=\"https://rsync.samba.org/\">Rsyncd</a> is an open source utility that provides fast incremental file transfer.</p>",
+        "detailed_readme": "<h1>Rsyncd</h1>\n<p><a href=\"https://rsync.samba.org/\">Rsyncd</a> is an open source utility that provides fast incremental file transfer.</p>",
+        "changelog": null
+    }
+}

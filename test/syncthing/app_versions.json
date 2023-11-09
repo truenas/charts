@@ -1,0 +1,577 @@
+{
+    "1.0.13": {
+        "healthy": true,
+        "supported": true,
+        "healthy_error": null,
+        "location": "/__w/charts/charts/test/syncthing/1.0.13",
+        "last_update": "2023-09-08 15:07:33",
+        "required_features": [
+            "normalize/ixVolume",
+            "definitions/certificate",
+            "definitions/timezone"
+        ],
+        "human_version": "1.23.3_1.0.13",
+        "version": "1.0.13",
+        "chart_metadata": {
+            "name": "syncthing",
+            "description": "Syncthing is a continuous file synchronization program.",
+            "annotations": {
+                "title": "Syncthing"
+            },
+            "type": "application",
+            "version": "1.0.13",
+            "apiVersion": "v2",
+            "appVersion": "1.23.3",
+            "kubeVersion": ">=1.16.0-0",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "dependencies": [
+                {
+                    "name": "common",
+                    "repository": "file://../../../common",
+                    "version": "1.1.1"
+                }
+            ],
+            "home": "https://syncthing.net/",
+            "icon": "https://syncthing.net/img/logo-horizontal.svg",
+            "sources": [
+                "https://syncthing.net/",
+                "https://github.com/syncthing/syncthing",
+                "https://hub.docker.com/r/syncthing/syncthing",
+                "https://github.com/truenas/charts/tree/master/enterprise/syncthing"
+            ],
+            "keywords": [
+                "sync",
+                "file-sharing"
+            ]
+        },
+        "app_metadata": {
+            "runAsContext": [
+                {
+                    "userName": "root",
+                    "groupName": "root",
+                    "gid": 0,
+                    "uid": 0,
+                    "description": "Syncthing runs as root and starts the syncthing process as a non-root user."
+                }
+            ],
+            "capabilities": [
+                {
+                    "name": "CHOWN",
+                    "description": "Syncthing is able to chown files."
+                },
+                {
+                    "name": "DAC_OVERRIDE",
+                    "description": "Syncthing is able to bypass permission checks."
+                },
+                {
+                    "name": "FOWNER",
+                    "description": "Syncthing is able bypass permission checks for it's sub-processes."
+                },
+                {
+                    "name": "SETUID",
+                    "description": "Syncthing is able to set user ID for it's sub-processes."
+                },
+                {
+                    "name": "SETGID",
+                    "description": "Syncthing is able to set group ID for it's sub-processes."
+                },
+                {
+                    "name": "SETPCAP",
+                    "description": "Syncthing is able to set process capabilities."
+                },
+                {
+                    "name": "SETFCAP",
+                    "description": "Syncthing is able to set file capabilities."
+                }
+            ],
+            "hostMounts": []
+        },
+        "schema": {
+            "groups": [
+                {
+                    "name": "Syncthing Configuration",
+                    "description": "Configure Syncthing"
+                },
+                {
+                    "name": "User and Group Configuration",
+                    "description": "Configure User and Group for Syncthing"
+                },
+                {
+                    "name": "Network Configuration",
+                    "description": "Configure Network for Syncthing"
+                },
+                {
+                    "name": "Storage Configuration",
+                    "description": "Configure Storage for Syncthing"
+                },
+                {
+                    "name": "Resources Configuration",
+                    "description": "Configure Resources for Syncthing"
+                }
+            ],
+            "portals": {
+                "web_portal": {
+                    "protocols": [
+                        "$kubernetes-resource_configmap_portal_protocol"
+                    ],
+                    "host": [
+                        "$kubernetes-resource_configmap_portal_host"
+                    ],
+                    "ports": [
+                        "$kubernetes-resource_configmap_portal_port"
+                    ],
+                    "path": "$kubernetes-resource_configmap_portal_path"
+                }
+            },
+            "questions": [
+                {
+                    "variable": "TZ",
+                    "group": "Syncthing Configuration",
+                    "label": "Timezone",
+                    "schema": {
+                        "type": "string",
+                        "default": "America/Los_Angeles",
+                        "required": true,
+                        "$ref": [
+                            "definitions/timezone"
+                        ],
+                        "enum": [
+                            {
+                                "value": "Asia/Damascus",
+                                "description": "'Asia/Damascus' timezone"
+                            },
+                            {
+                                "value": "Asia/Saigon",
+                                "description": "'Asia/Saigon' timezone"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "syncthingID",
+                    "label": "",
+                    "group": "User and Group Configuration",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "user",
+                                "label": "User ID",
+                                "description": "The user id that Syncthing files will be owned by.",
+                                "schema": {
+                                    "type": "int",
+                                    "min": 568,
+                                    "default": 568,
+                                    "immutable": true,
+                                    "required": true
+                                }
+                            },
+                            {
+                                "variable": "group",
+                                "label": "Group ID",
+                                "description": "The group id that Syncthing files will be owned by.",
+                                "schema": {
+                                    "type": "int",
+                                    "min": 568,
+                                    "default": 568,
+                                    "immutable": true,
+                                    "required": true
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "syncthingNetwork",
+                    "label": "",
+                    "group": "Network Configuration",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "hostNetwork",
+                                "label": "Host Network",
+                                "description": "Bind to the host network.</br></br>\nIf this is disabled, you will need to add your local networks in CIDR format to the Syncthing WebUI.</br>\nIn the Syncthing WebUI, go to Advanced Settings > Options > Always Local Nets</br>\nSeparate each CIDR network with a comma.</br>\nExample: 192.168.0.0/24,192.168.1.0/24\n",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            },
+                            {
+                                "variable": "webPort",
+                                "label": "Web Port",
+                                "description": "The port for the Syncthing WebUI.",
+                                "schema": {
+                                    "type": "int",
+                                    "default": 31000,
+                                    "min": 9000,
+                                    "max": 65535,
+                                    "required": true
+                                }
+                            },
+                            {
+                                "variable": "tcpPort",
+                                "label": "TCP Port (File Transfers)",
+                                "description": "The TCP port for Syncthing transfers.",
+                                "schema": {
+                                    "type": "int",
+                                    "show_if": [
+                                        [
+                                            "hostNetwork",
+                                            "=",
+                                            false
+                                        ]
+                                    ],
+                                    "default": 22000,
+                                    "min": 9000,
+                                    "max": 65535,
+                                    "required": true
+                                }
+                            },
+                            {
+                                "variable": "quicPort",
+                                "label": "QUIC (UDP) Port (File Transfers)",
+                                "description": "The QUIC (UDP) port for Syncthing transfers.",
+                                "schema": {
+                                    "type": "int",
+                                    "show_if": [
+                                        [
+                                            "hostNetwork",
+                                            "=",
+                                            false
+                                        ]
+                                    ],
+                                    "default": 22000,
+                                    "min": 9000,
+                                    "max": 65535,
+                                    "required": true
+                                }
+                            },
+                            {
+                                "variable": "certificateID",
+                                "label": "Certificate",
+                                "description": "The certificate to use for Syncthing GUI.",
+                                "schema": {
+                                    "type": "int",
+                                    "null": true,
+                                    "$ref": [
+                                        "definitions/certificate"
+                                    ],
+                                    "enum": [
+                                        {
+                                            "value": null,
+                                            "description": "No Certificate"
+                                        }
+                                    ],
+                                    "default": null
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "syncthingStorage",
+                    "label": "",
+                    "group": "Storage Configuration",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "home",
+                                "label": "Syncthing Home Storage",
+                                "description": "The path to store Syncthing Home Directory.",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "type",
+                                            "label": "Type",
+                                            "description": "ixVolume: Is dataset created automatically by the system.</br>\nHost Path: Is a path that already exists on the system.\n",
+                                            "schema": {
+                                                "type": "string",
+                                                "required": true,
+                                                "default": "ixVolume",
+                                                "enum": [
+                                                    {
+                                                        "value": "hostPath",
+                                                        "description": "Host Path (Path that already exists on the system)"
+                                                    },
+                                                    {
+                                                        "value": "ixVolume",
+                                                        "description": "ixVolume (Dataset created automatically by the system)"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "variable": "datasetName",
+                                            "label": "Dataset Name",
+                                            "schema": {
+                                                "type": "string",
+                                                "show_if": [
+                                                    [
+                                                        "type",
+                                                        "=",
+                                                        "ixVolume"
+                                                    ]
+                                                ],
+                                                "required": true,
+                                                "hidden": true,
+                                                "immutable": true,
+                                                "default": "home",
+                                                "$ref": [
+                                                    "normalize/ixVolume"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "variable": "hostPath",
+                                            "label": "Host Path",
+                                            "schema": {
+                                                "type": "hostpath",
+                                                "show_if": [
+                                                    [
+                                                        "type",
+                                                        "=",
+                                                        "hostPath"
+                                                    ]
+                                                ],
+                                                "immutable": true,
+                                                "required": true
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "additionalStorages",
+                                "label": "Additional Storage",
+                                "description": "Additional storage for Syncthing.",
+                                "schema": {
+                                    "type": "list",
+                                    "required": true,
+                                    "empty": false,
+                                    "default": [
+                                        {
+                                            "type": "hostPath",
+                                            "mountPath": "/data1",
+                                            "hostPath\"": ""
+                                        }
+                                    ],
+                                    "items": [
+                                        {
+                                            "variable": "storageEntry",
+                                            "label": "Storage Entry",
+                                            "schema": {
+                                                "type": "dict",
+                                                "attrs": [
+                                                    {
+                                                        "variable": "type",
+                                                        "label": "Type",
+                                                        "description": "Host Path: Is a path that already exists on the system.\n",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "required": true,
+                                                            "default": "hostPath",
+                                                            "enum": [
+                                                                {
+                                                                    "value": "hostPath",
+                                                                    "description": "Host Path (Path that already exists on the system)"
+                                                                },
+                                                                {
+                                                                    "value": "smb-pv-pvc",
+                                                                    "description": "SMB Share (Mounts a persistent volume claim to a SMB share)"
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "mountPath",
+                                                        "label": "Mount Path",
+                                                        "description": "The path inside the container to mount the storage.",
+                                                        "schema": {
+                                                            "type": "path",
+                                                            "required": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "hostPath",
+                                                        "label": "Host Path",
+                                                        "description": "The host path to use for storage.",
+                                                        "schema": {
+                                                            "type": "hostpath",
+                                                            "show_if": [
+                                                                [
+                                                                    "type",
+                                                                    "=",
+                                                                    "hostPath"
+                                                                ]
+                                                            ],
+                                                            "required": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "server",
+                                                        "label": "Server",
+                                                        "description": "The server for the SMB share.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "type",
+                                                                    "=",
+                                                                    "smb-pv-pvc"
+                                                                ]
+                                                            ],
+                                                            "required": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "share",
+                                                        "label": "Share",
+                                                        "description": "The share name for the SMB share.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "type",
+                                                                    "=",
+                                                                    "smb-pv-pvc"
+                                                                ]
+                                                            ],
+                                                            "required": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "domain",
+                                                        "label": "Domain (Optional)",
+                                                        "description": "The domain for the SMB share.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "type",
+                                                                    "=",
+                                                                    "smb-pv-pvc"
+                                                                ]
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "username",
+                                                        "label": "Username",
+                                                        "description": "The username for the SMB share.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "type",
+                                                                    "=",
+                                                                    "smb-pv-pvc"
+                                                                ]
+                                                            ],
+                                                            "required": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "password",
+                                                        "label": "Password",
+                                                        "description": "The password for the SMB share.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "type",
+                                                                    "=",
+                                                                    "smb-pv-pvc"
+                                                                ]
+                                                            ],
+                                                            "required": true,
+                                                            "private": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "size",
+                                                        "label": "Size (in Gi)",
+                                                        "description": "The size of the volume quota.",
+                                                        "schema": {
+                                                            "type": "int",
+                                                            "show_if": [
+                                                                [
+                                                                    "type",
+                                                                    "=",
+                                                                    "smb-pv-pvc"
+                                                                ]
+                                                            ],
+                                                            "required": true,
+                                                            "min": 1,
+                                                            "default": 1
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "resources",
+                    "group": "Resources Configuration",
+                    "label": "",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "limits",
+                                "label": "Limits",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "cpu",
+                                            "label": "CPU",
+                                            "description": "CPU limit for Syncthing.",
+                                            "schema": {
+                                                "type": "string",
+                                                "max_length": 6,
+                                                "valid_chars": "^(0\\.[1-9]|[1-9][0-9]*)(\\.[0-9]|m?)$",
+                                                "valid_chars_error": "Valid CPU limit formats are</br>\n- Plain Integer - eg. 1</br>\n- Float - eg. 0.5</br>\n- Milicpu - eg. 500m\n",
+                                                "default": "4000m",
+                                                "required": true
+                                            }
+                                        },
+                                        {
+                                            "variable": "memory",
+                                            "label": "Memory",
+                                            "description": "Memory limit for Syncthing.",
+                                            "schema": {
+                                                "type": "string",
+                                                "max_length": 12,
+                                                "valid_chars": "^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$",
+                                                "valid_chars_error": "Valid Memory limit formats are</br>\n- Suffixed with E/P/T/G/M/K - eg. 1G</br>\n- Suffixed with Ei/Pi/Ti/Gi/Mi/Ki - eg. 1Gi</br>\n- Plain Integer in bytes - eg. 1024</br>\n- Exponent - eg. 134e6\n",
+                                                "default": "8Gi",
+                                                "required": true
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "app_readme": "<h1>Syncthing</h1>\n<p><a href=\"https://syncthing.net/\">Syncthing</a> is a file synchronization program.</p>\n<p>At each startup of the application, the following settings are applied:</p>\n<ul>\n<li>Disable automatic upgrades</li>\n<li>Disable anonymous usage reporting</li>\n<li>Disable NAT traversal</li>\n<li>Disable global discovery</li>\n<li>Disable local discovery</li>\n<li>Disable relaying</li>\n<li>Disable announcing LAN addresses</li>\n</ul>\n<p>Additionally, the following defaults are set for new synthing \"folders\":</p>\n<ul>\n<li>Max total size of <code>xattr</code>: 10 MiB</li>\n<li>Max size per <code>xattr</code>: 2 MiB</li>\n<li>Enable <code>send</code> and <code>sync</code> of <code>xattr</code></li>\n<li>Enable <code>send</code> and <code>sync</code> of <code>ownership</code></li>\n</ul>",
+        "detailed_readme": "<h1>Syncthing</h1>\n<p><a href=\"https://syncthing.net/\">Syncthing</a> is a file synchronization program.</p>\n<p>At each startup of the application, the following settings are applied:</p>\n<ul>\n<li>Disable automatic upgrades</li>\n<li>Disable anonymous usage reporting</li>\n<li>Disable NAT traversal</li>\n<li>Disable global discovery</li>\n<li>Disable local discovery</li>\n<li>Disable relaying</li>\n<li>Disable announcing LAN addresses</li>\n</ul>\n<p>Additionally, the following defaults are set for new synthing \"folders\":</p>\n<ul>\n<li>Max total size of <code>xattr</code>: 10 MiB</li>\n<li>Max size per <code>xattr</code>: 2 MiB</li>\n<li>Enable <code>send</code> and <code>sync</code> of <code>xattr</code></li>\n<li>Enable <code>send</code> and <code>sync</code> of <code>ownership</code></li>\n</ul>",
+        "changelog": null
+    }
+}

@@ -1,0 +1,439 @@
+{
+    "1.2.22": {
+        "healthy": true,
+        "supported": true,
+        "healthy_error": null,
+        "location": "/__w/charts/charts/charts/collabora/1.2.22",
+        "last_update": "2023-10-31 12:13:07",
+        "required_features": [
+            "definitions/certificate",
+            "definitions/nodeIP",
+            "definitions/timezone"
+        ],
+        "human_version": "23.05.5.3.1_1.2.22",
+        "version": "1.2.22",
+        "chart_metadata": {
+            "name": "collabora",
+            "description": "Collabora Online Development Edition \\u2013 an awesome, Online Office\nsuite image suitable for home use.\n",
+            "annotations": {
+                "title": "Collabora"
+            },
+            "type": "application",
+            "version": "1.2.22",
+            "apiVersion": "v2",
+            "appVersion": "23.05.5.3.1",
+            "kubeVersion": ">=1.16.0-0",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "dependencies": [
+                {
+                    "name": "common",
+                    "repository": "file://../../../common/2304.0.1",
+                    "version": "2304.0.1"
+                }
+            ],
+            "home": "https://github.com/CollaboraOnline/online",
+            "icon": "https://media.sys.truenas.net/apps/collabora/icons/icon.png",
+            "sources": [
+                "https://github.com/CollaboraOnline/online.git",
+                "https://hub.docker.com/r/collabora/code"
+            ],
+            "keywords": [
+                "office",
+                "documents",
+                "productivity"
+            ]
+        },
+        "app_metadata": {
+            "runAsContext": [
+                {
+                    "userName": "cool",
+                    "groupName": "cool",
+                    "gid": 104,
+                    "uid": 106,
+                    "description": "Collabora runs as non-root user."
+                },
+                {
+                    "userName": "root",
+                    "groupName": "root",
+                    "gid": 0,
+                    "uid": 0,
+                    "description": "Nginx runs as root user."
+                }
+            ],
+            "capabilities": [
+                {
+                    "name": "CHOWN",
+                    "description": "Collabora and Nginx are able to chown files."
+                },
+                {
+                    "name": "FOWNER",
+                    "description": "Collabora and Nginx are able to bypass permission checks for it's sub-processes."
+                },
+                {
+                    "name": "SYS_CHROOT",
+                    "description": "Collabora and Nginx are able to use chroot."
+                },
+                {
+                    "name": "MKNOD",
+                    "description": "Collabora and Nginx are able to create device nodes."
+                },
+                {
+                    "name": "DAC_OVERRIDE",
+                    "description": "Nginx is able to bypass permission checks."
+                },
+                {
+                    "name": "SETGID",
+                    "description": "Nginx is able to set group ID for it's sub-processes."
+                },
+                {
+                    "name": "SETUID",
+                    "description": "Nginx is able to set user ID for it's sub-processes."
+                },
+                {
+                    "name": "FSETID",
+                    "description": "Nginx is able to set file capabilities."
+                },
+                {
+                    "name": "KILL",
+                    "description": "Nginx is able to kill processes."
+                },
+                {
+                    "name": "SETPCAP",
+                    "description": "Nginx is able to set process capabilities."
+                },
+                {
+                    "name": "NET_BIND_SERVICE",
+                    "description": "Nginx is able to bind to privileged ports."
+                },
+                {
+                    "name": "NET_RAW",
+                    "description": "Nginx is able to use raw sockets."
+                },
+                {
+                    "name": "AUDIT_WRITE",
+                    "description": "Nginx is able to write to audit log."
+                }
+            ],
+            "hostMounts": []
+        },
+        "schema": {
+            "groups": [
+                {
+                    "name": "Collabora Configuration",
+                    "description": "Configure Collabora"
+                },
+                {
+                    "name": "Collabora Environment Variables",
+                    "description": "Set the environment that will be visible to the container"
+                },
+                {
+                    "name": "Networking",
+                    "description": "Configure Networking for Collabora"
+                },
+                {
+                    "name": "Storage",
+                    "description": "Configure Storage for Collabora"
+                },
+                {
+                    "name": "Resource Limits",
+                    "description": "Set CPU/memory limits for Kubernetes Pod"
+                }
+            ],
+            "portals": {
+                "web_portal": {
+                    "protocols": [
+                        "https"
+                    ],
+                    "host": [
+                        "$variable-config.server_name"
+                    ],
+                    "ports": [
+                        "$variable-nodePort"
+                    ],
+                    "path": "/browser/dist/admin/admin.html"
+                }
+            },
+            "questions": [
+                {
+                    "variable": "config",
+                    "label": "Container Configuration",
+                    "group": "Collabora Configuration",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "timezone",
+                                "label": "Timezone",
+                                "group": "Collabora Configuration",
+                                "schema": {
+                                    "type": "string",
+                                    "$ref": [
+                                        "definitions/timezone"
+                                    ],
+                                    "enum": [
+                                        {
+                                            "value": "Asia/Damascus",
+                                            "description": "'Asia/Damascus' timezone"
+                                        },
+                                        {
+                                            "value": "Asia/Saigon",
+                                            "description": "'Asia/Saigon' timezone"
+                                        }
+                                    ],
+                                    "default": "America/Los_Angeles"
+                                }
+                            },
+                            {
+                                "variable": "enableWebUI",
+                                "label": "Enable WebUI",
+                                "description": "Enable WebUI for Collabora\nIf you enable this, you will need to set a username and password</br>\n",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            },
+                            {
+                                "variable": "username",
+                                "label": "Username for WebUI",
+                                "show_if": [
+                                    [
+                                        "enableWebUI",
+                                        "=",
+                                        true
+                                    ]
+                                ],
+                                "schema": {
+                                    "type": "string",
+                                    "default": "admin",
+                                    "required": true
+                                }
+                            },
+                            {
+                                "variable": "password",
+                                "label": "Password for WebUI",
+                                "schema": {
+                                    "type": "string",
+                                    "private": true,
+                                    "default": "changeme",
+                                    "show_if": [
+                                        [
+                                            "enableWebUI",
+                                            "=",
+                                            true
+                                        ]
+                                    ],
+                                    "valid_chars": "[a-zA-Z0-9!@#%^&*?]{8,}",
+                                    "valid_chars_error": "Password must be at least 8 characters long</br>\nCan contain at numbers, letters, and the following characters: !@#%^&*?\n",
+                                    "required": true
+                                }
+                            },
+                            {
+                                "variable": "aliasgroup1",
+                                "label": "Alias Group 1",
+                                "description": "List of domains that will be allowed to access the Collabora server\nType one domain per line\n",
+                                "schema": {
+                                    "type": "list",
+                                    "items": [
+                                        {
+                                            "variable": "alias",
+                                            "label": "Alias",
+                                            "schema": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "dictionaries",
+                                "label": "Dictionaries to use, leave empty to use all",
+                                "schema": {
+                                    "type": "string",
+                                    "default": "de_DE en_GB en_US es_ES fr_FR it nl pt_BR pt_PT ru"
+                                }
+                            },
+                            {
+                                "variable": "extra_params",
+                                "label": "Extra Parameters to add",
+                                "description": "e.g. \"--o:welcome.enable=false\", See more on /etc/loolwsd/loowsd.xml. Separate params with space",
+                                "schema": {
+                                    "type": "string",
+                                    "default": "--o:welcome.enable=false --o:user_interface.mode=notebookbar --o:ssl.termination=true --o:ssl.enable=false --o:net.proto=IPv4"
+                                }
+                            },
+                            {
+                                "variable": "server_name",
+                                "label": "Server Name",
+                                "description": "When this environment variable is set (is not \u201c\u201d), then its value will be used as server name in /etc/loolwsd/loolwsd.xml.\nWithout this, CODE is not delivering a correct host for the websocket connection in case of a proxy in front of it.</br>\nIf a port is not specified, the below configured Node Port will be used.\n",
+                                "schema": {
+                                    "type": "string",
+                                    "$ref": [
+                                        "definitions/nodeIP"
+                                    ],
+                                    "default": "192.168.0.10"
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "certificate",
+                    "description": "Collabora Certificate</br>\nIf you do not choose a certificate and do not configure an external reverse proxy</br>\nyou might have to adjust the extra_params.\n",
+                    "label": "Certificate",
+                    "group": "Collabora Configuration",
+                    "schema": {
+                        "type": "int",
+                        "$ref": [
+                            "definitions/certificate"
+                        ],
+                        "null": true,
+                        "enum": [
+                            {
+                                "value": null,
+                                "description": "No Certificate"
+                            }
+                        ],
+                        "default": null
+                    }
+                },
+                {
+                    "variable": "extraAppVolumeMounts",
+                    "label": "Collabora Extra Host Path Volumes",
+                    "group": "Storage",
+                    "schema": {
+                        "type": "list",
+                        "items": [
+                            {
+                                "variable": "extraAppVolume",
+                                "label": "Collabora Host Path Volume",
+                                "description": "Add an extra host path volume for Collabora application",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "mountPath",
+                                            "label": "Mount Path in Pod",
+                                            "description": "Path where the volume will be mounted inside the pod",
+                                            "schema": {
+                                                "type": "path",
+                                                "required": true
+                                            }
+                                        },
+                                        {
+                                            "variable": "hostPath",
+                                            "label": "Host Path",
+                                            "description": "Host path",
+                                            "schema": {
+                                                "type": "hostpath",
+                                                "required": true
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "environmentVariables",
+                    "label": "Environment Variables",
+                    "group": "Collabora Environment Variables",
+                    "schema": {
+                        "type": "list",
+                        "default": [],
+                        "items": [
+                            {
+                                "variable": "environmentVariable",
+                                "label": "Environment Variable",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "name",
+                                            "label": "Name",
+                                            "schema": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        {
+                                            "variable": "value",
+                                            "label": "Value",
+                                            "schema": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "nodePort",
+                    "label": "Node Port to use for Collabora",
+                    "group": "Networking",
+                    "schema": {
+                        "type": "int",
+                        "default": 9980,
+                        "min": 9000,
+                        "max": 65535
+                    }
+                },
+                {
+                    "variable": "enableResourceLimits",
+                    "label": "Enable Pod resource limits",
+                    "group": "Resource Limits",
+                    "schema": {
+                        "type": "boolean",
+                        "default": false
+                    }
+                },
+                {
+                    "variable": "cpuLimit",
+                    "label": "CPU Limit",
+                    "description": "CPU resource limit allow  plain integer values with suffix m(milli) e.g 1000m, 100.",
+                    "group": "Resource Limits",
+                    "schema": {
+                        "type": "string",
+                        "show_if": [
+                            [
+                                "enableResourceLimits",
+                                "=",
+                                true
+                            ]
+                        ],
+                        "valid_chars": "^\\d+(?:\\.\\d+(?!.*m$)|m?$)",
+                        "default": "4000m"
+                    }
+                },
+                {
+                    "variable": "memLimit",
+                    "label": "Memory Limit",
+                    "group": "Resource Limits",
+                    "description": "Memory limits is specified by number of bytes. Followed by quantity suffix like E,P,T,G,M,k and Ei,Pi,Ti,Mi,Gi,Ki can also be used. e.g 129e6, 129M,  128974848000m, 123Mi",
+                    "schema": {
+                        "type": "string",
+                        "show_if": [
+                            [
+                                "enableResourceLimits",
+                                "=",
+                                true
+                            ]
+                        ],
+                        "valid_chars": "^([+-]?[0-9.]+)([eEinumkKMGTP]*[-+]?[0-9]*)$",
+                        "default": "8Gi"
+                    }
+                }
+            ]
+        },
+        "app_readme": "<h1>Collabora Online Development Edition</h1>\n<p>An awesome, Online Office suite image suitable for home use.\nWith the Collabora Online Development Edition (CODE) Docker Image you can host\nyour own online Office Suite at home! This Docker image is aimed at home users\nand contains the latest and greatest developments. Simply integrate it in your\npreferred File Sync and Share (FSS), to easily get your own online Office \nSuite up and running!</p>",
+        "detailed_readme": "<h1>Collabora Online Development Edition</h1>\n<p>Collabora Online Development Edition - An awesome, Online Office suite image suitable for home use!\nIntroduction</p>\n<hr />\n<p>This chart bootstraps Collabora deployment on a <a href=\"http://kubernetes.io\">Kubernetes</a> cluster using the <a href=\"https://helm.sh\">Helm</a> package manager.</p>",
+        "changelog": null
+    }
+}

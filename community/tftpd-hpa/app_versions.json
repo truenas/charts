@@ -1,0 +1,346 @@
+{
+    "1.0.9": {
+        "healthy": true,
+        "supported": true,
+        "healthy_error": null,
+        "location": "/__w/charts/charts/community/tftpd-hpa/1.0.9",
+        "last_update": "2023-10-28 18:49:10",
+        "required_features": [
+            "normalize/ixVolume",
+            "definitions/timezone"
+        ],
+        "human_version": "1.0.0_1.0.9",
+        "version": "1.0.9",
+        "chart_metadata": {
+            "name": "tftpd-hpa",
+            "description": "A lightweight tftp-server",
+            "annotations": {
+                "title": "TFTP Server"
+            },
+            "type": "application",
+            "version": "1.0.9",
+            "apiVersion": "v2",
+            "appVersion": "1.0.0",
+            "kubeVersion": ">=1.16.0-0",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "dependencies": [
+                {
+                    "name": "common",
+                    "repository": "file://../../../common",
+                    "version": "1.1.1"
+                }
+            ],
+            "home": "https://github.com/truenas/containers/tree/main/apps/tftpd-hpa",
+            "icon": "https://media.sys.truenas.net/apps/tftpd-hpa/icons/icon.png",
+            "sources": [
+                "https://github.com/truenas/containers/tree/main/apps/tftpd-hpa",
+                "https://github.com/truenas/charts/tree/master/community/tftpd-hpa",
+                "https://hub.docker.com/r/ixsystems/tftpd-hpa"
+            ],
+            "keywords": [
+                "tftp",
+                "netboot"
+            ]
+        },
+        "app_metadata": {
+            "runAsContext": [
+                {
+                    "userName": "root",
+                    "groupName": "root",
+                    "gid": 0,
+                    "uid": 0,
+                    "description": "TFTP requires root privileges to start it's processes."
+                }
+            ],
+            "capabilities": [
+                {
+                    "name": "NET_BIND_SERVICE",
+                    "description": "TFTP requires this ability to bind to port 69 for TFTP."
+                },
+                {
+                    "name": "SETUID",
+                    "description": "TFTP requires this ability to switch user for sub-processes."
+                },
+                {
+                    "name": "SETGID",
+                    "description": "TFTP requires this ability to switch group for sub-processes."
+                },
+                {
+                    "name": "SYS_CHROOT",
+                    "description": "TFTP requires this ability to use chroot for it's sub-processes."
+                }
+            ],
+            "hostMounts": []
+        },
+        "schema": {
+            "groups": [
+                {
+                    "name": "TFTP Configuration",
+                    "description": "Configure TFTP"
+                },
+                {
+                    "name": "Network Configuration",
+                    "description": "Configure Network for TFTP"
+                },
+                {
+                    "name": "Storage Configuration",
+                    "description": "Configure Storage for TFTP"
+                },
+                {
+                    "name": "Resources Configuration",
+                    "description": "Configure Resources for TFTP"
+                }
+            ],
+            "questions": [
+                {
+                    "variable": "TZ",
+                    "group": "TFTP Configuration",
+                    "label": "Timezone",
+                    "schema": {
+                        "type": "string",
+                        "default": "America/Los_Angeles",
+                        "required": true,
+                        "$ref": [
+                            "definitions/timezone"
+                        ],
+                        "enum": [
+                            {
+                                "value": "Asia/Damascus",
+                                "description": "'Asia/Damascus' timezone"
+                            },
+                            {
+                                "value": "Asia/Saigon",
+                                "description": "'Asia/Saigon' timezone"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "tftpConfig",
+                    "label": "",
+                    "group": "TFTP Configuration",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "allowCreate",
+                                "label": "Allow Create",
+                                "description": "Allow new files to be created. This is disabled by default.</br>\nEnabling this will change the permissions of the tftpboot directory to 757.\nDisabling this will change the permissions of the tftpboot directory to 555.\n",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "variable": "additionalEnvs",
+                                "label": "Additional Environment Variables",
+                                "description": "Configure additional environment variables for TFTP.",
+                                "schema": {
+                                    "type": "list",
+                                    "default": [],
+                                    "items": [
+                                        {
+                                            "variable": "env",
+                                            "label": "Environment Variable",
+                                            "schema": {
+                                                "type": "dict",
+                                                "attrs": [
+                                                    {
+                                                        "variable": "name",
+                                                        "label": "Name",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "required": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "value",
+                                                        "label": "Value",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "required": true
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "tftpNetwork",
+                    "label": "",
+                    "group": "Network Configuration",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "hostNetwork",
+                                "label": "Host Network",
+                                "description": "Bind to the host network. It's recommended to keep this disabled.</br>\n",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            },
+                            {
+                                "variable": "tftpPort",
+                                "label": "TFTP Port",
+                                "description": "The port for TFTP.\nWhen hostNetwork is enabled, the port tftp port will be 69.\n",
+                                "schema": {
+                                    "type": "int",
+                                    "default": 30031,
+                                    "show_if": [
+                                        [
+                                            "hostNetwork",
+                                            "=",
+                                            false
+                                        ]
+                                    ],
+                                    "min": 9000,
+                                    "max": 65535,
+                                    "required": true
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "tftpStorage",
+                    "label": "",
+                    "group": "Storage Configuration",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "tftpboot",
+                                "label": "TFTP Boot Storage",
+                                "description": "The path to store TFTP Boot files.",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "type",
+                                            "label": "Type",
+                                            "description": "ixVolume: Is dataset created automatically by the system.</br>\nHost Path: Is a path that already exists on the system.\n",
+                                            "schema": {
+                                                "type": "string",
+                                                "required": true,
+                                                "immutable": true,
+                                                "default": "ixVolume",
+                                                "enum": [
+                                                    {
+                                                        "value": "hostPath",
+                                                        "description": "Host Path (Path that already exists on the system)"
+                                                    },
+                                                    {
+                                                        "value": "ixVolume",
+                                                        "description": "ixVolume (Dataset created automatically by the system)"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "variable": "datasetName",
+                                            "label": "Dataset Name",
+                                            "schema": {
+                                                "type": "string",
+                                                "show_if": [
+                                                    [
+                                                        "type",
+                                                        "=",
+                                                        "ixVolume"
+                                                    ]
+                                                ],
+                                                "required": true,
+                                                "hidden": true,
+                                                "immutable": true,
+                                                "default": "tftpboot",
+                                                "$ref": [
+                                                    "normalize/ixVolume"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "variable": "hostPath",
+                                            "label": "Host Path",
+                                            "schema": {
+                                                "type": "hostpath",
+                                                "show_if": [
+                                                    [
+                                                        "type",
+                                                        "=",
+                                                        "hostPath"
+                                                    ]
+                                                ],
+                                                "immutable": true,
+                                                "required": true
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "resources",
+                    "group": "Resources Configuration",
+                    "label": "",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "limits",
+                                "label": "Limits",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "cpu",
+                                            "label": "CPU",
+                                            "description": "CPU limit for TFTP.",
+                                            "schema": {
+                                                "type": "string",
+                                                "max_length": 6,
+                                                "valid_chars": "^(0\\.[1-9]|[1-9][0-9]*)(\\.[0-9]|m?)$",
+                                                "valid_chars_error": "Valid CPU limit formats are</br>\n- Plain Integer - eg. 1</br>\n- Float - eg. 0.5</br>\n- Milicpu - eg. 500m\n",
+                                                "default": "4000m",
+                                                "required": true
+                                            }
+                                        },
+                                        {
+                                            "variable": "memory",
+                                            "label": "Memory",
+                                            "description": "Memory limit for TFTP.",
+                                            "schema": {
+                                                "type": "string",
+                                                "max_length": 12,
+                                                "valid_chars": "^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$",
+                                                "valid_chars_error": "Valid Memory limit formats are</br>\n- Suffixed with E/P/T/G/M/K - eg. 1G</br>\n- Suffixed with Ei/Pi/Ti/Gi/Mi/Ki - eg. 1Gi</br>\n- Plain Integer in bytes - eg. 1024</br>\n- Exponent - eg. 134e6\n",
+                                                "default": "8Gi",
+                                                "required": true
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "app_readme": "<h1>TFTP</h1>\n<p><a href=\"https://manpages.debian.org/testing/tftpd-hpa/tftpd.8.en.html\">TFTP</a> is a server for the Trivial File Transfer Protocol.</p>\n<p>The app runs as <code>root</code> user and drops privileges to <code>tftp</code> (9069) user for the TFTP service.</p>\n<blockquote>\n<p>On every application start, a container will be launched with <strong>root</strong> privileges.\nThis will check the parent directory permissions and ownership.\nIf there is a mismatch it will apply the correct permissions to the TFTP directories.\nWhen \"Allow Create\" is checked, the above container will also check and <code>chmod</code> if needed\nto <code>757</code> the TFTP directories and to <code>555</code> when not checked.\nAfterward, the <code>TFTP</code> container will run as a <strong>root</strong> user, dropping privileges\nto <code>tftp</code> (9069) user for the TFTP service.\nNote: You need to have configured DHCP server for network boot to work.</p>\n</blockquote>",
+        "detailed_readme": "<h1>TFTP</h1>\n<p><a href=\"https://manpages.debian.org/testing/tftpd-hpa/tftpd.8.en.html\">TFTP</a> is a server for the Trivial File Transfer Protocol.</p>\n<p>The app runs as <code>root</code> user and drops privileges to <code>tftp</code> (9069) user for the TFTP service.</p>\n<blockquote>\n<p>On every application start, a container will be launched with <strong>root</strong> privileges.\nThis will check the parent directory permissions and ownership.\nIf there is a mismatch it will apply the correct permissions to the TFTP directories.\nWhen \"Allow Create\" is checked, the above container will also check and <code>chmod</code> if needed\nto <code>757</code> the TFTP directories and to <code>555</code> when not checked.\nAfterward, the <code>TFTP</code> container will run as a <strong>root</strong> user, dropping privileges\nto <code>tftp</code> (9069) user for the TFTP service.\nNote: You need to have configured DHCP server for network boot to work.</p>\n</blockquote>",
+        "changelog": null
+    }
+}

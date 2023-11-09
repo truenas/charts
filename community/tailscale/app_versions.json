@@ -1,0 +1,312 @@
+{
+    "1.0.21": {
+        "healthy": true,
+        "supported": true,
+        "healthy_error": null,
+        "location": "/__w/charts/charts/community/tailscale/1.0.21",
+        "last_update": "2023-11-01 00:33:50",
+        "required_features": [],
+        "human_version": "1.52.0_1.0.21",
+        "version": "1.0.21",
+        "chart_metadata": {
+            "name": "tailscale",
+            "description": "Secure remote access to shared resources",
+            "annotations": {
+                "title": "Tailscale"
+            },
+            "type": "application",
+            "version": "1.0.21",
+            "apiVersion": "v2",
+            "appVersion": "1.52.0",
+            "kubeVersion": ">=1.16.0-0",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "dependencies": [
+                {
+                    "name": "common",
+                    "repository": "file://../../../common",
+                    "version": "1.2.0"
+                }
+            ],
+            "home": "https://tailscale.com/",
+            "icon": "https://media.sys.truenas.net/apps/tailscale/icons/icon.png",
+            "sources": [
+                "https://tailscale.com/",
+                "https://github.com/truenas/charts/tree/master/community/tailscale",
+                "https://hub.docker.com/r/tailscale/tailscale"
+            ],
+            "keywords": [
+                "vpn",
+                "tailscale"
+            ]
+        },
+        "app_metadata": {
+            "runAsContext": [
+                {
+                    "userName": "root",
+                    "groupName": "root",
+                    "gid": 0,
+                    "uid": 0,
+                    "description": "Tailscale requires root privileges to start the tailscaled process (Only when userspace is disabled)"
+                }
+            ],
+            "capabilities": [
+                {
+                    "name": "NET_ADMIN",
+                    "description": "Tailscale requires NET_ADMIN to configure the VPN interface, modify routes, etc."
+                },
+                {
+                    "name": "NET_RAW",
+                    "description": "Tailscale requires NET_RAW to use raw sockets and proxying"
+                }
+            ],
+            "hostMounts": [
+                {
+                    "hostPath": "/dev/tun",
+                    "description": "Required to access the TUN device (Only when userspace is disabled)"
+                }
+            ]
+        },
+        "schema": {
+            "groups": [
+                {
+                    "name": "Tailscale Configuration",
+                    "description": "Configure Tailscale"
+                },
+                {
+                    "name": "Network Configuration",
+                    "description": "Configure Network for Tailscale"
+                },
+                {
+                    "name": "Resources Configuration",
+                    "description": "Configure Resources for Tailscale"
+                }
+            ],
+            "questions": [
+                {
+                    "variable": "tailscaleConfig",
+                    "label": "",
+                    "group": "Tailscale Configuration",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "authkey",
+                                "label": "Auth Key",
+                                "description": "The auth key for Tailscale.</br>\nSame as `--authkey` flag.\n",
+                                "schema": {
+                                    "type": "string",
+                                    "default": "",
+                                    "required": true,
+                                    "private": true
+                                }
+                            },
+                            {
+                                "variable": "hostname",
+                                "label": "Hostname",
+                                "description": "The hostname for Tailscale Node.</br>\nOnly lowercase letters, numbers, and hyphens are allowed.</br>\nSame as `--hostname` flag.\n",
+                                "schema": {
+                                    "type": "string",
+                                    "default": "truenas-scale",
+                                    "required": true
+                                }
+                            },
+                            {
+                                "variable": "advertiseRoutes",
+                                "label": "Advertise Routes",
+                                "description": "The routes to advertise.</br>\nSame as `--advertise-routes` flag.\n",
+                                "schema": {
+                                    "type": "list",
+                                    "default": [],
+                                    "items": [
+                                        {
+                                            "variable": "routeEntry",
+                                            "label": "Route",
+                                            "schema": {
+                                                "type": "string",
+                                                "required": true
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "advertiseExitNode",
+                                "label": "Advertise Exit Node",
+                                "description": "Advertise as Exit Node.</br>\nSame as `--advertise-exit-node` flag.\n",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "variable": "userspace",
+                                "label": "Userspace",
+                                "description": "Userspace for Tailscale.",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            },
+                            {
+                                "variable": "acceptDns",
+                                "label": "Accept DNS",
+                                "description": "Accept DNS.</br>\nSame as `--accept-dns` flag.\n",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "variable": "extraArgs",
+                                "label": "Extra Arguments",
+                                "description": "Extra arguments for Tailscale.",
+                                "schema": {
+                                    "type": "list",
+                                    "default": [],
+                                    "items": [
+                                        {
+                                            "variable": "argEntry",
+                                            "label": "Argument",
+                                            "schema": {
+                                                "type": "string",
+                                                "required": true
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "extraDaemonArgs",
+                                "label": "Extra Daemon Arguments",
+                                "description": "Extra arguments for Tailscale daemon.",
+                                "schema": {
+                                    "type": "list",
+                                    "default": [],
+                                    "items": [
+                                        {
+                                            "variable": "DaemonArgEntry",
+                                            "label": "Daemon Argument",
+                                            "schema": {
+                                                "type": "string",
+                                                "required": true
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "additionalEnvs",
+                                "label": "Additional Environment Variables",
+                                "description": "Configure additional environment variables for Tailscale.",
+                                "schema": {
+                                    "type": "list",
+                                    "default": [],
+                                    "items": [
+                                        {
+                                            "variable": "env",
+                                            "label": "Environment Variable",
+                                            "schema": {
+                                                "type": "dict",
+                                                "attrs": [
+                                                    {
+                                                        "variable": "name",
+                                                        "label": "Name",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "required": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "value",
+                                                        "label": "Value",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "required": true
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "tailscaleNetwork",
+                    "label": "",
+                    "group": "Network Configuration",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "hostNetwork",
+                                "label": "Host Network",
+                                "description": "Bind to the host network. It's recommended to keep this disabled.</br>\n",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "resources",
+                    "group": "Resources Configuration",
+                    "label": "",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "limits",
+                                "label": "Limits",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "cpu",
+                                            "label": "CPU",
+                                            "description": "CPU limit for Tailscale.",
+                                            "schema": {
+                                                "type": "string",
+                                                "max_length": 6,
+                                                "valid_chars": "^(0\\.[1-9]|[1-9][0-9]*)(\\.[0-9]|m?)$",
+                                                "valid_chars_error": "Valid CPU limit formats are</br>\n- Plain Integer - eg. 1</br>\n- Float - eg. 0.5</br>\n- Milicpu - eg. 500m\n",
+                                                "default": "4000m",
+                                                "required": true
+                                            }
+                                        },
+                                        {
+                                            "variable": "memory",
+                                            "label": "Memory",
+                                            "description": "Memory limit for Tailscale.",
+                                            "schema": {
+                                                "type": "string",
+                                                "max_length": 12,
+                                                "valid_chars": "^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$",
+                                                "valid_chars_error": "Valid Memory limit formats are</br>\n- Suffixed with E/P/T/G/M/K - eg. 1G</br>\n- Suffixed with Ei/Pi/Ti/Gi/Mi/Ki - eg. 1Gi</br>\n- Plain Integer in bytes - eg. 1024</br>\n- Exponent - eg. 134e6\n",
+                                                "default": "8Gi",
+                                                "required": true
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "app_readme": "<h1>Tailscale</h1>\n<p><a href=\"https://tailscale.com\">Tailscale</a> Secure remote access to shared resources</p>\n<ul>\n<li>When <code>Userspace</code> is <strong>disabled</strong>, <code>Tailscale</code> will run as root, with <code>/dev/net/tun</code> device mounted from the host.</li>\n<li>When <code>Userspace</code> is <strong>enabled</strong>, <code>Tailscale</code> will run as a non-root user.</li>\n</ul>",
+        "detailed_readme": "<h1>Tailscale</h1>\n<p><a href=\"https://tailscale.com\">Tailscale</a> Secure remote access to shared resources</p>\n<ul>\n<li>When <code>Userspace</code> is <strong>disabled</strong>, <code>Tailscale</code> will run as root, with <code>/dev/net/tun</code> device mounted from the host.</li>\n<li>When <code>Userspace</code> is <strong>enabled</strong>, <code>Tailscale</code> will run as a non-root user.</li>\n</ul>",
+        "changelog": null
+    }
+}
