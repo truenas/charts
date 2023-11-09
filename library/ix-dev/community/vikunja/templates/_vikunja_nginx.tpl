@@ -13,8 +13,8 @@ workload:
           primary: true
           imageSelector: nginxImage
           securityContext:
-            runAsUser: 568
-            runAsGroup: 568
+            runAsUser: 101
+            runAsGroup: 101
           probes:
             liveness:
               enabled: true
