@@ -34,6 +34,7 @@ immichConfig:
   publicLoginMessage: ''
   enableML: true
   enableTypesense: true
+  enableHwaccel: false
 
 immichNetwork:
   webuiPort: 30041

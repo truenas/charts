@@ -165,6 +165,15 @@
                                     "type": "boolean",
                                     "default": true
                                 }
+                            },
+                            {
+                                "variable": "enableHwaccel",
+                                "label": "Enable Hwaccel",
+                                "description": "Enable Hwaccel\n",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
                             }
                         ]
                     }

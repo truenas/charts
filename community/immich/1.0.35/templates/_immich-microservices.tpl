@@ -46,6 +46,7 @@ workload:
                                                       "secretName" "redis-creds") | nindent 8 }}
       {{- include "immich.wait.init" (dict "url" $url) | indent 8 }}
 
+{{- if .Values.immichConfig.enableHwaccel-}}
 {{- with .Values.immichGPU }}
 scaleGPU:
   {{- range $key, $value := . }}
@@ -55,5 +56,6 @@ scaleGPU:
       microservices:
         - microservices
   {{- end -}}
+{{- end -}}
 {{- end -}}
 {{- end -}}
