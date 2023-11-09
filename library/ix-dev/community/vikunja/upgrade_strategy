@@ -26,7 +26,6 @@ def newer_mapping(image_tags):
         "app_version": ""
     }
 
-
     for key in image_tags.keys():
         RE_STABLE_VERSION = ENUMS[key].get('RE_STABLE_VERSION', None) if key in ENUMS else None
         if (RE_STABLE_VERSION is None):
