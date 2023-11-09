@@ -15,7 +15,6 @@ workload:
           securityContext:
             runAsUser: 101
             runAsGroup: 101
-            # runAsNonRoot: false
             readOnlyRootFilesystem: false
           envFrom:
             - configMapRef:
