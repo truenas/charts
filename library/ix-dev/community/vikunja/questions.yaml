@@ -272,12 +272,12 @@ questions:
                       description: Enable ACL for the dataset.
                       schema:
                         type: boolean
+                        hidden: true
                         default: false
                     - variable: acl
                       label: ACL Configuration
                       schema:
                         type: dict
-                        hidden: true
                         show_if: [["aclEnable", "=", true]]
                         attrs: []
                         $ref:
@@ -352,12 +352,12 @@ questions:
                       description: Enable ACL for the dataset.
                       schema:
                         type: boolean
+                        hidden: true
                         default: false
                     - variable: acl
                       label: ACL Configuration
                       schema:
                         type: dict
-                        hidden: true
                         show_if: [["aclEnable", "=", true]]
                         attrs: []
                         $ref:
