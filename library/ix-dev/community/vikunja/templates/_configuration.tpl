@@ -82,19 +82,15 @@ configmap:
       nginx-config: |
         server {
             listen {{ .Values.vikunjaNetwork.webPort }};
-
             location /nginx-health {
                 return 200;
             }
-
             location / {
                 proxy_pass {{ printf "http://%s-frontend:%v" $fullname .Values.vikunjaPorts.frontHttp }};
             }
-
             location ~* ^/(api|dav|\.well-known)/ {
                 proxy_pass {{ printf "http://%s:%v" $fullname .Values.vikunjaPorts.api }};
                 client_max_body_size {{ printf "%vM" .Values.vikunjaConfig.maxFileSize }};
             }
-
         }
 {{- end -}}

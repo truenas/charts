@@ -15,7 +15,6 @@ workload:
             runAsUser: {{ .Values.vikunjaRunAs.user }}
             runAsGroup: {{ .Values.vikunjaRunAs.group }}
             runAsNonRoot: false
-
           env:
             # Make vikunja skip user creation
             PUID: ""
