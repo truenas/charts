@@ -67,9 +67,8 @@ configmap:
       VIKUNJA_DATABASE_TYPE: postgres
       VIKUNJA_SERVICE_INTERFACE: {{ printf ":%v" .Values.vikunjaPorts.api | quote }}
       VIKUNJA_FILES_MAXSIZE: {{ printf "%vMB" .Values.vikunjaConfig.maxFileSize }}
-      # TODO: Check that this works
       VIKUNJA_FILES_BASEPATH: /app/vikunja/files
-      # VIKUNJA_SERVICE_FRONTENDURL: TODO:
+      VIKUNJA_SERVICE_FRONTENDURL: {{ printf "%s/" (.Values.vikunjaConfig.url | trimSuffix "/") }}
 
   vikunja-frontend:
     enabled: true
