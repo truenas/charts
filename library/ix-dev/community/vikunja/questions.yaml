@@ -1,6 +1,8 @@
 groups:
   - name: Vikunja Configuration
     description: Configure Vikunja
+  - name: User and Group Configuration
+    description: Configure User and Group for Vikunja
   - name: Network Configuration
     description: Configure Network for Vikunja
   - name: Storage Configuration
@@ -76,6 +78,29 @@ questions:
                       schema:
                         type: string
                         required: true
+
+  - variable: vikunjaRunAs
+    label: ""
+    group: User and Group Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: user
+          label: User ID
+          description: The user id that Vikunja will run as.
+          schema:
+            type: int
+            min: 2
+            default: 568
+            required: true
+        - variable: group
+          label: Group ID
+          description: The group id that Vikunja will run as.
+          schema:
+            type: int
+            min: 2
+            default: 568
+            required: true
 
   - variable: vikunjaNetwork
     label: ""

@@ -1,9 +1,9 @@
 runAsContext:
-  - userName: root
-    groupName: root
-    gid: 0
-    uid: 0
-    description: Vikunja API runs as root user.
+  - userName: vikunja
+    groupName: vikunja
+    gid: 568
+    uid: 568
+    description: Vikunja API can run as any non-root user
   - userName: nginx
     groupName: nginx
     gid: 101
@@ -19,11 +19,5 @@ runAsContext:
     gid: 999
     uid: 999
     description: Postgres runs as a non-root user.
-capabilities:
-  - name: CHOWN
-    description: Vikunka API is able to chown files.
-  - name: SETGID
-    description: Vikunka API is able to set group ID for it's sub-processes.
-  - name: SETUID
-    description: Vikunka API is able to set user ID for it's sub-processes.
+capabilities: []
 hostMounts: []
