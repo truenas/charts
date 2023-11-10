@@ -12,15 +12,14 @@ workload:
           primary: true
           imageSelector: image
           securityContext:
-            runAsUser: 0
-            runAsGroup: 0
+            runAsUser: {{ .Values.vikunjaRunAs.user }}
+            runAsGroup: {{ .Values.vikunjaRunAs.group }}
             runAsNonRoot: false
-            readOnlyRootFilesystem: false
-            capabilities:
-              add:
-                - CHOWN
-                - SETGID
-                - SETUID
+
+          env:
+            # Make vikunja skip user creation
+            PUID: ""
+            PGID: ""
           envFrom:
             - secretRef:
                 name: vikunja-creds

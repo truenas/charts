@@ -21,6 +21,10 @@ vikunjaConfig:
   maxFileSize: 20
   additionalEnvs: []
 
+vikunjaRunAs:
+  user: 568
+  group: 568
+
 vikunjaNetwork:
   webPort: 31002
 
