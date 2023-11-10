@@ -1,15 +1,15 @@
 {
-    "1.0.12": {
+    "1.0.13": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/redis/1.0.12",
-        "last_update": "2023-11-10 06:10:42",
+        "location": "/__w/charts/charts/community/redis/1.0.13",
+        "last_update": "2023-11-10 14:34:55",
         "required_features": [
             "normalize/ixVolume"
         ],
-        "human_version": "7.2.3_1.0.12",
-        "version": "1.0.12",
+        "human_version": "7.2.3_1.0.13",
+        "version": "1.0.13",
         "chart_metadata": {
             "name": "redis",
             "description": "Redis. The open source, in-memory data store used by millions of developers as a database, cache, streaming engine, and message broker.",
@@ -17,7 +17,7 @@
                 "title": "Redis"
             },
             "type": "application",
-            "version": "1.0.12",
+            "version": "1.0.13",
             "apiVersion": "v2",
             "appVersion": "7.2.3",
             "kubeVersion": ">=1.16.0-0",
@@ -32,7 +32,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.1"
+                    "version": "1.2.2"
                 }
             ],
             "home": "https://redis.io/",

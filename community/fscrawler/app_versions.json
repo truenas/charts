@@ -1,16 +1,16 @@
 {
-    "1.1.1": {
+    "1.1.2": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/fscrawler/1.1.1",
-        "last_update": "2023-11-10 06:10:42",
+        "location": "/__w/charts/charts/community/fscrawler/1.1.2",
+        "last_update": "2023-11-10 14:34:55",
         "required_features": [
-            "definitions/timezone",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/timezone"
         ],
-        "human_version": "2.9_1.1.1",
-        "version": "1.1.1",
+        "human_version": "2.9_1.1.2",
+        "version": "1.1.2",
         "chart_metadata": {
             "name": "fscrawler",
             "description": "FSCrawler is a crawler that helps to index binary documents such as PDF, Open Office, MS Office.",
@@ -18,7 +18,7 @@
                 "title": "FSCrawler"
             },
             "type": "application",
-            "version": "1.1.1",
+            "version": "1.1.2",
             "apiVersion": "v2",
             "appVersion": "2.9",
             "kubeVersion": ">=1.16.0-0",
@@ -33,7 +33,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.1.1"
+                    "version": "1.2.2"
                 }
             ],
             "home": "https://fscrawler.readthedocs.io/",
