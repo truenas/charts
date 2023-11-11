@@ -11,17 +11,17 @@ ci: true
 
 ddnsConfig:
   config:
-    - provider: name
+    - provider: name.com
       host: subdomain
       domain: example.com
       ipVersion: ""
       nameUsername: "abcdef123456abcdef123456abcdef12"
-      nameToken: "abcdef123456abcdef123456abcdef12"
-      nameTTL: 300
-    - provider: name
+      namecomToken: "abcdef123456abcdef123456abcdef12"
+      namecomTTL: 300
+    - provider: name.com
       host: subdomain
       domain: example.com
       ipVersion: ""
-      nameUsername: "abcdef123456abcdef123456abcdef12"
-      nameToken: "abcdef123456abcdef123456abcdef12"
+      namecomUsername: "abcdef123456abcdef123456abcdef12"
+      namecomToken: "abcdef123456abcdef123456abcdef12"
       nameTTL: 300

@@ -46,7 +46,7 @@ configmap:
 {{- $providers := (list "aliyun" "allinkl" "cloudflare" "dd24" "ddnss" "digitalocean"
                         "dnsomatic" "dnspod" "dondominio" "dreamhost" "duckdns" "dyn"
                         "dynu" "dynv6" "freedns" "gandi" "gcp" "godaddy" "google" "he"
-                        "infomaniak" "inwx" "linode" "luadns" "name" "namecheap" "njalla" "noip"
+                        "infomaniak" "inwx" "linode" "luadns" "name.com" "namecheap" "njalla" "noip"
                         "opendns" "ovh" "porkbun" "selfhost.de" "servercow" "spdyn"
                         "strato" "variomedia") }}
 settings:
