@@ -1,8 +1,8 @@
 {{/* https://github.com/qdm12/ddns-updater/blob/master/docs/name.com.md */}}
 {{- define "ddns.config.name.com" -}}
   {{- $item := .item }}
-token: {{ $item.nameToken | required "DDNS Updater - Expected non-empty [Token] for Name.com provider" }}
-username: {{ $item.nameUsername | required "DDNS Updater - Expected non-empty [Username] for Name.com provider" }}
+token: {{ $item.namecomToken | required "DDNS Updater - Expected non-empty [Token] for Name.com provider" }}
+username: {{ $item.namecomUsername | required "DDNS Updater - Expected non-empty [Username] for Name.com provider" }}
 {{- end -}}
 {{/*
 ddnsConfig:
