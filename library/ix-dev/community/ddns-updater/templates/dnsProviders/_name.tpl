@@ -3,6 +3,7 @@
   {{- $item := .item }}
 token: {{ $item.namecomToken | required "DDNS Updater - Expected non-empty [Token] for Name.com provider" }}
 username: {{ $item.namecomUsername | required "DDNS Updater - Expected non-empty [Username] for Name.com provider" }}
+ttl: {{ $item.namecomTtl | required "DDNS Updater - Expected non-empty [TTL] for Name.com provider" }}
 {{- end -}}
 {{/*
 ddnsConfig:
