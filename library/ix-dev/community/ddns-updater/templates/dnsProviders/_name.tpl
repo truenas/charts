@@ -13,4 +13,5 @@ ddnsConfig:
       ipVersion: ""                     - Required - Valid values (ipv4/ipv6/"")
       namecomToken: token               - Required
       namecomUsername: username         - Required
+      namecomTtl: 300                   - Required - Min Value (300)
 */}}
