@@ -175,7 +175,7 @@ questions:
                         required: true
                         immutable: true
                         hidden: true
-                        default: "config"
+                        default: "data"
                     - variable: aclEntries
                       label: ACL Configuration
                       schema:
