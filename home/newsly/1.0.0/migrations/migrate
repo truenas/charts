@@ -3,7 +3,7 @@ import json
 import os
 import sys
 
-
+'''
 def migrate(values):
     storageKey = 'sonarrStorage'
     storages = ['config']
@@ -27,3 +27,4 @@ if __name__ == '__main__':
     if os.path.exists(sys.argv[1]):
         with open(sys.argv[1], 'r') as f:
             print(json.dumps(migrate(json.loads(f.read()))))
+'''

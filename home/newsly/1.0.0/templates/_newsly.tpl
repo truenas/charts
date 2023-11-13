@@ -1,23 +1,23 @@
-{{- define "sonarr.workload" -}}
+{{- define "newsly.workload" -}}
 workload:
-  sonarr:
+  newsly:
     enabled: true
     primary: true
     type: Deployment
     podSpec:
-      hostNetwork: {{ .Values.sonarrNetwork.hostNetwork }}
+      hostNetwork: {{ .Values.newslyNetwork.hostNetwork }}
       containers:
-        sonarr:
+        newsly:
           enabled: true
           primary: true
           imageSelector: image
           securityContext:
-            runAsUser: {{ .Values.sonarrRunAs.user }}
-            runAsGroup: {{ .Values.sonarrRunAs.group }}
+            runAsUser: {{ .Values.newslyRunAs.user }}
+            runAsGroup: {{ .Values.newslyRunAs.group }}
           env:
-            SONARR__PORT: {{ .Values.sonarrNetwork.webPort }}
-            SONARR__INSTANCE_NAME: {{ .Values.sonarrConfig.instanceName }}
-          {{ with .Values.sonarrConfig.additionalEnvs }}
+            NEWSLY__PORT: {{ .Values.newslyNetwork.webPort }}
+            NEWSLY__INSTANCE_NAME: {{ .Values.newslyConfig.instanceName }}
+          {{ with .Values.newslyConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
             - name: {{ $env.name }}
@@ -28,50 +28,50 @@ workload:
             liveness:
               enabled: true
               type: http
-              port: "{{ .Values.sonarrNetwork.webPort }}"
+              port: "{{ .Values.newslyNetwork.webPort }}"
               path: /ping
             readiness:
               enabled: true
               type: http
-              port: "{{ .Values.sonarrNetwork.webPort }}"
+              port: "{{ .Values.newslyNetwork.webPort }}"
               path: /ping
             startup:
               enabled: true
               type: http
-              port: "{{ .Values.sonarrNetwork.webPort }}"
+              port: "{{ .Values.newslyNetwork.webPort }}"
               path: /ping
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
-                                                        "UID" .Values.sonarrRunAs.user
-                                                        "GID" .Values.sonarrRunAs.group
+                                                        "UID" .Values.newslyRunAs.user
+                                                        "GID" .Values.newslyRunAs.group
                                                         "mode" "check"
                                                         "type" "init") | nindent 8 }}
 
 {{/* Service */}}
 service:
-  sonarr:
+  newsly:
     enabled: true
     primary: true
     type: NodePort
-    targetSelector: sonarr
+    targetSelector: newsly
     ports:
       webui:
         enabled: true
         primary: true
-        port: {{ .Values.sonarrNetwork.webPort }}
-        nodePort: {{ .Values.sonarrNetwork.webPort }}
-        targetSelector: sonarr
+        port: {{ .Values.newslyNetwork.webPort }}
+        nodePort: {{ .Values.newslyNetwork.webPort }}
+        targetSelector: newsly
 
 {{/* Persistence */}}
 persistence:
   config:
     enabled: true
-    type: {{ .Values.sonarrStorage.config.type }}
-    datasetName: {{ .Values.sonarrStorage.config.datasetName | default "" }}
-    hostPath: {{ .Values.sonarrStorage.config.hostPath | default "" }}
+    type: {{ .Values.newslyStorage.config.type }}
+    datasetName: {{ .Values.newslyStorage.config.datasetName | default "" }}
+    hostPath: {{ .Values.newslyStorage.config.hostPath | default "" }}
     targetSelector:
-      sonarr:
-        sonarr:
+      newsly:
+        newsly:
           mountPath: /config
         01-permissions:
           mountPath: /mnt/directories/config
@@ -79,11 +79,11 @@ persistence:
     enabled: true
     type: emptyDir
     targetSelector:
-      sonarr:
-        sonarr:
+      newsly:
+        newsly:
           mountPath: /tmp
-  {{- range $idx, $storage := .Values.sonarrStorage.additionalStorages }}
-  {{ printf "sonarr-%v" (int $idx) }}:
+  {{- range $idx, $storage := .Values.newslyStorage.additionalStorages }}
+  {{ printf "newsly-%v" (int $idx) }}:
     {{- $size := "" -}}
     {{- if $storage.size -}}
       {{- $size = (printf "%vGi" $storage.size) -}}
@@ -103,8 +103,8 @@ persistence:
       - key: noperm
     {{- end }}
     targetSelector:
-      sonarr:
-        sonarr:
+      newsly:
+        newsly:
           mountPath: {{ $storage.mountPath }}
         01-permissions:
           mountPath: /mnt/directories{{ $storage.mountPath }}

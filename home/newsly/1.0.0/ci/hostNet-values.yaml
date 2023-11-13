@@ -1,8 +1,8 @@
-sonarrNetwork:
+newslyNetwork:
   webPort: 30000
   hostNetwork: true
 
-sonarrStorage:
+newslyStorage:
   config:
     type: hostPath
     hostPath: /mnt/{{ .Release.Namespace }}/config

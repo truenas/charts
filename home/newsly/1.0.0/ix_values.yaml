@@ -1,23 +1,23 @@
 image:
-  repository: ghcr.io/onedr0p/sonarr
+  repository: registry.departy.xyz/newsly-app
   pullPolicy: IfNotPresent
-  tag: '3.0.10.1567'
+  tag: '2023.11.13'
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-sonarrConfig:
-  instanceName: Sonarr
+newslyConfig:
+  instanceName: Newsly-App
   additionalEnvs: []
-sonarrNetwork:
+newslyNetwork:
   webPort: 30027
   hostNetwork: false
-sonarrRunAs:
+newslyRunAs:
   user: 568
   group: 568
-sonarrStorage:
+newslyStorage:
   config:
     type: ixVolume
     datasetName: config
