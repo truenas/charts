@@ -73,6 +73,7 @@ workload:
               initialDelaySeconds: 5
               periodSeconds: 10
             startup:
+              enabled: false
               exec:
                 command:
                 - python
