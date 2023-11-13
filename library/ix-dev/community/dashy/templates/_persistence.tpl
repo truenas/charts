@@ -29,4 +29,27 @@ persistence:
         dashy:
           mountPath: {{ $storage.mountPath }}
   {{- end -}}
+
+  {{- if .Values.dashyNetwork.certificateID }}
+  cert:
+    enabled: true
+    type: secret
+    objectName: dashy-cert
+    defaultMode: "0600"
+    items:
+      - key: tls.key
+        path: tls.key
+      - key: tls.crt
+        path: tls.crt
+    targetSelector:
+      dashy:
+        dashy:
+          mountPath: /cert
+          readOnly: true
+
+scaleCertificate:
+  dashy-cert:
+    enabled: true
+    id: {{ .Values.dashyNetwork.certificateID }}
+    {{- end -}}
 {{- end -}}

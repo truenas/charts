@@ -20,9 +20,17 @@ workload:
           fixedEnv:
             PUID: {{ .Values.dashyID.user }}
           env:
+            {{- $protocol := "http" -}}
+            {{- if .Values.dashyNetwork.certificateID }}
+              {{- $protocol = "https" -}}
+            SSL_PRIV_KEY_PATH: /cert/tls.key
+            SSL_PUB_KEY_PATH: /cert/tls.crt
+            SSL_PORT: {{ .Values.dashyNetwork.webPort }}
+            {{- else }}
+            PORT: {{ .Values.dashyNetwork.webPort }}
+            {{- end }}
             NODE_ENV: production
             IS_DOCKER: "true"
-            PORT: {{ .Values.dashyNetwork.webPort }}
           {{ with .Values.dashyConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
@@ -33,17 +41,17 @@ workload:
           probes:
             liveness:
               enabled: true
-              type: http
+              type: {{ $protocol }}
               port: {{ .Values.dashyNetwork.webPort }}
               path: /
             readiness:
               enabled: true
-              type: http
+              type: {{ $protocol }}
               port: {{ .Values.dashyNetwork.webPort }}
               path: /
             startup:
               enabled: true
-              type: http
+              type: {{ $protocol }}
               port: {{ .Values.dashyNetwork.webPort }}
               path: /
       initContainers:
