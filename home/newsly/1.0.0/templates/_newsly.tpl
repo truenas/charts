@@ -73,3 +73,5 @@ service:
         port: {{ .Values.newslyNetwork.webPort }}
         nodePort: {{ .Values.newslyNetwork.webPort }}
         targetSelector: newsly
+
+{{- end -}}
