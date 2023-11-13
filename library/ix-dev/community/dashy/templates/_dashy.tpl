@@ -12,8 +12,9 @@ workload:
           primary: true
           imageSelector: image
           securityContext:
-            runAsUser: {{ .Values.dashyRunAs.user }}
-            runAsGroup: {{ .Values.dashyRunAs.group }}
+            runAsUser: 0
+            runAsGroup: 0
+            runAsNonRoot: false
           env:
             NODE_ENV: production
             IS_DOCKER: "true"
@@ -50,8 +51,9 @@ workload:
           type: init
           imageSelector: image
           securityContext:
-            runAsUser: {{ .Values.dashyRunAs.user }}
-            runAsGroup: {{ .Values.dashyRunAs.group }}
+            runAsUser: 0
+            runAsGroup: 0
+            runAsNonRoot: false
           command:
             - /bin/sh
           args:
