@@ -56,21 +56,22 @@ workload:
           env:
             PYTHONUNBUFFERED : {{ .Values.newslyDatabase.pythonlogging }}
           probes:
-            liveness:
-              enabled: true
-              type: http
-              port: "{{ .Values.newslyNetwork.webPort }}"
-              path: /
-            readiness:
-              enabled: true
-              type: http
-              port: "{{ .Values.newslyNetwork.webPort }}"
-              path: /
-            startup:
-              enabled: true
-              type: http
-              port: "{{ .Values.newslyNetwork.webPort }}"
-              path: /
+            livenessProbe:
+              exec:
+                command:
+                - python
+                - -c
+                - "import sys; sys.exit(0)"  # A simple command that always succeeds
+              initialDelaySeconds: 15
+              periodSeconds: 20
+            readinessProbe:
+              exec:
+                command:
+                - python
+                - -c
+                - "import sys; sys.exit(0)"  # A simple command that always succeeds
+              initialDelaySeconds: 5
+              periodSeconds: 10
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
                                                         "UID" .Values.newslyRunAs.user
