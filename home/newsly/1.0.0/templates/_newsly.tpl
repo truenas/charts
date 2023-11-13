@@ -29,17 +29,17 @@ workload:
               enabled: true
               type: http
               port: "{{ .Values.newslyNetwork.webPort }}"
-              path: /ping
+              path: /
             readiness:
               enabled: true
               type: http
               port: "{{ .Values.newslyNetwork.webPort }}"
-              path: /ping
+              path: /
             startup:
               enabled: true
               type: http
               port: "{{ .Values.newslyNetwork.webPort }}"
-              path: /ping
+              path: /
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
                                                         "UID" .Values.newslyRunAs.user
