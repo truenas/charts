@@ -2,7 +2,7 @@
 persistence:
   config:
     enabled: true
-    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.dashyStorage.config) | nindent 4 }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.dashyStorage.data) | nindent 4 }}
     targetSelector:
       dashy:
         dashy:
@@ -21,7 +21,7 @@ persistence:
           mountPath: /tmp
 
   {{- range $idx, $storage := .Values.dashyStorage.additionalStorages }}
-  {{ printf "dashy-%v" (int $idx) }}:
+  {{ printf "dashy-%v:" (int $idx) }}
     enabled: true
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
