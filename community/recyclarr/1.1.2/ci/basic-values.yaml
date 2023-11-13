@@ -1,8 +1,0 @@
-recyclarrRunAs:
-  user: 1000
-  group: 1000
-
-recyclarrStorage:
-  config:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/config

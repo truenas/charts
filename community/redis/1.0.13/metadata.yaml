@@ -1,8 +1,0 @@
-runAsContext:
-  - userName: redis
-    groupName: root
-    gid: 1001
-    uid: 0
-    description: Redis runs as a non-root user and root group.
-capabilities: []
-hostMounts: []

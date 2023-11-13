@@ -1,7 +1,0 @@
-redisStorage:
-  data:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/data
-
-redisConfig:
-  password: pass

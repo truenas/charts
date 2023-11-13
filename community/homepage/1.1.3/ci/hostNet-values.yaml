@@ -1,8 +1,0 @@
-homepageNetwork:
-  webPort: 30000
-  hostNetwork: true
-
-homepageStorage:
-  config:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/config

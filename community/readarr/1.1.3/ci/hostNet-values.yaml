@@ -1,8 +1,0 @@
-readarrNetwork:
-  webPort: 30000
-  hostNetwork: true
-
-readarrStorage:
-  config:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/config

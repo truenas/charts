@@ -1,7 +1,0 @@
-clamavStorage:
-  sigdb:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/sig-db
-  scandir:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/scan-dir

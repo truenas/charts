@@ -1,8 +1,0 @@
-{{- include "ix.v1.common.loader.init" . -}}
-
-{{/* Merge the templates with Values */}}
-{{- include "redis.validation" $ -}}
-{{- $_ := mustMergeOverwrite .Values (include "redis.configuration" $ | fromYaml) -}}
-{{- $_ := mustMergeOverwrite .Values (include "redis.workload" $ | fromYaml) -}}
-
-{{- include "ix.v1.common.loader.apply" . -}}

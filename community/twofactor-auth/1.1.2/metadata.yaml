@@ -1,8 +1,0 @@
-runAsContext:
-  - userName: twofauth
-    groupName: twofauthreadarr
-    gid: 1000
-    uid: 1000
-    description: 2FAuth runs as a non-root user.
-capabilities: []
-hostMounts: []

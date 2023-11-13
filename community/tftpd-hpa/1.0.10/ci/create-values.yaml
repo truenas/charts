@@ -1,6 +1,0 @@
-tftpStorage:
-  tftpboot:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/tftpboot
-tftpConfig:
-  allowCreate: true

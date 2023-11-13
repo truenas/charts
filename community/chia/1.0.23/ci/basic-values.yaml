@@ -1,7 +1,0 @@
-chiaStorage:
-  data:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/data
-  plots:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/plots

@@ -1,9 +1,0 @@
-{{- include "ix.v1.common.loader.init" . -}}
-
-{{/* Merge the templates with Values */}}
-{{- $_ := mustMergeOverwrite .Values (include "distribution.configuration" $ | fromYaml) -}}
-{{- $_ := mustMergeOverwrite .Values (include "distribution.persistence" $ | fromYaml) -}}
-{{- $_ := mustMergeOverwrite .Values (include "distribution.service" $ | fromYaml) -}}
-{{- $_ := mustMergeOverwrite .Values (include "distribution.workload" $ | fromYaml) -}}
-
-{{- include "ix.v1.common.loader.apply" . -}}

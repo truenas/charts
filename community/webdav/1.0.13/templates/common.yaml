@@ -1,7 +1,0 @@
-{{- include "ix.v1.common.loader.init" . -}}
-
-{{/* Merge the templates with Values */}}
-{{- $_ := mustMergeOverwrite .Values (include "webdav.configuration" $ | fromYaml) -}}
-{{- $_ := mustMergeOverwrite .Values (include "webdav.workload" $ | fromYaml) -}}
-
-{{- include "ix.v1.common.loader.apply" . -}}

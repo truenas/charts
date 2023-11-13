@@ -1,9 +1,0 @@
-{{- include "ix.v1.common.loader.init" . -}}
-
-{{/* Merge the templates with Values */}}
-{{- $_ := mustMergeOverwrite .Values (include "npm.workload" $ | fromYaml) -}}
-
-{{/* Create the configmap for portal manually*/}}
-{{- include "npm.portal" $ -}}
-
-{{- include "ix.v1.common.loader.apply" . -}}

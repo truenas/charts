@@ -1,8 +1,0 @@
-runAsContext:
-  - userName: elasticsearch
-    groupName: elasticsearch
-    gid: 1000
-    uid: 1000
-    description: Elastic Search runs as non-root user.
-capabilities: []
-hostMounts: []
