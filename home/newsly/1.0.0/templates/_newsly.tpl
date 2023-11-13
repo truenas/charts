@@ -74,13 +74,9 @@ workload:
               periodSeconds: 10
             startup:
               enabled: false
-              exec:
-                command:
-                - python
-                - -c
-                - "import sys; sys.exit(0)"  # A simple command that always succeeds
-              initialDelaySeconds: 5
-              periodSeconds: 10
+              type: http
+              port: "{{ .Values.newslyNetwork.webPort }}"
+              path: /
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
                                                         "UID" .Values.newslyRunAs.user
