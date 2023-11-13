@@ -1,8 +1,0 @@
-newslyNetwork:
-  webPort: 59687
-  hostNetwork: true
-
-newslyStorage:
-  config:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/config
