@@ -22,6 +22,7 @@ persistence:
           mountPath: /downloads/complete
         01-permissions:
           mountPath: /mnt/directories/complete
+  {{- if .Values.transmissionStorage.enableIncompleteDir }}
   download-incomplete:
     enabled: true
     type: {{ .Values.transmissionStorage.downloadsIncomplete.type }}
@@ -33,6 +34,7 @@ persistence:
           mountPath: /downloads/incomplete
         01-permissions:
           mountPath: /mnt/directories/incomplete
+  {{- end -}}
   {{- range $idx, $storage := .Values.transmissionStorage.additionalStorages }}
   {{ printf "transmission-%v" (int $idx) }}:
     {{- $size := "" -}}
