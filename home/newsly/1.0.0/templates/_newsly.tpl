@@ -40,46 +40,7 @@ workload:
               type: http
               port: "{{ .Values.newslyNetwork.webPort }}"
               path: /
-  newsly-scraper:
-    enabled: true
-    type: Deployment
-    podSpec:
-      hostNetwork: {{ .Values.newslyNetwork.hostNetwork }}
-      containers:
-        newsly-scraper:
-          enabled: true
-          primary: true
-          imageSelector: scraperimage
-          securityContext:
-            runAsUser: {{ .Values.newslyRunAs.user }}
-            runAsGroup: {{ .Values.newslyRunAs.group }}
-          env:
-            PYTHONUNBUFFERED : {{ .Values.newslyDatabase.pythonlogging }}
-          probes:
-            liveness:
-              exec:
-                command:
-                - python
-                - -c
-                - "import sys; sys.exit(0)"  # A simple command that always succeeds
-              initialDelaySeconds: 15
-              periodSeconds: 20
-            readiness:
-              exec:
-                command:
-                - python
-                - -c
-                - "import sys; sys.exit(0)"  # A simple command that always succeeds
-              initialDelaySeconds: 5
-              periodSeconds: 10
-            startup:
-              exec:
-                command:
-                - python
-                - -c
-                - "import sys; sys.exit(0)"  # A simple command that always succeeds
-              initialDelaySeconds: 5
-              periodSeconds: 10
+
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
                                                         "UID" .Values.newslyRunAs.user
