@@ -92,6 +92,13 @@ questions:
             default: asdasdasd
             required: true
             private: true
+        - variable: pythonlogging
+          label: Python Logging
+          description: This will make so the python logs considered as usual logs
+          schema:
+            type: string
+            default: "1"
+            required: true
 
 
   - variable: newslyRunAs

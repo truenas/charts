@@ -16,7 +16,7 @@ workload:
             runAsGroup: {{ .Values.newslyRunAs.group }}
           env:
             FLASK_RUN_PORT: {{ .Values.newslyNetwork.webPort }}
-            PYTHONUNBUFFERED : 1
+            PYTHONUNBUFFERED : {{ .Values.newslyDatabase.pythonlogging }}
           {{ with .Values.newslyConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
@@ -54,7 +54,7 @@ workload:
             runAsUser: {{ .Values.newslyRunAs.user }}
             runAsGroup: {{ .Values.newslyRunAs.group }}
           env:
-            PYTHONUNBUFFERED : 1
+            PYTHONUNBUFFERED : {{ .Values.newslyDatabase.pythonlogging }}
           probes:
             liveness:
               enabled: true
