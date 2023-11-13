@@ -57,6 +57,43 @@ questions:
                         type: string
                         required: true
 
+  - variable: newslyDatabase
+    label: Newsly Database Configuration
+    group: Newsly Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: host
+          label: Database Host
+          description: Hostname or IP address of the database server.
+          schema:
+            type: string
+            default: 10.2.20.25
+            required: true
+        - variable: port
+          label: Database Port
+          description: Port number for the database server.
+          schema:
+            type: int
+            default: 3306
+            required: true
+        - variable: username
+          label: Database User
+          description: Username for the database.
+          schema:
+            type: string
+            default: martin
+            required: true
+        - variable: password
+          label: Database Password
+          description: Password for the database.
+          schema:
+            type: string
+            default: asdasdasd
+            required: true
+            private: true
+
+
   - variable: newslyRunAs
     label: ""
     group: User and Group Configuration
