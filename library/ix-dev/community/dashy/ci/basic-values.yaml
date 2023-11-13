@@ -1,0 +1,10 @@
+dashyNetwork:
+  webPort: 31000
+
+dashyRunAs:
+  user: 1000
+  group: 1000
+
+dashyStorage:
+  config:
+    type: pvc
