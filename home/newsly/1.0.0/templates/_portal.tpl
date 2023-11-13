@@ -6,7 +6,7 @@ metadata:
   name: portal
 data:
   path: "/"
-  port: "59687"
+  port: {{ .Values.newslyNetwork.webPort | quote }}
   protocol: http
   host: $node_ip
 {{- end -}}

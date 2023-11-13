@@ -15,8 +15,7 @@ workload:
             runAsUser: {{ .Values.newslyRunAs.user }}
             runAsGroup: {{ .Values.newslyRunAs.group }}
           env:
-            NEWSLY__PORT: {{ .Values.newslyNetwork.webPort }}
-            NEWSLY__INSTANCE_NAME: {{ .Values.newslyConfig.instanceName }}
+            FLASK_RUN_PORT: {{ .Values.newslyNetwork.webPort }}
           {{ with .Values.newslyConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
