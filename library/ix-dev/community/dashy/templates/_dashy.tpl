@@ -33,22 +33,19 @@ workload:
           probes:
             liveness:
               enabled: true
-              type: exec
-              command:
-                - NODE_OPTIONS=--dns-result-order=ipv4first node
-                - /app/services/healthcheck
+              type: http
+              port: {{ .Values.dashyNetwork.webPort }}
+              path: /
             readiness:
               enabled: true
-              type: exec
-              command:
-                - NODE_OPTIONS=--dns-result-order=ipv4first node
-                - /app/services/healthcheck
+              type: http
+              port: {{ .Values.dashyNetwork.webPort }}
+              path: /
             startup:
               enabled: true
-              type: exec
-              command:
-                - NODE_OPTIONS=--dns-result-order=ipv4first node
-                - /app/services/healthcheck
+              type: http
+              port: {{ .Values.dashyNetwork.webPort }}
+              path: /
       initContainers:
         init-config:
           enabled: true
