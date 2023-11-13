@@ -72,6 +72,14 @@ workload:
                 - "import sys; sys.exit(0)"  # A simple command that always succeeds
               initialDelaySeconds: 5
               periodSeconds: 10
+            startup:
+              exec:
+                command:
+                - python
+                - -c
+                - "import sys; sys.exit(0)"  # A simple command that always succeeds
+              initialDelaySeconds: 5
+              periodSeconds: 10
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
                                                         "UID" .Values.newslyRunAs.user
