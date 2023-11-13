@@ -1,0 +1,27 @@
+image:
+  repository: lissy93/dashy
+  pullPolicy: IfNotPresent
+  tag: 2.1.1
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+dashyConfig:
+  additionalEnvs: []
+
+dashyNetwork:
+  webPort: 31003
+  hostNetwork: false
+
+dashyRunAs:
+  user: 568
+  group: 568
+
+dashyStorage:
+  config:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: config
+  additionalStorages: []
