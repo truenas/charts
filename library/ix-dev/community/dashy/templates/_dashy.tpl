@@ -35,19 +35,19 @@ workload:
               enabled: true
               type: exec
               command:
-                - node
+                - NODE_OPTIONS=--dns-result-order=ipv4first node
                 - /app/services/healthcheck
             readiness:
               enabled: true
               type: exec
               command:
-                - node
+                - NODE_OPTIONS=--dns-result-order=ipv4first node
                 - /app/services/healthcheck
             startup:
               enabled: true
               type: exec
               command:
-                - node
+                - NODE_OPTIONS=--dns-result-order=ipv4first node
                 - /app/services/healthcheck
       initContainers:
         init-config:
