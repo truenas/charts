@@ -56,7 +56,7 @@ workload:
           env:
             PYTHONUNBUFFERED : {{ .Values.newslyDatabase.pythonlogging }}
           probes:
-            livenessProbe:
+            liveness:
               exec:
                 command:
                 - python
@@ -64,7 +64,7 @@ workload:
                 - "import sys; sys.exit(0)"  # A simple command that always succeeds
               initialDelaySeconds: 15
               periodSeconds: 20
-            readinessProbe:
+            readiness:
               exec:
                 command:
                 - python
