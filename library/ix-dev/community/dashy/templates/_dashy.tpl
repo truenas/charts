@@ -22,7 +22,7 @@ workload:
           env:
             {{- $protocol := "http" -}}
             {{- if .Values.dashyNetwork.certificateID }}
-              {{- $protocol = "https" -}}
+              {{- $protocol = "https" }}
             SSL_PRIV_KEY_PATH: /cert/tls.key
             SSL_PUB_KEY_PATH: /cert/tls.crt
             SSL_PORT: {{ .Values.dashyNetwork.webPort }}
