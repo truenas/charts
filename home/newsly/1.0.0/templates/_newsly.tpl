@@ -26,17 +26,17 @@ workload:
           {{ end }}
           probes:
             liveness:
-              enabled: true
+              enabled: false
               type: http
               port: "{{ .Values.newslyNetwork.webPort }}"
               path: /
             readiness:
-              enabled: true
+              enabled: false
               type: http
               port: "{{ .Values.newslyNetwork.webPort }}"
               path: /
             startup:
-              enabled: true
+              enabled: false
               type: http
               port: "{{ .Values.newslyNetwork.webPort }}"
               path: /
