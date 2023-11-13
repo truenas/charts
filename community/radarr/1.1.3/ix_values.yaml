@@ -1,22 +1,23 @@
 image:
-  repository: searxng/searxng
+  repository: ghcr.io/onedr0p/radarr
   pullPolicy: IfNotPresent
-  tag: 2023.10.31-b05a15540
+  tag: 5.1.3.8246
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-searxngConfig:
-  instanceName: SearXNG
+radarrConfig:
+  instanceName: Radarr
   additionalEnvs: []
-
-searxngNetwork:
-  webPort: 30053
+radarrNetwork:
+  webPort: 30025
   hostNetwork: false
-
-searxngStorage:
+radarrRunAs:
+  user: 568
+  group: 568
+radarrStorage:
   config:
     type: ixVolume
     datasetName: config
