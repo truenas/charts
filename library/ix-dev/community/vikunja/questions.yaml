@@ -235,6 +235,8 @@ questions:
                 description: The configuration for the ixVolume dataset.
                 schema:
                   type: dict
+                  # Nothing to show for the user
+                  hidden: true
                   show_if: [["type", "=", "ixVolume"]]
                   $ref:
                     - "normalize/ixVolume"
@@ -244,6 +246,8 @@ questions:
                       description: Enable ACL for the dataset.
                       schema:
                         type: boolean
+                        # Postgres does a CHMOD at startup
+                        # Which fails with ACL                        
                         hidden: true
                         default: false
                     - variable: datasetName
@@ -272,6 +276,8 @@ questions:
                       description: Enable ACL for the dataset.
                       schema:
                         type: boolean
+                        # Postgres does a CHMOD at startup
+                        # Which fails with ACL                        
                         hidden: true
                         default: false
                     - variable: acl
@@ -315,6 +321,8 @@ questions:
                 description: The configuration for the ixVolume dataset.
                 schema:
                   type: dict
+                  # Nothing to show for the user
+                  hidden: true                  
                   show_if: [["type", "=", "ixVolume"]]
                   $ref:
                     - "normalize/ixVolume"
@@ -324,6 +332,8 @@ questions:
                       description: Enable ACL for the dataset.
                       schema:
                         type: boolean
+                        # Postgres does a CHMOD at startup
+                        # Which fails with ACL                        
                         hidden: true
                         default: false
                     - variable: datasetName
@@ -352,6 +362,8 @@ questions:
                       description: Enable ACL for the dataset.
                       schema:
                         type: boolean
+                        # Postgres does a CHMOD at startup
+                        # Which fails with ACL                        
                         hidden: true
                         default: false
                     - variable: acl
