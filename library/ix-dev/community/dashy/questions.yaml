@@ -21,7 +21,7 @@ portals:
     path: "$kubernetes-resource_configmap_portal_path"
 
 questions:
-  - variable: DashyConfig
+  - variable: dashyConfig
     label: ""
     group: Dashy Configuration
     schema:
@@ -73,8 +73,7 @@ questions:
             default: 568
             required: true
 
-
-  - variable: DashyNetwork
+  - variable: dashyNetwork
     label: ""
     group: Network Configuration
     schema:
@@ -105,7 +104,7 @@ questions:
             type: boolean
             default: false
 
-  - variable: DashyStorage
+  - variable: dashyStorage
     label: ""
     group: Storage Configuration
     schema:
