@@ -29,12 +29,9 @@ workload:
               enabled: false
               type: http
               port: "{{ .Values.newslyNetwork.webPort }}"
-              path: /scraper-run-2024
-              initialDelaySeconds: 10
+              path: /init-scrapery
+              initialDelaySeconds: 5
               periodSeconds: 60
-              timeoutSeconds: 60
-              successThreshold: 1
-              failureThreshold: 3
             readiness:
               enabled: false
               type: http
@@ -45,7 +42,7 @@ workload:
               type: http
               port: "{{ .Values.newslyNetwork.webPort }}"
               path: /
-  
+
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
                                                         "UID" .Values.newslyRunAs.user
