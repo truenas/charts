@@ -152,7 +152,7 @@ questions:
   - variable: newslyCronjob
     description: "Setup cronjob for Newsly"
     label: "Setup cronjob for Newsly"
-    group: "CronJob configuration"
+    group: "Newsly CronJob Configuration"
     schema:
       type: dict
       attrs:
