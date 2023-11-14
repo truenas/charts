@@ -4,7 +4,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: python-script-cronjob
+  name: {{ .Chart.Name }}-cronjob
 spec:
   schedule: "{{ .Values.newslyCronjob.schedule }}"
   concurrencyPolicy: Forbid
