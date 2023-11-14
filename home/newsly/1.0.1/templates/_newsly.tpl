@@ -29,7 +29,7 @@ workload:
               enabled: false
               type: http
               port: "{{ .Values.newslyNetwork.webPort }}"
-              path: /init-scrapery
+              path: /init-scraper
               initialDelaySeconds: 5
               periodSeconds: 60
             readiness:
