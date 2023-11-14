@@ -46,7 +46,7 @@ workload:
               port: "{{ .Values.newslyNetwork.webPort }}"
               path: /
         volumes:
-          - name: config-volume
+          - name: newsly-config
             configMap:
               name: app-config
 
