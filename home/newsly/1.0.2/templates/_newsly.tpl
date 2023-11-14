@@ -30,7 +30,7 @@ workload:
           {{ end }}
           volumeMounts:
             - name: config-volume
-              mountPath: /mnt/config
+              mountPath: /newsly/config.json
           probes:
             liveness:
               enabled: false
