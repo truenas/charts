@@ -18,3 +18,4 @@ spec:
           - name: {{ .Chart.Name }}-cronjob
             image: "{{.Values.scraperimage.repository }}:{{.Values.scraperimage.tag }}"
           restartPolicy: OnFailure
+{{ end }}
