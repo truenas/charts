@@ -6,10 +6,6 @@ workload:
     type: Deployment
     podSpec:
       hostNetwork: {{ .Values.newslyNetwork.hostNetwork }}
-      volumes:
-        - name: config-volume
-          configMap:
-            name: app-config
       containers:
         newsly:
           enabled: true
@@ -28,9 +24,6 @@ workload:
               value: {{ $env.value }}
             {{ end }}
           {{ end }}
-          volumeMounts:
-            - name: config-volume
-              mountPath: /newsly/config.json
           probes:
             liveness:
               enabled: false

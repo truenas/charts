@@ -1,3 +1,5 @@
+{{- define "newsly.config" -}}
+---
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -13,3 +15,4 @@ data:
         "dbname": "{{ .Values.newslyDatabase.dbname }}"
       }
     }
+{{- end -}}
