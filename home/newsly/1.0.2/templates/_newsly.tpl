@@ -26,7 +26,7 @@ workload:
           {{ end }}
           volumeMounts:
             - name: newsly-config
-              mountPath: /newsly/
+              mountPath: /newsly
           probes:
             liveness:
               enabled: false
