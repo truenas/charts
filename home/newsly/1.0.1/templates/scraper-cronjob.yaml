@@ -1,12 +1,10 @@
-
-{{-if .Values.newslyCronjob.enabled }}
-
 apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: {{ .Chart.Name }}-cronjob
 spec:
   schedule: "{{ .Values.newslyCronjob.schedule }}"
+  suspend: {{ not .Values.newslyCronjob.enabled }}
   concurrencyPolicy: Forbid
   failedJobsHistoryLimit: 2
   successfulJobsHistoryLimit: 1
@@ -18,4 +16,3 @@ spec:
           - name: {{ .Chart.Name }}-cronjob
             image: "{{.Values.scraperimage.repository }}:{{.Values.scraperimage.tag }}"
           restartPolicy: OnFailure
-{{-end }}
