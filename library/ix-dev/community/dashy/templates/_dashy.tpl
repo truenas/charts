@@ -6,8 +6,6 @@ workload:
     type: Deployment
     podSpec:
       hostNetwork: {{ .Values.dashyNetwork.hostNetwork }}
-      securityContext:
-        fsGroup: {{ .Values.dashyID.group }}
       containers:
         dashy:
           enabled: true
@@ -17,8 +15,6 @@ workload:
             runAsUser: 0
             runAsGroup: 0
             runAsNonRoot: false
-          fixedEnv:
-            PUID: {{ .Values.dashyID.user }}
           env:
             {{- $protocol := "http" -}}
             {{- if .Values.dashyNetwork.certificateID }}
@@ -63,8 +59,6 @@ workload:
             runAsUser: 0
             runAsGroup: 0
             runAsNonRoot: false
-          fixedEnv:
-            PUID: {{ .Values.dashyID.user }}
           command:
             - /bin/sh
           args:
