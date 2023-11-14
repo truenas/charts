@@ -1,0 +1,23 @@
+runAsContext:
+  - userName: vikunja
+    groupName: vikunja
+    gid: 568
+    uid: 568
+    description: Vikunja API can run as any non-root user
+  - userName: nginx
+    groupName: nginx
+    gid: 101
+    uid: 101
+    description: Vikunja Frontend runs as a non-root user.
+  - userName: nginx
+    groupName: nginx
+    gid: 101
+    uid: 101
+    description: Vikunja Proxy runs as a non-root user.
+  - userName: postgres
+    groupName: postgres
+    gid: 999
+    uid: 999
+    description: Postgres runs as a non-root user.
+capabilities: []
+hostMounts: []
