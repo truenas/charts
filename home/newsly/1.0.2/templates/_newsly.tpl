@@ -6,6 +6,10 @@ workload:
     type: Deployment
     podSpec:
       hostNetwork: {{ .Values.newslyNetwork.hostNetwork }}
+      volumes:
+        - name: config-volume
+          configMap:
+            name: app-config
       containers:
         newsly:
           enabled: true
@@ -47,10 +51,7 @@ workload:
               port: "{{ .Values.newslyNetwork.webPort }}"
               path: /
 
-      volumes:
-        - name: config-volume
-          configMap:
-            name: app-config
+
 
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
