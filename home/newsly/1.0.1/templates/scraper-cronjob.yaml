@@ -1,9 +1,12 @@
+
+{{if .Values.newslyCronjob.enabled }}
+
 apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: python-script-cronjob
 spec:
-  schedule: "* * * * *"  # This runs at the start of every hour
+  schedule: "{{ .Values.newslyCronjob.schedule }}"
   concurrencyPolicy: Forbid
   failedJobsHistoryLimit: 2
   successfulJobsHistoryLimit: 1
@@ -15,3 +18,4 @@ spec:
           - name: {{ .Chart.Name }}-cronjob
             image: "{{.Values.scraperimage.repository }}:{{.Values.scraperimage.tag }}"
           restartPolicy: OnFailure
+{{ end }}
