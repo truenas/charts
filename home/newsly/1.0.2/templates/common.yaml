@@ -4,7 +4,6 @@
 {{- $_ := mustMergeOverwrite .Values (include "newsly.workload" $ | fromYaml) -}}
 
 {{/* Create the configmap for portal manually*/}}
-{{- include "newsly.config" $ -}}
 
 
 {{- include "ix.v1.common.loader.apply" . -}}

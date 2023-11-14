@@ -24,6 +24,9 @@ workload:
               value: {{ $env.value }}
             {{ end }}
           {{ end }}
+          volumeMounts:
+            - name: newsly-config
+              mountPath: /newsly/
           probes:
             liveness:
               enabled: false
@@ -42,7 +45,10 @@ workload:
               type: http
               port: "{{ .Values.newslyNetwork.webPort }}"
               path: /
-
+        volumes:
+          - name: config-volume
+            configMap:
+              name: app-config
 
 
       initContainers:
