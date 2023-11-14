@@ -45,10 +45,10 @@ workload:
               type: http
               port: "{{ .Values.newslyNetwork.webPort }}"
               path: /
-        volumes:
-          - name: newsly-config
-            configMap:
-              name: app-config
+      volumes:
+        - name: newsly-config
+          configMap:
+            name: app-config
 
 
       initContainers:
