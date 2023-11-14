@@ -50,14 +50,6 @@ workload:
           configMap:
             name: app-config
 
-
-      initContainers:
-      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
-                                                        "UID" .Values.newslyRunAs.user
-                                                        "GID" .Values.newslyRunAs.group
-                                                        "mode" "check"
-                                                        "type" "init") | nindent 8 }}
-
 {{/* Service */}}
 service:
   newsly:
