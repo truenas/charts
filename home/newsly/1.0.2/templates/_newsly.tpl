@@ -26,14 +26,14 @@ workload:
           {{ end }}
           volumeMounts:
             - name: config-volume
-            mouthPath: /newsly
+            mouthPath: /newsly/config
             
           probes:
             liveness:
               enabled: false
               type: http
               port: "{{ .Values.newslyNetwork.webPort }}"
-              path: /init-scraper
+              path: /
               initialDelaySeconds: 5
               periodSeconds: 60
             readiness:
@@ -48,10 +48,10 @@ workload:
               path: /
 
       volumes:
-        -name config-volume
-        configMap:
-          -name: app-config
-          
+        - name: config-volume
+          configMap:
+            name: app-config
+
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
                                                         "UID" .Values.newslyRunAs.user
