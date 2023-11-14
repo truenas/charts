@@ -1,0 +1,7 @@
+dashyNetwork:
+  webPort: 31000
+  hostNetwork: true
+
+dashyStorage:
+  data:
+    type: pvc
