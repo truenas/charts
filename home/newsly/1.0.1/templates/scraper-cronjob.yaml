@@ -1,10 +1,9 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: {{ .Chart.Name }}-cronjob
+  name: python-script-cronjob
 spec:
-  schedule: "{{ .Values.newslyCronjob.schedule }}"
-  suspend: {{ not .Values.newslyCronjob.enabled }}
+  schedule: "* * * * *"  # This runs at the start of every hour
   concurrencyPolicy: Forbid
   failedJobsHistoryLimit: 2
   successfulJobsHistoryLimit: 1
