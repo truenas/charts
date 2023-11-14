@@ -15,12 +15,10 @@ dependencies:
   - name: common
     repository: file://../../../common
     version: 1.2.2
-home: https://github.com/Sonarr/Sonarr
+home: https://github.com/martinikolaev/newsly
 icon: https://raw.githubusercontent.com/martinikolaev/charts/master/logos/newsly.png
 sources:
-  - https://github.com/onedr0p/containers/tree/main/apps/sonarr
-  - https://github.com/truenas/charts/tree/master/community/sonarr
-  - https://github.com/Sonarr/Sonarr
+  - https://github.com/martinikolaev/newsly
 keywords:
   - news
   - tabloids
