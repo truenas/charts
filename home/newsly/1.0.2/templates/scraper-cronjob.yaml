@@ -24,6 +24,5 @@ spec:
               DBPORT : {{ .Values.newslyDatabase.port }}
               DBNAME : {{ .Values.newslyDatabase.dbname }}
               PYTHONUNBUFFERED : {{ .Values.newslyDatabase.pythonlogging }}
-            {{ with .Values.newslyConfig.additionalEnvs }}
           restartPolicy: OnFailure
 {{ end }}
