@@ -1,7 +1,7 @@
 image:
   repository: gitea/gitea
   pullPolicy: IfNotPresent
-  tag: 1.20.5-rootless
+  tag: 1.21.0-rootless
 
 resources:
   limits:
@@ -28,16 +28,21 @@ giteaRunAs:
 giteaStorage:
   data:
     type: ixVolume
-    datasetName: data
+    ixVolumeConfig:
+      datasetName: data
   config:
     type: ixVolume
-    datasetName: config
+    ixVolumeConfig:
+      datasetName: config
   pgData:
     type: ixVolume
-    datasetName: pgData
+    ixVolumeConfig:
+      datasetName: pgData
   pgBackup:
     type: ixVolume
-    datasetName: pgBackup
+    ixVolumeConfig:
+      datasetName: pgBackup
+  additionalStorages: []
 
 notes:
   custom: |
