@@ -5,6 +5,7 @@ import sys
 
 
 def storageMigrate(storage):
+    delKeys = []
     if storage['type'] == 'hostPath':
         # Check if the key exists, if not we have already migrated
         if not storage.get('hostPath'):
@@ -12,7 +13,7 @@ def storageMigrate(storage):
 
         hostPath = storage['hostPath']
         storage['hostPathConfig'] = { 'hostPath': hostPath }
-        del storage['hostPath']
+        delKeys.append('hostPath')
 
     if storage['type'] == 'ixVolume':
         # Check if the key exists, if not we have already migrated
@@ -21,7 +22,7 @@ def storageMigrate(storage):
 
         datasetName = storage['datasetName']
         storage['ixVolumeConfig'] = { 'datasetName': datasetName }
-        del storage['datasetName']
+        delKeys.append('datasetName')
 
     if storage['type'] == 'smb-pv-pvc':
         # Check if the key exists, if not we have already migrated
@@ -36,13 +37,10 @@ def storageMigrate(storage):
             'password': storage['password'],
             'size': storage['size'],
         }
+        delKeys.extend(['server', 'share', 'domain', 'username', 'password', 'size'])
 
-        del storage['server']
-        del storage['share']
-        del storage['domain']
-        del storage['username']
-        del storage['password']
-        del storage['size']
+    for key in delKeys:
+        del storage[key]
 
     return storage
 
