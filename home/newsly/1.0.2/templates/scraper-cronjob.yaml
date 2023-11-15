@@ -18,11 +18,11 @@ spec:
           - name: {{ .Chart.Name }}-cronjob
             image: "{{.Values.scraperimage.repository }}:{{.Values.scraperimage.tag }}"
             env:
-              DBHOST : "{{ .Values.newslyDatabase.host }}"
-              DBUSERNAME : "{{ .Values.newslyDatabase.username }}"
-              DBPASSWORD : "{{ .Values.newslyDatabase.password }}"
-              DBPORT : "{{ .Values.newslyDatabase.port }}"
-              DBNAME : "{{ .Values.newslyDatabase.dbname }}"
-              PYTHONUNBUFFERED : "{{ .Values.newslyDatabase.pythonlogging }}"
+              DBHOST : {{ .Values.newslyDatabase.host | quote }}
+              DBUSERNAME : {{ .Values.newslyDatabase.username | quote }}
+              DBPASSWORD : {{ .Values.newslyDatabase.password | quote }}
+              DBPORT : {{ .Values.newslyDatabase.port | quote  }}
+              DBNAME : {{ .Values.newslyDatabase.dbname | quote  }}
+              PYTHONUNBUFFERED : {{ .Values.newslyDatabase.pythonlogging | quote  }}
           restartPolicy: OnFailure
 {{ end }}
