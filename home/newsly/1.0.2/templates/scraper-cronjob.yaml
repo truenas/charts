@@ -17,5 +17,13 @@ spec:
           containers:
           - name: {{ .Chart.Name }}-cronjob
             image: "{{.Values.scraperimage.repository }}:{{.Values.scraperimage.tag }}"
+            env:
+              DBHOST : {{ .Values.newslyDatabase.host }}
+              DBUSERNAME : {{ .Values.newslyDatabase.username }}
+              DBPASSWORD : {{ .Values.newslyDatabase.password }}
+              DBPORT : {{ .Values.newslyDatabase.port }}
+              DBNAME : {{ .Values.newslyDatabase.dbname }}
+              PYTHONUNBUFFERED : {{ .Values.newslyDatabase.pythonlogging }}
+          {{ with .Values.newslyConfig.additionalEnvs }}
           restartPolicy: OnFailure
 {{ end }}

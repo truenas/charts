@@ -2,4 +2,4 @@
 
 ### Development
 
-- chart will now create the config files inside the pods
+- chart will apply the environment variables the values passed from the UI

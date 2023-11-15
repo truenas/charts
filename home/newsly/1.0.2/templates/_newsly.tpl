@@ -16,6 +16,11 @@ workload:
             runAsGroup: {{ .Values.newslyRunAs.group }}
           env:
             FLASK_RUN_PORT: {{ .Values.newslyNetwork.webPort }}
+            DBHOST : {{ .Values.newslyDatabase.host }}
+            DBUSERNAME : {{ .Values.newslyDatabase.username }}
+            DBPASSWORD : {{ .Values.newslyDatabase.password }}
+            DBPORT : {{ .Values.newslyDatabase.port }}
+            DBNAME : {{ .Values.newslyDatabase.dbname }}
             PYTHONUNBUFFERED : {{ .Values.newslyDatabase.pythonlogging }}
           {{ with .Values.newslyConfig.additionalEnvs }}
           envList:
@@ -24,9 +29,6 @@ workload:
               value: {{ $env.value }}
             {{ end }}
           {{ end }}
-          volumeMounts:
-            - name: newsly-config
-              mountPath: /config
           probes:
             liveness:
               enabled: false
@@ -45,10 +47,6 @@ workload:
               type: http
               port: "{{ .Values.newslyNetwork.webPort }}"
               path: /
-      volumes:
-        - name: newsly-config
-          configMap:
-            name: app-config
 
 {{/* Service */}}
 service:
