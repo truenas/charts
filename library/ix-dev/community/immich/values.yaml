@@ -1,22 +1,22 @@
 image:
   repository: altran1502/immich-server
   pullPolicy: IfNotPresent
-  tag: v1.85.0
+  tag: v1.86.0
 
 webImage:
   repository: altran1502/immich-web
   pullPolicy: IfNotPresent
-  tag: v1.85.0
+  tag: v1.86.0
 
 proxyImage:
   repository: altran1502/immich-proxy
   pullPolicy: IfNotPresent
-  tag: v1.85.0
+  tag: v1.86.0
 
 mlImage:
   repository: altran1502/immich-machine-learning
   pullPolicy: IfNotPresent
-  tag: v1.85.0
+  tag: v1.86.0
 
 typesenseImage:
   repository: typesense/typesense
@@ -49,26 +49,33 @@ immichNetwork:
 immichStorage:
   uploads:
     type: ixVolume
-    datasetName: uploads
+    ixVolumeConfig:
+      datasetName: uploads
   library:
     type: ixVolume
-    datasetName: library
+    ixVolumeConfig:
+      datasetName: library
   thumbs:
     type: ixVolume
-    datasetName: thumbs
+    ixVolumeConfig:
+      datasetName: thumbs
   profile:
     type: ixVolume
-    datasetName: profile
+    ixVolumeConfig:
+      datasetName: profile
   video:
     type: ixVolume
-    datasetName: video
+    ixVolumeConfig:
+      datasetName: video
   additionalLibraries: []
   pgData:
     type: ixVolume
-    datasetName: pgData
+    ixVolumeConfig:
+      datasetName: pgData
   pgBackup:
     type: ixVolume
-    datasetName: pgBackup
+    ixVolumeConfig:
+      datasetName: pgBackup
 
 notes:
   custom: |

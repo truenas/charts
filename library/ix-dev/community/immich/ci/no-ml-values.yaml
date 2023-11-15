@@ -1,25 +1,18 @@
 immichStorage:
   uploads:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/uploads
+    type: pvc
   library:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/library
+    type: pvc
   thumbs:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/thumbs
+    type: pvc
   profile:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/profile
+    type: pvc
   video:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/video
+    type: pvc
   pgData:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/pgData
+    type: pvc
   pgBackup:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/pgBackup
+    type: emptyDir
 
 immichConfig:
   enableML: false
