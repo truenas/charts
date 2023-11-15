@@ -10,14 +10,10 @@ odooConfig:
 
 odooStorage:
   data:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/data
+    type: pvc
   addons:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/addons
+    type: pvc
   pgData:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/pgData
+    type: pvc
   pgBackup:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/pgBackup
+    type: emptyDir
