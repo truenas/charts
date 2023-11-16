@@ -1,8 +1,6 @@
 groups:
 - name: Newsly Configuration
   description: Configure Newsly
-- name: Newsly CronJob Configuration
-  description: Configure Newsly Cronjob
 - name: User and Group Configuration
   description: Configure User and Group for Newsly
 - name: Network Configuration
@@ -141,28 +139,6 @@ questions:
       schema:
         type: boolean
         default: false
-
-- variable: newslyCronjob
-  description: "Setup cronjob for Newsly"
-  label: "Setup cronjob for Newsly"
-  group: "Newsly CronJob Configuration"
-  schema:
-    type: dict
-    attrs:
-    - variable: enabled
-      label: "Enable cronjob for newsly"
-      schema:
-        type: boolean
-        default: true
-        show_subquestions_if: true
-        subquestions:
-        - variable: schedule
-          label: Schedule
-          schema:
-            type: string
-            default: "* * * * *"
-            empty: false
-            required: true
 
 - variable: newslyStorage
   label: ""
