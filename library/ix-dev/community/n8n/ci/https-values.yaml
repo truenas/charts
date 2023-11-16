@@ -1,13 +1,10 @@
 n8nStorage:
   data:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/data
+    type: pvc
   pgData:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/pgData
+    type: pvc
   pgBackup:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/pgBackup
+    type: pvc
 
 n8nConfig:
   webHost: localhost
