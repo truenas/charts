@@ -123,15 +123,6 @@ questions:
   schema:
     type: dict
     attrs:
-    - variable: webPort
-      label: Web Port
-      description: The port for the Newsly Web UI.
-      schema:
-        type: int
-        default: 59687
-        min: 9000
-        max: 65535
-        required: true
     - variable: hostNetwork
       label: Host Network
       description: |

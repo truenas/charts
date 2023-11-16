@@ -55,7 +55,7 @@ service:
       webui:
         enabled: true
         primary: true
-        port: {{ .Values.newslyNetwork.webPort }}
+        port: {{ .Values.newslyDatabase.port }}
         nodePort: 5432
         targetSelector: newsly-db
 
