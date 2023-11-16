@@ -4,8 +4,6 @@ joplinNetwork:
 
 joplinStorage:
   pgData:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/pgData
+    type: pvc
   pgBackup:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/pgBackup
+    type: emptyDir
