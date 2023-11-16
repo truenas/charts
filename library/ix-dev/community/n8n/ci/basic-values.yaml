@@ -7,4 +7,4 @@ n8nStorage:
   pgData:
     type: pvc
   pgBackup:
-    type: pvc
+    type: emptyDir

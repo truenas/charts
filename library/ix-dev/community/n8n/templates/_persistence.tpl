@@ -2,6 +2,7 @@
 persistence:
   data:
     enabled: true
+    {{- include "n8n.storage.ci.migration" (dict "storage" .Values.n8nStorage.data) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.n8nStorage.data) | nindent 4 }}
     targetSelector:
       n8n:
@@ -17,6 +18,7 @@ persistence:
   {{- range $idx, $storage := .Values.n8nStorage.additionalStorages }}
   {{ printf "n8n-%v:" (int $idx) }}
     enabled: true
+    {{- include "n8n.storage.ci.migration" (dict "storage" $storage) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       n8n:
