@@ -16,6 +16,10 @@ def storageMigrate(storage):
         delKeys.append('hostPath')
 
     if storage['type'] == 'ixVolume':
+        # Fixes an invalid key carried from values.yaml
+        if storage.get('hostPath'):
+            del storage['hostPath']
+
         # Check if the key exists, if not we have already migrated
         if not storage.get('datasetName'):
             return storage
