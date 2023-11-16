@@ -34,7 +34,7 @@ questions:
       description: The name of the Newsly instance.
       schema:
         type: string
-        default: "Newsly Database"
+        default: "Newsly"
         required: true
     - variable: additionalEnvs
       label: Additional Environment Variables
@@ -65,13 +65,19 @@ questions:
   schema:
     type: dict
     attrs:
-
+    - variable: host
+      label: Database Host
+      description: Hostname or IP address of the database server.
+      schema:
+        type: string
+        default: 10.2.20.25
+        required: true
     - variable: port
       label: Database Port
       description: Port number for the database server.
       schema:
         type: int
-        default: 5432
+        default: 3306
         required: true
     - variable: username
       label: Database User
@@ -88,13 +94,14 @@ questions:
         default: asdasdasd
         required: true
         private: true
-    - variable: dbname
-      label: Database Name
-      description: Database name.
+    - variable: pythonlogging
+      label: Python Logging
+      description: This will make so the python logs considered as usual logs
       schema:
         type: string
-        default: news
+        default: "1"
         required: true
+
 
 - variable: newslyRunAs
   label: ""
