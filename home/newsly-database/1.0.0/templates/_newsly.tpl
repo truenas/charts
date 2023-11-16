@@ -15,9 +15,9 @@ workload:
             runAsUser: {{ .Values.newslyRunAs.user }}
             runAsGroup: {{ .Values.newslyRunAs.group }}
           env:
-            DBUSERNAME : {{ .Values.newslyDatabase.username }}
-            DBPASSWORD : {{ .Values.newslyDatabase.password }}
-            DBNAME : {{ .Values.newslyDatabase.dbname }}
+            POSTGRES_USER : {{ .Values.newslyDatabase.username }}
+            POSTGRES_PASSWORD : {{ .Values.newslyDatabase.password }}
+            POSTGRES_DB : {{ .Values.newslyDatabase.dbname }}
           {{ with .Values.newslyConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
