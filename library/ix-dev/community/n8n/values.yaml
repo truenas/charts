@@ -24,13 +24,16 @@ n8nNetwork:
 n8nStorage:
   data:
     type: ixVolume
-    datasetName: data
+    ixVolumeConfig:
+      datasetName: data
   pgData:
     type: ixVolume
-    hostPath: pgData
+    ixVolumeConfig:
+      datasetName: pgData
   pgBackup:
     type: ixVolume
-    hostPath: pgBackup
+    ixVolumeConfig:
+      datasetName: pgBackup
   additionalStorages: []
 
 notes:
