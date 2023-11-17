@@ -56,7 +56,7 @@ service:
         enabled: true
         primary: true
         port: 5432
-        nodePort: {{ .Values.newslyNetwork.webPort }}
+        nodePort: {{ .Values.newslyNetwork.port }}
         targetSelector: newsly
 
 

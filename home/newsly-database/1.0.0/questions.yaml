@@ -92,7 +92,7 @@ questions:
       description: Port number for the database server.
       schema:
         type: int
-        default: 5432
+        default: 15432
         required: true
     - variable: username
       label: Database User
