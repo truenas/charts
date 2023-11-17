@@ -38,7 +38,11 @@ def migrate(values):
 
 
     for storage in storages:
-        values[storage_key][storage] = storage_migrate(values[storage_key][storage])
+        check_val = values.get(storage_key, {}).get(storage, {})
+        if not isinstance(check_val, dict) or not check_val:
+            raise Exception(f'Storage section {storage} is malformed')
+
+        values[storage_key][storage] = storage_migrate(check_val)
 
 
     return values
