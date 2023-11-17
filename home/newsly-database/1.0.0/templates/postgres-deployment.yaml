@@ -1,6 +1,6 @@
 {{ $values := (. | mustDeepCopy) }}
 {{ $_ := set $values "common" (dict "nameSuffix" "postgres") }}
-apiVersion: apps/v1
+apiVersion: {{ template "common.capabilities.deployment.apiVersion" . }}
 kind: Deployment
 spec:
   replicas: {{ (default 1 .Values.replicas) }}

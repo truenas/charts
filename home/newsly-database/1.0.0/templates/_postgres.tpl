@@ -47,6 +47,12 @@ Retrieve postgres volume mounts configuration
 {{ include "common.storage.configureAppVolumeMountsInContainer" (dict "appVolumeMounts" .Values.postgresAppVolumeMounts ) | nindent 0 }}
 {{- end -}}
 
+{{/*
+Return the appropriate apiVersion for Deployment objects.
+*/}}
+{{- define "common.capabilities.deployment.apiVersion" -}}
+{{- print "apps/v1" -}}
+{{- end -}}
 
 
 {{/*
