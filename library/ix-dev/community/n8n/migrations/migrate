@@ -52,10 +52,17 @@ def migrate(values):
 
 
     for storage in storages:
-        values[storage_key][storage] = storage_migrate(value[storage_key][storage])
+        check_val = values.get(storage_key, {}).get(storage, {})
+        if not isinstance(check_val, dict) or not check_val:
+            raise Exception(f'Storage section {storage} is malformed')
 
-    additionalStorages = values[storage_key].get('additionalStorages', [])
+        values[storage_key][storage] = storage_migrate(check_val)
+
+    additionalStorages = values.get(storage_key, {}).get('additionalStorages', [])
     for idx, storage in enumerate(additionalStorages):
+        if not isinstance(storage, dict) or not storage:
+            raise Exception(f'Item {idx} in additionalStorages is malformed')
+
         values[storage_key]['additionalStorages'][idx] = storage_migrate(storage)
 
 
