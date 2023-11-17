@@ -8,4 +8,5 @@
 {{- $_ := mustMergeOverwrite .Values (include "newslydb.persistence" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "newslydb.service" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "postgres.workload" $ | fromYaml) -}}
+
 {{- include "ix.v1.common.loader.apply" . -}}
