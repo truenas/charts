@@ -72,6 +72,7 @@ spec:
             httpGet:
               path: /minio/health/live
               port: {{ .Values.service.consolePort | int }}
+              scheme: {{ include "minio.scheme" . | upper }}
             initialDelaySeconds: 10
             periodSeconds: 10
             timeoutSeconds: 5
@@ -81,6 +82,7 @@ spec:
             httpGet:
               path: /minio/health/live
               port: {{ .Values.service.consolePort | int }}
+              scheme: {{ include "minio.scheme" . | upper }}
             initialDelaySeconds: 10
             periodSeconds: 10
             timeoutSeconds: 5
@@ -90,6 +92,7 @@ spec:
             httpGet:
               path: /minio/health/live
               port: {{ .Values.service.consolePort | int }}
+              scheme: {{ include "minio.scheme" . | upper }}
             initialDelaySeconds: 10
             periodSeconds: 5
             timeoutSeconds: 2
