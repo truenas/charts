@@ -27,27 +27,22 @@ workload:
           {{ end }}
           probes:
             liveness:
-              exec:
-                command:
-                  - sh
-                  - -c
-                  - "until pg_isready -U ${POSTGRES_USER} -h localhost; do sleep 2; done"
-              initialDelaySeconds: 10
-              periodSeconds: 10
-              timeoutSeconds: 5
-              failureThreshold: 5
-              successThreshold: 1
-            startup
-              exec:
-                command:
-                  - sh
-                  - -c
-                  - "until pg_isready -U ${POSTGRES_USER} -h localhost; do sleep 2; done"
-              initialDelaySeconds: 10
-              periodSeconds: 5
-              timeoutSeconds: 2
-              failureThreshold: 60
-              successThreshold: 1
+              enabled: false
+              type: http
+              port: "{{ .Values.newslyNetwork.webPort }}"
+              path: /
+              initialDelaySeconds: 5
+              periodSeconds: 60
+            readiness:
+              enabled: false
+              type: http
+              port: "{{ .Values.newslyNetwork.webPort }}"
+              path: /
+            startup:
+              enabled: false
+              type: http
+              port: "{{ .Values.newslyNetwork.webPort }}"
+              path: /
 
 {{/* Service */}}
 service:
@@ -57,13 +52,13 @@ service:
     type: NodePort
     targetSelector: newsly
     ports:
-      postgres:
+      webui:
         enabled: true
         primary: true
         port: {{ .Values.newslyNetwork.webPort }}
         nodePort: {{ .Values.newslyNetwork.webPort }}
         targetSelector: newsly
 
-persistance:
+
 
 {{- end -}}
