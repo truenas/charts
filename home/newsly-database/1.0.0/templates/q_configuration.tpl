@@ -5,7 +5,7 @@
   {{- $dbUser := "newsly" -}}
   {{- $dbName := "news" -}}
 
-  {{- $dbPass := "asdasdasd" -}}
+  {{- $dbPass := randAlphaNum 32 -}}
   {{- with (lookup "v1" "Secret" .Release.Namespace (printf "%s-postgres-creds" $fullname)) -}}
     {{- $dbPass = ((index .data "POSTGRES_PASSWORD") | b64dec) -}}
   {{- end -}}

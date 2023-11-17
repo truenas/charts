@@ -4,10 +4,3 @@ dbimage:
   tag: '2023.11.17'
 
 
-newslyStorage:
-  pgData:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/pgData
-  pgBackup:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/pgBackup
