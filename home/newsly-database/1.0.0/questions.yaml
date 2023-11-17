@@ -60,7 +60,7 @@ questions:
 - variable: newslyCronjob
   description: "Setup cronjob for Newsly"
   label: "Setup cronjob for Newsly"
-  group: "Newsly CronJob Configuration"
+  group: Newsly Configurations
   schema:
     type: dict
     attrs:
