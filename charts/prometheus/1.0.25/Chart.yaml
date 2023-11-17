@@ -3,9 +3,9 @@ description: The Prometheus monitoring system and time series database.
 annotations:
   title: Prometheus
 type: application
-version: 1.0.24
+version: 1.0.25
 apiVersion: v2
-appVersion: v2.47.2
+appVersion: v2.48.0
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: truenas
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.2.2
+    version: 1.2.3
 home: https://prometheus.io
 icon: https://media.sys.truenas.net/apps/prometheus/icons/icon.png
 sources:
