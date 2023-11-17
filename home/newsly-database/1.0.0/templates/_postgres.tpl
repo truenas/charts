@@ -47,6 +47,37 @@ Retrieve postgres volume mounts configuration
 {{ include "common.storage.configureAppVolumeMountsInContainer" (dict "appVolumeMounts" .Values.postgresAppVolumeMounts ) | nindent 0 }}
 {{- end -}}
 
+
+
+{{/*
+Define hostPath for appVolumes
+*/}}
+{{- define "common.storage.configureAppVolumes" -}}
+{{- include "common.schema.validateKeys" (dict "values" . "checkKeys" (list "appVolumeMounts")) -}}
+{{- $values := . -}}
+{{- if $values.appVolumeMounts -}}
+{{- range $name, $av := $values.appVolumeMounts -}}
+{{ if (default true $av.enabled) }}
+- name: {{ $name }}
+  {{ if or $av.emptyDir $.emptyDirVolumes }}
+  emptyDir: {}
+  {{- else -}}
+  hostPath:
+    {{ if $av.hostPathEnabled }}
+    path: {{ required "hostPath not set" $av.hostPath }}
+    {{ else }}
+    {{- include "common.schema.validateKeys" (dict "values" $values "checkKeys" (list "ixVolumes")) -}}
+    {{- include "common.schema.validateKeys" (dict "values" $av "checkKeys" (list "datasetName")) -}}
+    {{- $volDict := dict "datasetName" $av.datasetName "ixVolumes" $values.ixVolumes -}}
+    path: {{ include "common.storage.retrieveHostPathFromiXVolume" $volDict }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+
+
 {{/*
 Validates the keys in a dictionary.
 */}}
