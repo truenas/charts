@@ -26,3 +26,4 @@ secret:
       POSTGRES_PASSWORD: {{ $dbPass }}
       POSTGRES_HOST: {{ $dbHost }}
       POSTGRES_URL: {{ $dbURL }}
+{{- end -}}
