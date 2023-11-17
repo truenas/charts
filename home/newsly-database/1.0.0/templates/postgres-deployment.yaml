@@ -9,8 +9,7 @@ spec:
       hostNetwork: {{ .Values.hostNetwork }}
       containers:
       - name: {{ .Chart.Name }}-postgres
-        image: {{ template "postgres.imageName" . }}
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        image: dbimage
         env:
           {{ $envList := (default list .Values.environmentVariables) }}
           {{ $envList = mustAppend $envList (dict "name" "POSTGRES_DB" "value" (include "postgres.DatabaseName" .)) }}
