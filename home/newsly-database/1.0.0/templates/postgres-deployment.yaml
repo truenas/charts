@@ -15,13 +15,14 @@ spec:
           {{ $envList = mustAppend $envList (dict "name" "POSTGRES_DB" "value" (include "postgres.DatabaseName" .)) }}
           {{ $envList = mustAppend $envList (dict "name" "POSTGRES_USER" "valueFromSecret" true "secretName" "db-details" "secretKey" "db-user")}}
           {{ $envList = mustAppend $envList (dict "name" "POSTGRES_PASSWORD" "valueFromSecret" true "secretName" "db-details" "secretKey" "db-password")}}
-          {{ with .Values.newslyConfig.additionalEnvs }}
-          envList:
-            {{ range $env := . }}
-            - name: {{ $env.name }}
-              value: {{ $env.value }}
-            {{ end }}
-          {{ end }}        volumeMounts: {{ include "postgres.volumeMountsConfiguration" $values | nindent 10 }}
+        {{ with .Values.newslyConfig.additionalEnvs }}
+        envList:
+          {{ range $env := . }}
+          - name: {{ $env.name }}
+            value: {{ $env.value }}
+          {{ end }}
+        {{ end }}
+        volumeMounts: {{ include "postgres.volumeMountsConfiguration" $values | nindent 10 }}
         ports:
         - name: postgres-tcp
           containerPort: 5432
