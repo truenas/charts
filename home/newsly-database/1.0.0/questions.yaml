@@ -56,6 +56,28 @@ questions:
               schema:
                 type: string
                 required: true
+                
+- variable: newslyCronjob
+  description: "Setup cronjob for Newsly"
+  label: "Setup cronjob for Newsly"
+  group: "Newsly CronJob Configuration"
+  schema:
+    type: dict
+    attrs:
+    - variable: enabled
+      label: "Enable cronjob for newsly"
+      schema:
+        type: boolean
+        default: true
+        show_subquestions_if: true
+        subquestions:
+        - variable: schedule
+          label: Schedule
+          schema:
+            type: string
+            default: "* * * * *"
+            empty: false
+            required: true
 
 - variable: newslyDatabase
   label: Newsly Database Configuration
