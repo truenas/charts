@@ -35,6 +35,9 @@ def libraries_migrate(libraries):
     # had a requirement for both hostPath and mountPath to be the same,
     # now its no longer the case, so we can merge it with additionalStorages
     for idx, library in enumerate(libraries):
+        if not library.get('hostPath'):
+            raise Exception(f'Library {idx} is malformed')
+
         libraries[idx] = {
             'type': 'hostPath',
             'mountPath': library['hostPath'],
@@ -52,11 +55,15 @@ def migrate(values):
     storages = ['uploads', 'library', 'thumbs', 'profile', 'video', 'pgData', 'pgBackup']
 
     for storage in storages:
-        values[storage_key][storage] = storage_migrate(values[storage_key][storage])
+        check_val = values.get(storage_key, {}).get(storage, {})
+        if not isinstance(check_val, dict) or not check_val:
+            raise Exception(f'Storage section {storage} is malformed')
+
+        values[storage_key][storage] = storage_migrate(check_val)
 
     # Migrate additionalLibraries,
     # if additionalLibraries does not exist, we have already migrated
-    if libraries := values[storage_key].get('additionalLibraries', None):
+    if libraries := values.get(storage_key, {}).get('additionalLibraries', None):
         # If additionalLibraries exists, additionalStorages does not exist yet
         values[storage_key]['additionalStorages'] = libraries_migrate(libraries)
 
