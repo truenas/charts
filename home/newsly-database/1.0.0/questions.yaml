@@ -1,6 +1,8 @@
 groups:
 - name: Newsly Configuration
   description: Configure Newsly
+- name: Newsly CronJob Configuration
+  description: Configure Newsly Cronjob
 - name: User and Group Configuration
   description: Configure User and Group for Newsly
 - name: Network Configuration
@@ -60,7 +62,7 @@ questions:
 - variable: newslyCronjob
   description: "Setup cronjob for Newsly"
   label: "Setup cronjob for Newsly"
-  group: Newsly Configurations
+  group: "Newsly CronJob Configuration"
   schema:
     type: dict
     attrs:
