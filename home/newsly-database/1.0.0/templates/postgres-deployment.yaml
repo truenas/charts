@@ -2,8 +2,9 @@
 {{ $_ := set $values "common" (dict "nameSuffix" "postgres") }}
 apiVersion: apps/v1
 kind: Deployment
-spec: {{ include "common.deployment.common_spec" $values | nindent 2 }}
-  template: {{ include "common.deployment.pod.metadata" $values | nindent 4 }}
+spec:
+  replicas: {{ (default 1 .Values.replicas) }}
+  template: 
     spec:
       hostNetwork: {{ .Values.hostNetwork }}
       containers:
