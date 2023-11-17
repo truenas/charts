@@ -1,0 +1,25 @@
+image:
+  repository: registry.departy.xyz/newsly-app
+  pullPolicy: IfNotPresent
+  tag: '2023.11.13.2'
+
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 1Gi
+
+newslyConfig:
+  instanceName: Newsly-App
+  additionalEnvs: []
+newslyNetwork:
+  webPort: 30027
+  hostNetwork: false
+newslyRunAs:
+  user: 568
+  group: 568
+newslyStorage:
+  config:
+    type: ixVolume
+    datasetName: config
+  additionalStorages: []

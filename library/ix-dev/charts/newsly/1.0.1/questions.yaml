@@ -1,0 +1,364 @@
+groups:
+- name: Newsly Configuration
+  description: Configure Newsly
+- name: Newsly CronJob Configuration
+  description: Configure Newsly Cronjob
+- name: User and Group Configuration
+  description: Configure User and Group for Newsly
+- name: Network Configuration
+  description: Configure Network for Newsly
+- name: Storage Configuration
+  description: Configure Storage for Newsly
+- name: Resources Configuration
+  description: Configure Resources for Newsly
+
+portals:
+  web_portal:
+    protocols:
+    - "$kubernetes-resource_configmap_portal_protocol"
+    host:
+    - "$kubernetes-resource_configmap_portal_host"
+    ports:
+    - "$kubernetes-resource_configmap_portal_port"
+    path: "$kubernetes-resource_configmap_portal_path"
+
+questions:
+- variable: newslyConfig
+  label: ""
+  group: Newsly Configuration
+  schema:
+    type: dict
+    attrs:
+    - variable: instanceName
+      label: Instance Name
+      description: The name of the Newsly instance.
+      schema:
+        type: string
+        default: "Newsly"
+        required: true
+    - variable: additionalEnvs
+      label: Additional Environment Variables
+      description: Configure additional environment variables for Newsly.
+      schema:
+        type: list
+        default: []
+        items:
+        - variable: env
+          label: Environment Variable
+          schema:
+            type: dict
+            attrs:
+            - variable: name
+              label: Name
+              schema:
+                type: string
+                required: true
+            - variable: value
+              label: Value
+              schema:
+                type: string
+                required: true
+
+- variable: newslyDatabase
+  label: Newsly Database Configuration
+  group: Newsly Configuration
+  schema:
+    type: dict
+    attrs:
+    - variable: host
+      label: Database Host
+      description: Hostname or IP address of the database server.
+      schema:
+        type: string
+        default: 10.2.20.25
+        required: true
+    - variable: port
+      label: Database Port
+      description: Port number for the database server.
+      schema:
+        type: int
+        default: 3306
+        required: true
+    - variable: username
+      label: Database User
+      description: Username for the database.
+      schema:
+        type: string
+        default: martin
+        required: true
+    - variable: password
+      label: Database Password
+      description: Password for the database.
+      schema:
+        type: string
+        default: asdasdasd
+        required: true
+        private: true
+    - variable: dbname
+      label: Database Name
+      description: Database name.
+      schema:
+        type: string
+        default: news
+        required: true
+    - variable: pythonlogging
+      label: Python Logging
+      description: This will make so the python logs considered as usual logs
+      schema:
+        type: string
+        default: "1"
+        required: true
+
+
+- variable: newslyRunAs
+  label: ""
+  group: User and Group Configuration
+  schema:
+    type: dict
+    attrs:
+    - variable: user
+      label: User ID
+      description: The user id that Newsly will run as.
+      schema:
+        type: int
+        min: 2
+        default: 568
+        required: true
+    - variable: group
+      label: Group ID
+      description: The group id that Newsly will run as.
+      schema:
+        type: int
+        min: 2
+        default: 568
+        required: true
+
+- variable: newslyNetwork
+  label: ""
+  group: Network Configuration
+  schema:
+    type: dict
+    attrs:
+    - variable: webPort
+      label: Web Port
+      description: The port for the Newsly Web UI.
+      schema:
+        type: int
+        default: 59687
+        min: 9000
+        max: 65535
+        required: true
+    - variable: hostNetwork
+      label: Host Network
+      description: |
+        Bind to the host network. It's recommended to keep this disabled.</br>
+      schema:
+        type: boolean
+        default: false
+
+- variable: newslyCronjob
+  description: "Setup cronjob for Newsly"
+  label: "Setup cronjob for Newsly"
+  group: "Newsly CronJob Configuration"
+  schema:
+    type: dict
+    attrs:
+    - variable: enabled
+      label: "Enable cronjob for newsly"
+      schema:
+        type: boolean
+        default: true
+        show_subquestions_if: true
+        subquestions:
+        - variable: schedule
+          label: Schedule
+          schema:
+            type: string
+            default: "* * * * *"
+            empty: false
+            required: true
+
+- variable: newslyStorage
+  label: ""
+  group: Storage Configuration
+  schema:
+    type: dict
+    attrs:
+    - variable: config
+      label: Newsly Config Storage
+      description: The path to store Newsly Configuration.
+      schema:
+        type: dict
+        attrs:
+        - variable: type
+          label: Type
+          description: |
+            ixVolume: Is dataset created automatically by the system.</br>
+            Host Path: Is a path that already exists on the system.
+          schema:
+            type: string
+            required: true
+            immutable: true
+            default: "ixVolume"
+            enum:
+            - value: "hostPath"
+              description: Host Path (Path that already exists on the system)
+            - value: "ixVolume"
+              description: ixVolume (Dataset created automatically by the system)
+        - variable: datasetName
+          label: Dataset Name
+          schema:
+            type: string
+            show_if: [["type", "=", "ixVolume"]]
+            required: true
+            hidden: true
+            immutable: true
+            default: "config"
+            $ref:
+            - "normalize/ixVolume"
+        - variable: hostPath
+          label: Host Path
+          schema:
+            type: hostpath
+            show_if: [["type", "=", "hostPath"]]
+            immutable: true
+            required: true
+    - variable: additionalStorages
+      label: Additional Storage
+      description: Additional storage for Newsly.
+      schema:
+        type: list
+        default: []
+        items:
+        - variable: storageEntry
+          label: Storage Entry
+          schema:
+            type: dict
+            attrs:
+            - variable: type
+              label: Type
+              description: |
+                ixVolume: Is dataset created automatically by the system.</br>
+                Host Path: Is a path that already exists on the system.</br>
+                SMB Share: Is a SMB share that is mounted to a persistent volume claim.
+              schema:
+                type: string
+                required: true
+                default: "ixVolume"
+                immutable: true
+                enum:
+                - value: "hostPath"
+                  description: Host Path (Path that already exists on the system)
+                - value: "ixVolume"
+                  description: ixVolume (Dataset created automatically by the system)
+                - value: "smb-pv-pvc"
+                  description: SMB Share (Mounts a persistent volume claim to a SMB share)
+            - variable: mountPath
+              label: Mount Path
+              description: The path inside the container to mount the storage.
+              schema:
+                type: path
+                required: true
+            - variable: hostPath
+              label: Host Path
+              description: The host path to use for storage.
+              schema:
+                type: hostpath
+                show_if: [["type", "=", "hostPath"]]
+                required: true
+            - variable: datasetName
+              label: Dataset Name
+              description: The name of the dataset to use for storage.
+              schema:
+                type: string
+                show_if: [["type", "=", "ixVolume"]]
+                required: true
+                immutable: true
+                default: "storage_entry"
+                $ref:
+                - "normalize/ixVolume"
+            - variable: server
+              label: Server
+              description: The server for the SMB share.
+              schema:
+                type: string
+                show_if: [["type", "=", "smb-pv-pvc"]]
+                required: true
+            - variable: share
+              label: Share
+              description: The share name for the SMB share.
+              schema:
+                type: string
+                show_if: [["type", "=", "smb-pv-pvc"]]
+                required: true
+            - variable: domain
+              label: Domain (Optional)
+              description: The domain for the SMB share.
+              schema:
+                type: string
+                show_if: [["type", "=", "smb-pv-pvc"]]
+            - variable: username
+              label: Username
+              description: The username for the SMB share.
+              schema:
+                type: string
+                show_if: [["type", "=", "smb-pv-pvc"]]
+                required: true
+            - variable: password
+              label: Password
+              description: The password for the SMB share.
+              schema:
+                type: string
+                show_if: [["type", "=", "smb-pv-pvc"]]
+                required: true
+                private: true
+            - variable: size
+              label: Size (in Gi)
+              description: The size of the volume quota.
+              schema:
+                type: int
+                show_if: [["type", "=", "smb-pv-pvc"]]
+                required: true
+                min: 1
+                default: 1
+
+- variable: resources
+  group: Resources Configuration
+  label: ""
+  schema:
+    type: dict
+    attrs:
+    - variable: limits
+      label: Limits
+      schema:
+        type: dict
+        attrs:
+        - variable: cpu
+          label: CPU
+          description: CPU limit for Newsly.
+          schema:
+            type: string
+            max_length: 6
+            valid_chars: '^(0\.[1-9]|[1-9][0-9]*)(\.[0-9]|m?)$'
+            valid_chars_error: |
+              Valid CPU limit formats are</br>
+              - Plain Integer - eg. 1</br>
+              - Float - eg. 0.5</br>
+              - Milicpu - eg. 500m
+            default: "4000m"
+            required: true
+        - variable: memory
+          label: Memory
+          description: Memory limit for Newsly.
+          schema:
+            type: string
+            max_length: 12
+            valid_chars: '^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$'
+            valid_chars_error: |
+              Valid Memory limit formats are</br>
+              - Suffixed with E/P/T/G/M/K - eg. 1G</br>
+              - Suffixed with Ei/Pi/Ti/Gi/Mi/Ki - eg. 1Gi</br>
+              - Plain Integer in bytes - eg. 1024</br>
+              - Exponent - eg. 134e6
+            default: "1Gi"
+            required: true

@@ -1,0 +1,26 @@
+name: newsly
+description: All tabloid titles in one place without additional bullshit!
+annotations:
+  title: Newsly
+type: application
+version: 1.0.0
+apiVersion: v2
+appVersion: '0.2'
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: homechart
+    url: https://departy.xyz/
+    email: dev@departy.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.2.2
+home: https://github.com/Sonarr/Sonarr
+icon: https://raw.githubusercontent.com/martinikolaev/charts/master/logos/newsly.png
+sources:
+  - https://github.com/onedr0p/containers/tree/main/apps/sonarr
+  - https://github.com/truenas/charts/tree/master/community/sonarr
+  - https://github.com/Sonarr/Sonarr
+keywords:
+  - news
+  - tabloids

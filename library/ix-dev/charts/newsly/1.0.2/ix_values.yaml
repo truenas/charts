@@ -1,0 +1,9 @@
+image:
+  repository: registry.departy.xyz/newsly-app
+  pullPolicy: IfNotPresent
+  tag: '2023.11.15.1'
+
+scraperimage:
+  repository: registry.departy.xyz/newsly-scraper
+  pullPolicy: IfNotPresent
+  tag: '2023.11.15.1'
