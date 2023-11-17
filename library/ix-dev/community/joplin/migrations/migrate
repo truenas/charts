@@ -4,44 +4,38 @@ import os
 import sys
 
 
-def storageMigrate(storage):
-    delKeys = []
+def storage_migrate(storage):
+    delete_keys = []
     if storage['type'] == 'hostPath':
         # Check if the key exists, if not we have already migrated
         if not storage.get('hostPath'):
             return storage
 
-        hostPath = storage['hostPath']
-        storage['hostPathConfig'] = { 'hostPath': hostPath }
-        delKeys.append('hostPath')
+        storage['hostPathConfig'] = {'hostPath': storage['hostPath']}
+        delete_keys.append('hostPath')
 
     if storage['type'] == 'ixVolume':
         # Check if the key exists, if not we have already migrated
         if not storage.get('datasetName'):
             return storage
 
-        datasetName = storage['datasetName']
-        storage['ixVolumeConfig'] = { 'datasetName': datasetName }
-        delKeys.append('datasetName')
+        storage['ixVolumeConfig'] = { 'datasetName': storage['datasetName'] }
+        delete_keys.append('datasetName')
 
 
-    for key in delKeys:
+    for key in delete_keys:
         del storage[key]
 
     return storage
 
 
 def migrate(values):
-    storageKey = 'joplinStorage'
+    storage_key = 'joplinStorage'
     storages = ['pgData', 'pgBackup']
 
 
     for storage in storages:
-        check_val = values.get(storageKey, {}).get(storage, {})
-        if not isinstance(check_val, dict) or not check_val:
-            continue
-
-        values[storageKey][storage] = storageMigrate(check_val)
+        values[storage_key][storage] = storage_migrate(values[storage_key][storage])
 
 
     return values
