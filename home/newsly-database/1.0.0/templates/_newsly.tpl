@@ -52,7 +52,7 @@ service:
     type: NodePort
     targetSelector: newsly
     ports:
-      webui:
+      newsly:
         enabled: true
         primary: true
         port: 5432
