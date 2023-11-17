@@ -26,7 +26,7 @@ workload:
             {{ end }}
           {{ end }}
           probes:
-            livenessProbe:
+            liveness:
               exec:
                 command:
                   - sh
@@ -37,7 +37,7 @@ workload:
               timeoutSeconds: 5
               failureThreshold: 5
               successThreshold: 1
-            startupProbe:
+            startup
               exec:
                 command:
                   - sh
