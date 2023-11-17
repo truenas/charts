@@ -47,3 +47,48 @@ Retrieve postgres volume mounts configuration
 {{ include "common.storage.configureAppVolumeMountsInContainer" (dict "appVolumeMounts" .Values.postgresAppVolumeMounts ) | nindent 0 }}
 {{- end -}}
 
+{{/*
+Validates the keys in a dictionary.
+*/}}
+{{- define "common.schema.validateKeys" -}}
+{{- $values := . -}}
+{{- if and (hasKey $values "values") (hasKey $values "checkKeys") -}}
+{{- $missingKeys := list -}}
+{{- range $values.checkKeys -}}
+{{- if eq (hasKey $values.values . ) false -}}
+{{- $missingKeys = mustAppend $missingKeys . -}}
+{{- end -}}
+{{- end -}}
+{{- if $missingKeys -}}
+{{- fail (printf "Missing %s from dictionary" ($missingKeys | join ", ")) -}}
+{{- end -}}
+{{- else -}}
+{{- fail "A dictionary and list of keys to check must be provided" -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Configures application volume mounts in a container.
+*/}}
+{{- define "common.storage.configureAppVolumeMountsInContainer" -}}
+{{- include "common.schema.validateKeys" (dict "values" . "checkKeys" (list "appVolumeMounts")) -}}
+{{- $appVolumeMounts := .appVolumeMounts -}}
+{{- if $appVolumeMounts -}}
+{{ range $name, $avm := $appVolumeMounts }}
+{{- if (default true $avm.enabled) -}}
+{{ if $avm.containerNameOverride }}
+{{ $name = $avm.containerNameOverride }}
+{{ end }}
+- name: {{ $name }}
+  mountPath: {{ $avm.mountPath }}
+  {{ if $avm.subPath }}
+  subPath: {{ $avm.subPath }}
+  {{ end }}
+  {{ if $avm.readOnly }}
+  readOnly: {{ $avm.readOnly }}
+  {{ end }}
+{{- end -}}
+{{ end }}
+{{- end -}}
+{{- end -}}
+
