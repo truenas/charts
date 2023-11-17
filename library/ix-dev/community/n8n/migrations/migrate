@@ -4,29 +4,26 @@ import os
 import sys
 
 
-def storageMigrate(storage):
-    delKeys = []
+def storage_migrate(storage):
+    delete_keys = []
     if storage['type'] == 'hostPath':
         # Check if the key exists, if not we have already migrated
         if not storage.get('hostPath'):
             return storage
 
-        hostPath = storage['hostPath']
-        storage['hostPathConfig'] = { 'hostPath': hostPath }
-        delKeys.append('hostPath')
+        storage['hostPathConfig'] = {'hostPath': storage['hostPath']}
+        delete_keys.append('hostPath')
 
     if storage['type'] == 'ixVolume':
         # Fixes an invalid key carried from values.yaml
-        if storage.get('hostPath'):
-            del storage['hostPath']
+        storage.pop('hostPath', None):
 
         # Check if the key exists, if not we have already migrated
         if not storage.get('datasetName'):
             return storage
 
-        datasetName = storage['datasetName']
-        storage['ixVolumeConfig'] = { 'datasetName': datasetName }
-        delKeys.append('datasetName')
+        storage['ixVolumeConfig'] = {'datasetName': storage['datasetName']}
+        delete_keys.append('datasetName')
 
     if storage['type'] == 'smb-pv-pvc':
         # Check if the key exists, if not we have already migrated
@@ -41,42 +38,31 @@ def storageMigrate(storage):
             'password': storage['password'],
             'size': storage['size'],
         }
-        delKeys.extend(['server', 'share', 'domain', 'username', 'password', 'size'])
+        delete_keys.extend(['server', 'share', 'domain', 'username', 'password', 'size'])
 
-    for key in delKeys:
+    for key in delete_keys:
         del storage[key]
 
     return storage
 
 
 def migrate(values):
-    storageKey = 'n8nStorage'
+    storage_key = 'n8nStorage'
     storages = ['data', 'pgData', 'pgBackup']
 
 
     for storage in storages:
-        check_val = values.get(storageKey, {}).get(storage, {})
-        if not isinstance(check_val, dict) or not check_val:
-            continue
+        values[storage_key][storage] = storage_migrate(value[storage_key][storage])
 
-        values[storageKey][storage] = storageMigrate(check_val)
-
-
-    additionalStorages = values.get(storageKey, {}).get('additionalStorages', [])
+    additionalStorages = values[storage_key].get('additionalStorages', [])
     for idx, storage in enumerate(additionalStorages):
-        if not isinstance(storage, dict) or not storage:
-            continue
-
-        values[storageKey]['additionalStorages'][idx] = storageMigrate(storage)
+        values[storage_key]['additionalStorages'][idx] = storage_migrate(storage)
 
 
     return values
 
 
 if __name__ == '__main__':
-    with open('in.json', 'r') as f:
-        print(json.dumps(migrate(json.loads(f.read()))))
-
     if len(sys.argv) != 2:
         exit(1)
 
