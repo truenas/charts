@@ -35,15 +35,14 @@ def libraries_migrate(libraries):
     # had a requirement for both hostPath and mountPath to be the same,
     # now its no longer the case, so we can merge it with additionalStorages
     for idx, library in enumerate(libraries):
-        libraries[idx].update({
+        libraries[idx] = {
             'type': 'hostPath',
             'mountPath': library['hostPath'],
             'hostPathConfig': {
                 'hostPath': library['hostPath'],
             }
-        })
+        }
 
-        del libraries[idx]['hostPath']
 
     return libraries
 
@@ -57,11 +56,10 @@ def migrate(values):
 
     # Migrate additionalLibraries,
     # if additionalLibraries does not exist, we have already migrated
-    if libraries := values[storage_key].get('additionalLibraries', []):
+    if libraries := values[storage_key].get('additionalLibraries', None):
         # If additionalLibraries exists, additionalStorages does not exist yet
-        values[storage_key].update({
-            'additionalStorages': libraries_migrate(libraries)
-        })
+        values[storage_key]['additionalStorages'] = libraries_migrate(libraries)
+
 
         del values[storage_key]['additionalLibraries']
 
