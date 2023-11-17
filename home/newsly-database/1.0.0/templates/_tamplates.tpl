@@ -153,3 +153,11 @@ This will add a suffix to the release name if nameSuffix is set
   {{- print .Release.Name -}}
 {{ end -}}
 {{- end -}}
+
+
+{{/*
+Common workload annotations
+*/}}
+{{- define "common.annotations" -}}
+rollme: {{ randAlphaNum 5 | quote }}
+{{- end -}}
