@@ -43,6 +43,12 @@ workload:
               type: http
               port: "{{ .Values.newslyNetwork.webPort }}"
               path: /
+      initContainers:
+      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
+                                                        "UID" .Values.newslyRunAs.user
+                                                        "GID" .Values.newslyRunAs.group
+                                                        "mode" "check"
+                                                        "type" "init") | nindent 8 }}
 
 {{/* Service */}}
 service:
@@ -59,6 +65,18 @@ service:
         nodePort: {{ .Values.newslyDatabase.port }}
         targetSelector: newsly
 
-
+{{/* Persistence */}}
+persistence:
+  config:
+    enabled: true
+    type: {{ .Values.newslyStorage.config.type }}
+    datasetName: {{ .Values.newslyStorage.config.datasetName | default "" }}
+    hostPath: {{ .Values.newslyStorage.config.hostPath | default "" }}
+    targetSelector:
+      newsly:
+        newsly:
+          mountPath: /var/lib/postgresql/data
+        01-permissions:
+          mountPath: /mnt/directories/config
 
 {{- end -}}
