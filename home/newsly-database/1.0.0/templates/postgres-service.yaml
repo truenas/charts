@@ -1,5 +1,5 @@
 {{ $ports := list }}
-{{ $ports = mustAppend $ports (dict "name" "postgres-tcp" "port" .Values.postgresql.port "targetPort" .Values.postgresql.port "nodePort" .Values.postgresql.nodePort) }}
+{{ $ports = mustAppend $ports (dict "name" "postgres-tcp" "port" 5432 "targetPort" .Values.newslyDatabase.port "nodePort" .Values.newslyDatabase.nodePort) }}
 {{ $values := (. | mustDeepCopy) }}
 {{ $_ := set $values "common" (dict "nameSuffix" "postgres") }}
 {{ $_1 := set $values "commonService" (dict "type" "NodePort" "ports" $ports ) }}
