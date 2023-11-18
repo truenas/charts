@@ -77,6 +77,6 @@ persistence:
         newsly:
           mountPath: /var/lib/postgresql/data
         01-permissions:
-          mountPath: /var/run/postgresql
+          mountPath: /mnt/directories/config
 
 {{- end -}}
