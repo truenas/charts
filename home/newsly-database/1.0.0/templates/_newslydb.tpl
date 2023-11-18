@@ -78,14 +78,6 @@ persistence:
           mountPath: /var/lib/postgresql/data
         01-permissions:
           mountPath: /tmp
-  dbrun:
-    enabled: true
-    type: {{ .Values.newslyStorage.config.type }}
-    datasetName: {{ .Values.newslyStorage.config.datasetName | default "" }}
-    hostPath: {{ .Values.newslyStorage.config.hostPath | default "" }}
-    targetSelector:
-      newsly:
-        newsly:
-          mountPath: /var/run/postgresql
+
 
 {{- end -}}
