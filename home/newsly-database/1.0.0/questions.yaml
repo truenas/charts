@@ -1,16 +1,16 @@
 groups:
-- name: Newsly Configuration
-  description: Configure Newsly
-- name: Newsly CronJob Configuration
-  description: Configure Newsly Cronjob
+- name: NewslyDB Configuration
+  description: Configure NewslyDB
+- name: NewslyDB CronJob Configuration
+  description: Configure NewslyDB Cronjob
 - name: User and Group Configuration
-  description: Configure User and Group for Newsly
+  description: Configure User and Group for NewslyDB
 - name: Network Configuration
-  description: Configure Network for Newsly
+  description: Configure Network for NewslyDB
 - name: Storage Configuration
-  description: Configure Storage for Newsly
+  description: Configure Storage for NewslyDB
 - name: Resources Configuration
-  description: Configure Resources for Newsly
+  description: Configure Resources for NewslyDB
 
 portals:
   web_portal:
@@ -23,22 +23,22 @@ portals:
     path: "$kubernetes-resource_configmap_portal_path"
 
 questions:
-- variable: newslyConfig
+- variable: newslydbConfig
   label: ""
-  group: Newsly Configuration
+  group: NewslyDB Configuration
   schema:
     type: dict
     attrs:
     - variable: instanceName
       label: Instance Name
-      description: The name of the Newsly instance.
+      description: The name of the NewslyDB instance.
       schema:
         type: string
-        default: "Newsly Database"
+        default: "NewslyDB Database"
         required: true
     - variable: additionalEnvs
       label: Additional Environment Variables
-      description: Configure additional environment variables for Newsly.
+      description: Configure additional environment variables for NewslyDB.
       schema:
         type: list
         default: []
@@ -59,15 +59,15 @@ questions:
                 type: string
                 required: true
 
-- variable: newslyCronjob
-  description: "Setup cronjob for Newsly"
-  label: "Setup cronjob for Newsly"
-  group: "Newsly CronJob Configuration"
+- variable: newslydbCronjob
+  description: "Setup cronjob for NewslyDB"
+  label: "Setup cronjob for NewslyDB"
+  group: "NewslyDB CronJob Configuration"
   schema:
     type: dict
     attrs:
     - variable: enabled
-      label: "Enable cronjob for newsly"
+      label: "Enable cronjob for newslydb"
       schema:
         type: boolean
         default: false
@@ -81,9 +81,9 @@ questions:
             empty: false
             required: true
 
-- variable: newslyDatabase
-  label: Newsly Database Configuration
-  group: Newsly Configuration
+- variable: newslydbDatabase
+  label: NewslyDB Database Configuration
+  group: NewslyDB Configuration
   schema:
     type: dict
     attrs:
@@ -118,7 +118,7 @@ questions:
         required: true
 
 
-- variable: newslyRunAs
+- variable: newslydbRunAs
   label: ""
   group: User and Group Configuration
   schema:
@@ -126,7 +126,7 @@ questions:
     attrs:
     - variable: user
       label: User ID
-      description: The user id that Newsly will run as.
+      description: The user id that NewslyDB will run as.
       schema:
         type: int
         min: 2
@@ -134,14 +134,14 @@ questions:
         required: true
     - variable: group
       label: Group ID
-      description: The group id that Newsly will run as.
+      description: The group id that NewslyDB will run as.
       schema:
         type: int
         min: 2
         default: 568
         required: true
 
-- variable: newslyNetwork
+- variable: newslydbNetwork
   label: ""
   group: Network Configuration
   schema:
@@ -155,15 +155,15 @@ questions:
         type: boolean
         default: false
 
-- variable: newslyStorage
+- variable: newslydbStorage
   label: ""
   group: Storage Configuration
   schema:
     type: dict
     attrs:
     - variable: config
-      label: Newsly Config Storage
-      description: The path to store Newsly Configuration.
+      label: NewslyDB Config Storage
+      description: The path to store NewslyDB Configuration.
       schema:
         type: dict
         attrs:
@@ -201,8 +201,8 @@ questions:
             immutable: true
             required: true
         - variable: pgData
-          label: Newsly Postgres Data Storage
-          description: The path to store Newsly Postgres Data.
+          label: NewslyDB Postgres Data Storage
+          description: The path to store NewslyDB Postgres Data.
           schema:
             type: dict
             attrs:
@@ -240,7 +240,7 @@ questions:
                 immutable: true
                 required: true
         - variable: pgBackup
-          label: Newsly Postgres Backup Storage
+          label: NewslyDB Postgres Backup Storage
           description: The path to store Immich Postgres Backup.
           schema:
             type: dict
@@ -280,7 +280,7 @@ questions:
                 required: true
     - variable: additionalStorages
       label: Additional Storage
-      description: Additional storage for Newsly.
+      description: Additional storage for NewslyDB.
       schema:
         type: list
         default: []
@@ -390,7 +390,7 @@ questions:
         attrs:
         - variable: cpu
           label: CPU
-          description: CPU limit for Newsly.
+          description: CPU limit for NewslyDB.
           schema:
             type: string
             max_length: 6
@@ -404,7 +404,7 @@ questions:
             required: true
         - variable: memory
           label: Memory
-          description: Memory limit for Newsly.
+          description: Memory limit for NewslyDB.
           schema:
             type: string
             max_length: 12
