@@ -7,7 +7,7 @@ spec: {{ include "common.deployment.common_spec" $values | nindent 2 }}
       hostNetwork: {{ .Values.hostNetwork }}
       containers:
       - name: {{ .Chart.Name }}-postgres
-        image: dbimage
+        image: {{ .Values.dbimage.repository }}:{{ .Values.dbimage.tag }}
         imagePullPolicy: {{ .Values.dbimage.pullPolicy }}
         env:
           {{ $envList := (default list .Values.environmentVariables) }}
