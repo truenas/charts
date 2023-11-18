@@ -94,13 +94,6 @@ questions:
         type: int
         default: 15432
         required: true
-    - variable: username
-      label: Database User
-      description: Username for the database.
-      schema:
-        type: string
-        default: martin
-        required: true
     - variable: password
       label: Database Password
       description: Password for the database.
