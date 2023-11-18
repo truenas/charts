@@ -27,21 +27,10 @@ workload:
           probes:
             liveness:
               enabled: false
-              type: http
-              port: "{{ .Values.newslydbNetwork.webPort }}"
-              path: /
-              initialDelaySeconds: 5
-              periodSeconds: 60
             readiness:
               enabled: false
-              type: http
-              port: "{{ .Values.newslydbNetwork.webPort }}"
-              path: /
             startup:
               enabled: false
-              type: http
-              port: "{{ .Values.newslydbNetwork.webPort }}"
-              path: /
 
 {{/* Service */}}
 service:
