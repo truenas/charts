@@ -1,10 +1,11 @@
-{{- include "ix.v1.common.loader.init" . -}}
+{{/* Make sure all variables are set properly */}}
+{{- include "tc.v1.common.loader.init" . -}}
 
-{{/* Merge the templates with Values */}}
-{{- $_ := mustMergeOverwrite .Values (include "newsly.workload" $ | fromYaml) -}}
-{{- $_ := mustMergeOverwrite .Values (include "newsly.config" $ | fromYaml) -}}
+{{/* Disable [exportarr] if requested */}}
+{{- if not .Values.metrics.main.enabled -}}
+  {{- $_ := set .Values.workload.exportarr "enabled" false -}}
+  {{- $_ := set .Values.service.metrics "enabled" false -}}
+{{- end -}}
 
-{{/* Create the configmap for portal manually*/}}
-
-
-{{- include "ix.v1.common.loader.apply" . -}}
+{{/* Render the templates */}}
+{{- include "tc.v1.common.loader.apply" . -}}
