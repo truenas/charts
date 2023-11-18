@@ -1,5 +1,5 @@
 
-{{if .Values.newslydbCronjob.enabled }}
+{{if .Values.newslyCronjob.enabled }}
 
 apiVersion: batch/v1
 kind: CronJob

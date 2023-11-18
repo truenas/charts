@@ -1,23 +1,24 @@
-{{- define "newslydb.workload" -}}
+{{- define "newsly.workload" -}}
 workload:
-  newslydb:
+  newsly:
     enabled: true
     primary: true
     type: Deployment
     podSpec:
-      hostNetwork: {{ .Values.newslydbNetwork.hostNetwork }}
+      hostNetwork: {{ .Values.newslyNetwork.hostNetwork }}
       containers:
-        newslydb:
+        newsly:
           enabled: true
           primary: true
           imageSelector: dbimage
           securityContext:
-            runAsUser: {{ .Values.newslydbRunAs.user }}
-            runAsGroup: {{ .Values.newslydbRunAs.group }}
+            runAsUser: {{ .Values.newslyRunAs.user }}
+            runAsGroup: {{ .Values.newslyRunAs.group }}
           env:
-            POSTGRES_USER : {{ .Values.newslydbDatabase.username }}
-            POSTGRES_PASSWORD : {{ .Values.newslydbDatabase.password }}
-          {{ with .Values.newslydbConfig.additionalEnvs }}
+            POSTGRES_DB : {{ .Values.newslyDatabase.host }}
+            POSTGRES_USER : {{ .Values.newslyDatabase.username }}
+            POSTGRES_PASSWORD : {{ .Values.newslyDatabase.password }}
+          {{ with .Values.newslyConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
             - name: {{ $env.name }}
@@ -27,25 +28,36 @@ workload:
           probes:
             liveness:
               enabled: false
+              type: http
+              port: "{{ .Values.newslyNetwork.webPort }}"
+              path: /
+              initialDelaySeconds: 5
+              periodSeconds: 60
             readiness:
               enabled: false
+              type: http
+              port: "{{ .Values.newslyNetwork.webPort }}"
+              path: /
             startup:
               enabled: false
+              type: http
+              port: "{{ .Values.newslyNetwork.webPort }}"
+              path: /
 
 {{/* Service */}}
 service:
-  newslydb:
+  newsly:
     enabled: true
     primary: true
     type: NodePort
-    targetSelector: newslydb
+    targetSelector: newsly
     ports:
-      newslydb:
+      newsly:
         enabled: true
         primary: true
         port: 5432
-        nodePort: {{ .Values.newslydbDatabase.port }}
-        targetSelector: newslydb
+        nodePort: {{ .Values.newslyDatabase.port }}
+        targetSelector: newsly
 
 
 
