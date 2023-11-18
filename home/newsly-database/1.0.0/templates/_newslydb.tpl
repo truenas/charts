@@ -58,18 +58,3 @@ service:
         nodePort: {{ .Values.newslydbDatabase.port }}
         targetSelector: newslydb
 
-{{/* Persistence */}}
-persistence:
-  config:
-    enabled: true
-    type: {{ .Values.newslydbStorage.config.type }}
-    datasetName: {{ .Values.newslydbStorage.config.datasetName | default "" }}
-    hostPath: {{ .Values.newslydbStorage.config.hostPath | default "" }}
-    targetSelector:
-      newslydb:
-        newslydb:
-          mountPath: /config
-        01-permissions:
-          mountPath: /mnt/directories/config
-
-{{- end -}}
