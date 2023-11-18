@@ -1,6 +1,10 @@
-{{/* Make sure all variables are set properly */}}
-{{- include "tc.v1.common.loader.init" . -}}
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "newsly.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "newsly.config" $ | fromYaml) -}}
+
+{{/* Create the configmap for portal manually*/}}
 
 
-{{/* Render the templates */}}
-{{- include "tc.v1.common.loader.apply" . -}}
+{{- include "ix.v1.common.loader.apply" . -}}
