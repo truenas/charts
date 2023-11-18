@@ -67,7 +67,7 @@ service:
 
 {{/* Persistence */}}
 persistence:
-  dbdata:
+  config:
     enabled: true
     type: {{ .Values.newslyStorage.config.type }}
     datasetName: {{ .Values.newslyStorage.config.datasetName | default "" }}
