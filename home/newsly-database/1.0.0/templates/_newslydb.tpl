@@ -58,3 +58,6 @@ service:
         nodePort: {{ .Values.newslydbDatabase.port }}
         targetSelector: newslydb
 
+
+
+{{- end -}}
