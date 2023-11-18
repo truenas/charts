@@ -17,12 +17,6 @@
 
   {{- $dbURL := (printf "postgres://%s:%s@%s:5432/%s?sslmode=disable" $dbUser $dbPass $dbHost $dbName) -}}
 
-  {{- $typesenseKey := randAlphaNum 32 -}}
-  {{- with (lookup "v1" "Secret" .Release.Namespace (printf "%s-immich-creds" $fullname)) -}}
-    {{- $typesenseKey = ((index .data "TYPESENSE_API_KEY") | b64dec) -}}
-  {{- end -}}
-
-  {{- $mlURL := printf "http://%v-machinelearning:%v" $fullname .Values.immichNetwork.machinelearningPort }}
 
 secret:
   postgres-creds:
