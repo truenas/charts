@@ -8,7 +8,7 @@ spec: {{ include "common.deployment.common_spec" $values | nindent 2 }}
       containers:
       - name: {{ .Chart.Name }}-postgres
         image: {{ template "postgres.imageName" . }}
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        imagePullPolicy: {{ .Values.dbimage.pullPolicy }}
         env:
           {{ $envList := (default list .Values.environmentVariables) }}
           {{ $envList = mustAppend $envList (dict "name" "POSTGRES_DB" "value" (include "postgres.DatabaseName" .)) }}
