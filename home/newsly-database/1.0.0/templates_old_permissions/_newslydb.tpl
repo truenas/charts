@@ -44,7 +44,6 @@ workload:
               port: "{{ .Values.newslyNetwork.webPort }}"
               path: /
       initContainers:
-      
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
                                                         "UID" .Values.newslyRunAs.user
                                                         "GID" .Values.newslyRunAs.group
