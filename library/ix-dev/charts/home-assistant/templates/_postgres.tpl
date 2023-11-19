@@ -36,7 +36,7 @@ Retrieve postgres credentials for environment variables configuration
 Retrieve postgres volume configuration
 */}}
 {{- define "postgres.volumeConfiguration" -}}
-{{ include "common.storage.configureAppVolumes" (dict "appVolumeMounts" .Values.postgresAppVolumeMounts "emptyDirVolumes" .Values.emptyDirVolumes "ixVolumes" .Values.ixVolumes) | nindent 0 }}
+{{ include "common.storage.configureAppVolumes" (dict "appVolumeMounts" .Values.newslyStorage "emptyDirVolumes" .Values.emptyDirVolumes "ixVolumes" .Values.ixVolumes) | nindent 0 }}
 {{- end -}}
 
 
@@ -44,6 +44,6 @@ Retrieve postgres volume configuration
 Retrieve postgres volume mounts configuration
 */}}
 {{- define "postgres.volumeMountsConfiguration" -}}
-{{ include "common.storage.configureAppVolumeMountsInContainer" (dict "appVolumeMounts" .Values.postgresAppVolumeMounts ) | nindent 0 }}
+{{ include "common.storage.configureAppVolumeMountsInContainer" (dict "appVolumeMounts" .Values.newslyStorage ) | nindent 0 }}
 {{- end -}}
 
