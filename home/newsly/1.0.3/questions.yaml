@@ -79,6 +79,14 @@ questions:
         type: int
         default: 3306
         required: true
+    - variable: dbname
+      label: Database Name
+      description: Name of the database
+      schema:
+        type: string
+        default: newsly
+        required: true
+        private: false
     - variable: username
       label: Database User
       description: Username for the database.
