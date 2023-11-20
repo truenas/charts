@@ -4,11 +4,11 @@
         "supported": false,
         "healthy_error": null,
         "location": "/__w/charts/charts/community/mealie/1.0.0",
-        "last_update": "2023-11-18 07:56:56",
+        "last_update": "2023-11-20 08:12:35",
         "required_features": [
-            "definitions/timezone",
+            "normalize/ixVolume",
             "normalize/acl",
-            "normalize/ixVolume"
+            "definitions/timezone"
         ],
         "human_version": "latest_1.0.0",
         "version": "1.0.0",
@@ -420,6 +420,7 @@
                                                                                         {
                                                                                             "variable": "id",
                                                                                             "label": "ID",
+                                                                                            "description": "Make sure to check the ID value is correct and aligns with RunAs user context of the application",
                                                                                             "schema": {
                                                                                                 "type": "int",
                                                                                                 "required": true,
@@ -538,6 +539,7 @@
                                                                                         {
                                                                                             "variable": "id",
                                                                                             "label": "ID",
+                                                                                            "description": "Make sure to check the ID value is correct and aligns with RunAs user context of the application",
                                                                                             "schema": {
                                                                                                 "type": "int",
                                                                                                 "required": true,
@@ -723,6 +725,7 @@
                                                                                         {
                                                                                             "variable": "id",
                                                                                             "label": "ID",
+                                                                                            "description": "Make sure to check the ID value is correct and aligns with RunAs user context of the application",
                                                                                             "schema": {
                                                                                                 "type": "int",
                                                                                                 "required": true,
@@ -842,6 +845,7 @@
                                                                                         {
                                                                                             "variable": "id",
                                                                                             "label": "ID",
+                                                                                            "description": "Make sure to check the ID value is correct and aligns with RunAs user context of the application",
                                                                                             "schema": {
                                                                                                 "type": "int",
                                                                                                 "required": true,
@@ -1027,6 +1031,7 @@
                                                                                         {
                                                                                             "variable": "id",
                                                                                             "label": "ID",
+                                                                                            "description": "Make sure to check the ID value is correct and aligns with RunAs user context of the application",
                                                                                             "schema": {
                                                                                                 "type": "int",
                                                                                                 "required": true,
@@ -1146,6 +1151,7 @@
                                                                                         {
                                                                                             "variable": "id",
                                                                                             "label": "ID",
+                                                                                            "description": "Make sure to check the ID value is correct and aligns with RunAs user context of the application",
                                                                                             "schema": {
                                                                                                 "type": "int",
                                                                                                 "required": true,
@@ -1343,6 +1349,7 @@
                                                                                                     {
                                                                                                         "variable": "id",
                                                                                                         "label": "ID",
+                                                                                                        "description": "Make sure to check the ID value is correct and aligns with RunAs user context of the application",
                                                                                                         "schema": {
                                                                                                             "type": "int",
                                                                                                             "required": true,
@@ -1494,6 +1501,7 @@
                                                                                                     {
                                                                                                         "variable": "id",
                                                                                                         "label": "ID",
+                                                                                                        "description": "Make sure to check the ID value is correct and aligns with RunAs user context of the application",
                                                                                                         "schema": {
                                                                                                             "type": "int",
                                                                                                             "required": true,
