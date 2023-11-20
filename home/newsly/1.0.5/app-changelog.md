@@ -1,3 +1,10 @@
+## [newsly-2023.11] (2023-11-20)
+
+- Added previous day link
+- Changed docker image tag: registry.departy.xyz/newsly:2023.11.20
+
+### Development
+
 ## [newsly-2023.11] (2023-11-19)
 
 ### Development
