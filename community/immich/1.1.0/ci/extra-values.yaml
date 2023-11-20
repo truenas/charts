@@ -1,0 +1,18 @@
+immichStorage:
+  uploads:
+    type: pvc
+  library:
+    type: pvc
+  thumbs:
+    type: pvc
+  profile:
+    type: pvc
+  video:
+    type: pvc
+  pgData:
+    type: pvc
+  pgBackup:
+    type: emptyDir
+  additionalLibraries:
+    - hostPath: /mnt/{{ .Release.Name }}/additionalLibrary1
+    - hostPath: /mnt/{{ .Release.Name }}/additionalLibrary2

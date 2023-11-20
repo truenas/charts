@@ -1,0 +1,80 @@
+#!/usr/bin/python3
+import json
+import os
+import sys
+
+
+# Used to migrate storage format to include ACLs
+def storage_migrate(storage):
+    delete_keys = []
+    if storage['type'] == 'hostPath':
+        # Check if the key exists, if not we have already migrated
+        if not storage.get('hostPath'):
+            return storage
+
+        storage['hostPathConfig'] = {'hostPath': storage['hostPath']}
+        delete_keys.append('hostPath')
+
+    elif storage['type'] == 'ixVolume':
+        # Check if the key exists, if not we have already migrated
+        if not storage.get('datasetName'):
+            return storage
+
+        storage['ixVolumeConfig'] = {'datasetName': storage['datasetName']}
+        delete_keys.append('datasetName')
+
+
+    for key in delete_keys:
+        storage.pop(key, None)
+
+    return storage
+
+# Used to migrate libraries to additionalStorages
+def libraries_migrate(libraries):
+    # Additional **Libraries** only had a field for hostPath, because Immich
+    # had a requirement for both hostPath and mountPath to be the same,
+    # now its no longer the case, so we can merge it with additionalStorages
+    for idx, library in enumerate(libraries):
+        if not library.get('hostPath'):
+            raise Exception(f'Library {idx} is malformed')
+
+        libraries[idx] = {
+            'type': 'hostPath',
+            'mountPath': library['hostPath'],
+            'hostPathConfig': {
+                'hostPath': library['hostPath'],
+            }
+        }
+
+
+    return libraries
+
+
+def migrate(values):
+    storage_key = 'immichStorage'
+    storages = ['uploads', 'library', 'thumbs', 'profile', 'video', 'pgData', 'pgBackup']
+
+    for storage in storages:
+        check_val = values.get(storage_key, {}).get(storage, {})
+        if not isinstance(check_val, dict) or not check_val:
+            raise Exception(f'Storage section {storage} is malformed')
+
+        values[storage_key][storage] = storage_migrate(check_val)
+
+    # Migrate additionalLibraries,
+    # if additionalLibraries does not exist, we have already migrated
+    if libraries := values.get(storage_key, {}).get('additionalLibraries', None):
+        # If additionalLibraries exists, additionalStorages does not exist yet
+        values[storage_key]['additionalStorages'] = libraries_migrate(libraries)
+        values[storage_key].pop('additionalLibraries', None)
+
+    return values
+
+
+if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        exit(1)
+
+    if os.path.exists(sys.argv[1]):
+        with open(sys.argv[1], 'r') as f:
+            print(json.dumps(migrate(json.loads(f.read()))))
