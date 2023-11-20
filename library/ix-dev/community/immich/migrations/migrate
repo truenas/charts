@@ -68,7 +68,7 @@ def migrate(values):
         values[storage_key]['additionalStorages'] = libraries_migrate(libraries)
 
 
-        del values[storage_key]['additionalLibraries']
+        values[storage_key].pop('additionalLibraries', None)
 
     return values
 
