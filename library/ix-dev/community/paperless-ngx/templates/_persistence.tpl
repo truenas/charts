@@ -32,8 +32,6 @@ persistence:
       paperless:
         paperless:
           mountPath: /usr/src/paperless/trash
-        01-permissions:
-          mountPath: /mnt/directories/trash
   tmp:
     enabled: true
     type: emptyDir

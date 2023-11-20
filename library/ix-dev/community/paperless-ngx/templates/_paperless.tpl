@@ -52,14 +52,6 @@ workload:
               port: {{ .Values.paperlessNetwork.webPort }}
               path: /
       initContainers:
-      {{- if .Values.paperlessConfig.enableTrash }}
-        {{/* Paperless entrypoint never chowns the trash and fails if the permissions are wrong */}}
-        {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
-                                                          "UID" .Values.paperlessID.user
-                                                          "GID" .Values.paperlessID.group
-                                                          "mode" "check"
-                                                          "type" "init") | nindent 8 }}
-      {{- end }}
       {{- include "ix.v1.common.app.redisWait" (dict  "name" "02-redis-wait"
                                                       "secretName" "redis-creds") | nindent 8 }}
       {{- include "ix.v1.common.app.postgresWait" (dict "name" "03-postgres-wait"
