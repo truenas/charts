@@ -16,7 +16,7 @@ def storage_migrate(storage):
 
     if storage['type'] == 'ixVolume':
         # Fixes an invalid key carried from values.yaml
-        storage.pop('hostPath', None):
+        storage.pop('hostPath', None)
 
         # Check if the key exists, if not we have already migrated
         if not storage.get('datasetName'):
