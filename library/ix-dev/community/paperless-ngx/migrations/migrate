@@ -14,7 +14,7 @@ def storage_migrate(storage):
         storage['hostPathConfig'] = {'hostPath': storage['hostPath']}
         delete_keys.append('hostPath')
 
-    if storage['type'] == 'ixVolume':
+    elif storage['type'] == 'ixVolume':
         # Check if the key exists, if not we have already migrated
         if not storage.get('datasetName'):
             return storage
@@ -22,7 +22,7 @@ def storage_migrate(storage):
         storage['ixVolumeConfig'] = {'datasetName': storage['datasetName']}
         delete_keys.append('datasetName')
 
-    if storage['type'] == 'smb-pv-pvc':
+    elif storage['type'] == 'smb-pv-pvc':
         # Check if the key exists, if not we have already migrated
         if not storage.get('server'):
             return storage
@@ -38,7 +38,7 @@ def storage_migrate(storage):
         delete_keys.extend(['server', 'share', 'domain', 'username', 'password', 'size'])
 
     for key in delete_keys:
-        del storage[key]
+        storage.pop(key, None)
 
     return storage
 
