@@ -7,17 +7,12 @@ plankaConfig:
 
 plankaStorage:
   avatars:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/avatars
+    type: pvc
   backgroundImages:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/bg-img
+    type: pvc
   attachments:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/attachments
+    type: pvc
   pgData:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/pgData
+    type: pvc
   pgBackup:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/pgBackup
+    type: emptyDir

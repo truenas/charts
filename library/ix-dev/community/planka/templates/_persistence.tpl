@@ -2,37 +2,28 @@
 persistence:
   avatars:
     enabled: true
-    type: {{ .Values.plankaStorage.avatars.type }}
-    datasetName: {{ .Values.plankaStorage.avatars.datasetName | default "" }}
-    hostPath: {{ .Values.plankaStorage.avatars.hostPath | default "" }}
+    {{- include "planka.storage.ci.migration" (dict "storage" .Values.plankaStorage.avatars) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.plankaStorage.avatars) | nindent 4 }}
     targetSelector:
       planka:
         planka:
           mountPath: /app/public/user-avatars
-        01-permissions:
-          mountPath: /mnt/directories/user-avatars
   bg-img:
     enabled: true
-    type: {{ .Values.plankaStorage.backgroundImages.type }}
-    datasetName: {{ .Values.plankaStorage.backgroundImages.datasetName | default "" }}
-    hostPath: {{ .Values.plankaStorage.backgroundImages.hostPath | default "" }}
+    {{- include "planka.storage.ci.migration" (dict "storage" .Values.plankaStorage.backgroundImages) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.plankaStorage.backgroundImages) | nindent 4 }}
     targetSelector:
       planka:
         planka:
           mountPath: /app/public/project-background-images
-        01-permissions:
-          mountPath: /mnt/directories/project-background-images
   attachments:
     enabled: true
-    type: {{ .Values.plankaStorage.attachments.type }}
-    datasetName: {{ .Values.plankaStorage.attachments.datasetName | default "" }}
-    hostPath: {{ .Values.plankaStorage.attachments.hostPath | default "" }}
+    {{- include "planka.storage.ci.migration" (dict "storage" .Values.plankaStorage.attachments) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.plankaStorage.attachments) | nindent 4 }}
     targetSelector:
       planka:
         planka:
           mountPath: /app/private/attachments
-        01-permissions:
-          mountPath: /mnt/directories/attachments
   tmp:
     enabled: true
     type: emptyDir
@@ -41,36 +32,29 @@ persistence:
         planka:
           mountPath: /tmp
   {{- range $idx, $storage := .Values.plankaStorage.additionalStorages }}
-  {{ printf "planka-%v" (int $idx) }}:
-    {{- $size := "" -}}
-    {{- if $storage.size -}}
-      {{- $size = (printf "%vGi" $storage.size) -}}
-    {{- end }}
-    enabled: true
-    type: {{ $storage.type }}
-    datasetName: {{ $storage.datasetName | default "" }}
-    hostPath: {{ $storage.hostPath | default "" }}
-    server: {{ $storage.server | default "" }}
-    share: {{ $storage.share | default "" }}
-    domain: {{ $storage.domain | default "" }}
-    username: {{ $storage.username | default "" }}
-    password: {{ $storage.password | default "" }}
-    size: {{ $size }}
-    {{- if eq $storage.type "smb-pv-pvc" }}
-    mountOptions:
-      - key: noperm
-    {{- end }}
+  {{ printf "planka-%v:" (int $idx) }}
+    {{- include "planka.storage.ci.migration" (dict "storage" $storage) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       planka:
         planka:
           mountPath: {{ $storage.mountPath }}
-        01-permissions:
-          mountPath: /mnt/directories{{ $storage.mountPath }}
   {{- end }}
 
-
+  {{- include "planka.storage.ci.migration" (dict "storage" .Values.plankaStorage.pgData) }}
+  {{- include "planka.storage.ci.migration" (dict "storage" .Values.plankaStorage.pgBackup) }}
   {{- include "ix.v1.common.app.postgresPersistence"
       (dict "pgData" .Values.plankaStorage.pgData
             "pgBackup" .Values.plankaStorage.pgBackup
       ) | nindent 2 }}
+{{- end -}}
+
+{{/* TODO: Remove on the next version bump, eg 1.2.0+ */}}
+{{- define "planka.storage.ci.migration" -}}
+  {{- $storage := .storage -}}
+
+  {{- if $storage.hostPath -}}
+    {{- $_ := set $storage "hostPathConfig" dict -}}
+    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
+  {{- end -}}
 {{- end -}}

@@ -1,7 +1,7 @@
 image:
   repository: ghcr.io/plankanban/planka
   pullPolicy: IfNotPresent
-  tag: 1.14.3
+  tag: 1.15.0
 
 resources:
   limits:
@@ -24,20 +24,25 @@ plankaNetwork:
 plankaStorage:
   avatars:
     type: ixVolume
-    datasetName: avatars
+    ixVolumeConfig:
+      datasetName: avatars
   backgroundImages:
     type: ixVolume
-    datasetName: bg-img
+    ixVolumeConfig:
+      datasetName: bg-img
   attachments:
     type: ixVolume
-    datasetName: attachments
+    ixVolumeConfig:
+      datasetName: attachments
   additionalStorages: []
   pgData:
     type: ixVolume
-    datasetName: pgData
+    ixVolumeConfig:
+      datasetName: pgData
   pgBackup:
     type: ixVolume
-    datasetName: pgBackup
+    ixVolumeConfig:
+      datasetName: pgBackup
 
 notes:
   custom: |
