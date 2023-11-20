@@ -25,7 +25,7 @@ def storage_migrate(storage):
 
 
     for key in delete_keys:
-        storage.pop(key)
+        storage.pop(key, None)
 
     return storage
 
