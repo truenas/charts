@@ -66,8 +66,6 @@ def migrate(values):
     if libraries := values.get(storage_key, {}).get('additionalLibraries', None):
         # If additionalLibraries exists, additionalStorages does not exist yet
         values[storage_key]['additionalStorages'] = libraries_migrate(libraries)
-
-
         values[storage_key].pop('additionalLibraries', None)
 
     return values
