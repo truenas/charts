@@ -14,7 +14,7 @@ def storage_migrate(storage):
         storage['hostPathConfig'] = {'hostPath': storage['hostPath']}
         delete_keys.append('hostPath')
 
-    if storage['type'] == 'ixVolume':
+    elif storage['type'] == 'ixVolume':
         # Check if the key exists, if not we have already migrated
         if not storage.get('datasetName'):
             return storage
@@ -24,7 +24,7 @@ def storage_migrate(storage):
 
 
     for key in delete_keys:
-        del storage[key]
+        storage.pop(key, None)
 
     return storage
 
