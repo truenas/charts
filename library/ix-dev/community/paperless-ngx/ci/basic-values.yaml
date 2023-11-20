@@ -12,20 +12,14 @@ paperlessID:
 
 paperlessStorage:
   data:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/data
+    type: pvc
   media:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/media
+    type: pvc
   consume:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/consume
+    type: pvc
   trash:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/trash
+    type: pvc
   pgData:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/pgData
+    type: pvc
   pgBackup:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/pgBackup
+    type: emptyDir
