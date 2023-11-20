@@ -1,0 +1,24 @@
+name: newsly-database
+description: All tabloid titles in one place without additional bullshit!
+annotations:
+  title: Newsly Database
+type: application
+version: 1.0.1
+apiVersion: v2
+appVersion: '0.2'
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: homechart
+    url: https://departy.xyz/
+    email: dev@departy.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 2304.0.1
+home: https://github.com/martinikolaev/newsly
+icon: https://raw.githubusercontent.com/martinikolaev/charts/master/logos/newsly.png
+sources:
+  - https://github.com/martinikolaev/newsly
+keywords:
+  - news
+  - tabloids
