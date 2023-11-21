@@ -2,9 +2,7 @@
 persistence:
   data:
     enabled: true
-    type: {{ .Values.freshrssStorage.data.type }}
-    datasetName: {{ .Values.freshrssStorage.data.datasetName | default "" }}
-    hostPath: {{ .Values.freshrssStorage.data.hostPath | default "" }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.freshrssStorage.data) | nindent 4 }}
     targetSelector:
       freshrss:
         freshrss:
@@ -14,9 +12,7 @@ persistence:
           mountPath: /var/www/FreshRSS/data
   extensions:
     enabled: true
-    type: {{ .Values.freshrssStorage.extensions.type }}
-    datasetName: {{ .Values.freshrssStorage.extensions.datasetName | default "" }}
-    hostPath: {{ .Values.freshrssStorage.extensions.hostPath | default "" }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.freshrssStorage.extensions) | nindent 4 }}
     targetSelector:
       freshrss:
         freshrss:
@@ -35,25 +31,9 @@ persistence:
         freshrss:
           mountPath: /tmp
   {{- range $idx, $storage := .Values.freshrssStorage.additionalStorages }}
-  {{ printf "freshrss-%v" (int $idx) }}:
-    {{- $size := "" -}}
-    {{- if $storage.size -}}
-      {{- $size = (printf "%vGi" $storage.size) -}}
-    {{- end }}
+  {{ printf "freshrss-%v:" (int $idx) }}
     enabled: true
-    type: {{ $storage.type }}
-    datasetName: {{ $storage.datasetName | default "" }}
-    hostPath: {{ $storage.hostPath | default "" }}
-    server: {{ $storage.server | default "" }}
-    share: {{ $storage.share | default "" }}
-    domain: {{ $storage.domain | default "" }}
-    username: {{ $storage.username | default "" }}
-    password: {{ $storage.password | default "" }}
-    size: {{ $size }}
-    {{- if eq $storage.type "smb-pv-pvc" }}
-    mountOptions:
-      - key: noperm
-    {{- end }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       freshrss:
         freshrss:
@@ -62,7 +42,6 @@ persistence:
         freshrss-cron:
           mountPath: {{ $storage.mountPath }}
   {{- end }}
-
 
   {{- include "ix.v1.common.app.postgresPersistence"
       (dict "pgData" .Values.freshrssStorage.pgData
