@@ -3,7 +3,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: {{ .Chart.Name }}-cronjob
+  name: {{ .Chart.Name }}-backup-cronjob
 spec:
   schedule: "{{ .Values.newslyBackupCronJob.schedule }}"
   concurrencyPolicy: Forbid
