@@ -1,0 +1,53 @@
+{{if .Values.newslyBackupCronJob.enabled }}
+{{ $values := (. | mustDeepCopy) }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ .Chart.Name }}-cronjob
+spec:
+  schedule: "{{ .Values.newslyBackupCronJob.schedule }}"
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 2
+  successfulJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: {{ .Chart.Name }}-backup-cronjob
+            image: "{{.Values.dbimage.repository }}:{{.Values.dbimage.tag }}"
+            env:
+              - name: DB_USER
+                valueFrom:
+                  secretKeyRef:
+                    name: db-details
+                    key: db-user
+              - name: DB_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: db-details
+                    key: db-password
+              - name: DB_NAME
+                value: "{{ .Values.newslyDatabase.dbname }}"
+              - name: DB_PORT
+                value: "{{ .Values.newslyDatabase.port }}"
+              - name: DB_HOST
+                value: "10.2.20.25"
+            command:
+              - "/bin/bash"
+              - "-c"
+              - |
+                TIMESTAMP=$(date +\%Y-\%m-\%dT\%H:\%M:\%S)
+                PGPASSWORD=$DB_PASSWORD pg_dump -h $DB_HOST -p $DB_PORT -U $DB_USER --clean $DB_NAME > /postgres_backups/${DB_NAME}-${TIMESTAMP}.sql
+                if [ $? -eq 0 ]; then
+                  echo "Backup for ${DB_NAME} completed successfully at ${TIMESTAMP}"
+                else
+                  echo "Backup for ${DB_NAME} failed"
+                fi
+
+            volumeMounts: {{ include "postgres.volumeMountsConfiguration" $values | nindent 14 }}
+
+          restartPolicy: OnFailure
+          volumes: {{ include "postgres.volumeConfiguration" $values | nindent 12 }}
+
+{{ end }}
