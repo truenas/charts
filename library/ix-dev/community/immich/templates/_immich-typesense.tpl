@@ -1,6 +1,6 @@
 {{- define "immich.typesense.workload" -}}
 {{- $fullname := (include "ix.v1.common.lib.chart.names.fullname" $) -}}
-{{- $url := printf "http://%v-server:%v/server-info/ping" $fullname .Values.immichNetwork.serverPort }}
+{{- $url := printf "http://%v-server:%v/server-info/ping" $fullname .Values.immichNetwork.webuiPort }}
 workload:
   typesense:
     enabled: true
