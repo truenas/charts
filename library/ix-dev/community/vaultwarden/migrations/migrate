@@ -22,9 +22,9 @@ def storage_migrate(storage):
         storage['ixVolumeConfig'] = {'datasetName': storage['datasetName']}
         delete_keys.append('datasetName')
 
-    # Clean up for some older versions.
-    elif storage['type'] != 'hostPath' and storage.get('hostPath'):
-        delete_keys.append('hostPath')
+        # Clean up for some older versions.
+        if storage.get('hostPath'):
+            delete_keys.append('hostPath')
 
     for key in delete_keys:
         storage.pop(key, None)
