@@ -1,7 +1,7 @@
 image:
   repository: altran1502/immich-server
   pullPolicy: IfNotPresent
-  tag: v1.88.0
+  tag: v1.87.0
 
 webImage:
   repository: altran1502/immich-web
@@ -16,7 +16,7 @@ proxyImage:
 mlImage:
   repository: altran1502/immich-machine-learning
   pullPolicy: IfNotPresent
-  tag: v1.88.0
+  tag: v1.87.0
 
 typesenseImage:
   repository: typesense/typesense
