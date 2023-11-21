@@ -87,7 +87,10 @@ configmap:
     data:
       LOG_LEVEL: log
       NODE_ENV: production
-      SERVER_PORT: {{ .Values.immichNetwork.serverPort | quote }}
+      SERVER_PORT: {{ .Values.immichNetwork.webuiPort | quote }}
+      {{- with .Values.immichConfig.publicLoginMessage }}
+      PUBLIC_LOGIN_PAGE_MESSAGE: {{ . | quote }}
+      {{- end }}
 
   micro-config:
     enabled: true
@@ -96,23 +99,6 @@ configmap:
       NODE_ENV: production
       MICROSERVICES_PORT: {{ .Values.immichNetwork.microservicesPort | quote }}
       REVERSE_GEOCODING_DUMP_DIRECTORY: /microcache
-
-  web-config:
-    enabled: true
-    data:
-      NODE_ENV: production
-      PORT: {{ .Values.immichNetwork.webPort | quote }}
-      IMMICH_SERVER_URL: {{ printf "http://%v-server:%v" $fullname .Values.immichNetwork.serverPort }}
-      PUBLIC_IMMICH_SERVER_URL: {{ printf "http://%v-server:%v" $fullname .Values.immichNetwork.serverPort }}
-      {{- with .Values.immichConfig.publicLoginMessage }}
-      PUBLIC_LOGIN_PAGE_MESSAGE: {{ . | quote }}
-      {{- end }}
-
-  proxy-config:
-    enabled: true
-    data:
-      IMMICH_WEB_URL: {{ printf "http://%v-web:%v" $fullname .Values.immichNetwork.webPort }}
-      IMMICH_SERVER_URL: {{ printf "http://%v-server:%v" $fullname .Values.immichNetwork.serverPort }}
 
   {{- if .Values.immichConfig.enableML }}
   ml-config:
