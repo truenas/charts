@@ -1,5 +1,5 @@
 {{if .Values.newslyBackupCronJob.enabled }}
-
+{{ $values := (. | mustDeepCopy) }}
 apiVersion: batch/v1
 kind: CronJob
 metadata:
@@ -38,7 +38,10 @@ spec:
               - "-c"
               - |
                 TIMESTAMP=$(date +\%Y-\%m-\%dT\%H:\%M:\%S)
-                PGPASSWORD=$DB_PASSWORD pg_dump -h $DB_HOST -p $DB_PORT -U $DB_USER $DB_NAME > /tmp/backups/${DB_NAME}-${TIMESTAMP}.sql
-                        
+                PGPASSWORD=$DB_PASSWORD pg_dump -h $DB_HOST -p $DB_PORT -U $DB_USER $DB_NAME > /postgres_backups/${DB_NAME}-${TIMESTAMP}.sql
+            volumeMounts: {{ include "postgres.volumeMountsConfiguration" $values | nindent 14 }}
+
           restartPolicy: OnFailure
+          volumes: {{ include "postgres.volumeConfiguration" $values | nindent 12 }}
+
 {{ end }}
