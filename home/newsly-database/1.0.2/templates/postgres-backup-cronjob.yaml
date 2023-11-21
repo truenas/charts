@@ -39,6 +39,12 @@ spec:
               - |
                 TIMESTAMP=$(date +\%Y-\%m-\%dT\%H:\%M:\%S)
                 PGPASSWORD=$DB_PASSWORD pg_dump -h $DB_HOST -p $DB_PORT -U $DB_USER $DB_NAME > /postgres_backups/${DB_NAME}-${TIMESTAMP}.sql
+                if [ $? -eq 0 ]; then
+                  echo "Backup for ${DB_NAME} completed successfully at ${TIMESTAMP}"
+                else
+                  echo "Backup for ${DB_NAME} failed"
+                fi
+                
             volumeMounts: {{ include "postgres.volumeMountsConfiguration" $values | nindent 14 }}
 
           restartPolicy: OnFailure
