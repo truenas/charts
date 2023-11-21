@@ -109,6 +109,8 @@ questions:
         type: string
         default: newsly
         required: true
+        hidden: true
+        editable: false
 
 
 - variable: newslyRunAs
