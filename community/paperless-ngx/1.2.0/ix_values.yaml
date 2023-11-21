@@ -26,22 +26,28 @@ paperlessID:
 paperlessStorage:
   data:
     type: ixVolume
-    datasetName: data
+    ixVolumeConfig:
+      datasetName: data
   media:
     type: ixVolume
-    datasetName: media
+    ixVolumeConfig:
+      datasetName: media
   consume:
     type: ixVolume
-    datasetName: consume
+    ixVolumeConfig:
+      datasetName: consume
   trash:
     type: ixVolume
-    datasetName: trash
+    ixVolumeConfig:
+      datasetName: trash
   pgData:
     type: ixVolume
-    datasetName: pgData
+    ixVolumeConfig:
+      datasetName: pgData
   pgBackup:
     type: ixVolume
-    datasetName: pgBackup
+    ixVolumeConfig:
+      datasetName: pgBackup
   additionalStorages: []
 
 notes:
