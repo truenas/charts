@@ -7,8 +7,6 @@
 {{- if .Values.immichConfig.enableML -}}
   {{- $_ := mustMergeOverwrite .Values (include "immich.machinelearning.workload" $ | fromYaml) -}}
 {{- end -}}
-{{- $_ := mustMergeOverwrite .Values (include "immich.web.workload" $ | fromYaml) -}}
-{{- $_ := mustMergeOverwrite .Values (include "immich.proxy.workload" $ | fromYaml) -}}
 {{- if .Values.immichConfig.enableTypesense -}}
   {{- $_ := mustMergeOverwrite .Values (include "immich.typesense.workload" $ | fromYaml) -}}
 {{- end -}}

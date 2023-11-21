@@ -1,43 +1,18 @@
 {{- define "immich.service" -}}
 service:
-  proxy:
+  server:
     enabled: true
     primary: true
     type: NodePort
-    targetSelector: proxy
-    ports:
-      proxy:
-        enabled: true
-        primary: true
-        port: {{ .Values.immichNetwork.webuiPort }}
-        nodePort: {{ .Values.immichNetwork.webuiPort }}
-        protocol: http
-        targetPort: 8080
-        targetSelector: proxy
-
-  server:
-    enabled: true
-    type: ClusterIP
     targetSelector: server
     ports:
       server:
         enabled: true
         primary: true
-        port: {{ .Values.immichNetwork.serverPort }}
+        port: {{ .Values.immichNetwork.webuiPort }}
+        nodePort: {{ .Values.immichNetwork.webuiPort }}
         protocol: http
         targetSelector: server
-
-  web:
-    enabled: true
-    type: ClusterIP
-    targetSelector: web
-    ports:
-      web:
-        enabled: true
-        primary: true
-        port: {{ .Values.immichNetwork.webPort }}
-        protocol: http
-        targetSelector: web
 
   microservices:
     enabled: true

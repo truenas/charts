@@ -1,12 +1,4 @@
 {{- define "immich.persistence" -}}
-  {{- include "immich.storage.ci.migration" (dict "storage" .Values.immichStorage.pgData) }}
-  {{- include "immich.storage.ci.migration" (dict "storage" .Values.immichStorage.pgBackup) }}
-  {{- include "immich.storage.ci.migration" (dict "storage" .Values.immichStorage.library) }}
-  {{- include "immich.storage.ci.migration" (dict "storage" .Values.immichStorage.uploads) }}
-  {{- include "immich.storage.ci.migration" (dict "storage" .Values.immichStorage.thumbs) }}
-  {{- include "immich.storage.ci.migration" (dict "storage" .Values.immichStorage.profile) }}
-  {{- include "immich.storage.ci.migration" (dict "storage" .Values.immichStorage.video) }}
-
 persistence:
   {{/* Data */}}
   library:
@@ -62,7 +54,6 @@ persistence:
   {{- range $idx, $storage := .Values.immichStorage.additionalStorages }}
   {{ printf "immich-%v:" (int $idx) }}
     enabled: true
-    {{- include "immich.storage.ci.migration" (dict "storage" $storage) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       server:
@@ -119,14 +110,4 @@ persistence:
       (dict "pgData" .Values.immichStorage.pgData
             "pgBackup" .Values.immichStorage.pgBackup
       ) | nindent 2 }}
-{{- end -}}
-
-{{/* Can be removed on the next bump (1.1.0+), only used for CI values */}}
-{{- define "immich.storage.ci.migration" -}}
-  {{- $storage := .storage -}}
-
-  {{- if $storage.hostPath -}}
-    {{- $_ := set $storage "hostPathConfig" dict -}}
-    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
-  {{- end -}}
 {{- end -}}
