@@ -38,8 +38,7 @@ spec:
               - "-c"
               - |
                 TIMESTAMP=$(date +\%Y-\%m-\%dT\%H:\%M:\%S)
-                PGPASSWORD=$DB_PASSWORD pg_dump -h $DB_HOST -p $DB_PORT -U $DB_USER $DB_NAME > /tmp/backups/databasename-${TIMESTAMP}.sql
-            
-            
+                PGPASSWORD=$DB_PASSWORD pg_dump -h $DB_HOST -p $DB_PORT -U $DB_USER $DB_NAME > /tmp/backups/${DB_NAME}-${TIMESTAMP}.sql
+                        
           restartPolicy: OnFailure
 {{ end }}
