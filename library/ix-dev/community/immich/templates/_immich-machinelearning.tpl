@@ -1,6 +1,6 @@
 {{- define "immich.machinelearning.workload" -}}
 {{- $fullname := (include "ix.v1.common.lib.chart.names.fullname" $) -}}
-{{- $url := printf "http://%v-server:%v/api/server-info/ping" $fullname .Values.immichNetwork.webuiPort }}
+{{- $url := printf "http://%v:%v/api/server-info/ping" $fullname .Values.immichNetwork.webuiPort }}
 workload:
   machinelearning:
     enabled: true
