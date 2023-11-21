@@ -1,18 +1,18 @@
 {
-    "1.1.0": {
+    "1.1.1": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/immich/1.1.0",
-        "last_update": "2023-11-21 08:14:57",
+        "location": "/__w/charts/charts/community/immich/1.1.1",
+        "last_update": "2023-11-21 13:24:17",
         "required_features": [
             "normalize/ixVolume",
-            "normalize/acl",
             "definitions/timezone",
+            "normalize/acl",
             "definitions/gpuConfiguration"
         ],
-        "human_version": "1.87.0_1.1.0",
-        "version": "1.1.0",
+        "human_version": "1.87.0_1.1.1",
+        "version": "1.1.1",
         "chart_metadata": {
             "name": "immich",
             "description": "Immich",
@@ -20,7 +20,7 @@
                 "title": "Immich"
             },
             "type": "application",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "apiVersion": "v2",
             "appVersion": "1.87.0",
             "kubeVersion": ">=1.16.0-0",
