@@ -16,15 +16,30 @@ spec:
           containers:
           - name: {{ .Chart.Name }}-backup-cronjob
             image: "{{.Values.dbimage.repository }}:{{.Values.dbimage.tag }}"
-            command: ["python", "/newsly/app-scraper.py"]
-
+            env:
+              - name: DB_USER
+                valueFrom:
+                  secretKeyRef:
+                    name: db-details
+                    key: db-user
+              - name: DB_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: db-details
+                    key: db-password
+              - name: DB_NAME
+                value: "{{ .Values.newslyDatabase.dbname }}"
+              - name: DB_PORT
+                value: "{{ .Values.newslyDatabase.port }}"
+              - name: DB_HOST
+                value: "10.2.20.25"
             command:
               - "/bin/bash"
               - "-c"
               - |
                 TIMESTAMP=$(date +\%Y-\%m-\%dT\%H:\%M:\%S)
-                pg_dump -h your_db_host -p your_db_port -U your_db_user your_db_name > /tmp/backups/databasename-${TIMESTAMP}.sql
-
+                PGPASSWORD=$DB_PASSWORD pg_dump -h $DB_HOST -p $DB_PORT -U $DB_USER $DB_NAME > /tmp/backups/databasename-${TIMESTAMP}.sql
+            
             
           restartPolicy: OnFailure
 {{ end }}
