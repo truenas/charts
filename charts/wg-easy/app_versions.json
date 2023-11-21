@@ -4,11 +4,11 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/wg-easy/1.0.12",
-        "last_update": "2023-11-21 16:56:28",
+        "last_update": "2023-11-21 16:58:20",
         "required_features": [
-            "normalize/ixVolume",
             "definitions/nodeIP",
-            "validations/lockedHostPath"
+            "validations/lockedHostPath",
+            "normalize/ixVolume"
         ],
         "human_version": "7_1.0.12",
         "version": "1.0.12",
