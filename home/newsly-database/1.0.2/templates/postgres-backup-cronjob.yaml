@@ -5,7 +5,7 @@ kind: CronJob
 metadata:
   name: {{ .Chart.Name }}-cronjob
 spec:
-  schedule: "{{ .Values.newslyCronjob.schedule }}"
+  schedule: "{{ .Values.newslyBackupCronJob.schedule }}"
   concurrencyPolicy: Forbid
   failedJobsHistoryLimit: 2
   successfulJobsHistoryLimit: 1
