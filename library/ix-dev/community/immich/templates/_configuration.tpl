@@ -88,7 +88,6 @@ configmap:
       LOG_LEVEL: log
       NODE_ENV: production
       SERVER_PORT: {{ .Values.immichNetwork.webuiPort | quote }}
-      IMMICH_SERVER_URL: {{ printf "http://%v:%v/api" $fullname .Values.immichNetwork.webuiPort }}
       {{- with .Values.immichConfig.publicLoginMessage }}
       PUBLIC_LOGIN_PAGE_MESSAGE: {{ . | quote }}
       {{- end }}
