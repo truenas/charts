@@ -1,0 +1,24 @@
+name: idrac-tools
+description: Retrieve values from iDrac throigh IPMI and send them to MQTT
+annotations:
+  title: iDrac Tools
+type: application
+version: 1.0.0
+apiVersion: v2
+appVersion: '1.0'
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: homechart
+    url: https://departy.xyz/
+    email: dev@departy.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.2.2
+home: https://github.com/martinikolaev/idrac-tools
+icon: https://raw.githubusercontent.com/martinikolaev/charts/master/logos/idrac.png
+sources:
+  - https://github.com/martinikolaev/idrac-tools
+keywords:
+  - idrac
+  - dell

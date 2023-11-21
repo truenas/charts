@@ -81,6 +81,45 @@
                 "https://github.com/truenas/charts/tree/master/charts/wg-easy"
             ],
             "icon_url": "https://raw.githubusercontent.com/martinikolaev/charts/master/logos/newsly.png"
+        },
+        "idractool": {
+            "app_readme": "<h1>iDrac IPMI</h1>\n<p>Get values through IPMI and send them over MQTT</p>",
+            "categories": [
+                "idrac",
+                "ipmi"
+            ],
+            "description": "Get values from iDrac throigh IPMI protocol and send them over MQTT",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://github.com/martinikolaev/idrac-tool",
+            "location": "",
+            "latest_version": "1.0.0",
+            "latest_app_version": "1.0",
+            "latest_human_version": "0.2",
+            "last_update": "2023-11-11 09:32:55",
+            "name": "idractool",
+            "recommended": false,
+            "title": "iDrac Tool",
+            "maintainers": [
+                {
+                    "name": "departy.xyz",
+                    "url": "https://github.com/martinikolaev/idrac-tool/",
+                    "email": "na@na.com"
+                }
+            ],
+            "tags": [
+                "ipmi",
+                "idrac",
+                "mqtt"
+            ],
+            "screenshots": [
+                "https://media.sys.truenas.net/apps/wg-easy/screenshots/screenshot1.png",
+                "https://media.sys.truenas.net/apps/wg-easy/screenshots/screenshot1.png"
+            ],
+            "sources": [
+                "https://github.com/martinikolaev/idrac-tool/"
+            ],
+            "icon_url": "https://raw.githubusercontent.com/martinikolaev/charts/master/logos/idrac.png"
         }
     }
 }
