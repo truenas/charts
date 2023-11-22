@@ -11,11 +11,8 @@ linkdingConfig:
 
 linkdingStorage:
   data:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/data
+    type: pvc
   pgData:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/pgData
+    type: pvc
   pgBackup:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/pgBackup
+    type: emptyDir
