@@ -24,13 +24,16 @@ listmonkRunAs:
 listmonkStorage:
   uploads:
     type: ixVolume
-    datasetName: uploads
+    ixVolumeConfig:
+      datasetName: uploads
   pgData:
     type: ixVolume
-    datasetName: pgData
+    ixVolumeConfig:
+      datasetName: pgData
   pgBackup:
     type: ixVolume
-    datasetName: pgBackup
+    ixVolumeConfig:
+      datasetName: pgBackup
   additionalStorages: []
 
 notes:
