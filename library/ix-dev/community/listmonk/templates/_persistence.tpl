@@ -2,15 +2,11 @@
 persistence:
   uploads:
     enabled: true
-    type: {{ .Values.listmonkStorage.uploads.type }}
-    datasetName: {{ .Values.listmonkStorage.uploads.datasetName | default "" }}
-    hostPath: {{ .Values.listmonkStorage.uploads.hostPath | default "" }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.listmonkStorage.uploads) | nindent 4 }}
     targetSelector:
       listmonk:
         listmonk:
           mountPath: /listmonk/uploads
-        01-permissions:
-          mountPath: /mnt/directories/uploads
   tmp:
     enabled: true
     type: emptyDir
@@ -19,25 +15,9 @@ persistence:
         listmonk:
           mountPath: /tmp
   {{- range $idx, $storage := .Values.listmonkStorage.additionalStorages }}
-  {{ printf "listmonk-%v" (int $idx) }}:
-    {{- $size := "" -}}
-    {{- if $storage.size -}}
-      {{- $size = (printf "%vGi" $storage.size) -}}
-    {{- end }}
+  {{ printf "listmonk-%v:" (int $idx) }}
     enabled: true
-    type: {{ $storage.type }}
-    datasetName: {{ $storage.datasetName | default "" }}
-    hostPath: {{ $storage.hostPath | default "" }}
-    server: {{ $storage.server | default "" }}
-    share: {{ $storage.share | default "" }}
-    domain: {{ $storage.domain | default "" }}
-    username: {{ $storage.username | default "" }}
-    password: {{ $storage.password | default "" }}
-    size: {{ $size }}
-    {{- if eq $storage.type "smb-pv-pvc" }}
-    mountOptions:
-      - key: noperm
-    {{- end }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       listmonk:
         listmonk:
