@@ -55,10 +55,6 @@ workload:
               type: exec
               command: /healthcheck.sh
       initContainers:
-      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
-                                                        "UID" .Values.vaultwardenRunAs.user
-                                                        "GID" .Values.vaultwardenRunAs.group
-                                                        "type" "install") | nindent 8 }}
       {{- include "ix.v1.common.app.postgresWait" (dict "name" "postgres-wait"
                                                         "secretName" "postgres-creds") | nindent 8 }}
 
@@ -86,15 +82,22 @@ service:
 persistence:
   data:
     enabled: true
-    type: {{ .Values.vaultwardenStorage.data.type }}
-    datasetName: {{ .Values.vaultwardenStorage.data.datasetName | default "" }}
-    hostPath: {{ .Values.vaultwardenStorage.data.hostPath | default "" }}
+    {{- include "vaultwarden.storage.ci.migration" (dict "storage" .Values.vaultwardenStorage.data) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.vaultwardenStorage.data) | nindent 4 }}
     targetSelector:
       vaultwarden:
         vaultwarden:
           mountPath: /data
-        01-permissions:
-          mountPath: /mnt/directories/data
+
+  {{- range $idx, $storage := .Values.vaultwardenStorage.additionalStorages }}
+  {{ printf "vaultwarden-%v:" (int $idx) }}
+    enabled: true
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
+    targetSelector:
+      vaultwarden:
+        vaultwarden:
+          mountPath: {{ $storage.mountPath }}
+  {{- end }}
 
   {{- if .Values.vaultwardenNetwork.certificateID }}
   cert:
@@ -118,4 +121,15 @@ scaleCertificate:
     enabled: true
     id: {{ .Values.vaultwardenNetwork.certificateID }}
     {{- end -}}
+{{- end -}}
+
+
+{{/* TODO: Remove on the next version bump, eg 1.1.0+ */}}
+{{- define "vaultwarden.storage.ci.migration" -}}
+  {{- $storage := .storage -}}
+
+  {{- if $storage.hostPath -}}
+    {{- $_ := set $storage "hostPathConfig" dict -}}
+    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
+  {{- end -}}
 {{- end -}}
