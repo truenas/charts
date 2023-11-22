@@ -7,8 +7,6 @@ persistence:
       listmonk:
         listmonk:
           mountPath: /listmonk/uploads
-        01-permissions:
-          mountPath: /mnt/directories/uploads
   tmp:
     enabled: true
     type: emptyDir
