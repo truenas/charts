@@ -1,13 +1,10 @@
 vaultwardenStorage:
   data:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/data
+    type: pvc
   pgData:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/pgData
+    type: pvc
   pgBackup:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/pgBackup
+    type: emptyDir
 
 vaultwardenRunAs:
   user: 1000
