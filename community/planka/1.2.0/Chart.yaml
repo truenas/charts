@@ -3,9 +3,9 @@ description: Planka is an Elegant open source project tracking
 annotations:
   title: Planka
 type: application
-version: 1.1.4
+version: 1.2.0
 apiVersion: v2
-appVersion: 1.14.3
+appVersion: 1.15.0
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: truenas
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.2.2
+    version: 1.2.3
 home: https://github.com/plankanban/planka
 icon: https://media.sys.truenas.net/apps/planka/icons/icon.png
 sources:
