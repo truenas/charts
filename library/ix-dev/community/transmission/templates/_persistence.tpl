@@ -19,7 +19,7 @@ persistence:
     targetSelector:
       transmission:
         transmission:
-          mountPath: /downloads/complete
+          mountPath: {{ .Values.transmissionStorage.downloadsDir | default "/downloads/complete" }}
         01-permissions:
           mountPath: /mnt/directories/complete
   {{- if .Values.transmissionStorage.enableIncompleteDir }}
@@ -31,7 +31,7 @@ persistence:
     targetSelector:
       transmission:
         transmission:
-          mountPath: /downloads/incomplete
+          mountPath: {{ .Values.transmissionStorage.incompleteDir | default "/downloads/incomplete" }}
         01-permissions:
           mountPath: /mnt/directories/incomplete
   {{- end -}}
