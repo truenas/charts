@@ -1,16 +1,16 @@
 {
-    "1.7.21": {
+    "1.7.22": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/minio/1.7.21",
-        "last_update": "2023-11-22 16:59:44",
+        "location": "/__w/charts/charts/charts/minio/1.7.22",
+        "last_update": "2023-11-22 18:00:15",
         "required_features": [
             "definitions/certificate",
             "normalize/ixVolume"
         ],
-        "human_version": "2023-03-13_1.7.21",
-        "version": "1.7.21",
+        "human_version": "2023-03-13_1.7.22",
+        "version": "1.7.22",
         "chart_metadata": {
             "name": "minio",
             "description": "High Performance, Kubernetes Native Object Storage",
@@ -18,7 +18,7 @@
                 "title": "MinIO"
             },
             "type": "application",
-            "version": "1.7.21",
+            "version": "1.7.22",
             "apiVersion": "v2",
             "appVersion": "2023-03-13",
             "kubeVersion": ">=1.16.0-0",
@@ -320,7 +320,7 @@
                 {
                     "variable": "minioDomain",
                     "label": "Minio Domain Name",
-                    "description": "This is only required if TLS is configured for Minio",
+                    "description": "Depending on your setup/environment, you may need to leave this blank.\nCheck MinIO documentation for more information.\n",
                     "group": "Minio Configuration",
                     "schema": {
                         "type": "string",
