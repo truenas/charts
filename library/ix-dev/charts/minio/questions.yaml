@@ -176,7 +176,9 @@ questions:
 
   - variable: minioDomain
     label: "Minio Domain Name"
-    description: "This is only required if TLS is configured for Minio"
+    description: |
+      Depending on your setup/environment, you may need to leave this blank.
+      Check MinIO documentation for more information.
     group: "Minio Configuration"
     schema:
       type: string
