@@ -19,16 +19,21 @@ odooNetwork:
 odooStorage:
   data:
     type: ixVolume
-    datasetName: data
+    ixVolumeConfig:
+      datasetName: data
   addons:
     type: ixVolume
-    datasetName: addons
+    ixVolumeConfig:
+      datasetName: addons
   pgData:
     type: ixVolume
-    datasetName: pgData
+    ixVolumeConfig:
+      datasetName: pgData
   pgBackup:
     type: ixVolume
-    datasetName: pgBackup
+    ixVolumeConfig:
+      datasetName: pgBackup
+  additionalStorages: []
 
 notes:
   custom: |
