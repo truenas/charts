@@ -8,11 +8,18 @@ persistence:
     targetSelector:
       unifi:
         unifi:
-          mountPath: /unifi
+          mountPath: /usr/lib/unifi/data
         01-permissions:
           mountPath: /mnt/directories/unifi
-        02-certs:
-          mountPath: /unifi
+  cert:
+    # Mounted secrets are combined
+    # into a java keystore at startup
+    enabled: true
+    type: emptyDir
+    targetSelector:
+      unifi:
+        unifi:
+          mountPath: /usr/lib/unifi/cert
   tmp:
     enabled: true
     type: emptyDir
@@ -49,22 +56,28 @@ persistence:
   {{- end -}}
 
   {{- if .Values.unifiNetwork.certificateID }}
-  cert:
+  cert-private:
     enabled: true
     type: secret
     objectName: unifi-cert
     defaultMode: "0600"
-    items:
-      - key: tls.key
-        path: private.key
-      - key: tls.crt
-        path: public.crt
     targetSelector:
       unifi:
-        02-certs:
-          mountPath: /ix/cert
+        unifi:
+          mountPath: /usr/lib/unifi/cert/privkey.pem
+          subPath: tls.key
           readOnly: true
-
+  cert-public:
+    enabled: true
+    type: secret
+    objectName: unifi-cert
+    defaultMode: "0600"
+    targetSelector:
+      unifi:
+        unifi:
+          mountPath: /usr/lib/unifi/cert/cert.pem
+          subPath: tls.crt
+          readOnly: true
 scaleCertificate:
   unifi-cert:
     enabled: true

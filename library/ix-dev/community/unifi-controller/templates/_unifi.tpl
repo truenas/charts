@@ -16,16 +16,13 @@ workload:
             runAsGroup: 999
             readOnlyRootFilesystem: false
           env:
-            UNIFI_STDOUT: true
+            DB_MONGO_LOCAL: true
+            RUN_CHOWN: false
+            RUNAS_UID0: false
             UNIFI_HTTP_PORT: {{ .Values.unifiNetwork.webHttpPort }}
             UNIFI_HTTPS_PORT: {{ .Values.unifiNetwork.webHttpsPort }}
             PORTAL_HTTP_PORT: {{ .Values.unifiNetwork.portalHttpPort }}
             PORTAL_HTTPS_PORT: {{ .Values.unifiNetwork.portalHttpsPort }}
-            {{- if .Values.unifiNetwork.certificateID }}
-            CERTNAME: cert.pem
-            CERT_PRIVATE_NAME: privkey.pem
-            CERT_IS_CHAIN: true
-            {{- end }}
           {{ with .Values.unifiConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
@@ -52,27 +49,4 @@ workload:
                                                         "GID" 999
                                                         "mode" "check"
                                                         "type" "init") | nindent 8 }}
-      {{- if .Values.unifiNetwork.certificateID }}
-        # Unifi chowns the files on startup, and if we mount them directly
-        # from the secret, it will fail to start. So we make copy.
-        02-certs:
-          enabled: true
-          type: init
-          imageSelector: image
-          securityContext:
-            runAsUser: 999
-            runAsGroup: 999
-            readOnlyRootFilesystem: false
-          command:
-            - /bin/sh
-            - -c
-          args:
-            - |
-              certdir=/unifi/cert
-              echo "Copying certificates to $certdir"
-              mkdir -p $certdir
-              cp --force --verbose /ix/cert/private.key $certdir/privkey.pem
-              cp --force --verbose /ix/cert/public.crt $certdir/cert.pem
-              cp --force --verbose /ix/cert/public.crt $certdir/chain.pem
-      {{- end -}}
 {{- end -}}
