@@ -1,11 +1,11 @@
 unifiStorage:
   data:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/data
+    type: pvc
+  logs:
+    type: pvc
   additionalStorages:
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/init.d
-    mountPath: /unifi/init.d
+  - type: pvc
+    mountPath: /data2
 
 unifiNetwork:
   enableWebHttp: true
