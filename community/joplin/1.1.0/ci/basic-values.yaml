@@ -1,0 +1,8 @@
+joplinNetwork:
+  webPort: 31000
+
+joplinStorage:
+  pgData:
+    type: pvc
+  pgBackup:
+    type: emptyDir
