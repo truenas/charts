@@ -47,10 +47,6 @@ workload:
               path: /api/healthz
               port: {{ .Values.giteaNetwork.webPort }}
       initContainers:
-      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
-                                                        "UID" .Values.giteaRunAs.user
-                                                        "GID" .Values.giteaRunAs.group
-                                                        "type" "install") | nindent 8 }}
       {{- include "ix.v1.common.app.postgresWait" (dict "name" "postgres-wait"
                                                         "secretName" "postgres-creds") | nindent 8 }}
 {{/* Service */}}
@@ -77,9 +73,8 @@ service:
 persistence:
   data:
     enabled: true
-    type: {{ .Values.giteaStorage.data.type }}
-    datasetName: {{ .Values.giteaStorage.data.datasetName | default "" }}
-    hostPath: {{ .Values.giteaStorage.data.hostPath | default "" }}
+    {{- include "gitea.storage.ci.migration" (dict "storage" .Values.giteaStorage.data) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.giteaStorage.data) | nindent 4 }}
     targetSelector:
       gitea:
         gitea:
@@ -88,9 +83,8 @@ persistence:
           mountPath: /mnt/directories/data
   config:
     enabled: true
-    type: {{ .Values.giteaStorage.config.type }}
-    datasetName: {{ .Values.giteaStorage.config.datasetName | default "" }}
-    hostPath: {{ .Values.giteaStorage.config.hostPath | default "" }}
+    {{- include "gitea.storage.ci.migration" (dict "storage" .Values.giteaStorage.config) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.giteaStorage.config) | nindent 4 }}
     targetSelector:
       gitea:
         gitea:
@@ -104,6 +98,17 @@ persistence:
       gitea:
         gitea:
           mountPath: /tmp/gitea
+
+  {{- range $idx, $storage := .Values.giteaStorage.additionalStorages }}
+  {{ printf "gitea-%v:" (int $idx) }}
+    enabled: true
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
+    targetSelector:
+      gitea:
+        gitea:
+          mountPath: {{ $storage.mountPath }}
+  {{- end }}
+
   {{ if .Values.giteaNetwork.certificateID }}
   cert:
     enabled: true
@@ -121,4 +126,15 @@ persistence:
           mountPath: /etc/certs/gitea
           readOnly: true
   {{ end }}
+{{- end -}}
+
+
+{{/* TODO: Remove on the next version bump, eg 1.1.0+ */}}
+{{- define "gitea.storage.ci.migration" -}}
+  {{- $storage := .storage -}}
+
+  {{- if $storage.hostPath -}}
+    {{- $_ := set $storage "hostPathConfig" dict -}}
+    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
+  {{- end -}}
 {{- end -}}

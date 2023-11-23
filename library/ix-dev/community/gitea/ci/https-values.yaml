@@ -1,16 +1,12 @@
 giteaStorage:
   data:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/data
+    type: pvc
   config:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/config
+    type: pvc
   pgData:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/pgData
+    type: pvc
   pgBackup:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/pgBackup
+    type: emptyDir
 
 giteaNetwork:
   certificateID: 1
