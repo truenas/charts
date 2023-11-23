@@ -8,11 +8,8 @@ fireflyNetwork:
 
 fireflyStorage:
   uploads:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/uploads
+    type: pvc
   pgData:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/pgData
+    type: pvc
   pgBackup:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/pgBackup
+    type: emptyDir
