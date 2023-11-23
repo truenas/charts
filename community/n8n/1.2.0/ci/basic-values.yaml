@@ -1,0 +1,10 @@
+n8nNetwork:
+  webPort: 31000
+
+n8nStorage:
+  data:
+    type: pvc
+  pgData:
+    type: pvc
+  pgBackup:
+    type: emptyDir
