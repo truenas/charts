@@ -4,11 +4,11 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/community/tdarr/1.1.2",
-        "last_update": "2023-11-23 08:16:52",
+        "last_update": "2023-11-23 08:50:20",
         "required_features": [
-            "definitions/gpuConfiguration",
             "definitions/timezone",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/gpuConfiguration"
         ],
         "human_version": "2.00.20.1_1.1.2",
         "version": "1.1.2",
