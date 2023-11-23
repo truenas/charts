@@ -2,29 +2,23 @@
 persistence:
   data:
     enabled: true
-    type: {{ .Values.odooStorage.data.type }}
-    datasetName: {{ .Values.odooStorage.data.datasetName | default "" }}
-    hostPath: {{ .Values.odooStorage.data.hostPath | default "" }}
+    {{- include "odoo.storage.ci.migration" (dict "storage" .Values.odooStorage.data) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.odooStorage.data) | nindent 4 }}
     targetSelector:
       odoo:
         odoo:
           mountPath: /var/lib/odoo
-        01-permissions:
-          mountPath: /mnt/directories/odoo_data
-        03-db-init:
+        02-db-init:
           mountPath: /var/lib/odoo
   addons:
     enabled: true
-    type: {{ .Values.odooStorage.addons.type }}
-    datasetName: {{ .Values.odooStorage.addons.datasetName | default "" }}
-    hostPath: {{ .Values.odooStorage.addons.hostPath | default "" }}
+    {{- include "odoo.storage.ci.migration" (dict "storage" .Values.odooStorage.addons) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.odooStorage.addons) | nindent 4 }}
     targetSelector:
       odoo:
         odoo:
           mountPath: /mnt/extra-addons
-        01-permissions:
-          mountPath: /mnt/directories/odoo_addons
-        03-db-init:
+        02-db-init:
           mountPath: /mnt/extra-addons
   tmp:
     enabled: true
@@ -33,7 +27,7 @@ persistence:
       odoo:
         odoo:
           mountPath: /tmp
-        03-db-init:
+        02-db-init:
           mountPath: /tmp
 
   config:
@@ -46,13 +40,36 @@ persistence:
           mountPath: /etc/odoo/odoo.conf
           readOnly: true
           subPath: odoo.conf
-        03-db-init:
+        02-db-init:
           mountPath: /etc/odoo/odoo.conf
           readOnly: true
           subPath: odoo.conf
 
+  {{- range $idx, $storage := .Values.odooStorage.additionalStorages }}
+  {{ printf "odoo-%v:" (int $idx) }}
+    enabled: true
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
+    targetSelector:
+      odoo:
+        odoo:
+          mountPath: {{ $storage.mountPath }}
+  {{- end }}
+
+  {{- include "odoo.storage.ci.migration" (dict "storage" .Values.odooStorage.pgData) }}
+  {{- include "odoo.storage.ci.migration" (dict "storage" .Values.odooStorage.pgBackup) }}
   {{- include "ix.v1.common.app.postgresPersistence"
       (dict "pgData" .Values.odooStorage.pgData
             "pgBackup" .Values.odooStorage.pgBackup
       ) | nindent 2 }}
+{{- end -}}
+
+
+{{/* TODO: Remove on the next version bump, eg 1.1.0+ */}}
+{{- define "odoo.storage.ci.migration" -}}
+  {{- $storage := .storage -}}
+
+  {{- if $storage.hostPath -}}
+    {{- $_ := set $storage "hostPathConfig" dict -}}
+    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
+  {{- end -}}
 {{- end -}}
