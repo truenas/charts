@@ -43,7 +43,7 @@ spec:
           command:
             - sh
             - -c
-            - "until curl $apiURL/status; do sleep 2; done"
+            - "until curl --silent $apiURL/status; do sleep 2; done"
       {{ end }}
       containers:
         - name: {{ .Chart.Name }}
