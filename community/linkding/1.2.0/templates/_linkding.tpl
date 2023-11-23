@@ -44,11 +44,6 @@ workload:
               port: {{ .Values.linkdingNetwork.webPort }}
               path: /health
       initContainers:
-      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
-                                                        "UID" .Values.linkdingRunAs.user
-                                                        "GID" .Values.linkdingRunAs.group
-                                                        "mode" "check"
-                                                        "type" "init") | nindent 8 }}
-      {{- include "ix.v1.common.app.postgresWait" (dict "name" "02-postgres-wait"
+      {{- include "ix.v1.common.app.postgresWait" (dict "name" "01-postgres-wait"
                                                         "secretName" "postgres-creds") | nindent 8 }}
 {{- end -}}
