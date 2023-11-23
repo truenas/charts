@@ -1,15 +1,15 @@
 {
-    "1.0.27": {
+    "1.0.28": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/adguard-home/1.0.27",
-        "last_update": "2023-11-23 22:45:31",
+        "location": "/__w/charts/charts/community/adguard-home/1.0.28",
+        "last_update": "2023-11-23 22:48:53",
         "required_features": [
             "normalize/ixVolume"
         ],
-        "human_version": "0.107.41_1.0.27",
-        "version": "1.0.27",
+        "human_version": "0.107.41_1.0.28",
+        "version": "1.0.28",
         "chart_metadata": {
             "name": "adguard-home",
             "description": "Free and open source, powerful network-wide ads & trackers blocking DNS server.",
@@ -17,7 +17,7 @@
                 "title": "AdGuard Home"
             },
             "type": "application",
-            "version": "1.0.27",
+            "version": "1.0.28",
             "apiVersion": "v2",
             "appVersion": "0.107.41",
             "kubeVersion": ">=1.16.0-0",
@@ -32,7 +32,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.2"
+                    "version": "1.2.3"
                 }
             ],
             "home": "https://github.com/AdguardTeam/AdGuardHome",

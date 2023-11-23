@@ -1,16 +1,16 @@
 {
-    "1.1.3": {
+    "1.1.4": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/filebrowser/1.1.3",
-        "last_update": "2023-11-23 22:45:31",
+        "location": "/__w/charts/charts/community/filebrowser/1.1.4",
+        "last_update": "2023-11-23 22:48:53",
         "required_features": [
-            "definitions/certificate",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/certificate"
         ],
-        "human_version": "2.26.0_1.1.3",
-        "version": "1.1.3",
+        "human_version": "2.26.0_1.1.4",
+        "version": "1.1.4",
         "chart_metadata": {
             "name": "filebrowser",
             "description": "File Browser provides a file managing interface within a specified directory and it can be used to upload, delete, preview, rename and edit your files.",
@@ -18,7 +18,7 @@
                 "title": "File Browser"
             },
             "type": "application",
-            "version": "1.1.3",
+            "version": "1.1.4",
             "apiVersion": "v2",
             "appVersion": "2.26.0",
             "kubeVersion": ">=1.16.0-0",
@@ -33,7 +33,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.2"
+                    "version": "1.2.3"
                 }
             ],
             "home": "https://filebrowser.org",

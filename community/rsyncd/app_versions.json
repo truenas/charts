@@ -1,13 +1,13 @@
 {
-    "1.0.9": {
+    "1.0.10": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/rsyncd/1.0.9",
-        "last_update": "2023-11-23 22:45:31",
+        "location": "/__w/charts/charts/community/rsyncd/1.0.10",
+        "last_update": "2023-11-23 22:48:53",
         "required_features": [],
-        "human_version": "1.0.0_1.0.9",
-        "version": "1.0.9",
+        "human_version": "1.0.0_1.0.10",
+        "version": "1.0.10",
         "chart_metadata": {
             "name": "rsyncd",
             "description": "Rsync is an open source utility that provides fast incremental file transfer.",
@@ -15,7 +15,7 @@
                 "title": "Rsync Daemon"
             },
             "type": "application",
-            "version": "1.0.9",
+            "version": "1.0.10",
             "apiVersion": "v2",
             "appVersion": "1.0.0",
             "kubeVersion": ">=1.16.0-0",
@@ -30,7 +30,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.2"
+                    "version": "1.2.3"
                 }
             ],
             "home": "https://github.com/truenas/containers/tree/main/apps/rsyncd",
