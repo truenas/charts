@@ -4,11 +4,11 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/plex/1.7.58",
-        "last_update": "2023-11-23 22:47:30",
+        "last_update": "2023-11-24 07:54:22",
         "required_features": [
-            "definitions/timezone",
-            "definitions/gpuConfiguration",
             "normalize/ixVolume",
+            "definitions/gpuConfiguration",
+            "definitions/timezone",
             "validations/lockedHostPath"
         ],
         "human_version": "1.32.7.7621_1.7.58",
