@@ -2,7 +2,7 @@
   {{- $fullname := (include "ix.v1.common.lib.chart.names.fullname" $) -}}
 
   {{- $secretKey := randAlphaNum 32 -}}
-  {{- with (lookup "v1" "Secret" .Release.Namespace (printf "%s-homarr" $fullname)) -}}
+  {{- with (lookup "v1" "Secret" .Release.Namespace (printf "%s-homarr-creds" $fullname)) -}}
     {{- $secretKey = ((index .data "NEXTAUTH_SECRET") | b64dec) -}}
   {{- end }}
 
