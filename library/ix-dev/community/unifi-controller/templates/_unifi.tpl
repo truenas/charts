@@ -50,12 +50,14 @@ workload:
                                                         "mode" "check"
                                                         "type" "init") | nindent 8 }}
         {{- $migrate := false -}}
-        {{- if and (hasKey .Values.global "ixChartContext") (hasKey .Values.global.ixChartContext "upgradeMetadata") -}}
-          {{- with .Values.global.ixChartContext.upgradeMetadata -}}
-            {{- $ver := semver (.oldChartVersion | default "0.0.0") -}}
-            {{/* Enable migrate script if old version is below 1.2.x */}}
-            {{- if and (eq $ver.Major 1) (lt $ver.Minor 2) -}}
-              {{- $migrate = true -}}
+        {{- if (hasKey .Values.global "ixChartContext") -}}
+          {{- if (hasKey .Values.global.ixChartContext "upgradeMetadata") -}}
+            {{- with .Values.global.ixChartContext.upgradeMetadata -}}
+              {{- $ver := semver (.oldChartVersion | default "0.0.0") -}}
+              {{/* Enable migrate script if old version is below 1.2.x */}}
+              {{- if and (eq $ver.Major 1) (lt $ver.Minor 2) -}}
+                {{- $migrate = true -}}
+              {{- end -}}
             {{- end -}}
           {{- end -}}
         {{- end }}
