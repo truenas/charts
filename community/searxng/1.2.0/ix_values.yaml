@@ -19,5 +19,6 @@ searxngNetwork:
 searxngStorage:
   config:
     type: ixVolume
-    datasetName: config
+    ixVolumeConfig:
+      datasetName: config
   additionalStorages: []
