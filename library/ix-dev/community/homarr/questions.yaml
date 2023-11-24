@@ -37,13 +37,6 @@ questions:
     schema:
       type: dict
       attrs:
-        - variable: password
-          label: Password (Optional)
-          description: Password for Homarr.
-          schema:
-            type: string
-            default: ""
-            private: true
         - variable: additionalEnvs
           label: Additional Environment Variables
           description: Configure additional environment variables for Homarr.

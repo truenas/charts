@@ -16,9 +16,6 @@ workload:
             runAsGroup: {{ .Values.homarrRunAs.group }}
           env:
             PORT: {{ .Values.homarrNetwork.webPort }}
-            {{ with .Values.homarrConfig.password }}
-            PASSWORD: {{ . }}
-            {{ end }}
           envFrom:
             - secretRef:
                 name: homarr-creds
