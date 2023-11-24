@@ -63,16 +63,18 @@ workload:
             - -c
             - |
               # Check the dir exists
-              if [ -d /usr/lib/unifi/data ]; then
+              if [ -d "/usr/lib/unifi/data" ]; then
                 # If the data/data dir exists, move the files one level up
                 echo "Checking if data/data dir exists"
-                if [ -d /usr/lib/unifi/data/data ]; then
+                if [ -d "/usr/lib/unifi/data/data" ]; then
                   echo "Checking if data dir is empty"
-                  if [ ! $(ls -A /usr/lib/unifi/data | grep -v "data") ]; then
+                  dirs=$(ls -A /usr/lib/unifi/data | grep -v "data")
+                  if [ -n "$dirs" ]; then
                     echo "Migrating data one level up"
                     mv /usr/lib/unifi/data/data/* /usr/lib/unifi/data || exit 1
                     # Remove the data/data dir
                     rm -rf /usr/lib/unifi/data/data
+                    echo "Data migration complete"
                   fi
                 fi
               fi
