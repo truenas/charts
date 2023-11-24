@@ -5,9 +5,13 @@ import sys
 
 
 def migrate_common_lib(values):
-    # Create a new dict, so we can throw away
-    # the old values, instead of deleting each key
-    newValues = {
+    delete_keys = [
+        'wgUDPPort', 'webUIPort', 'hostNetwork', 'cpuLimit', 'memLimit',
+        'dnsConfig', 'environmentVariables', 'appVolumeMounts',
+        'extraAppVolumeMounts', 'wgeasy', 'enableResourceLimits',
+    ]
+
+    values.update({
         # Migrate Network
         'wgNetwork': {
             'udpPort': values['wgUDPPort'],
@@ -63,10 +67,12 @@ def migrate_common_lib(values):
                 for e in values.get('extraAppVolumeMounts', [])
             ],
         },
-    }
+    })
 
+    for k in delete_keys:
+        values.pop(k, None)
 
-    return newValues
+    return values
 
 def migrate(values):
     if not 'wgeasy' in values.keys():
@@ -78,6 +84,8 @@ def migrate(values):
 
 
 if __name__ == '__main__':
+    with open('in.json', 'r') as f:
+        print(json.dumps(migrate(json.loads(f.read()))))
     if len(sys.argv) != 2:
         exit(1)
 
