@@ -1,31 +1,22 @@
 image:
-  repository: n8nio/n8n
+  repository: joplin/server
   pullPolicy: IfNotPresent
-  tag: 1.17.0
+  tag: 2.13.5-beta
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-n8nConfig:
-  webHost: localhost
+joplinConfig:
+  baseUrl: http://localhost:30063
   additionalEnvs: []
 
-n8nRunAs:
-  user: 568
-  group: 568
-
-n8nNetwork:
-  webPort: 30068
-  certificateID:
+joplinNetwork:
+  webPort: 30063
   hostNetwork: false
 
-n8nStorage:
-  data:
-    type: ixVolume
-    ixVolumeConfig:
-      datasetName: data
+joplinStorage:
   pgData:
     type: ixVolume
     ixVolumeConfig:
@@ -38,18 +29,22 @@ n8nStorage:
 
 notes:
   custom: |
+    ## Default Credentials
+      - Username: `admin@localhost`
+      - Password: `admin`
+
     ## Database
     You can connect to the database using the pgAdmin App from the catalog
 
     <details>
       <summary>Database Details</summary>
 
-      - Database: `n8n`
-      - Username: `n8n`
-      - Password: `{{ .Values.n8nDbPass }}`
-      - Host:     `{{ .Values.n8nDbHost }}.{{ .Release.Namespace }}.svc.cluster.local`
+      - Database: `joplin`
+      - Username: `joplin`
+      - Password: `{{ .Values.joplinDbPass }}`
+      - Host:     `{{ .Values.joplinDbHost }}.{{ .Release.Namespace }}.svc.cluster.local`
       - Port:     `5432`
 
     </details>
-    {{- $_ := unset .Values "n8nDbPass" }}
-    {{- $_ := unset .Values "n8nDbHost" }}
+    {{- $_ := unset .Values "joplinDbPass" }}
+    {{- $_ := unset .Values "joplinDbHost" }}
