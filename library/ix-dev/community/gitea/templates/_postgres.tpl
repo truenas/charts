@@ -7,8 +7,6 @@ workload:
 service:
   {{- include "ix.v1.common.app.postgresService" $ | nindent 2 }}
 
-{{- include "gitea.storage.ci.migration" (dict "storage" .Values.giteaStorage.pgData) }}
-{{- include "gitea.storage.ci.migration" (dict "storage" .Values.giteaStorage.pgBackup) }}
 {{/* Persistence */}}
 persistence:
   {{- include "ix.v1.common.app.postgresPersistence"
