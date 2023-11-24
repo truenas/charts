@@ -82,7 +82,6 @@ service:
 persistence:
   data:
     enabled: true
-    {{- include "vaultwarden.storage.ci.migration" (dict "storage" .Values.vaultwardenStorage.data) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.vaultwardenStorage.data) | nindent 4 }}
     targetSelector:
       vaultwarden:
@@ -121,15 +120,4 @@ scaleCertificate:
     enabled: true
     id: {{ .Values.vaultwardenNetwork.certificateID }}
     {{- end -}}
-{{- end -}}
-
-
-{{/* TODO: Remove on the next version bump, eg 1.1.0+ */}}
-{{- define "vaultwarden.storage.ci.migration" -}}
-  {{- $storage := .storage -}}
-
-  {{- if $storage.hostPath -}}
-    {{- $_ := set $storage "hostPathConfig" dict -}}
-    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
-  {{- end -}}
 {{- end -}}

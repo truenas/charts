@@ -2,7 +2,6 @@
 persistence:
   data:
     enabled: true
-    {{- include "odoo.storage.ci.migration" (dict "storage" .Values.odooStorage.data) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.odooStorage.data) | nindent 4 }}
     targetSelector:
       odoo:
@@ -12,7 +11,6 @@ persistence:
           mountPath: /var/lib/odoo
   addons:
     enabled: true
-    {{- include "odoo.storage.ci.migration" (dict "storage" .Values.odooStorage.addons) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.odooStorage.addons) | nindent 4 }}
     targetSelector:
       odoo:
@@ -55,21 +53,8 @@ persistence:
           mountPath: {{ $storage.mountPath }}
   {{- end }}
 
-  {{- include "odoo.storage.ci.migration" (dict "storage" .Values.odooStorage.pgData) }}
-  {{- include "odoo.storage.ci.migration" (dict "storage" .Values.odooStorage.pgBackup) }}
   {{- include "ix.v1.common.app.postgresPersistence"
       (dict "pgData" .Values.odooStorage.pgData
             "pgBackup" .Values.odooStorage.pgBackup
       ) | nindent 2 }}
-{{- end -}}
-
-
-{{/* TODO: Remove on the next version bump, eg 1.1.0+ */}}
-{{- define "odoo.storage.ci.migration" -}}
-  {{- $storage := .storage -}}
-
-  {{- if $storage.hostPath -}}
-    {{- $_ := set $storage "hostPathConfig" dict -}}
-    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
-  {{- end -}}
 {{- end -}}

@@ -2,7 +2,6 @@
 persistence:
   data:
     enabled: true
-    {{- include "n8n.storage.ci.migration" (dict "storage" .Values.n8nStorage.data) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.n8nStorage.data) | nindent 4 }}
     targetSelector:
       n8n:
@@ -18,7 +17,6 @@ persistence:
   {{- range $idx, $storage := .Values.n8nStorage.additionalStorages }}
   {{ printf "n8n-%v:" (int $idx) }}
     enabled: true
-    {{- include "n8n.storage.ci.migration" (dict "storage" $storage) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       n8n:
@@ -26,8 +24,6 @@ persistence:
           mountPath: {{ $storage.mountPath }}
   {{- end }}
 
-  {{- include "n8n.storage.ci.migration" (dict "storage" .Values.n8nStorage.pgData) }}
-  {{- include "n8n.storage.ci.migration" (dict "storage" .Values.n8nStorage.pgBackup) }}
   {{- include "ix.v1.common.app.postgresPersistence"
       (dict "pgData" .Values.n8nStorage.pgData
             "pgBackup" .Values.n8nStorage.pgBackup
@@ -55,14 +51,4 @@ scaleCertificate:
     enabled: true
     id: {{ .Values.n8nNetwork.certificateID }}
     {{- end }}
-{{- end -}}
-
-{{/* TODO: Remove on the next version bump, eg 1.2.0+ */}}
-{{- define "n8n.storage.ci.migration" -}}
-  {{- $storage := .storage -}}
-
-  {{- if $storage.hostPath -}}
-    {{- $_ := set $storage "hostPathConfig" dict -}}
-    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
-  {{- end -}}
 {{- end -}}
