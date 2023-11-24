@@ -51,6 +51,7 @@ workload:
                                                         "type" "init") | nindent 8 }}
         migrate:
           enabled: true
+          type: init
           imageSelector: image
           securityContext:
             runAsUser: 999
