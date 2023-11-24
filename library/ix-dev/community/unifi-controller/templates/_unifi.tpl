@@ -58,24 +58,24 @@ workload:
             runAsGroup: 999
             readOnlyRootFilesystem: false
           command:
-            - /bin/sh
+            - /bin/bash
           args:
             - -c
             - |
+              newdatadir="/usr/lib/unifi/data"
+              olddatadir="/usr/lib/unifi/data/data"
               # Check the dir exists
-              if [ -d "/usr/lib/unifi/data" ]; then
-                # If the data/data dir exists, move the files one level up
-                echo "Checking if data/data dir exists"
-                if [ -d "/usr/lib/unifi/data/data" ]; then
-                  echo "Checking if data dir is empty"
-                  dirs=$(ls -A /usr/lib/unifi/data | grep -v "data")
-                  if [ -n "$dirs" ]; then
-                    echo "Migrating data one level up"
-                    mv /usr/lib/unifi/data/data/* /usr/lib/unifi/data || exit 1
-                    # Remove the data/data dir
-                    rm -rf /usr/lib/unifi/data/data
-                    echo "Data migration complete"
-                  fi
-                fi
+              [ ! -d "$newdatadir" ] && (echo "$newdatadir missing"; exit 1)
+              # Check if there is a data/data dir to migrate
+              [ ! -d "$olddatadir" ] && (echo "No $olddatadir dir found. Migration skipped"; exit 0)
+
+              # Check if the new data dir is empty, ignoring the old data dir
+              dirs=$(ls -A "$newdatadir" | grep -v "data")
+              if [ -n "$dirs" ]; then
+                echo "New data dir is empty. Migrating data one level up"
+                mv $olddatadir/* $newdatadir || (echo "Failed to move data"; exit 1)
+                # Remove the data/data dir
+                rm -rf $olddatadir
+                echo "Data migration complete"
               fi
 {{- end -}}
