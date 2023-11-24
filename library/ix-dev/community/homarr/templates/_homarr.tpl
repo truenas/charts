@@ -30,22 +30,16 @@ workload:
             liveness:
               enabled: true
               type: http
-              port: "{{ .Values.homarrNetwork.webPort }}"
-              path: /api/configs
+              port: {{ .Values.homarrNetwork.webPort }}
+              path: /
             readiness:
               enabled: true
               type: http
-              port: "{{ .Values.homarrNetwork.webPort }}"
-              path: /api/configs
+              port: {{ .Values.homarrNetwork.webPort }}
+              path: /
             startup:
               enabled: true
               type: http
-              port: "{{ .Values.homarrNetwork.webPort }}"
-              path: /api/configs
-      initContainers:
-      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
-                                                        "UID" .Values.homarrRunAs.user
-                                                        "GID" .Values.homarrRunAs.group
-                                                        "mode" "check"
-                                                        "type" "init") | nindent 8 }}
+              port: {{ .Values.homarrNetwork.webPort }}
+              path: /
 {{- end -}}

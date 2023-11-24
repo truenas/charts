@@ -1,7 +1,7 @@
 image:
   repository: ghcr.io/ajnart/homarr
   pullPolicy: IfNotPresent
-  tag: 0.13.4
+  tag: 0.14.2
 
 resources:
   limits:
@@ -23,11 +23,14 @@ homarrRunAs:
 homarrStorage:
   configs:
     type: ixVolume
-    datasetName: configs
+    ixVolumeConfig:
+      datasetName: configs
   data:
     type: ixVolume
-    datasetName: data
+    ixVolumeConfig:
+      datasetName: data
   icons:
     type: ixVolume
-    datasetName: icons
+    ixVolumeConfig:
+      datasetName: icons
   additionalStorages: []
