@@ -65,15 +65,15 @@ workload:
               newdatadir="/usr/lib/unifi/data"
               olddatadir="/usr/lib/unifi/data/data"
               # Check the dir exists
-              [ ! -d "$newdatadir" ] && (echo "$newdatadir missing"; exit 1)
+              [ ! -d "$newdatadir" ] && echo "$newdatadir missing" && exit 1
               # Check if there is a data/data dir to migrate
-              [ ! -d "$olddatadir" ] && (echo "No $olddatadir dir found. Migration skipped"; exit 0)
+              [ ! -d "$olddatadir" ] && echo "No $olddatadir dir found. Migration skipped" && exit 0
 
               # Check if the new data dir is empty, ignoring the old data dir
               dirs=$(ls -A "$newdatadir" | grep -v "data")
               if [ -n "$dirs" ]; then
                 echo "New data dir is empty. Migrating data one level up"
-                mv $olddatadir/* $newdatadir || (echo "Failed to move data"; exit 1)
+                mv $olddatadir/* $newdatadir || echo "Failed to move data" && exit 1
                 # Remove the data/data dir
                 rm -rf $olddatadir
                 echo "Data migration complete"
