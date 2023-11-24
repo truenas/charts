@@ -19,6 +19,9 @@ workload:
             {{ with .Values.homarrConfig.password }}
             PASSWORD: {{ . }}
             {{ end }}
+          envFrom:
+            - secretRef:
+                name: homarr-creds
           {{ with .Values.homarrConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}

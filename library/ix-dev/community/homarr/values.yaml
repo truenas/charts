@@ -24,6 +24,9 @@ homarrStorage:
   configs:
     type: ixVolume
     datasetName: configs
+  data:
+    type: ixVolume
+    datasetName: data
   icons:
     type: ixVolume
     datasetName: icons

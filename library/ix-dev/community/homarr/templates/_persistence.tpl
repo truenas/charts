@@ -11,6 +11,17 @@ persistence:
           mountPath: /app/data/configs
         01-permissions:
           mountPath: /mnt/directories/configs
+  data:
+    enabled: true
+    type: {{ .Values.homarrStorage.data.type }}
+    datasetName: {{ .Values.homarrStorage.data.datasetName | default "" }}
+    hostPath: {{ .Values.homarrStorage.data.hostPath | default "" }}
+    targetSelector:
+      homarr:
+        homarr:
+          mountPath: /data
+        01-permissions:
+          mountPath: /mnt/directories/data
   icons:
     enabled: true
     type: {{ .Values.homarrStorage.icons.type }}
