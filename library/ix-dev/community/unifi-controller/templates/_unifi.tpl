@@ -49,7 +49,7 @@ workload:
                                                         "GID" 999
                                                         "mode" "check"
                                                         "type" "init") | nindent 8 }}
-        migrate:
+        02-migrate:
           enabled: true
           type: init
           imageSelector: image
