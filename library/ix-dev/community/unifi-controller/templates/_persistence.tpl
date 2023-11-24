@@ -8,7 +8,7 @@ persistence:
     targetSelector:
       unifi:
         unifi:
-          mountPath: /usr/lib/unifi/data
+          mountPath: /usr/lib/unifi/
         01-permissions:
           mountPath: /mnt/directories/unifi
   cert:
@@ -20,6 +20,13 @@ persistence:
       unifi:
         unifi:
           mountPath: /usr/lib/unifi/cert
+  logs:
+    enabled: true
+    type: emptyDir
+    targetSelector:
+      unifi:
+        unifi:
+          mountPath: /usr/lib/unifi/logs
   tmp:
     enabled: true
     type: emptyDir
