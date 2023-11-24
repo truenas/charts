@@ -1,3 +1,4 @@
 unifiStorage:
   data:
-    type: pvc
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Namespace }}/data

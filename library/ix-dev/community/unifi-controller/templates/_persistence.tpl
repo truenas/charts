@@ -8,7 +8,9 @@ persistence:
     targetSelector:
       unifi:
         unifi:
-          mountPath: /usr/lib/unifi/
+          mountPath: /usr/lib/unifi/data
+        migrate:
+          mountPath: /usr/lib/unifi/data
         01-permissions:
           mountPath: /mnt/directories/unifi
   cert:
