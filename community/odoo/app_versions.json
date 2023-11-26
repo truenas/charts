@@ -1,16 +1,16 @@
 {
-    "1.1.0": {
+    "1.1.1": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/odoo/1.1.0",
-        "last_update": "2023-11-25 15:19:44",
+        "location": "/__w/charts/charts/community/odoo/1.1.1",
+        "last_update": "2023-11-26 09:29:22",
         "required_features": [
-            "normalize/ixVolume",
-            "normalize/acl"
+            "normalize/acl",
+            "normalize/ixVolume"
         ],
-        "human_version": "16.0_1.1.0",
-        "version": "1.1.0",
+        "human_version": "16.0_1.1.1",
+        "version": "1.1.1",
         "chart_metadata": {
             "name": "odoo",
             "description": "Odoo is a suite of web based open source business apps.",
@@ -18,7 +18,7 @@
                 "title": "Odoo"
             },
             "type": "application",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "apiVersion": "v2",
             "appVersion": "16.0",
             "kubeVersion": ">=1.16.0-0",
@@ -386,7 +386,7 @@
                                         },
                                         {
                                             "variable": "hostPathConfig",
-                                            "label": "hostPathConfig",
+                                            "label": "Host Path Configuration",
                                             "schema": {
                                                 "type": "dict",
                                                 "show_if": [
@@ -690,7 +690,7 @@
                                         },
                                         {
                                             "variable": "hostPathConfig",
-                                            "label": "hostPathConfig",
+                                            "label": "Host Path Configuration",
                                             "schema": {
                                                 "type": "dict",
                                                 "show_if": [
@@ -996,7 +996,7 @@
                                         },
                                         {
                                             "variable": "hostPathConfig",
-                                            "label": "hostPathConfig",
+                                            "label": "Host Path Configuration",
                                             "schema": {
                                                 "type": "dict",
                                                 "show_if": [
@@ -1303,7 +1303,7 @@
                                         },
                                         {
                                             "variable": "hostPathConfig",
-                                            "label": "hostPathConfig",
+                                            "label": "Host Path Configuration",
                                             "schema": {
                                                 "type": "dict",
                                                 "show_if": [
@@ -1503,7 +1503,7 @@
                                                     },
                                                     {
                                                         "variable": "hostPathConfig",
-                                                        "label": "hostPathConfig",
+                                                        "label": "Host Path Configuration",
                                                         "schema": {
                                                             "type": "dict",
                                                             "show_if": [

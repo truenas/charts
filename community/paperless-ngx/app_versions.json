@@ -1,17 +1,17 @@
 {
-    "1.2.0": {
+    "1.2.1": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/paperless-ngx/1.2.0",
-        "last_update": "2023-11-25 15:19:44",
+        "location": "/__w/charts/charts/community/paperless-ngx/1.2.1",
+        "last_update": "2023-11-26 09:29:22",
         "required_features": [
-            "normalize/ixVolume",
+            "definitions/timezone",
             "normalize/acl",
-            "definitions/timezone"
+            "normalize/ixVolume"
         ],
-        "human_version": "1.17.4_1.2.0",
-        "version": "1.2.0",
+        "human_version": "1.17.4_1.2.1",
+        "version": "1.2.1",
         "chart_metadata": {
             "name": "paperless-ngx",
             "description": "Paperless-ngx is a document management system that transforms your physical documents into a searchable online archive so you can keep, well, less paper.",
@@ -19,7 +19,7 @@
                 "title": "Paperless-ngx"
             },
             "type": "application",
-            "version": "1.2.0",
+            "version": "1.2.1",
             "apiVersion": "v2",
             "appVersion": "1.17.4",
             "kubeVersion": ">=1.16.0-0",
@@ -481,7 +481,7 @@
                                         },
                                         {
                                             "variable": "hostPathConfig",
-                                            "label": "hostPathConfig",
+                                            "label": "Host Path Configuration",
                                             "schema": {
                                                 "type": "dict",
                                                 "show_if": [
@@ -785,7 +785,7 @@
                                         },
                                         {
                                             "variable": "hostPathConfig",
-                                            "label": "hostPathConfig",
+                                            "label": "Host Path Configuration",
                                             "schema": {
                                                 "type": "dict",
                                                 "show_if": [
@@ -1089,7 +1089,7 @@
                                         },
                                         {
                                             "variable": "hostPathConfig",
-                                            "label": "hostPathConfig",
+                                            "label": "Host Path Configuration",
                                             "schema": {
                                                 "type": "dict",
                                                 "show_if": [
@@ -1393,7 +1393,7 @@
                                         },
                                         {
                                             "variable": "hostPathConfig",
-                                            "label": "hostPathConfig",
+                                            "label": "Host Path Configuration",
                                             "schema": {
                                                 "type": "dict",
                                                 "show_if": [
@@ -1699,7 +1699,7 @@
                                         },
                                         {
                                             "variable": "hostPathConfig",
-                                            "label": "hostPathConfig",
+                                            "label": "Host Path Configuration",
                                             "schema": {
                                                 "type": "dict",
                                                 "show_if": [
@@ -2006,7 +2006,7 @@
                                         },
                                         {
                                             "variable": "hostPathConfig",
-                                            "label": "hostPathConfig",
+                                            "label": "Host Path Configuration",
                                             "schema": {
                                                 "type": "dict",
                                                 "show_if": [
@@ -2206,7 +2206,7 @@
                                                     },
                                                     {
                                                         "variable": "hostPathConfig",
-                                                        "label": "hostPathConfig",
+                                                        "label": "Host Path Configuration",
                                                         "schema": {
                                                             "type": "dict",
                                                             "show_if": [
