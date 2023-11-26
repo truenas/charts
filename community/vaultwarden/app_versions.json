@@ -1,18 +1,18 @@
 {
-    "1.1.0": {
+    "1.1.1": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/vaultwarden/1.1.0",
-        "last_update": "2023-11-25 15:19:44",
+        "location": "/__w/charts/charts/community/vaultwarden/1.1.1",
+        "last_update": "2023-11-26 09:29:22",
         "required_features": [
-            "definitions/certificate",
-            "normalize/ixVolume",
+            "definitions/timezone",
             "normalize/acl",
-            "definitions/timezone"
+            "normalize/ixVolume",
+            "definitions/certificate"
         ],
-        "human_version": "1.30.1_1.1.0",
-        "version": "1.1.0",
+        "human_version": "1.30.1_1.1.1",
+        "version": "1.1.1",
         "chart_metadata": {
             "name": "vaultwarden",
             "description": "Alternative implementation of the Bitwarden server API written in Rust and compatible with upstream Bitwarden clients.",
@@ -20,7 +20,7 @@
                 "title": "Vaultwarden"
             },
             "type": "application",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "apiVersion": "v2",
             "appVersion": "1.30.1",
             "kubeVersion": ">=1.16.0-0",
@@ -487,7 +487,7 @@
                                         },
                                         {
                                             "variable": "hostPathConfig",
-                                            "label": "hostPathConfig",
+                                            "label": "Host Path Configuration",
                                             "schema": {
                                                 "type": "dict",
                                                 "show_if": [
@@ -793,7 +793,7 @@
                                         },
                                         {
                                             "variable": "hostPathConfig",
-                                            "label": "hostPathConfig",
+                                            "label": "Host Path Configuration",
                                             "schema": {
                                                 "type": "dict",
                                                 "show_if": [
@@ -1100,7 +1100,7 @@
                                         },
                                         {
                                             "variable": "hostPathConfig",
-                                            "label": "hostPathConfig",
+                                            "label": "Host Path Configuration",
                                             "schema": {
                                                 "type": "dict",
                                                 "show_if": [
@@ -1300,7 +1300,7 @@
                                                     },
                                                     {
                                                         "variable": "hostPathConfig",
-                                                        "label": "hostPathConfig",
+                                                        "label": "Host Path Configuration",
                                                         "schema": {
                                                             "type": "dict",
                                                             "show_if": [

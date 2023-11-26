@@ -1,17 +1,17 @@
 {
-    "1.0.0": {
+    "1.0.1": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/dashy/1.0.0",
-        "last_update": "2023-11-25 15:19:44",
+        "location": "/__w/charts/charts/community/dashy/1.0.1",
+        "last_update": "2023-11-26 09:29:22",
         "required_features": [
             "definitions/certificate",
-            "normalize/ixVolume",
-            "normalize/acl"
+            "normalize/acl",
+            "normalize/ixVolume"
         ],
-        "human_version": "2.1.1_1.0.0",
-        "version": "1.0.0",
+        "human_version": "2.1.1_1.0.1",
+        "version": "1.0.1",
         "chart_metadata": {
             "name": "dashy",
             "description": "Dashy is a self-hostable personal dashboard built for you.",
@@ -19,7 +19,7 @@
                 "title": "Dashy"
             },
             "type": "application",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "apiVersion": "v2",
             "appVersion": "2.1.1",
             "kubeVersion": ">=1.16.0-0",
@@ -366,7 +366,7 @@
                                         },
                                         {
                                             "variable": "hostPathConfig",
-                                            "label": "hostPathConfig",
+                                            "label": "Host Path Configuration",
                                             "schema": {
                                                 "type": "dict",
                                                 "show_if": [
@@ -496,6 +496,7 @@
                                                                     false
                                                                 ]
                                                             ],
+                                                            "immutable": true,
                                                             "required": true
                                                         }
                                                     }
@@ -564,7 +565,7 @@
                                                     },
                                                     {
                                                         "variable": "hostPathConfig",
-                                                        "label": "hostPathConfig",
+                                                        "label": "Host Path Configuration",
                                                         "schema": {
                                                             "type": "dict",
                                                             "show_if": [
@@ -694,6 +695,7 @@
                                                                                 false
                                                                             ]
                                                                         ],
+                                                                        "immutable": true,
                                                                         "required": true
                                                                     }
                                                                 }
