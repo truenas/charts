@@ -73,7 +73,6 @@ service:
 persistence:
   data:
     enabled: true
-    {{- include "gitea.storage.ci.migration" (dict "storage" .Values.giteaStorage.data) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.giteaStorage.data) | nindent 4 }}
     targetSelector:
       gitea:
@@ -83,7 +82,6 @@ persistence:
           mountPath: /mnt/directories/data
   config:
     enabled: true
-    {{- include "gitea.storage.ci.migration" (dict "storage" .Values.giteaStorage.config) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.giteaStorage.config) | nindent 4 }}
     targetSelector:
       gitea:
@@ -126,15 +124,4 @@ persistence:
           mountPath: /etc/certs/gitea
           readOnly: true
   {{ end }}
-{{- end -}}
-
-
-{{/* TODO: Remove on the next version bump, eg 1.1.0+ */}}
-{{- define "gitea.storage.ci.migration" -}}
-  {{- $storage := .storage -}}
-
-  {{- if $storage.hostPath -}}
-    {{- $_ := set $storage "hostPathConfig" dict -}}
-    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
-  {{- end -}}
 {{- end -}}

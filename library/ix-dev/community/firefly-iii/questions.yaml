@@ -179,7 +179,7 @@ questions:
                         show_if: [["aclEnable", "=", true]]
                         attrs: []
               - variable: hostPathConfig
-                label: hostPathConfig
+                label: Host Path Configuration
                 schema:
                   type: dict
                   show_if: [["type", "=", "hostPath"]]
@@ -264,7 +264,7 @@ questions:
                         show_if: [["aclEnable", "=", true]]
                         attrs: []
               - variable: hostPathConfig
-                label: hostPathConfig
+                label: Host Path Configuration
                 schema:
                   type: dict
                   show_if: [["type", "=", "hostPath"]]
@@ -351,7 +351,7 @@ questions:
                         show_if: [["aclEnable", "=", true]]
                         attrs: []
               - variable: hostPathConfig
-                label: hostPathConfig
+                label: Host Path Configuration
                 schema:
                   type: dict
                   show_if: [["type", "=", "hostPath"]]
@@ -425,7 +425,7 @@ questions:
                         type: path
                         required: true
                     - variable: hostPathConfig
-                      label: hostPathConfig
+                      label: Host Path Configuration
                       schema:
                         type: dict
                         show_if: [["type", "=", "hostPath"]]

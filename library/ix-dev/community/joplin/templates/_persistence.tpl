@@ -1,7 +1,4 @@
 {{- define "joplin.persistence" -}}
-  {{- include "joplin.storage.ci.migration" (dict "storage" .Values.joplinStorage.pgData) }}
-  {{- include "joplin.storage.ci.migration" (dict "storage" .Values.joplinStorage.pgBackup) }}
-
 persistence:
   {{- include "ix.v1.common.app.postgresPersistence"
       (dict "pgData" .Values.joplinStorage.pgData
@@ -17,15 +14,4 @@ persistence:
         joplin:
           mountPath: {{ $storage.mountPath }}
   {{- end }}
-{{- end -}}
-
-
-{{/* TODO: Remove on the next version bump, eg 1.1.0+ */}}
-{{- define "joplin.storage.ci.migration" -}}
-  {{- $storage := .storage -}}
-
-  {{- if $storage.hostPath -}}
-    {{- $_ := set $storage "hostPathConfig" dict -}}
-    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
-  {{- end -}}
 {{- end -}}
