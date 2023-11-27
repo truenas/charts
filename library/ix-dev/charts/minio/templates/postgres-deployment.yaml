@@ -9,7 +9,7 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ template "common.names.name" $values }}
-      app.kubernetes.io/instance: {{ .Release.Name }}-postgres
+      app.kubernetes.io/instance: {{ .Release.Name }}-postgres-pg
       app: {{ template "common.names.name" . }}
       release: {{ .Release.Name }}
   template: {{ include "common.deployment.pod.metadata" $values | nindent 4 }}
