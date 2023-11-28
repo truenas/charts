@@ -1,15 +1,15 @@
 {
-    "1.0.16": {
+    "1.0.17": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/storj/1.0.16",
-        "last_update": "2023-11-28 14:57:43",
+        "location": "/__w/charts/charts/charts/storj/1.0.17",
+        "last_update": "2023-11-28 15:00:53",
         "required_features": [
             "normalize/ixVolume"
         ],
-        "human_version": "v1.68.2_1.0.16",
-        "version": "1.0.16",
+        "human_version": "v1.68.2_1.0.17",
+        "version": "1.0.17",
         "chart_metadata": {
             "name": "storj",
             "description": "Share your storage on the internet and earn.",
@@ -17,7 +17,7 @@
                 "title": "Storj"
             },
             "type": "application",
-            "version": "1.0.16",
+            "version": "1.0.17",
             "apiVersion": "v2",
             "appVersion": "v1.68.2",
             "kubeVersion": ">=1.16.0-0",
@@ -264,7 +264,17 @@
                 {
                     "variable": "zksync",
                     "label": "Opt-in to zkSync",
-                    "description": "Appends --operator.wallet-features=zksync flag to the storagenode command",
+                    "description": "Appends \"zksync\" to --operator.wallet-features flag to the storagenode command",
+                    "group": "Configuration",
+                    "schema": {
+                        "type": "boolean",
+                        "default": false
+                    }
+                },
+                {
+                    "variable": "zksyncEra",
+                    "label": "Opt-in to zkSync era",
+                    "description": "Appends \"zksync-era\" to --operator.wallet-features flag to the storagenode command",
                     "group": "Configuration",
                     "schema": {
                         "type": "boolean",
