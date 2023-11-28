@@ -1,6 +1,6 @@
 # Unifi Controller
 
-[Unifi Controller](https://github.com/jacobalberty/unifi-docker) is a network management controller for Unifi Equipment.
+[Unifi Controller](https://github.com/goofball222/unifi) is a network management controller for Unifi Equipment.
 
 > When application is installed, a container will be launched with **root** privileges.
 > This is required in order to apply the correct permissions to the `Unifi Controller` directories.
