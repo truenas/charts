@@ -1,0 +1,14 @@
+wgStorage:
+  config:
+    type: pvc
+
+wgConfig:
+  host: wg.domain.com
+  password: secret
+  clientMTU: 1420
+  keepAlive: 5
+  clientAddressRange: 10.10.0.x
+  clientDNSServer: "8.8.8.8"
+  allowedIPs:
+    - 10.10.10.0/24
+    - 10.10.12.0/24

@@ -1,0 +1,94 @@
+#!/usr/bin/python3
+import json
+import os
+import sys
+
+
+def migrate_common_lib(values):
+    delete_keys = [
+        'wgUDPPort', 'webUIPort', 'hostNetwork', 'cpuLimit', 'memLimit',
+        'dnsConfig', 'environmentVariables', 'appVolumeMounts',
+        'extraAppVolumeMounts', 'wgeasy', 'enableResourceLimits',
+    ]
+
+    values.update({
+        # Migrate Network
+        'wgNetwork': {
+            'udpPort': values['wgUDPPort'],
+            'webPort': values['webUIPort'],
+            'hostNetwork': values['hostNetwork'],
+        },
+        # Migrate Resources
+        'resources': {
+            'limits': {
+                'cpu': values.get('cpuLimit', '4000m'),
+                'memory': values.get('memLimit', '8Gi'),
+            }
+        },
+        # Migrate DNS
+        'podOptions': {
+            'dnsConfig': {
+                'options': [
+                    {'name': opt['name'], 'value': opt['value']}
+                    for opt in values.get('dnsConfig', {}).get('options', [])
+                ]
+            }
+        },
+        # Migrate Config
+        'wgConfig': {
+            'host': values['wgeasy']['host'],
+            'password': values['wgeasy'].get('password', ''),
+            'keepAlive': values['wgeasy']['keep_alive'],
+            'clientMTU': values['wgeasy']['client_mtu'],
+            'clientAddressRange': values['wgeasy']['client_address_range'],
+            'clientDNSServer': values['wgeasy']['client_dns_server'],
+            'allowedIPs': values['wgeasy']['allowed_ips'],
+            'additionalEnvs': values.get('environmentVariables', []),
+        },
+        # Migrate Storage
+        'wgStorage': {
+            'config': {
+                'type': 'hostPath',
+                'hostPathConfig': {
+                    'hostPath': values['appVolumeMounts']['config']['hostPath']
+                },
+            } if values['appVolumeMounts']['config']['hostPathEnabled'] else {
+                'type': 'ixVolume',
+                'ixVolumeConfig': {
+                    'datasetName': values['appVolumeMounts']['config']['datasetName'],
+                },
+            },
+            'additionalStorages': [
+                {
+                    'type': 'hostPath',
+                    'hostPathConfig': {'hostPath': e['hostPath']},
+                    'mountPath': e['mountPath'],
+                }
+                for e in values.get('extraAppVolumeMounts', [])
+            ],
+        },
+    })
+
+    for k in delete_keys:
+        values.pop(k, None)
+
+    return values
+
+def migrate(values):
+    if not 'wgeasy' in values.keys():
+        return values
+
+
+    return migrate_common_lib(values)
+
+
+
+if __name__ == '__main__':
+    with open('in.json', 'r') as f:
+        print(json.dumps(migrate(json.loads(f.read()))))
+    if len(sys.argv) != 2:
+        exit(1)
+
+    if os.path.exists(sys.argv[1]):
+        with open(sys.argv[1], 'r') as f:
+            print(json.dumps(migrate(json.loads(f.read()))))
