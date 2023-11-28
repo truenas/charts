@@ -101,7 +101,15 @@ questions:
 
   - variable: zksync
     label: "Opt-in to zkSync"
-    description: Appends --operator.wallet-features=zksync flag to the storagenode command
+    description: Appends "zksync" to --operator.wallet-features flag to the storagenode command
+    group: "Configuration"
+    schema:
+      type: boolean
+      default: false
+
+  - variable: zksyncEra
+    label: "Opt-in to zkSync era"
+    description: Appends "zksync-era" to --operator.wallet-features flag to the storagenode command
     group: "Configuration"
     schema:
       type: boolean

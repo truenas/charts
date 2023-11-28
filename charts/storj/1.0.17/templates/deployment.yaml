@@ -78,9 +78,16 @@ spec:
             - name: udp
               containerPort: 28967
               protocol: UDP
-          {{ if .Values.zksync }}
+          {{- $walletFeats := list -}}
+          {{- if .Values.zksync }}
+            {{- $walletFeats = mustAppend $walletFeats "zksync" -}}
+          {{- end -}}
+          {{ if .Values.zksyncEra }}
+            {{- $walletFeats = mustAppend $walletFeats "zksync-era" -}}
+          {{- end -}}
+          {{- if $walletFeats }}
           args:
-            - --operator.wallet-features=zksync
+            - --operator.wallet-features={{ join "," $walletFeats }}
           {{ end }}
           env:
             {{ $envList := (default list .Values.environmentVariables) }}
