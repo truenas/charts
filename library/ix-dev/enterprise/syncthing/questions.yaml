@@ -37,6 +37,45 @@ questions:
     schema:
       type: dict
       attrs:
+        # Boolean flags are currently
+        # not exposed to the user
+        - variable: natTraversal
+          label: NAT Traversal
+          schema:
+            type: boolean
+            default: false
+            hidden: true
+        - variable: localDiscovery
+          label: Local Discovery
+          schema:
+            type: boolean
+            default: false
+            hidden: true
+        - variable: globalDiscovery
+          label: Global Discovery
+          schema:
+            type: boolean
+            default: false
+            hidden: true
+        - variable: telemetry
+          label: Telemetry
+          schema:
+            type: boolean
+            default: false
+            hidden: true
+        - variable: relaying
+          label: Relaying
+          schema:
+            type: boolean
+            default: false
+            hidden: true
+        - variable: announceLANAddresses
+          label: Announce LAN Addresses
+          schema:
+            type: boolean
+            default: false
+            hidden: true
+
         - variable: additionalEnvs
           label: Additional Environment Variables
           description: Configure additional environment variables for Syncthing.
