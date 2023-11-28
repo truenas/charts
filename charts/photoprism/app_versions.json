@@ -1,16 +1,16 @@
 {
-    "1.0.32": {
+    "1.1.0": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/photoprism/1.0.32",
-        "last_update": "2023-11-28 15:01:13",
+        "location": "/__w/charts/charts/charts/photoprism/1.1.0",
+        "last_update": "2023-11-28 15:06:16",
         "required_features": [
             "definitions/gpuConfiguration",
             "normalize/ixVolume"
         ],
-        "human_version": "231021_1.0.32",
-        "version": "1.0.32",
+        "human_version": "231021_1.1.0",
+        "version": "1.1.0",
         "chart_metadata": {
             "name": "photoprism",
             "description": "AI-powered app for browsing, organizing & sharing your photo collection.",
@@ -18,7 +18,7 @@
                 "title": "PhotoPrism"
             },
             "type": "application",
-            "version": "1.0.32",
+            "version": "1.1.0",
             "apiVersion": "v2",
             "appVersion": "231021",
             "kubeVersion": ">=1.16.0-0",
@@ -158,6 +158,16 @@
                 }
             },
             "questions": [
+                {
+                    "variable": "host_network",
+                    "group": "Networking",
+                    "label": "Host Network",
+                    "description": "Bind to the host network. It's recommended to keep this disabled but may be needed for photoprism to be reachable from a hostNetworked VPN.</br>\n",
+                    "schema": {
+                        "type": "boolean",
+                        "default": false
+                    }
+                },
                 {
                     "variable": "web_port",
                     "label": "Web Port for photo prism",
