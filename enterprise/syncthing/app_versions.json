@@ -1,17 +1,17 @@
 {
-    "1.1.3": {
+    "1.1.4": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/enterprise/syncthing/1.1.3",
-        "last_update": "2023-11-28 15:10:21",
+        "location": "/__w/charts/charts/enterprise/syncthing/1.1.4",
+        "last_update": "2023-11-28 21:52:43",
         "required_features": [
-            "normalize/ixVolume",
+            "definitions/certificate",
             "definitions/timezone",
-            "definitions/certificate"
+            "normalize/ixVolume"
         ],
-        "human_version": "1.23.3_1.1.3",
-        "version": "1.1.3",
+        "human_version": "1.23.3_1.1.4",
+        "version": "1.1.4",
         "chart_metadata": {
             "name": "syncthing",
             "description": "Syncthing is a continuous file synchronization program.",
@@ -19,7 +19,7 @@
                 "title": "Syncthing"
             },
             "type": "application",
-            "version": "1.1.3",
+            "version": "1.1.4",
             "apiVersion": "v2",
             "appVersion": "1.23.3",
             "kubeVersion": ">=1.16.0-0",
@@ -34,7 +34,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.2"
+                    "version": "1.2.3"
                 }
             ],
             "home": "https://syncthing.net/",
@@ -149,6 +149,106 @@
                             {
                                 "value": "Asia/Saigon",
                                 "description": "'Asia/Saigon' timezone"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "syncthingConfig",
+                    "label": "",
+                    "group": "Syncthing Configuration",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "natTraversal",
+                                "label": "NAT Traversal",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false,
+                                    "hidden": true
+                                }
+                            },
+                            {
+                                "variable": "localDiscovery",
+                                "label": "Local Discovery",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false,
+                                    "hidden": true
+                                }
+                            },
+                            {
+                                "variable": "globalDiscovery",
+                                "label": "Global Discovery",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false,
+                                    "hidden": true
+                                }
+                            },
+                            {
+                                "variable": "telemetry",
+                                "label": "Telemetry",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false,
+                                    "hidden": true
+                                }
+                            },
+                            {
+                                "variable": "relaying",
+                                "label": "Relaying",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false,
+                                    "hidden": true
+                                }
+                            },
+                            {
+                                "variable": "announceLANAddresses",
+                                "label": "Announce LAN Addresses",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false,
+                                    "hidden": true
+                                }
+                            },
+                            {
+                                "variable": "additionalEnvs",
+                                "label": "Additional Environment Variables",
+                                "description": "Configure additional environment variables for Syncthing.",
+                                "schema": {
+                                    "type": "list",
+                                    "default": [],
+                                    "items": [
+                                        {
+                                            "variable": "env",
+                                            "label": "Environment Variable",
+                                            "schema": {
+                                                "type": "dict",
+                                                "attrs": [
+                                                    {
+                                                        "variable": "name",
+                                                        "label": "Name",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "required": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "value",
+                                                        "label": "Value",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "required": true
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
                             }
                         ]
                     }

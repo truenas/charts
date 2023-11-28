@@ -4,12 +4,12 @@
         "supported": false,
         "healthy_error": null,
         "location": "/__w/charts/charts/community/vaultwarden/1.1.1",
-        "last_update": "2023-11-28 15:10:21",
+        "last_update": "2023-11-28 21:49:55",
         "required_features": [
-            "normalize/ixVolume",
+            "definitions/certificate",
             "normalize/acl",
             "definitions/timezone",
-            "definitions/certificate"
+            "normalize/ixVolume"
         ],
         "human_version": "1.30.1_1.1.1",
         "version": "1.1.1",
@@ -597,6 +597,24 @@
                                                                             }
                                                                         ]
                                                                     }
+                                                                },
+                                                                {
+                                                                    "variable": "options",
+                                                                    "label": "ACL Options",
+                                                                    "schema": {
+                                                                        "type": "dict",
+                                                                        "attrs": [
+                                                                            {
+                                                                                "variable": "force",
+                                                                                "label": "Force Flag",
+                                                                                "description": "Enabling `Force` applies ACL even if the path has existing data",
+                                                                                "schema": {
+                                                                                    "type": "boolean",
+                                                                                    "default": false
+                                                                                }
+                                                                            }
+                                                                        ]
+                                                                    }
                                                                 }
                                                             ],
                                                             "$ref": [
@@ -900,6 +918,24 @@
                                                                                             }
                                                                                         }
                                                                                     ]
+                                                                                }
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "variable": "options",
+                                                                    "label": "ACL Options",
+                                                                    "schema": {
+                                                                        "type": "dict",
+                                                                        "attrs": [
+                                                                            {
+                                                                                "variable": "force",
+                                                                                "label": "Force Flag",
+                                                                                "description": "Enabling `Force` applies ACL even if the path has existing data",
+                                                                                "schema": {
+                                                                                    "type": "boolean",
+                                                                                    "default": false
                                                                                 }
                                                                             }
                                                                         ]
@@ -1211,6 +1247,24 @@
                                                                             }
                                                                         ]
                                                                     }
+                                                                },
+                                                                {
+                                                                    "variable": "options",
+                                                                    "label": "ACL Options",
+                                                                    "schema": {
+                                                                        "type": "dict",
+                                                                        "attrs": [
+                                                                            {
+                                                                                "variable": "force",
+                                                                                "label": "Force Flag",
+                                                                                "description": "Enabling `Force` applies ACL even if the path has existing data",
+                                                                                "schema": {
+                                                                                    "type": "boolean",
+                                                                                    "default": false
+                                                                                }
+                                                                            }
+                                                                        ]
+                                                                    }
                                                                 }
                                                             ],
                                                             "$ref": [
@@ -1406,6 +1460,24 @@
                                                                                                         }
                                                                                                     }
                                                                                                 ]
+                                                                                            }
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            },
+                                                                            {
+                                                                                "variable": "options",
+                                                                                "label": "ACL Options",
+                                                                                "schema": {
+                                                                                    "type": "dict",
+                                                                                    "attrs": [
+                                                                                        {
+                                                                                            "variable": "force",
+                                                                                            "label": "Force Flag",
+                                                                                            "description": "Enabling `Force` applies ACL even if the path has existing data",
+                                                                                            "schema": {
+                                                                                                "type": "boolean",
+                                                                                                "default": false
                                                                                             }
                                                                                         }
                                                                                     ]
