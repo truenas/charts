@@ -1,16 +1,16 @@
 {
-    "1.7.22": {
+    "1.7.23": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/minio/1.7.22",
-        "last_update": "2023-11-28 14:30:03",
+        "location": "/__w/charts/charts/charts/minio/1.7.23",
+        "last_update": "2023-11-28 14:59:05",
         "required_features": [
             "definitions/certificate",
             "normalize/ixVolume"
         ],
-        "human_version": "2023-03-13_1.7.22",
-        "version": "1.7.22",
+        "human_version": "2023-03-13_1.7.23",
+        "version": "1.7.23",
         "chart_metadata": {
             "name": "minio",
             "description": "High Performance, Kubernetes Native Object Storage",
@@ -18,7 +18,7 @@
                 "title": "MinIO"
             },
             "type": "application",
-            "version": "1.7.22",
+            "version": "1.7.23",
             "apiVersion": "v2",
             "appVersion": "2023-03-13",
             "kubeVersion": ">=1.16.0-0",
@@ -140,7 +140,7 @@
                     "group": "Workload Configuration",
                     "schema": {
                         "type": "string",
-                        "default": "RollingUpdate",
+                        "default": "Recreate",
                         "enum": [
                             {
                                 "value": "RollingUpdate",
