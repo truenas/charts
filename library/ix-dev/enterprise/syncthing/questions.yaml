@@ -31,6 +31,35 @@ questions:
       $ref:
         - definitions/timezone
 
+  - variable: syncthingConfig
+    label: ""
+    group: Syncthing Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: additionalEnvs
+          label: Additional Environment Variables
+          description: Configure additional environment variables for Syncthing.
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: env
+                label: Environment Variable
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: name
+                      label: Name
+                      schema:
+                        type: string
+                        required: true
+                    - variable: value
+                      label: Value
+                      schema:
+                        type: string
+                        required: true
+
   - variable: syncthingID
     label: ""
     group: User and Group Configuration
