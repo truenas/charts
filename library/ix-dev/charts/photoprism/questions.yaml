@@ -23,6 +23,15 @@ portals:
     path: "/"
 
 questions:
+  - variable: host_network
+    group: Networking
+    label: Host Network
+    description: |
+      Bind to the host network. It's recommended to keep this disabled but may be needed for photoprism to be reachable from a hostNetworked VPN.</br>
+    schema:
+      type: boolean
+      default: false
+
   - variable: web_port
     label: "Web Port for photo prism"
     group: Networking
