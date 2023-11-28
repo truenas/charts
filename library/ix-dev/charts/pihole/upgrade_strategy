@@ -1,14 +1,18 @@
 #!/usr/bin/python3
 import json
+import re
 import sys
 
-from catalog_update.upgrade_strategy import datetime_versioning
+from catalog_update.upgrade_strategy import semantic_versioning
+
+
+RE_STABLE_VERSION = re.compile(r'\d+\.\d+\.\d+')
 
 
 def newer_mapping(image_tags):
     key = list(image_tags.keys())[0]
-    tags = {t for t in image_tags[key]}
-    version = datetime_versioning(list(tags), '%Y.%m.%d')
+    tags = {t for t in image_tags[key] if RE_STABLE_VERSION.fullmatch(t)}
+    version = semantic_versioning(list(tags))
     if not version:
         return {}
 
