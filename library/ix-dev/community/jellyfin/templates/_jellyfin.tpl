@@ -62,6 +62,7 @@ service:
 persistence:
   config:
     enabled: true
+    {{- include "jellyfin.storage.ci.migration" (dict "storage" .Values.jellyfinStorage.config) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.jellyfinStorage.config) | nindent 4 }}
     targetSelector:
       jellyfin:
@@ -72,6 +73,7 @@ persistence:
     type: {{ .Values.jellyfinStorage.cache.type }}
     datasetName: {{ .Values.jellyfinStorage.cache.datasetName | default "" }}
     hostPath: {{ .Values.jellyfinStorage.cache.hostPath | default "" }}
+    {{- include "jellyfin.storage.ci.migration" (dict "storage" .Values.jellyfinStorage.cache) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.jellyfinStorage.cache) | nindent 4 }}
     targetSelector:
       jellyfin:
@@ -79,6 +81,7 @@ persistence:
           mountPath: /cache
   transcode:
     enabled: true
+    {{- include "jellyfin.storage.ci.migration" (dict "storage" .Values.jellyfinStorage.transcodes) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.jellyfinStorage.transcodes) | nindent 4 }}
     targetSelector:
       jellyfin:
@@ -94,6 +97,7 @@ persistence:
   {{- range $idx, $storage := .Values.jellyfinStorage.additionalStorages }}
   {{ printf "jellyfin-%v:" (int $idx) }}
     enabled: true
+    {{- include "jellyfin.storage.ci.migration" (dict "storage" $storage) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       jellyfin:
@@ -111,4 +115,14 @@ scaleGPU:
         - jellyfin
   {{ end }}
 {{ end }}
+{{- end -}}
+
+{{/* TODO: Remove on the next version bump, eg 1.2.0+ */}}
+{{- define "jellyfin.storage.ci.migration" -}}
+  {{- $storage := .storage -}}
+
+  {{- if $storage.hostPath -}}
+    {{- $_ := set $storage "hostPathConfig" dict -}}
+    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
+  {{- end -}}
 {{- end -}}
