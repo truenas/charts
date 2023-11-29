@@ -41,12 +41,6 @@ workload:
               type: http
               port: 8096
               path: /health
-      initContainers:
-      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
-                                                        "UID" .Values.jellyfinRunAs.user
-                                                        "GID" .Values.jellyfinRunAs.group
-                                                        "mode" "check"
-                                                        "type" "init") | nindent 8 }}
 
 {{/* Service */}}
 service:
@@ -68,42 +62,28 @@ service:
 persistence:
   config:
     enabled: true
-    type: {{ .Values.jellyfinStorage.config.type }}
-    datasetName: {{ .Values.jellyfinStorage.config.datasetName | default "" }}
-    hostPath: {{ .Values.jellyfinStorage.config.hostPath | default "" }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.jellyfinStorage.config) | nindent 4 }}
     targetSelector:
       jellyfin:
         jellyfin:
           mountPath: /config
-        01-permissions:
-          mountPath: /mnt/directories/config
   cache:
     enabled: true
     type: {{ .Values.jellyfinStorage.cache.type }}
     datasetName: {{ .Values.jellyfinStorage.cache.datasetName | default "" }}
     hostPath: {{ .Values.jellyfinStorage.cache.hostPath | default "" }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.jellyfinStorage.cache) | nindent 4 }}
     targetSelector:
       jellyfin:
         jellyfin:
           mountPath: /cache
-        01-permissions:
-          mountPath: /mnt/directories/cache
   transcode:
     enabled: true
-    type: {{ .Values.jellyfinStorage.transcodes.type }}
-    datasetName: {{ .Values.jellyfinStorage.transcodes.datasetName | default "" }}
-    hostPath: {{ .Values.jellyfinStorage.transcodes.hostPath | default "" }}
-    medium: {{ .Values.jellyfinStorage.transcodes.medium | default "" }}
-    {{/* Size of the emptyDir */}}
-    size: {{ .Values.jellyfinStorage.transcodes.size | default "" }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.jellyfinStorage.transcodes) | nindent 4 }}
     targetSelector:
       jellyfin:
         jellyfin:
           mountPath: /config/transcodes
-        {{ if ne .Values.jellyfinStorage.transcodes.type "emptyDir" }}
-        01-permissions:
-          mountPath: /mnt/directories/transcodes
-        {{ end }}
   tmp:
     enabled: true
     type: emptyDir
@@ -112,32 +92,15 @@ persistence:
         jellyfin:
           mountPath: /tmp
   {{- range $idx, $storage := .Values.jellyfinStorage.additionalStorages }}
-  {{ printf "jellyfin-%v" (int $idx) }}:
-    {{- $size := "" -}}
-    {{- if $storage.size -}}
-      {{- $size = (printf "%vGi" $storage.size) -}}
-    {{- end }}
+  {{ printf "jellyfin-%v:" (int $idx) }}
     enabled: true
-    type: {{ $storage.type }}
-    datasetName: {{ $storage.datasetName | default "" }}
-    hostPath: {{ $storage.hostPath | default "" }}
-    server: {{ $storage.server | default "" }}
-    share: {{ $storage.share | default "" }}
-    domain: {{ $storage.domain | default "" }}
-    username: {{ $storage.username | default "" }}
-    password: {{ $storage.password | default "" }}
-    size: {{ $size }}
-    {{- if eq $storage.type "smb-pv-pvc" }}
-    mountOptions:
-      - key: noperm
-    {{- end }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       jellyfin:
         jellyfin:
           mountPath: {{ $storage.mountPath }}
-        01-permissions:
-          mountPath: /mnt/directories{{ $storage.mountPath }}
   {{- end }}
+
 {{ with .Values.jellyfinGPU }}
 scaleGPU:
   {{ range $key, $value := . }}

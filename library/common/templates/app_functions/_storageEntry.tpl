@@ -17,6 +17,7 @@
   {{- $domain := "" -}}
   {{- $username := "" -}}
   {{- $password := "" -}}
+  {{- $medium := "" -}}
 
   {{- if $storage.readOnly -}}
     {{- $readOnly = true -}}
@@ -58,6 +59,21 @@
     {{- if $storage.smbConfig.size -}}
       {{- $size = (printf "%vGi" $storage.smbConfig.size) -}}
     {{- end -}}
+  {{- end -}}
+
+  {{/* emptyDir */}}
+  {{- if eq $storage.type "emptyDir" -}}
+    {{- if not $storage.emptyDirConfig -}}
+      {{- fail (printf "Storage Shim - Expected non-empty [emptyDirConfig]") -}}
+    {{- end -}}
+
+    {{- if $storage.emptyDirConfig.medium -}}
+      {{- $medium = $storage.emptyDirConfig.medium -}}
+    {{- end -}}
+
+    {{- if $storage.emptyDirConfig.size -}}
+      {{- $size = (printf "%vGi" $storage.emptyDirConfig.size) -}}
+    {{- end -}}
   {{- end }}
 
 type: {{ $storage.type }}
@@ -65,6 +81,7 @@ size: {{ $size }}
 hostPath: {{ $hostPath }}
 datasetName: {{ $datasetName }}
 readOnly: {{ $readOnly }}
+medium: {{ $medium }}
 server: {{ $server }}
 share: {{ $share }}
 domain: {{ $domain }}
