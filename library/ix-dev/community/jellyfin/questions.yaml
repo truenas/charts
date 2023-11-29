@@ -342,7 +342,7 @@ questions:
                           - value: "Memory"
                             description: Memory (Temporary directory created in memory)
                     - variable: size
-                      label: emptyDir Size Limit
+                      label: emptyDir Size Limit (in Gi)
                       description: |
                         The maximum size (in Gi) of the temporary directory.</br>
                         For example: 2
