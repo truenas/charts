@@ -125,4 +125,10 @@ scaleGPU:
     {{- $_ := set $storage "hostPathConfig" dict -}}
     {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
   {{- end -}}
+
+  {{- if (hasKey $storage "medium") -}}
+    {{- $_ := set $storage "emptyDirConfig" dict -}}
+    {{- $_ := set $storage.emptyDirConfig "medium" $storage.medium -}}
+    {{- $_ := set $storage.emptyDirConfig "size" $storage.size -}}
+  {{- end -}}
 {{- end -}}
