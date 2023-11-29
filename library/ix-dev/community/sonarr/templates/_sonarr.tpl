@@ -60,15 +60,12 @@ service:
 persistence:
   config:
     enabled: true
-    type: {{ .Values.sonarrStorage.config.type }}
-    datasetName: {{ .Values.sonarrStorage.config.datasetName | default "" }}
-    hostPath: {{ .Values.sonarrStorage.config.hostPath | default "" }}
+    {{- include "sonarr.storage.ci.migration" (dict "storage" .Values.sonarrStorage.config) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.sonarrStorage.config) | nindent 4 }}
     targetSelector:
       sonarr:
         sonarr:
           mountPath: /config
-        01-permissions:
-          mountPath: /mnt/directories/config
   tmp:
     enabled: true
     type: emptyDir
@@ -77,30 +74,23 @@ persistence:
         sonarr:
           mountPath: /tmp
   {{- range $idx, $storage := .Values.sonarrStorage.additionalStorages }}
-  {{ printf "sonarr-%v" (int $idx) }}:
-    {{- $size := "" -}}
-    {{- if $storage.size -}}
-      {{- $size = (printf "%vGi" $storage.size) -}}
-    {{- end }}
+  {{ printf "sonarr-%v:" (int $idx) }}
     enabled: true
-    type: {{ $storage.type }}
-    datasetName: {{ $storage.datasetName | default "" }}
-    hostPath: {{ $storage.hostPath | default "" }}
-    server: {{ $storage.server | default "" }}
-    share: {{ $storage.share | default "" }}
-    domain: {{ $storage.domain | default "" }}
-    username: {{ $storage.username | default "" }}
-    password: {{ $storage.password | default "" }}
-    size: {{ $size }}
-    {{- if eq $storage.type "smb-pv-pvc" }}
-    mountOptions:
-      - key: noperm
-    {{- end }}
+    {{- include "sonarr.storage.ci.migration" (dict "storage" $storage) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       sonarr:
         sonarr:
           mountPath: {{ $storage.mountPath }}
-        01-permissions:
-          mountPath: /mnt/directories{{ $storage.mountPath }}
   {{- end }}
+{{- end -}}
+
+{{/* TODO: Remove on the next version bump, eg 1.2.0+ */}}
+{{- define "sonarr.storage.ci.migration" -}}
+  {{- $storage := .storage -}}
+
+  {{- if $storage.hostPath -}}
+    {{- $_ := set $storage "hostPathConfig" dict -}}
+    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
+  {{- end -}}
 {{- end -}}
