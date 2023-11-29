@@ -40,12 +40,6 @@ workload:
               type: http
               port: "{{ .Values.sonarrNetwork.webPort }}"
               path: /ping
-      initContainers:
-      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
-                                                        "UID" .Values.sonarrRunAs.user
-                                                        "GID" .Values.sonarrRunAs.group
-                                                        "mode" "check"
-                                                        "type" "init") | nindent 8 }}
 
 {{/* Service */}}
 service:
