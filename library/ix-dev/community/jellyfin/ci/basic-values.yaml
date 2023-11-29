@@ -12,8 +12,9 @@ jellyfinStorage:
     type: pvc
   transcodes:
     type: emptyDir
-    medium: Memory
-    size: 1Gi
+    emptyDirConfig:
+      medium: Memory
+      size: 1
 
 # Make sure installation don't fail when 0 GPU are assigned
 jellyfinGPU:

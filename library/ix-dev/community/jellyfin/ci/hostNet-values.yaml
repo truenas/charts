@@ -8,3 +8,6 @@ jellyfinStorage:
     type: pvc
   transcodes:
     type: pvc
+    emptyDirConfig:
+      medium: ""
+      size:

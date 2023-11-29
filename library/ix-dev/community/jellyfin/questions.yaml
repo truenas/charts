@@ -344,11 +344,12 @@ questions:
                     - variable: size
                       label: emptyDir Size Limit
                       description: |
-                        The maximum size of the temporary directory.</br>
-                        For example: 2Gi
+                        The maximum size (in Gi) of the temporary directory.</br>
+                        For example: 2
                       schema:
-                        type: string
-                        default: "2Gi"
+                        type: int
+                        "null": true
+                        default: 2
               - variable: hostPathConfig
                 label: Host Path Configuration
                 schema:

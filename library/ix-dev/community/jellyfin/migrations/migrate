@@ -28,14 +28,19 @@ def storage_migrate(storage):
 
     elif storage['type'] == 'emptyDir':
         # Check if the key exists, if not we have already migrated
-        if not storage.get('medium'):
+        if not 'medium' in storage.keys():
             return storage
 
+        if storage['size'] and (not storage['size'].endswith('Gi')):
+            raise Exception(f'In order to proceed with the update, ' \
+                            'please change the size for the storage using'  \
+                            '"emptyDir" in the format xGi. eg. "2Gi"')
+
         storage['emptyDirConfig'] = {
-            'medium': storage['emptyDir']
-            'size': storage['size'],
+            'medium': storage['medium'],
+            'size': int(storage['size'].replace('Gi', '')) if storage['size'] else None,
         }
-        delete_keys.append('emptyDir', 'size')
+        delete_keys.extend(['medium', 'size'])
 
     elif storage['type'] == 'smb-pv-pvc':
         # Check if the key exists, if not we have already migrated

@@ -70,9 +70,6 @@ persistence:
           mountPath: /config
   cache:
     enabled: true
-    type: {{ .Values.jellyfinStorage.cache.type }}
-    datasetName: {{ .Values.jellyfinStorage.cache.datasetName | default "" }}
-    hostPath: {{ .Values.jellyfinStorage.cache.hostPath | default "" }}
     {{- include "jellyfin.storage.ci.migration" (dict "storage" .Values.jellyfinStorage.cache) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.jellyfinStorage.cache) | nindent 4 }}
     targetSelector:
@@ -129,6 +126,6 @@ scaleGPU:
   {{- if (hasKey $storage "medium") -}}
     {{- $_ := set $storage "emptyDirConfig" dict -}}
     {{- $_ := set $storage.emptyDirConfig "medium" $storage.medium -}}
-    {{- $_ := set $storage.emptyDirConfig "size" $storage.size -}}
+    {{- $_ := set $storage.emptyDirConfig "size" 1 -}}
   {{- end -}}
 {{- end -}}
