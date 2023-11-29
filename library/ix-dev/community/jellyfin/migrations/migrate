@@ -32,8 +32,8 @@ def storage_migrate(storage):
             return storage
 
         if storage['size'] and (not storage['size'].endswith('Gi')):
-            raise Exception(f'In order to proceed with the update, ' \
-                            'please change the size for the storage using'  \
+            raise Exception('In order to proceed with the update, ' \
+                            'please change the size for the storage using ' \
                             '"emptyDir" in the format xGi. eg. "2Gi"')
 
         storage['emptyDirConfig'] = {
