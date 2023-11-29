@@ -3,20 +3,16 @@ jellyfinNetwork:
 
 jellyfinStorage:
   config:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/config
+    type: pvc
   cache:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/cache
+    type: pvc
   transcodes:
     type: emptyDir
     medium: ''
     size: ''
 
   additionalStorages:
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/movies
+  - type: pvc
     mountPath: /movies
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/series
+  - type: pvc
     mountPath: /series

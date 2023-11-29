@@ -3,11 +3,8 @@ jellyfinNetwork:
 
 jellyfinStorage:
   config:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/config
+    type: pvc
   cache:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/cache
+    type: pvc
   transcodes:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/transcodes
+    type: pvc

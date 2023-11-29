@@ -7,11 +7,9 @@ jellyfinRunAs:
 
 jellyfinStorage:
   config:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/config
+    type: pvc
   cache:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/cache
+    type: pvc
   transcodes:
     type: emptyDir
     medium: Memory
