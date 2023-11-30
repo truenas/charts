@@ -10,24 +10,27 @@ resources:
 
 qbitConfig:
   additionalEnvs: []
+
 qbitNetwork:
   webPort: 30024
   btPort: 50413
   hostNetwork: false
+
 qbitRunAs:
   user: 568
   group: 568
+
 qbitStorage:
   downloads:
     type: ixVolume
-    datasetName: downloads
+    ixVolumeConfig:
+      datasetName: downloads
   config:
     type: ixVolume
-    datasetName: config
+    ixVolumeConfig:
+      datasetName: config
   additionalStorages: []
 
 notes:
   custom: |
-    Default credentials:
-    -  username: admin
-    -  password: adminadmin
+    Default credentials are auto-generated and printed on the logs.
