@@ -3,12 +3,9 @@ bazarrNetwork:
 
 bazarrStorage:
   config:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/config
+    type: pvc
   additionalStorages:
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/series
+  - type: pvc
     mountPath: /series
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/movies
+  - type: pvc
     mountPath: /movies
