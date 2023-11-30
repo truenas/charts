@@ -2,15 +2,12 @@
 persistence:
   config:
     enabled: true
-    type: {{ .Values.bazarrStorage.config.type }}
-    datasetName: {{ .Values.bazarrStorage.config.datasetName | default "" }}
-    hostPath: {{ .Values.bazarrStorage.config.hostPath | default "" }}
+    {{- include "bazarr.storage.ci.migration" (dict "storage" .Values.bazarrStorage.config) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.bazarrStorage.config) | nindent 4 }}
     targetSelector:
       bazarr:
         bazarr:
           mountPath: /config
-        01-permissions:
-          mountPath: /mnt/directories/config
   tmp:
     enabled: true
     type: emptyDir
@@ -19,30 +16,23 @@ persistence:
         bazarr:
           mountPath: /tmp
   {{- range $idx, $storage := .Values.bazarrStorage.additionalStorages }}
-  {{ printf "bazarr-%v" (int $idx) }}:
-    {{- $size := "" -}}
-    {{- if $storage.size -}}
-      {{- $size = (printf "%vGi" $storage.size) -}}
-    {{- end }}
+  {{ printf "bazarr-%v:" (int $idx) }}
     enabled: true
-    type: {{ $storage.type }}
-    datasetName: {{ $storage.datasetName | default "" }}
-    hostPath: {{ $storage.hostPath | default "" }}
-    server: {{ $storage.server | default "" }}
-    share: {{ $storage.share | default "" }}
-    domain: {{ $storage.domain | default "" }}
-    username: {{ $storage.username | default "" }}
-    password: {{ $storage.password | default "" }}
-    size: {{ $size }}
-    {{- if eq $storage.type "smb-pv-pvc" }}
-    mountOptions:
-      - key: noperm
-    {{- end }}
+    {{- include "bazarr.storage.ci.migration" (dict "storage" $storage) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       bazarr:
         bazarr:
           mountPath: {{ $storage.mountPath }}
-        01-permissions:
-          mountPath: /mnt/directories{{ $storage.mountPath }}
   {{- end }}
+{{- end -}}
+
+{{/* TODO: Remove on the next version bump, eg 1.2.0+ */}}
+{{- define "bazarr.storage.ci.migration" -}}
+  {{- $storage := .storage -}}
+
+  {{- if $storage.hostPath -}}
+    {{- $_ := set $storage "hostPathConfig" dict -}}
+    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
+  {{- end -}}
 {{- end -}}
