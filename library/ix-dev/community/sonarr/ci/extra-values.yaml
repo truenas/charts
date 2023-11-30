@@ -10,12 +10,9 @@ sonarrNetwork:
 
 sonarrStorage:
   config:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/config
+    type: pvc
   additionalStorages:
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/action_series
+  - type: pvc
     mountPath: /action_series
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/adventure_series
+  - type: pvc
     mountPath: /adventure_series
