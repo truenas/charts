@@ -40,12 +40,6 @@ workload:
               type: http
               port: "{{ .Values.lidarrNetwork.webPort }}"
               path: /ping
-      initContainers:
-      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
-                                                        "UID" .Values.lidarrRunAs.user
-                                                        "GID" .Values.lidarrRunAs.group
-                                                        "mode" "check"
-                                                        "type" "init") | nindent 8 }}
 
 {{/* Service */}}
 service:
