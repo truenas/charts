@@ -192,7 +192,7 @@ questions:
 
         - variable: additionalStorages
           label: Additional Storage
-          description: Additional storage for Sonarr.
+          description: Additional storage for Elastic Search.
           schema:
             type: list
             default: []
