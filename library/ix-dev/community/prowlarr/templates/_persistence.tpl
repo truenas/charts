@@ -9,8 +9,6 @@ persistence:
       prowlarr:
         prowlarr:
           mountPath: /config
-        01-permissions:
-          mountPath: /mnt/directories/config
   tmp:
     enabled: true
     type: emptyDir
@@ -42,7 +40,5 @@ persistence:
       prowlarr:
         prowlarr:
           mountPath: {{ $storage.mountPath }}
-        01-permissions:
-          mountPath: /mnt/directories{{ $storage.mountPath }}
   {{- end }}
 {{- end -}}
