@@ -2,9 +2,8 @@
 persistence:
   config:
     enabled: true
-    type: {{ .Values.prowlarrStorage.config.type }}
-    datasetName: {{ .Values.prowlarrStorage.config.datasetName | default "" }}
-    hostPath: {{ .Values.prowlarrStorage.config.hostPath | default "" }}
+    {{- include "prowlarr.storage.ci.migration" (dict "storage" .Values.prowlarrStorage.config) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.prowlarrStorage.config) | nindent 4 }}
     targetSelector:
       prowlarr:
         prowlarr:
@@ -17,25 +16,10 @@ persistence:
         prowlarr:
           mountPath: /tmp
   {{- range $idx, $storage := .Values.prowlarrStorage.additionalStorages }}
-  {{ printf "prowlarr-%v" (int $idx) }}:
-    {{- $size := "" -}}
-    {{- if $storage.size -}}
-      {{- $size = (printf "%vGi" $storage.size) -}}
-    {{- end }}
+  {{ printf "prowlarr-%v:" (int $idx) }}
     enabled: true
-    type: {{ $storage.type }}
-    datasetName: {{ $storage.datasetName | default "" }}
-    hostPath: {{ $storage.hostPath | default "" }}
-    server: {{ $storage.server | default "" }}
-    share: {{ $storage.share | default "" }}
-    domain: {{ $storage.domain | default "" }}
-    username: {{ $storage.username | default "" }}
-    password: {{ $storage.password | default "" }}
-    size: {{ $size }}
-    {{- if eq $storage.type "smb-pv-pvc" }}
-    mountOptions:
-      - key: noperm
-    {{- end }}
+    {{- include "prowlarr.storage.ci.migration" (dict "storage" $storage) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       prowlarr:
         prowlarr:
