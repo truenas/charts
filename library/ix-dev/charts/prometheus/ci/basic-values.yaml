@@ -1,7 +1,5 @@
 prometheusStorage:
   data:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/data
+    type: pvc
   config:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/config
+    type: pvc
