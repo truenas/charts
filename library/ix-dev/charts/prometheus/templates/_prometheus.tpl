@@ -53,6 +53,7 @@ workload:
               type: http
               port: {{ .Values.prometheusNetwork.apiPort }}
               path: /-/ready
+      initContainers:
         init-config:
           enabled: true
           type: init
