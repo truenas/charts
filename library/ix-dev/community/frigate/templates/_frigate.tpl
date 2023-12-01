@@ -10,7 +10,7 @@ workload:
         frigate:
           enabled: true
           primary: true
-          imageSelector: {{ .Values.frigateConfig.imageSelector }}
+          imageSelector: {{ .Values.frigateConfig.imageSelector | default "image" }}
           securityContext:
             runAsUser: 0
             runAsGroup: 0
