@@ -42,3 +42,13 @@ persistence:
           mountPath: {{ $storage.mountPath }}
   {{- end }}
 {{- end -}}
+
+{{/* TODO: Remove on the next version bump, eg 1.2.0+ */}}
+{{- define "prowlarr.storage.ci.migration" -}}
+  {{- $storage := .storage -}}
+
+  {{- if $storage.hostPath -}}
+    {{- $_ := set $storage "hostPathConfig" dict -}}
+    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
+  {{- end -}}
+{{- end -}}
