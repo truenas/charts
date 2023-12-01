@@ -27,4 +27,6 @@ esNetwork:
 esStorage:
   data:
     type: ixVolume
-    datasetName: data
+    ixVolumeCofig:
+      datasetName: data
+    additionalStorages: []
