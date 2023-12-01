@@ -17,6 +17,8 @@ ENUMS = {
         'STRIP_TEXT': '-tensorrt'
     },
 }
+
+
 def newer_mapping(image_tags):
     output = {
         "tags": {},
