@@ -3,14 +3,20 @@ service:
   server:
     enabled: true
     primary: true
+    {{- if .Values.immichNetwork.immichExpose }}
     type: NodePort
+    {{- else }}
+    type: ClusterIP
+    {{- end -}}
     targetSelector: server
     ports:
       server:
         enabled: true
         primary: true
         port: {{ .Values.immichNetwork.webuiPort }}
+        {{- if .Values.immichNetwork.immichExpose }}
         nodePort: {{ .Values.immichNetwork.webuiPort }}
+        {{- end -}}
         protocol: http
         targetSelector: server
 

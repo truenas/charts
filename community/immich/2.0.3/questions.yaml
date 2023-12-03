@@ -72,6 +72,12 @@ questions:
             min: 9000
             max: 65535
             required: true
+        - variable: immichExpose
+          label: Expose app
+          description: Expose service on node IP
+          schema:
+            type: boolean
+            default: true
 
   - variable: immichStorage
     label: ""

@@ -26,6 +26,7 @@ immichConfig:
   enableTypesense: true
 
 immichNetwork:
+  immichExpose: true
   webuiPort: 30041
   # Not user configurable, will be hidden on UI
   # Putting it here in case it needs to be configurable
