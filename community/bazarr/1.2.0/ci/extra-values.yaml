@@ -1,0 +1,11 @@
+bazarrNetwork:
+  webPort: 31000
+
+bazarrStorage:
+  config:
+    type: pvc
+  additionalStorages:
+  - type: pvc
+    mountPath: /series
+  - type: pvc
+    mountPath: /movies
