@@ -1,7 +1,6 @@
 esStorage:
   data:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/data
+    type: pvc
 
 esConfig:
   password: some-https-secret
