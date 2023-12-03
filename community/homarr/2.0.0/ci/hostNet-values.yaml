@@ -1,0 +1,11 @@
+homarrNetwork:
+  webPort: 30000
+  hostNetwork: true
+
+homarrStorage:
+  configs:
+    type: pvc
+  data:
+    type: pvc
+  icons:
+    type: pvc

@@ -1,0 +1,14 @@
+homarrNetwork:
+  webPort: 31000
+
+homarrRunAs:
+  user: 1000
+  group: 1000
+
+homarrStorage:
+  configs:
+    type: pvc
+  data:
+    type: pvc
+  icons:
+    type: pvc

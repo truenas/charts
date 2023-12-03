@@ -1,0 +1,21 @@
+homarrConfig:
+  password: secret
+  additionalEnvs:
+    - name: DISABLE_EDIT_MODE
+      value: true
+
+homarrNetwork:
+  webPort: 31000
+
+homarrStorage:
+  configs:
+    type: pvc
+  data:
+    type: pvc
+  icons:
+    type: pvc
+  additionalStorages:
+  - type: pvc
+    mountPath: /data1
+  - type: pvc
+    mountPath: /data2
