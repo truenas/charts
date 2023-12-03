@@ -3,12 +3,18 @@ image:
   pullPolicy: IfNotPresent
   tag: 0.12.1
 
+tensorrtImage:
+  repository: ghcr.io/blakeblackshear/frigate
+  pullPolicy: IfNotPresent
+  tag: 0.12.1-tensorrt
+
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
 frigateConfig:
+  imageSelector: image
   mountUSBBus: false
   additionalEnvs: []
 

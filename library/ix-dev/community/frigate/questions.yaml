@@ -25,6 +25,18 @@ questions:
     schema:
       type: dict
       attrs:
+        - variable: imageSelector
+          label: Image
+          description: The image to use for Frigate.
+          schema:
+            type: string
+            default: "image"
+            required: true
+            enum:
+              - value: image
+                description: Frigate Image
+              - value: tensorrtImage
+                description: Frigate TensorRT Image
         - variable: mountUSBBus
           label: Mount USB Bus
           description: |
