@@ -1,0 +1,59 @@
+image:
+  repository: odoo
+  pullPolicy: IfNotPresent
+  tag: '17.0'
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+odooConfig:
+  additionalConf: []
+  additionalEnvs: []
+
+odooNetwork:
+  webPort: 30062
+  hostNetwork: false
+
+odooStorage:
+  data:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: data
+  addons:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: addons
+  pgData:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: pgData
+  pgBackup:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: pgBackup
+  additionalStorages: []
+
+notes:
+  custom: |
+    # Initial Admin Credentials
+
+    - Username: `admin`
+    - Password: `admin`
+
+    ## Database
+    You can connect to the database using the pgAdmin App from the catalog
+
+    <details>
+      <summary>Database Details</summary>
+
+      - Database: `odoo`
+      - Username: `odoo`
+      - Password: `{{ .Values.odooDbPass }}`
+      - Host:     `{{ .Values.odooDbHost }}.{{ .Release.Namespace }}.svc.cluster.local`
+      - Port:     `5432`
+
+    </details>
+    {{- $_ := unset .Values "odooDbPass" }}
+    {{- $_ := unset .Values "odooDbHost" }}
