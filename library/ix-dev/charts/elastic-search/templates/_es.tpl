@@ -60,11 +60,6 @@ workload:
               port: {{ .Values.esNetwork.httpPort }}
               httpHeaders:
                 Authorization: Basic {{ printf "elastic:%s" .Values.esConfig.password | b64enc }}
-      initContainers:
-      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
-                                                        "UID" .Values.esRunAs.user
-                                                        "GID" .Values.esRunAs.group
-                                                        "type" "install") | nindent 8 }}
 {{/* Service */}}
 service:
   es:
@@ -84,15 +79,24 @@ service:
 persistence:
   data:
     enabled: true
-    type: {{ .Values.esStorage.data.type }}
-    datasetName: {{ .Values.esStorage.data.datasetName | default "" }}
-    hostPath: {{ .Values.esStorage.data.hostPath | default "" }}
+    {{- include "es.storage.ci.migration" (dict "storage" .Values.esStorage.data) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.esStorage.data) | nindent 4 }}
     targetSelector:
       es:
         es:
           mountPath: /usr/share/elasticsearch/data
-        01-permissions:
-          mountPath: /mnt/directories/data
+
+  {{- range $idx, $storage := .Values.esStorage.additionalStorages }}
+  {{ printf "es-%v:" (int $idx) }}
+    enabled: true
+    {{- include "es.storage.ci.migration" (dict "storage" $storage) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
+    targetSelector:
+      es:
+        es:
+          mountPath: {{ $storage.mountPath }}
+  {{- end }}
+
   {{- if .Values.esNetwork.certificateID }}
   certs:
     enabled: true
@@ -117,4 +121,14 @@ scaleCertificate:
     enabled: true
     id: {{ .Values.esNetwork.certificateID }}
     {{- end -}}
+{{- end -}}
+
+{{/* TODO: Remove on the next version bump, eg 1.1.0+ */}}
+{{- define "es.storage.ci.migration" -}}
+  {{- $storage := .storage -}}
+
+  {{- if $storage.hostPath -}}
+    {{- $_ := set $storage "hostPathConfig" dict -}}
+    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
+  {{- end -}}
 {{- end -}}
