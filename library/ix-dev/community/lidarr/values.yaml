@@ -11,14 +11,18 @@ resources:
 lidarrConfig:
   instanceName: Lidarr
   additionalEnvs: []
+
 lidarrNetwork:
   webPort: 30014
   hostNetwork: false
+
 lidarrRunAs:
   user: 568
   group: 568
+
 lidarrStorage:
   config:
     type: ixVolume
-    datasetName: config
+    ixVolumeConfig:
+      datasetName: config
   additionalStorages: []

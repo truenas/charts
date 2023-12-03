@@ -40,12 +40,6 @@ workload:
               type: http
               port: "{{ .Values.lidarrNetwork.webPort }}"
               path: /ping
-      initContainers:
-      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
-                                                        "UID" .Values.lidarrRunAs.user
-                                                        "GID" .Values.lidarrRunAs.group
-                                                        "mode" "check"
-                                                        "type" "init") | nindent 8 }}
 
 {{/* Service */}}
 service:
@@ -66,15 +60,12 @@ service:
 persistence:
   config:
     enabled: true
-    type: {{ .Values.lidarrStorage.config.type }}
-    datasetName: {{ .Values.lidarrStorage.config.datasetName | default "" }}
-    hostPath: {{ .Values.lidarrStorage.config.hostPath | default "" }}
+    {{- include "lidarr.storage.ci.migration" (dict "storage" .Values.lidarrStorage.config) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.lidarrStorage.config) | nindent 4 }}
     targetSelector:
       lidarr:
         lidarr:
           mountPath: /config
-        01-permissions:
-          mountPath: /mnt/directories/config
   tmp:
     enabled: true
     type: emptyDir
@@ -83,30 +74,23 @@ persistence:
         lidarr:
           mountPath: /tmp
   {{- range $idx, $storage := .Values.lidarrStorage.additionalStorages }}
-  {{ printf "lidarr-%v" (int $idx) }}:
-    {{- $size := "" -}}
-    {{- if $storage.size -}}
-      {{- $size = (printf "%vGi" $storage.size) -}}
-    {{- end }}
+  {{ printf "lidarr-%v:" (int $idx) }}
     enabled: true
-    type: {{ $storage.type }}
-    datasetName: {{ $storage.datasetName | default "" }}
-    hostPath: {{ $storage.hostPath | default "" }}
-    server: {{ $storage.server | default "" }}
-    share: {{ $storage.share | default "" }}
-    domain: {{ $storage.domain | default "" }}
-    username: {{ $storage.username | default "" }}
-    password: {{ $storage.password | default "" }}
-    size: {{ $size }}
-    {{- if eq $storage.type "smb-pv-pvc" }}
-    mountOptions:
-      - key: noperm
-    {{- end }}
+    {{- include "lidarr.storage.ci.migration" (dict "storage" $storage) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       lidarr:
         lidarr:
           mountPath: {{ $storage.mountPath }}
-        01-permissions:
-          mountPath: /mnt/directories{{ $storage.mountPath }}
   {{- end }}
+{{- end -}}
+
+{{/* TODO: Remove on the next version bump, eg 1.2.0+ */}}
+{{- define "lidarr.storage.ci.migration" -}}
+  {{- $storage := .storage -}}
+
+  {{- if $storage.hostPath -}}
+    {{- $_ := set $storage "hostPathConfig" dict -}}
+    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
+  {{- end -}}
 {{- end -}}
