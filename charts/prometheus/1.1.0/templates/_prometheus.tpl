@@ -54,10 +54,6 @@ workload:
               port: {{ .Values.prometheusNetwork.apiPort }}
               path: /-/ready
       initContainers:
-      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
-                                                        "UID" .Values.prometheusRunAs.user
-                                                        "GID" .Values.prometheusRunAs.group
-                                                        "type" "install") | nindent 8 }}
         init-config:
           enabled: true
           type: init
@@ -95,26 +91,40 @@ service:
 persistence:
   data:
     enabled: true
-    type: {{ .Values.prometheusStorage.data.type }}
-    datasetName: {{ .Values.prometheusStorage.data.datasetName | default "" }}
-    hostPath: {{ .Values.prometheusStorage.data.hostPath | default "" }}
+    {{- include "prometheus.storage.ci.migration" (dict "storage" .Values.prometheusStorage.data) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.prometheusStorage.data) | nindent 4 }}
     targetSelector:
       prometheus:
         prometheus:
           mountPath: /data
-        01-permissions:
-          mountPath: /mnt/directories/data
   config:
     enabled: true
-    type: {{ .Values.prometheusStorage.config.type }}
-    datasetName: {{ .Values.prometheusStorage.config.datasetName | default "" }}
-    hostPath: {{ .Values.prometheusStorage.config.hostPath | default "" }}
+    {{- include "prometheus.storage.ci.migration" (dict "storage" .Values.prometheusStorage.config) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.prometheusStorage.config) | nindent 4 }}
     targetSelector:
       prometheus:
         prometheus:
           mountPath: /config
-        01-permissions:
-          mountPath: /mnt/directories/export
         init-config:
           mountPath: /config
+  {{- range $idx, $storage := .Values.prometheusStorage.additionalStorages }}
+  {{ printf "prometheus-%v:" (int $idx) }}
+    enabled: true
+    {{- include "prometheus.storage.ci.migration" (dict "storage" $storage) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
+    targetSelector:
+      prometheus:
+        prometheus:
+          mountPath: {{ $storage.mountPath }}
+  {{- end }}
+{{- end -}}
+
+{{/* TODO: Remove on the next version bump, eg 1.1.0+ */}}
+{{- define "prometheus.storage.ci.migration" -}}
+  {{- $storage := .storage -}}
+
+  {{- if $storage.hostPath -}}
+    {{- $_ := set $storage "hostPathConfig" dict -}}
+    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
+  {{- end -}}
 {{- end -}}

@@ -26,7 +26,10 @@ prometheusRunAs:
 prometheusStorage:
   data:
     type: ixVolume
-    datasetName: data
+    ixVolumeConfig:
+      datasetName: data
   config:
     type: ixVolume
-    datasetName: config
+    ixVolumeConfig:
+      datasetName: config
+  additionalStorages: []
