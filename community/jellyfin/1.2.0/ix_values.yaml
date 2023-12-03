@@ -11,23 +11,28 @@ resources:
 jellyfinConfig:
   publishedServerUrl: ''
   additionalEnvs: []
+
 jellyfinGPU: {}
+
 jellyfinNetwork:
   webPort: 30013
   hostNetwork: false
+
 jellyfinRunAs:
   user: 568
   group: 568
+
 jellyfinStorage:
   config:
     type: ixVolume
-    datasetName: config
+    ixVolumeConfig:
+      datasetName: config
   cache:
     type: ixVolume
-    datasetName: cache
+    ixVolumeConfig:
+      datasetName: cache
   transcodes:
     type: ixVolume
-    datasetName: transcodes
-    medium: ''
-    size: ''
+    ixVolumeConfig:
+      datasetName: transcodes
   additionalStorages: []

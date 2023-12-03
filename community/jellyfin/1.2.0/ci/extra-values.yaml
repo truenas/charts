@@ -1,0 +1,19 @@
+jellyfinNetwork:
+  webPort: 31000
+
+jellyfinStorage:
+  config:
+    type: pvc
+  cache:
+    type: pvc
+  transcodes:
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size:
+
+  additionalStorages:
+  - type: pvc
+    mountPath: /movies
+  - type: pvc
+    mountPath: /series

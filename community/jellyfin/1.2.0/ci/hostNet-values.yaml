@@ -1,0 +1,10 @@
+jellyfinNetwork:
+  hostNetwork: true
+
+jellyfinStorage:
+  config:
+    type: pvc
+  cache:
+    type: pvc
+  transcodes:
+    type: pvc
