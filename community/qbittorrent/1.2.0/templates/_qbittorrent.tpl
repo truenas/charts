@@ -40,12 +40,6 @@ workload:
               type: http
               port: "{{ .Values.qbitNetwork.webPort }}"
               path: /
-      initContainers:
-      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
-                                                        "UID" .Values.qbitRunAs.user
-                                                        "GID" .Values.qbitRunAs.group
-                                                        "mode" "check"
-                                                        "type" "init") | nindent 8 }}
 
 {{/* Service */}}
 service:
@@ -84,51 +78,38 @@ service:
 persistence:
   config:
     enabled: true
-    type: {{ .Values.qbitStorage.config.type }}
-    datasetName: {{ .Values.qbitStorage.config.datasetName | default "" }}
-    hostPath: {{ .Values.qbitStorage.config.hostPath | default "" }}
+    {{- include "qbit.storage.ci.migration" (dict "storage" .Values.qbitStorage.config) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.qbitStorage.config) | nindent 4 }}
     targetSelector:
       qbittorrent:
         qbittorrent:
           mountPath: /config
-        01-permissions:
-          mountPath: /mnt/directories/config
   downloads:
     enabled: true
-    type: {{ .Values.qbitStorage.downloads.type }}
-    datasetName: {{ .Values.qbitStorage.downloads.datasetName | default "" }}
-    hostPath: {{ .Values.qbitStorage.downloads.hostPath | default "" }}
+    {{- include "qbit.storage.ci.migration" (dict "storage" .Values.qbitStorage.downloads) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.qbitStorage.downloads) | nindent 4 }}
     targetSelector:
       qbittorrent:
         qbittorrent:
           mountPath: /downloads
-        01-permissions:
-          mountPath: /mnt/directories/downloads
   {{- range $idx, $storage := .Values.qbitStorage.additionalStorages }}
-  {{ printf "qbittorrent-%v" (int $idx) }}:
-    {{- $size := "" -}}
-    {{- if $storage.size -}}
-      {{- $size = (printf "%vGi" $storage.size) -}}
-    {{- end }}
+  {{ printf "qbittorrent-%v:" (int $idx) }}
     enabled: true
-    type: {{ $storage.type }}
-    datasetName: {{ $storage.datasetName | default "" }}
-    hostPath: {{ $storage.hostPath | default "" }}
-    server: {{ $storage.server | default "" }}
-    share: {{ $storage.share | default "" }}
-    domain: {{ $storage.domain | default "" }}
-    username: {{ $storage.username | default "" }}
-    password: {{ $storage.password | default "" }}
-    size: {{ $size }}
-    {{- if eq $storage.type "smb-pv-pvc" }}
-    mountOptions:
-      - key: noperm
-    {{- end }}
+    {{- include "qbit.storage.ci.migration" (dict "storage" $storage) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       qbittorrent:
         qbittorrent:
           mountPath: {{ $storage.mountPath }}
-        01-permissions:
-          mountPath: /mnt/directories/{{ printf "qbittorrent-%v" (int $idx) }}
   {{- end }}
+{{- end -}}
+
+{{/* TODO: Remove on the next version bump, eg 1.2.0+ */}}
+{{- define "qbit.storage.ci.migration" -}}
+  {{- $storage := .storage -}}
+
+  {{- if $storage.hostPath -}}
+    {{- $_ := set $storage "hostPathConfig" dict -}}
+    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
+  {{- end -}}
 {{- end -}}
