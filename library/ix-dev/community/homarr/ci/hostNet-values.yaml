@@ -4,8 +4,8 @@ homarrNetwork:
 
 homarrStorage:
   configs:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/configs
+    type: pvc
+  data:
+    type: pvc
   icons:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/icons
+    type: pvc

@@ -2,26 +2,25 @@
 persistence:
   configs:
     enabled: true
-    type: {{ .Values.homarrStorage.configs.type }}
-    datasetName: {{ .Values.homarrStorage.configs.datasetName | default "" }}
-    hostPath: {{ .Values.homarrStorage.configs.hostPath | default "" }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.homarrStorage.configs) | nindent 4 }}
     targetSelector:
       homarr:
         homarr:
           mountPath: /app/data/configs
-        01-permissions:
-          mountPath: /mnt/directories/configs
+  data:
+    enabled: true
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.homarrStorage.data) | nindent 4 }}
+    targetSelector:
+      homarr:
+        homarr:
+          mountPath: /data
   icons:
     enabled: true
-    type: {{ .Values.homarrStorage.icons.type }}
-    datasetName: {{ .Values.homarrStorage.icons.datasetName | default "" }}
-    hostPath: {{ .Values.homarrStorage.icons.hostPath | default "" }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.homarrStorage.icons) | nindent 4 }}
     targetSelector:
       homarr:
         homarr:
           mountPath: /app/data/icons
-        01-permissions:
-          mountPath: /mnt/directories/icons
   tmp:
     enabled: true
     type: emptyDir
@@ -31,29 +30,11 @@ persistence:
           mountPath: /tmp
   {{- range $idx, $storage := .Values.homarrStorage.additionalStorages }}
   {{ printf "homarr-%v" (int $idx) }}:
-    {{- $size := "" -}}
-    {{- if $storage.size -}}
-      {{- $size = (printf "%vGi" $storage.size) -}}
-    {{- end }}
     enabled: true
-    type: {{ $storage.type }}
-    datasetName: {{ $storage.datasetName | default "" }}
-    hostPath: {{ $storage.hostPath | default "" }}
-    server: {{ $storage.server | default "" }}
-    share: {{ $storage.share | default "" }}
-    domain: {{ $storage.domain | default "" }}
-    username: {{ $storage.username | default "" }}
-    password: {{ $storage.password | default "" }}
-    size: {{ $size }}
-    {{- if eq $storage.type "smb-pv-pvc" }}
-    mountOptions:
-      - key: noperm
-    {{- end }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       homarr:
         homarr:
           mountPath: {{ $storage.mountPath }}
-        01-permissions:
-          mountPath: /mnt/directories{{ $storage.mountPath }}
   {{- end }}
 {{- end -}}

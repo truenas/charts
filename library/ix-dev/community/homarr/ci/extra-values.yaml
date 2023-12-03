@@ -9,15 +9,13 @@ homarrNetwork:
 
 homarrStorage:
   configs:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/configs
+    type: pvc
+  data:
+    type: pvc
   icons:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/icons
+    type: pvc
   additionalStorages:
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/data1
+  - type: pvc
     mountPath: /data1
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/data2
+  - type: pvc
     mountPath: /data2
