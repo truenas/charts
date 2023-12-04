@@ -28,7 +28,7 @@ questions:
       type: dict
       attrs:
         - variable: udpPort
-          label: Web Port
+          label: UDP Port
           description: The port for the WG-Easy Wireguard service.
           schema:
             type: int
