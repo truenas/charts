@@ -1,16 +1,16 @@
 {
-    "1.1.5": {
+    "1.1.6": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/minecraft/1.1.5",
-        "last_update": "2023-12-06 13:24:48",
+        "location": "/__w/charts/charts/community/minecraft/1.1.6",
+        "last_update": "2023-12-08 00:21:22",
         "required_features": [
-            "normalize/ixVolume",
-            "definitions/timezone"
+            "definitions/timezone",
+            "normalize/ixVolume"
         ],
-        "human_version": "2023.12.0_1.1.5",
-        "version": "1.1.5",
+        "human_version": "2023.12.1_1.1.6",
+        "version": "1.1.6",
         "chart_metadata": {
             "name": "minecraft",
             "description": "Minecraft is a sandbox game",
@@ -18,9 +18,9 @@
                 "title": "Minecraft"
             },
             "type": "application",
-            "version": "1.1.5",
+            "version": "1.1.6",
             "apiVersion": "v2",
-            "appVersion": "2023.12.0",
+            "appVersion": "2023.12.1",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {

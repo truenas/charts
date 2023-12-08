@@ -1,16 +1,16 @@
 {
-    "1.0.121": {
+    "1.0.122": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/home-assistant/1.0.121",
-        "last_update": "2023-12-06 13:24:48",
+        "location": "/__w/charts/charts/charts/home-assistant/1.0.122",
+        "last_update": "2023-12-08 00:21:22",
         "required_features": [
-            "normalize/ixVolume",
-            "definitions/timezone"
+            "definitions/timezone",
+            "normalize/ixVolume"
         ],
-        "human_version": "2023.11.3_1.0.121",
-        "version": "1.0.121",
+        "human_version": "2023.12.0_1.0.122",
+        "version": "1.0.122",
         "chart_metadata": {
             "name": "home-assistant",
             "description": "Home Assistant App for TrueNAS SCALE",
@@ -18,9 +18,9 @@
                 "title": "Home Assistant"
             },
             "type": "application",
-            "version": "1.0.121",
+            "version": "1.0.122",
             "apiVersion": "v2",
-            "appVersion": "2023.11.3",
+            "appVersion": "2023.12.0",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
