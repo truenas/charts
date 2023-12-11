@@ -1,0 +1,24 @@
+plankaNetwork:
+  webPort: 31000
+
+plankaConfig:
+  defaultAdminEmail: admin@example.com
+  defaultAdminName: John Doe
+  defaultAdminPassword: password
+  defaultAdminUsername: admin
+  baseURL: http://localhost:31000
+
+plankaStorage:
+  avatars:
+    type: pvc
+  backgroundImages:
+    type: pvc
+  attachments:
+    type: pvc
+  pgData:
+    type: pvc
+  pgBackup:
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""

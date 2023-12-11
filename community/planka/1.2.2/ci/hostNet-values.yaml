@@ -1,0 +1,21 @@
+plankaNetwork:
+  webPort: 30000
+  hostNetwork: true
+
+plankaConfig:
+  baseURL: http://localhost:30000
+
+plankaStorage:
+  avatars:
+    type: pvc
+  backgroundImages:
+    type: pvc
+  attachments:
+    type: pvc
+  pgData:
+    type: pvc
+  pgBackup:
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""
