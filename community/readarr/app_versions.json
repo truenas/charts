@@ -1,15 +1,15 @@
 {
-    "1.1.4": {
+    "1.1.5": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/readarr/1.1.4",
-        "last_update": "2023-12-11 12:42:01",
+        "location": "/__w/charts/charts/community/readarr/1.1.5",
+        "last_update": "2023-12-11 12:46:01",
         "required_features": [
             "normalize/ixVolume"
         ],
-        "human_version": "0.3.10.2287_1.1.4",
-        "version": "1.1.4",
+        "human_version": "0.3.11.2319_1.1.5",
+        "version": "1.1.5",
         "chart_metadata": {
             "name": "readarr",
             "description": "Readarr is an ebook and audiobook collection manager for Usenet and BitTorrent users.",
@@ -17,9 +17,9 @@
                 "title": "Readarr"
             },
             "type": "application",
-            "version": "1.1.4",
+            "version": "1.1.5",
             "apiVersion": "v2",
-            "appVersion": "0.3.10.2287",
+            "appVersion": "0.3.11.2319",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
@@ -32,7 +32,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.3"
+                    "version": "1.2.4"
                 }
             ],
             "home": "https://github.com/Readarr/Readarr",
