@@ -20,7 +20,7 @@ persistence:
     targetSelector:
       homarr:
         homarr:
-          mountPath: /app/data/icons
+          mountPath: /app/public/icons
   tmp:
     enabled: true
     type: emptyDir
