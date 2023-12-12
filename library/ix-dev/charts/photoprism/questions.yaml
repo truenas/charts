@@ -159,6 +159,12 @@ questions:
                   hidden: true
                   editable: true
                   default: "/photoprism/originals"
+              - variable: readOnly
+                label: "Read Only"
+                description: "Mount volume as read only"
+                schema:
+                  type: boolean
+                  default: false
               - variable: hostPathEnabled
                 label: "Enable Custom Host Path for Photo Prism Original Storage Volume"
                 schema:
@@ -260,6 +266,12 @@ questions:
                 schema:
                   type: path
                   required: true
+              - variable: readOnly
+                label: "Read Only"
+                description: "Mount volume as read only"
+                schema:
+                  type: boolean
+                  default: false
               - variable: hostPath
                 label: "Host Path"
                 description: "Host path"
