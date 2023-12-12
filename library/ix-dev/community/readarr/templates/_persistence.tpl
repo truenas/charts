@@ -2,15 +2,16 @@
 persistence:
   config:
     enabled: true
-    type: {{ .Values.readarrStorage.config.type }}
-    datasetName: {{ .Values.readarrStorage.config.datasetName | default "" }}
-    hostPath: {{ .Values.readarrStorage.config.hostPath | default "" }}
+    {{- include "readarr.storage.ci.migration" (dict "storage" .Values.readarrStorage.config) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.readarrStorage.config) | nindent 4 }}
     targetSelector:
       readarr:
         readarr:
           mountPath: /config
+        {{- if eq .Values.readarrStorage.config.type "ixVolume" }}
         01-permissions:
           mountPath: /mnt/directories/config
+        {{- end }}
   tmp:
     enabled: true
     type: emptyDir
@@ -19,30 +20,28 @@ persistence:
         readarr:
           mountPath: /tmp
   {{- range $idx, $storage := .Values.readarrStorage.additionalStorages }}
-  {{ printf "readarr-%v" (int $idx) }}:
-    {{- $size := "" -}}
-    {{- if $storage.size -}}
-      {{- $size = (printf "%vGi" $storage.size) -}}
+  {{ printf "readarr-%v:" (int $idx) }}
     {{- end }}
     enabled: true
-    type: {{ $storage.type }}
-    datasetName: {{ $storage.datasetName | default "" }}
-    hostPath: {{ $storage.hostPath | default "" }}
-    server: {{ $storage.server | default "" }}
-    share: {{ $storage.share | default "" }}
-    domain: {{ $storage.domain | default "" }}
-    username: {{ $storage.username | default "" }}
-    password: {{ $storage.password | default "" }}
-    size: {{ $size }}
-    {{- if eq $storage.type "smb-pv-pvc" }}
-    mountOptions:
-      - key: noperm
-    {{- end }}
+    {{- include "readarr.storage.ci.migration" (dict "storage" $storage) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       readarr:
         readarr:
           mountPath: {{ $storage.mountPath }}
+        {{- if eq $storage.type "ixVolume" }}
         01-permissions:
           mountPath: /mnt/directories{{ $storage.mountPath }}
+        {{- end }}
   {{- end }}
+{{- end -}}
+
+{{/* TODO: Remove on the next version bump, eg 1.2.0+ */}}
+{{- define "readarr.storage.ci.migration" -}}
+  {{- $storage := .storage -}}
+
+  {{- if $storage.hostPath -}}
+    {{- $_ := set $storage "hostPathConfig" dict -}}
+    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
+  {{- end -}}
 {{- end -}}
