@@ -10,15 +10,14 @@ briefkastenConfig:
 
 briefkastenStorage:
   pgData:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/pgData
+    type: pvc
   pgBackup:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/pgBackup
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""
   additionalStorages:
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/data1
+  - type: pvc
     mountPath: /data1
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/data2
+  - type: pvc
     mountPath: /data2
