@@ -1,16 +1,16 @@
 {
-    "1.1.1": {
+    "1.1.2": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/photoprism/1.1.1",
-        "last_update": "2023-12-12 06:52:44",
+        "location": "/__w/charts/charts/charts/photoprism/1.1.2",
+        "last_update": "2023-12-12 16:12:00",
         "required_features": [
             "definitions/gpuConfiguration",
             "normalize/ixVolume"
         ],
-        "human_version": "231128_1.1.1",
-        "version": "1.1.1",
+        "human_version": "231128_1.1.2",
+        "version": "1.1.2",
         "chart_metadata": {
             "name": "photoprism",
             "description": "AI-powered app for browsing, organizing & sharing your photo collection.",
@@ -18,7 +18,7 @@
                 "title": "PhotoPrism"
             },
             "type": "application",
-            "version": "1.1.1",
+            "version": "1.1.2",
             "apiVersion": "v2",
             "appVersion": "231128",
             "kubeVersion": ">=1.16.0-0",
@@ -357,6 +357,15 @@
                                             }
                                         },
                                         {
+                                            "variable": "readOnly",
+                                            "label": "Read Only",
+                                            "description": "Mount volume as read only",
+                                            "schema": {
+                                                "type": "boolean",
+                                                "default": false
+                                            }
+                                        },
+                                        {
                                             "variable": "hostPathEnabled",
                                             "label": "Enable Custom Host Path for Photo Prism Original Storage Volume",
                                             "schema": {
@@ -520,6 +529,15 @@
                                             "schema": {
                                                 "type": "path",
                                                 "required": true
+                                            }
+                                        },
+                                        {
+                                            "variable": "readOnly",
+                                            "label": "Read Only",
+                                            "description": "Mount volume as read only",
+                                            "schema": {
+                                                "type": "boolean",
+                                                "default": false
                                             }
                                         },
                                         {
