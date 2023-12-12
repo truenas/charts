@@ -43,6 +43,7 @@ spec:
           {{ range $index, $hostPathConfiguration := .Values.extraAppVolumeMounts }}
             - name: extrappvolume-{{ $index }}
               mountPath: {{ $hostPathConfiguration.mountPath }}
+              readOnly: {{ $hostPathConfiguration.readOnly | default false }}
           {{ end }}
           ports:
             - name: web
