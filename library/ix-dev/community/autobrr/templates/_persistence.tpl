@@ -2,15 +2,16 @@
 persistence:
   config:
     enabled: true
-    type: {{ .Values.autobrrStorage.config.type }}
-    datasetName: {{ .Values.autobrrStorage.config.datasetName | default "" }}
-    hostPath: {{ .Values.autobrrStorage.config.hostPath | default "" }}
+    {{- include "autobrr.storage.ci.migration" (dict "storage" .Values.autobrrStorage.config) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.autobrrStorage.config) | nindent 4 }}
     targetSelector:
       autobrr:
         autobrr:
           mountPath: /config
+        {{- if eq .Values.autobrrStorage.config.type "ixVolume" }}
         01-permissions:
           mountPath: /mnt/directories/config
+        {{- end }}
   tmp:
     enabled: true
     type: emptyDir
@@ -19,30 +20,27 @@ persistence:
         autobrr:
           mountPath: /tmp
   {{- range $idx, $storage := .Values.autobrrStorage.additionalStorages }}
-  {{ printf "autobrr-%v" (int $idx) }}:
-    {{- $size := "" -}}
-    {{- if $storage.size -}}
-      {{- $size = (printf "%vGi" $storage.size) -}}
-    {{- end }}
+  {{ printf "autobrr-%v:" (int $idx) }}
     enabled: true
-    type: {{ $storage.type }}
-    datasetName: {{ $storage.datasetName | default "" }}
-    hostPath: {{ $storage.hostPath | default "" }}
-    server: {{ $storage.server | default "" }}
-    share: {{ $storage.share | default "" }}
-    domain: {{ $storage.domain | default "" }}
-    username: {{ $storage.username | default "" }}
-    password: {{ $storage.password | default "" }}
-    size: {{ $size }}
-    {{- if eq $storage.type "smb-pv-pvc" }}
-    mountOptions:
-      - key: noperm
-    {{- end }}
+    {{- include "autobrr.storage.ci.migration" (dict "storage" $storage) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       autobrr:
         autobrr:
           mountPath: {{ $storage.mountPath }}
+        {{- if eq $storage.type "ixVolume" }}
         01-permissions:
           mountPath: /mnt/directories{{ $storage.mountPath }}
+        {{- end }}
   {{- end }}
+{{- end -}}
+
+{{/* TODO: Remove on the next version bump, eg 1.2.0+ */}}
+{{- define "autobrr.storage.ci.migration" -}}
+  {{- $storage := .storage -}}
+
+  {{- if $storage.hostPath -}}
+    {{- $_ := set $storage "hostPathConfig" dict -}}
+    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
+  {{- end -}}
 {{- end -}}
