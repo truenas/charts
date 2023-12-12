@@ -21,7 +21,6 @@ persistence:
           mountPath: /tmp
   {{- range $idx, $storage := .Values.readarrStorage.additionalStorages }}
   {{ printf "readarr-%v:" (int $idx) }}
-    {{- end }}
     enabled: true
     {{- include "readarr.storage.ci.migration" (dict "storage" $storage) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
