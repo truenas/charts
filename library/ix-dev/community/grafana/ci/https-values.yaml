@@ -1,7 +1,6 @@
 grafanaStorage:
   data:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/data
+    type: pvc
 
 grafanaNetwork:
   certificateID: 1
