@@ -7,6 +7,10 @@ persistence:
       mealie:
         mealie:
           mountPath: /app/data
+        {{- if eq .Values.mealieStorage.data.type "ixVolume" }}
+        01-permissions:
+          mountPath: /mnt/directories/data
+        {{- end }}
   tmp:
     enabled: true
     type: emptyDir
@@ -22,6 +26,10 @@ persistence:
       mealie:
         mealie:
           mountPath: {{ $storage.mountPath }}
+        {{- if eq .Values.mealieStorage.data.type "ixVolume" }}
+        01-permissions:
+          mountPath: /mnt/directories{{ $storage.mountPath }}
+        {{- end }}
   {{- end -}}
 
   {{- include "ix.v1.common.app.postgresPersistence"
