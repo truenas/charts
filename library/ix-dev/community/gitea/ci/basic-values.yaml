@@ -7,6 +7,9 @@ giteaStorage:
     type: pvc
   pgBackup:
     type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""
 
 giteaNetwork:
   rootURL: http://localhost:30000
