@@ -49,7 +49,7 @@ workload:
                                                         "UID" .Values.grafanaRunAs.user
                                                         "GID" .Values.grafanaRunAs.group
                                                         "mode" "check"
-                                                        "type" "init") | nindent 8 }}
+                                                        "type" "install") | nindent 8 }}
 
 {{/* Service */}}
 service:
@@ -70,15 +70,16 @@ service:
 persistence:
   data:
     enabled: true
-    type: {{ .Values.grafanaStorage.data.type }}
-    datasetName: {{ .Values.grafanaStorage.data.datasetName | default "" }}
-    hostPath: {{ .Values.grafanaStorage.data.hostPath | default "" }}
+    {{- include "grafana.storage.ci.migration" (dict "storage" .Values.grafanaStorage.data) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.grafanaStorage.data) | nindent 4 }}
     targetSelector:
       grafana:
         grafana:
           mountPath: /var/lib/grafana
+        {{- if eq .Values.grafanaStorage.data.type "ixVolume" }}
         01-permissions:
           mountPath: /mnt/directories/data
+        {{- end }}
   tmp:
     enabled: true
     type: emptyDir
@@ -87,31 +88,18 @@ persistence:
         grafana:
           mountPath: /tmp
   {{- range $idx, $storage := .Values.grafanaStorage.additionalStorages }}
-  {{ printf "grafana-%v" (int $idx) }}:
-    {{- $size := "" -}}
-    {{- if $storage.size -}}
-      {{- $size = (printf "%vGi" $storage.size) -}}
-    {{- end }}
+  {{ printf "grafana-%v:" (int $idx) }}
     enabled: true
-    type: {{ $storage.type }}
-    datasetName: {{ $storage.datasetName | default "" }}
-    hostPath: {{ $storage.hostPath | default "" }}
-    server: {{ $storage.server | default "" }}
-    share: {{ $storage.share | default "" }}
-    domain: {{ $storage.domain | default "" }}
-    username: {{ $storage.username | default "" }}
-    password: {{ $storage.password | default "" }}
-    size: {{ $size }}
-    {{- if eq $storage.type "smb-pv-pvc" }}
-    mountOptions:
-      - key: noperm
-    {{- end }}
+    {{- include "grafana.storage.ci.migration" (dict "storage" $storage) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       grafana:
         grafana:
           mountPath: {{ $storage.mountPath }}
+        {{- if eq $storage.type "ixVolume" }}
         01-permissions:
           mountPath: /mnt/directories{{ $storage.mountPath }}
+        {{- end }}
   {{- end }}
   {{- if .Values.grafanaNetwork.certificateID }}
   cert:
@@ -135,4 +123,14 @@ scaleCertificate:
     enabled: true
     id: {{ .Values.grafanaNetwork.certificateID }}
     {{- end -}}
+{{- end -}}
+
+{{/* TODO: Remove on the next version bump, eg 1.2.0+ */}}
+{{- define "grafana.storage.ci.migration" -}}
+  {{- $storage := .storage -}}
+
+  {{- if $storage.hostPath -}}
+    {{- $_ := set $storage "hostPathConfig" dict -}}
+    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
+  {{- end -}}
 {{- end -}}
