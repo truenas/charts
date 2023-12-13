@@ -1,0 +1,37 @@
+image:
+  repository: castopod/app
+  pullPolicy: IfNotPresent
+  tag: 1.7.2
+webImage:
+  repository: castopod/web-server
+  pullPolicy: IfNotPresent
+  tag: 1.7.2
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+castopodConfig:
+  baseUrl: http://localhost:30085
+  webTimeout: 900
+  webMaxBodySize: 512
+  phpMemoryLimit: 512
+  enable2fa: false
+  disableHttpsRedirect: true
+  additionalEnvs: []
+
+castopodNetwork:
+  webPort: 30085
+
+castopodStorage:
+  data:
+    type: ixVolume
+    datasetName: data
+  mariadbData:
+    type: ixVolume
+    datasetName: mariadbData
+  mariadbBackup:
+    type: ixVolume
+    datasetName: mariadbBackup
+  additionalStorages: []
