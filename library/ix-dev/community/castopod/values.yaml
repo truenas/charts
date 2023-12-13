@@ -1,11 +1,11 @@
 image:
   repository: castopod/app
   pullPolicy: IfNotPresent
-  tag: 1.7.1
+  tag: 1.7.2
 webImage:
   repository: castopod/web-server
   pullPolicy: IfNotPresent
-  tag: 1.7.1
+  tag: 1.7.2
 
 resources:
   limits:
