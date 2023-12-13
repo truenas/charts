@@ -10,12 +10,9 @@ readarrNetwork:
 
 readarrStorage:
   config:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/config
+    type: pvc
   additionalStorages:
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/pop_music
+  - type: pvc
     mountPath: /pop_music
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/country_music
+  - type: pvc
     mountPath: /country_music

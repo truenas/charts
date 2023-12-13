@@ -45,5 +45,5 @@ workload:
                                                         "UID" .Values.readarrRunAs.user
                                                         "GID" .Values.readarrRunAs.group
                                                         "mode" "check"
-                                                        "type" "init") | nindent 8 }}
+                                                        "type" "install") | nindent 8 }}
 {{- end -}}
