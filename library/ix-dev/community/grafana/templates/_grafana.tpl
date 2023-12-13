@@ -76,7 +76,8 @@ persistence:
       grafana:
         grafana:
           mountPath: /var/lib/grafana
-        {{- if and (eq .Values.grafanaStorage.data.type "ixVolume") (not .Values.grafanaStorage.data.ixVolumeConfig.aclEnable) }}
+        {{- if and (eq .Values.grafanaStorage.data.type "ixVolume")
+                  (not (.Values.grafanaStorage.data.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
           mountPath: /mnt/directories/data
         {{- end }}
