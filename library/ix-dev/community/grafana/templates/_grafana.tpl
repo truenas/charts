@@ -97,7 +97,7 @@ persistence:
       grafana:
         grafana:
           mountPath: {{ $storage.mountPath }}
-        {{- if and (eq $storage.type "ixVolume") (not $storage.ixVolumeConfig.aclEnable) }}
+        {{- if and (eq $storage.type "ixVolume") (not ($storage.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
           mountPath: /mnt/directories{{ $storage.mountPath }}
         {{- end }}
