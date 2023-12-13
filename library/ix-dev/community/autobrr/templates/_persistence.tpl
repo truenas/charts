@@ -8,7 +8,7 @@ persistence:
       autobrr:
         autobrr:
           mountPath: /config
-        {{- if eq .Values.autobrrStorage.config.type "ixVolume" }}
+        {{- if and (eq .Values.autobrrStorage.config.type "ixVolume") (not .Values.autobrrStorage.config.ixVolumeConfig.aclEnable) }}
         01-permissions:
           mountPath: /mnt/directories/config
         {{- end }}
@@ -28,7 +28,7 @@ persistence:
       autobrr:
         autobrr:
           mountPath: {{ $storage.mountPath }}
-        {{- if eq $storage.type "ixVolume" }}
+        {{- if and (eq $storage.type "ixVolume") (not $storage.ixVolumeConfig.aclEnable) }}
         01-permissions:
           mountPath: /mnt/directories{{ $storage.mountPath }}
         {{- end }}
