@@ -2,8 +2,8 @@ grafanaStorage:
   data:
     type: pvc
   additionalStorages:
-  - type: hostPath
-    hostPath: pvc
+  - type: pvc
+    mountPath: /logs
 
 grafanaConfig:
   plugins:
