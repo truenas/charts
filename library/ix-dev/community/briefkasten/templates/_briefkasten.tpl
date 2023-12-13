@@ -44,7 +44,12 @@ workload:
               port: {{ .Values.briefkastenNetwork.webPort }}
               path: /
       initContainers:
-      {{- include "ix.v1.common.app.postgresWait" (dict "name" "01-postgres-wait"
+      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
+                                                        "UID" 1001
+                                                        "GID" 1001
+                                                        "mode" "check"
+                                                        "type" "install") | nindent 8 }}
+      {{- include "ix.v1.common.app.postgresWait" (dict "name" "02-postgres-wait"
                                                         "secretName" "postgres-creds") | nindent 8 }}
         02-migrate-db:
           enabled: true
