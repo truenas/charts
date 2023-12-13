@@ -7,7 +7,8 @@ persistence:
       mealie:
         mealie:
           mountPath: /app/data
-        {{- if eq .Values.mealieStorage.data.type "ixVolume" }}
+        {{- if and (eq .Values.mealieStorage.data.type "ixVolume")
+                  (not (.Values.mealieStorage.data.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
           mountPath: /mnt/directories/data
         {{- end }}
@@ -26,7 +27,7 @@ persistence:
       mealie:
         mealie:
           mountPath: {{ $storage.mountPath }}
-        {{- if eq .Values.mealieStorage.data.type "ixVolume" }}
+        {{- if and (eq $storage.type "ixVolume") (not ($storage.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
           mountPath: /mnt/directories{{ $storage.mountPath }}
         {{- end }}
