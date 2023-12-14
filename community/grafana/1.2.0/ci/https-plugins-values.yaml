@@ -1,11 +1,21 @@
 grafanaStorage:
   data:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/data
+    type: pvc
+  additionalStorages:
+  - type: pvc
+    mountPath: /logs
 
 grafanaNetwork:
   certificateID: 1
   rootURL: https://grafana.example.com:30000
+
+grafanaConfig:
+  plugins:
+    - grafana-piechart-panel
+    - grafana-clock-panel 1.0.0
+  additionalEnvs:
+    - name: GF_PATHS_LOGS
+      value: /logs
 
 ixCertificates:
   "1":
