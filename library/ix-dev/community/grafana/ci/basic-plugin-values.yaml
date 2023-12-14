@@ -1,10 +1,8 @@
 grafanaStorage:
   data:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/data
+    type: pvc
   additionalStorages:
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/logs
+  - type: pvc
     mountPath: /logs
 
 grafanaConfig:
