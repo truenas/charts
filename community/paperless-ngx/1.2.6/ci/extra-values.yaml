@@ -1,0 +1,39 @@
+paperlessNetwork:
+  webPort: 31000
+
+paperlessConfig:
+  adminUser: admin
+  adminPassword: supersecretpassword
+  adminMail: admin@example.com
+  enableTrash: false
+  additionalEnvs:
+    - name: PAPERLESS_OCR_LANGUAGES
+      value: deu+eng
+    - name: PAPERLESS_OCR_MODE
+      value: redo
+
+paperlessID:
+  user: 1001
+  group: 1001
+
+paperlessStorage:
+  data:
+    type: pvc
+  media:
+    type: pvc
+  consume:
+    type: pvc
+  trash:
+    type: pvc
+  pgData:
+    type: pvc
+  pgBackup:
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""
+  additionalStorages:
+  - type: pvc
+    mountPath: /data1
+  - type: pvc
+    mountPath: /data2

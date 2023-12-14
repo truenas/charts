@@ -1,0 +1,25 @@
+paperlessNetwork:
+  webPort: 31000
+  hostNetwork: true
+
+paperlessConfig:
+  adminUser: admin
+  adminPassword: supersecretpassword
+  adminMail: admin@example.com
+
+paperlessStorage:
+  data:
+    type: pvc
+  media:
+    type: pvc
+  consume:
+    type: pvc
+  trash:
+    type: pvc
+  pgData:
+    type: pvc
+  pgBackup:
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""
