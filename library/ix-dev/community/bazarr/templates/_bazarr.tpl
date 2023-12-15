@@ -42,4 +42,10 @@ workload:
               type: http
               port: "{{ .Values.bazarrNetwork.webPort }}"
               path: /api/swagger.json
+      initContainers:
+      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
+                                                        "UID" .Values.bazarrRunAs.user
+                                                        "GID" .Values.bazarrRunAs.group
+                                                        "mode" "check"
+                                                        "type" "install") | nindent 8 }}
 {{- end -}}
