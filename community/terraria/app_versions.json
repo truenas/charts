@@ -1,15 +1,15 @@
 {
-    "1.0.14": {
+    "1.0.15": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/terraria/1.0.14",
-        "last_update": "2023-12-15 12:26:10",
+        "location": "/__w/charts/charts/community/terraria/1.0.15",
+        "last_update": "2023-12-15 15:24:19",
         "required_features": [
             "normalize/ixVolume"
         ],
-        "human_version": "1.4.4.9_1.0.14",
-        "version": "1.0.14",
+        "human_version": "1.4.4.9_1.0.15",
+        "version": "1.0.15",
         "chart_metadata": {
             "name": "terraria",
             "description": "Terraria is a land of adventure! A land of mystery! A land that's yours to shape, defend, and enjoy.",
@@ -17,7 +17,7 @@
                 "title": "Terraria"
             },
             "type": "application",
-            "version": "1.0.14",
+            "version": "1.0.15",
             "apiVersion": "v2",
             "appVersion": "1.4.4.9",
             "kubeVersion": ">=1.16.0-0",
@@ -32,7 +32,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.3"
+                    "version": "1.2.4"
                 }
             ],
             "home": "https://terraria.org/",

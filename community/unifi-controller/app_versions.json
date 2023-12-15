@@ -1,17 +1,17 @@
 {
-    "1.2.1": {
+    "1.2.2": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/unifi-controller/1.2.1",
-        "last_update": "2023-12-15 12:26:10",
+        "location": "/__w/charts/charts/community/unifi-controller/1.2.2",
+        "last_update": "2023-12-15 15:24:19",
         "required_features": [
-            "definitions/certificate",
             "definitions/timezone",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/certificate"
         ],
-        "human_version": "8.0.7_1.2.1",
-        "version": "1.2.1",
+        "human_version": "8.0.7_1.2.2",
+        "version": "1.2.2",
         "chart_metadata": {
             "name": "unifi-controller",
             "description": "Unifi Controller is a network management controller for Unifi Equipment.",
@@ -19,7 +19,7 @@
                 "title": "Unifi Controller"
             },
             "type": "application",
-            "version": "1.2.1",
+            "version": "1.2.2",
             "apiVersion": "v2",
             "appVersion": "8.0.7",
             "kubeVersion": ">=1.16.0-0",
@@ -34,7 +34,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.3"
+                    "version": "1.2.4"
                 }
             ],
             "home": "https://github.com/goofball222/unifi",

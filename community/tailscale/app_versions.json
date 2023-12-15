@@ -1,13 +1,13 @@
 {
-    "1.0.24": {
+    "1.0.25": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/tailscale/1.0.24",
-        "last_update": "2023-12-15 12:26:10",
+        "location": "/__w/charts/charts/community/tailscale/1.0.25",
+        "last_update": "2023-12-15 15:24:19",
         "required_features": [],
-        "human_version": "1.54.1_1.0.24",
-        "version": "1.0.24",
+        "human_version": "1.54.1_1.0.25",
+        "version": "1.0.25",
         "chart_metadata": {
             "name": "tailscale",
             "description": "Secure remote access to shared resources",
@@ -15,7 +15,7 @@
                 "title": "Tailscale"
             },
             "type": "application",
-            "version": "1.0.24",
+            "version": "1.0.25",
             "apiVersion": "v2",
             "appVersion": "1.54.1",
             "kubeVersion": ">=1.16.0-0",
@@ -30,7 +30,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.3"
+                    "version": "1.2.4"
                 }
             ],
             "home": "https://tailscale.com/",
