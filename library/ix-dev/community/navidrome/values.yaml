@@ -23,8 +23,10 @@ navidromeRunAs:
 navidromeStorage:
   data:
     type: ixVolume
-    datasetName: data
+    ixVolumeConfig:
+      datasetName: data
   music:
     type: ixVolume
-    datasetName: music
+    ixVolumeConfig:
+      datasetName: music
   additionalStorages: []
