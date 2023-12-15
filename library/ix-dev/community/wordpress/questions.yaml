@@ -131,7 +131,6 @@ questions:
                 schema:
                   type: hostpath
                   show_if: [["type", "=", "hostPath"]]
-                  immutable: true
                   required: true
         - variable: mariadbData
           label: Wordpress MariaDB Data Storage
@@ -170,7 +169,6 @@ questions:
                 schema:
                   type: hostpath
                   show_if: [["type", "=", "hostPath"]]
-                  immutable: true
                   required: true
         - variable: mariadbBackup
           label: Wordpress MariaDB Backup Storage
@@ -209,7 +207,6 @@ questions:
                 schema:
                   type: hostpath
                   show_if: [["type", "=", "hostPath"]]
-                  immutable: true
                   required: true
         - variable: additionalStorages
           label: Additional Storage

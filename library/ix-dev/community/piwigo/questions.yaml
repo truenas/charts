@@ -318,7 +318,6 @@ questions:
                 schema:
                   type: hostpath
                   show_if: [["type", "=", "hostPath"]]
-                  immutable: true
                   required: true
         - variable: gallery
           label: Piwigo Gallery Storage
@@ -357,7 +356,6 @@ questions:
                 schema:
                   type: hostpath
                   show_if: [["type", "=", "hostPath"]]
-                  immutable: true
                   required: true
         - variable: mariadbData
           label: Piwigo MariaDB Data Storage
@@ -396,7 +394,6 @@ questions:
                 schema:
                   type: hostpath
                   show_if: [["type", "=", "hostPath"]]
-                  immutable: true
                   required: true
         - variable: mariadbBackup
           label: Piwigo MariaDB Backup Storage
@@ -435,7 +432,6 @@ questions:
                 schema:
                   type: hostpath
                   show_if: [["type", "=", "hostPath"]]
-                  immutable: true
                   required: true
         - variable: additionalStorages
           label: Additional Storage

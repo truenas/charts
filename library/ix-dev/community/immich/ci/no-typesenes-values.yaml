@@ -13,6 +13,9 @@ immichStorage:
     type: pvc
   pgBackup:
     type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""
 
 immichConfig:
   enableTypesense: false

@@ -204,7 +204,6 @@ questions:
                       schema:
                         type: hostpath
                         show_if: [["aclEnable", "=", false]]
-                        immutable: true
                         required: true
 
         - variable: pgData
@@ -292,7 +291,6 @@ questions:
                       schema:
                         type: hostpath
                         show_if: [["aclEnable", "=", false]]
-                        immutable: true
                         required: true
         - variable: pgBackup
           label: Firefly III Postgres Backup Storage
@@ -379,7 +377,6 @@ questions:
                       schema:
                         type: hostpath
                         show_if: [["aclEnable", "=", false]]
-                        immutable: true
                         required: true
 
         - variable: additionalStorages
@@ -450,7 +447,6 @@ questions:
                             schema:
                               type: hostpath
                               show_if: [["aclEnable", "=", false]]
-                              immutable: true
                               required: true
                     - variable: ixVolumeConfig
                       label: ixVolume Configuration

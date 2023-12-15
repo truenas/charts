@@ -156,7 +156,6 @@ questions:
                       schema:
                         type: hostpath
                         show_if: [["aclEnable", "=", false]]
-                        immutable: true
                         required: true
         - variable: library
           label: Immich Library Storage
@@ -235,7 +234,6 @@ questions:
                       schema:
                         type: hostpath
                         show_if: [["aclEnable", "=", false]]
-                        immutable: true
                         required: true
         - variable: thumbs
           label: Immich Thumbs Storage
@@ -314,7 +312,6 @@ questions:
                       schema:
                         type: hostpath
                         show_if: [["aclEnable", "=", false]]
-                        immutable: true
                         required: true
         - variable: profile
           label: Immich Profile Storage
@@ -393,7 +390,6 @@ questions:
                       schema:
                         type: hostpath
                         show_if: [["aclEnable", "=", false]]
-                        immutable: true
                         required: true
         - variable: video
           label: Immich Video Storage
@@ -472,7 +468,6 @@ questions:
                       schema:
                         type: hostpath
                         show_if: [["aclEnable", "=", false]]
-                        immutable: true
                         required: true
 
         - variable: pgData
@@ -560,7 +555,6 @@ questions:
                       schema:
                         type: hostpath
                         show_if: [["aclEnable", "=", false]]
-                        immutable: true
                         required: true
 
         - variable: pgBackup
@@ -648,7 +642,6 @@ questions:
                       schema:
                         type: hostpath
                         show_if: [["aclEnable", "=", false]]
-                        immutable: true
                         required: true
 
         - variable: additionalStorages
@@ -719,7 +712,6 @@ questions:
                             schema:
                               type: hostpath
                               show_if: [["aclEnable", "=", false]]
-                              immutable: true
                               required: true
                     - variable: ixVolumeConfig
                       label: ixVolume Configuration
