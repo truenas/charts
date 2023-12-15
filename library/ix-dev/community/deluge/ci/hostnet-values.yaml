@@ -1,10 +1,8 @@
 delugeStorage:
   config:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/config
+    type: pvc
   downloads:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/downloads
+    type: pvc
 
 delugeNetwork:
   hostNetwork: true
