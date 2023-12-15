@@ -3,7 +3,7 @@ description: PiGallery2 is a fast directory-first photo gallery website, with ri
 annotations:
   title: PiGallery2
 type: application
-version: 1.1.3
+version: 1.1.4
 apiVersion: v2
 appVersion: 2.0.0
 kubeVersion: '>=1.16.0-0'
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.2.3
+    version: 1.2.4
 home: https://bpatrik.github.io/pigallery2
 icon: https://media.sys.truenas.net/apps/pigallery2/icons/icon.png
 sources:
