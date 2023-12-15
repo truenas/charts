@@ -3,7 +3,7 @@ description: Secure remote access to shared resources
 annotations:
   title: Tailscale
 type: application
-version: 1.0.24
+version: 1.0.25
 apiVersion: v2
 appVersion: 1.54.1
 kubeVersion: '>=1.16.0-0'
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.2.3
+    version: 1.2.4
 home: https://tailscale.com/
 icon: https://media.sys.truenas.net/apps/tailscale/icons/icon.png
 sources:
