@@ -40,6 +40,12 @@ workload:
               type: http
               port: "{{ .Values.radarrNetwork.webPort }}"
               path: /ping
+      initContainers:
+      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
+                                                        "UID" .Values.radarrRunAs.user
+                                                        "GID" .Values.radarrRunAs.group
+                                                        "mode" "check"
+                                                        "type" "install") | nindent 8 }}
 
 {{/* Service */}}
 service:
@@ -60,12 +66,16 @@ service:
 persistence:
   config:
     enabled: true
-    {{- include "radarr.storage.ci.migration" (dict "storage" .Values.radarrStorage.config) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.radarrStorage.config) | nindent 4 }}
     targetSelector:
       radarr:
         radarr:
           mountPath: /config
+        {{- if and (eq .Values.radarrStorage.config.type "ixVolume")
+                  (not (.Values.radarrStorage.config.ixVolumeConfig | default dict).aclEnable) }}
+        01-permissions:
+          mountPath: /mnt/directories/config
+        {{- end }}
   tmp:
     enabled: true
     type: emptyDir
@@ -76,21 +86,14 @@ persistence:
   {{- range $idx, $storage := .Values.radarrStorage.additionalStorages }}
   {{ printf "radarr-%v:" (int $idx) }}
     enabled: true
-    {{- include "radarr.storage.ci.migration" (dict "storage" $storage) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       radarr:
         radarr:
           mountPath: {{ $storage.mountPath }}
+        {{- if and (eq $storage.type "ixVolume") (not ($storage.ixVolumeConfig | default dict).aclEnable) }}
+        01-permissions:
+          mountPath: /mnt/directories{{ $storage.mountPath }}
+        {{- end }}
   {{- end }}
-{{- end -}}
-
-{{/* TODO: Remove on the next version bump, eg 1.2.0+ */}}
-{{- define "radarr.storage.ci.migration" -}}
-  {{- $storage := .storage -}}
-
-  {{- if $storage.hostPath -}}
-    {{- $_ := set $storage "hostPathConfig" dict -}}
-    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
-  {{- end -}}
 {{- end -}}
