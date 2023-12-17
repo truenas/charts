@@ -25,10 +25,12 @@ delugeID:
 delugeStorage:
   config:
     type: ixVolume
-    datasetName: config
+    ixVolumeConfig:
+      datasetName: config
   downloads:
     type: ixVolume
-    datasetName: downloads
+    ixVolumeConfig:
+      datasetName: downloads
   additionalStorages: []
 
 notes:

@@ -1,0 +1,9 @@
+delugeStorage:
+  config:
+    type: pvc
+  downloads:
+    type: pvc
+
+delugeNetwork:
+  exposeDaemon: true
+  daemonPort: 32100
