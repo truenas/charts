@@ -1,0 +1,21 @@
+immichStorage:
+  uploads:
+    type: pvc
+  library:
+    type: pvc
+  thumbs:
+    type: pvc
+  profile:
+    type: pvc
+  video:
+    type: pvc
+  pgData:
+    type: pvc
+  pgBackup:
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""
+
+immichConfig:
+  enableML: false

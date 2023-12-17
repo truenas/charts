@@ -1,0 +1,21 @@
+linkdingNetwork:
+  webPort: 31000
+
+linkdingRunAs:
+  user: 1000
+  group: 1000
+
+linkdingConfig:
+  username: admin
+  password: admin
+
+linkdingStorage:
+  data:
+    type: pvc
+  pgData:
+    type: pvc
+  pgBackup:
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""

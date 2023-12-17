@@ -1,0 +1,196 @@
+groups:
+  - name: AdGuard Home Configuration
+    description: Configure AdGuard Home
+  # - name: User and Group Configuration
+  #   description: Configure User and Group for AdGuard Home
+  - name: Network Configuration
+    description: Configure Network for AdGuard Home
+  - name: Storage Configuration
+    description: Configure Storage for AdGuard Home
+  - name: Resources Configuration
+    description: Configure Resources for AdGuard Home
+
+portals:
+  web_portal:
+    protocols:
+      - "$kubernetes-resource_configmap_portal_protocol"
+    host:
+      - "$kubernetes-resource_configmap_portal_host"
+    ports:
+      - "$kubernetes-resource_configmap_portal_port"
+    path: "$kubernetes-resource_configmap_portal_path"
+
+questions:
+  # - variable: adguardRunAs
+  #   label: ""
+  #   group: User and Group Configuration
+  #   schema:
+  #     type: dict
+  #     attrs:
+  #       - variable: user
+  #         label: User ID
+  #         description: The user id that AdGuard Home will run as.
+  #         schema:
+  #           type: int
+  #           min: 1
+  #           default: 568
+  #           required: true
+  #       - variable: group
+  #         label: Group ID
+  #         description: The group id that AdGuard Home will run as.
+  #         schema:
+  #           type: int
+  #           min: 1
+  #           default: 568
+  #           required: true
+
+  - variable: adguardNetwork
+    label: ""
+    group: Network Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: webPort
+          label: Web Port
+          description: |
+            The port for the AdGuard Home WebUI. Set the same during the setup wizard.
+            In case you set a different port, you will need to stop/start the app for the
+            port set here to take effect. (Or wait for the container to restart automatically)
+          schema:
+            type: int
+            default: 30004
+            min: 9000
+            max: 65535
+            required: true
+        - variable: enableDHCP
+          label: Enable DHCP
+          description: |
+            This will only append the needed capabilities for DHCP to work </br>
+            The configuration for DHCP is done in the AdGuard Home WebUI
+          schema:
+            type: boolean
+            default: false
+
+  - variable: adguardStorage
+    label: ""
+    group: Storage Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: work
+          label: AdGuard Home Data Storage
+          description: The path to store AdGuard Home work.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
+                schema:
+                  type: string
+                  required: true
+                  immutable: true
+                  default: ixVolume
+                  enum:
+                    - value: hostPath
+                      description: Host Path (Path that already exists on the system)
+                    - value: ixVolume
+                      description: ixVolume (Dataset created automatically by the system)
+              - variable: datasetName
+                label: Dataset Name
+                schema:
+                  type: string
+                  show_if: [["type", "=", "ixVolume"]]
+                  required: true
+                  hidden: true
+                  immutable: true
+                  default: work
+                  $ref:
+                    - "normalize/ixVolume"
+              - variable: hostPath
+                label: Host Path
+                schema:
+                  type: hostpath
+                  show_if: [["type", "=", "hostPath"]]
+                  required: true
+        - variable: conf
+          label: AdGuard Home Configuration Storage
+          description: The path to store AdGuard Home configuration
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
+                schema:
+                  type: string
+                  required: true
+                  immutable: true
+                  default: ixVolume
+                  enum:
+                    - value: hostPath
+                      description: Host Path (Path that already exists on the system)
+                    - value: ixVolume
+                      description: ixVolume (Dataset created automatically by the system)
+              - variable: datasetName
+                label: Dataset Name
+                schema:
+                  type: string
+                  show_if: [["type", "=", "ixVolume"]]
+                  required: true
+                  hidden: true
+                  immutable: true
+                  default: conf
+                  $ref:
+                    - "normalize/ixVolume"
+              - variable: hostPath
+                label: Host Path
+                schema:
+                  type: hostpath
+                  show_if: [["type", "=", "hostPath"]]
+                  required: true
+
+  - variable: resources
+    label: ""
+    group: Resources Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: limits
+          label: Limits
+          schema:
+            type: dict
+            attrs:
+              - variable: cpu
+                label: CPU
+                description: CPU limit for AdGuard Home.
+                schema:
+                  type: string
+                  max_length: 6
+                  valid_chars: '^(0\.[1-9]|[1-9][0-9]*)(\.[0-9]|m?)$'
+                  valid_chars_error: |
+                    Valid CPU limit formats are</br>
+                    - Plain Integer - eg. 1</br>
+                    - Float - eg. 0.5</br>
+                    - Milicpu - eg. 500m
+                  default: "4000m"
+                  required: true
+              - variable: memory
+                label: Memory
+                description: Memory limit for AdGuard Home.
+                schema:
+                  type: string
+                  max_length: 12
+                  valid_chars: '^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$'
+                  valid_chars_error: |
+                    Valid Memory limit formats are</br>
+                    - Suffixed with E/P/T/G/M/K - eg. 1G</br>
+                    - Suffixed with Ei/Pi/Ti/Gi/Mi/Ki - eg. 1Gi</br>
+                    - Plain Integer in bytes - eg. 1024</br>
+                    - Exponent - eg. 134e6
+                  default: "8Gi"
+                  required: true

@@ -1,0 +1,21 @@
+mealieNetwork:
+  webPort: 31000
+  hostNetwork: true
+
+mealieConfig:
+  allowSignup: true
+  defaultGroup: Home
+  defaultAdminEmail: admin@example.com
+  defaultAdminPassword: supersecret
+  baseURL: http://localhost:31000
+
+mealieStorage:
+  data:
+    type: pvc
+  pgData:
+    type: pvc
+  pgBackup:
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""

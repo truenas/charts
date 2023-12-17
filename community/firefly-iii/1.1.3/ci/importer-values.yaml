@@ -1,0 +1,18 @@
+fireflyConfig:
+  appUrl: http://localhost:31000
+  enableImporter: true
+
+fireflyNetwork:
+  webPort: 31000
+  importerPort: 31001
+
+fireflyStorage:
+  uploads:
+    type: pvc
+  pgData:
+    type: pvc
+  pgBackup:
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""

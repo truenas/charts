@@ -1,0 +1,20 @@
+freshrssConfig:
+  defaultAdmin: admin
+  defaultAdminPass: admin
+
+freshrssNetwork:
+  webPort: 30000
+  hostNetwork: true
+
+freshrssStorage:
+  data:
+    type: pvc
+  extensions:
+    type: pvc
+  pgData:
+    type: pvc
+  pgBackup:
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""

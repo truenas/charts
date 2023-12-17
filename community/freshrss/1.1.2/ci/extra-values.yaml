@@ -1,0 +1,31 @@
+freshrssConfig:
+  defaultAdmin: admin
+  defaultAdminPass: admin
+  enableCron: true
+  cronSchedule: "*/5 * * * *"
+  additionalEnvs:
+    - name: freshrss__API_KEY
+      value: some-long-api-key
+    - name: freshrss__LOG_LEVEL
+      value: error
+
+freshrssNetwork:
+  webPort: 32000
+
+freshrssStorage:
+  data:
+    type: pvc
+  extensions:
+    type: pvc
+  pgData:
+    type: pvc
+  pgBackup:
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""
+  additionalStorages:
+  - type: pvc
+    mountPath: /data1
+  - type: pvc
+    mountPath: /data2

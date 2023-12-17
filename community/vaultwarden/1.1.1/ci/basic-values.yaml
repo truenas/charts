@@ -1,7 +1,0 @@
-vaultwardenStorage:
-  data:
-    type: pvc
-  pgData:
-    type: pvc
-  pgBackup:
-    type: emptyDir

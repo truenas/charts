@@ -1,0 +1,14 @@
+listmonkNetwork:
+  webPort: 30000
+  hostNetwork: true
+
+listmonkStorage:
+  uploads:
+    type: pvc
+  pgData:
+    type: pvc
+  pgBackup:
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""

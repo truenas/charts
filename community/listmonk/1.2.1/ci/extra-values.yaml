@@ -1,0 +1,23 @@
+listmonkNetwork:
+  webPort: 31000
+
+listmonkConfig:
+  adminUsername: admin
+  adminPassword: password
+
+listmonkStorage:
+  uploads:
+    type: pvc
+  pgData:
+    type: pvc
+  pgBackup:
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""
+
+  additionalStorages:
+  - type: pvc
+    mountPath: /data1
+  - type: pvc
+    mountPath: /data2

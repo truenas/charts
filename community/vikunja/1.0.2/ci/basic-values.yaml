@@ -1,0 +1,17 @@
+vikunjaNetwork:
+  webPort: 31000
+
+vikunjaConfig:
+  url: http://localhost:31000
+  maxFileSize: 20
+
+vikunjaStorage:
+  data:
+    type: pvc
+  pgData:
+    type: pvc
+  pgBackup:
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""

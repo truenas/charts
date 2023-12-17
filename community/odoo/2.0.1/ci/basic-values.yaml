@@ -1,0 +1,15 @@
+odooNetwork:
+  webPort: 31000
+
+odooStorage:
+  data:
+    type: pvc
+  addons:
+    type: pvc
+  pgData:
+    type: pvc
+  pgBackup:
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""

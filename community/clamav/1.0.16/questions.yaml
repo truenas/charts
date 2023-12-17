@@ -1,0 +1,223 @@
+groups:
+  - name: ClamAV Configuration
+    description: Configure ClamAV
+  - name: Network Configuration
+    description: Configure Network for ClamAV
+  - name: Storage Configuration
+    description: Configure Storage for ClamAV
+  - name: Resources Configuration
+    description: Configure Resources for ClamAV
+
+questions:
+
+  - variable: clamavConfig
+    label: ""
+    group: ClamAV Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: disableClamd
+          label: Disable ClamD
+          description: Do not start Clam daemon
+          schema:
+            type: boolean
+            default: false
+        - variable: disableFreshClamd
+          label: Disable FreshClamD
+          description: Do not start the FreshClam daemon
+          schema:
+            type: boolean
+            default: false
+        - variable: disableMilterd
+          label: Disable MilterD
+          description: Do not start the ClamAV-Milter daemon
+          schema:
+            type: boolean
+            default: true
+        - variable: clamdStartupTimeout
+          label: ClamD Startup Timeout
+          description: Seconds to wait for ClamD to start
+          schema:
+            type: int
+            default: 1800
+            required: true
+        - variable: freshclamChecks
+          label: Fresh Clam Checks
+          description: Times to check per day for a new database.
+          schema:
+            type: int
+            default: 1
+            min: 1
+            max: 50
+            required: true
+        - variable: additionalEnvs
+          label: Additional Environment Variables
+          description: Configure additional environment variables for ClamAV.
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: env
+                label: Environment Variable
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: name
+                      label: Name
+                      schema:
+                        type: string
+                        required: true
+                    - variable: value
+                      label: Value
+                      schema:
+                        type: string
+                        required: true
+
+  - variable: clamavNetwork
+    label: ""
+    group: Network Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: clamdPort
+          label: ClamD Port
+          description: The port for the ClamAV ClamD
+          schema:
+            type: int
+            default: 30005
+            min: 9000
+            max: 65535
+            required: true
+        - variable: milterdPort
+          label: MilterD Port
+          description: The port for the ClamAV MilterD
+          schema:
+            type: int
+            default: 30006
+            min: 9000
+            max: 65535
+            required: true
+
+  - variable: clamavStorage
+    label: ""
+    group: Storage Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: sigdb
+          label: ClamAV Signature Database Storage
+          description: The path to store ClamAV Signature Database.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
+                schema:
+                  type: string
+                  required: true
+                  immutable: true
+                  default: ixVolume
+                  enum:
+                    - value: hostPath
+                      description: Host Path (Path that already exists on the system)
+                    - value: ixVolume
+                      description: ixVolume (Dataset created automatically by the system)
+              - variable: datasetName
+                label: Dataset Name
+                schema:
+                  type: string
+                  show_if: [["type", "=", "ixVolume"]]
+                  required: true
+                  hidden: true
+                  immutable: true
+                  default: sig-db
+                  $ref:
+                    - "normalize/ixVolume"
+              - variable: hostPath
+                label: Host Path
+                schema:
+                  type: hostpath
+                  show_if: [["type", "=", "hostPath"]]
+                  required: true
+        - variable: scandir
+          label: ClamAV Scan Storage
+          description: The path to store ClamAV Scan storage.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
+                schema:
+                  type: string
+                  required: true
+                  immutable: true
+                  default: ixVolume
+                  enum:
+                    - value: hostPath
+                      description: Host Path (Path that already exists on the system)
+                    - value: ixVolume
+                      description: ixVolume (Dataset created automatically by the system)
+              - variable: datasetName
+                label: Dataset Name
+                schema:
+                  type: string
+                  show_if: [["type", "=", "ixVolume"]]
+                  required: true
+                  hidden: true
+                  immutable: true
+                  default: scan-dir
+                  $ref:
+                    - "normalize/ixVolume"
+              - variable: hostPath
+                label: Host Path
+                schema:
+                  type: hostpath
+                  show_if: [["type", "=", "hostPath"]]
+                  required: true
+
+  - variable: resources
+    label: ""
+    group: Resources Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: limits
+          label: Limits
+          schema:
+            type: dict
+            attrs:
+              - variable: cpu
+                label: CPU
+                description: CPU limit for ClamAV.
+                schema:
+                  type: string
+                  max_length: 6
+                  valid_chars: '^(0\.[1-9]|[1-9][0-9]*)(\.[0-9]|m?)$'
+                  valid_chars_error: |
+                    Valid CPU limit formats are</br>
+                    - Plain Integer - eg. 1</br>
+                    - Float - eg. 0.5</br>
+                    - Milicpu - eg. 500m
+                  default: "4000m"
+                  required: true
+              - variable: memory
+                label: Memory
+                description: Memory limit for ClamAV.
+                schema:
+                  type: string
+                  max_length: 12
+                  valid_chars: '^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$'
+                  valid_chars_error: |
+                    Valid Memory limit formats are</br>
+                    - Suffixed with E/P/T/G/M/K - eg. 1G</br>
+                    - Suffixed with Ei/Pi/Ti/Gi/Mi/Ki - eg. 1Gi</br>
+                    - Plain Integer in bytes - eg. 1024</br>
+                    - Exponent - eg. 134e6
+                  default: "8Gi"
+                  required: true

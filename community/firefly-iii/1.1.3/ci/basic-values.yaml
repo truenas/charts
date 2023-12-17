@@ -1,0 +1,14 @@
+fireflyNetwork:
+  appUrl: http://localhost:31000
+  webPort: 31000
+
+fireflyStorage:
+  uploads:
+    type: pvc
+  pgData:
+    type: pvc
+  pgBackup:
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""

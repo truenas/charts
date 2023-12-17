@@ -1,0 +1,17 @@
+vaultwardenStorage:
+  data:
+    type: pvc
+  pgData:
+    type: pvc
+  pgBackup:
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""
+
+vaultwardenConfig:
+  additionalEnvs:
+    - name: LOG_LEVEL
+      value: debug
+    - name: SIGNUPS_ALLOWED
+      value: false

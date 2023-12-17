@@ -1,0 +1,170 @@
+groups:
+  - name: TFTP Configuration
+    description: Configure TFTP
+  - name: Network Configuration
+    description: Configure Network for TFTP
+  - name: Storage Configuration
+    description: Configure Storage for TFTP
+  - name: Resources Configuration
+    description: Configure Resources for TFTP
+
+questions:
+  - variable: TZ
+    group: TFTP Configuration
+    label: Timezone
+    schema:
+      type: string
+      default: Etc/UTC
+      required: true
+      $ref:
+        - definitions/timezone
+
+  - variable: tftpConfig
+    label: ""
+    group: TFTP Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: allowCreate
+          label: Allow Create
+          description: |
+            Allow new files to be created. This is disabled by default.</br>
+            Enabling this will change the permissions of the tftpboot directory to 757.
+            Disabling this will change the permissions of the tftpboot directory to 555.
+          schema:
+            type: boolean
+            default: false
+        - variable: additionalEnvs
+          label: Additional Environment Variables
+          description: Configure additional environment variables for TFTP.
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: env
+                label: Environment Variable
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: name
+                      label: Name
+                      schema:
+                        type: string
+                        required: true
+                    - variable: value
+                      label: Value
+                      schema:
+                        type: string
+                        required: true
+
+  - variable: tftpNetwork
+    label: ""
+    group: Network Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: hostNetwork
+          label: Host Network
+          description: |
+            Bind to the host network. It's recommended to keep this disabled.</br>
+          schema:
+            type: boolean
+            default: true
+        - variable: tftpPort
+          label: TFTP Port
+          description: |
+            The port for TFTP.
+            When hostNetwork is enabled, the port tftp port will be 69.
+          schema:
+            type: int
+            default: 30031
+            show_if: [["hostNetwork", "=", false]]
+            min: 9000
+            max: 65535
+            required: true
+
+  - variable: tftpStorage
+    label: ""
+    group: Storage Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: tftpboot
+          label: TFTP Boot Storage
+          description: The path to store TFTP Boot files.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
+                schema:
+                  type: string
+                  required: true
+                  immutable: true
+                  default: "ixVolume"
+                  enum:
+                    - value: "hostPath"
+                      description: Host Path (Path that already exists on the system)
+                    - value: "ixVolume"
+                      description: ixVolume (Dataset created automatically by the system)
+              - variable: datasetName
+                label: Dataset Name
+                schema:
+                  type: string
+                  show_if: [["type", "=", "ixVolume"]]
+                  required: true
+                  hidden: true
+                  immutable: true
+                  default: "tftpboot"
+                  $ref:
+                    - "normalize/ixVolume"
+              - variable: hostPath
+                label: Host Path
+                schema:
+                  type: hostpath
+                  show_if: [["type", "=", "hostPath"]]
+                  required: true
+
+  - variable: resources
+    group: Resources Configuration
+    label: ""
+    schema:
+      type: dict
+      attrs:
+        - variable: limits
+          label: Limits
+          schema:
+            type: dict
+            attrs:
+              - variable: cpu
+                label: CPU
+                description: CPU limit for TFTP.
+                schema:
+                  type: string
+                  max_length: 6
+                  valid_chars: '^(0\.[1-9]|[1-9][0-9]*)(\.[0-9]|m?)$'
+                  valid_chars_error: |
+                    Valid CPU limit formats are</br>
+                    - Plain Integer - eg. 1</br>
+                    - Float - eg. 0.5</br>
+                    - Milicpu - eg. 500m
+                  default: "4000m"
+                  required: true
+              - variable: memory
+                label: Memory
+                description: Memory limit for TFTP.
+                schema:
+                  type: string
+                  max_length: 12
+                  valid_chars: '^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$'
+                  valid_chars_error: |
+                    Valid Memory limit formats are</br>
+                    - Suffixed with E/P/T/G/M/K - eg. 1G</br>
+                    - Suffixed with Ei/Pi/Ti/Gi/Mi/Ki - eg. 1Gi</br>
+                    - Plain Integer in bytes - eg. 1024</br>
+                    - Exponent - eg. 134e6
+                  default: "8Gi"
+                  required: true

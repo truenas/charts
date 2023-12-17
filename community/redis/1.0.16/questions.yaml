@@ -1,0 +1,146 @@
+groups:
+  - name: Redis Configuration
+    description: Configure Redis
+  - name: Network Configuration
+    description: Configure Network for Redis
+  - name: Storage Configuration
+    description: Configure Storage for Redis
+  - name: Resources Configuration
+    description: Configure Resources for Redis
+
+questions:
+  - variable: redisConfig
+    label: ""
+    group: Redis Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: allowEmptyPassword
+          label: Allow Empty Password
+          description: |
+            Allow empty password for Redis.</br>
+            It's recommended to keep this disabled.
+          schema:
+            type: boolean
+            default: false
+        - variable: password
+          label: Password
+          description: Password for Redis.
+          schema:
+            type: string
+            required: true
+            private: true
+            # Character @ is not allowed in password
+            valid_chars: '^((?!@).)*$'
+            valid_chars_error: "Character @ is not allowed in password"
+            show_if: [[ "allowEmptyPassword", "=", false ]]
+            default: ""
+
+  - variable: redisNetwork
+    label: ""
+    group: Network Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: hostNetwork
+          label: Host Network
+          description: |
+            Bind to the host network. It's recommended to keep this disabled.</br>
+          schema:
+            type: boolean
+            default: false
+        - variable: redisPort
+          label: Redis Port
+          description: The port for Redis.
+          schema:
+            type: int
+            default: 30036
+            min: 9000
+            max: 65535
+            required: true
+
+  - variable: redisStorage
+    label: ""
+    group: Storage Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: data
+          label: Redis Data Storage
+          description: The path to store Redis Data.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
+                schema:
+                  type: string
+                  required: true
+                  immutable: true
+                  default: "ixVolume"
+                  enum:
+                    - value: "hostPath"
+                      description: Host Path (Path that already exists on the system)
+                    - value: "ixVolume"
+                      description: ixVolume (Dataset created automatically by the system)
+              - variable: datasetName
+                label: Dataset Name
+                schema:
+                  type: string
+                  show_if: [["type", "=", "ixVolume"]]
+                  required: true
+                  hidden: true
+                  immutable: true
+                  default: "data"
+                  $ref:
+                    - "normalize/ixVolume"
+              - variable: hostPath
+                label: Host Path
+                schema:
+                  type: hostpath
+                  show_if: [["type", "=", "hostPath"]]
+                  required: true
+
+  - variable: resources
+    group: Resources Configuration
+    label: ""
+    schema:
+      type: dict
+      attrs:
+        - variable: limits
+          label: Limits
+          schema:
+            type: dict
+            attrs:
+              - variable: cpu
+                label: CPU
+                description: CPU limit for Redis.
+                schema:
+                  type: string
+                  max_length: 6
+                  valid_chars: '^(0\.[1-9]|[1-9][0-9]*)(\.[0-9]|m?)$'
+                  valid_chars_error: |
+                    Valid CPU limit formats are</br>
+                    - Plain Integer - eg. 1</br>
+                    - Float - eg. 0.5</br>
+                    - Milicpu - eg. 500m
+                  default: "4000m"
+                  required: true
+              - variable: memory
+                label: Memory
+                description: Memory limit for Redis.
+                schema:
+                  type: string
+                  max_length: 12
+                  valid_chars: '^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$'
+                  valid_chars_error: |
+                    Valid Memory limit formats are</br>
+                    - Suffixed with E/P/T/G/M/K - eg. 1G</br>
+                    - Suffixed with Ei/Pi/Ti/Gi/Mi/Ki - eg. 1Gi</br>
+                    - Plain Integer in bytes - eg. 1024</br>
+                    - Exponent - eg. 134e6
+                  default: "8Gi"
+                  required: true

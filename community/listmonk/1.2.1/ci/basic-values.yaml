@@ -1,0 +1,17 @@
+listmonkNetwork:
+  webPort: 31000
+
+listmonkRunAs:
+  user: 1000
+  group: 1000
+
+listmonkStorage:
+  uploads:
+    type: pvc
+  pgData:
+    type: pvc
+  pgBackup:
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""
