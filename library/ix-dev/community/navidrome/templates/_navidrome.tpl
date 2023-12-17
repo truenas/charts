@@ -47,5 +47,5 @@ workload:
                                                         "UID" .Values.navidromeRunAs.user
                                                         "GID" .Values.navidromeRunAs.group
                                                         "mode" "check"
-                                                        "type" "init") | nindent 8 }}
+                                                        "type" "install") | nindent 8 }}
 {{- end -}}

@@ -2,51 +2,52 @@
 persistence:
   data:
     enabled: true
-    type: {{ .Values.navidromeStorage.data.type }}
-    datasetName: {{ .Values.navidromeStorage.data.datasetName | default "" }}
-    hostPath: {{ .Values.navidromeStorage.data.hostPath | default "" }}
+    {{- include "navidrome.storage.ci.migration" (dict "storage" .Values.navidromeStorage.data) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.navidromeStorage.data) | nindent 4 }}
     targetSelector:
       navidrome:
         navidrome:
           mountPath: /data
+        {{- if and (eq .Values.navidromeStorage.data.type "ixVolume")
+                  (not (.Values.navidromeStorage.data.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
           mountPath: /mnt/directories/data
+        {{- end }}
   music:
     enabled: true
-    type: {{ .Values.navidromeStorage.music.type }}
-    datasetName: {{ .Values.navidromeStorage.music.datasetName | default "" }}
-    hostPath: {{ .Values.navidromeStorage.music.hostPath | default "" }}
+    {{- include "navidrome.storage.ci.migration" (dict "storage" .Values.navidromeStorage.music) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.navidromeStorage.music) | nindent 4 }}
     targetSelector:
       navidrome:
         navidrome:
           mountPath: /music
+        {{- if and (eq .Values.navidromeStorage.music.type "ixVolume")
+                  (not (.Values.navidromeStorage.music.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
           mountPath: /mnt/directories/music
+        {{- end }}
   {{- range $idx, $storage := .Values.navidromeStorage.additionalStorages }}
-  {{ printf "navidrome-%v" (int $idx) }}:
-    {{- $size := "" -}}
-    {{- if $storage.size -}}
-      {{- $size = (printf "%vGi" $storage.size) -}}
-    {{- end }}
+  {{ printf "navidrome-%v:" (int $idx) }}
     enabled: true
-    type: {{ $storage.type }}
-    datasetName: {{ $storage.datasetName | default "" }}
-    hostPath: {{ $storage.hostPath | default "" }}
-    server: {{ $storage.server | default "" }}
-    share: {{ $storage.share | default "" }}
-    domain: {{ $storage.domain | default "" }}
-    username: {{ $storage.username | default "" }}
-    password: {{ $storage.password | default "" }}
-    size: {{ $size }}
-    {{- if eq $storage.type "smb-pv-pvc" }}
-    mountOptions:
-      - key: noperm
-    {{- end }}
+    {{- include "navidrome.storage.ci.migration" (dict "storage" $storage) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       navidrome:
         navidrome:
           mountPath: {{ $storage.mountPath }}
+        {{- if and (eq $storage.type "ixVolume") (not ($storage.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
           mountPath: /mnt/directories{{ $storage.mountPath }}
+        {{- end }}
   {{- end }}
+{{- end -}}
+
+{{/* TODO: Remove on the next version bump, eg 1.2.0+ */}}
+{{- define "navidrome.storage.ci.migration" -}}
+  {{- $storage := .storage -}}
+
+  {{- if $storage.hostPath -}}
+    {{- $_ := set $storage "hostPathConfig" dict -}}
+    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
+  {{- end -}}
 {{- end -}}

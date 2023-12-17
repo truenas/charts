@@ -1,10 +1,8 @@
 navidromeStorage:
   data:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/data
+    type: pvc
   music:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/music
+    type: pvc
 
 navidromeConfig:
   uiWelcomeMessage: 'Welcome to Navidrome!'
