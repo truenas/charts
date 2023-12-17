@@ -41,7 +41,12 @@ workload:
               type: http
               port: 8096
               path: /health
-
+      initContainers:
+      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
+                                                        "UID" .Values.jellyfinRunAs.user
+                                                        "GID" .Values.jellyfinRunAs.group
+                                                        "mode" "check"
+                                                        "type" "install") | nindent 8 }}
 {{/* Service */}}
 service:
   jellyfin:
@@ -62,28 +67,40 @@ service:
 persistence:
   config:
     enabled: true
-    {{- include "jellyfin.storage.ci.migration" (dict "storage" .Values.jellyfinStorage.config) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.jellyfinStorage.config) | nindent 4 }}
     targetSelector:
       jellyfin:
         jellyfin:
           mountPath: /config
+        {{- if and (eq .Values.jellyfinStorage.config.type "ixVolume")
+                  (not (.Values.jellyfinStorage.config.ixVolumeConfig | default dict).aclEnable) }}
+        01-permissions:
+          mountPath: /mnt/directories/config
+        {{- end }}
   cache:
     enabled: true
-    {{- include "jellyfin.storage.ci.migration" (dict "storage" .Values.jellyfinStorage.cache) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.jellyfinStorage.cache) | nindent 4 }}
     targetSelector:
       jellyfin:
         jellyfin:
           mountPath: /cache
+        {{- if and (eq .Values.jellyfinStorage.cache.type "ixVolume")
+                  (not (.Values.jellyfinStorage.cache.ixVolumeConfig | default dict).aclEnable) }}
+        01-permissions:
+          mountPath: /mnt/directories/cache
+        {{- end }}
   transcode:
     enabled: true
-    {{- include "jellyfin.storage.ci.migration" (dict "storage" .Values.jellyfinStorage.transcodes) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.jellyfinStorage.transcodes) | nindent 4 }}
     targetSelector:
       jellyfin:
         jellyfin:
           mountPath: /config/transcodes
+        {{- if and (eq .Values.jellyfinStorage.transcodes.type "ixVolume")
+                  (not (.Values.jellyfinStorage.transcodes.ixVolumeConfig | default dict).aclEnable) }}
+        01-permissions:
+          mountPath: /mnt/directories/transcodes
+        {{- end }}
   tmp:
     enabled: true
     type: emptyDir
@@ -94,12 +111,15 @@ persistence:
   {{- range $idx, $storage := .Values.jellyfinStorage.additionalStorages }}
   {{ printf "jellyfin-%v:" (int $idx) }}
     enabled: true
-    {{- include "jellyfin.storage.ci.migration" (dict "storage" $storage) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       jellyfin:
         jellyfin:
           mountPath: {{ $storage.mountPath }}
+        {{- if and (eq $storage.type "ixVolume") (not ($storage.ixVolumeConfig | default dict).aclEnable) }}
+        01-permissions:
+          mountPath: /mnt/directories{{ $storage.mountPath }}
+        {{- end }}
   {{- end }}
 
 {{ with .Values.jellyfinGPU }}
@@ -112,20 +132,4 @@ scaleGPU:
         - jellyfin
   {{ end }}
 {{ end }}
-{{- end -}}
-
-{{/* TODO: Remove on the next version bump, eg 1.2.0+ */}}
-{{- define "jellyfin.storage.ci.migration" -}}
-  {{- $storage := .storage -}}
-
-  {{- if $storage.hostPath -}}
-    {{- $_ := set $storage "hostPathConfig" dict -}}
-    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
-  {{- end -}}
-
-  {{- if (hasKey $storage "medium") -}}
-    {{- $_ := set $storage "emptyDirConfig" dict -}}
-    {{- $_ := set $storage.emptyDirConfig "medium" $storage.medium -}}
-    {{- $_ := set $storage.emptyDirConfig "size" 1 -}}
-  {{- end -}}
 {{- end -}}

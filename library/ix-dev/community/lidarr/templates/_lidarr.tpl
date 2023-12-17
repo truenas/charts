@@ -40,6 +40,12 @@ workload:
               type: http
               port: "{{ .Values.lidarrNetwork.webPort }}"
               path: /ping
+      initContainers:
+      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
+                                                        "UID" .Values.lidarrRunAs.user
+                                                        "GID" .Values.lidarrRunAs.group
+                                                        "mode" "check"
+                                                        "type" "install") | nindent 8 }}
 
 {{/* Service */}}
 service:
@@ -60,12 +66,16 @@ service:
 persistence:
   config:
     enabled: true
-    {{- include "lidarr.storage.ci.migration" (dict "storage" .Values.lidarrStorage.config) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.lidarrStorage.config) | nindent 4 }}
     targetSelector:
       lidarr:
         lidarr:
           mountPath: /config
+        {{- if and (eq .Values.lidarrStorage.config.type "ixVolume")
+                  (not (.Values.lidarrStorage.config.ixVolumeConfig | default dict).aclEnable) }}
+        01-permissions:
+          mountPath: /mnt/directories/config
+        {{- end }}
   tmp:
     enabled: true
     type: emptyDir
@@ -76,21 +86,14 @@ persistence:
   {{- range $idx, $storage := .Values.lidarrStorage.additionalStorages }}
   {{ printf "lidarr-%v:" (int $idx) }}
     enabled: true
-    {{- include "lidarr.storage.ci.migration" (dict "storage" $storage) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       lidarr:
         lidarr:
           mountPath: {{ $storage.mountPath }}
+        {{- if and (eq $storage.type "ixVolume") (not ($storage.ixVolumeConfig | default dict).aclEnable) }}
+        01-permissions:
+          mountPath: /mnt/directories{{ $storage.mountPath }}
+        {{- end }}
   {{- end }}
-{{- end -}}
-
-{{/* TODO: Remove on the next version bump, eg 1.2.0+ */}}
-{{- define "lidarr.storage.ci.migration" -}}
-  {{- $storage := .storage -}}
-
-  {{- if $storage.hostPath -}}
-    {{- $_ := set $storage "hostPathConfig" dict -}}
-    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
-  {{- end -}}
 {{- end -}}

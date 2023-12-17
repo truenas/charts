@@ -54,6 +54,11 @@ workload:
               port: {{ .Values.prometheusNetwork.apiPort }}
               path: /-/ready
       initContainers:
+      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
+                                                        "UID" .Values.prometheusRunAs.user
+                                                        "GID" .Values.prometheusRunAs.group
+                                                        "mode" "check"
+                                                        "type" "install") | nindent 8 }}
         init-config:
           enabled: true
           type: init
@@ -91,15 +96,18 @@ service:
 persistence:
   data:
     enabled: true
-    {{- include "prometheus.storage.ci.migration" (dict "storage" .Values.prometheusStorage.data) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.prometheusStorage.data) | nindent 4 }}
     targetSelector:
       prometheus:
         prometheus:
           mountPath: /data
+        {{- if and (eq .Values.prometheusStorage.data.type "ixVolume")
+                  (not (.Values.prometheusStorage.data.ixVolumeConfig | default dict).aclEnable) }}
+        01-permissions:
+          mountPath: /mnt/directories/data
+        {{- end }}
   config:
     enabled: true
-    {{- include "prometheus.storage.ci.migration" (dict "storage" .Values.prometheusStorage.config) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.prometheusStorage.config) | nindent 4 }}
     targetSelector:
       prometheus:
@@ -107,24 +115,22 @@ persistence:
           mountPath: /config
         init-config:
           mountPath: /config
+        {{- if and (eq .Values.prometheusStorage.config.type "ixVolume")
+                  (not (.Values.prometheusStorage.config.ixVolumeConfig | default dict).aclEnable) }}
+        01-permissions:
+          mountPath: /mnt/directories/config
+        {{- end }}
   {{- range $idx, $storage := .Values.prometheusStorage.additionalStorages }}
   {{ printf "prometheus-%v:" (int $idx) }}
     enabled: true
-    {{- include "prometheus.storage.ci.migration" (dict "storage" $storage) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       prometheus:
         prometheus:
           mountPath: {{ $storage.mountPath }}
+        {{- if and (eq $storage.type "ixVolume") (not ($storage.ixVolumeConfig | default dict).aclEnable) }}
+        01-permissions:
+          mountPath: /mnt/directories{{ $storage.mountPath }}
+        {{- end }}
   {{- end }}
-{{- end -}}
-
-{{/* TODO: Remove on the next version bump, eg 1.1.0+ */}}
-{{- define "prometheus.storage.ci.migration" -}}
-  {{- $storage := .storage -}}
-
-  {{- if $storage.hostPath -}}
-    {{- $_ := set $storage "hostPathConfig" dict -}}
-    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
-  {{- end -}}
 {{- end -}}
