@@ -114,7 +114,6 @@ questions:
                 schema:
                   type: hostpath
                   show_if: [["type", "=", "hostPath"]]
-                  immutable: true
                   required: true
         - variable: conf
           label: AdGuard Home Configuration Storage
@@ -153,7 +152,6 @@ questions:
                 schema:
                   type: hostpath
                   show_if: [["type", "=", "hostPath"]]
-                  immutable: true
                   required: true
 
   - variable: resources

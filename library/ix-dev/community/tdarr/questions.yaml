@@ -167,7 +167,6 @@ questions:
                 schema:
                   type: hostpath
                   show_if: [["type", "=", "hostPath"]]
-                  immutable: true
                   required: true
         - variable: configs
           label: Tdarr Config Storage
@@ -206,7 +205,6 @@ questions:
                 schema:
                   type: hostpath
                   show_if: [["type", "=", "hostPath"]]
-                  immutable: true
                   required: true
         - variable: logs
           label: Tdarr Logs Storage
@@ -245,7 +243,6 @@ questions:
                 schema:
                   type: hostpath
                   show_if: [["type", "=", "hostPath"]]
-                  immutable: true
                   required: true
         - variable: transcodes
           label: Tdarr Transcodes Storage
@@ -287,7 +284,6 @@ questions:
                 schema:
                   type: hostpath
                   show_if: [["type", "=", "hostPath"]]
-                  immutable: true
                   required: true
               - variable: medium
                 label: emptyDir Medium

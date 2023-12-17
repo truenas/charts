@@ -230,7 +230,6 @@ questions:
                       schema:
                         type: hostpath
                         show_if: [["aclEnable", "=", false]]
-                        immutable: true
                         required: true
         - variable: pgData
           label: Postgres Data Storage
@@ -317,7 +316,6 @@ questions:
                       schema:
                         type: hostpath
                         show_if: [["aclEnable", "=", false]]
-                        immutable: true
                         required: true
         - variable: pgBackup
           label: Postgres Backup Storage
@@ -404,7 +402,6 @@ questions:
                       schema:
                         type: hostpath
                         show_if: [["aclEnable", "=", false]]
-                        immutable: true
                         required: true
 
         - variable: additionalStorages
@@ -475,7 +472,6 @@ questions:
                             schema:
                               type: hostpath
                               show_if: [["aclEnable", "=", false]]
-                              immutable: true
                               required: true
                     - variable: ixVolumeConfig
                       label: ixVolume Configuration

@@ -239,7 +239,6 @@ questions:
                 schema:
                   type: hostpath
                   show_if: [["type", "=", "hostPath"]]
-                  immutable: true
                   required: true
         - variable: logs
           label: Omada Controller Logs Storage
@@ -278,7 +277,6 @@ questions:
                 schema:
                   type: hostpath
                   show_if: [["type", "=", "hostPath"]]
-                  immutable: true
                   required: true
         - variable: additionalStorages
           label: Additional Storage

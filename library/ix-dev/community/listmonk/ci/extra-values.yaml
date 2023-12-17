@@ -12,6 +12,10 @@ listmonkStorage:
     type: pvc
   pgBackup:
     type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""
+
   additionalStorages:
   - type: pvc
     mountPath: /data1

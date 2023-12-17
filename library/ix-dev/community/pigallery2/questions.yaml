@@ -146,7 +146,6 @@ questions:
                 schema:
                   type: hostpath
                   show_if: [["type", "=", "hostPath"]]
-                  immutable: true
                   required: true
         - variable: db
           label: PiGallery2 Database Storage
@@ -185,7 +184,6 @@ questions:
                 schema:
                   type: hostpath
                   show_if: [["type", "=", "hostPath"]]
-                  immutable: true
                   required: true
         - variable: media
           label: PiGallery2 Media Storage
@@ -224,7 +222,6 @@ questions:
                 schema:
                   type: hostpath
                   show_if: [["type", "=", "hostPath"]]
-                  immutable: true
                   required: true
         - variable: thumbnails
           label: PiGallery2 Thumbnails Storage
@@ -263,7 +260,6 @@ questions:
                 schema:
                   type: hostpath
                   show_if: [["type", "=", "hostPath"]]
-                  immutable: true
                   required: true
         - variable: additionalStorages
           label: Additional Storage

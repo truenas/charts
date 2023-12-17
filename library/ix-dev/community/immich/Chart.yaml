@@ -4,7 +4,7 @@ description: Immich is a self-hosted photo and video backup solution directly fr
 annotations:
   title: Immich
 type: application
-version: 2.0.5
+version: 2.0.6
 apiVersion: v2
 appVersion: 1.90.2
 kubeVersion: '>=1.16.0-0'
@@ -15,7 +15,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.2.3
+    version: 1.2.4
 home: https://immich.app
 icon: https://media.sys.truenas.net/apps/immich/icons/icon.svg
 sources:

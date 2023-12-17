@@ -173,7 +173,6 @@ questions:
                       schema:
                         type: hostpath
                         show_if: [["aclEnable", "=", false]]
-                        immutable: true
                         required: true
 
         - variable: pgBackup
@@ -261,7 +260,6 @@ questions:
                       schema:
                         type: hostpath
                         show_if: [["aclEnable", "=", false]]
-                        immutable: true
                         required: true
 
         - variable: additionalStorages
@@ -332,7 +330,6 @@ questions:
                             schema:
                               type: hostpath
                               show_if: [["aclEnable", "=", false]]
-                              immutable: true
                               required: true
                     - variable: ixVolumeConfig
                       label: ixVolume Configuration

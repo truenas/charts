@@ -5,6 +5,9 @@ vaultwardenStorage:
     type: pvc
   pgBackup:
     type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""
 
 vaultwardenRunAs:
   user: 1000
