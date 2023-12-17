@@ -1,16 +1,16 @@
 {
-    "1.0.14": {
+    "1.0.15": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/mineos/1.0.14",
-        "last_update": "2023-12-17 10:04:39",
+        "location": "/__w/charts/charts/community/mineos/1.0.15",
+        "last_update": "2023-12-17 15:59:04",
         "required_features": [
-            "definitions/certificate",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/certificate"
         ],
-        "human_version": "latest_1.0.14",
-        "version": "1.0.14",
+        "human_version": "latest_1.0.15",
+        "version": "1.0.15",
         "chart_metadata": {
             "name": "mineos",
             "description": "MineOS is a server front-end to ease managing Minecraft administrative tasks.",
@@ -18,7 +18,7 @@
                 "title": "MineOS"
             },
             "type": "application",
-            "version": "1.0.14",
+            "version": "1.0.15",
             "apiVersion": "v2",
             "appVersion": "latest",
             "kubeVersion": ">=1.16.0-0",
@@ -381,7 +381,6 @@
                                                         "hostPath"
                                                     ]
                                                 ],
-                                                "immutable": true,
                                                 "required": true
                                             }
                                         }

@@ -1,16 +1,16 @@
 {
-    "2.0.0": {
+    "2.0.1": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/odoo/2.0.0",
-        "last_update": "2023-12-17 10:04:39",
+        "location": "/__w/charts/charts/community/odoo/2.0.1",
+        "last_update": "2023-12-17 15:59:04",
         "required_features": [
             "normalize/acl",
             "normalize/ixVolume"
         ],
-        "human_version": "16.0_2.0.0",
-        "version": "2.0.0",
+        "human_version": "16.0_2.0.1",
+        "version": "2.0.1",
         "chart_metadata": {
             "name": "odoo",
             "description": "Odoo is a suite of web based open source business apps.",
@@ -18,7 +18,7 @@
                 "title": "Odoo"
             },
             "type": "application",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "apiVersion": "v2",
             "appVersion": "16.0",
             "kubeVersion": ">=1.16.0-0",
@@ -33,7 +33,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.3"
+                    "version": "1.2.4"
                 }
             ],
             "home": "https://www.odoo.com/",
@@ -534,7 +534,6 @@
                                                                     false
                                                                 ]
                                                             ],
-                                                            "immutable": true,
                                                             "required": true
                                                         }
                                                     }
@@ -856,7 +855,6 @@
                                                                     false
                                                                 ]
                                                             ],
-                                                            "immutable": true,
                                                             "required": true
                                                         }
                                                     }
@@ -1181,7 +1179,6 @@
                                                                     false
                                                                 ]
                                                             ],
-                                                            "immutable": true,
                                                             "required": true
                                                         }
                                                     }
@@ -1506,7 +1503,6 @@
                                                                     false
                                                                 ]
                                                             ],
-                                                            "immutable": true,
                                                             "required": true
                                                         }
                                                     }
@@ -1723,7 +1719,6 @@
                                                                                 false
                                                                             ]
                                                                         ],
-                                                                        "immutable": true,
                                                                         "required": true
                                                                     }
                                                                 }
@@ -2001,7 +1996,7 @@
         "supported": false,
         "healthy_error": null,
         "location": "/__w/charts/charts/community/odoo/1.1.1",
-        "last_update": "2023-12-17 10:04:39",
+        "last_update": "2023-12-17 15:44:03",
         "required_features": [
             "normalize/acl",
             "normalize/ixVolume"

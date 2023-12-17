@@ -1,16 +1,16 @@
 {
-    "1.1.4": {
+    "1.1.5": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/plex-auto-languages/1.1.4",
-        "last_update": "2023-12-17 10:04:39",
+        "location": "/__w/charts/charts/community/plex-auto-languages/1.1.5",
+        "last_update": "2023-12-17 15:59:04",
         "required_features": [
-            "definitions/timezone",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/timezone"
         ],
-        "human_version": "1.2.3_1.1.4",
-        "version": "1.1.4",
+        "human_version": "1.2.3_1.1.5",
+        "version": "1.1.5",
         "chart_metadata": {
             "name": "plex-auto-languages",
             "description": "Plex Auto Languages offer automated language selection for Plex TV Shows",
@@ -18,7 +18,7 @@
                 "title": "Plex Auto Languages"
             },
             "type": "application",
-            "version": "1.1.4",
+            "version": "1.1.5",
             "apiVersion": "v2",
             "appVersion": "1.2.3",
             "kubeVersion": ">=1.16.0-0",
@@ -268,7 +268,6 @@
                                                         "hostPath"
                                                     ]
                                                 ],
-                                                "immutable": true,
                                                 "required": true
                                             }
                                         }

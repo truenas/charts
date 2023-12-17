@@ -1,15 +1,15 @@
 {
-    "1.0.15": {
+    "1.0.16": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/clamav/1.0.15",
-        "last_update": "2023-12-17 10:04:39",
+        "location": "/__w/charts/charts/community/clamav/1.0.16",
+        "last_update": "2023-12-17 15:59:04",
         "required_features": [
             "normalize/ixVolume"
         ],
-        "human_version": "1.0.1_1.0.15",
-        "version": "1.0.15",
+        "human_version": "1.0.1_1.0.16",
+        "version": "1.0.16",
         "chart_metadata": {
             "name": "clamav",
             "description": "ClamAV is an open source (GPLv2) anti-virus toolkit.",
@@ -17,7 +17,7 @@
                 "title": "Clam AV"
             },
             "type": "application",
-            "version": "1.0.15",
+            "version": "1.0.16",
             "apiVersion": "v2",
             "appVersion": "1.0.1",
             "kubeVersion": ">=1.16.0-0",
@@ -298,7 +298,6 @@
                                                         "hostPath"
                                                     ]
                                                 ],
-                                                "immutable": true,
                                                 "required": true
                                             }
                                         }
@@ -366,7 +365,6 @@
                                                         "hostPath"
                                                     ]
                                                 ],
-                                                "immutable": true,
                                                 "required": true
                                             }
                                         }

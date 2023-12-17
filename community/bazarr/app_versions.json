@@ -1,16 +1,16 @@
 {
-    "1.2.1": {
+    "1.2.2": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/bazarr/1.2.1",
-        "last_update": "2023-12-17 10:04:39",
+        "location": "/__w/charts/charts/community/bazarr/1.2.2",
+        "last_update": "2023-12-17 15:59:04",
         "required_features": [
             "normalize/acl",
             "normalize/ixVolume"
         ],
-        "human_version": "1.4.0_1.2.1",
-        "version": "1.2.1",
+        "human_version": "1.4.0_1.2.2",
+        "version": "1.2.2",
         "chart_metadata": {
             "name": "bazarr",
             "description": "Bazarr is a companion application to Sonarr and Radarr. It manages and downloads subtitles based on your requirements.",
@@ -18,7 +18,7 @@
                 "title": "Bazarr"
             },
             "type": "application",
-            "version": "1.2.1",
+            "version": "1.2.2",
             "apiVersion": "v2",
             "appVersion": "1.4.0",
             "kubeVersion": ">=1.16.0-0",
@@ -527,7 +527,6 @@
                                                                     false
                                                                 ]
                                                             ],
-                                                            "immutable": true,
                                                             "required": true
                                                         }
                                                     }
@@ -744,7 +743,6 @@
                                                                                 false
                                                                             ]
                                                                         ],
-                                                                        "immutable": true,
                                                                         "required": true
                                                                     }
                                                                 }

@@ -1,16 +1,16 @@
 {
-    "1.2.2": {
+    "1.2.3": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/lidarr/1.2.2",
-        "last_update": "2023-12-17 10:04:39",
+        "location": "/__w/charts/charts/community/lidarr/1.2.3",
+        "last_update": "2023-12-17 15:59:04",
         "required_features": [
             "normalize/acl",
             "normalize/ixVolume"
         ],
-        "human_version": "2.0.7.3849_1.2.2",
-        "version": "1.2.2",
+        "human_version": "2.0.7.3849_1.2.3",
+        "version": "1.2.3",
         "chart_metadata": {
             "name": "lidarr",
             "description": "Lidarr is a music collection manager for Usenet and BitTorrent users.",
@@ -18,7 +18,7 @@
                 "title": "Lidarr"
             },
             "type": "application",
-            "version": "1.2.2",
+            "version": "1.2.3",
             "apiVersion": "v2",
             "appVersion": "2.0.7.3849",
             "kubeVersion": ">=1.16.0-0",
@@ -537,7 +537,6 @@
                                                                     false
                                                                 ]
                                                             ],
-                                                            "immutable": true,
                                                             "required": true
                                                         }
                                                     }
@@ -754,7 +753,6 @@
                                                                                 false
                                                                             ]
                                                                         ],
-                                                                        "immutable": true,
                                                                         "required": true
                                                                     }
                                                                 }

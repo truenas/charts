@@ -1,16 +1,16 @@
 {
-    "1.1.4": {
+    "1.1.5": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/distribution/1.1.4",
-        "last_update": "2023-12-17 10:04:39",
+        "location": "/__w/charts/charts/community/distribution/1.1.5",
+        "last_update": "2023-12-17 15:59:04",
         "required_features": [
-            "definitions/certificate",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/certificate"
         ],
-        "human_version": "2.8.3_1.1.4",
-        "version": "1.1.4",
+        "human_version": "2.8.3_1.1.5",
+        "version": "1.1.5",
         "chart_metadata": {
             "name": "distribution",
             "description": "Distribution is a toolkit to pack, ship, store, and deliver container content",
@@ -18,7 +18,7 @@
                 "title": "Distribution"
             },
             "type": "application",
-            "version": "1.1.4",
+            "version": "1.1.5",
             "apiVersion": "v2",
             "appVersion": "2.8.3",
             "kubeVersion": ">=1.16.0-0",
@@ -335,7 +335,6 @@
                                                         "hostPath"
                                                     ]
                                                 ],
-                                                "immutable": true,
                                                 "required": true
                                             }
                                         }

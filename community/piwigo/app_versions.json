@@ -1,15 +1,15 @@
 {
-    "1.1.4": {
+    "1.1.5": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/piwigo/1.1.4",
-        "last_update": "2023-12-17 10:04:39",
+        "location": "/__w/charts/charts/community/piwigo/1.1.5",
+        "last_update": "2023-12-17 15:59:04",
         "required_features": [
             "normalize/ixVolume"
         ],
-        "human_version": "14.0.0_1.1.4",
-        "version": "1.1.4",
+        "human_version": "14.0.0_1.1.5",
+        "version": "1.1.5",
         "chart_metadata": {
             "name": "piwigo",
             "description": "Piwigo is a photo gallery software for the web that comes with powerful features to publish and manage your collection of pictures.",
@@ -17,7 +17,7 @@
                 "title": "Piwigo"
             },
             "type": "application",
-            "version": "1.1.4",
+            "version": "1.1.5",
             "apiVersion": "v2",
             "appVersion": "14.0.0",
             "kubeVersion": ">=1.16.0-0",
@@ -617,7 +617,6 @@
                                                         "hostPath"
                                                     ]
                                                 ],
-                                                "immutable": true,
                                                 "required": true
                                             }
                                         }
@@ -685,7 +684,6 @@
                                                         "hostPath"
                                                     ]
                                                 ],
-                                                "immutable": true,
                                                 "required": true
                                             }
                                         }
@@ -753,7 +751,6 @@
                                                         "hostPath"
                                                     ]
                                                 ],
-                                                "immutable": true,
                                                 "required": true
                                             }
                                         }
@@ -821,7 +818,6 @@
                                                         "hostPath"
                                                     ]
                                                 ],
-                                                "immutable": true,
                                                 "required": true
                                             }
                                         }

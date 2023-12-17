@@ -1,17 +1,17 @@
 {
-    "1.1.4": {
+    "1.1.5": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/omada-controller/1.1.4",
-        "last_update": "2023-12-17 10:04:39",
+        "location": "/__w/charts/charts/community/omada-controller/1.1.5",
+        "last_update": "2023-12-17 15:59:04",
         "required_features": [
+            "normalize/ixVolume",
             "definitions/certificate",
-            "definitions/timezone",
-            "normalize/ixVolume"
+            "definitions/timezone"
         ],
-        "human_version": "5.13_1.1.4",
-        "version": "1.1.4",
+        "human_version": "5.13_1.1.5",
+        "version": "1.1.5",
         "chart_metadata": {
             "name": "omada-controller",
             "description": "Omada Controller (TP-Link) is a network management controller for TP-Link Omada Equipment.",
@@ -19,7 +19,7 @@
                 "title": "Omada Controller"
             },
             "type": "application",
-            "version": "1.1.4",
+            "version": "1.1.5",
             "apiVersion": "v2",
             "appVersion": "5.13",
             "kubeVersion": ">=1.16.0-0",
@@ -450,7 +450,6 @@
                                                         "hostPath"
                                                     ]
                                                 ],
-                                                "immutable": true,
                                                 "required": true
                                             }
                                         }
@@ -518,7 +517,6 @@
                                                         "hostPath"
                                                     ]
                                                 ],
-                                                "immutable": true,
                                                 "required": true
                                             }
                                         }

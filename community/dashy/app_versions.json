@@ -1,17 +1,17 @@
 {
-    "1.0.2": {
+    "1.0.3": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/dashy/1.0.2",
-        "last_update": "2023-12-17 10:04:39",
+        "location": "/__w/charts/charts/community/dashy/1.0.3",
+        "last_update": "2023-12-17 15:59:04",
         "required_features": [
             "normalize/acl",
-            "definitions/certificate",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/certificate"
         ],
-        "human_version": "2.1.1_1.0.2",
-        "version": "1.0.2",
+        "human_version": "2.1.1_1.0.3",
+        "version": "1.0.3",
         "chart_metadata": {
             "name": "dashy",
             "description": "Dashy is a self-hostable personal dashboard built for you.",
@@ -19,7 +19,7 @@
                 "title": "Dashy"
             },
             "type": "application",
-            "version": "1.0.2",
+            "version": "1.0.3",
             "apiVersion": "v2",
             "appVersion": "2.1.1",
             "kubeVersion": ">=1.16.0-0",
@@ -514,7 +514,6 @@
                                                                     false
                                                                 ]
                                                             ],
-                                                            "immutable": true,
                                                             "required": true
                                                         }
                                                     }
@@ -731,7 +730,6 @@
                                                                                 false
                                                                             ]
                                                                         ],
-                                                                        "immutable": true,
                                                                         "required": true
                                                                     }
                                                                 }

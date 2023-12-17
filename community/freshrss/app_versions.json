@@ -1,17 +1,17 @@
 {
-    "1.1.1": {
+    "1.1.2": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/freshrss/1.1.1",
-        "last_update": "2023-12-17 10:04:39",
+        "location": "/__w/charts/charts/community/freshrss/1.1.2",
+        "last_update": "2023-12-17 15:59:04",
         "required_features": [
             "normalize/acl",
-            "definitions/timezone",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/timezone"
         ],
-        "human_version": "1.22.1_1.1.1",
-        "version": "1.1.1",
+        "human_version": "1.22.1_1.1.2",
+        "version": "1.1.2",
         "chart_metadata": {
             "name": "freshrss",
             "description": "FreshRSS is a free, self-hostable news aggregator",
@@ -19,7 +19,7 @@
                 "title": "FreshRSS"
             },
             "type": "application",
-            "version": "1.1.1",
+            "version": "1.1.2",
             "apiVersion": "v2",
             "appVersion": "1.22.1",
             "kubeVersion": ">=1.16.0-0",
@@ -34,7 +34,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.3"
+                    "version": "1.2.4"
                 }
             ],
             "home": "https://freshrss.org/",
@@ -577,7 +577,6 @@
                                                                     false
                                                                 ]
                                                             ],
-                                                            "immutable": true,
                                                             "required": true
                                                         }
                                                     }
@@ -899,7 +898,6 @@
                                                                     false
                                                                 ]
                                                             ],
-                                                            "immutable": true,
                                                             "required": true
                                                         }
                                                     }
@@ -1224,7 +1222,6 @@
                                                                     false
                                                                 ]
                                                             ],
-                                                            "immutable": true,
                                                             "required": true
                                                         }
                                                     }
@@ -1549,7 +1546,6 @@
                                                                     false
                                                                 ]
                                                             ],
-                                                            "immutable": true,
                                                             "required": true
                                                         }
                                                     }
@@ -1766,7 +1762,6 @@
                                                                                 false
                                                                             ]
                                                                         ],
-                                                                        "immutable": true,
                                                                         "required": true
                                                                     }
                                                                 }

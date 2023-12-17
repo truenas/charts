@@ -1,17 +1,17 @@
 {
-    "1.0.1": {
+    "1.0.2": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/mealie/1.0.1",
-        "last_update": "2023-12-17 10:04:39",
+        "location": "/__w/charts/charts/community/mealie/1.0.2",
+        "last_update": "2023-12-17 15:59:04",
         "required_features": [
             "normalize/acl",
-            "definitions/timezone",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/timezone"
         ],
-        "human_version": "latest_1.0.1",
-        "version": "1.0.1",
+        "human_version": "latest_1.0.2",
+        "version": "1.0.2",
         "chart_metadata": {
             "name": "mealie",
             "description": "Mealie is a self-hosted recipe manager and meal planner",
@@ -19,7 +19,7 @@
                 "title": "Mealie"
             },
             "type": "application",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "apiVersion": "v2",
             "appVersion": "latest",
             "kubeVersion": ">=1.16.0-0",
@@ -34,7 +34,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.3"
+                    "version": "1.2.4"
                 }
             ],
             "home": "https://mealie.io",
@@ -610,7 +610,6 @@
                                                                     false
                                                                 ]
                                                             ],
-                                                            "immutable": true,
                                                             "required": true
                                                         }
                                                     }
@@ -935,7 +934,6 @@
                                                                     false
                                                                 ]
                                                             ],
-                                                            "immutable": true,
                                                             "required": true
                                                         }
                                                     }
@@ -1260,7 +1258,6 @@
                                                                     false
                                                                 ]
                                                             ],
-                                                            "immutable": true,
                                                             "required": true
                                                         }
                                                     }
@@ -1477,7 +1474,6 @@
                                                                                 false
                                                                             ]
                                                                         ],
-                                                                        "immutable": true,
                                                                         "required": true
                                                                     }
                                                                 }

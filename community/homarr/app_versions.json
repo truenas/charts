@@ -1,17 +1,17 @@
 {
-    "2.0.1": {
+    "2.0.2": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/homarr/2.0.1",
-        "last_update": "2023-12-17 10:04:39",
+        "location": "/__w/charts/charts/community/homarr/2.0.2",
+        "last_update": "2023-12-17 15:59:04",
         "required_features": [
             "normalize/acl",
-            "definitions/timezone",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/timezone"
         ],
-        "human_version": "0.14.2_2.0.1",
-        "version": "2.0.1",
+        "human_version": "0.14.2_2.0.2",
+        "version": "2.0.2",
         "chart_metadata": {
             "name": "homarr",
             "description": "Homarr is a sleek, modern dashboard that puts all of your apps and services at your fingertips.",
@@ -19,7 +19,7 @@
                 "title": "Homarr"
             },
             "type": "application",
-            "version": "2.0.1",
+            "version": "2.0.2",
             "apiVersion": "v2",
             "appVersion": "0.14.2",
             "kubeVersion": ">=1.16.0-0",
@@ -550,7 +550,6 @@
                                                                     false
                                                                 ]
                                                             ],
-                                                            "immutable": true,
                                                             "required": true
                                                         }
                                                     }
@@ -872,7 +871,6 @@
                                                                     false
                                                                 ]
                                                             ],
-                                                            "immutable": true,
                                                             "required": true
                                                         }
                                                     }
@@ -1194,7 +1192,6 @@
                                                                     false
                                                                 ]
                                                             ],
-                                                            "immutable": true,
                                                             "required": true
                                                         }
                                                     }
@@ -1411,7 +1408,6 @@
                                                                                 false
                                                                             ]
                                                                         ],
-                                                                        "immutable": true,
                                                                         "required": true
                                                                     }
                                                                 }

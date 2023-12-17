@@ -1,16 +1,16 @@
 {
-    "1.0.19": {
+    "1.0.20": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/overseerr/1.0.19",
-        "last_update": "2023-12-17 10:04:39",
+        "location": "/__w/charts/charts/community/overseerr/1.0.20",
+        "last_update": "2023-12-17 15:59:04",
         "required_features": [
-            "definitions/timezone",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/timezone"
         ],
-        "human_version": "1.33.2_1.0.19",
-        "version": "1.0.19",
+        "human_version": "1.33.2_1.0.20",
+        "version": "1.0.20",
         "chart_metadata": {
             "name": "overseerr",
             "description": "Overseerr is a free and open source software application for managing requests for your media library.",
@@ -18,7 +18,7 @@
                 "title": "Overseerr"
             },
             "type": "application",
-            "version": "1.0.19",
+            "version": "1.0.20",
             "apiVersion": "v2",
             "appVersion": "1.33.2",
             "kubeVersion": ">=1.16.0-0",
@@ -298,7 +298,6 @@
                                                         "hostPath"
                                                     ]
                                                 ],
-                                                "immutable": true,
                                                 "required": true
                                             }
                                         }

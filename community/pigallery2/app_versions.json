@@ -1,15 +1,15 @@
 {
-    "1.1.4": {
+    "1.1.5": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/pigallery2/1.1.4",
-        "last_update": "2023-12-17 10:04:39",
+        "location": "/__w/charts/charts/community/pigallery2/1.1.5",
+        "last_update": "2023-12-17 15:59:04",
         "required_features": [
             "normalize/ixVolume"
         ],
-        "human_version": "2.0.0_1.1.4",
-        "version": "1.1.4",
+        "human_version": "2.0.0_1.1.5",
+        "version": "1.1.5",
         "chart_metadata": {
             "name": "pigallery2",
             "description": "PiGallery2 is a fast directory-first photo gallery website, with rich UI, optimized for running on low resource servers",
@@ -17,7 +17,7 @@
                 "title": "PiGallery2"
             },
             "type": "application",
-            "version": "1.1.4",
+            "version": "1.1.5",
             "apiVersion": "v2",
             "appVersion": "2.0.0",
             "kubeVersion": ">=1.16.0-0",
@@ -285,7 +285,6 @@
                                                         "hostPath"
                                                     ]
                                                 ],
-                                                "immutable": true,
                                                 "required": true
                                             }
                                         }
@@ -353,7 +352,6 @@
                                                         "hostPath"
                                                     ]
                                                 ],
-                                                "immutable": true,
                                                 "required": true
                                             }
                                         }
@@ -421,7 +419,6 @@
                                                         "hostPath"
                                                     ]
                                                 ],
-                                                "immutable": true,
                                                 "required": true
                                             }
                                         }
@@ -489,7 +486,6 @@
                                                         "hostPath"
                                                     ]
                                                 ],
-                                                "immutable": true,
                                                 "required": true
                                             }
                                         }

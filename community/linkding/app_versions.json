@@ -1,16 +1,16 @@
 {
-    "1.2.2": {
+    "1.2.3": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/linkding/1.2.2",
-        "last_update": "2023-12-17 10:04:39",
+        "location": "/__w/charts/charts/community/linkding/1.2.3",
+        "last_update": "2023-12-17 15:59:04",
         "required_features": [
             "normalize/acl",
             "normalize/ixVolume"
         ],
-        "human_version": "1.23.1_1.2.2",
-        "version": "1.2.2",
+        "human_version": "1.23.1_1.2.3",
+        "version": "1.2.3",
         "chart_metadata": {
             "name": "linkding",
             "description": "Linkding is a bookmark manager that you can host yourself.",
@@ -18,7 +18,7 @@
                 "title": "Linkding"
             },
             "type": "application",
-            "version": "1.2.2",
+            "version": "1.2.3",
             "apiVersion": "v2",
             "appVersion": "1.23.1",
             "kubeVersion": ">=1.16.0-0",
@@ -33,7 +33,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.3"
+                    "version": "1.2.4"
                 }
             ],
             "home": "https://github.com/sissbruecker/linkding",
@@ -638,7 +638,6 @@
                                                                     false
                                                                 ]
                                                             ],
-                                                            "immutable": true,
                                                             "required": true
                                                         }
                                                     }
@@ -963,7 +962,6 @@
                                                                     false
                                                                 ]
                                                             ],
-                                                            "immutable": true,
                                                             "required": true
                                                         }
                                                     }
@@ -1288,7 +1286,6 @@
                                                                     false
                                                                 ]
                                                             ],
-                                                            "immutable": true,
                                                             "required": true
                                                         }
                                                     }
@@ -1505,7 +1502,6 @@
                                                                                 false
                                                                             ]
                                                                         ],
-                                                                        "immutable": true,
                                                                         "required": true
                                                                     }
                                                                 }

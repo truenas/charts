@@ -1,16 +1,16 @@
 {
-    "1.0.12": {
+    "1.0.13": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/tftpd-hpa/1.0.12",
-        "last_update": "2023-12-17 10:04:39",
+        "location": "/__w/charts/charts/community/tftpd-hpa/1.0.13",
+        "last_update": "2023-12-17 15:59:04",
         "required_features": [
-            "definitions/timezone",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/timezone"
         ],
-        "human_version": "1.0.0_1.0.12",
-        "version": "1.0.12",
+        "human_version": "1.0.0_1.0.13",
+        "version": "1.0.13",
         "chart_metadata": {
             "name": "tftpd-hpa",
             "description": "A lightweight tftp-server",
@@ -18,7 +18,7 @@
                 "title": "TFTP Server"
             },
             "type": "application",
-            "version": "1.0.12",
+            "version": "1.0.13",
             "apiVersion": "v2",
             "appVersion": "1.0.0",
             "kubeVersion": ">=1.16.0-0",
@@ -282,7 +282,6 @@
                                                         "hostPath"
                                                     ]
                                                 ],
-                                                "immutable": true,
                                                 "required": true
                                             }
                                         }

@@ -1,18 +1,18 @@
 {
-    "2.0.5": {
+    "2.0.6": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/immich/2.0.5",
-        "last_update": "2023-12-17 10:04:39",
+        "location": "/__w/charts/charts/community/immich/2.0.6",
+        "last_update": "2023-12-17 15:59:04",
         "required_features": [
             "normalize/acl",
-            "definitions/timezone",
+            "definitions/gpuConfiguration",
             "normalize/ixVolume",
-            "definitions/gpuConfiguration"
+            "definitions/timezone"
         ],
-        "human_version": "1.90.2_2.0.5",
-        "version": "2.0.5",
+        "human_version": "1.90.2_2.0.6",
+        "version": "2.0.6",
         "chart_metadata": {
             "name": "immich",
             "description": "Immich is a self-hosted photo and video backup solution directly from your mobile phone.",
@@ -20,7 +20,7 @@
                 "title": "Immich"
             },
             "type": "application",
-            "version": "2.0.5",
+            "version": "2.0.6",
             "apiVersion": "v2",
             "appVersion": "1.90.2",
             "kubeVersion": ">=1.16.0-0",
@@ -35,7 +35,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.3"
+                    "version": "1.2.4"
                 }
             ],
             "home": "https://immich.app",
@@ -511,7 +511,6 @@
                                                                     false
                                                                 ]
                                                             ],
-                                                            "immutable": true,
                                                             "required": true
                                                         }
                                                     }
@@ -833,7 +832,6 @@
                                                                     false
                                                                 ]
                                                             ],
-                                                            "immutable": true,
                                                             "required": true
                                                         }
                                                     }
@@ -1155,7 +1153,6 @@
                                                                     false
                                                                 ]
                                                             ],
-                                                            "immutable": true,
                                                             "required": true
                                                         }
                                                     }
@@ -1477,7 +1474,6 @@
                                                                     false
                                                                 ]
                                                             ],
-                                                            "immutable": true,
                                                             "required": true
                                                         }
                                                     }
@@ -1799,7 +1795,6 @@
                                                                     false
                                                                 ]
                                                             ],
-                                                            "immutable": true,
                                                             "required": true
                                                         }
                                                     }
@@ -2124,7 +2119,6 @@
                                                                     false
                                                                 ]
                                                             ],
-                                                            "immutable": true,
                                                             "required": true
                                                         }
                                                     }
@@ -2449,7 +2443,6 @@
                                                                     false
                                                                 ]
                                                             ],
-                                                            "immutable": true,
                                                             "required": true
                                                         }
                                                     }
@@ -2666,7 +2659,6 @@
                                                                                 false
                                                                             ]
                                                                         ],
-                                                                        "immutable": true,
                                                                         "required": true
                                                                     }
                                                                 }

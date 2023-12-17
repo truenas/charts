@@ -1,16 +1,16 @@
 {
-    "1.2.1": {
+    "1.2.2": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/prowlarr/1.2.1",
-        "last_update": "2023-12-17 10:04:39",
+        "location": "/__w/charts/charts/community/prowlarr/1.2.2",
+        "last_update": "2023-12-17 15:59:04",
         "required_features": [
             "normalize/acl",
             "normalize/ixVolume"
         ],
-        "human_version": "1.11.1.4146_1.2.1",
-        "version": "1.2.1",
+        "human_version": "1.11.1.4146_1.2.2",
+        "version": "1.2.2",
         "chart_metadata": {
             "name": "prowlarr",
             "description": "Prowlarr is an indexer manager/proxy to integrate with your various PVR apps.",
@@ -18,7 +18,7 @@
                 "title": "Prowlarr"
             },
             "type": "application",
-            "version": "1.2.1",
+            "version": "1.2.2",
             "apiVersion": "v2",
             "appVersion": "1.11.1.4146",
             "kubeVersion": ">=1.16.0-0",
@@ -536,7 +536,6 @@
                                                                     false
                                                                 ]
                                                             ],
-                                                            "immutable": true,
                                                             "required": true
                                                         }
                                                     }
@@ -753,7 +752,6 @@
                                                                                 false
                                                                             ]
                                                                         ],
-                                                                        "immutable": true,
                                                                         "required": true
                                                                     }
                                                                 }
