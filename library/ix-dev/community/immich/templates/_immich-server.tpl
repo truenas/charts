@@ -1,5 +1,5 @@
 {{- define "immich.server.workload" -}}
-{{- $fullname := (include "ix.v1.common.lib.chart.names.fullname" $) -}}
+{{- $fullname := (include "ix.v1.common.lib.chart.names.fullname" $) }}
 workload:
   server:
     enabled: true

@@ -38,7 +38,7 @@ service:
         port: {{ .Values.immichNetwork.machinelearningPort }}
         protocol: http
         targetSelector: machinelearning
-  {{- end -}}
+  {{- end }}
 
   redis:
     enabled: true
