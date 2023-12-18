@@ -1,17 +1,12 @@
 image:
   repository: altran1502/immich-server
   pullPolicy: IfNotPresent
-  tag: v1.90.2
+  tag: v1.91.3
 
 mlImage:
   repository: altran1502/immich-machine-learning
   pullPolicy: IfNotPresent
-  tag: v1.90.2
-
-typesenseImage:
-  repository: typesense/typesense
-  pullPolicy: IfNotPresent
-  tag: 0.25.1
+  tag: v1.91.3
 
 resources:
   limits:
@@ -23,7 +18,6 @@ immichGPU: {}
 immichConfig:
   publicLoginMessage: ''
   enableML: true
-  enableTypesense: true
 
 immichNetwork:
   webuiPort: 30041
@@ -32,7 +26,6 @@ immichNetwork:
   # in the future.
   machinelearningPort: 32002
   microservicesPort: 32003
-  typesensePort: 32004
 
 immichStorage:
   uploads:

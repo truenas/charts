@@ -40,20 +40,6 @@ service:
         targetSelector: machinelearning
   {{- end -}}
 
-  {{- if .Values.immichConfig.enableTypesense }}
-  typesense:
-    enabled: true
-    type: ClusterIP
-    targetSelector: typesense
-    ports:
-      typesense:
-        enabled: true
-        primary: true
-        port: {{ .Values.immichNetwork.typesensePort }}
-        protocol: http
-        targetSelector: typesense
-  {{- end }}
-
   redis:
     enabled: true
     type: ClusterIP

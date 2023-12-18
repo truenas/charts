@@ -49,13 +49,6 @@ questions:
           schema:
             type: boolean
             default: true
-        - variable: enableTypesense
-          label: Enable Typesense
-          description: |
-            Enable Typesense
-          schema:
-            type: boolean
-            default: true
 
   - variable: immichNetwork
     label: ""
