@@ -1,13 +1,10 @@
 filebrowserStorage:
   config:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/config
+    type: pvc
   additionalStorages:
-    - type: hostPath
-      hostPath: /mnt/{{ .Release.Name }}/data1
+    - type: pvc
       mountPath: /data1
-    - type: hostPath
-      hostPath: /mnt/{{ .Release.Name }}/data2
+    - type: pvc
       mountPath: /data2
 
 filebrowserNetwork:
