@@ -55,6 +55,11 @@ workload:
               type: exec
               command: /healthcheck.sh
       initContainers:
+      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
+                                                    "UID" .Values.vaultwardenRunAs.user
+                                                    "GID" .Values.vaultwardenRunAs.group
+                                                    "mode" "check"
+                                                    "type" "install") | nindent 8 }}
       {{- include "ix.v1.common.app.postgresWait" (dict "name" "postgres-wait"
                                                         "secretName" "postgres-creds") | nindent 8 }}
 
@@ -87,6 +92,11 @@ persistence:
       vaultwarden:
         vaultwarden:
           mountPath: /data
+        {{- if and (eq .Values.vaultwardenStorage.data.type "ixVolume")
+                  (not (.Values.vaultwardenStorage.data.ixVolumeConfig | default dict).aclEnable) }}
+        01-permissions:
+          mountPath: /mnt/directories/data
+        {{- end }}
 
   {{- range $idx, $storage := .Values.vaultwardenStorage.additionalStorages }}
   {{ printf "vaultwarden-%v:" (int $idx) }}
@@ -96,6 +106,10 @@ persistence:
       vaultwarden:
         vaultwarden:
           mountPath: {{ $storage.mountPath }}
+        {{- if and (eq $storage.type "ixVolume") (not ($storage.ixVolumeConfig | default dict).aclEnable) }}
+        01-permissions:
+          mountPath: /mnt/directories{{ $storage.mountPath }}
+        {{- end }}
   {{- end }}
 
   {{- if .Values.vaultwardenNetwork.certificateID }}
