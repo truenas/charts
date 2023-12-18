@@ -11,7 +11,7 @@ ENUMS = {
     'default': {
         'RE_STABLE_VERSION': re.compile(rf'v{RE_STABLE_VERSION_BASE}'),
         'STRIP_TEXT': 'v'
-    }
+    },
     'pgvectorImage': {
         'RE_STABLE_VERSION': re.compile(rf'pg15-v{RE_STABLE_VERSION_BASE}'),
         'STRIP_TEXT': 'pg15-v'

@@ -11,7 +11,7 @@ mlImage:
 pgvectorImage:
   repository: tensorchord/pgvecto-rs
   pullPolicy: IfNotPresent
-  tag: pg15-v0.1.13
+  tag: pg15-v0.1.11
 
 resources:
   limits:
