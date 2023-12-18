@@ -8,6 +8,11 @@ mlImage:
   pullPolicy: IfNotPresent
   tag: v1.91.3
 
+pgvectorImage:
+  repository: tensorchord/pgvecto-rs
+  pullPolicy: IfNotPresent
+  tag: pg15-v0.1.13
+
 resources:
   limits:
     cpu: 4000m
