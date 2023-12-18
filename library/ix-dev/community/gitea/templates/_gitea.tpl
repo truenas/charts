@@ -47,6 +47,11 @@ workload:
               path: /api/healthz
               port: {{ .Values.giteaNetwork.webPort }}
       initContainers:
+      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
+                                                    "UID" .Values.giteaRunAs.user
+                                                    "GID" .Values.giteaRunAs.group
+                                                    "mode" "check"
+                                                    "type" "install") | nindent 8 }}
       {{- include "ix.v1.common.app.postgresWait" (dict "name" "postgres-wait"
                                                         "secretName" "postgres-creds") | nindent 8 }}
 {{/* Service */}}
@@ -78,8 +83,11 @@ persistence:
       gitea:
         gitea:
           mountPath: /var/lib/gitea
+        {{- if and (eq .Values.giteaStorage.data.type "ixVolume")
+                  (not (.Values.giteaStorage.data.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
           mountPath: /mnt/directories/data
+        {{- end }}
   config:
     enabled: true
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.giteaStorage.config) | nindent 4 }}
@@ -87,8 +95,11 @@ persistence:
       gitea:
         gitea:
           mountPath: /etc/gitea
+        {{- if and (eq .Values.giteaStorage.config.type "ixVolume")
+                  (not (.Values.giteaStorage.config.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
           mountPath: /mnt/directories/config
+        {{- end }}
   gitea-temp:
     enabled: true
     type: emptyDir
@@ -105,6 +116,10 @@ persistence:
       gitea:
         gitea:
           mountPath: {{ $storage.mountPath }}
+        {{- if and (eq $storage.type "ixVolume") (not ($storage.ixVolumeConfig | default dict).aclEnable) }}
+        01-permissions:
+          mountPath: /mnt/directories{{ $storage.mountPath }}
+        {{- end }}
   {{- end }}
 
   {{ if .Values.giteaNetwork.certificateID }}
