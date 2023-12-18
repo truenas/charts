@@ -49,6 +49,11 @@ workload:
                 - python
                 - /app/mealie/scripts/healthcheck.py
       initContainers:
-      {{- include "ix.v1.common.app.postgresWait" (dict "name" "01-postgres-wait"
+      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
+                                                        "UID" .Values.mealieRunAs.user
+                                                        "GID" .Values.mealieRunAs.group
+                                                        "mode" "check"
+                                                        "type" "install") | nindent 8 }}
+      {{- include "ix.v1.common.app.postgresWait" (dict "name" "02-postgres-wait"
                                                         "secretName" "postgres-creds") | nindent 8 }}
 {{- end -}}
