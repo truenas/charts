@@ -62,7 +62,7 @@ workload:
                                                           "UID" .Values.filebrowserRunAs.user
                                                           "GID" .Values.filebrowserRunAs.group
                                                           "mode" "check"
-                                                          "type" "init") | nindent 8 }}
+                                                          "type" "install") | nindent 8 }}
         02-init-config:
           enabled: true
           type: init

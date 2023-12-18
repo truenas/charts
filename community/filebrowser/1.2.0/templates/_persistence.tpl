@@ -3,17 +3,19 @@
 persistence:
   config:
     enabled: true
-    type: {{ .Values.filebrowserStorage.config.type }}
-    datasetName: {{ .Values.filebrowserStorage.config.datasetName | default "" }}
-    hostPath: {{ .Values.filebrowserStorage.config.hostPath | default "" }}
+    {{- include "filebrowser.storage.ci.migration" (dict "storage" .Values.filebrowserStorage.config) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.filebrowserStorage.config) | nindent 4 }}
     targetSelector:
       filebrowser:
         filebrowser:
           mountPath: {{ $configBasePath }}
         02-init-config:
           mountPath: {{ $configBasePath }}
+        {{- if and (eq .Values.filebrowserStorage.config.type "ixVolume")
+                  (not (.Values.filebrowserStorage.config.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
           mountPath: /mnt/directories/config
+        {{- end }}
   {{- if not .Values.filebrowserStorage.additionalStorages -}}
     {{- fail "Filebrowser - Expected at least 1 additional storage" -}}
   {{- end -}}
@@ -21,31 +23,18 @@ persistence:
     {{- if not (hasPrefix "/" $storage.mountPath) -}}
       {{- fail (printf "Filebrowser - Expected [Mount Path] to start with [/], but got [%v]" $storage.mountPath) -}}
     {{- end }}
-  {{ printf "filebrowser-%v" (int $idx) }}:
-    {{- $size := "" -}}
-    {{- if $storage.size -}}
-      {{- $size = (printf "%vGi" $storage.size) -}}
-    {{- end }}
+  {{ printf "filebrowser-%v:" (int $idx) }}
     enabled: true
-    type: {{ $storage.type }}
-    datasetName: {{ $storage.datasetName | default "" }}
-    hostPath: {{ $storage.hostPath | default "" }}
-    server: {{ $storage.server | default "" }}
-    share: {{ $storage.share | default "" }}
-    domain: {{ $storage.domain | default "" }}
-    username: {{ $storage.username | default "" }}
-    password: {{ $storage.password | default "" }}
-    size: {{ $size }}
-    {{- if eq $storage.type "smb-pv-pvc" }}
-    mountOptions:
-      - key: noperm
-    {{- end }}
+    {{- include "filebrowser.storage.ci.migration" (dict "storage" $storage) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       filebrowser:
         filebrowser:
           mountPath: /data{{ $storage.mountPath }}
+        {{- if and (eq $storage.type "ixVolume") (not ($storage.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
           mountPath: /mnt/directories{{ $storage.mountPath }}
+        {{- end }}
   {{- end }}
 
 {{/* Certificate */}}
@@ -71,4 +60,14 @@ scaleCertificate:
     enabled: true
     id: {{ . }}
 {{- end -}}
+{{- end -}}
+
+{{/* TODO: Remove on the next version bump, eg 1.2.0+ */}}
+{{- define "filebrowser.storage.ci.migration" -}}
+  {{- $storage := .storage -}}
+
+  {{- if $storage.hostPath -}}
+    {{- $_ := set $storage "hostPathConfig" dict -}}
+    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
+  {{- end -}}
 {{- end -}}
