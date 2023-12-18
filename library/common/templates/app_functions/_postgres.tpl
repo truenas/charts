@@ -13,6 +13,7 @@ backupChownMode (optional): Whether to chown the backup directory or
 */}}
 {{- define "ix.v1.common.app.postgres" -}}
   {{- $name := .name | default "postgres" -}}
+  {{- $imageSelector := .imageSelector | default "postgresImage" -}}
   {{- $secretName := (required "Postgres - Secret Name is required" .secretName) -}}
   {{- $backupPath := .backupPath | default "/postgres_backup" -}}
   {{- $backupChownMode := .backupChownMode | default "check" -}}
@@ -27,7 +28,7 @@ backupChownMode (optional): Whether to chown the backup directory or
       {{ $name }}:
         enabled: true
         primary: true
-        imageSelector: postgresImage
+        imageSelector: {{ $imageSelector }}
         securityContext:
           runAsUser: 999
           runAsGroup: 999
@@ -99,7 +100,7 @@ postgresbackup:
       postgresbackup:
         enabled: true
         primary: true
-        imageSelector: postgresImage
+        imageSelector: {{ $imageSelector }}
         securityContext:
           runAsUser: 999
           runAsGroup: 999
