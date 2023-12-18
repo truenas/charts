@@ -7,6 +7,11 @@ persistence:
       n8n:
         n8n:
           mountPath: /data
+        {{- if and (eq .Values.n8nStorage.data.type "ixVolume")
+                  (not (.Values.n8nStorage.data.ixVolumeConfig | default dict).aclEnable) }}
+        01-permissions:
+          mountPath: /mnt/directories/data
+        {{- end }}
   tmp:
     enabled: true
     type: emptyDir
@@ -22,6 +27,10 @@ persistence:
       n8n:
         n8n:
           mountPath: {{ $storage.mountPath }}
+        {{- if and (eq $storage.type "ixVolume") (not ($storage.ixVolumeConfig | default dict).aclEnable) }}
+        01-permissions:
+          mountPath: /mnt/directories{{ $storage.mountPath }}
+        {{- end }}
   {{- end }}
 
   {{- include "ix.v1.common.app.postgresPersistence"
