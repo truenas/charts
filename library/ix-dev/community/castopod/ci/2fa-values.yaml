@@ -12,3 +12,6 @@ castopodStorage:
     type: pvc
   mariadbBackup:
     type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""
