@@ -58,8 +58,8 @@ configmap:
 
   {{- $types := (list "VANILLA" "SPIGOT" "BUKKIT" "CATSERVER" "CRUCIBLE"
                       "AUTO_CURSEFORGE" "CUSTOM" "FABRIC" "FTBA" "FORGE"
-                      "LOLISERVER" "LIMBO" "MAGMA" "MOHIST" "FABRIC" "PAPER"
-                      "PUFFERFISH" "PURPUR" "QUILT") -}}
+                      "LOLISERVER" "LIMBO" "MAGMA" "MODRINTH" "MOHIST"
+                      "FABRIC" "PAPER" "PUFFERFISH" "PURPUR" "QUILT") -}}
   {{- if not (mustHas .Values.mcConfig.type $types) -}}
     {{- fail (printf "Minecraft - Expected [Type] to be one of [%s], but got [%s]" (join ", " $types) .Values.mcConfig.type) -}}
   {{- end -}}
