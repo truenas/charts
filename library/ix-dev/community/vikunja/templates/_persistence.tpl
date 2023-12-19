@@ -28,6 +28,11 @@ persistence:
       vikunja-api:
         vikunja-api:
           mountPath: /app/vikunja/files
+        {{- if and (eq .Values.vikunjaStorage.data.type "ixVolume")
+                  (not (.Values.vikunjaStorage.data.ixVolumeConfig | default dict).aclEnable) }}
+        01-permissions:
+          mountPath: /mnt/directories/data
+        {{- end }}
   nginx:
     enabled: true
     type: configmap
@@ -48,6 +53,10 @@ persistence:
       vikunja-api:
         vikunja-api:
           mountPath: {{ $storage.mountPath }}
+        {{- if and (eq $storage.type "ixVolume") (not ($storage.ixVolumeConfig | default dict).aclEnable) }}
+        01-permissions:
+          mountPath: /mnt/directories{{ $storage.mountPath }}
+        {{- end }}
   {{- end -}}
 
   {{- include "ix.v1.common.app.postgresPersistence"

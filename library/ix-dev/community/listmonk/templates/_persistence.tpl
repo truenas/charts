@@ -7,6 +7,11 @@ persistence:
       listmonk:
         listmonk:
           mountPath: /listmonk/uploads
+        {{- if and (eq .Values.listmonkStorage.uploads.type "ixVolume")
+                  (not (.Values.listmonkStorage.uploads.ixVolumeConfig | default dict).aclEnable) }}
+        01-permissions:
+          mountPath: /mnt/directories/uploads
+        {{- end }}
   tmp:
     enabled: true
     type: emptyDir
@@ -22,6 +27,10 @@ persistence:
       listmonk:
         listmonk:
           mountPath: {{ $storage.mountPath }}
+        {{- if and (eq $storage.type "ixVolume") (not ($storage.ixVolumeConfig | default dict).aclEnable) }}
+        01-permissions:
+          mountPath: /mnt/directories{{ $storage.mountPath }}
+        {{- end }}
   {{- end -}}
 
   {{- include "ix.v1.common.app.postgresPersistence"

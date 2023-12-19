@@ -66,6 +66,11 @@ workload:
               httpHeaders:
                 Host: '{{ .Values.joplinConfig.baseUrl | trimPrefix "https://" | trimPrefix "http://" | trimSuffix "/" }}'
       initContainers:
+      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
+                                                    "UID" 1001
+                                                    "GID" 1001
+                                                    "mode" "check"
+                                                    "type" "install") | nindent 8 }}
       {{- include "ix.v1.common.app.postgresWait" (dict "name" "postgres-wait"
                                                         "secretName" "postgres-creds") | nindent 8 }}
 {{- end -}}

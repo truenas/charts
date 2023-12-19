@@ -9,6 +9,11 @@ persistence:
           mountPath: /var/lib/odoo
         02-db-init:
           mountPath: /var/lib/odoo
+        {{- if and (eq .Values.odooStorage.data.type "ixVolume")
+                  (not (.Values.odooStorage.data.ixVolumeConfig | default dict).aclEnable) }}
+        01-permissions:
+          mountPath: /mnt/directories/data
+        {{- end }}
   addons:
     enabled: true
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.odooStorage.addons) | nindent 4 }}
@@ -18,6 +23,11 @@ persistence:
           mountPath: /mnt/extra-addons
         02-db-init:
           mountPath: /mnt/extra-addons
+        {{- if and (eq .Values.odooStorage.addons.type "ixVolume")
+                  (not (.Values.odooStorage.addons.ixVolumeConfig | default dict).aclEnable) }}
+        01-permissions:
+          mountPath: /mnt/directories/addons
+        {{- end }}
   tmp:
     enabled: true
     type: emptyDir
@@ -51,6 +61,10 @@ persistence:
       odoo:
         odoo:
           mountPath: {{ $storage.mountPath }}
+        {{- if and (eq $storage.type "ixVolume") (not ($storage.ixVolumeConfig | default dict).aclEnable) }}
+        01-permissions:
+          mountPath: /mnt/directories{{ $storage.mountPath }}
+        {{- end }}
   {{- end }}
 
   {{- include "ix.v1.common.app.postgresPersistence"
