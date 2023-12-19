@@ -3,15 +3,17 @@ persistence:
   {{- if .Values.distributionStorage.useFilesystemBackend }}
   data:
     enabled: true
-    type: {{ .Values.distributionStorage.data.type }}
-    datasetName: {{ .Values.distributionStorage.data.datasetName | default "" }}
-    hostPath: {{ .Values.distributionStorage.data.hostPath | default "" }}
+    {{- include "distribution.storage.ci.migration" (dict "storage" .Values.distributionStorage.data) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.distributionStorage.data) | nindent 4 }}
     targetSelector:
       distribution:
         distribution:
           mountPath: /var/lib/registry
+        {{- if and (eq .Values.distributionStorage.data.type "ixVolume")
+                  (not (.Values.distributionStorage.data.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
           mountPath: /mnt/directories/registry
+        {{- end -}}
   {{- end }}
 
   tmp:
@@ -22,31 +24,18 @@ persistence:
         distribution:
           mountPath: /tmp
   {{- range $idx, $storage := .Values.distributionStorage.additionalStorages }}
-  {{ printf "distribution-%v" (int $idx) }}:
-    {{- $size := "" -}}
-    {{- if $storage.size -}}
-      {{- $size = (printf "%vGi" $storage.size) -}}
-    {{- end }}
+  {{ printf "distribution-%v:" (int $idx) }}
     enabled: true
-    type: {{ $storage.type }}
-    datasetName: {{ $storage.datasetName | default "" }}
-    hostPath: {{ $storage.hostPath | default "" }}
-    server: {{ $storage.server | default "" }}
-    share: {{ $storage.share | default "" }}
-    domain: {{ $storage.domain | default "" }}
-    username: {{ $storage.username | default "" }}
-    password: {{ $storage.password | default "" }}
-    size: {{ $size }}
-    {{- if eq $storage.type "smb-pv-pvc" }}
-    mountOptions:
-      - key: noperm
-    {{- end }}
+    {{- include "distribution.storage.ci.migration" (dict "storage" $storage) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       distribution:
         distribution:
           mountPath: {{ $storage.mountPath }}
+        {{- if and (eq $storage.type "ixVolume") (not ($storage.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
           mountPath: /mnt/directories{{ $storage.mountPath }}
+        {{- end }}
   {{- end -}}
 
   {{- if .Values.distributionConfig.basicAuthUsers }}
@@ -87,5 +76,14 @@ scaleCertificate:
     enabled: true
     id: {{ .Values.distributionNetwork.certificateID }}
     {{- end -}}
+{{- end -}}
 
+{{/* TODO: Remove on the next version bump, eg 1.2.0+ */}}
+{{- define "distribution.storage.ci.migration" -}}
+  {{- $storage := .storage -}}
+
+  {{- if $storage.hostPath -}}
+    {{- $_ := set $storage "hostPathConfig" dict -}}
+    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
+  {{- end -}}
 {{- end -}}
