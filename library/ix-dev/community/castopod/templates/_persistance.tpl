@@ -2,9 +2,8 @@
 persistence:
   data:
     enabled: true
-    type: {{ .Values.castopodStorage.data.type }}
-    datasetName: {{ .Values.castopodStorage.data.datasetName | default "" }}
-    hostPath: {{ .Values.castopodStorage.data.hostPath | default "" }}
+    {{- include "castopod.storage.ci.migration" (dict "storage" .Values.castopodStorage.data) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.castopodStorage.data) | nindent 4 }}
     targetSelector:
       castopod:
         castopod:
@@ -21,24 +20,9 @@ persistence:
           mountPath: /tmp
   {{- range $idx, $storage := .Values.castopodStorage.additionalStorages }}
   {{ printf "castopod-%v" (int $idx) }}:
-    {{- $size := "" -}}
-    {{- if $storage.size -}}
-      {{- $size = (printf "%vGi" $storage.size) -}}
-    {{- end }}
     enabled: true
-    type: {{ $storage.type }}
-    datasetName: {{ $storage.datasetName | default "" }}
-    hostPath: {{ $storage.hostPath | default "" }}
-    server: {{ $storage.server | default "" }}
-    share: {{ $storage.share | default "" }}
-    domain: {{ $storage.domain | default "" }}
-    username: {{ $storage.username | default "" }}
-    password: {{ $storage.password | default "" }}
-    size: {{ $size }}
-    {{- if eq $storage.type "smb-pv-pvc" }}
-    mountOptions:
-      - key: noperm
-    {{- end }}
+    {{- include "castopod.storage.ci.migration" (dict "storage" $storage) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       castopod:
         castopod:
@@ -47,9 +31,8 @@ persistence:
 
   mariadbdata:
     enabled: true
-    type: {{ .Values.castopodStorage.mariadbData.type }}
-    datasetName: {{ .Values.castopodStorage.mariadbData.datasetName | default "" }}
-    hostPath: {{ .Values.castopodStorage.mariadbData.hostPath | default "" }}
+    {{- include "castopod.storage.ci.migration" (dict "storage" .Values.castopodStorage.mariadbData) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.castopodStorage.mariadbData) | nindent 4 }}
     targetSelector:
       # MariaDB pod
       mariadb:
@@ -61,9 +44,8 @@ persistence:
           mountPath: /mnt/directories/mariadb_data
   mariadbbackup:
     enabled: true
-    type: {{ .Values.castopodStorage.mariadbBackup.type }}
-    datasetName: {{ .Values.castopodStorage.mariadbBackup.datasetName | default "" }}
-    hostPath: {{ .Values.castopodStorage.mariadbBackup.hostPath | default "" }}
+    {{- include "castopod.storage.ci.migration" (dict "storage" .Values.castopodStorage.mariadbBackup) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.castopodStorage.mariadbBackup) | nindent 4 }}
     targetSelector:
       # MariaDB backup pod
       mariadbbackup:
@@ -73,4 +55,14 @@ persistence:
         # MariaDB - Permissions container
         permissions:
           mountPath: /mnt/directories/mariadb_backup
+{{- end -}}
+
+{{/* TODO: Remove on the next version bump, eg 1.2.0+ */}}
+{{- define "castopod.storage.ci.migration" -}}
+  {{- $storage := .storage -}}
+
+  {{- if $storage.hostPath -}}
+    {{- $_ := set $storage "hostPathConfig" dict -}}
+    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
+  {{- end -}}
 {{- end -}}
