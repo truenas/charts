@@ -1,17 +1,17 @@
 {
-    "2.0.2": {
+    "2.0.3": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/homarr/2.0.2",
-        "last_update": "2023-12-19 06:50:34",
+        "location": "/__w/charts/charts/community/homarr/2.0.3",
+        "last_update": "2023-12-19 09:37:19",
         "required_features": [
             "definitions/timezone",
-            "normalize/ixVolume",
-            "normalize/acl"
+            "normalize/acl",
+            "normalize/ixVolume"
         ],
-        "human_version": "0.14.2_2.0.2",
-        "version": "2.0.2",
+        "human_version": "0.14.2_2.0.3",
+        "version": "2.0.3",
         "chart_metadata": {
             "name": "homarr",
             "description": "Homarr is a sleek, modern dashboard that puts all of your apps and services at your fingertips.",
@@ -19,7 +19,7 @@
                 "title": "Homarr"
             },
             "type": "application",
-            "version": "2.0.2",
+            "version": "2.0.3",
             "apiVersion": "v2",
             "appVersion": "0.14.2",
             "kubeVersion": ">=1.16.0-0",
