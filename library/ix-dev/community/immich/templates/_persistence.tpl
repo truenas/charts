@@ -71,15 +71,6 @@ persistence:
       microservices:
         microservices:
           mountPath: /microcache
-  {{- if .Values.immichConfig.enableTypesense }}
-  typsense:
-    enabled: true
-    type: emptyDir
-    targetSelector:
-      typesense:
-        typesense:
-          mountPath: /typesense-data
-  {{- end -}}
   {{- if .Values.immichConfig.enableML }}
   mlcache:
     enabled: true
@@ -103,7 +94,6 @@ persistence:
       redis:
         redis:
           mountPath: /tmp
-
 
   {{/* Database */}}
   {{- include "ix.v1.common.app.postgresPersistence"

@@ -13,10 +13,12 @@ backupChownMode (optional): Whether to chown the backup directory or
 */}}
 {{- define "ix.v1.common.app.postgres" -}}
   {{- $name := .name | default "postgres" -}}
+  {{- $imageSelector := .imageSelector | default "postgresImage" -}}
   {{- $secretName := (required "Postgres - Secret Name is required" .secretName) -}}
   {{- $backupPath := .backupPath | default "/postgres_backup" -}}
   {{- $backupChownMode := .backupChownMode | default "check" -}}
   {{- $ixChartContext := .ixChartContext -}}
+  {{- $preUpgradeTasks := .preUpgradeTasks | default list -}}
   {{- $resources := (required "Postgres - Resources are required" .resources) }}
 
 {{ $name }}:
@@ -27,7 +29,7 @@ backupChownMode (optional): Whether to chown the backup directory or
       {{ $name }}:
         enabled: true
         primary: true
-        imageSelector: postgresImage
+        imageSelector: {{ $imageSelector }}
         securityContext:
           runAsUser: 999
           runAsGroup: 999
@@ -99,7 +101,7 @@ postgresbackup:
       postgresbackup:
         enabled: true
         primary: true
-        imageSelector: postgresImage
+        imageSelector: {{ $imageSelector }}
         securityContext:
           runAsUser: 999
           runAsGroup: 999
@@ -126,6 +128,9 @@ postgresbackup:
             echo "Creating backup of ${POSTGRES_DB} database"
             pg_dump --dbname=${POSTGRES_URL} --file {{ $backupPath }}/${POSTGRES_DB}_$(date +%Y-%m-%d_%H-%M-%S).sql || echo "Failed to create backup"
             echo "Backup finished"
+            {{- range $task := $preUpgradeTasks }}
+            {{ $task }}
+            {{- end }}
     initContainers:
     {{- include "ix.v1.common.app.permissions"
       (dict
