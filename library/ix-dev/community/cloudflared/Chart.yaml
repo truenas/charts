@@ -3,7 +3,7 @@ description: Cloudflared is a client for Cloudflare Tunnel, a daemon that expose
 annotations:
   title: Cloudflared
 type: application
-version: 1.1.5
+version: 1.1.6
 apiVersion: v2
 appVersion: 2023.10.0
 kubeVersion: '>=1.16.0-0'
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.2.4
+    version: 1.2.5
 home: https://github.com/cloudflare/cloudflared
 icon: https://media.sys.truenas.net/apps/cloudflared/icons/icon.png
 sources:
