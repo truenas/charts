@@ -1,18 +1,18 @@
 {
-    "2.0.6": {
+    "3.0.0": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/immich/2.0.6",
-        "last_update": "2023-12-19 06:42:14",
+        "location": "/__w/charts/charts/community/immich/3.0.0",
+        "last_update": "2023-12-19 06:52:23",
         "required_features": [
-            "definitions/gpuConfiguration",
+            "definitions/timezone",
             "normalize/ixVolume",
             "normalize/acl",
-            "definitions/timezone"
+            "definitions/gpuConfiguration"
         ],
-        "human_version": "1.90.2_2.0.6",
-        "version": "2.0.6",
+        "human_version": "1.91.3_3.0.0",
+        "version": "3.0.0",
         "chart_metadata": {
             "name": "immich",
             "description": "Immich is a self-hosted photo and video backup solution directly from your mobile phone.",
@@ -20,9 +20,9 @@
                 "title": "Immich"
             },
             "type": "application",
-            "version": "2.0.6",
+            "version": "3.0.0",
             "apiVersion": "v2",
-            "appVersion": "1.90.2",
+            "appVersion": "1.91.3",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
@@ -35,7 +35,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.4"
+                    "version": "1.2.5"
                 }
             ],
             "home": "https://immich.app",
@@ -153,15 +153,6 @@
                                 "variable": "enableML",
                                 "label": "Enable Machine Learning",
                                 "description": "Enable Machine Learning\n",
-                                "schema": {
-                                    "type": "boolean",
-                                    "default": true
-                                }
-                            },
-                            {
-                                "variable": "enableTypesense",
-                                "label": "Enable Typesense",
-                                "description": "Enable Typesense\n",
                                 "schema": {
                                     "type": "boolean",
                                     "default": true
