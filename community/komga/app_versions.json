@@ -1,16 +1,16 @@
 {
-    "1.1.12": {
+    "1.1.13": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/komga/1.1.12",
-        "last_update": "2023-12-19 09:35:58",
+        "location": "/__w/charts/charts/community/komga/1.1.13",
+        "last_update": "2023-12-19 10:31:22",
         "required_features": [
             "definitions/timezone",
             "normalize/ixVolume"
         ],
-        "human_version": "1.9.0_1.1.12",
-        "version": "1.1.12",
+        "human_version": "1.9.2_1.1.13",
+        "version": "1.1.13",
         "chart_metadata": {
             "name": "komga",
             "description": "Komga is a free and open source comics/mangas server.",
@@ -18,9 +18,9 @@
                 "title": "Komga"
             },
             "type": "application",
-            "version": "1.1.12",
+            "version": "1.1.13",
             "apiVersion": "v2",
-            "appVersion": "1.9.0",
+            "appVersion": "1.9.2",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
@@ -33,7 +33,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.4"
+                    "version": "1.2.5"
                 }
             ],
             "home": "https://komga.org",
