@@ -1,16 +1,16 @@
 {
-    "1.1.9": {
+    "1.1.10": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/minecraft/1.1.9",
-        "last_update": "2023-12-18 13:07:38",
+        "location": "/__w/charts/charts/community/minecraft/1.1.10",
+        "last_update": "2023-12-19 06:43:35",
         "required_features": [
             "normalize/ixVolume",
             "definitions/timezone"
         ],
-        "human_version": "2023.12.2_1.1.9",
-        "version": "1.1.9",
+        "human_version": "2023.12.2_1.1.10",
+        "version": "1.1.10",
         "chart_metadata": {
             "name": "minecraft",
             "description": "Minecraft is a sandbox game",
@@ -18,7 +18,7 @@
                 "title": "Minecraft"
             },
             "type": "application",
-            "version": "1.1.9",
+            "version": "1.1.10",
             "apiVersion": "v2",
             "appVersion": "2023.12.2",
             "kubeVersion": ">=1.16.0-0",
@@ -273,6 +273,10 @@
                                         {
                                             "value": "MAGMA",
                                             "description": "Magma"
+                                        },
+                                        {
+                                            "value": "MODRINTH",
+                                            "description": "Modrinth"
                                         },
                                         {
                                             "value": "MOHIST",
