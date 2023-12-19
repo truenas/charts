@@ -6,18 +6,13 @@ castopodNetwork:
 
 castopodStorage:
   data:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/data
+    type: pvc
   mariadbData:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/mariadbData
+    type: pvc
   mariadbBackup:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/mariadbBackup
+    type: emptyDir
   additionalStorages:
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/data1
+  - type: pvc
     mountPath: /data1
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/data2
+  - type: pvc
     mountPath: /data2
