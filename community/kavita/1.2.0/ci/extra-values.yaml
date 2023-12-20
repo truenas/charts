@@ -1,0 +1,11 @@
+kavitaNetwork:
+  webPort: 31000
+
+kavitaStorage:
+  config:
+    type: pvc
+  additionalStorages:
+  - type: pvc
+    mountPath: /manga
+  - type: pvc
+    mountPath: /comic
