@@ -1,0 +1,16 @@
+castopodConfig:
+  baseUrl: http://localhost:31000
+
+castopodNetwork:
+  webPort: 31000
+
+castopodStorage:
+  data:
+    type: pvc
+  mariadbData:
+    type: pvc
+  mariadbBackup:
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""
