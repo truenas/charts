@@ -111,6 +111,13 @@ questions:
             type: int
             required: true
             default: 0
+        - variable: deviceName
+          label: Device Name
+          description: Ethernet device the wireguard traffic should be forwarded through.
+          schema:
+            type: string
+            required: true
+            default: eth0
         - variable: clientMTU
           label: Clients MTU
           description: The MTU the clients will use.
