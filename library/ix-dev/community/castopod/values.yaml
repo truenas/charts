@@ -27,11 +27,14 @@ castopodNetwork:
 castopodStorage:
   data:
     type: ixVolume
-    datasetName: data
+    ixVolumeConfig:
+      datasetName: data
   mariadbData:
     type: ixVolume
-    datasetName: mariadbData
+    ixVolumeConfig:
+      datasetName: mariadbData
   mariadbBackup:
     type: ixVolume
-    datasetName: mariadbBackup
+    ixVolumeConfig:
+      datasetName: mariadbBackup
   additionalStorages: []
