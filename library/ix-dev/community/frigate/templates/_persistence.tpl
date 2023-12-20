@@ -2,9 +2,8 @@
 persistence:
   config:
     enabled: true
-    type: {{ .Values.frigateStorage.config.type }}
-    datasetName: {{ .Values.frigateStorage.config.datasetName | default "" }}
-    hostPath: {{ .Values.frigateStorage.config.hostPath | default "" }}
+    {{- include "frigate.storage.ci.migration" (dict "storage" .Values.frigateStorage.config) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.frigateStorage.config) | nindent 4 }}
     targetSelector:
       frigate:
         frigate:
@@ -13,9 +12,8 @@ persistence:
           mountPath: /config
   media:
     enabled: true
-    type: {{ .Values.frigateStorage.media.type }}
-    datasetName: {{ .Values.frigateStorage.media.datasetName | default "" }}
-    hostPath: {{ .Values.frigateStorage.media.hostPath | default "" }}
+    {{- include "frigate.storage.ci.migration" (dict "storage" .Values.frigateStorage.media) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.frigateStorage.media) | nindent 4 }}
     targetSelector:
       frigate:
         frigate:
@@ -56,28 +54,23 @@ persistence:
           mountPath: /dev/bus/usb
   {{- end -}}
   {{- range $idx, $storage := .Values.frigateStorage.additionalStorages }}
-  {{ printf "frigate-%v" (int $idx) }}:
-    {{- $size := "" -}}
-    {{- if $storage.size -}}
-      {{- $size = (printf "%vGi" $storage.size) -}}
-    {{- end }}
+  {{ printf "frigate-%v:" (int $idx) }}
     enabled: true
-    type: {{ $storage.type }}
-    datasetName: {{ $storage.datasetName | default "" }}
-    hostPath: {{ $storage.hostPath | default "" }}
-    server: {{ $storage.server | default "" }}
-    share: {{ $storage.share | default "" }}
-    domain: {{ $storage.domain | default "" }}
-    username: {{ $storage.username | default "" }}
-    password: {{ $storage.password | default "" }}
-    size: {{ $size }}
-    {{- if eq $storage.type "smb-pv-pvc" }}
-    mountOptions:
-      - key: noperm
-    {{- end }}
+    {{- include "frigate.storage.ci.migration" (dict "storage" $storage) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       frigate:
         frigate:
           mountPath: {{ $storage.mountPath }}
   {{- end }}
+{{- end -}}
+
+{{/* TODO: Remove on the next version bump, eg 1.2.0+ */}}
+{{- define "frigate.storage.ci.migration" -}}
+  {{- $storage := .storage -}}
+
+  {{- if $storage.hostPath -}}
+    {{- $_ := set $storage "hostPathConfig" dict -}}
+    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
+  {{- end -}}
 {{- end -}}
