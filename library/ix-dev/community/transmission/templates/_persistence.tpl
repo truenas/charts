@@ -2,7 +2,6 @@
 persistence:
   config:
     enabled: true
-    {{- include "transmission.storage.ci.migration" (dict "storage" .Values.transmissionStorage.config) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.transmissionStorage.config) | nindent 4 }}
     targetSelector:
       transmission:
@@ -15,7 +14,6 @@ persistence:
         {{- end -}}
   download-complete:
     enabled: true
-    {{- include "transmission.storage.ci.migration" (dict "storage" .Values.transmissionStorage.downloadsComplete) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.transmissionStorage.downloadsComplete) | nindent 4 }}
     targetSelector:
       transmission:
@@ -29,7 +27,6 @@ persistence:
   {{- if .Values.transmissionStorage.enableIncompleteDir }}
   download-incomplete:
     enabled: true
-    {{- include "transmission.storage.ci.migration" (dict "storage" .Values.transmissionStorage.downloadsIncomplete) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.transmissionStorage.downloadsIncomplete) | nindent 4 }}
     targetSelector:
       transmission:
@@ -44,7 +41,6 @@ persistence:
   {{- range $idx, $storage := .Values.transmissionStorage.additionalStorages }}
   {{ printf "transmission-%v:" (int $idx) }}
     enabled: true
-    {{- include "transmission.storage.ci.migration" (dict "storage" $storage) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       transmission:
@@ -55,14 +51,4 @@ persistence:
           mountPath: /mnt/directories{{ $storage.mountPath }}
         {{- end }}
   {{- end }}
-{{- end -}}
-
-{{/* TODO: Remove on the next version bump, eg 1.3.0+ */}}
-{{- define "transmission.storage.ci.migration" -}}
-  {{- $storage := .storage -}}
-
-  {{- if $storage.hostPath -}}
-    {{- $_ := set $storage "hostPathConfig" dict -}}
-    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
-  {{- end -}}
 {{- end -}}
