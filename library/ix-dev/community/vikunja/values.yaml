@@ -1,11 +1,11 @@
 image:
   repository: vikunja/api
   pullPolicy: IfNotPresent
-  tag: 0.21.0
+  tag: 0.22.0
 frontendImage:
   repository: vikunja/frontend
   pullPolicy: IfNotPresent
-  tag: 0.21.0
+  tag: 0.22.0
 nginxImage:
   repository: nginx
   pullPolicy: IfNotPresent
