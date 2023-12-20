@@ -2,7 +2,6 @@
 persistence:
   data:
     enabled: true
-    {{- include "navidrome.storage.ci.migration" (dict "storage" .Values.navidromeStorage.data) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.navidromeStorage.data) | nindent 4 }}
     targetSelector:
       navidrome:
@@ -15,7 +14,6 @@ persistence:
         {{- end }}
   music:
     enabled: true
-    {{- include "navidrome.storage.ci.migration" (dict "storage" .Values.navidromeStorage.music) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.navidromeStorage.music) | nindent 4 }}
     targetSelector:
       navidrome:
@@ -29,7 +27,6 @@ persistence:
   {{- range $idx, $storage := .Values.navidromeStorage.additionalStorages }}
   {{ printf "navidrome-%v:" (int $idx) }}
     enabled: true
-    {{- include "navidrome.storage.ci.migration" (dict "storage" $storage) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       navidrome:
@@ -40,14 +37,4 @@ persistence:
           mountPath: /mnt/directories{{ $storage.mountPath }}
         {{- end }}
   {{- end }}
-{{- end -}}
-
-{{/* TODO: Remove on the next version bump, eg 1.2.0+ */}}
-{{- define "navidrome.storage.ci.migration" -}}
-  {{- $storage := .storage -}}
-
-  {{- if $storage.hostPath -}}
-    {{- $_ := set $storage "hostPathConfig" dict -}}
-    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
-  {{- end -}}
 {{- end -}}

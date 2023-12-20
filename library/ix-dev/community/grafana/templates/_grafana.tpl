@@ -70,7 +70,6 @@ service:
 persistence:
   data:
     enabled: true
-    {{- include "grafana.storage.ci.migration" (dict "storage" .Values.grafanaStorage.data) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.grafanaStorage.data) | nindent 4 }}
     targetSelector:
       grafana:
@@ -91,7 +90,6 @@ persistence:
   {{- range $idx, $storage := .Values.grafanaStorage.additionalStorages }}
   {{ printf "grafana-%v:" (int $idx) }}
     enabled: true
-    {{- include "grafana.storage.ci.migration" (dict "storage" $storage) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       grafana:
@@ -124,14 +122,4 @@ scaleCertificate:
     enabled: true
     id: {{ .Values.grafanaNetwork.certificateID }}
     {{- end -}}
-{{- end -}}
-
-{{/* TODO: Remove on the next version bump, eg 1.2.0+ */}}
-{{- define "grafana.storage.ci.migration" -}}
-  {{- $storage := .storage -}}
-
-  {{- if $storage.hostPath -}}
-    {{- $_ := set $storage "hostPathConfig" dict -}}
-    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
-  {{- end -}}
 {{- end -}}

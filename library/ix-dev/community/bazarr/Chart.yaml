@@ -3,7 +3,7 @@ description: Bazarr is a companion application to Sonarr and Radarr. It manages 
 annotations:
   title: Bazarr
 type: application
-version: 1.2.3
+version: 1.2.4
 apiVersion: v2
 appVersion: 1.4.0
 kubeVersion: '>=1.16.0-0'
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.2.4
+    version: 1.2.5
 home: https://www.bazarr.media/
 icon: https://media.sys.truenas.net/apps/bazarr/icons/icon.png
 sources:
