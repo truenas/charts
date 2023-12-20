@@ -1,15 +1,15 @@
 {
-    "1.1.5": {
+    "1.1.6": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/flame/1.1.5",
-        "last_update": "2023-12-19 10:29:57",
+        "location": "/__w/charts/charts/community/flame/1.1.6",
+        "last_update": "2023-12-20 10:45:42",
         "required_features": [
             "normalize/ixVolume"
         ],
-        "human_version": "2.3.1_1.1.5",
-        "version": "1.1.5",
+        "human_version": "2.3.1_1.1.6",
+        "version": "1.1.6",
         "chart_metadata": {
             "name": "flame",
             "description": "Flame is a self-hosted start page for your server.",
@@ -17,7 +17,7 @@
                 "title": "Flame"
             },
             "type": "application",
-            "version": "1.1.5",
+            "version": "1.1.6",
             "apiVersion": "v2",
             "appVersion": "2.3.1",
             "kubeVersion": ">=1.16.0-0",
@@ -32,7 +32,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.4"
+                    "version": "1.2.5"
                 }
             ],
             "home": "https://github.com/pawelmalak/flame",
