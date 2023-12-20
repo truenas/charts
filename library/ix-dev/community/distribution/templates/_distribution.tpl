@@ -51,5 +51,5 @@ workload:
                                                         "UID" .Values.distributionRunAs.user
                                                         "GID" .Values.distributionRunAs.group
                                                         "mode" "check"
-                                                        "type" "init") | nindent 8 }}
+                                                        "type" "install") | nindent 8 }}
 {{- end -}}
