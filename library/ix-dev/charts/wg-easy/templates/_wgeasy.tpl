@@ -32,7 +32,7 @@ workload:
             WG_MTU: {{ .Values.wgConfig.clientMTU }}
             WG_DEFAULT_ADDRESS: {{ .Values.wgConfig.clientAddressRange }}
             WG_DEFAULT_DNS: {{ .Values.wgConfig.clientDNSServer }}
-            WG_DEVICE: {{ .Values.wgConfig.deviceName | default "wg0" }}
+            WG_DEVICE: {{ .Values.wgConfig.deviceName | default "eth0" }}
             WG_ALLOWED_IPS: {{ join "," .Values.wgConfig.allowedIPs | default "0.0.0.0/0,::/0" | quote }}
           fixedEnv:
             PUID: 0
