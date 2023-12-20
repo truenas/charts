@@ -11,7 +11,7 @@ persistence:
                   (not (.Values.transmissionStorage.config.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
           mountPath: /mnt/directories/config
-        {{- end -}}
+        {{- end }}
   download-complete:
     enabled: true
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.transmissionStorage.downloadsComplete) | nindent 4 }}
@@ -23,7 +23,7 @@ persistence:
                   (not (.Values.transmissionStorage.downloadsComplete.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
           mountPath: /mnt/directories/complete
-        {{- end -}}
+        {{- end }}
   {{- if .Values.transmissionStorage.enableIncompleteDir }}
   download-incomplete:
     enabled: true
@@ -36,7 +36,7 @@ persistence:
                   (not (.Values.transmissionStorage.downloadsIncomplete.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
           mountPath: /mnt/directories/incomplete
-        {{- end -}}
+        {{- end }}
   {{- end -}}
   {{- range $idx, $storage := .Values.transmissionStorage.additionalStorages }}
   {{ printf "transmission-%v:" (int $idx) }}
