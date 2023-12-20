@@ -1,16 +1,16 @@
 {
-    "1.0.14": {
+    "1.0.15": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/jellyseerr/1.0.14",
-        "last_update": "2023-12-19 10:29:57",
+        "location": "/__w/charts/charts/community/jellyseerr/1.0.15",
+        "last_update": "2023-12-20 10:45:42",
         "required_features": [
             "definitions/timezone",
             "normalize/ixVolume"
         ],
-        "human_version": "1.7.0_1.0.14",
-        "version": "1.0.14",
+        "human_version": "1.7.0_1.0.15",
+        "version": "1.0.15",
         "chart_metadata": {
             "name": "jellyseerr",
             "description": "Jellyseerr is a free and open source software application for managing requests for your media library.",
@@ -18,7 +18,7 @@
                 "title": "Jellyseerr"
             },
             "type": "application",
-            "version": "1.0.14",
+            "version": "1.0.15",
             "apiVersion": "v2",
             "appVersion": "1.7.0",
             "kubeVersion": ">=1.16.0-0",
@@ -33,7 +33,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.4"
+                    "version": "1.2.5"
                 }
             ],
             "home": "https://github.com/Fallenbagel/jellyseerr",

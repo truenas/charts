@@ -1,16 +1,16 @@
 {
-    "1.0.17": {
+    "1.0.18": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/mumble/1.0.17",
-        "last_update": "2023-12-19 10:29:57",
+        "location": "/__w/charts/charts/community/mumble/1.0.18",
+        "last_update": "2023-12-20 10:45:42",
         "required_features": [
             "definitions/certificate",
             "normalize/ixVolume"
         ],
-        "human_version": "v1.4.230_1.0.17",
-        "version": "1.0.17",
+        "human_version": "v1.4.230_1.0.18",
+        "version": "1.0.18",
         "chart_metadata": {
             "name": "mumble",
             "description": "Mumble is a free, open source, low latency, high quality voice chat application.",
@@ -18,7 +18,7 @@
                 "title": "Mumble"
             },
             "type": "application",
-            "version": "1.0.17",
+            "version": "1.0.18",
             "apiVersion": "v2",
             "appVersion": "v1.4.230",
             "kubeVersion": ">=1.16.0-0",
@@ -33,7 +33,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.4"
+                    "version": "1.2.5"
                 }
             ],
             "home": "https://www.mumble.info/",
