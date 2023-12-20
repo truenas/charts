@@ -35,11 +35,14 @@ sftpgoRunAs:
 sftpgoStorage:
   config:
     type: ixVolume
-    datasetName: config
+    ixVolumeConfig:
+      datasetName: config
   data:
     type: ixVolume
-    datasetName: data
+    ixVolumeConfig:
+      datasetName: data
   backups:
     type: ixVolume
-    datasetName: backups
+    ixVolumeConfig:
+      datasetName: backups
   additionalStorages: []
