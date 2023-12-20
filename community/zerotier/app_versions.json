@@ -1,13 +1,13 @@
 {
-    "1.0.14": {
+    "1.0.15": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/zerotier/1.0.14",
-        "last_update": "2023-12-19 10:29:57",
+        "location": "/__w/charts/charts/community/zerotier/1.0.15",
+        "last_update": "2023-12-20 10:45:42",
         "required_features": [],
-        "human_version": "1.12.2_1.0.14",
-        "version": "1.0.14",
+        "human_version": "1.12.2_1.0.15",
+        "version": "1.0.15",
         "chart_metadata": {
             "name": "zerotier",
             "description": "Securely connect any device, anywhere.",
@@ -15,7 +15,7 @@
                 "title": "Zerotier"
             },
             "type": "application",
-            "version": "1.0.14",
+            "version": "1.0.15",
             "apiVersion": "v2",
             "appVersion": "1.12.2",
             "kubeVersion": ">=1.16.0-0",
@@ -30,7 +30,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.4"
+                    "version": "1.2.5"
                 }
             ],
             "home": "https://www.zerotier.com",
