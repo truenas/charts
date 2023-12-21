@@ -4,12 +4,12 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/plex/1.7.59",
-        "last_update": "2023-12-21 08:35:06",
+        "last_update": "2023-12-21 08:37:46",
         "required_features": [
-            "validations/lockedHostPath",
-            "definitions/gpuConfiguration",
             "normalize/ixVolume",
-            "definitions/timezone"
+            "definitions/gpuConfiguration",
+            "definitions/timezone",
+            "validations/lockedHostPath"
         ],
         "human_version": "1.32.8.7639_1.7.59",
         "version": "1.7.59",
