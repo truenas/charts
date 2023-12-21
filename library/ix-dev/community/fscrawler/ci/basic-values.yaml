@@ -3,5 +3,4 @@ fscrawlerConfig:
 
 fscrawlerStorage:
   jobs:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/jobs
+    type: pvc
