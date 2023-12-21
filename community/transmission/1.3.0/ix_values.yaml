@@ -23,15 +23,18 @@ transmissionRunAs:
 transmissionStorage:
   config:
     type: ixVolume
-    datasetName: config
+    ixVolumeConfig:
+      datasetName: config
   downloadsComplete:
     type: ixVolume
-    datasetName: downloads-complete
+    ixVolumeConfig:
+      datasetName: downloads-complete
   downloadsDir: /downloads/complete
   enableIncompleteDir: true
   downloadsIncomplete:
     type: ixVolume
-    datasetName: downloads-incomplete
+    ixVolumeConfig:
+      datasetName: downloads-incomplete
   incompleteDir: /downloads/incomplete
   additionalStorages: []
 

@@ -42,6 +42,6 @@ workload:
                                                         "UID" .Values.transmissionRunAs.user
                                                         "GID" .Values.transmissionRunAs.group
                                                         "mode" "check"
-                                                        "type" "init") | nindent 8 }}
+                                                        "type" "install") | nindent 8 }}
 
 {{- end -}}
