@@ -5,34 +5,40 @@ persistence:
     type: {{ .Values.sftpgoStorage.config.type }}
     datasetName: {{ .Values.sftpgoStorage.config.datasetName | default "" }}
     hostPath: {{ .Values.sftpgoStorage.config.hostPath | default "" }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.sftpgoStorage.config) | nindent 4 }}
     targetSelector:
       sftpgo:
         sftpgo:
           mountPath: /var/lib/sftpgo
+        {{- if and (eq .Values.sftpgoStorage.config.type "ixVolume")
+                  (not (.Values.sftpgoStorage.config.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
           mountPath: /mnt/directories/config
+        {{- end }}
   data:
     enabled: true
-    type: {{ .Values.sftpgoStorage.data.type }}
-    datasetName: {{ .Values.sftpgoStorage.data.datasetName | default "" }}
-    hostPath: {{ .Values.sftpgoStorage.data.hostPath | default "" }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.sftpgoStorage.data) | nindent 4 }}
     targetSelector:
       sftpgo:
         sftpgo:
           mountPath: /srv/sftpgo/data
+        {{- if and (eq .Values.sftpgoStorage.data.type "ixVolume")
+                  (not (.Values.sftpgoStorage.data.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
           mountPath: /mnt/directories/data
+        {{- end }}
   backups:
     enabled: true
-    type: {{ .Values.sftpgoStorage.backups.type }}
-    datasetName: {{ .Values.sftpgoStorage.backups.datasetName | default "" }}
-    hostPath: {{ .Values.sftpgoStorage.backups.hostPath | default "" }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.sftpgoStorage.backups) | nindent 4 }}
     targetSelector:
       sftpgo:
         sftpgo:
           mountPath: /srv/sftpgo/backups
+        {{- if and (eq .Values.sftpgoStorage.backups.type "ixVolume")
+                  (not (.Values.sftpgoStorage.backups.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
           mountPath: /mnt/directories/backups
+        {{- end }}
   tmp:
     enabled: true
     type: emptyDir
@@ -41,31 +47,17 @@ persistence:
         sftpgo:
           mountPath: /tmp
   {{- range $idx, $storage := .Values.sftpgoStorage.additionalStorages }}
-  {{ printf "sftpgo-%v" (int $idx) }}:
-    {{- $size := "" -}}
-    {{- if $storage.size -}}
-      {{- $size = (printf "%vGi" $storage.size) -}}
-    {{- end }}
+  {{ printf "sftpgo-%v:" (int $idx) }}
     enabled: true
-    type: {{ $storage.type }}
-    datasetName: {{ $storage.datasetName | default "" }}
-    hostPath: {{ $storage.hostPath | default "" }}
-    server: {{ $storage.server | default "" }}
-    share: {{ $storage.share | default "" }}
-    domain: {{ $storage.domain | default "" }}
-    username: {{ $storage.username | default "" }}
-    password: {{ $storage.password | default "" }}
-    size: {{ $size }}
-    {{- if eq $storage.type "smb-pv-pvc" }}
-    mountOptions:
-      - key: noperm
-    {{- end }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       sftpgo:
         sftpgo:
           mountPath: {{ $storage.mountPath }}
+        {{- if and (eq $storage.type "ixVolume") (not ($storage.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
           mountPath: /mnt/directories{{ $storage.mountPath }}
+        {{- end }}
   {{- end -}}
   {{- if .Values.sftpgoNetwork.certificateID }}
   cert:
