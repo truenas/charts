@@ -34,10 +34,12 @@ frigateGPU: {}
 frigateStorage:
   media:
     type: ixVolume
-    datasetName: media
+    ixVolumeConfig:
+      datasetName: media
   config:
     type: ixVolume
-    datasetName: config
+    ixVolumeConfig:
+      datasetName: config
   cache:
     sizeGiB: 1
   shm:

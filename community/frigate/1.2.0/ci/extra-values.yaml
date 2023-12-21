@@ -12,19 +12,15 @@ frigateConfig:
 
 frigateStorage:
   config:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/config
+    type: pvc
   media:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/media
+    type: pvc
   cache:
     sizeGiB: 2
   shm:
     sizeMiB: 128
   additionalStorages:
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/clips
+  - type: pvc
     mountPath: /clips
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/snapshots
+  - type: pvc
     mountPath: /snapshots

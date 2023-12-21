@@ -1,0 +1,15 @@
+frigateNetwork:
+  enableRtmp: true
+  enableRtsp: true
+  enableWebRtc: true
+  hostNetwork: true
+
+frigateStorage:
+  config:
+    type: pvc
+  media:
+    type: pvc
+  cache:
+    sizeGiB: 2
+  shm:
+    sizeMiB: 128
