@@ -9,11 +9,9 @@ frigateNetwork:
 
 frigateStorage:
   config:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/config
+    type: pvc
   media:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/media
+    type: pvc
   cache:
     sizeGiB: 2
   shm:
