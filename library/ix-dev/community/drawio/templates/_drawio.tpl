@@ -38,4 +38,10 @@ workload:
               type: http
               port: 8080
               path: /
+      initContainers:
+      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
+                                                        "UID" 1000
+                                                        "GID" 999
+                                                        "mode" "check"
+                                                        "type" "install") | nindent 8 }}
 {{- end -}}
