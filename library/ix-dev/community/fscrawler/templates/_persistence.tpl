@@ -2,9 +2,8 @@
 persistence:
   jobs:
     enabled: true
-    type: {{ .Values.fscrawlerStorage.jobs.type }}
-    datasetName: {{ .Values.fscrawlerStorage.jobs.datasetName | default "" }}
-    hostPath: {{ .Values.fscrawlerStorage.jobs.hostPath | default "" }}
+    {{- include "fscrawler.storage.ci.migration" (dict "storage" .Values.fscrawlerStorage.jobs) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.fscrawlerStorage.jobs) | nindent 4 }}
     targetSelector:
       fscrawler:
         fscrawler:
@@ -21,28 +20,23 @@ persistence:
           mountPath: /example/_settings.example.yaml
           subPath: _settings.example.yaml
   {{- range $idx, $storage := .Values.fscrawlerStorage.additionalStorages }}
-  {{ printf "fscrawler-%v" (int $idx) }}:
-    {{- $size := "" -}}
-    {{- if $storage.size -}}
-      {{- $size = (printf "%vGi" $storage.size) -}}
-    {{- end }}
+  {{ printf "fscrawler-%v:" (int $idx) }}
     enabled: true
-    type: {{ $storage.type }}
-    datasetName: {{ $storage.datasetName | default "" }}
-    hostPath: {{ $storage.hostPath | default "" }}
-    server: {{ $storage.server | default "" }}
-    share: {{ $storage.share | default "" }}
-    domain: {{ $storage.domain | default "" }}
-    username: {{ $storage.username | default "" }}
-    password: {{ $storage.password | default "" }}
-    size: {{ $size }}
-    {{- if eq $storage.type "smb-pv-pvc" }}
-    mountOptions:
-      - key: noperm
-    {{- end }}
+    {{- include "fscrawler.storage.ci.migration" (dict "storage" $storage) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       fscrawler:
         fscrawler:
           mountPath: {{ $storage.mountPath }}
   {{- end }}
+{{- end -}}
+
+{{/* TODO: Remove on the next version bump, eg 1.2.0+ */}}
+{{- define "fscrawler.storage.ci.migration" -}}
+  {{- $storage := .storage -}}
+
+  {{- if $storage.hostPath -}}
+    {{- $_ := set $storage "hostPathConfig" dict -}}
+    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
+  {{- end -}}
 {{- end -}}
