@@ -178,7 +178,7 @@ questions:
                         required: true
                         immutable: true
                         hidden: true
-                        default: "data"
+                        default: "jobs"
                     - variable: aclEntries
                       label: ACL Configuration
                       schema:
