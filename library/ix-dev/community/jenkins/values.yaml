@@ -22,7 +22,8 @@ jenkinsNetwork:
 jenkinsStorage:
   home:
     type: ixVolume
-    datasetName: home
+    ixVolumeConfig:
+      datasetName: home
   additionalStorages: []
 
 # Not user configurable

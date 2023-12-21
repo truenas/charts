@@ -1,4 +1,3 @@
 jenkinsStorage:
   home:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/home
+    type: pvc
