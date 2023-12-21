@@ -50,5 +50,5 @@ workload:
                                                         "UID" .Values.sftpgoRunAs.user
                                                         "GID" .Values.sftpgoRunAs.group
                                                         "mode" "check"
-                                                        "type" "init") | nindent 8 }}
+                                                        "type" "install") | nindent 8 }}
 {{- end -}}
