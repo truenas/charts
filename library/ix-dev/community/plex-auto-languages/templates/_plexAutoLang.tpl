@@ -48,5 +48,5 @@ workload:
                                                         "UID" .Values.palRunAs.user
                                                         "GID" .Values.palRunAs.group
                                                         "mode" "check"
-                                                        "type" "init") | nindent 8 }}
+                                                        "type" "install") | nindent 8 }}
 {{- end -}}
