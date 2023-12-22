@@ -7,11 +7,8 @@ kapowarrRunAs:
 
 kapowarrStorage:
   config:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/config
+    type: pvc
   downloads:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/downloads
+    type: pvc
   content:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/content
+    type: pvc

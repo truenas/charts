@@ -21,11 +21,14 @@ kapowarrRunAs:
 kapowarrStorage:
   config:
     type: ixVolume
-    datasetName: config
+    ixVolumeConfig:
+      datasetName: config
   downloads:
     type: ixVolume
-    datasetName: downloads
+    ixVolumeConfig:
+      datasetName: downloads
   content:
     type: ixVolume
-    datasetName: content
+    ixVolumeConfig:
+      datasetName: content
   additionalStorages: []
