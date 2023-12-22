@@ -2,8 +2,8 @@
 persistence:
   data:
     enabled: true
-    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.flameStorage.data) | nindent 4 }}
     {{- include "flame.storage.ci.migration" (dict "storage" .Values.flameStorage.data) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.flameStorage.data) | nindent 4 }}
     targetSelector:
       flame:
         flame:
@@ -18,8 +18,8 @@ persistence:
   {{- range $idx, $storage := .Values.flameStorage.additionalStorages }}
   {{ printf "flame-%v:" (int $idx) }}
     enabled: true
-    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     {{- include "flame.storage.ci.migration" (dict "storage" $storage) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       flame:
         flame:
