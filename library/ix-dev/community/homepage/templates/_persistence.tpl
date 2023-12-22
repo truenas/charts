@@ -22,15 +22,17 @@ persistence:
           mountPath: /tmp
   {{- range $idx, $storage := .Values.homepageStorage.additionalStorages }}
   {{ printf "homepage-%v:" (int $idx) }}
+    enabled: true
     {{- include "homepage.storage.ci.migration" (dict "storage" $storage) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
-    enabled: true
     targetSelector:
       homepage:
         homepage:
           mountPath: {{ $storage.mountPath }}
+        {{- if and (eq $storage.type "ixVolume") (not ($storage.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
           mountPath: /mnt/directories{{ $storage.mountPath }}
+        {{- end }}
   {{- end }}
 {{- end -}}
 
