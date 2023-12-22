@@ -29,7 +29,8 @@ fscrawlerNetwork:
 fscrawlerStorage:
   jobs:
     type: ixVolume
-    datasetName: jobs
+    ixVolumeConfig:
+      datasetName: jobs
   additionalStorages: []
 
 notes:

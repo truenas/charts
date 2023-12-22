@@ -1,0 +1,13 @@
+fscrawlerConfig:
+  jobName: test
+  restart: true
+  loop: 2
+
+fscrawlerStorage:
+  jobs:
+    type: pvc
+  additionalStorages:
+  - type: pvc
+    mountPath: /data1
+  - type: pvc
+    mountPath: /data2
