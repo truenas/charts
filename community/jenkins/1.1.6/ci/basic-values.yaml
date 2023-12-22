@@ -1,4 +1,0 @@
-jenkinsStorage:
-  home:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/home
