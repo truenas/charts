@@ -1,7 +1,7 @@
 image:
   pullPolicy: IfNotPresent
   repository: nextcloud
-  tag: 28.0.0
+  tag: 28.0.1
 nginx:
   image:
     pullPolicy: IfNotPresent
