@@ -1,13 +1,10 @@
 jenkinsStorage:
   home:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/home
+    type: pvc
   additionalStorages:
-    - type: hostPath
-      hostPath: /mnt/{{ .Release.Name }}/jenkinsWorkspace1
+    - type: pvc
       mountPath: /workspace1
-    - type: hostPath
-      hostPath: /mnt/{{ .Release.Name }}/jenkinsWorkspace2
+    - type: pvc
       mountPath: /workspace2
 
 jenkinsConfig:

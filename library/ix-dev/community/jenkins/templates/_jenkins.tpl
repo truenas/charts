@@ -53,7 +53,7 @@ workload:
                                                         "UID" 1000
                                                         "GID" 1000
                                                         "mode" "check"
-                                                        "type" "init") | nindent 8 }}
+                                                        "type" "install") | nindent 8 }}
       {{- if .Values.jenkinsNetwork.certificateID }}
         02-cert-container:
           {{- include "jenkins.certContainer" $ | nindent 10 }}
@@ -90,15 +90,17 @@ service:
 persistence:
   home:
     enabled: true
-    type: {{ .Values.jenkinsStorage.home.type }}
-    datasetName: {{ .Values.jenkinsStorage.home.datasetName | default "" }}
-    hostPath: {{ .Values.jenkinsStorage.home.hostPath | default "" }}
+    {{- include "jenkins.storage.ci.migration" (dict "storage" .Values.jenkinsStorage.home) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.jenkinsStorage.home) | nindent 4 }}
     targetSelector:
       jenkins:
         jenkins:
           mountPath: /var/jenkins_home
+        {{- if and (eq .Values.jenkinsStorage.home.type "ixVolume")
+                  (not (.Values.jenkinsStorage.home.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
-          mountPath: /mnt/directories/home
+          mountPath: /mnt/directories/jenkins_home
+        {{- end }}
         02-cert-container:
           mountPath: /var/jenkins_home
   tmp:
@@ -111,31 +113,18 @@ persistence:
         02-cert-container:
           mountPath: /tmp
   {{- range $idx, $storage := .Values.jenkinsStorage.additionalStorages }}
-  {{ printf "jenkins-%v" (int $idx) }}:
-    {{- $size := "" -}}
-    {{- if $storage.size -}}
-      {{- $size = (printf "%vGi" $storage.size) -}}
-    {{- end }}
+  {{ printf "jenkins-%v:" (int $idx) }}
     enabled: true
-    type: {{ $storage.type }}
-    datasetName: {{ $storage.datasetName | default "" }}
-    hostPath: {{ $storage.hostPath | default "" }}
-    server: {{ $storage.server | default "" }}
-    share: {{ $storage.share | default "" }}
-    domain: {{ $storage.domain | default "" }}
-    username: {{ $storage.username | default "" }}
-    password: {{ $storage.password | default "" }}
-    size: {{ $size }}
-    {{- if eq $storage.type "smb-pv-pvc" }}
-    mountOptions:
-      - key: noperm
-    {{- end }}
+    {{- include "jenkins.storage.ci.migration" (dict "storage" $storage) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       jenkins:
         jenkins:
           mountPath: {{ $storage.mountPath }}
+        {{- if and (eq $storage.type "ixVolume") (not ($storage.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
           mountPath: /mnt/directories{{ $storage.mountPath }}
+        {{- end }}
   {{- end }}
   {{- if .Values.jenkinsNetwork.certificateID }}
   cert:
@@ -159,4 +148,14 @@ scaleCertificate:
     enabled: true
     id: {{ .Values.jenkinsNetwork.certificateID }}
     {{- end -}}
+{{- end -}}
+
+{{/* TODO: Remove on the next version bump, eg 1.2.0+ */}}
+{{- define "jenkins.storage.ci.migration" -}}
+  {{- $storage := .storage -}}
+
+  {{- if $storage.hostPath -}}
+    {{- $_ := set $storage "hostPathConfig" dict -}}
+    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
+  {{- end -}}
 {{- end -}}
