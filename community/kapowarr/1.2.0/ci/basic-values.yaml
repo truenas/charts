@@ -1,0 +1,14 @@
+kapowarrNetwork:
+  webPort: 31000
+
+kapowarrRunAs:
+  user: 1000
+  group: 1000
+
+kapowarrStorage:
+  config:
+    type: pvc
+  downloads:
+    type: pvc
+  content:
+    type: pvc

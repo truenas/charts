@@ -42,5 +42,5 @@ workload:
                                                         "UID" .Values.kapowarrRunAs.user
                                                         "GID" .Values.kapowarrRunAs.group
                                                         "mode" "check"
-                                                        "type" "init") | nindent 8 }}
+                                                        "type" "install") | nindent 8 }}
 {{- end -}}
