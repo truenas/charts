@@ -1,0 +1,14 @@
+ci: true
+
+palConfig:
+  plexURL: http://plex:32400
+  plexToken: some-token
+
+palStorage:
+  config:
+    type: pvc
+  additionalStorages:
+  - type: pvc
+    mountPath: /data1
+  - type: pvc
+    mountPath: /data2
