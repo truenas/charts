@@ -3,9 +3,7 @@ cloudflaredNetwork:
 
 cloudflaredStorage:
   additionalStorages:
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/data1
-    mountPath: /data1
+  - type: pvc
 
 cloudflaredConfig:
   tunnelToken: supersecrettoken
