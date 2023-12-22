@@ -8,7 +8,6 @@ persistence:
       homepage:
         homepage:
           mountPath: /app/config
-          mountPath: /var/lib/grafana
         {{- if and (eq .Values.homepageStorage.config.type "ixVolume")
                   (not (.Values.homepageStorage.config.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
