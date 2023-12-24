@@ -1,7 +1,7 @@
 image:
   pullPolicy: IfNotPresent
-  repository: weejewel/wg-easy
-  tag: "7"
+  repository: ghcr.io/wg-easy/wg-easy
+  tag: "8"
 
 resources:
   limits:
@@ -24,6 +24,7 @@ wgConfig:
   clientMTU: 1420
   clientAddressRange: 10.8.0.x
   clientDNSServer: "1.1.1.1"
+  deviceName: eth0
   allowedIPs: []
   additionalEnvs: []
 
