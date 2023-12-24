@@ -3,8 +3,7 @@ cloudflaredNetwork:
 
 cloudflaredStorage:
   additionalStorages:
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/data1
+  - type: pvc
     mountPath: /data1
 
 cloudflaredConfig:

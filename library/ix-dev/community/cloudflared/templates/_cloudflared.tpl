@@ -52,4 +52,10 @@ workload:
               enabled: false
             startup:
               enabled: false
+      initContainers:
+      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
+                                                        "UID" .Values.cloudflaredRunAs.user
+                                                        "GID" .Values.cloudflaredRunAs.group
+                                                        "mode" "check"
+                                                        "type" "install") | nindent 8 }}
 {{- end -}}
