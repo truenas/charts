@@ -10,12 +10,9 @@ komgaNetwork:
 
 komgaStorage:
   config:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/config
+    type: pvc
   additionalStorages:
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/comics
+  - type: pvc
     mountPath: /comics
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/mangas
+  - type: pvc
     mountPath: /mangas
