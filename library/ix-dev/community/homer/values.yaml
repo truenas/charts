@@ -23,5 +23,6 @@ homerRunAs:
 homerStorage:
   assets:
     type: ixVolume
-    datasetName: assets
+    ixVolumeConfig:
+      datasetName: assets
   additionalStorages: []
