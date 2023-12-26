@@ -2,15 +2,16 @@
 persistence:
   assets:
     enabled: true
-    type: {{ .Values.homerStorage.assets.type }}
-    datasetName: {{ .Values.homerStorage.assets.datasetName | default "" }}
-    hostPath: {{ .Values.homerStorage.assets.hostPath | default "" }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.homerStorage.assets) | nindent 4 }}
     targetSelector:
       homer:
         homer:
           mountPath: /www/assets
+        {{- if and (eq .Values.homerStorage.assets.type "ixVolume")
+                  (not (.Values.homerStorage.assets.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
           mountPath: /mnt/directories/assets
+        {{- end }}
   tmp:
     enabled: true
     type: emptyDir
@@ -20,29 +21,15 @@ persistence:
           mountPath: /tmp
   {{- range $idx, $storage := .Values.homerStorage.additionalStorages }}
   {{ printf "homer-%v" (int $idx) }}:
-    {{- $size := "" -}}
-    {{- if $storage.size -}}
-      {{- $size = (printf "%vGi" $storage.size) -}}
-    {{- end }}
     enabled: true
-    type: {{ $storage.type }}
-    datasetName: {{ $storage.datasetName | default "" }}
-    hostPath: {{ $storage.hostPath | default "" }}
-    server: {{ $storage.server | default "" }}
-    share: {{ $storage.share | default "" }}
-    domain: {{ $storage.domain | default "" }}
-    username: {{ $storage.username | default "" }}
-    password: {{ $storage.password | default "" }}
-    size: {{ $size }}
-    {{- if eq $storage.type "smb-pv-pvc" }}
-    mountOptions:
-      - key: noperm
-    {{- end }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       homer:
         homer:
           mountPath: {{ $storage.mountPath }}
+        {{- if and (eq $storage.type "ixVolume") (not ($storage.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
           mountPath: /mnt/directories{{ $storage.mountPath }}
+        {{- end }}
   {{- end }}
 {{- end -}}
