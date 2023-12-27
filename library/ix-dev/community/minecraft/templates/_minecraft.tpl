@@ -86,7 +86,7 @@ persistence:
   {{- range $idx, $storage := .Values.mcStorage.additionalStorages }}
   {{ printf "mc-%v" (int $idx) }}:
     enabled: true
-    {{- include "minecraft.storage.ci.migration" (dict "storage" .Values.castopodStorage.mariadbBackup) }}
+    {{- include "minecraft.storage.ci.migration" (dict "storage" $storage) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       minecraft:
