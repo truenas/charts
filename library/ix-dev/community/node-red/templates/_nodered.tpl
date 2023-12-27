@@ -56,5 +56,5 @@ workload:
                                                         "UID" 1000
                                                         "GID" 1000
                                                         "mode" "check"
-                                                        "type" "init") | nindent 8 }}
+                                                        "type" "install") | nindent 8 }}
 {{- end -}}
