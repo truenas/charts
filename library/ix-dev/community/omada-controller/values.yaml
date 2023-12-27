@@ -32,8 +32,10 @@ omadaNetwork:
 omadaStorage:
   data:
     type: ixVolume
-    datasetName: data
+    ixVolumeConfig:
+      datasetName: data
   logs:
     type: ixVolume
-    datasetName: logs
+    ixVolumeConfig:
+      datasetName: logs
   additionalStorages: []

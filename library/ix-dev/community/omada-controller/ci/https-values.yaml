@@ -1,10 +1,8 @@
 omadaStorage:
   data:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/data
+    type: pvc
   logs:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/logs
+    type: pvc
 
 # CI has a lower port rage of 30000
 omadaNetwork:
