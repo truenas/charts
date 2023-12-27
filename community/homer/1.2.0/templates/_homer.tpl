@@ -45,5 +45,5 @@ workload:
                                                         "UID" .Values.homerRunAs.user
                                                         "GID" .Values.homerRunAs.group
                                                         "mode" "check"
-                                                        "type" "init") | nindent 8 }}
+                                                        "type" "install") | nindent 8 }}
 {{- end -}}
