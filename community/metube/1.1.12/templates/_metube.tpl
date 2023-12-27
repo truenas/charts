@@ -23,7 +23,7 @@ workload:
           envList:
             {{ range $env := . }}
             - name: {{ $env.name }}
-              value: {{ $env.value }}
+              value: {{ $env.value | quote }}
             {{ end }}
           {{ end }}
           probes:
