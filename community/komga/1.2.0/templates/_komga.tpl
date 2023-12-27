@@ -47,5 +47,5 @@ workload:
                                                         "UID" .Values.komgaRunAs.user
                                                         "GID" .Values.komgaRunAs.group
                                                         "mode" "check"
-                                                        "type" "init") | nindent 8 }}
+                                                        "type" "install") | nindent 8 }}
 {{- end -}}
