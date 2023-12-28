@@ -10,12 +10,9 @@ noderedNetwork:
 
 noderedStorage:
   data:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/data
+    type: pvc
   additionalStorages:
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/customData
+  - type: pvc
     mountPath: /customData
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/customFiles
+  - type: pvc
     mountPath: /customFiles
