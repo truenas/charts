@@ -104,9 +104,3 @@ scaleCertificate:
     id: {{ .Values.passboltNetwork.certificateID }}
     {{- end -}}
 {{- end -}}
-
-{{- define "emptyDirConfig.migration" -}}
-  {{- $storage := .storage -}}
-  {{- if eq $storage.type "emtpyDir" -}}
-  {{- end -}}
-{{- end -}}
