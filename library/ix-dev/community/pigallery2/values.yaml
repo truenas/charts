@@ -23,16 +23,20 @@ pigalleryRunAs:
 pigalleryStorage:
   config:
     type: ixVolume
-    datasetName: config
+    ixVolumeConfig:
+      datasetName: config
   db:
     type: ixVolume
-    datasetName: db
+    ixVolumeConfig:
+      datasetName: db
   media:
     type: ixVolume
-    datasetName: media
+    ixVolumeConfig:
+      datasetName: media
   thumbnails:
     type: ixVolume
-    datasetName: thumbnails
+    ixVolumeConfig:
+      datasetName: thumbnails
   additionalStorages: []
 
 notes:
