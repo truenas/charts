@@ -1,11 +1,11 @@
 mcStorage:
   data:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/data
+    type: pvc
 
 mcConfig:
-  imageSelector: j17gceImage
+  imageSelector: j11j9Image
   eula: true
+  version: 1.16.5
 
 mcNetwork:
   serverPort: 30000
