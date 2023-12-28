@@ -2,26 +2,28 @@
 persistence:
   gpg:
     enabled: true
-    type: {{ .Values.passboltStorage.gpg.type }}
-    datasetName: {{ .Values.passboltStorage.gpg.datasetName | default "" }}
-    hostPath: {{ .Values.passboltStorage.gpg.hostPath | default "" }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.passboltStorage.gpg) | nindent 4 }}
     targetSelector:
       passbolt:
         passbolt:
           mountPath: /etc/passbolt/gpg
+        {{- if and (eq .Values.passboltStorage.gpg.type "ixVolume")
+                  (not (.Values.passboltStorage.gpg.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
           mountPath: /mnt/directories/gpg
+        {{- end }}
   jwt:
     enabled: true
-    type: {{ .Values.passboltStorage.jwt.type }}
-    datasetName: {{ .Values.passboltStorage.jwt.datasetName | default "" }}
-    hostPath: {{ .Values.passboltStorage.jwt.hostPath | default "" }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.passboltStorage.jwt) | nindent 4 }}
     targetSelector:
       passbolt:
         passbolt:
           mountPath: /etc/passbolt/jwt
+        {{- if and (eq .Values.passboltStorage.jwt.type "ixVolume")
+                  (not (.Values.passboltStorage.jwt.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
           mountPath: /mnt/directories/jwt
+        {{- end }}
   tmp:
     enabled: true
     type: emptyDir
@@ -38,37 +40,21 @@ persistence:
           mountPath: /var/run
   {{- range $idx, $storage := .Values.passboltStorage.additionalStorages }}
   {{ printf "passbolt-%v" (int $idx) }}:
-    {{- $size := "" -}}
-    {{- if $storage.size -}}
-      {{- $size = (printf "%vGi" $storage.size) -}}
-    {{- end }}
     enabled: true
-    type: {{ $storage.type }}
-    datasetName: {{ $storage.datasetName | default "" }}
-    hostPath: {{ $storage.hostPath | default "" }}
-    server: {{ $storage.server | default "" }}
-    share: {{ $storage.share | default "" }}
-    domain: {{ $storage.domain | default "" }}
-    username: {{ $storage.username | default "" }}
-    password: {{ $storage.password | default "" }}
-    size: {{ $size }}
-    {{- if eq $storage.type "smb-pv-pvc" }}
-    mountOptions:
-      - key: noperm
-    {{- end }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       passbolt:
         passbolt:
           mountPath: {{ $storage.mountPath }}
+        {{- if and (eq $storage.type "ixVolume") (not ($storage.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
           mountPath: /mnt/directories{{ $storage.mountPath }}
+        {{- end }}
   {{- end }}
 
   mariadbdata:
     enabled: true
-    type: {{ .Values.passboltStorage.mariadbData.type }}
-    datasetName: {{ .Values.passboltStorage.mariadbData.datasetName | default "" }}
-    hostPath: {{ .Values.passboltStorage.mariadbData.hostPath | default "" }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.passboltStorage.mariadbData) | nindent 4 }}
     targetSelector:
       # MariaDB pod
       mariadb:
@@ -80,9 +66,7 @@ persistence:
           mountPath: /mnt/directories/mariadb_data
   mariadbbackup:
     enabled: true
-    type: {{ .Values.passboltStorage.mariadbBackup.type }}
-    datasetName: {{ .Values.passboltStorage.mariadbBackup.datasetName | default "" }}
-    hostPath: {{ .Values.passboltStorage.mariadbBackup.hostPath | default "" }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.passboltStorage.mariadbBackup) | nindent 4 }}
     targetSelector:
       # MariaDB backup pod
       mariadbbackup:
