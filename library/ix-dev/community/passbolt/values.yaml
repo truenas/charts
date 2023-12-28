@@ -23,13 +23,16 @@ passboltStorage:
     datasetName: gpg
   jwt:
     type: ixVolume
-    datasetName: jwt
+    ixVolumeConfig:
+      datasetName: jwt
   mariadbData:
     type: ixVolume
-    datasetName: mariadbData
+    ixVolumeConfig:
+      datasetName: mariadbData
   mariadbBackup:
     type: ixVolume
-    datasetName: mariadbBackup
+    ixVolumeConfig:
+      datasetName: mariadbBackup
   additionalStorages: []
 
 notes:
