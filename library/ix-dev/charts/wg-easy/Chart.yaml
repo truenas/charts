@@ -3,7 +3,7 @@ description: WG-Easy is the easiest way to install & manage WireGuard!
 annotations:
   title: WG Easy
 type: application
-version: 2.0.5
+version: 2.0.6
 apiVersion: v2
 appVersion: "8"
 kubeVersion: ">=1.16.0-0"
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.2.5
+    version: 1.2.6
 home: https://github.com/WeeJeWel/wg-easy
 icon: https://media.sys.truenas.net/apps/wg-easy/icons/icon.png
 sources:
