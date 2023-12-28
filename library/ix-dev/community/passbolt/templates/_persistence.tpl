@@ -66,6 +66,10 @@ persistence:
           mountPath: /mnt/directories/mariadb_data
   mariadbbackup:
     enabled: true
+    {{/* Remove on the next version (eg 1.2.0+) */}}
+    {{- if eq .Values.passboltStorage.mariadbBackup.type "emptyDir" }}
+      {{- $_ := set .Values.passboltStorage.mariadbBackup "emptyDirConfig" (dict "medium" "" "size" "") }}
+    {{- end }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.passboltStorage.mariadbBackup) | nindent 4 }}
     targetSelector:
       # MariaDB backup pod
@@ -99,4 +103,10 @@ scaleCertificate:
     enabled: true
     id: {{ .Values.passboltNetwork.certificateID }}
     {{- end -}}
+{{- end -}}
+
+{{- define "emptyDirConfig.migration" -}}
+  {{- $storage := .storage -}}
+  {{- if eq $storage.type "emtpyDir" -}}
+  {{- end -}}
 {{- end -}}
