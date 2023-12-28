@@ -23,5 +23,6 @@ metubeRunAs:
 metubeStorage:
   downloads:
     type: ixVolume
-    datasetName: downloads
+    ixVolumeConfig:
+      datasetName: downloads
   additionalStorages: []

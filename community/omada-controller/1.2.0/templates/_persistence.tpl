@@ -2,26 +2,20 @@
 persistence:
   data:
     enabled: true
-    type: {{ .Values.omadaStorage.data.type }}
-    datasetName: {{ .Values.omadaStorage.data.datasetName | default "" }}
-    hostPath: {{ .Values.omadaStorage.data.hostPath | default "" }}
+    {{- include "omada.storage.ci.migration" (dict "storage" .Values.omadaStorage.data) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.omadaStorage.data) | nindent 4 }}
     targetSelector:
       omada:
         omada:
           mountPath: /opt/tplink/EAPController/data
-        01-permissions:
-          mountPath: /mnt/directories/data
   logs:
     enabled: true
-    type: {{ .Values.omadaStorage.logs.type }}
-    datasetName: {{ .Values.omadaStorage.logs.datasetName | default "" }}
-    hostPath: {{ .Values.omadaStorage.logs.hostPath | default "" }}
+    {{- include "omada.storage.ci.migration" (dict "storage" .Values.omadaStorage.logs) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.omadaStorage.logs) | nindent 4 }}
     targetSelector:
       omada:
         omada:
           mountPath: /opt/tplink/EAPController/logs
-        01-permissions:
-          mountPath: /mnt/directories/logs
   tmp:
     enabled: true
     type: emptyDir
@@ -31,24 +25,9 @@ persistence:
           mountPath: /tmp
   {{- range $idx, $storage := .Values.omadaStorage.additionalStorages }}
   {{ printf "omada-%v" (int $idx) }}:
-    {{- $size := "" -}}
-    {{- if $storage.size -}}
-      {{- $size = (printf "%vGi" $storage.size) -}}
-    {{- end }}
     enabled: true
-    type: {{ $storage.type }}
-    datasetName: {{ $storage.datasetName | default "" }}
-    hostPath: {{ $storage.hostPath | default "" }}
-    server: {{ $storage.server | default "" }}
-    share: {{ $storage.share | default "" }}
-    domain: {{ $storage.domain | default "" }}
-    username: {{ $storage.username | default "" }}
-    password: {{ $storage.password | default "" }}
-    size: {{ $size }}
-    {{- if eq $storage.type "smb-pv-pvc" }}
-    mountOptions:
-      - key: noperm
-    {{- end }}
+    {{- include "omada.storage.ci.migration" (dict "storage" $storage) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       omada:
         omada:
@@ -79,4 +58,14 @@ scaleCertificate:
     enabled: true
     id: {{ .Values.omadaNetwork.certificateID }}
     {{- end -}}
+{{- end -}}
+
+{{/* TODO: Remove on the next version bump, eg 1.2.0+ */}}
+{{- define "omada.storage.ci.migration" -}}
+  {{- $storage := .storage -}}
+
+  {{- if $storage.hostPath -}}
+    {{- $_ := set $storage "hostPathConfig" dict -}}
+    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
+  {{- end -}}
 {{- end -}}

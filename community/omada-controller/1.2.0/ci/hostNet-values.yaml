@@ -1,0 +1,8 @@
+omadaStorage:
+  data:
+    type: pvc
+  logs:
+    type: pvc
+
+omadaNetwork:
+  hostNetwork: true
