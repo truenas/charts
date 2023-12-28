@@ -1,7 +1,6 @@
 mcStorage:
   data:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/data
+    type: pvc
 
 mcConfig:
   imageSelector: j19Image
