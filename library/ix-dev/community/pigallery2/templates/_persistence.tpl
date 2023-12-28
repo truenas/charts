@@ -44,7 +44,7 @@ persistence:
         pigallery:
           mountPath: /app/data/thumbnails
         {{- if and (eq .Values.pigalleryStorage.thumbnails "ixVolume")
-                  (not (.Values..pigalleryStorage.thumbnails.ixVolumeConfig | default dict).aclEnable) }}
+                  (not (.Values.pigalleryStorage.thumbnails.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
           mountPath: /mnt/directories/thumbnails
          {{- end }}
