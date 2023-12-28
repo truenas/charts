@@ -1,17 +1,17 @@
 {
-    "1.2.0": {
+    "1.2.1": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/frigate/1.2.0",
-        "last_update": "2023-12-21 08:36:42",
+        "location": "/__w/charts/charts/community/frigate/1.2.1",
+        "last_update": "2023-12-28 09:40:31",
         "required_features": [
+            "normalize/acl",
             "normalize/ixVolume",
-            "definitions/gpuConfiguration",
-            "normalize/acl"
+            "definitions/gpuConfiguration"
         ],
-        "human_version": "0.12.1_1.2.0",
-        "version": "1.2.0",
+        "human_version": "0.12.1_1.2.1",
+        "version": "1.2.1",
         "chart_metadata": {
             "name": "frigate",
             "description": "Frigate is an NVR With Realtime Object Detection for IP Cameras",
@@ -19,7 +19,7 @@
                 "title": "Frigate"
             },
             "type": "application",
-            "version": "1.2.0",
+            "version": "1.2.1",
             "apiVersion": "v2",
             "appVersion": "0.12.1",
             "kubeVersion": ">=1.16.0-0",
@@ -34,7 +34,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.5"
+                    "version": "1.2.6"
                 }
             ],
             "home": "https://github.com/blakeblackshear/frigate",

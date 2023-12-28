@@ -1,17 +1,17 @@
 {
-    "1.1.6": {
+    "1.1.7": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/omada-controller/1.1.6",
-        "last_update": "2023-12-20 10:45:42",
+        "location": "/__w/charts/charts/community/omada-controller/1.1.7",
+        "last_update": "2023-12-28 09:40:31",
         "required_features": [
-            "definitions/certificate",
             "definitions/timezone",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/certificate"
         ],
-        "human_version": "5.13_1.1.6",
-        "version": "1.1.6",
+        "human_version": "5.13_1.1.7",
+        "version": "1.1.7",
         "chart_metadata": {
             "name": "omada-controller",
             "description": "Omada Controller (TP-Link) is a network management controller for TP-Link Omada Equipment.",
@@ -19,7 +19,7 @@
                 "title": "Omada Controller"
             },
             "type": "application",
-            "version": "1.1.6",
+            "version": "1.1.7",
             "apiVersion": "v2",
             "appVersion": "5.13",
             "kubeVersion": ">=1.16.0-0",
@@ -34,7 +34,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.5"
+                    "version": "1.2.6"
                 }
             ],
             "home": "https://github.com/mbentley/docker-omada-controller",

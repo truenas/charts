@@ -1,18 +1,18 @@
 {
-    "1.2.0": {
+    "1.2.1": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/jenkins/1.2.0",
-        "last_update": "2023-12-22 09:33:21",
+        "location": "/__w/charts/charts/community/jenkins/1.2.1",
+        "last_update": "2023-12-28 09:40:31",
         "required_features": [
-            "definitions/certificate",
             "definitions/timezone",
             "normalize/acl",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/certificate"
         ],
-        "human_version": "2.426.2_1.2.0",
-        "version": "1.2.0",
+        "human_version": "2.426.2_1.2.1",
+        "version": "1.2.1",
         "chart_metadata": {
             "name": "jenkins",
             "description": "Jenkins is a leading open source automation server,",
@@ -20,7 +20,7 @@
                 "title": "Jenkins"
             },
             "type": "application",
-            "version": "1.2.0",
+            "version": "1.2.1",
             "apiVersion": "v2",
             "appVersion": "2.426.2",
             "kubeVersion": ">=1.16.0-0",
@@ -35,7 +35,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.5"
+                    "version": "1.2.6"
                 }
             ],
             "home": "https://www.jenkins.io/",

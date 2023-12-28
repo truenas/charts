@@ -1,17 +1,17 @@
 {
-    "1.2.0": {
+    "1.2.1": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/sftpgo/1.2.0",
-        "last_update": "2023-12-21 08:43:22",
+        "location": "/__w/charts/charts/community/sftpgo/1.2.1",
+        "last_update": "2023-12-28 09:40:31",
         "required_features": [
-            "definitions/certificate",
             "normalize/acl",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/certificate"
         ],
-        "human_version": "2.5.6_1.2.0",
-        "version": "1.2.0",
+        "human_version": "2.5.6_1.2.1",
+        "version": "1.2.1",
         "chart_metadata": {
             "name": "sftpgo",
             "description": "SFTPGo is a fully featured and highly configurable SFTP server with optional HTTP/S, FTP/S and WebDAV support - S3, Google Cloud Storage, Azure Blob",
@@ -19,7 +19,7 @@
                 "title": "SFTPGo"
             },
             "type": "application",
-            "version": "1.2.0",
+            "version": "1.2.1",
             "apiVersion": "v2",
             "appVersion": "2.5.6",
             "kubeVersion": ">=1.16.0-0",
@@ -34,7 +34,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.5"
+                    "version": "1.2.6"
                 }
             ],
             "home": "https://github.com/drakkan/sftpgo",
