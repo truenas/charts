@@ -22,10 +22,6 @@ persistence:
           mountPath: /tmp
   {{- range $idx, $storage := .Values.pgadminStorage.additionalStorages }}
   {{ printf "pgadmin-%v" (int $idx) }}:
-    {{- $size := "" -}}
-    {{- if $storage.size -}}
-      {{- $size = (printf "%vGi" $storage.size) -}}
-    {{- end }}
     enabled: true
     {{- include "pgadmin.storage.ci.migration" (dict "storage" $storage) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
