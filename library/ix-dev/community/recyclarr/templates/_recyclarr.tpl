@@ -38,5 +38,5 @@ workload:
                                                         "UID" .Values.recyclarrRunAs.user
                                                         "GID" .Values.recyclarrRunAs.group
                                                         "mode" "check"
-                                                        "type" "init") | nindent 8 }}
+                                                        "type" "install") | nindent 8 }}
 {{- end -}}
