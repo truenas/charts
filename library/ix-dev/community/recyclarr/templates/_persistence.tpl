@@ -22,6 +22,7 @@ persistence:
           mountPath: /tmp
   {{- range $idx, $storage := .Values.recyclarrStorage.additionalStorages }}
   {{ printf "recyclarr-%v" (int $idx) }}:
+    enabled: true
     {{- include "recyclarr.storage.ci.migration" (dict "storage" $storage) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
