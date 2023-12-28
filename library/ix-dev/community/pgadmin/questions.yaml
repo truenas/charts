@@ -115,11 +115,11 @@ questions:
                   type: string
                   required: true
                   immutable: true
-                  default: ixVolume
+                  default: "ixVolume"
                   enum:
-                    - value: hostPath
+                    - value: "hostPath"
                       description: Host Path (Path that already exists on the system)
-                    - value: ixVolume
+                    - value: "ixVolume"
                       description: ixVolume (Dataset created automatically by the system)
               - variable: ixVolumeConfig
                 label: ixVolume Configuration
