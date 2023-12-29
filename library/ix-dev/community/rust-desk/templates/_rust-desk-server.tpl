@@ -51,5 +51,5 @@ workload:
                                                         "UID" .Values.rustRunAs.user
                                                         "GID" .Values.rustRunAs.group
                                                         "mode" "check"
-                                                        "type" "init") | nindent 8 }}
+                                                        "type" "install") | nindent 8 }}
 {{- end -}}
