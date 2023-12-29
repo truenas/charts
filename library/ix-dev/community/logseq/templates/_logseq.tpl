@@ -42,4 +42,10 @@ workload:
               type: {{ $protocol }}
               port: {{ .Values.logseqNetwork.webPort }}
               path: /health
+      initContainers:
+      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
+                                                        "UID" .Values.logseqRunAs.user
+                                                        "GID" .Values.logseqRunAs.group
+                                                        "mode" "check"
+                                                        "type" "install") | nindent 8 }}
 {{- end -}}
