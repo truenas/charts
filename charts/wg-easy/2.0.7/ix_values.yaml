@@ -1,7 +1,7 @@
 image:
   pullPolicy: IfNotPresent
   repository: ghcr.io/wg-easy/wg-easy
-  tag: "8"
+  tag: '9'
 
 resources:
   limits:
@@ -23,7 +23,7 @@ wgConfig:
   keepAlive: 0
   clientMTU: 1420
   clientAddressRange: 10.8.0.x
-  clientDNSServer: "1.1.1.1"
+  clientDNSServer: 1.1.1.1
   deviceName: eth0
   allowedIPs: []
   additionalEnvs: []
