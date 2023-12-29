@@ -1,7 +1,6 @@
 rustStorage:
   data:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/data
+    type: pvc
 
 rustConfig:
   allowOnlyEncryptedConnections: true

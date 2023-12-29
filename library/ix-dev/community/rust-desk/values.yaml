@@ -29,5 +29,6 @@ rustRunAs:
 rustStorage:
   data:
     type: ixVolume
-    datasetName: data
+    ixVolumeConfig:
+      datasetName: data
   additionalStorages: []
