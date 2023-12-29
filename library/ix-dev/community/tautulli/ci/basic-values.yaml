@@ -7,5 +7,4 @@ tautulliRunAs:
 
 tautulliStorage:
   config:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/config
+    type: pvc
