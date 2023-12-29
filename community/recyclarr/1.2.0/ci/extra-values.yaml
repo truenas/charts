@@ -1,0 +1,8 @@
+recyclarrStorage:
+  config:
+    type: pvc
+  additionalStorages:
+  - type: pvc
+    mountPath: /data1
+  - type: pvc
+    mountPath: /data2
