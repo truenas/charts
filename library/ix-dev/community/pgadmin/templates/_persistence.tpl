@@ -2,15 +2,17 @@
 persistence:
   config:
     enabled: true
-    type: {{ .Values.pgadminStorage.config.type }}
-    datasetName: {{ .Values.pgadminStorage.config.datasetName | default "" }}
-    hostPath: {{ .Values.pgadminStorage.config.hostPath | default "" }}
+    {{- include "pgadmin.storage.ci.migration" (dict "storage" .Values.pgadminStorage.config) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.pgadminStorage.config) | nindent 4 }}
     targetSelector:
       pgadmin:
         pgadmin:
           mountPath: /var/lib/pgadmin
+        {{- if and (eq .Values.pgadminStorage.config.type "ixVolume")
+                  (not (.Values.pgadminStorage.config.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
           mountPath: /mnt/directories/pgadmin
+        {{- end }}
   tmp:
     enabled: true
     type: emptyDir
@@ -20,30 +22,17 @@ persistence:
           mountPath: /tmp
   {{- range $idx, $storage := .Values.pgadminStorage.additionalStorages }}
   {{ printf "pgadmin-%v" (int $idx) }}:
-    {{- $size := "" -}}
-    {{- if $storage.size -}}
-      {{- $size = (printf "%vGi" $storage.size) -}}
-    {{- end }}
     enabled: true
-    type: {{ $storage.type }}
-    datasetName: {{ $storage.datasetName | default "" }}
-    hostPath: {{ $storage.hostPath | default "" }}
-    server: {{ $storage.server | default "" }}
-    share: {{ $storage.share | default "" }}
-    domain: {{ $storage.domain | default "" }}
-    username: {{ $storage.username | default "" }}
-    password: {{ $storage.password | default "" }}
-    size: {{ $size }}
-    {{- if eq $storage.type "smb-pv-pvc" }}
-    mountOptions:
-      - key: noperm
-    {{- end }}
+    {{- include "pgadmin.storage.ci.migration" (dict "storage" $storage) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       pgadmin:
         pgadmin:
           mountPath: {{ $storage.mountPath }}
+        {{- if and (eq $storage.type "ixVolume") (not ($storage.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
           mountPath: /mnt/directories{{ $storage.mountPath }}
+        {{- end }}
   {{- end }}
 
   {{- if .Values.pgadminNetwork.certificateID }}
@@ -68,4 +57,14 @@ scaleCertificate:
     enabled: true
     id: {{ .Values.pgadminNetwork.certificateID }}
   {{- end }}
+{{- end -}}
+
+{{/* TODO: Remove on the next version bump, eg 1.2.0+ */}}
+{{- define "pgadmin.storage.ci.migration" -}}
+  {{- $storage := .storage -}}
+
+  {{- if $storage.hostPath -}}
+    {{- $_ := set $storage "hostPathConfig" dict -}}
+    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
+  {{- end -}}
 {{- end -}}

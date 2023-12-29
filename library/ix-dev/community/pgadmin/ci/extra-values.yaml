@@ -7,12 +7,9 @@ pgadminNetwork:
 
 pgadminStorage:
   config:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/config
+    type: pvc
   additionalStorages:
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/db1
+  - type: pvc
     mountPath: /db1
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/db2
+  - type: pvc
     mountPath: /db2

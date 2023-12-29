@@ -5,8 +5,7 @@ pgadminNetwork:
 
 pgadminStorage:
   config:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/config
+    type: pvc
 
 pgadminConfig:
   adminEmail: some@email.com
