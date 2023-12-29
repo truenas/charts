@@ -43,7 +43,7 @@ persistence:
       whoogle:
         whoogle:
           mountPath: {{ $storage.mountPath }}
-      {{- if .Release.IsInstall }}
+      {{- if $.Release.IsInstall }}
         {{- if and (eq $storage.type "ixVolume") (not ($storage.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
           mountPath: /mnt/directories{{ $storage.mountPath }}
