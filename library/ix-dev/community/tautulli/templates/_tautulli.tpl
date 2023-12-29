@@ -47,5 +47,5 @@ workload:
                                                         "UID" .Values.tautulliRunAs.user
                                                         "GID" .Values.tautulliRunAs.group
                                                         "mode" "check"
-                                                        "type" "init") | nindent 8 }}
+                                                        "type" "install") | nindent 8 }}
 {{- end -}}
