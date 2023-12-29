@@ -1,5 +1,6 @@
 pgadminNetwork:
-  webPort: 31000
+  webPort: 30000
+  hostNetwork: true
 
 pgadminConfig:
   adminEmail: some@email.com
@@ -7,5 +8,4 @@ pgadminConfig:
 
 pgadminStorage:
   config:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/config
+    type: pvc

@@ -1,0 +1,15 @@
+pgadminConfig:
+  adminEmail: some@email.com
+  adminPassword: somepassword
+
+pgadminNetwork:
+  webPort: 31000
+
+pgadminStorage:
+  config:
+    type: pvc
+  additionalStorages:
+  - type: pvc
+    mountPath: /db1
+  - type: pvc
+    mountPath: /db2
