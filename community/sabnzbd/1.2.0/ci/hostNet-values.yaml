@@ -1,0 +1,7 @@
+sabnzbdNetwork:
+  webPort: 30000
+  hostNetwork: true
+
+sabnzbdStorage:
+  config:
+    type: pvc

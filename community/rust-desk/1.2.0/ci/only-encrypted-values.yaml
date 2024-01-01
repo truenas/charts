@@ -1,0 +1,17 @@
+rustStorage:
+  data:
+    type: pvc
+
+rustConfig:
+  allowOnlyEncryptedConnections: true
+
+rustNetwork:
+  natTypeTestPort: 31115
+  idRegHolePunchPort: 31116
+  relayPort: 31117
+  serverWebClientsPort: 31118
+  relayWebClientsPort: 31119
+
+rustRunAs:
+  user: 1000
+  group: 1000

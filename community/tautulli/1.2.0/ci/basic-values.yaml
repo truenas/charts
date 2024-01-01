@@ -1,0 +1,10 @@
+tautulliNetwork:
+  webPort: 31000
+
+tautulliRunAs:
+  user: 1000
+  group: 1000
+
+tautulliStorage:
+  config:
+    type: pvc

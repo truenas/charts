@@ -1,0 +1,10 @@
+sabnzbdNetwork:
+  webPort: 31000
+
+sabnzbdRunAs:
+  user: 1000
+  group: 1000
+
+sabnzbdStorage:
+  config:
+    type: pvc
