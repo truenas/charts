@@ -44,5 +44,5 @@ workload:
                                                         "UID" .Values.sabnzbdRunAs.user
                                                         "GID" .Values.sabnzbdRunAs.group
                                                         "mode" "check"
-                                                        "type" "init") | nindent 8 }}
+                                                        "type" "install") | nindent 8 }}
 {{- end -}}
