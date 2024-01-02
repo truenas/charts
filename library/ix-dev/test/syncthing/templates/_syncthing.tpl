@@ -40,6 +40,13 @@ workload:
             STNOUPGRADE: "true"
           fixedEnv:
             PUID: {{ .Values.syncthingID.user }}
+          {{ with .Values.syncthingConfig.additionalEnvs }}
+          envList:
+            {{ range $env := . }}
+            - name: {{ $env.name }}
+              value: {{ $env.value }}
+            {{ end }}
+          {{ end }}
           probes:
             liveness:
               enabled: true
