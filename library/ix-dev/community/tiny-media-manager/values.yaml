@@ -20,7 +20,8 @@ tmmID:
   group: 568
 
 tmmStorage:
-  config:
+  data:
     type: ixVolume
-    datasetName: data
+    ixVolumeConfig:
+      datasetName: data
   additionalStorages: []
