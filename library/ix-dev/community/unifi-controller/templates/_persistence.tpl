@@ -2,15 +2,16 @@
 persistence:
   data:
     enabled: true
-    type: {{ .Values.unifiStorage.data.type }}
-    datasetName: {{ .Values.unifiStorage.data.datasetName | default "" }}
-    hostPath: {{ .Values.unifiStorage.data.hostPath | default "" }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.unifiStorage.data) | nindent 4 }}
     targetSelector:
       unifi:
         unifi:
           mountPath: /usr/lib/unifi/data
+        {{- if and (eq .Values.unifiStorage.data.type "ixVolume")
+                  (not (.Values.unifiStorage.data.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
           mountPath: /mnt/directories/unifi
+        {{- end }}
         02-migrate:
           mountPath: /usr/lib/unifi/data
   cert:
@@ -38,30 +39,16 @@ persistence:
           mountPath: /tmp
   {{- range $idx, $storage := .Values.unifiStorage.additionalStorages }}
   {{ printf "unifi-%v" (int $idx) }}:
-    {{- $size := "" -}}
-    {{- if $storage.size -}}
-      {{- $size = (printf "%vGi" $storage.size) -}}
-    {{- end }}
     enabled: true
-    type: {{ $storage.type }}
-    datasetName: {{ $storage.datasetName | default "" }}
-    hostPath: {{ $storage.hostPath | default "" }}
-    server: {{ $storage.server | default "" }}
-    share: {{ $storage.share | default "" }}
-    domain: {{ $storage.domain | default "" }}
-    username: {{ $storage.username | default "" }}
-    password: {{ $storage.password | default "" }}
-    size: {{ $size }}
-    {{- if eq $storage.type "smb-pv-pvc" }}
-    mountOptions:
-      - key: noperm
-    {{- end }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       unifi:
         unifi:
           mountPath: {{ $storage.mountPath }}
+        {{- if and (eq $storage.type "ixVolume") (not ($storage.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
           mountPath: /mnt/directories{{ $storage.mountPath }}
+        {{- end }}
   {{- end -}}
 
   {{- if .Values.unifiNetwork.certificateID }}
