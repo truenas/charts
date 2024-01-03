@@ -3,5 +3,4 @@ twofauthNetwork:
 
 twofauthStorage:
   config:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/config
+    type: pvc
