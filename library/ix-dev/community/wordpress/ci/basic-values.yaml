@@ -4,4 +4,7 @@ wpStorage:
   mariadbData:
     type: pvc
   mariadbBackup:
-    type: pvc
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""
