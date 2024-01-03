@@ -6,12 +6,9 @@ tmmNetwork:
 
 tmmStorage:
   data:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/data
+    type: pvc
   additionalStorages:
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/tv-shows
+  - type: pvc
     mountPath: /tv-shows
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/movies
+  - type: pvc
     mountPath: /movies
