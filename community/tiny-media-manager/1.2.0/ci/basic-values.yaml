@@ -1,0 +1,13 @@
+tmmConfig:
+  password: secret
+
+tmmNetwork:
+  webPort: 31000
+
+tmmID:
+  user: 1000
+  group: 1000
+
+tmmStorage:
+  data:
+    type: pvc

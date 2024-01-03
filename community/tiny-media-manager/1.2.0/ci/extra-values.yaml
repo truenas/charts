@@ -1,0 +1,14 @@
+tmmConfig:
+  password: secret
+
+tmmNetwork:
+  webPort: 31000
+
+tmmStorage:
+  data:
+    type: pvc
+  additionalStorages:
+  - type: pvc
+    mountPath: /tv-shows
+  - type: pvc
+    mountPath: /movies

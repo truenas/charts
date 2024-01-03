@@ -1,0 +1,10 @@
+tmmConfig:
+  password: secret
+
+tmmNetwork:
+  webPort: 31000
+  hostNetwork: true
+
+tmmStorage:
+  data:
+    type: pvc
