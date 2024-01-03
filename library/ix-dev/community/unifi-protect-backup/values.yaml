@@ -33,8 +33,10 @@ upbID:
 upbStorage:
   config:
     type: ixVolume
-    datasetName: config
+    ixVolumeConfig:
+      datasetName: config
   data:
     type: ixVolume
-    datasetName: data
+    ixVolumeConfig:
+      datasetName: data
   additionalStorages: []
