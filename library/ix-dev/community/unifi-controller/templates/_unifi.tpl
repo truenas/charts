@@ -48,7 +48,7 @@ workload:
                                                         "UID" 999
                                                         "GID" 999
                                                         "mode" "check"
-                                                        "type" "init") | nindent 8 }}
+                                                        "type" "install") | nindent 8 }}
         {{- $migrate := false -}}
         {{- if (hasKey .Values.global "ixChartContext") -}}
           {{- if (hasKey .Values.global.ixChartContext "upgradeMetadata") -}}
