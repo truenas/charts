@@ -13,7 +13,5 @@ minioRunAs:
   group: 1000
 
 minioStorage:
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/data1
-    datasetName: ""
+  - type: pvc
     mountPath: /data1

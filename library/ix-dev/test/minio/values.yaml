@@ -1,6 +1,6 @@
 image:
   repository: minio/minio
-  tag: RELEASE.2023-03-24T21-41-23Z
+  tag: RELEASE.2023-12-07T04-16-00Z
   pullPolicy: IfNotPresent
 
 logsearchImage:
@@ -42,7 +42,9 @@ minioLogging:
     diskCapacityGB: 5
     pgData:
       type: ixVolume
-      datasetName: postgres-data
+      ixVolumeConfig:
+        datasetName: postgres-data
     pgBackup:
       type: ixVolume
-      datasetName: postgres-backup
+      ixVolumeConfig:
+        datasetName: postgres-backup

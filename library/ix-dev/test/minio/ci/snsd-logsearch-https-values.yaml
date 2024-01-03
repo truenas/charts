@@ -12,9 +12,7 @@ minioNetwork:
   certificateID: 1
 
 minioStorage:
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/data1
-    datasetName: ""
+  - type: pvc
     mountPath: /data1
 
 minioLogging:
@@ -22,13 +20,12 @@ minioLogging:
     enabled: true
     diskCapacityGB: 5
     pgData:
-      type: hostPath
-      hostPath: /mnt/{{ .Release.Namespace }}/postgres_data
-      datasetName: ""
+      type: pvc
     pgBackup:
-      type: hostPath
-      hostPath: /mnt/{{ .Release.Namespace }}/postgres_backup
-      datasetName: ""
+      type: emptyDir
+      emptyDirConfig:
+        size: ""
+        medium: ""
 
 ixCertificates:
   "1":
