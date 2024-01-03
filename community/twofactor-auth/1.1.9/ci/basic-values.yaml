@@ -1,7 +1,0 @@
-twofauthNetwork:
-  webPort: 31000
-
-twofauthStorage:
-  config:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/config

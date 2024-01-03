@@ -17,12 +17,9 @@ twofauthNetwork:
 
 twofauthStorage:
   config:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/config
+    type: pvc
   additionalStorages:
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/data1
+  - type: pvc
     mountPath: /data1
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/data2
+  - type: pvc
     mountPath: /data2
