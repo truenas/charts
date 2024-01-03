@@ -9,9 +9,7 @@ minioCreds:
   rootPass: minio_test
 
 minioStorage:
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/data1
-    datasetName: ""
+  - type: pvc
     mountPath: /data1
 
 minioLogging:
