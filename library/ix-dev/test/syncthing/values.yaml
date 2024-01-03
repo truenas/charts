@@ -1,6 +1,6 @@
 image:
   repository: syncthing/syncthing
-  tag: '1.23.3'
+  tag: '1.27.0'
   pullPolicy: IfNotPresent
 
 resources:
@@ -8,9 +8,10 @@ resources:
     cpu: 4000m
     memory: 8Gi
 
-# Currently not exposed in the UI
-# But can be exposed in the future
 syncthingConfig:
+  additionalEnvs: []
+  # Currently not exposed in the UI
+  # But can be exposed in the future
   natTraversal: false
   localDiscovery: false
   globalDiscovery: false
