@@ -1,10 +1,10 @@
 wpStorage:
   data:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/data
+    type: pvc
   mariadbData:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/mariadbData
+    type: pvc
   mariadbBackup:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/mariadbBackup
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""
