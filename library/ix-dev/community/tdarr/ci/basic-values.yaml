@@ -14,7 +14,7 @@ tdarrStorage:
     type: emptyDir
     emptyDirConfig:
       medium: Memory
-      size: 1Gi
+      size: 1
 # Make sure installation don't fail when 0 GPU are assigned
 tdarrGPU:
   nvidia.com/gpu: 0

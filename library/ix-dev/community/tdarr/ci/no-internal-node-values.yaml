@@ -11,4 +11,5 @@ tdarrStorage:
   transcodes:
     type: emptyDir
     emptyDirConfig:
-      size: 1Gi
+      size: 1
+      medium: ""
