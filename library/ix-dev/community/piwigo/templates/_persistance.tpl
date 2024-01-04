@@ -2,18 +2,16 @@
 persistence:
   config:
     enabled: true
-    type: {{ .Values.piwiStorage.config.type }}
-    datasetName: {{ .Values.piwiStorage.config.datasetName | default "" }}
-    hostPath: {{ .Values.piwiStorage.config.hostPath | default "" }}
+    {{- include "piwi.storage.ci.migration" (dict "storage" .Values.piwiStorage.config) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.piwiStorage.config) | nindent 4 }}
     targetSelector:
       piwigo:
         piwigo:
           mountPath: /config
   gallery:
     enabled: true
-    type: {{ .Values.piwiStorage.gallery.type }}
-    datasetName: {{ .Values.piwiStorage.gallery.datasetName | default "" }}
-    hostPath: {{ .Values.piwiStorage.gallery.hostPath | default "" }}
+    {{- include "piwi.storage.ci.migration" (dict "storage" .Values.piwiStorage.gallery) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.piwiStorage.gallery) | nindent 4 }}
     targetSelector:
       piwigo:
         piwigo:
@@ -27,24 +25,9 @@ persistence:
           mountPath: /tmp
   {{- range $idx, $storage := .Values.piwiStorage.additionalStorages }}
   {{ printf "piwi-%v" (int $idx) }}:
-    {{- $size := "" -}}
-    {{- if $storage.size -}}
-      {{- $size = (printf "%vGi" $storage.size) -}}
-    {{- end }}
     enabled: true
-    type: {{ $storage.type }}
-    datasetName: {{ $storage.datasetName | default "" }}
-    hostPath: {{ $storage.hostPath | default "" }}
-    server: {{ $storage.server | default "" }}
-    share: {{ $storage.share | default "" }}
-    domain: {{ $storage.domain | default "" }}
-    username: {{ $storage.username | default "" }}
-    password: {{ $storage.password | default "" }}
-    size: {{ $size }}
-    {{- if eq $storage.type "smb-pv-pvc" }}
-    mountOptions:
-      - key: noperm
-    {{- end }}
+    {{- include "piwi.storage.ci.migration" (dict "storage" $storage) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       piwigo:
         piwigo:
@@ -53,9 +36,8 @@ persistence:
 
   mariadbdata:
     enabled: true
-    type: {{ .Values.piwiStorage.mariadbData.type }}
-    datasetName: {{ .Values.piwiStorage.mariadbData.datasetName | default "" }}
-    hostPath: {{ .Values.piwiStorage.mariadbData.hostPath | default "" }}
+    {{- include "piwi.storage.ci.migration" (dict "storage" .Values.piwiStorage.mariadbData) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.piwiStorage.mariadbData) | nindent 4 }}
     targetSelector:
       # MariaDB pod
       mariadb:
@@ -67,9 +49,8 @@ persistence:
           mountPath: /mnt/directories/mariadb_data
   mariadbbackup:
     enabled: true
-    type: {{ .Values.piwiStorage.mariadbBackup.type }}
-    datasetName: {{ .Values.piwiStorage.mariadbBackup.datasetName | default "" }}
-    hostPath: {{ .Values.piwiStorage.mariadbBackup.hostPath | default "" }}
+    {{- include "piwi.storage.ci.migration" (dict "storage" .Values.piwiStorage.mariadbBackup) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.piwiStorage.mariadbBackup) | nindent 4 }}
     targetSelector:
       # MariaDB backup pod
       mariadbbackup:
@@ -79,4 +60,14 @@ persistence:
         # MariaDB - Permissions container
         permissions:
           mountPath: /mnt/directories/mariadb_backup
+{{- end -}}
+
+{{/* TODO: Remove on the next version bump, eg 1.2.0+ */}}
+{{- define "piwi.storage.ci.migration" -}}
+  {{- $storage := .storage -}}
+
+  {{- if $storage.hostPath -}}
+    {{- $_ := set $storage "hostPathConfig" dict -}}
+    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
+  {{- end -}}
 {{- end -}}
