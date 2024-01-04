@@ -50,7 +50,8 @@ workload:
               port: "{{ .Values.minioNetwork.apiPort }}"
               path: /minio/health/live
       initContainers:
-      {{- include "ix.v1.common.app.permissions" (dict "UID" .Values.minioRunAs.user
+      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
+                                                        "UID" .Values.minioRunAs.user
                                                         "GID" .Values.minioRunAs.group
                                                         "type" "install") | nindent 8 -}}
       {{- if .Values.minioLogging.logsearch.enabled }}
@@ -102,15 +103,16 @@ persistence:
   {{- range $idx, $storage := .Values.minioStorage }}
   {{ printf "data%v" (int $idx) }}:
     enabled: true
-    type: {{ $storage.type }}
-    datasetName: {{ $storage.datasetName | default "" }}
-    hostPath: {{ $storage.hostPath | default "" }}
+    {{- include "minio.storage.ci.migration" (dict "storage" $storage) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       minio:
         minio:
           mountPath: {{ $storage.mountPath }}
-        permissions:
+        {{- if and (eq $storage.type "ixVolume") (not ($storage.ixVolumeConfig | default dict).aclEnable) }}
+        01-permissions:
           mountPath: /mnt/directories{{ $storage.mountPath }}
+        {{- end }}
   {{- end }}
   # Minio writes temporary files to this directory. Adding this as an emptyDir,
   # So we don't have to set readOnlyRootFilesystem to false

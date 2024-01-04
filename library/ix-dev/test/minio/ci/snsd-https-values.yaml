@@ -13,9 +13,7 @@ minioNetwork:
   certificateID: 1
 
 minioStorage:
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/data1
-    datasetName: ""
+  - type: pvc
     mountPath: /data1
 
 ixCertificates:
