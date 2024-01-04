@@ -1,0 +1,25 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{/* TODO: Remove on the next version bump, eg 1.1.0+ */}}
+{{- define "minio.storage.ci.migration" -}}
+  {{- $storage := .storage -}}
+
+  {{- if $storage.hostPath -}}
+    {{- $_ := set $storage "hostPathConfig" dict -}}
+    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* Merge the templates with Values  */}}
+{{- $_ := mustMergeOverwrite .Values (include "minio.configuration" $ | fromYaml) -}}
+
+{{- $_ := mustMergeOverwrite .Values (include "minio.workload" $ | fromYaml) -}}
+{{- if .Values.minioLogging.logsearch.enabled -}}
+  {{- $_ := mustMergeOverwrite .Values (include "logsearch.workload" $ | fromYaml) -}}
+  {{- $_ := mustMergeOverwrite .Values (include "postgres.workload" $ | fromYaml) -}}
+{{- end -}}
+
+{{/* Create the configmap for portal manually*/}}
+{{- include "minio.portal" $ -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}

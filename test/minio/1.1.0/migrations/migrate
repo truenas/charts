@@ -1,0 +1,63 @@
+#!/usr/bin/python3
+import json
+import os
+import sys
+
+
+def storage_migrate(storage):
+    delete_keys = []
+    if storage['type'] == 'hostPath':
+        # Check if the key exists, if not we have already migrated
+        if not storage.get('hostPath'):
+            return storage
+
+        storage['hostPathConfig'] = {'hostPath': storage['hostPath']}
+        delete_keys.append('hostPath')
+
+    elif storage['type'] == 'ixVolume':
+        # Check if the key exists, if not we have already migrated
+        if not storage.get('datasetName'):
+            return storage
+
+        storage['ixVolumeConfig'] = {'datasetName': storage['datasetName']}
+        delete_keys.append('datasetName')
+
+        # Clean up for some older versions.
+        if storage.get('hostPath'):
+            delete_keys.append('hostPath')
+
+    for key in delete_keys:
+        storage.pop(key, None)
+
+    return storage
+
+
+def migrate(values):
+    storageKey = 'minioLogging'
+    storageSubKey = 'logsearch'
+    storages = ['pgData', 'pgBackup']
+
+    for storage in storages:
+        check_val = values.get(storageKey, {}).get(storageSubKey, {}).get(storage, {})
+        if not isinstance(check_val, dict) or not check_val:
+            raise Exception(f'Storage section {storage} is malformed')
+
+        values[storageKey][storageSubKey][storage] = storage_migrate(check_val)
+
+    dataStorageItems = values.get('minioStorage', {})
+    for idx, storage in enumerate(dataStorageItems):
+        if not isinstance(storage, dict) or not storage:
+            raise Exception(f'Item {idx} in minioStorage is malformed')
+
+        dataStorageItems[idx] = storage_migrate(storage)
+
+    return values
+
+
+if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        exit(1)
+
+    if os.path.exists(sys.argv[1]):
+        with open(sys.argv[1], 'r') as f:
+            print(json.dumps(migrate(json.loads(f.read()))))

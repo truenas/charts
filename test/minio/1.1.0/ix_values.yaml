@@ -1,0 +1,50 @@
+image:
+  repository: minio/minio
+  tag: RELEASE.2023-12-07T04-16-00Z
+  pullPolicy: IfNotPresent
+
+logsearchImage:
+  repository: minio/operator
+  tag: v4.5.8
+  pullPolicy: IfNotPresent
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+minioCreds:
+  rootUser: ''
+  rootPass: ''
+
+minioRunAs:
+  user: 568
+  group: 568
+
+minioNetwork:
+  apiPort: 30000
+  webPort: 30001
+  certificateID: null
+  hostNetwork: true
+  serverUrl: ''
+  consoleUrl: ''
+
+minioMultiMode: []
+
+minioStorage: []
+
+minioLogging:
+  anonymous: false
+  quiet: false
+
+  logsearch:
+    enabled: false
+    diskCapacityGB: 5
+    pgData:
+      type: ixVolume
+      ixVolumeConfig:
+        datasetName: postgres-data
+    pgBackup:
+      type: ixVolume
+      ixVolumeConfig:
+        datasetName: postgres-backup

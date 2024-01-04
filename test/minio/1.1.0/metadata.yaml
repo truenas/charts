@@ -1,0 +1,18 @@
+runAsContext:
+  - userName: minio
+    groupName: minio
+    gid: 568
+    uid: 568
+    description: Minio can run as any non-root user.
+  - userName: logsearch
+    groupName: logsearch
+    gid: 568
+    uid: 568
+    description: Minio's logsearch can run as any non-root user.
+  - userName: postgres
+    groupName: postgres
+    gid: 999
+    uid: 999
+    description: Postgres runs as a non-root user.
+capabilities: []
+hostMounts: []

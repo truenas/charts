@@ -1,0 +1,14 @@
+wpConfig:
+  enableCronJob: true
+  cronSchedule: "*/1 * * * *"
+
+wpStorage:
+  data:
+    type: pvc
+  mariadbData:
+    type: pvc
+  mariadbBackup:
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""
