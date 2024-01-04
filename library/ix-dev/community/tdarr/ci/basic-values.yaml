@@ -5,18 +5,16 @@ tdarrID:
   group: 1001
 tdarrStorage:
   server:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/server
+    type: pvc
   configs:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/configs
+    type: pvc
   logs:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/logs
+    type: pvc
   transcodes:
     type: emptyDir
-    medium: Memory
-    size: 1Gi
+    emptyDirConfig:
+      medium: Memory
+      size: 1Gi
 # Make sure installation don't fail when 0 GPU are assigned
 tdarrGPU:
   nvidia.com/gpu: 0
