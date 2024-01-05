@@ -22,16 +22,18 @@ tdarrID:
 tdarrStorage:
   server:
     type: ixVolume
-    datasetName: server
+    ixVolumeConfig:
+      datasetName: server
   configs:
     type: ixVolume
-    datasetName: configs
+    ixVolumeConfig:
+      datasetName: configs
   logs:
     type: ixVolume
-    datasetName: logs
+    ixVolumeConfig:
+      datasetName: logs
   transcodes:
     type: ixVolume
-    datasetName: transcodes
-    medium: ''
-    size: ''
+    ixVolumeConfig:
+      datasetName: transcodes
   additionalStorages: []

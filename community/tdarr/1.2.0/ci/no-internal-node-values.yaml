@@ -1,0 +1,15 @@
+tdarrConfig:
+  nodeName: ''
+  internalNode: false
+tdarrStorage:
+  server:
+    type: pvc
+  configs:
+    type: pvc
+  logs:
+    type: pvc
+  transcodes:
+    type: emptyDir
+    emptyDirConfig:
+      size: 1
+      medium: ""

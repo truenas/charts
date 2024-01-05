@@ -1,0 +1,25 @@
+piwiNetwork:
+  webPort: 31000
+
+piwiConfig:
+  language: en_GB
+  adminName: admin
+  adminMail: admin@example.com
+  adminPass: admin
+
+piwiID:
+  user: 1000
+  group: 1000
+
+piwiStorage:
+  config:
+    type: pvc
+  gallery:
+    type: pvc
+  mariadbData:
+    type: pvc
+  mariadbBackup:
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""
