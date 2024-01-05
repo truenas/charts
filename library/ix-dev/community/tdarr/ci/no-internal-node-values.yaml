@@ -3,14 +3,13 @@ tdarrConfig:
   internalNode: false
 tdarrStorage:
   server:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/server
+    type: pvc
   configs:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/configs
+    type: pvc
   logs:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/logs
+    type: pvc
   transcodes:
     type: emptyDir
-    size: 1Gi
+    emptyDirConfig:
+      size: 1
+      medium: ""

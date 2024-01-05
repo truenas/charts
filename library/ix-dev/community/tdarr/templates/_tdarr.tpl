@@ -81,63 +81,41 @@ service:
 persistence:
   server:
     enabled: true
-    type: {{ .Values.tdarrStorage.server.type }}
-    datasetName: {{ .Values.tdarrStorage.server.datasetName | default "" }}
-    hostPath: {{ .Values.tdarrStorage.server.hostPath | default "" }}
+    {{- include "tdarr.storage.ci.migration" (dict "storage" .Values.tdarrStorage.server) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.tdarrStorage.server) | nindent 4 }}
     targetSelector:
       tdarr:
         tdarr:
           mountPath: /app/server
   configs:
     enabled: true
-    type: {{ .Values.tdarrStorage.configs.type }}
-    datasetName: {{ .Values.tdarrStorage.configs.datasetName | default "" }}
-    hostPath: {{ .Values.tdarrStorage.configs.hostPath | default "" }}
+    {{- include "tdarr.storage.ci.migration" (dict "storage" .Values.tdarrStorage.configs) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.tdarrStorage.configs) | nindent 4 }}
     targetSelector:
       tdarr:
         tdarr:
           mountPath: /app/configs
   logs:
     enabled: true
-    type: {{ .Values.tdarrStorage.logs.type }}
-    datasetName: {{ .Values.tdarrStorage.logs.datasetName | default "" }}
-    hostPath: {{ .Values.tdarrStorage.logs.hostPath | default "" }}
+    {{- include "tdarr.storage.ci.migration" (dict "storage" .Values.tdarrStorage.logs) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.tdarrStorage.logs) | nindent 4 }}
     targetSelector:
       tdarr:
         tdarr:
           mountPath: /app/logs
   transcode:
     enabled: true
-    type: {{ .Values.tdarrStorage.transcodes.type }}
-    datasetName: {{ .Values.tdarrStorage.transcodes.datasetName | default "" }}
-    hostPath: {{ .Values.tdarrStorage.transcodes.hostPath | default "" }}
-    medium: {{ .Values.tdarrStorage.transcodes.medium | default "" }}
-    {{/* Size of the emptyDir */}}
-    size: {{ .Values.tdarrStorage.transcodes.size | default "" }}
+    {{- include "tdarr.storage.ci.migration" (dict "storage" .Values.tdarrStorage.transcodes) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.tdarrStorage.transcodes) | nindent 4 }}
     targetSelector:
       tdarr:
         tdarr:
           mountPath: /temp
   {{- range $idx, $storage := .Values.tdarrStorage.additionalStorages }}
   {{ printf "tdarr-%v" (int $idx) }}:
-    {{- $size := "" -}}
-    {{- if $storage.size -}}
-      {{- $size = (printf "%vGi" $storage.size) -}}
-    {{- end }}
     enabled: true
-    type: {{ $storage.type }}
-    datasetName: {{ $storage.datasetName | default "" }}
-    hostPath: {{ $storage.hostPath | default "" }}
-    server: {{ $storage.server | default "" }}
-    share: {{ $storage.share | default "" }}
-    domain: {{ $storage.domain | default "" }}
-    username: {{ $storage.username | default "" }}
-    password: {{ $storage.password | default "" }}
-    size: {{ $size }}
-    {{- if eq $storage.type "smb-pv-pvc" }}
-    mountOptions:
-      - key: noperm
-    {{- end }}
+    {{- include "tdarr.storage.ci.migration" (dict "storage" $storage) }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       tdarr:
         tdarr:
@@ -154,4 +132,20 @@ scaleGPU:
         - tdarr
   {{ end }}
 {{ end }}
+{{- end -}}
+
+{{/* TODO: Remove on the next version bump, eg 1.2.0+ */}}
+{{- define "tdarr.storage.ci.migration" -}}
+  {{- $storage := .storage -}}
+
+  {{- if $storage.hostPath -}}
+    {{- $_ := set $storage "hostPathConfig" dict -}}
+    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
+  {{- end -}}
+
+  {{- if eq $storage.type "emptyDir" -}}
+    {{- if not $storage.emptyDirConfig -}}
+      {{- $_ := set $storage "emptyDirConfig" (dict "medium" "" "size" "") -}}
+    {{- end -}}
+  {{- end -}}
 {{- end -}}
