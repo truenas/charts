@@ -13,14 +13,13 @@ piwiID:
 
 piwiStorage:
   config:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/config
+    type: pvc
   gallery:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/gallery
+    type: pvc
   mariadbData:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/mariadbData
+    type: pvc
   mariadbBackup:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Name }}/mariadbBackup
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""
