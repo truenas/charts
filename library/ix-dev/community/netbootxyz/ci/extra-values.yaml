@@ -1,0 +1,8 @@
+netbootStorage:
+  config:
+    type: pvc
+  assets:
+    type: pvc
+  additionalStorages:
+  - type: pvc
+    mountPath: /data

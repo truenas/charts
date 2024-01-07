@@ -1,0 +1,8 @@
+netbootStorage:
+  config:
+    type: pvc
+  assets:
+    type: pvc
+
+netbootNetwork:
+  hostNetwork: true
