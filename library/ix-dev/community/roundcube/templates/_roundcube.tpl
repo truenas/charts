@@ -1,4 +1,4 @@
-{{- define "roundube.workload" -}}
+{{- define "roundcube.workload" -}}
 workload:
   roundube:
     enabled: true
