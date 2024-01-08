@@ -60,10 +60,13 @@ questions:
             required: true
         - variable: skin
           label: Skin
-          description: Configures the default theme
+          description: |
+            Configures the default theme</br>
+            If you don't have the theme installed,
+            it will show an error on all pages.
           schema:
             type: string
-            default: "larry"
+            default: elastic
             required: true
         - variable: uploadMaxSize
           label: Upload Max Size
