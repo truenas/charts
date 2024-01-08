@@ -5,7 +5,7 @@ kind: ConfigMap
 metadata:
   name: portal
 data:
-  port: {{ .Values.roundcubeNetwork.webPort }}
+  port: {{ .Values.roundcubeNetwork.webPort | quote }}
   path: "/"
   protocol: http
   host: $node_ip
