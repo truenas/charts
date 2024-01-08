@@ -50,5 +50,5 @@ configmap:
       ROUNDCUBEMAIL_SMTP_PORT: {{ .Values.roundcubeConfig.smtpPort | quote }}
       ROUNDCUBEMAIL_PLUGINS: {{ join "," .Values.roundcubeConfig.plugins | quote }}
       ROUNDCUBEMAIL_ASPELL_PACKAGES: {{ join "," .Values.roundcubeConfig.aspellDicts | quote }}
-      ROUNDCUBEMAIL_UPLOAD_MAX_FILESIZE: {{ printf "%dM" .Values.roundcubeConfig.uploadMaxSize | quote }}
+      ROUNDCUBEMAIL_UPLOAD_MAX_FILESIZE: {{ printf "%vM" .Values.roundcubeConfig.uploadMaxSize | quote }}
 {{- end -}}
