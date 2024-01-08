@@ -35,5 +35,6 @@ syncthingNetwork:
 syncthingStorage:
   home:
     type: ixVolume
-    datasetName: home
+    ixVolumeConfig:
+      datasetName: home
   additionalStorages: []
