@@ -11,9 +11,13 @@ runAsContext:
     description: Postgres runs as a non-root user.
 capabilities:
   - name: CHOWN
-    description: Roundube is able to chown files.
+    description: Roundcube is able to chown files.
   - name: SETGID
-    description: Roundube is able to set group ID for it's sub-processes.
+    description: Roundcube is able to set group ID for it's sub-processes.
   - name: SETUID
-    description: Roundube is able to set user ID for it's sub-processes.
+    description: Roundcube is able to set user ID for it's sub-processes.
+  - name: FOWNER
+    description: Roundcube is able to bypass permission checks for chown.
+  - name: DAC_OVERRIDE
+    description: Roundcube is able to bypass permission checks.
 hostMounts: []
