@@ -42,6 +42,13 @@ configmap:
     enabled: true
     data:
       ROUNDCUBEMAIL_SKIN: {{ .Values.roundcubeConfig.skin }}
+      {{/* IMAP */}}
+      ROUNDCUBEMAIL_DEFAULT_HOST: {{ .Values.roundcubeConfig.defaultHost | quote }}
+      ROUNDCUBEMAIL_DEFAULT_PORT: {{ .Values.roundcubeConfig.defaultPort | quote }}
+      {{/* SMTP */}}
+      ROUNDCUBEMAIL_SMTP_SERVER: {{ .Values.roundcubeConfig.smtpServer | quote }}
+      ROUNDCUBEMAIL_SMTP_PORT: {{ .Values.roundcubeConfig.smtpPort | quote }}
       ROUNDCUBEMAIL_PLUGINS: {{ join "," .Values.roundcubeConfig.plugins | quote }}
+      ROUNDCUBEMAIL_ASPELL_PACKAGES: {{ join "," .Values.roundcubeConfig.aspellDicts | quote }}
       ROUNDCUBEMAIL_UPLOAD_MAX_FILESIZE: {{ printf "%dM" .Values.roundcubeConfig.uploadMaxSize | quote }}
 {{- end -}}

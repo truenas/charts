@@ -26,6 +26,38 @@ questions:
     schema:
       type: dict
       attrs:
+        - variable: defaultHost
+          label: Default Host (IMAP)
+          description: The default host to connect to.
+          schema:
+            type: string
+            default: ""
+            required: true
+        - variable: defaultPort
+          label: Default Port (IMAP)
+          description: The default port to connect to.
+          schema:
+            type: int
+            default: 143
+            min: 1
+            max: 65535
+            required: true
+        - variable: smtpServer
+          label: SMTP Server
+          description: The SMTP server to use.
+          schema:
+            type: string
+            default: ""
+            required: true
+        - variable: smtpPort
+          label: SMTP Port
+          description: The SMTP port to use.
+          schema:
+            type: int
+            default: 587
+            min: 1
+            max: 65535
+            required: true
         - variable: skin
           label: Skin
           description: Configures the default theme
@@ -41,6 +73,18 @@ questions:
             default: 5
             min: 1
             required: true
+        - variable: aspellDicts
+          label: Aspell Dictionaries
+          description: A list of aspell dictionaries to install.
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: aspellDict
+                label: Aspell Dictionary
+                schema:
+                  type: string
+                  required: true
         - variable: plugins
           label: Plugins
           description: A list of plugins to enable.

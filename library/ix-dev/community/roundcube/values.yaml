@@ -9,10 +9,15 @@ resources:
     memory: 8Gi
 
 roundcubeConfig:
+  defaultHost: ''
+  defaultPort: 143
+  smtpServer: ''
+  smtpPort: 587
   skin: larry
   plugins:
     - archive
     - zipdownload
+  aspellDicts: []
   uploadMaxSize: 5
   additionalEnvs: []
 
