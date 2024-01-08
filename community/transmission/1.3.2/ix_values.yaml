@@ -1,0 +1,44 @@
+image:
+  repository: ghcr.io/onedr0p/transmission
+  pullPolicy: IfNotPresent
+  tag: 4.0.5
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+transmissionConfig:
+  additionalEnvs: []
+
+transmissionNetwork:
+  webPort: 30096
+  peerPort: 50413
+  hostNetwork: false
+
+transmissionRunAs:
+  user: 568
+  group: 568
+
+transmissionStorage:
+  config:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: config
+  downloadsComplete:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: downloads-complete
+  downloadsDir: /downloads/complete
+  enableIncompleteDir: true
+  downloadsIncomplete:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: downloads-incomplete
+  incompleteDir: /downloads/incomplete
+  additionalStorages: []
+
+notes:
+  custom: |
+    Settings can be configured via Environment Variables.
+    See https://github.com/onedr0p/containers/tree/main/apps/transmission for available options.
