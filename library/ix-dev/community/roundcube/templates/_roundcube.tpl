@@ -19,6 +19,8 @@ workload:
             capabilities:
               add:
                 - CHOWN
+                - SETGID
+                - SETUID
           envFrom:
             - secretRef:
                 name: roundcube-creds

@@ -12,4 +12,8 @@ runAsContext:
 capabilities:
   - name: CHOWN
     description: Roundube is able to chown files.
+  - name: SETGID
+    description: Roundube is able to set group ID for it's sub-processes.
+  - name: SETUID
+    description: Roundube is able to set user ID for it's sub-processes.
 hostMounts: []
