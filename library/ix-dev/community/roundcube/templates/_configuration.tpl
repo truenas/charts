@@ -42,6 +42,6 @@ configmap:
     enabled: true
     data:
       ROUNDCUBEMAIL_SKIN: {{ .Values.roundcubeConfig.skin }}
-      ROUNDCUBEMAIL_PLUGINS: {{ join "," .Values.roundcubeConfig.plugins }}
-      ROUNDCUBEMAIL_UPLOAD_MAX_FILESIZE: {{ printf "%dM" .Values.roundcubeConfig.uploadMaxSize }}
+      ROUNDCUBEMAIL_PLUGINS: {{ join "," .Values.roundcubeConfig.plugins | quote }}
+      ROUNDCUBEMAIL_UPLOAD_MAX_FILESIZE: {{ printf "%dM" .Values.roundcubeConfig.uploadMaxSize | quote }}
 {{- end -}}

@@ -1,13 +1,13 @@
 {{- define "roundcube.workload" -}}
 workload:
-  roundube:
+  roundcube:
     enabled: true
     primary: true
     type: Deployment
     podSpec:
       hostNetwork: false
       containers:
-        roundube:
+        roundcube:
           enabled: true
           primary: true
           imageSelector: image
@@ -21,9 +21,9 @@ workload:
                 - CHOWN
           envFrom:
             - secretRef:
-                name: roundube-creds
+                name: roundcube-creds
             - configMapRef:
-                name: roundube-config
+                name: roundcube-config
           {{ with .Values.roundcubeConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
