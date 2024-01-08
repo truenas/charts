@@ -24,7 +24,7 @@ workload:
                 name: roundube-creds
             - configMapRef:
                 name: roundube-config
-          {{ with .Values.roundubeConfig.additionalEnvs }}
+          {{ with .Values.roundcubeConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
             - name: {{ $env.name }}
