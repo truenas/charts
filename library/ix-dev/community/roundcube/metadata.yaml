@@ -1,0 +1,15 @@
+runAsContext:
+  - userName: root
+    groupName: root
+    gid: 0
+    uid: 0
+    description: Roundcube runs as root user
+  - userName: postgres
+    groupName: postgres
+    gid: 999
+    uid: 999
+    description: Postgres runs as a non-root user.
+capabilities:
+  - name: CHOWN
+    description: Roundube is able to chown files.
+hostMounts: []

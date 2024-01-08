@@ -1,0 +1,17 @@
+roundcubeNetwork:
+  webPort: 31000
+
+roundcubeStorage:
+  html:
+    type: pvc
+  config:
+    type: pvc
+  temps:
+    type: pvc
+  pgData:
+    type: pvc
+  pgBackup:
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""
