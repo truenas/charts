@@ -1,16 +1,12 @@
 syncthingStorage:
   home:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/home
+    type: pvc
   additionalStorages:
-    - type: hostPath
-      hostPath: /mnt/{{ .Release.Namespace }}/dir1
+    - type: pvc
       mountPath: /mnt/dir1
-    - type: hostPath
-      hostPath: /mnt/{{ .Release.Namespace }}/dir2
+    - type: pvc
       mountPath: /mnt/dir2
-    - type: hostPath
-      hostPath: /mnt/{{ .Release.Namespace }}/dir3
+    - type: pvc
       mountPath: /mnt/dir3
 
 syncthingID:
