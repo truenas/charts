@@ -1,8 +1,8 @@
 runAsContext:
-  - userName: kapowarr
-    groupName: kapowarr
-    gid: 568
-    uid: 568
-    description: Kapowarr can run as any non-root user.
+  - userName: root
+    groupName: root
+    gid: 0
+    uid: 0
+    description: Kapowarr runs as root user.
 capabilities: []
 hostMounts: []

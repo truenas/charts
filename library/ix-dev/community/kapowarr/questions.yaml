@@ -50,29 +50,6 @@ questions:
                         type: string
                         required: true
 
-  - variable: kapowarrRunAs
-    label: ""
-    group: User and Group Configuration
-    schema:
-      type: dict
-      attrs:
-        - variable: user
-          label: User ID
-          description: The user id that Kapowarr will run as.
-          schema:
-            type: int
-            min: 2
-            default: 568
-            required: true
-        - variable: group
-          label: Group ID
-          description: The group id that Kapowarr will run as.
-          schema:
-            type: int
-            min: 2
-            default: 568
-            required: true
-
   - variable: kapowarrNetwork
     label: ""
     group: Network Configuration
