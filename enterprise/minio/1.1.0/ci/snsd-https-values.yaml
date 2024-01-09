@@ -1,8 +1,9 @@
 # When inside the versioned minio folder, run:
 # helm dependency update
-# helm template -f ix_values.yaml -f ci/logsearch-https-values.yaml .
+# helm template -f ix_values.yaml -f ci/basic-https-values.yaml .
 
 # Always use a unique hostPath for each test
+
 
 minioCreds:
   rootUser: minio_test
@@ -12,23 +13,8 @@ minioNetwork:
   certificateID: 1
 
 minioStorage:
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/data1
-    datasetName: ""
+  - type: pvc
     mountPath: /data1
-
-minioLogging:
-  logsearch:
-    enabled: true
-    diskCapacityGB: 5
-    pgData:
-      type: hostPath
-      hostPath: /mnt/{{ .Release.Namespace }}/postgres_data
-      datasetName: ""
-    pgBackup:
-      type: hostPath
-      hostPath: /mnt/{{ .Release.Namespace }}/postgres_backup
-      datasetName: ""
 
 ixCertificates:
   "1":

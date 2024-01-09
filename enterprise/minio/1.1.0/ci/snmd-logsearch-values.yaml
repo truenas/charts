@@ -1,0 +1,34 @@
+# When inside the versioned minio folder, run:
+# helm dependency update
+# helm template -f ix_values.yaml -f ci/logsearch-values.yaml .
+
+# Always use a unique hostPath for each test
+
+minioCreds:
+  rootUser: minio_test
+  rootPass: minio_test
+
+minioMultiMode:
+  - /data{1...4}
+
+minioStorage:
+  - type: pvc
+    mountPath: /data1
+  - type: pvc
+    mountPath: /data2
+  - type: pvc
+    mountPath: /data3
+  - type: pvc
+    mountPath: /data4
+
+minioLogging:
+  logsearch:
+    enabled: true
+    diskCapacityGB: 5
+    pgData:
+      type: pvc
+    pgBackup:
+      type: emptyDir
+      emptyDirConfig:
+        size: ""
+        medium: ""

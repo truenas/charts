@@ -1,42 +1,31 @@
 # When inside the versioned minio folder, run:
 # helm dependency update
-# helm template -f ix_values.yaml -f ci/basic-https-values.yaml .
+# helm template -f ix_values.yaml -f ci/logsearch-https-values.yaml .
 
 # Always use a unique hostPath for each test
-# Release.Namespace is guaranteed to be a unique value
-# in the test environment (ct-install)
 
 minioCreds:
   rootUser: minio_test
   rootPass: minio_test
 
-minioRunAs:
-  user: 1000
-  group: 1000
-
 minioNetwork:
   certificateID: 1
 
-minioMultiMode:
-  - /data{1...4}
-
 minioStorage:
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/data1
-    datasetName: ""
+  - type: pvc
     mountPath: /data1
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/data2
-    datasetName: ""
-    mountPath: /data2
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/data3
-    datasetName: ""
-    mountPath: /data3
-  - type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/data4
-    datasetName: ""
-    mountPath: /data4
+
+minioLogging:
+  logsearch:
+    enabled: true
+    diskCapacityGB: 5
+    pgData:
+      type: pvc
+    pgBackup:
+      type: emptyDir
+      emptyDirConfig:
+        size: ""
+        medium: ""
 
 ixCertificates:
   "1":
