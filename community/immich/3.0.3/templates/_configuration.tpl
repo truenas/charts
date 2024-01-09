@@ -68,9 +68,6 @@ configmap:
       LOG_LEVEL: log
       NODE_ENV: production
       SERVER_PORT: {{ .Values.immichNetwork.webuiPort | quote }}
-      {{- with .Values.immichConfig.publicLoginMessage }}
-      PUBLIC_LOGIN_PAGE_MESSAGE: {{ . | quote }}
-      {{- end }}
 
   micro-config:
     enabled: true
