@@ -1,0 +1,23 @@
+runAsContext:
+  - userName: root
+    groupName: root
+    gid: 0
+    uid: 0
+    description: Invidious runs as root user
+  - userName: postgres
+    groupName: postgres
+    gid: 999
+    uid: 999
+    description: Postgres runs as a non-root user.
+capabilities:
+  - name: CHOWN
+    description: Invidious is able to chown files.
+  - name: SETGID
+    description: Invidious is able to set group ID for it's sub-processes.
+  - name: SETUID
+    description: Invidious is able to set user ID for it's sub-processes.
+  - name: FOWNER
+    description: Invidious is able to bypass permission checks for chown.
+  - name: DAC_OVERRIDE
+    description: Invidious is able to bypass permission checks.
+hostMounts: []
