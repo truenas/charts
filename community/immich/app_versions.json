@@ -1,18 +1,18 @@
 {
-    "3.0.2": {
+    "3.0.3": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/immich/3.0.2",
-        "last_update": "2024-01-08 12:18:03",
+        "location": "/__w/charts/charts/community/immich/3.0.3",
+        "last_update": "2024-01-09 06:41:41",
         "required_features": [
+            "normalize/ixVolume",
             "definitions/gpuConfiguration",
-            "definitions/timezone",
             "normalize/acl",
-            "normalize/ixVolume"
+            "definitions/timezone"
         ],
-        "human_version": "1.91.4_3.0.2",
-        "version": "3.0.2",
+        "human_version": "1.92.1_3.0.3",
+        "version": "3.0.3",
         "chart_metadata": {
             "name": "immich",
             "description": "Immich is a self-hosted photo and video backup solution directly from your mobile phone.",
@@ -20,9 +20,9 @@
                 "title": "Immich"
             },
             "type": "application",
-            "version": "3.0.2",
+            "version": "3.0.3",
             "apiVersion": "v2",
-            "appVersion": "1.91.4",
+            "appVersion": "1.92.1",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
@@ -140,15 +140,6 @@
                     "schema": {
                         "type": "dict",
                         "attrs": [
-                            {
-                                "variable": "publicLoginMessage",
-                                "label": "Public Login Message",
-                                "description": "The message that will be displayed on the login page.\n",
-                                "schema": {
-                                    "type": "string",
-                                    "default": ""
-                                }
-                            },
                             {
                                 "variable": "enableML",
                                 "label": "Enable Machine Learning",
