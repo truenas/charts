@@ -1,0 +1,20 @@
+syncthingStorage:
+  home:
+    type: pvc
+  additionalStorages:
+    - type: pvc
+      mountPath: /mnt/dir1
+    - type: pvc
+      mountPath: /mnt/dir2
+    - type: pvc
+      mountPath: /mnt/dir3
+
+syncthingID:
+  user: 1001
+  group: 1001
+
+syncthingNetwork:
+  hostNetwork: false
+  localDiscoveryPort: 31027
+  tcpPort: 32000
+  quicPort: 32000
