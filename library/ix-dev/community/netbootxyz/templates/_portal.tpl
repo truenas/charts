@@ -1,4 +1,4 @@
-{{- define "netbootxyz.portal" -}}
+{{- define "netboot.portal" -}}
 ---
 apiVersion: v1
 kind: ConfigMap

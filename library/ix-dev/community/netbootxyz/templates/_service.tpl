@@ -8,9 +8,10 @@ service:
     ports:
       tftp:
         enabled: true
+        primary: true
         port: {{ .Values.netbootNetwork.tftpPort }}
         nodePort: {{ .Values.netbootNetwork.tftpPort }}
-        protocol: UDP
+        protocol: udp
         targetSelector: netboot
       assets:
         enabled: true

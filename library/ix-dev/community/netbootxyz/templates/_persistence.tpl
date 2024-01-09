@@ -12,8 +12,6 @@ persistence:
         01-permissions:
           mountPath: /mnt/directories/netbootxyz/config
         {{- end }}
-        02-migrate:
-          mountPath: /config
   assets:
     enabled: true
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.netbootStorage.assets) | nindent 4 }}
@@ -26,6 +24,4 @@ persistence:
         01-permissions:
           mountPath: /mnt/directories/netbootxyz/assets
         {{- end }}
-        02-migrate:
-          mountPath: /assets
 {{- end -}}
