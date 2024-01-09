@@ -35,13 +35,6 @@ questions:
     schema:
       type: dict
       attrs:
-        - variable: publicLoginMessage
-          label: Public Login Message
-          description: |
-            The message that will be displayed on the login page.
-          schema:
-            type: string
-            default: ""
         - variable: enableML
           label: Enable Machine Learning
           description: |
