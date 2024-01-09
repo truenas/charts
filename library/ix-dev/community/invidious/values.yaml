@@ -1,0 +1,48 @@
+image:
+  repository: quay.io/invidious/invidious
+  pullPolicy: IfNotPresent
+  tag: latest
+gitImage:
+  repository: bitnami/git
+  pullPolicy: IfNotPresent
+  tag: latest
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+invidiousConfig:
+  additionalEnvs: []
+
+invidiousNetwork:
+  webPort: 31008
+
+invidiousStorage:
+  pgData:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: pgData
+  pgBackup:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: pgBackup
+  additionalStorages: []
+
+notes:
+  custom: |
+    ## Database
+    You can connect to the database using the pgAdmin App from the catalog
+
+    <details>
+      <summary>Database Details</summary>
+
+      - Database: `invidious`
+      - Username: `kemal`
+      - Password: `{{ .Values.invidiousDbPass }}`
+      - Host:     `{{ .Values.invidiousDbHost }}.{{ .Release.Namespace }}.svc.cluster.local`
+      - Port:     `5432`
+
+    </details>
+    {{- $_ := unset .Values "invidiousDbPass" }}
+    {{- $_ := unset .Values "invidiousDbHost" }}
