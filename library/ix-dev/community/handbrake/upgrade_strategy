@@ -11,7 +11,17 @@ RE_STABLE_VERSION = re.compile(r'v\d+\.\d+\.\d+')
 
 def newer_mapping(image_tags):
     key = list(image_tags.keys())[0]
-    tags = {t.strip('v'): t for t in image_tags[key] if RE_STABLE_VERSION.fullmatch(t)}
+    temp_tags = {t.strip('v'): t for t in image_tags[key] if RE_STABLE_VERSION.fullmatch(t)}
+
+    # Strip leading zeros
+    tags = {}
+    for tag in temp_tags:
+        tag = tag.split('.')
+        for i in range(len(tag)):
+            # Remove leading zeros
+            tag[i] = tag[i].lstrip('0')
+        tags[tag] = '.'.join(tag)
+
     version = semantic_versioning(list(tags))
     if not version:
         return {}
