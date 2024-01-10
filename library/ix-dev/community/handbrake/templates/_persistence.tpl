@@ -1,33 +1,40 @@
-{{- define "kapowarr.persistence" -}}
+{{- define "handbrake.persistence" -}}
 persistence:
   config:
     enabled: true
-    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.kapowarrStorage.config) | nindent 4 }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.handbrakeStorage.config) | nindent 4 }}
     targetSelector:
-      kapowarr:
-        kapowarr:
-          mountPath: /app/db
-  downloads:
+      handbrake:
+        handbrake:
+          mountPath: /config
+  storage:
     enabled: true
-    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.kapowarrStorage.downloads) | nindent 4 }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.handbrakeStorage.storage) | nindent 4 }}
     targetSelector:
-      kapowarr:
-        kapowarr:
-          mountPath: /app/temp_downloads
-  content:
+      handbrake:
+        handbrake:
+          mountPath: /storage
+  output:
     enabled: true
-    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.kapowarrStorage.content) | nindent 4 }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.handbrakeStorage.output) | nindent 4 }}
     targetSelector:
-      kapowarr:
-        kapowarr:
-          mountPath: /content
-  {{- range $idx, $storage := .Values.kapowarrStorage.additionalStorages }}
-  {{ printf "kapowarr-%v:" (int $idx) }}
+      handbrake:
+        handbrake:
+          mountPath: /output
+  watch:
+    enabled: true
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.handbrakeStorage.watch) | nindent 4 }}
+    targetSelector:
+      handbrake:
+        handbrake:
+          mountPath: /watch
+  {{- range $idx, $storage := .Values.handbrakeStorage.additionalStorages }}
+  {{ printf "handbrake-%v:" (int $idx) }}
     enabled: true
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
-      kapowarr:
-        kapowarr:
+      handbrake:
+        handbrake:
           mountPath: {{ $storage.mountPath }}
   {{- end }}
 {{- end -}}
