@@ -17,6 +17,9 @@ workload:
             runAsUser: 0
             runAsGroup: 0
             runAsNonRoot: false
+            capabilities:
+              add:
+                - KILL
           env:
             AUTOMATED_CONVERSION_OUTPUT_DIR: /output
             HANDBRAKE_GUI: "1"
@@ -34,24 +37,17 @@ workload:
               value: {{ $env.value }}
             {{ end }}
           {{ end }}
-          {{ $prot := "http" }}
-          {{ if .Values.handbrakeConfig.secureConnection }}
-            {{ $prot = "https" }}
-          {{ end }}
           probes:
             liveness:
               enabled: true
-              type: {{ $prot }}
-              port: {{ .Values.handbrakeNetwork.webPort }}
-              path: /
+              type: tcp
+              port: {{ .Values.handbrakeNetwork.vncPort }}
             readiness:
               enabled: true
-              type: {{ $prot }}
-              port: {{ .Values.handbrakeNetwork.webPort }}
-              path: /
+              type: tcp
+              port: {{ .Values.handbrakeNetwork.vncPort }}
             startup:
               enabled: true
-              type: {{ $prot }}
-              port: {{ .Values.handbrakeNetwork.webPort }}
-              path: /
+              type: tcp
+              port: {{ .Values.handbrakeNetwork.vncPort }}
 {{- end -}}

@@ -4,5 +4,7 @@ runAsContext:
     gid: 0
     uid: 0
     description: Handbrake runs as root user.
-capabilities: []
+capabilities:
+  - name: KILL
+    description: Handbrake is able to kill processes.
 hostMounts: []
