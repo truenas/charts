@@ -1,0 +1,23 @@
+runAsContext:
+  - userName: root
+    groupName: root
+    gid: 0
+    uid: 0
+    description: Roundcube runs as root user
+  - userName: postgres
+    groupName: postgres
+    gid: 999
+    uid: 999
+    description: Postgres runs as a non-root user.
+capabilities:
+  - name: CHOWN
+    description: Roundcube is able to chown files.
+  - name: SETGID
+    description: Roundcube is able to set group ID for it's sub-processes.
+  - name: SETUID
+    description: Roundcube is able to set user ID for it's sub-processes.
+  - name: FOWNER
+    description: Roundcube is able to bypass permission checks for chown.
+  - name: DAC_OVERRIDE
+    description: Roundcube is able to bypass permission checks.
+hostMounts: []
