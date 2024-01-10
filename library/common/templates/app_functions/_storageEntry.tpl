@@ -51,11 +51,11 @@
       {{- fail (printf "Storage Shim - Expected non-empty [smbConfig]") -}}
     {{- end -}}
 
-    {{- $server = $storage.smbConfig.server -}}
-    {{- $share = $storage.smbConfig.share -}}
-    {{- $domain = $storage.smbConfig.domain -}}
-    {{- $username = $storage.smbConfig.username -}}
-    {{- $password = $storage.smbConfig.password -}}
+    {{- $server = $storage.smbConfig.server | quote -}}
+    {{- $share = $storage.smbConfig.share | quote -}}
+    {{- $domain = $storage.smbConfig.domain | quote -}}
+    {{- $username = $storage.smbConfig.username | quote -}}
+    {{- $password = $storage.smbConfig.password | quote -}}
     {{- if $storage.smbConfig.size -}}
       {{- $size = (printf "%vGi" $storage.smbConfig.size) -}}
     {{- end -}}

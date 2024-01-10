@@ -1,0 +1,743 @@
+groups:
+  - name: Roundcube Configuration
+    description: Configure Roundcube
+  - name: Network Configuration
+    description: Configure Network for Roundcube
+  - name: Storage Configuration
+    description: Configure Storage for Roundcube
+  - name: Resources Configuration
+    description: Configure Resources for Roundcube
+
+portals:
+  web_portal:
+    protocols:
+      - "$kubernetes-resource_configmap_portal_protocol"
+    host:
+      - "$kubernetes-resource_configmap_portal_host"
+    ports:
+      - "$kubernetes-resource_configmap_portal_port"
+    path: "$kubernetes-resource_configmap_portal_path"
+
+questions:
+
+  - variable: roundcubeConfig
+    label: ""
+    group: Roundcube Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: defaultHost
+          label: Default Host (IMAP)
+          description: The default host to connect to.
+          schema:
+            type: string
+            default: ""
+            required: true
+        - variable: defaultPort
+          label: Default Port (IMAP)
+          description: The default port to connect to.
+          schema:
+            type: int
+            default: 143
+            min: 1
+            max: 65535
+            required: true
+        - variable: smtpServer
+          label: SMTP Server
+          description: The SMTP server to use.
+          schema:
+            type: string
+            default: ""
+            required: true
+        - variable: smtpPort
+          label: SMTP Port
+          description: The SMTP port to use.
+          schema:
+            type: int
+            default: 587
+            min: 1
+            max: 65535
+            required: true
+        - variable: skin
+          label: Skin
+          description: |
+            Configures the default theme</br>
+            If you don't have the theme installed,
+            it will show an error on all pages.
+          schema:
+            type: string
+            default: elastic
+            required: true
+        - variable: uploadMaxSize
+          label: Upload Max Size
+          description: The maximum size of an upload in MB.</br>
+          schema:
+            type: int
+            default: 5
+            min: 1
+            required: true
+        - variable: aspellDicts
+          label: Aspell Dictionaries
+          description: A list of aspell dictionaries to install.
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: aspellDict
+                label: Aspell Dictionary
+                schema:
+                  type: string
+                  required: true
+        - variable: plugins
+          label: Plugins
+          description: A list of plugins to enable.
+          schema:
+            type: list
+            default:
+              - archive
+              - zipdownload
+            items:
+              - variable: plugin
+                label: Plugin
+                schema:
+                  type: string
+                  required: true
+
+        - variable: additionalEnvs
+          label: Additional Environment Variables
+          description: Configure additional environment variables for Roundcube.
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: env
+                label: Environment Variable
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: name
+                      label: Name
+                      schema:
+                        type: string
+                        required: true
+                    - variable: value
+                      label: Value
+                      schema:
+                        type: string
+                        required: true
+
+  - variable: roundcubeNetwork
+    label: ""
+    group: Network Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: webPort
+          label: Web Port
+          description: The port for the Roundcube WebUI.
+          schema:
+            type: int
+            default: 31007
+            min: 9000
+            max: 65535
+            required: true
+
+  - variable: roundcubeStorage
+    label: ""
+    group: Storage Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: html
+          label: Roundcube HTML Storage
+          description: The path to store Roundcube HTML.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
+                schema:
+                  type: string
+                  required: true
+                  immutable: true
+                  default: ixVolume
+                  enum:
+                    - value: hostPath
+                      description: Host Path (Path that already exists on the system)
+                    - value: ixVolume
+                      description: ixVolume (Dataset created automatically by the system)
+              - variable: ixVolumeConfig
+                label: ixVolume Configuration
+                description: The configuration for the ixVolume dataset.
+                schema:
+                  type: dict
+                  show_if: [["type", "=", "ixVolume"]]
+                  $ref:
+                    - "normalize/ixVolume"
+                  attrs:
+                    - variable: aclEnable
+                      label: Enable ACL
+                      description: Enable ACL for the dataset.
+                      schema:
+                        type: boolean
+                        default: false
+                    - variable: datasetName
+                      label: Dataset Name
+                      description: The name of the dataset to use for storage.
+                      schema:
+                        type: string
+                        required: true
+                        immutable: true
+                        hidden: true
+                        default: "html"
+                    - variable: aclEntries
+                      label: ACL Configuration
+                      schema:
+                        type: dict
+                        show_if: [["aclEnable", "=", true]]
+                        attrs: []
+              - variable: hostPathConfig
+                label: Host Path Configuration
+                schema:
+                  type: dict
+                  show_if: [["type", "=", "hostPath"]]
+                  attrs:
+                    - variable: aclEnable
+                      label: Enable ACL
+                      description: Enable ACL for the dataset.
+                      schema:
+                        type: boolean
+                        default: false
+                    - variable: acl
+                      label: ACL Configuration
+                      schema:
+                        type: dict
+                        show_if: [["aclEnable", "=", true]]
+                        attrs: []
+                        $ref:
+                          - "normalize/acl"
+                    - variable: hostPath
+                      label: Host Path
+                      description: The host path to use for storage.
+                      schema:
+                        type: hostpath
+                        show_if: [["aclEnable", "=", false]]
+                        required: true
+        - variable: config
+          label: Roundcube Config Storage
+          description: The path to store Roundcube Config.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
+                schema:
+                  type: string
+                  required: true
+                  immutable: true
+                  default: ixVolume
+                  enum:
+                    - value: hostPath
+                      description: Host Path (Path that already exists on the system)
+                    - value: ixVolume
+                      description: ixVolume (Dataset created automatically by the system)
+              - variable: ixVolumeConfig
+                label: ixVolume Configuration
+                description: The configuration for the ixVolume dataset.
+                schema:
+                  type: dict
+                  show_if: [["type", "=", "ixVolume"]]
+                  $ref:
+                    - "normalize/ixVolume"
+                  attrs:
+                    - variable: aclEnable
+                      label: Enable ACL
+                      description: Enable ACL for the dataset.
+                      schema:
+                        type: boolean
+                        default: false
+                    - variable: datasetName
+                      label: Dataset Name
+                      description: The name of the dataset to use for storage.
+                      schema:
+                        type: string
+                        required: true
+                        immutable: true
+                        hidden: true
+                        default: "config"
+                    - variable: aclEntries
+                      label: ACL Configuration
+                      schema:
+                        type: dict
+                        show_if: [["aclEnable", "=", true]]
+                        attrs: []
+              - variable: hostPathConfig
+                label: Host Path Configuration
+                schema:
+                  type: dict
+                  show_if: [["type", "=", "hostPath"]]
+                  attrs:
+                    - variable: aclEnable
+                      label: Enable ACL
+                      description: Enable ACL for the dataset.
+                      schema:
+                        type: boolean
+                        default: false
+                    - variable: acl
+                      label: ACL Configuration
+                      schema:
+                        type: dict
+                        show_if: [["aclEnable", "=", true]]
+                        attrs: []
+                        $ref:
+                          - "normalize/acl"
+                    - variable: hostPath
+                      label: Host Path
+                      description: The host path to use for storage.
+                      schema:
+                        type: hostpath
+                        show_if: [["aclEnable", "=", false]]
+                        required: true
+        - variable: temps
+          label: Roundcube Temp Storage
+          description: The path to store Roundcube Temp.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
+                schema:
+                  type: string
+                  required: true
+                  immutable: true
+                  default: ixVolume
+                  enum:
+                    - value: hostPath
+                      description: Host Path (Path that already exists on the system)
+                    - value: ixVolume
+                      description: ixVolume (Dataset created automatically by the system)
+              - variable: ixVolumeConfig
+                label: ixVolume Configuration
+                description: The configuration for the ixVolume dataset.
+                schema:
+                  type: dict
+                  show_if: [["type", "=", "ixVolume"]]
+                  $ref:
+                    - "normalize/ixVolume"
+                  attrs:
+                    - variable: aclEnable
+                      label: Enable ACL
+                      description: Enable ACL for the dataset.
+                      schema:
+                        type: boolean
+                        default: false
+                    - variable: datasetName
+                      label: Dataset Name
+                      description: The name of the dataset to use for storage.
+                      schema:
+                        type: string
+                        required: true
+                        immutable: true
+                        hidden: true
+                        default: "temps"
+                    - variable: aclEntries
+                      label: ACL Configuration
+                      schema:
+                        type: dict
+                        show_if: [["aclEnable", "=", true]]
+                        attrs: []
+              - variable: hostPathConfig
+                label: Host Path Configuration
+                schema:
+                  type: dict
+                  show_if: [["type", "=", "hostPath"]]
+                  attrs:
+                    - variable: aclEnable
+                      label: Enable ACL
+                      description: Enable ACL for the dataset.
+                      schema:
+                        type: boolean
+                        default: false
+                    - variable: acl
+                      label: ACL Configuration
+                      schema:
+                        type: dict
+                        show_if: [["aclEnable", "=", true]]
+                        attrs: []
+                        $ref:
+                          - "normalize/acl"
+                    - variable: hostPath
+                      label: Host Path
+                      description: The host path to use for storage.
+                      schema:
+                        type: hostpath
+                        show_if: [["aclEnable", "=", false]]
+                        required: true
+
+        - variable: pgData
+          label: Roundcube Postgres Data Storage
+          description: The path to store Roundcube Postgres Data.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
+                schema:
+                  type: string
+                  required: true
+                  immutable: true
+                  default: ixVolume
+                  enum:
+                    - value: hostPath
+                      description: Host Path (Path that already exists on the system)
+                    - value: ixVolume
+                      description: ixVolume (Dataset created automatically by the system)
+              - variable: ixVolumeConfig
+                label: ixVolume Configuration
+                description: The configuration for the ixVolume dataset.
+                schema:
+                  type: dict
+                  # Nothing to show for the user
+                  hidden: true
+                  show_if: [["type", "=", "ixVolume"]]
+                  $ref:
+                    - "normalize/ixVolume"
+                  attrs:
+                    - variable: aclEnable
+                      label: Enable ACL
+                      description: Enable ACL for the dataset.
+                      schema:
+                        type: boolean
+                        # Postgres does a CHMOD at startup
+                        # Which fails with ACL
+                        hidden: true
+                        default: false
+                    - variable: datasetName
+                      label: Dataset Name
+                      description: The name of the dataset to use for storage.
+                      schema:
+                        type: string
+                        required: true
+                        immutable: true
+                        hidden: true
+                        default: "pgData"
+                    - variable: aclEntries
+                      label: ACL Configuration
+                      schema:
+                        type: dict
+                        show_if: [["aclEnable", "=", true]]
+                        attrs: []
+              - variable: hostPathConfig
+                label: Host Path Configuration
+                schema:
+                  type: dict
+                  show_if: [["type", "=", "hostPath"]]
+                  attrs:
+                    - variable: aclEnable
+                      label: Enable ACL
+                      description: Enable ACL for the dataset.
+                      schema:
+                        type: boolean
+                        # Postgres does a CHMOD at startup
+                        # Which fails with ACL
+                        hidden: true
+                        default: false
+                    - variable: acl
+                      label: ACL Configuration
+                      schema:
+                        type: dict
+                        show_if: [["aclEnable", "=", true]]
+                        attrs: []
+                        $ref:
+                          - "normalize/acl"
+                    - variable: hostPath
+                      label: Host Path
+                      description: The host path to use for storage.
+                      schema:
+                        type: hostpath
+                        show_if: [["aclEnable", "=", false]]
+                        required: true
+
+        - variable: pgBackup
+          label: Roundcube Postgres Backup Storage
+          description: The path to store Roundcube Postgres Backup.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
+                schema:
+                  type: string
+                  required: true
+                  immutable: true
+                  default: ixVolume
+                  enum:
+                    - value: hostPath
+                      description: Host Path (Path that already exists on the system)
+                    - value: ixVolume
+                      description: ixVolume (Dataset created automatically by the system)
+              - variable: ixVolumeConfig
+                label: ixVolume Configuration
+                description: The configuration for the ixVolume dataset.
+                schema:
+                  type: dict
+                  # Nothing to show for the user
+                  hidden: true
+                  show_if: [["type", "=", "ixVolume"]]
+                  $ref:
+                    - "normalize/ixVolume"
+                  attrs:
+                    - variable: aclEnable
+                      label: Enable ACL
+                      description: Enable ACL for the dataset.
+                      schema:
+                        type: boolean
+                        # Postgres does a CHMOD at startup
+                        # Which fails with ACL
+                        hidden: true
+                        default: false
+                    - variable: datasetName
+                      label: Dataset Name
+                      description: The name of the dataset to use for storage.
+                      schema:
+                        type: string
+                        required: true
+                        immutable: true
+                        hidden: true
+                        default: "pgBackup"
+                    - variable: aclEntries
+                      label: ACL Configuration
+                      schema:
+                        type: dict
+                        show_if: [["aclEnable", "=", true]]
+                        attrs: []
+              - variable: hostPathConfig
+                label: Host Path Configuration
+                schema:
+                  type: dict
+                  show_if: [["type", "=", "hostPath"]]
+                  attrs:
+                    - variable: aclEnable
+                      label: Enable ACL
+                      description: Enable ACL for the dataset.
+                      schema:
+                        type: boolean
+                        # Postgres does a CHMOD at startup
+                        # Which fails with ACL
+                        hidden: true
+                        default: false
+                    - variable: acl
+                      label: ACL Configuration
+                      schema:
+                        type: dict
+                        show_if: [["aclEnable", "=", true]]
+                        attrs: []
+                        $ref:
+                          - "normalize/acl"
+                    - variable: hostPath
+                      label: Host Path
+                      description: The host path to use for storage.
+                      schema:
+                        type: hostpath
+                        show_if: [["aclEnable", "=", false]]
+                        required: true
+
+        - variable: additionalStorages
+          label: Additional Storage
+          description: Additional storage for Roundcube.
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: storageEntry
+                label: Storage Entry
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: type
+                      label: Type
+                      description: |
+                        ixVolume: Is dataset created automatically by the system.</br>
+                        Host Path: Is a path that already exists on the system.</br>
+                        SMB Share: Is a SMB share that is mounted to a persistent volume claim.
+                      schema:
+                        type: string
+                        required: true
+                        default: "ixVolume"
+                        immutable: true
+                        enum:
+                          - value: "hostPath"
+                            description: Host Path (Path that already exists on the system)
+                          - value: "ixVolume"
+                            description: ixVolume (Dataset created automatically by the system)
+                          - value: "smb-pv-pvc"
+                            description: SMB Share (Mounts a persistent volume claim to a SMB share)
+                    - variable: readOnly
+                      label: Read Only
+                      description: Mount the volume as read only.
+                      schema:
+                        type: boolean
+                        default: false
+                    - variable: mountPath
+                      label: Mount Path
+                      description: The path inside the container to mount the storage.
+                      schema:
+                        type: path
+                        required: true
+                    - variable: hostPathConfig
+                      label: Host Path Configuration
+                      schema:
+                        type: dict
+                        show_if: [["type", "=", "hostPath"]]
+                        attrs:
+                          - variable: aclEnable
+                            label: Enable ACL
+                            description: Enable ACL for the dataset.
+                            schema:
+                              type: boolean
+                              default: false
+                          - variable: acl
+                            label: ACL Configuration
+                            schema:
+                              type: dict
+                              show_if: [["aclEnable", "=", true]]
+                              attrs: []
+                              $ref:
+                                - "normalize/acl"
+                          - variable: hostPath
+                            label: Host Path
+                            description: The host path to use for storage.
+                            schema:
+                              type: hostpath
+                              show_if: [["aclEnable", "=", false]]
+                              required: true
+                    - variable: ixVolumeConfig
+                      label: ixVolume Configuration
+                      description: The configuration for the ixVolume dataset.
+                      schema:
+                        type: dict
+                        show_if: [["type", "=", "ixVolume"]]
+                        $ref:
+                          - "normalize/ixVolume"
+                        attrs:
+                          - variable: aclEnable
+                            label: Enable ACL
+                            description: Enable ACL for the dataset.
+                            schema:
+                              type: boolean
+                              default: false
+                          - variable: datasetName
+                            label: Dataset Name
+                            description: The name of the dataset to use for storage.
+                            schema:
+                              type: string
+                              required: true
+                              immutable: true
+                              default: "storage_entry"
+                          - variable: aclEntries
+                            label: ACL Configuration
+                            schema:
+                              type: dict
+                              show_if: [["aclEnable", "=", true]]
+                              attrs: []
+                    - variable: smbConfig
+                      label: SMB Share Configuration
+                      description: The configuration for the SMB Share.
+                      schema:
+                        type: dict
+                        show_if: [["type", "=", "smb-pv-pvc"]]
+                        attrs:
+                          - variable: server
+                            label: Server
+                            description: The server for the SMB share.
+                            schema:
+                              type: string
+                              required: true
+                          - variable: share
+                            label: Share
+                            description: The share name for the SMB share.
+                            schema:
+                              type: string
+                              required: true
+                          - variable: domain
+                            label: Domain (Optional)
+                            description: The domain for the SMB share.
+                            schema:
+                              type: string
+                          - variable: username
+                            label: Username
+                            description: The username for the SMB share.
+                            schema:
+                              type: string
+                              required: true
+                          - variable: password
+                            label: Password
+                            description: The password for the SMB share.
+                            schema:
+                              type: string
+                              required: true
+                              private: true
+                          - variable: size
+                            label: Size (in Gi)
+                            description: The size of the volume quota.
+                            schema:
+                              type: int
+                              required: true
+                              min: 1
+                              default: 1
+
+  - variable: resources
+    label: ""
+    group: Resources Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: limits
+          label: Limits
+          schema:
+            type: dict
+            attrs:
+              - variable: cpu
+                label: CPU
+                description: CPU limit for Roundcube.
+                schema:
+                  type: string
+                  max_length: 6
+                  valid_chars: '^(0\.[1-9]|[1-9][0-9]*)(\.[0-9]|m?)$'
+                  valid_chars_error: |
+                    Valid CPU limit formats are</br>
+                    - Plain Integer - eg. 1</br>
+                    - Float - eg. 0.5</br>
+                    - Milicpu - eg. 500m
+                  default: "4000m"
+                  required: true
+              - variable: memory
+                label: Memory
+                description: Memory limit for Roundcube.
+                schema:
+                  type: string
+                  max_length: 12
+                  valid_chars: '^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$'
+                  valid_chars_error: |
+                    Valid Memory limit formats are</br>
+                    - Suffixed with E/P/T/G/M/K - eg. 1G</br>
+                    - Suffixed with Ei/Pi/Ti/Gi/Mi/Ki - eg. 1Gi</br>
+                    - Plain Integer in bytes - eg. 1024</br>
+                    - Exponent - eg. 134e6
+                  default: "8Gi"
+                  required: true

@@ -1,8 +1,0 @@
-sonarrNetwork:
-  webPort: 30000
-  hostNetwork: true
-
-sonarrStorage:
-  config:
-    type: hostPath
-    hostPath: /mnt/{{ .Release.Namespace }}/config
