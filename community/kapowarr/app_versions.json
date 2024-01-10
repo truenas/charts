@@ -1,16 +1,16 @@
 {
-    "1.2.1": {
+    "2.0.0": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/kapowarr/1.2.1",
-        "last_update": "2024-01-09 11:03:19",
+        "location": "/__w/charts/charts/community/kapowarr/2.0.0",
+        "last_update": "2024-01-10 09:42:46",
         "required_features": [
             "normalize/acl",
             "normalize/ixVolume"
         ],
-        "human_version": "1.0.0_1.2.1",
-        "version": "1.2.1",
+        "human_version": "1.0.0_2.0.0",
+        "version": "2.0.0",
         "chart_metadata": {
             "name": "kapowarr",
             "description": "Kapowarr is a software to build and manage a comic book library, fitting in the *arr suite of software.",
@@ -18,7 +18,7 @@
                 "title": "Kapowarr"
             },
             "type": "application",
-            "version": "1.2.1",
+            "version": "2.0.0",
             "apiVersion": "v2",
             "appVersion": "1.0.0",
             "kubeVersion": ">=1.16.0-0",
@@ -51,11 +51,11 @@
         "app_metadata": {
             "runAsContext": [
                 {
-                    "userName": "kapowarr",
-                    "groupName": "kapowarr",
-                    "gid": 568,
-                    "uid": 568,
-                    "description": "Kapowarr can run as any non-root user."
+                    "userName": "root",
+                    "groupName": "root",
+                    "gid": 0,
+                    "uid": 0,
+                    "description": "Kapowarr runs as root user."
                 }
             ],
             "capabilities": [],
@@ -140,38 +140,6 @@
                                             }
                                         }
                                     ]
-                                }
-                            }
-                        ]
-                    }
-                },
-                {
-                    "variable": "kapowarrRunAs",
-                    "label": "",
-                    "group": "User and Group Configuration",
-                    "schema": {
-                        "type": "dict",
-                        "attrs": [
-                            {
-                                "variable": "user",
-                                "label": "User ID",
-                                "description": "The user id that Kapowarr will run as.",
-                                "schema": {
-                                    "type": "int",
-                                    "min": 2,
-                                    "default": 568,
-                                    "required": true
-                                }
-                            },
-                            {
-                                "variable": "group",
-                                "label": "Group ID",
-                                "description": "The group id that Kapowarr will run as.",
-                                "schema": {
-                                    "type": "int",
-                                    "min": 2,
-                                    "default": 568,
-                                    "required": true
                                 }
                             }
                         ]
