@@ -1,10 +1,9 @@
 name: castopod
-description: Castopod is an open-source hosting platform made for podcasters who want
-  engage and interact with their audience.
+description: Castopod is an open-source hosting platform made for podcasters who want engage and interact with their audience.
 annotations:
   title: Castopod
 type: application
-version: 1.2.3
+version: 1.2.4
 apiVersion: v2
 appVersion: 1.7.4
 kubeVersion: '>=1.16.0-0'
@@ -15,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.2.6
+    version: 1.2.7
 home: https://castopod.org
 icon: https://media.sys.truenas.net/apps/castopod/icons/icon.svg
 sources:

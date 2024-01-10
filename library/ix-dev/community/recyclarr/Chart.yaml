@@ -3,7 +3,7 @@ description: Recyclarr synchronizes recommended settings from the TRaSH guides t
 annotations:
   title: Recyclarr
 type: application
-version: 1.2.0
+version: 1.2.1
 apiVersion: v2
 appVersion: 6.0.2
 kubeVersion: '>=1.16.0-0'
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.2.6
+    version: 1.2.7
 home: https://recyclarr.dev
 icon: https://media.sys.truenas.net/apps/recyclarr/icons/icon.png
 sources:
