@@ -1,7 +1,7 @@
 image:
   repository: mrcas/kapowarr
   pullPolicy: IfNotPresent
-  tag: v1.0.0-beta-3
+  tag: v1.0.0-beta-4
 
 resources:
   limits:
@@ -13,10 +13,6 @@ kapowarrConfig:
 
 kapowarrNetwork:
   webPort: 30071
-
-kapowarrRunAs:
-  user: 568
-  group: 568
 
 kapowarrStorage:
   config:

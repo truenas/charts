@@ -12,8 +12,9 @@ workload:
           primary: true
           imageSelector: image
           securityContext:
-            runAsUser: {{ .Values.kapowarrRunAs.user }}
-            runAsGroup: {{ .Values.kapowarrRunAs.group }}
+            runAsUser: 0
+            runAsGroup: 0
+            runAsNonRoot: false
           {{ with .Values.kapowarrConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
@@ -37,10 +38,4 @@ workload:
               type: http
               port: 5656
               path: /
-      initContainers:
-      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
-                                                        "UID" .Values.kapowarrRunAs.user
-                                                        "GID" .Values.kapowarrRunAs.group
-                                                        "mode" "check"
-                                                        "type" "install") | nindent 8 }}
 {{- end -}}
