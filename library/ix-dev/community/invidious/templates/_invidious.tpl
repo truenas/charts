@@ -12,10 +12,8 @@ workload:
           primary: true
           imageSelector: image
           securityContext:
-            runAsUser: 0
-            runAsGroup: 0
-            runAsNonRoot: false
-            readOnlyRootFilesystem: false
+            runAsUser: 1000
+            runAsGroup: 1000
           envFrom:
             - secretRef:
                 name: invidious-creds
@@ -43,6 +41,11 @@ workload:
               path: /api/v1/comments/jNQXAC9IVRw
               port: {{ .Values.invidiousNetwork.webPort }}
       initContainers:
+        {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
+                                                        "UID" 1000
+                                                        "GID" 1000
+                                                        "mode" "check"
+                                                        "type" "install") | nindent 8 }}
         {{- include "ix.v1.common.app.postgresWait" (dict "name" "01-postgres-wait"
                                                           "secretName" "postgres-creds") | nindent 8 }}
         02-fetch-seed:
@@ -50,10 +53,9 @@ workload:
           type: init
           imageSelector: gitImage
           securityContext:
-            runAsUser: 0
-            runAsGroup: 0
+            runAsUser: 1000
+            runAsGroup: 1000
             runAsNonRoot: false
-            readOnlyRootFilesystem: false
             capabilities:
               add:
                 - SETGID
@@ -82,10 +84,9 @@ workload:
           type: init
           imageSelector: postgresImage
           securityContext:
-            runAsUser: 0
-            runAsGroup: 0
+            runAsUser: 1000
+            runAsGroup: 1000
             runAsNonRoot: false
-            readOnlyRootFilesystem: false
           envFrom:
             - secretRef:
                 name: postgres-creds
@@ -103,10 +104,9 @@ workload:
           type: init
           imageSelector: image
           securityContext:
-            runAsUser: 0
-            runAsGroup: 0
+            runAsUser: 1000
+            runAsGroup: 1000
             runAsNonRoot: false
-            readOnlyRootFilesystem: false
           envFrom:
             - secretRef:
                 name: postgres-creds

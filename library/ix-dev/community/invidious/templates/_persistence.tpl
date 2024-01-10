@@ -9,6 +9,11 @@ persistence:
           mountPath: /config
         04-init-config:
           mountPath: /config
+        {{- if and (eq .Values.invidiousStorage.config.type "ixVolume")
+                  (not (.Values.invidiousStorage.config.ixVolumeConfig | default dict).aclEnable) }}
+        01-permissions:
+          mountPath: /mnt/directories/config
+        {{- end }}
   shared:
     enabled: true
     type: emptyDir
@@ -34,11 +39,14 @@ persistence:
       invidious:
         invidious:
           mountPath: {{ $storage.mountPath }}
+        {{- if and (eq $storage.type "ixVolume") (not ($storage.ixVolumeConfig | default dict).aclEnable) }}
+        01-permissions:
+          mountPath: /mnt/directories{{ $storage.mountPath }}
+        {{- end }}
   {{- end }}
 
   {{- include "ix.v1.common.app.postgresPersistence"
       (dict "pgData" .Values.invidiousStorage.pgData
             "pgBackup" .Values.invidiousStorage.pgBackup
       ) | nindent 2 }}
-
 {{- end -}}

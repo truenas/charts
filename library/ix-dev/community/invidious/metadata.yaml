@@ -1,9 +1,9 @@
 runAsContext:
-  - userName: root
-    groupName: root
-    gid: 0
-    uid: 0
-    description: Invidious runs as root user
+  - userName: invidious
+    groupName: invidious
+    gid: 1000
+    uid: 1000
+    description: Invidious runs as non-root user
   - userName: postgres
     groupName: postgres
     gid: 999
