@@ -20,6 +20,7 @@ workload:
             readOnlyRootFilesystem: false
             capabilities:
               add:
+                - CHOWN
                 - KILL
           env:
             AUTOMATED_CONVERSION_OUTPUT_DIR: /output

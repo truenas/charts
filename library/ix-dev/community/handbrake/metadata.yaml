@@ -5,6 +5,8 @@ runAsContext:
     uid: 0
     description: Handbrake runs as root user.
 capabilities:
+  - name: CHOWN
+    description: Handbrake is able to change file ownership.
   - name: KILL
     description: Handbrake is able to kill processes.
 hostMounts: []
