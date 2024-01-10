@@ -55,11 +55,6 @@ workload:
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
-            runAsNonRoot: false
-            capabilities:
-              add:
-                - SETGID
-                - SETUID
           command:
             - /bin/sh
             - -c
@@ -86,7 +81,6 @@ workload:
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
-            runAsNonRoot: false
           envFrom:
             - secretRef:
                 name: postgres-creds
@@ -106,7 +100,6 @@ workload:
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
-            runAsNonRoot: false
           envFrom:
             - secretRef:
                 name: postgres-creds
