@@ -10,6 +10,8 @@ resources:
 
 handbrakeConfig:
   darkMode: false
+  vncPassword: ""
+  secureConnection: false
   additionalEnvs: []
 
 handbrakeID:

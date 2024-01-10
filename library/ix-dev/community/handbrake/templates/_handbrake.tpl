@@ -19,9 +19,12 @@ workload:
             runAsNonRoot: false
           env:
             AUTOMATED_CONVERSION_OUTPUT_DIR: /output
+            HANDBRAKE_GUI: "1"
             WEB_LISTENING_PORT: {{ .Values.handbrakeNetwork.webPort }}
             VNC_LISTENING_PORT: {{ .Values.handbrakeNetwork.vncPort }}
+            VNC_PASSWORD: {{ .Values.handbrakeConfig.vncPassword }}
             DARK_MODE: {{ ternary "1" "0" .Values.handbrakeConfig.darkMode }}
+            SECURE_CONNECTION: {{ ternary "1" "0" .Values.handbrakeConfig.secureConnection }}
           fixedEnv:
             PUID: {{ .Values.handbrakeID.user }}
           {{ with .Values.handbrakeConfig.additionalEnvs }}
@@ -31,20 +34,24 @@ workload:
               value: {{ $env.value }}
             {{ end }}
           {{ end }}
+          {{ $prot := "http" }}
+          {{ if .Values.handbrakeConfig.secureConnection }}
+            {{ $prot = "https" }}
+          {{ end }}
           probes:
             liveness:
               enabled: true
-              type: http
+              type: {{ $prot }}
               port: {{ .Values.handbrakeNetwork.webPort }}
               path: /
             readiness:
               enabled: true
-              type: http
+              type: {{ $prot }}
               port: {{ .Values.handbrakeNetwork.webPort }}
               path: /
             startup:
               enabled: true
-              type: http
+              type: {{ $prot }}
               port: {{ .Values.handbrakeNetwork.webPort }}
               path: /
 {{- end -}}
