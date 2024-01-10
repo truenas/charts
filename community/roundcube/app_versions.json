@@ -1,27 +1,26 @@
 {
-    "1.0.6": {
+    "1.0.0": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/vikunja/1.0.6",
-        "last_update": "2024-01-10 09:43:54",
+        "location": "/__w/charts/charts/community/roundcube/1.0.0",
+        "last_update": "2024-01-10 09:45:20",
         "required_features": [
             "normalize/ixVolume",
-            "definitions/timezone",
             "normalize/acl"
         ],
-        "human_version": "0.22.0_1.0.6",
-        "version": "1.0.6",
+        "human_version": "1.6.5_1.0.0",
+        "version": "1.0.0",
         "chart_metadata": {
-            "name": "vikunja",
-            "description": "Vikunja is an open-source, self-hostable to-do app.",
+            "name": "roundcube",
+            "description": "Roundcube is a browser-based multilingual IMAP client with an application-like user interface.",
             "annotations": {
-                "title": "Vikunja"
+                "title": "Roundcube"
             },
             "type": "application",
-            "version": "1.0.6",
+            "version": "1.0.0",
             "apiVersion": "v2",
-            "appVersion": "0.22.0",
+            "appVersion": "1.6.5",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
@@ -37,38 +36,26 @@
                     "version": "1.2.6"
                 }
             ],
-            "home": "https://vikunja.io/",
-            "icon": "https://media.sys.truenas.net/apps/vikunja/icons/icon.png",
+            "home": "https://roundcube.net/",
+            "icon": "https://media.sys.truenas.net/apps/roundcube/icons/icon.png",
             "sources": [
-                "https://github.com/truenas/charts/tree/master/library/ix-dev/community/vikunja",
-                "https://vikunja.io/"
+                "https://roundcube.net/",
+                "https://github.com/truenas/charts/tree/master/community/roundcube",
+                "https://hub.docker.com/r/roundcube/roundcubemail/"
             ],
             "keywords": [
-                "todo"
+                "webmail",
+                "email"
             ]
         },
         "app_metadata": {
             "runAsContext": [
                 {
-                    "userName": "vikunja",
-                    "groupName": "vikunja",
-                    "gid": 568,
-                    "uid": 568,
-                    "description": "Vikunja API can run as any non-root user"
-                },
-                {
-                    "userName": "nginx",
-                    "groupName": "nginx",
-                    "gid": 101,
-                    "uid": 101,
-                    "description": "Vikunja Frontend runs as a non-root user."
-                },
-                {
-                    "userName": "nginx",
-                    "groupName": "nginx",
-                    "gid": 101,
-                    "uid": 101,
-                    "description": "Vikunja Proxy runs as a non-root user."
+                    "userName": "root",
+                    "groupName": "root",
+                    "gid": 0,
+                    "uid": 0,
+                    "description": "Roundcube runs as root user"
                 },
                 {
                     "userName": "postgres",
@@ -78,30 +65,47 @@
                     "description": "Postgres runs as a non-root user."
                 }
             ],
-            "capabilities": [],
+            "capabilities": [
+                {
+                    "name": "CHOWN",
+                    "description": "Roundcube is able to chown files."
+                },
+                {
+                    "name": "SETGID",
+                    "description": "Roundcube is able to set group ID for it's sub-processes."
+                },
+                {
+                    "name": "SETUID",
+                    "description": "Roundcube is able to set user ID for it's sub-processes."
+                },
+                {
+                    "name": "FOWNER",
+                    "description": "Roundcube is able to bypass permission checks for chown."
+                },
+                {
+                    "name": "DAC_OVERRIDE",
+                    "description": "Roundcube is able to bypass permission checks."
+                }
+            ],
             "hostMounts": []
         },
         "schema": {
             "groups": [
                 {
-                    "name": "Vikunja Configuration",
-                    "description": "Configure Vikunja"
-                },
-                {
-                    "name": "User and Group Configuration",
-                    "description": "Configure User and Group for Vikunja"
+                    "name": "Roundcube Configuration",
+                    "description": "Configure Roundcube"
                 },
                 {
                     "name": "Network Configuration",
-                    "description": "Configure Network for Vikunja"
+                    "description": "Configure Network for Roundcube"
                 },
                 {
                     "name": "Storage Configuration",
-                    "description": "Configure Storage for Vikunja"
+                    "description": "Configure Storage for Roundcube"
                 },
                 {
                     "name": "Resources Configuration",
-                    "description": "Configure Resources for Vikunja"
+                    "description": "Configure Resources for Roundcube"
                 }
             ],
             "portals": {
@@ -120,60 +124,122 @@
             },
             "questions": [
                 {
-                    "variable": "TZ",
-                    "group": "Vikunja Configuration",
-                    "label": "Timezone",
-                    "schema": {
-                        "type": "string",
-                        "default": "America/Los_Angeles",
-                        "required": true,
-                        "$ref": [
-                            "definitions/timezone"
-                        ],
-                        "enum": [
-                            {
-                                "value": "Asia/Damascus",
-                                "description": "'Asia/Damascus' timezone"
-                            },
-                            {
-                                "value": "Asia/Saigon",
-                                "description": "'Asia/Saigon' timezone"
-                            }
-                        ]
-                    }
-                },
-                {
-                    "variable": "vikunjaConfig",
+                    "variable": "roundcubeConfig",
                     "label": "",
-                    "group": "Vikunja Configuration",
+                    "group": "Roundcube Configuration",
                     "schema": {
                         "type": "dict",
                         "attrs": [
                             {
-                                "variable": "url",
-                                "label": "URL",
-                                "description": "The URL that Vikunja will be accessible from.</br>\nExample: </br>\nhttp://server.ip:30080</br>\nhttps://Vikunja.example.com\n",
+                                "variable": "defaultHost",
+                                "label": "Default Host (IMAP)",
+                                "description": "The default host to connect to.",
                                 "schema": {
-                                    "type": "uri",
+                                    "type": "string",
                                     "default": "",
                                     "required": true
                                 }
                             },
                             {
-                                "variable": "maxFileSize",
-                                "label": "Max File Size (in MB)",
-                                "description": "The maximum file size for attachments in MB.",
+                                "variable": "defaultPort",
+                                "label": "Default Port (IMAP)",
+                                "description": "The default port to connect to.",
                                 "schema": {
                                     "type": "int",
-                                    "default": 20,
-                                    "required": true,
-                                    "min": 1
+                                    "default": 143,
+                                    "min": 1,
+                                    "max": 65535,
+                                    "required": true
+                                }
+                            },
+                            {
+                                "variable": "smtpServer",
+                                "label": "SMTP Server",
+                                "description": "The SMTP server to use.",
+                                "schema": {
+                                    "type": "string",
+                                    "default": "",
+                                    "required": true
+                                }
+                            },
+                            {
+                                "variable": "smtpPort",
+                                "label": "SMTP Port",
+                                "description": "The SMTP port to use.",
+                                "schema": {
+                                    "type": "int",
+                                    "default": 587,
+                                    "min": 1,
+                                    "max": 65535,
+                                    "required": true
+                                }
+                            },
+                            {
+                                "variable": "skin",
+                                "label": "Skin",
+                                "description": "Configures the default theme</br>\nIf you don't have the theme installed,\nit will show an error on all pages.\n",
+                                "schema": {
+                                    "type": "string",
+                                    "default": "elastic",
+                                    "required": true
+                                }
+                            },
+                            {
+                                "variable": "uploadMaxSize",
+                                "label": "Upload Max Size",
+                                "description": "The maximum size of an upload in MB.</br>",
+                                "schema": {
+                                    "type": "int",
+                                    "default": 5,
+                                    "min": 1,
+                                    "required": true
+                                }
+                            },
+                            {
+                                "variable": "aspellDicts",
+                                "label": "Aspell Dictionaries",
+                                "description": "A list of aspell dictionaries to install.",
+                                "schema": {
+                                    "type": "list",
+                                    "default": [],
+                                    "items": [
+                                        {
+                                            "variable": "aspellDict",
+                                            "label": "Aspell Dictionary",
+                                            "schema": {
+                                                "type": "string",
+                                                "required": true
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "plugins",
+                                "label": "Plugins",
+                                "description": "A list of plugins to enable.",
+                                "schema": {
+                                    "type": "list",
+                                    "default": [
+                                        "archive",
+                                        "zipdownload"
+                                    ],
+                                    "items": [
+                                        {
+                                            "variable": "plugin",
+                                            "label": "Plugin",
+                                            "schema": {
+                                                "type": "string",
+                                                "required": true
+                                            }
+                                        }
+                                    ]
                                 }
                             },
                             {
                                 "variable": "additionalEnvs",
                                 "label": "Additional Environment Variables",
-                                "description": "Configure additional environment variables for Vikunja.",
+                                "description": "Configure additional environment variables for Roundcube.",
                                 "schema": {
                                     "type": "list",
                                     "default": [],
@@ -210,39 +276,7 @@
                     }
                 },
                 {
-                    "variable": "vikunjaRunAs",
-                    "label": "",
-                    "group": "User and Group Configuration",
-                    "schema": {
-                        "type": "dict",
-                        "attrs": [
-                            {
-                                "variable": "user",
-                                "label": "User ID",
-                                "description": "The user id that Vikunja will run as.",
-                                "schema": {
-                                    "type": "int",
-                                    "min": 2,
-                                    "default": 568,
-                                    "required": true
-                                }
-                            },
-                            {
-                                "variable": "group",
-                                "label": "Group ID",
-                                "description": "The group id that Vikunja will run as.",
-                                "schema": {
-                                    "type": "int",
-                                    "min": 2,
-                                    "default": 568,
-                                    "required": true
-                                }
-                            }
-                        ]
-                    }
-                },
-                {
-                    "variable": "vikunjaNetwork",
+                    "variable": "roundcubeNetwork",
                     "label": "",
                     "group": "Network Configuration",
                     "schema": {
@@ -251,38 +285,29 @@
                             {
                                 "variable": "webPort",
                                 "label": "Web Port",
-                                "description": "The port for the Vikunja Web UI.",
+                                "description": "The port for the Roundcube WebUI.",
                                 "schema": {
                                     "type": "int",
-                                    "default": 31002,
+                                    "default": 31007,
                                     "min": 9000,
                                     "max": 65535,
                                     "required": true
-                                }
-                            },
-                            {
-                                "variable": "hostNetwork",
-                                "label": "Host Network",
-                                "description": "Bind to the host network. It's recommended to keep this disabled.</br>\n",
-                                "schema": {
-                                    "type": "boolean",
-                                    "default": false
                                 }
                             }
                         ]
                     }
                 },
                 {
-                    "variable": "vikunjaStorage",
+                    "variable": "roundcubeStorage",
                     "label": "",
                     "group": "Storage Configuration",
                     "schema": {
                         "type": "dict",
                         "attrs": [
                             {
-                                "variable": "data",
-                                "label": "Vikunja Data Storage",
-                                "description": "The path to store Vikunja Data.",
+                                "variable": "html",
+                                "label": "Roundcube HTML Storage",
+                                "description": "The path to store Roundcube HTML.",
                                 "schema": {
                                     "type": "dict",
                                     "attrs": [
@@ -342,7 +367,649 @@
                                                             "required": true,
                                                             "immutable": true,
                                                             "hidden": true,
-                                                            "default": "data"
+                                                            "default": "html"
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "aclEntries",
+                                                        "label": "ACL Configuration",
+                                                        "schema": {
+                                                            "type": "dict",
+                                                            "show_if": [
+                                                                [
+                                                                    "aclEnable",
+                                                                    "=",
+                                                                    true
+                                                                ]
+                                                            ],
+                                                            "attrs": [
+                                                                {
+                                                                    "variable": "path",
+                                                                    "label": "Path",
+                                                                    "description": "Path to perform ACL",
+                                                                    "schema": {
+                                                                        "type": "string",
+                                                                        "hidden": true
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "variable": "entries",
+                                                                    "label": "ACL Entries",
+                                                                    "description": "ACL Entries",
+                                                                    "schema": {
+                                                                        "type": "list",
+                                                                        "items": [
+                                                                            {
+                                                                                "variable": "aclEntry",
+                                                                                "label": "ACL Entry",
+                                                                                "schema": {
+                                                                                    "type": "dict",
+                                                                                    "attrs": [
+                                                                                        {
+                                                                                            "variable": "id_type",
+                                                                                            "label": "ID Type",
+                                                                                            "schema": {
+                                                                                                "type": "string",
+                                                                                                "enum": [
+                                                                                                    {
+                                                                                                        "value": "USER",
+                                                                                                        "description": "Entry is for a USER"
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "value": "GROUP",
+                                                                                                        "description": "Entry is for a GROUP"
+                                                                                                    }
+                                                                                                ],
+                                                                                                "default": "USER"
+                                                                                            }
+                                                                                        },
+                                                                                        {
+                                                                                            "variable": "id",
+                                                                                            "label": "ID",
+                                                                                            "description": "Make sure to check the ID value is correct and aligns with RunAs user context of the application",
+                                                                                            "schema": {
+                                                                                                "type": "int",
+                                                                                                "required": true,
+                                                                                                "min": 0
+                                                                                            }
+                                                                                        },
+                                                                                        {
+                                                                                            "variable": "access",
+                                                                                            "label": "Access",
+                                                                                            "schema": {
+                                                                                                "type": "string",
+                                                                                                "enum": [
+                                                                                                    {
+                                                                                                        "value": "READ",
+                                                                                                        "description": "Read Access"
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "value": "MODIFY",
+                                                                                                        "description": "Modify Access"
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "value": "FULL_CONTROL",
+                                                                                                        "description": "FULL_CONTROL Access"
+                                                                                                    }
+                                                                                                ]
+                                                                                            }
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "variable": "hostPathConfig",
+                                            "label": "Host Path Configuration",
+                                            "schema": {
+                                                "type": "dict",
+                                                "show_if": [
+                                                    [
+                                                        "type",
+                                                        "=",
+                                                        "hostPath"
+                                                    ]
+                                                ],
+                                                "attrs": [
+                                                    {
+                                                        "variable": "aclEnable",
+                                                        "label": "Enable ACL",
+                                                        "description": "Enable ACL for the dataset.",
+                                                        "schema": {
+                                                            "type": "boolean",
+                                                            "default": false
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "acl",
+                                                        "label": "ACL Configuration",
+                                                        "schema": {
+                                                            "type": "dict",
+                                                            "show_if": [
+                                                                [
+                                                                    "aclEnable",
+                                                                    "=",
+                                                                    true
+                                                                ]
+                                                            ],
+                                                            "attrs": [
+                                                                {
+                                                                    "variable": "path",
+                                                                    "label": "Host Path",
+                                                                    "description": "Host Path to perform ACL",
+                                                                    "schema": {
+                                                                        "type": "hostpath",
+                                                                        "required": true,
+                                                                        "empty": false
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "variable": "entries",
+                                                                    "label": "ACL Entries",
+                                                                    "description": "ACL Entries",
+                                                                    "schema": {
+                                                                        "type": "list",
+                                                                        "items": [
+                                                                            {
+                                                                                "variable": "aclEntry",
+                                                                                "label": "ACL Entry",
+                                                                                "schema": {
+                                                                                    "type": "dict",
+                                                                                    "attrs": [
+                                                                                        {
+                                                                                            "variable": "id_type",
+                                                                                            "label": "ID Type",
+                                                                                            "schema": {
+                                                                                                "type": "string",
+                                                                                                "enum": [
+                                                                                                    {
+                                                                                                        "value": "USER",
+                                                                                                        "description": "Entry is for a USER"
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "value": "GROUP",
+                                                                                                        "description": "Entry is for a GROUP"
+                                                                                                    }
+                                                                                                ],
+                                                                                                "default": "USER"
+                                                                                            }
+                                                                                        },
+                                                                                        {
+                                                                                            "variable": "id",
+                                                                                            "label": "ID",
+                                                                                            "description": "Make sure to check the ID value is correct and aligns with RunAs user context of the application",
+                                                                                            "schema": {
+                                                                                                "type": "int",
+                                                                                                "required": true,
+                                                                                                "min": 0
+                                                                                            }
+                                                                                        },
+                                                                                        {
+                                                                                            "variable": "access",
+                                                                                            "label": "Access",
+                                                                                            "schema": {
+                                                                                                "type": "string",
+                                                                                                "enum": [
+                                                                                                    {
+                                                                                                        "value": "READ",
+                                                                                                        "description": "Read Access"
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "value": "MODIFY",
+                                                                                                        "description": "Modify Access"
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "value": "FULL_CONTROL",
+                                                                                                        "description": "FULL_CONTROL Access"
+                                                                                                    }
+                                                                                                ]
+                                                                                            }
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "variable": "options",
+                                                                    "label": "ACL Options",
+                                                                    "schema": {
+                                                                        "type": "dict",
+                                                                        "attrs": [
+                                                                            {
+                                                                                "variable": "force",
+                                                                                "label": "Force Flag",
+                                                                                "description": "Enabling `Force` applies ACL even if the path has existing data",
+                                                                                "schema": {
+                                                                                    "type": "boolean",
+                                                                                    "default": false
+                                                                                }
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                }
+                                                            ],
+                                                            "$ref": [
+                                                                "normalize/acl"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "hostPath",
+                                                        "label": "Host Path",
+                                                        "description": "The host path to use for storage.",
+                                                        "schema": {
+                                                            "type": "hostpath",
+                                                            "show_if": [
+                                                                [
+                                                                    "aclEnable",
+                                                                    "=",
+                                                                    false
+                                                                ]
+                                                            ],
+                                                            "required": true
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "config",
+                                "label": "Roundcube Config Storage",
+                                "description": "The path to store Roundcube Config.",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "type",
+                                            "label": "Type",
+                                            "description": "ixVolume: Is dataset created automatically by the system.</br>\nHost Path: Is a path that already exists on the system.\n",
+                                            "schema": {
+                                                "type": "string",
+                                                "required": true,
+                                                "immutable": true,
+                                                "default": "ixVolume",
+                                                "enum": [
+                                                    {
+                                                        "value": "hostPath",
+                                                        "description": "Host Path (Path that already exists on the system)"
+                                                    },
+                                                    {
+                                                        "value": "ixVolume",
+                                                        "description": "ixVolume (Dataset created automatically by the system)"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "variable": "ixVolumeConfig",
+                                            "label": "ixVolume Configuration",
+                                            "description": "The configuration for the ixVolume dataset.",
+                                            "schema": {
+                                                "type": "dict",
+                                                "show_if": [
+                                                    [
+                                                        "type",
+                                                        "=",
+                                                        "ixVolume"
+                                                    ]
+                                                ],
+                                                "$ref": [
+                                                    "normalize/ixVolume"
+                                                ],
+                                                "attrs": [
+                                                    {
+                                                        "variable": "aclEnable",
+                                                        "label": "Enable ACL",
+                                                        "description": "Enable ACL for the dataset.",
+                                                        "schema": {
+                                                            "type": "boolean",
+                                                            "default": false
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "datasetName",
+                                                        "label": "Dataset Name",
+                                                        "description": "The name of the dataset to use for storage.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "required": true,
+                                                            "immutable": true,
+                                                            "hidden": true,
+                                                            "default": "config"
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "aclEntries",
+                                                        "label": "ACL Configuration",
+                                                        "schema": {
+                                                            "type": "dict",
+                                                            "show_if": [
+                                                                [
+                                                                    "aclEnable",
+                                                                    "=",
+                                                                    true
+                                                                ]
+                                                            ],
+                                                            "attrs": [
+                                                                {
+                                                                    "variable": "path",
+                                                                    "label": "Path",
+                                                                    "description": "Path to perform ACL",
+                                                                    "schema": {
+                                                                        "type": "string",
+                                                                        "hidden": true
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "variable": "entries",
+                                                                    "label": "ACL Entries",
+                                                                    "description": "ACL Entries",
+                                                                    "schema": {
+                                                                        "type": "list",
+                                                                        "items": [
+                                                                            {
+                                                                                "variable": "aclEntry",
+                                                                                "label": "ACL Entry",
+                                                                                "schema": {
+                                                                                    "type": "dict",
+                                                                                    "attrs": [
+                                                                                        {
+                                                                                            "variable": "id_type",
+                                                                                            "label": "ID Type",
+                                                                                            "schema": {
+                                                                                                "type": "string",
+                                                                                                "enum": [
+                                                                                                    {
+                                                                                                        "value": "USER",
+                                                                                                        "description": "Entry is for a USER"
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "value": "GROUP",
+                                                                                                        "description": "Entry is for a GROUP"
+                                                                                                    }
+                                                                                                ],
+                                                                                                "default": "USER"
+                                                                                            }
+                                                                                        },
+                                                                                        {
+                                                                                            "variable": "id",
+                                                                                            "label": "ID",
+                                                                                            "description": "Make sure to check the ID value is correct and aligns with RunAs user context of the application",
+                                                                                            "schema": {
+                                                                                                "type": "int",
+                                                                                                "required": true,
+                                                                                                "min": 0
+                                                                                            }
+                                                                                        },
+                                                                                        {
+                                                                                            "variable": "access",
+                                                                                            "label": "Access",
+                                                                                            "schema": {
+                                                                                                "type": "string",
+                                                                                                "enum": [
+                                                                                                    {
+                                                                                                        "value": "READ",
+                                                                                                        "description": "Read Access"
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "value": "MODIFY",
+                                                                                                        "description": "Modify Access"
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "value": "FULL_CONTROL",
+                                                                                                        "description": "FULL_CONTROL Access"
+                                                                                                    }
+                                                                                                ]
+                                                                                            }
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "variable": "hostPathConfig",
+                                            "label": "Host Path Configuration",
+                                            "schema": {
+                                                "type": "dict",
+                                                "show_if": [
+                                                    [
+                                                        "type",
+                                                        "=",
+                                                        "hostPath"
+                                                    ]
+                                                ],
+                                                "attrs": [
+                                                    {
+                                                        "variable": "aclEnable",
+                                                        "label": "Enable ACL",
+                                                        "description": "Enable ACL for the dataset.",
+                                                        "schema": {
+                                                            "type": "boolean",
+                                                            "default": false
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "acl",
+                                                        "label": "ACL Configuration",
+                                                        "schema": {
+                                                            "type": "dict",
+                                                            "show_if": [
+                                                                [
+                                                                    "aclEnable",
+                                                                    "=",
+                                                                    true
+                                                                ]
+                                                            ],
+                                                            "attrs": [
+                                                                {
+                                                                    "variable": "path",
+                                                                    "label": "Host Path",
+                                                                    "description": "Host Path to perform ACL",
+                                                                    "schema": {
+                                                                        "type": "hostpath",
+                                                                        "required": true,
+                                                                        "empty": false
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "variable": "entries",
+                                                                    "label": "ACL Entries",
+                                                                    "description": "ACL Entries",
+                                                                    "schema": {
+                                                                        "type": "list",
+                                                                        "items": [
+                                                                            {
+                                                                                "variable": "aclEntry",
+                                                                                "label": "ACL Entry",
+                                                                                "schema": {
+                                                                                    "type": "dict",
+                                                                                    "attrs": [
+                                                                                        {
+                                                                                            "variable": "id_type",
+                                                                                            "label": "ID Type",
+                                                                                            "schema": {
+                                                                                                "type": "string",
+                                                                                                "enum": [
+                                                                                                    {
+                                                                                                        "value": "USER",
+                                                                                                        "description": "Entry is for a USER"
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "value": "GROUP",
+                                                                                                        "description": "Entry is for a GROUP"
+                                                                                                    }
+                                                                                                ],
+                                                                                                "default": "USER"
+                                                                                            }
+                                                                                        },
+                                                                                        {
+                                                                                            "variable": "id",
+                                                                                            "label": "ID",
+                                                                                            "description": "Make sure to check the ID value is correct and aligns with RunAs user context of the application",
+                                                                                            "schema": {
+                                                                                                "type": "int",
+                                                                                                "required": true,
+                                                                                                "min": 0
+                                                                                            }
+                                                                                        },
+                                                                                        {
+                                                                                            "variable": "access",
+                                                                                            "label": "Access",
+                                                                                            "schema": {
+                                                                                                "type": "string",
+                                                                                                "enum": [
+                                                                                                    {
+                                                                                                        "value": "READ",
+                                                                                                        "description": "Read Access"
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "value": "MODIFY",
+                                                                                                        "description": "Modify Access"
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "value": "FULL_CONTROL",
+                                                                                                        "description": "FULL_CONTROL Access"
+                                                                                                    }
+                                                                                                ]
+                                                                                            }
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "variable": "options",
+                                                                    "label": "ACL Options",
+                                                                    "schema": {
+                                                                        "type": "dict",
+                                                                        "attrs": [
+                                                                            {
+                                                                                "variable": "force",
+                                                                                "label": "Force Flag",
+                                                                                "description": "Enabling `Force` applies ACL even if the path has existing data",
+                                                                                "schema": {
+                                                                                    "type": "boolean",
+                                                                                    "default": false
+                                                                                }
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                }
+                                                            ],
+                                                            "$ref": [
+                                                                "normalize/acl"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "hostPath",
+                                                        "label": "Host Path",
+                                                        "description": "The host path to use for storage.",
+                                                        "schema": {
+                                                            "type": "hostpath",
+                                                            "show_if": [
+                                                                [
+                                                                    "aclEnable",
+                                                                    "=",
+                                                                    false
+                                                                ]
+                                                            ],
+                                                            "required": true
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "temps",
+                                "label": "Roundcube Temp Storage",
+                                "description": "The path to store Roundcube Temp.",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "type",
+                                            "label": "Type",
+                                            "description": "ixVolume: Is dataset created automatically by the system.</br>\nHost Path: Is a path that already exists on the system.\n",
+                                            "schema": {
+                                                "type": "string",
+                                                "required": true,
+                                                "immutable": true,
+                                                "default": "ixVolume",
+                                                "enum": [
+                                                    {
+                                                        "value": "hostPath",
+                                                        "description": "Host Path (Path that already exists on the system)"
+                                                    },
+                                                    {
+                                                        "value": "ixVolume",
+                                                        "description": "ixVolume (Dataset created automatically by the system)"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "variable": "ixVolumeConfig",
+                                            "label": "ixVolume Configuration",
+                                            "description": "The configuration for the ixVolume dataset.",
+                                            "schema": {
+                                                "type": "dict",
+                                                "show_if": [
+                                                    [
+                                                        "type",
+                                                        "=",
+                                                        "ixVolume"
+                                                    ]
+                                                ],
+                                                "$ref": [
+                                                    "normalize/ixVolume"
+                                                ],
+                                                "attrs": [
+                                                    {
+                                                        "variable": "aclEnable",
+                                                        "label": "Enable ACL",
+                                                        "description": "Enable ACL for the dataset.",
+                                                        "schema": {
+                                                            "type": "boolean",
+                                                            "default": false
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "datasetName",
+                                                        "label": "Dataset Name",
+                                                        "description": "The name of the dataset to use for storage.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "required": true,
+                                                            "immutable": true,
+                                                            "hidden": true,
+                                                            "default": "temps"
                                                         }
                                                     },
                                                     {
@@ -602,8 +1269,8 @@
                             },
                             {
                                 "variable": "pgData",
-                                "label": "Postgres Data Storage",
-                                "description": "The path to store Postgres Data.",
+                                "label": "Roundcube Postgres Data Storage",
+                                "description": "The path to store Roundcube Postgres Data.",
                                 "schema": {
                                     "type": "dict",
                                     "attrs": [
@@ -926,8 +1593,8 @@
                             },
                             {
                                 "variable": "pgBackup",
-                                "label": "Postgres Backup Storage",
-                                "description": "The path to store Postgres Backup.",
+                                "label": "Roundcube Postgres Backup Storage",
+                                "description": "The path to store Roundcube Postgres Backup.",
                                 "schema": {
                                     "type": "dict",
                                     "attrs": [
@@ -1251,7 +1918,7 @@
                             {
                                 "variable": "additionalStorages",
                                 "label": "Additional Storage",
-                                "description": "Additional storage for Vikunja.",
+                                "description": "Additional storage for Roundcube.",
                                 "schema": {
                                     "type": "list",
                                     "default": [],
@@ -1678,8 +2345,8 @@
                 },
                 {
                     "variable": "resources",
-                    "group": "Resources Configuration",
                     "label": "",
+                    "group": "Resources Configuration",
                     "schema": {
                         "type": "dict",
                         "attrs": [
@@ -1692,7 +2359,7 @@
                                         {
                                             "variable": "cpu",
                                             "label": "CPU",
-                                            "description": "CPU limit for Vikunja.",
+                                            "description": "CPU limit for Roundcube.",
                                             "schema": {
                                                 "type": "string",
                                                 "max_length": 6,
@@ -1705,7 +2372,7 @@
                                         {
                                             "variable": "memory",
                                             "label": "Memory",
-                                            "description": "Memory limit for Vikunja.",
+                                            "description": "Memory limit for Roundcube.",
                                             "schema": {
                                                 "type": "string",
                                                 "max_length": 12,
@@ -1723,8 +2390,8 @@
                 }
             ]
         },
-        "app_readme": "<h1>Vikunja</h1>\n<p><a href=\"https://vikunja.io\">Vikunja</a> is an open-source, self-hostable to-do app.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>postgres</code> directories.\nAfterward, the <code>postgres</code> container will run as a <strong>non</strong>-root user (<code>999</code>).\nOn each upgrade, a container will be launched with <strong>root</strong> privileges in order to apply the correct\npermissions to the <code>postgres</code> <strong>backups</strong> directory. Container that performs the backup will run as a <strong>non</strong>-root user (<code>999</code>) afterwards.\nKeep in mind the permissions on the backup directory will be changed to <code>999:999</code> on <strong>every</strong> update.\nBut will only be changed once for the <code>postgres</code> data directories.</p>\n</blockquote>",
-        "detailed_readme": "<h1>Vikunja</h1>\n<p><a href=\"https://vikunja.io\">Vikunja</a> is an open-source, self-hostable to-do app.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>postgres</code> directories.\nAfterward, the <code>postgres</code> container will run as a <strong>non</strong>-root user (<code>999</code>).\nOn each upgrade, a container will be launched with <strong>root</strong> privileges in order to apply the correct\npermissions to the <code>postgres</code> <strong>backups</strong> directory. Container that performs the backup will run as a <strong>non</strong>-root user (<code>999</code>) afterwards.\nKeep in mind the permissions on the backup directory will be changed to <code>999:999</code> on <strong>every</strong> update.\nBut will only be changed once for the <code>postgres</code> data directories.</p>\n</blockquote>",
+        "app_readme": "<h1>Roundcube</h1>\n<p><a href=\"https://roundcube.net/\">Roundcube</a> is a browser-based multilingual IMAP client with an application-like user interface.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>postgres</code> directories.\nAfterward, the <code>postgres</code> container will run as a <strong>non</strong>-root user (<code>999</code>).\nOn each upgrade, a container will be launched with <strong>root</strong> privileges in order to apply the correct\npermissions to the <code>postgres</code> <strong>backups</strong> directory. Container that performs the backup will run as a <strong>non</strong>-root user (<code>999</code>) afterwards.\nKeep in mind the permissions on the backup directory will be changed to <code>999:999</code> on <strong>every</strong> update.\nBut will only be changed once for the <code>postgres</code> data directories.</p>\n</blockquote>",
+        "detailed_readme": "<h1>Roundcube</h1>\n<p><a href=\"https://roundcube.net/\">Roundcube</a> is a browser-based multilingual IMAP client with an application-like user interface.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>postgres</code> directories.\nAfterward, the <code>postgres</code> container will run as a <strong>non</strong>-root user (<code>999</code>).\nOn each upgrade, a container will be launched with <strong>root</strong> privileges in order to apply the correct\npermissions to the <code>postgres</code> <strong>backups</strong> directory. Container that performs the backup will run as a <strong>non</strong>-root user (<code>999</code>) afterwards.\nKeep in mind the permissions on the backup directory will be changed to <code>999:999</code> on <strong>every</strong> update.\nBut will only be changed once for the <code>postgres</code> data directories.</p>\n</blockquote>",
         "changelog": null
     }
 }
