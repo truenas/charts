@@ -98,4 +98,27 @@ workload:
               cd /shared/invidious/docker
               ./init-invidious-db.sh
               echo "Done."
+        04-init-config:
+          enabled: true
+          type: init
+          imageSelector: image
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
+            runAsNonRoot: false
+            readOnlyRootFilesystem: false
+          envFrom:
+            - secretRef:
+                name: postgres-creds
+          command:
+            - /bin/sh
+            - -c
+          args:
+            - |
+              if [ ! -f /config/config.yaml ]; then
+                echo "Initializing Invidious Config..."
+                cp -v /invidious/config/config.yml /config/config.yaml
+                exit 0
+              fi
+              echo "Config already exists, skipping."
 {{- end -}}

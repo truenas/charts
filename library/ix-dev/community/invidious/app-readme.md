@@ -9,3 +9,8 @@
 > permissions to the `postgres` **backups** directory. Container that performs the backup will run as a **non**-root user (`999`) afterwards.
 > Keep in mind the permissions on the backup directory will be changed to `999:999` on **every** update.
 > But will only be changed once for the `postgres` data directories.
+
+Additional configuration can be specified
+
+- Via [environment variables](https://github.com/iv-org/invidious/pull/1702)
+- By editing the file `/config/config.yaml` (see [example](https://github.com/iv-org/invidious/blob/master/config/config.example.yml))

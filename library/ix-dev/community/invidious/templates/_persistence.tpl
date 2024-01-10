@@ -1,5 +1,14 @@
 {{- define "invidious.persistence" -}}
 persistence:
+  config:
+    enabled: true
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.invidiousStorage.config) | nindent 4 }}
+    targetSelector:
+      invidious:
+        invidious:
+          mountPath: /config
+        04-init-config:
+          mountPath: /config
   shared:
     enabled: true
     type: emptyDir

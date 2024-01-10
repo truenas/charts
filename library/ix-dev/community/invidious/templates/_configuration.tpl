@@ -13,7 +13,7 @@
 
   {{- $hmacKey := (randAlphaNum 64) -}}
   {{- with (lookup "v1" "Secret" .Release.Namespace (printf "%s-invidious-creds" $fullname)) -}}
-    {{- $hmacKey = ((index .data "HMAC_KEY") | b64dec) -}}
+    {{- $hmacKey = ((index .data "INVIDIOUS_HMAC_KEY") | b64dec) -}}
   {{- end -}}
 
   {{/* Temporary set dynamic db details on values,
@@ -40,19 +40,23 @@ secret:
   invidious-creds:
     enabled: true
     data:
-      HMAC_KEY: {{ $hmacKey }}
-      INVIDIOUS_CONFIG: |
-        hmac_key: {{ $hmacKey }}
-        # Database
-        check_tables: true
-        db:
-          user: {{ $dbUser }}
-          password: {{ $dbPass }}
-          dbname: {{ $dbName }}
-          host: {{ $dbHost }}
-          port: 5432
-
-        # Network
-        host_binding: 0.0.0.0
-        port: {{ .Values.invidiousNetwork.webPort }}
+      # Source config
+      INVIDIOUS_CONFIG_FILE: /config/config.yaml
+      # See https://github.com/iv-org/invidious/pull/1702
+      # Override config
+      INVIDIOUS_HMAC_KEY: {{ $hmacKey }}
+      INVIDIOUS_CHECK_TABLES: "true"
+      INVIDIOUS_DATABASE_URL: {{ $dbURL }}
+      INVIDIOUS_DB_USER: {{ $dbUser }}
+      INVIDIOUS_DB_PASSWORD: {{ $dbPass }}
+      INVIDIOUS_DB_DBNAME: {{ $dbName }}
+      INVIDIOUS_DB_HOST: {{ $dbHost }}
+      INVIDIOUS_DB_PORT: "5432"
+      INVIDIOUS_HOST_BINDING: "0.0.0.0"
+      INVIDIOUS_PORT: {{ .Values.invidiousNetwork.webPort | quote }}
+      # Add some easy to use values in UI
+      INVIDIOUS_ADMINS: {{ .Values.invidiousConfig.admins | toJson | quote }}
+      INVIDIOUS_REGISTRATION_ENABLED: {{ .Values.invidiousConfig.registrationEnabled | quote }}
+      INVIDIOUS_LOGIN_ENABLED: {{ .Values.invidiousConfig.loginEnabled | quote }}
+      INVIDIOUS_CAPTCHA_ENABLED: {{ .Values.invidiousConfig.captchaEnabled | quote }}
 {{- end -}}
