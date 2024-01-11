@@ -4,5 +4,5 @@ netbootStorage:
   assets:
     type: pvc
 netbootNetwork:
-  hostNetwork: true
+  hostNetwork: false
   

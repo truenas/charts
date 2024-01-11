@@ -98,7 +98,7 @@ questions:
             Required for specific features like TFTP.
           schema:
             type: boolean
-            default: true
+            default: false
 
   - variable: netbootStorage
     label: ""
