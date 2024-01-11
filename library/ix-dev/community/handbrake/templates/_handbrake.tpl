@@ -23,6 +23,7 @@ workload:
                 - CHOWN
                 - DAC_OVERRIDE
                 - FOWNER
+                - NET_BIND_SERVICE
                 - KILL
           env:
             AUTOMATED_CONVERSION_OUTPUT_DIR: /output
