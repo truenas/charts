@@ -1,0 +1,13 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "invidious.configuration" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "invidious.service" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "invidious.persistence" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "invidious.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "postgres.workload" $ | fromYaml) -}}
+
+{{/* Create the configmap for portal manually*/}}
+{{- include "invidious.portal" $ -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}
