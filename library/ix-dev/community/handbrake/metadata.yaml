@@ -7,6 +7,10 @@ runAsContext:
 capabilities:
   - name: CHOWN
     description: Handbrake is able to change file ownership.
+  - name: DAC_OVERRIDE
+    description: Handbrake is able to bypass file read, write, and execute permission checks.
+  - name: FOWNER
+    description: Handbrake is able to bypass permission checks on operations that normally require the file system UID of the process to match the UID of the file.
   - name: KILL
     description: Handbrake is able to kill processes.
 hostMounts: []
