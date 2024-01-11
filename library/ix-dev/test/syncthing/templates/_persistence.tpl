@@ -36,7 +36,7 @@ persistence:
 
   {{- range $idx, $storage := .Values.syncthingStorage.additionalStorages }}
   {{- if eq $storage.type "smb-pv-pvc" -}}
-    {{- if $storage.migrationMode -}}
+    {{- if $storage.smbConfig.migrationMode -}}
       {{- $_ := set $storage "readOnly" true -}}
       {{- $_ := set $storage.smbConfig "mountOptions" (list
         (dict "key" "noperm")

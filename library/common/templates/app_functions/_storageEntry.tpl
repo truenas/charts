@@ -59,7 +59,9 @@
     {{- $domain = $storage.smbConfig.domain | quote -}}
     {{- $username = $storage.smbConfig.username | quote -}}
     {{- $password = $storage.smbConfig.password | quote -}}
-    {{- $mountOpts = $storage.smbConfig.mountOptions -}}
+    {{- if $storage.smbConfig.mountOptions -}}
+      {{- $mountOpts = $storage.smbConfig.mountOptions -}}
+    {{- end -}}
     {{- if $storage.smbConfig.size -}}
       {{- $size = (printf "%vGi" $storage.smbConfig.size) -}}
     {{- end -}}
