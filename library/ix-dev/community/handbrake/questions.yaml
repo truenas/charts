@@ -348,7 +348,7 @@ questions:
                         required: true
                         immutable: true
                         hidden: true
-                        default: "content"
+                        default: "output"
                     - variable: aclEntries
                       label: ACL Configuration
                       schema:
@@ -427,7 +427,7 @@ questions:
                         required: true
                         immutable: true
                         hidden: true
-                        default: "content"
+                        default: "watch"
                     - variable: aclEntries
                       label: ACL Configuration
                       schema:
