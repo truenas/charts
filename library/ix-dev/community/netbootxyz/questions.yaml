@@ -69,7 +69,7 @@ questions:
           description: The TFTP port for netboot.xyz.
           schema:
             type: int
-            default: 30031
+            default: 31009
             min: 9000
             max: 65535
             required: true
@@ -78,7 +78,7 @@ questions:
           description: The HTTP port for the netboot.xyz Portal.
           schema:
             type: int
-            default: 30032
+            default: 31010
             min: 9000
             max: 65535
             required: true
@@ -87,7 +87,7 @@ questions:
           description: The Assets port for the netboot.xyz.
           schema:
             type: int
-            default: 30033
+            default: 31011
             min: 9000
             max: 65535
             required: true

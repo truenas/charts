@@ -12,9 +12,9 @@ netbootConfig:
   additionalEnvs: []
 
 netbootNetwork:
-  tftpPort: 30031
-  webHttpPort: 30032
-  webAssetsPort: 30033
+  tftpPort: 31009
+  webHttpPort: 31010
+  webAssetsPort: 31011
   # TFTP only works with hostNetwork: true
   hostNetwork: true
 
