@@ -3,7 +3,7 @@ description: Node-RED is a programming tool for wiring together hardware devices
 annotations:
   title: Node-RED
 type: application
-version: 1.2.0
+version: 1.2.1
 apiVersion: v2
 appVersion: 3.1.3
 kubeVersion: '>=1.16.0-0'
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.2.6
+    version: 1.2.7
 home: https://nodered.org
 icon: https://media.sys.truenas.net/apps/node-red/icons/icon.png
 sources:
