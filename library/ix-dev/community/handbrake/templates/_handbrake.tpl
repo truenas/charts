@@ -23,6 +23,8 @@ workload:
                 - CHOWN
                 - DAC_OVERRIDE
                 - FOWNER
+                - SETGID
+                - SETUID
                 - NET_BIND_SERVICE
                 - KILL
           env:
