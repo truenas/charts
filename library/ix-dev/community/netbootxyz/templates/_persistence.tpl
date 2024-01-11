@@ -10,7 +10,7 @@ persistence:
         {{- if and (eq .Values.netbootStorage.config.type "ixVolume")
                   (not (.Values.netbootStorage.config.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
-          mountPath: /mnt/directories/netbootxyz/config
+          mountPath: /mnt/directories/config
         {{- end }}
   assets:
     enabled: true
@@ -22,6 +22,19 @@ persistence:
         {{- if and (eq .Values.netbootStorage.assets.type "ixVolume")
                   (not (.Values.netbootStorage.assets.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
-          mountPath: /mnt/directories/netbootxyz/assets
+          mountPath: /mnt/directories/assets
         {{- end }}
+  {{- range $idx, $storage := .Values.unifiStorage.additionalStorages }}
+  {{ printf "unifi-%v" (int $idx) }}:
+    enabled: true
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
+    targetSelector:
+      unifi:
+        unifi:
+          mountPath: {{ $storage.mountPath }}
+        {{- if and (eq $storage.type "ixVolume") (not ($storage.ixVolumeConfig | default dict).aclEnable) }}
+        01-permissions:
+          mountPath: /mnt/directories{{ $storage.mountPath }}
+        {{- end }}
+  {{- end -}}
 {{- end -}}
