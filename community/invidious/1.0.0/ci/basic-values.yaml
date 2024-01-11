@@ -1,0 +1,18 @@
+invidiousNetwork:
+  webPort: 31000
+
+invidiousConfig:
+  admins:
+    - admin1
+    - admin2
+
+invidiousStorage:
+  config:
+    type: pvc
+  pgData:
+    type: pvc
+  pgBackup:
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""
