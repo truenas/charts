@@ -1,18 +1,18 @@
 {
-    "1.2.0": {
+    "1.2.1": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/tdarr/1.2.0",
-        "last_update": "2024-01-10 09:43:54",
+        "location": "/__w/charts/charts/community/tdarr/1.2.1",
+        "last_update": "2024-01-11 11:13:18",
         "required_features": [
             "definitions/gpuConfiguration",
-            "normalize/ixVolume",
             "definitions/timezone",
+            "normalize/ixVolume",
             "normalize/acl"
         ],
-        "human_version": "2.17.01_1.2.0",
-        "version": "1.2.0",
+        "human_version": "2.17.01_1.2.1",
+        "version": "1.2.1",
         "chart_metadata": {
             "name": "tdarr",
             "description": "Tdarr is a Distributed Transcoding System",
@@ -20,7 +20,7 @@
                 "title": "Tdarr"
             },
             "type": "application",
-            "version": "1.2.0",
+            "version": "1.2.1",
             "apiVersion": "v2",
             "appVersion": "2.17.01",
             "kubeVersion": ">=1.16.0-0",
@@ -35,7 +35,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.6"
+                    "version": "1.2.7"
                 }
             ],
             "home": "https://home.tdarr.io/",

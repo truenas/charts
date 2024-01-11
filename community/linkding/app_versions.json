@@ -1,16 +1,16 @@
 {
-    "1.2.6": {
+    "1.2.7": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/linkding/1.2.6",
-        "last_update": "2024-01-10 09:43:54",
+        "location": "/__w/charts/charts/community/linkding/1.2.7",
+        "last_update": "2024-01-11 11:13:18",
         "required_features": [
             "normalize/ixVolume",
             "normalize/acl"
         ],
-        "human_version": "1.23.1_1.2.6",
-        "version": "1.2.6",
+        "human_version": "1.23.1_1.2.7",
+        "version": "1.2.7",
         "chart_metadata": {
             "name": "linkding",
             "description": "Linkding is a bookmark manager that you can host yourself.",
@@ -18,7 +18,7 @@
                 "title": "Linkding"
             },
             "type": "application",
-            "version": "1.2.6",
+            "version": "1.2.7",
             "apiVersion": "v2",
             "appVersion": "1.23.1",
             "kubeVersion": ">=1.16.0-0",
@@ -33,7 +33,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.6"
+                    "version": "1.2.7"
                 }
             ],
             "home": "https://github.com/sissbruecker/linkding",

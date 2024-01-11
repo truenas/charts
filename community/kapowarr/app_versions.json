@@ -1,16 +1,16 @@
 {
-    "2.0.0": {
+    "2.0.1": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/kapowarr/2.0.0",
-        "last_update": "2024-01-10 09:43:54",
+        "location": "/__w/charts/charts/community/kapowarr/2.0.1",
+        "last_update": "2024-01-11 11:13:18",
         "required_features": [
             "normalize/ixVolume",
             "normalize/acl"
         ],
-        "human_version": "1.0.0_2.0.0",
-        "version": "2.0.0",
+        "human_version": "1.0.0_2.0.1",
+        "version": "2.0.1",
         "chart_metadata": {
             "name": "kapowarr",
             "description": "Kapowarr is a software to build and manage a comic book library, fitting in the *arr suite of software.",
@@ -18,7 +18,7 @@
                 "title": "Kapowarr"
             },
             "type": "application",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "apiVersion": "v2",
             "appVersion": "1.0.0",
             "kubeVersion": ">=1.16.0-0",
@@ -33,7 +33,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.6"
+                    "version": "1.2.7"
                 }
             ],
             "home": "https://casvt.github.io/Kapowarr/",

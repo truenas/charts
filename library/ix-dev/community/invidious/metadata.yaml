@@ -1,0 +1,13 @@
+runAsContext:
+  - userName: invidious
+    groupName: invidious
+    gid: 1000
+    uid: 1000
+    description: Invidious runs as non-root user
+  - userName: postgres
+    groupName: postgres
+    gid: 999
+    uid: 999
+    description: Postgres runs as a non-root user.
+capabilities: []
+hostMounts: []
