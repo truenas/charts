@@ -12,8 +12,8 @@ workload:
           primary: true
           imageSelector: image
           securityContext:
-            runAsUser: 999
-            runAsGroup: 999
+            runAsUser: 911
+            runAsGroup: 1000
             readOnlyRootFilesystem: false
           {{ with .Values.netbootConfig.additionalEnvs }}
           envList:
@@ -37,8 +37,8 @@ workload:
               command: /usr/local/bin/docker-healthcheck.sh
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
-                                                        "UID" 999
-                                                        "GID" 999
+                                                        "UID" 911
+                                                        "GID" 1000
                                                         "mode" "check"
                                                         "type" "install") | nindent 8 }}
 {{- end -}}

@@ -1,8 +1,8 @@
 runAsContext:
-  - userName: netboot
-    groupName: netboot
-    gid: 999
-    uid: 999
+  - userName: nbxyz
+    groupName: nbxyz
+    gid: 1000
+    uid: 911
     description: netboot runs as a non-root user.
 capabilities: []
 hostMounts: []
