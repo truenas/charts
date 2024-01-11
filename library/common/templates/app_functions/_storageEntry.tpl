@@ -18,6 +18,9 @@
   {{- $username := "" -}}
   {{- $password := "" -}}
   {{- $medium := "" -}}
+  {{- $mountOpts := (list
+      (dict "key" "noperm")
+  ) -}}
 
   {{- if $storage.readOnly -}}
     {{- $readOnly = true -}}
@@ -56,6 +59,7 @@
     {{- $domain = $storage.smbConfig.domain | quote -}}
     {{- $username = $storage.smbConfig.username | quote -}}
     {{- $password = $storage.smbConfig.password | quote -}}
+    {{- $mountOpts = $storage.smbConfig.mountOptions -}}
     {{- if $storage.smbConfig.size -}}
       {{- $size = (printf "%vGi" $storage.smbConfig.size) -}}
     {{- end -}}
@@ -88,7 +92,6 @@ domain: {{ $domain }}
 username: {{ $username }}
 password: {{ $password }}
 {{- if eq $storage.type "smb-pv-pvc" }}
-mountOptions:
-  - key: noperm
+mountOptions: {{ $mountOpts | toYaml | nindent 2 }}
 {{- end }}
 {{- end -}}

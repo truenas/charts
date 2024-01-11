@@ -2,7 +2,6 @@
 persistence:
   home:
     enabled: true
-    {{- include "syncthing.storage.ci.migration" (dict "storage" .Values.syncthingStorage.home) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.syncthingStorage.home) | nindent 4 }}
     targetSelector:
       syncthing:
@@ -36,9 +35,18 @@ persistence:
   {{- end -}}
 
   {{- range $idx, $storage := .Values.syncthingStorage.additionalStorages }}
+  {{- if eq $storage.type "smb-pv-pvc" -}}
+    {{- if $storage.migrationMode -}}
+      {{- $_ := set $storage "readOnly" true -}}
+      {{- $_ := set $storage.smbConfig "mountOptions" (list
+        (dict "key" "noperm")
+        (dict "key" "cifsacl")
+        (dict "key" "vers" "value" "3.0")
+      ) -}}
+    {{- end -}}
+  {{- end }}
   {{ printf "sync-%v" (int $idx) }}:
     enabled: true
-    {{- include "syncthing.storage.ci.migration" (dict "storage" $storage) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       syncthing:
@@ -68,14 +76,4 @@ scaleCertificate:
     enabled: true
     id: {{ .Values.syncthingNetwork.certificateID }}
     {{- end -}}
-{{- end -}}
-
-{{/* TODO: Remove on the next version bump, eg 1.2.0+ */}}
-{{- define "syncthing.storage.ci.migration" -}}
-  {{- $storage := .storage -}}
-
-  {{- if $storage.hostPath -}}
-    {{- $_ := set $storage "hostPathConfig" dict -}}
-    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
-  {{- end -}}
 {{- end -}}

@@ -8,6 +8,15 @@ syncthingStorage:
       mountPath: /mnt/dir2
     - type: pvc
       mountPath: /mnt/dir3
+    - type: "smb-pv-pvc"
+      mountPath: /mnt/dir4
+      smbConfig:
+        server: "asdf"
+        share: "asdf"
+        username: "asdf"
+        password: "asdf"
+        domain: "asdf"
+
 
 syncthingID:
   user: 1001
