@@ -11,12 +11,14 @@ service:
         primary: true
         port: {{ .Values.netbootNetwork.tftpPort }}
         nodePort: {{ .Values.netbootNetwork.tftpPort }}
+        targetPort: 69
         protocol: udp
         targetSelector: netboot
       assets:
         enabled: true
         port: {{ .Values.netbootNetwork.webAssetsPort }}
         nodePort: {{ .Values.netbootNetwork.webAssetsPort }}
+        targetPort: 80
         targetSelector: netboot
   netboot-portal:
     enabled: true
@@ -28,5 +30,6 @@ service:
         primary: true
         port: {{ .Values.netbootNetwork.webHttpPort }}
         nodePort: {{ .Values.netbootNetwork.webHttpPort }}
+        targetPort: 3000
         targetSelector: netboot
 {{- end -}}
