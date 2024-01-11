@@ -1,17 +1,17 @@
 {
-    "1.2.0": {
+    "1.2.1": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/logseq/1.2.0",
-        "last_update": "2024-01-10 09:43:54",
+        "location": "/__w/charts/charts/community/logseq/1.2.1",
+        "last_update": "2024-01-11 11:10:32",
         "required_features": [
+            "normalize/acl",
             "definitions/certificate",
-            "normalize/ixVolume",
-            "normalize/acl"
+            "normalize/ixVolume"
         ],
-        "human_version": "latest_1.2.0",
-        "version": "1.2.0",
+        "human_version": "latest_1.2.1",
+        "version": "1.2.1",
         "chart_metadata": {
             "name": "logseq",
             "description": "Logseq is a privacy-first, open-source platform for knowledge management and collaboration.",
@@ -19,7 +19,7 @@
                 "title": "Logseq"
             },
             "type": "application",
-            "version": "1.2.0",
+            "version": "1.2.1",
             "apiVersion": "v2",
             "appVersion": "latest",
             "kubeVersion": ">=1.16.0-0",
@@ -34,7 +34,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.6"
+                    "version": "1.2.7"
                 }
             ],
             "home": "https://logseq.com/",

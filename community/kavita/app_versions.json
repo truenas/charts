@@ -1,17 +1,17 @@
 {
-    "1.2.2": {
+    "1.2.3": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/kavita/1.2.2",
-        "last_update": "2024-01-10 09:43:54",
+        "location": "/__w/charts/charts/community/kavita/1.2.3",
+        "last_update": "2024-01-11 11:10:32",
         "required_features": [
+            "normalize/acl",
             "normalize/ixVolume",
-            "definitions/timezone",
-            "normalize/acl"
+            "definitions/timezone"
         ],
-        "human_version": "0.7.12_1.2.2",
-        "version": "1.2.2",
+        "human_version": "0.7.12_1.2.3",
+        "version": "1.2.3",
         "chart_metadata": {
             "name": "kavita",
             "description": "Kavita is a fast, feature rich, cross platform reading server.",
@@ -19,7 +19,7 @@
                 "title": "Kavita"
             },
             "type": "application",
-            "version": "1.2.2",
+            "version": "1.2.3",
             "apiVersion": "v2",
             "appVersion": "0.7.12",
             "kubeVersion": ">=1.16.0-0",
@@ -34,7 +34,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.6"
+                    "version": "1.2.7"
                 }
             ],
             "home": "https://www.kavitareader.com/",

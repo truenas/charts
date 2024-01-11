@@ -1,17 +1,17 @@
 {
-    "1.0.5": {
+    "1.0.6": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/dashy/1.0.5",
-        "last_update": "2024-01-10 09:43:54",
+        "location": "/__w/charts/charts/community/dashy/1.0.6",
+        "last_update": "2024-01-11 11:10:32",
         "required_features": [
-            "definitions/certificate",
             "normalize/acl",
+            "definitions/certificate",
             "normalize/ixVolume"
         ],
-        "human_version": "2.1.1_1.0.5",
-        "version": "1.0.5",
+        "human_version": "2.1.1_1.0.6",
+        "version": "1.0.6",
         "chart_metadata": {
             "name": "dashy",
             "description": "Dashy is a self-hostable personal dashboard built for you.",
@@ -19,7 +19,7 @@
                 "title": "Dashy"
             },
             "type": "application",
-            "version": "1.0.5",
+            "version": "1.0.6",
             "apiVersion": "v2",
             "appVersion": "2.1.1",
             "kubeVersion": ">=1.16.0-0",
@@ -34,7 +34,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.6"
+                    "version": "1.2.7"
                 }
             ],
             "home": "https://dashy.to/",
