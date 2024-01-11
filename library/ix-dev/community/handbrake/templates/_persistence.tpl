@@ -28,6 +28,20 @@ persistence:
       handbrake:
         handbrake:
           mountPath: /watch
+  varrun:
+    enabled: true
+    type: emptyDir
+    targetSelector:
+      handbrake:
+        handbrake:
+          mountPath: /var/run
+  tmp:
+    enabled: true
+    type: emptyDir
+    targetSelector:
+      handbrake:
+        handbrake:
+          mountPath: /tmp
   {{- range $idx, $storage := .Values.handbrakeStorage.additionalStorages }}
   {{ printf "handbrake-%v:" (int $idx) }}
     enabled: true
