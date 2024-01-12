@@ -84,7 +84,7 @@ questions:
           description: The port for the Actual Budget Web UI.
           schema:
             type: int
-            default: 30012
+            default: 31012
             min: 9000
             max: 65535
             required: true
