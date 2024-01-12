@@ -22,8 +22,8 @@ workload:
             # ACTUAL_CONFIG_PATH: /data/config.json
             NODE_ENV: production
             {{- if .Values.actualNetwork.certificateID }}
-            ACTUAL_HTTPS_KEY: /cert/tls.key
-            ACTUAL_HTTPS_CERT: /cert/tls.crt
+            ACTUAL_HTTPS_KEY: /certs/tls.key
+            ACTUAL_HTTPS_CERT: /certs/tls.crt
             {{- end }}
           {{ with .Values.actualConfig.additionalEnvs }}
           envList:
