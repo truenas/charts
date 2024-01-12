@@ -25,12 +25,12 @@ persistence:
           mountPath: /mnt/directories/assets
         {{- end }}
   {{- range $idx, $storage := .Values.unifiStorage.additionalStorages }}
-  {{ printf "unifi-%v" (int $idx) }}:
+  {{ printf "netboot-%v" (int $idx) }}:
     enabled: true
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
-      unifi:
-        unifi:
+      netboot:
+        netboot:
           mountPath: {{ $storage.mountPath }}
         {{- if and (eq $storage.type "ixVolume") (not ($storage.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
