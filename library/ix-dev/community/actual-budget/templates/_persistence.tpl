@@ -1,28 +1,16 @@
 {{- define "actual.persistence" -}}
 persistence:
-  server:
+  data:
     enabled: true
-    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.actualStorage.server) | nindent 4 }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.actualStorage.data) | nindent 4 }}
     targetSelector:
       actual:
         actual:
-          mountPath: /data/server-files
-        {{- if and (eq .Values.actualStorage.server.type "ixVolume")
-                  (not (.Values.actualStorage.server.ixVolumeConfig | default dict).aclEnable) }}
+          mountPath: /data
+        {{- if and (eq .Values.actualStorage.data.type "ixVolume")
+                  (not (.Values.actualStorage.data.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
-          mountPath: /mnt/directories/server-files
-        {{- end }}
-  user:
-    enabled: true
-    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.actualStorage.user) | nindent 4 }}
-    targetSelector:
-      actual:
-        actual:
-          mountPath: /data/user-files
-        {{- if and (eq .Values.actualStorage.user.type "ixVolume")
-                  (not (.Values.actualStorage.user.ixVolumeConfig | default dict).aclEnable) }}
-        01-permissions:
-          mountPath: /mnt/directories/user-files
+          mountPath: /mnt/directories
         {{- end }}
   tmp:
     enabled: true

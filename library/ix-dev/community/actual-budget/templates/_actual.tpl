@@ -19,7 +19,7 @@ workload:
             ACTUAL_HOSTNAME: 0.0.0.0
             ACTUAL_SERVER_FILES: /data/server-files
             ACTUAL_USER_FILES: /data/user-files
-            ACTUAL_CONFIG_PATH: /data/server-files/config.json
+            # ACTUAL_CONFIG_PATH: /data/config.json
             NODE_ENV: production
             {{- if .Values.actualNetwork.certificateID }}
             ACTUAL_HTTPS_KEY: /cert/tls.key

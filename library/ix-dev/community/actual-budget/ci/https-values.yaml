@@ -3,9 +3,7 @@ actualNetwork:
   certificateID: 1
 
 actualStorage:
-  server:
-    type: pvc
-  user:
+  data:
     type: pvc
   additionalStorages:
   - type: pvc

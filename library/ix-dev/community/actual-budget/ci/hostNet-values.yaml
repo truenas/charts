@@ -2,7 +2,5 @@ actualNetwork:
   hostNetwork: true
 
 actualStorage:
-  server:
-    type: pvc
-  user:
+  data:
     type: pvc

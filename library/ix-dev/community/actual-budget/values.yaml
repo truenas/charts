@@ -21,12 +21,8 @@ actualRunAs:
   group: 568
 
 actualStorage:
-  server:
+  data:
     type: ixVolume
     ixVolumeConfig:
-      datasetName: server
-  user:
-    type: ixVolume
-    ixVolumeConfig:
-      datasetName: user
+      datasetName: data
   additionalStorages: []
