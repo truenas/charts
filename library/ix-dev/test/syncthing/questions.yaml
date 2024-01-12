@@ -346,6 +346,22 @@ questions:
                         type: dict
                         show_if: [["type", "=", "smb-pv-pvc"]]
                         attrs:
+                          - variable: migrationMode
+                            label: Migration Mode
+                            description: |
+                              Enabling this will force the following:</br>
+                              - Read Only Mount, regardless of the value of the Read Only checkbox.</br>
+                              - SMB Mount Options will be set to "vers=3.0", "cifsacl", "noperm" </br>
+
+                              This option is used to migrate data from third party </br>
+                              NAS platforms onto TrueNAS SCALE.</br>
+
+                              Keep in mind that the ACL preservation is not guaranteed when:</br>
+                              - Non-AD environment</br>
+                              - ACL or remote server contains local users</br>
+                            schema:
+                              type: boolean
+                              default: false
                           - variable: server
                             label: Server
                             description: The server for the SMB share.
