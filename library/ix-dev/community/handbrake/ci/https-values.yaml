@@ -1,0 +1,16 @@
+handbrakeID:
+  user: 1000
+  group: 1000
+
+handbrakeConfig:
+  secureConnection: true
+
+handbrakeStorage:
+  config:
+    type: pvc
+  storage:
+    type: pvc
+  output:
+    type: pvc
+  watch:
+    type: pvc
