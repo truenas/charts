@@ -11,7 +11,7 @@ workload:
         sftpgo:
           enabled: true
           primary: true
-          imageSelector: image
+          imageSelector: {{ .Values.sftpgoConfig.imageSelector }}
           securityContext:
             runAsUser: {{ .Values.sftpgoRunAs.user }}
             runAsGroup: {{ .Values.sftpgoRunAs.group }}

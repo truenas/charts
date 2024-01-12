@@ -1,0 +1,43 @@
+image:
+  repository: jlesage/handbrake
+  pullPolicy: IfNotPresent
+  tag: v23.12.2
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+handbrakeConfig:
+  darkMode: false
+  vncPassword: ""
+  secureConnection: false
+  additionalEnvs: []
+
+handbrakeID:
+  user: 568
+  group: 568
+
+handbrakeNetwork:
+  webPort: 31010
+  vncPort: 31011
+  hostNetwork: false
+
+handbrakeStorage:
+  config:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: config
+  storage:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: storage
+  output:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: output
+  watch:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: watch
+  additionalStorages: []
