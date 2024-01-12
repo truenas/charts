@@ -1,18 +1,18 @@
 {
-    "1.2.1": {
+    "1.2.2": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/test/syncthing/1.2.1",
-        "last_update": "2024-01-12 07:17:33",
+        "location": "/__w/charts/charts/test/syncthing/1.2.2",
+        "last_update": "2024-01-12 12:28:43",
         "required_features": [
-            "definitions/timezone",
-            "definitions/certificate",
             "normalize/acl",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/timezone",
+            "definitions/certificate"
         ],
-        "human_version": "1.27.0_1.2.1",
-        "version": "1.2.1",
+        "human_version": "1.27.0_1.2.2",
+        "version": "1.2.2",
         "chart_metadata": {
             "name": "syncthing",
             "description": "Syncthing is a continuous file synchronization program.",
@@ -20,7 +20,7 @@
                 "title": "Syncthing"
             },
             "type": "application",
-            "version": "1.2.1",
+            "version": "1.2.2",
             "apiVersion": "v2",
             "appVersion": "1.27.0",
             "kubeVersion": ">=1.16.0-0",
@@ -35,7 +35,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.7"
+                    "version": "1.2.8"
                 }
             ],
             "home": "https://syncthing.net/",
@@ -940,6 +940,15 @@
                                                             ],
                                                             "attrs": [
                                                                 {
+                                                                    "variable": "migrationMode",
+                                                                    "label": "Migration Mode",
+                                                                    "description": "Enabling this will force the following:</br>\n- Read Only Mount, regardless of the value of the Read Only checkbox.</br>\n- SMB Mount Options will be set to \"vers=3.0\", \"cifsacl\", \"noperm\" </br>\n\nThis option is used to migrate data from third party </br>\nNAS platforms onto TrueNAS SCALE.</br>\n\nKeep in mind that the ACL preservation is not guaranteed when:</br>\n- Non-AD environment</br>\n- ACL or remote server contains local users</br>\n",
+                                                                    "schema": {
+                                                                        "type": "boolean",
+                                                                        "default": false
+                                                                    }
+                                                                },
+                                                                {
                                                                     "variable": "server",
                                                                     "label": "Server",
                                                                     "description": "The server for the SMB share.",
@@ -1063,11 +1072,11 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/test/syncthing/1.1.5",
-        "last_update": "2024-01-12 07:17:33",
+        "last_update": "2024-01-12 12:26:25",
         "required_features": [
+            "normalize/ixVolume",
             "definitions/timezone",
-            "definitions/certificate",
-            "normalize/ixVolume"
+            "definitions/certificate"
         ],
         "human_version": "1.27.0_1.1.5",
         "version": "1.1.5",
