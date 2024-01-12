@@ -1,0 +1,32 @@
+image:
+  repository: actualbudget/actual-server
+  pullPolicy: IfNotPresent
+  tag: 24.1.0
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+actualConfig:
+  additionalEnvs: []
+
+actualNetwork:
+  webPort: 31012
+  certificateID:
+  hostNetwork: false
+
+actualRunAs:
+  user: 568
+  group: 568
+
+actualStorage:
+  server:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: server
+  user:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: user
+  additionalStorages: []
