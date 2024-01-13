@@ -1,9 +1,10 @@
 name: sftpgo
-description: SFTPGo is a fully featured and highly configurable SFTP server with optional HTTP/S, FTP/S and WebDAV support - S3, Google Cloud Storage, Azure Blob
+description: SFTPGo is a fully featured and highly configurable SFTP server with optional
+  HTTP/S, FTP/S and WebDAV support - S3, Google Cloud Storage, Azure Blob
 annotations:
   title: SFTPGo
 type: application
-version: 1.2.3
+version: 1.2.4
 apiVersion: v2
 appVersion: 2.5.6
 kubeVersion: '>=1.16.0-0'
@@ -14,7 +15,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.2.7
+    version: 1.2.8
 home: https://github.com/drakkan/sftpgo
 icon: https://media.sys.truenas.net/apps/sftpgo/icons/icon.png
 sources:
