@@ -3,7 +3,7 @@ description: 2FAuth is a web based self-hosted alternative to One Time Passcode 
 annotations:
   title: 2FAuth
 type: application
-version: 1.2.1
+version: 1.2.2
 apiVersion: v2
 appVersion: 5.0.2
 kubeVersion: '>=1.16.0-0'
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.2.7
+    version: 1.2.8
 home: https://docs.2fauth.app/
 icon: https://media.sys.truenas.net/apps/twofactor-auth/icons/icon.png
 sources:

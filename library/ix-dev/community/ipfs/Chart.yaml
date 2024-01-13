@@ -3,7 +3,7 @@ description: Interplanetary Filesystem - the Web3 standard for content-addressin
 annotations:
   title: IPFS
 type: application
-version: 1.0.31
+version: 1.0.32
 apiVersion: v2
 appVersion: v0.25.0
 kubeVersion: '>=1.16.0-0'
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.2.7
+    version: 1.2.8
 home: https://ipfs.tech/
 icon: https://media.sys.truenas.net/apps/ipfs/icons/icon.png
 sources:

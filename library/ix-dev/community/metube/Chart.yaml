@@ -3,7 +3,7 @@ description: MeTube is a web GUI for youtube-dl (using the yt-dlp fork) with pla
 annotations:
   title: MeTube
 type: application
-version: 1.2.5
+version: 1.2.6
 apiVersion: v2
 appVersion: '2024-01-05'
 kubeVersion: '>=1.16.0-0'
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.2.7
+    version: 1.2.8
 home: https://github.com/alexta69/metube
 icon: https://localhost/no-icon
 sources:
