@@ -17,6 +17,7 @@ workload:
             runAsUser: 0
             runAsGroup: 0
             runAsNonRoot: false
+            readOnlyRootFilesystem: false
           fixedEnv:
             PUID: {{ .Values.organizrID.user }}
           {{ with .Values.organizrConfig.additionalEnvs }}
