@@ -1,16 +1,16 @@
 {
-    "1.1.8": {
+    "1.1.9": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/joplin/1.1.8",
-        "last_update": "2024-01-13 15:03:14",
+        "location": "/__w/charts/charts/community/joplin/1.1.9",
+        "last_update": "2024-01-15 09:52:54",
         "required_features": [
             "normalize/acl",
             "normalize/ixVolume"
         ],
-        "human_version": "2.14.1_1.1.8",
-        "version": "1.1.8",
+        "human_version": "2.14.1_1.1.9",
+        "version": "1.1.9",
         "chart_metadata": {
             "name": "joplin",
             "description": "Joplin is an open source note-taking app. Capture your thoughts and securely access them from any device",
@@ -18,7 +18,7 @@
                 "title": "Joplin"
             },
             "type": "application",
-            "version": "1.1.8",
+            "version": "1.1.9",
             "apiVersion": "v2",
             "appVersion": "2.14.1",
             "kubeVersion": ">=1.16.0-0",
@@ -33,7 +33,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.7"
+                    "version": "1.2.8"
                 }
             ],
             "home": "https://joplinapp.org/",

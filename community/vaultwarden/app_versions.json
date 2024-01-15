@@ -1,18 +1,18 @@
 {
-    "1.1.7": {
+    "1.1.8": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/vaultwarden/1.1.7",
-        "last_update": "2024-01-13 15:03:14",
+        "location": "/__w/charts/charts/community/vaultwarden/1.1.8",
+        "last_update": "2024-01-15 09:52:54",
         "required_features": [
-            "definitions/timezone",
-            "definitions/certificate",
             "normalize/acl",
-            "normalize/ixVolume"
+            "definitions/certificate",
+            "normalize/ixVolume",
+            "definitions/timezone"
         ],
-        "human_version": "1.30.1_1.1.7",
-        "version": "1.1.7",
+        "human_version": "1.30.1_1.1.8",
+        "version": "1.1.8",
         "chart_metadata": {
             "name": "vaultwarden",
             "description": "Alternative implementation of the Bitwarden server API written in Rust and compatible with upstream Bitwarden clients.",
@@ -20,7 +20,7 @@
                 "title": "Vaultwarden"
             },
             "type": "application",
-            "version": "1.1.7",
+            "version": "1.1.8",
             "apiVersion": "v2",
             "appVersion": "1.30.1",
             "kubeVersion": ">=1.16.0-0",
@@ -35,7 +35,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.7"
+                    "version": "1.2.8"
                 }
             ],
             "home": "https://github.com/dani-garcia/vaultwarden",
