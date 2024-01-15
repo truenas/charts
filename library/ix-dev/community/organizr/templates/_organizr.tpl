@@ -39,15 +39,15 @@ workload:
               enabled: true
               type: http
               port: 80
-              path: /
+              path: /api/v2/ping
             readiness:
               enabled: true
               type: http
               port: 80
-              path: /
+              path: /api/v2/ping
             startup:
               enabled: true
               type: http
               port: 80
-              path: /
+              path: /api/v2/ping
 {{- end -}}
