@@ -7,6 +7,13 @@ persistence:
       organizr:
         organizr:
           mountPath: /config
+  varrun:
+    enabled: true
+    type: emptyDir
+    targetSelector:
+      organizr:
+        organizr:
+          mountPath: /var/run
   {{- range $idx, $storage := .Values.organizrStorage.additionalStorages }}
   {{ printf "organizr-%v:" (int $idx) }}
     enabled: true
