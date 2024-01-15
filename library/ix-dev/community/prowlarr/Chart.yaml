@@ -1,11 +1,12 @@
 name: prowlarr
-description: Prowlarr is an indexer manager/proxy to integrate with your various PVR apps.
+description: Prowlarr is an indexer manager/proxy to integrate with your various PVR
+  apps.
 annotations:
   title: Prowlarr
 type: application
-version: 1.2.10
+version: 1.2.11
 apiVersion: v2
-appVersion: 1.12.0.4188
+appVersion: 1.12.1.4201
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: truenas
