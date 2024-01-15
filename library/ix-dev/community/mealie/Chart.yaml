@@ -3,7 +3,7 @@ description: Mealie is a self-hosted recipe manager and meal planner
 annotations:
   title: Mealie
 type: application
-version: 1.0.6
+version: 1.0.7
 apiVersion: v2
 appVersion: v1.0.0-RC2
 kubeVersion: '>=1.16.0-0'
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.2.7
+    version: 1.2.8
 home: https://mealie.io
 icon: https://media.sys.truenas.net/apps/mealie/icons/icon.png
 sources:
