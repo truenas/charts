@@ -14,13 +14,6 @@ persistence:
       organizr:
         organizr:
           mountPath: /var/run
-  varnginx:
-    enabled: true
-    type: emptyDir
-    targetSelector:
-      organizr:
-        organizr:
-          mountPath: /var/lib/nginx
   {{- range $idx, $storage := .Values.organizrStorage.additionalStorages }}
   {{ printf "organizr-%v:" (int $idx) }}
     enabled: true
