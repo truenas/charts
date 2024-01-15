@@ -18,6 +18,13 @@ workload:
             runAsGroup: 0
             runAsNonRoot: false
             readOnlyRootFilesystem: false
+            capabilities:
+              add:
+                - CHOWN
+                - FOWNER
+                - DAC_OVERRIDE
+                - SETGID
+                - SETUID
           fixedEnv:
             PUID: {{ .Values.organizrID.user }}
           {{ with .Values.organizrConfig.additionalEnvs }}
