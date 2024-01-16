@@ -83,7 +83,7 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
         {{ if eq (include "nginx.certAvailable" .) "true" }}
         {{ $envList = mustAppend $envList (dict "name" "APACHE_DISABLE_REWRITE_IP" "value" "1") }}
           {{ if and .Values.nextcloud.host .Values.service.nodePort }}
-            {{ if .Values.nginxConfig.use443 }}
+            {{ if .Values.nginxConfig.useDifferentAccessPort }}
         {{ $envList = mustAppend $envList (dict "name" "OVERWRITEHOST" "value" .Values.nextcloud.host) }}
             {{ else }}
         {{ $envList = mustAppend $envList (dict "name" "OVERWRITEHOST" "value" (printf "%v:%v" .Values.nextcloud.host .Values.service.nodePort)) }}
