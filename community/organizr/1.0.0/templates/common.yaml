@@ -1,0 +1,11 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "organizr.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "organizr.service" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "organizr.persistence" $ | fromYaml) -}}
+
+{{/* Create the configmap for portal manually*/}}
+{{- include "organizr.portal" $ -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}

@@ -1,0 +1,18 @@
+runAsContext:
+  - userName: root
+    groupName: root
+    gid: 0
+    uid: 0
+    description: Organizr runs as root user.
+capabilities:
+  - name: CHOWN
+    description: Organizr is able to chown files.
+  - name: FOWNER
+    description: Organizr is able to bypass file ownership checks for it's sub-processes.
+  - name: DAC_OVERRIDE
+    description: Organizr is able to bypass file permission checks for it's sub-processes.
+  - name: SETGID
+    description: Organizr is able to switch group for sub-processes.
+  - name: SETUID
+    description: Organizr is able to switch user for sub-processes.
+hostMounts: []
