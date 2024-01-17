@@ -57,13 +57,12 @@ secret:
         #!/bin/sh
         config="/config/configuration.yaml"
         default="/default/init"
-        if [ -f "$config" ]; then
-          echo "File [$config] exists"
-        else
+        if [ ! -f "$config" ]; then
           echo "File [$config] does NOT exist. Creating..."
           cp "$default/configuration.default" "$config"
         fi
-        if !grep -q "recorder:" "$config"; then
+        echo "File [$config] exists"
+        if ! grep -q "recorder:" "$config"; then
           echo "Section [recorder] does NOT exist in [$config]. Appending..."
           cat "$default/recorder.default" >> "$config"
           exit 0
