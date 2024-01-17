@@ -64,7 +64,7 @@ secret:
           cp "$default/configuration.default" "$config"
         fi
         if !grep -q "recorder:" "$config"; then
-          echo "Section [recorder] does NOT exist in [$config]. Appedning..."
+          echo "Section [recorder] does NOT exist in [$config]. Appending..."
           cat "$default/recorder.default" >> "$config"
           exit 0
         fi
