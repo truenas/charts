@@ -51,30 +51,13 @@ workload:
         01-init-config:
           enabled: true
           type: init
-          imageSelector: bashImage
+          imageSelector: yqImage
           securityContext:
             runAsUser: 0
             runAsGroup: 0
             runAsNonRoot: false
             readOnlyRootFilesystem: false
-          command: bash
-          args:
-            - -c
-            - |
-              config="/config/configuration.yaml"
-              default="/default/init"
-              if [ -f "$config" ]; then
-                echo "File [$config] exists"
-              else
-                echo "File [$config] does NOT exist. Creating..."
-                cp "$default/configuration.default" "$config"
-              fi
-              if grep -q "recorder:" "$config"; then
-                echo "Section [recorder] exists in [$config]"
-                exit 0
-              fi
-              echo "Section [recorder] does NOT exist in [$config]. Appedning..."
-              cat "$default/recorder.default" >> "$config"
+          command: /default/init/script.sh
       {{- include "ix.v1.common.app.postgresWait" (dict "name" "postgres-wait"
                                                         "secretName" "postgres-creds") | nindent 8 }}
 {{- end -}}

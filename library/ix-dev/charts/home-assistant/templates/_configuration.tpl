@@ -53,4 +53,22 @@ secret:
           purge_keep_days: 30
           commit_interval: 3
           db_url: {{ $haDBURL }}
+      script.sh: |
+        #!/bin/sh
+        config="/config/configuration.yaml"
+        default="/default/init"
+        if [ -f "$config" ]; then
+          echo "File [$config] exists"
+        else
+          echo "File [$config] does NOT exist. Creating..."
+          cp "$default/configuration.default" "$config"
+        fi
+        if !grep -q "recorder:" "$config"; then
+          echo "Section [recorder] does NOT exist in [$config]. Appedning..."
+          cat "$default/recorder.default" >> "$config"
+          exit 0
+        fi
+        echo "Section [recorder] exists in [$config], Updating..."
+        yq -i '.recorder.db_url = "{{ $haDBURL }}"' "$config"
+        echo "Done"
 {{- end -}}

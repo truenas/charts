@@ -20,11 +20,14 @@ persistence:
     enabled: true
     type: secret
     objectName: ha-config
+    defaultMode: "0744"
     items:
       - key: configuration.default
         path: configuration.default
       - key: recorder.default
         path: recorder.default
+      - key: script.sh
+        path: script.sh
     targetSelector:
       home-assistant:
         01-init-config:
