@@ -50,7 +50,7 @@ spec:
             - "/config/init/init.sh"
           env:
             {{ $envList := (default list .Values.environmentVariables) }}
-            {{ $envList = mustAppend $envList (dict "name" "POSTGRES_HOST" "value" (printf "%s:5432" (include "common.names.fullname" $postgres_values))) }}
+            {{ $envList = mustAppend $envList (dict "name" "POSTGRES_HOST" "value" (printf "%s-ha:5432" (include "common.names.fullname" $postgres_values))) }}
             {{ $envList = mustAppend $envList (dict "name" "POSTGRES_DB" "value" (include "postgres.DatabaseName" .)) }}
             {{ $envList = mustAppend $envList (dict "name" "POSTGRES_USER" "valueFromSecret" true "secretName" "db-details" "secretKey" "db-user")}}
             {{ $envList = mustAppend $envList (dict "name" "POSTGRES_PASSWORD" "valueFromSecret" true "secretName" "db-details" "secretKey" "db-password")}}
