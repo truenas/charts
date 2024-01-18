@@ -10,7 +10,7 @@
   {{/* Fetch secrets from pre-migration secret */}}
   {{- with (lookup "v1" "Secret" .Release.Namespace "db-details") -}}
     {{- $dbUser := ((index .data "db-user") | b64dec) -}}
-    {{- $dbPass := ((index .data "db-pass") | b64dec) -}}
+    {{- $dbPass := ((index .data "db-password") | b64dec) -}}
     {{/* Previous installs had a typo */}}
     {{- $dbName := "homeassistance" -}}
   {{- end -}}
