@@ -85,7 +85,6 @@ def migrate(values):
     return migrate_common_lib(values)
 
 
-
 if __name__ == '__main__':
     if len(sys.argv) != 2:
         exit(1)
