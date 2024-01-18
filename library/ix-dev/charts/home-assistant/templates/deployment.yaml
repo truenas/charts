@@ -40,7 +40,7 @@ spec:
       initContainers:
         - name: init-postgresdb
           image: {{ template "postgres.imageName" . }}
-          command: ['sh', '-c', "until pg_isready -h {{ template "common.names.fullname" $postgres_values }}; do echo waiting for postgres; sleep 2; done"]
+          command: ['sh', '-c', "until pg_isready -h {{ template "common.names.fullname" $postgres_values }}-ha; do echo waiting for postgres; sleep 2; done"]
           imagePullPolicy: {{ .Values.image.pullPolicy }}
         - name: init-configs
           image: "alpine:latest"
