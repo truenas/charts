@@ -19,15 +19,17 @@
 
 {{- define "home-assistant.migration" -}}
   {{- $versions := (fromYaml (include "home-assistant.get-versions" $)) -}}
-  {{- $oldV := semver $versions.old -}}
-  {{- $newV := semver $versions.new -}}
+  {{- if and $versions.old $versions.new -}}
+    {{- $oldV := semver $versions.old -}}
+    {{- $newV := semver $versions.new -}}
 
-  {{/* If new is v2.x.x */}}
-  {{- if eq ($newV.Major | int) 2 -}}
-    {{/* And old is v1.x.x, but lower than .130 */}}
-    {{- if and (eq $oldV.Major 1) (lt ($oldV.Patch | int) 130) -}}
-      {{/* Block the upgrade */}}
-      {{- fail "Migration to 2.x.x is only allowed from 1.0.130 or higher" -}}
+    {{/* If new is v2.x.x */}}
+    {{- if eq ($newV.Major | int) 2 -}}
+      {{/* And old is v1.x.x, but lower than .130 */}}
+      {{- if and (eq $oldV.Major 1) (lt ($oldV.Patch | int) 130) -}}
+        {{/* Block the upgrade */}}
+        {{- fail "Migration to 2.x.x is only allowed from 1.0.130 or higher" -}}
+      {{- end -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
