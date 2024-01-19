@@ -15,6 +15,7 @@ backupChownMode (optional): Whether to chown the backup directory or
   {{- $name := .name | default "postgres" -}}
   {{- $imageSelector := .imageSelector | default "postgresImage" -}}
   {{- $secretName := (required "Postgres - Secret Name is required" .secretName) -}}
+  {{- $backupSecretName := .backupSecretName | default $secretName -}}
   {{- $backupPath := .backupPath | default "/postgres_backup" -}}
   {{- $backupChownMode := .backupChownMode | default "check" -}}
   {{- $ixChartContext := .ixChartContext -}}
@@ -119,7 +120,7 @@ postgresbackup:
             memory: 2Gi
         envFrom:
           - secretRef:
-              name: {{ $secretName }}
+              name: {{ $backupSecretName }}
         command:
           - sh
           - -c
