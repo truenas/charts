@@ -28,7 +28,7 @@
   {{- $_ := set .Values "haDbName" $dbName -}}
   {{- $_ := set .Values "haDbUser" $dbUser -}}
 
-  {{- $dbURL := (printf "postgres://%s:%s@%s:5432/%s?sslmode=disable" $dbUser $dbPass $dbHost $dbName) }}
+  {{- $dbURL := (printf "postgres://%s:%s@%s:5432/%s?sslmode=disable" $dbUser $dbPass $dbHost $dbName) -}}
   {{- $haDBURL := (printf "postgresql://%s:%s@%s:5432/%s?sslmode=disable" $dbUser $dbPass $dbHost $dbName) }}
 secret:
   postgres-creds:
@@ -39,6 +39,20 @@ secret:
       POSTGRES_PASSWORD: {{ $dbPass }}
       POSTGRES_HOST: {{ $dbHost }}
       POSTGRES_URL: {{ $dbURL }}
+  {{- if eq (include "home-assistant.is-migration" $) "true" }}
+  postgres-backup-creds:
+    enabled: true
+    annotations:
+      helm.sh/hook: "pre-upgrade"
+      helm.sh/hook-delete-policy: "hook-succeeded"
+      helm.sh/hook-weight: "1"
+    data:
+      POSTGRES_USER: {{ $dbUser }}
+      POSTGRES_DB: {{ $dbName }}
+      POSTGRES_PASSWORD: {{ $dbPass }}
+      POSTGRES_HOST: {{ $dbHost }}
+      POSTGRES_URL: {{ $dbURL }}
+  {{- end }}
   ha-config:
     enabled: true
     data:
