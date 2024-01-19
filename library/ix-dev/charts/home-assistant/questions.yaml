@@ -160,7 +160,7 @@ questions:
                         required: true
                         immutable: true
                         hidden: true
-                        default: "uploads"
+                        default: "config"
                     - variable: aclEntries
                       label: ACL Configuration
                       schema:
@@ -239,7 +239,7 @@ questions:
                         required: true
                         immutable: true
                         hidden: true
-                        default: "uploads"
+                        default: "media"
                     - variable: aclEntries
                       label: ACL Configuration
                       schema:
