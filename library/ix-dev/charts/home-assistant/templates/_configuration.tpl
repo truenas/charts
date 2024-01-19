@@ -9,10 +9,10 @@
 
   {{/* Fetch secrets from pre-migration secret */}}
   {{- with (lookup "v1" "Secret" .Release.Namespace "db-details") -}}
-    {{- $dbUser := ((index .data "db-user") | b64dec) -}}
-    {{- $dbPass := ((index .data "db-password") | b64dec) -}}
+    {{- $dbUser = ((index .data "db-user") | b64dec) -}}
+    {{- $dbPass = ((index .data "db-password") | b64dec) -}}
     {{/* Previous installs had a typo */}}
-    {{- $dbName := "homeassistance" -}}
+    {{- $dbName = "homeassistance" -}}
   {{- end -}}
 
   {{- with (lookup "v1" "Secret" .Release.Namespace (printf "%s-postgres-creds" $fullname)) -}}
@@ -50,8 +50,8 @@ secret:
       POSTGRES_USER: {{ $dbUser }}
       POSTGRES_DB: {{ $dbName }}
       POSTGRES_PASSWORD: {{ $dbPass }}
-      POSTGRES_HOST: {{ $dbHost }}
-      POSTGRES_URL: {{ $dbURL }}
+      POSTGRES_HOST: {{ $dbHost }}-ha
+      POSTGRES_URL: {{ printf "postgres://%s:%s@%s-ha:5432/%s?sslmode=disable" $dbUser $dbPass $dbHost $dbName }}
   {{- end }}
   ha-config:
     enabled: true

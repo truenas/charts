@@ -9,6 +9,10 @@
 {{- $_ := mustMergeOverwrite .Values (include "home-assistant.configuration" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "postgres.workload" $ | fromYaml) -}}
 
+{{- if eq (include "home-assistant.is-migration" $) "true" }}
+  {{- $_ := set .Values.workload.postgres.podSpec.initContainers.permissions "type" "init" -}}
+{{- end }}
+
 {{/* Create the configmap for portal manually*/}}
 {{- include "home-assistant.portal" $ -}}
 
