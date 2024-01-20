@@ -1,0 +1,13 @@
+handbrakeID:
+  user: 1000
+  group: 1000
+
+handbrakeStorage:
+  config:
+    type: pvc
+  storage:
+    type: pvc
+  output:
+    type: pvc
+  watch:
+    type: pvc

@@ -1,16 +1,16 @@
 {
-    "1.0.22": {
+    "1.0.24": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/ddns-updater/1.0.22",
-        "last_update": "2024-01-10 09:43:54",
+        "location": "/__w/charts/charts/community/ddns-updater/1.0.24",
+        "last_update": "2024-01-19 12:08:54",
         "required_features": [
-            "normalize/ixVolume",
-            "definitions/timezone"
+            "definitions/timezone",
+            "normalize/ixVolume"
         ],
-        "human_version": "v2.5.0_1.0.22",
-        "version": "1.0.22",
+        "human_version": "v2.5.0_1.0.24",
+        "version": "1.0.24",
         "chart_metadata": {
             "name": "ddns-updater",
             "description": "Lightweight universal DDNS Updater with web UI",
@@ -18,7 +18,7 @@
                 "title": "DDNS Updater"
             },
             "type": "application",
-            "version": "1.0.22",
+            "version": "1.0.24",
             "apiVersion": "v2",
             "appVersion": "v2.5.0",
             "kubeVersion": ">=1.16.0-0",
@@ -33,7 +33,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.6"
+                    "version": "1.2.8"
                 }
             ],
             "home": "https://github.com/qdm12/ddns-updater",

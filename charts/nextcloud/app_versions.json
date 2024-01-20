@@ -1,17 +1,17 @@
 {
-    "1.6.55": {
+    "1.6.56": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/nextcloud/1.6.55",
-        "last_update": "2024-01-10 09:43:54",
+        "location": "/__w/charts/charts/charts/nextcloud/1.6.56",
+        "last_update": "2024-01-19 12:08:54",
         "required_features": [
             "definitions/nodeIP",
             "definitions/certificate",
             "normalize/ixVolume"
         ],
-        "human_version": "28.0.1_1.6.55",
-        "version": "1.6.55",
+        "human_version": "28.0.1_1.6.56",
+        "version": "1.6.56",
         "chart_metadata": {
             "name": "nextcloud",
             "description": "A file sharing server that puts the control and security of your own data back into your hands.",
@@ -19,7 +19,7 @@
                 "title": "Nextcloud"
             },
             "type": "application",
-            "version": "1.6.55",
+            "version": "1.6.56",
             "apiVersion": "v2",
             "appVersion": "28.0.1",
             "kubeVersion": ">=1.16.0-0",
@@ -828,7 +828,7 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/nextcloud/1.6.53",
-        "last_update": "2024-01-10 09:43:54",
+        "last_update": "2024-01-19 12:08:54",
         "required_features": [
             "definitions/nodeIP",
             "definitions/certificate",
@@ -1652,7 +1652,7 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/nextcloud/1.6.29",
-        "last_update": "2024-01-10 09:43:54",
+        "last_update": "2024-01-19 12:08:54",
         "required_features": [
             "definitions/nodeIP",
             "definitions/certificate",

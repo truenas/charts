@@ -1,0 +1,26 @@
+image:
+  repository: organizr/organizr
+  pullPolicy: IfNotPresent
+  tag: latest
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+organizrConfig:
+  additionalEnvs: []
+
+organizrNetwork:
+  webPort: 31013
+
+organizrID:
+  user: 568
+  group: 568
+
+organizrStorage:
+  config:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: config
+  additionalStorages: []

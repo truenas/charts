@@ -1,0 +1,11 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "handbrake.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "handbrake.service" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "handbrake.persistence" $ | fromYaml) -}}
+
+{{/* Create the configmap for portal manually*/}}
+{{- include "handbrake.portal" $ -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}
