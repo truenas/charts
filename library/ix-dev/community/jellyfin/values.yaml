@@ -1,7 +1,7 @@
 image:
   repository: jellyfin/jellyfin
   pullPolicy: IfNotPresent
-  tag: 10.8.13
+  tag: 10.8.13-1
 
 resources:
   limits:

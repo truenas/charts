@@ -1,12 +1,12 @@
 image:
   repository: altran1502/immich-server
   pullPolicy: IfNotPresent
-  tag: v1.92.1
+  tag: v1.93.3
 
 mlImage:
   repository: altran1502/immich-machine-learning
   pullPolicy: IfNotPresent
-  tag: v1.92.1
+  tag: v1.93.3
 
 pgvectorImage:
   repository: tensorchord/pgvecto-rs
