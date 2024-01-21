@@ -12,9 +12,19 @@ workload:
           primary: true
           imageSelector: image
           securityContext:
-            runAsUser: 911
-            runAsGroup: 1000
+            runAsNonRoot: false
+            runAsUser: 0
+            runAsGroup: 0
             readOnlyRootFilesystem: false
+            capabilities:
+              add:
+                - NET_BIND_SERVICE
+                - SETGID
+                - SETUID
+                - SYS_CHROOT
+          env:
+            NGINX_PORT: {{ .Values.netbootConfig.NGINX_PORT }}
+            TFTPD_OPTS: {{ .Values.netbootConfig.TFTPD_OPTS }}
           {{ with .Values.netbootConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}

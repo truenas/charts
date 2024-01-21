@@ -4,4 +4,7 @@ netbootStorage:
   assets:
     type: pvc
 netbootNetwork:
-  hostNetwork: false
+  hostNetwork: true
+  tftpPort: 69
+  webHttpPort: 3000
+  webAssetsPort: 8080

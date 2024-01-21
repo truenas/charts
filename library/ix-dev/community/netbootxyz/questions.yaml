@@ -35,6 +35,21 @@ questions:
     schema:
       type: dict
       attrs:
+        - variable: NGINX_PORT
+          label: Nginx Listener Port
+          description: |
+            Nginx needs to bind a port for the web interface.
+            This should be set to a port that doesn't conflict with other services.
+          schema:
+            type: string
+            default: 8080
+        - variable: TFTPD_OPTS
+          label: Nginx Listener Port
+          description: |
+            Additional TFTPD options.
+          schema:
+            type: string
+            default: ''
         - variable: additionalEnvs
           label: Additional Environment Variables
           description: Configure additional environment variables for netboot.xyz.
@@ -64,10 +79,19 @@ questions:
     schema:
       type: dict
       attrs:
+        - variable: hostNetwork
+          label: Host Network
+          description: |
+            Bind to the host network. </br>
+            Required for TFTP.
+          schema:
+            type: boolean
+            default: true
         - variable: tftpPort
           label: TFTP Port
           description: The TFTP port for netboot.xyz.
           schema:
+            show_if: [["hostNetwork", "=", false]]
             type: int
             default: 31009
             min: 9000
@@ -77,6 +101,7 @@ questions:
           label: Portal HTTP Port
           description: The HTTP port for the netboot.xyz Portal.
           schema:
+            show_if: [["hostNetwork", "=", false]]
             type: int
             default: 31010
             min: 9000
@@ -86,19 +111,12 @@ questions:
           label: Assets Port
           description: The Assets port for the netboot.xyz.
           schema:
+            show_if: [["hostNetwork", "=", false]]
             type: int
             default: 31011
             min: 9000
             max: 65535
             required: true
-        - variable: hostNetwork
-          label: Host Network
-          description: |
-            Bind to the host network. </br>
-            Required for specific features like TFTP.
-          schema:
-            type: boolean
-            default: false
 
   - variable: netbootStorage
     label: ""

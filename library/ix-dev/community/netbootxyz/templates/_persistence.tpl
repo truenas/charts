@@ -24,7 +24,7 @@ persistence:
         01-permissions:
           mountPath: /mnt/directories/assets
         {{- end }}
-  {{- range $idx, $storage := .Values.unifiStorage.additionalStorages }}
+  {{- range $idx, $storage := .Values.netbootStorage.additionalStorages }}
   {{ printf "netboot-%v" (int $idx) }}:
     enabled: true
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}

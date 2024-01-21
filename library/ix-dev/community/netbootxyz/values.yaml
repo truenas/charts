@@ -9,14 +9,16 @@ resources:
     memory: 8Gi
 
 netbootConfig:
+  NGINX_PORT: 8080
+  TFTPD_OPTS: ''
   additionalEnvs: []
 
 netbootNetwork:
-  tftpPort: 31009
-  webHttpPort: 31010
-  webAssetsPort: 31011
   # TFTP only works with hostNetwork: true
-  hostNetwork: false
+  hostNetwork: true
+  tftpPort: 69
+  webHttpPort: 3000
+  webAssetsPort: 8080
 
 netbootStorage:
   config:
