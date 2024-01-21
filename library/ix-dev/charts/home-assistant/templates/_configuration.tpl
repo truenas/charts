@@ -75,13 +75,11 @@ secret:
           echo "File [$config] does NOT exist. Creating..."
           cp "$default/configuration.default" "$config"
         fi
-        echo "File [$config] exists"
         if ! grep -q "recorder:" "$config"; then
           echo "Section [recorder] does NOT exist in [$config]. Appending..."
           cat "$default/recorder.default" >> "$config"
-          exit 0
         fi
-        echo "Section [recorder] exists in [$config], Updating..."
+        echo "Ensure DB URL is up to date"
         yq -i '.recorder.db_url = "{{ $haDBURL }}"' "$config"
         echo "Done"
 {{- end -}}
