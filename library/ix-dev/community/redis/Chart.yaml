@@ -3,7 +3,7 @@ description: Redis. The open source, in-memory data store used by millions of de
 annotations:
   title: Redis
 type: application
-version: 1.0.21
+version: 1.0.22
 apiVersion: v2
 appVersion: 7.2.4
 kubeVersion: '>=1.16.0-0'
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.2.8
+    version: 1.2.9
 home: https://redis.io/
 icon: https://media.sys.truenas.net/apps/redis/icons/icon.png
 sources:
