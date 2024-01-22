@@ -31,7 +31,11 @@ workload:
             SERVER_DIR: /serverdata/serverfiles
             SRV_ADMIN_PWD: {{ .Values.palworldConfig.adminPassword }}
             {{- $params := list (printf "port=%v" .Values.palworldNetwork.serverPort) }}
-            {{- $params = concat $params .Values.palworldConfig.gameParams -}}
+            {{- range $p := .Values.palworldConfig.gameParams -}}
+              {{- if not (hasPrefix "port=" $p) -}}
+                {{- $params = append $params $p -}}
+              {{- end -}}
+            {{- end }}
             GAME_PARAMS: {{ join " " $params }}
             GAME_PARAMS_EXTRA: {{ join " " .Values.palworldConfig.gameParamsExtra }}
             UPDATE_PUBLIC_IP: {{ .Values.palworldConfig.updatePublicIP }}
