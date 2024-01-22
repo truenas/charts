@@ -7,6 +7,10 @@ runAsContext:
 capabilities:
   - name: CHOWN
     description: Emby is able to chown files.
+  - name: DAC_OVERRIDE
+    description: Emby is able to bypass permission checks.
+  - name: FOWNER
+    description: Emby is able to bypass permission checks for it's sub-processes.
   - name: SETGID
     description: Emby is able to set group ID for it's sub-processes.
   - name: SETUID

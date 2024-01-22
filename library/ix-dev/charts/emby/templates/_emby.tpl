@@ -21,6 +21,8 @@ workload:
             capabilities:
               add:
                 - CHOWN
+                - DAC_OVERRIDE
+                - FOWNER
                 - SETGID
                 - SETUID
           fixedEnv:
