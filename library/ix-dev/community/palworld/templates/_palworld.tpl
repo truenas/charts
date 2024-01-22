@@ -46,11 +46,22 @@ workload:
             {{ end }}
           {{ end }}
           probes:
-            # Nothing to probe
             liveness:
-              enabled: false
+              enabled: true
+              type: exec
+              command:
+                - pgrep
+                - PalServer-Linux
             readiness:
-              enabled: false
+              enabled: true
+              type: exec
+              command:
+                - pgrep
+                - PalServer-Linux
             startup:
-              enabled: false
+              enabled: true
+              type: exec
+              command:
+                - pgrep
+                - PalServer-Linux
 {{- end -}}
