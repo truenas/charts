@@ -4,5 +4,11 @@ runAsContext:
     gid: 0
     uid: 0
     description: Emby runs as root user.
-capabilities: []
+capabilities:
+  - name: CHOWN
+    description: Emby is able to chown files.
+  - name: SETGID
+    description: Emby is able to set group ID for it's sub-processes.
+  - name: SETUID
+    description: Emby is able to set user ID for it's sub-processes.
 hostMounts: []
