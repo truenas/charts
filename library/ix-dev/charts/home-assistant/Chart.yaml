@@ -1,5 +1,5 @@
 name: home-assistant
-description: Home Assistant App for TrueNAS SCALE
+description: Home Assistant is an open source home automation that puts local control and privacy first.
 annotations:
   title: Home Assistant
 type: application
@@ -15,7 +15,7 @@ dependencies:
   - name: common
     repository: file://../../../common
     version: 1.2.9
-home: https://github.com/home-assistant/home-assistant
+home: https://www.home-assistant.io/
 icon: https://media.sys.truenas.net/apps/home-assistant/icons/icon.png
 sources:
   - https://github.com/home-assistant/home-assistant
