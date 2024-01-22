@@ -1,16 +1,16 @@
 {
-    "1.0.30": {
+    "1.0.31": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/chia/1.0.30",
-        "last_update": "2024-01-22 12:13:03",
+        "location": "/__w/charts/charts/community/chia/1.0.31",
+        "last_update": "2024-01-22 14:14:24",
         "required_features": [
-            "definitions/timezone",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/timezone"
         ],
-        "human_version": "2.1.4_1.0.30",
-        "version": "1.0.30",
+        "human_version": "2.1.4_1.0.31",
+        "version": "1.0.31",
         "chart_metadata": {
             "name": "chia",
             "description": "Chia is a modern cryptocurrency built from scratch, designed to be efficient, decentralized, and secure.",
@@ -18,7 +18,7 @@
                 "title": "Chia"
             },
             "type": "application",
-            "version": "1.0.30",
+            "version": "1.0.31",
             "apiVersion": "v2",
             "appVersion": "2.1.4",
             "kubeVersion": ">=1.16.0-0",
@@ -33,7 +33,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.8"
+                    "version": "1.2.9"
                 }
             ],
             "home": "https://www.chia.net/",

@@ -1,17 +1,17 @@
 {
-    "1.0.0": {
+    "1.0.1": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/organizr/1.0.0",
-        "last_update": "2024-01-22 12:13:03",
+        "location": "/__w/charts/charts/community/organizr/1.0.1",
+        "last_update": "2024-01-22 14:14:24",
         "required_features": [
-            "definitions/timezone",
+            "normalize/acl",
             "normalize/ixVolume",
-            "normalize/acl"
+            "definitions/timezone"
         ],
-        "human_version": "latest_1.0.0",
-        "version": "1.0.0",
+        "human_version": "latest_1.0.1",
+        "version": "1.0.1",
         "chart_metadata": {
             "name": "organizr",
             "description": "Organizr is a HTPC/Homelab Services Organizer - Written in PHP",
@@ -19,7 +19,7 @@
                 "title": "Organizr"
             },
             "type": "application",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "apiVersion": "v2",
             "appVersion": "latest",
             "kubeVersion": ">=1.16.0-0",
@@ -34,7 +34,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.8"
+                    "version": "1.2.9"
                 }
             ],
             "home": "https://github.com/causefx/Organizr",

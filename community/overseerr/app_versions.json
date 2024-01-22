@@ -1,16 +1,16 @@
 {
-    "1.0.24": {
+    "1.0.25": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/overseerr/1.0.24",
-        "last_update": "2024-01-22 12:13:03",
+        "location": "/__w/charts/charts/community/overseerr/1.0.25",
+        "last_update": "2024-01-22 14:14:24",
         "required_features": [
-            "definitions/timezone",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/timezone"
         ],
-        "human_version": "1.33.2_1.0.24",
-        "version": "1.0.24",
+        "human_version": "1.33.2_1.0.25",
+        "version": "1.0.25",
         "chart_metadata": {
             "name": "overseerr",
             "description": "Overseerr is a free and open source software application for managing requests for your media library.",
@@ -18,7 +18,7 @@
                 "title": "Overseerr"
             },
             "type": "application",
-            "version": "1.0.24",
+            "version": "1.0.25",
             "apiVersion": "v2",
             "appVersion": "1.33.2",
             "kubeVersion": ">=1.16.0-0",
@@ -33,7 +33,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.8"
+                    "version": "1.2.9"
                 }
             ],
             "home": "https://github.com/sct/overseerr",
