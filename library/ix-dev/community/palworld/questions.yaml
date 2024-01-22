@@ -203,7 +203,7 @@ questions:
                         required: true
                         immutable: true
                         hidden: true
-                        default: "config"
+                        default: "steamcmd"
                     - variable: aclEntries
                       label: ACL Configuration
                       schema:
@@ -288,7 +288,7 @@ questions:
                         required: true
                         immutable: true
                         hidden: true
-                        default: "storage"
+                        default: "server"
                     - variable: aclEntries
                       label: ACL Configuration
                       schema:
