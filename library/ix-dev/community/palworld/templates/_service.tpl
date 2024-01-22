@@ -11,7 +11,6 @@ service:
         primary: true
         port: {{ .Values.palworldNetwork.serverPort }}
         nodePort: {{ .Values.palworldNetwork.serverPort }}
-        targetPort: 8211
         protocol: udp
         targetSelector: palworld
 {{- end -}}

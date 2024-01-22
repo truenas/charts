@@ -30,7 +30,9 @@ workload:
             STEAMCMD_DIR: /serverdata/steamcmd
             SERVER_DIR: /serverdata/serverfiles
             SRV_ADMIN_PWD: {{ .Values.palworldConfig.adminPassword }}
-            GAME_PARAMS: {{ join " " .Values.palworldConfig.gameParams }}
+            {{- $params := list (printf "port=%v" .Values.palworldNetwork.serverPort) }}
+            {{- $params = concat $params .Values.palworldConfig.gameParams -}}
+            GAME_PARAMS: {{ join " " $params }}
             GAME_PARAMS_EXTRA: {{ join " " .Values.palworldConfig.gameParamsExtra }}
             UPDATE_PUBLIC_IP: {{ .Values.palworldConfig.updatePublicIP }}
             VALIDATE: {{ .Values.palworldConfig.validate }}
