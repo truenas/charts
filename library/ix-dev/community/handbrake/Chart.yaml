@@ -3,7 +3,7 @@ description: HandBrake is a tool for converting video from nearly any format to 
 annotations:
   title: HandBrake
 type: application
-version: 1.0.1
+version: 1.0.2
 apiVersion: v2
 appVersion: 23.12.2
 kubeVersion: '>=1.16.0-0'
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.2.8
+    version: 1.2.9
 home: https://github.com/jlesage/docker-handbrake
 icon: https://media.sys.truenas.net/apps/handbrake/icons/icon.png
 sources:
