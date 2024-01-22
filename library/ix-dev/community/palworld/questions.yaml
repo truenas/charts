@@ -24,13 +24,6 @@ questions:
             type: string
             private: true
             default: ""
-        - variable: vncPassword
-          label: VNC Password
-          description: The password for the VNC UI.
-          schema:
-            type: string
-            default: ""
-            private: true
         - variable: gameParams
           label: Game Parameters
           description: |
