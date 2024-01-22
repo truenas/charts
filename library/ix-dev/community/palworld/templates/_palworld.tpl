@@ -18,6 +18,13 @@ workload:
             runAsGroup: 0
             runAsNonRoot: false
             readOnlyRootFilesystem: false
+            capabilities:
+              add:
+                - CHOWN
+                - DAC_OVERRIDE
+                - FOWNER
+                - SETGID
+                - SETUID
           env:
             STEAMCMD_DIR: /serverdata/steamcmd
             SERVER_DIR: /serverdata/serverfiles
