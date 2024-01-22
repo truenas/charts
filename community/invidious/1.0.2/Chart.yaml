@@ -1,0 +1,25 @@
+name: invidious
+description: Invidious is an alternative front-end to YouTube
+annotations:
+  title: Invidious
+type: application
+version: 1.0.2
+apiVersion: v2
+appVersion: latest
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.2.9
+home: https://invidious.io/
+icon: https://media.sys.truenas.net/apps/invidious/icons/icon.svg
+sources:
+  - https://invidious.io/
+  - https://github.com/truenas/charts/tree/master/community/invidious
+  - https://quay.io/repository/invidious
+keywords:
+  - youtube

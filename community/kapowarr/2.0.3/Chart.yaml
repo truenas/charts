@@ -1,0 +1,26 @@
+name: kapowarr
+description: Kapowarr is a software to build and manage a comic book library, fitting in the *arr suite of software.
+annotations:
+  title: Kapowarr
+type: application
+version: 2.0.3
+apiVersion: v2
+appVersion: 1.0.0
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.2.9
+home: https://casvt.github.io/Kapowarr/
+icon: https://media.sys.truenas.net/apps/kapowarr/icons/icon.svg
+sources:
+  - https://hub.docker.com/r/mrcas/kapowarr
+  - https://github.com/truenas/charts/tree/master/library/ix-dev/community/kapowarr
+  - https://github.com/Casvt/Kapowarr
+keywords:
+  - media
+  - comic

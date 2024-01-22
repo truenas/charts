@@ -1,0 +1,26 @@
+name: whoogle
+description: Whoogle is a self-hosted, ad-free, privacy-respecting metasearch engine
+annotations:
+  title: Whoogle
+type: application
+version: 1.2.3
+apiVersion: v2
+appVersion: 0.8.4
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.2.9
+home: https://github.com/benbusby/whoogle-search
+icon: https://media.sys.truenas.net/apps/whoogle/icons/icon.png
+sources:
+  - https://github.com/benbusby/whoogle-search
+  - https://github.com/truenas/charts/tree/master/library/ix-dev/community/whoogle
+  - https://hub.docker.com/r/benbusby/whoogle-search
+keywords:
+  - search
+  - engine

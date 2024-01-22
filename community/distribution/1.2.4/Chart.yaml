@@ -1,0 +1,27 @@
+name: distribution
+description: Distribution is a toolkit to pack, ship, store, and deliver container content
+annotations:
+  title: Distribution
+type: application
+version: 1.2.4
+apiVersion: v2
+appVersion: 2.8.3
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.2.9
+home: https://github.com/distribution/distribution
+icon: https://media.sys.truenas.net/apps/distribution/icons/icon.svg
+sources:
+  - https://hub.docker.com/_/registry
+  - https://distribution.github.io/distribution/
+  - https://github.com/truenas/charts/tree/master/library/ix-dev/community/distribution
+  - https://github.com/distribution/distribution
+keywords:
+  - container
+  - registry

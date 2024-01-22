@@ -1,0 +1,25 @@
+name: overseerr
+description: Overseerr is a free and open source software application for managing requests for your media library.
+annotations:
+  title: Overseerr
+type: application
+version: 1.0.25
+apiVersion: v2
+appVersion: 1.33.2
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.2.9
+home: https://github.com/sct/overseerr
+icon: https://media.sys.truenas.net/apps/overseerr/icons/icon.svg
+sources:
+  - https://hub.docker.com/r/sctx/overseerr
+  - https://github.com/truenas/charts/tree/master/community/overseer
+  - https://github.com/sct/overseerr
+keywords:
+  - media

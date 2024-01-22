@@ -1,0 +1,25 @@
+name: mumble
+description: Mumble is a free, open source, low latency, high quality voice chat application.
+annotations:
+  title: Mumble
+type: application
+version: 1.0.22
+apiVersion: v2
+appVersion: 'v1.4.230'
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.2.9
+home: https://www.mumble.info/
+icon: https://media.sys.truenas.net/apps/mumble/icons/icon.svg
+sources:
+  - https://github.com/mumble-voip/mumble-docker
+  - https://github.com/truenas/charts/tree/master/community/mumble
+  - https://www.mumble.info/
+keywords:
+  - voice

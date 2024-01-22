@@ -1,0 +1,28 @@
+name: omada-controller
+description: Omada Controller (TP-Link) is a network management controller for TP-Link Omada Equipment.
+annotations:
+  title: Omada Controller
+type: application
+version: 1.2.3
+apiVersion: v2
+appVersion: '5.13'
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.2.9
+home: https://github.com/mbentley/docker-omada-controller
+icon: https://media.sys.truenas.net/apps/omada-controller/icons/icon.svg
+sources:
+  - https://github.com/mbentley/docker-omada-controller
+  - https://github.com/truenas/charts/tree/master/library/ix-dev/community/omada-controller
+  - https://hub.docker.com/r/mbentley/omada-controller
+keywords:
+  - network
+  - controller
+  - omada
+  - tp-link

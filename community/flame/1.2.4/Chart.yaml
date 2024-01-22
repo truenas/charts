@@ -1,0 +1,25 @@
+name: flame
+description: Flame is a self-hosted start page for your server.
+annotations:
+  title: Flame
+type: application
+version: 1.2.4
+apiVersion: v2
+appVersion: 2.3.1
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.2.9
+home: https://github.com/pawelmalak/flame
+icon: https://media.sys.truenas.net/apps/flame/icons/icon.png
+sources:
+  - https://hub.docker.com/r/pawelmalak/flame
+  - https://github.com/truenas/charts/tree/master/library/ix-dev/community/flame
+  - https://github.com/pawelmalak/flame
+keywords:
+  - startpage

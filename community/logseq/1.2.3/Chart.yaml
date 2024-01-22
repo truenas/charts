@@ -1,0 +1,25 @@
+name: logseq
+description: Logseq is a privacy-first, open-source platform for knowledge management and collaboration.
+annotations:
+  title: Logseq
+type: application
+version: 1.2.3
+apiVersion: v2
+appVersion: latest
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.2.9
+home: https://logseq.com/
+icon: https://media.sys.truenas.net/apps/logseq/icons/icon.png
+sources:
+  - https://github.com/logseq/logseq
+  - https://github.com/truenas/charts/tree/master/library/ix-dev/community/logseq
+keywords:
+  - knowledge
+  - management

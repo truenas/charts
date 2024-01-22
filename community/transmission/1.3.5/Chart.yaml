@@ -1,0 +1,27 @@
+name: transmission
+description: Transmission is designed for easy, powerful use.
+annotations:
+  title: Transmission
+type: application
+version: 1.3.5
+apiVersion: v2
+appVersion: 4.0.5
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.2.9
+home: https://transmissionbt.com/
+icon: https://media.sys.truenas.net/apps/transmission/icons/icon.png
+sources:
+  - https://github.com/onedr0p/containers/tree/main/apps/transmission
+  - https://github.com/truenas/charts/tree/master/community/transmission
+  - https://transmissionbt.com/
+keywords:
+  - media
+  - torrent
+  - download

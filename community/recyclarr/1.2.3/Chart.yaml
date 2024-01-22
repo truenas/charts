@@ -1,0 +1,27 @@
+name: recyclarr
+description: Recyclarr synchronizes recommended settings from the TRaSH guides to your Sonarr/Radarr instances.
+annotations:
+  title: Recyclarr
+type: application
+version: 1.2.3
+apiVersion: v2
+appVersion: 6.0.2
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.2.9
+home: https://recyclarr.dev
+icon: https://media.sys.truenas.net/apps/recyclarr/icons/icon.png
+sources:
+  - https://recyclarr.dev
+  - https://github.com/truenas/charts/tree/master/community/recyclarr
+  - https://github.com/recyclarr/recyclarr/tree/recyclarr
+keywords:
+  - media
+  - sonarr
+  - radarr

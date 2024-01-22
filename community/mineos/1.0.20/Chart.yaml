@@ -1,0 +1,25 @@
+name: mineos
+description: MineOS is a server front-end to ease managing Minecraft administrative tasks.
+annotations:
+  title: MineOS
+type: application
+version: 1.0.20
+apiVersion: v2
+appVersion: 'latest'
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.2.9
+home: https://github.com/hexparrot/mineos-node
+icon: https://media.sys.truenas.net/apps/mineos/icons/icon.png
+sources:
+  - https://hub.docker.com/r/hexparrot/mineos/
+  - https://github.com/truenas/charts/tree/master/community/mineos
+  - https://github.com/hexparrot/mineos-node
+keywords:
+  - minecraft
