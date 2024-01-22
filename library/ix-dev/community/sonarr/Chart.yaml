@@ -3,9 +3,9 @@ description: Sonarr is a PVR for Usenet and BitTorrent users.
 annotations:
   title: Sonarr
 type: application
-version: 1.2.9
+version: 1.2.10
 apiVersion: v2
-appVersion: 4.0.0.748
+appVersion: 4.0.1.929
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: truenas
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.2.8
+    version: 1.2.9
 home: https://github.com/Sonarr/Sonarr
 icon: https://media.sys.truenas.net/apps/sonarr/icons/icon.png
 sources:

@@ -3,9 +3,9 @@ description: Firefly III is a personal finances manager
 annotations:
   title: Firefly III
 type: application
-version: 1.1.12
+version: 1.1.13
 apiVersion: v2
-appVersion: 6.1.6
+appVersion: 6.1.7
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: truenas
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.2.8
+    version: 1.2.9
 home: https://www.firefly-iii.org/
 icon: https://media.sys.truenas.net/apps/firefly-iii/icons/icon.png
 sources:

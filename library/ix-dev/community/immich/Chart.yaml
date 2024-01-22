@@ -1,11 +1,12 @@
 name: immich
-description: Immich is a self-hosted photo and video backup solution directly from your mobile phone.
+description: Immich is a self-hosted photo and video backup solution directly from
+  your mobile phone.
 annotations:
   title: Immich
 type: application
-version: 3.0.5
+version: 3.0.6
 apiVersion: v2
-appVersion: 1.92.1
+appVersion: 1.93.3
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: truenas
@@ -14,7 +15,7 @@ maintainers:
 dependencies:
   - name: common
     repository: file://../../../common
-    version: 1.2.8
+    version: 1.2.9
 home: https://immich.app
 icon: https://media.sys.truenas.net/apps/immich/icons/icon.svg
 sources:
