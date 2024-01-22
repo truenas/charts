@@ -1,0 +1,15 @@
+haNetwork:
+  webPort: 31000
+
+haStorage:
+  config:
+    type: pvc
+  media:
+    type: pvc
+  pgData:
+    type: pvc
+  pgBackup:
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""
