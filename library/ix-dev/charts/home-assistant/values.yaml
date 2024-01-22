@@ -15,6 +15,11 @@ yqImage:
   repository: mikefarah/yq
   tag: 4.40.5
 
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
 podOptions:
   dnsConfig:
     options: []
