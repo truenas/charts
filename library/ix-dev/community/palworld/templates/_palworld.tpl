@@ -25,6 +25,7 @@ workload:
                 - FOWNER
                 - SETGID
                 - SETUID
+                - KILL
           env:
             STEAMCMD_DIR: /serverdata/steamcmd
             SERVER_DIR: /serverdata/serverfiles
@@ -45,16 +46,11 @@ workload:
             {{ end }}
           {{ end }}
           probes:
+            # Nothing to probe
             liveness:
-              enabled: true
-              type: tcp
-              port: {{ .Values.palworldNetwork.rconPort }}
+              enabled: false
             readiness:
-              enabled: true
-              type: tcp
-              port: {{ .Values.palworldNetwork.rconPort }}
+              enabled: false
             startup:
-              enabled: true
-              type: tcp
-              port: {{ .Values.palworldNetwork.rconPort }}
+              enabled: false
 {{- end -}}

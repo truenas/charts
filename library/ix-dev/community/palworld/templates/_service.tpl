@@ -14,10 +14,4 @@ service:
         targetPort: 8211
         protocol: udp
         targetSelector: palworld
-      rcon:
-        enabled: true
-        port: {{ .Values.palworldNetwork.rconPort }}
-        nodePort: {{ .Values.palworldNetwork.rconPort }}
-        targetPort: 25575
-        targetSelector: palworld
 {{- end -}}
