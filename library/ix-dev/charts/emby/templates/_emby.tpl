@@ -18,10 +18,11 @@ workload:
             runAsGroup: 0
             runAsNonRoot: false
             readOnlyRootFilesystem: false
-            # capabilities:
-            #   add:
-            #     - NET_BIND_SERVICE
-            #     - NET_RAW
+            capabilities:
+              add:
+                - CHOWN
+                - SETGID
+                - SETUID
           fixedEnv:
             PUID: {{ .Values.embyID.user }}
           {{ with .Values.embyConfig.additionalEnvs }}
