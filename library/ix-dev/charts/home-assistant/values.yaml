@@ -1,14 +1,14 @@
 image:
   pullPolicy: IfNotPresent
   repository: homeassistant/home-assistant
-  tag: 2024.1.3
+  tag: 2024.1.5
 
 # Keep using the same image
 # as before the migration
 haPostgresImage:
   pullPolicy: IfNotPresent
   repository: postgres
-  tag: "13.1"
+  tag: '13.1'
 
 yqImage:
   pullPolicy: IfNotPresent
