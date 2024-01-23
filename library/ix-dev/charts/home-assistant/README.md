@@ -1,3 +1,3 @@
-# Introduction
+# Home Assistant
 
-home assistant App for TrueNAS SCALE
+[Home Assistant](https://www.home-assistant.io/) is an open source home automation that puts local control and privacy first.
