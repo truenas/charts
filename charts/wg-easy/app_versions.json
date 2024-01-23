@@ -1,17 +1,17 @@
 {
-    "2.0.11": {
+    "2.0.12": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/wg-easy/2.0.11",
-        "last_update": "2024-01-23 11:02:10",
+        "location": "/__w/charts/charts/charts/wg-easy/2.0.12",
+        "last_update": "2024-01-23 11:15:35",
         "required_features": [
-            "normalize/ixVolume",
+            "definitions/nodeIP",
             "normalize/acl",
-            "definitions/nodeIP"
+            "normalize/ixVolume"
         ],
-        "human_version": "10_2.0.11",
-        "version": "2.0.11",
+        "human_version": "10_2.0.12",
+        "version": "2.0.12",
         "chart_metadata": {
             "name": "wg-easy",
             "description": "WG-Easy is the easiest way to install & manage WireGuard!",
@@ -19,7 +19,7 @@
                 "title": "WG Easy"
             },
             "type": "application",
-            "version": "2.0.11",
+            "version": "2.0.12",
             "apiVersion": "v2",
             "appVersion": "10",
             "kubeVersion": ">=1.16.0-0",
@@ -1159,11 +1159,11 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/wg-easy/1.0.12",
-        "last_update": "2024-01-23 11:02:10",
+        "last_update": "2024-01-23 11:14:01",
         "required_features": [
+            "definitions/nodeIP",
             "normalize/ixVolume",
-            "validations/lockedHostPath",
-            "definitions/nodeIP"
+            "validations/lockedHostPath"
         ],
         "human_version": "7_1.0.12",
         "version": "1.0.12",
