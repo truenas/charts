@@ -36,15 +36,15 @@ questions:
       type: dict
       attrs:
         - variable: tftpdOpts
-          label: TFTPD_OPTS
+          label: TFTPD Options
           description: |
             Additional TFTPD options.
           schema:
             type: list
             default: []
             items:
-              - variable: arg
-                label: Argument
+              - variable: option
+                label: Option
                 schema:
                   type: string
                   required: true
