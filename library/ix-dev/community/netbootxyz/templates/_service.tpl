@@ -18,7 +18,6 @@ service:
         enabled: true
         port: {{ .Values.netbootNetwork.webAssetsPort }}
         nodePort: {{ .Values.netbootNetwork.webAssetsPort }}
-        targetPort: {{ .Values.netbootConfig.NGINX_PORT }}
         targetSelector: netboot
   netboot-portal:
     enabled: true

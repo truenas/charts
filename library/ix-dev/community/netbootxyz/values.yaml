@@ -9,8 +9,7 @@ resources:
     memory: 8Gi
 
 netbootConfig:
-  NGINX_PORT: 8080
-  TFTPD_OPTS: ''
+  tftpdOpts: ''
   additionalEnvs: []
 
 netbootNetwork:

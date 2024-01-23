@@ -35,21 +35,13 @@ questions:
     schema:
       type: dict
       attrs:
-        - variable: NGINX_PORT
-          label: Nginx Listener Port
-          description: |
-            Nginx needs to bind a port for the web interface.
-            This should be set to a port that doesn't conflict with other services.
-          schema:
-            type: string
-            default: 8080
-        - variable: TFTPD_OPTS
-          label: Nginx Listener Port
+        - variable: tftpdOpts
+          label: TFTPD_OPTS
           description: |
             Additional TFTPD options.
           schema:
-            type: string
-            default: ''
+            type: list
+            default: []
         - variable: additionalEnvs
           label: Additional Environment Variables
           description: Configure additional environment variables for netboot.xyz.
@@ -109,9 +101,8 @@ questions:
             required: true
         - variable: webAssetsPort
           label: Assets Port
-          description: The Assets port for the netboot.xyz.
+          description: The Assets port for the netboot.xyz, configures the NGINX_PORT variable on the container.
           schema:
-            show_if: [["hostNetwork", "=", false]]
             type: int
             default: 31011
             min: 9000

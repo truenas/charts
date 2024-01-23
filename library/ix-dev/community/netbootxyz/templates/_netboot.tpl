@@ -23,8 +23,8 @@ workload:
                 - SETUID
                 - SYS_CHROOT
           env:
-            NGINX_PORT: {{ .Values.netbootConfig.NGINX_PORT }}
-            TFTPD_OPTS: {{ .Values.netbootConfig.TFTPD_OPTS }}
+            NGINX_PORT: {{ .Values.netbootNetwork.webAssetsPort }}
+            TFTPD_OPTS: {{ join " " .Values.netbootConfig.tftpdOpts }}
           {{ with .Values.netbootConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
