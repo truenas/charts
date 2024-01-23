@@ -21,3 +21,9 @@ tailscaleConfig:
 
 tailscaleNetwork:
   hostNetwork: false
+
+config:
+  type: ixVolume
+  ixVolumeConfig:
+  datasetName: config
+  additionalStorages: []
