@@ -1,6 +1,19 @@
 {{ include "common.storage.hostPathValidate" .Values }}
-{{ include "common.deployment.common_config" . | nindent 0 }}
-spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
+apiVersion: {{ template "common.capabilities.deployment.apiVersion" . }}
+kind: Deployment
+metadata:
+  name: {{ template "common.names.fullname" . }}-emby
+  labels:
+    app.kubernetes.io/name: {{ template "common.names.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+spec:
+  replicas: {{ (default 1 .Values.replicas) }}
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ template "common.names.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
   template: {{ include "common.deployment.pod.metadata" . | nindent 4 }}
     spec:
     {{- if .Values.hostNetwork }}
