@@ -14,6 +14,8 @@ persistence:
       palworld:
         palworld:
           mountPath: /serverdata/serverfiles
+        01-config:
+          mountPath: /serverdata/serverfiles
   tmp:
     enabled: true
     type: emptyDir

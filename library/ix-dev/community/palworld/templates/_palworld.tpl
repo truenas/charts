@@ -28,15 +28,10 @@ workload:
                 - KILL
           env:
             STEAMCMD_DIR: /serverdata/steamcmd
-            SERVER_DIR: /serverdata/serverfiles
+            {{- $srvDir := "/serverdata/serverfiles" }}
+            SERVER_DIR: {{ $srvDir }}
             SRV_ADMIN_PWD: {{ .Values.palworldConfig.adminPassword }}
-            {{- $params := list (printf "port=%v" .Values.palworldNetwork.serverPort) }}
-            {{- range $p := .Values.palworldConfig.gameParams -}}
-              {{- if not (hasPrefix "port=" $p) -}}
-                {{- $params = append $params $p -}}
-              {{- end -}}
-            {{- end }}
-            GAME_PARAMS: {{ join " " $params }}
+            GAME_PARAMS: {{ join " " .Values.palworldNetwork.serverPort }}
             GAME_PARAMS_EXTRA: {{ join " " .Values.palworldConfig.gameParamsExtra }}
             UPDATE_PUBLIC_IP: {{ .Values.palworldConfig.updatePublicIP }}
             VALIDATE: {{ .Values.palworldConfig.validate }}
@@ -54,20 +49,51 @@ workload:
           probes:
             liveness:
               enabled: true
-              type: exec
-              command:
-                - pgrep
-                - PalServer-Linux
+              type: tcp
+              port: {{ .Values.palworldNetwork.rconPort }}
             readiness:
               enabled: true
-              type: exec
-              command:
-                - pgrep
-                - PalServer-Linux
+              type: tcp
+              port: {{ .Values.palworldNetwork.rconPort }}
             startup:
               enabled: true
-              type: exec
-              command:
-                - pgrep
-                - PalServer-Linux
+              type: tcp
+              port: {{ .Values.palworldNetwork.rconPort }}
+      initContainers:
+        01-config:
+          enabled: true
+          type: init
+          imageSelector: image
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
+            runAsNonRoot: false
+            readOnlyRootFilesystem: false
+            capabilities:
+              add:
+                - CHOWN
+                - DAC_OVERRIDE
+                - FOWNER
+          command: /bin/bash
+          args:
+            - -c
+            - |
+              config={{ $srvDir }}/Pal/Saved/Config/LinuxServer
+              cfgFile=${config}/PalWorldSettings.ini
+              mkdir -p ${config}
+              if [ ! -f ${cfgFile} ]; then
+                echo "Config file not found, fetching..."
+                # Fetch the config file if it doesn't exist, just like the container does
+                wget -qO ${cfgFile} https://github.com/ich777/docker-steamcmd-server/raw/palworld/config/PalWorldSettings.ini
+              fi
+              echo "Setting RCON status..."
+              sed -i 's/\(RCONEnabled=\)[^,]*/\1True/g' ${cfgFile}
+              echo "Set to [$(grep -Po 'RCONEnabled=[^,]*' ${cfgFile})]"
+              echo "Setting RCON Port..."
+              sed -i 's/\(RCONPort=\)[^,]*/\1{{ .Values.palworldNetwork.rconPort }}/g' ${cfgFile}
+              echo "Set to [$(grep -Po 'RCONPort=[^,]*' ${cfgFile})]"
+              echo "Setting Game Port..."
+              sed -i 's/\(PublicPort=\)[^,]*/\1{{ .Values.palworldNetwork.serverPort }}/g' ${cfgFile}
+              echo "Set to [$(grep -Po 'PublicPort=[^,]*' ${cfgFile})]"
+              echo "Done!"
 {{- end -}}

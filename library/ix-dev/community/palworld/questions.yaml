@@ -145,6 +145,15 @@ questions:
             min: 9000
             max: 65535
             required: true
+        - variable: rconPort
+          label: RCON Port
+          description: The TCP port for the Palworld RCON.
+          schema:
+            type: int
+            default: 38212
+            min: 9000
+            max: 65535
+            required: true
         - variable: hostNetwork
           label: Host Network
           description: |

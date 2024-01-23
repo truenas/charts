@@ -13,4 +13,9 @@ service:
         nodePort: {{ .Values.palworldNetwork.serverPort }}
         protocol: udp
         targetSelector: palworld
+      rcon:
+        enabled: true
+        port: {{ .Values.palworldNetwork.rconPort }}
+        nodePort: {{ .Values.palworldNetwork.rconPort }}
+        targetSelector: palworld
 {{- end -}}
