@@ -9,7 +9,7 @@ resources:
     memory: 8Gi
 
 netbootConfig:
-  tftpdOpts: ''
+  tftpdOpts: []
   additionalEnvs: []
 
 netbootNetwork:
