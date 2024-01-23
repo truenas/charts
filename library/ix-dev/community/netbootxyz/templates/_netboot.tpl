@@ -45,10 +45,4 @@ workload:
               enabled: true
               type: exec
               command: /usr/local/bin/docker-healthcheck.sh
-      initContainers:
-      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
-                                                        "UID" 911
-                                                        "GID" 1000
-                                                        "mode" "check"
-                                                        "type" "install") | nindent 8 }}
 {{- end -}}

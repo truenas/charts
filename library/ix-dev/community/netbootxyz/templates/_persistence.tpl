@@ -7,11 +7,6 @@ persistence:
       netboot:
         netboot:
           mountPath: /config
-        {{- if and (eq .Values.netbootStorage.config.type "ixVolume")
-                  (not (.Values.netbootStorage.config.ixVolumeConfig | default dict).aclEnable) }}
-        01-permissions:
-          mountPath: /mnt/directories/config
-        {{- end }}
   assets:
     enabled: true
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.netbootStorage.assets) | nindent 4 }}
