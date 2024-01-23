@@ -1,16 +1,16 @@
 {
-    "1.0.29": {
+    "1.0.30": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/emby/1.0.29",
-        "last_update": "2024-01-22 14:12:57",
+        "location": "/__w/charts/charts/charts/emby/1.0.30",
+        "last_update": "2024-01-23 11:03:33",
         "required_features": [
             "definitions/gpuConfiguration",
             "normalize/ixVolume"
         ],
-        "human_version": "4.7.14.0_1.0.29",
-        "version": "1.0.29",
+        "human_version": "4.7.14.0_1.0.30",
+        "version": "1.0.30",
         "chart_metadata": {
             "name": "emby",
             "description": "Emby Server",
@@ -18,7 +18,7 @@
                 "title": "Emby Server"
             },
             "type": "application",
-            "version": "1.0.29",
+            "version": "1.0.30",
             "apiVersion": "v2",
             "appVersion": "4.7.14.0",
             "kubeVersion": ">=1.16.0-0",
