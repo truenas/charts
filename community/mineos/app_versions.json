@@ -1,16 +1,16 @@
 {
-    "1.0.19": {
+    "1.0.20": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/mineos/1.0.19",
-        "last_update": "2024-01-19 12:08:54",
+        "location": "/__w/charts/charts/community/mineos/1.0.20",
+        "last_update": "2024-01-23 12:44:43",
         "required_features": [
             "definitions/certificate",
             "normalize/ixVolume"
         ],
-        "human_version": "latest_1.0.19",
-        "version": "1.0.19",
+        "human_version": "latest_1.0.20",
+        "version": "1.0.20",
         "chart_metadata": {
             "name": "mineos",
             "description": "MineOS is a server front-end to ease managing Minecraft administrative tasks.",
@@ -18,7 +18,7 @@
                 "title": "MineOS"
             },
             "type": "application",
-            "version": "1.0.19",
+            "version": "1.0.20",
             "apiVersion": "v2",
             "appVersion": "latest",
             "kubeVersion": ">=1.16.0-0",
@@ -33,7 +33,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.8"
+                    "version": "1.2.9"
                 }
             ],
             "home": "https://github.com/hexparrot/mineos-node",

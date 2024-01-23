@@ -1,0 +1,19 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{- include "home-assistant.migration" $ -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "home-assistant.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "home-assistant.service" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "home-assistant.persistence" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "home-assistant.configuration" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "postgres.workload" $ | fromYaml) -}}
+
+{{- if eq (include "home-assistant.is-migration" $) "true" }}
+  {{- $_ := set .Values.workload.postgres.podSpec.initContainers.permissions "type" "init" -}}
+{{- end }}
+
+{{/* Create the configmap for portal manually*/}}
+{{- include "home-assistant.portal" $ -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}

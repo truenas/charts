@@ -1,18 +1,18 @@
 {
-    "3.0.5": {
+    "3.0.6": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/immich/3.0.5",
-        "last_update": "2024-01-19 12:08:54",
+        "location": "/__w/charts/charts/community/immich/3.0.6",
+        "last_update": "2024-01-23 12:44:43",
         "required_features": [
-            "normalize/acl",
             "definitions/timezone",
+            "normalize/acl",
             "definitions/gpuConfiguration",
             "normalize/ixVolume"
         ],
-        "human_version": "1.92.1_3.0.5",
-        "version": "3.0.5",
+        "human_version": "1.93.3_3.0.6",
+        "version": "3.0.6",
         "chart_metadata": {
             "name": "immich",
             "description": "Immich is a self-hosted photo and video backup solution directly from your mobile phone.",
@@ -20,9 +20,9 @@
                 "title": "Immich"
             },
             "type": "application",
-            "version": "3.0.5",
+            "version": "3.0.6",
             "apiVersion": "v2",
-            "appVersion": "1.92.1",
+            "appVersion": "1.93.3",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
@@ -35,7 +35,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.8"
+                    "version": "1.2.9"
                 }
             ],
             "home": "https://immich.app",

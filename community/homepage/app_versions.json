@@ -1,16 +1,16 @@
 {
-    "1.2.4": {
+    "1.2.5": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/homepage/1.2.4",
-        "last_update": "2024-01-19 12:08:54",
+        "location": "/__w/charts/charts/community/homepage/1.2.5",
+        "last_update": "2024-01-23 12:44:43",
         "required_features": [
             "normalize/acl",
             "normalize/ixVolume"
         ],
-        "human_version": "0.8.4_1.2.4",
-        "version": "1.2.4",
+        "human_version": "0.8.6_1.2.5",
+        "version": "1.2.5",
         "chart_metadata": {
             "name": "homepage",
             "description": "Homepage is a modern, secure, highly customizable application dashboard.",
@@ -18,9 +18,9 @@
                 "title": "Homepage"
             },
             "type": "application",
-            "version": "1.2.4",
+            "version": "1.2.5",
             "apiVersion": "v2",
-            "appVersion": "0.8.4",
+            "appVersion": "0.8.6",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
@@ -33,7 +33,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.8"
+                    "version": "1.2.9"
                 }
             ],
             "home": "https://gethomepage.dev/",

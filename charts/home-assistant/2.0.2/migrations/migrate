@@ -1,0 +1,94 @@
+#!/usr/bin/python3
+import json
+import os
+import sys
+
+def migrate_volume(volume):
+    return {
+        'type': 'hostPath',
+        'hostPathConfig': {
+            'hostPath': volume['hostPath']
+        },
+    } if volume.get('hostPathEnabled', False) else {
+        'type': 'ixVolume',
+        'ixVolumeConfig': {
+            'datasetName': volume['datasetName'],
+        },
+    }
+
+def migrate_common_lib(values):
+    delete_keys = [
+        'web_port', 'hostNetwork', 'cpuLimit', 'memLimit', 'enableResourceLimits',
+        'dnsConfig', 'environmentVariables', 'appVolumeMounts', 'postgresAppVolumeMounts',
+        'extraAppVolumeMounts', 'ownerUID', 'ownerGID', 'timezone'
+    ]
+
+    values.update({
+        # Migrate Network
+        'haNetwork': {
+            'webPort': values['web_port'],
+            'hostNetwork': values['hostNetwork'],
+        },
+        # Migrate Resources
+        'resources': {
+            'limits': {
+                'cpu': values.get('cpuLimit', '4000m'),
+                'memory': values.get('memLimit', '8Gi'),
+            }
+        },
+        'haID': {
+            'user': values.get('ownerUID'),
+            'group': values.get('ownerGID'),
+        },
+        # Migrate DNS
+        'podOptions': {
+            'dnsConfig': {
+                'options': [
+                    {'name': opt['name'], 'value': opt['value']}
+                    for opt in values.get('dnsConfig', {}).get('options', [])
+                ]
+            }
+        },
+        # Migrate Config
+        'TZ': values.get('timezone'),
+        'haConfig': {
+            'additionalEnvs': values.get('environmentVariables', []),
+        },
+        # Migrate Storage
+        'haStorage': {
+            'config': migrate_volume(values['appVolumeMounts']['config']),
+            'media': migrate_volume(values['appVolumeMounts']['media']),
+            'pgData': migrate_volume(values['postgresAppVolumeMounts']['postgres-data']),
+            'pgBackup': migrate_volume(values['postgresAppVolumeMounts']['postgres-backup']),
+            'additionalStorages': [
+                {
+                    'type': 'hostPath',
+                    'hostPathConfig': {'hostPath': e['hostPath']},
+                    'mountPath': e['mountPath'],
+                }
+                for e in values.get('extraAppVolumeMounts', [])
+            ],
+        },
+    })
+
+    for k in delete_keys:
+        values.pop(k, None)
+
+    return values
+
+def migrate(values):
+    # If this missing, we have already migrated
+    if not 'appVolumeMounts' in values.keys():
+        return values
+
+
+    return migrate_common_lib(values)
+
+
+if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        exit(1)
+
+    if os.path.exists(sys.argv[1]):
+        with open(sys.argv[1], 'r') as f:
+            print(json.dumps(migrate(json.loads(f.read()))))
