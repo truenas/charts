@@ -1,5 +1,3 @@
-# Plex Media Server helm chart
+# Plex
 
-## Configuration
-
-Please refer to questions.yaml for a detailed overview on supported configurable items.
+[Plex](https://plex.tv) is a media server that allows you to stream your media to any Plex client.

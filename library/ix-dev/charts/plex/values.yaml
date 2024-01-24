@@ -6,3 +6,39 @@ plexpassImage:
   pullPolicy: IfNotPresent
   repository: plexinc/pms-docker
   tag: plexpass
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+plexID:
+  # Default is 1000
+  user: 568
+  group: 568
+
+plexConfig:
+  imageSelector: image
+  claim: ''
+  additionalEnvs: []
+
+plexNetwork:
+  webPort: 30003
+  hostNetwork: false
+
+plexStorage:
+  data:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: data
+  config:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: config
+  transcode:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: transcode
+  additionalStorages: []
+
+plexGPU: {}
