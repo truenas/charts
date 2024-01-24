@@ -16,7 +16,7 @@ persistence:
           mountPath: /config
   transcode:
     enabled: true
-    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.plexStorage.transcodes) | nindent 4 }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.plexStorage.transcode) | nindent 4 }}
     targetSelector:
       plex:
         plex:
