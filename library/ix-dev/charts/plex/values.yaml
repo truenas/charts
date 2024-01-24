@@ -2,7 +2,7 @@ image:
   pullPolicy: IfNotPresent
   repository: plexinc/pms-docker
   tag: 1.32.8.7639-fb6452ebf
-plexpassImage:
+plexPassImage:
   pullPolicy: IfNotPresent
   repository: plexinc/pms-docker
   tag: plexpass
@@ -13,7 +13,6 @@ resources:
     memory: 8Gi
 
 plexID:
-  # Default is 1000
   user: 568
   group: 568
 

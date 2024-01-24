@@ -3,6 +3,8 @@ groups:
     description: Configure Plex
   - name: User and Group Configuration
     description: Configure User and Group for Plex
+  - name: Advanced Pod Configuration
+    description: Configure Advanced Pod Options for Plex
   - name: Network Configuration
     description: Configure Network for Plex
   - name: Storage Configuration
@@ -50,7 +52,19 @@ questions:
             empty: false
             required: true
             private: true
-
+        - variable: imageSelector
+          label: Image
+          description: |
+            The image to use for Plex.
+          schema:
+            type: string
+            default: "image"
+            required: true
+            enum:
+              - value: "image"
+                description: Plex Official Image
+              - value: "plexPassImage"
+                description: Plex Pass Image
         - variable: additionalEnvs
           label: Additional Environment Variables
           description: Configure additional environment variables for Plex.
@@ -96,6 +110,38 @@ questions:
             min: 568
             default: 568
             required: true
+
+  - variable: podOptions
+    label: ""
+    group: Advanced Pod Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: dnsConfig
+          label: Advanced DNS Configuration
+          schema:
+            type: dict
+            attrs:
+              - variable: options
+                label: DNS Options
+                schema:
+                  type: list
+                  items:
+                    - variable: optionsEntry
+                      label: DNS Option Entry
+                      schema:
+                        type: dict
+                        attrs:
+                          - variable: name
+                            label: Option Name
+                            schema:
+                              type: string
+                              required: true
+                          - variable: value
+                            label: Option Value
+                            schema:
+                              type: string
+                              required: true
 
   - variable: plexNetwork
     label: ""

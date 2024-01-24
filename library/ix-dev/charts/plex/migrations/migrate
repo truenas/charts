@@ -1,0 +1,100 @@
+#!/usr/bin/python3
+import json
+import os
+import sys
+
+def migrate_volume(volume):
+    return {
+        'type': 'hostPath',
+        'hostPathConfig': {
+            'hostPath': volume['hostPath']
+        },
+    } if volume.get('hostPathEnabled', False) else {
+        'type': 'ixVolume',
+        'ixVolumeConfig': {
+            'datasetName': volume['datasetName'],
+        },
+    }
+
+def migrate_common_lib(values):
+    delete_keys = [
+        'hostNetwork', 'plexServiceTCP', 'updateStrategy', 'timezone', 'claimToken',
+        'environmentVariables', 'gpuConfiguration', 'enableResourceLimits', 'cpuLimit',
+        'memLimit', 'dnsConfig', 'extraAppVolumeMounts', 'appVolumeMounts',
+    ]
+
+    values.update({
+        # Migrate Network
+        'plexNetwork': {
+            'webPort': values['plexServiceTCP']['port'],
+            'hostNetwork': values['hostNetwork'],
+        },
+        # Migrate Resources
+        'resources': {
+            'limits': {
+                'cpu': values.get('cpuLimit', '4000m'),
+                'memory': values.get('memLimit', '8Gi'),
+            }
+        },
+        # Migrate DNS
+        'podOptions': {
+            'dnsConfig': {
+                'options': [
+                    {'name': opt['name'], 'value': opt['value']}
+                    for opt in values.get('dnsConfig', {}).get('options', [])
+                ]
+            }
+        },
+        # Migrate ID
+        'plexID': {
+            # We didn't have exposed this on UI the default
+            # set by the container is 1000, so we will use that
+            'user': 1000,
+            'group': 1000,
+        },
+        # Migrate Config
+        'TZ': values['timezone'],
+        'plexConfig': {
+            'imageSelector': 'plexPassImage' if values['enablePlexPass'] else 'image',
+            'claim': values['claimToken'],
+            'additionalEnvs': values.get('environmentVariables', []),
+        },
+        'plexGPU': values.get('gpuConfiguration', {}),
+        # Migrate Storage
+        'plexStorage': {
+            'config': migrate_volume(values['appVolumeMounts']['config']),
+            'data': migrate_volume(values['appVolumeMounts']['data']),
+            'transcode': migrate_volume(values['appVolumeMounts']['transcode']),
+            'additionalStorages': [
+                {
+                    'type': 'hostPath',
+                    'hostPathConfig': {'hostPath': e['hostPath']},
+                    'mountPath': e['mountPath'],
+                    'readOnly': e['readOnly'],
+                }
+                for e in values.get('extraAppVolumeMounts', [])
+            ],
+        },
+
+    })
+
+    for k in delete_keys:
+        values.pop(k, None)
+
+    return values
+
+def migrate(values):
+    # If this missing, we have already migrated
+    if not 'appVolumeMounts' in values.keys():
+        return values
+
+    return migrate_common_lib(values)
+
+
+if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        exit(1)
+
+    if os.path.exists(sys.argv[1]):
+        with open(sys.argv[1], 'r') as f:
+            print(json.dumps(migrate(json.loads(f.read()))))
