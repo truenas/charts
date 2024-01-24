@@ -16,7 +16,16 @@ workload:
           securityContext:
             runAsUser: 0
             runAsGroup: 0
-            # readOnlyRootFilesystem: false
+            runAsNonRoot: false
+            readOnlyRootFilesystem: false
+            capabilities:
+              add:
+                - CHOWN
+                - DAC_OVERRIDE
+                - FOWNER
+                - SETGID
+                - SETUID
+                - KILL
           env:
             PLEX_CLAIM: {{ .Values.plexConfig.claim }}
           fixedEnv:
