@@ -1,0 +1,82 @@
+#!/usr/bin/python3
+import json
+import os
+import sys
+
+def migrate_volume(volume):
+    return {
+        'type': 'hostPath',
+        'hostPathConfig': {
+            'hostPath': volume['hostPath']
+        },
+    } if volume.get('hostPathEnabled', False) else {
+        'type': 'ixVolume',
+        'ixVolumeConfig': {
+            'datasetName': volume['datasetName'],
+        },
+    }
+
+def migrate_common_lib(values):
+    delete_keys = [
+        'hostNetwork', 'environmentVariables', 'updateStrategy', 'embyServerHttp', 'gpuConfiguration',
+        'appVolumeMounts', 'extraAppVolumeMounts', 'enableResourceLimits', 'cpuLimit', 'memLimit'
+    ]
+
+    values.update({
+        # Migrate Network
+        'embyNetwork': {
+            'webPort': values['embyServerHttp'],
+            'hostNetwork': values['hostNetwork'],
+        },
+        # Migrate Resources
+        'resources': {
+            'limits': {
+                'cpu': values.get('cpuLimit', '4000m'),
+                'memory': values.get('memLimit', '8Gi'),
+            }
+        },
+        'embyID': {
+            # We didn't have exposed this on UI the default
+            # set by the container is 2, so we will use that
+            'user': 2,
+            'group': 2,
+        },
+        # Migrate Config
+        'embyConfig': {
+            'additionalEnvs': values.get('environmentVariables', []),
+        },
+        # Migrate Storage
+        'embyStorage': {
+            'config': migrate_volume(values['appVolumeMounts']['config']),
+            'additionalStorages': [
+                {
+                    'type': 'hostPath',
+                    'hostPathConfig': {'hostPath': e['hostPath']},
+                    'mountPath': e['mountPath'],
+                    'readOnly': e['readOnly'],
+                }
+                for e in values.get('extraAppVolumeMounts', [])
+            ],
+        },
+    })
+
+    for k in delete_keys:
+        values.pop(k, None)
+
+    return values
+
+def migrate(values):
+    # If this missing, we have already migrated
+    if not 'appVolumeMounts' in values.keys():
+        return values
+
+    return migrate_common_lib(values)
+
+
+if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        exit(1)
+
+    if os.path.exists(sys.argv[1]):
+        with open(sys.argv[1], 'r') as f:
+            print(json.dumps(migrate(json.loads(f.read()))))

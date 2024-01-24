@@ -1,5 +1,3 @@
-# Emby Server helm chart
+# Emby
 
-## Configuration
-
-Please refer to questions.yaml for a detailed overview on supported configurable items.
+[Emby](https://emby.media/) is designed to help you manage your personal media library, such as home videos and photos

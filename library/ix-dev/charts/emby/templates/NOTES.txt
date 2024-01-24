@@ -1,7 +1,1 @@
-1. Get the application URL by running these commands:
-
-{{- if .Values.hostNetwork }}
-http://$node_ip:8096/
-{{ else }}
-http://$node_ip:{{ .Values.embyServerHttp.port }}/
-{{ end }}
+{{ include "ix.v1.common.lib.chart.notes" $ }}
