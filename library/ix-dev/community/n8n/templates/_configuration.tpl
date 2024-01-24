@@ -24,7 +24,7 @@
   {{- end -}}
 
   {{- $encKey := (randAlphaNum 32) -}}
-  {{- with (lookup "v1" "Secret" .Release.Namespace (printf "%s-n8n-config" $fullname)) -}}
+  {{- with (lookup "v1" "Secret" .Release.Namespace (printf "%s-n8n-creds" $fullname)) -}}
     {{- $encKey = ((index .data "N8N_ENCRYPTION_KEY") | b64dec) -}}
   {{- end -}}
 
