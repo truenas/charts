@@ -1,0 +1,13 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{- include "emby.migration" $ -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "emby.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "emby.service" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "emby.persistence" $ | fromYaml) -}}
+
+{{/* Create the configmap for portal manually*/}}
+{{- include "emby.portal" $ -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}

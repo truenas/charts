@@ -1,0 +1,10 @@
+embyNetwork:
+  webPort: 31000
+
+embyID:
+  user: 1000
+  group: 1000
+
+embyStorage:
+  config:
+    type: pvc
