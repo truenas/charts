@@ -1,0 +1,13 @@
+palworldNetwork:
+  serverPort: 32211
+  rconPort: 32212
+
+palworldID:
+  user: 1000
+  group: 1000
+
+palworldStorage:
+  steamcmd:
+    type: pvc
+  server:
+    type: pvc

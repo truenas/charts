@@ -1,0 +1,10 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{- include "palworld.validation" $ -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "palworld.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "palworld.service" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "palworld.persistence" $ | fromYaml) -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}
