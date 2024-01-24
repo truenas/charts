@@ -58,6 +58,7 @@ def migrate_common_lib(values):
                 for e in values.get('extraAppVolumeMounts', [])
             ],
         },
+        'embyGPU': values.get('gpuConfiguration', {}),
     })
 
     for k in delete_keys:
