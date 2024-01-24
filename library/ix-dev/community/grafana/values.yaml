@@ -1,7 +1,7 @@
 image:
   repository: grafana/grafana
   pullPolicy: IfNotPresent
-  tag: 10.2.3
+  tag: 10.3.1
 
 resources:
   limits:
