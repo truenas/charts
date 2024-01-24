@@ -3,7 +3,7 @@ plexNetwork:
   hostNetwork: true
 
 plexStorage:
-  plex:
+  data:
     type: pvc
   config:
     type: pvc
