@@ -25,6 +25,7 @@ workload:
                 - FOWNER
                 - SETGID
                 - SETUID
+                - SYS_RESOURCE
                 - KILL
           env:
             STEAMCMD_DIR: /serverdata/steamcmd
