@@ -1,26 +1,26 @@
 {
-    "1.1.11": {
+    "1.0.0": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/joplin/1.1.11",
-        "last_update": "2024-01-24 08:11:16",
+        "location": "/__w/charts/charts/community/palworld/1.0.0",
+        "last_update": "2024-01-24 08:12:40",
         "required_features": [
             "normalize/ixVolume",
             "normalize/acl"
         ],
-        "human_version": "2.14.2_1.1.11",
-        "version": "1.1.11",
+        "human_version": "palworld_1.0.0",
+        "version": "1.0.0",
         "chart_metadata": {
-            "name": "joplin",
-            "description": "Joplin is an open source note-taking app. Capture your thoughts and securely access them from any device",
+            "name": "palworld",
+            "description": "Palworld is a multiplayer, open-world survival crafting game where you befriend and collect mysterious creatures called \"Pals\".",
             "annotations": {
-                "title": "Joplin"
+                "title": "Palworld"
             },
             "type": "application",
-            "version": "1.1.11",
+            "version": "1.0.0",
             "apiVersion": "v2",
-            "appVersion": "2.14.2",
+            "appVersion": "palworld",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
@@ -36,85 +36,189 @@
                     "version": "1.2.9"
                 }
             ],
-            "home": "https://joplinapp.org/",
-            "icon": "https://media.sys.truenas.net/apps/joplin/icons/icon.png",
+            "home": "https://www.pocketpair.jp/palworld",
+            "icon": "https://media.sys.truenas.net/apps/palworld/icons/icon.webp",
             "sources": [
-                "https://github.com/laurent22/joplin",
-                "https://github.com/truenas/charts/tree/master/library/ix-dev/community/joplin",
-                "https://hub.docker.com/r/joplin/server/"
+                "https://www.pocketpair.jp/palworld",
+                "https://github.com/truenas/charts/tree/master/library/ix-dev/community/palworld",
+                "https://github.com/ich777/docker-steamcmd-server/tree/palworld"
             ],
             "keywords": [
-                "notes"
+                "game",
+                "palworld"
             ]
         },
         "app_metadata": {
             "runAsContext": [
                 {
-                    "userName": "joplin",
-                    "groupName": "joplin",
-                    "gid": 1001,
-                    "uid": 1001,
-                    "description": "Joplin can run as a non-root user."
+                    "userName": "root",
+                    "groupName": "root",
+                    "gid": 0,
+                    "uid": 0,
+                    "description": "Palworld runs as root user."
                 }
             ],
-            "capabilities": [],
+            "capabilities": [
+                {
+                    "name": "CHOWN",
+                    "description": "Palworld is able to change file ownership."
+                },
+                {
+                    "name": "DAC_OVERRIDE",
+                    "description": "Palworld is able to bypass file read, write, and execute permission checks."
+                },
+                {
+                    "name": "FOWNER",
+                    "description": "Palworld is able to bypass permission checks on operations that normally require the file system UID of the process to match the UID of the file."
+                },
+                {
+                    "name": "SETUID",
+                    "description": "Palworld is able to set the setuid attribute on a file."
+                },
+                {
+                    "name": "SETGID",
+                    "description": "Palworld is able to set the setgid attribute on a file."
+                },
+                {
+                    "name": "KILL",
+                    "description": "Palworld is able to send signals to processes owned by others."
+                }
+            ],
             "hostMounts": []
         },
         "schema": {
             "groups": [
                 {
-                    "name": "Joplin Configuration",
-                    "description": "Configure Joplin"
+                    "name": "Palworld Configuration",
+                    "description": "Configure Palworld"
+                },
+                {
+                    "name": "User and Group Configuration",
+                    "description": "Configure User and Group for Palworld"
                 },
                 {
                     "name": "Network Configuration",
-                    "description": "Configure Network for Joplin"
+                    "description": "Configure Network for Palworld"
                 },
                 {
                     "name": "Storage Configuration",
-                    "description": "Configure Storage for Joplin"
+                    "description": "Configure Storage for Palworld"
                 },
                 {
                     "name": "Resources Configuration",
-                    "description": "Configure Resources for Joplin"
+                    "description": "Configure Resources for Palworld"
                 }
             ],
-            "portals": {
-                "web_portal": {
-                    "protocols": [
-                        "$kubernetes-resource_configmap_portal_protocol"
-                    ],
-                    "host": [
-                        "$kubernetes-resource_configmap_portal_host"
-                    ],
-                    "ports": [
-                        "$kubernetes-resource_configmap_portal_port"
-                    ],
-                    "path": "$kubernetes-resource_configmap_portal_path"
-                }
-            },
             "questions": [
                 {
-                    "variable": "joplinConfig",
+                    "variable": "palworldConfig",
                     "label": "",
-                    "group": "Joplin Configuration",
+                    "group": "Palworld Configuration",
                     "schema": {
                         "type": "dict",
                         "attrs": [
                             {
-                                "variable": "baseUrl",
-                                "label": "Base URL",
-                                "description": "The base URL for Joplin.</br>\nExamples:</br>\nhttps://joplin.example.com\nhttp://192.168.1.100:30062\n",
+                                "variable": "adminPassword",
+                                "label": "Admin Password",
+                                "description": "Your server admin password",
                                 "schema": {
-                                    "type": "uri",
+                                    "type": "string",
+                                    "private": true,
+                                    "default": ""
+                                }
+                            },
+                            {
+                                "variable": "gameParams",
+                                "label": "Game Parameters",
+                                "description": "Enter your game parameters </br>\nFormat: EpicApp=PalServer\n",
+                                "schema": {
+                                    "type": "list",
+                                    "default": [
+                                        "EpicApp=PalServer"
+                                    ],
+                                    "items": [
+                                        {
+                                            "variable": "gameParam",
+                                            "label": "Game Parameter",
+                                            "schema": {
+                                                "type": "string",
+                                                "required": true
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "gameParamsExtra",
+                                "label": "Extra Game Parameters",
+                                "description": "Enter your extra game parameters </br>\nFormat: -NoAsyncLoadingThread\n",
+                                "schema": {
+                                    "type": "list",
+                                    "default": [
+                                        "-No-useperfthreads",
+                                        "-NoAsyncLoadingThread",
+                                        "-UseMultithreadForDS"
+                                    ],
+                                    "items": [
+                                        {
+                                            "variable": "gameParamExtra",
+                                            "label": "Extra Game Parameter",
+                                            "schema": {
+                                                "type": "string",
+                                                "required": true
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "updatePublicIP",
+                                "label": "Update Public IP",
+                                "description": "If enabled the container will check on each container\nstart if the Public IP is still valid.\n",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "variable": "validate",
+                                "label": "Validate",
+                                "description": "If enabled the container validates the game data",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "variable": "username",
+                                "label": "Username",
+                                "description": "Leave blank for anonymous login",
+                                "schema": {
+                                    "type": "string",
+                                    "default": ""
+                                }
+                            },
+                            {
+                                "variable": "password",
+                                "label": "Password",
+                                "description": "Leave blank for anonymous login",
+                                "schema": {
+                                    "type": "string",
                                     "default": "",
-                                    "required": true
+                                    "show_if": [
+                                        [
+                                            "username",
+                                            "!=",
+                                            ""
+                                        ]
+                                    ],
+                                    "private": true
                                 }
                             },
                             {
                                 "variable": "additionalEnvs",
                                 "label": "Additional Environment Variables",
-                                "description": "Configure additional environment variables for Joplin.",
+                                "description": "Configure additional environment variables for Palworld.",
                                 "schema": {
                                     "type": "list",
                                     "default": [],
@@ -151,19 +255,63 @@
                     }
                 },
                 {
-                    "variable": "joplinNetwork",
+                    "variable": "palworldID",
+                    "label": "",
+                    "group": "User and Group Configuration",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "user",
+                                "label": "User ID",
+                                "description": "The user id that Palworld files will be owned by.",
+                                "schema": {
+                                    "type": "int",
+                                    "min": 568,
+                                    "default": 568,
+                                    "required": true
+                                }
+                            },
+                            {
+                                "variable": "group",
+                                "label": "Group ID",
+                                "description": "The group id that Palworld files will be owned by.",
+                                "schema": {
+                                    "type": "int",
+                                    "min": 568,
+                                    "default": 568,
+                                    "required": true
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "palworldNetwork",
                     "label": "",
                     "group": "Network Configuration",
                     "schema": {
                         "type": "dict",
                         "attrs": [
                             {
-                                "variable": "webPort",
-                                "label": "Web Port",
-                                "description": "The port for the Joplin Web UI.",
+                                "variable": "serverPort",
+                                "label": "Server Port",
+                                "description": "The UDP port for the Palworld Server.",
                                 "schema": {
                                     "type": "int",
-                                    "default": 30062,
+                                    "default": 38211,
+                                    "min": 9000,
+                                    "max": 65535,
+                                    "required": true
+                                }
+                            },
+                            {
+                                "variable": "rconPort",
+                                "label": "RCON Port",
+                                "description": "The TCP port for the Palworld RCON.",
+                                "schema": {
+                                    "type": "int",
+                                    "default": 38212,
                                     "min": 9000,
                                     "max": 65535,
                                     "required": true
@@ -172,7 +320,7 @@
                             {
                                 "variable": "hostNetwork",
                                 "label": "Host Network",
-                                "description": "Bind to the host network. It's recommended to keep this disabled.</br>\n",
+                                "description": "Bind to the host network. It might be needed for the UDP server port to work.\n",
                                 "schema": {
                                     "type": "boolean",
                                     "default": false
@@ -182,16 +330,16 @@
                     }
                 },
                 {
-                    "variable": "joplinStorage",
+                    "variable": "palworldStorage",
                     "label": "",
                     "group": "Storage Configuration",
                     "schema": {
                         "type": "dict",
                         "attrs": [
                             {
-                                "variable": "pgData",
-                                "label": "Joplin Postgres Data Storage",
-                                "description": "The path to store Joplin Postgres Data.",
+                                "variable": "steamcmd",
+                                "label": "Palworld SteamCMD Storage",
+                                "description": "The path to store Palworld SteamCMD.",
                                 "schema": {
                                     "type": "dict",
                                     "attrs": [
@@ -222,7 +370,6 @@
                                             "description": "The configuration for the ixVolume dataset.",
                                             "schema": {
                                                 "type": "dict",
-                                                "hidden": true,
                                                 "show_if": [
                                                     [
                                                         "type",
@@ -240,7 +387,6 @@
                                                         "description": "Enable ACL for the dataset.",
                                                         "schema": {
                                                             "type": "boolean",
-                                                            "hidden": true,
                                                             "default": false
                                                         }
                                                     },
@@ -253,7 +399,7 @@
                                                             "required": true,
                                                             "immutable": true,
                                                             "hidden": true,
-                                                            "default": "pgData"
+                                                            "default": "steamcmd"
                                                         }
                                                     },
                                                     {
@@ -371,7 +517,6 @@
                                                         "description": "Enable ACL for the dataset.",
                                                         "schema": {
                                                             "type": "boolean",
-                                                            "hidden": true,
                                                             "default": false
                                                         }
                                                     },
@@ -513,9 +658,9 @@
                                 }
                             },
                             {
-                                "variable": "pgBackup",
-                                "label": "Joplin Postgres Backup Storage",
-                                "description": "The path to store Joplin Postgres Backup.",
+                                "variable": "server",
+                                "label": "Palworld Server Storage",
+                                "description": "The path to store Palworld Server.",
                                 "schema": {
                                     "type": "dict",
                                     "attrs": [
@@ -541,12 +686,20 @@
                                             }
                                         },
                                         {
+                                            "variable": "readOnly",
+                                            "label": "Read Only",
+                                            "description": "Mount the volume as read only.",
+                                            "schema": {
+                                                "type": "boolean",
+                                                "default": false
+                                            }
+                                        },
+                                        {
                                             "variable": "ixVolumeConfig",
                                             "label": "ixVolume Configuration",
                                             "description": "The configuration for the ixVolume dataset.",
                                             "schema": {
                                                 "type": "dict",
-                                                "hidden": true,
                                                 "show_if": [
                                                     [
                                                         "type",
@@ -564,7 +717,6 @@
                                                         "description": "Enable ACL for the dataset.",
                                                         "schema": {
                                                             "type": "boolean",
-                                                            "hidden": true,
                                                             "default": false
                                                         }
                                                     },
@@ -577,7 +729,7 @@
                                                             "required": true,
                                                             "immutable": true,
                                                             "hidden": true,
-                                                            "default": "pgBackup"
+                                                            "default": "server"
                                                         }
                                                     },
                                                     {
@@ -695,7 +847,6 @@
                                                         "description": "Enable ACL for the dataset.",
                                                         "schema": {
                                                             "type": "boolean",
-                                                            "hidden": true,
                                                             "default": false
                                                         }
                                                     },
@@ -839,7 +990,7 @@
                             {
                                 "variable": "additionalStorages",
                                 "label": "Additional Storage",
-                                "description": "Additional storage for Joplin.",
+                                "description": "Additional storage for Palworld.",
                                 "schema": {
                                     "type": "list",
                                     "default": [],
@@ -1280,7 +1431,7 @@
                                         {
                                             "variable": "cpu",
                                             "label": "CPU",
-                                            "description": "CPU limit for Joplin.",
+                                            "description": "CPU limit for Palworld.",
                                             "schema": {
                                                 "type": "string",
                                                 "max_length": 6,
@@ -1293,7 +1444,7 @@
                                         {
                                             "variable": "memory",
                                             "label": "Memory",
-                                            "description": "Memory limit for Joplin.",
+                                            "description": "Memory limit for Palworld.",
                                             "schema": {
                                                 "type": "string",
                                                 "max_length": 12,
@@ -1311,8 +1462,8 @@
                 }
             ]
         },
-        "app_readme": "<h1>Joplin</h1>\n<p><a href=\"https://joplinapp.org\">Joplin</a> is an open source note-taking app. Capture your thoughts and securely access them from any device</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>postgres</code> directories.\nAfterward, the <code>postgres</code> container will run as a <strong>non</strong>-root user (<code>999</code>).\nOn each upgrade, a container will be launched with <strong>root</strong> privileges in order to apply the correct\npermissions to the <code>postgres</code> <strong>backups</strong> directory. Container that performs the backup will run as a <strong>non</strong>-root user (<code>999</code>) afterwards.\nKeep in mind the permissions on the backup directory will be changed to <code>999:999</code> on <strong>every</strong> update.\nBut will only be changed once for the <code>postgres</code> data directories.</p>\n</blockquote>",
-        "detailed_readme": "<h1>Joplin</h1>\n<p><a href=\"https://joplinapp.org\">Joplin</a> is an open source note-taking app. Capture your thoughts and securely access them from any device</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>postgres</code> directories.\nAfterward, the <code>postgres</code> container will run as a <strong>non</strong>-root user (<code>999</code>).\nOn each upgrade, a container will be launched with <strong>root</strong> privileges in order to apply the correct\npermissions to the <code>postgres</code> <strong>backups</strong> directory. Container that performs the backup will run as a <strong>non</strong>-root user (<code>999</code>) afterwards.\nKeep in mind the permissions on the backup directory will be changed to <code>999:999</code> on <strong>every</strong> update.\nBut will only be changed once for the <code>postgres</code> data directories.</p>\n</blockquote>",
+        "app_readme": "<h1>Palworld</h1>\n<p><a href=\"https://www.pocketpair.jp/palworld\">Palworld</a> is a multiplayer, open-world survival crafting game where you befriend and collect mysterious creatures called \"Pals\".</p>",
+        "detailed_readme": "<h1>Palworld</h1>\n<p><a href=\"https://www.pocketpair.jp/palworld\">Palworld</a> is a multiplayer, open-world survival crafting game where you befriend and collect mysterious creatures called \"Pals\".</p>",
         "changelog": null
     }
 }
