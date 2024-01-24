@@ -19,6 +19,13 @@ persistence:
       n8n:
         n8n:
           mountPath: /tmp
+  cache:
+    enabled: true
+    type: emptyDir
+    targetSelector:
+      n8n:
+        n8n:
+          mountPath: /.cache
   {{- range $idx, $storage := .Values.n8nStorage.additionalStorages }}
   {{ printf "n8n-%v:" (int $idx) }}
     enabled: true
