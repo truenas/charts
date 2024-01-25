@@ -3,7 +3,7 @@ description: Emby is designed to help you manage your personal media library, su
 annotations:
   title: Emby Server
 type: application
-version: 2.0.0
+version: 2.0.1
 apiVersion: v2
 appVersion: 4.7.14.0
 kubeVersion: '>=1.16.0-0'
@@ -18,7 +18,9 @@ dependencies:
 home: https://emby.media/
 icon: https://media.sys.truenas.net/apps/emby/icons/icon.png
 sources:
+  - https://emby.media/
   - https://hub.docker.com/r/emby/embyserver
+  - https://github.com/truenas/charts/tree/master/charts/emby
 keywords:
   - emby
   - media

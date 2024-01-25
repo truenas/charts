@@ -26,10 +26,12 @@ service:
         primary: true
         port: 1900
         targetPort: 1900
+        protocol: udp
         targetSelector: emby
       local-discovery:
         enabled: true
         port: 7359
         targetPort: 7359
+        protocol: udp
         targetSelector: emby
 {{- end -}}
