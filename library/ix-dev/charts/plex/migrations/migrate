@@ -20,7 +20,7 @@ def migrate_common_lib(values):
     delete_keys = [
         'hostNetwork', 'plexServiceTCP', 'updateStrategy', 'timezone', 'claimToken',
         'environmentVariables', 'gpuConfiguration', 'enableResourceLimits', 'cpuLimit',
-        'memLimit', 'dnsConfig', 'extraAppVolumeMounts', 'appVolumeMounts',
+        'memLimit', 'dnsConfig', 'extraAppVolumeMounts', 'appVolumeMounts', 'enablePlexPass'
     ]
 
     values.update({
