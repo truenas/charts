@@ -1,0 +1,7 @@
+embyNetwork:
+  webPort: 31000
+  hostNetwork: true
+
+embyStorage:
+  config:
+    type: pvc

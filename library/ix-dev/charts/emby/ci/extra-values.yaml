@@ -1,0 +1,11 @@
+embyNetwork:
+  webPort: 31000
+
+embyStorage:
+  config:
+    type: pvc
+  additionalStorages:
+  - type: pvc
+    mountPath: /action_movies
+  - type: pvc
+    mountPath: /adventure_movies

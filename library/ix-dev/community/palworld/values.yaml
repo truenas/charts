@@ -1,0 +1,43 @@
+image:
+  repository: ich777/steamcmd
+  pullPolicy: IfNotPresent
+  tag: palworld
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+palworldConfig:
+  adminPassword: ''
+  gameParams:
+    - EpicApp=PalServer
+  gameParamsExtra:
+    - -No-useperfthreads
+    - -NoAsyncLoadingThread
+    - -UseMultithreadForDS
+  updatePublicIP: false
+  validate: false
+  username: ''
+  password: ''
+  additionalEnvs: []
+
+palworldID:
+  user: 568
+  group: 568
+
+palworldNetwork:
+  serverPort: 38211
+  rconPort: 38212
+  hostNetwork: false
+
+palworldStorage:
+  steamcmd:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: config
+  server:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: storage
+  additionalStorages: []
