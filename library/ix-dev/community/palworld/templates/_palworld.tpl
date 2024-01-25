@@ -42,9 +42,9 @@ workload:
             VALIDATE: {{ .Values.palworldConfig.validate }}
             USERNAME: {{ .Values.palworldConfig.username }}
             PASSWORD: {{ .Values.palworldConfig.password }}
-            BACKUP: {{ .Values.palworldConfig.backup.enabled }}
-            BACKUP_INTERVAL: {{ .Values.palworldConfig.backup.interval }}
-            BACKUPS_TO_KEEP: {{ .Values.palworldConfig.backup.keep }}
+            BACKUP: {{ .Values.palworldConfig.backup.enabled | default false }}
+            BACKUP_INTERVAL: {{ .Values.palworldConfig.backup.interval | default 120 }}
+            BACKUPS_TO_KEEP: {{ .Values.palworldConfig.backup.keep | default 3 }}
           fixedEnv:
             PUID: {{ .Values.palworldID.user }}
           {{ with .Values.palworldConfig.additionalEnvs }}
