@@ -78,6 +78,7 @@ questions:
                   type: int
                   show_if: [["enabled", "=", true]]
                   default: 120
+                  required: true
                   min: 15
               - variable: keep
                 label: Keep
@@ -86,6 +87,7 @@ questions:
                   type: int
                   show_if: [["enabled", "=", true]]
                   default: 3
+                  required: true
                   min: 1
         - variable: gameParams
           label: Game Parameters
