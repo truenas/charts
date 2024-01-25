@@ -23,6 +23,29 @@ questions:
           schema:
             type: string
             private: true
+            required: true
+            default: ""
+        - variable: serverName
+          label: Server Name
+          description: Your server name
+          schema:
+            type: string
+            required: true
+            default: "TrueNAS Palworld Server"
+        - variable: serverDescription
+          label: Server Description
+          description: Your server description
+          schema:
+            type: string
+            required: true
+            default: "Palworld Server running on TrueNAS"
+        - variable: serverPassword
+          label: Server Password
+          description: |
+            Your server password, leave blank for no password
+          schema:
+            type: string
+            private: true
             default: ""
         - variable: gameParams
           label: Game Parameters

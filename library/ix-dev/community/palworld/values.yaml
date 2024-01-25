@@ -10,6 +10,9 @@ resources:
 
 palworldConfig:
   adminPassword: ''
+  serverName: TrueNAS Palworld Server
+  serverDescription: Palworld Server running on TrueNAS
+  serverPassword: ''
   gameParams:
     - EpicApp=PalServer
   gameParamsExtra:

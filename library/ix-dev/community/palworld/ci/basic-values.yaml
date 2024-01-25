@@ -11,3 +11,6 @@ palworldStorage:
     type: pvc
   server:
     type: pvc
+
+palworldConfig:
+  adminPassword: secret

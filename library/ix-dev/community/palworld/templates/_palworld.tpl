@@ -31,7 +31,7 @@ workload:
             STEAMCMD_DIR: /serverdata/steamcmd
             {{- $srvDir := "/serverdata/serverfiles" }}
             SERVER_DIR: {{ $srvDir }}
-            SRV_ADMIN_PWD: {{ .Values.palworldConfig.adminPassword }}
+            SRV_ADMIN_PWD:
             GAME_PARAMS: {{ join " " .Values.palworldConfig.gameParams }}
             GAME_PARAMS_EXTRA: {{ join " " .Values.palworldConfig.gameParamsExtra }}
             UPDATE_PUBLIC_IP: {{ .Values.palworldConfig.updatePublicIP }}
@@ -96,5 +96,17 @@ workload:
               echo "Setting Game Port..."
               sed -i 's/\(PublicPort=\)[^,]*/\1{{ .Values.palworldNetwork.serverPort }}/g' ${cfgFile}
               echo "Set to [$(grep -Po 'PublicPort=[^,]*' ${cfgFile})]"
+              echo "Setting Server Name..."
+              sed -i 's/\(ServerName=\)[^,]*/\1{{ .Values.palworldConfig.serverName | quote }}/g' ${cfgFile}
+              echo "Set to [$(grep -Po 'ServerName=[^,]*' ${cfgFile})]"
+              echo "Setting Server Description..."
+              sed -i 's/\(ServerDescription=\)[^,]*/\1{{ .Values.palworldConfig.serverDescription | quote }}/g' ${cfgFile}
+              echo "Set to [$(grep -Po 'ServerDescription=[^,]*' ${cfgFile})]"
+              echo "Setting Server Password..."
+              sed -i 's/\(ServerPassword=\)[^,]*/\1{{ .Values.palworldConfig.serverPassword | quote }}/g' ${cfgFile}
+              echo "Server Password set..."
+              echo "Setting Admin Password..."
+              sed -i 's/\(AdminPassword=\)[^,]*/\1{{ .Values.palworldConfig.adminPassword | quote }}/g' ${cfgFile}
+              echo "Admin Password set..."
               echo "Done!"
 {{- end -}}
