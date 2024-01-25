@@ -18,10 +18,11 @@ workload:
             readOnlyRootFilesystem: false
             capabilities:
               add:
-                - NET_BIND_SERVICE
+                - CHOWN
                 - SETGID
                 - SETUID
                 - SYS_CHROOT
+                - NET_BIND_SERVICE
           env:
             NGINX_PORT: {{ .Values.netbootNetwork.webAssetsPort }}
             TFTPD_OPTS: {{ join " " .Values.netbootConfig.tftpdOpts }}
