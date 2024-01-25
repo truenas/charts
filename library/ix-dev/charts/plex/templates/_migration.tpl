@@ -26,7 +26,7 @@
     {{/* If new is v2.x.x */}}
     {{- if eq ($newV.Major | int) 2 -}}
       {{/* And old is v1.x.x, but lower than .7.60 */}}
-      {{- if and (eq $oldV.Major 1) (lt $oldV.Minor 7) (lt ($oldV.Patch | int) 60) -}}
+      {{- if and (eq $oldV.Major 1) (or (ne $oldV.Minor 7) (lt ($oldV.Patch | int) 60)) -}}
         {{/* Block the upgrade */}}
         {{- fail "Migration to 2.x.x is only allowed from 1.7.60 or higher" -}}
       {{- end -}}
