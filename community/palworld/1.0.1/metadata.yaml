@@ -15,6 +15,8 @@ capabilities:
     description: Palworld is able to set the setuid attribute on a file.
   - name: SETGID
     description: Palworld is able to set the setgid attribute on a file.
+  - name: SYS_RESOURCE
+    description: Palworld is able to override resource limits.
   - name: KILL
     description: Palworld is able to send signals to processes owned by others.
 hostMounts: []

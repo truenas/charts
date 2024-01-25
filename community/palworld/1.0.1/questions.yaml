@@ -47,7 +47,7 @@ questions:
           schema:
             type: list
             default:
-              - -No-useperfthreads
+              - -useperfthreads
               - -NoAsyncLoadingThread
               - -UseMultithreadForDS
             items:
