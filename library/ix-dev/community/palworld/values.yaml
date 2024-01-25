@@ -10,9 +10,10 @@ resources:
 
 palworldConfig:
   adminPassword: ''
-  serverName: TrueNAS Palworld Server
-  serverDescription: Palworld Server running on TrueNAS
-  serverPassword: ''
+  server:
+    name: TrueNAS Palworld Server
+    description: Palworld Server running on TrueNAS
+    password: ''
   backup:
     enabled: false
     interval: 60

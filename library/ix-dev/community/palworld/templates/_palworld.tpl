@@ -104,13 +104,13 @@ workload:
               sed -i 's/\(PublicPort=\)[^,]*/\1{{ .Values.palworldNetwork.serverPort }}/g' ${cfgFile}
               echo "Set to [$(grep -Po 'PublicPort=[^,]*' ${cfgFile})]"
               echo "Setting Server Name..."
-              sed -i 's/\(ServerName=\)[^,]*/\1{{ .Values.palworldConfig.serverName | quote }}/g' ${cfgFile}
+              sed -i 's/\(ServerName=\)[^,]*/\1{{ .Values.palworldConfig.server.name | quote }}/g' ${cfgFile}
               echo "Set to [$(grep -Po 'ServerName=[^,]*' ${cfgFile})]"
               echo "Setting Server Description..."
-              sed -i 's/\(ServerDescription=\)[^,]*/\1{{ .Values.palworldConfig.serverDescription | quote }}/g' ${cfgFile}
+              sed -i 's/\(ServerDescription=\)[^,]*/\1{{ .Values.palworldConfig.server.description | quote }}/g' ${cfgFile}
               echo "Set to [$(grep -Po 'ServerDescription=[^,]*' ${cfgFile})]"
               echo "Setting Server Password..."
-              sed -i 's/\(ServerPassword=\)[^,]*/\1{{ .Values.palworldConfig.serverPassword | quote }}/g' ${cfgFile}
+              sed -i 's/\(ServerPassword=\)[^,]*/\1{{ .Values.palworldConfig.server.password | quote }}/g' ${cfgFile}
               echo "Server Password set..."
               echo "Setting Admin Password..."
               sed -i 's/\(AdminPassword=\)[^,]*/\1{{ .Values.palworldConfig.adminPassword | quote }}/g' ${cfgFile}

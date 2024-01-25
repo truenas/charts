@@ -28,31 +28,37 @@ questions:
             valid_chars: "[a-zA-Z0-9!@#%-_]*"
             valid_chars_error: |
               Can contain at numbers, letters, and the following characters: !@#%-_
-        - variable: serverName
-          label: Server Name
-          description: Your server name
+        - variable: server
+          label: Server Configuration
+          description: Configure the server for Palworld
           schema:
-            type: string
-            required: true
-            default: "TrueNAS Palworld Server"
-        - variable: serverDescription
-          label: Server Description
-          description: Your server description
-          schema:
-            type: string
-            required: true
-            default: "Palworld Server running on TrueNAS"
-        - variable: serverPassword
-          label: Server Password
-          description: |
-            Your server password, leave blank for no password
-          schema:
-            type: string
-            private: true
-            default: ""
-            valid_chars: "[a-zA-Z0-9!@#%-_]*"
-            valid_chars_error: |
-              Can contain at numbers, letters, and the following characters: !@#%-_
+            type: dict
+            attrs:
+              - variable: name
+                label: Server Name
+                description: Your server name
+                schema:
+                  type: string
+                  required: true
+                  default: "TrueNAS Palworld Server"
+              - variable: description
+                label: Server Description
+                description: Your server description
+                schema:
+                  type: string
+                  required: true
+                  default: "Palworld Server running on TrueNAS"
+              - variable: password
+                label: Server Password
+                description: |
+                  Your server password, leave blank for no password
+                schema:
+                  type: string
+                  private: true
+                  default: ""
+                  valid_chars: "[a-zA-Z0-9!@#%-_]*"
+                  valid_chars_error: |
+                    Can contain at numbers, letters, and the following characters: !@#%-_
         - variable: backup
           label: Backup
           description: Configure the backup for Palworld
