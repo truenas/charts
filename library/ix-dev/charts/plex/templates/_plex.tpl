@@ -27,7 +27,7 @@ workload:
                 - SETUID
                 - KILL
           env:
-            PLEX_CLAIM: {{ .Values.plexConfig.claim }}
+            PLEX_CLAIM: {{ .Values.plexConfig.claimToken }}
           fixedEnv:
             PUID: {{ .Values.plexID.user }}
             PLEX_UID: {{ .Values.plexID.user }}

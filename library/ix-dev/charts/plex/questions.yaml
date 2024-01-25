@@ -39,7 +39,7 @@ questions:
     schema:
       type: dict
       attrs:
-        - variable: claim
+        - variable: claimToken
           label: Claim Token
           description: |
             The claim token for the server to obtain a real server token.

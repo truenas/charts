@@ -56,7 +56,7 @@ def migrate_common_lib(values):
         'TZ': values['timezone'],
         'plexConfig': {
             'imageSelector': 'plexPassImage' if values['enablePlexPass'] else 'image',
-            'claim': values['claimToken'],
+            'claimToken': values['claimToken'],
             'additionalEnvs': values.get('environmentVariables', []),
         },
         'plexGPU': values.get('gpuConfiguration', {}),
