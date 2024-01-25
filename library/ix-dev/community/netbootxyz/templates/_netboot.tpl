@@ -19,10 +19,12 @@ workload:
             capabilities:
               add:
                 - CHOWN
+                - DAC_OVERRIDE
+                - FOWNER
                 - SETGID
                 - SETUID
-                - SYS_CHROOT
                 - NET_BIND_SERVICE
+                - KILL
           env:
             NGINX_PORT: {{ .Values.netbootNetwork.webAssetsPort }}
             TFTPD_OPTS: {{ join " " .Values.netbootConfig.tftpdOpts }}
@@ -37,13 +39,25 @@ workload:
             liveness:
               enabled: true
               type: exec
-              command: /usr/local/bin/docker-healthcheck.sh
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  pgrep in.tftpd
             readiness:
               enabled: true
               type: exec
-              command: /usr/local/bin/docker-healthcheck.sh
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  pgrep in.tftpd
             startup:
               enabled: true
               type: exec
-              command: /usr/local/bin/docker-healthcheck.sh
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  pgrep in.tftpd
 {{- end -}}

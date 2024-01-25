@@ -14,6 +14,27 @@ persistence:
       netboot:
         netboot:
           mountPath: /assets
+  tmp:
+    enabled: true
+    type: emptyDir
+    targetSelector:
+      netboot:
+        netboot:
+          mountPath: /tmp
+  varlognginx:
+    enabled: true
+    type: emptyDir
+    targetSelector:
+      netboot:
+        netboot:
+          mountPath: /var/log/nginx
+  vartmpnginx:
+    enabled: true
+    type: emptyDir
+    targetSelector:
+      netboot:
+        netboot:
+          mountPath: /var/tmp/nginx
   {{- range $idx, $storage := .Values.netbootStorage.additionalStorages }}
   {{ printf "netboot-%v" (int $idx) }}:
     enabled: true
