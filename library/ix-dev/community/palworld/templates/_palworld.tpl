@@ -31,6 +31,11 @@ workload:
             STEAMCMD_DIR: /serverdata/steamcmd
             {{- $srvDir := "/serverdata/serverfiles" }}
             SERVER_DIR: {{ $srvDir }}
+            # This var does not seem to be used from the container script
+            # But is documented in the README, we currently update the password
+            # with the initContainer, keeping this here to avoid inconsistencies
+            # in case the container script is updated
+            SRV_ADMIN_PWD: {{ .Values.palworldConfig.adminPassword }}
             GAME_PARAMS: {{ join " " .Values.palworldConfig.gameParams }}
             GAME_PARAMS_EXTRA: {{ join " " .Values.palworldConfig.gameParamsExtra }}
             UPDATE_PUBLIC_IP: {{ .Values.palworldConfig.updatePublicIP }}
