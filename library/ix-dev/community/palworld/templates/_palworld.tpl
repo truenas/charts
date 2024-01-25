@@ -31,7 +31,6 @@ workload:
             STEAMCMD_DIR: /serverdata/steamcmd
             {{- $srvDir := "/serverdata/serverfiles" }}
             SERVER_DIR: {{ $srvDir }}
-            SRV_ADMIN_PWD:
             GAME_PARAMS: {{ join " " .Values.palworldConfig.gameParams }}
             GAME_PARAMS_EXTRA: {{ join " " .Values.palworldConfig.gameParamsExtra }}
             UPDATE_PUBLIC_IP: {{ .Values.palworldConfig.updatePublicIP }}
