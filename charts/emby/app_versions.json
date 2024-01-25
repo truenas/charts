@@ -1,17 +1,17 @@
 {
-    "2.0.0": {
+    "2.0.1": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/emby/2.0.0",
-        "last_update": "2024-01-24 11:29:55",
+        "location": "/__w/charts/charts/charts/emby/2.0.1",
+        "last_update": "2024-01-25 10:23:24",
         "required_features": [
-            "normalize/ixVolume",
+            "normalize/acl",
             "definitions/gpuConfiguration",
-            "normalize/acl"
+            "normalize/ixVolume"
         ],
-        "human_version": "4.7.14.0_2.0.0",
-        "version": "2.0.0",
+        "human_version": "4.7.14.0_2.0.1",
+        "version": "2.0.1",
         "chart_metadata": {
             "name": "emby",
             "description": "Emby is designed to help you manage your personal media library, such as home videos and photos",
@@ -19,7 +19,7 @@
                 "title": "Emby Server"
             },
             "type": "application",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "apiVersion": "v2",
             "appVersion": "4.7.14.0",
             "kubeVersion": ">=1.16.0-0",
@@ -40,7 +40,9 @@
             "home": "https://emby.media/",
             "icon": "https://media.sys.truenas.net/apps/emby/icons/icon.png",
             "sources": [
-                "https://hub.docker.com/r/emby/embyserver"
+                "https://emby.media/",
+                "https://hub.docker.com/r/emby/embyserver",
+                "https://github.com/truenas/charts/tree/master/charts/emby"
             ],
             "keywords": [
                 "emby",
@@ -1059,10 +1061,10 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/emby/1.0.30",
-        "last_update": "2024-01-24 11:29:55",
+        "last_update": "2024-01-25 10:22:06",
         "required_features": [
-            "normalize/ixVolume",
-            "definitions/gpuConfiguration"
+            "definitions/gpuConfiguration",
+            "normalize/ixVolume"
         ],
         "human_version": "4.7.14.0_1.0.30",
         "version": "1.0.30",
