@@ -13,6 +13,10 @@ palworldConfig:
   serverName: TrueNAS Palworld Server
   serverDescription: Palworld Server running on TrueNAS
   serverPassword: ''
+  backup:
+    enabled: false
+    interval: 60
+    keep: 3
   gameParams:
     - EpicApp=PalServer
   gameParamsExtra:

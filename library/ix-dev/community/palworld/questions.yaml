@@ -47,6 +47,34 @@ questions:
             type: string
             private: true
             default: ""
+        - variable: backup
+          label: Backup
+          description: Configure the backup for Palworld
+          schema:
+            type: dict
+            attrs:
+              - variable: enabled
+                label: Enabled
+                description: Enable the backup for Palworld
+                schema:
+                  type: boolean
+                  default: false
+              - variable: interval
+                label: Interval
+                description: Interval in minutes to backup the server
+                schema:
+                  type: int
+                  show_if: [["enabled", "=", true]]
+                  default: 120
+                  min: 15
+              - variable: keep
+                label: Keep
+                description: How many backups to keep
+                schema:
+                  type: int
+                  show_if: [["enabled", "=", true]]
+                  default: 3
+                  min: 1
         - variable: gameParams
           label: Game Parameters
           description: |
