@@ -13,7 +13,7 @@ palworldConfig:
   gameParams:
     - EpicApp=PalServer
   gameParamsExtra:
-    - -No-useperfthreads
+    - -useperfthreads
     - -NoAsyncLoadingThread
     - -UseMultithreadForDS
   updatePublicIP: false
