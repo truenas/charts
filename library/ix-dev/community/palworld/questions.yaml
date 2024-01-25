@@ -25,6 +25,9 @@ questions:
             private: true
             required: true
             default: ""
+            valid_chars: "[a-zA-Z0-9!@#%-_]*"
+            valid_chars_error: |
+              Can contain at numbers, letters, and the following characters: !@#%-_
         - variable: serverName
           label: Server Name
           description: Your server name
@@ -47,6 +50,9 @@ questions:
             type: string
             private: true
             default: ""
+            valid_chars: "[a-zA-Z0-9!@#%-_]*"
+            valid_chars_error: |
+              Can contain at numbers, letters, and the following characters: !@#%-_
         - variable: backup
           label: Backup
           description: Configure the backup for Palworld
