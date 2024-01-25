@@ -25,13 +25,14 @@ workload:
                 - FOWNER
                 - SETGID
                 - SETUID
+                - SYS_RESOURCE
                 - KILL
           env:
             STEAMCMD_DIR: /serverdata/steamcmd
             {{- $srvDir := "/serverdata/serverfiles" }}
             SERVER_DIR: {{ $srvDir }}
             SRV_ADMIN_PWD: {{ .Values.palworldConfig.adminPassword }}
-            GAME_PARAMS: {{ join " " .Values.palworldNetwork.serverPort }}
+            GAME_PARAMS: {{ join " " .Values.palworldConfig.gameParams }}
             GAME_PARAMS_EXTRA: {{ join " " .Values.palworldConfig.gameParamsExtra }}
             UPDATE_PUBLIC_IP: {{ .Values.palworldConfig.updatePublicIP }}
             VALIDATE: {{ .Values.palworldConfig.validate }}
