@@ -14,3 +14,7 @@ palworldStorage:
 
 palworldConfig:
   adminPassword: secret
+  backup:
+    enabled: true
+    interval: 60
+    keep: 3
