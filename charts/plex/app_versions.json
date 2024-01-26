@@ -1,18 +1,18 @@
 {
-    "1.7.59": {
+    "1.7.60": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/plex/1.7.59",
-        "last_update": "2024-01-26 07:51:27",
+        "location": "/__w/charts/charts/charts/plex/1.7.60",
+        "last_update": "2024-01-26 08:07:26",
         "required_features": [
-            "definitions/gpuConfiguration",
-            "normalize/ixVolume",
             "definitions/timezone",
-            "validations/lockedHostPath"
+            "definitions/gpuConfiguration",
+            "validations/lockedHostPath",
+            "normalize/ixVolume"
         ],
-        "human_version": "1.32.8.7639_1.7.59",
-        "version": "1.7.59",
+        "human_version": "1.32.8.7639_1.7.60",
+        "version": "1.7.60",
         "chart_metadata": {
             "name": "plex",
             "description": "Plex Media Server",
@@ -20,7 +20,7 @@
                 "title": "Plex"
             },
             "type": "application",
-            "version": "1.7.59",
+            "version": "1.7.60",
             "apiVersion": "v2",
             "appVersion": "1.32.8.7639",
             "kubeVersion": ">=1.16.0-0",
