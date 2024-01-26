@@ -1,15 +1,16 @@
 {{- define "collabora.service" -}}
+{{- $cert := ne (toString .Values.collaboraNetwork.certificateID) "" }}
 service:
   collabora:
     enabled: true
     primary: true
-    type: {{ ternary "ClusterIP" "NodePort" .Values.collaboraNetwork.certificateID }}
+    type: {{ ternary "ClusterIP" "NodePort" $cert }}
     targetSelector: collabora
     ports:
       webui:
         enabled: true
         primary: true
-        port: {{ ternary 9980 .Values.collaboraNetwork.webPort .Values.collaboraNetwork.certificateID }}
+        port: {{ ternary 9980 .Values.collaboraNetwork.webPort $cert }}
         {{- if not .Values.collaboraNetwork.certificateID }}
         nodePort: {{ .Values.collaboraNetwork.webPort }}
         {{- end }}

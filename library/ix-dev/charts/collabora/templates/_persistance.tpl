@@ -40,7 +40,7 @@ persistence:
           mountPath: /etc/nginx
           readOnly: true
   {{- end }}
-  {{- range $idx, $storage := .Values.haStorage.additionalStorages }}
+  {{- range $idx, $storage := .Values.collaboraStorage.additionalStorages }}
   {{ printf "collabora-%v:" (int $idx) }}
     enabled: true
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}

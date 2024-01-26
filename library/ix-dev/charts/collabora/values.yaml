@@ -30,6 +30,7 @@ collaboraConfig:
     - --o:ssl.enable=false
     - --o:net.proto=IPv4
   serverName: ''
+  additionalEnvs: []
 
 collaboraNetwork:
   webPort: 31020

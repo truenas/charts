@@ -11,10 +11,6 @@
 {{- $_ := mustMergeOverwrite .Values (include "collabora.service" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "collabora.persistence" $ | fromYaml) -}}
 
-{{- if eq (include "collabora.is-migration" $) "true" }}
-  {{- $_ := set .Values.workload.postgres.podSpec.initContainers.permissions "type" "init" -}}
-{{- end }}
-
 {{/* Create the configmap for portal manually*/}}
 {{- include "collabora.portal" $ -}}
 
