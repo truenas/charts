@@ -18,6 +18,8 @@ workload:
             capabilities:
               add:
                 - CHOWN
+                - SETGID
+                - SETUID
             #     - NET_BIND_SERVICE
             #     - NET_RAW
           probes:
