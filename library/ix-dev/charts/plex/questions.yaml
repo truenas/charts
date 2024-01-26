@@ -327,9 +327,9 @@ questions:
                         type: hostpath
                         show_if: [["aclEnable", "=", false]]
                         required: true
-        - variable: transcodes
-          label: Plex Transcodes Storage
-          description: The path to store Plex Transcodes.
+        - variable: transcode
+          label: Plex Transcode Storage
+          description: The path to store Plex Transcode.
           schema:
             type: dict
             attrs:
@@ -374,7 +374,7 @@ questions:
                         required: true
                         immutable: true
                         hidden: true
-                        default: "transcodes"
+                        default: "transcode"
                     - variable: aclEntries
                       label: ACL Configuration
                       schema:
