@@ -15,8 +15,9 @@ workload:
             runAsGroup: 0
             runAsNonRoot: false
             readOnlyRootFilesystem: false
-            # capabilities:
-            #   add:
+            capabilities:
+              add:
+                - CHOWN
             #     - NET_BIND_SERVICE
             #     - NET_RAW
           probes:
