@@ -15,9 +15,12 @@ workload:
             runAsUser: 100
             runAsGroup: 101
             readOnlyRootFilesystem: false
+            privileged: false
+            allowPrivilegeEscalation: true
             capabilities:
               add:
                 - CHOWN
+                - SETPCAP
                 - FOWNER
                 - SYS_CHROOT
                 - MKNOD
