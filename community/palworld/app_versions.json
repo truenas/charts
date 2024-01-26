@@ -1,16 +1,16 @@
 {
-    "1.0.1": {
+    "1.0.2": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/palworld/1.0.1",
-        "last_update": "2024-01-25 12:51:11",
+        "location": "/__w/charts/charts/community/palworld/1.0.2",
+        "last_update": "2024-01-26 07:52:56",
         "required_features": [
-            "normalize/ixVolume",
-            "normalize/acl"
+            "normalize/acl",
+            "normalize/ixVolume"
         ],
-        "human_version": "palworld_1.0.1",
-        "version": "1.0.1",
+        "human_version": "palworld_1.0.2",
+        "version": "1.0.2",
         "chart_metadata": {
             "name": "palworld",
             "description": "Palworld is a multiplayer, open-world survival crafting game where you befriend and collect mysterious creatures called \"Pals\".",
@@ -18,7 +18,7 @@
                 "title": "Palworld"
             },
             "type": "application",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "apiVersion": "v2",
             "appVersion": "palworld",
             "kubeVersion": ">=1.16.0-0",
@@ -128,7 +128,107 @@
                                 "schema": {
                                     "type": "string",
                                     "private": true,
-                                    "default": ""
+                                    "required": true,
+                                    "default": "",
+                                    "valid_chars": "[a-zA-Z0-9!@#%-_]*",
+                                    "valid_chars_error": "Can contain at numbers, letters, and the following characters: !@#%-_\n"
+                                }
+                            },
+                            {
+                                "variable": "server",
+                                "label": "Server Configuration",
+                                "description": "Configure the server for Palworld",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "name",
+                                            "label": "Server Name",
+                                            "description": "Your server name",
+                                            "schema": {
+                                                "type": "string",
+                                                "required": true,
+                                                "default": "TrueNAS Palworld Server"
+                                            }
+                                        },
+                                        {
+                                            "variable": "description",
+                                            "label": "Server Description",
+                                            "description": "Your server description",
+                                            "schema": {
+                                                "type": "string",
+                                                "required": true,
+                                                "default": "Palworld Server running on TrueNAS"
+                                            }
+                                        },
+                                        {
+                                            "variable": "password",
+                                            "label": "Server Password",
+                                            "description": "Your server password, leave blank for no password\n",
+                                            "schema": {
+                                                "type": "string",
+                                                "private": true,
+                                                "default": "",
+                                                "valid_chars": "[a-zA-Z0-9!@#%-_]*",
+                                                "valid_chars_error": "Can contain at numbers, letters, and the following characters: !@#%-_\n"
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "backup",
+                                "label": "Backup",
+                                "description": "Configure the backup for Palworld",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "enabled",
+                                            "label": "Enabled",
+                                            "description": "Enable the backup for Palworld",
+                                            "schema": {
+                                                "type": "boolean",
+                                                "default": false
+                                            }
+                                        },
+                                        {
+                                            "variable": "interval",
+                                            "label": "Interval",
+                                            "description": "Interval in minutes to backup the server",
+                                            "schema": {
+                                                "type": "int",
+                                                "show_if": [
+                                                    [
+                                                        "enabled",
+                                                        "=",
+                                                        true
+                                                    ]
+                                                ],
+                                                "default": 120,
+                                                "required": true,
+                                                "min": 15
+                                            }
+                                        },
+                                        {
+                                            "variable": "keep",
+                                            "label": "Keep",
+                                            "description": "How many backups to keep",
+                                            "schema": {
+                                                "type": "int",
+                                                "show_if": [
+                                                    [
+                                                        "enabled",
+                                                        "=",
+                                                        true
+                                                    ]
+                                                ],
+                                                "default": 3,
+                                                "required": true,
+                                                "min": 1
+                                            }
+                                        }
+                                    ]
                                 }
                             },
                             {
