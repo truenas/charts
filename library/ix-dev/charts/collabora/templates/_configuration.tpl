@@ -35,7 +35,7 @@ configmap:
             gzip  on;
             client_body_temp_path /var/tmp/firmware;
             server {
-                server_name  nginx;
+                server_name  {{ $nginx }};
                 listen                 0.0.0.0:{{ .Values.collaboraNetwork.webPort }} default_server ssl http2;
                 ssl_certificate        "/etc/certs/server.crt";
                 ssl_certificate_key    "/etc/certs/server.key";
@@ -47,7 +47,7 @@ configmap:
                 add_header Strict-Transport-Security max-age=31536000;
                 location = /robots.txt {
                   add_header Content-Type text/plain;
-                  proxy_set_header Referer "http://nginx";
+                  proxy_set_header Referer {{ $nginx | quote }};
                   return 200 "User-agent: *\nDisallow: /loleaflet/*\n";
                 }
                 # static files

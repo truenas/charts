@@ -27,15 +27,15 @@ workload:
               enabled: true
               type: https
               path: /robots.txt
-              port: 443
+              port: {{ .Values.collaboraNetwork.webPort }}
             readiness:
               enabled: true
               type: https
               path: /robots.txt
-              port: 443
+              port: {{ .Values.collaboraNetwork.webPort }}
             startup:
               enabled: true
               type: https
               path: /robots.txt
-              port: 443
+              port: {{ .Values.collaboraNetwork.webPort }}
 {{- end -}}
