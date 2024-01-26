@@ -28,10 +28,10 @@ workload:
                 - KILL
           env:
             PLEX_CLAIM: {{ .Values.plexConfig.claimToken }}
-          fixedEnv:
-            PUID: {{ .Values.plexID.user }}
             PLEX_UID: {{ .Values.plexID.user }}
             PLEX_GID: {{ .Values.plexID.group }}
+          fixedEnv:
+            PUID: {{ .Values.plexID.user }}
           {{ with .Values.plexConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
