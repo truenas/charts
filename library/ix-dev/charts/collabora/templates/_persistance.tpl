@@ -37,7 +37,7 @@ persistence:
     targetSelector:
       nginx:
         nginx:
-          mountPath: /etc/nginx
+          mountPath: /etc/certs
           readOnly: true
   {{- end }}
   {{- range $idx, $storage := .Values.collaboraStorage.additionalStorages }}
