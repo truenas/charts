@@ -100,6 +100,5 @@ scaleCertificate:
   collabora-cert:
     enabled: true
     id: {{ .Values.collaboraNetwork.certificateID }}
-    {{- end -}}
   {{- end -}}
 {{- end -}}
