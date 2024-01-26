@@ -35,6 +35,13 @@ questions:
     schema:
       type: boolean
       default: false
+  - variable: testtext
+    label: "Test Text Field"
+    group: "Plex Configuration"
+    description: "This is to test text schema"
+    schema:
+      type: text
+      default: ""
   - variable: dnsConfig
     label: "DNS Configuration"
     group: "Advanced DNS Settings"
