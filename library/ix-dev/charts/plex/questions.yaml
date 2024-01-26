@@ -49,8 +49,7 @@ questions:
             by visiting https://www.plex.tv/claim.
           schema:
             type: string
-            empty: false
-            required: true
+            default: ""
             private: true
         - variable: imageSelector
           label: Image
