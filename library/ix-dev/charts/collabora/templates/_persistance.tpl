@@ -16,13 +16,11 @@ persistence:
     type: configmap
     objectName: nginx-conf
     defaultMode: "0600"
-    items:
-      - key: nginx.conf
-        path: nginx.conf
     targetSelector:
       nginx:
         nginx:
-          mountPath: /etc/nginx
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
           readOnly: true
   cert:
     enabled: true

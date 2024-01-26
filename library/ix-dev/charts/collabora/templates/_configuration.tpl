@@ -37,8 +37,8 @@ configmap:
             server {
                 server_name  nginx;
                 listen                 0.0.0.0:{{ .Values.collaboraNetwork.webPort }} default_server ssl http2;
-                ssl_certificate        "/etc/nginx/server.crt";
-                ssl_certificate_key    "/etc/nginx/server.key";
+                ssl_certificate        "/etc/certs/server.crt";
+                ssl_certificate_key    "/etc/certs/server.key";
                 ssl_session_timeout    120m;
                 ssl_session_cache      shared:ssl:16m;
                 ssl_protocols TLSv1.2 TLSv1.3;
