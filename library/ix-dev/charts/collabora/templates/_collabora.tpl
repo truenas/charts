@@ -35,7 +35,7 @@ workload:
             {{- else }}
             server_name: {{ .Values.collaboraConfig.serverName }}
             {{- end }}
-          {{ with .Values.haConfig.additionalEnvs }}
+          {{ with .Values.collaboraConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
             - name: {{ $env.name }}

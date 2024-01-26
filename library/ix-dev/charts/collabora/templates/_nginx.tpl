@@ -19,13 +19,6 @@ workload:
             #   add:
             #     - NET_BIND_SERVICE
             #     - NET_RAW
-          {{ with .Values.haConfig.additionalEnvs }}
-          envList:
-            {{ range $env := . }}
-            - name: {{ $env.name }}
-              value: {{ $env.value }}
-            {{ end }}
-          {{ end }}
           probes:
             liveness:
               enabled: true
