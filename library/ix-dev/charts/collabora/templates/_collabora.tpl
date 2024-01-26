@@ -13,12 +13,14 @@ workload:
           imageSelector: image
           securityContext:
             runAsUser: 100
-            runAsGroup: 102
+            runAsGroup: 101
             readOnlyRootFilesystem: false
-            # capabilities:
-            #   add:
-            #     - NET_BIND_SERVICE
-            #     - NET_RAW
+            capabilities:
+              add:
+                - CHOWN
+                - FOWNER
+                - SYS_CHROOT
+                - MKNOD
           env:
             timezone: {{ .Values.TZ }}
             aliasgroup1: {{ join "," .Values.collaboraConfig.aliasGroup1 }}
