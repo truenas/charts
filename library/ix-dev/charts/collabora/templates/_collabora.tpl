@@ -12,9 +12,8 @@ workload:
           primary: true
           imageSelector: image
           securityContext:
-            runAsUser: 0
-            runAsGroup: 0
-            runAsNonRoot: false
+            runAsUser: 100
+            runAsGroup: 102
             readOnlyRootFilesystem: false
             # capabilities:
             #   add:
