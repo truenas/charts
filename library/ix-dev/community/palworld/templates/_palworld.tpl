@@ -101,14 +101,14 @@ workload:
               set_ini_value() {
                 local key="${1}"
                 local value="${2}"
-                local print="${3:-true}"
+                local quote="${3:-false}"
+                local print="${4:-true}"
                 # -- Escape special characters for sed
                 escaped_value=$(printf '%s\n' "$value" | sed 's/[&/\]/\\&/g')
-                # -- Check if the value contains spaces or special characters
-                if echo "$escaped_value" | grep -vE "(T|t)rue|(F|f)alse" | grep -q '[[:space:]]\|[^\w.-]'; then
-                  # -- Add quotes around the value
-                  escaped_value="\"$escaped_value\""
+                if [ "$quote" = true ]; then
+                  escaped_value="\"${escaped_value}\""
                 fi
+
                 echo "Setting ${key}..."
                 sed -i "s|\(${key}=\)[^,]*|\1${escaped_value}|g" "${cfgFile}"
                 if [ "$print" = true ]; then
@@ -119,10 +119,10 @@ workload:
               set_ini_value "RCONEnabled" True
               set_ini_value "RCONPort" {{ .Values.palworldNetwork.rconPort }}
               set_ini_value "PublicPort" {{ .Values.palworldNetwork.serverPort }}
-              set_ini_value "ServerName" {{ .Values.palworldConfig.server.name | quote }}
-              set_ini_value "ServerDescription" {{ .Values.palworldConfig.server.description | quote }}
-              set_ini_value "ServerPassword" {{ .Values.palworldConfig.server.password | squote }} false
-              set_ini_value "AdminPassword" {{ .Values.palworldConfig.adminPassword | squote }} false
+              set_ini_value "ServerName" {{ .Values.palworldConfig.server.name | quote }} true
+              set_ini_value "ServerDescription" {{ .Values.palworldConfig.server.description | quote }} true
+              set_ini_value "ServerPassword" {{ .Values.palworldConfig.server.password | squote }} true false
+              set_ini_value "AdminPassword" {{ .Values.palworldConfig.adminPassword | squote }} true false
 
               {{- range $item := .Values.palworldConfig.iniKeys }}
                 {{- if mustHas (kindOf $item.value) (list "int" "int64" "float64") }}
@@ -133,7 +133,7 @@ workload:
                   set_ini_value "{{ $item.key }}" {{ (toString $item.value) | camelcase }}
                 {{- else }}
                   echo "Key {{ $item.key }} is a {{ kindOf $item.value }}, setting with quotes..."
-                  set_ini_value "{{ $item.key }}" {{ $item.value | quote }}
+                  set_ini_value "{{ $item.key }}" {{ $item.value | quote }} true
                 {{- end }}
               {{- end }}
 
