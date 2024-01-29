@@ -1,6 +1,9 @@
 collaboraConfig:
   username: 'my-username'
   password: 'my-password'
+  dictionaries:
+    - en_GB
+    - en_US
   aliasGroup1:
     - nc.example.com
     - other-nc.example.com

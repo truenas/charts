@@ -1,5 +1,5 @@
 {{- define "collabora.service" -}}
-{{- $hasCert := ne (toString .Values.collaboraNetwork.certificateID) "" }}
+{{- $hasCert := not (empty .Values.collaboraNetwork.certificateID) }}
 service:
   collabora:
     enabled: true

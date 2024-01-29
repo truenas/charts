@@ -20,8 +20,6 @@ workload:
                 - CHOWN
                 - SETGID
                 - SETUID
-            #     - NET_BIND_SERVICE
-            #     - NET_RAW
           probes:
             liveness:
               enabled: true

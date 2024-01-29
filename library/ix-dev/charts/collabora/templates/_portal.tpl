@@ -1,5 +1,5 @@
 {{- define "collabora.portal" -}}
-{{- $hasCert := ne (toString .Values.collaboraNetwork.certificateID) "" }}
+{{- $hasCert := not (empty .Values.collaboraNetwork.certificateID) }}
 ---
 apiVersion: v1
 kind: ConfigMap
