@@ -125,9 +125,9 @@ workload:
                 {{- if mustHas (kindOf $item.value) (list "int" "int64" "float64") }}
                   echo "Key {{ $item.key }} is a {{ kindOf $item.value }}, setting without quotes..."
                   set_ini_value "{{ $item.key }}" {{ $item.value }}
-                {{- else if or (eq ($item.value | lower) "true") (eq ($item.value | lower) "false") }}
+                {{- else if or (eq ((toString $item.value) | lower) "true") (eq ((toString $item.value) | lower) "false") }}
                   echo "Key {{ $item.key }} is a boolean, setting without quotes..."
-                  set_ini_value "{{ $item.key }}" {{ $item.value | camelcase }}
+                  set_ini_value "{{ $item.key }}" {{ (toString $item.value) | camelcase }}
                 {{- else }}
                   echo "Key {{ $item.key }} is a {{ kindOf $item.value }}, setting with quotes..."
                   set_ini_value "{{ $item.key }}" {{ $item.value | quote }}
