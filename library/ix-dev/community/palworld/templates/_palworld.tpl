@@ -118,8 +118,8 @@ workload:
               set_ini_value "PublicPort" {{ .Values.palworldNetwork.serverPort }}
               set_ini_value "ServerName" {{ .Values.palworldConfig.server.name | quote }}
               set_ini_value "ServerDescription" {{ .Values.palworldConfig.server.description | quote }}
-              set_ini_value "ServerPassword" {{ .Values.palworldConfig.server.password | squote }}
-              set_ini_value "AdminPassword" {{ .Values.palworldConfig.adminPassword | squote }}
+              set_ini_value "ServerPassword" {{ .Values.palworldConfig.server.password | squote }} false
+              set_ini_value "AdminPassword" {{ .Values.palworldConfig.adminPassword | squote }} false
 
               {{- range $item := .Values.palworldConfig.iniKeys }}
                 {{- if mustHas (kindOf $item.value) (list "bool" "int" "int64" "float64") }}
