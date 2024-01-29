@@ -18,3 +18,16 @@ palworldConfig:
     enabled: true
     interval: 60
     keep: 3
+  iniKeys:
+    - key: something
+      value: something
+    - key: something1
+      value: 123
+    - key: something2
+      value: ""
+    - key: something3
+      value: 123.45
+    - key: something4
+      value: true
+    - key: something5
+      value: asdfhjfgk7*%^*&%^&%*^&$@!)_(@%&)(@#$&_^_@#($))
