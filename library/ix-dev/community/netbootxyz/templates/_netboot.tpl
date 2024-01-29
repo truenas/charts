@@ -23,6 +23,7 @@ workload:
                 - FOWNER
                 - SETGID
                 - SETUID
+                - SYS_CHROOT
                 - NET_BIND_SERVICE
                 - KILL
           env:
