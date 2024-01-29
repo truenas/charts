@@ -50,14 +50,15 @@ questions:
           show_if: [[enableWebUI, "=", true]]
           schema:
             type: string
-            default: "admin"
+            default: ""
             required: true
         - variable: password
           label: Password for WebUI
           schema:
             type: string
+            default: ""
             private: true
-            default: "changeme"
+            required: true
             show_if: [[enableWebUI, "=", true]]
             valid_chars: "[a-zA-Z0-9!@#%^&*?]{8,}"
             valid_chars_error: |
@@ -74,22 +75,25 @@ questions:
             default: ""
             $ref:
               - "definitions/nodeIP"
+        - variable: aliasGroup1
+          label: Alias Group 1
+          description: |
+            List of domains that will be allowed to access the Collabora server
+            Type one domain per line
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: alias
+                label: Alias
+                schema:
+                  type: string
         - variable: dictionaries
           label: Dictionaries
           description: Dictionaries to be used by Collabora.
           schema:
             type: list
-            default:
-              - de_DE
-              - en_GB
-              - en_US
-              - es_ES
-              - fr_FR
-              - it
-              - nl
-              - pt_BR
-              - pt_PT
-              - ru
+            default: []
             items:
               - variable: dictionary
                 label: Dictionary

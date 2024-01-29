@@ -12,17 +12,7 @@ collaboraConfig:
   username: ''
   password: ''
   aliasGroup1: []
-  dictionaries:
-    - de_DE
-    - en_GB
-    - en_US
-    - es_ES
-    - fr_FR
-    - it
-    - nl
-    - pt_BR
-    - pt_PT
-    - ru
+  dictionaries: []
   extraParams:
     - --o:welcome.enable=false
     - --o:user_interface.mode=notebookbar
