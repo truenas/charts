@@ -1,17 +1,17 @@
 {
-    "1.2.28": {
+    "1.2.29": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/collabora/1.2.28",
-        "last_update": "2024-01-29 12:14:45",
+        "location": "/__w/charts/charts/charts/collabora/1.2.29",
+        "last_update": "2024-01-29 12:39:50",
         "required_features": [
             "definitions/timezone",
             "definitions/certificate",
             "definitions/nodeIP"
         ],
-        "human_version": "23.05.7.5.1_1.2.28",
-        "version": "1.2.28",
+        "human_version": "23.05.8.2.1_1.2.29",
+        "version": "1.2.29",
         "chart_metadata": {
             "name": "collabora",
             "description": "Collabora Online Development Edition \\u2013 an awesome, Online Office\nsuite image suitable for home use.\n",
@@ -19,9 +19,9 @@
                 "title": "Collabora"
             },
             "type": "application",
-            "version": "1.2.28",
+            "version": "1.2.29",
             "apiVersion": "v2",
-            "appVersion": "23.05.7.5.1",
+            "appVersion": "23.05.8.2.1",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
