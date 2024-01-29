@@ -4,6 +4,8 @@ service:
   collabora:
     enabled: true
     primary: true
+    {{/* If a certificate is selected, turn collabora
+        to clusterIP, nginx will be the "frontend" */}}
     type: {{ ternary "ClusterIP" "NodePort" $hasCert }}
     targetSelector: collabora
     ports:
