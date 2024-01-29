@@ -105,7 +105,7 @@ workload:
                 # -- Escape special characters for sed
                 escaped_value=$(printf '%s\n' "$value" | sed 's/[&/\]/\\&/g')
                 # -- Check if the value contains spaces or special characters
-                if echo "$escaped_value" | grep -q '[[:space:]]\|[^\w.-]'; then
+                if echo "$escaped_value" | grep -vE "(T|t)rue|(F|f)alse" | grep -q '[[:space:]]\|[^\w.-]'; then
                   # -- Add quotes around the value
                   escaped_value="\"$escaped_value\""
                 fi
