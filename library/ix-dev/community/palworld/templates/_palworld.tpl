@@ -88,7 +88,10 @@ workload:
             - |
               config={{ $srvDir }}/Pal/Saved/Config/LinuxServer
               cfgFile=${config}/PalWorldSettings.ini
-              mkdir -p ${config}
+              if [ ! -d ${config} ]; then
+                echo "Config directory not found, creating..."
+                mkdir -p ${config}
+              fi
               if [ ! -f ${cfgFile} ]; then
                 echo "Config file not found, fetching..."
                 # -- Fetch the config file if it doesn't exist, just like the container does
