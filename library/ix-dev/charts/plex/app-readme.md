@@ -1,3 +1,3 @@
 # Plex
 
-Plex chart is a chart designed to deploy plex in a TrueNAS SCALE kubernetes cluster.
+[Plex](https://plex.tv) is a media server that allows you to stream your media to any Plex client.
