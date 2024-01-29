@@ -1,26 +1,27 @@
 {
-    "1.2.9": {
+    "1.0.0": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/radarr/1.2.9",
-        "last_update": "2024-01-29 12:14:45",
+        "location": "/__w/charts/charts/community/netbootxyz/1.0.0",
+        "last_update": "2024-01-29 12:16:20",
         "required_features": [
             "normalize/ixVolume",
-            "normalize/acl"
+            "normalize/acl",
+            "definitions/timezone"
         ],
-        "human_version": "5.2.6.8376_1.2.9",
-        "version": "1.2.9",
+        "human_version": "2.0.76_1.0.0",
+        "version": "1.0.0",
         "chart_metadata": {
-            "name": "radarr",
-            "description": "Radarr is a movie collection manager for Usenet and BitTorrent users.",
+            "name": "netbootxyz",
+            "description": "netboot.xyz lets you PXE boot various operating system installers or utilities from a single tool over the network.",
             "annotations": {
-                "title": "Radarr"
+                "title": "netbootxyz"
             },
             "type": "application",
-            "version": "1.2.9",
+            "version": "1.0.0",
             "apiVersion": "v2",
-            "appVersion": "5.2.6.8376",
+            "appVersion": "2.0.76",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
@@ -36,52 +37,81 @@
                     "version": "1.2.9"
                 }
             ],
-            "home": "https://github.com/Radarr/Radarr",
-            "icon": "https://media.sys.truenas.net/apps/radarr/icons/icon.png",
+            "home": "https://github.com/truenas/charts/tree/master/community/netbootxyz",
+            "icon": "https://media.sys.truenas.net/apps/netbootxyz/icons/icon.svg",
             "sources": [
-                "https://github.com/onedr0p/containers/tree/main/apps/radarr",
-                "https://github.com/truenas/charts/tree/master/community/radarr",
-                "https://github.com/Radarr/Radarr"
+                "https://github.com/truenas/charts/tree/master/community/netbootxyz",
+                "https://github.com/netbootxyz/docker-netbootxyz",
+                "https://netboot.xyz"
             ],
             "keywords": [
-                "media",
-                "movies"
+                "tftp",
+                "network",
+                "pxe",
+                "netboot",
+                "netbootxyz",
+                "netboot.xyz"
             ]
         },
         "app_metadata": {
             "runAsContext": [
                 {
-                    "userName": "radarr",
-                    "groupName": "radarr",
-                    "gid": 568,
-                    "uid": 568,
-                    "description": "Radarr can run as any non-root user."
+                    "userName": "root",
+                    "groupName": "root",
+                    "gid": 0,
+                    "uid": 0,
+                    "description": "The container starts as root, then NGINX and TFTP spawn under normal user accounts."
                 }
             ],
-            "capabilities": [],
+            "capabilities": [
+                {
+                    "name": "CHOWN",
+                    "description": "TFTP requires this ability to set permissions for sub-processes."
+                },
+                {
+                    "name": "DAC_OVERRIDE",
+                    "description": "TFTP requires this ability to set permissions for sub-processes."
+                },
+                {
+                    "name": "FOWNER",
+                    "description": "TFTP requires this ability to set permissions for sub-processes."
+                },
+                {
+                    "name": "SETUID",
+                    "description": "TFTP requires this ability to switch user for sub-processes."
+                },
+                {
+                    "name": "SETGID",
+                    "description": "TFTP requires this ability to switch group for sub-processes."
+                },
+                {
+                    "name": "NET_BIND_SERVICE",
+                    "description": "TFTP requires this ability to bind to port 69 for TFTP."
+                },
+                {
+                    "name": "KILL",
+                    "description": "TFTP requires this ability to kill sub-processes."
+                }
+            ],
             "hostMounts": []
         },
         "schema": {
             "groups": [
                 {
-                    "name": "Radarr Configuration",
-                    "description": "Configure Radarr"
-                },
-                {
-                    "name": "User and Group Configuration",
-                    "description": "Configure User and Group for Radarr"
+                    "name": "netboot.xyz Configuration",
+                    "description": "Configure netboot.xyz."
                 },
                 {
                     "name": "Network Configuration",
-                    "description": "Configure Network for Radarr"
+                    "description": "Configure Network for netboot.xyz."
                 },
                 {
                     "name": "Storage Configuration",
-                    "description": "Configure Storage for Radarr"
+                    "description": "Configure Storage for netboot.xyz"
                 },
                 {
                     "name": "Resources Configuration",
-                    "description": "Configure Resources for Radarr"
+                    "description": "Configure Resources for netboot.xyz"
                 }
             ],
             "portals": {
@@ -100,26 +130,58 @@
             },
             "questions": [
                 {
-                    "variable": "radarrConfig",
+                    "variable": "TZ",
+                    "group": "netboot.xyz Configuration",
+                    "label": "Timezone",
+                    "schema": {
+                        "type": "string",
+                        "default": "America/Los_Angeles",
+                        "required": true,
+                        "$ref": [
+                            "definitions/timezone"
+                        ],
+                        "enum": [
+                            {
+                                "value": "Asia/Damascus",
+                                "description": "'Asia/Damascus' timezone"
+                            },
+                            {
+                                "value": "Asia/Saigon",
+                                "description": "'Asia/Saigon' timezone"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "netbootConfig",
                     "label": "",
-                    "group": "Radarr Configuration",
+                    "group": "netboot.xyz Configuration",
                     "schema": {
                         "type": "dict",
                         "attrs": [
                             {
-                                "variable": "instanceName",
-                                "label": "Instance Name",
-                                "description": "The name of the Radarr instance.",
+                                "variable": "tftpdOpts",
+                                "label": "TFTPD Options",
+                                "description": "Additional TFTPD options.\n",
                                 "schema": {
-                                    "type": "string",
-                                    "default": "Radarr",
-                                    "required": true
+                                    "type": "list",
+                                    "default": [],
+                                    "items": [
+                                        {
+                                            "variable": "option",
+                                            "label": "Option",
+                                            "schema": {
+                                                "type": "string",
+                                                "required": true
+                                            }
+                                        }
+                                    ]
                                 }
                             },
                             {
                                 "variable": "additionalEnvs",
                                 "label": "Additional Environment Variables",
-                                "description": "Configure additional environment variables for Radarr.",
+                                "description": "Configure additional environment variables for netboot.xyz.",
                                 "schema": {
                                     "type": "list",
                                     "default": [],
@@ -156,70 +218,76 @@
                     }
                 },
                 {
-                    "variable": "radarrRunAs",
-                    "label": "",
-                    "group": "User and Group Configuration",
-                    "schema": {
-                        "type": "dict",
-                        "attrs": [
-                            {
-                                "variable": "user",
-                                "label": "User ID",
-                                "description": "The user id that Radarr will run as.",
-                                "schema": {
-                                    "type": "int",
-                                    "min": 2,
-                                    "default": 568,
-                                    "required": true
-                                }
-                            },
-                            {
-                                "variable": "group",
-                                "label": "Group ID",
-                                "description": "The group id that Radarr will run as.",
-                                "schema": {
-                                    "type": "int",
-                                    "min": 2,
-                                    "default": 568,
-                                    "required": true
-                                }
-                            }
-                        ]
-                    }
-                },
-                {
-                    "variable": "radarrNetwork",
+                    "variable": "netbootNetwork",
                     "label": "",
                     "group": "Network Configuration",
                     "schema": {
                         "type": "dict",
                         "attrs": [
                             {
-                                "variable": "webPort",
-                                "label": "Web Port",
-                                "description": "The port for the Radarr Web UI.",
+                                "variable": "hostNetwork",
+                                "label": "Host Network",
+                                "description": "Bind to the host network. </br>\nRequired for TFTP.\n",
                                 "schema": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            },
+                            {
+                                "variable": "tftpPort",
+                                "label": "TFTP Port",
+                                "description": "The TFTP port for netboot.xyz.",
+                                "schema": {
+                                    "show_if": [
+                                        [
+                                            "hostNetwork",
+                                            "=",
+                                            false
+                                        ]
+                                    ],
                                     "type": "int",
-                                    "default": 30025,
+                                    "default": 31009,
                                     "min": 9000,
                                     "max": 65535,
                                     "required": true
                                 }
                             },
                             {
-                                "variable": "hostNetwork",
-                                "label": "Host Network",
-                                "description": "Bind to the host network. It's recommended to keep this disabled.</br>\n",
+                                "variable": "webHttpPort",
+                                "label": "Portal HTTP Port",
+                                "description": "The HTTP port for the netboot.xyz Portal.",
                                 "schema": {
-                                    "type": "boolean",
-                                    "default": false
+                                    "show_if": [
+                                        [
+                                            "hostNetwork",
+                                            "=",
+                                            false
+                                        ]
+                                    ],
+                                    "type": "int",
+                                    "default": 31010,
+                                    "min": 9000,
+                                    "max": 65535,
+                                    "required": true
+                                }
+                            },
+                            {
+                                "variable": "webAssetsPort",
+                                "label": "Assets Port",
+                                "description": "The Assets port for the netboot.xyz, configures the NGINX_PORT variable on the container.",
+                                "schema": {
+                                    "type": "int",
+                                    "default": 31011,
+                                    "min": 9000,
+                                    "max": 65535,
+                                    "required": true
                                 }
                             }
                         ]
                     }
                 },
                 {
-                    "variable": "radarrStorage",
+                    "variable": "netbootStorage",
                     "label": "",
                     "group": "Storage Configuration",
                     "schema": {
@@ -227,8 +295,8 @@
                         "attrs": [
                             {
                                 "variable": "config",
-                                "label": "Radarr Config Storage",
-                                "description": "The path to store Radarr Configuration.",
+                                "label": "netboot.xyz Config Storage",
+                                "description": "The path to store netboot.xyz configuration.",
                                 "schema": {
                                     "type": "dict",
                                     "attrs": [
@@ -547,338 +615,151 @@
                                 }
                             },
                             {
-                                "variable": "additionalStorages",
-                                "label": "Additional Storage",
-                                "description": "Additional storage for Radarr.",
+                                "variable": "assets",
+                                "label": "netboot.xyz Assets Storage",
+                                "description": "The path to store netboot.xyz assets.",
                                 "schema": {
-                                    "type": "list",
-                                    "default": [],
-                                    "items": [
+                                    "type": "dict",
+                                    "attrs": [
                                         {
-                                            "variable": "storageEntry",
-                                            "label": "Storage Entry",
+                                            "variable": "type",
+                                            "label": "Type",
+                                            "description": "ixVolume: Is dataset created automatically by the system.</br>\nHost Path: Is a path that already exists on the system.\n",
                                             "schema": {
-                                                "type": "dict",
-                                                "attrs": [
+                                                "type": "string",
+                                                "required": true,
+                                                "immutable": true,
+                                                "default": "ixVolume",
+                                                "enum": [
                                                     {
-                                                        "variable": "type",
-                                                        "label": "Type",
-                                                        "description": "ixVolume: Is dataset created automatically by the system.</br>\nHost Path: Is a path that already exists on the system.</br>\nSMB Share: Is a SMB share that is mounted to a persistent volume claim.\n",
-                                                        "schema": {
-                                                            "type": "string",
-                                                            "required": true,
-                                                            "default": "ixVolume",
-                                                            "immutable": true,
-                                                            "enum": [
-                                                                {
-                                                                    "value": "hostPath",
-                                                                    "description": "Host Path (Path that already exists on the system)"
-                                                                },
-                                                                {
-                                                                    "value": "ixVolume",
-                                                                    "description": "ixVolume (Dataset created automatically by the system)"
-                                                                },
-                                                                {
-                                                                    "value": "smb-pv-pvc",
-                                                                    "description": "SMB Share (Mounts a persistent volume claim to a SMB share)"
-                                                                }
-                                                            ]
-                                                        }
+                                                        "value": "hostPath",
+                                                        "description": "Host Path (Path that already exists on the system)"
                                                     },
                                                     {
-                                                        "variable": "readOnly",
-                                                        "label": "Read Only",
-                                                        "description": "Mount the volume as read only.",
+                                                        "value": "ixVolume",
+                                                        "description": "ixVolume (Dataset created automatically by the system)"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "variable": "ixVolumeConfig",
+                                            "label": "ixVolume Configuration",
+                                            "description": "The configuration for the ixVolume dataset.",
+                                            "schema": {
+                                                "type": "dict",
+                                                "show_if": [
+                                                    [
+                                                        "type",
+                                                        "=",
+                                                        "ixVolume"
+                                                    ]
+                                                ],
+                                                "$ref": [
+                                                    "normalize/ixVolume"
+                                                ],
+                                                "attrs": [
+                                                    {
+                                                        "variable": "aclEnable",
+                                                        "label": "Enable ACL",
+                                                        "description": "Enable ACL for the dataset.",
                                                         "schema": {
                                                             "type": "boolean",
                                                             "default": false
                                                         }
                                                     },
                                                     {
-                                                        "variable": "mountPath",
-                                                        "label": "Mount Path",
-                                                        "description": "The path inside the container to mount the storage.",
+                                                        "variable": "datasetName",
+                                                        "label": "Dataset Name",
+                                                        "description": "The name of the dataset to use for storage.",
                                                         "schema": {
-                                                            "type": "path",
-                                                            "required": true
+                                                            "type": "string",
+                                                            "required": true,
+                                                            "immutable": true,
+                                                            "hidden": true,
+                                                            "default": "assets"
                                                         }
                                                     },
                                                     {
-                                                        "variable": "hostPathConfig",
-                                                        "label": "Host Path Configuration",
+                                                        "variable": "aclEntries",
+                                                        "label": "ACL Configuration",
                                                         "schema": {
                                                             "type": "dict",
                                                             "show_if": [
                                                                 [
-                                                                    "type",
+                                                                    "aclEnable",
                                                                     "=",
-                                                                    "hostPath"
+                                                                    true
                                                                 ]
                                                             ],
                                                             "attrs": [
                                                                 {
-                                                                    "variable": "aclEnable",
-                                                                    "label": "Enable ACL",
-                                                                    "description": "Enable ACL for the dataset.",
+                                                                    "variable": "path",
+                                                                    "label": "Path",
+                                                                    "description": "Path to perform ACL",
                                                                     "schema": {
-                                                                        "type": "boolean",
-                                                                        "default": false
+                                                                        "type": "string",
+                                                                        "hidden": true
                                                                     }
                                                                 },
                                                                 {
-                                                                    "variable": "acl",
-                                                                    "label": "ACL Configuration",
+                                                                    "variable": "entries",
+                                                                    "label": "ACL Entries",
+                                                                    "description": "ACL Entries",
                                                                     "schema": {
-                                                                        "type": "dict",
-                                                                        "show_if": [
-                                                                            [
-                                                                                "aclEnable",
-                                                                                "=",
-                                                                                true
-                                                                            ]
-                                                                        ],
-                                                                        "attrs": [
+                                                                        "type": "list",
+                                                                        "items": [
                                                                             {
-                                                                                "variable": "path",
-                                                                                "label": "Host Path",
-                                                                                "description": "Host Path to perform ACL",
-                                                                                "schema": {
-                                                                                    "type": "hostpath",
-                                                                                    "required": true,
-                                                                                    "empty": false
-                                                                                }
-                                                                            },
-                                                                            {
-                                                                                "variable": "entries",
-                                                                                "label": "ACL Entries",
-                                                                                "description": "ACL Entries",
-                                                                                "schema": {
-                                                                                    "type": "list",
-                                                                                    "items": [
-                                                                                        {
-                                                                                            "variable": "aclEntry",
-                                                                                            "label": "ACL Entry",
-                                                                                            "schema": {
-                                                                                                "type": "dict",
-                                                                                                "attrs": [
-                                                                                                    {
-                                                                                                        "variable": "id_type",
-                                                                                                        "label": "ID Type",
-                                                                                                        "schema": {
-                                                                                                            "type": "string",
-                                                                                                            "enum": [
-                                                                                                                {
-                                                                                                                    "value": "USER",
-                                                                                                                    "description": "Entry is for a USER"
-                                                                                                                },
-                                                                                                                {
-                                                                                                                    "value": "GROUP",
-                                                                                                                    "description": "Entry is for a GROUP"
-                                                                                                                }
-                                                                                                            ],
-                                                                                                            "default": "USER"
-                                                                                                        }
-                                                                                                    },
-                                                                                                    {
-                                                                                                        "variable": "id",
-                                                                                                        "label": "ID",
-                                                                                                        "description": "Make sure to check the ID value is correct and aligns with RunAs user context of the application",
-                                                                                                        "schema": {
-                                                                                                            "type": "int",
-                                                                                                            "required": true,
-                                                                                                            "min": 0
-                                                                                                        }
-                                                                                                    },
-                                                                                                    {
-                                                                                                        "variable": "access",
-                                                                                                        "label": "Access",
-                                                                                                        "schema": {
-                                                                                                            "type": "string",
-                                                                                                            "enum": [
-                                                                                                                {
-                                                                                                                    "value": "READ",
-                                                                                                                    "description": "Read Access"
-                                                                                                                },
-                                                                                                                {
-                                                                                                                    "value": "MODIFY",
-                                                                                                                    "description": "Modify Access"
-                                                                                                                },
-                                                                                                                {
-                                                                                                                    "value": "FULL_CONTROL",
-                                                                                                                    "description": "FULL_CONTROL Access"
-                                                                                                                }
-                                                                                                            ]
-                                                                                                        }
-                                                                                                    }
-                                                                                                ]
-                                                                                            }
-                                                                                        }
-                                                                                    ]
-                                                                                }
-                                                                            },
-                                                                            {
-                                                                                "variable": "options",
-                                                                                "label": "ACL Options",
+                                                                                "variable": "aclEntry",
+                                                                                "label": "ACL Entry",
                                                                                 "schema": {
                                                                                     "type": "dict",
                                                                                     "attrs": [
                                                                                         {
-                                                                                            "variable": "force",
-                                                                                            "label": "Force Flag",
-                                                                                            "description": "Enabling `Force` applies ACL even if the path has existing data",
+                                                                                            "variable": "id_type",
+                                                                                            "label": "ID Type",
                                                                                             "schema": {
-                                                                                                "type": "boolean",
-                                                                                                "default": false
+                                                                                                "type": "string",
+                                                                                                "enum": [
+                                                                                                    {
+                                                                                                        "value": "USER",
+                                                                                                        "description": "Entry is for a USER"
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "value": "GROUP",
+                                                                                                        "description": "Entry is for a GROUP"
+                                                                                                    }
+                                                                                                ],
+                                                                                                "default": "USER"
                                                                                             }
-                                                                                        }
-                                                                                    ]
-                                                                                }
-                                                                            }
-                                                                        ],
-                                                                        "$ref": [
-                                                                            "normalize/acl"
-                                                                        ]
-                                                                    }
-                                                                },
-                                                                {
-                                                                    "variable": "hostPath",
-                                                                    "label": "Host Path",
-                                                                    "description": "The host path to use for storage.",
-                                                                    "schema": {
-                                                                        "type": "hostpath",
-                                                                        "show_if": [
-                                                                            [
-                                                                                "aclEnable",
-                                                                                "=",
-                                                                                false
-                                                                            ]
-                                                                        ],
-                                                                        "required": true
-                                                                    }
-                                                                }
-                                                            ]
-                                                        }
-                                                    },
-                                                    {
-                                                        "variable": "ixVolumeConfig",
-                                                        "label": "ixVolume Configuration",
-                                                        "description": "The configuration for the ixVolume dataset.",
-                                                        "schema": {
-                                                            "type": "dict",
-                                                            "show_if": [
-                                                                [
-                                                                    "type",
-                                                                    "=",
-                                                                    "ixVolume"
-                                                                ]
-                                                            ],
-                                                            "$ref": [
-                                                                "normalize/ixVolume"
-                                                            ],
-                                                            "attrs": [
-                                                                {
-                                                                    "variable": "aclEnable",
-                                                                    "label": "Enable ACL",
-                                                                    "description": "Enable ACL for the dataset.",
-                                                                    "schema": {
-                                                                        "type": "boolean",
-                                                                        "default": false
-                                                                    }
-                                                                },
-                                                                {
-                                                                    "variable": "datasetName",
-                                                                    "label": "Dataset Name",
-                                                                    "description": "The name of the dataset to use for storage.",
-                                                                    "schema": {
-                                                                        "type": "string",
-                                                                        "required": true,
-                                                                        "immutable": true,
-                                                                        "default": "storage_entry"
-                                                                    }
-                                                                },
-                                                                {
-                                                                    "variable": "aclEntries",
-                                                                    "label": "ACL Configuration",
-                                                                    "schema": {
-                                                                        "type": "dict",
-                                                                        "show_if": [
-                                                                            [
-                                                                                "aclEnable",
-                                                                                "=",
-                                                                                true
-                                                                            ]
-                                                                        ],
-                                                                        "attrs": [
-                                                                            {
-                                                                                "variable": "path",
-                                                                                "label": "Path",
-                                                                                "description": "Path to perform ACL",
-                                                                                "schema": {
-                                                                                    "type": "string",
-                                                                                    "hidden": true
-                                                                                }
-                                                                            },
-                                                                            {
-                                                                                "variable": "entries",
-                                                                                "label": "ACL Entries",
-                                                                                "description": "ACL Entries",
-                                                                                "schema": {
-                                                                                    "type": "list",
-                                                                                    "items": [
+                                                                                        },
                                                                                         {
-                                                                                            "variable": "aclEntry",
-                                                                                            "label": "ACL Entry",
+                                                                                            "variable": "id",
+                                                                                            "label": "ID",
+                                                                                            "description": "Make sure to check the ID value is correct and aligns with RunAs user context of the application",
                                                                                             "schema": {
-                                                                                                "type": "dict",
-                                                                                                "attrs": [
+                                                                                                "type": "int",
+                                                                                                "required": true,
+                                                                                                "min": 0
+                                                                                            }
+                                                                                        },
+                                                                                        {
+                                                                                            "variable": "access",
+                                                                                            "label": "Access",
+                                                                                            "schema": {
+                                                                                                "type": "string",
+                                                                                                "enum": [
                                                                                                     {
-                                                                                                        "variable": "id_type",
-                                                                                                        "label": "ID Type",
-                                                                                                        "schema": {
-                                                                                                            "type": "string",
-                                                                                                            "enum": [
-                                                                                                                {
-                                                                                                                    "value": "USER",
-                                                                                                                    "description": "Entry is for a USER"
-                                                                                                                },
-                                                                                                                {
-                                                                                                                    "value": "GROUP",
-                                                                                                                    "description": "Entry is for a GROUP"
-                                                                                                                }
-                                                                                                            ],
-                                                                                                            "default": "USER"
-                                                                                                        }
+                                                                                                        "value": "READ",
+                                                                                                        "description": "Read Access"
                                                                                                     },
                                                                                                     {
-                                                                                                        "variable": "id",
-                                                                                                        "label": "ID",
-                                                                                                        "description": "Make sure to check the ID value is correct and aligns with RunAs user context of the application",
-                                                                                                        "schema": {
-                                                                                                            "type": "int",
-                                                                                                            "required": true,
-                                                                                                            "min": 0
-                                                                                                        }
+                                                                                                        "value": "MODIFY",
+                                                                                                        "description": "Modify Access"
                                                                                                     },
                                                                                                     {
-                                                                                                        "variable": "access",
-                                                                                                        "label": "Access",
-                                                                                                        "schema": {
-                                                                                                            "type": "string",
-                                                                                                            "enum": [
-                                                                                                                {
-                                                                                                                    "value": "READ",
-                                                                                                                    "description": "Read Access"
-                                                                                                                },
-                                                                                                                {
-                                                                                                                    "value": "MODIFY",
-                                                                                                                    "description": "Modify Access"
-                                                                                                                },
-                                                                                                                {
-                                                                                                                    "value": "FULL_CONTROL",
-                                                                                                                    "description": "FULL_CONTROL Access"
-                                                                                                                }
-                                                                                                            ]
-                                                                                                        }
+                                                                                                        "value": "FULL_CONTROL",
+                                                                                                        "description": "FULL_CONTROL Access"
                                                                                                     }
                                                                                                 ]
                                                                                             }
@@ -891,78 +772,161 @@
                                                                 }
                                                             ]
                                                         }
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "variable": "hostPathConfig",
+                                            "label": "Host Path Configuration",
+                                            "schema": {
+                                                "type": "dict",
+                                                "show_if": [
+                                                    [
+                                                        "type",
+                                                        "=",
+                                                        "hostPath"
+                                                    ]
+                                                ],
+                                                "attrs": [
+                                                    {
+                                                        "variable": "aclEnable",
+                                                        "label": "Enable ACL",
+                                                        "description": "Enable ACL for the dataset.",
+                                                        "schema": {
+                                                            "type": "boolean",
+                                                            "default": false
+                                                        }
                                                     },
                                                     {
-                                                        "variable": "smbConfig",
-                                                        "label": "SMB Share Configuration",
-                                                        "description": "The configuration for the SMB Share.",
+                                                        "variable": "acl",
+                                                        "label": "ACL Configuration",
                                                         "schema": {
                                                             "type": "dict",
                                                             "show_if": [
                                                                 [
-                                                                    "type",
+                                                                    "aclEnable",
                                                                     "=",
-                                                                    "smb-pv-pvc"
+                                                                    true
                                                                 ]
                                                             ],
                                                             "attrs": [
                                                                 {
-                                                                    "variable": "server",
-                                                                    "label": "Server",
-                                                                    "description": "The server for the SMB share.",
+                                                                    "variable": "path",
+                                                                    "label": "Host Path",
+                                                                    "description": "Host Path to perform ACL",
                                                                     "schema": {
-                                                                        "type": "string",
-                                                                        "required": true
-                                                                    }
-                                                                },
-                                                                {
-                                                                    "variable": "share",
-                                                                    "label": "Share",
-                                                                    "description": "The share name for the SMB share.",
-                                                                    "schema": {
-                                                                        "type": "string",
-                                                                        "required": true
-                                                                    }
-                                                                },
-                                                                {
-                                                                    "variable": "domain",
-                                                                    "label": "Domain (Optional)",
-                                                                    "description": "The domain for the SMB share.",
-                                                                    "schema": {
-                                                                        "type": "string"
-                                                                    }
-                                                                },
-                                                                {
-                                                                    "variable": "username",
-                                                                    "label": "Username",
-                                                                    "description": "The username for the SMB share.",
-                                                                    "schema": {
-                                                                        "type": "string",
-                                                                        "required": true
-                                                                    }
-                                                                },
-                                                                {
-                                                                    "variable": "password",
-                                                                    "label": "Password",
-                                                                    "description": "The password for the SMB share.",
-                                                                    "schema": {
-                                                                        "type": "string",
+                                                                        "type": "hostpath",
                                                                         "required": true,
-                                                                        "private": true
+                                                                        "empty": false
                                                                     }
                                                                 },
                                                                 {
-                                                                    "variable": "size",
-                                                                    "label": "Size (in Gi)",
-                                                                    "description": "The size of the volume quota.",
+                                                                    "variable": "entries",
+                                                                    "label": "ACL Entries",
+                                                                    "description": "ACL Entries",
                                                                     "schema": {
-                                                                        "type": "int",
-                                                                        "required": true,
-                                                                        "min": 1,
-                                                                        "default": 1
+                                                                        "type": "list",
+                                                                        "items": [
+                                                                            {
+                                                                                "variable": "aclEntry",
+                                                                                "label": "ACL Entry",
+                                                                                "schema": {
+                                                                                    "type": "dict",
+                                                                                    "attrs": [
+                                                                                        {
+                                                                                            "variable": "id_type",
+                                                                                            "label": "ID Type",
+                                                                                            "schema": {
+                                                                                                "type": "string",
+                                                                                                "enum": [
+                                                                                                    {
+                                                                                                        "value": "USER",
+                                                                                                        "description": "Entry is for a USER"
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "value": "GROUP",
+                                                                                                        "description": "Entry is for a GROUP"
+                                                                                                    }
+                                                                                                ],
+                                                                                                "default": "USER"
+                                                                                            }
+                                                                                        },
+                                                                                        {
+                                                                                            "variable": "id",
+                                                                                            "label": "ID",
+                                                                                            "description": "Make sure to check the ID value is correct and aligns with RunAs user context of the application",
+                                                                                            "schema": {
+                                                                                                "type": "int",
+                                                                                                "required": true,
+                                                                                                "min": 0
+                                                                                            }
+                                                                                        },
+                                                                                        {
+                                                                                            "variable": "access",
+                                                                                            "label": "Access",
+                                                                                            "schema": {
+                                                                                                "type": "string",
+                                                                                                "enum": [
+                                                                                                    {
+                                                                                                        "value": "READ",
+                                                                                                        "description": "Read Access"
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "value": "MODIFY",
+                                                                                                        "description": "Modify Access"
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "value": "FULL_CONTROL",
+                                                                                                        "description": "FULL_CONTROL Access"
+                                                                                                    }
+                                                                                                ]
+                                                                                            }
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "variable": "options",
+                                                                    "label": "ACL Options",
+                                                                    "schema": {
+                                                                        "type": "dict",
+                                                                        "attrs": [
+                                                                            {
+                                                                                "variable": "force",
+                                                                                "label": "Force Flag",
+                                                                                "description": "Enabling `Force` applies ACL even if the path has existing data",
+                                                                                "schema": {
+                                                                                    "type": "boolean",
+                                                                                    "default": false
+                                                                                }
+                                                                            }
+                                                                        ]
                                                                     }
                                                                 }
+                                                            ],
+                                                            "$ref": [
+                                                                "normalize/acl"
                                                             ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "hostPath",
+                                                        "label": "Host Path",
+                                                        "description": "The host path to use for storage.",
+                                                        "schema": {
+                                                            "type": "hostpath",
+                                                            "show_if": [
+                                                                [
+                                                                    "aclEnable",
+                                                                    "=",
+                                                                    false
+                                                                ]
+                                                            ],
+                                                            "required": true
                                                         }
                                                     }
                                                 ]
@@ -990,7 +954,7 @@
                                         {
                                             "variable": "cpu",
                                             "label": "CPU",
-                                            "description": "CPU limit for Radarr.",
+                                            "description": "CPU limit for netboot.xyz.",
                                             "schema": {
                                                 "type": "string",
                                                 "max_length": 6,
@@ -1003,7 +967,7 @@
                                         {
                                             "variable": "memory",
                                             "label": "Memory",
-                                            "description": "Memory limit for Radarr.",
+                                            "description": "Memory limit for netboot.xyz.",
                                             "schema": {
                                                 "type": "string",
                                                 "max_length": 12,
@@ -1021,8 +985,8 @@
                 }
             ]
         },
-        "app_readme": "<h1>Radarr</h1>\n<p><a href=\"https://github.com/Radarr/Radarr\">Radarr</a> is a movie collection manager for Usenet and BitTorrent users.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Radarr</code> directories.\nAfterward, the <code>Radarr</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>",
-        "detailed_readme": "<h1>Radarr</h1>\n<p><a href=\"https://github.com/Radarr/Radarr\">Radarr</a> is a movie collection manager for Usenet and BitTorrent users.</p>\n<blockquote>\n<p>When application is installed, a container will be launched with <strong>root</strong> privileges.\nThis is required in order to apply the correct permissions to the <code>Radarr</code> directories.\nAfterward, the <code>Radarr</code> container will run as a <strong>non</strong>-root user (Default: <code>568</code>).\nAll mounted storage(s) will be <code>chown</code>ed only if the parent directory does not match the configured user.</p>\n</blockquote>",
+        "app_readme": "<h1>netboot.xyz</h1>\n<p><a href=\"https://netboot.xyz\">netboot.xyz</a> lets you PXE boot various operating system installers or utilities from a single tool over the network.</p>",
+        "detailed_readme": "<h1>netboot.xyz</h1>\n<p><a href=\"https://netboot.xyz\">netboot.xyz</a> lets you PXE boot various operating system installers or utilities from a single tool over the network.</p>",
         "changelog": null
     }
 }
