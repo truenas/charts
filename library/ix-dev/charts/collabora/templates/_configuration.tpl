@@ -1,6 +1,6 @@
 {{- define "collabora.configuration" -}}
   {{- $fullname := (include "ix.v1.common.lib.chart.names.fullname" $) }}
-  {{- $nginx := printf "%s-nginx:%v" $fullname .Values.collaboraNetwork.webPort -}}
+  {{- $nginx := printf "https://%s-nginx:%v" $fullname .Values.collaboraNetwork.webPort -}}
 
   {{- if .Values.collaboraNetwork.certificateID }}
 configmap:
@@ -54,20 +54,20 @@ configmap:
                 location ^~ /browser {
                     proxy_pass http://{{ $fullname }}:9980;
                     proxy_set_header Host $host;
-                    proxy_set_header Referer {{ $nginx | quote }};
+                    # proxy_set_header Referer {{ $nginx | quote }};
                 }
                 # WOPI discovery URL
                 location ^~ /hosting/discovery {
                     set $upstream_collabora {{ $fullname }};
                     proxy_pass http://$upstream_collabora:9980;
                     proxy_set_header Host $http_host;
-                    proxy_set_header Referer {{ $nginx | quote }};
+                    # proxy_set_header Referer {{ $nginx | quote }};
                 }
                 # Capabilities
                 location ^~ /hosting/capabilities {
                     proxy_pass http://{{ $fullname }}:9980;
                     proxy_set_header Host $host;
-                    proxy_set_header Referer {{ $nginx | quote }};
+                    # proxy_set_header Referer {{ $nginx | quote }};
                 }
                 # main websocket
                 location ~ ^/cool/(.*)/ws$ {
@@ -75,7 +75,7 @@ configmap:
                     proxy_set_header Host $host;
                     proxy_set_header Upgrade $http_upgrade;
                     proxy_set_header Connection "Upgrade";
-                    proxy_set_header Referer {{ $nginx | quote }};
+                    # proxy_set_header Referer {{ $nginx | quote }};
                     proxy_read_timeout 36000s;
                 }
                 # download, presentation and image upload
@@ -90,7 +90,7 @@ configmap:
                     proxy_set_header Host $host;
                     proxy_set_header Upgrade $http_upgrade;
                     proxy_set_header Connection "Upgrade";
-                    proxy_set_header Referer {{ $nginx | quote }};
+                    # proxy_set_header Referer {{ $nginx | quote }};
                     proxy_read_timeout 36000s;
                 }
             }
