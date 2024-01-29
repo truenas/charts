@@ -1,0 +1,17 @@
+plexNetwork:
+  webPort: 31000
+
+plexID:
+  user: 1000
+  group: 1000
+
+plexStorage:
+  data:
+    type: pvc
+  config:
+    type: pvc
+  transcode:
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""

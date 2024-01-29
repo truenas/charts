@@ -1,0 +1,13 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{- include "plex.migration" $ -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "plex.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "plex.service" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "plex.persistence" $ | fromYaml) -}}
+
+{{/* Create the configmap for portal manually*/}}
+{{- include "plex.portal" $ -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}

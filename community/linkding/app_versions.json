@@ -1,16 +1,16 @@
 {
-    "1.2.9": {
+    "1.2.10": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/linkding/1.2.9",
-        "last_update": "2024-01-26 13:26:30",
+        "location": "/__w/charts/charts/community/linkding/1.2.10",
+        "last_update": "2024-01-29 12:39:50",
         "required_features": [
             "normalize/ixVolume",
             "normalize/acl"
         ],
-        "human_version": "1.23.1_1.2.9",
-        "version": "1.2.9",
+        "human_version": "1.24.0_1.2.10",
+        "version": "1.2.10",
         "chart_metadata": {
             "name": "linkding",
             "description": "Linkding is a bookmark manager that you can host yourself.",
@@ -18,9 +18,9 @@
                 "title": "Linkding"
             },
             "type": "application",
-            "version": "1.2.9",
+            "version": "1.2.10",
             "apiVersion": "v2",
-            "appVersion": "1.23.1",
+            "appVersion": "1.24.0",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
