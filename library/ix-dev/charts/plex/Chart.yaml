@@ -1,9 +1,9 @@
 name: plex
-description: Plex Media Server
+description: Plex is a media server that allows you to stream your media to any Plex client.
 annotations:
   title: Plex
 type: application
-version: 1.7.60
+version: 2.0.0
 apiVersion: v2
 appVersion: 1.32.8.7639
 kubeVersion: '>=1.16.0-0'
@@ -13,12 +13,13 @@ maintainers:
     email: dev@ixsystems.com
 dependencies:
   - name: common
-    repository: file://../../../common/2304.0.1
-    version: 2304.0.1
+    repository: file://../../../common
+    version: 1.2.9
 home: https://plex.tv/
 icon: https://media.sys.truenas.net/apps/plex/icons/icon.png
 sources:
+  - https://plex.tv/
+  - https://github.com/truenas/charts/tree/master/charts/plex
   - https://hub.docker.com/r/plexinc/pms-docker/
-  - https://github.com/k8s-at-home/charts/tree/master/charts/plex
 keywords:
   - plex
