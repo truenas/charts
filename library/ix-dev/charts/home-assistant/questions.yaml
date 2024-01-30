@@ -77,6 +77,7 @@ questions:
           schema:
             type: int
             default: 20810
+            show_if: [["hostNetwork", "=", false]]
             min: 9000
             max: 65535
             required: true
