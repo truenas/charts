@@ -88,32 +88,54 @@ workload:
             - |
               config={{ $srvDir }}/Pal/Saved/Config/LinuxServer
               cfgFile=${config}/PalWorldSettings.ini
-              mkdir -p ${config}
+              if [ ! -d ${config} ]; then
+                echo "Config directory not found, creating..."
+                mkdir -p ${config}
+              fi
               if [ ! -f ${cfgFile} ]; then
                 echo "Config file not found, fetching..."
-                # Fetch the config file if it doesn't exist, just like the container does
+                # -- Fetch the config file if it doesn't exist, just like the container does
                 wget -qO ${cfgFile} https://github.com/ich777/docker-steamcmd-server/raw/palworld/config/PalWorldSettings.ini
               fi
-              echo "Setting RCON status..."
-              sed -i 's/\(RCONEnabled=\)[^,]*/\1True/g' ${cfgFile}
-              echo "Set to [$(grep -Po 'RCONEnabled=[^,]*' ${cfgFile})]"
-              echo "Setting RCON Port..."
-              sed -i 's/\(RCONPort=\)[^,]*/\1{{ .Values.palworldNetwork.rconPort }}/g' ${cfgFile}
-              echo "Set to [$(grep -Po 'RCONPort=[^,]*' ${cfgFile})]"
-              echo "Setting Game Port..."
-              sed -i 's/\(PublicPort=\)[^,]*/\1{{ .Values.palworldNetwork.serverPort }}/g' ${cfgFile}
-              echo "Set to [$(grep -Po 'PublicPort=[^,]*' ${cfgFile})]"
-              echo "Setting Server Name..."
-              sed -i 's/\(ServerName=\)[^,]*/\1{{ .Values.palworldConfig.server.name | quote }}/g' ${cfgFile}
-              echo "Set to [$(grep -Po 'ServerName=[^,]*' ${cfgFile})]"
-              echo "Setting Server Description..."
-              sed -i 's/\(ServerDescription=\)[^,]*/\1{{ .Values.palworldConfig.server.description | quote }}/g' ${cfgFile}
-              echo "Set to [$(grep -Po 'ServerDescription=[^,]*' ${cfgFile})]"
-              echo "Setting Server Password..."
-              sed -i 's/\(ServerPassword=\)[^,]*/\1{{ .Values.palworldConfig.server.password | quote }}/g' ${cfgFile}
-              echo "Server Password set..."
-              echo "Setting Admin Password..."
-              sed -i 's/\(AdminPassword=\)[^,]*/\1{{ .Values.palworldConfig.adminPassword | quote }}/g' ${cfgFile}
-              echo "Admin Password set..."
+
+              set_ini_value() {
+                local key="${1}"
+                local value="${2}"
+                local quote="${3:-false}"
+                local print="${4:-true}"
+                # -- Escape special characters for sed
+                escaped_value=$(printf '%s\n' "$value" | sed 's/[&/\]/\\&/g')
+                if [ "$quote" = true ]; then
+                  escaped_value="\"${escaped_value}\""
+                fi
+
+                echo "Setting ${key}..."
+                sed -i "s|\(${key}=\)[^,]*|\1${escaped_value}|g" "${cfgFile}"
+                if [ "$print" = true ]; then
+                  echo "Set to $(grep -Po "(?<=${key}=)[^,]*" "${cfgFile}")"
+                fi
+              }
+
+              set_ini_value "RCONEnabled" True
+              set_ini_value "RCONPort" {{ .Values.palworldNetwork.rconPort }}
+              set_ini_value "PublicPort" {{ .Values.palworldNetwork.serverPort }}
+              set_ini_value "ServerName" {{ .Values.palworldConfig.server.name | quote }} true
+              set_ini_value "ServerDescription" {{ .Values.palworldConfig.server.description | quote }} true
+              set_ini_value "ServerPassword" {{ .Values.palworldConfig.server.password | squote }} true false
+              set_ini_value "AdminPassword" {{ .Values.palworldConfig.adminPassword | squote }} true false
+
+              {{- range $item := .Values.palworldConfig.iniKeys }}
+                {{- if mustHas (kindOf $item.value) (list "int" "int64" "float64") }}
+                  echo "Key {{ $item.key }} is a {{ kindOf $item.value }}, setting without quotes..."
+                  set_ini_value "{{ $item.key }}" {{ $item.value }}
+                {{- else if or (eq ((toString $item.value) | lower) "true") (eq ((toString $item.value) | lower) "false") }}
+                  echo "Key {{ $item.key }} is a boolean, setting without quotes..."
+                  set_ini_value "{{ $item.key }}" {{ (toString $item.value) | camelcase }}
+                {{- else }}
+                  echo "Key {{ $item.key }} is a {{ kindOf $item.value }}, setting with quotes..."
+                  set_ini_value "{{ $item.key }}" {{ $item.value | quote }} true
+                {{- end }}
+              {{- end }}
+
               echo "Done!"
 {{- end -}}

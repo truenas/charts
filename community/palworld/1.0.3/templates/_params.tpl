@@ -15,4 +15,15 @@
   {{- if not .Values.palworldConfig.backup -}}
     {{- $_ := set .Values.palworldConfig "backup" dict -}}
   {{- end -}}
+
+  {{- $reservedKeys := list
+    "RCONEnabled" "RCONPort" "PublicPort" "ServerName"
+    "ServerDescription" "ServerPassword" "AdminPassword"
+  -}}
+
+  {{- range $item := .Values.palworldConfig.iniKeys }}
+    {{- if (mustHas $item.key $reservedKeys) -}}
+      {{- fail (printf "PalWorld - [%v] is a reserved key." $item.key) -}}
+    {{- end -}}
+  {{- end -}}
 {{- end -}}

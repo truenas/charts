@@ -1,17 +1,17 @@
 {
-    "1.2.5": {
+    "1.2.6": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/deluge/1.2.5",
-        "last_update": "2024-01-29 12:38:27",
+        "location": "/__w/charts/charts/community/deluge/1.2.6",
+        "last_update": "2024-01-30 12:06:10",
         "required_features": [
-            "definitions/timezone",
             "normalize/ixVolume",
-            "normalize/acl"
+            "normalize/acl",
+            "definitions/timezone"
         ],
-        "human_version": "9.5.3_1.2.5",
-        "version": "1.2.5",
+        "human_version": "2.1.1_1.2.6",
+        "version": "1.2.6",
         "chart_metadata": {
             "name": "deluge",
             "description": "Deluge is a lightweight, Free Software, cross-platform BitTorrent client.",
@@ -19,9 +19,9 @@
                 "title": "Deluge"
             },
             "type": "application",
-            "version": "1.2.5",
+            "version": "1.2.6",
             "apiVersion": "v2",
-            "appVersion": "9.5.3",
+            "appVersion": "2.1.1",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
