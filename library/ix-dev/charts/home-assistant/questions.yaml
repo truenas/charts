@@ -84,7 +84,7 @@ questions:
           label: Host Network
           schema:
             type: boolean
-            default: true
+            default: false
 
   - variable: haID
     label: ""
