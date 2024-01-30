@@ -25,9 +25,6 @@ questions:
             private: true
             required: true
             default: ""
-            valid_chars: "[a-zA-Z0-9!@#%-_]*"
-            valid_chars_error: |
-              Can contain at numbers, letters, and the following characters: !@#%-_
         - variable: server
           label: Server Configuration
           description: Configure the server for Palworld
@@ -56,9 +53,31 @@ questions:
                   type: string
                   private: true
                   default: ""
-                  valid_chars: "[a-zA-Z0-9!@#%-_]*"
-                  valid_chars_error: |
-                    Can contain at numbers, letters, and the following characters: !@#%-_
+        - variable: iniKeys
+          label: Configure INI Keys
+          description: |
+            Enter your INI keys </br>
+            Updates the keys in PalWorldSettings.ini
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: iniKey
+                label: INI Key
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: key
+                      label: Key
+                      schema:
+                        type: string
+                        default: ""
+                        required: true
+                    - variable: value
+                      label: Value
+                      schema:
+                        type: string
+                        default: ""
         - variable: backup
           label: Backup
           description: Configure the backup for Palworld

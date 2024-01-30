@@ -13,8 +13,19 @@ palworldStorage:
     type: pvc
 
 palworldConfig:
-  adminPassword: sec!@#%-_ret123@#%-_!@#%
+  adminPassword: asdfhjfgk7!@^&$1asdf
   backup:
     enabled: true
     interval: 60
     keep: 3
+  iniKeys:
+    - key: PlayerDamageRateAttack
+      value: 1.000000
+    - key: DropItemMaxNum
+      value: 4000
+    - key: Region
+      value: ""
+    - key: PalEggDefaultHatchingTime
+      value: 72.450000
+    - key: bEnablePlayerToPlayerDamage
+      value: true
