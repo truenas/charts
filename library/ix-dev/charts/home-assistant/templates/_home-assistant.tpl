@@ -20,6 +20,9 @@ workload:
             readOnlyRootFilesystem: false
             capabilities:
               add:
+                - CHOWN
+                - DAC_OVERRIDE
+                - FOWNER
                 - NET_BIND_SERVICE
                 - NET_RAW
           fixedEnv:
