@@ -93,7 +93,17 @@ questions:
           description: Dictionaries to be used by Collabora.
           schema:
             type: list
-            default: []
+            default:
+              - de_DE
+              - en_GB
+              - en_US
+              - es_ES
+              - fr_FR
+              - it
+              - nl
+              - pt_BR
+              - pt_PT
+              - ru
             items:
               - variable: dictionary
                 label: Dictionary
