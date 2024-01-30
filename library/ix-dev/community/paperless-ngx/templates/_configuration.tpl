@@ -64,9 +64,9 @@ secret:
     enabled: true
     data:
       PAPERLESS_SECRET_KEY: {{ $secretKey }}
-      PAPERLESS_ADMIN_USER: {{ .Values.paperlessConfig.adminUser }}
-      PAPERLESS_ADMIN_MAIL: {{ .Values.paperlessConfig.adminMail }}
-      PAPERLESS_ADMIN_PASSWORD: {{ .Values.paperlessConfig.adminPassword }}
+      PAPERLESS_ADMIN_USER: {{ .Values.paperlessConfig.adminUser | quote }}
+      PAPERLESS_ADMIN_MAIL: {{ .Values.paperlessConfig.adminMail | quote }}
+      PAPERLESS_ADMIN_PASSWORD: {{ .Values.paperlessConfig.adminPassword | quote }}
       PAPERLESS_DBENGINE: postgresql
       PAPERLESS_DBHOST: {{ $dbHost }}
       PAPERLESS_DBPORT: "5432"
