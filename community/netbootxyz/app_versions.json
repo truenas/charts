@@ -1,17 +1,17 @@
 {
-    "1.0.0": {
+    "1.0.1": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/netbootxyz/1.0.0",
-        "last_update": "2024-01-30 12:40:43",
+        "location": "/__w/charts/charts/community/netbootxyz/1.0.1",
+        "last_update": "2024-01-31 08:18:37",
         "required_features": [
+            "normalize/acl",
             "definitions/timezone",
-            "normalize/ixVolume",
-            "normalize/acl"
+            "normalize/ixVolume"
         ],
-        "human_version": "2.0.76_1.0.0",
-        "version": "1.0.0",
+        "human_version": "2.0.76_1.0.1",
+        "version": "1.0.1",
         "chart_metadata": {
             "name": "netbootxyz",
             "description": "netboot.xyz lets you PXE boot various operating system installers or utilities from a single tool over the network.",
@@ -19,7 +19,7 @@
                 "title": "netbootxyz"
             },
             "type": "application",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "apiVersion": "v2",
             "appVersion": "2.0.76",
             "kubeVersion": ">=1.16.0-0",
@@ -83,6 +83,10 @@
                 {
                     "name": "SETGID",
                     "description": "TFTP requires this ability to switch group for sub-processes."
+                },
+                {
+                    "name": "SYS_CHROOT",
+                    "description": "TFTP requires this ability to spawn child processes."
                 },
                 {
                     "name": "NET_BIND_SERVICE",
