@@ -19,18 +19,18 @@ workload:
             runAsGroup: 0
             runAsNonRoot: false
             readOnlyRootFilesystem: false
-            # TODO: Drop privs
             allowPrivilegeEscalation: true
             capabilities:
-              drop: []
               add:
                 - CHOWN
                 - DAC_OVERRIDE
                 - DAC_READ_SEARCH
                 - FOWNER
+                - PERFMON
                 - SETGID
                 - SETUID
                 - SETPCAP
+                - SYS_ADMIN
                 - SYS_PTRACE
           env:
             NETDATA_LISTENER_PORT: {{ .Values.netdataNetwork.webPort }}
