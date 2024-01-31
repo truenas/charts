@@ -1,0 +1,17 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{- include "collabora.migration" $ -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "collabora.configuration" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "collabora.workload" $ | fromYaml) -}}
+{{- if .Values.collaboraNetwork.certificateID -}}
+  {{- $_ := mustMergeOverwrite .Values (include "nginx.workload" $ | fromYaml) -}}
+{{- end }}
+{{- $_ := mustMergeOverwrite .Values (include "collabora.service" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "collabora.persistence" $ | fromYaml) -}}
+
+{{/* Create the configmap for portal manually*/}}
+{{- include "collabora.portal" $ -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}
