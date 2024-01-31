@@ -24,13 +24,9 @@ workload:
               add:
                 - CHOWN
                 - DAC_OVERRIDE
-                - DAC_READ_SEARCH
                 - FOWNER
-                - PERFMON
                 - SETGID
                 - SETUID
-                - SETPCAP
-                - SYS_ADMIN
                 - SYS_PTRACE
           env:
             NETDATA_LISTENER_PORT: {{ .Values.netdataNetwork.webPort }}

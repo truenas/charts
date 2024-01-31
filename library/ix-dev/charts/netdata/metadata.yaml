@@ -11,14 +11,10 @@ capabilities:
     description: Netdata is able to bypass permission checks.
   - name: FOWNER
     description: Netdata is able to bypass permission checks for it's sub-processes.
-  - name: PERFMON
-    description: Netdata is able to use perfmon.
   - name: SETGID
     description: Netdata is able to set group ID for it's sub-processes.
   - name: SETUID
     description: Netdata is able to set user ID for it's sub-processes.
-  - name: SETPCAP
-    description: Netdata is able to set process capabilities.
   - name: SYS_PTRACE
     description: Netdata is able to trace processes.
 hostMounts:
