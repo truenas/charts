@@ -1,0 +1,27 @@
+runAsContext:
+  - userName: cool
+    groupName: cool
+    uid: 100
+    gid: 101
+    description: Collabora runs as non-root user.
+  - userName: root
+    groupName: root
+    gid: 0
+    uid: 0
+    description: Nginx runs as root user.
+capabilities:
+  - name: CHOWN
+    description: Collabora and Nginx are able to chown files.
+  - name: SETPCAP
+    description: Collabora is able to set process capabilities.
+  - name: FOWNER
+    description: Collabora is able to bypass permission checks for it's sub-processes.
+  - name: SYS_CHROOT
+    description: Collabora is able to use chroot.
+  - name: SETGID
+    description: Nginx is able to set group ID for it's sub-processes.
+  - name: SETUID
+    description: Nginx is able to set user ID for it's sub-processes.
+  - name: MKNOD
+    description: Collabora is able to create device nodes.
+hostMounts: []
