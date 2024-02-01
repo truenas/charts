@@ -71,6 +71,8 @@ secret:
         #!/bin/sh
         config="/config/configuration.yaml"
         default="/default/init"
+        // Attemp to get read/write access
+        chmod +rw "$config" || echo "Failed to set permissions on [$config]"
         if [ ! -f "$config" ]; then
           echo "File [$config] does NOT exist. Creating..."
           cp "$default/configuration.default" "$config"
