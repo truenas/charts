@@ -20,6 +20,7 @@ def migrate_common_lib(values):
     delete_keys = [
         'dnsConfig', 'environmentVariables', 'service', 'enableResourceLimits',
         'memLimit', 'cpuLimit', 'extraAppVolumeMounts', 'appVolumeMounts',
+        'runAsGroup', 'runAsUser',
     ]
 
     values.update({
