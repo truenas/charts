@@ -1,7 +1,7 @@
 image:
   repository: wordpress
   pullPolicy: IfNotPresent
-  tag: 6.4.2
+  tag: 6.4.3
 
 resources:
   limits:
