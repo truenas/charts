@@ -36,27 +36,36 @@ secret:
       PGHOST: {{ $dbHost }}
       PGPORT: "5432"
 
+  {{/* Do not quote: bools, numbers, json */}}
+  {{- $configOpts := list
+    (dict "path" "check_tables" "value" "true")
+    (dict "path" "database_url" "value" ($dbURL | quote))
+    (dict "path" "database.user" "value" ($dbUser | quote))
+    (dict "path" "database.password" "value" ($dbPass | quote))
+    (dict "path" "database.dbname" "value" ($dbName | quote))
+    (dict "path" "database.host" "value" ($dbHost | quote))
+    (dict "path" "database.port" "value" "5432")
+    (dict "path" "hmac_key" "value" ($hmacKey | quote))
+    (dict "path" "host_binding" "value" ("0.0.0.0" | quote))
+    (dict "path" "port" "value" .Values.invidiousNetwork.webPort)
+    (dict "path" "admins" "value" (.Values.invidiousConfig.admins | toJson))
+    (dict "path" "registration_enabled" "value" .Values.invidiousConfig.registrationEnabled)
+    (dict "path" "login_enabled" "value" .Values.invidiousConfig.loginEnabled)
+    (dict "path" "captcha_enabled" "value" .Values.invidiousConfig.captchaEnabled)
+  }}
 
   invidious-creds:
     enabled: true
     data:
-      # Source config
-      INVIDIOUS_CONFIG_FILE: /config/config.yaml
-      # See https://github.com/iv-org/invidious/pull/1702
-      # Override config
       INVIDIOUS_HMAC_KEY: {{ $hmacKey }}
-      INVIDIOUS_CHECK_TABLES: "true"
-      INVIDIOUS_DATABASE_URL: {{ $dbURL }}
-      INVIDIOUS_DB_USER: {{ $dbUser }}
-      INVIDIOUS_DB_PASSWORD: {{ $dbPass }}
-      INVIDIOUS_DB_DBNAME: {{ $dbName }}
-      INVIDIOUS_DB_HOST: {{ $dbHost }}
-      INVIDIOUS_DB_PORT: "5432"
-      INVIDIOUS_HOST_BINDING: "0.0.0.0"
-      INVIDIOUS_PORT: {{ .Values.invidiousNetwork.webPort | quote }}
-      # Add some easy to use values in UI
-      INVIDIOUS_ADMINS: {{ .Values.invidiousConfig.admins | toJson | quote }}
-      INVIDIOUS_REGISTRATION_ENABLED: {{ .Values.invidiousConfig.registrationEnabled | quote }}
-      INVIDIOUS_LOGIN_ENABLED: {{ .Values.invidiousConfig.loginEnabled | quote }}
-      INVIDIOUS_CAPTCHA_ENABLED: {{ .Values.invidiousConfig.captchaEnabled | quote }}
+      config.sh: |
+        #!/bin/sh
+        config="/config/config.yaml"
+        echo "Updating Invidious Config..."
+        {{- range $item := $configOpts }}
+        echo "Updating {{ $item.path }} to {{ $item.value }}"
+        yq -i '.{{ $item.path }} = {{ $item.value }}' "$config"
+        {{- end }}
+        cat "$config"
+        echo "Config already exists, skipping."
 {{- end -}}
