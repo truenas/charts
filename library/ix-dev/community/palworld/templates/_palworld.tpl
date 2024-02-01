@@ -125,8 +125,8 @@ workload:
               set_ini_value "AdminPassword" {{ .Values.palworldConfig.adminPassword | squote }} true false
 
               {{- range $item := .Values.palworldConfig.iniKeys }}
-                {{- $v := $item.value -}}
                 {{- $k := $item.key -}}
+                {{- $v := $item.value | toString -}}
                 {{- $numRegex := "^[0-9]+([.][0-9]+)?$" -}}
                 {{- $boolRegex := "^(true|false)$" -}}
 
