@@ -1,30 +1,22 @@
 image:
-  repository: castopod/app
+  repository: wordpress
   pullPolicy: IfNotPresent
-  tag: 1.8.2
-webImage:
-  repository: castopod/web-server
-  pullPolicy: IfNotPresent
-  tag: 1.8.2
+  tag: 6.4.3
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-castopodConfig:
-  baseUrl: http://localhost:30085
-  webTimeout: 900
-  webMaxBodySize: 512
-  phpMemoryLimit: 512
-  enable2fa: false
-  disableHttpsRedirect: true
+wpConfig:
+  enableCronJob: true
+  cronSchedule: '*/15 * * * *'
   additionalEnvs: []
 
-castopodNetwork:
-  webPort: 30085
+wpNetwork:
+  webPort: 30040
 
-castopodStorage:
+wpStorage:
   data:
     type: ixVolume
     ixVolumeConfig:
