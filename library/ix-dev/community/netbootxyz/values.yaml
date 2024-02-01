@@ -15,9 +15,9 @@ netbootConfig:
 netbootNetwork:
   # TFTP only works with hostNetwork: true
   hostNetwork: true
-  tftpPort: 69
-  webHttpPort: 3000
-  webAssetsPort: 8080
+  tftpPort: 31009
+  webHttpPort: 31010
+  webAssetsPort: 31011
 
 netbootStorage:
   config:
