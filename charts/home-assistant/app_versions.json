@@ -1,17 +1,17 @@
 {
-    "2.0.2": {
+    "2.0.5": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/home-assistant/2.0.2",
-        "last_update": "2024-01-30 12:06:10",
+        "location": "/__w/charts/charts/charts/home-assistant/2.0.5",
+        "last_update": "2024-02-01 09:44:49",
         "required_features": [
-            "normalize/ixVolume",
             "normalize/acl",
+            "normalize/ixVolume",
             "definitions/timezone"
         ],
-        "human_version": "2024.1.5_2.0.2",
-        "version": "2.0.2",
+        "human_version": "2024.1.6_2.0.5",
+        "version": "2.0.5",
         "chart_metadata": {
             "name": "home-assistant",
             "description": "Home Assistant is an open source home automation that puts local control and privacy first.",
@@ -19,9 +19,9 @@
                 "title": "Home Assistant"
             },
             "type": "application",
-            "version": "2.0.2",
+            "version": "2.0.5",
             "apiVersion": "v2",
-            "appVersion": "2024.1.5",
+            "appVersion": "2024.1.6",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
@@ -65,6 +65,18 @@
                 }
             ],
             "capabilities": [
+                {
+                    "name": "CHOWN",
+                    "description": "Home Assistant is able to change file ownership."
+                },
+                {
+                    "name": "FOWNER",
+                    "description": "Home Assistant is able to change file ownership."
+                },
+                {
+                    "name": "DAC_OVERRIDE",
+                    "description": "Home Assistant is able to bypass file permissions."
+                },
                 {
                     "name": "NET_BIND_SERVICE",
                     "description": "Home Assistant is able to bind to privileged ports."
@@ -208,6 +220,13 @@
                                 "schema": {
                                     "type": "int",
                                     "default": 20810,
+                                    "show_if": [
+                                        [
+                                            "hostNetwork",
+                                            "=",
+                                            false
+                                        ]
+                                    ],
                                     "min": 9000,
                                     "max": 65535,
                                     "required": true
@@ -218,7 +237,7 @@
                                 "label": "Host Network",
                                 "schema": {
                                     "type": "boolean",
-                                    "default": true
+                                    "default": false
                                 }
                             }
                         ]
@@ -2037,7 +2056,7 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/home-assistant/1.0.130",
-        "last_update": "2024-01-30 12:06:10",
+        "last_update": "2024-02-01 09:43:18",
         "required_features": [
             "normalize/ixVolume",
             "definitions/timezone"
