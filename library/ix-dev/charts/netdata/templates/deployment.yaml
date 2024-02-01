@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "netdata.name" . }}
+  name: {{ template "netdata.name" . }}-netdata
   labels:
     app: {{ template "netdata.name" . }}
     chart: {{ template "netdata.chart" . }}
