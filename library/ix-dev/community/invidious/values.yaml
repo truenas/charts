@@ -6,6 +6,10 @@ gitImage:
   repository: bitnami/git
   pullPolicy: IfNotPresent
   tag: latest
+yqImage:
+  pullPolicy: IfNotPresent
+  repository: mikefarah/yq
+  tag: 4.40.5
 
 resources:
   limits:
@@ -56,6 +60,6 @@ notes:
     {{- $_ := unset .Values "invidiousDbHost" }}
 
     Additional configuration can be specified
+    by editing the file `/config/config.yaml` (see [example](https://github.com/iv-org/invidious/blob/master/config/config.example.yml))
 
-    - Via [environment variables](https://github.com/iv-org/invidious/pull/1702)
-    - By editing the file `/config/config.yaml` (see [example](https://github.com/iv-org/invidious/blob/master/config/config.example.yml))
+    Note that some configuration options are updated automatically by the chart on each start.

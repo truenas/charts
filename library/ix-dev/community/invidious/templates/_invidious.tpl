@@ -14,9 +14,8 @@ workload:
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
-          envFrom:
-            - secretRef:
-                name: invidious-creds
+          env:
+            INVIDIOUS_CONFIG_FILE: /config/config.yaml
           {{ with .Values.invidiousConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
@@ -100,9 +99,6 @@ workload:
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
-          envFrom:
-            - secretRef:
-                name: postgres-creds
           command:
             - /bin/sh
             - -c
@@ -114,4 +110,13 @@ workload:
                 exit 0
               fi
               echo "Config already exists, skipping."
+        05-update-config:
+          enabled: true
+          type: init
+          imageSelector: yqImage
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            readOnlyRootFilesystem: false
+          command: /setup/config.sh
 {{- end -}}
