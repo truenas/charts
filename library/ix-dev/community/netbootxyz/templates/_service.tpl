@@ -29,6 +29,5 @@ service:
         primary: true
         port: {{ .Values.netbootNetwork.webHttpPort }}
         nodePort: {{ .Values.netbootNetwork.webHttpPort }}
-        targetPort: 3000
         targetSelector: netboot
 {{- end -}}
