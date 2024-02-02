@@ -1,0 +1,10 @@
+netbootStorage:
+  config:
+    type: pvc
+  assets:
+    type: pvc
+netbootNetwork:
+  hostNetwork: true
+  tftpPort: 31009
+  webHttpPort: 31010
+  webAssetsPort: 31011
