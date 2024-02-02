@@ -33,16 +33,3 @@
     {{- end -}}
   {{- end -}}
 {{- end -}}
-
-{{- define "netdata.is-migration" -}}
-  {{- $isMigration := "" -}}
-  {{- $versions := (fromYaml (include "netdata.get-versions" $)) -}}
-  {{- if $versions.old -}}
-    {{- $oldV := semver $versions.old -}}
-    {{- if and (eq $oldV.Major 1) (eq ($oldV.Patch | int) 130) -}}
-      {{- $isMigration = "true" -}}
-    {{- end -}}
-  {{- end -}}
-
-  {{- $isMigration -}}
-{{- end -}}
