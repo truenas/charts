@@ -1,11 +1,12 @@
 name: collabora
-description: Collabora is a collaborative online office suite based on LibreOffice technology
+description: Collabora is a collaborative online office suite based on LibreOffice
+  technology
 annotations:
   title: Collabora
 type: application
-version: 2.0.0
+version: 2.0.1
 apiVersion: v2
-appVersion: 23.05.8.2.1
+appVersion: 23.05.8.4.1
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: truenas
