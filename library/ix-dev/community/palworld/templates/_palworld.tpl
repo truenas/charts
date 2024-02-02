@@ -125,15 +125,20 @@ workload:
               set_ini_value "AdminPassword" {{ .Values.palworldConfig.adminPassword | squote }} true false
 
               {{- range $item := .Values.palworldConfig.iniKeys }}
-                {{- if mustHas (kindOf $item.value) (list "int" "int64" "float64") }}
-                  echo "Key {{ $item.key }} is a {{ kindOf $item.value }}, setting without quotes..."
-                  set_ini_value "{{ $item.key }}" {{ $item.value }}
-                {{- else if or (eq ((toString $item.value) | lower) "true") (eq ((toString $item.value) | lower) "false") }}
-                  echo "Key {{ $item.key }} is a boolean, setting without quotes..."
-                  set_ini_value "{{ $item.key }}" {{ (toString $item.value) | camelcase }}
+                {{- $k := $item.key -}}
+                {{- $v := $item.value | toString -}}
+                {{- $numRegex := "^[0-9]+([.][0-9]+)?$" -}}
+                {{- $boolRegex := "^(true|false)$" -}}
+
+                {{- if (mustRegexMatch $numRegex $v) }}
+                  echo "Key [{{ $k }}] is a number, setting without quotes..."
+                  set_ini_value "{{ $k }}" {{ $v }}
+                {{- else if (mustRegexMatch $boolRegex ($v | lower)) }}
+                  echo "Key [{{ $k }}] is a boolean, setting without quotes..."
+                  set_ini_value "{{ $k }}" {{ (toString $v) | camelcase }}
                 {{- else }}
-                  echo "Key {{ $item.key }} is a {{ kindOf $item.value }}, setting with quotes..."
-                  set_ini_value "{{ $item.key }}" {{ $item.value | quote }} true
+                  echo "Key [{{ $k }}] is a string, setting with quotes..."
+                  set_ini_value "{{ $k }}" {{ $v | quote }} true
                 {{- end }}
               {{- end }}
 
