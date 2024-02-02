@@ -99,7 +99,6 @@ questions:
           label: Portal HTTP Port
           description: The HTTP port for the netboot.xyz Portal.
           schema:
-            show_if: [["hostNetwork", "=", false]]
             type: int
             default: 31010
             min: 9000
