@@ -49,7 +49,7 @@ notes:
     <details>
       <summary>Database Details</summary>
 
-      - Database: `invidious`
+      - Database: `kemal`
       - Username: `kemal`
       - Password: `{{ .Values.invidiousDbPass }}`
       - Host:     `{{ .Values.invidiousDbHost }}.{{ .Release.Namespace }}.svc.cluster.local`
