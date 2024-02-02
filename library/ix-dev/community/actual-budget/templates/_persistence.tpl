@@ -10,7 +10,7 @@ persistence:
         {{- if and (eq .Values.actualStorage.data.type "ixVolume")
                   (not (.Values.actualStorage.data.ixVolumeConfig | default dict).aclEnable) }}
         01-permissions:
-          mountPath: /mnt/directories
+          mountPath: /mnt/directories/data
         {{- end }}
   tmp:
     enabled: true
