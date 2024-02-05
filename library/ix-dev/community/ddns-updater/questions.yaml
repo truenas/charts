@@ -101,6 +101,8 @@ questions:
                             description: GCP
                           - value: godaddy
                             description: GoDaddy
+                          - value: goip
+                            description: GoIP.de
                           - value: google
                             description: Google
                           - value: he
@@ -546,6 +548,25 @@ questions:
                         show_if: [["provider", "=", "gandi"]]
                         default: 3600
                         required: true
+
+                    # GoIP.de
+                    - variable: goipUsername
+                      label: GoIP.de Username
+                      description: GoIP.de Username.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "goip"]]
+                        required: true
+                        empty: false
+                    - variable: goipPassword
+                      label: GoIP.de Password
+                      description: GoIP.de Password.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "goip"]]
+                        required: true
+                        private: true
+                        empty: false
 
                     # GCP
                     - variable: gcpProject
