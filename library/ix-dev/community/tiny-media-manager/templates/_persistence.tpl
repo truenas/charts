@@ -8,6 +8,13 @@ persistence:
       tmm:
         tmm:
           mountPath: /data
+  varlognginx:
+    enabled: true
+    type: emptyDir
+    targetSelector:
+      tmm:
+        tmm:
+          mountPath: /var/log/nginx/
   tmp:
     enabled: true
     type: emptyDir
