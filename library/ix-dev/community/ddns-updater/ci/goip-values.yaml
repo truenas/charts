@@ -12,7 +12,7 @@ ci: true
 ddnsConfig:
   config:
     - provider: goip
-      host: "@"
+      host: "subdomain"
       domain: goip.de
       ipVersion: ""
       goipUsername: someuser
