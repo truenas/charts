@@ -1,0 +1,20 @@
+ddnsStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/data
+
+# This disables probes.
+# As we can't have for each provider
+# an api key, we just run through CI
+# for the linting.
+ci: true
+
+ddnsConfig:
+  config:
+    - provider: name.com
+      host: subdomain
+      domain: example.com
+      ipVersion: ""
+      namecomUsername: "abcdef123456abcdef123456abcdef12"
+      namecomToken: "abcdef123456abcdef123456abcdef12"
+      namecomTtl: 300

@@ -121,6 +121,8 @@ questions:
                             description: LuaDNS
                           - value: namecheap
                             description: Namecheap
+                          - value: name.com
+                            description: Name.com
                           - value: njalla
                             description: Njalla
                           - value: noip
@@ -776,6 +778,33 @@ questions:
                         type: boolean
                         show_if: [["provider", "=", "namecheap"]]
                         default: false
+
+                    # Name.com
+                    - variable: namecomUsername
+                      label: Name.com Username
+                      description: Name.com Username.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "name.com"]]
+                        required: true
+                        empty: false
+                    - variable: namecomToken
+                      label: Name.com Token
+                      description: Name.com Token.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "name.com"]]
+                        required: true
+                        private: true
+                        empty: false
+                    - variable: namecomTtl
+                      label: Name.com TTL
+                      description: Name.com TTL.
+                      schema:
+                        type: int
+                        show_if: [["provider", "=", "name.com"]]
+                        default: 300
+                        required: true
 
                     # Njalla
                     - variable: njallaKey
