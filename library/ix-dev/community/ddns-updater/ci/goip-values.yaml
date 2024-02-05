@@ -13,7 +13,7 @@ ddnsConfig:
   config:
     - provider: goip
       host: "@"
-      domain: example.com
+      domain: goip.de
       ipVersion: ""
       goipUsername: someuser
       goipPassword: password
