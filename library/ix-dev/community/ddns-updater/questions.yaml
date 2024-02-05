@@ -107,6 +107,8 @@ questions:
                             description: Google
                           - value: he
                             description: He.net
+                          - value: hetzner
+                            description: Hetzner
                           - value: infomaniak
                             description: Infomaniak
                           - value: inwx
@@ -653,6 +655,23 @@ questions:
                         type: boolean
                         show_if: [["provider", "=", "he"]]
                         default: false
+
+                    # Hetzner
+                    - variable: hetznerToken
+                      label: Hetzner Token
+                      description: Hetzner Token.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "hetzner"]]
+                        required: true
+                        private: true
+                        empty: false
+                    - variable: hetznerTtl
+                      label: Hetzner TTL
+                      description: Hetzner TTL.
+                      schema:
+                        type: int
+                        show_if: [["provider", "=", "hetzner"]]
 
                     # Infomaniak
                     - variable: infomaniakUsername
