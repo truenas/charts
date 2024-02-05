@@ -1280,8 +1280,8 @@ questions:
                         enum:
                           - value: all
                             description: All providers
-                          - value: google
-                            description: Google
+                          - value: opendns
+                            description: opendns
                           - value: cloudflare
                             description: Cloudflare
                     # Workaround for a UI bug that is fixed in the next release
@@ -1316,16 +1316,18 @@ questions:
                         enum:
                           - value: all
                             description: All providers
-                          - value: opendns
-                            description: opendns
+                          - value: ipify
+                            description: ipify
                           - value: ifconfig
                             description: ifconfig
                           - value: ipinfo
                             description: ipinfo
-                          - value: ddnss
-                            description: ddnss
                           - value: google
                             description: google
+                          - value: spdyn
+                            description: spdyn
+                          - value: ipleak
+                            description: ipleak
                           - value: custom
                             description: Custom Provider
                     - variable: custom
@@ -1358,10 +1360,10 @@ questions:
                         enum:
                           - value: all
                             description: All providers
+                          - value: ipleak
+                            description: iplaek
                           - value: ipify
                             description: ipify
-                          - value: noip
-                            description: noip
                           - value: custom
                             description: Custom Provider
                     - variable: custom
@@ -1394,10 +1396,10 @@ questions:
                         enum:
                           - value: all
                             description: All providers
+                          - value: ipleak
+                            description: ipleak
                           - value: ipify
                             description: ipify
-                          - value: noip
-                            description: noip
                           - value: custom
                             description: Custom Provider
                     - variable: custom

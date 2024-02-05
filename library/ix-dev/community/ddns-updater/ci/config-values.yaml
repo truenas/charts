@@ -35,15 +35,16 @@ ddnsConfig:
     - gotify://gotify-host/token
   publicIpDnsProviders:
     - provider: all
-  publicIpHttpProviders:
-    - provider: custom
-      custom: https://ifconfig.io/ip
-  publicIpv4HttpProviders:
-    - provider: custom
-      custom: https://api.ipify.org
-  publicIpv6HttpProviders:
-    - provider: custom
-      custom: https://api6.ipify.org
+  # FIXME: Custom providers stopped working on 2.6.0
+  # publicIpHttpProviders:
+  #   - provider: custom
+  #     custom: https://ifconfig.io/ip
+  # publicIpv4HttpProviders:
+  #   - provider: custom
+  #     custom: https://api.ipify.org
+  # publicIpv6HttpProviders:
+  #   - provider: custom
+  #     custom: https://api6.ipify.org
 
   additionalEnvs:
     - name: LOG_LEVEL
