@@ -520,6 +520,14 @@ questions:
                         default: false
 
                     # EasyDNS
+                    - variable: easyDnsUsername
+                      label: EasyDNS Username
+                      description: EasyDNS Username.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "easydns"]]
+                        required: true
+                        empty: false
                     - variable: easyDnsToken
                       label: EasyDNS Token
                       description: EasyDNS Token.
