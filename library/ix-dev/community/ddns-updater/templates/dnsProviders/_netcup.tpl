@@ -13,6 +13,6 @@ ddnsConfig:
       host: "@"                   - Required - Valid value ("@" or subdomain)
       ipVersion: ""               - Required - Valid values (ipv4/ipv6/"")
       netcupApiKey: pass          - Required
-      netcupPassword: pass     - Required
+      netcupPassword: pass        - Required
       netcupCustomerNumber: 12345 - Required
 */}}
