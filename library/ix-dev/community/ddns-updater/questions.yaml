@@ -682,6 +682,14 @@ questions:
                         required: true
                         private: true
                         empty: false
+                    - variable: hetznerZoneIdentifier
+                      label: Hetzner Zone ID
+                      description: Hetzner Zone ID.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "hetzner"]]
+                        required: true
+                        empty: false
                     - variable: hetznerTtl
                       label: Hetzner TTL
                       description: Hetzner TTL.
