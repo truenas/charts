@@ -1,12 +1,12 @@
 image:
   repository: fireflyiii/core
   pullPolicy: IfNotPresent
-  tag: version-6.1.7
+  tag: version-6.1.8
 
 importerImage:
   repository: fireflyiii/data-importer
   pullPolicy: IfNotPresent
-  tag: version-1.4.2
+  tag: version-1.4.3
 
 resources:
   limits:
