@@ -91,6 +91,8 @@ questions:
                             description: Dynu
                           - value: dynv6
                             description: DynV6
+                          - value: easydns
+                            description: EasyDNS
                           - value: freedns
                             description: FreeDNS
                           - value: gandi
@@ -504,6 +506,17 @@ questions:
                         type: boolean
                         show_if: [["provider", "=", "dynv6"]]
                         default: false
+
+                    # EasyDNS
+                    - variable: easyDnsToken
+                      label: EasyDNS Token
+                      description: EasyDNS Token.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "easydns"]]
+                        required: true
+                        private: true
+                        empty: false
 
                     # FreeDNS
                     - variable: freeDnsToken
