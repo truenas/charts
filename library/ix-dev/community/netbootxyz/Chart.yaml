@@ -1,11 +1,12 @@
 name: netbootxyz
-description: netboot.xyz lets you PXE boot various operating system installers or utilities from a single tool over the network.
+description: netboot.xyz lets you PXE boot various operating system installers or
+  utilities from a single tool over the network.
 annotations:
   title: netbootxyz
 type: application
-version: 1.0.2
+version: 1.0.3
 apiVersion: v2
-appVersion: 0.7.0.4
+appVersion: 0.7.0.6
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: truenas
