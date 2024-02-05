@@ -71,6 +71,8 @@ questions:
                             description: DD24
                           - value: ddnss
                             description: DDNSS
+                          - value: desec
+                            description: Desec
                           - value: digitalocean
                             description: Digital Ocean
                           - value: dnsomatic
@@ -105,6 +107,8 @@ questions:
                             description: Infomaniak
                           - value: inwx
                             description: INWX
+                          - value: ionos
+                            description: Ionos
                           - value: linode
                             description: Linode
                           - value: luadns
@@ -309,6 +313,17 @@ questions:
                         type: boolean
                         show_if: [["provider", "=", "ddnss"]]
                         default: false
+
+                    # Desec
+                    - variable: desecToken
+                      label: Desec Token
+                      description: Desec Token.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "desec"]]
+                        required: true
+                        private: true
+                        empty: false
 
                     # Digital Ocean
                     - variable: digitalOceanToken
@@ -648,6 +663,17 @@ questions:
                         show_if: [["provider", "=", "inwx"]]
                         private: true
                         required: true
+                        empty: false
+
+                    # Ionos
+                    - variable: ionosApiKey
+                      label: Ionos API Key
+                      description: Ionos API Key.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "ionos"]]
+                        required: true
+                        private: true
                         empty: false
 
                     # Linode

@@ -48,7 +48,7 @@ configmap:
                         "dynu" "dynv6" "freedns" "gandi" "gcp" "godaddy" "google" "he"
                         "infomaniak" "inwx" "linode" "luadns" "namecheap" "njalla" "noip"
                         "opendns" "ovh" "porkbun" "selfhost.de" "servercow" "spdyn"
-                        "strato" "variomedia") }}
+                        "strato" "variomedia" "ionos" "desec") }}
 settings:
   {{- range $item := .Values.ddnsConfig.config -}}
     {{- if not (mustHas $item.provider $providers) -}}
