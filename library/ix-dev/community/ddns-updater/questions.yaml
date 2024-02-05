@@ -123,6 +123,10 @@ questions:
                             description: Namecheap
                           - value: name.com
                             description: Name.com
+                          - variable: netcup
+                            description: Netcup
+                          - variable: nowdns
+                            description: NowDNS
                           - value: njalla
                             description: Njalla
                           - value: noip
@@ -143,6 +147,8 @@ questions:
                             description: Strato
                           - value: variomedia
                             description: Variomedia
+                          - variable: zoneedit
+                            description: ZoneEdit
                     # Common to all providers
                     - variable: domain
                       label: Domain
@@ -806,6 +812,53 @@ questions:
                         default: 300
                         required: true
 
+                    # Netcup
+                    - variable: netcupApiKey
+                      label: Netcup API Key
+                      description: Netcup API Key.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "netcup"]]
+                        required: true
+                        private: true
+                        empty: false
+                    - variable: netcupPassword
+                      label: Netcup Password
+                      description: Netcup Password.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "netcup"]]
+                        required: true
+                        private: true
+                        empty: false
+                    - variable: netcupCustomerNumber
+                      label: Netcup Customer Number
+                      description: Netcup Customer Number.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "netcup"]]
+                        required: true
+                        empty: false
+
+                    # NowDNS
+                    - variable: nowdnsUsername
+                      label: NowDNS Username
+                      description: NowDNS Username.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "nowdns"]]
+                        required: true
+                        empty: false
+                    - variable: nowdnsPassword
+                      label: NowDNS Password
+                      description: NowDNS Password.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "nowdns"]]
+                        required: true
+                        private: true
+                        empty: false
+
                     # Njalla
                     - variable: njallaKey
                       label: Njalla Key
@@ -1103,6 +1156,25 @@ questions:
                         type: boolean
                         show_if: [["provider", "=", "variomedia"]]
                         default: false
+
+                    # ZoneEdit
+                    - variable: zoneeditUsername
+                      label: ZoneEdit Username
+                      description: ZoneEdit Username.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "zoneedit"]]
+                        required: true
+                        empty: false
+                    - variable: zoneeditToken
+                      label: ZoneEdit Token
+                      description: ZoneEdit Token.
+                      schema:
+                        type: string
+                        show_if: [["provider", "=", "zoneedit"]]
+                        required: true
+                        private: true
+                        empty: false
 
         - variable: period
           label: Update Period

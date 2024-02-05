@@ -49,7 +49,7 @@ configmap:
                         "infomaniak" "inwx" "linode" "luadns" "namecheap" "njalla" "noip"
                         "opendns" "ovh" "porkbun" "selfhost.de" "servercow" "spdyn"
                         "strato" "variomedia" "ionos" "desec" "easydns" "goip" "hetzner"
-                        "name.com") }}
+                        "name.com" "netcup" "nowdns" "zoneedit") }}
 settings:
   {{- range $item := .Values.ddnsConfig.config -}}
     {{- if not (mustHas $item.provider $providers) -}}
