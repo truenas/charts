@@ -4,7 +4,7 @@
 
   {{- $dbHost := (printf "%s-postgres" $fullname) -}}
   {{- $dbUser := "kemal" -}} {{/* User is hardcoded */}}
-  {{- $dbName := "invidious" -}}
+  {{- $dbName := "kemal" -}} {{/* Database is hardcoded */}}
 
   {{- $dbPass := (randAlphaNum 32) -}}
   {{- with (lookup "v1" "Secret" .Release.Namespace (printf "%s-postgres-creds" $fullname)) -}}
@@ -40,11 +40,11 @@ secret:
   {{- $configOpts := list
     (dict "path" "check_tables" "value" "true")
     (dict "path" "database_url" "value" ($dbURL | quote))
-    (dict "path" "database.user" "value" ($dbUser | quote))
-    (dict "path" "database.password" "value" ($dbPass | quote))
-    (dict "path" "database.dbname" "value" ($dbName | quote))
-    (dict "path" "database.host" "value" ($dbHost | quote))
-    (dict "path" "database.port" "value" "5432")
+    (dict "path" "db.user" "value" ($dbUser | quote))
+    (dict "path" "db.password" "value" ($dbPass | quote))
+    (dict "path" "db.dbname" "value" ($dbName | quote))
+    (dict "path" "db.host" "value" ($dbHost | quote))
+    (dict "path" "db.port" "value" "5432")
     (dict "path" "hmac_key" "value" ($hmacKey | quote))
     (dict "path" "host_binding" "value" ("0.0.0.0" | quote))
     (dict "path" "port" "value" .Values.invidiousNetwork.webPort)
@@ -63,9 +63,9 @@ secret:
         config="/config/config.yaml"
         echo "Updating Invidious Config..."
         {{- range $item := $configOpts }}
-        echo "Updating {{ $item.path }} to {{ $item.value }}"
+        echo "Updating [{{ $item.path }}]"
         yq -i '.{{ $item.path }} = {{ $item.value }}' "$config"
+        echo "Updated [{{ $item.path }}] to $(yq '.{{ $item.path }}' "$config")"
         {{- end }}
-        cat "$config"
-        echo "Config already exists, skipping."
+        echo "Config updated!"
 {{- end -}}
