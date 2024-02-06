@@ -29,6 +29,7 @@ workload:
           env:
             NGINX_PORT: {{ .Values.netbootNetwork.webAssetsPort }}
             TFTPD_OPTS: {{ join " " .Values.netbootConfig.tftpdOpts }}
+            WEB_APP_PORT: {{ .Values.netbootNetwork.webHttpPort }}
           {{ with .Values.netbootConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
