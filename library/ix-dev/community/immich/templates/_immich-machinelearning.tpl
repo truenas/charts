@@ -1,6 +1,10 @@
 {{- define "immich.machinelearning.workload" -}}
 {{- $fullname := (include "ix.v1.common.lib.chart.names.fullname" $) -}}
-{{- $url := printf "http://%v:%v/api/server-info/ping" $fullname .Values.immichNetwork.webuiPort }}
+{{- $url := printf "http://%v:%v/api/server-info/ping" $fullname .Values.immichNetwork.webuiPort -}}
+{{- $img := "mlImage" -}}
+{{- with .Values.immichConfig.mlImage -}}
+  {{- $img = . -}}
+{{- end }}
 workload:
   machinelearning:
     enabled: true
@@ -11,7 +15,7 @@ workload:
         machinelearning:
           enabled: true
           primary: true
-          imageSelector: mlImage
+          imageSelector: {{ $img }}
           securityContext:
             runAsUser: 0
             runAsGroup: 0

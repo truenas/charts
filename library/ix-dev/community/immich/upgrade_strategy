@@ -18,6 +18,9 @@ ENUMS = {
     }
 }
 
+def strip_text(key, STRIP_TEXT):
+    key = key.replace('cuda', '').replace('openvino', '')
+    return key.strip(STRIP_TEXT)
 
 def newer_mapping(image_tags):
 
@@ -35,7 +38,7 @@ def newer_mapping(image_tags):
         if (STRIP_TEXT is None) or (RE_STABLE_VERSION is None):
             continue
 
-        tags = {t.strip(STRIP_TEXT): t for t in image_tags[key] if RE_STABLE_VERSION.fullmatch(t)}
+        tags = {strip_text(t, STRIP_TEXT): t for t in image_tags[key] if RE_STABLE_VERSION.fullmatch(t)}
         version = semantic_versioning(list(tags))
 
         if not version:
