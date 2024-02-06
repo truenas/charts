@@ -1,16 +1,16 @@
 {
-    "1.0.26": {
+    "1.0.27": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/ddns-updater/1.0.26",
-        "last_update": "2024-02-05 13:11:41",
+        "location": "/__w/charts/charts/community/ddns-updater/1.0.27",
+        "last_update": "2024-02-06 10:04:25",
         "required_features": [
             "definitions/timezone",
             "normalize/ixVolume"
         ],
-        "human_version": "v2.5.0_1.0.26",
-        "version": "1.0.26",
+        "human_version": "2.6.0_1.0.27",
+        "version": "1.0.27",
         "chart_metadata": {
             "name": "ddns-updater",
             "description": "Lightweight universal DDNS Updater with web UI",
@@ -18,9 +18,9 @@
                 "title": "DDNS Updater"
             },
             "type": "application",
-            "version": "1.0.26",
+            "version": "1.0.27",
             "apiVersion": "v2",
-            "appVersion": "v2.5.0",
+            "appVersion": "2.6.0",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
@@ -174,6 +174,10 @@
                                                                     "description": "DDNSS"
                                                                 },
                                                                 {
+                                                                    "value": "desec",
+                                                                    "description": "Desec"
+                                                                },
+                                                                {
                                                                     "value": "digitalocean",
                                                                     "description": "Digital Ocean"
                                                                 },
@@ -210,6 +214,10 @@
                                                                     "description": "DynV6"
                                                                 },
                                                                 {
+                                                                    "value": "easydns",
+                                                                    "description": "EasyDNS"
+                                                                },
+                                                                {
                                                                     "value": "freedns",
                                                                     "description": "FreeDNS"
                                                                 },
@@ -226,6 +234,10 @@
                                                                     "description": "GoDaddy"
                                                                 },
                                                                 {
+                                                                    "value": "goip",
+                                                                    "description": "GoIP.de"
+                                                                },
+                                                                {
                                                                     "value": "google",
                                                                     "description": "Google"
                                                                 },
@@ -234,12 +246,20 @@
                                                                     "description": "He.net"
                                                                 },
                                                                 {
+                                                                    "value": "hetzner",
+                                                                    "description": "Hetzner"
+                                                                },
+                                                                {
                                                                     "value": "infomaniak",
                                                                     "description": "Infomaniak"
                                                                 },
                                                                 {
                                                                     "value": "inwx",
                                                                     "description": "INWX"
+                                                                },
+                                                                {
+                                                                    "value": "ionos",
+                                                                    "description": "Ionos"
                                                                 },
                                                                 {
                                                                     "value": "linode",
@@ -252,6 +272,18 @@
                                                                 {
                                                                     "value": "namecheap",
                                                                     "description": "Namecheap"
+                                                                },
+                                                                {
+                                                                    "value": "name.com",
+                                                                    "description": "Name.com"
+                                                                },
+                                                                {
+                                                                    "value": "netcup",
+                                                                    "description": "Netcup"
+                                                                },
+                                                                {
+                                                                    "value": "nowdns",
+                                                                    "description": "NowDNS"
                                                                 },
                                                                 {
                                                                     "value": "njalla",
@@ -292,6 +324,10 @@
                                                                 {
                                                                     "value": "variomedia",
                                                                     "description": "Variomedia"
+                                                                },
+                                                                {
+                                                                    "value": "zoneedit",
+                                                                    "description": "ZoneEdit"
                                                                 }
                                                             ]
                                                         }
@@ -607,6 +643,24 @@
                                                                 ]
                                                             ],
                                                             "default": false
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "desecToken",
+                                                        "label": "Desec Token",
+                                                        "description": "Desec Token.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "provider",
+                                                                    "=",
+                                                                    "desec"
+                                                                ]
+                                                            ],
+                                                            "required": true,
+                                                            "private": true,
+                                                            "empty": false
                                                         }
                                                     },
                                                     {
@@ -952,6 +1006,41 @@
                                                         }
                                                     },
                                                     {
+                                                        "variable": "easyDnsUsername",
+                                                        "label": "EasyDNS Username",
+                                                        "description": "EasyDNS Username.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "provider",
+                                                                    "=",
+                                                                    "easydns"
+                                                                ]
+                                                            ],
+                                                            "required": true,
+                                                            "empty": false
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "easyDnsToken",
+                                                        "label": "EasyDNS Token",
+                                                        "description": "EasyDNS Token.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "provider",
+                                                                    "=",
+                                                                    "easydns"
+                                                                ]
+                                                            ],
+                                                            "required": true,
+                                                            "private": true,
+                                                            "empty": false
+                                                        }
+                                                    },
+                                                    {
                                                         "variable": "freeDnsToken",
                                                         "label": "FreeDNS Token",
                                                         "description": "FreeDNS Token.",
@@ -1001,6 +1090,41 @@
                                                             ],
                                                             "default": 3600,
                                                             "required": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "goipUsername",
+                                                        "label": "GoIP.de Username",
+                                                        "description": "GoIP.de Username.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "provider",
+                                                                    "=",
+                                                                    "goip"
+                                                                ]
+                                                            ],
+                                                            "required": true,
+                                                            "empty": false
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "goipPassword",
+                                                        "label": "GoIP.de Password",
+                                                        "description": "GoIP.de Password.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "provider",
+                                                                    "=",
+                                                                    "goip"
+                                                                ]
+                                                            ],
+                                                            "required": true,
+                                                            "private": true,
+                                                            "empty": false
                                                         }
                                                     },
                                                     {
@@ -1161,6 +1285,56 @@
                                                         }
                                                     },
                                                     {
+                                                        "variable": "hetznerToken",
+                                                        "label": "Hetzner Token",
+                                                        "description": "Hetzner Token.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "provider",
+                                                                    "=",
+                                                                    "hetzner"
+                                                                ]
+                                                            ],
+                                                            "required": true,
+                                                            "private": true,
+                                                            "empty": false
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "hetznerZoneIdentifier",
+                                                        "label": "Hetzner Zone ID",
+                                                        "description": "Hetzner Zone ID.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "provider",
+                                                                    "=",
+                                                                    "hetzner"
+                                                                ]
+                                                            ],
+                                                            "required": true,
+                                                            "empty": false
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "hetznerTtl",
+                                                        "label": "Hetzner TTL",
+                                                        "description": "Hetzner TTL.",
+                                                        "schema": {
+                                                            "type": "int",
+                                                            "show_if": [
+                                                                [
+                                                                    "provider",
+                                                                    "=",
+                                                                    "hetzner"
+                                                                ]
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
                                                         "variable": "infomaniakUsername",
                                                         "label": "Infomaniak Username",
                                                         "description": "Infomaniak Username.",
@@ -1243,6 +1417,24 @@
                                                             ],
                                                             "private": true,
                                                             "required": true,
+                                                            "empty": false
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "ionosApiKey",
+                                                        "label": "Ionos API Key",
+                                                        "description": "Ionos API Key.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "provider",
+                                                                    "=",
+                                                                    "ionos"
+                                                                ]
+                                                            ],
+                                                            "required": true,
+                                                            "private": true,
                                                             "empty": false
                                                         }
                                                     },
@@ -1331,6 +1523,146 @@
                                                                 ]
                                                             ],
                                                             "default": false
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "namecomUsername",
+                                                        "label": "Name.com Username",
+                                                        "description": "Name.com Username.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "provider",
+                                                                    "=",
+                                                                    "name.com"
+                                                                ]
+                                                            ],
+                                                            "required": true,
+                                                            "empty": false
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "namecomToken",
+                                                        "label": "Name.com Token",
+                                                        "description": "Name.com Token.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "provider",
+                                                                    "=",
+                                                                    "name.com"
+                                                                ]
+                                                            ],
+                                                            "required": true,
+                                                            "private": true,
+                                                            "empty": false
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "namecomTtl",
+                                                        "label": "Name.com TTL",
+                                                        "description": "Name.com TTL.",
+                                                        "schema": {
+                                                            "type": "int",
+                                                            "show_if": [
+                                                                [
+                                                                    "provider",
+                                                                    "=",
+                                                                    "name.com"
+                                                                ]
+                                                            ],
+                                                            "default": 300,
+                                                            "required": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "netcupApiKey",
+                                                        "label": "Netcup API Key",
+                                                        "description": "Netcup API Key.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "provider",
+                                                                    "=",
+                                                                    "netcup"
+                                                                ]
+                                                            ],
+                                                            "required": true,
+                                                            "private": true,
+                                                            "empty": false
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "netcupPassword",
+                                                        "label": "Netcup Password",
+                                                        "description": "Netcup Password.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "provider",
+                                                                    "=",
+                                                                    "netcup"
+                                                                ]
+                                                            ],
+                                                            "required": true,
+                                                            "private": true,
+                                                            "empty": false
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "netcupCustomerNumber",
+                                                        "label": "Netcup Customer Number",
+                                                        "description": "Netcup Customer Number.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "provider",
+                                                                    "=",
+                                                                    "netcup"
+                                                                ]
+                                                            ],
+                                                            "required": true,
+                                                            "empty": false
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "nowdnsUsername",
+                                                        "label": "NowDNS Username",
+                                                        "description": "NowDNS Username.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "provider",
+                                                                    "=",
+                                                                    "nowdns"
+                                                                ]
+                                                            ],
+                                                            "required": true,
+                                                            "empty": false
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "nowdnsPassword",
+                                                        "label": "NowDNS Password",
+                                                        "description": "NowDNS Password.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "provider",
+                                                                    "=",
+                                                                    "nowdns"
+                                                                ]
+                                                            ],
+                                                            "required": true,
+                                                            "private": true,
+                                                            "empty": false
                                                         }
                                                     },
                                                     {
@@ -1930,6 +2262,41 @@
                                                             ],
                                                             "default": false
                                                         }
+                                                    },
+                                                    {
+                                                        "variable": "zoneeditUsername",
+                                                        "label": "ZoneEdit Username",
+                                                        "description": "ZoneEdit Username.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "provider",
+                                                                    "=",
+                                                                    "zoneedit"
+                                                                ]
+                                                            ],
+                                                            "required": true,
+                                                            "empty": false
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "zoneeditToken",
+                                                        "label": "ZoneEdit Token",
+                                                        "description": "ZoneEdit Token.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "show_if": [
+                                                                [
+                                                                    "provider",
+                                                                    "=",
+                                                                    "zoneedit"
+                                                                ]
+                                                            ],
+                                                            "required": true,
+                                                            "private": true,
+                                                            "empty": false
+                                                        }
                                                     }
                                                 ]
                                             }
@@ -2041,8 +2408,8 @@
                                                                     "description": "All providers"
                                                                 },
                                                                 {
-                                                                    "value": "google",
-                                                                    "description": "Google"
+                                                                    "value": "opendns",
+                                                                    "description": "opendns"
                                                                 },
                                                                 {
                                                                     "value": "cloudflare",
@@ -2101,8 +2468,8 @@
                                                                     "description": "All providers"
                                                                 },
                                                                 {
-                                                                    "value": "opendns",
-                                                                    "description": "opendns"
+                                                                    "value": "ipify",
+                                                                    "description": "ipify"
                                                                 },
                                                                 {
                                                                     "value": "ifconfig",
@@ -2113,12 +2480,16 @@
                                                                     "description": "ipinfo"
                                                                 },
                                                                 {
-                                                                    "value": "ddnss",
-                                                                    "description": "ddnss"
-                                                                },
-                                                                {
                                                                     "value": "google",
                                                                     "description": "google"
+                                                                },
+                                                                {
+                                                                    "value": "spdyn",
+                                                                    "description": "spdyn"
+                                                                },
+                                                                {
+                                                                    "value": "ipleak",
+                                                                    "description": "ipleak"
                                                                 },
                                                                 {
                                                                     "value": "custom",
@@ -2183,12 +2554,12 @@
                                                                     "description": "All providers"
                                                                 },
                                                                 {
-                                                                    "value": "ipify",
-                                                                    "description": "ipify"
+                                                                    "value": "ipleak",
+                                                                    "description": "iplaek"
                                                                 },
                                                                 {
-                                                                    "value": "noip",
-                                                                    "description": "noip"
+                                                                    "value": "ipify",
+                                                                    "description": "ipify"
                                                                 },
                                                                 {
                                                                     "value": "custom",
@@ -2253,12 +2624,12 @@
                                                                     "description": "All providers"
                                                                 },
                                                                 {
-                                                                    "value": "ipify",
-                                                                    "description": "ipify"
+                                                                    "value": "ipleak",
+                                                                    "description": "ipleak"
                                                                 },
                                                                 {
-                                                                    "value": "noip",
-                                                                    "description": "noip"
+                                                                    "value": "ipify",
+                                                                    "description": "ipify"
                                                                 },
                                                                 {
                                                                     "value": "custom",
