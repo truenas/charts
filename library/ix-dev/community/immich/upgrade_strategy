@@ -18,9 +18,11 @@ ENUMS = {
     }
 }
 
+
 def strip_text(key, STRIP_TEXT):
     key = key.replace('cuda', '').replace('openvino', '')
     return key.strip(STRIP_TEXT)
+
 
 def newer_mapping(image_tags):
 
