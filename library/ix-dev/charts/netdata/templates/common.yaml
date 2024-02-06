@@ -1,0 +1,14 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{- include "netdata.migration" $ -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "netdata.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "netdata.service" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "netdata.persistence" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "netdata.rbac" $ | fromYaml) -}}
+
+{{/* Create the configmap for portal manually*/}}
+{{- include "netdata.portal" $ -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}
