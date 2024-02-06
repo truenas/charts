@@ -27,8 +27,8 @@ def migrate_common_lib(values):
         # Migrate Config
         'collaboraConfig': {
             'enableWebUI': values['config']['enableWebUI'],
-            'username': values['config']['username'],
-            'password': values['config']['password'],
+            'username': values['config'].get('username', ''),
+            'password': values['config'].get('password', ''),
             'serverName': values['config']['server_name'],
             'dictionaries': [d for d in values['config']['dictionaries'].split(' ') if d],
             'extraParams': [p for p in values['config']['extra_params'].split(' ') if p],
