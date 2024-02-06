@@ -1,0 +1,20 @@
+ddnsStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/data
+
+# This disables probes.
+# As we can't have for each provider
+# an api key, we just run through CI
+# for the linting.
+ci: true
+
+ddnsConfig:
+  config:
+    - provider: hetzner
+      host: "@"
+      domain: example.com
+      ipVersion: ""
+      hetznerToken: password
+      hetznerZoneIdentifier: zoneid
+      hetznerTtl: 60

@@ -15,7 +15,7 @@ workload:
             runAsUser: {{ .Values.ddnsRunAs.user }}
             runAsGroup: {{ .Values.ddnsRunAs.group }}
           env:
-            LISTENING_PORT: {{ .Values.ddnsNetwork.webPort }}
+            LISTENING_ADDRESS: {{ printf ":%v" .Values.ddnsNetwork.webPort }}
             DATADIR: /updater/data
             BACKUP_DIRECTORY: /updater/data
           envFrom:
