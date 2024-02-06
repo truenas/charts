@@ -1,0 +1,53 @@
+ddnsStorage:
+  data:
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/data
+
+# This disables probes.
+# As we can't have for each provider
+# an api key, we just run through CI
+# for the linting.
+ci: true
+
+ddnsRunAs:
+  user: 1000
+  group: 1000
+
+ddnsConfig:
+  config:
+    - provider: allinkl
+      host: "@"
+      domain: example.com
+      ipVersion: ""
+      allinklUsername: user
+      allinklPassword: pass
+
+  period: 1m
+  backupPeriod: 1h
+  updateCooldownPeriod: 10m
+  publicIpDnsTimeout: 3s
+  httpTimeout: 15s
+  publicIpFetchers:
+    - provider: all
+
+  shoutrrrAddresses:
+    - discord://token@id
+    - gotify://gotify-host/token
+  publicIpDnsProviders:
+    - provider: all
+  # FIXME: Custom providers stopped working on 2.6.0
+  # publicIpHttpProviders:
+  #   - provider: custom
+  #     custom: https://ifconfig.io/ip
+  # publicIpv4HttpProviders:
+  #   - provider: custom
+  #     custom: https://api.ipify.org
+  # publicIpv6HttpProviders:
+  #   - provider: custom
+  #     custom: https://api6.ipify.org
+
+  additionalEnvs:
+    - name: LOG_LEVEL
+      value: debug
+    - name: LOG_CALLER
+      value: short

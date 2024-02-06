@@ -1,0 +1,10 @@
+netdataNetwork:
+  webPort: 30489
+
+netdataStorage:
+  config:
+    type: pvc
+  cache:
+    type: pvc
+  lib:
+    type: pvc

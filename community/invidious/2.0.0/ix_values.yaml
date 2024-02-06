@@ -1,0 +1,65 @@
+image:
+  repository: quay.io/invidious/invidious
+  pullPolicy: IfNotPresent
+  tag: latest
+gitImage:
+  repository: bitnami/git
+  pullPolicy: IfNotPresent
+  tag: latest
+yqImage:
+  pullPolicy: IfNotPresent
+  repository: mikefarah/yq
+  tag: 4.40.5
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+invidiousConfig:
+  admins: []
+  registrationEnabled: true
+  loginEnabled: true
+  captchaEnabled: true
+  additionalEnvs: []
+
+invidiousNetwork:
+  webPort: 31008
+
+invidiousStorage:
+  config:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: config
+  pgData:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: pgData
+  pgBackup:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: pgBackup
+  additionalStorages: []
+
+notes:
+  custom: |
+    ## Database
+    You can connect to the database using the pgAdmin App from the catalog
+
+    <details>
+      <summary>Database Details</summary>
+
+      - Database: `kemal`
+      - Username: `kemal`
+      - Password: `{{ .Values.invidiousDbPass }}`
+      - Host:     `{{ .Values.invidiousDbHost }}.{{ .Release.Namespace }}.svc.cluster.local`
+      - Port:     `5432`
+
+    </details>
+    {{- $_ := unset .Values "invidiousDbPass" }}
+    {{- $_ := unset .Values "invidiousDbHost" }}
+
+    Additional configuration can be specified
+    by editing the file `/config/config.yaml` (see [example](https://github.com/iv-org/invidious/blob/master/config/config.example.yml))
+
+    Note that some configuration options are updated automatically by the chart on each start.

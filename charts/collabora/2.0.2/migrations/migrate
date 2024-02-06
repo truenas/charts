@@ -1,0 +1,71 @@
+#!/usr/bin/python3
+import json
+import os
+import sys
+
+def migrate_common_lib(values):
+    delete_keys = [
+        'nodePort', 'certificate', 'enableResourceLimits', 'cpuLimit', 'memLimit',
+        'environmentVariables', 'extraAppVolumeMounts', 'config', 'updateStrategy',
+        'nginx',
+    ]
+
+    values.update({
+        # Migrate Network
+        'collaboraNetwork': {
+            'webPort': values['nodePort'],
+            'certificateID': values['certificate'],
+        },
+        # Migrate Resources
+        'resources': {
+            'limits': {
+                'cpu': values.get('cpuLimit', '4000m'),
+                'memory': values.get('memLimit', '8Gi'),
+            }
+        },
+        'TZ': values['config']['timezone'],
+        # Migrate Config
+        'collaboraConfig': {
+            'enableWebUI': values['config']['enableWebUI'],
+            'username': values['config'].get('username', ''),
+            'password': values['config'].get('password', ''),
+            'serverName': values['config']['server_name'],
+            'dictionaries': [d for d in values['config']['dictionaries'].split(' ') if d],
+            'extraParams': [p for p in values['config']['extra_params'].split(' ') if p],
+            'aliasGroup1': values['config']['aliasgroup1'],
+            'additionalEnvs': values.get('environmentVariables', []),
+        },
+        # Migrate Storage
+        'collaboraStorage': {
+            'additionalStorages': [
+                {
+                    'type': 'hostPath',
+                    'hostPathConfig': {'hostPath': e['hostPath']},
+                    'mountPath': e['mountPath'],
+                    'readOnly': e.get('readOnly', False),
+                }
+                for e in values.get('extraAppVolumeMounts', [])
+            ],
+        },
+    })
+
+    for k in delete_keys:
+        values.pop(k, None)
+
+    return values
+
+def migrate(values):
+    # If this missing, we have already migrated
+    if not 'nodePort' in values.keys():
+        return values
+
+    return migrate_common_lib(values)
+
+
+if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        exit(1)
+
+    if os.path.exists(sys.argv[1]):
+        with open(sys.argv[1], 'r') as f:
+            print(json.dumps(migrate(json.loads(f.read()))))

@@ -1,0 +1,31 @@
+image:
+  repository: netbootxyz/netbootxyz
+  pullPolicy: IfNotPresent
+  tag: 0.7.1-nbxyz1
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+netbootConfig:
+  tftpdOpts: []
+  additionalEnvs: []
+
+netbootNetwork:
+  # TFTP only works with hostNetwork: true
+  hostNetwork: true
+  tftpPort: 31009
+  webHttpPort: 31010
+  webAssetsPort: 31011
+
+netbootStorage:
+  config:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: config
+  assets:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: assets
+  additionalStorages: []

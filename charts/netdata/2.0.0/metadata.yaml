@@ -1,0 +1,30 @@
+runAsContext:
+  - userName: root
+    groupName: root
+    gid: 0
+    uid: 0
+    description: Netdata runs as root user.
+capabilities:
+  - name: CHOWN
+    description: Netdata is able to chown files.
+  - name: DAC_OVERRIDE
+    description: Netdata is able to bypass permission checks.
+  - name: FOWNER
+    description: Netdata is able to bypass permission checks for it's sub-processes.
+  - name: SETGID
+    description: Netdata is able to set group ID for it's sub-processes.
+  - name: SETUID
+    description: Netdata is able to set user ID for it's sub-processes.
+  - name: SYS_PTRACE
+    description: Netdata is able to trace processes.
+hostMounts:
+  - hostPath: /etc/os-release
+    description: Required to read the OS release information.
+  - hostPath: /etc/passwd
+    description: Required to read the user information.
+  - hostPath: /etc/group
+    description: Required to read the group information.
+  - hostPath: /proc
+    description: Required to read the processes information.
+  - hostPath: /sys
+    description: Required to read the system information.
