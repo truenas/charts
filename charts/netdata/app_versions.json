@@ -1,16 +1,16 @@
 {
-    "2.0.0": {
+    "2.0.1": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/netdata/2.0.0",
-        "last_update": "2024-02-06 10:04:25",
+        "location": "/__w/charts/charts/charts/netdata/2.0.1",
+        "last_update": "2024-02-07 12:35:38",
         "required_features": [
             "normalize/acl",
             "normalize/ixVolume"
         ],
-        "human_version": "v1.44.1_2.0.0",
-        "version": "2.0.0",
+        "human_version": "v1.44.2_2.0.1",
+        "version": "2.0.1",
         "chart_metadata": {
             "name": "netdata",
             "description": "Real-time performance monitoring, done right!",
@@ -18,9 +18,9 @@
                 "title": "Netdata"
             },
             "type": "application",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "apiVersion": "v2",
-            "appVersion": "v1.44.1",
+            "appVersion": "v1.44.2",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {

@@ -1,18 +1,18 @@
 {
-    "3.0.7": {
+    "3.0.8": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/immich/3.0.7",
-        "last_update": "2024-02-06 10:03:00",
+        "location": "/__w/charts/charts/community/immich/3.0.8",
+        "last_update": "2024-02-07 12:35:38",
         "required_features": [
-            "normalize/acl",
-            "definitions/gpuConfiguration",
             "definitions/timezone",
-            "normalize/ixVolume"
+            "normalize/acl",
+            "normalize/ixVolume",
+            "definitions/gpuConfiguration"
         ],
-        "human_version": "1.94.1_3.0.7",
-        "version": "3.0.7",
+        "human_version": "1.94.1_3.0.8",
+        "version": "3.0.8",
         "chart_metadata": {
             "name": "immich",
             "description": "Immich is a self-hosted photo and video backup solution directly from your mobile phone.",
@@ -20,7 +20,7 @@
                 "title": "Immich"
             },
             "type": "application",
-            "version": "3.0.7",
+            "version": "3.0.8",
             "apiVersion": "v2",
             "appVersion": "1.94.1",
             "kubeVersion": ">=1.16.0-0",
@@ -147,6 +147,29 @@
                                 "schema": {
                                     "type": "boolean",
                                     "default": true
+                                }
+                            },
+                            {
+                                "variable": "mlImageType",
+                                "label": "Machine Learning Image Type",
+                                "description": "The type of image to use for Machine Learning.\n",
+                                "schema": {
+                                    "type": "string",
+                                    "default": "mlImage",
+                                    "enum": [
+                                        {
+                                            "value": "mlImage",
+                                            "description": "Default Machine Learning Image"
+                                        },
+                                        {
+                                            "value": "mlCudaImage",
+                                            "description": "Cuda Machine Learning Image"
+                                        },
+                                        {
+                                            "value": "mlOpenvinoImage",
+                                            "description": "Openvino Machine Learning Image"
+                                        }
+                                    ]
                                 }
                             }
                         ]
