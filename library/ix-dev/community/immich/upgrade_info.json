@@ -1,4 +1,10 @@
 {
   "filename": "values.yaml",
-  "keys": ["image", "webImage", "proxyImage", "mlImage"]
+  "keys": [
+    "pgvectorImage",
+    "image",
+    "mlImage",
+    "mlCudaImage",
+    "mlOpenvinoImage"
+  ]
 }

@@ -42,7 +42,20 @@ questions:
           schema:
             type: boolean
             default: true
-
+        - variable: mlImageType
+          label: Machine Learning Image Type
+          description: |
+            The type of image to use for Machine Learning.
+          schema:
+            type: string
+            default: mlImage
+            enum:
+              - value: mlImage
+                description: Default Machine Learning Image
+              - value: mlCudaImage
+                description: Cuda Machine Learning Image
+              - value: mlOpenvinoImage
+                description: Openvino Machine Learning Image
   - variable: immichNetwork
     label: ""
     group: Network Configuration
