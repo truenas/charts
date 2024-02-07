@@ -8,6 +8,16 @@ mlImage:
   pullPolicy: IfNotPresent
   tag: v1.94.1
 
+mlCudaImage:
+  repository: altran1502/immich-machine-learning
+  pullPolicy: IfNotPresent
+  tag: v1.94.1-cuda
+
+mlOpenvinoImage:
+  repository: altran1502/immich-machine-learning
+  pullPolicy: IfNotPresent
+  tag: v1.94.1-openvino
+
 pgvectorImage:
   repository: tensorchord/pgvecto-rs
   pullPolicy: IfNotPresent
@@ -23,6 +33,7 @@ immichGPU: {}
 immichConfig:
   publicLoginMessage: ''
   enableML: true
+  mlImageType: mlImage
 
 immichNetwork:
   webuiPort: 30041

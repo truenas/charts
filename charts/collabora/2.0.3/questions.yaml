@@ -47,9 +47,9 @@ questions:
             default: true
         - variable: username
           label: Username for WebUI
-          show_if: [[enableWebUI, "=", true]]
           schema:
             type: string
+            show_if: [[enableWebUI, "=", true]]
             default: ""
             required: true
         - variable: password
