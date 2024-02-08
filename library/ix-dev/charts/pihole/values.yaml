@@ -2,3 +2,34 @@ image:
   pullPolicy: IfNotPresent
   repository: pihole/pihole
   tag: 2023.11.0
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+podOptions:
+  dnsConfig:
+    options: []
+
+piholeConfig:
+  webPassword: ''
+  additionalEnvs: []
+
+piholeNetwork:
+  webPort: 20489
+  dhcpEnabled: false
+  dhcpStart: ''
+  dhcpEnd: ''
+  dhcpGateway: ''
+
+piholeStorage:
+  config:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: config
+  dnsmasq:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: dnsmasq
+  additionalStorages: []

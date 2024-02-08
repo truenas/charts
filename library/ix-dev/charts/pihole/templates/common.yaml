@@ -6,7 +6,6 @@
 {{- $_ := mustMergeOverwrite .Values (include "pihole.workload" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "pihole.service" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "pihole.persistence" $ | fromYaml) -}}
-{{- $_ := mustMergeOverwrite .Values (include "pihole.rbac" $ | fromYaml) -}}
 
 {{/* Create the configmap for portal manually*/}}
 {{- include "pihole.portal" $ -}}
