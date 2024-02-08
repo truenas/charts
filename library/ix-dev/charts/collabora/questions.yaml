@@ -49,6 +49,7 @@ questions:
           label: Username for WebUI
           schema:
             type: string
+            required: true
             show_if: [[enableWebUI, "=", true]]
             default: ""
         - variable: password
@@ -57,6 +58,7 @@ questions:
             type: string
             default: ""
             private: true
+            required: true
             show_if: [[enableWebUI, "=", true]]
             valid_chars: "^[a-zA-Z0-9!@#%^&*?]{8,}$|^$"
             valid_chars_error: |

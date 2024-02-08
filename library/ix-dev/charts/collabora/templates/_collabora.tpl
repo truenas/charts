@@ -31,8 +31,8 @@ workload:
             extra_params: {{ join " " .Values.collaboraConfig.extraParams }}
             DONT_GEN_SSL_CERT: "true"
             {{- if .Values.collaboraConfig.enableWebUI }}
-            username: {{ .Values.collaboraConfig.username | required "Collabora - Username is required when Enable WebUI is checked" }}
-            password: {{ .Values.collaboraConfig.password | required "Collabora - Password is required when Enable WebUI is checked" }}
+            username: {{ .Values.collaboraConfig.username }}
+            password: {{ .Values.collaboraConfig.password }}
             {{- end }}
             {{- if not (contains ":" .Values.collaboraConfig.serverName) }}
             server_name: {{ printf "%s:%v" .Values.collaboraConfig.serverName .Values.collaboraNetwork.webPort }}
