@@ -8,8 +8,20 @@ from catalog_update.upgrade_strategy import semantic_versioning
 
 RE_STABLE_VERSION_BASE = r'\d+\.\d+\.\d+'
 ENUMS = {
-    'default': {
+    'image': {
         'RE_STABLE_VERSION': re.compile(rf'v{RE_STABLE_VERSION_BASE}'),
+        'STRIP_TEXT': 'v'
+    },
+    'mlImage': {
+        'RE_STABLE_VERSION': re.compile(rf'v{RE_STABLE_VERSION_BASE}'),
+        'STRIP_TEXT': 'v'
+    },
+    'mlCudaImage': {
+        'RE_STABLE_VERSION': re.compile(rf'v{RE_STABLE_VERSION_BASE}-cuda'),
+        'STRIP_TEXT': 'v'
+    },
+    'mlOpenvinoImage': {
+        'RE_STABLE_VERSION': re.compile(rf'v{RE_STABLE_VERSION_BASE}-openvino'),
         'STRIP_TEXT': 'v'
     },
     'pgvectorImage': {
@@ -20,7 +32,7 @@ ENUMS = {
 
 
 def strip_text(key, STRIP_TEXT):
-    key = key.replace('cuda', '').replace('openvino', '')
+    key = key.replace('-cuda', '').replace('-openvino', '')
     return key.strip(STRIP_TEXT)
 
 
@@ -32,10 +44,8 @@ def newer_mapping(image_tags):
     }
 
     for key in image_tags.keys():
-        STRIP_TEXT = ENUMS[key].get('STRIP_TEXT', None) \
-            if key in ENUMS else ENUMS.get('default', None).get('STRIP_TEXT', None)
-        RE_STABLE_VERSION = ENUMS[key].get('RE_STABLE_VERSION') \
-            if key in ENUMS else ENUMS.get('default', None).get('RE_STABLE_VERSION', None)
+        STRIP_TEXT = ENUMS[key].get('STRIP_TEXT', None)
+        RE_STABLE_VERSION = ENUMS[key].get('RE_STABLE_VERSION')
 
         if (STRIP_TEXT is None) or (RE_STABLE_VERSION is None):
             continue
