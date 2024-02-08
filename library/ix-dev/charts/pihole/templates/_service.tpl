@@ -30,5 +30,4 @@ service:
         protocol: udp
         targetSelector: pihole
       {{- end }}
-
 {{- end -}}
