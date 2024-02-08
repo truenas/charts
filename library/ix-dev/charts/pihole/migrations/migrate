@@ -21,10 +21,7 @@ def migrate_common_lib(values):
         'enableResourceLimits', 'memLimit', 'cpuLimit', 'dnsConfig',
         'web_port', 'environmentVariables', 'timezone', 'password',
         'extraAppVolumeMounts', 'appVolumeMounts', 'dhcp', 'dhcp_start',
-        'dhcp_end', 'dhcp_gateway',
-
-        # TODO: Check
-        'ownerUID', 'ownerGID',
+        'dhcp_end', 'dhcp_gateway', 'ownerUID', 'ownerGID',
     ]
 
     values.update({
