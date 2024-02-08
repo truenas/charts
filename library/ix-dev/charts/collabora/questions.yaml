@@ -51,14 +51,12 @@ questions:
             type: string
             show_if: [[enableWebUI, "=", true]]
             default: ""
-            required: true
         - variable: password
           label: Password for WebUI
           schema:
             type: string
             default: ""
             private: true
-            required: true
             show_if: [[enableWebUI, "=", true]]
             valid_chars: "[a-zA-Z0-9!@#%^&*?]{8,}"
             valid_chars_error: |
