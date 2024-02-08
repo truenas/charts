@@ -24,6 +24,7 @@ workload:
                 - FOWNER
                 - SETGID
                 - SETUID
+                - SETFCAP
                 - KILL
           env:
             WEB_PORT: {{ .Values.piholeNetwork.webPort }}
