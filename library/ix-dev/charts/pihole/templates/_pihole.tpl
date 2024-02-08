@@ -19,12 +19,11 @@ workload:
             capabilities:
               add:
                 - NET_ADMIN
-            #     - CHOWN
-            #     - DAC_OVERRIDE
-            #     - FOWNER
-            #     - SETGID
-            #     - SETUID
-            #     - SYS_PTRACE
+                - CHOWN
+                - DAC_OVERRIDE
+                - FOWNER
+                - SETGID
+                - SETUID
           env:
             WEB_PORT: {{ .Values.piholeNetwork.webPort }}
             WEBPASSWORD: {{ .Values.piholeConfig.webPassword }}
