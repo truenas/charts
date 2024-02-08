@@ -1,0 +1,15 @@
+piholeConfig:
+  webPassword: somepassword
+
+piholeNetwork:
+  webPort: 32000
+  dhcpEnabled: true
+  dhcpStart: '192.168.1.1'
+  dhcpEnd: '192.168.1.2'
+  dhcpGateway: '192.168.1.0'
+
+piholeStorage:
+  config:
+    type: pvc
+  dnsmasq:
+    type: pvc
