@@ -1,30 +1,22 @@
 image:
+  repository: jvmilazz0/kavita
   pullPolicy: IfNotPresent
-  repository: emby/embyserver
-  tag: 4.7.14.0
+  tag: 0.7.14
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-embyConfig:
+kavitaConfig:
   additionalEnvs: []
 
-# On migration the default is 2
-embyID:
-  user: 568
-  group: 568
+kavitaNetwork:
+  webPort: 30069
 
-embyNetwork:
-  webPort: 9096
-  hostNetwork: false
-
-embyStorage:
+kavitaStorage:
   config:
     type: ixVolume
     ixVolumeConfig:
       datasetName: config
   additionalStorages: []
-
-embyGPU: {}
