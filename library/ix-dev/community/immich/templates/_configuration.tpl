@@ -86,4 +86,17 @@ configmap:
       MACHINE_LEARNING_CACHE_FOLDER: /mlcache
       TRANSFORMERS_CACHE: /mlcache
   {{- end }}
+
+{{- with .Values.immichGPU }}
+scaleGPU:
+  {{- range $key, $value := . }}
+  - gpu:
+      {{ $key }}: {{ $value }}
+    targetSelector:
+      microservices:
+        - microservices
+      machinelearning:
+        - machinelearning
+  {{- end -}}
+{{- end -}}
 {{- end -}}
