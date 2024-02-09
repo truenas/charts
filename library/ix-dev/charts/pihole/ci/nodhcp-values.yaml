@@ -3,7 +3,8 @@ piholeConfig:
 
 piholeNetwork:
   webPort: 32000
-  dhcpEnabled: false
+  dhcp:
+    enabled: false
 
 piholeStorage:
   config:

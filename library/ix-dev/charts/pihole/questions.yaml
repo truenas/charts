@@ -114,31 +114,37 @@ questions:
             min: 9000
             max: 65535
             required: true
-        - variable: dhcpEnabled
-          label: Enable DHCP
-          description: Enable DHCP for Pi-Hole.
+        - variable: dhcp
+          label: DHCP Configuration
           schema:
-            type: boolean
-            default: false
-            show_subquestions_if: true
-            subquestions:
-              - variable: dhcpStart
-                label: DHCP Start Address
+            type: dict
+            attrs:
+              - variable: enabled
+                label: Enable DHCP
+                description: Enable DHCP for Pi-Hole.
+                schema:
+                  type: boolean
+                  default: false
+              - variable: start
+                label: DHCP Start
+                description: The start of the DHCP range.
                 schema:
                   type: ipaddr
-                  cidr: false
+                  show_if: [["enabled", "=", true]]
                   required: true
-              - variable: dhcpEnd
-                label: DHCP End Address
+              - variable: end
+                label: DHCP End
+                description: The end of the DHCP range.
                 schema:
                   type: ipaddr
-                  cidr: false
+                  show_if: [["enabled", "=", true]]
                   required: true
-              - variable: dhcpGateway
-                label: Gateway
+              - variable: gateway
+                label: DHCP Gateway
+                description: The gateway for the DHCP range.
                 schema:
                   type: ipaddr
-                  cidr: false
+                  show_if: [["enabled", "=", true]]
                   required: true
 
   - variable: piholeStorage

@@ -29,10 +29,10 @@ def migrate_common_lib(values):
         'piholeNetwork': {
             'webPort': values['web_port'],
             'dhcp': {
-                'dhcpEnabled': values['dhcp'],
-                'dhcpStart': values['dhcp_start'],
-                'dhcpEnd': values['dhcp_end'],
-                'dhcpGateway': values['dhcp_gateway'],
+                'enabled': values['dhcp'],
+                'start': values['dhcp_start'],
+                'end': values['dhcp_end'],
+                'gateway': values['dhcp_gateway'],
             }
         },
         # Migrate Resources
@@ -52,8 +52,8 @@ def migrate_common_lib(values):
             }
         },
         # Migrate Config
+        'TZ': values['timezone'],
         'piholeConfig': {
-            'TZ': values['timezone'],
             'webPassword': values['password'],
             'additionalEnvs': values.get('environmentVariables', []),
         },
@@ -87,6 +87,8 @@ def migrate(values):
 
 
 if __name__ == '__main__':
+    with open('in.json', 'r') as f:
+        print(json.dumps(migrate(json.loads(f.read()))))
     if len(sys.argv) != 2:
         exit(1)
 

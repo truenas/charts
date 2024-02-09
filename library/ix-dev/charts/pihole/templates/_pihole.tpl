@@ -29,11 +29,11 @@ workload:
           env:
             WEB_PORT: {{ .Values.piholeNetwork.webPort }}
             WEBPASSWORD: {{ .Values.piholeConfig.webPassword }}
-            {{- if .Values.piholeNetwork.enableDHCP }}
+            {{- if .Values.piholeNetwork.dhcp.enabled }}
             DHCP_ACTIVE: "true"
-            DHCP_START: {{ .Values.piholeNetwork.dhcpStart }}
-            DHCP_END: {{ .Values.piholeNetwork.dhcpEnd }}
-            DHCP_ROUTER: {{ .Values.piholeNetwork.dhcpGateway }}
+            DHCP_START: {{ .Values.piholeNetwork.dhcp.start }}
+            DHCP_END: {{ .Values.piholeNetwork.dhcp.end }}
+            DHCP_ROUTER: {{ .Values.piholeNetwork.dhcp.gateway }}
             {{- end }}
           {{ with .Values.piholeConfig.additionalEnvs }}
           envList:

@@ -18,10 +18,11 @@ piholeConfig:
 
 piholeNetwork:
   webPort: 20489
-  dhcpEnabled: false
-  dhcpStart: ''
-  dhcpEnd: ''
-  dhcpGateway: ''
+  dhcp:
+    enabled: false
+    start: ''
+    end: ''
+    gateway: ''
 
 piholeStorage:
   config:
