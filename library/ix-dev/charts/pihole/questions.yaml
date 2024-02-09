@@ -130,6 +130,7 @@ questions:
                 description: The start of the DHCP range.
                 schema:
                   type: ipaddr
+                  cidr: false
                   show_if: [["enabled", "=", true]]
                   required: true
               - variable: end
@@ -137,6 +138,7 @@ questions:
                 description: The end of the DHCP range.
                 schema:
                   type: ipaddr
+                  cidr: false
                   show_if: [["enabled", "=", true]]
                   required: true
               - variable: gateway
@@ -144,6 +146,7 @@ questions:
                 description: The gateway for the DHCP range.
                 schema:
                   type: ipaddr
+                  cidr: false
                   show_if: [["enabled", "=", true]]
                   required: true
 
