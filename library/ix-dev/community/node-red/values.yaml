@@ -1,27 +1,27 @@
 node18Image:
   repository: nodered/node-red
   pullPolicy: IfNotPresent
-  tag: 3.1.4-18
+  tag: 3.1.5-18
 node18MinimalImage:
   repository: nodered/node-red
   pullPolicy: IfNotPresent
-  tag: 3.1.4-18-minimal
+  tag: 3.1.5-18-minimal
 node16Image:
   repository: nodered/node-red
   pullPolicy: IfNotPresent
-  tag: 3.1.4-16
+  tag: 3.1.5-16
 node16MinimalImage:
   repository: nodered/node-red
   pullPolicy: IfNotPresent
-  tag: 3.1.4-16-minimal
+  tag: 3.1.5-16-minimal
 node14Image:
   repository: nodered/node-red
   pullPolicy: IfNotPresent
-  tag: 3.1.3-14
+  tag: 3.1.5-14
 node14MinimalImage:
   repository: nodered/node-red
   pullPolicy: IfNotPresent
-  tag: 3.1.3-14-minimal
+  tag: 3.1.5-14-minimal
 
 resources:
   limits:
