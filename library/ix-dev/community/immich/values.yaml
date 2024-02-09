@@ -11,17 +11,17 @@ mlImage:
 mlCudaImage:
   repository: altran1502/immich-machine-learning
   pullPolicy: IfNotPresent
-  tag: v1.94.1
+  tag: v1.94.1-cuda
 
 mlOpenvinoImage:
   repository: altran1502/immich-machine-learning
   pullPolicy: IfNotPresent
-  tag: v1.94.1
+  tag: v1.94.1-openvino
 
 pgvectorImage:
   repository: tensorchord/pgvecto-rs
   pullPolicy: IfNotPresent
-  tag: pg15-v0.2.0
+  tag: pg15-v0.1.11
 
 resources:
   limits:
