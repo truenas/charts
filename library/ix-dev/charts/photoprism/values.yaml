@@ -21,6 +21,10 @@ photoprismNetwork:
   webPort: 20800
   hostNetwork: false
 
+photoprismRunAs:
+  user: 568
+  group: 568
+
 photoprismStorage:
   import:
     type: ixVolume
