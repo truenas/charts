@@ -23,16 +23,6 @@ portals:
     path: "$kubernetes-resource_configmap_portal_path"
 
 questions:
-  - variable: TZ
-    group: Photoprism Configuration
-    label: Timezone
-    schema:
-      type: string
-      default: Etc/UTC
-      required: true
-      $ref:
-        - definitions/timezone
-
   - variable: photoprismConfig
     label: ""
     group: Photoprism Configuration
