@@ -234,7 +234,7 @@ questions:
                         type: hostpath
                         show_if: [["aclEnable", "=", false]]
                         required: true
-        - variable: dnsmaq
+        - variable: dnsmasq
           label: Pi-Hole DNSmasq Storage
           description: The path to store Pi-Hole DNSmasq.
           schema:
