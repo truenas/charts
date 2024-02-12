@@ -30,9 +30,9 @@ def migrate_common_lib(values):
             'webPort': values['web_port'],
             'dhcp': {
                 'enabled': values['dhcp'],
-                'start': values['dhcp_start'],
-                'end': values['dhcp_end'],
-                'gateway': values['dhcp_gateway'],
+                'start': values.get('dhcp_start', ''),
+                'end': values.get('dhcp_end', ''),
+                'gateway': values.get('dhcp_gateway', ''),
             }
         },
         # Migrate Resources
