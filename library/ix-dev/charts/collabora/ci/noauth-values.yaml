@@ -1,0 +1,17 @@
+collaboraConfig:
+  enableWebUI: false
+  username: ''
+  password: ''
+  dictionaries:
+    - en_GB
+    - en_US
+  aliasGroup1:
+    - nc.example.com
+    - other-nc.example.com
+  serverName: collabora.example.com:9980
+  extraParams:
+    - --o:welcome.enable=false
+    - --o:user_interface.mode=notebookbar
+    - --o:ssl.termination=true
+    - --o:ssl.enable=false
+    - --o:net.proto=IPv4

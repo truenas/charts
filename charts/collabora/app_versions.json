@@ -1,19 +1,19 @@
 {
-    "2.0.3": {
+    "2.0.4": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/collabora/2.0.3",
-        "last_update": "2024-02-09 13:12:08",
+        "location": "/__w/charts/charts/charts/collabora/2.0.4",
+        "last_update": "2024-02-12 11:12:05",
         "required_features": [
-            "definitions/timezone",
             "normalize/acl",
             "definitions/certificate",
             "definitions/nodeIP",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/timezone"
         ],
-        "human_version": "23.05.8.4.1_2.0.3",
-        "version": "2.0.3",
+        "human_version": "23.05.8.4.1_2.0.4",
+        "version": "2.0.4",
         "chart_metadata": {
             "name": "collabora",
             "description": "Collabora is a collaborative online office suite based on LibreOffice technology",
@@ -21,7 +21,7 @@
                 "title": "Collabora"
             },
             "type": "application",
-            "version": "2.0.3",
+            "version": "2.0.4",
             "apiVersion": "v2",
             "appVersion": "23.05.8.4.1",
             "kubeVersion": ">=1.16.0-0",
@@ -183,6 +183,7 @@
                                 "label": "Username for WebUI",
                                 "schema": {
                                     "type": "string",
+                                    "required": true,
                                     "show_if": [
                                         [
                                             "enableWebUI",
@@ -190,8 +191,7 @@
                                             true
                                         ]
                                     ],
-                                    "default": "",
-                                    "required": true
+                                    "default": ""
                                 }
                             },
                             {
@@ -209,7 +209,7 @@
                                             true
                                         ]
                                     ],
-                                    "valid_chars": "[a-zA-Z0-9!@#%^&*?]{8,}",
+                                    "valid_chars": "^[a-zA-Z0-9!@#%^&*?]{8,}$|^$",
                                     "valid_chars_error": "Password must be at least 8 characters long and contain at least one of the following:</br>\n- Uppercase letter</br>\n- Lowercase letter</br>\n- Number</br>\n- Special character</br>\n"
                                 }
                             },
@@ -874,11 +874,11 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/collabora/1.2.30",
-        "last_update": "2024-02-09 13:12:08",
+        "last_update": "2024-02-12 11:12:05",
         "required_features": [
-            "definitions/nodeIP",
+            "definitions/timezone",
             "definitions/certificate",
-            "definitions/timezone"
+            "definitions/nodeIP"
         ],
         "human_version": "23.05.8.2.1_1.2.30",
         "version": "1.2.30",
