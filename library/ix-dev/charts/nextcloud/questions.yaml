@@ -435,3 +435,12 @@ questions:
                 label: "Value"
                 schema:
                   type: string
+
+  - variable: nextcloudGPU
+    group: Resources Configuration
+    label: GPU Configuration
+    schema:
+      type: dict
+      $ref:
+        - "definitions/gpuConfiguration"
+      attrs: []

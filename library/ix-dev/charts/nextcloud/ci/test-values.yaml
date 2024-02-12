@@ -43,3 +43,4 @@ service:
   nodePort: 31000
 updateStrategy: Recreate
 useServiceNameForHost: true
+nextcloudGPU: {}
