@@ -71,7 +71,7 @@ questions:
                         type: string
                         required: true
 
-  - variable: photoprismRunAs
+  - variable: photoprismID
     label: ""
     group: User and Group Configuration
     schema:
@@ -79,18 +79,18 @@ questions:
       attrs:
         - variable: user
           label: User ID
-          description: The user id that Photoprism will run as.
+          description: The user id that Photoprism files will be owned by.
           schema:
             type: int
-            min: 2
+            min: 568
             default: 568
             required: true
         - variable: group
           label: Group ID
-          description: The group id that Photoprism will run as.
+          description: The group id that Photoprism files will be owned by.
           schema:
             type: int
-            min: 2
+            min: 568
             default: 568
             required: true
 

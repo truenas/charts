@@ -4,6 +4,10 @@ photoprismNetwork:
 photoprismConfig:
   public: true
 
+photoprismID:
+  user: 1000
+  group: 1000
+
 photoprismStorage:
   import:
     type: pvc
