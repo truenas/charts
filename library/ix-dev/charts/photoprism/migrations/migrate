@@ -63,7 +63,7 @@ def migrate_common_lib(values):
         'photoprismStorage': {
             'import': migrate_volume(values['appVolumeMounts']['import']),
             'storage': migrate_volume(values['appVolumeMounts']['storage']),
-            'original': migrate_volume(values['appVolumeMounts']['original']),
+            'originals': migrate_volume(values['appVolumeMounts']['original']),
             'additionalStorages': [
                 {
                     'type': 'hostPath',
