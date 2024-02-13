@@ -1,0 +1,24 @@
+runAsContext:
+  - userName: root
+    groupName: root
+    gid: 0
+    uid: 0
+    description: Pi-hole runs as root user.
+capabilities:
+  - name: CHOWN
+    description: Pi-hole is able to chown files.
+  - name: FOWNER
+    description: Pi-hole is able to bypass permission checks for it's sub-processes.
+  - name: DAC_OVERRIDE
+    description: Pi-hole is able to bypass permission checks.
+  - name: SETGID
+    description: Pi-hole is able to set group ID for it's sub-processes.
+  - name: SETUID
+    description: Pi-hole is able to set user ID for it's sub-processes.
+  - name: SETFCAP
+    description: Pi-hole is able to set file capabilities.
+  - name: NET_ADMIN
+    description: Pi-hole is able to perform various network-related operations.
+  - name: KILL
+    description: Pi-hole is able to kill processes.
+hostMounts: []

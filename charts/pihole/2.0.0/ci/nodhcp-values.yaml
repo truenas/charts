@@ -1,0 +1,13 @@
+piholeConfig:
+  webPassword: somepassword
+
+piholeNetwork:
+  webPort: 32000
+  dhcp:
+    enabled: false
+
+piholeStorage:
+  config:
+    type: pvc
+  dnsmasq:
+    type: pvc

@@ -288,6 +288,12 @@ questions:
                       description: Host Path (Path that already exists on the system)
                     - value: "ixVolume"
                       description: ixVolume (Dataset created automatically by the system)
+              - variable: readOnly
+                label: Read Only
+                description: Mount the volume as read only.
+                schema:
+                  type: boolean
+                  default: false
               - variable: ixVolumeConfig
                 label: ixVolume Configuration
                 description: The configuration for the ixVolume dataset.
