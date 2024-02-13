@@ -60,12 +60,7 @@ workload:
               type: http
               path: /
               port: {{ .Values.photoprismNetwork.webPort }}
-      initContainers:
-      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
-                                                        "UID" .Values.photoprismRunAs.user
-                                                        "GID" .Values.photoprismRunAs.group
-                                                        "mode" "check"
-                                                        "type" "install") | nindent 8 }}
+
 {{ with .Values.photoprismGPU }}
 scaleGPU:
   {{ range $key, $value := . }}
