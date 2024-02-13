@@ -49,7 +49,7 @@ def migrate_common_lib(values):
             }
         },
         # Migrate run context
-        'photoprismRunAs': {
+        'photoprismID': {
             'user': values['ownerUID'],
             'group': values['ownerGID'],
         },
