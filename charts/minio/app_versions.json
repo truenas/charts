@@ -1,16 +1,16 @@
 {
-    "1.7.23": {
+    "1.7.24": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/minio/1.7.23",
-        "last_update": "2024-02-12 11:12:05",
+        "location": "/__w/charts/charts/charts/minio/1.7.24",
+        "last_update": "2024-02-13 11:43:58",
         "required_features": [
-            "normalize/ixVolume",
-            "definitions/certificate"
+            "definitions/certificate",
+            "normalize/ixVolume"
         ],
-        "human_version": "2023-03-13_1.7.23",
-        "version": "1.7.23",
+        "human_version": "2023-03-13_1.7.24",
+        "version": "1.7.24",
         "chart_metadata": {
             "name": "minio",
             "description": "High Performance, Kubernetes Native Object Storage",
@@ -18,7 +18,7 @@
                 "title": "MinIO"
             },
             "type": "application",
-            "version": "1.7.23",
+            "version": "1.7.24",
             "apiVersion": "v2",
             "appVersion": "2023-03-13",
             "kubeVersion": ">=1.16.0-0",
@@ -65,7 +65,7 @@
                 },
                 {
                     "name": "Storage",
-                    "description": "Configure Storage for Nextcloud"
+                    "description": "Configure Storage for Minio"
                 },
                 {
                     "name": "Advanced DNS Settings",
