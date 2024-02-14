@@ -1,0 +1,24 @@
+name: photoprism
+description: AI-powered app for browsing, organizing & sharing your photo collection.
+annotations:
+  title: PhotoPrism
+type: application
+version: 1.1.3
+apiVersion: v2
+appVersion: '231128'
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common/2304.0.1
+    version: 2304.0.1
+home: https://photoprism.app/
+icon: https://media.sys.truenas.net/apps/photoprism/icons/icon.svg
+sources:
+  - https://photoprism.app/
+  - https://github.com/truenas/charts/tree/master/charts/photoprism
+keywords:
+  - media
