@@ -1,0 +1,98 @@
+#!/usr/bin/python3
+import json
+import os
+import sys
+
+def migrate_volume(volume):
+    return {
+        'type': 'hostPath',
+        'readOnly': volume.get('readOnly', False),
+        'hostPathConfig': {
+            'hostPath': volume['hostPath']
+        },
+    } if volume.get('hostPathEnabled', False) else {
+        'type': 'ixVolume',
+        'readOnly': volume.get('readOnly', False),
+        'ixVolumeConfig': {
+            'datasetName': volume['datasetName'],
+        },
+    }
+
+def migrate_common_lib(values):
+    delete_keys = [
+        'memLimit', 'cpuLimit', 'enableResourceLimits', 'extraAppVolumeMounts',
+        'password', 'public', 'ownerUID', 'ownerGID', 'dnsConfig', 'environmentVariables',
+        'web_port', 'host_network', 'appVolumeMounts', 'gpuConfiguration'
+    ]
+
+    values.update({
+        # Migrate Network
+        'photoprismNetwork': {
+            'webPort': values['web_port'],
+            'hostNetwork': values['host_network'],
+        },
+        # Migrate Resources
+        'resources': {
+            'limits': {
+                'cpu': values.get('cpuLimit', '4000m'),
+                'memory': values.get('memLimit', '8Gi'),
+            }
+        },
+        'photoprismGPU': values.get('gpuConfiguration', {}),
+        # Migrate DNS
+        'podOptions': {
+            'dnsConfig': {
+                'options': [
+                    {'name': opt['name'], 'value': opt['value']}
+                    for opt in values.get('dnsConfig', {}).get('options', [])
+                ]
+            }
+        },
+        # Migrate run context
+        'photoprismID': {
+            'user': values['ownerUID'],
+            'group': values['ownerGID'],
+        },
+        # Migrate Config
+        'photoprismConfig': {
+            'public': values['public'],
+            'password': values.get('password', ''),
+            'additionalEnvs': values.get('environmentVariables', []),
+        },
+        # Migrate Storage
+        'photoprismStorage': {
+            'import': migrate_volume(values['appVolumeMounts']['import']),
+            'storage': migrate_volume(values['appVolumeMounts']['storage']),
+            'originals': migrate_volume(values['appVolumeMounts']['original']),
+            'additionalStorages': [
+                {
+                    'type': 'hostPath',
+                    'hostPathConfig': {'hostPath': e['hostPath']},
+                    'mountPath': e['mountPath'],
+                    'readOnly': e.get('readOnly', False),
+                }
+                for e in values.get('extraAppVolumeMounts', [])
+            ],
+        },
+    })
+
+    for k in delete_keys:
+        values.pop(k, None)
+
+    return values
+
+def migrate(values):
+    # If this missing, we have already migrated
+    if not 'appVolumeMounts' in values.keys():
+        return values
+
+    return migrate_common_lib(values)
+
+
+if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        exit(1)
+
+    if os.path.exists(sys.argv[1]):
+        with open(sys.argv[1], 'r') as f:
+            print(json.dumps(migrate(json.loads(f.read()))))
