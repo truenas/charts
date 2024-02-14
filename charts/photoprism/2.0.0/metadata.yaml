@@ -1,0 +1,20 @@
+runAsContext:
+  - userName: photoprism
+    groupName: photoprism
+    gid: 0
+    uid: 0
+    description: Photoprism run as a root user.
+capabilities:
+  - name: CHOWN
+    description: Photoprism is able to chown files.
+  - name: FOWNER
+    description: Photoprism is able to bypass permission checks for it's sub-processes.
+  - name: DAC_OVERRIDE
+    description: Photoprism is able to bypass permission checks.
+  - name: SETGID
+    description: Photoprism is able to set group ID for it's sub-processes.
+  - name: SETUID
+    description: Photoprism is able to set user ID for it's sub-processes.
+  - name: KILL
+    description: Photoprism is able to kill processes.
+hostMounts: []

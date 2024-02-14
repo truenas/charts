@@ -1,0 +1,43 @@
+image:
+  pullPolicy: IfNotPresent
+  repository: photoprism/photoprism
+  tag: '231128'
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+podOptions:
+  dnsConfig:
+    options: []
+
+photoprismConfig:
+  public: false
+  password: ''
+  additionalEnvs: []
+
+photoprismNetwork:
+  webPort: 20800
+  hostNetwork: false
+
+photoprismID:
+  user: 568
+  group: 568
+
+photoprismStorage:
+  import:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: import
+  storage:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: storage
+  originals:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: originals
+  additionalStorages: []
+
+photoprismGPU: {}

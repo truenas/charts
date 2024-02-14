@@ -1,0 +1,13 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{- include "photoprism.migration" $ -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "photoprism.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "photoprism.service" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "photoprism.persistence" $ | fromYaml) -}}
+
+{{/* Create the configmap for portal manually*/}}
+{{- include "photoprism.portal" $ -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}

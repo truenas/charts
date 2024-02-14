@@ -1,0 +1,13 @@
+photoprismNetwork:
+  webPort: 30489
+
+photoprismConfig:
+  password: secret
+
+photoprismStorage:
+  import:
+    type: pvc
+  originals:
+    type: pvc
+  storage:
+    type: pvc

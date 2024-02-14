@@ -1,0 +1,17 @@
+photoprismNetwork:
+  webPort: 30489
+
+photoprismConfig:
+  public: true
+
+photoprismID:
+  user: 1000
+  group: 1000
+
+photoprismStorage:
+  import:
+    type: pvc
+  originals:
+    type: pvc
+  storage:
+    type: pvc
