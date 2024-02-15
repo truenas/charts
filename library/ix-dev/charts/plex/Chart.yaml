@@ -1,11 +1,12 @@
 name: plex
-description: Plex is a media server that allows you to stream your media to any Plex client.
+description: Plex is a media server that allows you to stream your media to any Plex
+  client.
 annotations:
   title: Plex
 type: application
-version: 2.0.1
+version: 2.0.2
 apiVersion: v2
-appVersion: 1.32.8.7639
+appVersion: 1.40.0.7998
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: truenas
