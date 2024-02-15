@@ -20,6 +20,7 @@ workload:
             capabilities:
               add:
                 - NET_ADMIN
+                - NET_BIND_SERVICE
                 - CHOWN
                 - DAC_OVERRIDE
                 - FOWNER
