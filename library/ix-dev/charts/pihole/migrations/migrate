@@ -82,10 +82,9 @@ def migrate(values):
     # If this missing, we have already migrated
     if not 'appVolumeMounts' in values.keys():
         return values
-    
-    if values['piholeStorage']['cache']:
-        values['piholeStorage']['dnsmasq'] = values['piholeStorage']['cache']
-        values['piholeStorage'].pop('cache', None)
+        
+    if 'cache' in values['piholeStorage'].keys():
+        values['piholeStorage']['dnsmasq'] = values['piholeStorage'].pop('cache')
 
     return migrate_common_lib(values)
 
