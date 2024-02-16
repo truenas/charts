@@ -1,16 +1,16 @@
 {
-    "2.0.2": {
+    "2.0.3": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/netdata/2.0.2",
-        "last_update": "2024-02-16 09:17:48",
+        "location": "/__w/charts/charts/charts/netdata/2.0.3",
+        "last_update": "2024-02-16 09:23:06",
         "required_features": [
             "normalize/ixVolume",
             "normalize/acl"
         ],
-        "human_version": "v1.44.3_2.0.2",
-        "version": "2.0.2",
+        "human_version": "v1.44.3_2.0.3",
+        "version": "2.0.3",
         "chart_metadata": {
             "name": "netdata",
             "description": "Real-time performance monitoring, done right!",
@@ -18,7 +18,7 @@
                 "title": "Netdata"
             },
             "type": "application",
-            "version": "2.0.2",
+            "version": "2.0.3",
             "apiVersion": "v2",
             "appVersion": "v1.44.3",
             "kubeVersion": ">=1.16.0-0",
@@ -1723,6 +1723,566 @@
         },
         "app_readme": "<h1>Netdata</h1>\n<p><a href=\"https://www.netdata.cloud/\">Netdata</a> is a fast, easy monitoring and troubleshooting system.</p>",
         "detailed_readme": "<h1>Netdata</h1>\n<p><a href=\"https://www.netdata.cloud/\">Netdata</a> is a fast, easy monitoring and troubleshooting system.</p>",
+        "changelog": null
+    },
+    "1.0.40": {
+        "healthy": true,
+        "supported": true,
+        "healthy_error": null,
+        "location": "/__w/charts/charts/charts/netdata/1.0.40",
+        "last_update": "2024-02-16 09:21:47",
+        "required_features": [
+            "normalize/ixVolume"
+        ],
+        "human_version": "v1.44.1_1.0.40",
+        "version": "1.0.40",
+        "chart_metadata": {
+            "name": "netdata",
+            "description": "Real-time performance monitoring, done right!",
+            "annotations": {
+                "title": "Netdata"
+            },
+            "type": "application",
+            "version": "1.0.40",
+            "apiVersion": "v2",
+            "appVersion": "v1.44.1",
+            "kubeVersion": ">=1.16.0-0",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "dependencies": [
+                {
+                    "name": "common",
+                    "repository": "file://../../../common/2304.0.1",
+                    "version": "2304.0.1"
+                }
+            ],
+            "home": "https://www.netdata.cloud/",
+            "icon": "https://media.sys.truenas.net/apps/netdata/icons/icon.png",
+            "sources": [
+                "https://github.com/netdata/helmchart",
+                "https://github.com/netdata/netdata"
+            ],
+            "keywords": [
+                "alerting",
+                "metric",
+                "monitoring"
+            ]
+        },
+        "app_metadata": {
+            "runAsContext": [
+                {
+                    "userName": "root",
+                    "groupName": "root",
+                    "gid": 0,
+                    "uid": 0,
+                    "description": "Netdata runs as root user."
+                }
+            ],
+            "capabilities": [
+                {
+                    "name": "CHOWN",
+                    "description": "Netdata is able to chown files."
+                },
+                {
+                    "name": "FOWNER",
+                    "description": "Netdata is able to bypass permission checks for it's sub-processes."
+                },
+                {
+                    "name": "SYS_CHROOT",
+                    "description": "Netdata is able to use chroot."
+                },
+                {
+                    "name": "MKNOD",
+                    "description": "Netdata is able to create device nodes."
+                },
+                {
+                    "name": "DAC_OVERRIDE",
+                    "description": "Netdata is able to bypass permission checks."
+                },
+                {
+                    "name": "FSETID",
+                    "description": "Netdata is able to set file capabilities."
+                },
+                {
+                    "name": "KILL",
+                    "description": "Netdata is able to kill processes."
+                },
+                {
+                    "name": "SETGID",
+                    "description": "Netdata is able to set group ID for it's sub-processes."
+                },
+                {
+                    "name": "SETUID",
+                    "description": "Netdata is able to set user ID for it's sub-processes."
+                },
+                {
+                    "name": "SETPCAP",
+                    "description": "Netdata is able to set process capabilities."
+                },
+                {
+                    "name": "NET_BIND_SERVICE",
+                    "description": "Netdata is able to bind to privileged ports."
+                },
+                {
+                    "name": "NET_RAW",
+                    "description": "Netdata is able to use raw sockets."
+                },
+                {
+                    "name": "SETFCAP",
+                    "description": "Netdata is able to set file capabilities."
+                },
+                {
+                    "name": "PTRACE",
+                    "description": "Netdata is able to trace processes."
+                },
+                {
+                    "name": "AUDIT_WRITE",
+                    "description": "Netdata is able to write to audit log."
+                }
+            ],
+            "hostMounts": [
+                {
+                    "hostPath": "/etc/os-release",
+                    "description": "Required to read the OS release information."
+                },
+                {
+                    "hostPath": "/etc/passwd",
+                    "description": "Required to read the user information."
+                },
+                {
+                    "hostPath": "/etc/group",
+                    "description": "Required to read the group information."
+                },
+                {
+                    "hostPath": "/proc",
+                    "description": "Required to read the processes information."
+                }
+            ]
+        },
+        "schema": {
+            "groups": [
+                {
+                    "name": "Container Images",
+                    "description": "Image to be used for container"
+                },
+                {
+                    "name": "Workload Configuration",
+                    "description": "Configure workload deployment"
+                },
+                {
+                    "name": "Netdata Configuration",
+                    "description": "Configure Netdata credentials"
+                },
+                {
+                    "name": "Storage",
+                    "description": "Configure Storage for Netdata"
+                },
+                {
+                    "name": "Advanced DNS Settings",
+                    "description": "Configure DNS settings"
+                },
+                {
+                    "name": "Resource Limits",
+                    "description": "Set CPU/memory limits for Kubernetes Pod"
+                }
+            ],
+            "portals": {
+                "web_portal": {
+                    "protocols": [
+                        "http"
+                    ],
+                    "host": [
+                        "$node_ip"
+                    ],
+                    "ports": [
+                        "$variable-service.nodePort"
+                    ]
+                }
+            },
+            "questions": [
+                {
+                    "variable": "dnsConfig",
+                    "label": "DNS Configuration",
+                    "group": "Advanced DNS Settings",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "options",
+                                "label": "DNS Options",
+                                "schema": {
+                                    "type": "list",
+                                    "items": [
+                                        {
+                                            "variable": "optionsEntry",
+                                            "label": "Option Entry Configuration",
+                                            "schema": {
+                                                "type": "dict",
+                                                "attrs": [
+                                                    {
+                                                        "variable": "name",
+                                                        "label": "Option Name",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "required": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "value",
+                                                        "label": "Option Value",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "required": true
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "environmentVariables",
+                    "label": "Netdata image environment",
+                    "group": "Netdata Configuration",
+                    "schema": {
+                        "type": "list",
+                        "default": [],
+                        "items": [
+                            {
+                                "variable": "environmentVariable",
+                                "label": "Environment Variable",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "name",
+                                            "label": "Name",
+                                            "schema": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        {
+                                            "variable": "value",
+                                            "label": "Value",
+                                            "schema": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "service",
+                    "description": "Netdata Service Configuration",
+                    "label": "Netdata Service Configuration",
+                    "group": "Netdata Configuration",
+                    "schema": {
+                        "type": "dict",
+                        "required": true,
+                        "attrs": [
+                            {
+                                "variable": "nodePort",
+                                "label": "Node Port to use for Netdata UI",
+                                "schema": {
+                                    "type": "int",
+                                    "min": 9000,
+                                    "max": 65535,
+                                    "default": 20489,
+                                    "required": true
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "appVolumeMounts",
+                    "label": "Netdata Storage",
+                    "group": "Storage",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "netdataconfig",
+                                "label": "Configuration Volume",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "datasetName",
+                                            "label": "Configuration Volume Name",
+                                            "schema": {
+                                                "type": "string",
+                                                "hidden": true,
+                                                "$ref": [
+                                                    "normalize/ixVolume"
+                                                ],
+                                                "show_if": [
+                                                    [
+                                                        "hostPathEnabled",
+                                                        "=",
+                                                        false
+                                                    ]
+                                                ],
+                                                "default": "ix-config",
+                                                "editable": false
+                                            }
+                                        },
+                                        {
+                                            "variable": "mountPath",
+                                            "label": "Configuration Mount Path",
+                                            "description": "Path where the volume will be mounted inside the pod",
+                                            "schema": {
+                                                "type": "path",
+                                                "hidden": true,
+                                                "editable": false,
+                                                "default": "/etc/netdata"
+                                            }
+                                        },
+                                        {
+                                            "variable": "hostPathEnabled",
+                                            "label": "Enable Host Path for Netdata Configuration Volume",
+                                            "schema": {
+                                                "type": "boolean",
+                                                "default": false,
+                                                "show_subquestions_if": true,
+                                                "subquestions": [
+                                                    {
+                                                        "variable": "hostPath",
+                                                        "label": "Host Path for Netdata Configuration Volume",
+                                                        "schema": {
+                                                            "type": "hostpath",
+                                                            "required": true,
+                                                            "immutable": true
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "netdatacache",
+                                "label": "Cache Volume",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "datasetName",
+                                            "label": "Cache Volume Name",
+                                            "schema": {
+                                                "type": "string",
+                                                "hidden": true,
+                                                "$ref": [
+                                                    "normalize/ixVolume"
+                                                ],
+                                                "show_if": [
+                                                    [
+                                                        "hostPathEnabled",
+                                                        "=",
+                                                        false
+                                                    ]
+                                                ],
+                                                "default": "ix-cache",
+                                                "editable": false
+                                            }
+                                        },
+                                        {
+                                            "variable": "mountPath",
+                                            "label": "Cache Mount Path",
+                                            "description": "Path where the volume will be mounted inside the pod",
+                                            "schema": {
+                                                "type": "path",
+                                                "hidden": true,
+                                                "editable": false,
+                                                "default": "/var/cache/netdata"
+                                            }
+                                        },
+                                        {
+                                            "variable": "hostPathEnabled",
+                                            "label": "Enable Host Path for Netdata Cache Volume",
+                                            "schema": {
+                                                "type": "boolean",
+                                                "default": false,
+                                                "show_subquestions_if": true,
+                                                "subquestions": [
+                                                    {
+                                                        "variable": "hostPath",
+                                                        "label": "Host Path for Netdata Cache Volume",
+                                                        "schema": {
+                                                            "type": "hostpath",
+                                                            "required": true,
+                                                            "immutable": true
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "netdatalib",
+                                "label": "Netdata Library Volume",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "datasetName",
+                                            "label": "Netdata Library Volume Name",
+                                            "schema": {
+                                                "type": "string",
+                                                "hidden": true,
+                                                "$ref": [
+                                                    "normalize/ixVolume"
+                                                ],
+                                                "show_if": [
+                                                    [
+                                                        "hostPathEnabled",
+                                                        "=",
+                                                        false
+                                                    ]
+                                                ],
+                                                "default": "ix-lib",
+                                                "editable": false
+                                            }
+                                        },
+                                        {
+                                            "variable": "mountPath",
+                                            "label": "Netdata Library Mount Path",
+                                            "description": "Path where the volume will be mounted inside the pod",
+                                            "schema": {
+                                                "type": "path",
+                                                "hidden": true,
+                                                "editable": false,
+                                                "default": "/var/lib/netdata"
+                                            }
+                                        },
+                                        {
+                                            "variable": "hostPathEnabled",
+                                            "label": "Enable Host Path for Netdata Library Volume",
+                                            "schema": {
+                                                "type": "boolean",
+                                                "default": false,
+                                                "show_subquestions_if": true,
+                                                "subquestions": [
+                                                    {
+                                                        "variable": "hostPath",
+                                                        "label": "Host Path for Netdata Library Volume",
+                                                        "schema": {
+                                                            "type": "hostpath",
+                                                            "required": true,
+                                                            "immutable": true
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "extraAppVolumeMounts",
+                    "label": "Extra Host Path Volumes",
+                    "group": "Storage",
+                    "schema": {
+                        "type": "list",
+                        "items": [
+                            {
+                                "variable": "extraAppVolume",
+                                "label": "Host Path Volume",
+                                "description": "Add an extra host path volume for Netdata application",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "mountPath",
+                                            "label": "Mount Path in Pod",
+                                            "description": "Path where the volume will be mounted inside the pod",
+                                            "schema": {
+                                                "type": "path",
+                                                "required": true
+                                            }
+                                        },
+                                        {
+                                            "variable": "hostPath",
+                                            "label": "Host Path",
+                                            "description": "Host path",
+                                            "schema": {
+                                                "type": "hostpath",
+                                                "required": true
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "enableResourceLimits",
+                    "label": "Enable Pod resource limits",
+                    "group": "Resource Limits",
+                    "schema": {
+                        "type": "boolean",
+                        "default": false
+                    }
+                },
+                {
+                    "variable": "cpuLimit",
+                    "label": "CPU Limit",
+                    "description": "CPU resource limit allow  plain integer values with suffix m(milli) e.g 1000m, 100.",
+                    "group": "Resource Limits",
+                    "schema": {
+                        "type": "string",
+                        "show_if": [
+                            [
+                                "enableResourceLimits",
+                                "=",
+                                true
+                            ]
+                        ],
+                        "valid_chars": "^\\d+(?:\\.\\d+(?!.*m$)|m?$)",
+                        "default": "4000m"
+                    }
+                },
+                {
+                    "variable": "memLimit",
+                    "label": "Memory Limit",
+                    "group": "Resource Limits",
+                    "description": "Memory limits is specified by number of bytes. Followed by quantity suffix like E,P,T,G,M,k and Ei,Pi,Ti,Mi,Gi,Ki can also be used. e.g 129e6, 129M,  128974848000m, 123Mi",
+                    "schema": {
+                        "type": "string",
+                        "show_if": [
+                            [
+                                "enableResourceLimits",
+                                "=",
+                                true
+                            ]
+                        ],
+                        "valid_chars": "^([+-]?[0-9.]+)([eEinumkKMGTP]*[-+]?[0-9]*)$",
+                        "default": "8Gi"
+                    }
+                }
+            ]
+        },
+        "app_readme": "<p><a href=\"https://www.netdata.cloud/\">Netdata</a> is a fast, easy monitoring and troubleshooting system.</p>",
+        "detailed_readme": "<h1>Netdata</h1>\n<p><a href=\"https://www.netdata.cloud/\">Netdata</a> is a fast, easy monitoring and troubleshooting system.</p>\n<h2>Introduction</h2>\n<p>This chart bootstraps Netdata deployment on a <a href=\"http://kubernetes.io\">Kubernetes</a> cluster using the <a href=\"https://helm.sh\">Helm</a> package manager.</p>",
         "changelog": null
     }
 }
