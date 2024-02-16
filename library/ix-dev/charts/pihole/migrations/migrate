@@ -60,7 +60,7 @@ def migrate_common_lib(values):
         # Migrate Storage
         'piholeStorage': {
             'config': migrate_volume(values['appVolumeMounts']['config']),
-            'cache': migrate_volume(values['appVolumeMounts']['dnsmasq']),
+            'dnsmasq': migrate_volume(values['appVolumeMounts']['dnsmasq']),
             'additionalStorages': [
                 {
                     'type': 'hostPath',
@@ -82,6 +82,10 @@ def migrate(values):
     # If this missing, we have already migrated
     if not 'appVolumeMounts' in values.keys():
         return values
+    
+    if values['piholeStorage']['cache']:
+        values['piholeStorage']['dnsmasq'] = values['piholeStorage']['cache']
+        values['piholeStorage'].pop('cache', None)
 
     return migrate_common_lib(values)
 
