@@ -1,17 +1,17 @@
 {
-    "2.0.1": {
+    "2.0.2": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/pihole/2.0.1",
-        "last_update": "2024-02-16 09:21:47",
+        "location": "/__w/charts/charts/charts/pihole/2.0.2",
+        "last_update": "2024-02-16 09:26:27",
         "required_features": [
             "definitions/timezone",
-            "normalize/ixVolume",
-            "normalize/acl"
+            "normalize/acl",
+            "normalize/ixVolume"
         ],
-        "human_version": "2023.11.0_2.0.1",
-        "version": "2.0.1",
+        "human_version": "2023.11.0_2.0.2",
+        "version": "2.0.2",
         "chart_metadata": {
             "name": "pihole",
             "description": "DNS and Ad-filtering for your network.",
@@ -19,7 +19,7 @@
                 "title": "Pi-hole"
             },
             "type": "application",
-            "version": "2.0.1",
+            "version": "2.0.2",
             "apiVersion": "v2",
             "appVersion": "2023.11.0",
             "kubeVersion": ">=1.16.0-0",
@@ -90,6 +90,10 @@
                 {
                     "name": "NET_ADMIN",
                     "description": "Pi-hole is able to perform various network-related operations."
+                },
+                {
+                    "name": "NET_BIND_SERVICE",
+                    "description": "Pi-hole is able to bind to a privileged port."
                 },
                 {
                     "name": "KILL",
@@ -1492,7 +1496,7 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/pihole/1.0.25",
-        "last_update": "2024-02-16 09:21:47",
+        "last_update": "2024-02-16 09:25:01",
         "required_features": [
             "definitions/timezone",
             "normalize/ixVolume"
