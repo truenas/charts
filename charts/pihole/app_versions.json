@@ -1,17 +1,17 @@
 {
-    "2.0.0": {
+    "2.0.1": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/pihole/2.0.0",
-        "last_update": "2024-02-14 13:10:26",
+        "location": "/__w/charts/charts/charts/pihole/2.0.1",
+        "last_update": "2024-02-15 09:09:33",
         "required_features": [
+            "definitions/timezone",
             "normalize/acl",
-            "normalize/ixVolume",
-            "definitions/timezone"
+            "normalize/ixVolume"
         ],
-        "human_version": "2023.11.0_2.0.0",
-        "version": "2.0.0",
+        "human_version": "2023.11.0_2.0.1",
+        "version": "2.0.1",
         "chart_metadata": {
             "name": "pihole",
             "description": "DNS and Ad-filtering for your network.",
@@ -19,7 +19,7 @@
                 "title": "Pi-hole"
             },
             "type": "application",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "apiVersion": "v2",
             "appVersion": "2023.11.0",
             "kubeVersion": ">=1.16.0-0",
@@ -82,6 +82,10 @@
                 {
                     "name": "SETFCAP",
                     "description": "Pi-hole is able to set file capabilities."
+                },
+                {
+                    "name": "SETPCAP",
+                    "description": "Pi-hole is able to set process capabilities."
                 },
                 {
                     "name": "NET_ADMIN",
@@ -1488,10 +1492,10 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/pihole/1.0.25",
-        "last_update": "2024-02-14 13:10:26",
+        "last_update": "2024-02-15 09:09:33",
         "required_features": [
-            "normalize/ixVolume",
-            "definitions/timezone"
+            "definitions/timezone",
+            "normalize/ixVolume"
         ],
         "human_version": "2023.11.0_1.0.25",
         "version": "1.0.25",

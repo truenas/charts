@@ -16,6 +16,7 @@ workload:
             runAsGroup: 0
             runAsNonRoot: false
             readOnlyRootFilesystem: false
+            allowPrivilegeEscalation: true
             capabilities:
               add:
                 - NET_ADMIN
@@ -25,6 +26,7 @@ workload:
                 - SETGID
                 - SETUID
                 - SETFCAP
+                - SETPCAP
                 - KILL
           env:
             WEB_PORT: {{ .Values.piholeNetwork.webPort }}
