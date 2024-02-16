@@ -1,17 +1,17 @@
 {
-    "2.0.0": {
+    "2.0.1": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/photoprism/2.0.0",
-        "last_update": "2024-02-16 09:01:02",
+        "location": "/__w/charts/charts/charts/photoprism/2.0.1",
+        "last_update": "2024-02-16 09:19:07",
         "required_features": [
             "normalize/ixVolume",
             "normalize/acl",
             "definitions/gpuConfiguration"
         ],
-        "human_version": "231128_2.0.0",
-        "version": "2.0.0",
+        "human_version": "231128_2.0.1",
+        "version": "2.0.1",
         "chart_metadata": {
             "name": "photoprism",
             "description": "AI-powered app for browsing, organizing & sharing your photo collection.",
@@ -19,7 +19,7 @@
                 "title": "PhotoPrism"
             },
             "type": "application",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "apiVersion": "v2",
             "appVersion": "231128",
             "kubeVersion": ">=1.16.0-0",
