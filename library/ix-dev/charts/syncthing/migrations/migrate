@@ -53,7 +53,7 @@ def migrate_common_lib(values):
         'syncthingID': {
             'user': values['ownerUID'],
             'group': values['ownerGID'],
-        }
+        },
         # Migrate Config
         'syncthingConfig': {
             'additionalEnvs': values.get('environmentVariables', []),
