@@ -39,9 +39,12 @@ workload:
             PHOTOPRISM_SITE_URL: {{ . }}
             {{- end -}}
             {{- if .Values.photoprismNetwork.certificateID }}
+              {{- if not .Values.photoprismConfig.siteURL -}}
+                {{- fail "Site URL is required when using a certificate" -}}
+              {{- end }}
             PHOTOPRISM_DISABLE_TLS: false
-            PHOTOPRISM_TLS_CERT: /certs/tls.crt
-            PHOTOPRISM_TLS_KEY: /certs/tls.key
+            PHOTOPRISM_TLS_CERT: tls.crt
+            PHOTOPRISM_TLS_KEY: tls.key
             {{- end }}
           fixedEnv:
             PUID: {{ .Values.photoprismID.user }}

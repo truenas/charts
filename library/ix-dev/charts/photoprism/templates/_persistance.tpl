@@ -52,7 +52,7 @@ persistence:
     targetSelector:
       photoprism:
         photoprism:
-          mountPath: /certs
+          mountPath: /photoprism/storage/config/certificates
           readOnly: true
 
 scaleCertificate:
