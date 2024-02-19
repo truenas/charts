@@ -29,6 +29,12 @@ questions:
     schema:
       type: dict
       attrs:
+        - variable: siteURL
+          label: Site URL
+          description: The URL for Photoprism.
+          schema:
+            type: string
+            default: ""
         - variable: public
           label: Public
           description: |
