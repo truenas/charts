@@ -82,5 +82,7 @@ configmap:
       N8N_SSL_KEY: /certs/tls.key
       N8N_SSL_CERT: /certs/tls.crt
       {{- end }}
+      # https://github.com/n8n-io/n8n/issues/8664#issuecomment-1952155450
+      SHELL: /bin/sh
 
 {{- end -}}
