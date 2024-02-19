@@ -128,6 +128,7 @@ questions:
           schema:
             type: int
             default: 20978
+            show_if: [["hostNetwork", "=", false]]
             min: 9000
             max: 65535
             required: true
@@ -137,11 +138,16 @@ questions:
           schema:
             type: int
             default: 20979
+            show_if: [["hostNetwork", "=", false]]
             min: 9000
             max: 65535
             required: true
         - variable: hostNetwork
           label: Host Network
+          description: |
+            Enabling this will use the host network for Syncthing.</br>
+            The TCP and UDP ports will listen on port 22000. </br>
+            Web UI will listen on the port specified above.
           schema:
             type: boolean
             default: false
