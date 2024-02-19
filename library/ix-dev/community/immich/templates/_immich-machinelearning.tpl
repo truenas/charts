@@ -2,7 +2,7 @@
 {{- $fullname := (include "ix.v1.common.lib.chart.names.fullname" $) -}}
 {{- $url := printf "http://%v:%v/api/server-info/ping" $fullname .Values.immichNetwork.webuiPort -}}
 {{- $img := "mlImage" -}}
-{{- with .Values.immichConfig.mlImage -}}
+{{- with .Values.immichConfig.mlImageType -}}
   {{- $img = . -}}
 {{- end }}
 workload:
