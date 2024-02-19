@@ -81,11 +81,11 @@ def migrate_common_lib(values):
 def migrate(values):
     # If this missing, we have already migrated
     if not 'appVolumeMounts' in values.keys():
-        return values
+        # Handle typo for users that already gone through the migration
+        if 'cache' in values['piholeStorage'].keys():
+            values['piholeStorage']['dnsmasq'] = values['piholeStorage'].pop('cache')
 
-    # Handle typo for users that already gone through the migration
-    if 'cache' in values['piholeStorage'].keys():
-        values['piholeStorage']['dnsmasq'] = values['piholeStorage'].pop('cache')
+        return values
 
     return migrate_common_lib(values)
 
