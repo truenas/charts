@@ -1,17 +1,17 @@
 {
-    "2.0.3": {
+    "2.0.4": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/pihole/2.0.3",
-        "last_update": "2024-02-19 12:30:42",
+        "location": "/__w/charts/charts/charts/pihole/2.0.4",
+        "last_update": "2024-02-19 14:01:33",
         "required_features": [
-            "definitions/timezone",
             "normalize/acl",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/timezone"
         ],
-        "human_version": "2023.11.0_2.0.3",
-        "version": "2.0.3",
+        "human_version": "2023.11.0_2.0.4",
+        "version": "2.0.4",
         "chart_metadata": {
             "name": "pihole",
             "description": "DNS and Ad-filtering for your network.",
@@ -19,7 +19,7 @@
                 "title": "Pi-hole"
             },
             "type": "application",
-            "version": "2.0.3",
+            "version": "2.0.4",
             "apiVersion": "v2",
             "appVersion": "2023.11.0",
             "kubeVersion": ">=1.16.0-0",
@@ -94,6 +94,10 @@
                 {
                     "name": "NET_BIND_SERVICE",
                     "description": "Pi-hole is able to bind to a privileged port."
+                },
+                {
+                    "name": "NET_RAW",
+                    "description": "Pi-hole is able to use raw sockets."
                 },
                 {
                     "name": "KILL",
@@ -1496,10 +1500,10 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/pihole/1.0.25",
-        "last_update": "2024-02-19 12:30:42",
+        "last_update": "2024-02-19 14:00:05",
         "required_features": [
-            "definitions/timezone",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/timezone"
         ],
         "human_version": "2023.11.0_1.0.25",
         "version": "1.0.25",
