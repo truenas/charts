@@ -16,6 +16,16 @@ def newer_mapping(image_tags):
     if not version:
         return {}
 
+    parts = version.split('.')
+    for idx, val in enumerate(parts):
+        if val == '0':
+            continue
+
+        if len(val) == 1:
+            parts[idx] = '0' + val
+
+    version = '.'.join(parts)
+
     return {
         'tags': {key: tags[version]},
         'app_version': version,
