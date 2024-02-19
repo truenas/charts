@@ -46,9 +46,9 @@ persistence:
     defaultMode: "0600"
     items:
       - key: tls.key
-        path: private.key
+        path: tls.key
       - key: tls.crt
-        path: public.crt
+        path: tls.crt
     targetSelector:
       photoprism:
         photoprism:
