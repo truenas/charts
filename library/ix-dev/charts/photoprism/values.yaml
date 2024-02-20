@@ -15,10 +15,12 @@ podOptions:
 photoprismConfig:
   public: false
   password: ''
+  siteURL: ''
   additionalEnvs: []
 
 photoprismNetwork:
   webPort: 20800
+  certificateID:
   hostNetwork: false
 
 photoprismID:
