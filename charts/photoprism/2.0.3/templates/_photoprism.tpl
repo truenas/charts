@@ -35,6 +35,17 @@ workload:
             PHOTOPRISM_STORAGE_PATH: /photoprism/storage
             PHOTOPRISM_ORIGINALS_PATH: /photoprism/originals
             PHOTOPRISM_IMPORT_PATH: /photoprism/import
+            {{- with .Values.photoprismConfig.siteURL }}
+            PHOTOPRISM_SITE_URL: {{ . }}
+            {{- end -}}
+            {{- if .Values.photoprismNetwork.certificateID }}
+              {{- if not .Values.photoprismConfig.siteURL -}}
+                {{- fail "Site URL is required when using a certificate" -}}
+              {{- end }}
+            PHOTOPRISM_DISABLE_TLS: false
+            PHOTOPRISM_TLS_CERT: tls.crt
+            PHOTOPRISM_TLS_KEY: tls.key
+            {{- end }}
           fixedEnv:
             PUID: {{ .Values.photoprismID.user }}
           {{ with .Values.photoprismConfig.additionalEnvs }}
@@ -45,19 +56,23 @@ workload:
             {{ end }}
           {{ end }}
           probes:
+            {{- $prot := "http" -}}
+            {{- if .Values.photoprismNetwork.certificateID -}}
+              {{- $prot = "https" -}}
+            {{- end }}
             liveness:
               enabled: true
-              type: http
+              type: {{ $prot }}
               path: /
               port: {{ .Values.photoprismNetwork.webPort }}
             readiness:
               enabled: true
-              type: http
+              type: {{ $prot }}
               path: /
               port: {{ .Values.photoprismNetwork.webPort }}
             startup:
               enabled: true
-              type: http
+              type: {{ $prot }}
               path: /
               port: {{ .Values.photoprismNetwork.webPort }}
 
