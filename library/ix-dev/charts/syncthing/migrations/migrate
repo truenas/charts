@@ -1,0 +1,94 @@
+#!/usr/bin/python3
+import json
+import os
+import sys
+
+
+def migrate_volume(volume):
+    return {
+        'type': 'hostPath',
+        'hostPathConfig': {
+            'hostPath': volume['hostPath']
+        },
+    } if volume.get('hostPathEnabled', False) else {
+        'type': 'ixVolume',
+        'ixVolumeConfig': {
+            'datasetName': volume['datasetName'],
+        },
+    }
+
+
+def migrate_common_lib(values):
+    delete_keys = [
+        'web_port', 'tcp_port', 'udp_port', 'hostNetwork', 'dnsConfig',
+        'ownerUID', 'ownerGID', 'environmentVariables', 'cpuLimit', 'memLimit',
+        'enableResourceLimits', 'extraAppVolumeMounts', 'appVolumeMounts',
+    ]
+
+    values.update({
+        # Migrate Network
+        'syncthingNetwork': {
+            'webPort': values['web_port'],
+            'tcpPort': values['tcp_port'],
+            'udpPort': values['udp_port'],
+            'hostNetwork': values['hostNetwork'],
+        },
+        # Migrate Resources
+        'resources': {
+            'limits': {
+                'cpu': values.get('cpuLimit', '4000m'),
+                'memory': values.get('memLimit', '8Gi'),
+            }
+        },
+        # Migrate DNS
+        'podOptions': {
+            'dnsConfig': {
+                'options': [
+                    {'name': opt['name'], 'value': opt['value']}
+                    for opt in values.get('dnsConfig', {}).get('options', [])
+                ]
+            }
+        },
+        # Migrate ID
+        'syncthingID': {
+            'user': values['ownerUID'],
+            'group': values['ownerGID'],
+        },
+        # Migrate Config
+        'syncthingConfig': {
+            'additionalEnvs': values.get('environmentVariables', []),
+        },
+        # Migrate Storage
+        'syncthingStorage': {
+            'config': migrate_volume(values['appVolumeMounts']['config']),
+            'additionalStorages': [
+                {
+                    'type': 'hostPath',
+                    'hostPathConfig': {'hostPath': e['hostPath']},
+                    'mountPath': e['mountPath'],
+                }
+                for e in values.get('extraAppVolumeMounts', [])
+            ],
+        },
+    })
+
+    for k in delete_keys:
+        values.pop(k, None)
+
+    return values
+
+def migrate(values):
+    # If this missing, we have already migrated
+    if not 'appVolumeMounts' in values.keys():
+        return values
+
+    return migrate_common_lib(values)
+
+
+if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        exit(1)
+
+    if os.path.exists(sys.argv[1]):
+        with open(sys.argv[1], 'r') as f:
+            print(json.dumps(migrate(json.loads(f.read()))))

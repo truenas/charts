@@ -3,7 +3,7 @@ description: Syncthing is a continuous file synchronization program.
 annotations:
   title: Syncthing
 type: application
-version: 1.0.42
+version: 2.0.0
 apiVersion: v2
 appVersion: 1.27.3
 kubeVersion: '>=1.16.0-0'
@@ -13,8 +13,8 @@ maintainers:
     email: dev@ixsystems.com
 dependencies:
   - name: common
-    repository: file://../../../common/2304.0.1
-    version: 2304.0.1
+    repository: file://../../../common
+    version: 1.2.9
 home: https://syncthing.net/
 icon: https://media.sys.truenas.net/apps/syncthing/icons/icon.svg
 sources:
