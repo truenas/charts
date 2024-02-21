@@ -1,16 +1,16 @@
 {
-    "1.2.9": {
+    "1.2.10": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/bazarr/1.2.9",
-        "last_update": "2024-02-20 10:01:40",
+        "location": "/__w/charts/charts/community/bazarr/1.2.10",
+        "last_update": "2024-02-21 12:32:45",
         "required_features": [
-            "normalize/ixVolume",
-            "normalize/acl"
+            "normalize/acl",
+            "normalize/ixVolume"
         ],
-        "human_version": "1.4.1_1.2.9",
-        "version": "1.2.9",
+        "human_version": "1.4.2_1.2.10",
+        "version": "1.2.10",
         "chart_metadata": {
             "name": "bazarr",
             "description": "Bazarr is a companion application to Sonarr and Radarr. It manages and downloads subtitles based on your requirements.",
@@ -18,9 +18,9 @@
                 "title": "Bazarr"
             },
             "type": "application",
-            "version": "1.2.9",
+            "version": "1.2.10",
             "apiVersion": "v2",
-            "appVersion": "1.4.1",
+            "appVersion": "1.4.2",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
