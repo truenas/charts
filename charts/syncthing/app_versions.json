@@ -1,16 +1,16 @@
 {
-    "2.0.0": {
+    "2.0.1": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/syncthing/2.0.0",
-        "last_update": "2024-02-21 12:31:21",
+        "location": "/__w/charts/charts/charts/syncthing/2.0.1",
+        "last_update": "2024-02-21 12:41:48",
         "required_features": [
             "normalize/acl",
             "normalize/ixVolume"
         ],
-        "human_version": "1.27.3_2.0.0",
-        "version": "2.0.0",
+        "human_version": "1.27.3_2.0.1",
+        "version": "2.0.1",
         "chart_metadata": {
             "name": "syncthing",
             "description": "Syncthing is a continuous file synchronization program.",
@@ -18,7 +18,7 @@
                 "title": "Syncthing"
             },
             "type": "application",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "apiVersion": "v2",
             "appVersion": "1.27.3",
             "kubeVersion": ">=1.16.0-0",
@@ -218,7 +218,7 @@
                                 "description": "The user id that Syncthing files will be owned by.",
                                 "schema": {
                                     "type": "int",
-                                    "min": 568,
+                                    "min": 0,
                                     "default": 568,
                                     "required": true
                                 }
@@ -229,7 +229,7 @@
                                 "description": "The group id that Syncthing files will be owned by.",
                                 "schema": {
                                     "type": "int",
-                                    "min": 568,
+                                    "min": 0,
                                     "default": 568,
                                     "required": true
                                 }
@@ -1171,10 +1171,10 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/syncthing/1.0.42",
-        "last_update": "2024-02-21 12:31:21",
+        "last_update": "2024-02-21 12:40:23",
         "required_features": [
-            "normalize/ixVolume",
-            "validations/lockedHostPath"
+            "validations/lockedHostPath",
+            "normalize/ixVolume"
         ],
         "human_version": "1.27.3_1.0.42",
         "version": "1.0.42",
