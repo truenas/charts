@@ -5,7 +5,7 @@ workload:
     primary: true
     type: Deployment
     podSpec:
-      securityContenxt:
+      securityContext:
         fsGroup: {{ .Values.syncthingID.group }}
       hostNetwork: {{ .Values.syncthingNetwork.hostNetwork }}
       containers:
