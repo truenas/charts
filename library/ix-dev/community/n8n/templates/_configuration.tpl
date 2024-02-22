@@ -51,7 +51,7 @@ secret:
     data:
       N8N_ENCRYPTION_KEY: {{ $encKey }}
       DB_TYPE: postgresdb
-      EXECUTIONS_MODE: queue
+      EXECUTIONS_MODE: regural
       DB_POSTGRESDB_USER: {{ $dbUser }}
       DB_POSTGRESDB_PASSWORD: {{ $dbPass }}
       DB_POSTGRESDB_DATABASE: {{ $dbName }}
@@ -82,7 +82,4 @@ configmap:
       N8N_SSL_KEY: /certs/tls.key
       N8N_SSL_CERT: /certs/tls.crt
       {{- end }}
-      # https://github.com/n8n-io/n8n/issues/8664#issuecomment-1952155450
-      SHELL: /bin/sh
-
 {{- end -}}
