@@ -51,7 +51,7 @@ secret:
     data:
       N8N_ENCRYPTION_KEY: {{ $encKey }}
       DB_TYPE: postgresdb
-      EXECUTIONS_MODE: regural
+      EXECUTIONS_MODE: regular
       DB_POSTGRESDB_USER: {{ $dbUser }}
       DB_POSTGRESDB_PASSWORD: {{ $dbPass }}
       DB_POSTGRESDB_DATABASE: {{ $dbName }}
