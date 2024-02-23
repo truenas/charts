@@ -199,7 +199,7 @@ questions:
           description: |
             Enable host network for Storj
           schema:
-            type: bool
+            type: boolean
             default: false
 
   - variable: storjStorage
