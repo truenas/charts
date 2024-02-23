@@ -27,8 +27,8 @@ workload:
           {{- include "storj.args" $ | nindent 10 }}
           env:
             EMAIL: {{ .Values.storjConfig.email }}
-            STORAGE: {{ printf "%dGB" .Values.storjConfig.storageSizeGB }}
-            ADDRESS: {{ printf "%s:%d" .Values.storjConfig.domainAddress .Values.storjNetwork.p2pPort }}
+            STORAGE: {{ printf "%vGB" .Values.storjConfig.storageSizeGB }}
+            ADDRESS: {{ printf "%s:%v" .Values.storjConfig.domainAddress .Values.storjNetwork.p2pPort }}
             WALLET:
               secretKeyRef:
                 name: storj
@@ -60,6 +60,7 @@ workload:
           securityContext:
             runAsUser: 0
             runAsGroup: 0
+            runAsNonRoot: false
           command: ./init_script/init_config.sh
           env:
             DEFAULT_CERT_PATH: {{ template "storj.idPath" }}/ca.cert

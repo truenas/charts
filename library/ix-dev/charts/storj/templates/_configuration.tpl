@@ -24,11 +24,11 @@ configmap:
 {{- define "storj.args" -}}
   {{- $wallets := list -}}
   {{- if .Values.storjConfig.wallets.zkSync -}}
-    {{- $wallets = $wallets | append "zksync" -}}
+    {{- $wallets = mustAppend $wallets "zksync" -}}
   {{- end -}}
 
   {{- if .Values.storjConfig.wallets.zkSyncEra -}}
-    {{- $wallets = $wallets | append "zksync-era" -}}
+    {{- $wallets = mustAppend $wallets "zksync-era" -}}
   {{- end -}}
 
 {{- if $wallets -}}
