@@ -58,7 +58,7 @@ workload:
               command: /bin/check-health
               spec:
                 initialDelaySeconds: 30
-                failureThreshold: 150
+                failureThreshold: 180
 {{/* Service */}}
 service:
   npm:
