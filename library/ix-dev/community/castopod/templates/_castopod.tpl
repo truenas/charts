@@ -48,6 +48,9 @@ workload:
               enabled: true
               type: tcp
               port: 9000
+              spec:
+                initialDelaySeconds: 30
+                failureThreshold: 150
       initContainers:
       {{- include "ix.v1.common.app.redisWait" (dict  "name" "01-redis-wait"
                                                       "secretName" "redis-creds") | nindent 8 }}

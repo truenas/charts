@@ -51,6 +51,9 @@ workload:
               type: http
               port: {{ .Values.paperlessNetwork.webPort }}
               path: /
+              spec:
+                initialDelaySeconds: 30
+                failureThreshold: 150
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
                                                         "UID" .Values.paperlessID.user
