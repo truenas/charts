@@ -1,16 +1,16 @@
 {
-    "2.0.7": {
+    "2.0.8": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/odoo/2.0.7",
-        "last_update": "2024-02-23 07:42:11",
+        "location": "/__w/charts/charts/community/odoo/2.0.8",
+        "last_update": "2024-02-23 09:53:28",
         "required_features": [
-            "normalize/ixVolume",
-            "normalize/acl"
+            "normalize/acl",
+            "normalize/ixVolume"
         ],
-        "human_version": "16.0_2.0.7",
-        "version": "2.0.7",
+        "human_version": "17.0_2.0.8",
+        "version": "2.0.8",
         "chart_metadata": {
             "name": "odoo",
             "description": "Odoo is a suite of web based open source business apps.",
@@ -18,9 +18,9 @@
                 "title": "Odoo"
             },
             "type": "application",
-            "version": "2.0.7",
+            "version": "2.0.8",
             "apiVersion": "v2",
-            "appVersion": "16.0",
+            "appVersion": "17.0",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
@@ -1996,10 +1996,10 @@
         "supported": false,
         "healthy_error": null,
         "location": "/__w/charts/charts/community/odoo/1.1.1",
-        "last_update": "2024-02-23 07:42:11",
+        "last_update": "2024-02-23 09:52:07",
         "required_features": [
-            "normalize/ixVolume",
-            "normalize/acl"
+            "normalize/acl",
+            "normalize/ixVolume"
         ],
         "human_version": "16.0_1.1.1",
         "version": "1.1.1",
