@@ -61,6 +61,7 @@ questions:
           description: The grace period to use for Storj.
           schema:
             type: int
+            min: 30
             default: 30
             required: true
         - variable: storageSizeGB
@@ -68,6 +69,7 @@ questions:
           description: The storage size to use for Storj.
           schema:
             type: int
+            min: 500
             default: 500
             required: true
         - variable: wallets
