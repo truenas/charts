@@ -1,9 +1,9 @@
 runAsContext:
-  - userName: root
-    groupName: root
-    gid: 0
-    uid: 0
-    description: Storj runs as root user.
+  - userName: storj
+    groupName: storj
+    gid: 568
+    uid: 568
+    description: Storj runs as non-root user.
 capabilities:
   - name: CHOWN
     description: Storj is able to chown files.

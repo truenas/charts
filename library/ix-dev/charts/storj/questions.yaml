@@ -10,16 +10,6 @@ groups:
   - name: "Resource Limits"
     description: "Set CPU/memory limits for Kubernetes Pod"
 
-portals:
-  web_portal:
-    protocols:
-      - "http"
-    host:
-      - "$node_ip"
-    ports:
-      - "$variable-webPort"
-    path: "/"
-
 questions:
   - variable: webPort
     label: "Web Port for Storj"
