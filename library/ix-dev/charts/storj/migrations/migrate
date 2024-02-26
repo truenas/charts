@@ -22,7 +22,7 @@ def migrate_common_lib(values):
         'environmentVariables', 'runAsUser', 'runAsGroup', 'webPort',
         'nodePort', 'wallet', 'authToken', 'email', 'domainAddress',
         'terminationGracePeriod', 'storageSize', 'zksync', 'zksyncEra',
-        'extraAppVolumeMounts', 'appVolumeMounts',
+        'extraAppVolumeMounts', 'appVolumeMounts', 'identityCreationMountPath',
     ]
 
     values.update({
