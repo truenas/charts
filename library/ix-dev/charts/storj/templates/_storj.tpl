@@ -61,7 +61,17 @@ workload:
             runAsUser: 0
             runAsGroup: 0
             runAsNonRoot: false
-          command: ./init_script/init_config.sh
+            readOnlyRootFilesystem: false
+            capabilities:
+              add:
+                - CHOWN
+                - FOWNER
+                - DAC_OVERRIDE
+          command:
+            - /bin/sh
+            - -c
+          args:
+            - ./init_script/init_config.sh
           env:
             DEFAULT_CERT_PATH: {{ template "storj.idPath" }}/ca.cert
             DEFAULT_IDENTITY_CERT_PATH: {{ template "storj.idPath" }}/identity.cert

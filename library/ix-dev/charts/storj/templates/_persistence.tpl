@@ -34,6 +34,7 @@ persistence:
     enabled: true
     type: configmap
     objectName: storj
+    defaultMode: "0755"
     targetSelector:
       storj:
         02-generateid:

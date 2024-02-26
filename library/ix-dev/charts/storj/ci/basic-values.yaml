@@ -14,3 +14,7 @@ storjStorage:
     type: pvc
   identity:
     type: pvc
+
+storjNetwork:
+  webPort: 30909
+  p2pPort: 32767
