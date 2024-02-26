@@ -47,6 +47,10 @@ persistence:
       storj:
         storj:
           mountPath: /tmp
+        02-generateid:
+          mountPath: /tmp
+        03-setup:
+          mountPath: /tmp
   {{- range $idx, $storage := .Values.storjStorage.additionalStorages }}
   {{ printf "storj-%v:" (int $idx) }}
     enabled: true

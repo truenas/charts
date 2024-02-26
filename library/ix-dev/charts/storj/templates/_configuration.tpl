@@ -23,6 +23,8 @@ configmap:
           ./identity authorize storagenode ${AUTH_KEY}
           echo "Storagenode identity certificate generated"
           chown -R {{ .Values.storjRunAs.user }}:{{ .Values.storjRunAs.group }} {{ template "storj.idPath" }}
+        else
+          echo "Identity certificate already exists"
         fi
 {{- end -}}
 

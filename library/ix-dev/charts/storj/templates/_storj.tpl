@@ -15,7 +15,7 @@ workload:
           securityContext:
             runAsUser: {{ .Values.storjRunAs.user }}
             runAsGroup: {{ .Values.storjRunAs.group }}
-            # readOnlyRootFilesystem: false
+            readOnlyRootFilesystem: false
             # capabilities:
             #   add:
             #     - CHOWN
