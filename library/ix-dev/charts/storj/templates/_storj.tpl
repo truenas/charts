@@ -25,14 +25,9 @@ workload:
             #     - SETUID
             #     - KILL
           {{- include "storj.args" $ | nindent 10 }}
-          env:
-            EMAIL: {{ .Values.storjConfig.email }}
-            STORAGE: {{ printf "%vGB" .Values.storjConfig.storageSizeGB }}
-            ADDRESS: {{ printf "%s:%v" .Values.storjConfig.domainAddress .Values.storjNetwork.p2pPort }}
-            WALLET:
-              secretKeyRef:
-                name: storj
-                key: wallet
+          envFrom:
+            - secretRef:
+                name: storj-config
           {{ with .Values.storjConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
@@ -83,9 +78,13 @@ workload:
           enabled: true
           type: init
           imageSelector: image
+          envFrom:
+            - secretRef:
+                name: storj-config
           securityContext:
             runAsUser: {{ .Values.storjRunAs.user }}
             runAsGroup: {{ .Values.storjRunAs.group }}
+            readOnlyRootFilesystem: false
           command:
             - /bin/sh
             - -c

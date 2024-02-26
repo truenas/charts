@@ -4,7 +4,13 @@ secret:
     enabled: true
     data:
       authToken: {{ .Values.storjConfig.authToken | quote }}
-      wallet: {{ .Values.storjConfig.wallet | quote }}
+  storj-config:
+    enabled: true
+    data:
+      EMAIL: {{ .Values.storjConfig.email }}
+      STORAGE: {{ printf "%vGB" .Values.storjConfig.storageSizeGB }}
+      ADDRESS: {{ printf "%s:%v" .Values.storjConfig.domainAddress .Values.storjNetwork.p2pPort }}
+      WALLET: {{ .Values.storjConfig.wallet | quote }}
 configmap:
   storj:
     enabled: true
