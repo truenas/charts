@@ -1,0 +1,551 @@
+groups:
+  - name: Storj Configuration
+    description: Configure Storj
+  - name: User and Group Configuration
+    description: Configure User and Group for Storj
+  - name: Advanced Pod Configuration
+    description: Configure Advanced Pod Options for Storj
+  - name: Network Configuration
+    description: Configure Network for Storj
+  - name: Storage Configuration
+    description: Configure Storage for Storj
+  - name: Resources Configuration
+    description: Configure Resources for Storj
+
+portals:
+  web_portal:
+    protocols:
+      - "$kubernetes-resource_configmap_portal_protocol"
+    host:
+      - "$kubernetes-resource_configmap_portal_host"
+    ports:
+      - "$kubernetes-resource_configmap_portal_port"
+    path: "$kubernetes-resource_configmap_portal_path"
+
+questions:
+  - variable: storjConfig
+    label: ""
+    group: Storj Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: wallet
+          label: Wallet
+          description: The wallet to use for Storj.
+          schema:
+            type: string
+            required: true
+            private: true
+        - variable: authToken
+          label: Auth Token
+          description: The auth token to use for Storj.
+          schema:
+            type: string
+            required: true
+            private: true
+        - variable: email
+          label: Email
+          description: The email to use for Storj.
+          schema:
+            type: string
+            required: true
+        - variable: domainAddress
+          label: Domain Address
+          description: The domain address to use for Storj.
+          schema:
+            type: string
+            required: true
+            private: true
+        - variable: gracePeriod
+          label: Grace Period
+          description: The grace period to use for Storj.
+          schema:
+            type: int
+            min: 30
+            default: 30
+            required: true
+        - variable: storageSizeGB
+          label: Storage Size
+          description: The storage size to use for Storj.
+          schema:
+            type: int
+            min: 500
+            default: 500
+            required: true
+        - variable: wallets
+          label: Opt-in to additional Wallets
+          schema:
+            type: dict
+            attrs:
+              - variable: zkSync
+                label: zkSync
+                description: Appends "zksync" to --operator.wallet-features flag to the storagenode command
+                schema:
+                  type: boolean
+                  default: false
+              - variable: zkSyncEra
+                label: zkSync Era
+                description: Appends "zksync-era" to --operator.wallet-features flag to the storagenode command
+                schema:
+                  type: boolean
+                  default: false
+        - variable: additionalEnvs
+          label: Additional Environment Variables
+          description: Configure additional environment variables for Storj.
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: env
+                label: Environment Variable
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: name
+                      label: Name
+                      schema:
+                        type: string
+                        required: true
+                    - variable: value
+                      label: Value
+                      schema:
+                        type: string
+                        required: true
+
+  - variable: storjRunAs
+    label: ""
+    group: User and Group Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: user
+          label: User ID
+          description: The user id that Storj will run as.
+          schema:
+            type: int
+            min: 568
+            default: 568
+            required: true
+        - variable: group
+          label: Group ID
+          description: The group id that Storj will run as.
+          schema:
+            type: int
+            min: 568
+            default: 568
+            required: true
+
+  - variable: podOptions
+    label: ""
+    group: Advanced Pod Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: dnsConfig
+          label: Advanced DNS Configuration
+          schema:
+            type: dict
+            attrs:
+              - variable: options
+                label: DNS Options
+                schema:
+                  type: list
+                  items:
+                    - variable: optionsEntry
+                      label: DNS Option Entry
+                      schema:
+                        type: dict
+                        attrs:
+                          - variable: name
+                            label: Option Name
+                            schema:
+                              type: string
+                              required: true
+                          - variable: value
+                            label: Option Value
+                            schema:
+                              type: string
+                              required: true
+
+  - variable: storjNetwork
+    label: ""
+    group: Network Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: webPort
+          label: Web Port
+          description: The port for the Storj Web UI.
+          schema:
+            type: int
+            default: 20909
+            min: 9000
+            max: 65535
+            required: true
+        - variable: p2pPort
+          label: P2P Port
+          description: |
+            This port will be used for both TCP and UDP traffic. </br>
+            Note that this port must be open on your firewall and that internal
+            Storj port will not be affected by this change, but only the external (Node Port)
+          schema:
+            type: int
+            default: 28967
+            min: 9000
+            max: 65535
+            required: true
+        - variable: hostNetwork
+          label: Host Network
+          description: |
+            Enable host network for Storj
+          schema:
+            type: boolean
+            default: false
+
+  - variable: storjStorage
+    label: ""
+    group: Storage Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: data
+          label: Storj Data Storage
+          description: The path to store Storj Data.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
+                schema:
+                  type: string
+                  required: true
+                  immutable: true
+                  default: "ixVolume"
+                  enum:
+                    - value: "hostPath"
+                      description: Host Path (Path that already exists on the system)
+                    - value: "ixVolume"
+                      description: ixVolume (Dataset created automatically by the system)
+              - variable: ixVolumeConfig
+                label: ixVolume Configuration
+                description: The configuration for the ixVolume dataset.
+                schema:
+                  type: dict
+                  show_if: [["type", "=", "ixVolume"]]
+                  $ref:
+                    - "normalize/ixVolume"
+                  attrs:
+                    - variable: aclEnable
+                      label: Enable ACL
+                      description: Enable ACL for the dataset.
+                      schema:
+                        type: boolean
+                        default: false
+                    - variable: datasetName
+                      label: Dataset Name
+                      description: The name of the dataset to use for storage.
+                      schema:
+                        type: string
+                        required: true
+                        immutable: true
+                        hidden: true
+                        default: "data"
+                    - variable: aclEntries
+                      label: ACL Configuration
+                      schema:
+                        type: dict
+                        show_if: [["aclEnable", "=", true]]
+                        attrs: []
+              - variable: hostPathConfig
+                label: Host Path Config
+                schema:
+                  type: dict
+                  show_if: [["type", "=", "hostPath"]]
+                  attrs:
+                    - variable: aclEnable
+                      label: Enable ACL
+                      description: Enable ACL for the dataset.
+                      schema:
+                        type: boolean
+                        default: false
+                    - variable: acl
+                      label: ACL Configuration
+                      schema:
+                        type: dict
+                        show_if: [["aclEnable", "=", true]]
+                        attrs: []
+                        $ref:
+                          - "normalize/acl"
+                    - variable: hostPath
+                      label: Host Path
+                      description: The host path to use for storage.
+                      schema:
+                        type: hostpath
+                        show_if: [["aclEnable", "=", false]]
+                        required: true
+        - variable: identity
+          label: Storj Identity Storage
+          description: The path to store Storj Identity.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
+                schema:
+                  type: string
+                  required: true
+                  immutable: true
+                  default: "ixVolume"
+                  enum:
+                    - value: "hostPath"
+                      description: Host Path (Path that already exists on the system)
+                    - value: "ixVolume"
+                      description: ixVolume (Dataset created automatically by the system)
+              - variable: ixVolumeConfig
+                label: ixVolume Configuration
+                description: The configuration for the ixVolume dataset.
+                schema:
+                  type: dict
+                  show_if: [["type", "=", "ixVolume"]]
+                  $ref:
+                    - "normalize/ixVolume"
+                  attrs:
+                    - variable: aclEnable
+                      label: Enable ACL
+                      description: Enable ACL for the dataset.
+                      schema:
+                        type: boolean
+                        default: false
+                    - variable: datasetName
+                      label: Dataset Name
+                      description: The name of the dataset to use for storage.
+                      schema:
+                        type: string
+                        required: true
+                        immutable: true
+                        hidden: true
+                        default: "identity"
+                    - variable: aclEntries
+                      label: ACL Configuration
+                      schema:
+                        type: dict
+                        show_if: [["aclEnable", "=", true]]
+                        attrs: []
+              - variable: hostPathConfig
+                label: Host Path Config
+                schema:
+                  type: dict
+                  show_if: [["type", "=", "hostPath"]]
+                  attrs:
+                    - variable: aclEnable
+                      label: Enable ACL
+                      description: Enable ACL for the dataset.
+                      schema:
+                        type: boolean
+                        default: false
+                    - variable: acl
+                      label: ACL Configuration
+                      schema:
+                        type: dict
+                        show_if: [["aclEnable", "=", true]]
+                        attrs: []
+                        $ref:
+                          - "normalize/acl"
+                    - variable: hostPath
+                      label: Host Path
+                      description: The host path to use for storage.
+                      schema:
+                        type: hostpath
+                        show_if: [["aclEnable", "=", false]]
+                        required: true
+
+        - variable: additionalStorages
+          label: Additional Storage
+          description: Additional storage for Storj.
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: storageEntry
+                label: Storage Entry
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: type
+                      label: Type
+                      description: |
+                        ixVolume: Is dataset created automatically by the system.</br>
+                        Host Path: Is a path that already exists on the system.</br>
+                        SMB Share: Is a SMB share that is mounted to a persistent volume claim.
+                      schema:
+                        type: string
+                        required: true
+                        default: "ixVolume"
+                        immutable: true
+                        enum:
+                          - value: "hostPath"
+                            description: Host Path (Path that already exists on the system)
+                          - value: "ixVolume"
+                            description: ixVolume (Dataset created automatically by the system)
+                          - value: "smb-pv-pvc"
+                            description: SMB Share (Mounts a persistent volume claim to a SMB share)
+                    - variable: readOnly
+                      label: Read Only
+                      description: Mount the volume as read only.
+                      schema:
+                        type: boolean
+                        default: false
+                    - variable: mountPath
+                      label: Mount Path
+                      description: The path inside the container to mount the storage.
+                      schema:
+                        type: path
+                        required: true
+                    - variable: hostPathConfig
+                      label: Host Path Config
+                      schema:
+                        type: dict
+                        show_if: [["type", "=", "hostPath"]]
+                        attrs:
+                          - variable: aclEnable
+                            label: Enable ACL
+                            description: Enable ACL for the dataset.
+                            schema:
+                              type: boolean
+                              default: false
+                          - variable: acl
+                            label: ACL Configuration
+                            schema:
+                              type: dict
+                              show_if: [["aclEnable", "=", true]]
+                              attrs: []
+                              $ref:
+                                - "normalize/acl"
+                          - variable: hostPath
+                            label: Host Path
+                            description: The host path to use for storage.
+                            schema:
+                              type: hostpath
+                              show_if: [["aclEnable", "=", false]]
+                              required: true
+                    - variable: ixVolumeConfig
+                      label: ixVolume Configuration
+                      description: The configuration for the ixVolume dataset.
+                      schema:
+                        type: dict
+                        show_if: [["type", "=", "ixVolume"]]
+                        $ref:
+                          - "normalize/ixVolume"
+                        attrs:
+                          - variable: aclEnable
+                            label: Enable ACL
+                            description: Enable ACL for the dataset.
+                            schema:
+                              type: boolean
+                              default: false
+                          - variable: datasetName
+                            label: Dataset Name
+                            description: The name of the dataset to use for storage.
+                            schema:
+                              type: string
+                              required: true
+                              immutable: true
+                              default: "storage_entry"
+                          - variable: aclEntries
+                            label: ACL Configuration
+                            schema:
+                              type: dict
+                              show_if: [["aclEnable", "=", true]]
+                              attrs: []
+                    - variable: smbConfig
+                      label: SMB Share Configuration
+                      description: The configuration for the SMB Share.
+                      schema:
+                        type: dict
+                        show_if: [["type", "=", "smb-pv-pvc"]]
+                        attrs:
+                          - variable: server
+                            label: Server
+                            description: The server for the SMB share.
+                            schema:
+                              type: string
+                              required: true
+                          - variable: share
+                            label: Share
+                            description: The share name for the SMB share.
+                            schema:
+                              type: string
+                              required: true
+                          - variable: domain
+                            label: Domain (Optional)
+                            description: The domain for the SMB share.
+                            schema:
+                              type: string
+                          - variable: username
+                            label: Username
+                            description: The username for the SMB share.
+                            schema:
+                              type: string
+                              required: true
+                          - variable: password
+                            label: Password
+                            description: The password for the SMB share.
+                            schema:
+                              type: string
+                              required: true
+                              private: true
+                          - variable: size
+                            label: Size (in Gi)
+                            description: The size of the volume quota.
+                            schema:
+                              type: int
+                              required: true
+                              min: 1
+                              default: 1
+
+  - variable: resources
+    group: Resources Configuration
+    label: ""
+    schema:
+      type: dict
+      attrs:
+        - variable: limits
+          label: Limits
+          schema:
+            type: dict
+            attrs:
+              - variable: cpu
+                label: CPU
+                description: CPU limit for Storj.
+                schema:
+                  type: string
+                  max_length: 6
+                  valid_chars: '^(0\.[1-9]|[1-9][0-9]*)(\.[0-9]|m?)$'
+                  valid_chars_error: |
+                    Valid CPU limit formats are</br>
+                    - Plain Integer - eg. 1</br>
+                    - Float - eg. 0.5</br>
+                    - Milicpu - eg. 500m
+                  default: "4000m"
+                  required: true
+              - variable: memory
+                label: Memory
+                description: Memory limit for Storj.
+                schema:
+                  type: string
+                  max_length: 12
+                  valid_chars: '^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$'
+                  valid_chars_error: |
+                    Valid Memory limit formats are</br>
+                    - Suffixed with E/P/T/G/M/K - eg. 1G</br>
+                    - Suffixed with Ei/Pi/Ti/Gi/Mi/Ki - eg. 1Gi</br>
+                    - Plain Integer in bytes - eg. 1024</br>
+                    - Exponent - eg. 134e6
+                  default: "8Gi"
+                  required: true

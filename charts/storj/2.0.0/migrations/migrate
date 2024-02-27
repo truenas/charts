@@ -1,0 +1,104 @@
+#!/usr/bin/python3
+import json
+import os
+import sys
+
+def migrate_volume(volume):
+    return {
+        'type': 'hostPath',
+        'hostPathConfig': {
+            'hostPath': volume['hostPath']
+        },
+    } if volume.get('hostPathEnabled', False) else {
+        'type': 'ixVolume',
+        'ixVolumeConfig': {
+            'datasetName': volume['datasetName'],
+        },
+    }
+
+def migrate_common_lib(values):
+    delete_keys = [
+        'enableResourceLimits', 'cpuLimit', 'memLimit', 'dnsConfig',
+        'environmentVariables', 'runAsUser', 'runAsGroup', 'webPort',
+        'nodePort', 'wallet', 'authToken', 'email', 'domainAddress',
+        'terminationGracePeriod', 'storageSize', 'zksync', 'zksyncEra',
+        'extraAppVolumeMounts', 'appVolumeMounts', 'identityCreationMountPath',
+    ]
+
+    values.update({
+        # Migrate Network
+        'storjNetwork': {
+            'webPort': values['webPort'],
+            'p2pPort': values['nodePort'],
+        },
+        # Migrate Resources
+        'resources': {
+            'limits': {
+                'cpu': values.get('cpuLimit', '4000m'),
+                'memory': values.get('memLimit', '8Gi'),
+            }
+        },
+        # Migrate DNS
+        'podOptions': {
+            'dnsConfig': {
+                'options': [
+                    {'name': opt['name'], 'value': opt['value']}
+                    for opt in values.get('dnsConfig', {}).get('options', [])
+                ]
+            }
+        },
+        # Migrate ID
+        'storjRunAs': {
+            'user': values['runAsUser'],
+            'group': values['runAsGroup'],
+        },
+        # Migrate Config
+        'storjConfig': {
+            'wallet': values['wallet'],
+            'authToken': values['authToken'],
+            'email': values['email'],
+            'domainAddress': values['domainAddress'],
+            'storageSizeGB': values['storageSize'],
+            'gracePeriod': values['terminationGracePeriod'],
+            'wallets': {
+                'zkSync': values['zksync'],
+                'zkSyncEra': values['zksyncEra'],
+            },
+            'additionalEnvs': [e for e in values.get('environmentVariables', [])],
+        },
+        # Migrate Storage
+        'storjStorage': {
+            'data': migrate_volume(values['appVolumeMounts']['data']),
+            'identity': migrate_volume(values['appVolumeMounts']['identity']),
+            'additionalStorages': [
+                {
+                    'type': 'hostPath',
+                    'hostPathConfig': {'hostPath': e['hostPath']},
+                    'mountPath': e['mountPath'],
+                }
+                for e in values.get('extraAppVolumeMounts', [])
+            ],
+        },
+
+    })
+
+    for k in delete_keys:
+        values.pop(k, None)
+
+    return values
+
+def migrate(values):
+    # If this missing, we have already migrated
+    if not 'appVolumeMounts' in values.keys():
+        return values
+
+    return migrate_common_lib(values)
+
+
+if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        exit(1)
+
+    if os.path.exists(sys.argv[1]):
+        with open(sys.argv[1], 'r') as f:
+            print(json.dumps(migrate(json.loads(f.read()))))

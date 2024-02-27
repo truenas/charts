@@ -1,0 +1,36 @@
+runAsContext:
+  - userName: storj
+    groupName: storj
+    gid: 568
+    uid: 568
+    description: Storj runs as non-root user.
+capabilities:
+  - name: CHOWN
+    description: Storj is able to chown files.
+  - name: FOWNER
+    description: Storj is able to bypass permission checks for it's sub-processes.
+  - name: SYS_CHROOT
+    description: Storj is able to use chroot.
+  - name: MKNOD
+    description: Storj is able to create device nodes.
+  - name: DAC_OVERRIDE
+    description: Storj is able to bypass permission checks.
+  - name: FSETID
+    description: Storj is able to set file capabilities.
+  - name: KILL
+    description: Storj is able to kill processes.
+  - name: SETGID
+    description: Storj is able to set group ID for it's sub-processes.
+  - name: SETUID
+    description: Storj is able to set user ID for it's sub-processes.
+  - name: SETPCAP
+    description: Storj is able to set process capabilities.
+  - name: NET_BIND_SERVICE
+    description: Storj is able to bind to privileged ports.
+  - name: SETFCAP
+    description: Storj is able to set file capabilities.
+  - name: NET_RAW
+    description: Storj is able to use raw sockets.
+  - name: AUDIT_WRITE
+    description: Storj is able to write to audit log.
+hostMounts: []

@@ -1,0 +1,49 @@
+image:
+  pullPolicy: IfNotPresent
+  repository: storjlabs/storagenode
+  tag: 1d42f9ac3-v1.68.2-go1.18.8
+curlImage:
+  pullPolicy: IfNotPresent
+  repository: alpine/curl
+  tag: latest
+
+podOptions:
+  dnsConfig:
+    options: []
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+storjConfig:
+  wallet: ''
+  authToken: ''
+  email: ''
+  domainAddress: ''
+  gracePeriod: 30
+  storageSizeGB: 500
+  wallets:
+    zkSync: false
+    zkSyncEra: false
+  additionalEnvs: []
+
+storjRunAs:
+  user: 568
+  group: 568
+
+storjNetwork:
+  webPort: 20909
+  p2pPort: 28967
+  hostNetwork: false
+
+storjStorage:
+  data:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: data
+  identity:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: identity
+  additionalStorages: []
