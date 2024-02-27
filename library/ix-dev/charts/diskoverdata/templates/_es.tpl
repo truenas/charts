@@ -21,12 +21,6 @@ workload:
             ES_SETTING_XPACK_SECURITY_ENABLED: true
             ES_SETTING_XPACK_SECURITY_TRANSPORT_SSL_ENABLED: false
             ES_SETTING_XPACK_SECURITY_HTTP_SSL_ENABLED: false
-          envList:
-            {{ range $env := . }}
-            - name: {{ $env.name }}
-              value: {{ $env.value }}
-            {{ end }}
-          {{ end }}
           probes:
             liveness:
               enabled: true

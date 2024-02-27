@@ -29,6 +29,7 @@ workload:
                 - KILL
           fixedEnv:
             PUID: {{ .Values.diskoverID.user }}
+          {{ with .Values.diskoverConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
             - name: {{ $env.name }}
