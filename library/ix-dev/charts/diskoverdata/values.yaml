@@ -13,10 +13,19 @@ elasticSearchImage:
 #   repository: python
 #   tag: "3.10"
 
-# es_user: elasticsearch
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+podOptions:
+  dnsConfig:
+    options: []
 
 # TODO: TZ
 diskoverConfig:
+  username: ''
+  password: ''
   additionalEnvs: []
 
 diskoverID:
