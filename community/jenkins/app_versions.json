@@ -4,12 +4,12 @@
         "supported": false,
         "healthy_error": null,
         "location": "/__w/charts/charts/community/jenkins/1.2.6",
-        "last_update": "2024-02-27 11:17:27",
+        "last_update": "2024-02-27 13:41:51",
         "required_features": [
-            "definitions/timezone",
-            "normalize/acl",
             "normalize/ixVolume",
-            "definitions/certificate"
+            "definitions/certificate",
+            "definitions/timezone",
+            "normalize/acl"
         ],
         "human_version": "2.440.1_1.2.6",
         "version": "1.2.6",
