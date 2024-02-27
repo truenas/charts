@@ -18,7 +18,7 @@ workload:
           securityContext:
             runAsUser: 0
             runAsGroup: 0
-            readOnlyRootFilesystem: false\
+            readOnlyRootFilesystem: false
             capabilities:
               add:
                 - CHOWN
@@ -62,7 +62,8 @@ workload:
           args:
             - |
               echo "Pinging [{{ $elasticsearch }}] until it is ready..."
-              until wget --spider --quiet "{{ $elasticsearch }}"; do
+              header='--header=Authorization: Basic {{ printf "elastic:%s" "changeme" | b64enc }}'
+              until wget "$header" --spider --quiet "{{ $elasticsearch }}"; do
                 echo "Waiting for [{{ $elasticsearch }}] to be ready..."
                 sleep 2
               done
@@ -70,5 +71,4 @@ workload:
         # 02-init-config:
         #   enabled: true
         #   type: init
-
 {{- end -}}
