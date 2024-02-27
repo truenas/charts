@@ -18,6 +18,7 @@ workload:
           securityContext:
             runAsUser: 0
             runAsGroup: 0
+            runAsNonRoot: false
             readOnlyRootFilesystem: false
             capabilities:
               add:
