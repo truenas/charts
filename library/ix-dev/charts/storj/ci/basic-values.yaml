@@ -1,0 +1,20 @@
+storjConfig:
+  wallet: 0xab00000999999aaaaaaaccccccdddddddfffffff
+  authToken: user:sasjkadkjhakdlaskdlkajsd
+  email: user@example.com
+  domainAddress: localhost
+  gracePeriod: 120
+  storageSizeGB: 500
+  wallets:
+    zkSync: true
+    zkSyncEra: true
+
+storjStorage:
+  data:
+    type: pvc
+  identity:
+    type: pvc
+
+storjNetwork:
+  webPort: 30909
+  p2pPort: 32767
