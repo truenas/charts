@@ -3,16 +3,42 @@ image:
   repository: linuxserver/diskover
   tag: "2.0.1"
 
-elasticsearch:
-  image:
-    pullPolicy: IfNotPresent
-    repository: elasticsearch
-    tag: "7.5.2"
+elasticSearchImage:
+  pullPolicy: IfNotPresent
+  repository: elasticsearch
+  tag: "7.5.2"
 
-python:
-  image:
-    pullPolicy: IfNotPresent
-    repository: python
-    tag: "3.10"
+# pythonImage:
+#   pullPolicy: IfNotPresent
+#   repository: python
+#   tag: "3.10"
 
-es_user: elasticsearch
+
+
+# es_user: elasticsearch
+
+# TODO: TZ
+diskoverConfig:
+  additionalEnvs: []
+
+diskoverID:
+  user: 568
+  group: 568
+
+diskoverNetwork:
+  webPort: 32000
+
+diskoverStorage:
+  config:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: config
+  data:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: data
+  esdata:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: esdata
+  additionalStorages: []

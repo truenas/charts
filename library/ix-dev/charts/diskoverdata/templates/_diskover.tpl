@@ -1,35 +1,74 @@
-{{- define "add.user" -}}
-    {{- $user := .Values.es_user -}}
-    {{- printf "adduser %s -D;" $user -}}
-{{- end -}}
+{{- define "diskover.workload" -}}
+  {{- $fullname := (include "ix.v1.common.lib.chart.names.fullname" $) -}}
+  {{- $elasticsearch := printf "http://%s-elasticsearch:%v/_cluster/health?local=true" $fullname 9200 }}
+workload:
+  diskover:
+    enabled: true
+    primary: true
+    type: Deployment
+    podSpec:
+      hostNetwork: false
+      securityContext:
+        fsGroup: {{ .Values.diskoverID.group }}
+      containers:
+        diskover:
+          enabled: true
+          primary: true
+          imageSelector: image
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
+            readOnlyRootFilesystem: false\
+            capabilities:
+              add:
+                - CHOWN
+                - DAC_OVERRIDE
+                - FOWNER
+                - SETGID
+                - SETUID
+                - KILL
+          fixedEnv:
+            PUID: {{ .Values.diskoverID.user }}
+          envList:
+            {{ range $env := . }}
+            - name: {{ $env.name }}
+              value: {{ $env.value }}
+            {{ end }}
+          {{ end }}
+          probes:
+            liveness:
+              enabled: true
+              type: http
+              path: /login.php
+              port: 80
+            readiness:
+              enabled: true
+              type: http
+              path: /login.php
+              port: 80
+            startup:
+              enabled: true
+              type: http
+              path: /login.php
+              port: 80
+      initContainers:
+        01-wait-for-elasticsearch:
+          enabled: true
+          type: init
+          imageSelector: bashImage
+          command:
+            - /bin/sh
+            - -c
+          args:
+            - |
+              echo "Pinging [{{ $elasticsearch }}] until it is ready..."
+              until wget --spider --quiet "{{ $elasticsearch }}"; do
+                echo "Waiting for [{{ $elasticsearch }}] to be ready..."
+                sleep 2
+              done
+              echo "URL [{{ $elasticsearch }}] is ready!"
+        # 02-init-config:
+        #   enabled: true
+        #   type: init
 
-
-{{- define "change.user.permissions" -}}
-    {{- $user := .Values.es_user -}}
-    {{- $mountPath := .Values.elasticSearchAppVolumeMounts.esdata.mountPath -}}
-    {{- printf "chown -R %s:%s %s;" $user $user $mountPath -}}
-{{- end -}}
-
-
-{{- define "elasticsearch.IP" -}}
-    {{ $envList := (default list) }}
-    {{ $envList = mustAppend $envList (dict "name" "ES_HOST" "value" (printf "%s" (include "common.names.fullname" .))) }}
-    {{ $envList = mustAppend $envList (dict "name" "ES_PORT" "value" "9200") }}
-    {{ include "common.containers.environmentVariables" (dict "environmentVariables" $envList) }}
-{{- end -}}
-
-
-{{- define "elasticsearch.credentials" -}}
-    {{ $envList := (default list) }}
-    {{ $envList = mustAppend $envList (dict "name" "ES_USER" "valueFromSecret" true "secretName" "elastic-search-credentials" "secretKey" "es-username") }}
-    {{ $envList = mustAppend $envList (dict "name" "ES_PASS" "valueFromSecret" true "secretName" "elastic-search-credentials" "secretKey" "es-password") }}
-    {{ include "common.containers.environmentVariables" (dict "environmentVariables" $envList) }}
-{{- end -}}
-
-
-{{- define "config.file.path" -}}
-    {{ $envList := (default list) }}
-    {{ $envList = mustAppend $envList (dict "name" "DEST" "value" .mountPath) }}
-    {{ $envList = mustAppend $envList (dict "name" "FILE" "value" .configFile) }}
-    {{ include "common.containers.environmentVariables" (dict "environmentVariables" $envList) }}
 {{- end -}}
