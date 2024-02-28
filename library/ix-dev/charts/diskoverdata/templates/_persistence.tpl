@@ -40,6 +40,13 @@ persistence:
         diskover:
           mountPath: /config/diskover.conf.d/diskover/config.yaml
           subPath: config.yaml
+  tmp:
+    enabled: true
+    type: emptyDir
+    targetSelector:
+      diskover:
+        01-wait-for-elasticsearch:
+          mountPath: /tmp
   {{- range $idx, $storage := .Values.diskoverStorage.additionalStorages }}
   {{ printf "diskover-%v:" (int $idx) }}
     enabled: true

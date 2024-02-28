@@ -58,19 +58,22 @@ workload:
           enabled: true
           type: init
           imageSelector: bashImage
+          env:
+            ELASTIC_PASSWORD:
+              secretKeyRef:
+                name: diskover-secret
+                key: es-password
           command:
-            - /bin/sh
+            - bash
             - -c
           args:
             - |
               echo "Pinging [{{ $elasticsearch }}] until it is ready..."
-              header='--header=Authorization: Basic {{ printf "elastic:%s" "changeme" | b64enc }}'
-              until wget "$header" --spider --quiet "{{ $elasticsearch }}"; do
+              head="--header=Authorization: Basic x$(base64 <<< "elastic:$ELASTIC_PASSWORD")"
+              time="--timeout=3"
+              until wget "$head" "$time" --spider -qO- "{{ $elasticsearch }}"; do
                 echo "Waiting for [{{ $elasticsearch }}] to be ready..."
                 sleep 2
               done
               echo "URL [{{ $elasticsearch }}] is ready!"
-        # 02-init-config:
-        #   enabled: true
-        #   type: init
 {{- end -}}

@@ -2,6 +2,12 @@
   {{- $fullname := (include "ix.v1.common.lib.chart.names.fullname" $) }}
   {{- $elasticsearch := printf "%s-elasticsearch" $fullname }}
 
+{{- $esPassword := randAlphaNum 32 }}
+secret:
+  diskover-secret:
+    enabled: true
+    data:
+      es-password: {{ $esPassword }}
 configmap:
   diskover-config:
     enabled: true
@@ -9,14 +15,12 @@ configmap:
       Constants.php: |
         <?php
             namespace diskover;
-
             class Constants {
                 const TIMEZONE = '{{ .Values.TZ }}';
                 const ES_HOST = '{{ $elasticsearch }}';
                 const ES_PORT = 9200;
                 const ES_USER = 'elastic';
-                // TODO: Check random gen
-                const ES_PASS = 'changeme';
+                const ES_PASS = '{{ $esPassword }}';
                 // if your Elasticsearch cluster uses HTTP TLS/SSL, set ES_HTTPS to TRUE
                 // override with env var ES_HTTPS
                 const ES_HTTPS = FALSE;
@@ -164,8 +168,7 @@ configmap:
                 host: '{{ $elasticsearch }}'
                 port: 9200
                 user: 'elastic'
-                # TODO: test random gen
-                password: 'changeme'
+                password: '{{ $esPassword }}'
                 # set https to True if using HTTP TLS/SSL or False if using http
                 # for AWS ES, you will most likely want to set this to True
                 # override with env var ES_HTTPS

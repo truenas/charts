@@ -15,32 +15,39 @@ workload:
             runAsGroup: 1000
             readOnlyRootFilesystem: false
           env:
-            ES_SETTING_HTTP_PORT: 9200
-            ELASTIC_PASSWORD: changeme
-            ES_SETTING_DISCOVERY_TYPE: single-node
-            ES_SETTING_XPACK_SECURITY_ENABLED: true
-            ES_SETTING_XPACK_SECURITY_TRANSPORT_SSL_ENABLED: false
-            ES_SETTING_XPACK_SECURITY_HTTP_SSL_ENABLED: false
+            ELASTIC_PASSWORD:
+              secretKeyRef:
+                name: diskover-secret
+                key: es-password
+            http.port: 9200
+            discovery.type: single-node
+            node.name: diskoverdata
           probes:
             liveness:
               enabled: true
-              type: http
-              path: /_cluster/health?local=true
-              port: 9200
-              httpHeaders:
-                Authorization: Basic {{ printf "elastic:%s" "changeme" | b64enc }}
+              type: exec
+              command:
+                - /bin/bash
+                - -c
+                - |
+                  curl -s -H "Authorization: Basic $(base64 <<< "elastic:$ELASTIC_PASSWORD")" \
+                    http://localhost:9200/_cluster/health?local=true
             readiness:
               enabled: true
-              type: http
-              path: /_cluster/health?local=true
-              port: 9200
-              httpHeaders:
-                Authorization: Basic {{ printf "elastic:%s" "changeme" | b64enc }}
+              type: exec
+              command:
+                - /bin/bash
+                - -c
+                - |
+                  curl -s -H "Authorization: Basic $(base64 <<< "elastic:$ELASTIC_PASSWORD")" \
+                    http://localhost:9200/_cluster/health?local=true
             startup:
               enabled: true
-              type: http
-              path: /_cluster/health?local=true
-              port: 9200
-              httpHeaders:
-                Authorization: Basic {{ printf "elastic:%s" "changeme" | b64enc }}
+              type: exec
+              command:
+                - /bin/bash
+                - -c
+                - |
+                  curl -s -H "Authorization: Basic $(base64 <<< "elastic:$ELASTIC_PASSWORD")" \
+                    http://localhost:9200/_cluster/health?local=true
 {{- end -}}
