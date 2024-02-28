@@ -21,7 +21,16 @@ persistence:
       elasticsearch:
         elasticsearch:
           mountPath: /usr/share/elasticsearch/data
-
+  defaultcrawler:
+    enabled: true
+    type: configmap
+    objectName: diskover-config
+    defaultMode: "0755"
+    targetSelector:
+      diskover:
+        diskover:
+          mountPath: /scripts/default_crawler.sh
+          subPath: .default_crawler.sh
   phpfile:
     enabled: true
     type: configmap

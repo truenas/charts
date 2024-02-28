@@ -53,6 +53,30 @@ workload:
               type: http
               path: /login.php
               port: 80
+          lifecycle:
+            {{- $sched := .Values.diskoverConfig.cronSchedule }}
+            postStart:
+              type: exec
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  /scripts/.default_crawler.sh /app/diskover/diskover.py /data;
+                  {{- $cron := printf "%s python3 /app/diskover/diskover.py /data" $sched }}
+                  if ! cat /config/crontab | grep -q "{{ $cron }}"; then
+                    echo "{{ $cron }}" >> /config/crontab;
+                  fi
+                  {{- range $item := .Values.diskoverStorage.additionalStorages }}
+                  /scripts/.default_crawler.sh /app/diskover/diskover.py {{ $item.mountPath }};
+                  {{- end -}}
+                  {{- range $item := .Values.diskoverStorage.additionalStorages }}
+                  {{- $cron := printf "%s python3 /app/diskover/diskover.py %s" $sched $item.mountPath }}
+                  if ! cat /config/crontab | grep -q "{{ $cron }}"; then
+                    echo "{{ $cron }}" >> /config/crontab;
+                  fi
+                  {{- end }}
+                  crontab /config/crontab;
+
       initContainers:
         01-wait-for-elasticsearch:
           enabled: true

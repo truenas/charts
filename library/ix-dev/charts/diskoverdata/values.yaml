@@ -8,11 +8,6 @@ elasticSearchImage:
   repository: elasticsearch
   tag: "7.5.2"
 
-# pythonImage:
-#   pullPolicy: IfNotPresent
-#   repository: python
-#   tag: "3.10"
-
 resources:
   limits:
     cpu: 4000m
@@ -24,6 +19,7 @@ podOptions:
 
 # TODO: TZ
 diskoverConfig:
+  cronSchedule: ''
   username: ''
   password: ''
   additionalEnvs: []

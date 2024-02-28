@@ -12,6 +12,20 @@ configmap:
   diskover-config:
     enabled: true
     data:
+      .default_crawler.sh: |-
+        #!/bin/sh
+        while true; do
+            # this condition wait for the script to copy into the container .
+            if test -f "$1"; then
+                # Empty folders don't generate indices . if folder is empty a default file is generated
+                if ! [ "$(ls -A $2)" ]; then
+                    echo "Dummy file created as empty dirs are rejected" > $2/diskover_test.txt;
+                fi
+                python3 $1 $2/;
+                break;
+            fi
+            sleep 5
+        done
       Constants.php: |
         <?php
             namespace diskover;
