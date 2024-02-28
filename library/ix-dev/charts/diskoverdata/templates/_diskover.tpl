@@ -70,10 +70,12 @@ workload:
                   /scripts/.default_crawler.sh /app/diskover/diskover.py {{ $item.mountPath }};
                   {{- end -}}
                   {{- range $item := .Values.diskoverStorage.additionalStorages }}
-                  {{- $cron := printf "%s python3 /app/diskover/diskover.py %s" $sched $item.mountPath }}
-                  if ! cat /config/crontab | grep -q "{{ $cron }}"; then
-                    echo "{{ $cron }}" >> /config/crontab;
-                  fi
+                    {{- if $item.diskoverDataIndex }}
+                      {{- $cron := printf "%s python3 /app/diskover/diskover.py %s" $sched $item.mountPath }}
+                      if ! cat /config/crontab | grep -q "{{ $cron }}"; then
+                        echo "{{ $cron }}" >> /config/crontab;
+                      fi
+                    {{- end }}
                   {{- end }}
                   crontab /config/crontab;
 
