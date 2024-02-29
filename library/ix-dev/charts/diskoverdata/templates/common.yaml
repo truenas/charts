@@ -1,6 +1,6 @@
 {{- include "ix.v1.common.loader.init" . -}}
 
-{{- /* include "diskover.migration" $ TODO: */ -}}
+{{- include "diskover.migration" $ -}}
 
 {{/* Merge the templates with Values */}}
 {{- $_ := mustMergeOverwrite .Values (include "diskover.configuration" $ | fromYaml) -}}
