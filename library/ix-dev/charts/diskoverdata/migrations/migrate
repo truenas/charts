@@ -23,6 +23,7 @@ def migrate_common_lib(values):
         'web_port', 'timezone', 'dnsConfig', 'environmentVariables', 'ownerUID',
         'cronjobSchedule', 'diskoverCredentials', 'appVolumeMounts', 'ownerGID',
         'extraAppVolumeMounts', 'extraDataVolumeMounts', 'elasticSearchAppVolumeMounts',
+        'elasticsearch', 'enableResourceLimits', 'es_user', 'python',
     ]
 
     additionalVols = [
@@ -41,7 +42,7 @@ def migrate_common_lib(values):
     ]
 
     values.update({
-        'TZ': values['timezone']
+        'TZ': values['timezone'],
         # Migrate Network
         'diskoverNetwork': {
             'webPort': values['web_port'],
@@ -69,9 +70,9 @@ def migrate_common_lib(values):
         },
         # Migrate Config
         'diskoverConfig': {
-            'cronSchedule': values['cronjobSchedule']
-            'username': values['diskoverCredentials']['username']
-            'password': values['diskoverCredentials']['password']
+            'cronSchedule': values['cronjobSchedule'],
+            'username': values['diskoverCredentials']['username'],
+            'password': values['diskoverCredentials']['password'],
             'additionalEnvs': values.get('environmentVariables', []),
         },
         # Migrate Storage
