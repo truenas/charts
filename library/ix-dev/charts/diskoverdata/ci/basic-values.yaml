@@ -10,3 +10,10 @@ diskoverStorage:
     type: pvc
   esdata:
     type: pvc
+  additionalStorages:
+    - type: pvc
+      diskoverDataIndex: true
+      mountPath: /data1
+    - type: pvc
+      diskoverDataIndex: true
+      mountPath: /data2
