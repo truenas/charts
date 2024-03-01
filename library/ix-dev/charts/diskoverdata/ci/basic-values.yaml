@@ -1,0 +1,19 @@
+diskoverConfig:
+  cronSchedule: '* * * * *'
+  username: someuser
+  password: somepass
+
+diskoverStorage:
+  config:
+    type: pvc
+  data:
+    type: pvc
+  esdata:
+    type: pvc
+  additionalStorages:
+    - type: pvc
+      diskoverDataIndex: true
+      mountPath: /data1
+    - type: pvc
+      diskoverDataIndex: true
+      mountPath: /data2
