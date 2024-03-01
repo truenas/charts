@@ -32,7 +32,7 @@ workload:
                 - KILL
           env:
             WEB_PORT: {{ .Values.piholeNetwork.webPort }}
-            WEBPASSWORD: {{ .Values.piholeConfig.webPassword }}
+            WEBPASSWORD: {{ .Values.piholeConfig.webPassword | quote }}
             {{- if .Values.piholeNetwork.dhcp.enabled }}
             DHCP_ACTIVE: "true"
             DHCP_START: {{ .Values.piholeNetwork.dhcp.start }}
