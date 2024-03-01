@@ -13,7 +13,7 @@
 
 {{- define "elasticsearch.IP" -}}
     {{ $envList := (default list) }}
-    {{ $envList = mustAppend $envList (dict "name" "ES_HOST" "value" (printf "%s" (include "common.names.fullname" .))) }}
+    {{ $envList = mustAppend $envList (dict "name" "ES_HOST" "value" (printf "%s-es" (include "common.names.fullname" .))) }}
     {{ $envList = mustAppend $envList (dict "name" "ES_PORT" "value" "9200") }}
     {{ include "common.containers.environmentVariables" (dict "environmentVariables" $envList) }}
 {{- end -}}

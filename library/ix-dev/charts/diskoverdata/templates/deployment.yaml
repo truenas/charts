@@ -5,7 +5,7 @@
 apiVersion: {{ template "common.capabilities.deployment.apiVersion" . }}
 kind: Deployment
 metadata:
-  name: {{ template "common.names.fullname" . }}
+  name: {{ template "common.names.fullname" . }}-diskover
   labels:
     app: {{ template "common.names.name" . }}
     chart: {{ template "common.names.chart" . }}
