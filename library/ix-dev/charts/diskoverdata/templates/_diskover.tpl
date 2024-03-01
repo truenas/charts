@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {{- define "diskover.workload" -}}
   {{- $fullname := (include "ix.v1.common.lib.chart.names.fullname" $) -}}
   {{- $elasticsearch := printf "http://%s-elasticsearch:%v/_cluster/health?local=true" $fullname 9200 }}
@@ -102,4 +103,40 @@ workload:
                 sleep 2
               done
               echo "URL [{{ $elasticsearch }}] is ready!"
+=======
+{{- define "add.user" -}}
+    {{- $user := .Values.es_user -}}
+    {{- printf "adduser %s -D;" $user -}}
+{{- end -}}
+
+
+{{- define "change.user.permissions" -}}
+    {{- $user := .Values.es_user -}}
+    {{- $mountPath := .Values.elasticSearchAppVolumeMounts.esdata.mountPath -}}
+    {{- printf "chown -R %s:%s %s;" $user $user $mountPath -}}
+{{- end -}}
+
+
+{{- define "elasticsearch.IP" -}}
+    {{ $envList := (default list) }}
+    {{ $envList = mustAppend $envList (dict "name" "ES_HOST" "value" (printf "%s-es" (include "common.names.fullname" .))) }}
+    {{ $envList = mustAppend $envList (dict "name" "ES_PORT" "value" "9200") }}
+    {{ include "common.containers.environmentVariables" (dict "environmentVariables" $envList) }}
+{{- end -}}
+
+
+{{- define "elasticsearch.credentials" -}}
+    {{ $envList := (default list) }}
+    {{ $envList = mustAppend $envList (dict "name" "ES_USER" "valueFromSecret" true "secretName" "elastic-search-credentials" "secretKey" "es-username") }}
+    {{ $envList = mustAppend $envList (dict "name" "ES_PASS" "valueFromSecret" true "secretName" "elastic-search-credentials" "secretKey" "es-password") }}
+    {{ include "common.containers.environmentVariables" (dict "environmentVariables" $envList) }}
+{{- end -}}
+
+
+{{- define "config.file.path" -}}
+    {{ $envList := (default list) }}
+    {{ $envList = mustAppend $envList (dict "name" "DEST" "value" .mountPath) }}
+    {{ $envList = mustAppend $envList (dict "name" "FILE" "value" .configFile) }}
+    {{ include "common.containers.environmentVariables" (dict "environmentVariables" $envList) }}
+>>>>>>> ac17868824cce8f965fefce8472286549ba10462
 {{- end -}}

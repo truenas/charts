@@ -25,7 +25,7 @@ def migrate_common_lib(values):
     values.update({
         # Migrate Network
         'embyNetwork': {
-            'webPort': values['embyServerHttp']['port'],
+            'webPort': values['embyServerHttp']['port'] if values['hostNetwork'] else 9096,
             'hostNetwork': values['hostNetwork'],
         },
         # Migrate Resources
