@@ -1,0 +1,26 @@
+name: diskoverdata
+description: Diskover is used to monitor size/volumes of distributed dataset.
+annotations:
+  title: Diskover Data
+type: application
+version: 2.0.0
+apiVersion: v2
+appVersion: "2.0.1"
+kubeVersion: ">=1.16.0-0"
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.2.9
+home: https://github.com/diskoverdata/diskover-community
+icon: https://media.sys.truenas.net/apps/diskoverdata/icons/icon.png
+sources:
+  - https://github.com/diskoverdata/diskover-community
+  - https://github.com/truenas/charts/tree/master/charts/diskoverdata
+keywords:
+  - storage
+  - monitoring
+  - management

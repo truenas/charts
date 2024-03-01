@@ -1,0 +1,46 @@
+image:
+  pullPolicy: IfNotPresent
+  repository: linuxserver/diskover
+  tag: "2.0.1"
+
+elasticSearchImage:
+  pullPolicy: IfNotPresent
+  repository: elasticsearch
+  tag: "7.5.2"
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+podOptions:
+  dnsConfig:
+    options: []
+
+diskoverConfig:
+  cronSchedule: ''
+  username: ''
+  password: ''
+  additionalEnvs: []
+
+diskoverID:
+  user: 568
+  group: 568
+
+diskoverNetwork:
+  webPort: 32000
+
+diskoverStorage:
+  config:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: config
+  data:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: data
+  esdata:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: esdata
+  additionalStorages: []

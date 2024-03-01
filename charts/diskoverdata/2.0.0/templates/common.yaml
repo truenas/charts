@@ -1,0 +1,15 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{- include "diskover.migration" $ -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "diskover.configuration" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "diskover.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "es.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "diskover.service" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "diskover.persistence" $ | fromYaml) -}}
+
+{{/* Create the configmap for portal manually */}}
+{{- include "diskover.portal" $ -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}
