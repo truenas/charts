@@ -16,14 +16,6 @@ workload:
             runAsUser: {{ .Values.storjRunAs.user }}
             runAsGroup: {{ .Values.storjRunAs.group }}
             readOnlyRootFilesystem: false
-            # capabilities:
-            #   add:
-            #     - CHOWN
-            #     - DAC_OVERRIDE
-            #     - FOWNER
-            #     - SETGID
-            #     - SETUID
-            #     - KILL
           {{- include "storj.args" $ | nindent 10 }}
           envFrom:
             - secretRef:
@@ -89,5 +81,11 @@ workload:
             - /bin/sh
             - -c
             - |
-              test ! -f /app/config/config.yaml && export SETUP="true"; /entrypoint
+              if test ! -f /app/config/config.yaml; then
+                echo "Setting up Storj"
+                export SETUP="true"
+                /entrypoint
+              else
+                echo "Storj already setup"
+              fi
 {{- end -}}
