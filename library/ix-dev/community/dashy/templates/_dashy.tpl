@@ -15,6 +15,7 @@ workload:
             runAsUser: 0
             runAsGroup: 0
             runAsNonRoot: false
+            readOnlyRootFilesystem: false
           env:
             {{- $protocol := "http" -}}
             {{- if .Values.dashyNetwork.certificateID }}
