@@ -64,14 +64,3 @@ ports:
   {{- end }}
 {{- end }}
 {{- end }}
-
-{{/*
-Container Resource Configuration
-*/}}
-{{- define "containerResourceConfiguration" }}
-{{- if .Values.gpuConfiguration }}
-resources:
-  limits:
-    {{- toYaml .Values.gpuConfiguration | nindent 4 }}
-{{- end }}
-{{- end }}
