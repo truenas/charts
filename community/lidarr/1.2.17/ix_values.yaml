@@ -1,28 +1,28 @@
 image:
-  repository: actualbudget/actual-server
+  repository: ghcr.io/onedr0p/lidarr-develop
   pullPolicy: IfNotPresent
-  tag: 24.2.0
+  tag: 2.2.0.4053
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-actualConfig:
+lidarrConfig:
+  instanceName: Lidarr
   additionalEnvs: []
 
-actualNetwork:
-  webPort: 31012
-  certificateID:
+lidarrNetwork:
+  webPort: 30014
   hostNetwork: false
 
-actualRunAs:
+lidarrRunAs:
   user: 568
   group: 568
 
-actualStorage:
-  data:
+lidarrStorage:
+  config:
     type: ixVolume
     ixVolumeConfig:
-      datasetName: data
+      datasetName: config
   additionalStorages: []
