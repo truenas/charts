@@ -1,13 +1,14 @@
 name: emby
-description: Emby is designed to help you manage your personal media library, such
+description:
+  Emby is designed to help you manage your personal media library, such
   as home videos and photos
 annotations:
   title: Emby Server
 type: application
-version: 2.0.4
+version: 2.0.5
 apiVersion: v2
 appVersion: 4.8.3.0
-kubeVersion: '>=1.16.0-0'
+kubeVersion: ">=1.16.0-0"
 maintainers:
   - name: truenas
     url: https://www.truenas.com/
