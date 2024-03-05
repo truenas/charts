@@ -20,7 +20,7 @@ workload:
           envFrom:
             - secretRef:
                 name: minio-creds
-          {{ with .Values.esConfig.additionalEnvs }}
+          {{ with .Values.minioConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
             - name: {{ $env.name }}
@@ -69,29 +69,4 @@ workload:
                 sleep 2;
               done
               echo "API is up: $logapi";
-
-  {{- if .Values.esNetwork.certificateID }}
-  certs:
-    enabled: true
-    type: secret
-    objectName: es-cert
-    defaultMode: "0600"
-    items:
-      - key: tls.key
-        path: tls.key
-      - key: tls.crt
-        path: tls.crt
-      - key: tls.crt
-        path: ca.crt
-    targetSelector:
-      es:
-        es:
-          mountPath: /usr/share/elasticsearch/config/certs
-          readOnly: true
-
-scaleCertificate:
-  es-cert:
-    enabled: true
-    id: {{ .Values.esNetwork.certificateID }}
-    {{- end -}}
 {{- end -}}

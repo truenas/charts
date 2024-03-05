@@ -11,8 +11,8 @@
   {{- end -}}
 
   {{- with (lookup "v1" "Secret" .Release.Namespace (printf "%s-logsearch-creds" $fullname)) -}}
-    {{- $auditToken = ((index .data "auditToken") | b64dec) -}}
-    {{- $queryToken = ((index .data "queryToken") | b64dec) -}}
+    {{- $auditToken = ((index .data "LOGSEARCH_AUDIT_AUTH_TOKEN") | b64dec) -}}
+    {{- $queryToken = ((index .data "MINIO_LOG_QUERY_AUTH_TOKEN") | b64dec) -}}
   {{- end -}}
   {{- $queryURL := printf "http://%v-log:8080" $fullname -}}
   {{- $webhookURL := printf "http://%v-log:8080/api/ingest?token=%v" $fullname $auditToken -}}
@@ -83,10 +83,10 @@ secret:
   logsearch-creds:
     enabled: true
     data:
-      auditToken: {{ $auditToken | quote }}
-      queryToken: {{ $queryToken | quote }}
-      logQueryURL: {{ $queryURL | quote }}
-      webhookURL: {{ $webhookURL | quote }}
+      MINIO_LOG_QUERY_AUTH_TOKEN: {{ $queryToken | quote }}
+      LOGSEARCH_AUDIT_AUTH_TOKEN: {{ $auditToken | quote }}
+      LOGSEARCH_PG_CONN_STR: "TODO:"
+      LOGSEARCH_DISK_CAPACITY_GB: {{ .Values.minioConfig.logSearchDiskCapacityGB }}
 {{/*
   postgres-creds:
     enabled: true
