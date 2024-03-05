@@ -34,6 +34,25 @@ minioNetwork:
   consolePort: 9002
   certificateID:
 
+minioStorage:
+  # config:
+  #   type: ixVolume
+  #   ixVolumeConfig:
+  #     datasetName: config
+  # media:
+  #   type: ixVolume
+  #   ixVolumeConfig:
+  #     datasetName: media
+  pgData:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: pgData
+  pgBackup:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: pgBackup
+  additionalStorages: []
+
 notes:
   custom: |
     ## Database
