@@ -9,7 +9,7 @@ logSearchImage:
 logPostgresImage:
   pullPolicy: IfNotPresent
   repository: postgres
-  tag: 14.5
+  tag: "14.5"
 
 resources:
   limits:
