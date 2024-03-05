@@ -7,6 +7,23 @@ logSearchImage:
   repository: minio/operator
   tag: v4.5.4
 
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+podOptions:
+  dnsConfig:
+    options: []
+
+minioConfig:
+  accessKey: ""
+  secretKey: ""
+  domain: ""
+  distributedMode: false
+  logSearchApi: false
+
 minioNetwork:
   apiPort: 9000
   consolePort: 9002
+  certificateID:

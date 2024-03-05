@@ -17,6 +17,18 @@ service:
         port: {{ .Values.minioNetwork.apiPort }}
         nodePort: {{ .Values.minioNetwork.apiPort }}
         targetSelector: minio
+  {{ if .Values.minioConfig.logSearchApi }}
+  log:
+    enabled: true
+    type: ClusterIP
+    targetSelector: logsearchapi
+    ports:
+      log:
+        enabled: true
+        port: 8080
+        targetPort: 8080
+        targetSelector: logsearchapi
+  {{ end }}
   # TODO: Conditionally enable (logsearch)
   {{- include "ix.v1.common.app.postgresService" $ | nindent 2 }}
 {{- end -}}
