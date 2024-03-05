@@ -6,6 +6,10 @@ logSearchImage:
   pullPolicy: IfNotPresent
   repository: minio/operator
   tag: v4.5.4
+logPostgresImage:
+  pullPolicy: IfNotPresent
+  repository: postgres
+  tag: 14.5
 
 resources:
   limits:
@@ -22,8 +26,28 @@ minioConfig:
   domain: ""
   distributedMode: false
   logSearchApi: false
+  logSearchDiskCapacityGB: 5
+  additionalEnvs: []
 
 minioNetwork:
   apiPort: 9000
   consolePort: 9002
   certificateID:
+
+notes:
+  custom: |
+    ## Database
+    You can connect to the database using the pgAdmin App from the catalog
+
+    <details>
+      <summary>Database Details</summary>
+
+      - Database: `logsearch`
+      - Username: `logsearch`
+      - Password: `{{ .Values.minioDbPass }}`
+      - Host:     `{{ .Values.minioDbHost }}.{{ .Release.Namespace }}.svc.cluster.local`
+      - Port:     `5432`
+
+    </details>
+    {{- $_ := unset .Values "haDbPass" }}
+    {{- $_ := unset .Values "haDbHost" }}

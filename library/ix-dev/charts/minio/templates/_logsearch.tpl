@@ -1,4 +1,4 @@
-{{- define "logsearch.workload" -}}
+{{- define "logsearchapi.workload" -}}
 workload:
   logsearchapi:
     enabled: true

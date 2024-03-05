@@ -17,44 +17,28 @@
   {{- $queryURL := printf "http://%v-log:8080" $fullname -}}
   {{- $webhookURL := printf "http://%v-log:8080/api/ingest?token=%v" $fullname $auditToken -}}
 
-{{/*
-
+  {{/* DB details */}}
   {{- $dbHost := (printf "%s-postgres" $fullname) -}}
-  {{- $dbUser := "home-assistant" -}}
-  {{- $dbName := "home-assistant" -}}
+  {{- $dbUser := "logsearchapi" -}}
+  {{- $dbName := "logsearchapi" -}}
   {{- $dbPass := (randAlphaNum 32) -}}
-*/}}
 
   {{/* Fetch secrets from pre-migration secret */}}
-{{/*
-  {{- with (lookup "v1" "Secret" .Release.Namespace "db-details") -}}
-    {{- $dbUser = ((index .data "db-user") | b64dec) -}}
-    {{- $dbPass = ((index .data "db-password") | b64dec) -}}
-*/}}
-
-    {{/* Previous installs had a typo */}}
-{{/*
-    {{- $dbName = "homeassistance" -}}
+  {{- with (lookup "v1" "Secret" .Release.Namespace "postgres-details") -}}
+    {{- $dbPass = ((index .data "db_password") | b64dec) -}}
   {{- end -}}
 
   {{- with (lookup "v1" "Secret" .Release.Namespace (printf "%s-postgres-creds" $fullname)) -}}
-    {{- $dbUser = ((index .data "POSTGRES_USER") | b64dec) -}}
-    {{- $dbPass = ((index .data "POSTGRES_PASSWORD") | b64dec) -}}
     {{- $dbName = ((index .data "POSTGRES_DB") | b64dec) -}}
   {{- end -}}
-*/}}
 
   {{/* Temporary set dynamic db details on values,
   so we can print them on the notes */}}
-{{/*
-  {{- $_ := set .Values "haDbPass" $dbPass -}}
-  {{- $_ := set .Values "haDbHost" $dbHost -}}
-  {{- $_ := set .Values "haDbName" $dbName -}}
-  {{- $_ := set .Values "haDbUser" $dbUser -}}
+  {{- $_ := set .Values "minioDbPass" $dbPass -}}
+  {{- $_ := set .Values "minioDbHost" $dbHost -}}
 
   {{- $dbURL := (printf "postgres://%s:%s@%s:5432/%s?sslmode=disable" $dbUser $dbPass $dbHost $dbName) -}}
   {{- $haDBURL := (printf "postgresql://%s:%s@%s:5432/%s?sslmode=disable" $dbUser $dbPass $dbHost $dbName) }}
-*/}}
 
 secret:
   minio-creds:

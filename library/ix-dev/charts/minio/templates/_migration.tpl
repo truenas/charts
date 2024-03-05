@@ -17,8 +17,8 @@
   {{- toYaml (dict "old" $oldChartVersion "new" $newChartVersion) -}}
 {{- end -}}
 
-{{- define "plex.migration" -}}
-  {{- $versions := (fromYaml (include "plex.get-versions" $)) -}}
+{{- define "minio.migration" -}}
+  {{- $versions := (fromYaml (include "minio.get-versions" $)) -}}
   {{- if and $versions.old $versions.new -}}
     {{- $oldV := semver $versions.old -}}
     {{- $newV := semver $versions.new -}}
@@ -32,4 +32,17 @@
       {{- end -}}
     {{- end -}}
   {{- end -}}
+{{- end -}}
+
+{{- define "minio.is-migration" -}}
+  {{- $isMigration := "" -}}
+  {{- $versions := (fromYaml (include "minio.get-versions" $)) -}}
+  {{- if $versions.old -}}
+    {{- $oldV := semver $versions.old -}}
+    {{- if and (eq $oldV.Major 1) (or (ne $oldV.Minor 7) (lt ($oldV.Patch | int) 25)) -}}
+      {{- $isMigration = "true" -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- $isMigration -}}
 {{- end -}}

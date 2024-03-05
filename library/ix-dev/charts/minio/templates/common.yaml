@@ -7,7 +7,10 @@
 {{- $_ := mustMergeOverwrite .Values (include "minio.workload" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "minio.persistence" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "minio.configuration" $ | fromYaml) -}}
-{{- $_ := mustMergeOverwrite .Values (include "postgres.workload" $ | fromYaml) -}}
+{{- if .Values.minioConfig.logSearchApi -}}
+  {{- $_ := mustMergeOverwrite .Values (include "postgres.workload" $ | fromYaml) -}}
+  {{- $_ := mustMergeOverwrite .Values (include "logsearchapi.workload" $ | fromYaml) -}}
+{{- end -}}
 
 {{/* Create the configmap for portal manually*/}}
 {{- include "minio.portal" $ -}}
