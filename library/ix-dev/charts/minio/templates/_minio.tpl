@@ -47,12 +47,12 @@ workload:
               type: {{ $proto }}
               path: /minio/health/live
               port: {{ .Values.minioNetwork.consolePort }}
-      initContainers:
-      # {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
-      #                                                   "UID" 473
-      #                                                   "GID" 473
-      #                                                   "mode" "check"
-      #                                                   "type" "install") | nindent 8 }}
+      initContainers: {{/* TODO: check mode */}}
+      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
+                                                        "UID" 473
+                                                        "GID" 473
+                                                        "mode" "check"
+                                                        "type" "install") | nindent 8 }}
         wait-api:
           enabled: true
           type: init
