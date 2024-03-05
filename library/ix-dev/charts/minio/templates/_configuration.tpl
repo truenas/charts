@@ -24,8 +24,10 @@
   {{- $dbPass := (randAlphaNum 32) -}}
 
   {{/* Fetch secrets from pre-migration secret */}}
+  {{- $tmpBackupHost := "" -}}
   {{- with (lookup "v1" "Secret" .Release.Namespace "postgres-details") -}}
     {{- $dbPass = ((index .data "db_password") | b64dec) -}}
+    {{- $tmpBackupHost = ((index .data "postgresHost") | b64dec) -}}
   {{- end -}}
 
   {{- with (lookup "v1" "Secret" .Release.Namespace (printf "%s-postgres-creds" $fullname)) -}}
@@ -37,9 +39,7 @@
   {{- $_ := set .Values "minioDbPass" $dbPass -}}
   {{- $_ := set .Values "minioDbHost" $dbHost -}}
 
-  {{- $dbURL := (printf "postgres://%s:%s@%s:5432/%s?sslmode=disable" $dbUser $dbPass $dbHost $dbName) -}}
-  {{- $haDBURL := (printf "postgresql://%s:%s@%s:5432/%s?sslmode=disable" $dbUser $dbPass $dbHost $dbName) }}
-
+  {{- $dbURL := (printf "postgres://%s:%s@%s:5432/%s?sslmode=disable" $dbUser $dbPass $dbHost $dbName) }}
 secret:
   minio-creds:
     enabled: true
@@ -69,9 +69,8 @@ secret:
     data:
       MINIO_LOG_QUERY_AUTH_TOKEN: {{ $queryToken | quote }}
       LOGSEARCH_AUDIT_AUTH_TOKEN: {{ $auditToken | quote }}
-      LOGSEARCH_PG_CONN_STR: "TODO:"
-      LOGSEARCH_DISK_CAPACITY_GB: {{ .Values.minioConfig.logSearchDiskCapacityGB }}
-{{/*
+      LOGSEARCH_PG_CONN_STR: {{ $dbURL | quote }}
+      LOGSEARCH_DISK_CAPACITY_GB: {{ .Values.minioConfig.logSearchDiskCapacityGB | quote }}
   postgres-creds:
     enabled: true
     data:
@@ -80,7 +79,7 @@ secret:
       POSTGRES_PASSWORD: {{ $dbPass }}
       POSTGRES_HOST: {{ $dbHost }}
       POSTGRES_URL: {{ $dbURL }}
-  {{- if eq (include "home-assistant.is-migration" $) "true" }}
+  {{- if eq (include "minio.is-migration" $) "true" }}
   postgres-backup-creds:
     enabled: true
     annotations:
@@ -91,8 +90,7 @@ secret:
       POSTGRES_USER: {{ $dbUser }}
       POSTGRES_DB: {{ $dbName }}
       POSTGRES_PASSWORD: {{ $dbPass }}
-      POSTGRES_HOST: {{ $dbHost }}-ha
+      POSTGRES_HOST: {{ $tmpBackupHost }}
       POSTGRES_URL: {{ printf "postgres://%s:%s@%s-ha:5432/%s?sslmode=disable" $dbUser $dbPass $dbHost $dbName }}
   {{- end }}
-*/}}
 {{- end -}}
