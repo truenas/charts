@@ -28,6 +28,10 @@ workload:
           fixedEnv:
             PUID: {{ .Values.embyID.user }}
           {{ with .Values.embyConfig.additionalEnvs }}
+          {{ if .Values.embyGPU }}
+          env:
+            GIDLIST: 44,107
+          {{ end }}
           envList:
             {{ range $env := . }}
             - name: {{ $env.name }}
