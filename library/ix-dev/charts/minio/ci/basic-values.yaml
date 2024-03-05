@@ -1,0 +1,13 @@
+minioConfig:
+  logSearchApi: true
+  logSearchDiskCapacityGB: 5
+
+minioNetwork:
+  apiPort: 31000
+  consolePort: 31001
+
+minioStorage:
+  pgData:
+    type: pvc
+  pgBackup:
+    type: pvc

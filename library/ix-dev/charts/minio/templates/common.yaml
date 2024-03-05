@@ -5,9 +5,7 @@
 {{/* Merge the templates with Values */}}
 {{- $_ := mustMergeOverwrite .Values (include "minio.service" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "minio.workload" $ | fromYaml) -}}
-{{/*
-  {{- $_ := mustMergeOverwrite .Values (include "minio.persistence" $ | fromYaml) -}}
-*/}}
+{{- $_ := mustMergeOverwrite .Values (include "minio.persistence" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "minio.configuration" $ | fromYaml) -}}
 {{- if .Values.minioConfig.logSearchApi -}}
   {{- $_ := mustMergeOverwrite .Values (include "postgres.workload" $ | fromYaml) -}}
