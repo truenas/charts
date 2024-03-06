@@ -1,7 +1,7 @@
 {{- define "minio.workload" -}}
 {{- $fullname := (include "ix.v1.common.lib.chart.names.fullname" $) -}}
 {{- $logapi := printf "http://%v-log:8080" $fullname -}}
-{{ $args := (printf "server --console-address=':%v'" .Values.minioNetwork.consolePort) }}
+{{ $args := list "server" (printf "--console-address=':%v'" .Values.minioNetwork.consolePort) }}
 workload:
   minio:
     enabled: true
