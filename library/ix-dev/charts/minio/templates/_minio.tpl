@@ -20,7 +20,7 @@ workload:
           args:
             - server
             - --console-address
-            - :{{ .Values.minioNetwork.consolePort | quote }}
+            - {{ printf ":%v" .Values.minioNetwork.consolePort }}
             {{- if .Values.minioNetwork.certificateID }}
               - "--certs-dir"
               - "/etc/minio/certs"
@@ -31,7 +31,7 @@ workload:
               {{- end }}
             {{- else }}
               - "--address"
-              - :{{ .Values.minioNetwork.apiPort | quote }}
+              - {{ printf ":%v" .Values.minioNetwork.apiPort }}
               - "/export"
             {{- end }}
             {{- range .Values.minioConfig.extraArgs }}
