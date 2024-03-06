@@ -22,18 +22,18 @@ workload:
           args:
             - server
             - --console-address
-            - {{ printf ":%v" .Values.minioNetwork.consolePort }}
-            {{- if .Values.minioNetwork.certificateID }}
-            - "--certs-dir"
-            - "/etc/minio/certs"
-            {{- end }}
+            - {{ printf ":%v" .Values.minioNetwork.consolePort | quote }}
             {{- if .Values.minioConfig.distributedMode }}
               {{- range .Values.minioConfig.distributedIps }}
             - {{ quote . }}
               {{- end }}
             {{- else }}
             - "--address"
-            - {{ printf ":%v" .Values.minioNetwork.apiPort }}
+            - {{ printf ":%v" .Values.minioNetwork.apiPort | quote }}
+            {{- end }}
+            {{- if .Values.minioNetwork.certificateID }}
+            - "--certs-dir"
+            - "/etc/minio/certs"
             {{- end }}
             {{- range .Values.minioConfig.extraArgs }}
             - {{ quote . }}
