@@ -1,7 +1,6 @@
 {{- define "minio.workload" -}}
 {{- $fullname := (include "ix.v1.common.lib.chart.names.fullname" $) -}}
 {{- $logapi := printf "http://%v-log:8080" $fullname -}}
-{{ $args := list "server" (printf "--console-address=':%v'" .Values.minioNetwork.consolePort) }}
 workload:
   minio:
     enabled: true
@@ -19,6 +18,9 @@ workload:
             runAsGroup: 473
             # readOnlyRootFilesystem: false
           args:
+            - server
+            - --console-address
+            - :{{ .Values.minioNetwork.consolePort | quote }}
             {{- if .Values.minioNetwork.certificateID }}
               - "--certs-dir"
               - "/etc/minio/certs"
@@ -29,7 +31,7 @@ workload:
               {{- end }}
             {{- else }}
               - "--address"
-              - {{ .Values.minioNetwork.apiPort | quote }}
+              - :{{ .Values.minioNetwork.apiPort | quote }}
               - "/export"
             {{- end }}
             {{- range .Values.minioConfig.extraArgs }}
