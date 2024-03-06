@@ -62,11 +62,11 @@ workload:
           args:
             - -c
             - |
-              echo "Waiting for [$logapi]";
-              until wget --spider --quiet --timeout=3 --tries=1 $logapi/status;
+              echo "Waiting for [{{ $logapi }}]";
+              until wget --spider --quiet --timeout=3 --tries=1 {{ $logapi }}/status;
               do
-                echo "Waiting for [$logapi]";
+                echo "Waiting for [{{ $logapi }}]";
                 sleep 2;
               done
-              echo "API is up: $logapi";
+              echo "API is up: {{ $logapi }}";
 {{- end -}}
