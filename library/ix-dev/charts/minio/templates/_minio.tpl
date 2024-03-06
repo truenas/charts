@@ -20,17 +20,21 @@ workload:
             # readOnlyRootFilesystem: false
           args:
             {{- if .Values.minioNetwork.certificateID }}
-              {{- $args = mustAppend $args (printf "--certs-dir '/etc/minio/certs'") }}
+              - "--certs-dir"
+              - "/etc/minio/certs"
             {{- end }}
             {{- if .Values.minioConfig.distributedMode }}
-              {{- $args = concat $args (.Values.minioConfig.distributedIps | default list) }}
-              {{- $args = concat $args (.Values.minioConfig.extraArgs | default list) }}
+              {{- range .Values.minioConfig.distributedIps }}
+              - {{ quote . }}
+              {{- end }}
             {{- else }}
-              {{- $args = mustAppend $args (printf "--address ':%v'" .Values.minioNetwork.apiPort) }}
-              {{- $args = mustAppend $args "/export" }} {{/* TODO: this is not hardcoded in UI */}}
-              {{- $args = concat $args (.Values.minioConfig.extraArgs | default list) }}
+              - "--address"
+              - {{ .Values.minioNetwork.apiPort | quote }}
+              - "/export"
             {{- end }}
-            - {{ $args | join " " | quote }}
+            {{- range .Values.minioConfig.extraArgs }}
+            - {{ quote . }}
+            {{ end }}
           envFrom:
             - secretRef:
                 name: minio-creds
