@@ -23,12 +23,12 @@ workload:
               {{- $args = mustAppend $args printf "--certs-dir '/etc/minio/certs'" }}
             {{- end }}
             {{- if .Values.minioConfig.distributedMode }}
-              {{- $args = mustAppend $args (.Values.minioConfig.distributedIps | default list) }}
-              {{- $args = mustAppend $args (.Values.minioConfig.extraArgs | default list) }}
+              {{- $args = concat $args (.Values.minioConfig.distributedIps | default list) }}
+              {{- $args = concat $args (.Values.minioConfig.extraArgs | default list) }}
             {{- else }}
               {{- $args = mustAppend $args printf "--address ':%v'" .Values.minioNetwork.apiPort }}
               {{- $args = mustAppend $args "/export" }} {{/* TODO: this is not hardcoded in UI */}}
-              {{- $args = mustAppend $args (.Values.minioConfig.extraArgs | default list) }}
+              {{- $args = concat $args (.Values.minioConfig.extraArgs | default list) }}
             {{- end }}
             - {{ $args | join " " | quote }}
           envFrom:
