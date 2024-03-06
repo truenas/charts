@@ -22,17 +22,17 @@ workload:
             - --console-address
             - {{ printf ":%v" .Values.minioNetwork.consolePort }}
             {{- if .Values.minioNetwork.certificateID }}
-              - "--certs-dir"
-              - "/etc/minio/certs"
+            - "--certs-dir"
+            - "/etc/minio/certs"
             {{- end }}
             {{- if .Values.minioConfig.distributedMode }}
               {{- range .Values.minioConfig.distributedIps }}
-              - {{ quote . }}
+            - {{ quote . }}
               {{- end }}
             {{- else }}
-              - "--address"
-              - {{ printf ":%v" .Values.minioNetwork.apiPort }}
-              - "/export"
+            - "--address"
+            - {{ printf ":%v" .Values.minioNetwork.apiPort }}
+            - "/export"
             {{- end }}
             {{- range .Values.minioConfig.extraArgs }}
             - {{ quote . }}
