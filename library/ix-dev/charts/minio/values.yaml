@@ -35,10 +35,10 @@ minioNetwork:
   certificateID:
 
 minioStorage:
-  # config:
-  #   type: ixVolume
-  #   ixVolumeConfig:
-  #     datasetName: config
+  export:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: export
   # media:
   #   type: ixVolume
   #   ixVolumeConfig:

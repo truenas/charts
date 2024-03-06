@@ -1,6 +1,7 @@
 {{- define "minio.workload" -}}
 {{- $fullname := (include "ix.v1.common.lib.chart.names.fullname" $) -}}
-{{- $logapi := printf "http://%v-log:8080" $fullname }}
+{{- $logapi := printf "http://%v-log:8080" $fullname -}}
+{{ $args := (printf "server --console-address=':%v'" .Values.minioNetwork.consolePort) }}
 workload:
   minio:
     enabled: true
@@ -17,6 +18,19 @@ workload:
             runAsUser: 473
             runAsGroup: 473
             # readOnlyRootFilesystem: false
+          args:
+            {{- if .Values.minioConfig.distributedMode }}
+              {{- $args = mustAppend $args (.Values.minioConfig.distributedIps | default list) }}
+              {{- $args = mustAppend $args (.Values.minioConfig.extraArgs | default list) }}
+            {{- else }}
+              {{- $args = mustAppend $args (list (printf "--address ':%v'" .Values.minioNetwork.apiPort)) }}
+              {{- $args = mustAppend $args (list ("/export")) }} {{/* TODO: this is not hardcoded in UI */}}
+              {{- $args = mustAppend $args (.Values.minioConfig.extraArgs | default list) }}
+            {{- end }}
+            {{- if .Values.minioNetwork.certificateID }}
+              {{- $args = mustAppend $args (list (printf "--certs-dir '/etc/minio/certs'")) }}
+            {{- end }}
+            - {{ $args | join " " | quote }}
           envFrom:
             - secretRef:
                 name: minio-creds

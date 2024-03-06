@@ -7,6 +7,8 @@ minioNetwork:
   consolePort: 31001
 
 minioStorage:
+  export:
+    type: pvc
   pgData:
     type: pvc
   pgBackup:
