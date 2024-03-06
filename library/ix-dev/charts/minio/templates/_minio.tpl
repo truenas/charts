@@ -17,6 +17,8 @@ workload:
             runAsUser: 473
             runAsGroup: 473
             # readOnlyRootFilesystem: false
+          env:
+            MINIO_VOLUMES: /export
           args:
             - server
             - --console-address
@@ -32,7 +34,6 @@ workload:
             {{- else }}
             - "--address"
             - {{ printf ":%v" .Values.minioNetwork.apiPort }}
-            - "/export"
             {{- end }}
             {{- range .Values.minioConfig.extraArgs }}
             - {{ quote . }}
