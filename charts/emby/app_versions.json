@@ -1,17 +1,17 @@
 {
-    "2.0.5": {
+    "2.0.6": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/emby/2.0.5",
-        "last_update": "2024-03-05 10:04:55",
+        "location": "/__w/charts/charts/charts/emby/2.0.6",
+        "last_update": "2024-03-07 08:56:13",
         "required_features": [
-            "normalize/ixVolume",
             "normalize/acl",
-            "definitions/gpuConfiguration"
+            "definitions/gpuConfiguration",
+            "normalize/ixVolume"
         ],
-        "human_version": "4.8.3.0_2.0.5",
-        "version": "2.0.5",
+        "human_version": "4.8.3.0_2.0.6",
+        "version": "2.0.6",
         "chart_metadata": {
             "name": "emby",
             "description": "Emby is designed to help you manage your personal media library, such as home videos and photos",
@@ -19,7 +19,7 @@
                 "title": "Emby Server"
             },
             "type": "application",
-            "version": "2.0.5",
+            "version": "2.0.6",
             "apiVersion": "v2",
             "appVersion": "4.8.3.0",
             "kubeVersion": ">=1.16.0-0",
@@ -1061,10 +1061,10 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/emby/1.0.30",
-        "last_update": "2024-03-05 10:04:55",
+        "last_update": "2024-03-07 08:56:13",
         "required_features": [
-            "normalize/ixVolume",
-            "definitions/gpuConfiguration"
+            "definitions/gpuConfiguration",
+            "normalize/ixVolume"
         ],
         "human_version": "4.7.14.0_1.0.30",
         "version": "1.0.30",
