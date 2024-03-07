@@ -70,7 +70,7 @@ secret:
       MINIO_LOG_QUERY_AUTH_TOKEN: {{ $queryToken | quote }}
       LOGSEARCH_AUDIT_AUTH_TOKEN: {{ $auditToken | quote }}
       LOGSEARCH_PG_CONN_STR: {{ $dbURL | quote }}
-      LOGSEARCH_DISK_CAPACITY_GB: {{ .Values.minioConfig.logSearchDiskCapacityGB | quote }}
+      LOGSEARCH_DISK_CAPACITY_GB: {{ .Values.minioStorage.logSearchDiskCapacityGB | quote }}
   postgres-creds:
     enabled: true
     data:

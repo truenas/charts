@@ -33,6 +33,43 @@ persistence:
         {{- end }}
   {{- end }}
 
+  {{- if .Values.minioNetwork.certificateID }}
+  cert:
+    enabled: true
+    type: secret
+    objectName: minio-cert
+    defaultMode: "0600"
+    items:
+      - key: tls.key
+        path: private.key
+      - key: tls.crt
+        path: public.crt
+    targetSelector:
+      minio:
+        minio:
+          mountPath: /etc/minio/certs
+          readOnly: true
+  certca:
+    enabled: true
+    type: secret
+    objectName: minio-cert
+    defaultMode: "0600"
+    items:
+      - key: tls.crt
+        path: public.crt
+    targetSelector:
+      minio:
+        minio:
+          mountPath: /etc/minio/certs/CAs
+          readOnly: true
+
+scaleCertificate:
+  minio-cert:
+    enabled: true
+    id: {{ .Values.minioNetwork.certificateID }}
+    {{- end -}}
+  {{- end }}
+
   {{- include "ix.v1.common.app.postgresPersistence"
       (dict "pgData" .Values.minioStorage.pgData
             "pgBackup" .Values.minioStorage.pgBackup
