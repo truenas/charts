@@ -17,7 +17,7 @@ service:
         port: {{ .Values.minioNetwork.apiPort }}
         nodePort: {{ .Values.minioNetwork.apiPort }}
         targetSelector: minio
-  {{ if .Values.minioConfig.logSearchApi }}
+  {{ if .Values.minioStorage.logSearchApi }}
   log:
     enabled: true
     type: ClusterIP

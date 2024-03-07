@@ -6,7 +6,12 @@ persistence:
     targetSelector:
       minio:
         minio:
-          mountPath: /export
+          mountPath: {{ .Values.minioStorage.export.mountPath }}
+        {{- if and (eq .Values.minioStorage.export.type "ixVolume")
+                  (not (.Values.minioStorage.export.ixVolumeConfig | default dict).aclEnable) }}
+        01-permissions:
+          mountPath: /mnt/directories/export
+        {{- end }}
   tmp:
     enabled: true
     type: emptyDir
@@ -22,6 +27,10 @@ persistence:
       minio:
         minio:
           mountPath: {{ $storage.mountPath }}
+        {{- if and (eq $storage.type "ixVolume") (not ($storage.ixVolumeConfig | default dict).aclEnable) }}
+        01-permissions:
+          mountPath: /mnt/directories{{ $storage.mountPath }}
+        {{- end }}
   {{- end }}
 
   {{- include "ix.v1.common.app.postgresPersistence"

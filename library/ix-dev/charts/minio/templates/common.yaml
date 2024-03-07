@@ -7,7 +7,7 @@
 {{- $_ := mustMergeOverwrite .Values (include "minio.workload" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "minio.persistence" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "minio.configuration" $ | fromYaml) -}}
-{{- if .Values.minioConfig.logSearchApi -}}
+{{- if .Values.minioStorage.logSearchApi -}}
   {{- $_ := mustMergeOverwrite .Values (include "postgres.workload" $ | fromYaml) -}}
   {{- $_ := mustMergeOverwrite .Values (include "logsearchapi.workload" $ | fromYaml) -}}
 {{- end -}}

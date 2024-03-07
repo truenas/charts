@@ -1,6 +1,6 @@
 minioConfig:
-  logSearchApi: true
-  logSearchDiskCapacityGB: 5
+  rootUser: super-admin
+  rootPassword: super-admin-password
 
 minioNetwork:
   apiPort: 31000
@@ -9,6 +9,8 @@ minioNetwork:
 minioStorage:
   export:
     type: pvc
+  logSearchApi: true
+  logSearchDiskCapacityGB: 5
   pgData:
     type: pvc
   pgBackup:

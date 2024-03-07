@@ -21,13 +21,9 @@ podOptions:
     options: []
 
 minioConfig:
-  accessKey: ""
-  secretKey: ""
+  rootUser: ""
+  rootPassword: ""
   domain: ""
-  distributedMode: false
-  distributedIps: []
-  logSearchApi: false
-  logSearchDiskCapacityGB: 5
   extraArgs: []
   additionalEnvs: []
 
@@ -37,14 +33,15 @@ minioNetwork:
   certificateID:
 
 minioStorage:
+  distributedMode: false
+  distributedIps: []
   export:
     type: ixVolume
+    mountPath: /export
     ixVolumeConfig:
       datasetName: export
-  # media:
-  #   type: ixVolume
-  #   ixVolumeConfig:
-  #     datasetName: media
+  logSearchApi: false
+  logSearchDiskCapacityGB: 5
   pgData:
     type: ixVolume
     ixVolumeConfig:
@@ -57,18 +54,20 @@ minioStorage:
 
 notes:
   custom: |
+    {{ if .Values.minioStorage.logSearchApi }}
     ## Database
     You can connect to the database using the pgAdmin App from the catalog
 
     <details>
       <summary>Database Details</summary>
 
-      - Database: `logsearch`
-      - Username: `logsearch`
+      - Database: `logsearchapi`
+      - Username: `logsearchapi`
       - Password: `{{ .Values.minioDbPass }}`
       - Host:     `{{ .Values.minioDbHost }}.{{ .Release.Namespace }}.svc.cluster.local`
       - Port:     `5432`
 
     </details>
+    {{ end }}
     {{- $_ := unset .Values "haDbPass" }}
     {{- $_ := unset .Values "haDbHost" }}

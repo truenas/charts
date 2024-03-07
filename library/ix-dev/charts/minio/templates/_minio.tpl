@@ -7,7 +7,7 @@ workload:
     primary: true
     type: Deployment
     podSpec:
-      hostNetwork: {{ .Values.minioConfig.distributedMode }}
+      hostNetwork: {{ .Values.minioStorage.distributedMode }}
       containers:
         minio:
           enabled: true
@@ -23,8 +23,8 @@ workload:
             - server
             - --console-address
             - {{ printf ":%v" .Values.minioNetwork.consolePort | quote }}
-            {{- if .Values.minioConfig.distributedMode }}
-              {{- range .Values.minioConfig.distributedIps }}
+            {{- if .Values.minioStorage.distributedMode }}
+              {{- range .Values.minioStorage.distributedIps }}
             - {{ quote . }}
               {{- end }}
             {{- else }}
@@ -68,12 +68,12 @@ workload:
               type: {{ $proto }}
               path: /minio/health/live
               port: {{ .Values.minioNetwork.consolePort }}
-      initContainers: {{/* TODO: check mode */}}
+      initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
                                                         "UID" 473
                                                         "GID" 473
                                                         "mode" "check"
-                                                        "type" "install") | nindent 8 }}
+                                                        "type" "init") | nindent 8 }}
         wait-api:
           enabled: true
           type: init

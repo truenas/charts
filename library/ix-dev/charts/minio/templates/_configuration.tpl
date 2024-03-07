@@ -44,15 +44,15 @@ secret:
   minio-creds:
     enabled: true
     data:
-      MINIO_ROOT_USER: {{ .Values.minioConfig.accessKey | quote }}
-      MINIO_ROOT_PASSWORD: {{ .Values.minioConfig.secretKey | quote }}
+      MINIO_ROOT_USER: {{ .Values.minioConfig.rootUser | quote }}
+      MINIO_ROOT_PASSWORD: {{ .Values.minioConfig.rootPassword | quote }}
 
     {{ if and .Values.minioNetwork.certificateID .Values.minioConfig.domain }}
       MINIO_BROWSER_REDIRECT_URL: {{ printf "https://%s:%v" .Values.minioConfig.domain .Values.minioNetwork.consolePort }}
       MINIO_SERVER_URL: {{ printf "https://%s:%v" .Values.minioConfig.domain .Values.minioNetwork.apiPort }}
     {{ end }}
 
-    {{ if .Values.minioConfig.logSearchApi }}
+    {{ if .Values.minioStorage.logSearchApi }}
       MINIO_LOG_QUERY_AUTH_TOKEN: {{ $queryToken }}
       MINIO_LOG_QUERY_URL: {{ $queryURL }}
       {{/*
