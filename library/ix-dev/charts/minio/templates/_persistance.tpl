@@ -1,5 +1,12 @@
 {{- define "minio.persistence" -}}
 persistence:
+  export:
+    enabled: true
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.minioStorage.export) | nindent 4 }}
+    targetSelector:
+      minio:
+        minio:
+          mountPath: /export
   tmp:
     enabled: true
     type: emptyDir

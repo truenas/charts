@@ -21,7 +21,7 @@
   {{- $dbHost := (printf "%s-postgres" $fullname) -}}
   {{- $dbUser := "logsearchapi" -}}
   {{- $dbName := "logsearchapi" -}}
-  {{- $dbPass := (randAlphaNum 32) -}}
+  {{- $dbPass := randAlphaNum 32 -}}
 
   {{/* Fetch secrets from pre-migration secret */}}
   {{- $tmpBackupHost := "" -}}
@@ -31,7 +31,7 @@
   {{- end -}}
 
   {{- with (lookup "v1" "Secret" .Release.Namespace (printf "%s-postgres-creds" $fullname)) -}}
-    {{- $dbName = ((index .data "POSTGRES_DB") | b64dec) -}}
+    {{- $dbPass = ((index .data "POSTGRES_PASSWORD") | b64dec) -}}
   {{- end -}}
 
   {{/* Temporary set dynamic db details on values,
