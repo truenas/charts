@@ -67,7 +67,6 @@ scaleCertificate:
   minio-cert:
     enabled: true
     id: {{ .Values.minioNetwork.certificateID }}
-    {{- end -}}
   {{- end }}
 
   {{- include "ix.v1.common.app.postgresPersistence"
