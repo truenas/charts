@@ -55,13 +55,8 @@ secret:
     {{ if .Values.minioStorage.logSearchApi }}
       MINIO_LOG_QUERY_AUTH_TOKEN: {{ $queryToken }}
       MINIO_LOG_QUERY_URL: {{ $queryURL }}
-      {{/*
-        We can put any ID we want here. Just make sure it's unique
-        It can be rolled on each startup without problems, or can be set to a static one.
-      */}}
-      {{ $id := printf "ix-%v" (randAlphaNum 5) }}
-      {{ printf "MINIO_AUDIT_WEBHOOK_ENDPOINT_%s: %s" $id $webhookURL }}
-      {{ printf "MINIO_AUDIT_WEBHOOK_ENABLE_%s: %s" $id ("on" | quote) }}
+      MINIO_AUDIT_WEBHOOK_ENDPOINT_ix-logsearch: {{ $webhookURL }}
+      MINIO_AUDIT_WEBHOOK_ENABLE_ix-logsearch: "on"
     {{ end }}
 
   logsearch-creds:

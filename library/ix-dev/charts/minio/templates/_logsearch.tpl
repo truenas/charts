@@ -13,7 +13,6 @@ workload:
           securityContext:
             runAsUser: 473
             runAsGroup: 473
-            # readOnlyRootFilesystem: false
           command:
             - /logsearchapi
           envFrom:
