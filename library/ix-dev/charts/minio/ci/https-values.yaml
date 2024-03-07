@@ -6,7 +6,10 @@ minioStorage:
   pgData:
     type: pvc
   pgBackup:
-    type: pvc
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""
 
 minioConfig:
   rootUser: super-admin
