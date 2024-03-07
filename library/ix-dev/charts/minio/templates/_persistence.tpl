@@ -33,6 +33,11 @@ persistence:
         {{- end }}
   {{- end }}
 
+  {{- include "ix.v1.common.app.postgresPersistence"
+      (dict "pgData" .Values.minioStorage.pgData
+            "pgBackup" .Values.minioStorage.pgBackup
+      ) | nindent 2 }}
+
   {{- if .Values.minioNetwork.certificateID }}
   cert:
     enabled: true
@@ -69,8 +74,4 @@ scaleCertificate:
     id: {{ .Values.minioNetwork.certificateID }}
   {{- end }}
 
-  {{- include "ix.v1.common.app.postgresPersistence"
-      (dict "pgData" .Values.minioStorage.pgData
-            "pgBackup" .Values.minioStorage.pgBackup
-      ) | nindent 2 }}
 {{- end -}}
