@@ -76,6 +76,7 @@ configmap:
       N8N_PORT: {{ .Values.n8nNetwork.webPort | quote }}
       N8N_HOST: {{ .Values.n8nConfig.webHost | quote }}
       GENERIC_TIMEZONE: {{ .Values.TZ }}
+      N8N_SECURE_COOKIE: {{ ternary "true" "false" (eq $prot "https") | quote }}
       N8N_PROTOCOL: {{ $prot }}
       N8N_USER_FOLDER: "/data"
       {{- if .Values.n8nNetwork.certificateID }}
