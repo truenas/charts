@@ -1,0 +1,102 @@
+#!/usr/bin/python3
+import json
+import os
+import sys
+
+
+def migrate_volume(volume):
+    return {
+        'type': 'hostPath',
+        'hostPathConfig': {
+            'hostPath': volume['hostPath']
+        },
+    } if volume.get('hostPathEnabled', False) else {
+        'type': 'ixVolume',
+        'ixVolumeConfig': {
+            'datasetName': volume['datasetName'],
+        },
+    }
+
+
+def migrate_common_lib(values):
+    delete_keys = [
+        'dnsConfig', 'updateStrategy', 'enableResourceLimits', 'cpuLimit',
+        'memLimit', 'certificate', 'service', 'environmentVariables', 'minioDomain',
+        'accessKey', 'secretKey', 'distributedMode', 'distributedIps', 'logsearchapi',
+        'appVolumeMounts', 'extraAppVolumeMounts', 'postgresAppVolumeMounts'
+    ]
+
+    values.update({
+        # Migrate Config
+        'minioConfig': {
+            'rootUser': values['accessKey'],
+            'rootPassword': values['secretKey'],
+            'domain': values.get('minioDomain', ''),
+            'extraArgs': values.get('extraArgs', []),
+            'additionalEnvs': [e for e in values.get('environmentVariables', []) if e['name'] not in ['PLEX_UID', 'PLEX_GID'] ],
+        },
+        # Migrate Network
+        'minioNetwork': {
+            'apiPort': values['service']['nodePort'],
+            'consolePort': values['service']['consolePort'],
+            'certificateID': values['certificate'],
+        },
+        # Migrate Resources
+        'resources': {
+            'limits': {
+                'cpu': values.get('cpuLimit', '4000m'),
+                'memory': values.get('memLimit', '8Gi'),
+            }
+        },
+        # Migrate DNS
+        'podOptions': {
+            'dnsConfig': {
+                'options': [
+                    {'name': opt['name'], 'value': opt['value']}
+                    for opt in values.get('dnsConfig', {}).get('options', [])
+                ]
+            }
+        },
+        # Migrate Storage
+        'minioStorage': {
+            'distributedMode': values['distributedMode']
+            'distributedIps': values['distributedIps'] if values['distributedMode'] else [],
+            'logSearchApi': values['logsearchapi']['enabled'],
+            'logSearchDiskCapacityGB': values['logsearchapi']['diskCapacityGB'] if values['logsearchapi']['enabled'] else 5,
+            'export': migrate_volume(values['appVolumeMounts']['export']).update({
+                mountPath: values['appVolumeMounts']['export'][mountPath]
+            }),
+            'pgData': migrate_volume(values['postgresAppVolumeMounts']['postgres-data']),
+            'pgBackup': migrate_volume(values['postgresAppVolumeMounts']['postgres-backup']),
+            'additionalStorages': [
+                {
+                    'type': 'hostPath',
+                    'hostPathConfig': {'hostPath': e['hostPath']},
+                    'mountPath': e['mountPath'],
+                    'readOnly': e['readOnly'],
+                }
+                for e in values.get('extraAppVolumeMounts', [])
+            ],
+        },
+    })
+
+    for k in delete_keys:
+        values.pop(k, None)
+
+    return values
+
+def migrate(values):
+    # If this missing, we have already migrated
+    if not 'nodePort' in values.keys():
+        return values
+
+    return migrate_common_lib(values)
+
+
+if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        exit(1)
+
+    if os.path.exists(sys.argv[1]):
+        with open(sys.argv[1], 'r') as f:
+            print(json.dumps(migrate(json.loads(f.read()))))
