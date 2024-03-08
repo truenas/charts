@@ -18,7 +18,7 @@ def newer_mapping(image_tags):
 
     parts = version.split('.')
 
-    # Versioning scheme
+    # Versioning scheme:
     # Must be x.y.z
     # Second part has leading 0 if not 0
     # Third part does not have leading 0
