@@ -1,17 +1,17 @@
 {
-    "1.2.29": {
+    "1.2.30": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/paperless-ngx/1.2.29",
-        "last_update": "2024-03-08 07:11:01",
+        "location": "/__w/charts/charts/community/paperless-ngx/1.2.30",
+        "last_update": "2024-03-10 01:14:10",
         "required_features": [
-            "definitions/timezone",
             "normalize/ixVolume",
+            "definitions/timezone",
             "normalize/acl"
         ],
-        "human_version": "2.6.1_1.2.29",
-        "version": "1.2.29",
+        "human_version": "2.6.2_1.2.30",
+        "version": "1.2.30",
         "chart_metadata": {
             "name": "paperless-ngx",
             "description": "Paperless-ngx is a document management system that transforms your physical documents into a searchable online archive so you can keep, well, less paper.",
@@ -19,9 +19,9 @@
                 "title": "Paperless-ngx"
             },
             "type": "application",
-            "version": "1.2.29",
+            "version": "1.2.30",
             "apiVersion": "v2",
-            "appVersion": "2.6.1",
+            "appVersion": "2.6.2",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
