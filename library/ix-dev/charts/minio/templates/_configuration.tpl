@@ -86,6 +86,6 @@ secret:
       POSTGRES_DB: {{ $dbName }}
       POSTGRES_PASSWORD: {{ $dbPass }}
       POSTGRES_HOST: {{ $tmpBackupHost }}
-      POSTGRES_URL: {{ printf "postgres://%s:%s@%s-ha:5432/%s?sslmode=disable" $dbUser $dbPass $dbHost $dbName }}
+      POSTGRES_URL: {{ printf "postgres://%s:%s@%s-pg:5432/%s?sslmode=disable" $dbUser $dbPass $dbHost $dbName }}
   {{- end }}
 {{- end -}}
