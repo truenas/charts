@@ -88,7 +88,7 @@ questions:
           description: The user id that Photoprism files will be owned by.
           schema:
             type: int
-            min: 568
+            min: 2
             default: 568
             required: true
         - variable: group
@@ -96,7 +96,7 @@ questions:
           description: The group id that Photoprism files will be owned by.
           schema:
             type: int
-            min: 568
+            min: 2
             default: 568
             required: true
 
@@ -587,7 +587,7 @@ questions:
                 schema:
                   type: string
                   max_length: 12
-                  valid_chars: '^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$'
+                  valid_chars: "^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$"
                   valid_chars_error: |
                     Valid Memory limit formats are</br>
                     - Suffixed with E/P/T/G/M/K - eg. 1G</br>
