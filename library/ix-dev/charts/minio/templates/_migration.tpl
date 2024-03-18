@@ -25,10 +25,10 @@
 
     {{/* If new is v2.x.x */}}
     {{- if eq ($newV.Major | int) 2 -}}
-      {{/* And old is v1.x.x, but lower than .7.25 */}}
-      {{- if and (eq $oldV.Major 1) (or (ne $oldV.Minor 7) (lt ($oldV.Patch | int) 25)) -}}
+      {{/* And old is v1.x.x, but lower than .7.24 */}}
+      {{- if and (eq $oldV.Major 1) (or (ne $oldV.Minor 7) (lt ($oldV.Patch | int) 24)) -}}
         {{/* Block the upgrade */}}
-        {{- fail "Migration to 2.x.x is only allowed from 1.7.25 or higher" -}}
+        {{- fail "Migration to 2.x.x is only allowed from 1.7.24 or higher" -}}
       {{- end -}}
     {{- end -}}
   {{- end -}}
@@ -39,7 +39,7 @@
   {{- $versions := (fromYaml (include "minio.get-versions" $)) -}}
   {{- if $versions.old -}}
     {{- $oldV := semver $versions.old -}}
-    {{- if and (eq $oldV.Major 1) (or (ne $oldV.Minor 7) (lt ($oldV.Patch | int) 25)) -}}
+    {{- if and (eq $oldV.Major 1) (or (ne $oldV.Minor 7) (lt ($oldV.Patch | int) 24)) -}}
       {{- $isMigration = "true" -}}
     {{- end -}}
   {{- end -}}
