@@ -17,12 +17,20 @@ def newer_mapping(image_tags):
         return {}
 
     parts = version.split('.')
-    for idx, val in enumerate(parts):
-        if val == '0':
-            continue
 
-        if len(val) == 1:
-            parts[idx] = '0' + val
+    # Versioning scheme:
+    # Must be x.y.z
+    # Second part has leading 0 if not 0
+    # Third part does not have leading 0
+
+    # Below we make sure the above conditions are met
+    # as the semantic_versioning function modifies the version
+
+    if len(parts) < 3:
+        return {}
+
+    if parts[1] != '0':
+        parts[1] = '0' + parts[1]
 
     version = '.'.join(parts)
 
