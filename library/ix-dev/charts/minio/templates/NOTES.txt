@@ -1,2 +1,1 @@
-Minio can be accessed from the following URL:
-http://$node_ip:{{ .Values.service.nodePort }}/
+{{ include "ix.v1.common.lib.chart.notes" $ }}

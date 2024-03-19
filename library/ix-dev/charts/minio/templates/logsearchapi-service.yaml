@@ -1,8 +1,0 @@
-{{ if .Values.logsearchapi.enabled }}
-{{ $ports := list }}
-{{ $ports = mustAppend $ports (dict "name" "logsearchapi-tcp" "port" 8080 "targetPort" 8080) }}
-{{ $values := (. | mustDeepCopy) }}
-{{ $_ := set $values "common" (dict "nameSuffix" (printf "%s-log" (include "logsearchapi.nameSuffix" .))) }}
-{{ $_1 := set $values "commonService" (dict "type" "ClusterIP" "ports" $ports ) }}
-{{ include "common.classes.service" $values }}
-{{ end }}
