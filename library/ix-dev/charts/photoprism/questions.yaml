@@ -88,7 +88,7 @@ questions:
           description: The user id that Photoprism files will be owned by.
           schema:
             type: int
-            min: 568
+            min: 2
             default: 568
             required: true
         - variable: group
@@ -96,7 +96,7 @@ questions:
           description: The group id that Photoprism files will be owned by.
           schema:
             type: int
-            min: 568
+            min: 2
             default: 568
             required: true
 
