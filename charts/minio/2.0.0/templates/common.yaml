@@ -1,0 +1,18 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{- include "minio.migration" $ -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "minio.service" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "minio.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "minio.persistence" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "minio.configuration" $ | fromYaml) -}}
+{{- if .Values.minioStorage.logSearchApi -}}
+  {{- $_ := mustMergeOverwrite .Values (include "postgres.workload" $ | fromYaml) -}}
+  {{- $_ := mustMergeOverwrite .Values (include "logsearchapi.workload" $ | fromYaml) -}}
+{{- end -}}
+
+{{/* Create the configmap for portal manually*/}}
+{{- include "minio.portal" $ -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}

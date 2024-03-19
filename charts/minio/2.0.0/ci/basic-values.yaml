@@ -1,0 +1,20 @@
+minioConfig:
+  rootUser: super-admin
+  rootPassword: super-admin-password
+
+minioNetwork:
+  apiPort: 31000
+  consolePort: 31001
+
+minioStorage:
+  export:
+    type: pvc
+  logSearchApi: true
+  logSearchDiskCapacityGB: 5
+  pgData:
+    type: pvc
+  pgBackup:
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""

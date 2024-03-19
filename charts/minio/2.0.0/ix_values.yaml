@@ -1,0 +1,73 @@
+image:
+  pullPolicy: IfNotPresent
+  repository: minio/minio
+  tag: RELEASE.2023-07-21T21-12-44Z
+logSearchImage:
+  pullPolicy: IfNotPresent
+  repository: minio/operator
+  tag: v4.5.4
+logPostgresImage:
+  pullPolicy: IfNotPresent
+  repository: postgres
+  tag: "14.5"
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+podOptions:
+  dnsConfig:
+    options: []
+
+minioConfig:
+  rootUser: ""
+  rootPassword: ""
+  domain: ""
+  extraArgs: []
+  additionalEnvs: []
+
+minioNetwork:
+  apiPort: 9000
+  consolePort: 9002
+  certificateID:
+
+minioStorage:
+  distributedMode: false
+  distributedIps: []
+  export:
+    type: ixVolume
+    mountPath: /export
+    ixVolumeConfig:
+      datasetName: export
+  logSearchApi: false
+  logSearchDiskCapacityGB: 5
+  pgData:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: pgData
+  pgBackup:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: pgBackup
+  additionalStorages: []
+
+notes:
+  custom: |
+    {{ if .Values.minioStorage.logSearchApi }}
+    ## Database
+    You can connect to the database using the pgAdmin App from the catalog
+
+    <details>
+      <summary>Database Details</summary>
+
+      - Database: `logsearchapi`
+      - Username: `logsearchapi`
+      - Password: `{{ .Values.minioDbPass }}`
+      - Host:     `{{ .Values.minioDbHost }}.{{ .Release.Namespace }}.svc.cluster.local`
+      - Port:     `5432`
+
+    </details>
+    {{ end }}
+    {{- $_ := unset .Values "haDbPass" }}
+    {{- $_ := unset .Values "haDbHost" }}
