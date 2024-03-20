@@ -1,0 +1,22 @@
+minioConfig:
+  rootUser: super-admin
+  rootPassword: super-admin-password
+
+minioNetwork:
+  apiPort: 31000
+  consolePort: 31001
+
+minioStorage:
+  export:
+    type: pvc
+  logSearchApi: false
+  pgData:
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""
+  pgBackup:
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""
