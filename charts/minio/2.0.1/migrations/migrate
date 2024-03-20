@@ -23,9 +23,11 @@ def migrate_common_lib(values):
         'dnsConfig', 'updateStrategy', 'enableResourceLimits', 'cpuLimit',
         'memLimit', 'certificate', 'service', 'environmentVariables', 'minioDomain',
         'accessKey', 'secretKey', 'distributedMode', 'distributedIps', 'logsearchapi',
-        'appVolumeMounts', 'extraAppVolumeMounts', 'postgresAppVolumeMounts'
+        'appVolumeMounts', 'extraAppVolumeMounts', 'postgresAppVolumeMounts', 'runAsUser', 'runAsGroup',
     ]
 
+    exportVol = migrate_volume(values['appVolumeMounts']['export'])
+    exportVol['mountPath'] = values['appVolumeMounts']['export']['mountPath']
     values.update({
         # Migrate Config
         'minioConfig': {
@@ -33,7 +35,7 @@ def migrate_common_lib(values):
             'rootPassword': values['secretKey'],
             'domain': values.get('minioDomain', ''),
             'extraArgs': values.get('extraArgs', []),
-            'additionalEnvs': [e for e in values.get('environmentVariables', []) if e['name'] not in ['PLEX_UID', 'PLEX_GID'] ],
+            'additionalEnvs': values.get('environmentVariables', []),
         },
         # Migrate Network
         'minioNetwork': {
@@ -59,13 +61,11 @@ def migrate_common_lib(values):
         },
         # Migrate Storage
         'minioStorage': {
-            'distributedMode': values['distributedMode']
+            'distributedMode': values['distributedMode'],
             'distributedIps': values['distributedIps'] if values['distributedMode'] else [],
             'logSearchApi': values['logsearchapi']['enabled'],
             'logSearchDiskCapacityGB': values['logsearchapi']['diskCapacityGB'] if values['logsearchapi']['enabled'] else 5,
-            'export': migrate_volume(values['appVolumeMounts']['export']).update({
-                mountPath: values['appVolumeMounts']['export'][mountPath]
-            }),
+            'export': exportVol,
             'pgData': migrate_volume(values['postgresAppVolumeMounts']['postgres-data']),
             'pgBackup': migrate_volume(values['postgresAppVolumeMounts']['postgres-backup']),
             'additionalStorages': [
@@ -87,7 +87,7 @@ def migrate_common_lib(values):
 
 def migrate(values):
     # If this missing, we have already migrated
-    if not 'nodePort' in values.keys():
+    if not 'appVolumeMounts' in values.keys():
         return values
 
     return migrate_common_lib(values)
