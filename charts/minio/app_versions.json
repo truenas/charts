@@ -1,17 +1,17 @@
 {
-    "2.0.0": {
+    "2.0.1": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/minio/2.0.0",
-        "last_update": "2024-03-20 05:37:30",
+        "location": "/__w/charts/charts/charts/minio/2.0.1",
+        "last_update": "2024-03-20 17:09:26",
         "required_features": [
             "definitions/certificate",
-            "normalize/ixVolume",
-            "normalize/acl"
+            "normalize/acl",
+            "normalize/ixVolume"
         ],
-        "human_version": "2023-03-13_2.0.0",
-        "version": "2.0.0",
+        "human_version": "2023-03-13_2.0.1",
+        "version": "2.0.1",
         "chart_metadata": {
             "name": "minio",
             "description": "High Performance, Kubernetes Native Object Storage",
@@ -19,7 +19,7 @@
                 "title": "MinIO"
             },
             "type": "application",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "apiVersion": "v2",
             "appVersion": "2023-03-13",
             "kubeVersion": ">=1.16.0-0",
@@ -314,7 +314,7 @@
                                     "show_if": [
                                         [
                                             "distributedMode",
-                                            "==",
+                                            "=",
                                             true
                                         ]
                                     ],
@@ -341,7 +341,7 @@
                                     "show_if": [
                                         [
                                             "distributedMode",
-                                            "==",
+                                            "=",
                                             true
                                         ]
                                     ],
@@ -686,7 +686,7 @@
                                     "show_if": [
                                         [
                                             "logSearchApi",
-                                            "==",
+                                            "=",
                                             true
                                         ]
                                     ],
@@ -702,7 +702,7 @@
                                     "show_if": [
                                         [
                                             "logSearchApi",
-                                            "==",
+                                            "=",
                                             true
                                         ]
                                     ],
@@ -1032,7 +1032,7 @@
                                     "show_if": [
                                         [
                                             "logSearchApi",
-                                            "==",
+                                            "=",
                                             true
                                         ]
                                     ],
@@ -1837,7 +1837,7 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/minio/1.7.24",
-        "last_update": "2024-03-20 05:37:30",
+        "last_update": "2024-03-20 17:07:53",
         "required_features": [
             "definitions/certificate",
             "normalize/ixVolume"
