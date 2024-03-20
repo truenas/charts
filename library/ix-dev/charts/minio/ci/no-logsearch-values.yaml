@@ -11,7 +11,10 @@ minioStorage:
     type: pvc
   logSearchApi: false
   pgData:
-    type: pvc
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""
   pgBackup:
     type: emptyDir
     emptyDirConfig:
