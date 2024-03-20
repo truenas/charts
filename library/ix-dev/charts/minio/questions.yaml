@@ -168,7 +168,7 @@ questions:
           label: Distributed Minio Instance URI(s)
           schema:
             type: list
-            show_if: [["distributedMode", "==", true]]
+            show_if: [["distributedMode", "=", true]]
             required: true
             default: []
             items:
@@ -182,7 +182,7 @@ questions:
           description: The path to store Minio Export.
           schema:
             type: dict
-            show_if: [["distributedMode", "==", true]]
+            show_if: [["distributedMode", "=", true]]
             attrs:
               - variable: type
                 label: Type
@@ -273,14 +273,14 @@ questions:
           label: Log Search Disk Capacity
           schema:
             type: int
-            show_if: [["logSearchApi", "==", true]]
+            show_if: [["logSearchApi", "=", true]]
             default: 5
         - variable: pgData
           label: Minio Postgres Data Storage
           description: The path to store Minio Postgres Data.
           schema:
             type: dict
-            show_if: [["logSearchApi", "==", true]]
+            show_if: [["logSearchApi", "=", true]]
             attrs:
               - variable: type
                 label: Type
@@ -366,7 +366,7 @@ questions:
           description: The path to store Minio Postgres Backup.
           schema:
             type: dict
-            show_if: [["logSearchApi", "==", true]]
+            show_if: [["logSearchApi", "=", true]]
             attrs:
               - variable: type
                 label: Type
