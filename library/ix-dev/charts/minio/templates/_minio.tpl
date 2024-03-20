@@ -74,6 +74,7 @@ workload:
                                                         "GID" 473
                                                         "mode" "check"
                                                         "type" "init") | nindent 8 }}
+      {{- if .Values.minioStorage.logSearchApi }}
         wait-api:
           enabled: true
           type: init
@@ -90,4 +91,5 @@ workload:
                 sleep 2;
               done
               echo "API is up: {{ $logapi }}";
+      {{- end }}
 {{- end -}}
