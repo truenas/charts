@@ -1,16 +1,16 @@
 {
-    "1.1.19": {
+    "1.1.20": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/firefly-iii/1.1.19",
-        "last_update": "2024-03-20 18:36:21",
+        "location": "/__w/charts/charts/community/firefly-iii/1.1.20",
+        "last_update": "2024-03-21 06:10:27",
         "required_features": [
-            "normalize/ixVolume",
-            "normalize/acl"
+            "normalize/acl",
+            "normalize/ixVolume"
         ],
-        "human_version": "6.1.11_1.1.19",
-        "version": "1.1.19",
+        "human_version": "6.1.11_1.1.20",
+        "version": "1.1.20",
         "chart_metadata": {
             "name": "firefly-iii",
             "description": "Firefly III is a personal finances manager",
@@ -18,7 +18,7 @@
                 "title": "Firefly III"
             },
             "type": "application",
-            "version": "1.1.19",
+            "version": "1.1.20",
             "apiVersion": "v2",
             "appVersion": "6.1.11",
             "kubeVersion": ">=1.16.0-0",
