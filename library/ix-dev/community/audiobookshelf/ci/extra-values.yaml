@@ -1,0 +1,13 @@
+audiobookshelfNetwork:
+  webPort: 31000
+
+audiobookshelfStorage:
+  config:
+    type: pvc
+  metadata:
+    type: pvc
+  additionalStorages:
+  - type: pvc
+    mountPath: /data1
+  - type: pvc
+    mountPath: /data2
