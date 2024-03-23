@@ -4,12 +4,12 @@
         "supported": false,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/photoprism/2.0.4",
-        "last_update": "2024-03-22 05:13:11",
+        "last_update": "2024-03-23 06:46:20",
         "required_features": [
-            "normalize/acl",
+            "definitions/certificate",
             "normalize/ixVolume",
-            "definitions/gpuConfiguration",
-            "definitions/certificate"
+            "normalize/acl",
+            "definitions/gpuConfiguration"
         ],
         "human_version": "231128_2.0.4",
         "version": "2.0.4",
@@ -1824,7 +1824,7 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/photoprism/1.1.3",
-        "last_update": "2024-03-22 05:13:11",
+        "last_update": "2024-03-23 06:46:20",
         "required_features": [
             "normalize/ixVolume",
             "definitions/gpuConfiguration"

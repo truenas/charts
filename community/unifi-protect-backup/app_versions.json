@@ -1,17 +1,17 @@
 {
-    "1.2.5": {
+    "1.2.6": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/unifi-protect-backup/1.2.5",
-        "last_update": "2024-03-22 05:13:11",
+        "location": "/__w/charts/charts/community/unifi-protect-backup/1.2.6",
+        "last_update": "2024-03-23 06:47:51",
         "required_features": [
-            "normalize/acl",
             "normalize/ixVolume",
-            "definitions/timezone"
+            "definitions/timezone",
+            "normalize/acl"
         ],
-        "human_version": "0.10.5_1.2.5",
-        "version": "1.2.5",
+        "human_version": "0.10.6_1.2.6",
+        "version": "1.2.6",
         "chart_metadata": {
             "name": "unifi-protect-backup",
             "description": "Unifi Protect Backup is a python based tool for backing up UniFi Protect event clips as they occur.",
@@ -19,9 +19,9 @@
                 "title": "Unifi Protect Backup"
             },
             "type": "application",
-            "version": "1.2.5",
+            "version": "1.2.6",
             "apiVersion": "v2",
-            "appVersion": "0.10.5",
+            "appVersion": "0.10.6",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
