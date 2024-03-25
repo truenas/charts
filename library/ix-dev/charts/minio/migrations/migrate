@@ -73,7 +73,7 @@ def migrate_common_lib(values):
                     'type': 'hostPath',
                     'hostPathConfig': {'hostPath': e['hostPath']},
                     'mountPath': e['mountPath'],
-                    'readOnly': e['readOnly'],
+                    'readOnly': e.get('readOnly', False),
                 }
                 for e in values.get('extraAppVolumeMounts', [])
             ],
