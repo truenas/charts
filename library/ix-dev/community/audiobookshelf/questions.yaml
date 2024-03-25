@@ -21,6 +21,16 @@ portals:
     path: "$kubernetes-resource_configmap_portal_path"
 
 questions:
+  - variable: TZ
+    group: Audiobookshelf Configuration
+    label: Timezone
+    schema:
+      type: string
+      default: Etc/UTC
+      required: true
+      $ref:
+        - definitions/timezone
+
   - variable: audiobookshelfConfig
     label: ""
     group: Audiobookshelf Configuration
@@ -225,7 +235,7 @@ questions:
                         required: true
                         immutable: true
                         hidden: true
-                        default: "downloads"
+                        default: "metadata"
                     - variable: aclEntries
                       label: ACL Configuration
                       schema:

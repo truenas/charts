@@ -11,6 +11,5 @@ service:
         primary: true
         port: {{ .Values.audiobookshelfNetwork.webPort }}
         nodePort: {{ .Values.audiobookshelfNetwork.webPort }}
-        targetPort: 80
         targetSelector: audiobookshelf
 {{- end -}}

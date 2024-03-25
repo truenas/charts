@@ -12,6 +12,7 @@ audiobookshelfConfig:
   additionalEnvs: []
 audiobookshelfNetwork:
   webPort: 30067
+  hostNetwork: false
 audiobookshelfRunAs:
   user: 568
   group: 568
