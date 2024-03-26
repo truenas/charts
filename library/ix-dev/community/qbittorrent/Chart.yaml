@@ -1,11 +1,12 @@
 name: qbittorrent
-description: The qBittorrent project aims to provide an open-source software alternative to µTorrent.
+description: The qBittorrent project aims to provide an open-source software alternative
+  to µTorrent.
 annotations:
   title: qBittorrent
 type: application
-version: 1.2.9
+version: 1.2.10
 apiVersion: v2
-appVersion: 4.6.3
+appVersion: 4.6.4
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: truenas
