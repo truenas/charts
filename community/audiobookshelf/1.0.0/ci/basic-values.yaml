@@ -1,0 +1,12 @@
+audiobookshelfNetwork:
+  webPort: 31000
+
+audiobookshelfRunAs:
+  user: 1000
+  group: 1000
+
+audiobookshelfStorage:
+  config:
+    type: pvc
+  metadata:
+    type: pvc
