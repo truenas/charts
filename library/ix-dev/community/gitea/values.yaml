@@ -1,7 +1,7 @@
 image:
   repository: gitea/gitea
   pullPolicy: IfNotPresent
-  tag: 1.21.9-rootless
+  tag: 1.21.10-rootless
 
 resources:
   limits:
