@@ -182,7 +182,7 @@ questions:
           description: The path to store Minio Export.
           schema:
             type: dict
-            show_if: [["distributedMode", "=", true]]
+            show_if: [["distributedMode", "=", false]]
             attrs:
               - variable: type
                 label: Type
