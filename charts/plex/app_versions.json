@@ -153,6 +153,50 @@
                     }
                 },
                 {
+                    "variable": "testyamllang",
+                    "label": "Test YAML Language",
+                    "group": "Plex Configuration",
+                    "description": "This is to test yaml language type",
+                    "schema": {
+                        "type": "text",
+                        "default": "",
+                        "language": "yaml"
+                    }
+                },
+                {
+                    "variable": "testtomllang",
+                    "label": "Test TOML Language",
+                    "group": "Plex Configuration",
+                    "description": "This is to test toml language type",
+                    "schema": {
+                        "type": "text",
+                        "default": "",
+                        "language": "toml"
+                    }
+                },
+                {
+                    "variable": "testjsonlang",
+                    "label": "Test JSON Language",
+                    "group": "Plex Configuration",
+                    "description": "This is to test json language type",
+                    "schema": {
+                        "type": "text",
+                        "default": "",
+                        "language": "json"
+                    }
+                },
+                {
+                    "variable": "testtextlang",
+                    "label": "Test Text Language",
+                    "group": "Plex Configuration",
+                    "description": "This is to test json language type",
+                    "schema": {
+                        "type": "text",
+                        "default": "",
+                        "language": "text"
+                    }
+                },
+                {
                     "variable": "plexConfig",
                     "label": "",
                     "group": "Plex Configuration",
