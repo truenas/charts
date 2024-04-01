@@ -10,6 +10,13 @@ persistence:
       nginx:
         nginx:
           mountPath: /tmp
+  varcache:
+    enabled: true
+    type: emptyDir
+    targetSelector:
+      nginx:
+        nginx:
+          mountPath: /var/cache/nginx
   {{- if .Values.collaboraNetwork.certificateID }}
   nginx-conf:
     enabled: true
