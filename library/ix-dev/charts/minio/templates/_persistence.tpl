@@ -1,5 +1,6 @@
 {{- define "minio.persistence" -}}
 persistence:
+  {{- if not .Values.minioStorage.distributedMode }}
   export:
     enabled: true
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.minioStorage.export) | nindent 4 }}
@@ -12,6 +13,7 @@ persistence:
         01-permissions:
           mountPath: /mnt/directories/export
         {{- end }}
+  {{- end }}
   tmp:
     enabled: true
     type: emptyDir
