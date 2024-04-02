@@ -39,6 +39,10 @@ def newer_mapping(image_tags):
         if idx in [0, 1]:
             cleanVersion += part + '.'
             continue
+        if idx == 2:
+            # Preserve the trailing zero on third part, but trim the leading zero
+            cleanVersion += part.lstrip('0') + '.'
+            continue
         if len(part) == 2 and part[0] == '0':
             cleanVersion += part[1] + '.'
 
