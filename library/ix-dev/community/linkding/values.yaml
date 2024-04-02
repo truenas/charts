@@ -13,13 +13,13 @@ resources:
     memory: 8Gi
 
 linkdingConfig:
-  username: ""
-  password: ""
+  username: ''
+  password: ''
   disableBackgroundTasks: false
   disableUrlValidation: false
   enableAuthProxy: false
-  authProxyUsernameHeader: ""
-  authProxyLogoutUrl: ""
+  authProxyUsernameHeader: ''
+  authProxyLogoutUrl: ''
   csrfTrustedOrigins: []
   additionalEnvs: []
 
