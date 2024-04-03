@@ -10,7 +10,7 @@ workload:
         linkding:
           enabled: true
           primary: true
-          imageSelector: image
+          imageSelector: {{ .Values.linkdingConfig.imageSelector | default "image" }}
           securityContext:
             runAsUser: {{ .Values.linkdingRunAs.user }}
             runAsGroup: {{ .Values.linkdingRunAs.group }}

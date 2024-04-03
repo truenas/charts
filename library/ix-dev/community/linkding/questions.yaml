@@ -27,6 +27,18 @@ questions:
     schema:
       type: dict
       attrs:
+        - variable: imageSelector
+          label: Image
+          description: The image to use for Linkding
+          schema:
+            type: string
+            default: image
+            required: true
+            enum:
+              - value: image
+                description: Normal Linkding image
+              - value: plusImage
+                description: Plus Linkding image
         - variable: username
           label: Username
           description: |
@@ -608,7 +620,7 @@ questions:
                 schema:
                   type: string
                   max_length: 12
-                  valid_chars: '^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$'
+                  valid_chars: "^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$"
                   valid_chars_error: |
                     Valid Memory limit formats are</br>
                     - Suffixed with E/P/T/G/M/K - eg. 1G</br>

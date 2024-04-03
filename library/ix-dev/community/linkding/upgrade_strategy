@@ -6,20 +6,44 @@ import sys
 from catalog_update.upgrade_strategy import semantic_versioning
 
 
-RE_STABLE_VERSION = re.compile(r'\d+\.\d+\.\d+')
+RE_STABLE_VERSION_BASE = re.compile(r'\d+\.\d+\.\d+')
+ENUMS = {
+    'image': {
+        'RE_STABLE_VERSION': RE_STABLE_VERSION_BASE,
+    },
+    'plusImage': {
+        'RE_STABLE_VERSION': re.compile(rf'{RE_STABLE_VERSION_BASE}-plus'),
+        'STRIP_TEXT': '-plus'
+    },
+}
 
 
 def newer_mapping(image_tags):
-    key = list(image_tags.keys())[0]
-    tags = {t: t for t in image_tags[key] if RE_STABLE_VERSION.fullmatch(t)}
-    version = semantic_versioning(list(tags))
-    if not version:
-        return {}
-
-    return {
-        'tags': {key: tags[version]},
-        'app_version': version,
+    output = {
+        "tags": {},
+        "app_version": ""
     }
+
+    for key in image_tags.keys():
+        STRIP_TEXT = ENUMS[key].get('STRIP_TEXT', None) if key in ENUMS else None
+        RE_STABLE_VERSION = ENUMS[key].get('RE_STABLE_VERSION', None) if key in ENUMS else None
+
+        if (STRIP_TEXT is None) or (RE_STABLE_VERSION is None):
+            continue
+
+        tags = {t.strip(STRIP_TEXT): t for t in image_tags[key] if RE_STABLE_VERSION.fullmatch(t)}
+        version = semantic_versioning(list(tags))
+
+        if not version:
+            continue
+
+        # 16 is the "default" (Also tied to latest tag)
+        if key == 'image':
+            output['app_version'] = version
+
+        output['tags'][key] = tags[version]
+
+    return output
 
 
 if __name__ == '__main__':

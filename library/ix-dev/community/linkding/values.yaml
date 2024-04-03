@@ -2,6 +2,10 @@ image:
   repository: sissbruecker/linkding
   pullPolicy: IfNotPresent
   tag: 1.27.0
+plusImage:
+  repository: sissbruecker/linkding
+  pullPolicy: IfNotPresent
+  tag: 1.27.0-plus
 
 resources:
   limits:
