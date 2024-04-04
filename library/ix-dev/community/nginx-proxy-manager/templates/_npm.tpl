@@ -1,4 +1,7 @@
 {{- define "npm.workload" -}}
+{{- if not .Values.npmID -}}
+  {{- $_ := set .Values "npmID" dict -}}
+{{- end }}
 workload:
   npm:
     enabled: true
@@ -7,7 +10,7 @@ workload:
     podSpec:
       hostNetwork: false
       securityContext:
-        fsGroup: {{ .Values.npmID.group }}
+        fsGroup: {{ .Values.npmID.group | default 1000 }}
       containers:
         npm:
           enabled: true
@@ -30,7 +33,7 @@ workload:
                 # Needed for: Nginx Service
                 - FOWNER
           fixedEnv:
-            PUID: {{ .Values.npmID.user }}
+            PUID: {{ .Values.npmID.user | default 1000 }}
           env:
             DISABLE_IPV6: true
             DB_SQLITE_FILE: /data/database.sqlite
