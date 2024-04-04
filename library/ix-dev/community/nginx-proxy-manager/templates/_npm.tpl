@@ -7,7 +7,7 @@ workload:
     podSpec:
       hostNetwork: false
       securityContext:
-        fsGroup: 1000
+        fsGroup: {{ .Values.npmID.group }}
       containers:
         npm:
           enabled: true
@@ -30,9 +30,7 @@ workload:
                 # Needed for: Nginx Service
                 - FOWNER
           fixedEnv:
-            # FIXME: Revisit once upstream irons out some issues in regarids with PUID.
-            # Make sure 568 PUID works before exposing
-            PUID: 1000
+            PUID: {{ .Values.npmID.user }}
           env:
             DISABLE_IPV6: true
             DB_SQLITE_FILE: /data/database.sqlite
