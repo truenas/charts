@@ -1,19 +1,19 @@
 {
-    "2.0.10": {
+    "2.0.11": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/collabora/2.0.10",
-        "last_update": "2024-04-03 12:44:44",
+        "location": "/__w/charts/charts/charts/collabora/2.0.11",
+        "last_update": "2024-04-04 04:30:28",
         "required_features": [
-            "normalize/ixVolume",
-            "normalize/acl",
             "definitions/nodeIP",
+            "definitions/certificate",
+            "normalize/acl",
             "definitions/timezone",
-            "definitions/certificate"
+            "normalize/ixVolume"
         ],
-        "human_version": "23.05.9.4.1_2.0.10",
-        "version": "2.0.10",
+        "human_version": "23.05.10.1.1_2.0.11",
+        "version": "2.0.11",
         "chart_metadata": {
             "name": "collabora",
             "description": "Collabora is a collaborative online office suite based on LibreOffice technology",
@@ -21,9 +21,9 @@
                 "title": "Collabora"
             },
             "type": "application",
-            "version": "2.0.10",
+            "version": "2.0.11",
             "apiVersion": "v2",
-            "appVersion": "23.05.9.4.1",
+            "appVersion": "23.05.10.1.1",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
@@ -874,11 +874,11 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/collabora/1.2.30",
-        "last_update": "2024-04-03 12:43:15",
+        "last_update": "2024-04-04 04:29:07",
         "required_features": [
+            "definitions/certificate",
             "definitions/nodeIP",
-            "definitions/timezone",
-            "definitions/certificate"
+            "definitions/timezone"
         ],
         "human_version": "23.05.8.2.1_1.2.30",
         "version": "1.2.30",
