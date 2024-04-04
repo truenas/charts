@@ -18,7 +18,7 @@ def migrate(values):
 
     # If there is no npmID, add it defaults to
     # 1000 to account for existing installations
-    if not values.get('npmID', {}):
+    if values.get('npmID', None) is None:
         values.update({
             'npmID': {
                 'user': 1000,
