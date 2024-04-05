@@ -1,16 +1,16 @@
 {
-    "1.0.28": {
+    "1.0.29": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/nginx-proxy-manager/1.0.28",
-        "last_update": "2024-04-05 04:19:23",
+        "location": "/__w/charts/charts/community/nginx-proxy-manager/1.0.29",
+        "last_update": "2024-04-05 11:19:45",
         "required_features": [
-            "normalize/ixVolume",
-            "definitions/timezone"
+            "definitions/timezone",
+            "normalize/ixVolume"
         ],
-        "human_version": "2.11.1_1.0.28",
-        "version": "1.0.28",
+        "human_version": "2.11.1_1.0.29",
+        "version": "1.0.29",
         "chart_metadata": {
             "name": "nginx-proxy-manager",
             "description": "Expose your services easily and securely",
@@ -18,7 +18,7 @@
                 "title": "Nginx Proxy Manager"
             },
             "type": "application",
-            "version": "1.0.28",
+            "version": "1.0.29",
             "apiVersion": "v2",
             "appVersion": "2.11.1",
             "kubeVersion": ">=1.16.0-0",
@@ -184,6 +184,38 @@
                                             }
                                         }
                                     ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "npmID",
+                    "label": "",
+                    "group": "User and Group Configuration",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "user",
+                                "label": "User ID",
+                                "description": "The user id that Nginx Proxy Manager files will be owned by.",
+                                "schema": {
+                                    "type": "int",
+                                    "min": 2,
+                                    "default": 568,
+                                    "required": true
+                                }
+                            },
+                            {
+                                "variable": "group",
+                                "label": "Group ID",
+                                "description": "The group id that Nginx Proxy Manager files will be owned by.",
+                                "schema": {
+                                    "type": "int",
+                                    "min": 2,
+                                    "default": 568,
+                                    "required": true
                                 }
                             }
                         ]

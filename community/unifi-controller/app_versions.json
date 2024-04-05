@@ -1,18 +1,18 @@
 {
-    "1.3.6": {
+    "1.3.7": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/unifi-controller/1.3.6",
-        "last_update": "2024-04-05 04:19:23",
+        "location": "/__w/charts/charts/community/unifi-controller/1.3.7",
+        "last_update": "2024-04-05 11:19:45",
         "required_features": [
-            "definitions/certificate",
-            "normalize/ixVolume",
             "normalize/acl",
-            "definitions/timezone"
+            "definitions/timezone",
+            "normalize/ixVolume",
+            "definitions/certificate"
         ],
-        "human_version": "8.1.113_1.3.6",
-        "version": "1.3.6",
+        "human_version": "8.1.113_1.3.7",
+        "version": "1.3.7",
         "chart_metadata": {
             "name": "unifi-controller",
             "description": "Unifi Controller is a network management controller for Unifi Equipment.",
@@ -20,7 +20,7 @@
                 "title": "Unifi Controller"
             },
             "type": "application",
-            "version": "1.3.6",
+            "version": "1.3.7",
             "apiVersion": "v2",
             "appVersion": "8.1.113",
             "kubeVersion": ">=1.16.0-0",
@@ -188,8 +188,8 @@
                             },
                             {
                                 "variable": "enableWebHttp",
-                                "label": "Enable Web HTTP",
-                                "description": "Enable HTTP for the Unifi Controller Web UI.",
+                                "label": "Enable Web HTTP / Inform Port",
+                                "description": "Enable HTTP for the Unifi Controller Inform Port.",
                                 "schema": {
                                     "type": "boolean",
                                     "default": false
