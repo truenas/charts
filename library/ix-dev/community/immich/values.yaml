@@ -29,6 +29,9 @@ resources:
     memory: 8Gi
 
 immichGPU: {}
+immichGPUContainers:
+  microservices: true
+  machinelearning: true
 
 immichConfig:
   publicLoginMessage: ''
