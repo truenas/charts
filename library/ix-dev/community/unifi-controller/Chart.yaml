@@ -3,10 +3,10 @@ description: Unifi Controller is a network management controller for Unifi Equip
 annotations:
   title: Unifi Controller
 type: application
-version: 1.3.6
+version: 1.3.7
 apiVersion: v2
 appVersion: 8.1.113
-kubeVersion: '>=1.16.0-0'
+kubeVersion: ">=1.16.0-0"
 maintainers:
   - name: truenas
     url: https://www.truenas.com/

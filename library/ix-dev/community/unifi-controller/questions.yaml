@@ -74,8 +74,8 @@ questions:
             max: 65535
             required: true
         - variable: enableWebHttp
-          label: Enable Web HTTP
-          description: Enable HTTP for the Unifi Controller Web UI.
+          label: Enable Web HTTP / Inform Port
+          description: Enable HTTP for the Unifi Controller Inform Port.
           schema:
             type: boolean
             default: false
@@ -391,7 +391,7 @@ questions:
                 schema:
                   type: string
                   max_length: 12
-                  valid_chars: '^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$'
+                  valid_chars: "^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$"
                   valid_chars_error: |
                     Valid Memory limit formats are</br>
                     - Suffixed with E/P/T/G/M/K - eg. 1G</br>
