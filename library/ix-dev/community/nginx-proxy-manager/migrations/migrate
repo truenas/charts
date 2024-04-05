@@ -16,6 +16,15 @@ def migrate(values):
 
         values[storageKey][storage] = {key: value for key, value in check_val.items() if key != 'hostPath'}
 
+    # If there is no npmID, add it defaults to
+    # 1000 to account for existing installations
+    if values.get('npmID', None) is None:
+        values.update({
+            'npmID': {
+                'user': 1000,
+                'group': 1000
+            }
+        })
 
     return values
 
