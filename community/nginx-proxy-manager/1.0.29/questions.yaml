@@ -59,6 +59,28 @@ questions:
                       schema:
                         type: string
                         required: true
+  - variable: npmID
+    label: ""
+    group: User and Group Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: user
+          label: User ID
+          description: The user id that Nginx Proxy Manager files will be owned by.
+          schema:
+            type: int
+            min: 2
+            default: 568
+            required: true
+        - variable: group
+          label: Group ID
+          description: The group id that Nginx Proxy Manager files will be owned by.
+          schema:
+            type: int
+            min: 2
+            default: 568
+            required: true
 
   - variable: npmNetwork
     label: ""
