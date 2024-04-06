@@ -1,16 +1,16 @@
 {
-    "1.2.16": {
+    "1.2.17": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/planka/1.2.16",
-        "last_update": "2024-04-05 11:18:15",
+        "location": "/__w/charts/charts/community/planka/1.2.17",
+        "last_update": "2024-04-06 11:37:00",
         "required_features": [
-            "normalize/acl",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "normalize/acl"
         ],
-        "human_version": "1.16.1_1.2.16",
-        "version": "1.2.16",
+        "human_version": "1.16.2_1.2.17",
+        "version": "1.2.17",
         "chart_metadata": {
             "name": "planka",
             "description": "Planka is an Elegant open source project tracking",
@@ -18,9 +18,9 @@
                 "title": "Planka"
             },
             "type": "application",
-            "version": "1.2.16",
+            "version": "1.2.17",
             "apiVersion": "v2",
-            "appVersion": "1.16.1",
+            "appVersion": "1.16.2",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
