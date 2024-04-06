@@ -1,11 +1,12 @@
 name: webdav
-description: WebDAV is a set of extensions to the HTTP protocol which allows users to collaboratively edit and manage files on remote web servers.
+description: WebDAV is a set of extensions to the HTTP protocol which allows users
+  to collaboratively edit and manage files on remote web servers.
 annotations:
   title: WebDAV
 type: application
-version: 1.0.20
+version: 1.0.21
 apiVersion: v2
-appVersion: 2.4.58
+appVersion: 2.4.59
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: truenas
