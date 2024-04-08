@@ -27,17 +27,17 @@ workload:
           probes:
             liveness:
               enabled: true
-              type: http
+              type: {{ ternary "https" "http" .Values.qbitNetwork.useHttpsProbe }}
               port: "{{ .Values.qbitNetwork.webPort }}"
               path: /
             readiness:
               enabled: true
-              type: http
+              type: {{ ternary "https" "http" .Values.qbitNetwork.useHttpsProbe }}
               port: "{{ .Values.qbitNetwork.webPort }}"
               path: /
             startup:
               enabled: true
-              type: http
+              type: {{ ternary "https" "http" .Values.qbitNetwork.useHttpsProbe }}
               port: "{{ .Values.qbitNetwork.webPort }}"
               path: /
       initContainers:
