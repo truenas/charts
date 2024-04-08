@@ -30,7 +30,10 @@ persistence:
           mountPath: /shared
   logs:
     enabled: true
-    type: emptyDir
+    {{- if not .Values.plexStorage.logs -}}
+      {{- $_ := set .Values.plexStorage "logs" (dict "type" "emptyDir" "emptyDirConfig" (dict "medium" "" "size" "")) -}}
+    {{- end }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.plexStorage.logs) | nindent 4 }}
     targetSelector:
       plex:
         plex:
