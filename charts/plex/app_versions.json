@@ -1,18 +1,18 @@
 {
-    "2.0.3": {
+    "2.0.4": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/plex/2.0.3",
-        "last_update": "2024-04-07 11:50:57",
+        "location": "/__w/charts/charts/charts/plex/2.0.4",
+        "last_update": "2024-04-08 10:39:22",
         "required_features": [
             "definitions/gpuConfiguration",
-            "normalize/acl",
             "normalize/ixVolume",
+            "normalize/acl",
             "definitions/timezone"
         ],
-        "human_version": "1.40.1.8227_2.0.3",
-        "version": "2.0.3",
+        "human_version": "1.40.1.8227_2.0.4",
+        "version": "2.0.4",
         "chart_metadata": {
             "name": "plex",
             "description": "Plex is a media server that allows you to stream your media to any Plex client.",
@@ -20,7 +20,7 @@
                 "title": "Plex"
             },
             "type": "application",
-            "version": "2.0.3",
+            "version": "2.0.4",
             "apiVersion": "v2",
             "appVersion": "1.40.1.8227",
             "kubeVersion": ">=1.16.0-0",
@@ -829,6 +829,376 @@
                                                                     }
                                                                 }
                                                             ]
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "variable": "hostPathConfig",
+                                            "label": "Host Path Configuration",
+                                            "schema": {
+                                                "type": "dict",
+                                                "show_if": [
+                                                    [
+                                                        "type",
+                                                        "=",
+                                                        "hostPath"
+                                                    ]
+                                                ],
+                                                "attrs": [
+                                                    {
+                                                        "variable": "aclEnable",
+                                                        "label": "Enable ACL",
+                                                        "description": "Enable ACL for the dataset.",
+                                                        "schema": {
+                                                            "type": "boolean",
+                                                            "default": false
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "acl",
+                                                        "label": "ACL Configuration",
+                                                        "schema": {
+                                                            "type": "dict",
+                                                            "show_if": [
+                                                                [
+                                                                    "aclEnable",
+                                                                    "=",
+                                                                    true
+                                                                ]
+                                                            ],
+                                                            "attrs": [
+                                                                {
+                                                                    "variable": "path",
+                                                                    "label": "Host Path",
+                                                                    "description": "Host Path to perform ACL",
+                                                                    "schema": {
+                                                                        "type": "hostpath",
+                                                                        "required": true,
+                                                                        "empty": false
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "variable": "entries",
+                                                                    "label": "ACL Entries",
+                                                                    "description": "ACL Entries",
+                                                                    "schema": {
+                                                                        "type": "list",
+                                                                        "items": [
+                                                                            {
+                                                                                "variable": "aclEntry",
+                                                                                "label": "ACL Entry",
+                                                                                "schema": {
+                                                                                    "type": "dict",
+                                                                                    "attrs": [
+                                                                                        {
+                                                                                            "variable": "id_type",
+                                                                                            "label": "ID Type",
+                                                                                            "schema": {
+                                                                                                "type": "string",
+                                                                                                "enum": [
+                                                                                                    {
+                                                                                                        "value": "USER",
+                                                                                                        "description": "Entry is for a USER"
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "value": "GROUP",
+                                                                                                        "description": "Entry is for a GROUP"
+                                                                                                    }
+                                                                                                ],
+                                                                                                "default": "USER"
+                                                                                            }
+                                                                                        },
+                                                                                        {
+                                                                                            "variable": "id",
+                                                                                            "label": "ID",
+                                                                                            "description": "Make sure to check the ID value is correct and aligns with RunAs user context of the application",
+                                                                                            "schema": {
+                                                                                                "type": "int",
+                                                                                                "required": true,
+                                                                                                "min": 0
+                                                                                            }
+                                                                                        },
+                                                                                        {
+                                                                                            "variable": "access",
+                                                                                            "label": "Access",
+                                                                                            "schema": {
+                                                                                                "type": "string",
+                                                                                                "enum": [
+                                                                                                    {
+                                                                                                        "value": "READ",
+                                                                                                        "description": "Read Access"
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "value": "MODIFY",
+                                                                                                        "description": "Modify Access"
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "value": "FULL_CONTROL",
+                                                                                                        "description": "FULL_CONTROL Access"
+                                                                                                    }
+                                                                                                ]
+                                                                                            }
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "variable": "options",
+                                                                    "label": "ACL Options",
+                                                                    "schema": {
+                                                                        "type": "dict",
+                                                                        "attrs": [
+                                                                            {
+                                                                                "variable": "force",
+                                                                                "label": "Force Flag",
+                                                                                "description": "Enabling `Force` applies ACL even if the path has existing data",
+                                                                                "schema": {
+                                                                                    "type": "boolean",
+                                                                                    "default": false
+                                                                                }
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                }
+                                                            ],
+                                                            "$ref": [
+                                                                "normalize/acl"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "hostPath",
+                                                        "label": "Host Path",
+                                                        "description": "The host path to use for storage.",
+                                                        "schema": {
+                                                            "type": "hostpath",
+                                                            "show_if": [
+                                                                [
+                                                                    "aclEnable",
+                                                                    "=",
+                                                                    false
+                                                                ]
+                                                            ],
+                                                            "required": true
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "logs",
+                                "label": "Plex Logs Storage",
+                                "description": "The path to store Plex Logs.",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "type",
+                                            "label": "Type",
+                                            "description": "ixVolume: Is dataset created automatically by the system.</br>\nHost Path: Is a path that already exists on the system.<br/>\nemptyDir: Is a temporary directory that will be created on the disk or in memory.\n",
+                                            "schema": {
+                                                "type": "string",
+                                                "required": true,
+                                                "immutable": true,
+                                                "default": "emptyDir",
+                                                "enum": [
+                                                    {
+                                                        "value": "hostPath",
+                                                        "description": "Host Path (Path that already exists on the system)"
+                                                    },
+                                                    {
+                                                        "value": "ixVolume",
+                                                        "description": "ixVolume (Dataset created automatically by the system)"
+                                                    },
+                                                    {
+                                                        "value": "emptyDir",
+                                                        "description": "emptyDir (Temporary directory that will be created on the disk or in memory)"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "variable": "ixVolumeConfig",
+                                            "label": "ixVolume Configuration",
+                                            "description": "The configuration for the ixVolume dataset.",
+                                            "schema": {
+                                                "type": "dict",
+                                                "show_if": [
+                                                    [
+                                                        "type",
+                                                        "=",
+                                                        "ixVolume"
+                                                    ]
+                                                ],
+                                                "$ref": [
+                                                    "normalize/ixVolume"
+                                                ],
+                                                "attrs": [
+                                                    {
+                                                        "variable": "aclEnable",
+                                                        "label": "Enable ACL",
+                                                        "description": "Enable ACL for the dataset.",
+                                                        "schema": {
+                                                            "type": "boolean",
+                                                            "default": false
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "datasetName",
+                                                        "label": "Dataset Name",
+                                                        "description": "The name of the dataset to use for storage.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "required": true,
+                                                            "immutable": true,
+                                                            "hidden": true,
+                                                            "default": "logs"
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "aclEntries",
+                                                        "label": "ACL Configuration",
+                                                        "schema": {
+                                                            "type": "dict",
+                                                            "show_if": [
+                                                                [
+                                                                    "aclEnable",
+                                                                    "=",
+                                                                    true
+                                                                ]
+                                                            ],
+                                                            "attrs": [
+                                                                {
+                                                                    "variable": "path",
+                                                                    "label": "Path",
+                                                                    "description": "Path to perform ACL",
+                                                                    "schema": {
+                                                                        "type": "string",
+                                                                        "hidden": true
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "variable": "entries",
+                                                                    "label": "ACL Entries",
+                                                                    "description": "ACL Entries",
+                                                                    "schema": {
+                                                                        "type": "list",
+                                                                        "items": [
+                                                                            {
+                                                                                "variable": "aclEntry",
+                                                                                "label": "ACL Entry",
+                                                                                "schema": {
+                                                                                    "type": "dict",
+                                                                                    "attrs": [
+                                                                                        {
+                                                                                            "variable": "id_type",
+                                                                                            "label": "ID Type",
+                                                                                            "schema": {
+                                                                                                "type": "string",
+                                                                                                "enum": [
+                                                                                                    {
+                                                                                                        "value": "USER",
+                                                                                                        "description": "Entry is for a USER"
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "value": "GROUP",
+                                                                                                        "description": "Entry is for a GROUP"
+                                                                                                    }
+                                                                                                ],
+                                                                                                "default": "USER"
+                                                                                            }
+                                                                                        },
+                                                                                        {
+                                                                                            "variable": "id",
+                                                                                            "label": "ID",
+                                                                                            "description": "Make sure to check the ID value is correct and aligns with RunAs user context of the application",
+                                                                                            "schema": {
+                                                                                                "type": "int",
+                                                                                                "required": true,
+                                                                                                "min": 0
+                                                                                            }
+                                                                                        },
+                                                                                        {
+                                                                                            "variable": "access",
+                                                                                            "label": "Access",
+                                                                                            "schema": {
+                                                                                                "type": "string",
+                                                                                                "enum": [
+                                                                                                    {
+                                                                                                        "value": "READ",
+                                                                                                        "description": "Read Access"
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "value": "MODIFY",
+                                                                                                        "description": "Modify Access"
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "value": "FULL_CONTROL",
+                                                                                                        "description": "FULL_CONTROL Access"
+                                                                                                    }
+                                                                                                ]
+                                                                                            }
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "variable": "emptyDirConfig",
+                                            "label": "emptyDir Configuration",
+                                            "schema": {
+                                                "type": "dict",
+                                                "show_if": [
+                                                    [
+                                                        "type",
+                                                        "=",
+                                                        "emptyDir"
+                                                    ]
+                                                ],
+                                                "attrs": [
+                                                    {
+                                                        "variable": "medium",
+                                                        "label": "emptyDir Medium",
+                                                        "description": "Disk: Creates a temporary directory on the disk.</br>\nMemory: Creates a temporary directory in memory.\n",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "default": "",
+                                                            "enum": [
+                                                                {
+                                                                    "value": "",
+                                                                    "description": "Disk (Temporary directory created on the disk)"
+                                                                },
+                                                                {
+                                                                    "value": "Memory",
+                                                                    "description": "Memory (Temporary directory created in memory)"
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "size",
+                                                        "label": "emptyDir Size Limit (in Gi)",
+                                                        "description": "The maximum size (in Gi) of the temporary directory.</br>\nFor example: 2\n",
+                                                        "schema": {
+                                                            "type": "int",
+                                                            "null": true,
+                                                            "default": 2
                                                         }
                                                     }
                                                 ]
@@ -1859,11 +2229,11 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/plex/1.7.60",
-        "last_update": "2024-04-07 11:50:57",
+        "last_update": "2024-04-08 10:37:59",
         "required_features": [
+            "normalize/ixVolume",
             "definitions/gpuConfiguration",
             "validations/lockedHostPath",
-            "normalize/ixVolume",
             "definitions/timezone"
         ],
         "human_version": "1.32.8.7639_1.7.60",
