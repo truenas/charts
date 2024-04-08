@@ -836,3 +836,23 @@ questions:
       $ref:
         - "definitions/gpuConfiguration"
       attrs: []
+  - variable: immichGPUContainers
+    group: Resources Configuration
+    label: GPU Containers
+    description: Select which containers should use GPU.
+    schema:
+      type: dict
+      # This will only hide it if there are no GPUs available
+      # but will still show if there are 0 GPUs selected.
+      show_if: [["immichGPU", "!=", {}]]
+      attrs:
+        - variable: microservices
+          label: Enable GPU for Microservices
+          schema:
+            type: boolean
+            default: true
+        - variable: machinelearning
+          label: Enable GPU for Machine Learning
+          schema:
+            type: boolean
+            default: true
