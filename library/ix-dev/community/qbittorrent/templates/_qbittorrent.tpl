@@ -25,6 +25,9 @@ workload:
             - configMapRef:
                 name: qbit-config
           probes:
+            {{- if not (hasKey .Values.qbitNetwork "useHttpsProbe") -}}
+              {{- $_ := set .Valies.qbitNetwork "useHttpsProbe" false -}}
+            {{- end }}
             liveness:
               enabled: true
               type: {{ ternary "https" "http" .Values.qbitNetwork.useHttpsProbe }}
