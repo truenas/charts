@@ -1,0 +1,23 @@
+plexNetwork:
+  webPort: 31000
+
+plexStorage:
+  data:
+    type: pvc
+  config:
+    type: pvc
+  logs:
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""
+  transcode:
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""
+  additionalStorages:
+    - type: pvc
+      mountPath: /action_movies
+    - type: pvc
+      mountPath: /adventure_movies
