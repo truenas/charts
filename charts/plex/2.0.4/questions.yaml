@@ -327,6 +327,115 @@ questions:
                         type: hostpath
                         show_if: [["aclEnable", "=", false]]
                         required: true
+        - variable: logs
+          label: Plex Logs Storage
+          description: The path to store Plex Logs.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.<br/>
+                  emptyDir: Is a temporary directory that will be created on the disk or in memory.
+                schema:
+                  type: string
+                  required: true
+                  immutable: true
+                  default: "emptyDir"
+                  enum:
+                    - value: "hostPath"
+                      description: Host Path (Path that already exists on the system)
+                    - value: "ixVolume"
+                      description: ixVolume (Dataset created automatically by the system)
+                    - value: "emptyDir"
+                      description: emptyDir (Temporary directory that will be created on the disk or in memory)
+              - variable: ixVolumeConfig
+                label: ixVolume Configuration
+                description: The configuration for the ixVolume dataset.
+                schema:
+                  type: dict
+                  show_if: [["type", "=", "ixVolume"]]
+                  $ref:
+                    - "normalize/ixVolume"
+                  attrs:
+                    - variable: aclEnable
+                      label: Enable ACL
+                      description: Enable ACL for the dataset.
+                      schema:
+                        type: boolean
+                        default: false
+                    - variable: datasetName
+                      label: Dataset Name
+                      description: The name of the dataset to use for storage.
+                      schema:
+                        type: string
+                        required: true
+                        immutable: true
+                        hidden: true
+                        default: "logs"
+                    - variable: aclEntries
+                      label: ACL Configuration
+                      schema:
+                        type: dict
+                        show_if: [["aclEnable", "=", true]]
+                        attrs: []
+              - variable: emptyDirConfig
+                label: emptyDir Configuration
+                schema:
+                  type: dict
+                  show_if: [["type", "=", "emptyDir"]]
+                  attrs:
+                    - variable: medium
+                      label: emptyDir Medium
+                      description: |
+                        Disk: Creates a temporary directory on the disk.</br>
+                        Memory: Creates a temporary directory in memory.
+                      schema:
+                        type: string
+                        default: ""
+                        enum:
+                          - value: ""
+                            description: Disk (Temporary directory created on the disk)
+                          - value: "Memory"
+                            description: Memory (Temporary directory created in memory)
+                    - variable: size
+                      label: emptyDir Size Limit (in Gi)
+                      description: |
+                        The maximum size (in Gi) of the temporary directory.</br>
+                        For example: 2
+                      schema:
+                        type: int
+                        "null": true
+                        default: 2
+              - variable: hostPathConfig
+                label: Host Path Configuration
+                schema:
+                  type: dict
+                  show_if: [["type", "=", "hostPath"]]
+                  attrs:
+                    - variable: aclEnable
+                      label: Enable ACL
+                      description: Enable ACL for the dataset.
+                      schema:
+                        type: boolean
+                        default: false
+                    - variable: acl
+                      label: ACL Configuration
+                      schema:
+                        type: dict
+                        show_if: [["aclEnable", "=", true]]
+                        attrs: []
+                        $ref:
+                          - "normalize/acl"
+                    - variable: hostPath
+                      label: Host Path
+                      description: The host path to use for storage.
+                      schema:
+                        type: hostpath
+                        show_if: [["aclEnable", "=", false]]
+                        required: true
         - variable: transcode
           label: Plex Transcode Storage
           description: The path to store Plex Transcode.

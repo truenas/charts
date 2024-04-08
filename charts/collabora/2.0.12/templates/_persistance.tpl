@@ -17,6 +17,13 @@ persistence:
       nginx:
         nginx:
           mountPath: /var/cache/nginx
+  varrun:
+    enabled: true
+    type: emptyDir
+    targetSelector:
+      nginx:
+        nginx:
+          mountPath: /var/run
   {{- if .Values.collaboraNetwork.certificateID }}
   nginx-conf:
     enabled: true
