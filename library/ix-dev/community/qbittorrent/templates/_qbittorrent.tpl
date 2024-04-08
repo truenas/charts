@@ -26,7 +26,7 @@ workload:
                 name: qbit-config
           probes:
             {{- if not (hasKey .Values.qbitNetwork "useHttpsProbe") -}}
-              {{- $_ := set .Valies.qbitNetwork "useHttpsProbe" false -}}
+              {{- $_ := set .Values.qbitNetwork "useHttpsProbe" false -}}
             {{- end }}
             liveness:
               enabled: true
