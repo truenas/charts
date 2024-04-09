@@ -26,8 +26,11 @@ def migrate_common_lib(values):
         'appVolumeMounts', 'extraAppVolumeMounts', 'postgresAppVolumeMounts', 'runAsUser', 'runAsGroup',
     ]
 
-    exportVol = migrate_volume(values['appVolumeMounts']['export'])
-    exportVol['mountPath'] = values['appVolumeMounts']['export']['mountPath']
+    exportVol = {}
+    if not values['distributedMode']:
+        exportVol = migrate_volume(values['appVolumeMounts']['export'])
+        exportVol['mountPath'] = values['appVolumeMounts']['export']['mountPath']
+
     values.update({
         # Migrate Config
         'minioConfig': {
@@ -87,13 +90,15 @@ def migrate_common_lib(values):
 
 def migrate(values):
     # If this missing, we have already migrated
-    if not 'appVolumeMounts' in values.keys():
+    if not 'accessKey' in values.keys():
         return values
 
     return migrate_common_lib(values)
 
 
 if __name__ == '__main__':
+    with open('in.json', 'r') as f:
+        print(json.dumps(migrate(json.loads(f.read()))))
     if len(sys.argv) != 2:
         exit(1)
 
