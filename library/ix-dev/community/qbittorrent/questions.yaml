@@ -97,6 +97,15 @@ questions:
             min: 9000
             max: 65535
             required: true
+        - variable: useHttpsProbe
+          label: Use HTTPS Probe
+          description: |
+            Use HTTPS probe for the qBittorrent Web UI. </br>
+            This will ONLY affect the probes, only enable this if you
+            configured HTTPS in the qBittorrent Web UI.
+          schema:
+            type: boolean
+            default: false
         - variable: hostNetwork
           label: Host Network
           description: |
