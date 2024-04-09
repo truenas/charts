@@ -14,6 +14,7 @@ qbitConfig:
 qbitNetwork:
   webPort: 30024
   btPort: 50413
+  useHttpsProbe: false
   hostNetwork: false
 
 qbitRunAs:

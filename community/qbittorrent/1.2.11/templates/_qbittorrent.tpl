@@ -25,19 +25,22 @@ workload:
             - configMapRef:
                 name: qbit-config
           probes:
+            {{- if not (hasKey .Values.qbitNetwork "useHttpsProbe") -}}
+              {{- $_ := set .Values.qbitNetwork "useHttpsProbe" false -}}
+            {{- end }}
             liveness:
               enabled: true
-              type: http
+              type: {{ ternary "https" "http" .Values.qbitNetwork.useHttpsProbe }}
               port: "{{ .Values.qbitNetwork.webPort }}"
               path: /
             readiness:
               enabled: true
-              type: http
+              type: {{ ternary "https" "http" .Values.qbitNetwork.useHttpsProbe }}
               port: "{{ .Values.qbitNetwork.webPort }}"
               path: /
             startup:
               enabled: true
-              type: http
+              type: {{ ternary "https" "http" .Values.qbitNetwork.useHttpsProbe }}
               port: "{{ .Values.qbitNetwork.webPort }}"
               path: /
       initContainers:
