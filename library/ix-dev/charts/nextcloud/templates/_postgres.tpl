@@ -1,6 +1,6 @@
 {{- define "postgres.workload" -}}
   {{- $backupSecretName := "postgres-creds" -}}
-  {{- if eq (include "home-assistant.is-migration" $) "true" }}
+  {{- if eq (include "nextcloud.is-migration" $) "true" }}
     {{- $backupSecretName = "postgres-backup-creds" -}}
   {{- end }}
 workload:
