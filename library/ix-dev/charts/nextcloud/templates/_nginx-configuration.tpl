@@ -5,7 +5,6 @@ scaleCertificate:
   nextcloud-cert:
     enabled: true
     id: {{ .Values.ncNetwork.certificateID }}
-  {{- end -}}
 
   {{ $timeout := 60 }}
   {{ $size := .Values.ncConfig.maxUploadLimit | default 3 }}
