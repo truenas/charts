@@ -33,3 +33,16 @@
     {{- end -}}
   {{- end -}}
 {{- end -}}
+
+{{- define "nextcloud.is-migration" -}}
+  {{- $isMigration := "" -}}
+  {{- $versions := (fromYaml (include "nextcloud.get-versions" $)) -}}
+  {{- if $versions.old -}}
+    {{- $oldV := semver $versions.old -}}
+    {{- if and (eq $oldV.Major 1) (eq ($oldV.Minor | int) 7) (eq ($oldV.Patch | int) 60) -}}
+      {{- $isMigration = "true" -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- $isMigration -}}
+{{- end -}}
