@@ -17,3 +17,17 @@ resources:
   limits:
     cpu: 4000m
     memory: 8Gi
+
+podOptions:
+  dnsConfig:
+    options: []
+
+ncConfig:
+  additionalEnvs: []
+  commands:
+    - ffmpeg
+    - smbclient
+
+ncNetwork:
+  webPort: 9001
+  certificateID:
