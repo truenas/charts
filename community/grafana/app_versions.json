@@ -1,17 +1,17 @@
 {
-    "1.2.11": {
+    "1.2.12": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/grafana/1.2.11",
-        "last_update": "2024-04-11 10:30:15",
+        "location": "/__w/charts/charts/community/grafana/1.2.12",
+        "last_update": "2024-04-12 04:35:23",
         "required_features": [
             "normalize/acl",
-            "normalize/ixVolume",
-            "definitions/certificate"
+            "definitions/certificate",
+            "normalize/ixVolume"
         ],
-        "human_version": "10.4.1_1.2.11",
-        "version": "1.2.11",
+        "human_version": "10.4.2_1.2.12",
+        "version": "1.2.12",
         "chart_metadata": {
             "name": "grafana",
             "description": "Grafana is the open source analytics & monitoring solution for every database.",
@@ -19,9 +19,9 @@
                 "title": "Grafana"
             },
             "type": "application",
-            "version": "1.2.11",
+            "version": "1.2.12",
             "apiVersion": "v2",
-            "appVersion": "10.4.1",
+            "appVersion": "10.4.2",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
