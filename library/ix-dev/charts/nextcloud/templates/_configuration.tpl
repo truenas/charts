@@ -52,6 +52,7 @@ secret:
       OVERWRITEHOST: {{ .Values.ncConfig.host }}
         {{- else }}
       OVERWRITEHOST: {{ .Values.ncConfig.host }}:{{ .Values.ncNetwork.webPort }}
+        {{- end }}
       {{- end }}
     {{- end }}
       NEXTCLOUD_TRUSTED_DOMAINS: {{ .Values.ncConfig.host }}
