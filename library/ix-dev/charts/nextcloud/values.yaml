@@ -2,9 +2,18 @@ image:
   pullPolicy: IfNotPresent
   repository: nextcloud
   tag: 28.0.4
-nginx:
-  image:
-    pullPolicy: IfNotPresent
-    repository: nginx
-    tag: 1.23.3
-useServiceNameForHost: false
+nginxImage:
+  pullPolicy: IfNotPresent
+  repository: nginx
+  tag: 1.25.4
+# Keep using the same image
+# as before the migration
+ncPostgresImage:
+  pullPolicy: IfNotPresent
+  repository: postgres
+  tag: 13.1
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi

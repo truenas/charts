@@ -4,7 +4,7 @@ description: A file sharing server that puts the control and security of your ow
 annotations:
   title: Nextcloud
 type: application
-version: 1.6.59
+version: 2.0.0
 apiVersion: v2
 appVersion: 28.0.4
 kubeVersion: '>=1.16.0-0'
@@ -14,8 +14,8 @@ maintainers:
     email: dev@ixsystems.com
 dependencies:
   - name: common
-    repository: file://../../../common/2304.0.1
-    version: 2304.0.1
+    repository: file://../../../common
+    version: 1.2.9
 home: https://nextcloud.com/
 icon: https://media.sys.truenas.net/apps/nextcloud/icons/icon.svg
 sources:

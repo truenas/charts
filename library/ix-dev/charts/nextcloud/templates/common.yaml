@@ -1,0 +1,14 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{- include "nextcloud.migration" $ -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "nextcloud.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "postgres.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "nextcloud.service" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "nextcloud.persistence" $ | fromYaml) -}}
+
+{{/* Create the configmap for portal manually*/}}
+{{- include "nextcloud.portal" $ -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}
