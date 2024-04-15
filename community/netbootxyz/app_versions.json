@@ -1,17 +1,17 @@
 {
-    "1.0.4": {
+    "1.0.5": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/netbootxyz/1.0.4",
-        "last_update": "2024-04-15 09:28:51",
+        "location": "/__w/charts/charts/community/netbootxyz/1.0.5",
+        "last_update": "2024-04-15 09:34:41",
         "required_features": [
-            "definitions/timezone",
             "normalize/acl",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/timezone"
         ],
-        "human_version": "0.7.1.1_1.0.4",
-        "version": "1.0.4",
+        "human_version": "0.7.1.1_1.0.5",
+        "version": "1.0.5",
         "chart_metadata": {
             "name": "netbootxyz",
             "description": "netboot.xyz lets you PXE boot various operating system installers or utilities from a single tool over the network.",
@@ -19,7 +19,7 @@
                 "title": "netbootxyz"
             },
             "type": "application",
-            "version": "1.0.4",
+            "version": "1.0.5",
             "apiVersion": "v2",
             "appVersion": "0.7.1.1",
             "kubeVersion": ">=1.16.0-0",
@@ -38,7 +38,7 @@
                 }
             ],
             "home": "https://github.com/truenas/charts/tree/master/community/netbootxyz",
-            "icon": "https://media.sys.truenas.net/apps/netbootxyz/icons/icon.svg",
+            "icon": "https://media.sys.truenas.net/apps/netbootxyz/icons/icon.png",
             "sources": [
                 "https://github.com/truenas/charts/tree/master/community/netbootxyz",
                 "https://github.com/netbootxyz/docker-netbootxyz",
