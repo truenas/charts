@@ -39,7 +39,9 @@ secret:
     enabled: true
     data:
       POSTGRES_HOST: {{ $dbHost }}
-      POSTGRES_URL: {{ $dbURL }}
+      POSTGRES_DB: {{ $dbName }}
+      POSTGRES_USER: {{ $dbUser }}
+      POSTGRES_PASSWORD: {{ $dbPass }}
       NEXTCLOUD_DATA_DIR: {{ .Values.ncConfig.dataDir }}
       PHP_UPLOAD_LIMIT: {{ printf "%vG" .Values.ncConfig.maxUploadLimit | default 3 }}
       PHP_MEMORY_LIMIT: {{ printf "%vM" .Values.ncConfig.phpMemoryLimit | default 512 }}

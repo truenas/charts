@@ -25,6 +25,9 @@ workload:
                 - NET_RAW
                 - SETGID
                 - SETUID
+          envFrom:
+            - secretRef:
+                name: nextcloud-creds
           {{ with .Values.ncConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
