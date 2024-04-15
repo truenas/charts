@@ -3,7 +3,7 @@ service:
   nextcloud:
     enabled: true
     primary: true
-    {{- if not .Values.ncNetwork.certificateID -}}
+    {{- if not .Values.ncNetwork.certificateID }}
     type: NodePort
     {{- else }}
     type: ClusterIP
@@ -21,7 +21,7 @@ service:
         {{- end }}
         targetPort: 80
         targetSelector: nextcloud
-  {{- if .Values.ncNetwork.certificateID -}}
+  {{- if .Values.ncNetwork.certificateID }}
   nextcloud-nginx:
     enabled: true
     primary: true
