@@ -16,6 +16,7 @@ service:
         enabled: true
         port: {{ .Values.wgNetwork.udpPort }}
         nodePort: {{ .Values.wgNetwork.udpPort }}
+        targetPort: 51820
         protocol: udp
         targetSelector: wgeasy
 {{- end -}}
