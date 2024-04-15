@@ -1,5 +1,13 @@
 {{- define "nextcloud.persistence" -}}
 persistence:
+  data: # TODO:
+    enabled: true
+    type: emptyDir
+    targetSelector:
+      nextcloud:
+        nextcloud:
+          mountPath: {{ .Values.ncConfig.dataDir }}
+
   # config:
   #   enabled: true
   #   targetSelector:

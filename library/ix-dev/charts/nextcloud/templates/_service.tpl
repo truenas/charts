@@ -16,7 +16,7 @@ service:
         {{- if not .Values.ncNetwork.certificateID }}
         nodePort: {{ .Values.ncNetwork.webPort }}
         {{- end }}
-        port: 80
+        port: {{ .Values.ncNetwork.webPort }}
         targetPort: 80
         targetSelector: nextcloud
   {{- if .Values.ncNetwork.certificateID }}

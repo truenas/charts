@@ -2,7 +2,7 @@ ncConfig:
   adminUser: admin
   adminPassword: password
   host: "127.0.0.1"
-  dataDir: /var/www/html
+  dataDir: /var/www/html/data
   commands:
     - ffmpeg
     - smbclient
@@ -18,10 +18,7 @@ ncNetwork:
 
 ncStorage:
   pgData:
-    type: emptyDir
-    emptyDirConfig:
-      medium: ""
-      size: ""
+    type: pvc
   pgBackup:
     type: emptyDir
     emptyDirConfig:

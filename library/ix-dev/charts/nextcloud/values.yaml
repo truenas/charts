@@ -26,7 +26,7 @@ ncConfig:
   adminUser: admin
   adminPassword: password
   host: ""
-  dataDir: /var/www/html
+  dataDir: /var/www/html/data
   commands:
     - ffmpeg
     - smbclient
