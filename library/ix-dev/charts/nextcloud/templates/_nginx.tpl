@@ -27,7 +27,6 @@ workload:
                 - FOWNER
                 - NET_BIND_SERVICE
                 - NET_RAW
-
           {{ with .Values.ncConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
@@ -73,5 +72,5 @@ workload:
                 echo "Waiting for [{{ $ncUrl }}]";
                 sleep 2;
               done
-              echo "API is up: {{ $ncUrl }}";
+              echo "Nextcloud is up: {{ $ncUrl }}";
 {{- end -}}

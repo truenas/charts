@@ -5,7 +5,9 @@
 {{/* Merge the templates with Values */}}
 {{- $_ := mustMergeOverwrite .Values (include "nextcloud.workload" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "nextcloud.configuration" $ | fromYaml) -}}
-{{- $_ := mustMergeOverwrite .Values (include "nginx.workload" $ | fromYaml) -}}
+{{- if .Values.ncNetwork.certificateID }}
+  {{- $_ := mustMergeOverwrite .Values (include "nginx.workload" $ | fromYaml) -}}
+{{- end }}
 {{- $_ := mustMergeOverwrite .Values (include "nginx.configuration" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "postgres.workload" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "nextcloud.service" $ | fromYaml) -}}
