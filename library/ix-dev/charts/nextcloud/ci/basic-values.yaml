@@ -1,0 +1,30 @@
+ncConfig:
+  adminUser: admin
+  adminPassword: password
+  host: ""
+  dataDir: /var/www/html
+  commands:
+    - ffmpeg
+    - smbclient
+  maxUploadLimit: 3
+  phpMemoryLimit: 512
+  nginx:
+    proxyTimeouts: 120
+    useDifferentAccessPort: false
+    externalAccessPort: 80
+
+ncNetwork:
+  webPort: 9001
+
+ncStorage:
+  pgData:
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""
+  pgBackup:
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""
+  additionalStorages: []

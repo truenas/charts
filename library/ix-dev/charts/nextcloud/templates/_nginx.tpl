@@ -1,4 +1,9 @@
 {{- define "nginx.workload" -}}
+  {{- $fullname := (include "ix.v1.common.lib.chart.names.fullname" $) -}}
+  {{- $ncUrl := printf "http://%s:80" $fullname -}}
+  {{- if .Values.ncNetwork.certificateID -}}
+    {{- $ncUrl = printf "https://%s:%s" $fullname .Values.ncNetwork.webPort -}}
+  {{- end }}
 workload:
   nginx:
     enabled: true
@@ -51,26 +56,21 @@ workload:
               path: /status.php
               httpHeaders:
                 Host: localhost
-      {{- $fullname := (include "ix.v1.common.lib.chart.names.fullname" $) -}}
-      {{- $ncUrl := printf "http://%s:80" $fullname }}
-      {{- if .Values.ncNetwork.certificateID -}}
-        {{- $ncUrl = printf "https://%s:%s" $fullname .Values.ncNetwork.webPort -}}
-      {{- end }}
       initContainers:
         01-wait-server:
           enabled: true
-            type: init
-            imageSelector: bashImage
-            command:
-              - bash
-            args:
-              - -c
-              - |
+          type: init
+          imageSelector: bashImage
+          command:
+            - bash
+          args:
+            - -c
+            - |
+              echo "Waiting for [{{ $ncUrl }}]";
+              until wget --spider --quiet --timeout=3 --tries=1 {{ $ncUrl }}/status.php;
+              do
                 echo "Waiting for [{{ $ncUrl }}]";
-                until wget --spider --quiet --timeout=3 --tries=1 {{ $ncUrl }}/status.php;
-                do
-                  echo "Waiting for [{{ $ncUrl }}]";
-                  sleep 2;
-                done
-                echo "API is up: {{ $ncUrl }}";
+                sleep 2;
+              done
+              echo "API is up: {{ $ncUrl }}";
 {{- end -}}
