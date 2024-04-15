@@ -1,16 +1,16 @@
 {
-    "2.0.0": {
+    "2.0.1": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/invidious/2.0.0",
-        "last_update": "2024-04-13 22:15:13",
+        "location": "/__w/charts/charts/community/invidious/2.0.1",
+        "last_update": "2024-04-15 09:30:16",
         "required_features": [
-            "normalize/ixVolume",
-            "normalize/acl"
+            "normalize/acl",
+            "normalize/ixVolume"
         ],
-        "human_version": "latest_2.0.0",
-        "version": "2.0.0",
+        "human_version": "latest_2.0.1",
+        "version": "2.0.1",
         "chart_metadata": {
             "name": "invidious",
             "description": "Invidious is an alternative front-end to YouTube",
@@ -18,7 +18,7 @@
                 "title": "Invidious"
             },
             "type": "application",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "apiVersion": "v2",
             "appVersion": "latest",
             "kubeVersion": ">=1.16.0-0",
