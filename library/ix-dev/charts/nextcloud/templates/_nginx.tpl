@@ -1,8 +1,8 @@
 {{- define "nginx.workload" -}}
   {{- $fullname := (include "ix.v1.common.lib.chart.names.fullname" $) -}}
-  {{- $ncUrl := printf "http://%s:80" $fullname -}}
+  {{- $ncUrl := printf "http://%s:%s" $fullname .Values.ncNetwork.webPort -}}
   {{- if .Values.ncNetwork.certificateID -}}
-    {{- $ncUrl = printf "https://%s:%s" $fullname .Values.ncNetwork.webPort -}}
+    {{- $ncUrl = printf "https://%s:80" $fullname -}}
   {{- end }}
 workload:
   nginx:
