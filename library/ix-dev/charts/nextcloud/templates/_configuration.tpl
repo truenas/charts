@@ -25,7 +25,7 @@
   {{- $_ := set .Values "haDbName" $dbName -}}
   {{- $_ := set .Values "haDbUser" $dbUser -}}
 
-  {{- $dbURL := (printf "postgres://%s:%s@%s:5432/%s?sslmode=disable" $dbUser $dbPass $dbHost $dbName) -}}
+  {{- $dbURL := (printf "postgres://%s:%s@%s:5432/%s?sslmode=disable" $dbUser $dbPass $dbHost $dbName) }}
 secret:
   postgres-creds:
     enabled: true
