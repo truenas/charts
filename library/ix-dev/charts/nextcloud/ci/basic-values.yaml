@@ -1,7 +1,7 @@
 ncConfig:
   adminUser: admin
   adminPassword: password
-  host: ""
+  host: "127.0.0.1"
   dataDir: /var/www/html
   commands:
     - ffmpeg

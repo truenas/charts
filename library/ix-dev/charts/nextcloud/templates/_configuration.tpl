@@ -20,10 +20,10 @@
 
   {{/* Temporary set dynamic db details on values,
   so we can print them on the notes */}}
-  {{- $_ := set .Values "haDbPass" $dbPass -}}
-  {{- $_ := set .Values "haDbHost" $dbHost -}}
-  {{- $_ := set .Values "haDbName" $dbName -}}
-  {{- $_ := set .Values "haDbUser" $dbUser -}}
+  {{- $_ := set .Values "ncDbPass" $dbPass -}}
+  {{- $_ := set .Values "ncDbHost" $dbHost -}}
+  {{- $_ := set .Values "ncDbName" $dbName -}}
+  {{- $_ := set .Values "ncDbUser" $dbUser -}}
 
   {{- $dbURL := (printf "postgres://%s:%s@%s:5432/%s?sslmode=disable" $dbUser $dbPass $dbHost $dbName) }}
 secret:
@@ -57,7 +57,7 @@ secret:
         {{- end }}
       {{- end }}
     {{- end }}
-      NEXTCLOUD_TRUSTED_DOMAINS: {{ .Values.ncConfig.host }}
+      NEXTCLOUD_TRUSTED_DOMAINS: {{ (list .Values.ncConfig.host "127.0.0.1" "localhost") | mustUniq | join "," | quote }}
       NEXTCLOUD_ADMIN_USER: {{ .Values.ncConfig.adminUser }}
       NEXTCLOUD_ADMIN_PASSWORD: {{ .Values.ncConfig.adminPassword }}
   {{- if eq (include "nextcloud.is-migration" $) "true" }}
