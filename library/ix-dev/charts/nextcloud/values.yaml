@@ -52,3 +52,23 @@ ncStorage:
     ixVolumeConfig:
       datasetName: pgBackup
   additionalStorages: []
+
+notes:
+  custom: |
+    ## Database
+    You can connect to the database using the pgAdmin App from the catalog
+
+    <details>
+      <summary>Database Details</summary>
+
+      - Database: `{{ .Values.ncDbName }}`
+      - Username: `{{ .Values.ncDbUser }}`
+      - Password: `{{ .Values.ncDbPass }}`
+      - Host:     `{{ .Values.ncDbHost }}.{{ .Release.Namespace }}.svc.cluster.local`
+      - Port:     `5432`
+
+    </details>
+    {{- $_ := unset .Values "ncDbUser" }}
+    {{- $_ := unset .Values "ncDbName" }}
+    {{- $_ := unset .Values "ncDbPass" }}
+    {{- $_ := unset .Values "ncDbHost" }}
