@@ -26,18 +26,15 @@ workload:
           probes:
             liveness:
               enabled: true
-              type: http
-              path: /api/v1/comments/jNQXAC9IVRw
+              type: tcp
               port: {{ .Values.invidiousNetwork.webPort }}
             readiness:
               enabled: true
-              type: http
-              path: /api/v1/comments/jNQXAC9IVRw
+              type: tcp
               port: {{ .Values.invidiousNetwork.webPort }}
             startup:
               enabled: true
-              type: http
-              path: /api/v1/comments/jNQXAC9IVRw
+              type: tcp
               port: {{ .Values.invidiousNetwork.webPort }}
       initContainers:
         {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
