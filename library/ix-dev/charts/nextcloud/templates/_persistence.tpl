@@ -2,11 +2,11 @@
 persistence:
   data: # TODO:
     enabled: true
-    type: emptyDir
+    type: pvc
     targetSelector:
       nextcloud:
         nextcloud:
-          mountPath: {{ .Values.ncConfig.dataDir }}
+          mountPath: /var/www/html
 
   # config:
   #   enabled: true

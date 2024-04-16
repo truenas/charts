@@ -51,7 +51,9 @@ secret:
     {{- if .Values.ncNetwork.certificateID }}
       APACHE_DISABLE_REWRITE_IP: "1"
       OVERWRITEPROTOCOL: "https"
-      TRUSTED_PROXIES: {{ list "127.0.0.1" "localhost" .Values.ncConfig.host | mustUniq | join "," | quote }}
+      {{- $svcCidr := .Values.global.ixChartContext.kubernetes_config.service_cidr -}}
+      {{- $clusterCidr := .Values.global.ixChartContext.kubernetes_config.cluster_cidr -}}
+      TRUSTED_PROXIES: {{ list  $svcCidr $clusterCidr "127.0.0.1" | mustUniq | join "," | quote }}
       {{- if and .Values.ncConfig.host .Values.ncNetwork.webPort }}
         {{- if .Values.ncConfig.nginx.useDifferentAccessPort }}
       OVERWRITEHOST: {{ .Values.ncConfig.host }}
