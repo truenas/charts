@@ -36,7 +36,8 @@ def migrate_common_lib(values):
         'minioConfig': {
             'rootUser': values['accessKey'],
             'rootPassword': values['secretKey'],
-            'domain': values.get('minioDomain', ''),
+            # We don't want to allow null value here
+            'domain': values.get('minioDomain', '') or '',
             'extraArgs': values.get('extraArgs', []),
             'additionalEnvs': values.get('environmentVariables', []),
         },
