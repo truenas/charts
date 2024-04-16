@@ -17,8 +17,10 @@ workload:
             runAsUser: 473
             runAsGroup: 473
             # readOnlyRootFilesystem: false
+          {{- if not .Values.minioStorage.distributedMode }}
           env:
             MINIO_VOLUMES: /export
+          {{- end }}
           args:
             - server
             - --console-address
