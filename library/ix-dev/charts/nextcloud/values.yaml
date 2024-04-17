@@ -32,6 +32,8 @@ ncConfig:
     - smbclient
   maxUploadLimit: 3
   phpMemoryLimit: 512
+  opCacheMemoryConsumption: 128
+  maxExecutionTime: 30
   nginx:
     proxyTimeouts: 120
     useDifferentAccessPort: false
@@ -48,6 +50,8 @@ ncStorage:
     ixVolumeConfig:
       datasetName: pgData
   pgBackup:
+    # TODO: NC creates a different user/pw for pg, so we should pass the
+    # config to the backup container so it can get the right details
     type: ixVolume
     ixVolumeConfig:
       datasetName: pgBackup
