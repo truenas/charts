@@ -70,6 +70,19 @@ persistence:
         nginx:
           mountPath: /etc/nginx-certs
           readOnly: true
+  nginx-conf:
+    enabled: true
+    type: configmap
+    objectName: nginx
+    defaultMode: "0600"
+    items:
+      - key: nginx.conf
+        path: nginx.conf
+    targetSelector:
+      nginx:
+        nginx:
+          mountPath: /etc/nginx
+          readOnly: true
   {{- end -}}
 
   {{- include "ix.v1.common.app.postgresPersistence"
