@@ -1,4 +1,5 @@
 {{- define "nginx.configuration" -}}
+{{- $fullname := (include "ix.v1.common.lib.chart.names.fullname" $) -}}
 
 {{- if .Values.ncNetwork.certificateID }}
 scaleCertificate:
@@ -27,8 +28,8 @@ configmap:
       nginx.conf: |
         events {}
         http {
-          # redirects all http requests to https requests
           server {
+            # redirects all http requests to https requests
             listen 8000 default_server;
             listen [::]:8000 default_server;
             return 301 https://$host$request_uri;
@@ -71,7 +72,7 @@ configmap:
             }
 
             location / {
-              proxy_pass http://localhost;
+              proxy_pass http://{{ $fullname }}:80;
               proxy_http_version                 1.1;
               proxy_cache_bypass                 $http_upgrade;
               proxy_request_buffering            off;

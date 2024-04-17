@@ -16,13 +16,12 @@ service:
         {{- if not .Values.ncNetwork.certificateID }}
         nodePort: {{ .Values.ncNetwork.webPort }}
         {{- end }}
-        port: {{ .Values.ncNetwork.webPort }}
+        port: 80
         targetPort: 80
         targetSelector: nextcloud
   {{- if .Values.ncNetwork.certificateID }}
   nextcloud-nginx:
     enabled: true
-    primary: true
     type: NodePort
     targetSelector: nginx
     ports:
