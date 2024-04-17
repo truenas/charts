@@ -11,7 +11,7 @@ persistence:
     enabled: true
     type: configmap
     objectName: nextcloud-config
-    defaultMode: "0600"
+    defaultMode: "0755"
     targetSelector:
       nextcloud:
         nextcloud:
@@ -22,7 +22,7 @@ persistence:
     enabled: true
     type: configmap
     objectName: nextcloud-config
-    defaultMode: "0600"
+    defaultMode: "0755"
     targetSelector:
       nextcloud:
         nextcloud:
@@ -33,7 +33,7 @@ persistence:
     enabled: true
     type: configmap
     objectName: nextcloud-config
-    defaultMode: "0600"
+    defaultMode: "0755"
     targetSelector:
       nextcloud:
         nextcloud:
