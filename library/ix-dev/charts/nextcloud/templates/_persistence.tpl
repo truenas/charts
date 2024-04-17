@@ -7,6 +7,39 @@ persistence:
       nextcloud:
         nextcloud:
           mountPath: /var/www/html
+  nc-config-opcache:
+    enabled: true
+    type: configmap
+    objectName: nextcloud-config
+    defaultMode: "0600"
+    targetSelector:
+      nextcloud:
+        nextcloud:
+          # z-99 is used to ensure that this file is loaded last
+          mountPath: /usr/local/etc/php/conf.d/opcache-z-99.ini
+          subPath: opcache.ini
+  nc-config-php:
+    enabled: true
+    type: configmap
+    objectName: nextcloud-config
+    defaultMode: "0600"
+    targetSelector:
+      nextcloud:
+        nextcloud:
+          # z-99 is used to ensure that this file is loaded last
+          mountPath: /usr/local/etc/php/conf.d/nextcloud-z-99.ini
+          subPath: php.ini
+  nc-config-limreqbody:
+    enabled: true
+    type: configmap
+    objectName: nextcloud-config
+    defaultMode: "0600"
+    targetSelector:
+      nextcloud:
+        nextcloud:
+          # https://github.com/nextcloud/docker/issues/1796
+          mountPath: /etc/apache2/conf-enabled/limitrequestbody.conf
+          subPath: limitrequestbody.conf
 
   # config:
   #   enabled: true
