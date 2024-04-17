@@ -6,6 +6,8 @@ workload:
     type: Deployment
     podSpec:
       hostNetwork: false
+      securityContext:
+        fsGroup: 33
       containers:
         nextcloud:
           enabled: true
