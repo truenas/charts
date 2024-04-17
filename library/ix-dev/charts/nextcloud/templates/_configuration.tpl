@@ -45,25 +45,25 @@ secret:
       NEXTCLOUD_DATA_DIR: {{ .Values.ncConfig.dataDir }}
       PHP_UPLOAD_LIMIT: {{ printf "%vG" .Values.ncConfig.maxUploadLimit | default 3 }}
       PHP_MEMORY_LIMIT: {{ printf "%vM" .Values.ncConfig.phpMemoryLimit | default 512 }}
-      NEXTCLOUD_TRUSTED_DOMAINS: {{ list .Values.ncConfig.host "127.0.0.1" "localhost" "10.0.0.8/8" (printf "%v-*" $fullname) $fullname | mustUniq | join " " | quote }}
+      NEXTCLOUD_TRUSTED_DOMAINS: {{ list .Values.ncConfig.host "127.0.0.1" "localhost" $fullname (printf "%v-*" $fullname) | mustUniq | join " " | quote }}
       NEXTCLOUD_ADMIN_USER: {{ .Values.ncConfig.adminUser }}
       NEXTCLOUD_ADMIN_PASSWORD: {{ .Values.ncConfig.adminPassword }}
     {{- if .Values.ncNetwork.certificateID }}
-      APACHE_DISABLE_REWRITE_IP: "1"
-      OVERWRITEPROTOCOL: "https"
       {{- $svcCidr := "" -}}
       {{- $clusterCidr := "" -}}
       {{- if .Values.global.ixChartContext -}}
         {{- $svcCidr = .Values.global.ixChartContext.kubernetes_config.service_cidr -}}
         {{- $clusterCidr = .Values.global.ixChartContext.kubernetes_config.cluster_cidr -}}
       {{- end }}
+      APACHE_DISABLE_REWRITE_IP: "1"
+      OVERWRITEPROTOCOL: "https"
       TRUSTED_PROXIES: {{ list  $svcCidr $clusterCidr "127.0.0.1" | mustUniq | join "," | quote }}
       {{- if and .Values.ncConfig.host .Values.ncNetwork.webPort }}
+        {{- $overwritehost := .Values.ncConfig.host -}}
         {{- if .Values.ncConfig.nginx.useDifferentAccessPort }}
-      OVERWRITEHOST: {{ .Values.ncConfig.host }}
-        {{- else }}
-      OVERWRITEHOST: {{ .Values.ncConfig.host }}:{{ .Values.ncNetwork.webPort }}
+          {{ $overwritehost = (printf "%v:%v" .Values.ncConfig.host .Values.ncNetwork.webPort) }}
         {{- end }}
+      OVERWRITEHOST: {{ $overwritehost }}
       {{- end }}
     {{- end }}
   {{- if eq (include "nextcloud.is-migration" $) "true" }}
