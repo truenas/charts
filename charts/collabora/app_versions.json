@@ -4,13 +4,13 @@
         "supported": false,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/collabora/2.0.12",
-        "last_update": "2024-04-16 05:23:14",
+        "last_update": "2024-04-17 11:36:16",
         "required_features": [
+            "normalize/acl",
             "definitions/nodeIP",
             "definitions/certificate",
-            "normalize/ixVolume",
             "definitions/timezone",
-            "normalize/acl"
+            "normalize/ixVolume"
         ],
         "human_version": "23.05.10.1.1_2.0.12",
         "version": "2.0.12",
@@ -874,10 +874,10 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/collabora/1.2.30",
-        "last_update": "2024-04-16 05:23:14",
+        "last_update": "2024-04-17 11:36:16",
         "required_features": [
-            "definitions/timezone",
             "definitions/nodeIP",
+            "definitions/timezone",
             "definitions/certificate"
         ],
         "human_version": "23.05.8.2.1_1.2.30",

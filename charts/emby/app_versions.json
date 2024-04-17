@@ -4,10 +4,10 @@
         "supported": false,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/emby/2.0.6",
-        "last_update": "2024-04-16 05:23:14",
+        "last_update": "2024-04-17 11:36:16",
         "required_features": [
-            "normalize/ixVolume",
             "normalize/acl",
+            "normalize/ixVolume",
             "definitions/gpuConfiguration"
         ],
         "human_version": "4.8.3.0_2.0.6",
@@ -1061,10 +1061,10 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/emby/1.0.30",
-        "last_update": "2024-04-16 05:23:14",
+        "last_update": "2024-04-17 11:36:16",
         "required_features": [
-            "normalize/ixVolume",
-            "definitions/gpuConfiguration"
+            "definitions/gpuConfiguration",
+            "normalize/ixVolume"
         ],
         "human_version": "4.7.14.0_1.0.30",
         "version": "1.0.30",
