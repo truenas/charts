@@ -24,6 +24,8 @@ workload:
                 - FOWNER
                 - NET_BIND_SERVICE
                 - NET_RAW
+                - SETGID
+                - SETUID
           {{ with .Values.ncConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
