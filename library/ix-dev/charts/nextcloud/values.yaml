@@ -34,15 +34,15 @@ ncConfig:
   phpMemoryLimit: 512
   opCacheMemoryConsumption: 128
   maxExecutionTime: 30
-  nginx:
-    proxyTimeouts: 120
-    useDifferentAccessPort: false
-    externalAccessPort: 80
   additionalEnvs: []
 
 ncNetwork:
   webPort: 9001
   certificateID:
+  nginx:
+    proxyTimeouts: 120
+    useDifferentAccessPort: false
+    externalAccessPort: 80
 
 ncStorage:
   pgData:

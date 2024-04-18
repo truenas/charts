@@ -26,13 +26,6 @@ workload:
                 - NET_RAW
                 - SETGID
                 - SETUID
-          {{ with .Values.ncConfig.additionalEnvs }}
-          envList:
-            {{ range $env := . }}
-            - name: {{ $env.name }}
-              value: {{ $env.value }}
-            {{ end }}
-          {{ end }}
           probes:
             liveness:
               enabled: true

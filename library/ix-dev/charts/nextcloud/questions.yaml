@@ -164,8 +164,43 @@ questions:
             "null": true
             $ref:
               - "definitions/certificate"
+        - variable: nginx
+          label: Nginx Configuration
+          schema:
+            type: dict
+            show_if: [["certificateID", "!=", null]]
+            attrs:
+              - variable: proxyTimeouts
+                label: Proxy timeouts (Seconds)
+                description: |
+                  Applies the timeout to the following settings:</br>
+                  - proxy_connect_timeout</br>
+                  - proxy_send_timeout</br>
+                  - proxy_read_timeout</br>
+                schema:
+                  type: int
+                  min: 30
+                  default: 60
+                  required: true
+              - variable: useDifferentAccessPort
+                label: Use different port for URL rewrites
+                description: |
+                  If enabled, the URL rewrite will use [Access Port] defined below instead of the [Node Port].</br>
+                  Note that Nextcloud will still listen on the [Node Port]. (Default 9001)
+                schema:
+                  type: boolean
+                  default: false
+              - variable: externalAccessPort
+                label: External Access Port
+                schema:
+                  type: int
+                  show_if: [["useDifferentAccessPort", "=", true]]
+                  min: 443
+                  max: 65535
+                  default: 443
+                  required: true
 
-  - variable: haStorage
+  - variable: ncStorage
     label: ""
     group: Storage Configuration
     schema:

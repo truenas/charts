@@ -8,14 +8,14 @@ ncConfig:
     - smbclient
   maxUploadLimit: 3
   phpMemoryLimit: 512
-  nginx:
-    proxyTimeouts: 120
-    useDifferentAccessPort: false
-    externalAccessPort: 80
 
 ncNetwork:
   webPort: 30001
   certificateID: 1
+  nginx:
+    proxyTimeouts: 120
+    useDifferentAccessPort: false
+    externalAccessPort: 80
 
 ncStorage:
   pgData:

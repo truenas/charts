@@ -12,10 +12,10 @@ scaleCertificate:
   {{ $useDiffAccessPort := false }}
   {{ $externalAccessPort := "" }}
   {{/* Safely access key as it is conditionaly shown */}}
-  {{ if hasKey .Values.ncConfig "nginx" }}
-    {{ $useDiffAccessPort = .Values.ncConfig.nginx.useDifferentAccessPort }}
-    {{ $externalAccessPort = printf ":%v" .Values.ncConfig.nginx.externalAccessPort }}
-    {{ $timeout = .Values.ncConfig.nginx.proxyTimeouts | default 60 }}
+  {{ if hasKey .Values.ncNetwork "nginx" }}
+    {{ $useDiffAccessPort = .Values.ncNetwork.nginx.useDifferentAccessPort }}
+    {{ $externalAccessPort = printf ":%v" .Values.ncNetwork.nginx.externalAccessPort }}
+    {{ $timeout = .Values.ncNetwork.nginx.proxyTimeouts | default 60 }}
   {{ end }}
   {{/* If its 443, do not append it on the rewrite at all */}}
   {{ if eq $externalAccessPort ":443" }}
