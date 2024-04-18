@@ -1,0 +1,42 @@
+image:
+  repository: linuxserver/piwigo
+  pullPolicy: IfNotPresent
+  tag: 14.4.0
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+piwiConfig:
+  language: ''
+  adminName: ''
+  adminMail: ''
+  adminPass: ''
+  additionalEnvs: []
+
+piwiNetwork:
+  webPort: 30066
+
+piwiID:
+  user: 568
+  group: 568
+
+piwiStorage:
+  config:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: config
+  gallery:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: gallery
+  mariadbData:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: mariadbData
+  mariadbBackup:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: mariadbBackup
+  additionalStorages: []

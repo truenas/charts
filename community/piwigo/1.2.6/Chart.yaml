@@ -1,0 +1,26 @@
+name: piwigo
+description: Piwigo is a photo gallery software for the web that comes with powerful
+  features to publish and manage your collection of pictures.
+annotations:
+  title: Piwigo
+type: application
+version: 1.2.6
+apiVersion: v2
+appVersion: 14.4.0
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.2.9
+home: https://piwigo.org
+icon: https://media.sys.truenas.net/apps/piwigo/icons/icon.svg
+sources:
+  - https://hub.docker.com/r/linuxserver/piwigo
+  - https://github.com/truenas/charts/tree/master/community/piwigo
+keywords:
+  - gallery
+  - photo

@@ -1,0 +1,69 @@
+image:
+  repository: vikunja/api
+  pullPolicy: IfNotPresent
+  tag: 0.22.1
+frontendImage:
+  repository: vikunja/frontend
+  pullPolicy: IfNotPresent
+  tag: 0.22.1
+nginxImage:
+  repository: nginx
+  pullPolicy: IfNotPresent
+  tag: 1.25.5
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+vikunjaConfig:
+  url: ''
+  maxFileSize: 20
+  additionalEnvs: []
+
+vikunjaRunAs:
+  user: 568
+  group: 568
+
+vikunjaNetwork:
+  webPort: 31002
+
+vikunjaStorage:
+  additionalStorages: []
+  data:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: data
+  pgData:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: pgData
+  pgBackup:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: pgBackup
+
+notes:
+  custom: |
+    ## Database
+    You can connect to the database using the pgAdmin App from the catalog
+
+    <details>
+      <summary>Database Details</summary>
+
+      - Database: `vikunja`
+      - Username: `vikunja`
+      - Password: `{{ .Values.vikunjaDbPass }}`
+      - Host:     `{{ .Values.vikunjaDbHost }}.{{ .Release.Namespace }}.svc.cluster.local`
+      - Port:     `5432`
+
+    </details>
+    {{- $_ := unset .Values "vikunjaDbPass" }}
+    {{- $_ := unset .Values "vikunjaDbHost" }}
+
+# Not exposed to the user,
+# just used internally
+vikunjaPorts:
+  api: 3456
+  frontHttp: 5000
+  frontHttp2: 5001
