@@ -35,6 +35,7 @@ questions:
             default: 30057
             min: 9000
             max: 65535
+            show_if: [["hostNetwork", "=", false]]
             required: true
         - variable: webPort
           label: Web Port
