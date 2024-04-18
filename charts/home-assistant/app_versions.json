@@ -4,11 +4,11 @@
         "supported": false,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/home-assistant/2.0.19",
-        "last_update": "2024-04-18 04:33:29",
+        "last_update": "2024-04-18 12:00:32",
         "required_features": [
+            "normalize/ixVolume",
             "definitions/timezone",
-            "normalize/acl",
-            "normalize/ixVolume"
+            "normalize/acl"
         ],
         "human_version": "2024.4.3_2.0.19",
         "version": "2.0.19",
@@ -2056,10 +2056,10 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/home-assistant/1.0.130",
-        "last_update": "2024-04-18 04:33:29",
+        "last_update": "2024-04-18 12:00:32",
         "required_features": [
-            "definitions/timezone",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/timezone"
         ],
         "human_version": "2024.1.3_1.0.130",
         "version": "1.0.130",
