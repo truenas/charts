@@ -21,16 +21,94 @@ portals:
     path: "$kubernetes-resource_configmap_portal_path"
 
 questions:
-  - variable: TZ
+  - variable: ncConfig
+    label: ""
     group: Nextcloud Configuration
-    label: Timezone
     schema:
-      type: string
-      default: Etc/UTC
-      required: true
-      $ref:
-        - definitions/timezone
-
+      type: dict
+      attrs:
+        - variable: adminUser
+          label: Admin User
+          description: The Nextcloud admin user.
+          schema:
+            type: string
+            default: ""
+            required: true
+        - variable: adminPassword
+          label: Admin Password
+          description: The Nextcloud admin password.
+          schema:
+            type: string
+            default: ""
+            required: true
+        - variable: host
+          label: Host
+          description: Nextcloud host to create application URLs
+          schema:
+            type: string
+            $ref:
+              - "definitions/nodeIP"
+        - variable: dataDir
+          label: "Nextcloud data directory"
+          description: "Configures the data directory where Nextcloud stores all files from the users"
+          schema:
+            type: path
+            default: "/var/www/html/data"
+            required: true
+        - variable: commands
+          label: Commands
+          description: Commands to run in the Nextcloud container
+          schema:
+            type: list
+            items:
+              - variable: command
+                label: Command
+                schema:
+                  type: string
+                  required: true
+                  enum:
+                    - value: ffmpeg
+                      description: ffmpeg
+                    - value: smbclient
+                      description: smbclient
+        - variable: maxUploadLimit
+          label: Max Upload Size (Giga Bytes)
+          description: |
+            Applies the timeout to the following settings:</br>
+            - client_max_body_size in nginx</br>
+            - post_max_size and upload_max_filesize in php</br>
+          schema:
+            type: int
+            default: 3
+            min: 1
+            required: true
+        - variable: maxExecutionTime
+          label: Max Execution Time (Seconds)
+          description: Configures the max execution time of php
+          schema:
+            type: int
+            default: 30
+            min: 30
+            required: true
+        - variable: phpMemoryLimit
+          label: PHP Memory Limit (Mega Bytes)
+          description: Configures the memory limit of php
+          schema:
+            type: int
+            default: 512
+            min: 128
+            max: 4096
+            required: true
+        - variable: opCacheMemoryConsumption
+          label: Opcache Memory Consumption (Mega Bytes)
+          description: Configures the memory consumption of the opcache
+          schema:
+            type: int
+            min: 128
+            max: 1024
+            default: 128
+            required: true
+        # TODO: nginx
   - variable: podOptions
     label: ""
     group: Advanced Pod Configuration
