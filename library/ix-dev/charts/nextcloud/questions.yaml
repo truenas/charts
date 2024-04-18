@@ -108,7 +108,26 @@ questions:
             max: 1024
             default: 128
             required: true
-        # TODO: nginx
+        - variable: cron
+          label: Cron
+          description: Configures the cron job for Nextcloud
+          schema:
+            type: dict
+            attrs:
+              - variable: enabled
+                label: Enabled
+                schema:
+                  type: bool
+                  default: true
+                  required: true
+              - variable: schedule
+                label: Schedule
+                schema:
+                  type: string
+                  show_if: [["enabled", "=", true]]
+                  default: "*/15 * * * *"
+                  required: true
+
   - variable: podOptions
     label: ""
     group: Advanced Pod Configuration

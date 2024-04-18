@@ -9,6 +9,9 @@
 {{- if .Values.ncNetwork.certificateID }}
   {{- $_ := mustMergeOverwrite .Values (include "nginx.workload" $ | fromYaml) -}}
 {{- end }}
+{{- if .Values.ncConfig.cron.enabled }}
+  {{- $_ := mustMergeOverwrite .Values (include "nextcloud.cron" $ | fromYaml) -}}
+{{- end }}
 {{- $_ := mustMergeOverwrite .Values (include "nginx.configuration" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "postgres.workload" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "nextcloud.service" $ | fromYaml) -}}

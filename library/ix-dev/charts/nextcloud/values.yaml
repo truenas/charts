@@ -34,6 +34,9 @@ ncConfig:
   phpMemoryLimit: 512
   opCacheMemoryConsumption: 128
   maxExecutionTime: 30
+  cron:
+    enabled: true
+    schedule: "*/15 * * * *"
   additionalEnvs: []
 
 ncNetwork:
