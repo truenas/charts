@@ -1,17 +1,17 @@
 {
-    "1.0.16": {
+    "1.0.17": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/mealie/1.0.16",
-        "last_update": "2024-04-17 11:37:46",
+        "location": "/__w/charts/charts/community/mealie/1.0.17",
+        "last_update": "2024-04-18 04:34:56",
         "required_features": [
-            "normalize/ixVolume",
             "definitions/timezone",
-            "normalize/acl"
+            "normalize/acl",
+            "normalize/ixVolume"
         ],
-        "human_version": "1.5.0_1.0.16",
-        "version": "1.0.16",
+        "human_version": "1.5.1_1.0.17",
+        "version": "1.0.17",
         "chart_metadata": {
             "name": "mealie",
             "description": "Mealie is a self-hosted recipe manager and meal planner",
@@ -19,9 +19,9 @@
                 "title": "Mealie"
             },
             "type": "application",
-            "version": "1.0.16",
+            "version": "1.0.17",
             "apiVersion": "v2",
-            "appVersion": "1.5.0",
+            "appVersion": "1.5.1",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {

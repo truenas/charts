@@ -1,16 +1,16 @@
 {
-    "1.0.20": {
+    "1.0.21": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/jellyseerr/1.0.20",
-        "last_update": "2024-04-16 05:24:36",
+        "location": "/__w/charts/charts/community/jellyseerr/1.0.21",
+        "last_update": "2024-04-18 04:34:56",
         "required_features": [
-            "normalize/ixVolume",
-            "definitions/timezone"
+            "definitions/timezone",
+            "normalize/ixVolume"
         ],
-        "human_version": "1.8.0_1.0.20",
-        "version": "1.0.20",
+        "human_version": "1.8.1_1.0.21",
+        "version": "1.0.21",
         "chart_metadata": {
             "name": "jellyseerr",
             "description": "Jellyseerr is a free and open source software application for managing requests for your media library.",
@@ -18,9 +18,9 @@
                 "title": "Jellyseerr"
             },
             "type": "application",
-            "version": "1.0.20",
+            "version": "1.0.21",
             "apiVersion": "v2",
-            "appVersion": "1.8.0",
+            "appVersion": "1.8.1",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
