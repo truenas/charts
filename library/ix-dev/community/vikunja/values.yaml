@@ -9,7 +9,7 @@ frontendImage:
 nginxImage:
   repository: nginx
   pullPolicy: IfNotPresent
-  tag: 1.25.4
+  tag: 1.25.5
 
 resources:
   limits:
