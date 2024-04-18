@@ -7,6 +7,9 @@ persistence:
       nextcloud:
         nextcloud:
           mountPath: /var/www/html
+      nextcloud-cron:
+        nextcloud-cron:
+          mountPath: /var/www/html
   nc-config-opcache:
     enabled: true
     type: configmap
