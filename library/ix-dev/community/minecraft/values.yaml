@@ -1,19 +1,19 @@
 j8Image:
   repository: itzg/minecraft-server
   pullPolicy: IfNotPresent
-  tag: 2024.4.0-java8
+  tag: 2024.4.1-java8
 j8gceImage:
   repository: itzg/minecraft-server
   pullPolicy: IfNotPresent
-  tag: 2024.4.0-java8-graalvm-ce
+  tag: 2024.4.1-java8-graalvm-ce
 j8j9Image:
   repository: itzg/minecraft-server
   pullPolicy: IfNotPresent
-  tag: 2024.4.0-java8-openj9
+  tag: 2024.4.1-java8-openj9
 j8jdkImage:
   repository: itzg/minecraft-server
   pullPolicy: IfNotPresent
-  tag: 2024.4.0-java8-jdk
+  tag: 2024.4.1-java8-jdk
 j11Image:
   repository: itzg/minecraft-server
   pullPolicy: IfNotPresent
