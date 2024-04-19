@@ -4,11 +4,11 @@
         "supported": false,
         "healthy_error": null,
         "location": "/__w/charts/charts/community/n8n/1.2.41",
-        "last_update": "2024-04-19 05:08:30",
+        "last_update": "2024-04-19 09:12:24",
         "required_features": [
-            "definitions/certificate",
-            "normalize/acl",
             "definitions/nodeIP",
+            "normalize/acl",
+            "definitions/certificate",
             "normalize/ixVolume"
         ],
         "human_version": "1.38.1_1.2.41",
