@@ -117,7 +117,7 @@ questions:
               - variable: enabled
                 label: Enabled
                 schema:
-                  type: bool
+                  type: boolean
                   default: true
                   required: true
               - variable: schedule
