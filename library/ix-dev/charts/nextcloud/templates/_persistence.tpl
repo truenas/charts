@@ -89,6 +89,9 @@ persistence:
       nextcloud:
         nextcloud:
           mountPath: {{ $storage.mountPath }}
+      nextcloud-cron:
+        nextcloud-cron:
+          mountPath: {{ $storage.mountPath }}
   {{- end }}
   {{- if .Values.ncNetwork.certificateID }}
   nginx-cert:
