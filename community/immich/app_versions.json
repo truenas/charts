@@ -1,18 +1,18 @@
 {
-    "3.0.19": {
+    "3.0.20": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/immich/3.0.19",
-        "last_update": "2024-04-19 09:12:24",
+        "location": "/__w/charts/charts/community/immich/3.0.20",
+        "last_update": "2024-04-20 13:18:33",
         "required_features": [
             "normalize/acl",
-            "definitions/timezone",
+            "normalize/ixVolume",
             "definitions/gpuConfiguration",
-            "normalize/ixVolume"
+            "definitions/timezone"
         ],
-        "human_version": "1.101.0_3.0.19",
-        "version": "3.0.19",
+        "human_version": "1.102.0_3.0.20",
+        "version": "3.0.20",
         "chart_metadata": {
             "name": "immich",
             "description": "Immich is a self-hosted photo and video backup solution directly from your mobile phone.",
@@ -20,9 +20,9 @@
                 "title": "Immich"
             },
             "type": "application",
-            "version": "3.0.19",
+            "version": "3.0.20",
             "apiVersion": "v2",
-            "appVersion": "1.101.0",
+            "appVersion": "1.102.0",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
@@ -2940,6 +2940,40 @@
                             "definitions/gpuConfiguration"
                         ],
                         "attrs": []
+                    }
+                },
+                {
+                    "variable": "immichGPUContainers",
+                    "group": "Resources Configuration",
+                    "label": "GPU Containers",
+                    "description": "Select which containers should use GPU.",
+                    "schema": {
+                        "type": "dict",
+                        "show_if": [
+                            [
+                                "immichGPU",
+                                "!=",
+                                {}
+                            ]
+                        ],
+                        "attrs": [
+                            {
+                                "variable": "microservices",
+                                "label": "Enable GPU for Microservices",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            },
+                            {
+                                "variable": "machinelearning",
+                                "label": "Enable GPU for Machine Learning",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            }
+                        ]
                     }
                 }
             ]
