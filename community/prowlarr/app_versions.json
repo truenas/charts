@@ -1,16 +1,16 @@
 {
-    "1.2.22": {
+    "1.2.23": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/prowlarr/1.2.22",
-        "last_update": "2024-04-20 13:17:04",
+        "location": "/__w/charts/charts/community/prowlarr/1.2.23",
+        "last_update": "2024-04-21 21:12:28",
         "required_features": [
-            "normalize/acl",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "normalize/acl"
         ],
-        "human_version": "1.16.1.4420_1.2.22",
-        "version": "1.2.22",
+        "human_version": "1.16.2.4435_1.2.23",
+        "version": "1.2.23",
         "chart_metadata": {
             "name": "prowlarr",
             "description": "Prowlarr is an indexer manager/proxy to integrate with your various PVR apps.",
@@ -18,9 +18,9 @@
                 "title": "Prowlarr"
             },
             "type": "application",
-            "version": "1.2.22",
+            "version": "1.2.23",
             "apiVersion": "v2",
-            "appVersion": "1.16.1.4420",
+            "appVersion": "1.16.2.4435",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
