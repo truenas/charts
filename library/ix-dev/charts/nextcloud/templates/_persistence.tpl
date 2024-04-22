@@ -131,7 +131,7 @@ persistence:
   {{- $isOld := "false" -}}
   {{- $storage := .storage -}}
 
-
+  # FIXME: also handle hostPaths
   {{- if eq $storage.type "ixVolume" -}}
     {{- if eq $storage.ixVolumeConfig.datasetName $oldDatasetName -}}
       {{- $isOld = "true" -}}
