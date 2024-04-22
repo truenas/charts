@@ -16,10 +16,10 @@ persistence:
     targetSelector:
       nextcloud:
         nextcloud:
-          mountPath: {{ .Values.nextcloud.datadir }}
+          mountPath: {{ .Values.ncConfig.dataDir }}
       nextcloud-cron:
         nextcloud-cron:
-          mountPath: /var/www/data
+          mountPath: {{ .Values.ncConfig.dataDir }}
   nc-config-opcache:
     enabled: true
     type: configmap
