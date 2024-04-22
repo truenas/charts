@@ -3,11 +3,11 @@ import json
 import os
 import sys
 
-def migrate_volume(volume):
+def migrate_volume(volume, suffix=''):
     return {
         'type': 'hostPath',
         'hostPathConfig': {
-            'hostPath': volume['hostPath']
+            'hostPath': volume['hostPath']+suffix
         },
     } if volume.get('hostPathEnabled', False) else {
         'type': 'ixVolume',
@@ -71,9 +71,8 @@ def migrate_common_lib(values):
         'ncStorage': {
             'pgData': migrate_volume(values['postgresAppVolumeMounts']['postgres-data']),
             'pgBackup': migrate_volume(values['postgresAppVolumeMounts']['postgres-backup']),
-            # TODO:
-            'data': migrate_volume(values['appVolumeMounts']['data']),
-            'html': migrate_volume(values['appVolumeMounts']['data']),
+            'data': migrate_volume(values['appVolumeMounts']['data'], '/data'),
+            'html': migrate_volume(values['appVolumeMounts']['data'], '/html'),
             'additionalStorages': [
                 {
                     'type': 'hostPath',

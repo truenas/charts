@@ -8,14 +8,14 @@ persistence:
       nextcloud:
         nextcloud:
           mountPath: /var/www/html
-          {{- if eq (include "isOldInstall" (dict "storage" .Values.ncStorage.html)) "true" }}
+          {{- if eq (include "isOldIxVol" (dict "storage" .Values.ncStorage.html)) "true" }}
           # If the dataset is coming from on old install, we need to use the `html` subPath of the host
           subPath: html
           {{- end }}
       nextcloud-cron:
         nextcloud-cron:
           mountPath: /var/www/html
-          {{- if eq (include "isOldInstall" (dict "storage" .Values.ncStorage.html)) "true" }}
+          {{- if eq (include "isOldIxVol" (dict "storage" .Values.ncStorage.html)) "true" }}
           # If the dataset is coming from on old install, we need to use the `html` subPath of the host
           subPath: html
           {{- end }}
@@ -26,14 +26,14 @@ persistence:
       nextcloud:
         nextcloud:
           mountPath: {{ .Values.ncConfig.dataDir }}
-          {{- if eq (include "isOldInstall" (dict "storage" .Values.ncStorage.data)) "true" }}
+          {{- if eq (include "isOldIxVol" (dict "storage" .Values.ncStorage.data)) "true" }}
           # If the dataset is coming from on old install, we need to use the `data` subPath of the host
           subPath: data
           {{- end }}
       nextcloud-cron:
         nextcloud-cron:
           mountPath: {{ .Values.ncConfig.dataDir }}
-          {{- if eq (include "isOldInstall" (dict "storage" .Values.ncStorage.data)) "true" }}
+          {{- if eq (include "isOldIxVol" (dict "storage" .Values.ncStorage.data)) "true" }}
           # If the dataset is coming from on old install, we need to use the `data` subPath of the host
           subPath: data
           {{- end }}
@@ -126,12 +126,11 @@ persistence:
       ) | nindent 2 }}
 {{- end -}}
 
-{{- define "isOldInstall" -}}
+{{- define "isOldIxVol" -}}
   {{- $oldDatasetName := "ix-nextcloud_data" -}}
   {{- $isOld := "false" -}}
   {{- $storage := .storage -}}
 
-  # FIXME: also handle hostPaths
   {{- if eq $storage.type "ixVolume" -}}
     {{- if eq $storage.ixVolumeConfig.datasetName $oldDatasetName -}}
       {{- $isOld = "true" -}}
