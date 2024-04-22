@@ -48,6 +48,14 @@ ncNetwork:
     externalAccessPort: 80
 
 ncStorage:
+  data:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: data
+  html:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: html
   pgData:
     type: ixVolume
     ixVolumeConfig:
