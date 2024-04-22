@@ -132,8 +132,8 @@ persistence:
   {{- $storage := .storage -}}
 
 
-  {{- if eq .storage.type "ixVolume" -}}
-    {{- if eq .storage.ixVolumeConfig.datasetName $oldDatasetName -}}
+  {{- if eq $storage.type "ixVolume" -}}
+    {{- if eq $storage.ixVolumeConfig.datasetName $oldDatasetName -}}
       {{- $isOld = "true" -}}
     {{- end -}}
   {{- end -}}
