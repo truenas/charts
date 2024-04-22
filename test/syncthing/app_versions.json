@@ -1,18 +1,18 @@
 {
-    "1.2.2": {
+    "1.2.3": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/test/syncthing/1.2.2",
-        "last_update": "2024-04-21 21:11:03",
+        "location": "/__w/charts/charts/test/syncthing/1.2.3",
+        "last_update": "2024-04-22 09:13:44",
         "required_features": [
-            "definitions/certificate",
+            "normalize/acl",
             "normalize/ixVolume",
-            "definitions/timezone",
-            "normalize/acl"
+            "definitions/certificate",
+            "definitions/timezone"
         ],
-        "human_version": "1.27.0_1.2.2",
-        "version": "1.2.2",
+        "human_version": "1.27.6_1.2.3",
+        "version": "1.2.3",
         "chart_metadata": {
             "name": "syncthing",
             "description": "Syncthing is a continuous file synchronization program.",
@@ -20,9 +20,9 @@
                 "title": "Syncthing"
             },
             "type": "application",
-            "version": "1.2.2",
+            "version": "1.2.3",
             "apiVersion": "v2",
-            "appVersion": "1.27.0",
+            "appVersion": "1.27.6",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
@@ -35,7 +35,7 @@
                 {
                     "name": "common",
                     "repository": "file://../../../common",
-                    "version": "1.2.8"
+                    "version": "1.2.9"
                 }
             ],
             "home": "https://syncthing.net/",
@@ -1072,10 +1072,10 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/test/syncthing/1.1.5",
-        "last_update": "2024-04-21 21:11:03",
+        "last_update": "2024-04-22 09:12:19",
         "required_features": [
-            "definitions/certificate",
             "normalize/ixVolume",
+            "definitions/certificate",
             "definitions/timezone"
         ],
         "human_version": "1.27.0_1.1.5",
