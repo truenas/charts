@@ -17,6 +17,10 @@ ncNetwork:
 ncStorage:
   pgData:
     type: pvc
+  html:
+    type: pvc
+  data:
+    type: pvc
   pgBackup:
     type: emptyDir
     emptyDirConfig:

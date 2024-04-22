@@ -2,7 +2,7 @@
 persistence:
   html: # TODO:
     enabled: true
-    type: pvc
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.ncStorage.html) | nindent 4 }}
     targetSelector:
       nextcloud:
         nextcloud:
@@ -12,7 +12,7 @@ persistence:
           mountPath: /var/www/html
   data:
     enabled: true
-    type: pvc
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.ncStorage.data) | nindent 4 }}
     targetSelector:
       nextcloud:
         nextcloud:
