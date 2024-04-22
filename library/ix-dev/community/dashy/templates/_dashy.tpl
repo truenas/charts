@@ -66,7 +66,7 @@ workload:
             - |
               if [ -z "$(ls -A /data)" ]; then
                 echo "App directory is empty, copying default files"
-                cp -r /app/public/* /data/
+                cp -r /app/user-data/* /data/
                 exit 0
               fi
 
