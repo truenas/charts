@@ -1,6 +1,6 @@
 {{- define "nextcloud.persistence" -}}
 persistence:
-  data: # TODO:
+  html: # TODO:
     enabled: true
     type: pvc
     targetSelector:
@@ -10,6 +10,16 @@ persistence:
       nextcloud-cron:
         nextcloud-cron:
           mountPath: /var/www/html
+  data:
+    enabled: true
+    type: pvc
+    targetSelector:
+      nextcloud:
+        nextcloud:
+          mountPath: {{ .Values.nextcloud.datadir }}
+      nextcloud-cron:
+        nextcloud-cron:
+          mountPath: /var/www/data
   nc-config-opcache:
     enabled: true
     type: configmap
@@ -43,37 +53,6 @@ persistence:
           # https://github.com/nextcloud/docker/issues/1796
           mountPath: /etc/apache2/conf-enabled/limitrequestbody.conf
           subPath: limitrequestbody.conf
-
-  # config:
-  #   enabled: true
-  #   targetSelector:
-  #     nextcloud:
-  #       nextcloud:
-  #         mountPath: /config
-  #       01-init-config:
-  #         mountPath: /config
-  # media:
-  #   enabled: true
-  #   targetSelector:
-  #     nextcloud:
-  #       nextcloud:
-  #         mountPath: /media
-  # default-config:
-  #   enabled: true
-  #   type: secret
-  #   objectName: ha-config
-  #   defaultMode: "0744"
-  #   items:
-  #     - key: configuration.default
-  #       path: configuration.default
-  #     - key: recorder.default
-  #       path: recorder.default
-  #     - key: script.sh
-  #       path: script.sh
-  #   targetSelector:
-  #     nextcloud:
-  #       01-init-config:
-  #         mountPath: /default/init
   tmp:
     enabled: true
     type: emptyDir
