@@ -1,4 +1,5 @@
 {{- define "nextcloud.persistence" -}}
+
 persistence:
   html: # TODO:
     enabled: true
@@ -7,14 +8,14 @@ persistence:
       nextcloud:
         nextcloud:
           mountPath: /var/www/html
-          {{- if and (eq .Values.ncStorage.html.type "ixVolume") (eq .Values.ncStorage.html.ixVolumeConfig.datasetName "ix-nextcloud_data") }}
+          {{- if eq (include "isOldInstall" (dict "storage" .Values.ncStorage.html)) "true" }}
           # If the dataset is coming from on old install, we need to use the `html` subPath of the host
           subPath: html
           {{- end }}
       nextcloud-cron:
         nextcloud-cron:
           mountPath: /var/www/html
-          {{- if and (eq .Values.ncStorage.html.type "ixVolume") (eq .Values.ncStorage.html.ixVolumeConfig.datasetName "ix-nextcloud_data") }}
+          {{- if eq (include "isOldInstall" (dict "storage" .Values.ncStorage.html)) "true" }}
           # If the dataset is coming from on old install, we need to use the `html` subPath of the host
           subPath: html
           {{- end }}
@@ -25,14 +26,14 @@ persistence:
       nextcloud:
         nextcloud:
           mountPath: {{ .Values.ncConfig.dataDir }}
-          {{- if and (eq .Values.ncStorage.data.type "ixVolume") (eq .Values.ncStorage.data.ixVolumeConfig.datasetName "ix-nextcloud_data") }}
+          {{- if eq (include "isOldInstall" (dict "storage" .Values.ncStorage.data)) "true" }}
           # If the dataset is coming from on old install, we need to use the `data` subPath of the host
           subPath: data
           {{- end }}
       nextcloud-cron:
         nextcloud-cron:
           mountPath: {{ .Values.ncConfig.dataDir }}
-          {{- if and (eq .Values.ncStorage.data.type "ixVolume") (eq .Values.ncStorage.data.ixVolumeConfig.datasetName "ix-nextcloud_data") }}
+          {{- if eq (include "isOldInstall" (dict "storage" .Values.ncStorage.data)) "true" }}
           # If the dataset is coming from on old install, we need to use the `data` subPath of the host
           subPath: data
           {{- end }}
@@ -123,4 +124,19 @@ persistence:
       (dict "pgData" .Values.ncStorage.pgData
             "pgBackup" .Values.ncStorage.pgBackup
       ) | nindent 2 }}
+{{- end -}}
+
+{{- define "isOldInstall" -}}
+  {{- $oldDatasetName := "ix-nextcloud_data" -}}
+  {{- $isOld := "false" -}}
+  {{- $storage := .storage -}}
+
+
+  {{- if eq .storage.type "ixVolume" -}}
+    {{- if eq .storage.ixVolumeConfig.datasetName $oldDatasetName -}}
+      {{- $isOld = "true" -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- $isOld }}
 {{- end -}}
