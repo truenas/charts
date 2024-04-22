@@ -7,9 +7,17 @@ persistence:
       nextcloud:
         nextcloud:
           mountPath: /var/www/html
+          {{- if and (eq .Values.ncStorage.html.type "ixVolume") (eq .Values.ncStorage.html.ixVolumeConfig.datasetName "ix-nextcloud_data") }}
+          # If the dataset is coming from on old install, we need to use the `html` subPath of the host
+          subPath: html
+          {{- end }}
       nextcloud-cron:
         nextcloud-cron:
           mountPath: /var/www/html
+          {{- if and (eq .Values.ncStorage.html.type "ixVolume") (eq .Values.ncStorage.html.ixVolumeConfig.datasetName "ix-nextcloud_data") }}
+          # If the dataset is coming from on old install, we need to use the `html` subPath of the host
+          subPath: html
+          {{- end }}
   data:
     enabled: true
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.ncStorage.data) | nindent 4 }}
@@ -17,9 +25,17 @@ persistence:
       nextcloud:
         nextcloud:
           mountPath: {{ .Values.ncConfig.dataDir }}
+          {{- if and (eq .Values.ncStorage.data.type "ixVolume") (eq .Values.ncStorage.data.ixVolumeConfig.datasetName "ix-nextcloud_data") }}
+          # If the dataset is coming from on old install, we need to use the `data` subPath of the host
+          subPath: data
+          {{- end }}
       nextcloud-cron:
         nextcloud-cron:
           mountPath: {{ .Values.ncConfig.dataDir }}
+          {{- if and (eq .Values.ncStorage.data.type "ixVolume") (eq .Values.ncStorage.data.ixVolumeConfig.datasetName "ix-nextcloud_data") }}
+          # If the dataset is coming from on old install, we need to use the `data` subPath of the host
+          subPath: data
+          {{- end }}
   nc-config-opcache:
     enabled: true
     type: configmap
