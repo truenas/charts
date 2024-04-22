@@ -225,84 +225,162 @@ questions:
     schema:
       type: dict
       attrs:
-        # - variable: config
-        #   label: Nextcloud Configuration Storage
-        #   description: The path to store Nextcloud Configuration.
-        #   schema:
-        #     type: dict
-        #     attrs:
-        #       - variable: type
-        #         label: Type
-        #         description: |
-        #           ixVolume: Is dataset created automatically by the system.</br>
-        #           Host Path: Is a path that already exists on the system.
-        #         schema:
-        #           type: string
-        #           required: true
-        #           immutable: true
-        #           default: ixVolume
-        #           enum:
-        #             - value: hostPath
-        #               description: Host Path (Path that already exists on the system)
-        #             - value: ixVolume
-        #               description: ixVolume (Dataset created automatically by the system)
-        #       - variable: ixVolumeConfig
-        #         label: ixVolume Configuration
-        #         description: The configuration for the ixVolume dataset.
-        #         schema:
-        #           type: dict
-        #           show_if: [["type", "=", "ixVolume"]]
-        #           $ref:
-        #             - "normalize/ixVolume"
-        #           attrs:
-        #             - variable: aclEnable
-        #               label: Enable ACL
-        #               description: Enable ACL for the dataset.
-        #               schema:
-        #                 type: boolean
-        #                 default: false
-        #             - variable: datasetName
-        #               label: Dataset Name
-        #               description: The name of the dataset to use for storage.
-        #               schema:
-        #                 type: string
-        #                 required: true
-        #                 immutable: true
-        #                 hidden: true
-        #                 default: "config"
-        #             - variable: aclEntries
-        #               label: ACL Configuration
-        #               schema:
-        #                 type: dict
-        #                 show_if: [["aclEnable", "=", true]]
-        #                 attrs: []
-        #       - variable: hostPathConfig
-        #         label: Host Path Configuration
-        #         schema:
-        #           type: dict
-        #           show_if: [["type", "=", "hostPath"]]
-        #           attrs:
-        #             - variable: aclEnable
-        #               label: Enable ACL
-        #               description: Enable ACL for the dataset.
-        #               schema:
-        #                 type: boolean
-        #                 default: false
-        #             - variable: acl
-        #               label: ACL Configuration
-        #               schema:
-        #                 type: dict
-        #                 show_if: [["aclEnable", "=", true]]
-        #                 attrs: []
-        #                 $ref:
-        #                   - "normalize/acl"
-        #             - variable: hostPath
-        #               label: Host Path
-        #               description: The host path to use for storage.
-        #               schema:
-        #                 type: hostpath
-        #                 show_if: [["aclEnable", "=", false]]
-        #                 required: true
+        - variable: html
+          label: Nextcloud HTML Storage
+          description: The path to store Nextcloud HTML and AppData.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
+                schema:
+                  type: string
+                  required: true
+                  immutable: true
+                  default: ixVolume
+                  enum:
+                    - value: hostPath
+                      description: Host Path (Path that already exists on the system)
+                    - value: ixVolume
+                      description: ixVolume (Dataset created automatically by the system)
+              - variable: ixVolumeConfig
+                label: ixVolume Configuration
+                description: The configuration for the ixVolume dataset.
+                schema:
+                  type: dict
+                  show_if: [["type", "=", "ixVolume"]]
+                  $ref:
+                    - "normalize/ixVolume"
+                  attrs:
+                    - variable: aclEnable
+                      label: Enable ACL
+                      description: Enable ACL for the dataset.
+                      schema:
+                        type: boolean
+                        default: false
+                    - variable: datasetName
+                      label: Dataset Name
+                      description: The name of the dataset to use for storage.
+                      schema:
+                        type: string
+                        required: true
+                        immutable: true
+                        hidden: true
+                        default: "html"
+                    - variable: aclEntries
+                      label: ACL Configuration
+                      schema:
+                        type: dict
+                        show_if: [["aclEnable", "=", true]]
+                        attrs: []
+              - variable: hostPathConfig
+                label: Host Path Configuration
+                schema:
+                  type: dict
+                  show_if: [["type", "=", "hostPath"]]
+                  attrs:
+                    - variable: aclEnable
+                      label: Enable ACL
+                      description: Enable ACL for the dataset.
+                      schema:
+                        type: boolean
+                        default: false
+                    - variable: acl
+                      label: ACL Configuration
+                      schema:
+                        type: dict
+                        show_if: [["aclEnable", "=", true]]
+                        attrs: []
+                        $ref:
+                          - "normalize/acl"
+                    - variable: hostPath
+                      label: Host Path
+                      description: The host path to use for storage.
+                      schema:
+                        type: hostpath
+                        show_if: [["aclEnable", "=", false]]
+                        required: true
+        - variable: data
+          label: Nextcloud Data Storage
+          description: The path to store Nextcloud User Data.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
+                schema:
+                  type: string
+                  required: true
+                  immutable: true
+                  default: ixVolume
+                  enum:
+                    - value: hostPath
+                      description: Host Path (Path that already exists on the system)
+                    - value: ixVolume
+                      description: ixVolume (Dataset created automatically by the system)
+              - variable: ixVolumeConfig
+                label: ixVolume Configuration
+                description: The configuration for the ixVolume dataset.
+                schema:
+                  type: dict
+                  show_if: [["type", "=", "ixVolume"]]
+                  $ref:
+                    - "normalize/ixVolume"
+                  attrs:
+                    - variable: aclEnable
+                      label: Enable ACL
+                      description: Enable ACL for the dataset.
+                      schema:
+                        type: boolean
+                        default: false
+                    - variable: datasetName
+                      label: Dataset Name
+                      description: The name of the dataset to use for storage.
+                      schema:
+                        type: string
+                        required: true
+                        immutable: true
+                        hidden: true
+                        default: "html"
+                    - variable: aclEntries
+                      label: ACL Configuration
+                      schema:
+                        type: dict
+                        show_if: [["aclEnable", "=", true]]
+                        attrs: []
+              - variable: hostPathConfig
+                label: Host Path Configuration
+                schema:
+                  type: dict
+                  show_if: [["type", "=", "hostPath"]]
+                  attrs:
+                    - variable: aclEnable
+                      label: Enable ACL
+                      description: Enable ACL for the dataset.
+                      schema:
+                        type: boolean
+                        default: false
+                    - variable: acl
+                      label: ACL Configuration
+                      schema:
+                        type: dict
+                        show_if: [["aclEnable", "=", true]]
+                        attrs: []
+                        $ref:
+                          - "normalize/acl"
+                    - variable: hostPath
+                      label: Host Path
+                      description: The host path to use for storage.
+                      schema:
+                        type: hostpath
+                        show_if: [["aclEnable", "=", false]]
+                        required: true
 
         - variable: pgData
           label: Nextcloud Postgres Data Storage
