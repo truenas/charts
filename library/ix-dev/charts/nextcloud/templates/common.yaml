@@ -14,6 +14,7 @@
 {{- end }}
 {{- $_ := mustMergeOverwrite .Values (include "nginx.configuration" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "postgres.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "redis.workload" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "nextcloud.service" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "nextcloud.persistence" $ | fromYaml) -}}
 

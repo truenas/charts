@@ -18,6 +18,13 @@
     {{- $dbPass = ((index .data "POSTGRES_PASSWORD") | b64dec) -}}
   {{- end -}}
 
+  {{- $redisHost := (printf "%s-redis" $fullname) -}}
+
+  {{- $redisPass := randAlphaNum 32 -}}
+  {{- with (lookup "v1" "Secret" .Release.Namespace (printf "%s-redis-creds" $fullname)) -}}
+    {{- $redisPass = ((index .data "REDIS_PASSWORD") | b64dec) -}}
+  {{- end -}}
+
   {{/* Temporary set dynamic db details on values,
   so we can print them on the notes */}}
   {{- $_ := set .Values "ncDbPass" $dbPass -}}
@@ -35,6 +42,14 @@ secret:
       POSTGRES_PASSWORD: {{ $dbPass }}
       POSTGRES_HOST: {{ $dbHost }}
       POSTGRES_URL: {{ $dbURL }}
+
+  redis-creds:
+    enabled: true
+    data:
+      ALLOW_EMPTY_PASSWORD: "no"
+      REDIS_PASSWORD: {{ $redisPass }}
+      REDIS_HOST: {{ $redisHost }}
+
   nextcloud-creds:
     enabled: true
     data:
@@ -42,6 +57,9 @@ secret:
       POSTGRES_DB: {{ $dbName }}
       POSTGRES_USER: {{ $dbUser }}
       POSTGRES_PASSWORD: {{ $dbPass }}
+      REDIS_HOST: {{ $redisHost }}
+      REDIS_HOST_PORT: "6379"
+      REDIS_HOST_PASSWORD: {{ $redisPass }}
       NEXTCLOUD_DATA_DIR: {{ .Values.ncConfig.dataDir }}
       PHP_UPLOAD_LIMIT: {{ printf "%vG" .Values.ncConfig.maxUploadLimit | default 3 }}
       PHP_MEMORY_LIMIT: {{ printf "%vM" .Values.ncConfig.phpMemoryLimit | default 512 }}

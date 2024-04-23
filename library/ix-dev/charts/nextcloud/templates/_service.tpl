@@ -33,5 +33,17 @@ service:
         targetSelector: nginx
   {{- end }}
 
+  # Redis
+  redis:
+    enabled: true
+    type: ClusterIP
+    targetSelector: redis
+    ports:
+      redis:
+        enabled: true
+        primary: true
+        port: 6379
+        targetPort: 6379
+        targetSelector: redis
   {{- include "ix.v1.common.app.postgresService" $ | nindent 2 }}
 {{- end -}}
