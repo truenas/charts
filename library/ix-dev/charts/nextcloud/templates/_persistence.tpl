@@ -1,72 +1,5 @@
 {{- define "nextcloud.persistence" -}}
 persistence:
-  {{/* Due to the previous volume structure, we can't really migrate it
-       without moving data between directories. Especially without a way to notify user before.
-       So if its an old install, we need to use the previous structure.
-  */}}
-
-  {{- if .Values.ncStorage.isPreMigrationInstallation }}
-  oldhtml:
-    enabled: true
-    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.ncStorage.old) | nindent 4 }}
-    targetSelector:
-      nextcloud:
-        nextcloud:
-          mountPath: /var/www/html
-          subPath: html
-      nextcloud-cron:
-        nextcloud-cron:
-          mountPath: /var/www/html
-          subPath: html
-  olddata:
-    enabled: true
-    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.ncStorage.old) | nindent 4 }}
-    targetSelector:
-      nextcloud:
-        nextcloud:
-          mountPath: {{ .Values.ncConfig.dataDir }}
-          subPath: data
-      nextcloud-cron:
-        nextcloud-cron:
-          mountPath: {{ .Values.ncConfig.dataDir }}
-          subPath: data
-  oldconfig:
-    enabled: true
-    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.ncStorage.old) | nindent 4 }}
-    targetSelector:
-      nextcloud:
-        nextcloud:
-          mountPath: /var/www/html/config
-          subPath: config
-      nextcloud-cron:
-        nextcloud-cron:
-          mountPath: /var/www/html/config
-          subPath: config
-  oldcustomapps:
-    enabled: true
-    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.ncStorage.old) | nindent 4 }}
-    targetSelector:
-      nextcloud:
-        nextcloud:
-          mountPath: /var/www/html/custom_apps
-          subPath: custom_apps
-      nextcloud-cron:
-        nextcloud-cron:
-          mountPath: /var/www/html/custom_apps
-          subPath: custom_apps
-  oldthemes:
-    enabled: true
-    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.ncStorage.old) | nindent 4 }}
-    targetSelector:
-      nextcloud:
-        nextcloud:
-          mountPath: /var/www/html/themes
-          subPath: themes
-      nextcloud-cron:
-        nextcloud-cron:
-          mountPath: /var/www/html/themes
-          subPath: themes
-  {{- else }}
   html:
     enabled: true
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.ncStorage.html) | nindent 4 }}
@@ -84,10 +17,15 @@ persistence:
       nextcloud:
         nextcloud:
           mountPath: {{ .Values.ncConfig.dataDir }}
+          {{- if .Values.ncStorage.isDataInTheSameVolume }}
+          subPath: data
+          {{- end }}
       nextcloud-cron:
         nextcloud-cron:
           mountPath: {{ .Values.ncConfig.dataDir }}
-  {{- end }}
+          {{- if .Values.ncStorage.isDataInTheSameVolume }}
+          subPath: data
+          {{- end }}
 
   # Configuration files mounting
   nc-config-opcache:
