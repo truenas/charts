@@ -87,7 +87,6 @@ persistence:
       nextcloud-cron:
         nextcloud-cron:
           mountPath: {{ .Values.ncConfig.dataDir }}
-          {{- end }}
   {{- end }}
 
   # Configuration files mounting
