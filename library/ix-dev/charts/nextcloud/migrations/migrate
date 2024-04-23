@@ -19,8 +19,9 @@ def migrate_volume(volume, suffix=''):
 def migrate_common_lib(values):
     delete_keys = [
         'service', 'updateStrategy', 'certificate', 'enableResourceLimits', 'cpuLimit',
-        'memLimit', 'dnsConfig', 'environmentVariables', 'nextcloud', 'cronjob',
+        'memLimit', 'dnsConfig', 'environmentVariables', 'nextcloud', 'cronjob', 'nginx',
         'nginxConfig', 'postgresAppVolumeMounts', 'extraAppVolumeMounts', 'appVolumeMounts',
+        'useServiceNameForHost',
     ]
 
     values.update({
@@ -101,6 +102,8 @@ def migrate(values):
 
 
 if __name__ == '__main__':
+    with open('in.json', 'r') as f:
+        print(json.dumps(migrate(json.loads(f.read()))))
     if len(sys.argv) != 2:
         exit(1)
 
