@@ -225,102 +225,30 @@ questions:
     schema:
       type: dict
       attrs:
-        - variable: isPreMigrationInstallation
-          label: "Pre v2 Installation (See the tooltip for more information)"
-          description: |
-            If this is checked, means that this is an installation coming from a previous version (v1.x.x).<br/>
-            In order for backwards compatibility, the older storage structure was kept for this installation.<br/>
-            New installations will find this option unchecked and will see the new storage structure options below. <br/>
-            This option is not available for editing and is here only as an indicator.
+        - variable: shouldShowStorageToggle
+          label: ""
           schema:
             type: boolean
             default: false
-            editable: false
-        - variable: old
-          label: Nextcloud Data and HTML Storage
-          description: The path to store Nextcloud UserData, HTML and AppData.
+            hidden: true
+        - variable: isDataInTheSameVolume
+          label: "Pre v2 Storage Structure (See the tooltip for more information)"
+          description: |
+            If this is checked, means that this is an installation coming from a previous version (v1.x.x).<br/>
+            In order to have backwards compatibility, the older storage structure was kept for this installation.<br/>
+            If you want to utilize the new storage structure, move 'data' in a separate directory or dataset.
+            Change the 'Nextcloud UserData' configuration below to point to the new location and then uncheck this checkbox.
+            <br/><br/>
+            You will NOT likely want to change that if your setup uses ixVolume as storage.
           schema:
-            type: dict
-            show_if: [["isPreMigrationInstallation", "=", true]]
-            attrs:
-              - variable: type
-                label: Type
-                description: |
-                  ixVolume: Is dataset created automatically by the system.</br>
-                  Host Path: Is a path that already exists on the system.
-                schema:
-                  type: string
-                  required: true
-                  immutable: true
-                  default: ixVolume
-                  enum:
-                    - value: hostPath
-                      description: Host Path (Path that already exists on the system)
-                    - value: ixVolume
-                      description: ixVolume (Dataset created automatically by the system)
-              - variable: ixVolumeConfig
-                label: ixVolume Configuration
-                description: The configuration for the ixVolume dataset.
-                schema:
-                  type: dict
-                  show_if: [["type", "=", "ixVolume"]]
-                  $ref:
-                    - "normalize/ixVolume"
-                  attrs:
-                    - variable: aclEnable
-                      label: Enable ACL
-                      description: Enable ACL for the dataset.
-                      schema:
-                        type: boolean
-                        default: false
-                    - variable: datasetName
-                      label: Dataset Name
-                      description: The name of the dataset to use for storage.
-                      schema:
-                        type: string
-                        required: true
-                        immutable: true
-                        hidden: true
-                        default: "ix-nextcloud_data"
-                    - variable: aclEntries
-                      label: ACL Configuration
-                      schema:
-                        type: dict
-                        show_if: [["aclEnable", "=", true]]
-                        attrs: []
-              - variable: hostPathConfig
-                label: Host Path Configuration
-                schema:
-                  type: dict
-                  show_if: [["type", "=", "hostPath"]]
-                  attrs:
-                    - variable: aclEnable
-                      label: Enable ACL
-                      description: Enable ACL for the dataset.
-                      schema:
-                        type: boolean
-                        default: false
-                    - variable: acl
-                      label: ACL Configuration
-                      schema:
-                        type: dict
-                        show_if: [["aclEnable", "=", true]]
-                        attrs: []
-                        $ref:
-                          - "normalize/acl"
-                    - variable: hostPath
-                      label: Host Path
-                      description: The host path to use for storage.
-                      schema:
-                        type: hostpath
-                        show_if: [["aclEnable", "=", false]]
-                        required: true
+            type: boolean
+            show_if: [["shouldShowStorageToggle", "=", true]]
+            default: false
         - variable: html
           label: Nextcloud HTML Storage
           description: The path to store Nextcloud HTML and AppData.
           schema:
             type: dict
-            show_if: [["isPreMigrationInstallation", "=", false]]
             attrs:
               - variable: type
                 label: Type
@@ -395,11 +323,10 @@ questions:
                         show_if: [["aclEnable", "=", false]]
                         required: true
         - variable: data
-          label: Nextcloud Data Storage
+          label: Nextcloud User Data Storage
           description: The path to store Nextcloud User Data.
           schema:
             type: dict
-            show_if: [["isPreMigrationInstallation", "=", false]]
             attrs:
               - variable: type
                 label: Type
