@@ -24,6 +24,7 @@ def migrate_common_lib(values):
     ]
 
     values.update({
+        'isPreMigrationInstallation': True,
         # Migrate Network
         'ncNetwork': {
             'webPort': values['service']['nodePort'],
@@ -71,8 +72,7 @@ def migrate_common_lib(values):
         'ncStorage': {
             'pgData': migrate_volume(values['postgresAppVolumeMounts']['postgres-data']),
             'pgBackup': migrate_volume(values['postgresAppVolumeMounts']['postgres-backup']),
-            'data': migrate_volume(values['appVolumeMounts']['data'], '/data'),
-            'html': migrate_volume(values['appVolumeMounts']['data'], '/html'),
+            'old': migrate_volume(values['appVolumeMounts']['nextcloud-data']),
             'additionalStorages': [
                 {
                     'type': 'hostPath',
