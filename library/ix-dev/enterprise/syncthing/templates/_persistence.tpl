@@ -2,9 +2,7 @@
 persistence:
   home:
     enabled: true
-    type: {{ .Values.syncthingStorage.home.type }}
-    datasetName: {{ .Values.syncthingStorage.home.datasetName | default "" }}
-    hostPath: {{ .Values.syncthingStorage.home.hostPath | default "" }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.syncthingStorage.home) | nindent 4 }}
     targetSelector:
       syncthing:
         syncthing:
@@ -37,25 +35,19 @@ persistence:
   {{- end -}}
 
   {{- range $idx, $storage := .Values.syncthingStorage.additionalStorages }}
+  {{- if eq $storage.type "smb-pv-pvc" -}}
+    {{- if $storage.smbConfig.migrationMode -}}
+      {{- $_ := set $storage "readOnly" true -}}
+      {{- $_ := set $storage.smbConfig "mountOptions" (list
+        (dict "key" "noperm")
+        (dict "key" "cifsacl")
+        (dict "key" "vers" "value" "3.0")
+      ) -}}
+    {{- end -}}
+  {{- end }}
   {{ printf "sync-%v" (int $idx) }}:
-    {{- $size := "" -}}
-    {{- if $storage.size -}}
-      {{- $size = (printf "%vGi" $storage.size) -}}
-    {{- end }}
     enabled: true
-    type: {{ $storage.type }}
-    datasetName: {{ $storage.datasetName | default "" }}
-    hostPath: {{ $storage.hostPath | default "" }}
-    server: {{ $storage.server | default "" }}
-    share: {{ $storage.share | default "" }}
-    domain: {{ $storage.domain | default "" }}
-    username: {{ $storage.username | default "" }}
-    password: {{ $storage.password | default "" }}
-    size: {{ $size }}
-    {{- if eq $storage.type "smb-pv-pvc" }}
-    mountOptions:
-      - key: noperm
-    {{- end }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       syncthing:
         syncthing:

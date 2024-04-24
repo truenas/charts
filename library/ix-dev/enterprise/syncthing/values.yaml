@@ -1,6 +1,6 @@
 image:
   repository: syncthing/syncthing
-  tag: '1.27.0'
+  tag: '1.27.6'
   pullPolicy: IfNotPresent
 
 resources:
@@ -35,5 +35,6 @@ syncthingNetwork:
 syncthingStorage:
   home:
     type: ixVolume
-    datasetName: home
+    ixVolumeConfig:
+      datasetName: home
   additionalStorages: []
