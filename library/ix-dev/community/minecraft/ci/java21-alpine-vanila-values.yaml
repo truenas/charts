@@ -1,0 +1,11 @@
+mcStorage:
+  data:
+    type: pvc
+
+mcConfig:
+  imageSelector: j21alpineImage
+  eula: true
+
+mcNetwork:
+  serverPort: 30000
+  rconPort: 30001
