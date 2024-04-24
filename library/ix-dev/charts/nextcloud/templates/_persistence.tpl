@@ -10,6 +10,9 @@ persistence:
       nextcloud-cron:
         nextcloud-cron:
           mountPath: /var/www/html
+      postgresbackup:
+        postgresbackup:
+          mountPath: /nc-config
   data:
     enabled: true
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.ncStorage.data) | nindent 4 }}
