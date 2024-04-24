@@ -2,6 +2,7 @@
 persistence:
   home:
     enabled: true
+    {{- include "syncthing.storage.ci.migration" (dict "storage" .Values.syncthingStorage.home) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.syncthingStorage.home) | nindent 4 }}
     targetSelector:
       syncthing:
@@ -47,6 +48,7 @@ persistence:
   {{- end }}
   {{ printf "sync-%v" (int $idx) }}:
     enabled: true
+    {{- include "syncthing.storage.ci.migration" (dict "storage" $storage) }}
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
     targetSelector:
       syncthing:
@@ -76,4 +78,14 @@ scaleCertificate:
     enabled: true
     id: {{ .Values.syncthingNetwork.certificateID }}
     {{- end -}}
+{{- end -}}
+
+{{/* TODO: CI only migration, remove on next version bump*/}}
+{{- define "syncthing.storage.ci.migration" -}}
+  {{- $storage := .storage -}}
+
+  {{- if $storage.hostPath -}}
+    {{- $_ := set $storage "hostPathConfig" dict -}}
+    {{- $_ := set $storage.hostPathConfig "hostPath" $storage.hostPath -}}
+  {{- end -}}
 {{- end -}}
