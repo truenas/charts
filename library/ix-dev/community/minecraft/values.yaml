@@ -53,15 +53,15 @@ j19Image:
 j21Image:
   repository: itzg/minecraft-server
   pullPolicy: IfNotPresent
-  tag: 2024.4.0-java21
+  tag: 2024.4.1-java21
 j21gImage:
   repository: itzg/minecraft-server
   pullPolicy: IfNotPresent
-  tag: 2023.8.3-java21-graalvm
+  tag: 2024.4.1-java21-graalvm
 j21alpineImage:
   repository: itzg/minecraft-server
   pullPolicy: IfNotPresent
-  tag: 2024.4.0-java21-alpine
+  tag: 2024.4.1-java21-alpine
 
 resources:
   limits:
