@@ -30,7 +30,6 @@
   (index $cmd 2) -}}
 {{- $newCmd := (list (index $cmd 0) (index $cmd 1) $temp) -}}
 {{- $_ := set .Values.workload.postgresbackup.podSpec.containers.postgresbackup "command" $newCmd -}}
-{{- fail (toYaml .Values.workload.postgresbackup.podSpec.containers.postgresbackup.command) -}}
 
 {{/* Create the configmap for portal manually*/}}
 {{- include "nextcloud.portal" $ -}}
