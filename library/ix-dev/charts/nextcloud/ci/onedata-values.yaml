@@ -20,10 +20,12 @@ ncStorage:
     type: hostPath
     hostPathConfig:
       hostPath: /mnt/{{ .Release.Name }}/data
+      hostPathType: DirectoryOrCreate
   data:
     type: hostPath
     hostPathConfig:
       hostPath: /mnt/{{ .Release.Name }}/data
+      hostPathType: DirectoryOrCreate
   pgData:
     type: pvc
   pgBackup:
