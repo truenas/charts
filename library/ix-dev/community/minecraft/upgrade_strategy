@@ -58,6 +58,18 @@ ENUMS = {
     'j19Image': {
         'RE_STABLE_VERSION': re.compile(rf'{RE_STABLE_VERSION_BASE}-java19'),
         'STRIP_TEXT': '-java19'
+    },
+    'j21Image': {
+        'RE_STABLE_VERSION': re.compile(rf'{RE_STABLE_VERSION_BASE}-java21'),
+        'STRIP_TEXT': '-java21'
+    },
+    'j21gImage': {
+        'RE_STABLE_VERSION': re.compile(rf'{RE_STABLE_VERSION_BASE}-java21-graalvm'),
+        'STRIP_TEXT': '-java21-graalvm'
+    },
+    'j21alpineImage': {
+        'RE_STABLE_VERSION': re.compile(rf'{RE_STABLE_VERSION_BASE}-java21-alpine'),
+        'STRIP_TEXT': '-java21-alpine'
     }
 }
 
