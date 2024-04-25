@@ -14,17 +14,23 @@ ncNetwork:
     useDifferentAccessPort: false
     externalAccessPort: 80
 
+ci: true
 ncStorage:
   isDataInTheSameVolume: true
+  ci:
+    type: hostPath
+    hostPathConfig:
+      hostPath: /mnt/{{ .Release.Name }}/test/data
+      hostPathType: DirectoryOrCreate
   html:
     type: hostPath
     hostPathConfig:
-      hostPath: /mnt/{{ .Release.Name }}/data
+      hostPath: /mnt/{{ .Release.Name }}/test
       hostPathType: DirectoryOrCreate
   data:
     type: hostPath
     hostPathConfig:
-      hostPath: /mnt/{{ .Release.Name }}/data
+      hostPath: /mnt/{{ .Release.Name }}/test
       hostPathType: DirectoryOrCreate
   pgData:
     type: pvc

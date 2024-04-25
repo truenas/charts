@@ -1,5 +1,14 @@
 {{- define "nextcloud.persistence" -}}
 persistence:
+  {{ if .Values.ci }}
+  ci:
+    enabled: true
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.ncStorage.html) | nindent 4 }}
+    targetSelector:
+      no-target:
+        no-target:
+          mountPath: /var/www/html
+  {{ end }}
   html:
     enabled: true
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.ncStorage.html) | nindent 4 }}
