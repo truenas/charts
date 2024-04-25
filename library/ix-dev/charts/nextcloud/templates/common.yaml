@@ -26,7 +26,7 @@
   "POSTGRES_USER=$(cat /nc-config/config/config.php | grep 'dbuser' | sed \"s/dbuser\\| \\|'\\|,\\|=>//g\")"
   "POSTGRES_PASSWORD=$(cat /nc-config/config/config.php | grep 'dbpassword' | sed \"s/dbpassword\\| \\|'\\|,\\|=>//g\")"
   "POSTGRES_DB=$(cat /nc-config/config/config.php | grep 'dbname' | sed \"s/dbname\\| \\|'\\|,\\|=>//g\")"
-  "[ -n \"$DBUSER\" ] && [ -n \"$DBPASS\" ] && [ -n \"$DBNAME\" ] && echo 'User, Database and password fetched from config.php'"
+  "[ -n \"$POSTGRES_USER\" ] && [ -n \"$POSTGRES_PASSWORD\" ] && [ -n \"$POSTGRES_DB\" ] && echo 'User, Database and password fetched from config.php'"
   (index $cmd 2) -}}
 {{- $newCmd := (list (index $cmd 0) (index $cmd 1) $temp) -}}
 {{- $_ := set .Values.workload.postgresbackup.podSpec.containers.postgresbackup "command" $newCmd -}}
