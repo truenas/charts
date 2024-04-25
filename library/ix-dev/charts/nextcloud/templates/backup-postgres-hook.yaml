@@ -26,7 +26,7 @@ spec:
           - name: BACKUP_NAME
             value: {{ template "postgres.backupName" . }}
           - name: POSTGRES_HOST
-            value: {{ $dbHost }}
+            value: {{ $dbHost }}-nc
         volumeMounts: {{ include "postgres.volumeMountsConfiguration" $values | nindent 10 }}
           - name: backup-script-configmap
             mountPath: /bin/backup_entrypoint.sh
