@@ -52,6 +52,9 @@ workload:
               enabled: true
               type: tcp
               port: 32400
+              spec:
+                initialDelaySeconds: 30
+                failureThreshold: 180
 
 {{ with .Values.plexGPU }}
 scaleGPU:
