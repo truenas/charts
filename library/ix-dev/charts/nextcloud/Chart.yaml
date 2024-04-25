@@ -1,13 +1,14 @@
 name: nextcloud
-description: A file sharing server that puts the control and security of your own
+description:
+  A file sharing server that puts the control and security of your own
   data back into your hands.
 annotations:
   title: Nextcloud
 type: application
-version: 1.6.60
+version: 1.6.61
 apiVersion: v2
 appVersion: 29.0.0
-kubeVersion: '>=1.16.0-0'
+kubeVersion: ">=1.16.0-0"
 maintainers:
   - name: truenas
     url: https://www.truenas.com/
