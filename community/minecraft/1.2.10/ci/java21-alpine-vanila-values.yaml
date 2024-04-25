@@ -3,7 +3,7 @@ mcStorage:
     type: pvc
 
 mcConfig:
-  imageSelector: j19Image
+  imageSelector: j21alpineImage
   eula: true
 
 mcNetwork:

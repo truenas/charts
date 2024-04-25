@@ -1,0 +1,12 @@
+mcStorage:
+  data:
+    type: pvc
+
+mcConfig:
+  imageSelector: j19Image
+  eula: true
+  version: "1.20.4"
+
+mcNetwork:
+  serverPort: 30000
+  rconPort: 30001
