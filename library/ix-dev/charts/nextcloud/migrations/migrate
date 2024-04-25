@@ -102,8 +102,6 @@ def migrate(values):
 
 
 if __name__ == '__main__':
-    with open('in.json', 'r') as f:
-        print(json.dumps(migrate(json.loads(f.read()))))
     if len(sys.argv) != 2:
         exit(1)
 
