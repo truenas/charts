@@ -1,5 +1,5 @@
 {{ $values := (. | mustDeepCopy) }}
-{{ $_ := set $values "common" (dict "nameSuffix" "postgres") }}
+{{ $_ := set $values "common" (dict "nameSuffix" "postgres-nc") }}
 {{ include "common.deployment.common_config" $values | nindent 0 }}
 spec: {{ include "common.deployment.common_spec" $values | nindent 2 }}
   template: {{ include "common.deployment.pod.metadata" $values | nindent 4 }}
