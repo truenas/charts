@@ -3,9 +3,8 @@ mcStorage:
     type: pvc
 
 mcConfig:
-  imageSelector: j17j9Image
+  imageSelector: j21Image
   eula: true
-  version: "1.20.4"
 
 mcNetwork:
   serverPort: 30000
