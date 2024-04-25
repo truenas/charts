@@ -1,0 +1,34 @@
+ncConfig:
+  adminUser: admin
+  adminPassword: password
+  host: "127.0.0.1"
+  dataDir: /var/www/html/data
+  commands: []
+  maxUploadLimit: 3
+  phpMemoryLimit: 512
+
+ncNetwork:
+  webPort: 30001
+  nginx:
+    proxyTimeouts: 120
+    useDifferentAccessPort: false
+    externalAccessPort: 80
+
+ncStorage:
+  isDataInTheSameVolume: true
+  html:
+    type: hostPath
+    hostPathConfig:
+      hostPath: /mnt/{{ .Release.Name }}/data
+  data:
+    type: hostPath
+    hostPathConfig:
+      hostPath: /mnt/{{ .Release.Name }}/data
+  pgData:
+    type: pvc
+  pgBackup:
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""
+  additionalStorages: []
