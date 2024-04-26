@@ -5,8 +5,8 @@ persistence:
     enabled: true
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.ncStorage.html) | nindent 4 }}
     targetSelector:
-      no-target:
-        no-target:
+      nextcloud:
+        nextcloud:
           mountPath: /var/www/html
   {{ end }}
   html:
