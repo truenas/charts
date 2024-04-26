@@ -3,7 +3,7 @@ persistence:
   {{ if .Values.ci }}
   ci:
     enabled: true
-    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.ncStorage.html) | nindent 4 }}
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.ncStorage.ci) | nindent 4 }}
     targetSelector:
       nextcloud:
         nextcloud:
