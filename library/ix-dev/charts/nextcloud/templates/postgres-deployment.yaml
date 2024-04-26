@@ -1,8 +1,27 @@
 {{ $values := (. | mustDeepCopy) }}
-{{ $_ := set $values "common" (dict "nameSuffix" "postgres-nc") }}
-{{ include "common.deployment.common_config" $values | nindent 0 }}
-spec: {{ include "common.deployment.common_spec" $values | nindent 2 }}
-  template: {{ include "common.deployment.pod.metadata" $values | nindent 4 }}
+{{ $_ := set $values "common" (dict "nameSuffix" "postgres") }}
+
+apiVersion: {{ template "common.capabilities.deployment.apiVersion" . }}
+kind: Deployment
+metadata:
+  name: {{ template "common.names.fullname" . }}-postgres-nc
+  labels:
+    app.kubernetes.io/name: {{ template "common.names.name" . }}-postgres
+    app.kubernetes.io/instance: {{ .Release.Name }}-postgres
+spec:
+  strategy:
+    type: "Recreate"
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ template "common.names.name" . }}-postgres
+      app.kubernetes.io/instance: {{ .Release.Name }}-postgres
+  template:
+    metadata:
+      name: {{ template "common.names.fullname" . }}
+      labels:
+        app.kubernetes.io/name: {{ template "common.names.name" . }}-postgres
+        app.kubernetes.io/instance: {{ .Release.Name }}-postgres
+      annotations: {{ include "common.annotations" . | nindent 8 }}
     spec:
       containers:
       - name: {{ .Chart.Name }}-postgres
