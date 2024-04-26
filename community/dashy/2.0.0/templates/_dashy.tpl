@@ -15,6 +15,7 @@ workload:
             runAsUser: 0
             runAsGroup: 0
             runAsNonRoot: false
+            readOnlyRootFilesystem: false
           env:
             {{- $protocol := "http" -}}
             {{- if .Values.dashyNetwork.certificateID }}
@@ -66,7 +67,7 @@ workload:
             - |
               if [ -z "$(ls -A /data)" ]; then
                 echo "App directory is empty, copying default files"
-                cp -r /app/public/* /data/
+                cp -r /app/user-data/* /data/
                 exit 0
               fi
 

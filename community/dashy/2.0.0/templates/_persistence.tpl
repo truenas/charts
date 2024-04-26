@@ -6,10 +6,10 @@ persistence:
     targetSelector:
       dashy:
         dashy:
-          mountPath: /app/public
+          mountPath: /app/user-data
         # Mount the same dir to different path on init container
         # So we can check if `/data` is empty and copy the default
-        # from /app/public
+        # from /app/user-data
         init-config:
           mountPath: /data
   tmp:

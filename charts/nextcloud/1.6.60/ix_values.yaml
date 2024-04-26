@@ -1,0 +1,10 @@
+image:
+  pullPolicy: IfNotPresent
+  repository: nextcloud
+  tag: 29.0.0
+nginx:
+  image:
+    pullPolicy: IfNotPresent
+    repository: nginx
+    tag: 1.25.5
+useServiceNameForHost: false
