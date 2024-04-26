@@ -25,10 +25,10 @@
 
     {{/* If new is v2.x.x */}}
     {{- if eq ($newV.Major | int) 2 -}}
-      {{/* And old is v1.x.x, but lower than .7.60 */}}
-      {{- if and (eq $oldV.Major 1) (or (ne $oldV.Minor 7) (lt ($oldV.Patch | int) 60)) -}}
+      {{/* And old is v1.x.x, but lower than .6.61 */}}
+      {{- if and (eq $oldV.Major 1) (or (ne $oldV.Minor 6) (lt ($oldV.Patch | int) 61)) -}}
         {{/* Block the upgrade */}}
-        {{- fail "Migration to 2.x.x is only allowed from 1.7.60 or higher" -}}
+        {{- fail "Migration to 2.x.x is only allowed from 1.6.61 or higher" -}}
       {{- end -}}
     {{- end -}}
   {{- end -}}
@@ -39,7 +39,7 @@
   {{- $versions := (fromYaml (include "nextcloud.get-versions" $)) -}}
   {{- if $versions.old -}}
     {{- $oldV := semver $versions.old -}}
-    {{- if and (eq $oldV.Major 1) (eq ($oldV.Minor | int) 7) (eq ($oldV.Patch | int) 60) -}}
+    {{- if and (eq $oldV.Major 1) (eq ($oldV.Minor | int) 6) (eq ($oldV.Patch | int) 61) -}}
       {{- $isMigration = "true" -}}
     {{- end -}}
   {{- end -}}
