@@ -7,9 +7,15 @@ persistence:
       nextcloud:
         nextcloud:
           mountPath: /var/www/html
+          {{- if .Values.ncStorage.isDataInTheSameVolume }}
+          subPath: html
+          {{- end }}
       nextcloud-cron:
         nextcloud-cron:
           mountPath: /var/www/html
+          {{- if .Values.ncStorage.isDataInTheSameVolume }}
+          subPath: html
+          {{- end }}
       postgresbackup:
         postgresbackup:
           mountPath: /nc-config
