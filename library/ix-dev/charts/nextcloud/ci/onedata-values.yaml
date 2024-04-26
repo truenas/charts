@@ -14,24 +14,16 @@ ncNetwork:
     useDifferentAccessPort: false
     externalAccessPort: 80
 
-ci: true
 ncStorage:
   isDataInTheSameVolume: true
-  ci:
-    type: hostPath
-    hostPathConfig:
-      hostPath: /mnt/{{ .Release.Name }}/test/data
-      hostPathType: DirectoryOrCreate
   html:
     type: hostPath
     hostPathConfig:
       hostPath: /mnt/{{ .Release.Name }}/test
-      hostPathType: DirectoryOrCreate
   data:
     type: hostPath
     hostPathConfig:
       hostPath: /mnt/{{ .Release.Name }}/test
-      hostPathType: DirectoryOrCreate
   pgData:
     type: pvc
   pgBackup:
@@ -40,3 +32,41 @@ ncStorage:
       medium: ""
       size: ""
   additionalStorages: []
+
+workload:
+  ci-hack:
+    enabled: true
+  type: Job
+  annotations:
+    "helm.sh/hook": pre-install
+    "helm.sh/hook-weight": "1"
+    "helm.sh/hook-delete-policy": hook-succeeded
+  podSpec:
+    restartPolicy: Never
+    containers:
+      ci-hack:
+        enabled: true
+        primary: true
+        image: bashImage
+        command: bash
+        args:
+          - -c
+          - exit 0
+        probes:
+          liveness:
+            enabled: false
+          readiness:
+            enabled: false
+          startup:
+            enabled: false
+
+persistence:
+  ci-hack:
+    enabled: true
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/test/data
+    hostPathType: DirectoryOrCreate
+    targetSelector:
+      ci-hack:
+        ci-hack:
+          mountPath: /ci
