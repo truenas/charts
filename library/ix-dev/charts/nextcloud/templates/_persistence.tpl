@@ -35,6 +35,44 @@ persistence:
           {{- if .Values.ncStorage.isDataInTheSameVolume }}
           subPath: data
           {{- end }}
+  {{- if .Values.ncStorage.isDataInTheSameVolume }}
+  config:
+    enabled: true
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.ncStorage.html) | nindent 4 }}
+    targetSelector:
+      nextcloud:
+        nextcloud:
+          mountPath: /var/www/html/config
+          subPath: config
+      nextcloud-cron:
+        nextcloud-cron:
+          mountPath: /var/www/html/config
+          subPath: config
+  customapps:
+    enabled: true
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.ncStorage.html) | nindent 4 }}
+    targetSelector:
+      nextcloud:
+        nextcloud:
+          mountPath: /var/www/html/custom_apps
+          subPath: custom_apps
+      nextcloud-cron:
+        nextcloud-cron:
+          mountPath: /var/www/html/custom_apps
+          subPath: custom_apps
+  themes:
+    enabled: true
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.ncStorage.html) | nindent 4 }}
+    targetSelector:
+      nextcloud:
+        nextcloud:
+          mountPath: /var/www/html/themes
+          subPath: themes
+      nextcloud-cron:
+        nextcloud-cron:
+          mountPath: /var/www/html/themes
+          subPath: themes
+  {{- end }}
 
   # Configuration files mounting
   nc-config-opcache:
