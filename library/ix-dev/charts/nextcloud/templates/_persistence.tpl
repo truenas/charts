@@ -7,7 +7,7 @@ persistence:
     targetSelector:
       nextcloud:
         nextcloud:
-          mountPath: /var/www/html
+          mountPath: /ci
   {{ end }}
   html:
     enabled: true
