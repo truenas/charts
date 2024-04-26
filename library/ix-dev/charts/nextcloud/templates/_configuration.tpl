@@ -95,7 +95,7 @@ secret:
       POSTGRES_USER: {{ $dbUser }}
       POSTGRES_DB: {{ $dbName }}
       POSTGRES_PASSWORD: {{ $dbPass }}
-      POSTGRES_HOST: {{ $dbHost }} # FIXME: (and on the url)
+      POSTGRES_HOST: {{ $dbHost }}
       POSTGRES_URL: {{ printf "postgres://%s:%s@%s:5432/%s?sslmode=disable" $dbUser $dbPass $dbHost $dbName }}
   {{- end }}
 {{- end -}}
