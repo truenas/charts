@@ -8,6 +8,10 @@ Latest 26.x.x version
 
 Latest 27.x.x version
 
+## 1.6.59
+
+Latest 28.x.x version
+
 ## 1.6.60
 
 Latest pre-migration release
