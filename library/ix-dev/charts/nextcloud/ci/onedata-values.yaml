@@ -36,29 +36,29 @@ ncStorage:
 workload:
   ci-hack:
     enabled: true
-  type: Job
-  annotations:
-    "helm.sh/hook": pre-install
-    "helm.sh/hook-weight": "1"
-    "helm.sh/hook-delete-policy": hook-succeeded
-  podSpec:
-    restartPolicy: Never
-    containers:
-      ci-hack:
-        enabled: true
-        primary: true
-        image: bashImage
-        command: bash
-        args:
-          - -c
-          - exit 0
-        probes:
-          liveness:
-            enabled: false
-          readiness:
-            enabled: false
-          startup:
-            enabled: false
+    type: Job
+    annotations:
+      "helm.sh/hook": pre-install
+      "helm.sh/hook-weight": "1"
+      "helm.sh/hook-delete-policy": hook-succeeded
+    podSpec:
+      restartPolicy: Never
+      containers:
+        ci-hack:
+          enabled: true
+          primary: true
+          image: bashImage
+          command: bash
+          args:
+            - -c
+            - exit 0
+          probes:
+            liveness:
+              enabled: false
+            readiness:
+              enabled: false
+            startup:
+              enabled: false
 
 persistence:
   ci-hack:
