@@ -610,6 +610,7 @@ questions:
                         Paste the JSON content in this field
                       schema:
                         type: string
+                        max_length: 10000
                         show_if: [["provider", "=", "gcp"]]
                         required: true
                         private: true
@@ -1273,7 +1274,7 @@ questions:
             min: 1
             required: true
             empty: false
-            default: [{"provider": "all", "placeholder": "placeholder"}]
+            default: [{ "provider": "all", "placeholder": "placeholder" }]
             items:
               - variable: publicIpDnsProviderEntry
                 label: Public IP DNS Provider Entry
@@ -1309,7 +1310,7 @@ questions:
             min: 1
             required: true
             empty: false
-            default: [{"provider": "all", "custom": ""}]
+            default: [{ "provider": "all", "custom": "" }]
             items:
               - variable: publicIpHttpProviderEntry
                 label: Public IP HTTP Provider Entry
@@ -1353,7 +1354,7 @@ questions:
             min: 1
             required: true
             empty: false
-            default: [{"provider": "all", "custom": ""}]
+            default: [{ "provider": "all", "custom": "" }]
             items:
               - variable: publicIpv4HttpProviderEntry
                 label: Public IPv4 HTTP Provider Entry
@@ -1389,7 +1390,7 @@ questions:
             min: 1
             required: true
             empty: false
-            default: [{"provider": "all", "custom": ""}]
+            default: [{ "provider": "all", "custom": "" }]
             items:
               - variable: publicIpv6HttpProviderEntry
                 label: Public IPv6 HTTP Provider Entry
@@ -1425,7 +1426,7 @@ questions:
             min: 1
             required: true
             empty: false
-            default: [{"provider": "all", "placeholder": "placeholder"}]
+            default: [{ "provider": "all", "placeholder": "placeholder" }]
             items:
               - variable: publicIpFetcherEntry
                 label: Public IP Fetcher Entry
@@ -1453,7 +1454,6 @@ questions:
                         default: placeholder
                         required: true
                         hidden: true
-
 
         - variable: additionalEnvs
           label: Additional Environment Variables
@@ -1600,7 +1600,7 @@ questions:
                 schema:
                   type: string
                   max_length: 12
-                  valid_chars: '^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$'
+                  valid_chars: "^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$"
                   valid_chars_error: |
                     Valid Memory limit formats are</br>
                     - Suffixed with E/P/T/G/M/K - eg. 1G</br>
