@@ -1,0 +1,30 @@
+name: nextcloud
+description: A file sharing server that puts the control and security of your own
+  data back into your hands.
+annotations:
+  title: Nextcloud
+type: application
+version: 1.6.61
+apiVersion: v2
+appVersion: 29.0.0
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common/2304.0.1
+    version: 2304.0.1
+home: https://nextcloud.com/
+icon: https://media.sys.truenas.net/apps/nextcloud/icons/icon.svg
+sources:
+  - https://github.com/nextcloud/docker
+  - https://github.com/nextcloud/helm
+  - https://github.com/truenas/charts/tree/master/charts/nextcloud
+keywords:
+  - nextcloud
+  - storage
+  - http
+  - web
+  - php
