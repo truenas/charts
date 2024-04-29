@@ -1,17 +1,17 @@
 {
-    "1.6.60": {
+    "1.6.61": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/nextcloud/1.6.60",
-        "last_update": "2024-04-28 08:01:54",
+        "location": "/__w/charts/charts/charts/nextcloud/1.6.61",
+        "last_update": "2024-04-29 06:12:25",
         "required_features": [
-            "definitions/certificate",
             "normalize/ixVolume",
+            "definitions/certificate",
             "definitions/nodeIP"
         ],
-        "human_version": "29.0.0_1.6.60",
-        "version": "1.6.60",
+        "human_version": "29.0.0_1.6.61",
+        "version": "1.6.61",
         "chart_metadata": {
             "name": "nextcloud",
             "description": "A file sharing server that puts the control and security of your own data back into your hands.",
@@ -19,7 +19,7 @@
                 "title": "Nextcloud"
             },
             "type": "application",
-            "version": "1.6.60",
+            "version": "1.6.61",
             "apiVersion": "v2",
             "appVersion": "29.0.0",
             "kubeVersion": ">=1.16.0-0",
@@ -828,10 +828,10 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/nextcloud/1.6.59",
-        "last_update": "2024-04-28 08:01:54",
+        "last_update": "2024-04-29 06:10:59",
         "required_features": [
-            "definitions/certificate",
             "normalize/ixVolume",
+            "definitions/certificate",
             "definitions/nodeIP"
         ],
         "human_version": "28.0.4_1.6.59",
@@ -1652,10 +1652,10 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/nextcloud/1.6.53",
-        "last_update": "2024-04-28 08:01:54",
+        "last_update": "2024-04-29 06:10:59",
         "required_features": [
-            "definitions/certificate",
             "normalize/ixVolume",
+            "definitions/certificate",
             "definitions/nodeIP"
         ],
         "human_version": "27.1.4_1.6.53",
@@ -2476,10 +2476,10 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/nextcloud/1.6.29",
-        "last_update": "2024-04-28 08:01:54",
+        "last_update": "2024-04-29 06:10:59",
         "required_features": [
-            "definitions/certificate",
             "normalize/ixVolume",
+            "definitions/certificate",
             "definitions/nodeIP"
         ],
         "human_version": "26.0.2_1.6.29",
