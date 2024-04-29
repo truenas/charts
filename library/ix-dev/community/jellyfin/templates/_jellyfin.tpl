@@ -43,8 +43,8 @@ workload:
               path: /health
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
-                                                        "UID" .Values.jellyfinRunAs.user
-                                                        "GID" .Values.jellyfinRunAs.group
+                                                        "UID" (include "ix.v1.common.helper.makeIntOrNoop" .Values.jellyfinRunAs.user)
+                                                        "GID" (include "ix.v1.common.helper.makeIntOrNoop" .Values.jellyfinRunAs.group)
                                                         "mode" "check"
                                                         "type" "install") | nindent 8 }}
 {{/* Service */}}
