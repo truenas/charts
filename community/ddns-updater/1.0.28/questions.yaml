@@ -610,6 +610,7 @@ questions:
                         Paste the JSON content in this field
                       schema:
                         type: string
+                        max_length: 10000
                         show_if: [["provider", "=", "gcp"]]
                         required: true
                         private: true
