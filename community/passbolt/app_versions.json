@@ -1,17 +1,17 @@
 {
-    "1.2.8": {
+    "1.2.9": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/passbolt/1.2.8",
-        "last_update": "2024-04-30 10:15:54",
+        "location": "/__w/charts/charts/community/passbolt/1.2.9",
+        "last_update": "2024-05-01 10:38:04",
         "required_features": [
-            "normalize/acl",
+            "normalize/ixVolume",
             "definitions/certificate",
-            "normalize/ixVolume"
+            "normalize/acl"
         ],
-        "human_version": "4.6.2.1_1.2.8",
-        "version": "1.2.8",
+        "human_version": "4.7.0.1_1.2.9",
+        "version": "1.2.9",
         "chart_metadata": {
             "name": "passbolt",
             "description": "Passbolt is a security-first, open source password manager",
@@ -19,9 +19,9 @@
                 "title": "Passbolt"
             },
             "type": "application",
-            "version": "1.2.8",
+            "version": "1.2.9",
             "apiVersion": "v2",
-            "appVersion": "4.6.2.1",
+            "appVersion": "4.7.0.1",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
