@@ -102,7 +102,7 @@ questions:
           label: External Port
           description: |
             The port accessible from the clients.</br>
-            This is ONLY used on the generated configuration in the "Endpoint".
+            This is ONLY used on the client configuration generation in the "Endpoint" field.
           schema:
             type: int
             required: true
