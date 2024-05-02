@@ -98,6 +98,15 @@ questions:
             required: true
             $ref:
               - "definitions/nodeIP"
+        - variable: externalPort
+          label: External Port
+          description: |
+            The port accessible from the clients.</br>
+            This is ONLY used on the generated configuration in the "Endpoint".
+          schema:
+            type: int
+            required: true
+            default: 51820
         - variable: password
           label: Password for WebUI
           description: When set, requires a password when logging in to the Web UI.
