@@ -1,79 +1,68 @@
-{{/*
-Retrieve true/false if certificate is configured
-*/}}
-{{- define "nginx.certAvailable" -}}
-{{- if .Values.certificate -}}
-{{- $values := (. | mustDeepCopy) -}}
-{{- $_ := set $values "commonCertOptions" (dict "certKeyName" $values.Values.certificate) -}}
-{{- template "common.resources.cert_present" $values -}}
-{{- else -}}
-{{- false -}}
-{{- end -}}
-{{- end -}}
-
-
-{{/*
-Retrieve public key of certificate
-*/}}
-{{- define "nginx.cert.publicKey" -}}
-{{- $values := (. | mustDeepCopy) -}}
-{{- $_ := set $values "commonCertOptions" (dict "certKeyName" $values.Values.certificate "publicKey" true) -}}
-{{ include "common.resources.cert" $values }}
-{{- end -}}
-
-
-{{/*
-Retrieve private key of certificate
-*/}}
-{{- define "nginx.cert.privateKey" -}}
-{{- $values := (. | mustDeepCopy) -}}
-{{- $_ := set $values "commonCertOptions" (dict "certKeyName" $values.Values.certificate) -}}
-{{ include "common.resources.cert" $values }}
-{{- end -}}
-
-
-{{/*
-Retrieve configured protocol scheme for nextcloud
-*/}}
-{{- define "nginx.scheme" -}}
-{{- if eq (include "nginx.certAvailable" .) "true" -}}
-{{- print "https" -}}
-{{- else -}}
-{{- print "http" -}}
-{{- end -}}
-{{- end -}}
-
-
-{{/*
-Retrieve nginx certificate secret name
-*/}}
-{{- define "nginx.secretName" -}}
-{{- print "nginx-secret" -}}
-{{- end -}}
-
-
-{{/*
-Formats volumeMount for tls keys and trusted certs
-*/}}
-{{- define "nginx.tlsKeysVolumeMount" -}}
-{{- if eq (include "nginx.certAvailable" .) "true" -}}
-- name: cert-secret-volume
-  mountPath: "/etc/nginx-certs"
-{{- end -}}
-{{- end -}}
-
-{{/*
-Formats volume for tls keys and trusted certs
-*/}}
-{{- define "nginx.tlsKeysVolume" -}}
-{{- if eq (include "nginx.certAvailable" .) "true" -}}
-- name: cert-secret-volume
-  secret:
-    secretName: {{ include "nginx.secretName" . }}
-    items:
-    - key: certPublicKey
-      path: public.crt
-    - key: certPrivateKey
-      path: private.key
-{{- end -}}
+{{- define "nginx.workload" -}}
+  {{- $fullname := (include "ix.v1.common.lib.chart.names.fullname" $) -}}
+  {{- $ncUrl := printf "http://%s:80" $fullname }}
+workload:
+  nginx:
+    enabled: true
+    type: Deployment
+    podSpec:
+      hostNetwork: false
+      containers:
+        nginx:
+          enabled: true
+          primary: true
+          imageSelector: nginxImage
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
+            runAsNonRoot: false
+            readOnlyRootFilesystem: false
+            capabilities:
+              add:
+                - CHOWN
+                - DAC_OVERRIDE
+                - FOWNER
+                - NET_BIND_SERVICE
+                - NET_RAW
+                - SETGID
+                - SETUID
+          probes:
+            liveness:
+              enabled: true
+              type: https
+              port: {{ .Values.ncNetwork.webPort }}
+              path: /status.php
+              httpHeaders:
+                Host: localhost
+            readiness:
+              enabled: true
+              type: https
+              port: {{ .Values.ncNetwork.webPort }}
+              path: /status.php
+              httpHeaders:
+                Host: localhost
+            startup:
+              enabled: true
+              type: https
+              port: {{ .Values.ncNetwork.webPort }}
+              path: /status.php
+              httpHeaders:
+                Host: localhost
+      initContainers:
+        01-wait-server:
+          enabled: true
+          type: init
+          imageSelector: bashImage
+          command:
+            - bash
+          args:
+            - -c
+            - |
+              echo "Waiting for [{{ $ncUrl }}]";
+              until wget --spider --quiet --timeout=3 --tries=1 {{ $ncUrl }}/status.php;
+              do
+                echo "Waiting for [{{ $ncUrl }}]";
+                sleep 2;
+              done
+              echo "Nextcloud is up: {{ $ncUrl }}";
 {{- end -}}

@@ -1,161 +1,78 @@
 groups:
-  - name: "Container Images"
-    description: "Image to be used for container"
-  - name: "Nextcloud Configuration"
-    description: "Configuration details for Nextcloud workload"
-  - name: "Storage"
-    description: "Configure Storage for Nextcloud"
-  - name: "Container Configuration"
-    description: "Configure nextcloud container parameters"
-  - name: "Postgresql Configuration"
-    description: "Configure Postgresql for nextcloud"
-  - name: "CronJob configuration"
-    description: "Configure CronJob for nextcloud"
-  - name: "Scaling/Upgrade Policy"
-    description: "Configure how pods are replaced when configuration is upgraded"
-  - name: "Advanced DNS Settings"
-    description: "Configure DNS settings"
-  - name: "Resource Limits"
-    description: "Set CPU/memory limits for Kubernetes Pod"
-
+  - name: Nextcloud Configuration
+    description: Configure Nextcloud
+  - name: Advanced Pod Configuration
+    description: Configure Advanced Pod Options for Nextcloud
+  - name: Network Configuration
+    description: Configure Network for Nextcloud
+  - name: Storage Configuration
+    description: Configure Storage for Nextcloud
+  - name: Resources Configuration
+    description: Configure Resources for Nextcloud
 
 portals:
   web_portal:
     protocols:
-      - "$kubernetes-resource_configmap_nginx-configuration_protocol"
+      - "$kubernetes-resource_configmap_portal_protocol"
     host:
-      - "$variable-nextcloud.host"
+      - "$kubernetes-resource_configmap_portal_host"
     ports:
-      - "$variable-service.nodePort"
+      - "$kubernetes-resource_configmap_portal_port"
+    path: "$kubernetes-resource_configmap_portal_path"
 
 questions:
-
-  - variable: dnsConfig
-    label: "DNS Configuration"
-    group: "Advanced DNS Settings"
+  - variable: ncConfig
+    label: ""
+    group: Nextcloud Configuration
     schema:
       type: dict
       attrs:
-        - variable: options
-          label: "DNS Options"
+        - variable: adminUser
+          label: Admin User
+          description: The Nextcloud admin user.
           schema:
-            type: list
-            items:
-              - variable: optionsEntry
-                label: "Option Entry Configuration"
-                schema:
-                  type: dict
-                  attrs:
-                    - variable: name
-                      label: "Option Name"
-                      schema:
-                        type: string
-                        required: true
-                    - variable: value
-                      label: "Option Value"
-                      schema:
-                        type: string
-                        required: true
-
-  - variable: certificate
-    description: "Configure Certificate for Nextcloud"
-    label: "Certificate Configuration"
-    group: "Nextcloud Configuration"
-    schema:
-      type: int
-      $ref:
-        - "definitions/certificate"
-
-  - variable: nginxConfig
-    description: "Configure Nginx for Nextcloud"
-    label: "Nginx Configuration"
-    group: "Nextcloud Configuration"
-    schema:
-      type: dict
-      show_if: [["certificate", "!=", null]]
-      attrs:
-        - variable: proxy_timeouts
-          label: "Proxy timeouts (Seconds)"
-          description: |
-            Applies the timeout to the following settings:</br>
-            - proxy_connect_timeout</br>
-            - proxy_send_timeout</br>
-            - proxy_read_timeout</br>
-          schema:
-            type: int
-            min: 30
-            default: 60
+            type: string
+            default: ""
             required: true
-        - variable: useDifferentAccessPort
-          label: "Use different port for URL rewrites"
-          description: |
-            If enabled, the URL rewrite will use [Access Port] defined below instead of the [Node Port].</br>
-            Note that Nextcloud will still listen on the [Node Port]. (Default 9001)
+        - variable: adminPassword
+          label: Admin Password
+          description: The Nextcloud admin password.
           schema:
-            type: boolean
-            default: false
-        - variable: externalAccessPort
-          label: "External Access Port"
-          schema:
-            type: int
-            show_if: [["useDifferentAccessPort", "=", true]]
-            min: 443
-            max: 65535
-            default: 443
+            type: string
+            default: ""
             required: true
-
-  - variable: nextcloud
-    description: "Nextcloud configuration details"
-    label: "Nextcloud Configuration"
-    group: "Nextcloud Configuration"
-    schema:
-      type: dict
-      required: true
-      additional_attrs: true
-      attrs:
         - variable: host
-          description: "Nextcloud host to create application URLs"
-          label: "Nextcloud host"
+          label: Host
+          description: Nextcloud host to create application URLs
           schema:
             type: string
             $ref:
               - "definitions/nodeIP"
-        - variable: username
-          label: "Username"
-          description: "Name of the Nextcloud admin user"
-          schema:
-            type: string
-            default: "admin"
-            required: true
-        - variable: password
-          label: "Password"
-          description: "Password for the Nextcloud admin user"
-          schema:
-            type: string
-            private: true
-            default: "changeme"
-            required: true
-        - variable: datadir
+        - variable: dataDir
           label: "Nextcloud data directory"
-          description: "Configures the data directory where nextcloud stores all files from the users"
+          description: "Configures the data directory where Nextcloud stores all files from the users. The path refers to the path inside the container"
           schema:
             type: path
             default: "/var/www/html/data"
             required: true
-        - variable: install_ffmpeg
-          label: "Install ffmpeg"
-          description: "Automatically Install ffmpeg when the container starts"
+        - variable: commands
+          label: Commands
+          description: Commands to run in the Nextcloud container
           schema:
-            type: boolean
-            default: false
-        - variable: install_smbclient
-          label: "Install smbclient"
-          description: "Automatically Install smbclient when the container starts"
-          schema:
-            type: boolean
-            default: false
-        - variable: max_upload_size
-          label: "Max Upload Size (Giga Bytes)"
+            type: list
+            items:
+              - variable: command
+                label: Command
+                schema:
+                  type: string
+                  required: true
+                  enum:
+                    - value: ffmpeg
+                      description: ffmpeg
+                    - value: smbclient
+                      description: smbclient
+        - variable: maxUploadLimit
+          label: Max Upload Size (Giga Bytes)
           description: |
             Applies the timeout to the following settings:</br>
             - client_max_body_size in nginx</br>
@@ -165,273 +82,679 @@ questions:
             default: 3
             min: 1
             required: true
-        - variable: max_execution_time
-          label: "Max Execution Time (Seconds)"
-          description: "Configures the max execution time of php"
+        - variable: maxExecutionTime
+          label: Max Execution Time (Seconds)
+          description: Configures the max execution time of php
           schema:
             type: int
             default: 30
             min: 30
             required: true
-        - variable: php_memory_limit
-          label: "PHP Memory Limit (Mega Bytes)"
-          description: "Configures the memory limit of php"
+        - variable: phpMemoryLimit
+          label: PHP Memory Limit (Mega Bytes)
+          description: Configures the memory limit of php
           schema:
             type: int
             default: 512
             min: 128
             max: 4096
             required: true
-        - variable: opcache_memory_consumption
-          label: "Opcache Memory Consumption (Mega Bytes)"
-          description: "Configures the memory consumption of the opcache"
+        - variable: opCacheMemoryConsumption
+          label: Opcache Memory Consumption (Mega Bytes)
+          description: Configures the memory consumption of the opcache
           schema:
             type: int
             min: 128
             max: 1024
             default: 128
             required: true
-
-  - variable: cronjob
-    description: "Setup cronjob for nextcloud"
-    label: "Setup cronjob for nextcloud"
-    group: "CronJob configuration"
-    schema:
-      type: dict
-      attrs:
-        - variable: enabled
-          label: "Enable cronjobs for nextcloud"
+        - variable: cron
+          label: Cron
+          description: Configures the cron job for Nextcloud
           schema:
-            type: boolean
-            default: false
-            show_subquestions_if: true
-            subquestions:
+            type: dict
+            attrs:
+              - variable: enabled
+                label: Enabled
+                schema:
+                  type: boolean
+                  default: true
+                  required: true
               - variable: schedule
                 label: Schedule
                 schema:
                   type: string
+                  show_if: [["enabled", "=", true]]
                   default: "*/15 * * * *"
-                  empty: false
+                  required: true
 
-  # Update strategy
-  - variable: updateStrategy
-    description: "Upgrade Policy"
-    label: "Update Strategy"
-    group: "Scaling/Upgrade Policy"
-    schema:
-      type: string
-      default: "Recreate"
-      enum:
-        - value: "RollingUpdate"
-          description: "Create new pods and then kill old ones"
-        - value: "Recreate"
-          description: "Kill existing pods before creating new ones"
-
-  - variable: service
-    description: "Nextcloud Service Configuration"
-    label: "Nextcloud Service Configuration"
-    group: "Nextcloud Configuration"
+  - variable: podOptions
+    label: ""
+    group: Advanced Pod Configuration
     schema:
       type: dict
-      required: true
       attrs:
-        - variable: nodePort
-          label: "Node Port to use for Nextcloud"
+        - variable: dnsConfig
+          label: Advanced DNS Configuration
+          schema:
+            type: dict
+            attrs:
+              - variable: options
+                label: DNS Options
+                schema:
+                  type: list
+                  items:
+                    - variable: optionsEntry
+                      label: DNS Option Entry
+                      schema:
+                        type: dict
+                        attrs:
+                          - variable: name
+                            label: Option Name
+                            schema:
+                              type: string
+                              required: true
+                          - variable: value
+                            label: Option Value
+                            schema:
+                              type: string
+                              required: true
+
+  - variable: ncNetwork
+    label: ""
+    group: Network Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: webPort
+          label: Web Port
+          description: The port for the Nextcloud Web UI.
           schema:
             type: int
+            default: 20810
             min: 9000
             max: 65535
-            default: 9001
             required: true
+        - variable: certificateID
+          label: Certificate
+          description: The certificate to use for Nextcloud
+          schema:
+            type: int
+            "null": true
+            $ref:
+              - "definitions/certificate"
+        - variable: nginx
+          label: Nginx Configuration
+          schema:
+            type: dict
+            show_if: [["certificateID", "!=", null]]
+            attrs:
+              - variable: proxyTimeouts
+                label: Proxy timeouts (Seconds)
+                description: |
+                  Applies the timeout to the following settings:</br>
+                  - proxy_connect_timeout</br>
+                  - proxy_send_timeout</br>
+                  - proxy_read_timeout</br>
+                schema:
+                  type: int
+                  min: 30
+                  default: 60
+                  required: true
+              - variable: useDifferentAccessPort
+                label: Use different port for URL rewrites
+                description: |
+                  If enabled, the URL rewrite will use [Access Port] defined below instead of the [Node Port].</br>
+                  Note that Nextcloud will still listen on the [Node Port]. (Default 9001)
+                schema:
+                  type: boolean
+                  default: false
+              - variable: externalAccessPort
+                label: External Access Port
+                schema:
+                  type: int
+                  show_if: [["useDifferentAccessPort", "=", true]]
+                  min: 443
+                  max: 65535
+                  default: 443
+                  required: true
 
-  - variable: appVolumeMounts
-    label: "Nextcloud Storage"
-    group: "Storage"
+  - variable: ncStorage
+    label: ""
+    group: Storage Configuration
     schema:
       type: dict
       attrs:
-        - variable: nextcloud-data
-          label: "Nextcloud Data Volume"
+        - variable: shouldShowStorageToggle
+          label: ""
+          schema:
+            type: boolean
+            default: false
+            hidden: true
+        - variable: isDataInTheSameVolume
+          label: "Pre v2 Storage Structure (See the tooltip for more information)"
+          description: |
+            If this is checked, means that this is an installation coming from a previous version (v1.x.x).<br/>
+            In order to have backwards compatibility, the older storage structure was kept for this installation.<br/>
+            If you want to utilize the new storage structure, move 'data' in a separate directory or dataset.
+            Change the 'Nextcloud UserData' configuration below to point to the new location and then uncheck this checkbox.
+            <br/><br/>
+            You will NOT likely want to change that if your setup uses ixVolume as storage.
+          schema:
+            type: boolean
+            show_if: [["shouldShowStorageToggle", "=", true]]
+            default: false
+        - variable: html
+          label: Nextcloud HTML Storage
+          description: The path to store Nextcloud HTML and AppData.
           schema:
             type: dict
             attrs:
-              - variable: datasetName
-                label: "Nextcloud Data Volume Name"
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
                 schema:
                   type: string
-                  hidden: true
+                  required: true
+                  immutable: true
+                  default: ixVolume
+                  enum:
+                    - value: hostPath
+                      description: Host Path (Path that already exists on the system)
+                    - value: ixVolume
+                      description: ixVolume (Dataset created automatically by the system)
+              - variable: ixVolumeConfig
+                label: ixVolume Configuration
+                description: The configuration for the ixVolume dataset.
+                schema:
+                  type: dict
+                  show_if: [["type", "=", "ixVolume"]]
                   $ref:
                     - "normalize/ixVolume"
-                  show_if: [["hostPathEnabled", "=", false]]
-                  default: "ix-nextcloud_data"
-                  editable: false
-              - variable: mountPath
-                label: "Nextcloud Data Mount Path"
-                description: "Path where the volume will be mounted inside the pod"
+                  attrs:
+                    - variable: aclEnable
+                      label: Enable ACL
+                      description: Enable ACL for the dataset.
+                      schema:
+                        type: boolean
+                        default: false
+                    - variable: datasetName
+                      label: Dataset Name
+                      description: The name of the dataset to use for storage.
+                      schema:
+                        type: string
+                        required: true
+                        immutable: true
+                        hidden: true
+                        default: "html"
+                    - variable: aclEntries
+                      label: ACL Configuration
+                      schema:
+                        type: dict
+                        show_if: [["aclEnable", "=", true]]
+                        attrs: []
+              - variable: hostPathConfig
+                label: Host Path Configuration
                 schema:
-                  type: path
-                  hidden: true
-                  editable: false
-                  default: "/var/www"
-              - variable: hostPathEnabled
-                label: "Enable Host Path for Nextcloud Data Volume"
-                schema:
-                  type: boolean
-                  default: false
-                  show_subquestions_if: true
-                  subquestions:
+                  type: dict
+                  show_if: [["type", "=", "hostPath"]]
+                  attrs:
+                    - variable: aclEnable
+                      label: Enable ACL
+                      description: Enable ACL for the dataset.
+                      schema:
+                        type: boolean
+                        default: false
+                    - variable: acl
+                      label: ACL Configuration
+                      schema:
+                        type: dict
+                        show_if: [["aclEnable", "=", true]]
+                        attrs: []
+                        $ref:
+                          - "normalize/acl"
                     - variable: hostPath
-                      label: "Host Path for Nextcloud Data Volume"
+                      label: Host Path
+                      description: The host path to use for storage.
                       schema:
                         type: hostpath
+                        show_if: [["aclEnable", "=", false]]
                         required: true
-
-  - variable: extraAppVolumeMounts
-    label: "Nextcloud Extra Host Path Volumes"
-    group: "Storage"
-    schema:
-      type: list
-      items:
-        - variable: extraAppVolume
-          label: "Nextcloud Host Path Volume"
-          description: "Add an extra host path volume for nextcloud application"
+        - variable: data
+          label: Nextcloud User Data Storage
+          description: The path to store Nextcloud User Data.
           schema:
             type: dict
             attrs:
-              - variable: mountPath
-                label: "Mount Path in Pod"
-                description: "Path where the volume will be mounted inside the pod"
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
                 schema:
-                  type: path
+                  type: string
                   required: true
-              - variable: hostPath
-                label: "Host Path"
-                description: "Host path"
+                  immutable: true
+                  default: ixVolume
+                  enum:
+                    - value: hostPath
+                      description: Host Path (Path that already exists on the system)
+                    - value: ixVolume
+                      description: ixVolume (Dataset created automatically by the system)
+              - variable: ixVolumeConfig
+                label: ixVolume Configuration
+                description: The configuration for the ixVolume dataset.
                 schema:
-                  type: hostpath
-                  required: true
+                  type: dict
+                  show_if: [["type", "=", "ixVolume"]]
+                  $ref:
+                    - "normalize/ixVolume"
+                  attrs:
+                    - variable: aclEnable
+                      label: Enable ACL
+                      description: Enable ACL for the dataset.
+                      schema:
+                        type: boolean
+                        default: false
+                    - variable: datasetName
+                      label: Dataset Name
+                      description: The name of the dataset to use for storage.
+                      schema:
+                        type: string
+                        required: true
+                        immutable: true
+                        hidden: true
+                        default: "html"
+                    - variable: aclEntries
+                      label: ACL Configuration
+                      schema:
+                        type: dict
+                        show_if: [["aclEnable", "=", true]]
+                        attrs: []
+              - variable: hostPathConfig
+                label: Host Path Configuration
+                schema:
+                  type: dict
+                  show_if: [["type", "=", "hostPath"]]
+                  attrs:
+                    - variable: aclEnable
+                      label: Enable ACL
+                      description: Enable ACL for the dataset.
+                      schema:
+                        type: boolean
+                        default: false
+                    - variable: acl
+                      label: ACL Configuration
+                      schema:
+                        type: dict
+                        show_if: [["aclEnable", "=", true]]
+                        attrs: []
+                        $ref:
+                          - "normalize/acl"
+                    - variable: hostPath
+                      label: Host Path
+                      description: The host path to use for storage.
+                      schema:
+                        type: hostpath
+                        show_if: [["aclEnable", "=", false]]
+                        required: true
 
-  - variable: postgresAppVolumeMounts
-    label: "Postgres Storage"
-    group: "Storage"
+        - variable: pgData
+          label: Nextcloud Postgres Data Storage
+          description: The path to store Nextcloud Postgres Data.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
+                schema:
+                  type: string
+                  required: true
+                  immutable: true
+                  default: ixVolume
+                  enum:
+                    - value: hostPath
+                      description: Host Path (Path that already exists on the system)
+                    - value: ixVolume
+                      description: ixVolume (Dataset created automatically by the system)
+              - variable: ixVolumeConfig
+                label: ixVolume Configuration
+                description: The configuration for the ixVolume dataset.
+                schema:
+                  type: dict
+                  # Nothing to show for the user
+                  hidden: true
+                  show_if: [["type", "=", "ixVolume"]]
+                  $ref:
+                    - "normalize/ixVolume"
+                  attrs:
+                    - variable: aclEnable
+                      label: Enable ACL
+                      description: Enable ACL for the dataset.
+                      schema:
+                        type: boolean
+                        # Postgres does a CHMOD at startup
+                        # Which fails with ACL
+                        hidden: true
+                        default: false
+                    - variable: datasetName
+                      label: Dataset Name
+                      description: The name of the dataset to use for storage.
+                      schema:
+                        type: string
+                        required: true
+                        immutable: true
+                        hidden: true
+                        default: "pgData"
+                    - variable: aclEntries
+                      label: ACL Configuration
+                      schema:
+                        type: dict
+                        show_if: [["aclEnable", "=", true]]
+                        attrs: []
+              - variable: hostPathConfig
+                label: Host Path Configuration
+                schema:
+                  type: dict
+                  show_if: [["type", "=", "hostPath"]]
+                  attrs:
+                    - variable: aclEnable
+                      label: Enable ACL
+                      description: Enable ACL for the dataset.
+                      schema:
+                        type: boolean
+                        # Postgres does a CHMOD at startup
+                        # Which fails with ACL
+                        hidden: true
+                        default: false
+                    - variable: acl
+                      label: ACL Configuration
+                      schema:
+                        type: dict
+                        show_if: [["aclEnable", "=", true]]
+                        attrs: []
+                        $ref:
+                          - "normalize/acl"
+                    - variable: hostPath
+                      label: Host Path
+                      description: The host path to use for storage.
+                      schema:
+                        type: hostpath
+                        show_if: [["aclEnable", "=", false]]
+                        required: true
+        - variable: pgBackup
+          label: Nextcloud Postgres Backup Storage
+          description: The path to store Nextcloud Postgres Backup.
+          schema:
+            type: dict
+            attrs:
+              - variable: type
+                label: Type
+                description: |
+                  ixVolume: Is dataset created automatically by the system.</br>
+                  Host Path: Is a path that already exists on the system.
+                schema:
+                  type: string
+                  required: true
+                  immutable: true
+                  default: ixVolume
+                  enum:
+                    - value: hostPath
+                      description: Host Path (Path that already exists on the system)
+                    - value: ixVolume
+                      description: ixVolume (Dataset created automatically by the system)
+              - variable: ixVolumeConfig
+                label: ixVolume Configuration
+                description: The configuration for the ixVolume dataset.
+                schema:
+                  type: dict
+                  # Nothing to show for the user
+                  hidden: true
+                  show_if: [["type", "=", "ixVolume"]]
+                  $ref:
+                    - "normalize/ixVolume"
+                  attrs:
+                    - variable: aclEnable
+                      label: Enable ACL
+                      description: Enable ACL for the dataset.
+                      schema:
+                        type: boolean
+                        # Postgres does a CHMOD at startup
+                        # Which fails with ACL
+                        hidden: true
+                        default: false
+                    - variable: datasetName
+                      label: Dataset Name
+                      description: The name of the dataset to use for storage.
+                      schema:
+                        type: string
+                        required: true
+                        immutable: true
+                        hidden: true
+                        default: "pgBackup"
+                    - variable: aclEntries
+                      label: ACL Configuration
+                      schema:
+                        type: dict
+                        show_if: [["aclEnable", "=", true]]
+                        attrs: []
+              - variable: hostPathConfig
+                label: Host Path Configuration
+                schema:
+                  type: dict
+                  show_if: [["type", "=", "hostPath"]]
+                  attrs:
+                    - variable: aclEnable
+                      label: Enable ACL
+                      description: Enable ACL for the dataset.
+                      schema:
+                        type: boolean
+                        # Postgres does a CHMOD at startup
+                        # Which fails with ACL
+                        hidden: true
+                        default: false
+                    - variable: acl
+                      label: ACL Configuration
+                      schema:
+                        type: dict
+                        show_if: [["aclEnable", "=", true]]
+                        attrs: []
+                        $ref:
+                          - "normalize/acl"
+                    - variable: hostPath
+                      label: Host Path
+                      description: The host path to use for storage.
+                      schema:
+                        type: hostpath
+                        show_if: [["aclEnable", "=", false]]
+                        required: true
+
+        - variable: additionalStorages
+          label: Additional Storage
+          description: Additional storage for Nextcloud.
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: storageEntry
+                label: Storage Entry
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: type
+                      label: Type
+                      description: |
+                        ixVolume: Is dataset created automatically by the system.</br>
+                        Host Path: Is a path that already exists on the system.</br>
+                        SMB Share: Is a SMB share that is mounted to a persistent volume claim.
+                      schema:
+                        type: string
+                        required: true
+                        default: "ixVolume"
+                        immutable: true
+                        enum:
+                          - value: "hostPath"
+                            description: Host Path (Path that already exists on the system)
+                          - value: "ixVolume"
+                            description: ixVolume (Dataset created automatically by the system)
+                          - value: "smb-pv-pvc"
+                            description: SMB Share (Mounts a persistent volume claim to a SMB share)
+                    - variable: readOnly
+                      label: Read Only
+                      description: Mount the volume as read only.
+                      schema:
+                        type: boolean
+                        default: false
+                    - variable: mountPath
+                      label: Mount Path
+                      description: The path inside the container to mount the storage.
+                      schema:
+                        type: path
+                        required: true
+                    - variable: hostPathConfig
+                      label: Host Path Configuration
+                      schema:
+                        type: dict
+                        show_if: [["type", "=", "hostPath"]]
+                        attrs:
+                          - variable: aclEnable
+                            label: Enable ACL
+                            description: Enable ACL for the dataset.
+                            schema:
+                              type: boolean
+                              default: false
+                          - variable: acl
+                            label: ACL Configuration
+                            schema:
+                              type: dict
+                              show_if: [["aclEnable", "=", true]]
+                              attrs: []
+                              $ref:
+                                - "normalize/acl"
+                          - variable: hostPath
+                            label: Host Path
+                            description: The host path to use for storage.
+                            schema:
+                              type: hostpath
+                              show_if: [["aclEnable", "=", false]]
+                              required: true
+                    - variable: ixVolumeConfig
+                      label: ixVolume Configuration
+                      description: The configuration for the ixVolume dataset.
+                      schema:
+                        type: dict
+                        show_if: [["type", "=", "ixVolume"]]
+                        $ref:
+                          - "normalize/ixVolume"
+                        attrs:
+                          - variable: aclEnable
+                            label: Enable ACL
+                            description: Enable ACL for the dataset.
+                            schema:
+                              type: boolean
+                              default: false
+                          - variable: datasetName
+                            label: Dataset Name
+                            description: The name of the dataset to use for storage.
+                            schema:
+                              type: string
+                              required: true
+                              immutable: true
+                              default: "storage_entry"
+                          - variable: aclEntries
+                            label: ACL Configuration
+                            schema:
+                              type: dict
+                              show_if: [["aclEnable", "=", true]]
+                              attrs: []
+                    - variable: smbConfig
+                      label: SMB Share Configuration
+                      description: The configuration for the SMB Share.
+                      schema:
+                        type: dict
+                        show_if: [["type", "=", "smb-pv-pvc"]]
+                        attrs:
+                          - variable: server
+                            label: Server
+                            description: The server for the SMB share.
+                            schema:
+                              type: string
+                              required: true
+                          - variable: share
+                            label: Share
+                            description: The share name for the SMB share.
+                            schema:
+                              type: string
+                              required: true
+                          - variable: domain
+                            label: Domain (Optional)
+                            description: The domain for the SMB share.
+                            schema:
+                              type: string
+                          - variable: username
+                            label: Username
+                            description: The username for the SMB share.
+                            schema:
+                              type: string
+                              required: true
+                          - variable: password
+                            label: Password
+                            description: The password for the SMB share.
+                            schema:
+                              type: string
+                              required: true
+                              private: true
+                          - variable: size
+                            label: Size (in Gi)
+                            description: The size of the volume quota.
+                            schema:
+                              type: int
+                              required: true
+                              min: 1
+                              default: 1
+
+  - variable: resources
+    group: Resources Configuration
+    label: ""
     schema:
       type: dict
       attrs:
-        - variable: postgres-data
-          label: "Postgres Data Volume"
+        - variable: limits
+          label: Limits
           schema:
             type: dict
             attrs:
-              - variable: datasetName
-                label: "Postgres Data Volume Name"
+              - variable: cpu
+                label: CPU
+                description: CPU limit for WG-Easy.
                 schema:
                   type: string
-                  hidden: true
-                  $ref:
-                    - "normalize/ixVolume"
-                  default: "ix-postgres_data"
-                  show_if: [["hostPathEnabled", "=", false]]
-                  editable: false
-
-              - variable: mountPath
-                label: "Postgresql Data Mount Path"
-                description: "Path where the volume will be mounted inside the pod"
-                schema:
-                  type: path
-                  hidden: true
-                  editable: false
-                  default: "/var/lib/postgresql/data"
-              - variable: hostPathEnabled
-                label: "Enable Host Path for Postgres Data Volume"
-                schema:
-                  type: boolean
-                  default: false
-                  show_subquestions_if: true
-                  subquestions:
-                    - variable: hostPath
-                      label: "Host Path for Postgres Data Volume"
-                      schema:
-                        type: hostpath
-                        required: true
-
-        - variable: postgres-backup
-          label: "Postgres Backup Volume"
-          schema:
-            type: dict
-            attrs:
-              - variable: datasetName
-                label: "Postgres Backup Volume Name"
+                  max_length: 6
+                  valid_chars: '^(0\.[1-9]|[1-9][0-9]*)(\.[0-9]|m?)$'
+                  valid_chars_error: |
+                    Valid CPU limit formats are</br>
+                    - Plain Integer - eg. 1</br>
+                    - Float - eg. 0.5</br>
+                    - Milicpu - eg. 500m
+                  default: "4000m"
+                  required: true
+              - variable: memory
+                label: Memory
+                description: Memory limit for WG-Easy.
                 schema:
                   type: string
-                  hidden: true
-                  $ref:
-                    - "normalize/ixVolume"
-                  default: "ix-postgres_backups"
-                  show_if: [["hostPathEnabled", "=", false]]
-                  editable: false
-              - variable: mountPath
-                label: "Postgresql Backup Mount Path"
-                description: "Path where the volume will be mounted inside the pod"
-                schema:
-                  type: path
-                  hidden: true
-                  editable: false
-                  default: "/postgres_backups"
-              - variable: hostPathEnabled
-                label: "Enable Host Path for Postgres Backup Volume"
-                schema:
-                  type: boolean
-                  default: false
-                  show_subquestions_if: true
-                  subquestions:
-                    - variable: hostPath
-                      label: "Host Path for Postgres Backup Volume"
-                      schema:
-                        type: hostpath
-                        required: true
-
-  - variable: enableResourceLimits
-    label: "Enable Pod resource limits"
-    group: "Resource Limits"
-    schema:
-      type: boolean
-      default: false
-  - variable: cpuLimit
-    label: "CPU Limit"
-    description: "CPU resource limit allow  plain integer values with suffix m(milli) e.g 1000m, 100."
-    group: "Resource Limits"
-    schema:
-      type: string
-      show_if: [["enableResourceLimits", "=", true]]
-      valid_chars: "^\\d+(?:\\.\\d+(?!.*m$)|m?$)"
-      default: "4000m"
-  - variable: memLimit
-    label: "Memory Limit"
-    group: "Resource Limits"
-    description: "Memory limits is specified by number of bytes. Followed by quantity suffix like E,P,T,G,M,k and Ei,Pi,Ti,Mi,Gi,Ki can also be used. e.g 129e6, 129M,  128974848000m, 123Mi"
-    schema:
-      type: string
-      show_if: [["enableResourceLimits", "=", true]]
-      valid_chars: "^([+-]?[0-9.]+)([eEinumkKMGTP]*[-+]?[0-9]*)$"
-      default: "8Gi"
-
-  - variable: environmentVariables
-    label: "Nextcloud environment"
-    group: "Nextcloud Configuration"
-    schema:
-      type: list
-      default: []
-      items:
-        - variable: environmentVariable
-          label: "Environment Variable"
-          schema:
-            type: dict
-            attrs:
-              - variable: name
-                label: "Name"
-                schema:
-                  type: string
-              - variable: value
-                label: "Value"
-                schema:
-                  type: string
+                  max_length: 12
+                  valid_chars: "^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$"
+                  valid_chars_error: |
+                    Valid Memory limit formats are</br>
+                    - Suffixed with E/P/T/G/M/K - eg. 1G</br>
+                    - Suffixed with Ei/Pi/Ti/Gi/Mi/Ki - eg. 1Gi</br>
+                    - Plain Integer in bytes - eg. 1024</br>
+                    - Exponent - eg. 134e6
+                  default: "8Gi"
+                  required: true

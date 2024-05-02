@@ -1,0 +1,38 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{- include "nextcloud.migration" $ -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "nextcloud.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "nextcloud.configuration" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "nextcloud.configs" $ | fromYaml) -}}
+{{- if .Values.ncNetwork.certificateID }}
+  {{- $_ := mustMergeOverwrite .Values (include "nginx.workload" $ | fromYaml) -}}
+{{- end }}
+{{- if .Values.ncConfig.cron.enabled }}
+  {{- $_ := mustMergeOverwrite .Values (include "nextcloud.cron" $ | fromYaml) -}}
+{{- end }}
+{{- $_ := mustMergeOverwrite .Values (include "nginx.configuration" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "postgres.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "redis.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "nextcloud.service" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "nextcloud.persistence" $ | fromYaml) -}}
+
+{{/* Mutate postgres backup command to handle nextcloud config */}}
+{{- $cmd := .Values.workload.postgresbackup.podSpec.containers.postgresbackup.command -}}
+{{- $temp := printf ("%s\n%s\n%s\n%s\n%s\n%s\n%s")
+  "echo 'Fetching password from config.php'"
+  "# sed removes ' , => spaces and db* from the string"
+  "POSTGRES_USER=$(cat /nc-config/config/config.php | grep 'dbuser' | sed \"s/dbuser\\| \\|'\\|,\\|=>//g\")"
+  "POSTGRES_PASSWORD=$(cat /nc-config/config/config.php | grep 'dbpassword' | sed \"s/dbpassword\\| \\|'\\|,\\|=>//g\")"
+  "POSTGRES_DB=$(cat /nc-config/config/config.php | grep 'dbname' | sed \"s/dbname\\| \\|'\\|,\\|=>//g\")"
+  "[ -n \"$POSTGRES_USER\" ] && [ -n \"$POSTGRES_PASSWORD\" ] && [ -n \"$POSTGRES_DB\" ] && echo 'User, Database and password fetched from config.php'"
+  (index $cmd 2) -}}
+{{- $newCmd := (list (index $cmd 0) (index $cmd 1) $temp) -}}
+{{- $_ := set .Values.workload.postgresbackup.podSpec.containers.postgresbackup "command" $newCmd -}}
+{{- $_ := set .Values.workload.postgresbackup.podSpec "securityContext" (dict "fsGroup" "33") -}}
+
+{{/* Create the configmap for portal manually*/}}
+{{- include "nextcloud.portal" $ -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}
