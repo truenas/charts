@@ -14,6 +14,7 @@ workload:
           securityContext:
             runAsUser: {{ .Values.navidromeRunAs.user }}
             runAsGroup: {{ .Values.navidromeRunAs.group }}
+            readOnlyRootFilesystem: false
           env:
             ND_MUSICFOLDER: /music
             ND_DATAFOLDER: /data
