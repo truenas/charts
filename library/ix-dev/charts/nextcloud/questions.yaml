@@ -129,7 +129,7 @@ questions:
                   required: true
         - variable: additionalEnvs
           label: Additional Environment Variables
-          description: Configure additional environment variables for Photoprism.
+          description: Configure additional environment variables for Nextcloud.
           schema:
             type: list
             default: []
