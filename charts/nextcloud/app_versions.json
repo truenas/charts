@@ -1,18 +1,18 @@
 {
-    "2.0.0": {
+    "2.0.1": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/nextcloud/2.0.0",
-        "last_update": "2024-05-03 09:16:06",
+        "location": "/__w/charts/charts/charts/nextcloud/2.0.1",
+        "last_update": "2024-05-03 09:19:49",
         "required_features": [
-            "normalize/ixVolume",
             "normalize/acl",
-            "definitions/nodeIP",
-            "definitions/certificate"
+            "definitions/certificate",
+            "normalize/ixVolume",
+            "definitions/nodeIP"
         ],
-        "human_version": "29.0.0_2.0.0",
-        "version": "2.0.0",
+        "human_version": "29.0.0_2.0.1",
+        "version": "2.0.1",
         "chart_metadata": {
             "name": "nextcloud",
             "description": "A file sharing server that puts the control and security of your own data back into your hands.",
@@ -20,7 +20,7 @@
                 "title": "Nextcloud"
             },
             "type": "application",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "apiVersion": "v2",
             "appVersion": "29.0.0",
             "kubeVersion": ">=1.16.0-0",
@@ -171,6 +171,7 @@
                                 "schema": {
                                     "type": "string",
                                     "default": "",
+                                    "private": true,
                                     "required": true
                                 }
                             },
@@ -300,6 +301,42 @@
                                                 ],
                                                 "default": "*/15 * * * *",
                                                 "required": true
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "additionalEnvs",
+                                "label": "Additional Environment Variables",
+                                "description": "Configure additional environment variables for Nextcloud.",
+                                "schema": {
+                                    "type": "list",
+                                    "default": [],
+                                    "items": [
+                                        {
+                                            "variable": "env",
+                                            "label": "Environment Variable",
+                                            "schema": {
+                                                "type": "dict",
+                                                "attrs": [
+                                                    {
+                                                        "variable": "name",
+                                                        "label": "Name",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "required": true
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "value",
+                                                        "label": "Value",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "required": true
+                                                        }
+                                                    }
+                                                ]
                                             }
                                         }
                                     ]
@@ -502,7 +539,6 @@
                                             "schema": {
                                                 "type": "string",
                                                 "required": true,
-                                                "immutable": true,
                                                 "default": "ixVolume",
                                                 "enum": [
                                                     {
@@ -823,7 +859,6 @@
                                             "schema": {
                                                 "type": "string",
                                                 "required": true,
-                                                "immutable": true,
                                                 "default": "ixVolume",
                                                 "enum": [
                                                     {
@@ -872,7 +907,7 @@
                                                             "required": true,
                                                             "immutable": true,
                                                             "hidden": true,
-                                                            "default": "html"
+                                                            "default": "data"
                                                         }
                                                     },
                                                     {
@@ -1144,7 +1179,6 @@
                                             "schema": {
                                                 "type": "string",
                                                 "required": true,
-                                                "immutable": true,
                                                 "default": "ixVolume",
                                                 "enum": [
                                                     {
@@ -1468,7 +1502,6 @@
                                             "schema": {
                                                 "type": "string",
                                                 "required": true,
-                                                "immutable": true,
                                                 "default": "ixVolume",
                                                 "enum": [
                                                     {
@@ -1800,7 +1833,6 @@
                                                             "type": "string",
                                                             "required": true,
                                                             "default": "ixVolume",
-                                                            "immutable": true,
                                                             "enum": [
                                                                 {
                                                                     "value": "hostPath",
@@ -2262,11 +2294,11 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/nextcloud/1.6.61",
-        "last_update": "2024-05-03 09:16:06",
+        "last_update": "2024-05-03 09:18:16",
         "required_features": [
+            "definitions/certificate",
             "normalize/ixVolume",
-            "definitions/nodeIP",
-            "definitions/certificate"
+            "definitions/nodeIP"
         ],
         "human_version": "29.0.0_1.6.61",
         "version": "1.6.61",
@@ -3086,11 +3118,11 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/nextcloud/1.6.59",
-        "last_update": "2024-05-03 09:16:06",
+        "last_update": "2024-05-03 09:18:16",
         "required_features": [
+            "definitions/certificate",
             "normalize/ixVolume",
-            "definitions/nodeIP",
-            "definitions/certificate"
+            "definitions/nodeIP"
         ],
         "human_version": "28.0.4_1.6.59",
         "version": "1.6.59",
@@ -3910,11 +3942,11 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/nextcloud/1.6.53",
-        "last_update": "2024-05-03 09:16:06",
+        "last_update": "2024-05-03 09:18:16",
         "required_features": [
+            "definitions/certificate",
             "normalize/ixVolume",
-            "definitions/nodeIP",
-            "definitions/certificate"
+            "definitions/nodeIP"
         ],
         "human_version": "27.1.4_1.6.53",
         "version": "1.6.53",
@@ -4734,11 +4766,11 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/nextcloud/1.6.29",
-        "last_update": "2024-05-03 09:16:06",
+        "last_update": "2024-05-03 09:18:16",
         "required_features": [
+            "definitions/certificate",
             "normalize/ixVolume",
-            "definitions/nodeIP",
-            "definitions/certificate"
+            "definitions/nodeIP"
         ],
         "human_version": "26.0.2_1.6.29",
         "version": "1.6.29",
