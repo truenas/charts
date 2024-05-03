@@ -254,6 +254,13 @@ questions:
             type: boolean
             default: false
             hidden: true
+        # Dummy variable so we can skip "fixing" migration on new installations
+        - variable: migrationFixed
+          label: ""
+          schema:
+            type: boolean
+            default: true
+            hidden: true
         - variable: isDataInTheSameVolume
           label: "Pre v2 Storage Structure (See the tooltip for more information)"
           description: |
