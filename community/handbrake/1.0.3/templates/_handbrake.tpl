@@ -57,4 +57,14 @@ workload:
               enabled: true
               type: tcp
               port: {{ .Values.handbrakeNetwork.vncPort }}
+{{ with .Values.handbrakeGPU }}
+scaleGPU:
+  {{ range $key, $value := . }}
+  - gpu:
+      {{ $key }}: {{ $value }}
+    targetSelector:
+      handbrake:
+        - handbrake
+  {{ end }}
+{{ end }}
 {{- end -}}
