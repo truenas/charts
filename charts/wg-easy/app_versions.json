@@ -1,17 +1,17 @@
 {
-    "2.0.16": {
+    "2.0.17": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/wg-easy/2.0.16",
-        "last_update": "2024-05-03 09:12:50",
+        "location": "/__w/charts/charts/charts/wg-easy/2.0.17",
+        "last_update": "2024-05-03 09:17:52",
         "required_features": [
-            "normalize/acl",
             "normalize/ixVolume",
+            "normalize/acl",
             "definitions/nodeIP"
         ],
-        "human_version": "12_2.0.16",
-        "version": "2.0.16",
+        "human_version": "12_2.0.17",
+        "version": "2.0.17",
         "chart_metadata": {
             "name": "wg-easy",
             "description": "WG-Easy is the easiest way to install & manage WireGuard!",
@@ -19,7 +19,7 @@
                 "title": "WG Easy"
             },
             "type": "application",
-            "version": "2.0.16",
+            "version": "2.0.17",
             "apiVersion": "v2",
             "appVersion": "12",
             "kubeVersion": ">=1.16.0-0",
@@ -233,6 +233,16 @@
                                         "definitions/nodeIP"
                                     ],
                                     "default": "192.168.0.10"
+                                }
+                            },
+                            {
+                                "variable": "externalPort",
+                                "label": "Port for Client Configuration",
+                                "description": "The port accessible from the clients.</br>\nThis is ONLY used on the client configuration generation in the \"Endpoint\" field.\n",
+                                "schema": {
+                                    "type": "int",
+                                    "required": true,
+                                    "default": 51820
                                 }
                             },
                             {
@@ -1166,11 +1176,11 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/wg-easy/1.0.12",
-        "last_update": "2024-05-03 09:12:50",
+        "last_update": "2024-05-03 09:16:06",
         "required_features": [
             "normalize/ixVolume",
-            "definitions/nodeIP",
-            "validations/lockedHostPath"
+            "validations/lockedHostPath",
+            "definitions/nodeIP"
         ],
         "human_version": "7_1.0.12",
         "version": "1.0.12",
