@@ -23,7 +23,7 @@ workload:
                 - NET_RAW
                 - SYS_MODULE
           env:
-            WG_PORT: {{ .Values.wgNetwork.udpPort }}
+            WG_PORT: {{ .Values.wgConfig.externalPort }}
             WG_PATH: /etc/wireguard
             PORT: {{ .Values.wgNetwork.webPort }}
             WG_HOST: {{ .Values.wgConfig.host | quote }}
