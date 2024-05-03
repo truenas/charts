@@ -93,6 +93,11 @@ def migrate_common_lib(values):
     return values
 
 def migrate(values):
+    if 'isDataInTheSameVolume' in values.keys():
+        values['ncStorage']['isDataInTheSameVolume'] = values.pop('isDataInTheSameVolume', True)
+        values['ncStorage']['shouldShowStorageToggle'] = values.pop('shouldShowStorageToggle', True)
+        return values
+
     # If this missing, we have already migrated
     if not 'appVolumeMounts' in values.keys():
         return values
