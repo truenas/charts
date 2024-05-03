@@ -1,17 +1,18 @@
 {
-    "1.0.2": {
+    "1.0.3": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/handbrake/1.0.2",
-        "last_update": "2024-05-03 05:17:54",
+        "location": "/__w/charts/charts/community/handbrake/1.0.3",
+        "last_update": "2024-05-03 09:14:20",
         "required_features": [
             "normalize/acl",
             "normalize/ixVolume",
-            "definitions/timezone"
+            "definitions/timezone",
+            "definitions/gpuConfiguration"
         ],
-        "human_version": "23.12.2_1.0.2",
-        "version": "1.0.2",
+        "human_version": "23.12.2_1.0.3",
+        "version": "1.0.3",
         "chart_metadata": {
             "name": "handbrake",
             "description": "HandBrake is a tool for converting video from nearly any format to a selection of modern, widely supported codecs.",
@@ -19,7 +20,7 @@
                 "title": "HandBrake"
             },
             "type": "application",
-            "version": "1.0.2",
+            "version": "1.0.3",
             "apiVersion": "v2",
             "appVersion": "23.12.2",
             "kubeVersion": ">=1.16.0-0",
@@ -2073,6 +2074,18 @@
                                 }
                             }
                         ]
+                    }
+                },
+                {
+                    "variable": "handbrakeGPU",
+                    "group": "Resources Configuration",
+                    "label": "GPU Configuration",
+                    "schema": {
+                        "type": "dict",
+                        "$ref": [
+                            "definitions/gpuConfiguration"
+                        ],
+                        "attrs": []
                     }
                 }
             ]
