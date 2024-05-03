@@ -1,18 +1,18 @@
 {
-    "2.0.1": {
+    "2.0.2": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/nextcloud/2.0.1",
-        "last_update": "2024-05-03 09:19:49",
+        "location": "/__w/charts/charts/charts/nextcloud/2.0.2",
+        "last_update": "2024-05-03 11:23:26",
         "required_features": [
-            "normalize/acl",
-            "definitions/certificate",
+            "definitions/nodeIP",
             "normalize/ixVolume",
-            "definitions/nodeIP"
+            "definitions/certificate",
+            "normalize/acl"
         ],
-        "human_version": "29.0.0_2.0.1",
-        "version": "2.0.1",
+        "human_version": "29.0.0_2.0.2",
+        "version": "2.0.2",
         "chart_metadata": {
             "name": "nextcloud",
             "description": "A file sharing server that puts the control and security of your own data back into your hands.",
@@ -20,7 +20,7 @@
                 "title": "Nextcloud"
             },
             "type": "application",
-            "version": "2.0.1",
+            "version": "2.0.2",
             "apiVersion": "v2",
             "appVersion": "29.0.0",
             "kubeVersion": ">=1.16.0-0",
@@ -506,6 +506,15 @@
                                 "schema": {
                                     "type": "boolean",
                                     "default": false,
+                                    "hidden": true
+                                }
+                            },
+                            {
+                                "variable": "migrationFixed",
+                                "label": "",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": true,
                                     "hidden": true
                                 }
                             },
@@ -2294,11 +2303,11 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/nextcloud/1.6.61",
-        "last_update": "2024-05-03 09:18:16",
+        "last_update": "2024-05-03 11:21:55",
         "required_features": [
-            "definitions/certificate",
+            "definitions/nodeIP",
             "normalize/ixVolume",
-            "definitions/nodeIP"
+            "definitions/certificate"
         ],
         "human_version": "29.0.0_1.6.61",
         "version": "1.6.61",
@@ -3118,11 +3127,11 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/nextcloud/1.6.59",
-        "last_update": "2024-05-03 09:18:16",
+        "last_update": "2024-05-03 11:21:55",
         "required_features": [
-            "definitions/certificate",
+            "definitions/nodeIP",
             "normalize/ixVolume",
-            "definitions/nodeIP"
+            "definitions/certificate"
         ],
         "human_version": "28.0.4_1.6.59",
         "version": "1.6.59",
@@ -3942,11 +3951,11 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/nextcloud/1.6.53",
-        "last_update": "2024-05-03 09:18:16",
+        "last_update": "2024-05-03 11:21:55",
         "required_features": [
-            "definitions/certificate",
+            "definitions/nodeIP",
             "normalize/ixVolume",
-            "definitions/nodeIP"
+            "definitions/certificate"
         ],
         "human_version": "27.1.4_1.6.53",
         "version": "1.6.53",
@@ -4766,11 +4775,11 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/nextcloud/1.6.29",
-        "last_update": "2024-05-03 09:18:16",
+        "last_update": "2024-05-03 11:21:55",
         "required_features": [
-            "definitions/certificate",
+            "definitions/nodeIP",
             "normalize/ixVolume",
-            "definitions/nodeIP"
+            "definitions/certificate"
         ],
         "human_version": "26.0.2_1.6.29",
         "version": "1.6.29",
