@@ -259,7 +259,7 @@ questions:
           label: ""
           schema:
             type: boolean
-            default: false
+            default: true
             hidden: true
         - variable: isDataInTheSameVolume
           label: "Pre v2 Storage Structure (See the tooltip for more information)"
