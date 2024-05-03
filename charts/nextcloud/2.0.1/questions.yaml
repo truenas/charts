@@ -40,6 +40,7 @@ questions:
           schema:
             type: string
             default: ""
+            private: true
             required: true
         - variable: host
           label: Host
@@ -127,6 +128,28 @@ questions:
                   show_if: [["enabled", "=", true]]
                   default: "*/15 * * * *"
                   required: true
+        - variable: additionalEnvs
+          label: Additional Environment Variables
+          description: Configure additional environment variables for Nextcloud.
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: env
+                label: Environment Variable
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: name
+                      label: Name
+                      schema:
+                        type: string
+                        required: true
+                    - variable: value
+                      label: Value
+                      schema:
+                        type: string
+                        required: true
 
   - variable: podOptions
     label: ""
@@ -171,7 +194,7 @@ questions:
           description: The port for the Nextcloud Web UI.
           schema:
             type: int
-            default: 9001
+            default: 20810
             min: 9000
             max: 65535
             required: true
@@ -258,7 +281,6 @@ questions:
                 schema:
                   type: string
                   required: true
-                  immutable: true
                   default: ixVolume
                   enum:
                     - value: hostPath
@@ -336,7 +358,6 @@ questions:
                 schema:
                   type: string
                   required: true
-                  immutable: true
                   default: ixVolume
                   enum:
                     - value: hostPath
@@ -366,7 +387,7 @@ questions:
                         required: true
                         immutable: true
                         hidden: true
-                        default: "html"
+                        default: "data"
                     - variable: aclEntries
                       label: ACL Configuration
                       schema:
@@ -415,7 +436,6 @@ questions:
                 schema:
                   type: string
                   required: true
-                  immutable: true
                   default: ixVolume
                   enum:
                     - value: hostPath
@@ -501,7 +521,6 @@ questions:
                 schema:
                   type: string
                   required: true
-                  immutable: true
                   default: ixVolume
                   enum:
                     - value: hostPath
@@ -596,7 +615,6 @@ questions:
                         type: string
                         required: true
                         default: "ixVolume"
-                        immutable: true
                         enum:
                           - value: "hostPath"
                             description: Host Path (Path that already exists on the system)
@@ -749,7 +767,7 @@ questions:
                 schema:
                   type: string
                   max_length: 12
-                  valid_chars: "^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$"
+                  valid_chars: '^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$'
                   valid_chars_error: |
                     Valid Memory limit formats are</br>
                     - Suffixed with E/P/T/G/M/K - eg. 1G</br>
