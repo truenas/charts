@@ -171,7 +171,7 @@ questions:
           description: The port for the Nextcloud Web UI.
           schema:
             type: int
-            default: 20810
+            default: 9001
             min: 9000
             max: 65535
             required: true

@@ -25,8 +25,6 @@ def migrate_common_lib(values):
     ]
 
     values.update({
-        'shouldShowStorageToggle': True,
-        'isDataInTheSameVolume': True,
         # Migrate Network
         'ncNetwork': {
             'webPort': values['service']['nodePort'],
@@ -72,6 +70,8 @@ def migrate_common_lib(values):
         },
         # Migrate Storage
         'ncStorage': {
+            'shouldShowStorageToggle': True,
+            'isDataInTheSameVolume': True,
             'pgData': migrate_volume(values['postgresAppVolumeMounts']['postgres-data']),
             'pgBackup': migrate_volume(values['postgresAppVolumeMounts']['postgres-backup']),
             'data': migrate_volume(values['appVolumeMounts']['nextcloud-data']),
@@ -93,6 +93,11 @@ def migrate_common_lib(values):
     return values
 
 def migrate(values):
+    if 'isDataInTheSameVolume' in values.keys():
+        values['ncStorage']['isDataInTheSameVolume'] = values.pop('isDataInTheSameVolume', True)
+        values['ncStorage']['shouldShowStorageToggle'] = values.pop('shouldShowStorageToggle', True)
+        return values
+
     # If this missing, we have already migrated
     if not 'appVolumeMounts' in values.keys():
         return values
