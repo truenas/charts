@@ -387,7 +387,7 @@ questions:
                         required: true
                         immutable: true
                         hidden: true
-                        default: "html"
+                        default: "data"
                     - variable: aclEntries
                       label: ACL Configuration
                       schema:
