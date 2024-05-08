@@ -1,0 +1,27 @@
+name: sabnzbd
+description: SABnzbd is an Open Source Binary Newsreader written in Python.
+annotations:
+  title: SABnzbd
+type: application
+version: 1.2.9
+apiVersion: v2
+appVersion: 4.3.1
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.2.9
+home: https://sabnzbd.org/
+icon: https://media.sys.truenas.net/apps/sabnzbd/icons/icon.svg
+sources:
+  - https://github.com/onedr0p/containers/tree/main/apps/sabnzbd
+  - https://github.com/truenas/charts/tree/master/library/ix-dev/community/sabnzbd
+  - https://github.com/Sabnzbd/Sabnzbd
+keywords:
+  - media
+  - usenet
+  - newsreader

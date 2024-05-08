@@ -1,0 +1,27 @@
+image:
+  repository: ghcr.io/onedr0p/sabnzbd
+  pullPolicy: IfNotPresent
+  tag: 4.3.1
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+sabnzbdConfig:
+  additionalEnvs: []
+
+sabnzbdNetwork:
+  webPort: 30055
+  hostNetwork: false
+
+sabnzbdRunAs:
+  user: 568
+  group: 568
+
+sabnzbdStorage:
+  config:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: config
+  additionalStorages: []

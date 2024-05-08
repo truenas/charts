@@ -1,0 +1,27 @@
+name: actual-budget
+description: Actual Budget is a super fast and privacy-focused app for managing your
+  finances.
+annotations:
+  title: Actual Budget
+type: application
+version: 1.2.13
+apiVersion: v2
+appVersion: 24.5.0
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.2.9
+home: https://actualbudget.org/
+icon: https://media.sys.truenas.net/apps/actual-budget/icons/icon.png
+sources:
+  - https://github.com/actualbudget/actual-server
+  - https://github.com/truenas/charts/tree/master/community/actual-budget
+  - https://hub.docker.com/r/actualbudget/actual-server
+keywords:
+  - finance
+  - budget

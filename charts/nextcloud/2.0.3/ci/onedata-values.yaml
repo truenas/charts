@@ -1,0 +1,76 @@
+ncConfig:
+  adminUser: admin
+  adminPassword: password
+  host: "127.0.0.1"
+  dataDir: /var/www/html/data
+  commands: []
+  maxUploadLimit: 3
+  phpMemoryLimit: 512
+
+ncNetwork:
+  webPort: 30001
+  nginx:
+    proxyTimeouts: 120
+    useDifferentAccessPort: false
+    externalAccessPort: 443
+
+ncStorage:
+  isDataInTheSameVolume: true
+  html:
+    type: hostPath
+    hostPathConfig:
+      hostPath: /mnt/{{ .Release.Name }}/test
+  data:
+    type: hostPath
+    hostPathConfig:
+      hostPath: /mnt/{{ .Release.Name }}/test
+  pgData:
+    type: pvc
+  pgBackup:
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""
+  additionalStorages: []
+
+##### CI Hack #####
+# What this hack does is that it will create a pod before the chart install
+# A hostPath is attached to the pod, which will force k8s to create the directory on the host.
+# so the actual test run will find the directory created there. (Storage attached to the actual NC chart
+# uses `subPath` for which k8s will not created the directory on the host.)
+workload:
+  ci-hack:
+    enabled: true
+    type: Job
+    annotations:
+      "helm.sh/hook": pre-install
+      "helm.sh/hook-weight": "1"
+      "helm.sh/hook-delete-policy": hook-succeeded
+    podSpec:
+      restartPolicy: Never
+      containers:
+        ci-hack:
+          enabled: true
+          primary: true
+          image: bashImage
+          command: bash
+          args:
+            - -c
+            - exit 0
+          probes:
+            liveness:
+              enabled: false
+            readiness:
+              enabled: false
+            startup:
+              enabled: false
+persistence:
+  ci-hack:
+    enabled: true
+    type: hostPath
+    hostPath: /mnt/{{ .Release.Name }}/test/data
+    hostPathType: DirectoryOrCreate
+    targetSelector:
+      ci-hack:
+        ci-hack:
+          mountPath: /ci

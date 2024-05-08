@@ -1,0 +1,30 @@
+image:
+  repository: goofball222/unifi
+  pullPolicy: IfNotPresent
+  tag: 8.1.127
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+unifiConfig:
+  additionalEnvs: []
+
+unifiNetwork:
+  webHttpsPort: 30072
+  enableWebHttp: false
+  webHttpPort: 30073
+  portalHttpsPort: 30074
+  enablePortalHttp: false
+  portalHttpPort: 30075
+  certificateID:
+  # Stun only works with hostNetwork: true
+  hostNetwork: false
+
+unifiStorage:
+  data:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: data
+  additionalStorages: []
