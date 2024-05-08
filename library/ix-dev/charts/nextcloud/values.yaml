@@ -87,3 +87,7 @@ notes:
     {{- $_ := unset .Values "ncDbName" }}
     {{- $_ := unset .Values "ncDbPass" }}
     {{- $_ := unset .Values "ncDbHost" }}
+
+    Note: Nextcloud will create an additional new user and password for the admin user
+    on first startup. You can find those credentials in the `/var/www/html/config/config.php` file
+    inside the container.
