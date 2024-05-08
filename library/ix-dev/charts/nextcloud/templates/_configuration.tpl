@@ -27,10 +27,10 @@
 
   {{/* Temporary set dynamic db details on values,
   so we can print them on the notes */}}
-  {{- $_ := set .Values "ncDbPass" $dbPass -}}
-  {{- $_ := set .Values "ncDbHost" $dbHost -}}
-  {{- $_ := set .Values "ncDbName" $dbName -}}
-  {{- $_ := set .Values "ncDbUser" $dbUser -}}
+  {{- $_ := set .Values "ncDbPass" $dbPass | quote -}}
+  {{- $_ := set .Values "ncDbHost" $dbHost | quote -}}
+  {{- $_ := set .Values "ncDbName" $dbName | quote -}}
+  {{- $_ := set .Values "ncDbUser" $dbUser | quote -}}
 
   {{- $dbURL := (printf "postgres://%s:%s@%s:5432/%s?sslmode=disable" $dbUser $dbPass $dbHost $dbName) }}
 secret:
