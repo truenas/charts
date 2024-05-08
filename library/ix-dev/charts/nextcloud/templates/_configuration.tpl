@@ -63,7 +63,14 @@ secret:
       NEXTCLOUD_DATA_DIR: {{ .Values.ncConfig.dataDir }}
       PHP_UPLOAD_LIMIT: {{ printf "%vG" .Values.ncConfig.maxUploadLimit | default 3 }}
       PHP_MEMORY_LIMIT: {{ printf "%vM" .Values.ncConfig.phpMemoryLimit | default 512 }}
-      NEXTCLOUD_TRUSTED_DOMAINS: {{ list .Values.ncConfig.host "127.0.0.1" "localhost" $fullname (printf "%v-*" $fullname) | mustUniq | join " " | quote }}
+      {{- $host := "127.0.0.1" -}}
+      {{- if .Values.ncConfig.host -}}
+        {{- $host = printf "%v:%v" .Values.ncConfig.host .Values.ncNetwork.webPort -}}
+        {{- if contains ":" $host  -}} {{/* Make sure it always contains a port https://ixsystems.atlassian.net/browse/TNCHARTS-1016 */}}
+          {{- $host = .Values.ncConfig.host -}}
+        {{- end -}}
+      {{- end }}
+      NEXTCLOUD_TRUSTED_DOMAINS: {{ list $host "127.0.0.1" "localhost" (printf "%v-*" $fullname) $fullname | mustUniq | join " " | quote }}
       NEXTCLOUD_ADMIN_USER: {{ .Values.ncConfig.adminUser }}
       NEXTCLOUD_ADMIN_PASSWORD: {{ .Values.ncConfig.adminPassword }}
     {{- if .Values.ncNetwork.certificateID }}
