@@ -12,7 +12,7 @@ ncNetwork:
   nginx:
     proxyTimeouts: 120
     useDifferentAccessPort: false
-    externalAccessPort: 80
+    externalAccessPort: 443
 
 ncStorage:
   pgData:
