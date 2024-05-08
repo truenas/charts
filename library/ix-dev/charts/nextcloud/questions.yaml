@@ -275,7 +275,7 @@ questions:
             show_if: [["shouldShowStorageToggle", "=", true]]
             default: false
         - variable: html
-          label: Nextcloud HTML Storage
+          label: Nextcloud AppData Storage (HTML, Custom Themes, Apps, etc.)
           description: The path to store Nextcloud HTML and AppData.
           schema:
             type: dict
