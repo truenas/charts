@@ -36,8 +36,6 @@ configmap:
           }
 
           server {
-            server_name localhost;
-
             listen {{ .Values.ncNetwork.webPort }} ssl http2;
             listen [::]:{{ .Values.ncNetwork.webPort }} ssl http2;
 
