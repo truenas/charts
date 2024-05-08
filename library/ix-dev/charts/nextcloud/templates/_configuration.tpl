@@ -75,7 +75,7 @@ secret:
       {{- end }}
       APACHE_DISABLE_REWRITE_IP: "1"
       OVERWRITEPROTOCOL: "https"
-      TRUSTED_PROXIES: {{ list  $svcCidr $clusterCidr "127.0.0.1" | mustUniq | join "," | quote }}
+      TRUSTED_PROXIES: {{ list $svcCidr $clusterCidr "127.0.0.1" | mustUniq | join " " | quote }}
       {{- if and .Values.ncConfig.host .Values.ncNetwork.webPort }}
         {{- $overwritehost := .Values.ncConfig.host -}}
         {{- if .Values.ncNetwork.nginx.useDifferentAccessPort }}
