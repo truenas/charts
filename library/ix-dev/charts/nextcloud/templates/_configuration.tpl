@@ -80,6 +80,9 @@ secret:
         {{- $overwritehost := printf "%v:%v" .Values.ncConfig.host .Values.ncNetwork.webPort -}}
         {{- if .Values.ncNetwork.nginx.useDifferentAccessPort -}}
           {{ $overwritehost = printf "%v:%v" .Values.ncConfig.host .Values.ncNetwork.nginx.externalAccessPort -}}
+          {{- if contains ":" .Values.ncConfig.host -}}
+            {{- $overwritehost = .Values.ncConfig.host -}}
+          {{- end -}}
         {{- end }}
       OVERWRITEHOST: {{ $overwritehost }}
       {{- end }}
