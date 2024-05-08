@@ -33,7 +33,7 @@ def migrate_common_lib(values):
                 'proxyTimeouts': values.get('nginxConfig', {}).get('proxy_timeouts', 60),
                 'useDifferentAccessPort': values.get('nginxConfig', {}).get('useDifferentAccessPort', False),
                 'externalAccessPort': values.get('nginxConfig', {}).get('externalAccessPort', 443)
-            }
+            } if values['certificate'] else {}
         },
         # Migrate Resources
         'resources': {
@@ -98,6 +98,9 @@ def migrate(values):
 
     # If this missing, we have already migrated
     if not 'appVolumeMounts' in values.keys():
+        if 'certificateID' in values['ncNetwork']:
+            if not values['ncNetwork']['certificateID']:
+                values['ncNetwork']['nginx'] = {}
         # If 'shouldFixMigration' missing, we should fix migration and then add the key
         if not 'migrationFixed' in values['ncStorage'].keys():
             values['ncStorage']['isDataInTheSameVolume'] = True
