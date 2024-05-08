@@ -1,16 +1,16 @@
 {
-    "1.2.8": {
+    "1.2.9": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/sabnzbd/1.2.8",
-        "last_update": "2024-05-03 11:21:55",
+        "location": "/__w/charts/charts/community/sabnzbd/1.2.9",
+        "last_update": "2024-05-08 08:59:49",
         "required_features": [
             "normalize/ixVolume",
             "normalize/acl"
         ],
-        "human_version": "4.3.0_1.2.8",
-        "version": "1.2.8",
+        "human_version": "4.3.1_1.2.9",
+        "version": "1.2.9",
         "chart_metadata": {
             "name": "sabnzbd",
             "description": "SABnzbd is an Open Source Binary Newsreader written in Python.",
@@ -18,9 +18,9 @@
                 "title": "SABnzbd"
             },
             "type": "application",
-            "version": "1.2.8",
+            "version": "1.2.9",
             "apiVersion": "v2",
-            "appVersion": "4.3.0",
+            "appVersion": "4.3.1",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
