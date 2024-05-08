@@ -33,7 +33,7 @@ configmap:
             listen [::]:{{ .Values.ncNetwork.webPort }} ssl http2;
 
             # Redirect HTTP to HTTPS
-            error_page 497 https://$host{{ $externalAccessPort }}$request_uri;
+            error_page 497 301 =307 https://$host{{ $externalAccessPort }}$request_uri;
 
             ssl_certificate '/etc/nginx-certs/public.crt';
             ssl_certificate_key '/etc/nginx-certs/private.key';
