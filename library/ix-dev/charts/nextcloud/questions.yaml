@@ -46,10 +46,10 @@ questions:
           label: Host
           description: |
             Nextcloud host to create application URLs</br>
-            Example: </br>
+            Examples: </br>
             cloud.domain.com:30001</br>
-            or </br>
             cloud.domain.com (if you use port 443 externally)</br>
+            192.168.1.100:9001 (replace ip and port with your own)</br>
           schema:
             type: string
             $ref:
@@ -199,7 +199,7 @@ questions:
           description: The port for the Nextcloud Web UI.
           schema:
             type: int
-            default: 20810
+            default: 9001
             min: 9000
             max: 65535
             required: true
