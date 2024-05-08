@@ -29,13 +29,6 @@ configmap:
         events {}
         http {
           server {
-            # redirects all http requests to https requests
-            listen 8000 default_server;
-            listen [::]:8000 default_server;
-            return 301 https://$host$request_uri;
-          }
-
-          server {
             listen {{ .Values.ncNetwork.webPort }} ssl http2;
             listen [::]:{{ .Values.ncNetwork.webPort }} ssl http2;
 
