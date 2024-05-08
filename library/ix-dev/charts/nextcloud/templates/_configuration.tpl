@@ -77,9 +77,9 @@ secret:
       OVERWRITEPROTOCOL: "https"
       TRUSTED_PROXIES: {{ list $svcCidr $clusterCidr "127.0.0.1" | mustUniq | join " " | quote }}
       {{- if .Values.ncConfig.host }}
-        {{- $overwritehost := .Values.ncConfig.host -}}
-        {{- if .Values.ncNetwork.nginx.useDifferentAccessPort }}
-          {{ $overwritehost = (printf "%v:%v" .Values.ncConfig.host .Values.ncNetwork.webPort) }}
+        {{- $overwritehost := printf "%v:%v" .Values.ncConfig.host .Values.ncNetwork.webPort -}}
+        {{- if .Values.ncNetwork.nginx.useDifferentAccessPort -}}
+          {{ $overwritehost = printf "%v:%v" .Values.ncConfig.host .Values.ncNetwork.nginx.externalAccessPort -}}
         {{- end }}
       OVERWRITEHOST: {{ $overwritehost }}
       {{- end }}
