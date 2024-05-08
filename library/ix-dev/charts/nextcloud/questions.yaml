@@ -253,12 +253,6 @@ questions:
     schema:
       type: dict
       attrs:
-        - variable: shouldShowStorageToggle
-          label: ""
-          schema:
-            type: boolean
-            default: false
-            hidden: true
         # Dummy variable so we can skip "fixing" migration on new installations
         - variable: migrationFixed
           label: ""
@@ -269,6 +263,7 @@ questions:
         - variable: isDataInTheSameVolume
           label: "Pre v2 Storage Structure (See the tooltip for more information)"
           description: |
+            Do NOT check this, if this is a new installation.</br>
             If this is checked, means that this is an installation coming from a previous version (v1.x.x).<br/>
             In order to have backwards compatibility, the older storage structure was kept for this installation.<br/>
             If you want to utilize the new storage structure, move 'data' in a separate directory or dataset.
@@ -277,7 +272,6 @@ questions:
             You will NOT likely want to change that if your setup uses ixVolume as storage.
           schema:
             type: boolean
-            show_if: [["shouldShowStorageToggle", "=", true]]
             default: false
         - variable: html
           label: Nextcloud AppData Storage (HTML, Custom Themes, Apps, etc.)
