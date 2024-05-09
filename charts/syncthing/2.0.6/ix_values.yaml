@@ -1,0 +1,33 @@
+image:
+  pullPolicy: IfNotPresent
+  repository: syncthing/syncthing
+  tag: 1.27.7
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+podOptions:
+  dnsConfig:
+    options: []
+
+syncthingConfig:
+  additionalEnvs: []
+
+syncthingID:
+  user: 568
+  group: 568
+
+syncthingNetwork:
+  webPort: 20910
+  tcpPort: 20978
+  udpPort: 20979
+  hostNetwork: false
+
+syncthingStorage:
+  config:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: config
+  additionalStorages: []

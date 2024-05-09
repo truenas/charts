@@ -1,0 +1,25 @@
+name: pihole
+description: DNS and Ad-filtering for your network.
+annotations:
+  title: Pi-hole
+type: application
+version: 2.0.11
+apiVersion: v2
+appVersion: 2024.05.0
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.2.9
+home: https://pi-hole.net/
+icon: https://media.sys.truenas.net/apps/pihole/icons/icon.png
+sources:
+  - https://pi-hole.net/
+  - https://github.com/truenas/charts/tree/master/charts/pihole
+keywords:
+  - networking
+  - dns

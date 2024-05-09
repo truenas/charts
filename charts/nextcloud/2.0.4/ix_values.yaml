@@ -1,0 +1,93 @@
+image:
+  pullPolicy: IfNotPresent
+  repository: nextcloud
+  tag: 29.0.0
+nginxImage:
+  pullPolicy: IfNotPresent
+  repository: nginx
+  tag: 1.25.4
+# Keep using the same image
+# as before the migration
+ncPostgresImage:
+  pullPolicy: IfNotPresent
+  repository: postgres
+  tag: "13.1"
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+podOptions:
+  dnsConfig:
+    options: []
+
+ncConfig:
+  adminUser: admin
+  adminPassword: password
+  host: ""
+  dataDir: /var/www/html/data
+  commands:
+    - ffmpeg
+    - smbclient
+  maxUploadLimit: 3
+  phpMemoryLimit: 512
+  opCacheMemoryConsumption: 128
+  maxExecutionTime: 30
+  cron:
+    enabled: true
+    schedule: "*/15 * * * *"
+  additionalEnvs: []
+
+ncNetwork:
+  webPort: 9001
+  certificateID:
+  nginx:
+    proxyTimeouts: 120
+    useDifferentAccessPort: false
+    externalAccessPort: 443
+
+ncStorage:
+  data:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: data
+  html:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: html
+  pgData:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: pgData
+  pgBackup:
+    # TODO: NC creates a different user/pw for pg, so we should pass the
+    # config to the backup container so it can get the right details
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: pgBackup
+  additionalStorages: []
+
+notes:
+  custom: |
+    ## Database
+    You can connect to the database using the pgAdmin App from the catalog
+
+    <details>
+      <summary>Database Details</summary>
+
+      - Database: `{{ .Values.ncDbName }}`
+      - Username: `{{ .Values.ncDbUser }}`
+      - Password: `{{ .Values.ncDbPass }}`
+      - Host:     `{{ .Values.ncDbHost }}.{{ .Release.Namespace }}.svc.cluster.local`
+      - Port:     `5432`
+
+    </details>
+    {{- $_ := unset .Values "ncDbUser" }}
+    {{- $_ := unset .Values "ncDbName" }}
+    {{- $_ := unset .Values "ncDbPass" }}
+    {{- $_ := unset .Values "ncDbHost" }}
+
+    Note: Nextcloud will create an additional new user and password for the admin user
+    on first startup. You can find those credentials in the `/var/www/html/config/config.php` file
+    inside the container.

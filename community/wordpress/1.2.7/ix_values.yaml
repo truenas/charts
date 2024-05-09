@@ -1,0 +1,32 @@
+image:
+  repository: wordpress
+  pullPolicy: IfNotPresent
+  tag: 6.5.3
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+wpConfig:
+  enableCronJob: true
+  cronSchedule: '*/15 * * * *'
+  additionalEnvs: []
+
+wpNetwork:
+  webPort: 30040
+
+wpStorage:
+  data:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: data
+  mariadbData:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: mariadbData
+  mariadbBackup:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: mariadbBackup
+  additionalStorages: []
