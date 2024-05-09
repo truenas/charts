@@ -27,10 +27,10 @@
 
   {{/* Temporary set dynamic db details on values,
   so we can print them on the notes */}}
-  {{- $_ := set .Values "ncDbPass" $dbPass -}}
-  {{- $_ := set .Values "ncDbHost" $dbHost -}}
-  {{- $_ := set .Values "ncDbName" $dbName -}}
-  {{- $_ := set .Values "ncDbUser" $dbUser -}}
+  {{- $_ := set .Values "ncDbPass" $dbPass | quote -}}
+  {{- $_ := set .Values "ncDbHost" $dbHost | quote -}}
+  {{- $_ := set .Values "ncDbName" $dbName | quote -}}
+  {{- $_ := set .Values "ncDbUser" $dbUser | quote -}}
 
   {{- $dbURL := (printf "postgres://%s:%s@%s:5432/%s?sslmode=disable" $dbUser $dbPass $dbHost $dbName) }}
 secret:
@@ -63,7 +63,14 @@ secret:
       NEXTCLOUD_DATA_DIR: {{ .Values.ncConfig.dataDir }}
       PHP_UPLOAD_LIMIT: {{ printf "%vG" .Values.ncConfig.maxUploadLimit | default 3 }}
       PHP_MEMORY_LIMIT: {{ printf "%vM" .Values.ncConfig.phpMemoryLimit | default 512 }}
-      NEXTCLOUD_TRUSTED_DOMAINS: {{ list .Values.ncConfig.host "127.0.0.1" "localhost" $fullname (printf "%v-*" $fullname) | mustUniq | join " " | quote }}
+      {{- $host := "127.0.0.1" -}}
+      {{- if .Values.ncConfig.host -}}
+        {{- $host = printf "%v:%v" .Values.ncConfig.host .Values.ncNetwork.webPort -}}
+        {{- if contains ":" $host  -}} {{/* Make sure it always contains a port https://ixsystems.atlassian.net/browse/TNCHARTS-1016 */}}
+          {{- $host = .Values.ncConfig.host -}}
+        {{- end -}}
+      {{- end }}
+      NEXTCLOUD_TRUSTED_DOMAINS: {{ list $host "127.0.0.1" "localhost" (printf "%v-*" $fullname) $fullname | mustUniq | join " " | quote }}
       NEXTCLOUD_ADMIN_USER: {{ .Values.ncConfig.adminUser }}
       NEXTCLOUD_ADMIN_PASSWORD: {{ .Values.ncConfig.adminPassword }}
     {{- if .Values.ncNetwork.certificateID }}
@@ -75,11 +82,14 @@ secret:
       {{- end }}
       APACHE_DISABLE_REWRITE_IP: "1"
       OVERWRITEPROTOCOL: "https"
-      TRUSTED_PROXIES: {{ list  $svcCidr $clusterCidr "127.0.0.1" | mustUniq | join "," | quote }}
-      {{- if and .Values.ncConfig.host .Values.ncNetwork.webPort }}
-        {{- $overwritehost := .Values.ncConfig.host -}}
-        {{- if .Values.ncNetwork.nginx.useDifferentAccessPort }}
-          {{ $overwritehost = (printf "%v:%v" .Values.ncConfig.host .Values.ncNetwork.webPort) }}
+      TRUSTED_PROXIES: {{ list $svcCidr $clusterCidr "127.0.0.1" | mustUniq | join " " | quote }}
+      {{- if .Values.ncConfig.host }}
+        {{- $overwritehost := printf "%v:%v" .Values.ncConfig.host .Values.ncNetwork.webPort -}}
+        {{- if .Values.ncNetwork.nginx.useDifferentAccessPort -}}
+          {{ $overwritehost = printf "%v:%v" .Values.ncConfig.host .Values.ncNetwork.nginx.externalAccessPort -}}
+          {{- if contains ":" .Values.ncConfig.host -}}
+            {{- $overwritehost = .Values.ncConfig.host -}}
+          {{- end -}}
         {{- end }}
       OVERWRITEHOST: {{ $overwritehost }}
       {{- end }}

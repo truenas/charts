@@ -108,6 +108,16 @@ persistence:
           # https://github.com/nextcloud/docker/issues/1796
           mountPath: /etc/apache2/conf-enabled/limitrequestbody.conf
           subPath: limitrequestbody.conf
+  nc-occ:
+    enabled: true
+    type: configmap
+    objectName: nextcloud-config
+    defaultMode: "0755"
+    targetSelector:
+      nextcloud:
+        nextcloud:
+          mountPath: /usr/bin/occ
+          subPath: occ
   tmp:
     enabled: true
     type: emptyDir

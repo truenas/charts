@@ -33,7 +33,7 @@ def migrate_common_lib(values):
                 'proxyTimeouts': values.get('nginxConfig', {}).get('proxy_timeouts', 60),
                 'useDifferentAccessPort': values.get('nginxConfig', {}).get('useDifferentAccessPort', False),
                 'externalAccessPort': values.get('nginxConfig', {}).get('externalAccessPort', 443)
-            }
+            } if values['certificate'] else {}
         },
         # Migrate Resources
         'resources': {
@@ -70,7 +70,6 @@ def migrate_common_lib(values):
         },
         # Migrate Storage
         'ncStorage': {
-            'shouldShowStorageToggle': True,
             'isDataInTheSameVolume': True,
             'pgData': migrate_volume(values['postgresAppVolumeMounts']['postgres-data']),
             'pgBackup': migrate_volume(values['postgresAppVolumeMounts']['postgres-backup']),
@@ -93,16 +92,17 @@ def migrate_common_lib(values):
     return values
 
 def migrate(values):
-    if 'isDataInTheSameVolume' in values.keys() or 'shouldShowStorageToggle' in values.keys():
+    if 'isDataInTheSameVolume' in values.keys():
         values['ncStorage']['isDataInTheSameVolume'] = values.pop('isDataInTheSameVolume', True)
-        values['ncStorage']['shouldShowStorageToggle'] = values.pop('shouldShowStorageToggle', True)
         return values
 
     # If this missing, we have already migrated
     if not 'appVolumeMounts' in values.keys():
+        if 'certificateID' in values['ncNetwork']:
+            if not values['ncNetwork']['certificateID']:
+                values['ncNetwork']['nginx'] = {}
         # If 'shouldFixMigration' missing, we should fix migration and then add the key
         if not 'migrationFixed' in values['ncStorage'].keys():
-            values['ncStorage']['shouldShowStorageToggle'] = True
             values['ncStorage']['isDataInTheSameVolume'] = True
             values['ncStorage']['migrationFixed'] = True
         return values

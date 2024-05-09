@@ -10,7 +10,7 @@ scaleCertificate:
   {{ $timeout := 60 }}
   {{ $size := .Values.ncConfig.maxUploadLimit | default 3 }}
   {{ $useDiffAccessPort := false }}
-  {{ $externalAccessPort := "" }}
+  {{ $externalAccessPort := ":$server_port" }}
   {{/* Safely access key as it is conditionaly shown */}}
   {{ if hasKey .Values.ncNetwork "nginx" }}
     {{ $useDiffAccessPort = .Values.ncNetwork.nginx.useDifferentAccessPort }}
@@ -29,22 +29,15 @@ configmap:
         events {}
         http {
           server {
-            # redirects all http requests to https requests
-            listen 8000 default_server;
-            listen [::]:8000 default_server;
-            return 301 https://$host$request_uri;
-          }
-
-          server {
-            server_name localhost;
-
             listen {{ .Values.ncNetwork.webPort }} ssl http2;
             listen [::]:{{ .Values.ncNetwork.webPort }} ssl http2;
+
+            # Redirect HTTP to HTTPS
+            error_page 497 301 =307 https://$host{{ $externalAccessPort }}$request_uri;
 
             ssl_certificate '/etc/nginx-certs/public.crt';
             ssl_certificate_key '/etc/nginx-certs/private.key';
 
-            # maximum 3GB Upload File; change to fit your needs
             client_max_body_size {{ $size }}G;
 
             add_header Strict-Transport-Security "max-age=15552000; includeSubDomains; preload" always;
@@ -56,19 +49,11 @@ configmap:
             }
 
             location = /.well-known/carddav {
-              {{ if $useDiffAccessPort }}
               return 301 $scheme://$host{{ $externalAccessPort }}/remote.php/dav;
-              {{ else }}
-              return 301 $scheme://$host:$server_port/remote.php/dav;
-              {{ end }}
             }
 
             location = /.well-known/caldav {
-              {{ if $useDiffAccessPort }}
               return 301 $scheme://$host{{ $externalAccessPort }}/remote.php/dav;
-              {{ else }}
-              return 301 $scheme://$host:$server_port/remote.php/dav;
-              {{ end }}
             }
 
             location / {
@@ -85,11 +70,7 @@ configmap:
               proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
               proxy_set_header X-Forwarded-Proto https;
               proxy_set_header X-Forwarded-Host  $host;
-              {{ if $useDiffAccessPort }}
               proxy_set_header X-Forwarded-Port  {{ $externalAccessPort | default "443" | trimPrefix ":" }};
-              {{ else }}
-              proxy_set_header X-Forwarded-Port  $server_port;
-              {{ end }}
 
               # Proxy timeouts
               proxy_connect_timeout              {{ $timeout }}s;

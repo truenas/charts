@@ -44,7 +44,12 @@ questions:
             required: true
         - variable: host
           label: Host
-          description: Nextcloud host to create application URLs
+          description: |
+            Nextcloud host to create application URLs</br>
+            Examples: </br>
+            cloud.domain.com:30001</br>
+            cloud.domain.com (if you use port 443 externally)</br>
+            192.168.1.100:9001 (replace ip and port with your own)</br>
           schema:
             type: string
             $ref:
@@ -194,7 +199,7 @@ questions:
           description: The port for the Nextcloud Web UI.
           schema:
             type: int
-            default: 20810
+            default: 9001
             min: 9000
             max: 65535
             required: true
@@ -248,12 +253,6 @@ questions:
     schema:
       type: dict
       attrs:
-        - variable: shouldShowStorageToggle
-          label: ""
-          schema:
-            type: boolean
-            default: false
-            hidden: true
         # Dummy variable so we can skip "fixing" migration on new installations
         - variable: migrationFixed
           label: ""
@@ -264,6 +263,7 @@ questions:
         - variable: isDataInTheSameVolume
           label: "Pre v2 Storage Structure (See the tooltip for more information)"
           description: |
+            Do NOT check this, if this is a new installation.</br>
             If this is checked, means that this is an installation coming from a previous version (v1.x.x).<br/>
             In order to have backwards compatibility, the older storage structure was kept for this installation.<br/>
             If you want to utilize the new storage structure, move 'data' in a separate directory or dataset.
@@ -272,10 +272,9 @@ questions:
             You will NOT likely want to change that if your setup uses ixVolume as storage.
           schema:
             type: boolean
-            show_if: [["shouldShowStorageToggle", "=", true]]
             default: false
         - variable: html
-          label: Nextcloud HTML Storage
+          label: Nextcloud AppData Storage (HTML, Custom Themes, Apps, etc.)
           description: The path to store Nextcloud HTML and AppData.
           schema:
             type: dict
@@ -774,7 +773,7 @@ questions:
                 schema:
                   type: string
                   max_length: 12
-                  valid_chars: '^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$'
+                  valid_chars: "^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$"
                   valid_chars_error: |
                     Valid Memory limit formats are</br>
                     - Suffixed with E/P/T/G/M/K - eg. 1G</br>

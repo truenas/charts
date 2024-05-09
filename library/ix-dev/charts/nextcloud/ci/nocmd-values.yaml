@@ -9,10 +9,7 @@ ncConfig:
 
 ncNetwork:
   webPort: 30001
-  nginx:
-    proxyTimeouts: 120
-    useDifferentAccessPort: false
-    externalAccessPort: 443
+  nginx: {}
 
 ncStorage:
   pgData:
