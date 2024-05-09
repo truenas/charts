@@ -71,8 +71,8 @@ secret:
         {{- end -}}
       {{- end }}
       NEXTCLOUD_TRUSTED_DOMAINS: {{ list $host "127.0.0.1" "localhost" (printf "%v-*" $fullname) $fullname | mustUniq | join " " | quote }}
-      NEXTCLOUD_ADMIN_USER: {{ .Values.ncConfig.adminUser }}
-      NEXTCLOUD_ADMIN_PASSWORD: {{ .Values.ncConfig.adminPassword }}
+      NEXTCLOUD_ADMIN_USER: {{ .Values.ncConfig.adminUser | quote }}
+      NEXTCLOUD_ADMIN_PASSWORD: {{ .Values.ncConfig.adminPassword | quote }}
     {{- if .Values.ncNetwork.certificateID }}
       {{- $svcCidr := "" -}}
       {{- $clusterCidr := "" -}}
