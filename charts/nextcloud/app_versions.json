@@ -1,18 +1,18 @@
 {
-    "2.0.3": {
+    "2.0.4": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/nextcloud/2.0.3",
-        "last_update": "2024-05-08 08:59:49",
+        "location": "/__w/charts/charts/charts/nextcloud/2.0.4",
+        "last_update": "2024-05-09 10:40:19",
         "required_features": [
             "definitions/nodeIP",
-            "normalize/ixVolume",
+            "definitions/certificate",
             "normalize/acl",
-            "definitions/certificate"
+            "normalize/ixVolume"
         ],
-        "human_version": "29.0.0_2.0.3",
-        "version": "2.0.3",
+        "human_version": "29.0.0_2.0.4",
+        "version": "2.0.4",
         "chart_metadata": {
             "name": "nextcloud",
             "description": "A file sharing server that puts the control and security of your own data back into your hands.",
@@ -20,7 +20,7 @@
                 "title": "Nextcloud"
             },
             "type": "application",
-            "version": "2.0.3",
+            "version": "2.0.4",
             "apiVersion": "v2",
             "appVersion": "29.0.0",
             "kubeVersion": ">=1.16.0-0",
@@ -178,7 +178,7 @@
                             {
                                 "variable": "host",
                                 "label": "Host",
-                                "description": "Nextcloud host to create application URLs",
+                                "description": "Nextcloud host to create application URLs</br>\nExamples: </br>\ncloud.domain.com:30001</br>\ncloud.domain.com (if you use port 443 externally)</br>\n192.168.1.100:9001 (replace ip and port with your own)</br>\n",
                                 "schema": {
                                     "type": "string",
                                     "$ref": [
@@ -411,7 +411,7 @@
                                 "description": "The port for the Nextcloud Web UI.",
                                 "schema": {
                                     "type": "int",
-                                    "default": 20810,
+                                    "default": 9001,
                                     "min": 9000,
                                     "max": 65535,
                                     "required": true
@@ -501,15 +501,6 @@
                         "type": "dict",
                         "attrs": [
                             {
-                                "variable": "shouldShowStorageToggle",
-                                "label": "",
-                                "schema": {
-                                    "type": "boolean",
-                                    "default": false,
-                                    "hidden": true
-                                }
-                            },
-                            {
                                 "variable": "migrationFixed",
                                 "label": "",
                                 "schema": {
@@ -521,22 +512,15 @@
                             {
                                 "variable": "isDataInTheSameVolume",
                                 "label": "Pre v2 Storage Structure (See the tooltip for more information)",
-                                "description": "If this is checked, means that this is an installation coming from a previous version (v1.x.x).<br/>\nIn order to have backwards compatibility, the older storage structure was kept for this installation.<br/>\nIf you want to utilize the new storage structure, move 'data' in a separate directory or dataset.\nChange the 'Nextcloud UserData' configuration below to point to the new location and then uncheck this checkbox.\n<br/><br/>\nYou will NOT likely want to change that if your setup uses ixVolume as storage.\n",
+                                "description": "Do NOT check this, if this is a new installation.</br>\nIf this is checked, means that this is an installation coming from a previous version (v1.x.x).<br/>\nIn order to have backwards compatibility, the older storage structure was kept for this installation.<br/>\nIf you want to utilize the new storage structure, move 'data' in a separate directory or dataset.\nChange the 'Nextcloud UserData' configuration below to point to the new location and then uncheck this checkbox.\n<br/><br/>\nYou will NOT likely want to change that if your setup uses ixVolume as storage.\n",
                                 "schema": {
                                     "type": "boolean",
-                                    "show_if": [
-                                        [
-                                            "shouldShowStorageToggle",
-                                            "=",
-                                            true
-                                        ]
-                                    ],
                                     "default": false
                                 }
                             },
                             {
                                 "variable": "html",
-                                "label": "Nextcloud HTML Storage",
+                                "label": "Nextcloud AppData Storage (HTML, Custom Themes, Apps, etc.)",
                                 "description": "The path to store Nextcloud HTML and AppData.",
                                 "schema": {
                                     "type": "dict",
@@ -2303,11 +2287,11 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/nextcloud/1.6.61",
-        "last_update": "2024-05-08 08:58:20",
+        "last_update": "2024-05-09 10:38:32",
         "required_features": [
             "definitions/nodeIP",
-            "normalize/ixVolume",
-            "definitions/certificate"
+            "definitions/certificate",
+            "normalize/ixVolume"
         ],
         "human_version": "29.0.0_1.6.61",
         "version": "1.6.61",
@@ -3127,11 +3111,11 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/nextcloud/1.6.59",
-        "last_update": "2024-05-08 08:58:20",
+        "last_update": "2024-05-09 10:38:32",
         "required_features": [
             "definitions/nodeIP",
-            "normalize/ixVolume",
-            "definitions/certificate"
+            "definitions/certificate",
+            "normalize/ixVolume"
         ],
         "human_version": "28.0.4_1.6.59",
         "version": "1.6.59",
@@ -3951,11 +3935,11 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/nextcloud/1.6.53",
-        "last_update": "2024-05-08 08:58:20",
+        "last_update": "2024-05-09 10:38:32",
         "required_features": [
             "definitions/nodeIP",
-            "normalize/ixVolume",
-            "definitions/certificate"
+            "definitions/certificate",
+            "normalize/ixVolume"
         ],
         "human_version": "27.1.4_1.6.53",
         "version": "1.6.53",
@@ -4775,11 +4759,11 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/nextcloud/1.6.29",
-        "last_update": "2024-05-08 08:58:20",
+        "last_update": "2024-05-09 10:38:32",
         "required_features": [
             "definitions/nodeIP",
-            "normalize/ixVolume",
-            "definitions/certificate"
+            "definitions/certificate",
+            "normalize/ixVolume"
         ],
         "human_version": "26.0.2_1.6.29",
         "version": "1.6.29",
