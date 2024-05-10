@@ -1,7 +1,7 @@
 image:
   repository: docker.elastic.co/elasticsearch/elasticsearch
   pullPolicy: IfNotPresent
-  tag: 8.13.3
+  tag: 8.13.4
 
 resources:
   limits:
