@@ -16,7 +16,7 @@ Listen {{ .Values.webdavNetwork.httpsPort }}
   {{- end }}
   SSLEngine on
   SSLCertificateFile "{{ include "webdav.path.cert.crt" $ }}"
-  SSLCertificateKeyFile "{{ include "webdav.path.cert.key" $ }}
+  SSLCertificateKeyFile "{{ include "webdav.path.cert.key" $ }}"
   SSLProtocol +TLSv1.2 +TLSv1.3
   SSLCipherSuite HIGH:MEDIUM
   {{- include "webdav.core.config" $ | nindent 2 }}
