@@ -10,6 +10,9 @@
   {{/* Fetch secrets from pre-migration secret */}}
   {{- with (lookup "v1" "Secret" .Release.Namespace "db-details") -}}
     {{- $dbUser = ((index .data "db-user") | b64dec) -}}
+    {{- if contains "\\x" (printf "%q" $dbUser) -}}
+      {{- $dbUser = (index .data "db-user") -}}
+    {{- end -}}
     {{- $dbPass = ((index .data "db-password") | b64dec) -}}
   {{- end -}}
 
