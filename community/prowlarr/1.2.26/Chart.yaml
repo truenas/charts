@@ -1,0 +1,26 @@
+name: prowlarr
+description: Prowlarr is an indexer manager/proxy to integrate with your various PVR
+  apps.
+annotations:
+  title: Prowlarr
+type: application
+version: 1.2.26
+apiVersion: v2
+appVersion: 1.17.2.4511
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.2.9
+home: https://prowlarr.com/
+icon: https://media.sys.truenas.net/apps/prowlarr/icons/icon.png
+sources:
+  - https://github.com/onedr0p/containers/tree/main/apps/prowlarr
+  - https://github.com/truenas/charts/tree/master/community/prowlarr
+  - https://github.com/Prowlarr/Prowlarr
+keywords:
+  - indexer

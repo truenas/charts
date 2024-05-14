@@ -1,0 +1,25 @@
+name: dashy
+description: Dashy is a self-hostable personal dashboard built for you.
+annotations:
+  title: Dashy
+type: application
+version: 2.0.2
+apiVersion: v2
+appVersion: 3.1.0
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.2.9
+home: https://dashy.to/
+icon: https://media.sys.truenas.net/apps/dashy/icons/icon.png
+sources:
+  - https://dashy.to/
+  - https://github.com/truenas/charts/tree/master/library/ix-dev/community/dashy
+  - https://github.com/lissy93/dashy
+keywords:
+  - dashboard
