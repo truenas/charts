@@ -39,11 +39,13 @@ DavLockDB "/usr/local/apache2/var/DavLock"
   Options Indexes FollowSymLinks
 </Directory>
 {{- range .Values.webdavStorage.shares }}
+  {{ $bytesGB := 1073741824 }}
   {{- if .enabled }}
 # WebDav Share - {{ .name }}
 # Description: {{ .description }}
 Alias /{{ .name }} "/{{ include "webdav.shares.prefix" $ }}/{{ .name }}"
 <Directory "/{{ include "webdav.shares.prefix" $ }}/{{ .name }}">
+  LimitRequestBody {{ mul (.maxRequestBodySizeInGB | default 1) $bytesGB }}
 </Directory>
     {{- if .readOnly }}
 <Location "/{{ .name }}">

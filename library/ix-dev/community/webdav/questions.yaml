@@ -180,8 +180,8 @@ questions:
                         Example: [share1] will be available at [http://<webdav-ip>:<webdav-port>/share1]
                       schema:
                         type: string
-                        valid_chars: '^[a-zA-Z0-9_-]+$'
-                        valid_chars_error: 'Share name can only consist of [Letters(a-z, A-Z), Numbers(0-9), Underscores(_), Dashes(-)]'
+                        valid_chars: "^[a-zA-Z0-9_-]+$"
+                        valid_chars_error: "Share name can only consist of [Letters(a-z, A-Z), Numbers(0-9), Underscores(_), Dashes(-)]"
                         required: true
                     - variable: description
                       label: Description
@@ -203,6 +203,14 @@ questions:
                       schema:
                         type: boolean
                         default: false
+                    - variable: maxRequestBodySizeInGB
+                      label: Max Request Body Size (in GB)
+                      description: |
+                        The maximum size of the request body in GB.
+                        If the request body size exceeds this value, the request will fail.
+                      schema:
+                        type: int
+                        default: 1
                     - variable: fixPermissions
                       label: Fix Permissions
                       description: |
@@ -245,7 +253,7 @@ questions:
                 schema:
                   type: string
                   max_length: 12
-                  valid_chars: '^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$'
+                  valid_chars: "^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$"
                   valid_chars_error: |
                     Valid Memory limit formats are</br>
                     - Suffixed with E/P/T/G/M/K - eg. 1G</br>
