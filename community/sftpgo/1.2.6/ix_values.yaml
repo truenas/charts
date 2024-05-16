@@ -1,11 +1,11 @@
 image:
   repository: drakkan/sftpgo
   pullPolicy: IfNotPresent
-  tag: v2.5.6
+  tag: v2.6.0
 pluginsImage:
   repository: drakkan/sftpgo
   pullPolicy: IfNotPresent
-  tag: v2.5.6-plugins
+  tag: v2.6.0-plugins
 
 resources:
   limits:

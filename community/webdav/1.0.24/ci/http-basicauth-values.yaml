@@ -17,6 +17,7 @@ webdavStorage:
       description: My third disabled share
       hostPath: /mnt/{{.Release.Name }}/share3
       readOnly: true
+      maxRequestBodySizeInGB: 10
       fixPermissions: false
 
 webdavNetwork:
