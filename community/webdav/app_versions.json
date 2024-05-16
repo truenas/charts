@@ -1,15 +1,15 @@
 {
-    "1.0.23": {
+    "1.0.24": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/webdav/1.0.23",
-        "last_update": "2024-05-15 05:46:17",
+        "location": "/__w/charts/charts/community/webdav/1.0.24",
+        "last_update": "2024-05-16 09:54:10",
         "required_features": [
             "definitions/certificate"
         ],
-        "human_version": "2.4.59_1.0.23",
-        "version": "1.0.23",
+        "human_version": "2.4.59_1.0.24",
+        "version": "1.0.24",
         "chart_metadata": {
             "name": "webdav",
             "description": "WebDAV is a set of extensions to the HTTP protocol which allows users to collaboratively edit and manage files on remote web servers.",
@@ -17,7 +17,7 @@
                 "title": "WebDAV"
             },
             "type": "application",
-            "version": "1.0.23",
+            "version": "1.0.24",
             "apiVersion": "v2",
             "appVersion": "2.4.59",
             "kubeVersion": ">=1.16.0-0",
@@ -367,6 +367,15 @@
                                                         "schema": {
                                                             "type": "boolean",
                                                             "default": false
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "maxRequestBodySizeInGB",
+                                                        "label": "Max Request Body Size (in GB)",
+                                                        "description": "The maximum size of the request body in GB.\nIf the request body size exceeds this value, the request will fail.\nValue of 0 means no limit.\n",
+                                                        "schema": {
+                                                            "type": "int",
+                                                            "default": 1
                                                         }
                                                     },
                                                     {
