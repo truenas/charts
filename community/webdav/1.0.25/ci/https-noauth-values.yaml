@@ -11,6 +11,7 @@ webdavStorage:
       description: My second share
       hostPath: /mnt/{{.Release.Name }}/share2
       readOnly: false
+      maxRequestBodySizeInGB: 0
       fixPermissions: true
     - name: share3
       enabled: false
