@@ -70,7 +70,7 @@ questions:
           description: The user id that Nginx Proxy Manager files will be owned by.
           schema:
             type: int
-            min: 2
+            min: 0
             default: 568
             required: true
         - variable: group
@@ -78,7 +78,7 @@ questions:
           description: The group id that Nginx Proxy Manager files will be owned by.
           schema:
             type: int
-            min: 2
+            min: 0
             default: 568
             required: true
 
