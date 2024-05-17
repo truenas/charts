@@ -45,7 +45,11 @@ DavLockDB "/usr/local/apache2/var/DavLock"
 # Description: {{ .description }}
 Alias /{{ .name }} "/{{ include "webdav.shares.prefix" $ }}/{{ .name }}"
 <Directory "/{{ include "webdav.shares.prefix" $ }}/{{ .name }}">
-  LimitRequestBody {{ mul (.maxRequestBodySizeInGB | default 1) $bytesGB }}
+  {{- $maxReqBody := 1 -}}
+  {{- if not (kindIs "invalid" .maxRequestBodySizeInGB) -}}
+    {{- $maxReqBody = mul .maxRequestBodySizeInGB $bytesGB -}}
+  {{- end }}
+  LimitRequestBody {{ $maxReqBody }}
 </Directory>
     {{- if .readOnly }}
 <Location "/{{ .name }}">
