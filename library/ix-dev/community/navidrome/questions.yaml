@@ -33,6 +33,17 @@ questions:
           schema:
             type: string
             default: ""
+        - variable: localPlayback
+          label: Enable Local Playback
+          description: |
+            Enable local playback for Navidrome.</br>
+            This will allow you to play music from your local machine, by mounting</br>
+            the sound card to the container.</br>
+            Keep in mind that this will make the container to run with elevated privileges</br>
+            and privilege escalation. Use with caution.
+          schema:
+            type: boolean
+            default: false
         - variable: additionalEnvs
           label: Additional Environment Variables
           description: Configure additional environment variables for Navidrome.

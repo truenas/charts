@@ -24,6 +24,16 @@ persistence:
         01-permissions:
           mountPath: /mnt/directories/music
         {{- end }}
+  {{- if .Values.navidromeConfig.localPlayback }}
+  snd-device:
+    enabled: true
+    type: hostPath
+    hostPath: /dev/snd
+    targetSelector:
+      navidrome:
+        navidrome:
+          mountPath: /dev/snd
+  {{- end }}
   {{- range $idx, $storage := .Values.navidromeStorage.additionalStorages }}
   {{ printf "navidrome-%v:" (int $idx) }}
     enabled: true

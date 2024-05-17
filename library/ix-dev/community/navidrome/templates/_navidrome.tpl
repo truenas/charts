@@ -6,6 +6,11 @@ workload:
     type: Deployment
     podSpec:
       hostNetwork: {{ .Values.navidromeNetwork.hostNetwork }}
+      securityContext:
+        {{- if .Values.navidromeConfig.localPlayback }}
+        supplementalGroups:
+          - 29
+        {{- end }}
       containers:
         navidrome:
           enabled: true
@@ -15,6 +20,10 @@ workload:
             runAsUser: {{ .Values.navidromeRunAs.user }}
             runAsGroup: {{ .Values.navidromeRunAs.group }}
             readOnlyRootFilesystem: false
+            {{- if .Values.navidromeConfig.localPlayback }}
+            privileged: true
+            allowPrivilegeEscalation: true
+            {{- end }}
           env:
             ND_MUSICFOLDER: /music
             ND_DATAFOLDER: /data
