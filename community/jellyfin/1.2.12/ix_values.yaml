@@ -1,28 +1,38 @@
 image:
-  repository: ghcr.io/advplyr/audiobookshelf
+  repository: jellyfin/jellyfin
   pullPolicy: IfNotPresent
-  tag: 2.8.1
+  tag: 10.9.2
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-audiobookshelfConfig:
+jellyfinConfig:
+  publishedServerUrl: ''
   additionalEnvs: []
-audiobookshelfNetwork:
-  webPort: 30067
+
+jellyfinGPU: {}
+
+jellyfinNetwork:
+  webPort: 30013
   hostNetwork: false
-audiobookshelfRunAs:
+
+jellyfinRunAs:
   user: 568
   group: 568
-audiobookshelfStorage:
+
+jellyfinStorage:
   config:
     type: ixVolume
     ixVolumeConfig:
       datasetName: config
-  metadata:
+  cache:
     type: ixVolume
     ixVolumeConfig:
-      datasetName: metadata
+      datasetName: cache
+  transcodes:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: transcodes
   additionalStorages: []
