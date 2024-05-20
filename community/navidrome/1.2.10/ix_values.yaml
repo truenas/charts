@@ -9,7 +9,8 @@ resources:
     memory: 8Gi
 
 navidromeConfig:
-  uiWelcomeMessage: ''
+  uiWelcomeMessage: ""
+  localPlayback: false
   additionalEnvs: []
 
 navidromeNetwork:
