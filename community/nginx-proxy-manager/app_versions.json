@@ -1,16 +1,16 @@
 {
-    "1.0.30": {
+    "1.0.31": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/nginx-proxy-manager/1.0.30",
-        "last_update": "2024-05-18 04:17:15",
+        "location": "/__w/charts/charts/community/nginx-proxy-manager/1.0.31",
+        "last_update": "2024-05-20 09:29:06",
         "required_features": [
-            "normalize/ixVolume",
-            "definitions/timezone"
+            "definitions/timezone",
+            "normalize/ixVolume"
         ],
-        "human_version": "2.11.2_1.0.30",
-        "version": "1.0.30",
+        "human_version": "2.11.2_1.0.31",
+        "version": "1.0.31",
         "chart_metadata": {
             "name": "nginx-proxy-manager",
             "description": "Expose your services easily and securely",
@@ -18,7 +18,7 @@
                 "title": "Nginx Proxy Manager"
             },
             "type": "application",
-            "version": "1.0.30",
+            "version": "1.0.31",
             "apiVersion": "v2",
             "appVersion": "2.11.2",
             "kubeVersion": ">=1.16.0-0",
@@ -202,7 +202,7 @@
                                 "description": "The user id that Nginx Proxy Manager files will be owned by.",
                                 "schema": {
                                     "type": "int",
-                                    "min": 2,
+                                    "min": 0,
                                     "default": 568,
                                     "required": true
                                 }
@@ -213,7 +213,7 @@
                                 "description": "The group id that Nginx Proxy Manager files will be owned by.",
                                 "schema": {
                                     "type": "int",
-                                    "min": 2,
+                                    "min": 0,
                                     "default": 568,
                                     "required": true
                                 }
