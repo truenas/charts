@@ -42,7 +42,7 @@ questions:
             need to adjust the Version and Type fields.
           schema:
             type: string
-            default: "j17Image"
+            default: "j21Image"
             required: true
             enum:
               - value: j8Image
