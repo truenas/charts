@@ -56,10 +56,11 @@ configmap:
     {{- fail "Minecraft - You have to accept EULA" -}}
   {{- end -}}
 
-  {{- $types := (list "VANILLA" "SPIGOT" "BUKKIT" "CATSERVER" "CRUCIBLE"
-                      "AUTO_CURSEFORGE" "CUSTOM" "FABRIC" "FTBA" "FORGE"
-                      "LOLISERVER" "LIMBO" "MAGMA" "MODRINTH" "MOHIST"
-                      "FABRIC" "PAPER" "PUFFERFISH" "PURPUR" "QUILT") -}}
+  {{- $types := (list "VANILLA" "SPIGOT" "BUKKIT" "PAPER" "FOLIA"
+                      "FABRIC" "FORGE" "NEOFORGE" "AUTO_CURSEFORGE" "MODRINTH"
+                      "FTBA" "PUFFERFISH" "PURPUR" "QUILT" "MAGMA"
+                      "MAGMA_MAINTAINED" "KETTING" "MOHIST" "CATSERVER" "SPONGEVANILLA"
+                      "LIMBO" "CRUCIBLE" "CUSTOM") -}}
   {{- if not (mustHas .Values.mcConfig.type $types) -}}
     {{- fail (printf "Minecraft - Expected [Type] to be one of [%s], but got [%s]" (join ", " $types) .Values.mcConfig.type) -}}
   {{- end -}}
