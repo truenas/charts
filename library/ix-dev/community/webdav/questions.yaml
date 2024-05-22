@@ -157,7 +157,6 @@ questions:
           description: Shares for WebDAV.
           schema:
             type: list
-            empty: false
             required: true
             default: []
             items:
