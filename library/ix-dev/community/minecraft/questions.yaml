@@ -42,7 +42,7 @@ questions:
             need to adjust the Version and Type fields.
           schema:
             type: string
-            default: "j17Image"
+            default: "j21Image"
             required: true
             enum:
               - value: j8Image
@@ -95,44 +95,46 @@ questions:
                 description: Spigot
               - value: BUKKIT
                 description: Bukkit
-              - value: FORGE
-                description: Forge
-              - value: CATSERVER
-                description: CatServer
-              - value: CRUCIBLE
-                description: Crucible
-              - value: AUTO_CURSEFORGE
-                description: Auto CurseForge
-              - value: CUSTOM
-                description: Custom
-              - value: FABRIC
-                description: Fabric
-              - value: FTBA
-                description: Feed The Beast
-              - value: FORGE
-                description: Forge
-              - value: LOLISERVER
-                description: LoliServer
-              - value: LIMBO
-                description: Limbo
-              - value: MAGMA
-                description: Magma
-              - value: MODRINTH
-                description: Modrinth
-              - value: MOHIST
-                description: Mohist
-              - value: FABRIC
-                description: Fabric
               - value: PAPER
                 description: Paper
+              - value: FOLIA
+                description: Folia
+              - value: FABRIC
+                description: Fabric
+              - value: FORGE
+                description: Forge
+              - value: NEOFORGE
+                description: NeoForge
+              - value: AUTO_CURSEFORGE
+                description: CurseForge
+              - value: MODRINTH
+                description: Modrinth
+              - value: FTBA
+                description: Feed the Beast
               - value: PUFFERFISH
                 description: Pufferfish
               - value: PURPUR
                 description: Purpur
               - value: QUILT
                 description: Quilt
+              - value: MAGMA
+                description: Magma
+              - value: MAGMA_MAINTAINED
+                description: Magma Maintained
+              - value: KETTING
+                description: Ketting
+              - value: MOHIST
+                description: Mohist
+              - value: CATSERVER
+                description: Catserver
               - value: SPONGEVANILLA
                 description: SpongeVanilla
+              - value: LIMBO
+                description: Limbo
+              - value: CRUCIBLE
+                description: Crucible
+              - value: CUSTOM
+                description: Custom
         - variable: version
           label: Version
           description: |
