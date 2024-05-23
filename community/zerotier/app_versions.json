@@ -1,13 +1,13 @@
 {
-    "1.0.20": {
+    "1.0.21": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/zerotier/1.0.20",
-        "last_update": "2024-05-22 13:23:38",
+        "location": "/__w/charts/charts/community/zerotier/1.0.21",
+        "last_update": "2024-05-23 11:21:49",
         "required_features": [],
-        "human_version": "1.14.0_1.0.20",
-        "version": "1.0.20",
+        "human_version": "1.14.0_1.0.21",
+        "version": "1.0.21",
         "chart_metadata": {
             "name": "zerotier",
             "description": "Securely connect any device, anywhere.",
@@ -15,7 +15,7 @@
                 "title": "Zerotier"
             },
             "type": "application",
-            "version": "1.0.20",
+            "version": "1.0.21",
             "apiVersion": "v2",
             "appVersion": "1.14.0",
             "kubeVersion": ">=1.16.0-0",
@@ -137,7 +137,6 @@
                                 "description": "The network(s) to join",
                                 "schema": {
                                     "type": "list",
-                                    "empty": false,
                                     "required": true,
                                     "min": 1,
                                     "default": [],

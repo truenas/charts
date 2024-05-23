@@ -1,17 +1,17 @@
 {
-    "1.2.4": {
+    "1.2.5": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/plex-auto-languages/1.2.4",
-        "last_update": "2024-05-22 13:23:38",
+        "location": "/__w/charts/charts/community/plex-auto-languages/1.2.5",
+        "last_update": "2024-05-23 11:21:49",
         "required_features": [
             "normalize/acl",
-            "normalize/ixVolume",
-            "definitions/timezone"
+            "definitions/timezone",
+            "normalize/ixVolume"
         ],
-        "human_version": "1.2.3_1.2.4",
-        "version": "1.2.4",
+        "human_version": "1.2.3_1.2.5",
+        "version": "1.2.5",
         "chart_metadata": {
             "name": "plex-auto-languages",
             "description": "Plex Auto Languages offer automated language selection for Plex TV Shows",
@@ -19,7 +19,7 @@
                 "title": "Plex Auto Languages"
             },
             "type": "application",
-            "version": "1.2.4",
+            "version": "1.2.5",
             "apiVersion": "v2",
             "appVersion": "1.2.3",
             "kubeVersion": ">=1.16.0-0",
@@ -38,7 +38,7 @@
                 }
             ],
             "home": "https://github.com/RemiRigal/Plex-Auto-Languages",
-            "icon": "https://localhost/no-icon",
+            "icon": "https://media.sys.truenas.net/apps/plex-auto-languages/icons/icon.svg",
             "sources": [
                 "https://github.com/RemiRigal/Plex-Auto-Languages",
                 "https://github.com/truenas/charts/tree/master/community/plex-auto-languages",
