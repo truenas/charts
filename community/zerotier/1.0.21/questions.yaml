@@ -18,7 +18,6 @@ questions:
           description: The network(s) to join
           schema:
             type: list
-            empty: false
             required: true
             min: 1
             default: []
