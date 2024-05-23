@@ -3,7 +3,7 @@ description: Plex Auto Languages offer automated language selection for Plex TV 
 annotations:
   title: Plex Auto Languages
 type: application
-version: 1.2.4
+version: 1.2.5
 apiVersion: v2
 appVersion: 1.2.3
 kubeVersion: '>=1.16.0-0'
@@ -16,7 +16,7 @@ dependencies:
     repository: file://../../../common
     version: 1.2.9
 home: https://github.com/RemiRigal/Plex-Auto-Languages
-icon: https://localhost/no-icon
+icon: https://media.sys.truenas.net/apps/plex-auto-languages/icons/icon.svg
 sources:
   - https://github.com/RemiRigal/Plex-Auto-Languages
   - https://github.com/truenas/charts/tree/master/community/plex-auto-languages
