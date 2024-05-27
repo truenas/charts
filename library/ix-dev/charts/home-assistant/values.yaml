@@ -8,7 +8,7 @@ image:
 haPostgresImage:
   pullPolicy: IfNotPresent
   repository: postgres
-  tag: "13.1"
+  tag: '13.1'
 
 yqImage:
   pullPolicy: IfNotPresent
@@ -25,7 +25,7 @@ podOptions:
     options: []
 
 haConfig:
-  allowDevices: true
+  allowDevices: false
   additionalEnvs: []
 
 haNetwork:
