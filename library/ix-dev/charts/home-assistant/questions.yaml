@@ -43,8 +43,8 @@ questions:
           label: Allow Devices
           description: |
             Allow devices to be added to Home Assistant.
-            Keep in mind that this will make the container to run with elevated privileges.</br>
-            Use with caution.
+            Keep in mind that this will make the container to run with elevated privileges</br>
+            and privilege escalation. Use with caution.
           schema:
             type: boolean
             default: false

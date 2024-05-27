@@ -18,6 +18,7 @@ workload:
             runAsGroup: 0
             runAsNonRoot: false
             privileged: {{ .Values.haConfig.allowDevices | default false }}
+            allowPrivilegeEscalation: {{ .Values.haConfig.allowDevices | default false }}
             readOnlyRootFilesystem: false
             capabilities:
               add:
