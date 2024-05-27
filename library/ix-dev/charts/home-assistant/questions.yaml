@@ -33,6 +33,38 @@ questions:
       $ref:
         - definitions/timezone
 
+  - variable: haConfig
+    label: ""
+    group: Home Assistant Configuration
+    schema:
+      type: dict
+      attrs:
+        - variable: allowDevices
+          label: Allow Devices
+          description: |
+            Allow devices to be added to Home Assistant.
+            Keep in mind that this will make the container to run with elevated privileges.</br>
+            Use with caution.
+          schema:
+            type: boolean
+            default: false
+        - variable: additionalEnvs
+          label: Additional Environment Variables
+          description: Additional environment variables for Home Assistant.
+          schema:
+            type: list
+            items:
+              - variable: name
+                label: Name
+                schema:
+                  type: string
+                  required: true
+              - variable: value
+                label: Value
+                schema:
+                  type: string
+                  required: true
+
   - variable: podOptions
     label: ""
     group: Advanced Pod Configuration
@@ -109,7 +141,6 @@ questions:
             min: 568
             default: 568
             required: true
-
 
   - variable: haStorage
     label: ""
@@ -623,7 +654,7 @@ questions:
                 schema:
                   type: string
                   max_length: 12
-                  valid_chars: '^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$'
+                  valid_chars: "^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$"
                   valid_chars_error: |
                     Valid Memory limit formats are</br>
                     - Suffixed with E/P/T/G/M/K - eg. 1G</br>
