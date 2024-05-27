@@ -1,16 +1,16 @@
 {
-    "1.2.11": {
+    "1.2.12": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/qbittorrent/1.2.11",
-        "last_update": "2024-05-25 05:48:56",
+        "location": "/__w/charts/charts/community/qbittorrent/1.2.12",
+        "last_update": "2024-05-27 11:27:36",
         "required_features": [
             "normalize/ixVolume",
             "normalize/acl"
         ],
-        "human_version": "4.6.4_1.2.11",
-        "version": "1.2.11",
+        "human_version": "4.6.5_1.2.12",
+        "version": "1.2.12",
         "chart_metadata": {
             "name": "qbittorrent",
             "description": "The qBittorrent project aims to provide an open-source software alternative to \u00b5Torrent.",
@@ -18,9 +18,9 @@
                 "title": "qBittorrent"
             },
             "type": "application",
-            "version": "1.2.11",
+            "version": "1.2.12",
             "apiVersion": "v2",
-            "appVersion": "4.6.4",
+            "appVersion": "4.6.5",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
