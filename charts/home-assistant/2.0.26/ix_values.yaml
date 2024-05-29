@@ -25,6 +25,7 @@ podOptions:
     options: []
 
 haConfig:
+  allowDevices: false
   additionalEnvs: []
 
 haNetwork:
