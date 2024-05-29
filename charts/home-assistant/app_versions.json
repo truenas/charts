@@ -1,17 +1,17 @@
 {
-    "2.0.25": {
+    "2.0.26": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/home-assistant/2.0.25",
-        "last_update": "2024-05-29 05:21:41",
+        "location": "/__w/charts/charts/charts/home-assistant/2.0.26",
+        "last_update": "2024-05-29 09:58:48",
         "required_features": [
             "definitions/timezone",
-            "normalize/ixVolume",
-            "normalize/acl"
+            "normalize/acl",
+            "normalize/ixVolume"
         ],
-        "human_version": "2024.5.5_2.0.25",
-        "version": "2.0.25",
+        "human_version": "2024.5.5_2.0.26",
+        "version": "2.0.26",
         "chart_metadata": {
             "name": "home-assistant",
             "description": "Home Assistant is an open source home automation that puts local control and privacy first.",
@@ -19,7 +19,7 @@
                 "title": "Home Assistant"
             },
             "type": "application",
-            "version": "2.0.25",
+            "version": "2.0.26",
             "apiVersion": "v2",
             "appVersion": "2024.5.5",
             "kubeVersion": ">=1.16.0-0",
@@ -149,6 +149,51 @@
                             {
                                 "value": "Asia/Saigon",
                                 "description": "'Asia/Saigon' timezone"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "variable": "haConfig",
+                    "label": "",
+                    "group": "Home Assistant Configuration",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "allowDevices",
+                                "label": "Allow Devices",
+                                "description": "Allow devices to be added to Home Assistant.\nKeep in mind that this will make the container to run with elevated privileges</br>\nand privilege escalation. Use with caution.\n",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "variable": "additionalEnvs",
+                                "label": "Additional Environment Variables",
+                                "description": "Additional environment variables for Home Assistant.",
+                                "schema": {
+                                    "type": "list",
+                                    "items": [
+                                        {
+                                            "variable": "name",
+                                            "label": "Name",
+                                            "schema": {
+                                                "type": "string",
+                                                "required": true
+                                            }
+                                        },
+                                        {
+                                            "variable": "value",
+                                            "label": "Value",
+                                            "schema": {
+                                                "type": "string",
+                                                "required": true
+                                            }
+                                        }
+                                    ]
+                                }
                             }
                         ]
                     }
@@ -2056,7 +2101,7 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/home-assistant/1.0.130",
-        "last_update": "2024-05-29 05:21:41",
+        "last_update": "2024-05-29 09:57:19",
         "required_features": [
             "definitions/timezone",
             "normalize/ixVolume"
