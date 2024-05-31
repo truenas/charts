@@ -4,11 +4,11 @@
         "supported": false,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/pihole/2.0.11",
-        "last_update": "2024-05-30 13:20:18",
+        "last_update": "2024-05-31 07:17:54",
         "required_features": [
-            "normalize/ixVolume",
             "definitions/timezone",
-            "normalize/acl"
+            "normalize/acl",
+            "normalize/ixVolume"
         ],
         "human_version": "2024.05.0_2.0.11",
         "version": "2.0.11",
@@ -1500,10 +1500,10 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/pihole/1.0.25",
-        "last_update": "2024-05-30 13:20:18",
+        "last_update": "2024-05-31 07:17:54",
         "required_features": [
-            "normalize/ixVolume",
-            "definitions/timezone"
+            "definitions/timezone",
+            "normalize/ixVolume"
         ],
         "human_version": "2023.11.0_1.0.25",
         "version": "1.0.25",
