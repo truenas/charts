@@ -14,6 +14,7 @@ workload:
           securityContext:
             runAsUser: {{ .Values.audiobookshelfRunAs.user }}
             runAsGroup: {{ .Values.audiobookshelfRunAs.group }}
+            readOnlyRootFilesystem: false
           env:
             PORT: {{ .Values.audiobookshelfNetwork.webPort }}
             CONFIG_PATH: /config
