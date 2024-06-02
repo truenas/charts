@@ -1,7 +1,7 @@
 image:
   pullPolicy: IfNotPresent
   repository: nextcloud
-  tag: 29.0.0
+  tag: 29.0.1
 nginxImage:
   pullPolicy: IfNotPresent
   repository: nginx
@@ -11,7 +11,7 @@ nginxImage:
 ncPostgresImage:
   pullPolicy: IfNotPresent
   repository: postgres
-  tag: "13.1"
+  tag: '13.1'
 
 resources:
   limits:
@@ -25,7 +25,7 @@ podOptions:
 ncConfig:
   adminUser: admin
   adminPassword: password
-  host: ""
+  host: ''
   dataDir: /var/www/html/data
   commands:
     - ffmpeg
@@ -36,7 +36,7 @@ ncConfig:
   maxExecutionTime: 30
   cron:
     enabled: true
-    schedule: "*/15 * * * *"
+    schedule: '*/15 * * * *'
   additionalEnvs: []
 
 ncNetwork:
