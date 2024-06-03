@@ -1,18 +1,18 @@
 {
-    "2.0.6": {
+    "2.0.7": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/nextcloud/2.0.6",
-        "last_update": "2024-05-31 17:10:22",
+        "location": "/__w/charts/charts/charts/nextcloud/2.0.7",
+        "last_update": "2024-06-03 10:19:01",
         "required_features": [
-            "definitions/nodeIP",
             "definitions/certificate",
-            "normalize/ixVolume",
-            "normalize/acl"
+            "normalize/acl",
+            "definitions/nodeIP",
+            "normalize/ixVolume"
         ],
-        "human_version": "29.0.0_2.0.6",
-        "version": "2.0.6",
+        "human_version": "29.0.1_2.0.7",
+        "version": "2.0.7",
         "chart_metadata": {
             "name": "nextcloud",
             "description": "A file sharing server that puts the control and security of your own data back into your hands.",
@@ -20,9 +20,9 @@
                 "title": "Nextcloud"
             },
             "type": "application",
-            "version": "2.0.6",
+            "version": "2.0.7",
             "apiVersion": "v2",
-            "appVersion": "29.0.0",
+            "appVersion": "29.0.1",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
@@ -2287,10 +2287,10 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/nextcloud/1.6.61",
-        "last_update": "2024-05-31 17:10:22",
+        "last_update": "2024-06-03 10:17:23",
         "required_features": [
-            "definitions/nodeIP",
             "definitions/certificate",
+            "definitions/nodeIP",
             "normalize/ixVolume"
         ],
         "human_version": "29.0.0_1.6.61",
@@ -3111,10 +3111,10 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/nextcloud/1.6.59",
-        "last_update": "2024-05-31 17:10:22",
+        "last_update": "2024-06-03 10:17:23",
         "required_features": [
-            "definitions/nodeIP",
             "definitions/certificate",
+            "definitions/nodeIP",
             "normalize/ixVolume"
         ],
         "human_version": "28.0.4_1.6.59",
@@ -3935,10 +3935,10 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/nextcloud/1.6.53",
-        "last_update": "2024-05-31 17:10:22",
+        "last_update": "2024-06-03 10:17:23",
         "required_features": [
-            "definitions/nodeIP",
             "definitions/certificate",
+            "definitions/nodeIP",
             "normalize/ixVolume"
         ],
         "human_version": "27.1.4_1.6.53",
@@ -4759,10 +4759,10 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/nextcloud/1.6.29",
-        "last_update": "2024-05-31 17:10:22",
+        "last_update": "2024-06-03 10:17:23",
         "required_features": [
-            "definitions/nodeIP",
             "definitions/certificate",
+            "definitions/nodeIP",
             "normalize/ixVolume"
         ],
         "human_version": "26.0.2_1.6.29",
