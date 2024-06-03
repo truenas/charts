@@ -1,27 +1,30 @@
 image:
-  repository: ghcr.io/onedr0p/bazarr
   pullPolicy: IfNotPresent
-  tag: 1.4.2
+  repository: emby/embyserver
+  tag: 4.8.8.0
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-bazarrConfig:
+embyConfig:
   additionalEnvs: []
 
-bazarrNetwork:
-  webPort: 30046
-  hostNetwork: false
-
-bazarrRunAs:
+# On migration the default is 2
+embyID:
   user: 568
   group: 568
 
-bazarrStorage:
+embyNetwork:
+  webPort: 9096
+  hostNetwork: false
+
+embyStorage:
   config:
     type: ixVolume
     ixVolumeConfig:
       datasetName: config
   additionalStorages: []
+
+embyGPU: {}

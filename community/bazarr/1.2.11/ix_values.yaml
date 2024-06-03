@@ -1,26 +1,25 @@
 image:
-  repository: ghcr.io/onedr0p/prowlarr-develop
+  repository: ghcr.io/onedr0p/bazarr
   pullPolicy: IfNotPresent
-  tag: 1.17.2.4511
+  tag: 1.4.3
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-prowlarrConfig:
-  instanceName: Prowlarr
+bazarrConfig:
   additionalEnvs: []
 
-prowlarrNetwork:
-  webPort: 30050
+bazarrNetwork:
+  webPort: 30046
   hostNetwork: false
 
-prowlarrRunAs:
+bazarrRunAs:
   user: 568
   group: 568
 
-prowlarrStorage:
+bazarrStorage:
   config:
     type: ixVolume
     ixVolumeConfig:
