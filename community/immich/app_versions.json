@@ -1,18 +1,18 @@
 {
-    "3.0.24": {
+    "3.0.25": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/immich/3.0.24",
-        "last_update": "2024-06-04 12:53:37",
+        "location": "/__w/charts/charts/community/immich/3.0.25",
+        "last_update": "2024-06-04 19:00:32",
         "required_features": [
             "normalize/acl",
             "normalize/ixVolume",
             "definitions/gpuConfiguration",
             "definitions/timezone"
         ],
-        "human_version": "1.105.1_3.0.24",
-        "version": "3.0.24",
+        "human_version": "1.105.1_3.0.25",
+        "version": "3.0.25",
         "chart_metadata": {
             "name": "immich",
             "description": "Immich is a self-hosted photo and video backup solution directly from your mobile phone.",
@@ -20,7 +20,7 @@
                 "title": "Immich"
             },
             "type": "application",
-            "version": "3.0.24",
+            "version": "3.0.25",
             "apiVersion": "v2",
             "appVersion": "1.105.1",
             "kubeVersion": ">=1.16.0-0",
@@ -170,6 +170,46 @@
                                             "description": "Openvino Machine Learning Image"
                                         }
                                     ]
+                                }
+                            },
+                            {
+                                "variable": "logLevel",
+                                "label": "Log Level",
+                                "description": "The log level to use for Machine Learning.\n",
+                                "schema": {
+                                    "type": "string",
+                                    "default": "log",
+                                    "enum": [
+                                        {
+                                            "value": "verbose",
+                                            "description": "Verbose"
+                                        },
+                                        {
+                                            "value": "debug",
+                                            "description": "Debug"
+                                        },
+                                        {
+                                            "value": "log",
+                                            "description": "Log"
+                                        },
+                                        {
+                                            "value": "warn",
+                                            "description": "Warn"
+                                        },
+                                        {
+                                            "value": "error",
+                                            "description": "Error"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "huggingFaceEndpoint",
+                                "label": "Hugging Face Endpoint (Optional)",
+                                "description": "The Hugging Face endpoint to use for Machine Learning.\n",
+                                "schema": {
+                                    "type": "string",
+                                    "default": ""
                                 }
                             }
                         ]

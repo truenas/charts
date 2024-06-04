@@ -1,19 +1,19 @@
 {
-    "2.0.15": {
+    "2.0.16": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/collabora/2.0.15",
-        "last_update": "2024-06-04 12:53:37",
+        "location": "/__w/charts/charts/charts/collabora/2.0.16",
+        "last_update": "2024-06-04 19:00:32",
         "required_features": [
-            "normalize/acl",
-            "normalize/ixVolume",
             "definitions/timezone",
+            "normalize/acl",
             "definitions/nodeIP",
+            "normalize/ixVolume",
             "definitions/certificate"
         ],
-        "human_version": "24.04.3.1.1_2.0.15",
-        "version": "2.0.15",
+        "human_version": "24.04.3.1.1_2.0.16",
+        "version": "2.0.16",
         "chart_metadata": {
             "name": "collabora",
             "description": "Collabora is a collaborative online office suite based on LibreOffice technology",
@@ -21,7 +21,7 @@
                 "title": "Collabora"
             },
             "type": "application",
-            "version": "2.0.15",
+            "version": "2.0.16",
             "apiVersion": "v2",
             "appVersion": "24.04.3.1.1",
             "kubeVersion": ">=1.16.0-0",
@@ -209,8 +209,8 @@
                                             true
                                         ]
                                     ],
-                                    "valid_chars": "^[a-zA-Z0-9!@#%^&*?]{8,}$|^$",
-                                    "valid_chars_error": "Password must be at least 8 characters long and contain at least one of the following:</br>\n- Uppercase letter</br>\n- Lowercase letter</br>\n- Number</br>\n- Special character</br>\n"
+                                    "valid_chars": "^[a-zA-Z0-9!@#$%^&*?]{8,}$|^$",
+                                    "valid_chars_error": "Password must be at least 8 characters long and contain at least one of the following:</br>\n- Uppercase letter</br>\n- Lowercase letter</br>\n- Number</br>\n- Special character (!@#$%^&*?)</br>\n"
                                 }
                             },
                             {
@@ -874,11 +874,11 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/collabora/1.2.30",
-        "last_update": "2024-06-04 12:53:37",
+        "last_update": "2024-06-04 18:58:58",
         "required_features": [
             "definitions/nodeIP",
-            "definitions/timezone",
-            "definitions/certificate"
+            "definitions/certificate",
+            "definitions/timezone"
         ],
         "human_version": "23.05.8.2.1_1.2.30",
         "version": "1.2.30",
