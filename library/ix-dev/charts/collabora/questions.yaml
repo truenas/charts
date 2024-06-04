@@ -60,13 +60,13 @@ questions:
             private: true
             required: true
             show_if: [[enableWebUI, "=", true]]
-            valid_chars: "^[a-zA-Z0-9!@#%^&*?]{8,}$|^$"
+            valid_chars: "^[a-zA-Z0-9!@#$%^&*?]{8,}$|^$"
             valid_chars_error: |
               Password must be at least 8 characters long and contain at least one of the following:</br>
               - Uppercase letter</br>
               - Lowercase letter</br>
               - Number</br>
-              - Special character</br>
+              - Special character (!@#$%^&*?)</br>
         - variable: serverName
           label: Server Name
           description: The server name for Collabora.
