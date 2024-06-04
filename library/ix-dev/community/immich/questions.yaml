@@ -56,6 +56,31 @@ questions:
                 description: Cuda Machine Learning Image
               - value: mlOpenvinoImage
                 description: Openvino Machine Learning Image
+        - variable: logLevel
+          label: Log Level
+          description: |
+            The log level to use for Machine Learning.
+          schema:
+            type: string
+            default: log
+            enum:
+              - value: verbose
+                description: Verbose
+              - value: debug
+                description: Debug
+              - value: log
+                description: Log
+              - value: warn
+                description: Warn
+              - value: error
+                description: Error
+        - variable: huggingFaceEndpoint
+          label: Hugging Face Endpoint (Optional)
+          description: |
+            The Hugging Face endpoint to use for Machine Learning.
+          schema:
+            type: string
+            default: "" 
   - variable: immichNetwork
     label: ""
     group: Network Configuration

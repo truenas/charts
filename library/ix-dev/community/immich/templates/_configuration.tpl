@@ -65,14 +65,14 @@ configmap:
   server-config:
     enabled: true
     data:
-      LOG_LEVEL: log
+      LOG_LEVEL: {{ .Values.immichConfig.logLevel | default "log" }}
       NODE_ENV: production
       SERVER_PORT: {{ .Values.immichNetwork.webuiPort | quote }}
 
   micro-config:
     enabled: true
     data:
-      LOG_LEVEL: log
+      LOG_LEVEL: {{ .Values.immichConfig.logLevel | default "log" }}
       NODE_ENV: production
       MICROSERVICES_PORT: {{ .Values.immichNetwork.microservicesPort | quote }}
       REVERSE_GEOCODING_DUMP_DIRECTORY: /microcache
@@ -82,6 +82,10 @@ configmap:
     enabled: true
     data:
       NODE_ENV: production
+      LOG_LEVEL: {{ .Values.immichConfig.logLevel | default "log" }}
+      {{- if .Values.immichConfig.huggingFaceEndpoint }}
+      HF_ENDPOINT: {{ .Values.immichConfig.huggingFaceEndpoint }}
+      {{- end }}
       MACHINE_LEARNING_PORT: {{ .Values.immichNetwork.machinelearningPort | quote }}
       MACHINE_LEARNING_CACHE_FOLDER: /mlcache
       TRANSFORMERS_CACHE: /mlcache
