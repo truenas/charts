@@ -34,9 +34,11 @@ immichGPUContainers:
   machinelearning: true
 
 immichConfig:
-  publicLoginMessage: ''
+  publicLoginMessage: ""
   enableML: true
   mlImageType: mlImage
+  logLevel: log
+  huggingFaceEndpoint: ""
 
 immichNetwork:
   webuiPort: 30041
