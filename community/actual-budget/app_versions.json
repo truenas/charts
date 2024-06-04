@@ -1,17 +1,17 @@
 {
-    "1.2.13": {
+    "1.2.14": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/actual-budget/1.2.13",
-        "last_update": "2024-06-03 10:17:23",
+        "location": "/__w/charts/charts/community/actual-budget/1.2.14",
+        "last_update": "2024-06-04 12:55:19",
         "required_features": [
-            "definitions/certificate",
             "normalize/acl",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/certificate"
         ],
-        "human_version": "24.5.0_1.2.13",
-        "version": "1.2.13",
+        "human_version": "24.6.0_1.2.14",
+        "version": "1.2.14",
         "chart_metadata": {
             "name": "actual-budget",
             "description": "Actual Budget is a super fast and privacy-focused app for managing your finances.",
@@ -19,9 +19,9 @@
                 "title": "Actual Budget"
             },
             "type": "application",
-            "version": "1.2.13",
+            "version": "1.2.14",
             "apiVersion": "v2",
-            "appVersion": "24.5.0",
+            "appVersion": "24.6.0",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
