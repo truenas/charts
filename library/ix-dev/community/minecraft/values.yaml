@@ -1,23 +1,23 @@
 j8Image:
   repository: itzg/minecraft-server
   pullPolicy: IfNotPresent
-  tag: 2024.5.0-java8
+  tag: 2024.6.0-java8
 j8gceImage:
   repository: itzg/minecraft-server
   pullPolicy: IfNotPresent
-  tag: 2024.5.0-java8-graalvm-ce
+  tag: 2024.6.0-java8-graalvm-ce
 j8j9Image:
   repository: itzg/minecraft-server
   pullPolicy: IfNotPresent
-  tag: 2024.4.1-java8-openj9
+  tag: 2024.6.0-java8-openj9
 j8jdkImage:
   repository: itzg/minecraft-server
   pullPolicy: IfNotPresent
-  tag: 2024.5.0-java8-jdk
+  tag: 2024.6.0-java8-jdk
 j11Image:
   repository: itzg/minecraft-server
   pullPolicy: IfNotPresent
-  tag: 2024.5.0-java11
+  tag: 2024.6.0-java11
 j11j9Image:
   repository: itzg/minecraft-server
   pullPolicy: IfNotPresent
@@ -29,7 +29,7 @@ j11jdkImage:
 j17Image:
   repository: itzg/minecraft-server
   pullPolicy: IfNotPresent
-  tag: 2024.5.0-java17
+  tag: 2024.6.0-java17
 j17j9Image:
   repository: itzg/minecraft-server
   pullPolicy: IfNotPresent
@@ -37,7 +37,7 @@ j17j9Image:
 j17jdkImage:
   repository: itzg/minecraft-server
   pullPolicy: IfNotPresent
-  tag: 2024.5.0-java17-jdk
+  tag: 2024.6.0-java17-jdk
 j17gceImage:
   repository: itzg/minecraft-server
   pullPolicy: IfNotPresent
@@ -45,7 +45,7 @@ j17gceImage:
 j17alpineImage:
   repository: itzg/minecraft-server
   pullPolicy: IfNotPresent
-  tag: 2024.5.0-java17-alpine
+  tag: 2024.6.0-java17-alpine
 j19Image:
   repository: itzg/minecraft-server
   pullPolicy: IfNotPresent
