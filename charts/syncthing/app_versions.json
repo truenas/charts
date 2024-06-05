@@ -1,16 +1,16 @@
 {
-    "2.0.6": {
+    "2.0.7": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/syncthing/2.0.6",
-        "last_update": "2024-06-04 18:58:58",
+        "location": "/__w/charts/charts/charts/syncthing/2.0.7",
+        "last_update": "2024-06-05 11:12:07",
         "required_features": [
             "normalize/acl",
             "normalize/ixVolume"
         ],
-        "human_version": "1.27.7_2.0.6",
-        "version": "2.0.6",
+        "human_version": "1.27.8_2.0.7",
+        "version": "2.0.7",
         "chart_metadata": {
             "name": "syncthing",
             "description": "Syncthing is a continuous file synchronization program.",
@@ -18,9 +18,9 @@
                 "title": "Syncthing"
             },
             "type": "application",
-            "version": "2.0.6",
+            "version": "2.0.7",
             "apiVersion": "v2",
-            "appVersion": "1.27.7",
+            "appVersion": "1.27.8",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
@@ -1171,10 +1171,10 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/syncthing/1.0.42",
-        "last_update": "2024-06-04 18:58:58",
+        "last_update": "2024-06-05 11:10:38",
         "required_features": [
-            "normalize/ixVolume",
-            "validations/lockedHostPath"
+            "validations/lockedHostPath",
+            "normalize/ixVolume"
         ],
         "human_version": "1.27.3_1.0.42",
         "version": "1.0.42",
