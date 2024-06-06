@@ -15,10 +15,15 @@ workload:
             runAsUser: {{ .Values.tautulliRunAs.user }}
             runAsGroup: {{ .Values.tautulliRunAs.group }}
           command:
-            - /entrypoint.sh
+            - python
+            - Tautulli.py
           args:
             - --port
             - {{ .Values.tautulliNetwork.webPort | quote }}
+            - --config
+            - /config/config.ini
+            - --datadir
+            - /config
           {{ with .Values.tautulliConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
