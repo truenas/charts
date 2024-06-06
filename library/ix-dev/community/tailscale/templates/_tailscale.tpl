@@ -38,6 +38,7 @@ workload:
             TS_SOCKET: /var/run/tailscale/tailscaled.sock
             TS_USERSPACE: {{ .Values.tailscaleConfig.userspace | quote }}
             TS_ACCEPT_DNS: {{ .Values.tailscaleConfig.acceptDns | quote }}
+            TS_AUTH_ONCE: {{ .Values.tailscaleConfig.authOnce | quote }}
             {{ with .Values.tailscaleConfig.advertiseRoutes }}
             TS_ROUTES: {{ join "," . }}
             {{ end }}
