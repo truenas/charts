@@ -14,7 +14,6 @@ workload:
           securityContext:
             runAsUser: {{ .Values.tautulliRunAs.user }}
             runAsGroup: {{ .Values.tautulliRunAs.group }}
-          entrypoint:
           command:
             - python
             - Tautulli.py
