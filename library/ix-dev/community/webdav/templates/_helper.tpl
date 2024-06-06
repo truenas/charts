@@ -69,7 +69,11 @@ BrowserMatch "^WebDAVFS/1.[01234]" redirect-carefully
 BrowserMatch "^gnome-vfs/1.0" redirect-carefully
 BrowserMatch "^XML Spy" redirect-carefully
 BrowserMatch "^Dreamweaver-WebDAV-SCM1" redirect-carefully
+BrowserMatch "^DAVx5" redirect-carefully
 BrowserMatch " Konqueror/4" redirect-carefully
+{{- range $match := .Values.webdavConfig.additionalBrowserMatches }}
+BrowserMatch "{{ $match }}" redirect-carefully
+{{- end }}
 RequestReadTimeout handshake=0 header=20-40,MinRate=500 body=20,MinRate=500
 {{- end -}}
 

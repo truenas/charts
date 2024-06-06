@@ -43,6 +43,24 @@ questions:
             show_if: [["authType", "=", "basic"]]
             private: true
             required: true
+        - variable: additionalBrowserMatches
+          label: Additional Browser Matches
+          description: |
+            Additional browser matches for WebDAV.</br>
+            This is useful if you want to use WebDAV with a browser
+            that is not supported by the default configuration.</br>
+            Example: "^some-regex" </br>
+            This will create the following line in the configuration file:</br>
+            BrowserMatch "^some-regex" redirect-carefully
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: match
+                label: Match
+                schema:
+                  type: string
+                  required: true
         - variable: additionalEnvs
           label: Additional Environment Variables
           description: Configure additional environment variables for WebDAV.
