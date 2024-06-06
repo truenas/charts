@@ -69,6 +69,13 @@ questions:
           schema:
             type: boolean
             default: false
+        - variable: authOnce
+          label: Auth Once
+          description: |
+            Attempt to log in only if not already logged in.</br>
+          schema:
+            type: boolean
+            default: false
         - variable: extraArgs
           label: Extra Arguments
           description: Extra arguments for Tailscale.
