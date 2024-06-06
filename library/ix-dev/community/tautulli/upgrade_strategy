@@ -6,12 +6,12 @@ import sys
 from catalog_update.upgrade_strategy import semantic_versioning
 
 
-RE_STABLE_VERSION = re.compile(r'[0-9]+\.[0-9]+\.[0-9]+')
+RE_STABLE_VERSION = re.compile(r'v[0-9]+\.[0-9]+\.[0-9]+')
 
 
 def newer_mapping(image_tags):
     key = list(image_tags.keys())[0]
-    tags = {t: t for t in image_tags[key] if RE_STABLE_VERSION.fullmatch(t)}
+    tags = {t.strip('v'): t for t in image_tags[key]}
     version = semantic_versioning(list(tags))
     if not version:
         return {}
