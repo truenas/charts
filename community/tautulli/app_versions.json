@@ -1,16 +1,16 @@
 {
-    "1.2.3": {
+    "1.2.4": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/tautulli/1.2.3",
-        "last_update": "2024-06-06 11:19:23",
+        "location": "/__w/charts/charts/community/tautulli/1.2.4",
+        "last_update": "2024-06-06 15:09:35",
         "required_features": [
-            "normalize/acl",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "normalize/acl"
         ],
-        "human_version": "2.13.4_1.2.3",
-        "version": "1.2.3",
+        "human_version": "v2.14.2_1.2.4",
+        "version": "1.2.4",
         "chart_metadata": {
             "name": "tautulli",
             "description": "Tautulli is a python based web application for monitoring, analytics and notifications for Plex Media Server.",
@@ -18,9 +18,9 @@
                 "title": "Tautulli"
             },
             "type": "application",
-            "version": "1.2.3",
+            "version": "1.2.4",
             "apiVersion": "v2",
-            "appVersion": "2.13.4",
+            "appVersion": "v2.14.2",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {

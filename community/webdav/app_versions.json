@@ -1,15 +1,15 @@
 {
-    "1.0.26": {
+    "1.0.27": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/webdav/1.0.26",
-        "last_update": "2024-06-06 11:19:23",
+        "location": "/__w/charts/charts/community/webdav/1.0.27",
+        "last_update": "2024-06-06 15:09:35",
         "required_features": [
             "definitions/certificate"
         ],
-        "human_version": "2.4.59_1.0.26",
-        "version": "1.0.26",
+        "human_version": "2.4.59_1.0.27",
+        "version": "1.0.27",
         "chart_metadata": {
             "name": "webdav",
             "description": "WebDAV is a set of extensions to the HTTP protocol which allows users to collaboratively edit and manage files on remote web servers.",
@@ -17,7 +17,7 @@
                 "title": "WebDAV"
             },
             "type": "application",
-            "version": "1.0.26",
+            "version": "1.0.27",
             "apiVersion": "v2",
             "appVersion": "2.4.59",
             "kubeVersion": ">=1.16.0-0",
@@ -140,6 +140,25 @@
                                     ],
                                     "private": true,
                                     "required": true
+                                }
+                            },
+                            {
+                                "variable": "additionalBrowserMatches",
+                                "label": "Additional Browser Matches",
+                                "description": "Additional browser matches for WebDAV.</br>\nThis is useful if you want to use WebDAV with a browser\nthat is not supported by the default configuration.</br>\nExample: \"^some-regex\" </br>\nThis will create the following line in the configuration file:</br>\nBrowserMatch \"^some-regex\" redirect-carefully\n",
+                                "schema": {
+                                    "type": "list",
+                                    "default": [],
+                                    "items": [
+                                        {
+                                            "variable": "match",
+                                            "label": "Match",
+                                            "schema": {
+                                                "type": "string",
+                                                "required": true
+                                            }
+                                        }
+                                    ]
                                 }
                             },
                             {

@@ -1,13 +1,13 @@
 {
-    "1.0.40": {
+    "1.0.41": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/tailscale/1.0.40",
-        "last_update": "2024-06-06 11:19:23",
+        "location": "/__w/charts/charts/community/tailscale/1.0.41",
+        "last_update": "2024-06-06 15:09:35",
         "required_features": [],
-        "human_version": "1.66.4_1.0.40",
-        "version": "1.0.40",
+        "human_version": "1.66.4_1.0.41",
+        "version": "1.0.41",
         "chart_metadata": {
             "name": "tailscale",
             "description": "Secure remote access to shared resources",
@@ -15,7 +15,7 @@
                 "title": "Tailscale"
             },
             "type": "application",
-            "version": "1.0.40",
+            "version": "1.0.41",
             "apiVersion": "v2",
             "appVersion": "1.66.4",
             "kubeVersion": ">=1.16.0-0",
@@ -157,6 +157,15 @@
                                 "variable": "acceptDns",
                                 "label": "Accept DNS",
                                 "description": "Accept DNS.</br>\nSame as `--accept-dns` flag.\n",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "variable": "authOnce",
+                                "label": "Auth Once",
+                                "description": "Attempt to log in only if not already logged in.</br>\n",
                                 "schema": {
                                     "type": "boolean",
                                     "default": false
