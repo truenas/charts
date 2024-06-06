@@ -10,8 +10,9 @@ resources:
 
 webdavConfig:
   authType: none
-  username: ''
-  password: ''
+  username: ""
+  password: ""
+  additionalBrowserMatches: []
   additionalEnvs: []
 webdavNetwork:
   hostNetwork: false
