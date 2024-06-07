@@ -1,16 +1,16 @@
 {
-    "1.2.7": {
+    "1.2.8": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/wordpress/1.2.7",
-        "last_update": "2024-06-06 15:08:08",
+        "location": "/__w/charts/charts/community/wordpress/1.2.8",
+        "last_update": "2024-06-07 11:48:00",
         "required_features": [
             "normalize/ixVolume",
             "normalize/acl"
         ],
-        "human_version": "6.5.3_1.2.7",
-        "version": "1.2.7",
+        "human_version": "6.5.4_1.2.8",
+        "version": "1.2.8",
         "chart_metadata": {
             "name": "wordpress",
             "description": "Wordpress is a web content management system",
@@ -18,9 +18,9 @@
                 "title": "Wordpress"
             },
             "type": "application",
-            "version": "1.2.7",
+            "version": "1.2.8",
             "apiVersion": "v2",
-            "appVersion": "6.5.3",
+            "appVersion": "6.5.4",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {

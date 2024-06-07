@@ -1,18 +1,18 @@
 {
-    "1.3.8": {
+    "1.3.9": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/unifi-controller/1.3.8",
-        "last_update": "2024-06-06 15:08:08",
+        "location": "/__w/charts/charts/community/unifi-controller/1.3.9",
+        "last_update": "2024-06-07 11:48:00",
         "required_features": [
-            "definitions/timezone",
-            "definitions/certificate",
             "normalize/ixVolume",
+            "definitions/certificate",
+            "definitions/timezone",
             "normalize/acl"
         ],
-        "human_version": "8.1.127_1.3.8",
-        "version": "1.3.8",
+        "human_version": "8.2.93_1.3.9",
+        "version": "1.3.9",
         "chart_metadata": {
             "name": "unifi-controller",
             "description": "Unifi Controller is a network management controller for Unifi Equipment.",
@@ -20,9 +20,9 @@
                 "title": "Unifi Controller"
             },
             "type": "application",
-            "version": "1.3.8",
+            "version": "1.3.9",
             "apiVersion": "v2",
-            "appVersion": "8.1.127",
+            "appVersion": "8.2.93",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {

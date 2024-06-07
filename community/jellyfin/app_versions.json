@@ -1,17 +1,17 @@
 {
-    "1.2.15": {
+    "1.2.16": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/jellyfin/1.2.15",
-        "last_update": "2024-06-06 15:08:08",
+        "location": "/__w/charts/charts/community/jellyfin/1.2.16",
+        "last_update": "2024-06-07 11:48:00",
         "required_features": [
-            "definitions/gpuConfiguration",
             "normalize/ixVolume",
+            "definitions/gpuConfiguration",
             "normalize/acl"
         ],
-        "human_version": "10.9.5_1.2.15",
-        "version": "1.2.15",
+        "human_version": "10.9.6_1.2.16",
+        "version": "1.2.16",
         "chart_metadata": {
             "name": "jellyfin",
             "description": "Jellyfin is a Free Software Media System that puts you in control of managing and streaming your media.",
@@ -19,9 +19,9 @@
                 "title": "Jellyfin"
             },
             "type": "application",
-            "version": "1.2.15",
+            "version": "1.2.16",
             "apiVersion": "v2",
-            "appVersion": "10.9.5",
+            "appVersion": "10.9.6",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
