@@ -1,17 +1,17 @@
 {
-    "2.0.27": {
+    "2.0.28": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/home-assistant/2.0.27",
-        "last_update": "2024-06-07 11:46:34",
+        "location": "/__w/charts/charts/charts/home-assistant/2.0.28",
+        "last_update": "2024-06-08 10:54:19",
         "required_features": [
+            "normalize/acl",
             "normalize/ixVolume",
-            "definitions/timezone",
-            "normalize/acl"
+            "definitions/timezone"
         ],
-        "human_version": "2024.6.0_2.0.27",
-        "version": "2.0.27",
+        "human_version": "2024.6.1_2.0.28",
+        "version": "2.0.28",
         "chart_metadata": {
             "name": "home-assistant",
             "description": "Home Assistant is an open source home automation that puts local control and privacy first.",
@@ -19,9 +19,9 @@
                 "title": "Home Assistant"
             },
             "type": "application",
-            "version": "2.0.27",
+            "version": "2.0.28",
             "apiVersion": "v2",
-            "appVersion": "2024.6.0",
+            "appVersion": "2024.6.1",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
@@ -2101,7 +2101,7 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/home-assistant/1.0.130",
-        "last_update": "2024-06-07 11:46:34",
+        "last_update": "2024-06-08 10:52:52",
         "required_features": [
             "normalize/ixVolume",
             "definitions/timezone"
