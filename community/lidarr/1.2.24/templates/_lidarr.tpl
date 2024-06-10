@@ -15,8 +15,8 @@ workload:
             runAsUser: {{ .Values.lidarrRunAs.user }}
             runAsGroup: {{ .Values.lidarrRunAs.group }}
           env:
-            LIDARR__PORT: {{ .Values.lidarrNetwork.webPort }}
-            LIDARR__INSTANCE_NAME: {{ .Values.lidarrConfig.instanceName }}
+            LIDARR__SERVER__PORT: {{ .Values.lidarrNetwork.webPort }}
+            LIDARR__APP__INSTANCENAME: {{ .Values.lidarrConfig.instanceName }}
           {{ with .Values.lidarrConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}

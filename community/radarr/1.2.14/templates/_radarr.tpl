@@ -15,8 +15,8 @@ workload:
             runAsUser: {{ .Values.radarrRunAs.user }}
             runAsGroup: {{ .Values.radarrRunAs.group }}
           env:
-            RADARR__PORT: {{ .Values.radarrNetwork.webPort }}
-            RADARR__INSTANCE_NAME: {{ .Values.radarrConfig.instanceName }}
+            RADARR__SERVER__PORT: {{ .Values.radarrNetwork.webPort }}
+            RADARR__APP__INSTANCENAME: {{ .Values.radarrConfig.instanceName }}
           {{ with .Values.radarrConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}
