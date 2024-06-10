@@ -15,8 +15,8 @@ workload:
             runAsUser: {{ .Values.sonarrRunAs.user }}
             runAsGroup: {{ .Values.sonarrRunAs.group }}
           env:
-            SONARR__PORT: {{ .Values.sonarrNetwork.webPort }}
-            SONARR__INSTANCE_NAME: {{ .Values.sonarrConfig.instanceName }}
+            SONARR__SERVER__PORT: {{ .Values.sonarrNetwork.webPort }}
+            SONARR__APP__INSTANCENAME: {{ .Values.sonarrConfig.instanceName }}
           {{ with .Values.sonarrConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}

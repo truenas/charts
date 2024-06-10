@@ -1,8 +1,8 @@
 radarrConfig:
   additionalEnvs:
-    - name: RADARR__API_KEY
+    - name: RADARR__AUTH__APIKEY
       value: some-long-api-key
-    - name: RADARR__LOG_LEVEL
+    - name: RADARR__LOG__LEVEL
       value: error
 
 radarrNetwork:

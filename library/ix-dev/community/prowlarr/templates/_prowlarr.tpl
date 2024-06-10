@@ -15,8 +15,8 @@ workload:
             runAsUser: {{ .Values.prowlarrRunAs.user }}
             runAsGroup: {{ .Values.prowlarrRunAs.group }}
           env:
-            PROWLARR__PORT: {{ .Values.prowlarrNetwork.webPort }}
-            PROWLARR__INSTANCE_NAME: {{ .Values.prowlarrConfig.instanceName }}
+            PROWLARR__SERVER__PORT: {{ .Values.prowlarrNetwork.webPort }}
+            PROWLARR__APP__INSTANCENAME: {{ .Values.prowlarrConfig.instanceName }}
           {{ with .Values.prowlarrConfig.additionalEnvs }}
           envList:
             {{ range $env := . }}

@@ -1,8 +1,8 @@
 prowlarrConfig:
   additionalEnvs:
-    - name: PROWLARR__API_KEY
+    - name: PROWLARR__AUTH__APIKEY
       value: some-long-api-key
-    - name: PROWLARR__LOG_LEVEL
+    - name: PROWLARR__LOG__LEVEL
       value: error
 
 prowlarrNetwork:
