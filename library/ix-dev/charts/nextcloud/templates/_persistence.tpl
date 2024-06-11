@@ -76,14 +76,14 @@ persistence:
 
   redis-tmp:
     enabled: true
-    type: emtpyDir
+    type: emptyDir
     targetSelector:
       redis:
         redis:
           mountPath: /tmp
   redis-bitnami-tmp:
     enabled: true
-    type: emtpyDir
+    type: emptyDir
     targetSelector:
       redis:
         redis:
