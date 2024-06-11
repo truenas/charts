@@ -8,18 +8,12 @@ persistence:
       server:
         server:
           mountPath: /usr/src/app/upload/library
-      microservices:
-        microservices:
-          mountPath: /usr/src/app/upload/library
   uploads:
     enabled: true
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.immichStorage.uploads) | nindent 4 }}
     targetSelector:
       server:
         server:
-          mountPath: /usr/src/app/upload/upload
-      microservices:
-        microservices:
           mountPath: /usr/src/app/upload/upload
   thumbs:
     enabled: true
@@ -28,9 +22,6 @@ persistence:
       server:
         server:
           mountPath: /usr/src/app/upload/thumbs
-      microservices:
-        microservices:
-          mountPath: /usr/src/app/upload/thumbs
   profile:
     enabled: true
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.immichStorage.profile) | nindent 4 }}
@@ -38,18 +29,12 @@ persistence:
       server:
         server:
           mountPath: /usr/src/app/upload/profile
-      microservices:
-        microservices:
-          mountPath: /usr/src/app/upload/profile
   video:
     enabled: true
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.immichStorage.video) | nindent 4 }}
     targetSelector:
       server:
         server:
-          mountPath: /usr/src/app/upload/encoded-video
-      microservices:
-        microservices:
           mountPath: /usr/src/app/upload/encoded-video
   {{- range $idx, $storage := .Values.immichStorage.additionalStorages }}
   {{ printf "immich-%v:" (int $idx) }}
@@ -59,18 +44,7 @@ persistence:
       server:
         server:
           mountPath: {{ $storage.mountPath }}
-      microservices:
-        microservices:
-          mountPath: {{ $storage.mountPath }}
   {{- end }}
-  {{/* Caches */}}
-  microcache:
-    enabled: true
-    type: emptyDir
-    targetSelector:
-      microservices:
-        microservices:
-          mountPath: /microcache
   {{- if .Values.immichConfig.enableML }}
   mlcache:
     enabled: true

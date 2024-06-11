@@ -3,7 +3,6 @@
 {{/* Merge the templates with Values */}}
 {{- $_ := mustMergeOverwrite .Values (include "immich.configuration" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "immich.server.workload" $ | fromYaml) -}}
-{{- $_ := mustMergeOverwrite .Values (include "immich.microservices.workload" $ | fromYaml) -}}
 {{- if .Values.immichConfig.enableML -}}
   {{- $_ := mustMergeOverwrite .Values (include "immich.machinelearning.workload" $ | fromYaml) -}}
 {{- end -}}
