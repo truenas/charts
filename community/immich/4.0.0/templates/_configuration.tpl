@@ -23,7 +23,6 @@
   {{- end -}}
 
   {{- $dbURL := (printf "postgres://%s:%s@%s:5432/%s?sslmode=disable" $dbUser $dbPass $dbHost $dbName) -}}
-
   {{- $mlURL := printf "http://%v-machinelearning:%v" $fullname .Values.immichNetwork.machinelearningPort }}
 
 secret:
@@ -43,7 +42,7 @@ secret:
       REDIS_PASSWORD: {{ $redisPass }}
       REDIS_HOST: {{ $redisHost }}
 
-  {{/* Server & Microservices */}}
+  {{/* Server */}}
   immich-creds:
     enabled: true
     data:
@@ -65,28 +64,20 @@ configmap:
   server-config:
     enabled: true
     data:
-      LOG_LEVEL: {{ .Values.immichConfig.logLevel | default "log" }}
+      IMMICH_LOG_LEVEL: {{ .Values.immichConfig.logLevel | default "log" }}
       NODE_ENV: production
-      SERVER_PORT: {{ .Values.immichNetwork.webuiPort | quote }}
-
-  micro-config:
-    enabled: true
-    data:
-      LOG_LEVEL: {{ .Values.immichConfig.logLevel | default "log" }}
-      NODE_ENV: production
-      MICROSERVICES_PORT: {{ .Values.immichNetwork.microservicesPort | quote }}
-      REVERSE_GEOCODING_DUMP_DIRECTORY: /microcache
+      IMMICH_PORT: {{ .Values.immichNetwork.webuiPort | quote }}
 
   {{- if .Values.immichConfig.enableML }}
   ml-config:
     enabled: true
     data:
       NODE_ENV: production
-      LOG_LEVEL: {{ .Values.immichConfig.logLevel | default "log" }}
+      IMMICH_LOG_LEVEL: {{ .Values.immichConfig.logLevel | default "log" }}
       {{- if .Values.immichConfig.huggingFaceEndpoint }}
       HF_ENDPOINT: {{ .Values.immichConfig.huggingFaceEndpoint }}
       {{- end }}
-      MACHINE_LEARNING_PORT: {{ .Values.immichNetwork.machinelearningPort | quote }}
+      IMMICH_PORT: {{ .Values.immichNetwork.machinelearningPort | quote }}
       MACHINE_LEARNING_CACHE_FOLDER: /mlcache
       TRANSFORMERS_CACHE: /mlcache
   {{- end }}
@@ -97,14 +88,8 @@ scaleGPU:
   - gpu:
       {{ $key }}: {{ $value }}
     targetSelector:
-      {{- if $.Values.immichGPUContainers.microservices }}
-      microservices:
-        - microservices
-      {{- end }}
-      {{- if $.Values.immichGPUContainers.machinelearning }}
       machinelearning:
         - machinelearning
-      {{- end }}
   {{- end -}}
 {{- end -}}
 {{- end -}}
