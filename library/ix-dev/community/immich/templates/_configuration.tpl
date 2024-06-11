@@ -66,7 +66,6 @@ configmap:
     data:
       IMMICH_LOG_LEVEL: {{ .Values.immichConfig.logLevel | default "log" }}
       NODE_ENV: production
-      SERVER_PORT: {{ .Values.immichNetwork.webuiPort | quote }} {{/* Remove on the next chart version */}}
       IMMICH_PORT: {{ .Values.immichNetwork.webuiPort | quote }}
 
   {{- if .Values.immichConfig.enableML }}
@@ -78,7 +77,6 @@ configmap:
       {{- if .Values.immichConfig.huggingFaceEndpoint }}
       HF_ENDPOINT: {{ .Values.immichConfig.huggingFaceEndpoint }}
       {{- end }}
-      MACHINE_LEARNING_PORT: {{ .Values.immichNetwork.machinelearningPort | quote }} {{/* Remove on the next chart version */}}
       IMMICH_PORT: {{ .Values.immichNetwork.machinelearningPort | quote }}
       MACHINE_LEARNING_CACHE_FOLDER: /mlcache
       TRANSFORMERS_CACHE: /mlcache
