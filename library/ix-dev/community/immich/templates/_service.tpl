@@ -14,18 +14,6 @@ service:
         protocol: http
         targetSelector: server
 
-  microservices:
-    enabled: true
-    type: ClusterIP
-    targetSelector: microservices
-    ports:
-      microservices:
-        enabled: true
-        primary: true
-        port: {{ .Values.immichNetwork.microservicesPort }}
-        protocol: http
-        targetSelector: microservices
-
   {{- if .Values.immichConfig.enableML }}
   machinelearning:
     enabled: true
