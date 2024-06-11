@@ -74,6 +74,21 @@ persistence:
           subPath: themes
   {{- end }}
 
+  redis-tmp:
+    enabled: true
+    type: emtpyDir
+    targetSelector:
+      redis:
+        redis:
+          mountPath: /tmp
+  redis-bitnami-tmp:
+    enabled: true
+    type: emtpyDir
+    targetSelector:
+      redis:
+        redis:
+          mountPath: /opt/bitnami/redis/tmp
+
   # Configuration files mounting
   nc-config-opcache:
     enabled: true
