@@ -1,7 +1,7 @@
 image:
   repository: ipfs/kubo
   pullPolicy: IfNotPresent
-  tag: v0.28.0
+  tag: v0.29.0
 resources:
   limits:
     cpu: 4000m
