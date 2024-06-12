@@ -1,8 +1,8 @@
 readarrConfig:
   additionalEnvs:
-    - name: READARR__API_KEY
+    - name: READARR__AUTH__APIKEY
       value: some-long-api-key
-    - name: READARR__LOG_LEVEL
+    - name: READARR__LOG__LEVEL
       value: error
 
 readarrNetwork:
