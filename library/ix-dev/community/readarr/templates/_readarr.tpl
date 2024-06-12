@@ -15,6 +15,7 @@ workload:
             runAsUser: {{ .Values.readarrRunAs.user }}
             runAsGroup: {{ .Values.readarrRunAs.group }}
           env:
+            READARR__PORT: {{ .Values.readarrNetwork.webPort }}
             READARR__SERVER__PORT: {{ .Values.readarrNetwork.webPort }}
             READARR__APP__INSTANCENAME: {{ .Values.readarrConfig.instanceName }}
           {{ with .Values.readarrConfig.additionalEnvs }}
