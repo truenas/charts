@@ -1,17 +1,17 @@
 {
-    "2.0.11": {
+    "2.0.12": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/pihole/2.0.11",
-        "last_update": "2024-06-14 10:55:59",
+        "location": "/__w/charts/charts/charts/pihole/2.0.12",
+        "last_update": "2024-06-17 11:52:35",
         "required_features": [
+            "definitions/timezone",
             "normalize/ixVolume",
-            "normalize/acl",
-            "definitions/timezone"
+            "normalize/acl"
         ],
-        "human_version": "2024.05.0_2.0.11",
-        "version": "2.0.11",
+        "human_version": "2024.06.0_2.0.12",
+        "version": "2.0.12",
         "chart_metadata": {
             "name": "pihole",
             "description": "DNS and Ad-filtering for your network.",
@@ -19,9 +19,9 @@
                 "title": "Pi-hole"
             },
             "type": "application",
-            "version": "2.0.11",
+            "version": "2.0.12",
             "apiVersion": "v2",
-            "appVersion": "2024.05.0",
+            "appVersion": "2024.06.0",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
@@ -1500,10 +1500,10 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/pihole/1.0.25",
-        "last_update": "2024-06-14 10:55:59",
+        "last_update": "2024-06-17 11:51:15",
         "required_features": [
-            "normalize/ixVolume",
-            "definitions/timezone"
+            "definitions/timezone",
+            "normalize/ixVolume"
         ],
         "human_version": "2023.11.0_1.0.25",
         "version": "1.0.25",
