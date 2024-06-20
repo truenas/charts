@@ -86,4 +86,13 @@ persistence:
       zerotier:
         zerotier:
           mountPath: /dev/net/tun
+  {{- range $idx, $storage := .Values.zerotierStorage.additionalStorages }}
+  {{ printf "zerotier-%v:" (int $idx) }}
+    enabled: true
+    {{- include "ix.v1.common.app.storageOptions" (dict "storage" $storage) | nindent 4 }}
+    targetSelector:
+      zerotier:
+        zerotier:
+          mountPath: {{ $storage.mountPath }}
+  {{- end }}
 {{- end -}}
