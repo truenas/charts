@@ -7,7 +7,7 @@ from catalog_update.upgrade_strategy import semantic_versioning
 
 
 # Drop _ffmpeg5 after Cobia is released for a while
-RE_STABLE_VERSION = re.compile(r'[0-9]+\.[0-9]+\.[0-9]+_ffmpeg5')
+RE_STABLE_VERSION = re.compile(r'[0-9]+\.[0-9]+\.[0-9]+(\.[0-9]+)?(_ffmpeg5)?')
 STRIP_TEXT = '_ffmpeg5'
 
 
