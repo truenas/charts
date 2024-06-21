@@ -21,6 +21,16 @@ portals:
     path: "$kubernetes-resource_configmap_portal_path"
 
 questions:
+  - variable: TZ
+    group: SABnzbd Configuration
+    label: Timezone
+    schema:
+      type: string
+      default: Etc/UTC
+      required: true
+      $ref:
+        - definitions/timezone
+
   - variable: sabnzbdConfig
     label: ""
     group: SABnzbd Configuration
