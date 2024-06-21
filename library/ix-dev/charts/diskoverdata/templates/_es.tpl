@@ -50,4 +50,10 @@ workload:
                 - |
                   curl -s -H "Authorization: Basic $(base64 <<< "elastic:$ELASTIC_PASSWORD")" \
                     http://localhost:9200/_cluster/health?local=true
+      initContainers:
+      {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
+                                                        "UID" 1000
+                                                        "GID" 1000
+                                                        "mode" "check"
+                                                        "type" "install") | nindent 8 }}
 {{- end -}}
