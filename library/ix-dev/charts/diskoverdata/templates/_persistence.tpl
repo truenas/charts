@@ -21,6 +21,11 @@ persistence:
       elasticsearch:
         elasticsearch:
           mountPath: /usr/share/elasticsearch/data
+        {{- if and (eq .Values.diskoverStorage.esdata.type "ixVolume")
+                  (not (.Values.diskoverStorage.esdata.ixVolumeConfig | default dict).aclEnable) }}
+        01-permissions:
+          mountPath: /mnt/directories/esdata
+        {{- end }}
   defaultcrawler:
     enabled: true
     type: configmap
