@@ -1,25 +1,23 @@
 image:
-  repository: tautulli/tautulli
+  repository: ghcr.io/onedr0p/radarr
   pullPolicy: IfNotPresent
-  tag: v2.14.2
+  tag: 5.7.0.8882
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-tautulliConfig:
+radarrConfig:
+  instanceName: Radarr
   additionalEnvs: []
-
-tautulliNetwork:
-  webPort: 30047
+radarrNetwork:
+  webPort: 30025
   hostNetwork: false
-
-tautulliRunAs:
+radarrRunAs:
   user: 568
   group: 568
-
-tautulliStorage:
+radarrStorage:
   config:
     type: ixVolume
     ixVolumeConfig:

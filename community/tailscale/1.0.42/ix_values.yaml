@@ -1,7 +1,7 @@
 image:
   repository: tailscale/tailscale
   pullPolicy: IfNotPresent
-  tag: v1.66.4
+  tag: v1.68.1
 
 resources:
   limits:
@@ -9,8 +9,8 @@ resources:
     memory: 8Gi
 
 tailscaleConfig:
-  authkey: ""
-  hostname: ""
+  authkey: ''
+  hostname: ''
   advertiseRoutes: []
   advertiseExitNode: false
   userspace: true
