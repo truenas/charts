@@ -1,11 +1,12 @@
 name: tautulli
-description: Tautulli is a python based web application for monitoring, analytics and notifications for Plex Media Server.
+description: Tautulli is a python based web application for monitoring, analytics
+  and notifications for Plex Media Server.
 annotations:
   title: Tautulli
 type: application
-version: 1.2.4
+version: 1.2.5
 apiVersion: v2
-appVersion: v2.14.2
+appVersion: 2.14.3
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: truenas
