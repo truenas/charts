@@ -1,18 +1,18 @@
 {
-    "2.0.7": {
+    "2.0.8": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/plex/2.0.7",
-        "last_update": "2024-06-21 13:50:30",
+        "location": "/__w/charts/charts/charts/plex/2.0.8",
+        "last_update": "2024-06-21 16:32:47",
         "required_features": [
-            "definitions/gpuConfiguration",
-            "definitions/timezone",
             "normalize/ixVolume",
-            "normalize/acl"
+            "normalize/acl",
+            "definitions/gpuConfiguration",
+            "definitions/timezone"
         ],
-        "human_version": "1.40.3.8555_2.0.7",
-        "version": "2.0.7",
+        "human_version": "1.40.3.8555_2.0.8",
+        "version": "2.0.8",
         "chart_metadata": {
             "name": "plex",
             "description": "Plex is a media server that allows you to stream your media to any Plex client.",
@@ -20,7 +20,7 @@
                 "title": "Plex"
             },
             "type": "application",
-            "version": "2.0.7",
+            "version": "2.0.8",
             "apiVersion": "v2",
             "appVersion": "1.40.3.8555",
             "kubeVersion": ">=1.16.0-0",
@@ -1007,7 +1007,6 @@
                                             "schema": {
                                                 "type": "string",
                                                 "required": true,
-                                                "immutable": true,
                                                 "default": "emptyDir",
                                                 "enum": [
                                                     {
@@ -1377,7 +1376,6 @@
                                             "schema": {
                                                 "type": "string",
                                                 "required": true,
-                                                "immutable": true,
                                                 "default": "ixVolume",
                                                 "enum": [
                                                     {
@@ -2229,12 +2227,12 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/plex/1.7.60",
-        "last_update": "2024-06-21 13:50:30",
+        "last_update": "2024-06-21 16:31:22",
         "required_features": [
-            "definitions/gpuConfiguration",
-            "definitions/timezone",
             "validations/lockedHostPath",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/gpuConfiguration",
+            "definitions/timezone"
         ],
         "human_version": "1.32.8.7639_1.7.60",
         "version": "1.7.60",
