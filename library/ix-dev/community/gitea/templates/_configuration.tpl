@@ -45,7 +45,7 @@ configmap:
     data:
       {{ $protocol := "http" }}
       GITEA__server__HTTP_PORT: {{ .Values.giteaNetwork.webPort | quote }}
-      GITEA__server__SSH_PORT: {{ .Values.giteaNetwork.sshPort | quote }}
+      GITEA__server__SSH_PORT: {{ .Values.giteaNetwork.externalSshPort | default .Values.giteaNetwork.sshPort | quote }}
       GITEA__server__SSH_LISTEN_PORT: {{ .Values.giteaNetwork.sshPort | quote }}
       GITEA__server__ROOT_URL: {{ .Values.giteaNetwork.rootURL | quote }}
       {{ if .Values.giteaNetwork.certificateID }}
