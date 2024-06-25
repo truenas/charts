@@ -1,17 +1,17 @@
 {
-    "1.1.20": {
+    "1.1.21": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/gitea/1.1.20",
-        "last_update": "2024-06-25 12:02:45",
+        "location": "/__w/charts/charts/community/gitea/1.1.21",
+        "last_update": "2024-06-25 15:43:38",
         "required_features": [
-            "definitions/certificate",
             "normalize/ixVolume",
-            "normalize/acl"
+            "normalize/acl",
+            "definitions/certificate"
         ],
-        "human_version": "1.22.0_1.1.20",
-        "version": "1.1.20",
+        "human_version": "1.22.0_1.1.21",
+        "version": "1.1.21",
         "chart_metadata": {
             "name": "gitea",
             "description": "Gitea - Git with a cup of tea",
@@ -19,7 +19,7 @@
                 "title": "Gitea"
             },
             "type": "application",
-            "version": "1.1.20",
+            "version": "1.1.21",
             "apiVersion": "v2",
             "appVersion": "1.22.0",
             "kubeVersion": ">=1.16.0-0",
@@ -212,6 +212,18 @@
                                     "min": 9000,
                                     "max": 65535,
                                     "required": true
+                                }
+                            },
+                            {
+                                "variable": "externalSshPort",
+                                "label": "External SSH Port",
+                                "description": "The ssh port that Gitea will be available at externally.</br>\nLeave empty to use the same port as the ssh port.\n",
+                                "schema": {
+                                    "type": "int",
+                                    "null": true,
+                                    "default": null,
+                                    "min": 9000,
+                                    "max": 65535
                                 }
                             },
                             {
