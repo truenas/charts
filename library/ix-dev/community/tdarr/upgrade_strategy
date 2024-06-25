@@ -14,7 +14,11 @@ STRIP_TEXT = '_ffmpeg5'
 
 def newer_mapping(image_tags):
     key = list(image_tags.keys())[0]
-    tags = {RE_CLEAN_VERSION.sub("\\1", t.strip(STRIP_TEXT)): t for t in image_tags[key] if RE_STABLE_VERSION.fullmatch(t)}
+    tags = {
+        RE_CLEAN_VERSION.sub('\\1', t.strip(STRIP_TEXT)): t
+        for t in image_tags[key]
+        if RE_STABLE_VERSION.fullmatch(t)
+    }
     version = semantic_versioning(list(tags))
     if not version:
         return {}
