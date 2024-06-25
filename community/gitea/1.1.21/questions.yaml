@@ -21,7 +21,6 @@ portals:
     path: "$kubernetes-resource_configmap_portal_path"
 
 questions:
-
   - variable: giteaConfig
     label: ""
     group: Gitea Configuration
@@ -105,6 +104,17 @@ questions:
             min: 9000
             max: 65535
             required: true
+        - variable: externalSshPort
+          label: External SSH Port
+          description: |
+            The ssh port that Gitea will be available at externally.</br>
+            Leave empty to use the same port as the ssh port.
+          schema:
+            type: int
+            "null": true
+            default: null
+            min: 9000
+            max: 65535
         - variable: hostNetwork
           label: Host Network
           description: |
