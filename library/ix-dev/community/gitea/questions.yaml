@@ -106,7 +106,9 @@ questions:
             required: true
         - variable: externalSshPort
           label: External SSH Port
-          description: The ssh port that Gitea will be available at externally.
+          description: |
+            The ssh port that Gitea will be available at externally.</br>
+            Leave empty to use the same port as the ssh port.
           schema:
             type: int
             "null": true
