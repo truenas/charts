@@ -1,17 +1,17 @@
 {
-    "2.0.1": {
+    "2.0.2": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/diskoverdata/2.0.1",
-        "last_update": "2024-06-21 16:32:47",
+        "location": "/__w/charts/charts/charts/diskoverdata/2.0.2",
+        "last_update": "2024-06-25 10:51:49",
         "required_features": [
             "normalize/ixVolume",
             "normalize/acl",
             "definitions/timezone"
         ],
-        "human_version": "2.0.1_2.0.1",
-        "version": "2.0.1",
+        "human_version": "2.0.1_2.0.2",
+        "version": "2.0.2",
         "chart_metadata": {
             "name": "diskoverdata",
             "description": "Diskover is used to monitor size/volumes of distributed dataset.",
@@ -19,7 +19,7 @@
                 "title": "Diskover Data"
             },
             "type": "application",
-            "version": "2.0.1",
+            "version": "2.0.2",
             "apiVersion": "v2",
             "appVersion": "2.0.1",
             "kubeVersion": ">=1.16.0-0",
@@ -192,7 +192,7 @@
                     }
                 },
                 {
-                    "variable": "discoverConfig",
+                    "variable": "diskoverConfig",
                     "label": "",
                     "group": "Diskover Data Configuration",
                     "schema": {
@@ -1835,7 +1835,7 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/diskoverdata/1.0.15",
-        "last_update": "2024-06-21 16:31:22",
+        "last_update": "2024-06-25 10:50:32",
         "required_features": [
             "normalize/ixVolume",
             "definitions/timezone"
