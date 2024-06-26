@@ -137,7 +137,7 @@ questions:
             default: 568
             required: true
 
-  - variable: discoverNetwork
+  - variable: diskoverNetwork
     label: ""
     group: Network Configuration
     schema:
@@ -153,7 +153,7 @@ questions:
             max: 65535
             required: true
 
-  - variable: discoverStorage
+  - variable: diskoverStorage
     label: ""
     group: Storage Configuration
     schema:

@@ -89,10 +89,15 @@ def migrate_common_lib(values):
 
     return values
 
+
 def migrate(values):
     # Fix typo
     if 'discoverConfig' in values.keys():
         values['diskoverConfig'] = values.pop('discoverConfig')
+    if 'discoverNetwork' in values.keys():
+        values['diskoverNetwork'] = values.pop('discoverNetwork')
+    if 'discoverStorage' in values.keys():
+        values['diskoverStorage'] = values.pop('discoverStorage')
     # If this missing, we have already migrated
     if not 'appVolumeMounts' in values.keys():
         return values
