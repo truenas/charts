@@ -10,6 +10,9 @@ token: {{ $item.cloudflareToken }}
 user_service_key: {{ $item.cloudflareUserServiceKey }}
 {{- else if and $item.cloudflareEmail $item.cloudflareApiKey }}
 email: {{ $item.cloudflareEmail }}
+{{- if eq $item.cloudflareApiKey "api_key" -}} {{/* CI only fix */}}
+  {{- $_ := set $item "cloudflareApiKey" "apikey" -}}
+{{- end }}
 key: {{ $item.cloudflareApiKey }}
 {{- else -}}
   {{- fail "DDNS Updater - Cloudflare provider requires either [Token] or [User Service Key] or [Email and API Key]" -}}
