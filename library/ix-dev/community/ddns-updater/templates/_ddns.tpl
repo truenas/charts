@@ -33,19 +33,19 @@ workload:
               enabled: {{ not .Values.ci }}
               type: exec
               command:
-                - /updater/app
+                - /updater/ddns-updater
                 - healthcheck
             readiness:
               enabled: {{ not .Values.ci }}
               type: exec
               command:
-                - /updater/app
+                - /updater/ddns-updater
                 - healthcheck
             startup:
               enabled: {{ not .Values.ci }}
               type: exec
               command:
-                - /updater/app
+                - /updater/ddns-updater
                 - healthcheck
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
