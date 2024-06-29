@@ -1,11 +1,12 @@
 name: recyclarr
-description: Recyclarr synchronizes recommended settings from the TRaSH guides to your Sonarr/Radarr instances.
+description: Recyclarr synchronizes recommended settings from the TRaSH guides to
+  your Sonarr/Radarr instances.
 annotations:
   title: Recyclarr
 type: application
-version: 1.2.3
+version: 1.2.4
 apiVersion: v2
-appVersion: 6.0.2
+appVersion: 7.0.0
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: truenas
