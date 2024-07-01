@@ -37,6 +37,7 @@ def migrate_common_lib(values):
         # Migrate Config
         'wgConfig': {
             'host': values['wgeasy']['host'],
+            'externalPort': values.get('wgUDPPort', 30057),
             'password': values['wgeasy'].get('password', ''),
             'keepAlive': values['wgeasy']['keep_alive'],
             'clientMTU': values['wgeasy']['client_mtu'],
