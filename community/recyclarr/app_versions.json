@@ -1,17 +1,17 @@
 {
-    "1.2.3": {
+    "1.2.4": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/recyclarr/1.2.3",
-        "last_update": "2024-06-28 06:51:02",
+        "location": "/__w/charts/charts/community/recyclarr/1.2.4",
+        "last_update": "2024-07-01 11:14:19",
         "required_features": [
-            "normalize/ixVolume",
             "normalize/acl",
-            "definitions/timezone"
+            "definitions/timezone",
+            "normalize/ixVolume"
         ],
-        "human_version": "6.0.2_1.2.3",
-        "version": "1.2.3",
+        "human_version": "7.0.0_1.2.4",
+        "version": "1.2.4",
         "chart_metadata": {
             "name": "recyclarr",
             "description": "Recyclarr synchronizes recommended settings from the TRaSH guides to your Sonarr/Radarr instances.",
@@ -19,9 +19,9 @@
                 "title": "Recyclarr"
             },
             "type": "application",
-            "version": "1.2.3",
+            "version": "1.2.4",
             "apiVersion": "v2",
-            "appVersion": "6.0.2",
+            "appVersion": "7.0.0",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
