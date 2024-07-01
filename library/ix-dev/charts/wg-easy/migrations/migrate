@@ -74,15 +74,20 @@ def migrate_common_lib(values):
 
     return values
 
+
 def migrate(values):
-    if not 'wgeasy' in values.keys():
+    # If we have migrated...
+    if 'wgConfig' in values.keys():
+        # Make sure the externalPort is not missing.
+        if not values['wgConfig'].get('externalPort', None):
+            values['wgConfig']['externalPort'] = values['wgNetwork'].get('udpPort', 30057)
         return values
 
-    if not values['wgConfig'].get('externalPort', None):
-        values['wgConfig']['externalPort'] = values['wgNetwork'].get('udpPort', 30057)
+    # If this key is missing, we have already migrated.
+    if 'wgeasy' not in values.keys():
+        return values
 
     return migrate_common_lib(values)
-
 
 
 if __name__ == '__main__':
