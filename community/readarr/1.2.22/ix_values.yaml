@@ -1,26 +1,23 @@
 image:
-  repository: ghcr.io/onedr0p/lidarr-develop
+  repository: ghcr.io/onedr0p/readarr-develop
   pullPolicy: IfNotPresent
-  tag: 2.3.3.4204
+  tag: 0.3.29.2565
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-lidarrConfig:
-  instanceName: Lidarr
+readarrConfig:
+  instanceName: Readarr
   additionalEnvs: []
-
-lidarrNetwork:
-  webPort: 30014
+readarrNetwork:
+  webPort: 30045
   hostNetwork: false
-
-lidarrRunAs:
+readarrRunAs:
   user: 568
   group: 568
-
-lidarrStorage:
+readarrStorage:
   config:
     type: ixVolume
     ixVolumeConfig:
