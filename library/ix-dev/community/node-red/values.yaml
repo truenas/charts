@@ -1,11 +1,11 @@
 node18Image:
   repository: nodered/node-red
   pullPolicy: IfNotPresent
-  tag: 4.0.0-18
+  tag: 4.0.2-18
 node18MinimalImage:
   repository: nodered/node-red
   pullPolicy: IfNotPresent
-  tag: 4.0.0-18-minimal
+  tag: 4.0.2-18-minimal
 node16Image:
   repository: nodered/node-red
   pullPolicy: IfNotPresent
