@@ -1,16 +1,16 @@
 {
-    "1.2.11": {
+    "1.2.12": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/node-red/1.2.11",
-        "last_update": "2024-07-01 11:12:57",
+        "location": "/__w/charts/charts/community/node-red/1.2.12",
+        "last_update": "2024-07-02 13:26:34",
         "required_features": [
-            "normalize/acl",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "normalize/acl"
         ],
-        "human_version": "3.1.10_1.2.11",
-        "version": "1.2.11",
+        "human_version": "3.1.10_1.2.12",
+        "version": "1.2.12",
         "chart_metadata": {
             "name": "node-red",
             "description": "Node-RED is a programming tool for wiring together hardware devices, APIs and online services in new and interesting ways.",
@@ -18,7 +18,7 @@
                 "title": "Node-RED"
             },
             "type": "application",
-            "version": "1.2.11",
+            "version": "1.2.12",
             "apiVersion": "v2",
             "appVersion": "3.1.10",
             "kubeVersion": ">=1.16.0-0",
