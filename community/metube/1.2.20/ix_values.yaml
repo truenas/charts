@@ -1,28 +1,28 @@
 image:
-  repository: ghcr.io/onedr0p/lidarr-develop
+  repository: alexta69/metube
   pullPolicy: IfNotPresent
-  tag: 2.4.0.4222
+  tag: '2024-07-02'
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-lidarrConfig:
-  instanceName: Lidarr
+metubeConfig:
+  defaultTheme: auto
   additionalEnvs: []
 
-lidarrNetwork:
-  webPort: 30014
+metubeNetwork:
+  webPort: 30094
   hostNetwork: false
 
-lidarrRunAs:
+metubeRunAs:
   user: 568
   group: 568
 
-lidarrStorage:
-  config:
+metubeStorage:
+  downloads:
     type: ixVolume
     ixVolumeConfig:
-      datasetName: config
+      datasetName: downloads
   additionalStorages: []

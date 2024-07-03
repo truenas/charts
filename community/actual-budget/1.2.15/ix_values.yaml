@@ -1,25 +1,28 @@
 image:
-  repository: ghcr.io/onedr0p/sonarr
+  repository: actualbudget/actual-server
   pullPolicy: IfNotPresent
-  tag: 4.0.5.1710
+  tag: 24.7.0
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-sonarrConfig:
-  instanceName: Sonarr
+actualConfig:
   additionalEnvs: []
-sonarrNetwork:
-  webPort: 30027
+
+actualNetwork:
+  webPort: 31012
+  certificateID:
   hostNetwork: false
-sonarrRunAs:
+
+actualRunAs:
   user: 568
   group: 568
-sonarrStorage:
-  config:
+
+actualStorage:
+  data:
     type: ixVolume
     ixVolumeConfig:
-      datasetName: config
+      datasetName: data
   additionalStorages: []

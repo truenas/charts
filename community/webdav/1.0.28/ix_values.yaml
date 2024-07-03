@@ -1,7 +1,7 @@
 image:
   repository: httpd
   pullPolicy: IfNotPresent
-  tag: 2.4.59
+  tag: 2.4.60
 
 resources:
   limits:
@@ -10,8 +10,8 @@ resources:
 
 webdavConfig:
   authType: none
-  username: ""
-  password: ""
+  username: ''
+  password: ''
   additionalBrowserMatches: []
   additionalEnvs: []
 webdavNetwork:

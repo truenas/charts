@@ -1,28 +1,28 @@
 image:
-  repository: actualbudget/actual-server
+  repository: ghcr.io/onedr0p/prowlarr-develop
   pullPolicy: IfNotPresent
-  tag: 24.6.0
+  tag: 1.20.0.4590
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-actualConfig:
+prowlarrConfig:
+  instanceName: Prowlarr
   additionalEnvs: []
 
-actualNetwork:
-  webPort: 31012
-  certificateID:
+prowlarrNetwork:
+  webPort: 30050
   hostNetwork: false
 
-actualRunAs:
+prowlarrRunAs:
   user: 568
   group: 568
 
-actualStorage:
-  data:
+prowlarrStorage:
+  config:
     type: ixVolume
     ixVolumeConfig:
-      datasetName: data
+      datasetName: config
   additionalStorages: []
