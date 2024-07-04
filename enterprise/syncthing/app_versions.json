@@ -4,12 +4,12 @@
         "supported": false,
         "healthy_error": null,
         "location": "/__w/charts/charts/enterprise/syncthing/1.2.3",
-        "last_update": "2024-07-03 07:16:34",
+        "last_update": "2024-07-04 12:46:34",
         "required_features": [
-            "definitions/certificate",
-            "normalize/ixVolume",
             "definitions/timezone",
-            "normalize/acl"
+            "normalize/acl",
+            "definitions/certificate",
+            "normalize/ixVolume"
         ],
         "human_version": "1.27.6_1.2.3",
         "version": "1.2.3",
