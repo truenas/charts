@@ -35,6 +35,12 @@ workload:
               value: {{ $env.value }}
             {{ end }}
           {{ end }}
+          command:
+          - bash
+          args:
+          - -c
+          - |
+            chown root:root /usr/src/paperless; usermod -o -u "$USERMAP_UID" paperless; groupmod -o -g "$USERMAP_GID" paperless; chown paperless:paperless /usr/src/paperless; /usr/sbin/docker-entrypoint.sh /usr/local/bin/paperless_cmd.sh
           probes:
             liveness:
               enabled: true
