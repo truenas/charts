@@ -1,26 +1,21 @@
 image:
-  repository: ghcr.io/onedr0p/prowlarr-develop
+  repository: ghcr.io/gethomepage/homepage
   pullPolicy: IfNotPresent
-  tag: 1.20.0.4590
+  tag: v0.9.3
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-prowlarrConfig:
-  instanceName: Prowlarr
+homepageConfig:
   additionalEnvs: []
 
-prowlarrNetwork:
-  webPort: 30050
+homepageNetwork:
+  webPort: 30054
   hostNetwork: false
 
-prowlarrRunAs:
-  user: 568
-  group: 568
-
-prowlarrStorage:
+homepageStorage:
   config:
     type: ixVolume
     ixVolumeConfig:
