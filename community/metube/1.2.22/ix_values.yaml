@@ -1,25 +1,28 @@
 image:
-  repository: ghcr.io/onedr0p/readarr-develop
+  repository: alexta69/metube
   pullPolicy: IfNotPresent
-  tag: 0.3.29.2565
+  tag: '2024-07-08'
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-readarrConfig:
-  instanceName: Readarr
+metubeConfig:
+  defaultTheme: auto
   additionalEnvs: []
-readarrNetwork:
-  webPort: 30045
+
+metubeNetwork:
+  webPort: 30094
   hostNetwork: false
-readarrRunAs:
+
+metubeRunAs:
   user: 568
   group: 568
-readarrStorage:
-  config:
+
+metubeStorage:
+  downloads:
     type: ixVolume
     ixVolumeConfig:
-      datasetName: config
+      datasetName: downloads
   additionalStorages: []
