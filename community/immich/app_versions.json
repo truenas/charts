@@ -1,18 +1,18 @@
 {
-    "4.0.6": {
+    "4.0.7": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/immich/4.0.6",
-        "last_update": "2024-07-11 06:08:24",
+        "location": "/__w/charts/charts/community/immich/4.0.7",
+        "last_update": "2024-07-11 11:16:31",
         "required_features": [
-            "definitions/timezone",
-            "normalize/ixVolume",
             "definitions/gpuConfiguration",
-            "normalize/acl"
+            "normalize/acl",
+            "definitions/timezone",
+            "normalize/ixVolume"
         ],
-        "human_version": "1.108.0_4.0.6",
-        "version": "4.0.6",
+        "human_version": "1.108.0_4.0.7",
+        "version": "4.0.7",
         "chart_metadata": {
             "name": "immich",
             "description": "Immich is a self-hosted photo and video backup solution directly from your mobile phone.",
@@ -20,7 +20,7 @@
                 "title": "Immich"
             },
             "type": "application",
-            "version": "4.0.6",
+            "version": "4.0.7",
             "apiVersion": "v2",
             "appVersion": "1.108.0",
             "kubeVersion": ">=1.16.0-0",
@@ -2980,6 +2980,40 @@
                             "definitions/gpuConfiguration"
                         ],
                         "attrs": []
+                    }
+                },
+                {
+                    "variable": "immichGPUContainers",
+                    "group": "Resources Configuration",
+                    "label": "GPU Containers",
+                    "description": "Select which containers should use GPU.",
+                    "schema": {
+                        "type": "dict",
+                        "show_if": [
+                            [
+                                "immichGPU",
+                                "!=",
+                                {}
+                            ]
+                        ],
+                        "attrs": [
+                            {
+                                "variable": "server",
+                                "label": "Enable GPU for Server",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            },
+                            {
+                                "variable": "machinelearning",
+                                "label": "Enable GPU for Machine Learning",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            }
+                        ]
                     }
                 }
             ]
