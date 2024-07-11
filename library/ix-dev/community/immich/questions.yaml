@@ -843,7 +843,7 @@ questions:
                 schema:
                   type: string
                   max_length: 12
-                  valid_chars: '^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$'
+                  valid_chars: "^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$"
                   valid_chars_error: |
                     Valid Memory limit formats are</br>
                     - Suffixed with E/P/T/G/M/K - eg. 1G</br>
@@ -861,3 +861,23 @@ questions:
       $ref:
         - "definitions/gpuConfiguration"
       attrs: []
+  - variable: immichGPUContainers
+    group: Resources Configuration
+    label: GPU Containers
+    description: Select which containers should use GPU.
+    schema:
+      type: dict
+      # This will only hide it if there are no GPUs available
+      # but will still show if there are 0 GPUs selected.
+      show_if: [["immichGPU", "!=", {}]]
+      attrs:
+        - variable: server
+          label: Enable GPU for Server
+          schema:
+            type: boolean
+            default: true
+        - variable: machinelearning
+          label: Enable GPU for Machine Learning
+          schema:
+            type: boolean
+            default: true
