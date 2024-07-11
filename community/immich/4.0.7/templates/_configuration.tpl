@@ -88,8 +88,14 @@ scaleGPU:
   - gpu:
       {{ $key }}: {{ $value }}
     targetSelector:
+      {{- if $.Values.immichGPUContainers.server }}
+      server:
+        - server
+      {{- end }}
+      {{- if $.Values.immichGPUContainers.machinelearning }}
       machinelearning:
         - machinelearning
+      {{- end }}
   {{- end -}}
 {{- end -}}
 {{- end -}}
