@@ -1,17 +1,17 @@
 {
-    "1.1.21": {
+    "1.1.22": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/elastic-search/1.1.21",
-        "last_update": "2024-07-11 11:15:09",
+        "location": "/__w/charts/charts/charts/elastic-search/1.1.22",
+        "last_update": "2024-07-12 13:40:14",
         "required_features": [
-            "normalize/acl",
             "definitions/certificate",
+            "normalize/acl",
             "normalize/ixVolume"
         ],
-        "human_version": "8.14.2_1.1.21",
-        "version": "1.1.21",
+        "human_version": "8.14.3_1.1.22",
+        "version": "1.1.22",
         "chart_metadata": {
             "name": "elastic-search",
             "description": "Elasticsearch is the distributed, RESTful search and analytics engine at the heart of the Elastic Stack.",
@@ -19,9 +19,9 @@
                 "title": "Elastic Search"
             },
             "type": "application",
-            "version": "1.1.21",
+            "version": "1.1.22",
             "apiVersion": "v2",
-            "appVersion": "8.14.2",
+            "appVersion": "8.14.3",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
