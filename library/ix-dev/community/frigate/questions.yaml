@@ -37,6 +37,10 @@ questions:
                 description: Frigate Image
               - value: tensorrtImage
                 description: Frigate TensorRT Image
+              - value: imageBeta
+                description: Beta Frigate Image
+              - value: tensorrtImageBeta
+                description: Beta Frigate TensorRT Image
         - variable: mountUSBBus
           label: Mount USB Bus
           description: |

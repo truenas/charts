@@ -8,6 +8,16 @@ tensorrtImage:
   pullPolicy: IfNotPresent
   tag: 0.13.2-tensorrt
 
+imageBeta:
+  repository: ghcr.io/blakeblackshear/frigate
+  pullPolicy: IfNotPresent
+  tag: 0.14.0-beta4
+
+tensorrtImageBeta:
+  repository: ghcr.io/blakeblackshear/frigate
+  pullPolicy: IfNotPresent
+  tag: 0.14.0-beta4-tensorrt
+
 resources:
   limits:
     cpu: 4000m
