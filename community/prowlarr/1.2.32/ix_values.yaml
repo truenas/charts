@@ -1,28 +1,28 @@
 image:
-  repository: alexta69/metube
+  repository: ghcr.io/onedr0p/prowlarr-develop
   pullPolicy: IfNotPresent
-  tag: '2024-07-10'
+  tag: 1.21.0.4615
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-metubeConfig:
-  defaultTheme: auto
+prowlarrConfig:
+  instanceName: Prowlarr
   additionalEnvs: []
 
-metubeNetwork:
-  webPort: 30094
+prowlarrNetwork:
+  webPort: 30050
   hostNetwork: false
 
-metubeRunAs:
+prowlarrRunAs:
   user: 568
   group: 568
 
-metubeStorage:
-  downloads:
+prowlarrStorage:
+  config:
     type: ixVolume
     ixVolumeConfig:
-      datasetName: downloads
+      datasetName: config
   additionalStorages: []

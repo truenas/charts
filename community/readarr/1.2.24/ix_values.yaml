@@ -1,23 +1,23 @@
 image:
-  repository: recyclarr/recyclarr
+  repository: ghcr.io/onedr0p/readarr-develop
   pullPolicy: IfNotPresent
-  tag: 7.0.0
+  tag: 0.3.31.2578
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-recyclarrConfig:
-  createConfig: true
-  cronSchedule: '@daily'
+readarrConfig:
+  instanceName: Readarr
   additionalEnvs: []
-
-recyclarrRunAs:
+readarrNetwork:
+  webPort: 30045
+  hostNetwork: false
+readarrRunAs:
   user: 568
   group: 568
-
-recyclarrStorage:
+readarrStorage:
   config:
     type: ixVolume
     ixVolumeConfig:

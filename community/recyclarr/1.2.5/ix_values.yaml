@@ -1,26 +1,23 @@
 image:
-  repository: ghcr.io/onedr0p/prowlarr-develop
+  repository: recyclarr/recyclarr
   pullPolicy: IfNotPresent
-  tag: 1.20.1.4603
+  tag: 7.1.1
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-prowlarrConfig:
-  instanceName: Prowlarr
+recyclarrConfig:
+  createConfig: true
+  cronSchedule: '@daily'
   additionalEnvs: []
 
-prowlarrNetwork:
-  webPort: 30050
-  hostNetwork: false
-
-prowlarrRunAs:
+recyclarrRunAs:
   user: 568
   group: 568
 
-prowlarrStorage:
+recyclarrStorage:
   config:
     type: ixVolume
     ixVolumeConfig:
