@@ -1,16 +1,16 @@
 {
-    "1.2.27": {
+    "1.2.28": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/lidarr/1.2.27",
-        "last_update": "2024-07-12 13:38:38",
+        "location": "/__w/charts/charts/community/lidarr/1.2.28",
+        "last_update": "2024-07-15 13:00:51",
         "required_features": [
             "normalize/acl",
             "normalize/ixVolume"
         ],
-        "human_version": "2.4.2.4238_1.2.27",
-        "version": "1.2.27",
+        "human_version": "2.4.3.4248_1.2.28",
+        "version": "1.2.28",
         "chart_metadata": {
             "name": "lidarr",
             "description": "Lidarr is a music collection manager for Usenet and BitTorrent users.",
@@ -18,9 +18,9 @@
                 "title": "Lidarr"
             },
             "type": "application",
-            "version": "1.2.27",
+            "version": "1.2.28",
             "apiVersion": "v2",
-            "appVersion": "2.4.2.4238",
+            "appVersion": "2.4.3.4248",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
