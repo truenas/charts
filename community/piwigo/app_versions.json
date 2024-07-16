@@ -1,16 +1,16 @@
 {
-    "1.2.6": {
+    "1.2.7": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/piwigo/1.2.6",
-        "last_update": "2024-07-15 17:46:30",
+        "location": "/__w/charts/charts/community/piwigo/1.2.7",
+        "last_update": "2024-07-16 09:20:06",
         "required_features": [
-            "normalize/ixVolume",
-            "normalize/acl"
+            "normalize/acl",
+            "normalize/ixVolume"
         ],
-        "human_version": "14.4.0_1.2.6",
-        "version": "1.2.6",
+        "human_version": "14.5.0_1.2.7",
+        "version": "1.2.7",
         "chart_metadata": {
             "name": "piwigo",
             "description": "Piwigo is a photo gallery software for the web that comes with powerful features to publish and manage your collection of pictures.",
@@ -18,9 +18,9 @@
                 "title": "Piwigo"
             },
             "type": "application",
-            "version": "1.2.6",
+            "version": "1.2.7",
             "apiVersion": "v2",
-            "appVersion": "14.4.0",
+            "appVersion": "14.5.0",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {

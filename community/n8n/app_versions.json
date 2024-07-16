@@ -4,12 +4,12 @@
         "supported": false,
         "healthy_error": null,
         "location": "/__w/charts/charts/community/n8n/1.2.59",
-        "last_update": "2024-07-15 17:46:30",
+        "last_update": "2024-07-16 09:18:40",
         "required_features": [
-            "definitions/nodeIP",
-            "definitions/certificate",
             "normalize/acl",
-            "normalize/ixVolume"
+            "definitions/certificate",
+            "normalize/ixVolume",
+            "definitions/nodeIP"
         ],
         "human_version": "1.50.0_1.2.59",
         "version": "1.2.59",
