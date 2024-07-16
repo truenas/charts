@@ -9,7 +9,7 @@ from catalog_update.upgrade_strategy import datetime_versioning
 
 ENUMS = {
     'image': {
-        'RE_STABLE_VERSION': re.compile(r'RELEASE.\d{4}-\d{2}-\d{2}T\d{2}-\d{2}-\d{2}}Z'),
+        'RE_STABLE_VERSION': re.compile(r'RELEASE\.\d{4}-\d{2}-\d{2}T\d{2}-\d{2}-\d{2}Z'),
         'STRIP_TEXT': 'RELEASE.',
         'function': datetime_versioning,
         'function_arg': '%Y-%m-%dT%H-%M-%SZ'
