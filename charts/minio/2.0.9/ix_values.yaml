@@ -1,7 +1,7 @@
 image:
   pullPolicy: IfNotPresent
   repository: minio/minio
-  tag: RELEASE.2023-07-21T21-12-44Z
+  tag: RELEASE.2024-07-15T19-02-30Z
 logSearchImage:
   pullPolicy: IfNotPresent
   repository: minio/operator
@@ -9,7 +9,7 @@ logSearchImage:
 logPostgresImage:
   pullPolicy: IfNotPresent
   repository: postgres
-  tag: "14.5"
+  tag: '14.5'
 
 resources:
   limits:
@@ -21,9 +21,9 @@ podOptions:
     options: []
 
 minioConfig:
-  rootUser: ""
-  rootPassword: ""
-  domain: ""
+  rootUser: ''
+  rootPassword: ''
+  domain: ''
   extraArgs: []
   additionalEnvs: []
 
