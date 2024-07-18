@@ -94,7 +94,7 @@ jobs:
       matrix:
         # We run tests on k3s version of latest SCALE release, SCALE nightly and manually defined "latest"
         k3s-version:
-          - v1.26.6+k3s1
+          - v1.26.15+k3s1
         # We run tests on Helm version of latest SCALE release, SCALE nightly and manually defined "latest"
         helm-version:
           - v3.12.1
