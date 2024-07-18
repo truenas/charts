@@ -90,7 +90,7 @@ jobs:
           - v3.12.1
         # We run tests on k3s version of latest SCALE release
         k3s-version:
-          - v1.26.6+k3s1
+          - v1.26.15+k3s1
 
     steps:
       - name: Checkout
