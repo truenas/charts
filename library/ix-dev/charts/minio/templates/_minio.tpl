@@ -16,10 +16,9 @@ workload:
           securityContext:
             runAsUser: 473
             runAsGroup: 473
-            # readOnlyRootFilesystem: false
           {{- if not .Values.minioStorage.distributedMode }}
           env:
-            MINIO_VOLUMES: /export
+            MINIO_VOLUMES: {{ .Values.minioStorage.export.mountPath }}
           {{- end }}
           args:
             - server
