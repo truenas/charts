@@ -1,15 +1,15 @@
 {
-    "1.0.29": {
+    "1.0.30": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/webdav/1.0.29",
-        "last_update": "2024-07-18 15:54:19",
+        "location": "/__w/charts/charts/community/webdav/1.0.30",
+        "last_update": "2024-07-19 08:43:04",
         "required_features": [
             "definitions/certificate"
         ],
-        "human_version": "2.4.61_1.0.29",
-        "version": "1.0.29",
+        "human_version": "2.4.62_1.0.30",
+        "version": "1.0.30",
         "chart_metadata": {
             "name": "webdav",
             "description": "WebDAV is a set of extensions to the HTTP protocol which allows users to collaboratively edit and manage files on remote web servers.",
@@ -17,9 +17,9 @@
                 "title": "WebDAV"
             },
             "type": "application",
-            "version": "1.0.29",
+            "version": "1.0.30",
             "apiVersion": "v2",
-            "appVersion": "2.4.61",
+            "appVersion": "2.4.62",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
