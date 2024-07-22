@@ -1,26 +1,23 @@
 image:
-  repository: ghcr.io/onedr0p/prowlarr-develop
+  repository: ghcr.io/onedr0p/readarr-develop
   pullPolicy: IfNotPresent
-  tag: 1.21.0.4615
+  tag: 0.3.32.2587
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-prowlarrConfig:
-  instanceName: Prowlarr
+readarrConfig:
+  instanceName: Readarr
   additionalEnvs: []
-
-prowlarrNetwork:
-  webPort: 30050
+readarrNetwork:
+  webPort: 30045
   hostNetwork: false
-
-prowlarrRunAs:
+readarrRunAs:
   user: 568
   group: 568
-
-prowlarrStorage:
+readarrStorage:
   config:
     type: ixVolume
     ixVolumeConfig:

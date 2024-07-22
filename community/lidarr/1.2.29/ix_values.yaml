@@ -1,25 +1,26 @@
 image:
-  repository: ghcr.io/autobrr/autobrr
+  repository: ghcr.io/onedr0p/lidarr-develop
   pullPolicy: IfNotPresent
-  tag: v1.43.0
+  tag: 2.5.0.4277
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-autobrrConfig:
+lidarrConfig:
+  instanceName: Lidarr
   additionalEnvs: []
 
-autobrrNetwork:
-  webPort: 30051
+lidarrNetwork:
+  webPort: 30014
   hostNetwork: false
 
-autobrrRunAs:
+lidarrRunAs:
   user: 568
   group: 568
 
-autobrrStorage:
+lidarrStorage:
   config:
     type: ixVolume
     ixVolumeConfig:

@@ -1,27 +1,27 @@
 image:
-  repository: tinymediamanager/tinymediamanager
+  repository: ghcr.io/autobrr/autobrr
   pullPolicy: IfNotPresent
-  tag: 5.0.7
+  tag: v1.44.0
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-tmmConfig:
-  password: ''
+autobrrConfig:
   additionalEnvs: []
 
-tmmNetwork:
-  webPort: 30057
+autobrrNetwork:
+  webPort: 30051
+  hostNetwork: false
 
-tmmID:
+autobrrRunAs:
   user: 568
   group: 568
 
-tmmStorage:
-  data:
+autobrrStorage:
+  config:
     type: ixVolume
     ixVolumeConfig:
-      datasetName: data
+      datasetName: config
   additionalStorages: []

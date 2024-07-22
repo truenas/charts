@@ -1,23 +1,26 @@
 image:
-  repository: ghcr.io/onedr0p/radarr
+  repository: ghcr.io/onedr0p/prowlarr-develop
   pullPolicy: IfNotPresent
-  tag: 5.7.0.8882
+  tag: 1.21.1.4631
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-radarrConfig:
-  instanceName: Radarr
+prowlarrConfig:
+  instanceName: Prowlarr
   additionalEnvs: []
-radarrNetwork:
-  webPort: 30025
+
+prowlarrNetwork:
+  webPort: 30050
   hostNetwork: false
-radarrRunAs:
+
+prowlarrRunAs:
   user: 568
   group: 568
-radarrStorage:
+
+prowlarrStorage:
   config:
     type: ixVolume
     ixVolumeConfig:
