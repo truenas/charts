@@ -1,0 +1,24 @@
+image:
+  repository: mcr.microsoft.com/playwright
+  pullPolicy: IfNotPresent
+  tag: v1.45.3
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+playwrightConfig:
+  additionalEnvs: []
+playwrightNetwork:
+  webPort: 31004
+  hostNetwork: false
+playwrightRunAs:
+  user: 568
+  group: 568
+playwrightStorage:
+  project:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: project
+  additionalStorages: []
