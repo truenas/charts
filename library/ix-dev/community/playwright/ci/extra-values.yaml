@@ -1,6 +1,10 @@
 playwrightNetwork:
   webPort: 31000
 
+playwrightRunAs:
+  user: 1000
+  group: 1000
+
 playwrightStorage:
   project:
     type: pvc

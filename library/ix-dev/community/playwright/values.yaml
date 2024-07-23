@@ -14,8 +14,8 @@ playwrightNetwork:
   webPort: 31004
   hostNetwork: false
 playwrightRunAs:
-  user: 568
-  group: 568
+  user: 1000
+  group: 1000
 playwrightStorage:
   project:
     type: ixVolume

@@ -1,8 +1,8 @@
 runAsContext:
   - userName: playwright
     groupName: playwright
-    gid: 568
-    uid: 568
+    gid: 1000
+    uid: 1000
     description: Playwright can run as any non-root user.
 capabilities: []
 hostMounts: []

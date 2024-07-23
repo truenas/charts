@@ -5,5 +5,5 @@
 > The following applies only when the storage type is set to **ixVolume**
 > When application is installed, a container will be launched with **root** privileges.
 > This is required in order to apply the correct permissions to the `Playwright` directories.
-> Afterward, the `Playwright` container will run as a **non**-root user (Default: `568`).
+> Afterward, the `Playwright` container will run as a **non**-root user (Default: `1000`).
 > All mounted storage(s) will be `chown`ed only if the parent directory does not match the configured user.
