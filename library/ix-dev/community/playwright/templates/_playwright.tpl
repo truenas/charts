@@ -36,17 +36,17 @@ workload:
               enabled: true
               type: http
               port: "{{ .Values.playwrightNetwork.webPort }}"
-              path: /trace/ping
+              path: /
             readiness:
               enabled: true
               type: http
               port: "{{ .Values.playwrightNetwork.webPort }}"
-              path: /trace/ping
+              path: /
             startup:
               enabled: true
               type: http
               port: "{{ .Values.playwrightNetwork.webPort }}"
-              path: /trace/ping
+              path: /
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
                                                         "UID" .Values.playwrightRunAs.user
