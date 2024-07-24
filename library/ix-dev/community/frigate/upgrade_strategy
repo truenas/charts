@@ -7,6 +7,7 @@ from catalog_update.upgrade_strategy import semantic_versioning
 
 
 RE_STABLE_VERSION_BASE = r'\d+\.\d+\.\d+'
+RE_BETA_VERSION_BASE = r'\d+\.\d+\.\d+-beta\d+'
 ENUMS = {
     'image': {
         'RE_STABLE_VERSION': re.compile(RE_STABLE_VERSION_BASE),
@@ -14,6 +15,14 @@ ENUMS = {
     },
     'tensorrtImage': {
         'RE_STABLE_VERSION': re.compile(rf'{RE_STABLE_VERSION_BASE}-tensorrt'),
+        'STRIP_TEXT': '-tensorrt'
+    },
+    'imageBeta': {
+        'RE_STABLE_VERSION': re.compile(RE_BETA_VERSION_BASE),
+        'STRIP_TEXT': ''
+    },
+    'tensorrtImageBeta': {
+        'RE_STABLE_VERSION': re.compile(rf'{RE_BETA_VERSION_BASE}-tensorrt'),
         'STRIP_TEXT': '-tensorrt'
     },
 }
@@ -38,7 +47,7 @@ def newer_mapping(image_tags):
         if not version:
             continue
 
-        if key == 'image':
+        if key == 'image' or key == 'imageBeta':
             output['app_version'] = version
 
         output['tags'][key] = tags[version]
