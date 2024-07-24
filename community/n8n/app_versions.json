@@ -1,18 +1,18 @@
 {
-    "1.2.61": {
+    "1.2.62": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/n8n/1.2.61",
-        "last_update": "2024-07-23 05:46:04",
+        "location": "/__w/charts/charts/community/n8n/1.2.62",
+        "last_update": "2024-07-24 10:15:47",
         "required_features": [
+            "normalize/acl",
             "normalize/ixVolume",
             "definitions/nodeIP",
-            "definitions/certificate",
-            "normalize/acl"
+            "definitions/certificate"
         ],
-        "human_version": "1.51.0_1.2.61",
-        "version": "1.2.61",
+        "human_version": "1.51.1_1.2.62",
+        "version": "1.2.62",
         "chart_metadata": {
             "name": "n8n",
             "description": "n8n is an extendable workflow automation tool.",
@@ -20,9 +20,9 @@
                 "title": "n8n"
             },
             "type": "application",
-            "version": "1.2.61",
+            "version": "1.2.62",
             "apiVersion": "v2",
-            "appVersion": "1.51.0",
+            "appVersion": "1.51.1",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
