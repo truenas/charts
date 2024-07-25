@@ -1,0 +1,25 @@
+image:
+  repository: fyb3roptik/threadfin
+  pullPolicy: IfNotPresent
+  tag: 1.1.16
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+threadfinConfig:
+  instanceName: Threadfin
+  additionalEnvs: []
+threadfinNetwork:
+  webPort: 34400
+  hostNetwork: false
+threadfinRunAs:
+  user: 568
+  group: 568
+threadfinStorage:
+  config:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: config
+  additionalStorages: []

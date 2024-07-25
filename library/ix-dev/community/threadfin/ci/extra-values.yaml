@@ -1,0 +1,9 @@
+threadfinNetwork:
+  webPort: 31000
+
+threadfinStorage:
+  config:
+    type: pvc
+  additionalStorages:
+  - type: pvc
+    mountPath: /temp

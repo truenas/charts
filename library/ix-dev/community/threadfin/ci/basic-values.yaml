@@ -1,0 +1,10 @@
+threadfinNetwork:
+  webPort: 31000
+
+threadfinRunAs:
+  user: 1000
+  group: 1000
+
+threadfinStorage:
+  config:
+    type: pvc
