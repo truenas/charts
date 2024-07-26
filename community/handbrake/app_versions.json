@@ -4,12 +4,12 @@
         "supported": false,
         "healthy_error": null,
         "location": "/__w/charts/charts/community/handbrake/1.0.3",
-        "last_update": "2024-07-25 05:28:23",
+        "last_update": "2024-07-26 06:48:13",
         "required_features": [
             "definitions/timezone",
-            "definitions/gpuConfiguration",
             "normalize/ixVolume",
-            "normalize/acl"
+            "normalize/acl",
+            "definitions/gpuConfiguration"
         ],
         "human_version": "23.12.2_1.0.3",
         "version": "1.0.3",
