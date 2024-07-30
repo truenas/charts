@@ -1,23 +1,24 @@
 image:
-  repository: recyclarr/recyclarr
+  repository: dpage/pgadmin4
   pullPolicy: IfNotPresent
-  tag: 7.1.1
+  tag: '8.10'
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-recyclarrConfig:
-  createConfig: true
-  cronSchedule: '@daily'
+pgadminConfig:
+  adminEmail: ''
+  adminPassword: ''
   additionalEnvs: []
 
-recyclarrRunAs:
-  user: 568
-  group: 568
+pgadminNetwork:
+  webPort: 30056
+  certificateID:
+  hostNetwork: false
 
-recyclarrStorage:
+pgadminStorage:
   config:
     type: ixVolume
     ixVolumeConfig:
