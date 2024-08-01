@@ -10,6 +10,7 @@ configmap:
       */}}
       GUI: "FALSE"
       EULA: {{ .Values.mcConfig.eula | quote | upper }}
+      MODE: {{ .Values.mcConfig.mode | quote }}
       ENABLE_RCON: {{ .Values.mcConfig.enableRcon | quote | upper }}
       SERVER_PORT: {{ .Values.mcNetwork.serverPort | quote }}
       {{ if .Values.mcConfig.enableRcon }}
