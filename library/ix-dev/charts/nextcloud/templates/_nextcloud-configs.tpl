@@ -26,9 +26,9 @@ configmap:
         fi
         run_as() {
           if [ "$(id -u)" = 0 ]; then
-            su -p "$user" -s /bin/bash -c 'php /var/www/html/occ "$@"' - "$@"
+            su -p "$user" -s /bin/bash -c "php /var/www/html/occ $(printf '%q ' "$@")"
           else
-            /bin/bash -c 'php /var/www/html/occ "$@"' - "$@"
+            /bin/bash -c "php /var/www/html/occ $(printf '%q ' "$@")"
           fi
         }
         run_as "$@"
