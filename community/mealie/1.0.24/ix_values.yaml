@@ -1,31 +1,35 @@
 image:
-  repository: n8nio/n8n
+  repository: ghcr.io/mealie-recipes/mealie
   pullPolicy: IfNotPresent
-  tag: 1.52.1
+  tag: v1.11.0
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-n8nConfig:
-  webHost: localhost
+mealieConfig:
+  allowSignup: true
+  defaultGroup: Home
+  defaultAdminEmail: ''
+  defaultAdminPassword: ''
+  baseURL: ''
   additionalEnvs: []
 
-n8nRunAs:
+mealieRunAs:
   user: 568
   group: 568
 
-n8nNetwork:
-  webPort: 30068
-  certificateID:
+mealieNetwork:
+  webPort: 31001
   hostNetwork: false
 
-n8nStorage:
+mealieStorage:
   data:
     type: ixVolume
     ixVolumeConfig:
       datasetName: data
+  additionalStorages: []
   pgData:
     type: ixVolume
     ixVolumeConfig:
@@ -34,7 +38,6 @@ n8nStorage:
     type: ixVolume
     ixVolumeConfig:
       datasetName: pgBackup
-  additionalStorages: []
 
 notes:
   custom: |
@@ -44,12 +47,12 @@ notes:
     <details>
       <summary>Database Details</summary>
 
-      - Database: `n8n`
-      - Username: `n8n`
-      - Password: `{{ .Values.n8nDbPass }}`
-      - Host:     `{{ .Values.n8nDbHost }}.{{ .Release.Namespace }}.svc.cluster.local`
+      - Database: `mealie`
+      - Username: `mealie`
+      - Password: `{{ .Values.mealieDbPass }}`
+      - Host:     `{{ .Values.mealieDbHost }}.{{ .Release.Namespace }}.svc.cluster.local`
       - Port:     `5432`
 
     </details>
-    {{- $_ := unset .Values "n8nDbPass" }}
-    {{- $_ := unset .Values "n8nDbHost" }}
+    {{- $_ := unset .Values "mealieDbPass" }}
+    {{- $_ := unset .Values "mealieDbHost" }}
