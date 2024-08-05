@@ -1,28 +1,28 @@
 image:
-  repository: alexta69/metube
+  repository: actualbudget/actual-server
   pullPolicy: IfNotPresent
-  tag: '2024-07-26'
+  tag: 24.8.0
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-metubeConfig:
-  defaultTheme: auto
+actualConfig:
   additionalEnvs: []
 
-metubeNetwork:
-  webPort: 30094
+actualNetwork:
+  webPort: 31012
+  certificateID:
   hostNetwork: false
 
-metubeRunAs:
+actualRunAs:
   user: 568
   group: 568
 
-metubeStorage:
-  downloads:
+actualStorage:
+  data:
     type: ixVolume
     ixVolumeConfig:
-      datasetName: downloads
+      datasetName: data
   additionalStorages: []
