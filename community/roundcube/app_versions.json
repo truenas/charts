@@ -1,16 +1,16 @@
 {
-    "1.0.4": {
+    "1.0.5": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/roundcube/1.0.4",
-        "last_update": "2024-08-01 11:02:53",
+        "location": "/__w/charts/charts/community/roundcube/1.0.5",
+        "last_update": "2024-08-05 12:43:14",
         "required_features": [
             "normalize/ixVolume",
             "normalize/acl"
         ],
-        "human_version": "1.6.7_1.0.4",
-        "version": "1.0.4",
+        "human_version": "1.6.8_1.0.5",
+        "version": "1.0.5",
         "chart_metadata": {
             "name": "roundcube",
             "description": "Roundcube is a browser-based multilingual IMAP client with an application-like user interface.",
@@ -18,9 +18,9 @@
                 "title": "Roundcube"
             },
             "type": "application",
-            "version": "1.0.4",
+            "version": "1.0.5",
             "apiVersion": "v2",
-            "appVersion": "1.6.7",
+            "appVersion": "1.6.8",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
