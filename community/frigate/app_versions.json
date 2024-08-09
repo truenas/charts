@@ -1,17 +1,17 @@
 {
-    "1.2.6": {
+    "1.2.7": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/frigate/1.2.6",
-        "last_update": "2024-08-07 09:22:42",
+        "location": "/__w/charts/charts/community/frigate/1.2.7",
+        "last_update": "2024-08-09 13:24:31",
         "required_features": [
-            "normalize/ixVolume",
+            "definitions/gpuConfiguration",
             "normalize/acl",
-            "definitions/gpuConfiguration"
+            "normalize/ixVolume"
         ],
-        "human_version": "0.13.2_1.2.6",
-        "version": "1.2.6",
+        "human_version": "0.14.0_1.2.7",
+        "version": "1.2.7",
         "chart_metadata": {
             "name": "frigate",
             "description": "Frigate is an NVR With Realtime Object Detection for IP Cameras",
@@ -19,9 +19,9 @@
                 "title": "Frigate"
             },
             "type": "application",
-            "version": "1.2.6",
+            "version": "1.2.7",
             "apiVersion": "v2",
-            "appVersion": "0.13.2",
+            "appVersion": "0.14.0",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
@@ -1485,8 +1485,8 @@
                 }
             ]
         },
-        "app_readme": "<h1>Frigate</h1>\n<p><a href=\"https://github.com/frigate/frigate\">Frigate</a> is an NVR With Realtime Object Detection for IP Cameras</p>\n<blockquote>\n<p>Note: <strong>m.2</strong> Coral TPU devices is not supported.</p>\n</blockquote>",
-        "detailed_readme": "<h1>Frigate</h1>\n<p><a href=\"https://github.com/frigate/frigate\">Frigate</a> is an NVR With Realtime Object Detection for IP Cameras</p>\n<blockquote>\n<p>Note: <strong>m.2</strong> Coral TPU devices is not supported.</p>\n</blockquote>",
+        "app_readme": "<h1>Frigate</h1>\n<p><a href=\"https://github.com/blakeblackshear/frigate\">Frigate</a> is an NVR With Realtime Object Detection for IP Cameras</p>\n<blockquote>\n<p>Note: <strong>m.2</strong> Coral TPU devices is not supported.</p>\n</blockquote>",
+        "detailed_readme": "<h1>Frigate</h1>\n<p><a href=\"https://github.com/blakeblackshear/frigate\">Frigate</a> is an NVR With Realtime Object Detection for IP Cameras</p>\n<blockquote>\n<p>Note: <strong>m.2</strong> Coral TPU devices is not supported.</p>\n</blockquote>",
         "changelog": null
     }
 }
