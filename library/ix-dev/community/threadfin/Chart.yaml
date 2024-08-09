@@ -1,0 +1,26 @@
+name: threadfin
+description: Threadfin is a M3U Proxy for Plex DVR and Emby/Jellyfin Live TV. Based on xTeVe.
+annotations:
+  title: Threadfin
+type: application
+version: 1.0.0
+apiVersion: v2
+appVersion: 1.1.16
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.2.9
+home: https://github.com/Threadfin/Threadfin
+icon: https://raw.githubusercontent.com/Threadfin/Threadfin/main/html/img/threadfin.png
+sources:
+  - https://github.com/Threadfin/Threadfin
+keywords:
+  - media
+  - series
+  - m3u
+  - IPTV
