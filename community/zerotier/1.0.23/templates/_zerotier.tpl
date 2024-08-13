@@ -21,7 +21,7 @@ workload:
             {{ fail "Zerotier - At least one network must be specified" }}
           {{ end }}
           {{ range .Values.zerotierConfig.networks }}
-          - {{ . }}
+          - {{ . | lower }}
           {{ end }}
           securityContext:
             runAsUser: 0
