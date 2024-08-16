@@ -1,17 +1,17 @@
 image:
   repository: altran1502/immich-server
   pullPolicy: IfNotPresent
-  tag: v1.112.0
+  tag: v1.112.1
 
 mlImage:
   repository: altran1502/immich-machine-learning
   pullPolicy: IfNotPresent
-  tag: v1.112.0
+  tag: v1.112.1
 
 mlCudaImage:
   repository: altran1502/immich-machine-learning
   pullPolicy: IfNotPresent
-  tag: v1.112.0-cuda
+  tag: v1.112.1-cuda
 
 mlOpenvinoImage:
   repository: altran1502/immich-machine-learning
