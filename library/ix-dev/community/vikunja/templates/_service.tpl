@@ -9,7 +9,7 @@ service:
       api:
         enabled: true
         primary: true
-        port: {{ .Values.vikunjaPorts.webPort }}
+        port: {{ .Values.vikunjaNetwork.webPort }}
         targetSelector: vikunja-api
   redis:
     enabled: true
