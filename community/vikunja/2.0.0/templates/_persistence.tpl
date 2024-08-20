@@ -4,23 +4,9 @@ persistence:
     enabled: true
     type: emptyDir
     targetSelector:
-      vikunja:
-        vikunja:
+      vikunja-api:
+        vikunja-api:
           mountPath: /tmp
-  nginxvar:
-    enabled: true
-    type: emptyDir
-    targetSelector:
-      vikunja-proxy:
-        vikunja-proxy:
-          mountPath: /var/cache/nginx
-  nginxrun:
-    enabled: true
-    type: emptyDir
-    targetSelector:
-      vikunja-proxy:
-        vikunja-proxy:
-          mountPath: /var/run
   data:
     enabled: true
     {{- include "ix.v1.common.app.storageOptions" (dict "storage" .Values.vikunjaStorage.data) | nindent 4 }}
@@ -33,17 +19,6 @@ persistence:
         01-permissions:
           mountPath: /mnt/directories/data
         {{- end }}
-  nginx:
-    enabled: true
-    type: configmap
-    objectName: nginx-config
-    defaultMode: "0600"
-    targetSelector:
-      vikunja-proxy:
-        vikunja-proxy:
-          mountPath: /etc/nginx/conf.d/default.conf
-          subPath: nginx-config
-          readOnly: true
 
   {{- range $idx, $storage := .Values.vikunjaStorage.additionalStorages }}
   {{ printf "vikunja-%v" (int $idx) }}:
