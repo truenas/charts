@@ -4,12 +4,12 @@
         "supported": false,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/nextcloud/2.0.12",
-        "last_update": "2024-08-19 12:40:50",
+        "last_update": "2024-08-20 14:06:34",
         "required_features": [
-            "definitions/nodeIP",
-            "definitions/certificate",
             "normalize/acl",
-            "normalize/ixVolume"
+            "definitions/certificate",
+            "normalize/ixVolume",
+            "definitions/nodeIP"
         ],
         "human_version": "29.0.4_2.0.12",
         "version": "2.0.12",
@@ -2287,11 +2287,11 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/nextcloud/1.6.61",
-        "last_update": "2024-08-19 12:40:50",
+        "last_update": "2024-08-20 14:06:34",
         "required_features": [
-            "definitions/nodeIP",
             "definitions/certificate",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/nodeIP"
         ],
         "human_version": "29.0.0_1.6.61",
         "version": "1.6.61",
@@ -3111,11 +3111,11 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/nextcloud/1.6.59",
-        "last_update": "2024-08-19 12:40:50",
+        "last_update": "2024-08-20 14:06:34",
         "required_features": [
-            "definitions/nodeIP",
             "definitions/certificate",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/nodeIP"
         ],
         "human_version": "28.0.4_1.6.59",
         "version": "1.6.59",
@@ -3935,11 +3935,11 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/nextcloud/1.6.53",
-        "last_update": "2024-08-19 12:40:50",
+        "last_update": "2024-08-20 14:06:34",
         "required_features": [
-            "definitions/nodeIP",
             "definitions/certificate",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/nodeIP"
         ],
         "human_version": "27.1.4_1.6.53",
         "version": "1.6.53",
@@ -4759,11 +4759,11 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/nextcloud/1.6.29",
-        "last_update": "2024-08-19 12:40:50",
+        "last_update": "2024-08-20 14:06:34",
         "required_features": [
-            "definitions/nodeIP",
             "definitions/certificate",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/nodeIP"
         ],
         "human_version": "26.0.2_1.6.29",
         "version": "1.6.29",
