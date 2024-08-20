@@ -1,6 +1,6 @@
 {{- define "vikunja.service" -}}
 service:
-  vikunja:
+  vikunja-api:
     enabled: true
     primary: true
     type: NodePort
