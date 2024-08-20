@@ -6,8 +6,6 @@
 {{- $_ := mustMergeOverwrite .Values (include "vikunja.service" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "vikunja.redis" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "vikunja.postgres" $ | fromYaml) -}}
-{{- $_ := mustMergeOverwrite .Values (include "vikunja.nginx" $ | fromYaml) -}}
-{{- $_ := mustMergeOverwrite .Values (include "vikunja.frontend" $ | fromYaml) -}}
 {{- $_ := mustMergeOverwrite .Values (include "vikunja.api" $ | fromYaml) -}}
 
 {{/* Create the configmap for portal manually*/}}
