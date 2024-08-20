@@ -15,10 +15,6 @@ workload:
             runAsUser: {{ .Values.vikunjaRunAs.user }}
             runAsGroup: {{ .Values.vikunjaRunAs.group }}
             runAsNonRoot: false
-          env:
-            # Make vikunja skip user creation
-            PUID: ""
-            PGID: ""
           envFrom:
             - secretRef:
                 name: vikunja-creds
@@ -35,17 +31,17 @@ workload:
             liveness:
               enabled: true
               type: http
-              port: {{ .Values.vikunjaPorts.api }}
+              port: {{ .Values.vikunjaNetwork.webPort }}
               path: /health
             readiness:
               enabled: true
               type: http
-              port: {{ .Values.vikunjaPorts.api }}
+              port: {{ .Values.vikunjaNetwork.webPort }}
               path: /health
             startup:
               enabled: true
               type: http
-              port: {{ .Values.vikunjaPorts.api }}
+              port: {{ .Values.vikunjaNetwork.webPort }}
               path: /health
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
