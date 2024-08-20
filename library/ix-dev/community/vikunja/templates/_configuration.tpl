@@ -61,7 +61,6 @@ configmap:
     enabled: true
     data:
       VIKUNJA_SERVICE_TIMEZONE: {{ .Values.TZ }}
-      VIKUNJA_SERVICE_INTERFACE:
       VIKUNJA_REDIS_ENABLED: "true"
       VIKUNJA_KEYVALUE_TYPE: redis
       VIKUNJA_DATABASE_TYPE: postgres
