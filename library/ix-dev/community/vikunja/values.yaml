@@ -1,15 +1,7 @@
 image:
-  repository: vikunja/api
+  repository: vikunja/vikunja
   pullPolicy: IfNotPresent
-  tag: 0.22.1
-frontendImage:
-  repository: vikunja/frontend
-  pullPolicy: IfNotPresent
-  tag: 0.22.1
-nginxImage:
-  repository: nginx
-  pullPolicy: IfNotPresent
-  tag: 1.27.1
+  tag: 0.24.2
 
 resources:
   limits:
@@ -17,7 +9,7 @@ resources:
     memory: 8Gi
 
 vikunjaConfig:
-  url: ''
+  url: ""
   maxFileSize: 20
   additionalEnvs: []
 
@@ -60,10 +52,3 @@ notes:
     </details>
     {{- $_ := unset .Values "vikunjaDbPass" }}
     {{- $_ := unset .Values "vikunjaDbHost" }}
-
-# Not exposed to the user,
-# just used internally
-vikunjaPorts:
-  api: 3456
-  frontHttp: 5000
-  frontHttp2: 5001

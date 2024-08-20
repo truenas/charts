@@ -65,32 +65,8 @@ configmap:
       VIKUNJA_REDIS_ENABLED: "true"
       VIKUNJA_KEYVALUE_TYPE: redis
       VIKUNJA_DATABASE_TYPE: postgres
-      VIKUNJA_SERVICE_INTERFACE: {{ printf ":%v" .Values.vikunjaPorts.api | quote }}
+      VIKUNJA_SERVICE_INTERFACE: {{ printf ":%v" .Values.vikunjaNetwork.webPort | quote }}
       VIKUNJA_FILES_MAXSIZE: {{ printf "%vMB" .Values.vikunjaConfig.maxFileSize }}
       VIKUNJA_FILES_BASEPATH: /app/vikunja/files
-      VIKUNJA_SERVICE_FRONTENDURL: {{ printf "%s/" (.Values.vikunjaConfig.url | trimSuffix "/") }}
-
-  vikunja-frontend:
-    enabled: true
-    data:
-      VIKUNJA_HTTP_PORT: {{ .Values.vikunjaPorts.frontHttp | quote }}
-      VIKUNJA_HTTP2_PORT: {{ .Values.vikunjaPorts.frontHttp2 | quote }}
-
-  nginx-config:
-    enabled: true
-    data:
-      nginx-config: |
-        server {
-            listen {{ .Values.vikunjaNetwork.webPort }};
-            location /nginx-health {
-                return 200;
-            }
-            location / {
-                proxy_pass {{ printf "http://%s-frontend:%v" $fullname .Values.vikunjaPorts.frontHttp }};
-            }
-            location ~* ^/(api|dav|\.well-known)/ {
-                proxy_pass {{ printf "http://%s:%v" $fullname .Values.vikunjaPorts.api }};
-                client_max_body_size {{ printf "%vM" .Values.vikunjaConfig.maxFileSize }};
-            }
-        }
+      VIKUNJA_SERVICE_PUBLICURL: {{ printf "%s/" (.Values.vikunjaConfig.url | trimSuffix "/") }}
 {{- end -}}
