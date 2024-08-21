@@ -45,7 +45,7 @@ workload:
                 - /bin/sh
                 - -c
                 - |
-                  pgrep in.tftpd
+                  pgrep dnsmasq
             readiness:
               enabled: true
               type: exec
@@ -53,7 +53,7 @@ workload:
                 - /bin/sh
                 - -c
                 - |
-                  pgrep in.tftpd
+                  pgrep dnsmasq
             startup:
               enabled: true
               type: exec
@@ -61,5 +61,5 @@ workload:
                 - /bin/sh
                 - -c
                 - |
-                  pgrep in.tftpd
+                  pgrep dnsmasq
 {{- end -}}
