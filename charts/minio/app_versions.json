@@ -4,11 +4,11 @@
         "supported": false,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/minio/2.0.16",
-        "last_update": "2024-08-22 12:16:38",
+        "last_update": "2024-08-23 10:56:52",
         "required_features": [
-            "normalize/ixVolume",
+            "definitions/certificate",
             "normalize/acl",
-            "definitions/certificate"
+            "normalize/ixVolume"
         ],
         "human_version": "2024-08-17T01-24-54Z_2.0.16",
         "version": "2.0.16",
@@ -1836,10 +1836,10 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/minio/1.7.24",
-        "last_update": "2024-08-22 12:16:38",
+        "last_update": "2024-08-23 10:56:52",
         "required_features": [
-            "normalize/ixVolume",
-            "definitions/certificate"
+            "definitions/certificate",
+            "normalize/ixVolume"
         ],
         "human_version": "2023-03-13_1.7.24",
         "version": "1.7.24",
