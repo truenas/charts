@@ -1,25 +1,23 @@
 image:
-  repository: ghcr.io/autobrr/autobrr
+  repository: recyclarr/recyclarr
   pullPolicy: IfNotPresent
-  tag: v1.44.0
+  tag: 7.2.2
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-autobrrConfig:
+recyclarrConfig:
+  createConfig: true
+  cronSchedule: '@daily'
   additionalEnvs: []
 
-autobrrNetwork:
-  webPort: 30051
-  hostNetwork: false
-
-autobrrRunAs:
+recyclarrRunAs:
   user: 568
   group: 568
 
-autobrrStorage:
+recyclarrStorage:
   config:
     type: ixVolume
     ixVolumeConfig:
