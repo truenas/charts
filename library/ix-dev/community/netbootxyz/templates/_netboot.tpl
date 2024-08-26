@@ -38,6 +38,10 @@ workload:
             {{ end }}
           {{ end }}
           probes:
+            {{- $cmd := "dnsmasq" -}}
+            {{- if eq .Values.image.tag "0.7.1-nbxyz3" -}}
+              {{- $cmd = "in.tftpd" -}}
+            {{- end }}
             liveness:
               enabled: true
               type: exec
@@ -45,7 +49,7 @@ workload:
                 - /bin/sh
                 - -c
                 - |
-                  pgrep dnsmasq
+                  pgrep {{ $cmd }}
             readiness:
               enabled: true
               type: exec
@@ -53,7 +57,7 @@ workload:
                 - /bin/sh
                 - -c
                 - |
-                  pgrep dnsmasq
+                  pgrep {{ $cmd }}
             startup:
               enabled: true
               type: exec
@@ -61,5 +65,5 @@ workload:
                 - /bin/sh
                 - -c
                 - |
-                  pgrep dnsmasq
+                  pgrep {{ $cmd }}
 {{- end -}}
