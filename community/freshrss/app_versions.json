@@ -1,17 +1,17 @@
 {
-    "1.1.11": {
+    "1.1.12": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/freshrss/1.1.11",
-        "last_update": "2024-08-23 10:56:52",
+        "location": "/__w/charts/charts/community/freshrss/1.1.12",
+        "last_update": "2024-08-26 11:49:44",
         "required_features": [
+            "normalize/ixVolume",
             "normalize/acl",
-            "definitions/timezone",
-            "normalize/ixVolume"
+            "definitions/timezone"
         ],
-        "human_version": "1.24.1_1.1.11",
-        "version": "1.1.11",
+        "human_version": "1.24.2_1.1.12",
+        "version": "1.1.12",
         "chart_metadata": {
             "name": "freshrss",
             "description": "FreshRSS is a free, self-hostable news aggregator",
@@ -19,9 +19,9 @@
                 "title": "FreshRSS"
             },
             "type": "application",
-            "version": "1.1.11",
+            "version": "1.1.12",
             "apiVersion": "v2",
-            "appVersion": "1.24.1",
+            "appVersion": "1.24.2",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
