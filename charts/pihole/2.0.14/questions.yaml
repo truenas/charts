@@ -114,6 +114,12 @@ questions:
             min: 9000
             max: 65535
             required: true
+        - variable: interfaceName
+          label: Interface Name
+          description: The name of the interface to use for Pi-Hole.
+          schema:
+            type: string
+            default: ""
         - variable: dhcp
           label: DHCP Configuration
           schema:
