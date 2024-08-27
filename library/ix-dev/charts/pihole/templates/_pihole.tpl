@@ -33,6 +33,7 @@ workload:
           env:
             WEB_PORT: {{ .Values.piholeNetwork.webPort }}
             WEBPASSWORD: {{ .Values.piholeConfig.webPassword | quote }}
+            INTERFACE: {{ .Values.piholeNetwork.interfaceName }}
             {{- if .Values.piholeNetwork.dhcp.enabled }}
             DHCP_ACTIVE: "true"
             DHCP_START: {{ .Values.piholeNetwork.dhcp.start }}

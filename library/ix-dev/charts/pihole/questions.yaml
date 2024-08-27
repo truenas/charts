@@ -114,6 +114,12 @@ questions:
             min: 9000
             max: 65535
             required: true
+        - variable: interfaceName
+          label: Interface Name
+          description: The name of the interface to use for Pi-Hole.
+          schema:
+            type: string
+            default: ""
         - variable: dhcp
           label: DHCP Configuration
           schema:
@@ -488,7 +494,7 @@ questions:
                 schema:
                   type: string
                   max_length: 12
-                  valid_chars: '^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$'
+                  valid_chars: "^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$"
                   valid_chars_error: |
                     Valid Memory limit formats are</br>
                     - Suffixed with E/P/T/G/M/K - eg. 1G</br>

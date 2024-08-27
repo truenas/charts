@@ -18,6 +18,7 @@ piholeConfig:
 
 piholeNetwork:
   webPort: 20489
+  interfaceName: ''
   dhcp:
     enabled: false
     start: ''
