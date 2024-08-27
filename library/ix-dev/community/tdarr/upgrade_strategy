@@ -7,15 +7,14 @@ from catalog_update.upgrade_strategy import semantic_versioning
 
 
 # Drop _ffmpeg5 after Cobia is released for a while
-RE_STABLE_VERSION = re.compile(r'[0-9]+\.[0-9]+\.[0-9]+(\.[0-9]+)?(_ffmpeg5)?')
+RE_STABLE_VERSION = re.compile(r'[0-9]+\.[0-9]+\.[0-9]+(\.[0-9]+)?')
 RE_CLEAN_VERSION = re.compile(r'0+([1-9])')
-STRIP_TEXT = '_ffmpeg5'
 
 
 def newer_mapping(image_tags):
     key = list(image_tags.keys())[0]
     tags = {
-        RE_CLEAN_VERSION.sub('\\1', t.strip(STRIP_TEXT)): t
+        RE_CLEAN_VERSION.sub('\\1', t): t
         for t in image_tags[key]
         if RE_STABLE_VERSION.fullmatch(t)
     }
