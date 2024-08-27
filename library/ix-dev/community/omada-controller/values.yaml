@@ -1,7 +1,7 @@
 image:
   repository: mbentley/omada-controller
   pullPolicy: IfNotPresent
-  tag: '5.14'
+  tag: "beta-5.14.30.7"
 
 resources:
   limits:

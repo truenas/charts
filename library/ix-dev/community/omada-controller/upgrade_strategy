@@ -6,7 +6,7 @@ import sys
 from catalog_update.upgrade_strategy import semantic_versioning
 
 
-RE_STABLE_VERSION = re.compile(r'\d+\.\d+')
+RE_STABLE_VERSION = re.compile(r'\d+\.\d+\.\d+\.\d+')
 
 
 def newer_mapping(image_tags):
