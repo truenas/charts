@@ -1,17 +1,17 @@
 {
-    "2.0.13": {
+    "2.0.14": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/pihole/2.0.13",
-        "last_update": "2024-08-27 13:28:02",
+        "location": "/__w/charts/charts/charts/pihole/2.0.14",
+        "last_update": "2024-08-27 15:07:53",
         "required_features": [
+            "definitions/timezone",
             "normalize/ixVolume",
-            "normalize/acl",
-            "definitions/timezone"
+            "normalize/acl"
         ],
-        "human_version": "2024.07.0_2.0.13",
-        "version": "2.0.13",
+        "human_version": "2024.07.0_2.0.14",
+        "version": "2.0.14",
         "chart_metadata": {
             "name": "pihole",
             "description": "DNS and Ad-filtering for your network.",
@@ -19,7 +19,7 @@
                 "title": "Pi-hole"
             },
             "type": "application",
-            "version": "2.0.13",
+            "version": "2.0.14",
             "apiVersion": "v2",
             "appVersion": "2024.07.0",
             "kubeVersion": ">=1.16.0-0",
@@ -293,6 +293,15 @@
                                     "min": 9000,
                                     "max": 65535,
                                     "required": true
+                                }
+                            },
+                            {
+                                "variable": "interfaceName",
+                                "label": "Interface Name",
+                                "description": "The name of the interface to use for Pi-Hole.",
+                                "schema": {
+                                    "type": "string",
+                                    "default": ""
                                 }
                             },
                             {
@@ -1500,10 +1509,10 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/pihole/1.0.25",
-        "last_update": "2024-08-27 13:28:02",
+        "last_update": "2024-08-27 15:06:18",
         "required_features": [
-            "normalize/ixVolume",
-            "definitions/timezone"
+            "definitions/timezone",
+            "normalize/ixVolume"
         ],
         "human_version": "2023.11.0_1.0.25",
         "version": "1.0.25",
