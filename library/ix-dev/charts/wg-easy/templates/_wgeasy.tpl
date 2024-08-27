@@ -27,7 +27,7 @@ workload:
             WG_PATH: /etc/wireguard
             PORT: {{ .Values.wgNetwork.webPort }}
             WG_HOST: {{ .Values.wgConfig.host | quote }}
-            PASSWORD: {{ .Values.wgConfig.password | quote }}
+            PASSWORD_HASH: {{ bcrypt .Values.wgConfig.password | quote }}
             WG_PERSISTENT_KEEPALIVE: {{ .Values.wgConfig.keepAlive }}
             WG_MTU: {{ .Values.wgConfig.clientMTU }}
             WG_DEFAULT_ADDRESS: {{ .Values.wgConfig.clientAddressRange }}
