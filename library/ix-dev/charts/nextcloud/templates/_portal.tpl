@@ -3,14 +3,18 @@
 {{- if .Values.ncNetwork.certificateID -}}
   {{- $protocol = "https" -}}
 {{- end -}}
-{{- $host := "$node_ip" -}}
-{{- if .Values.ncConfig.host -}}
-  {{- $host = .Values.ncConfig.host -}}
-{{- end -}}
 {{- $port := .Values.ncNetwork.webPort -}}
 {{- if .Values.ncNetwork.nginx.useDifferentAccessPort -}}
   {{- $port = .Values.ncNetwork.nginx.externalAccessPort -}}
 {{- end }}
+{{- $host := "$node_ip" -}}
+{{- if .Values.ncConfig.host -}}
+  {{- $host = .Values.ncConfig.host -}}
+  {{- if contains ":" .Values.ncConfig.host -}}
+    {{- $host = (split ":" $host)._0 -}}
+    {{- $port = (split ":" $host)._1 -}}
+  {{- end -}}
+{{- end -}}
 ---
 apiVersion: v1
 kind: ConfigMap
