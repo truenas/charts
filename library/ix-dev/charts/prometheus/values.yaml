@@ -1,7 +1,7 @@
 image:
   repository: prom/prometheus
   pullPolicy: IfNotPresent
-  tag: v2.54.0
+  tag: v2.54.1
 
 resources:
   limits:
