@@ -1,16 +1,16 @@
 {
-    "1.2.12": {
+    "1.2.13": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/tiny-media-manager/1.2.12",
-        "last_update": "2024-08-28 10:20:13",
+        "location": "/__w/charts/charts/community/tiny-media-manager/1.2.13",
+        "last_update": "2024-08-29 16:31:21",
         "required_features": [
-            "normalize/acl",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "normalize/acl"
         ],
-        "human_version": "5.0.9_1.2.12",
-        "version": "1.2.12",
+        "human_version": "5.0.10_1.2.13",
+        "version": "1.2.13",
         "chart_metadata": {
             "name": "tiny-media-manager",
             "description": "tinyMediaManager is a media management tool written in Java/Swing.",
@@ -18,9 +18,9 @@
                 "title": "tinyMediaManager"
             },
             "type": "application",
-            "version": "1.2.12",
+            "version": "1.2.13",
             "apiVersion": "v2",
-            "appVersion": "5.0.9",
+            "appVersion": "5.0.10",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
