@@ -1,12 +1,12 @@
 image:
   repository: ghcr.io/blakeblackshear/frigate
   pullPolicy: IfNotPresent
-  tag: 0.14.0
+  tag: 0.14.1
 
 tensorrtImage:
   repository: ghcr.io/blakeblackshear/frigate
   pullPolicy: IfNotPresent
-  tag: 0.14.0-tensorrt
+  tag: 0.14.1-tensorrt
 
 resources:
   limits:
