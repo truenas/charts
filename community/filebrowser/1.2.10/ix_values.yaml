@@ -1,27 +1,34 @@
 image:
-  repository: gotson/komga
+  repository: filebrowser/filebrowser
   pullPolicy: IfNotPresent
-  tag: 1.11.3
+  tag: v2.31.0
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-komgaConfig:
+filebrowserConfig:
   additionalEnvs: []
 
-komgaNetwork:
-  webPort: 30048
+filebrowserNetwork:
+  webPort: 30044
+  certificateID:
   hostNetwork: false
 
-komgaRunAs:
+filebrowserRunAs:
   user: 568
   group: 568
 
-komgaStorage:
+filebrowserStorage:
   config:
     type: ixVolume
     ixVolumeConfig:
       datasetName: config
   additionalStorages: []
+
+notes:
+  custom: |
+    Default credentials:
+    -  username: admin
+    -  password: admin
