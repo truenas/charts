@@ -325,7 +325,7 @@ questions:
                 description: The size of RAM is allowed to Frigate to use as cache
                 schema:
                   type: int
-                  max: 4
+                  max: 8
                   default: 1
                   required: true
         - variable: shm
