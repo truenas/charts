@@ -1,22 +1,22 @@
 image:
   repository: altran1502/immich-server
   pullPolicy: IfNotPresent
-  tag: v1.112.1
+  tag: v1.113.0
 
 mlImage:
   repository: altran1502/immich-machine-learning
   pullPolicy: IfNotPresent
-  tag: v1.112.1
+  tag: v1.113.0
 
 mlCudaImage:
   repository: altran1502/immich-machine-learning
   pullPolicy: IfNotPresent
-  tag: v1.112.1-cuda
+  tag: v1.113.0-cuda
 
 mlOpenvinoImage:
   repository: altran1502/immich-machine-learning
   pullPolicy: IfNotPresent
-  tag: v1.112.0-openvino
+  tag: v1.113.0-openvino
 
 pgvectorImage:
   repository: tensorchord/pgvecto-rs
