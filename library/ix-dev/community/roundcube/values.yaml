@@ -1,7 +1,7 @@
 image:
   repository: roundcube/roundcubemail
   pullPolicy: IfNotPresent
-  tag: 1.6.8-apache
+  tag: 1.6.9-apache
 
 resources:
   limits:
