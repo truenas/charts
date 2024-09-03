@@ -1,17 +1,17 @@
 {
-    "1.0.11": {
+    "1.0.12": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/audiobookshelf/1.0.11",
-        "last_update": "2024-09-02 08:36:37",
+        "location": "/__w/charts/charts/community/audiobookshelf/1.0.12",
+        "last_update": "2024-09-03 06:00:18",
         "required_features": [
-            "definitions/timezone",
             "normalize/acl",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/timezone"
         ],
-        "human_version": "2.13.2_1.0.11",
-        "version": "1.0.11",
+        "human_version": "2.13.3_1.0.12",
+        "version": "1.0.12",
         "chart_metadata": {
             "name": "audiobookshelf",
             "description": "Audiobookshelf is a self-hosted audiobook and podcast server",
@@ -19,9 +19,9 @@
                 "title": "Audiobookshelf"
             },
             "type": "application",
-            "version": "1.0.11",
+            "version": "1.0.12",
             "apiVersion": "v2",
-            "appVersion": "2.13.2",
+            "appVersion": "2.13.3",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
