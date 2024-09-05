@@ -3,7 +3,7 @@ description: Overseerr is a free and open source software application for managi
 annotations:
   title: Overseerr
 type: application
-version: 1.0.25
+version: 1.0.26
 apiVersion: v2
 appVersion: 1.33.2
 kubeVersion: '>=1.16.0-0'
@@ -19,7 +19,7 @@ home: https://github.com/sct/overseerr
 icon: https://media.sys.truenas.net/apps/overseerr/icons/icon.svg
 sources:
   - https://hub.docker.com/r/sctx/overseerr
-  - https://github.com/truenas/charts/tree/master/community/overseer
+  - https://github.com/truenas/charts/tree/master/community/overseerr
   - https://github.com/sct/overseerr
 keywords:
   - media
