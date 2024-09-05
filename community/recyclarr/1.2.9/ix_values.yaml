@@ -1,25 +1,23 @@
 image:
-  repository: gotson/komga
+  repository: recyclarr/recyclarr
   pullPolicy: IfNotPresent
-  tag: 1.12.0
+  tag: 7.2.3
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-komgaConfig:
+recyclarrConfig:
+  createConfig: true
+  cronSchedule: '@daily'
   additionalEnvs: []
 
-komgaNetwork:
-  webPort: 30048
-  hostNetwork: false
-
-komgaRunAs:
+recyclarrRunAs:
   user: 568
   group: 568
 
-komgaStorage:
+recyclarrStorage:
   config:
     type: ixVolume
     ixVolumeConfig:
