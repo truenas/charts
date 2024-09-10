@@ -1,0 +1,25 @@
+name: minecraft
+description: Minecraft is a sandbox game
+annotations:
+  title: Minecraft
+type: application
+version: 1.2.18
+apiVersion: v2
+appVersion: 2024.9.0
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.2.9
+home: https://www.minecraft.net/en-us
+icon: https://media.sys.truenas.net/apps/minecraft/icons/icon.svg
+sources:
+  - https://www.minecraft.net/en-us
+  - https://github.com/truenas/charts/tree/master/community/minecraft
+  - https://github.com/itzg/docker-minecraft-server
+keywords:
+  - minecraft
