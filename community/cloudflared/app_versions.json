@@ -1,16 +1,16 @@
 {
-    "1.2.17": {
+    "1.2.18": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/cloudflared/1.2.17",
-        "last_update": "2024-09-10 17:27:19",
+        "location": "/__w/charts/charts/community/cloudflared/1.2.18",
+        "last_update": "2024-09-11 10:59:40",
         "required_features": [
-            "normalize/acl",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "normalize/acl"
         ],
-        "human_version": "2024.8.3_1.2.17",
-        "version": "1.2.17",
+        "human_version": "2024.9.1_1.2.18",
+        "version": "1.2.18",
         "chart_metadata": {
             "name": "cloudflared",
             "description": "Cloudflared is a client for Cloudflare Tunnel, a daemon that exposes private services through the Cloudflare edge.",
@@ -18,9 +18,9 @@
                 "title": "Cloudflared"
             },
             "type": "application",
-            "version": "1.2.17",
+            "version": "1.2.18",
             "apiVersion": "v2",
-            "appVersion": "2024.8.3",
+            "appVersion": "2024.9.1",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
