@@ -55,8 +55,7 @@ questions:
                   default: ""
         - variable: allowPlatform
           label: Platform
-          description: |
-                  Specify which platforms are allowed to connect
+          description: Specify which platforms are allowed to connect
           schema:
             type: string
             required: true
