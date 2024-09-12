@@ -53,6 +53,18 @@ questions:
                   type: string
                   private: true
                   default: ""
+        - variable: allow_platform
+          label: Platform
+          description: |
+                  Specify which platforms are allowed to connect
+          schema:
+            type: string
+            required: true
+            enum:
+              - value: "Steam"
+                description: Steam platform
+              - value: "Xbox"
+                description: Xbox platform
         - variable: iniKeys
           label: Configure INI Keys
           description: |
