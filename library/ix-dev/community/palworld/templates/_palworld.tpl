@@ -132,7 +132,7 @@ workload:
               set_ini_value "ServerDescription" {{ .Values.palworldConfig.server.description | quote }} true
               set_ini_value "ServerPassword" {{ .Values.palworldConfig.server.password | squote }} true false
               set_ini_value "AdminPassword" {{ .Values.palworldConfig.adminPassword | squote }} true false
-              set_ini_value "AllowConnectPlatform" {{ .Values.palworldConfig.allow_platform }} false
+              set_ini_value "AllowConnectPlatform" {{ .Values.palworldConfig.allowPlatform }} false
 
               {{- range $item := .Values.palworldConfig.iniKeys }}
                 {{- $k := $item.key -}}
