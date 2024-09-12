@@ -18,7 +18,7 @@
 
   {{- $reservedKeys := list
     "RCONEnabled" "RCONPort" "PublicPort" "ServerName"
-    "ServerDescription" "ServerPassword" "AdminPassword"
+    "ServerDescription" "ServerPassword" "AdminPassword" "AllowConnectPlatform"
   -}}
 
   {{- range $item := .Values.palworldConfig.iniKeys }}

@@ -110,7 +110,16 @@ workload:
                 fi
 
                 echo "Setting ${key}..."
-                sed -i "s|\(${key}=\)[^,]*|\1${escaped_value}|g" "${cfgFile}"
+
+                # Check if the key already exists
+                if grep -q "^OptionSettings=\(.*${key}=.*\)$" "${cfgFile}"; then
+                  # Key exists, update its value using the original logic
+                  sed -i "s|\(${key}=\)[^,]*|\1${escaped_value}|g" "${cfgFile}"
+                else
+                  # Key doesn't exist, append it right after "OptionSettings=("
+                  sed -i "s|^\(OptionSettings=(\)|\1${key}=${escaped_value}, |" "${cfgFile}"
+                fi
+
                 if [ "$print" = true ]; then
                   echo "Set to $(grep -Po "(?<=${key}=)[^,]*" "${cfgFile}")"
                 fi
@@ -123,6 +132,7 @@ workload:
               set_ini_value "ServerDescription" {{ .Values.palworldConfig.server.description | quote }} true
               set_ini_value "ServerPassword" {{ .Values.palworldConfig.server.password | squote }} true false
               set_ini_value "AdminPassword" {{ .Values.palworldConfig.adminPassword | squote }} true false
+              set_ini_value "AllowConnectPlatform" {{ .Values.palworldConfig.allow_platform }} false
 
               {{- range $item := .Values.palworldConfig.iniKeys }}
                 {{- $k := $item.key -}}
