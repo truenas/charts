@@ -14,6 +14,7 @@ palworldConfig:
     name: TrueNAS Palworld Server
     description: Palworld Server running on TrueNAS
     password: ''
+  allowPlatform: Steam
   backup:
     enabled: false
     interval: 60
