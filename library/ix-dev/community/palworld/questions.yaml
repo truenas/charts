@@ -53,7 +53,7 @@ questions:
                   type: string
                   private: true
                   default: ""
-        - variable: allow_platform
+        - variable: allowPlatform
           label: Platform
           description: |
                   Specify which platforms are allowed to connect
