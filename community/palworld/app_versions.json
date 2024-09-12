@@ -1,16 +1,16 @@
 {
-    "1.0.4": {
+    "1.0.5": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/palworld/1.0.4",
-        "last_update": "2024-09-12 11:05:34",
+        "location": "/__w/charts/charts/community/palworld/1.0.5",
+        "last_update": "2024-09-12 13:50:21",
         "required_features": [
             "normalize/acl",
             "normalize/ixVolume"
         ],
-        "human_version": "palworld_1.0.4",
-        "version": "1.0.4",
+        "human_version": "palworld_1.0.5",
+        "version": "1.0.5",
         "chart_metadata": {
             "name": "palworld",
             "description": "Palworld is a multiplayer, open-world survival crafting game where you befriend and collect mysterious creatures called \"Pals\".",
@@ -18,7 +18,7 @@
                 "title": "Palworld"
             },
             "type": "application",
-            "version": "1.0.4",
+            "version": "1.0.5",
             "apiVersion": "v2",
             "appVersion": "palworld",
             "kubeVersion": ">=1.16.0-0",
@@ -168,6 +168,25 @@
                                                 "private": true,
                                                 "default": ""
                                             }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "allowPlatform",
+                                "label": "Platform",
+                                "description": "Specify which platforms are allowed to connect",
+                                "schema": {
+                                    "type": "string",
+                                    "required": true,
+                                    "enum": [
+                                        {
+                                            "value": "Steam",
+                                            "description": "Steam platform"
+                                        },
+                                        {
+                                            "value": "Xbox",
+                                            "description": "Xbox platform"
                                         }
                                     ]
                                 }
