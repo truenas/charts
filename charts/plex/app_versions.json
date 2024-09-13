@@ -1,18 +1,18 @@
 {
-    "2.0.12": {
+    "2.0.13": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/plex/2.0.12",
-        "last_update": "2024-09-12 13:48:54",
+        "location": "/__w/charts/charts/charts/plex/2.0.13",
+        "last_update": "2024-09-13 11:12:58",
         "required_features": [
+            "definitions/timezone",
             "normalize/acl",
-            "definitions/gpuConfiguration",
             "normalize/ixVolume",
-            "definitions/timezone"
+            "definitions/gpuConfiguration"
         ],
-        "human_version": "1.40.5.8921_2.0.12",
-        "version": "2.0.12",
+        "human_version": "1.41.0.8992_2.0.13",
+        "version": "2.0.13",
         "chart_metadata": {
             "name": "plex",
             "description": "Plex is a media server that allows you to stream your media to any Plex client.",
@@ -20,9 +20,9 @@
                 "title": "Plex"
             },
             "type": "application",
-            "version": "2.0.12",
+            "version": "2.0.13",
             "apiVersion": "v2",
-            "appVersion": "1.40.5.8921",
+            "appVersion": "1.41.0.8992",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
@@ -2227,12 +2227,12 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/plex/1.7.60",
-        "last_update": "2024-09-12 13:48:54",
+        "last_update": "2024-09-13 11:11:34",
         "required_features": [
-            "validations/lockedHostPath",
+            "definitions/timezone",
             "definitions/gpuConfiguration",
             "normalize/ixVolume",
-            "definitions/timezone"
+            "validations/lockedHostPath"
         ],
         "human_version": "1.32.8.7639_1.7.60",
         "version": "1.7.60",
