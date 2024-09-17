@@ -21,6 +21,6 @@ and run the following command replacing the
 values (`user@example.com`, `first_name`, `last_name`) with your own values.
 
 ```shell
-/usr/share/php/passbolt/bin/cake passbolt register_user -r admin -u user@example.com -f first_name -l last_name
+/usr/share/php/passbolt/bin/cake /passbolt register_user -r admin -u user@example.com -f first_name -l last_name
 ```
 then paste the link in your browser and finish the first steps.
