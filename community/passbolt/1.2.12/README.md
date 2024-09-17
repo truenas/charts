@@ -13,10 +13,14 @@
 
 ## Register admin user
 
-Connect to the container's shell and run the following command replacing the
+Connect to the container's shell
+CD ..  several time to move to the level you see 
+![Captura de tela 2024-01-09 101333](https://github.com/user-attachments/assets/f981750f-5fb9-405c-a1c2-73130436d058)
+
+and run the following command replacing the
 values (`user@example.com`, `first_name`, `last_name`) with your own values.
 
 ```shell
-/usr/share/php/passbolt/bin/cake passbolt register_user -r admin \
-  -u user@example.com -f first_name -l last_name
+/usr/share/php/passbolt/bin/cake passbolt register_user -r admin -u user@example.com -f first_name -l last_name
 ```
+then paste the link in your browser and finish the first steps.
