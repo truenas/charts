@@ -16,7 +16,7 @@
 
 {{- if $warnings -}}
   {{- $text := "WARNING: The following providers have deprecated fields set:" -}}
-  {{- $text = printf "%s\n%s" $text (strings.Join $warnings "\n") -}}
+  {{- $text = printf "%s\n%s" $text (join "\n" $warnings) -}}
   {{- $_ := set .Values.notes "custom" $text -}}
 {{- end -}}
 
