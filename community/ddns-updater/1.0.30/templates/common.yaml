@@ -1,0 +1,23 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{/* Merge the templates with Values */}}
+{{- $_ := mustMergeOverwrite .Values (include "ddns.workload" $ | fromYaml) -}}
+{{- $_ := mustMergeOverwrite .Values (include "ddns.configuration" $ | fromYaml) -}}
+
+{{/* Create the configmap for portal manually*/}}
+{{- include "ddns.portal" $ -}}
+
+{{- $warnings := list -}}
+{{- range $item := .Values.ddnsConfig.config -}}
+  {{- if $item.host -}}
+    {{- $warnings = mustAppend $warnings (printf "- Provider [%s] has deprecated [Host] field set, with value [%s]" $item.provider $item.host) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if $warnings -}}
+  {{- $text := "WARNING: The following providers have deprecated fields set:" -}}
+  {{- $text = printf "%s\n%s" $text (join "\n" $warnings) -}}
+  {{- $_ := set .Values.notes "custom" $text -}}
+{{- end -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}
