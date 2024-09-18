@@ -1,16 +1,16 @@
 {
-    "1.0.5": {
+    "1.0.6": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/palworld/1.0.5",
-        "last_update": "2024-09-18 13:45:36",
+        "location": "/__w/charts/charts/community/palworld/1.0.6",
+        "last_update": "2024-09-18 16:22:31",
         "required_features": [
-            "normalize/acl",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "normalize/acl"
         ],
-        "human_version": "palworld_1.0.5",
-        "version": "1.0.5",
+        "human_version": "palworld_1.0.6",
+        "version": "1.0.6",
         "chart_metadata": {
             "name": "palworld",
             "description": "Palworld is a multiplayer, open-world survival crafting game where you befriend and collect mysterious creatures called \"Pals\".",
@@ -18,7 +18,7 @@
                 "title": "Palworld"
             },
             "type": "application",
-            "version": "1.0.5",
+            "version": "1.0.6",
             "apiVersion": "v2",
             "appVersion": "palworld",
             "kubeVersion": ">=1.16.0-0",
@@ -179,6 +179,7 @@
                                 "schema": {
                                     "type": "string",
                                     "required": true,
+                                    "default": "Steam",
                                     "enum": [
                                         {
                                             "value": "Steam",

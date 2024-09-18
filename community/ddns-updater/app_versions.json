@@ -1,16 +1,16 @@
 {
-    "1.0.29": {
+    "1.0.30": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/ddns-updater/1.0.29",
-        "last_update": "2024-09-18 13:45:36",
+        "location": "/__w/charts/charts/community/ddns-updater/1.0.30",
+        "last_update": "2024-09-18 16:22:31",
         "required_features": [
             "definitions/timezone",
             "normalize/ixVolume"
         ],
-        "human_version": "2.7.0_1.0.29",
-        "version": "1.0.29",
+        "human_version": "2.9.0_1.0.30",
+        "version": "1.0.30",
         "chart_metadata": {
             "name": "ddns-updater",
             "description": "Lightweight universal DDNS Updater with web UI",
@@ -18,9 +18,9 @@
                 "title": "DDNS Updater"
             },
             "type": "application",
-            "version": "1.0.29",
+            "version": "1.0.30",
             "apiVersion": "v2",
-            "appVersion": "2.7.0",
+            "appVersion": "2.9.0",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
@@ -335,11 +335,20 @@
                                                     {
                                                         "variable": "domain",
                                                         "label": "Domain",
-                                                        "description": "Domain </br>\nFor example: example.com\n",
+                                                        "description": "Domain </br>\nFor example:</br>\n- example.com</br>\n- *.example.com</br>\n- sub.example.com</br>\n",
                                                         "schema": {
                                                             "type": "string",
                                                             "required": true,
-                                                            "empty": false
+                                                            "default": ""
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "host",
+                                                        "label": "Host (Deprecated)",
+                                                        "description": "DEPRECATED. Use Domain field instead.</br>\nIt will be removed in the near future.\n",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "default": ""
                                                         }
                                                     },
                                                     {
@@ -363,17 +372,6 @@
                                                                     "description": "IPv4 and IPv6"
                                                                 }
                                                             ]
-                                                        }
-                                                    },
-                                                    {
-                                                        "variable": "host",
-                                                        "label": "Host",
-                                                        "description": "Host. </br>\nFor example: \"@\"\n",
-                                                        "schema": {
-                                                            "type": "string",
-                                                            "default": "@",
-                                                            "required": true,
-                                                            "empty": false
                                                         }
                                                     },
                                                     {
@@ -614,22 +612,6 @@
                                                         }
                                                     },
                                                     {
-                                                        "variable": "ddnssProviderIP",
-                                                        "label": "DDNSS Provider IP",
-                                                        "description": "DDNSS Provider IP.",
-                                                        "schema": {
-                                                            "type": "boolean",
-                                                            "show_if": [
-                                                                [
-                                                                    "provider",
-                                                                    "=",
-                                                                    "ddnss"
-                                                                ]
-                                                            ],
-                                                            "default": false
-                                                        }
-                                                    },
-                                                    {
                                                         "variable": "ddnssDualStack",
                                                         "label": "DDNSS Dual Stack",
                                                         "description": "DDNSS Dual Stack.",
@@ -714,22 +696,6 @@
                                                             "required": true,
                                                             "private": true,
                                                             "empty": false
-                                                        }
-                                                    },
-                                                    {
-                                                        "variable": "dnsOMaticProviderIP",
-                                                        "label": "DNS O Matic Provider IP",
-                                                        "description": "DNS O Matic Provider IP.",
-                                                        "schema": {
-                                                            "type": "boolean",
-                                                            "show_if": [
-                                                                [
-                                                                    "provider",
-                                                                    "=",
-                                                                    "dnsomatic"
-                                                                ]
-                                                            ],
-                                                            "default": false
                                                         }
                                                     },
                                                     {
@@ -839,22 +805,6 @@
                                                         }
                                                     },
                                                     {
-                                                        "variable": "duckdnsProviderIP",
-                                                        "label": "Duck DNS Provider IP",
-                                                        "description": "Duck DNS Provider IP.",
-                                                        "schema": {
-                                                            "type": "boolean",
-                                                            "show_if": [
-                                                                [
-                                                                    "provider",
-                                                                    "=",
-                                                                    "duckdns"
-                                                                ]
-                                                            ],
-                                                            "default": false
-                                                        }
-                                                    },
-                                                    {
                                                         "variable": "dynClientKey",
                                                         "label": "DynDNS Client Key",
                                                         "description": "DynDNS Client Key.",
@@ -887,22 +837,6 @@
                                                             ],
                                                             "required": true,
                                                             "empty": false
-                                                        }
-                                                    },
-                                                    {
-                                                        "variable": "dynProviderIP",
-                                                        "label": "DynDNS Provider IP",
-                                                        "description": "DynDNS Provider IP.",
-                                                        "schema": {
-                                                            "type": "boolean",
-                                                            "show_if": [
-                                                                [
-                                                                    "provider",
-                                                                    "=",
-                                                                    "dyn"
-                                                                ]
-                                                            ],
-                                                            "default": false
                                                         }
                                                     },
                                                     {
@@ -956,22 +890,6 @@
                                                         }
                                                     },
                                                     {
-                                                        "variable": "dynuProviderIP",
-                                                        "label": "Dynu Provider IP",
-                                                        "description": "Dynu Provider IP.",
-                                                        "schema": {
-                                                            "type": "boolean",
-                                                            "show_if": [
-                                                                [
-                                                                    "provider",
-                                                                    "=",
-                                                                    "dynu"
-                                                                ]
-                                                            ],
-                                                            "default": false
-                                                        }
-                                                    },
-                                                    {
                                                         "variable": "dynv6Token",
                                                         "label": "DynV6 Token",
                                                         "description": "DynV6 Token",
@@ -987,22 +905,6 @@
                                                             "required": true,
                                                             "private": true,
                                                             "empty": false
-                                                        }
-                                                    },
-                                                    {
-                                                        "variable": "dynv6ProviderIP",
-                                                        "label": "DynV6 Provider IP",
-                                                        "description": "DynV6 Provider IP.",
-                                                        "schema": {
-                                                            "type": "boolean",
-                                                            "show_if": [
-                                                                [
-                                                                    "provider",
-                                                                    "=",
-                                                                    "dynv6"
-                                                                ]
-                                                            ],
-                                                            "default": false
                                                         }
                                                     },
                                                     {
@@ -1270,22 +1172,6 @@
                                                         }
                                                     },
                                                     {
-                                                        "variable": "heProviderIP",
-                                                        "label": "He.net Provider IP",
-                                                        "description": "He.net Provider IP.",
-                                                        "schema": {
-                                                            "type": "boolean",
-                                                            "show_if": [
-                                                                [
-                                                                    "provider",
-                                                                    "=",
-                                                                    "he"
-                                                                ]
-                                                            ],
-                                                            "default": false
-                                                        }
-                                                    },
-                                                    {
                                                         "variable": "hetznerToken",
                                                         "label": "Hetzner Token",
                                                         "description": "Hetzner Token.",
@@ -1368,22 +1254,6 @@
                                                             "required": true,
                                                             "private": true,
                                                             "empty": false
-                                                        }
-                                                    },
-                                                    {
-                                                        "variable": "infomaniakProviderIP",
-                                                        "label": "Infomaniak Provider IP",
-                                                        "description": "Infomaniak Provider IP.",
-                                                        "schema": {
-                                                            "type": "boolean",
-                                                            "show_if": [
-                                                                [
-                                                                    "provider",
-                                                                    "=",
-                                                                    "infomaniak"
-                                                                ]
-                                                            ],
-                                                            "default": false
                                                         }
                                                     },
                                                     {
@@ -1508,22 +1378,6 @@
                                                             "required": true,
                                                             "private": true,
                                                             "empty": false
-                                                        }
-                                                    },
-                                                    {
-                                                        "variable": "namecheapProviderIP",
-                                                        "label": "Namecheap Provider IP",
-                                                        "description": "Namecheap Provider IP.",
-                                                        "schema": {
-                                                            "type": "boolean",
-                                                            "show_if": [
-                                                                [
-                                                                    "provider",
-                                                                    "=",
-                                                                    "namecheap"
-                                                                ]
-                                                            ],
-                                                            "default": false
                                                         }
                                                     },
                                                     {
@@ -1685,22 +1539,6 @@
                                                         }
                                                     },
                                                     {
-                                                        "variable": "njallaProviderIP",
-                                                        "label": "Njalla Provider IP",
-                                                        "description": "Njalla Provider IP.",
-                                                        "schema": {
-                                                            "type": "boolean",
-                                                            "show_if": [
-                                                                [
-                                                                    "provider",
-                                                                    "=",
-                                                                    "njalla"
-                                                                ]
-                                                            ],
-                                                            "default": false
-                                                        }
-                                                    },
-                                                    {
                                                         "variable": "noipUsername",
                                                         "label": "NoIP Username",
                                                         "description": "NoIP Username.",
@@ -1736,22 +1574,6 @@
                                                         }
                                                     },
                                                     {
-                                                        "variable": "noipProviderIP",
-                                                        "label": "NoIP Provider IP",
-                                                        "description": "NoIP Provider IP.",
-                                                        "schema": {
-                                                            "type": "boolean",
-                                                            "show_if": [
-                                                                [
-                                                                    "provider",
-                                                                    "=",
-                                                                    "noip"
-                                                                ]
-                                                            ],
-                                                            "default": false
-                                                        }
-                                                    },
-                                                    {
                                                         "variable": "opendnsUsername",
                                                         "label": "OpenDNS Username",
                                                         "description": "OpenDNS Username.",
@@ -1784,22 +1606,6 @@
                                                             "required": true,
                                                             "private": true,
                                                             "empty": false
-                                                        }
-                                                    },
-                                                    {
-                                                        "variable": "opendnsProviderIP",
-                                                        "label": "OpenDNS Provider IP",
-                                                        "description": "OpenDNS Provider IP.",
-                                                        "schema": {
-                                                            "type": "boolean",
-                                                            "show_if": [
-                                                                [
-                                                                    "provider",
-                                                                    "=",
-                                                                    "opendns"
-                                                                ]
-                                                            ],
-                                                            "default": false
                                                         }
                                                     },
                                                     {
@@ -1925,22 +1731,6 @@
                                                         }
                                                     },
                                                     {
-                                                        "variable": "ovhProviderIP",
-                                                        "label": "OVH Provider IP",
-                                                        "description": "OVH Provider IP.",
-                                                        "schema": {
-                                                            "type": "boolean",
-                                                            "show_if": [
-                                                                [
-                                                                    "provider",
-                                                                    "=",
-                                                                    "ovh"
-                                                                ]
-                                                            ],
-                                                            "default": false
-                                                        }
-                                                    },
-                                                    {
                                                         "variable": "porkbunApiKey",
                                                         "label": "Porkbun API Key",
                                                         "description": "Porkbun API Key.",
@@ -2028,22 +1818,6 @@
                                                         }
                                                     },
                                                     {
-                                                        "variable": "selfhostdeProviderIP",
-                                                        "label": "Selfhost.de Provider IP",
-                                                        "description": "Selfhost.de Provider IP.",
-                                                        "schema": {
-                                                            "type": "boolean",
-                                                            "show_if": [
-                                                                [
-                                                                    "provider",
-                                                                    "=",
-                                                                    "selfhost.de"
-                                                                ]
-                                                            ],
-                                                            "default": false
-                                                        }
-                                                    },
-                                                    {
                                                         "variable": "servercowUsername",
                                                         "label": "Servercow Username",
                                                         "description": "Servercow Username.",
@@ -2092,22 +1866,6 @@
                                                                 ]
                                                             ],
                                                             "default": 120
-                                                        }
-                                                    },
-                                                    {
-                                                        "variable": "servercowProviderIP",
-                                                        "label": "Servercow Provider IP",
-                                                        "description": "Servercow Provider IP.",
-                                                        "schema": {
-                                                            "type": "boolean",
-                                                            "show_if": [
-                                                                [
-                                                                    "provider",
-                                                                    "=",
-                                                                    "servercow"
-                                                                ]
-                                                            ],
-                                                            "default": false
                                                         }
                                                     },
                                                     {
@@ -2164,22 +1922,6 @@
                                                         }
                                                     },
                                                     {
-                                                        "variable": "spdynProviderIP",
-                                                        "label": "Spdyn.de Provider IP",
-                                                        "description": "Spdyn.de Provider IP.",
-                                                        "schema": {
-                                                            "type": "boolean",
-                                                            "show_if": [
-                                                                [
-                                                                    "provider",
-                                                                    "=",
-                                                                    "spdyn"
-                                                                ]
-                                                            ],
-                                                            "default": false
-                                                        }
-                                                    },
-                                                    {
                                                         "variable": "stratoPassword",
                                                         "label": "Strato Password",
                                                         "description": "Strato Password.",
@@ -2195,22 +1937,6 @@
                                                             "required": true,
                                                             "private": true,
                                                             "empty": false
-                                                        }
-                                                    },
-                                                    {
-                                                        "variable": "stratoProviderIP",
-                                                        "label": "Strato Provider IP",
-                                                        "description": "Strato Provider IP.",
-                                                        "schema": {
-                                                            "type": "boolean",
-                                                            "show_if": [
-                                                                [
-                                                                    "provider",
-                                                                    "=",
-                                                                    "strato"
-                                                                ]
-                                                            ],
-                                                            "default": false
                                                         }
                                                     },
                                                     {
@@ -2246,22 +1972,6 @@
                                                             ],
                                                             "required": true,
                                                             "empty": false
-                                                        }
-                                                    },
-                                                    {
-                                                        "variable": "variomediaProviderIP",
-                                                        "label": "Variomedia Provider IP",
-                                                        "description": "Variomedia Provider IP.",
-                                                        "schema": {
-                                                            "type": "boolean",
-                                                            "show_if": [
-                                                                [
-                                                                    "provider",
-                                                                    "=",
-                                                                    "variomedia"
-                                                                ]
-                                                            ],
-                                                            "default": false
                                                         }
                                                     },
                                                     {
@@ -2479,10 +2189,6 @@
                                                                 {
                                                                     "value": "ipinfo",
                                                                     "description": "ipinfo"
-                                                                },
-                                                                {
-                                                                    "value": "google",
-                                                                    "description": "google"
                                                                 },
                                                                 {
                                                                     "value": "spdyn",
