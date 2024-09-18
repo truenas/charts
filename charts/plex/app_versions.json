@@ -4,12 +4,12 @@
         "supported": false,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/plex/2.0.13",
-        "last_update": "2024-09-16 20:27:51",
+        "last_update": "2024-09-18 13:45:36",
         "required_features": [
-            "definitions/gpuConfiguration",
-            "normalize/acl",
             "definitions/timezone",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "normalize/acl",
+            "definitions/gpuConfiguration"
         ],
         "human_version": "1.41.0.8992_2.0.13",
         "version": "2.0.13",
@@ -2227,11 +2227,11 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/plex/1.7.60",
-        "last_update": "2024-09-16 20:27:51",
+        "last_update": "2024-09-18 13:45:36",
         "required_features": [
-            "definitions/gpuConfiguration",
             "definitions/timezone",
             "validations/lockedHostPath",
+            "definitions/gpuConfiguration",
             "normalize/ixVolume"
         ],
         "human_version": "1.32.8.7639_1.7.60",
