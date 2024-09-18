@@ -16,10 +16,8 @@ ddnsConfig:
       domain: example.com
       ipVersion: ""
       njallaKey: key
-      njallaProviderIP: true
     - provider: njalla
       host: "@"
       domain: example.com
       ipVersion: ""
       njallaKey: key
-      njallaProviderIP: false

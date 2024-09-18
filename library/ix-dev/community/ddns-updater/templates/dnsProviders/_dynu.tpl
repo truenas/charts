@@ -6,7 +6,6 @@ password: {{ $item.dynuPassword | required "DDNS Updater - Expected non-empty [P
 {{- if $item.dynuGroup }}
 group: {{ $item.dynuGroup }}
 {{- end }}
-provider_ip: {{ $item.dynuProviderIP | default false }}
 {{- end -}}
 {{/*
 ddnsConfig:
@@ -18,5 +17,4 @@ ddnsConfig:
       dynuUsername: username    - Required
       dynuPassword: password    - Required
       dynuGroup: group          - Optional
-      dynuProviderIP: true      - Required - Valid values (true/false)
 */}}

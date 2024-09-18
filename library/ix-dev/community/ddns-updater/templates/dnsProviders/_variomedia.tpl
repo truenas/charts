@@ -3,7 +3,6 @@
   {{- $item := .item }}
 password: {{ $item.variomediaPassword | required "DDNS Updater - Expected non-empty [Password] for Variomedia provider" }}
 email: {{ $item.variomediaEmail | required "DDNS Updater - Expected non-empty [Email] for Variomedia provider" }}
-provider_ip: {{ $item.variomediaProviderIP }}
 {{- end -}}
 {{/*
 ddnsConfig:
@@ -14,5 +13,4 @@ ddnsConfig:
       ipVersion: ""                  - Required - Valid values (ipv4/ipv6/"")
       variomediaPassword: password   - Required
       variomediaEmail: email         - Required
-      variomediaProviderIP: false    - Required - Valid values (true/false)
 */}}

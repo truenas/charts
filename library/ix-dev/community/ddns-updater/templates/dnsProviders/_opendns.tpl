@@ -3,7 +3,6 @@
   {{- $item := .item }}
 username: {{ $item.opendnsUsername | required "DDNS Updater - Expected non-empty [Username] for OpenDNS provider" }}
 password: {{ $item.opendnsPassword | required "DDNS Updater - Expected non-empty [Password] for OpenDNS provider" }}
-provider_ip: {{ $item.opendnsProviderIP }}
 {{- end -}}
 {{/*
 ddnsConfig:
@@ -14,5 +13,4 @@ ddnsConfig:
       ipVersion: ""                     - Required - Valid values (ipv4/ipv6/"")
       opendnsUsername: username         - Required
       opendnsPassword: password         - Required
-      opendnsProviderIP: false          - Required - Valid values (true/false)
 */}}

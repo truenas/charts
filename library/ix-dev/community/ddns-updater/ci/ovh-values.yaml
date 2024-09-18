@@ -18,7 +18,6 @@ ddnsConfig:
       ovhMode: dynamic
       ovhUsername: username
       ovhPassword: password
-      ovhProviderIP: true
     - provider: ovh
       host: "@"
       domain: example.com
@@ -26,7 +25,6 @@ ddnsConfig:
       ovhMode: dynamic
       ovhUsername: username
       ovhPassword: password
-      ovhProviderIP: false
     - provider: ovh
       host: "@"
       domain: example.com
@@ -36,7 +34,6 @@ ddnsConfig:
       ovhAppKey: applicationKey
       ovhAppSecret: applicationSecret
       ovhConsumerKey: consumerKey
-      ovhProviderIP: false
     - provider: ovh
       host: "@"
       domain: example.com
@@ -46,4 +43,3 @@ ddnsConfig:
       ovhAppKey: applicationKey
       ovhAppSecret: applicationSecret
       ovhConsumerKey: consumerKey
-      ovhProviderIP: true

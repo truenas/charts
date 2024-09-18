@@ -3,7 +3,6 @@
   {{- $item := .item }}
 username: {{ $item.noipUsername | required "DDNS Updater - Expected non-empty [Username] for NoIP provider" }}
 password: {{ $item.noipPassword | required "DDNS Updater - Expected non-empty [Password] for NoIP provider" }}
-provider_ip: {{ $item.noipProviderIP }}
 {{- end -}}
 {{/*
 ddnsConfig:
@@ -14,5 +13,4 @@ ddnsConfig:
       ipVersion: ""                     - Required - Valid values (ipv4/ipv6/"")
       noipUsername: username            - Required
       noipPassword: password            - Required
-      noipProviderIP: false             - Required - Valid values (true/false)
 */}}

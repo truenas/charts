@@ -1,11 +1,11 @@
 {{- define "ddns.validation" -}}
   {{- include "ddns.validatePublicIpProviders" (dict "text" "Public IP DNS Providers"
                                             "list" .Values.ddnsConfig.publicIpDnsProviders
-                                            "valid" (list "all" "cloudflare" "google")) -}}
+                                            "valid" (list "all" "cloudflare" "opendns")) -}}
 
   {{- include "ddns.validatePublicIpProviders" (dict "text" "Public IP HTTP Providers"
                                             "list" .Values.ddnsConfig.publicIpHttpProviders
-                                            "valid" (list "all" "custom" "opendns" "ifconfig" "ipinfo" "ddnss" "google")) -}}
+                                            "valid" (list "all" "custom" "opendns" "ifconfig" "ipinfo" "ddnss")) -}}
 
   {{- include "ddns.validatePublicIpProviders" (dict "text" "Public IPv4 HTTP Providers"
                                             "list" .Values.ddnsConfig.publicIpv4HttpProviders

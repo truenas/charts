@@ -16,11 +16,9 @@ ddnsConfig:
       domain: example.com
       dynuUsername: user
       dynuPassword: password
-      dynuProviderIP: false
     - provider: dynu
       host: "@"
       domain: example.com
       dynuUsername: user
       dynuPassword: password
       dynuGroup: group
-      dynuProviderIP: true

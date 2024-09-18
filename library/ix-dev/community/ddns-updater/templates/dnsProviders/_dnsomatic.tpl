@@ -3,7 +3,6 @@
   {{- $item := .item }}
 username: {{ $item.dnsOMaticUsername | required "DDNS Updater - Expected non-empty [Username] for DNS O Matic provider" }}
 password: {{ $item.dnsOMaticPassword | required "DDNS Updater - Expected non-empty [Password] for DNS O Matic provider" }}
-provider_ip: {{ $item.dnsOMaticProviderIP | default false }}
 {{- end -}}
 {{/*
 ddnsConfig:
@@ -14,5 +13,4 @@ ddnsConfig:
       ipVersion: ""             - Required - Valid values (ipv4/ipv6/"")
       dnsOMaticUsername: user   - Required
       dnsOMaticPassword: pass   - Required
-      dnsOMaticProviderIP: true - Required - Valid values (true/false)
 */}}

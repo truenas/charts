@@ -17,11 +17,9 @@ ddnsConfig:
       ipVersion: ""
       infomaniakUsername: username
       infomaniakPassword: password
-      infomaniakProviderIP: true
     - provider: infomaniak
       host: "@"
       domain: example.com
       ipVersion: ""
       infomaniakUsername: username
       infomaniakPassword: password
-      infomaniakProviderIP: false

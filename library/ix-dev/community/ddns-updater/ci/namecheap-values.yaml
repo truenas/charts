@@ -16,10 +16,8 @@ ddnsConfig:
       domain: example.com
       ipVersion: ""
       namecheapPassword: abcdef123456abcdef123456abcdef12
-      namecheapProviderIP: true
     - provider: namecheap
       host: subdomain
       domain: example.com
       ipVersion: ""
       namecheapPassword: abcdef123456abcdef123456abcdef12
-      namecheapProviderIP: false
