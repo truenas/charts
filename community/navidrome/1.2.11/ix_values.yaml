@@ -1,7 +1,7 @@
 image:
   repository: deluan/navidrome
   pullPolicy: IfNotPresent
-  tag: 0.52.5
+  tag: 0.53.1
 
 resources:
   limits:
@@ -9,7 +9,7 @@ resources:
     memory: 8Gi
 
 navidromeConfig:
-  uiWelcomeMessage: ""
+  uiWelcomeMessage: ''
   localPlayback: false
   additionalEnvs: []
 
