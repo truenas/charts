@@ -9,7 +9,6 @@ password: {{ $item.spdynPassword }}
 {{- else -}}
   {{- fail "DDNS Updater - Spdyn.de provider requires either [Token] or [Username and Password]" -}}
 {{- end }}
-provider_ip: {{ $item.spdynProviderIP | default false }}
 {{- end -}}
 {{/*
 ddnsConfig:
@@ -18,7 +17,6 @@ ddnsConfig:
       domain: "example.com"     - Required
       host: "@"                 - Required - Valid value ("@")
       ipVersion: ""             - Required - Valid values (ipv4/ipv6/"")
-      spdynProviderIP: false    - Required - Valid values (true/false)
 
       # One of the following is required
       # Token

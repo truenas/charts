@@ -2,7 +2,6 @@
 {{- define "ddns.config.strato" -}}
   {{- $item := .item }}
 password: {{ $item.stratoPassword | required "DDNS Updater - Expected non-empty [Password] for Strato provider" }}
-provider_ip: {{ $item.stratoProviderIP }}
 {{- end -}}
 {{/*
 ddnsConfig:
@@ -12,5 +11,4 @@ ddnsConfig:
       host: "@"                      - Required - Valid value ("@" or subdomain)
       ipVersion: ""                  - Required - Valid values (ipv4/ipv6/"")
       stratoPassword: password       - Required
-      stratoProviderIP: false        - Required - Valid values (true/false)
 */}}

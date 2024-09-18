@@ -154,11 +154,23 @@ questions:
                       label: Domain
                       description: |
                         Domain </br>
-                        For example: example.com
+                        For example:</br>
+                        - example.com</br>
+                        - *.example.com</br>
+                        - sub.example.com</br>
                       schema:
                         type: string
                         required: true
-                        empty: false
+                        default: ""
+
+                    - variable: host
+                      label: Host (Deprecated)
+                      description: |
+                        DEPRECATED. Use Domain field instead.</br>
+                        It will be removed in the near future.
+                      schema:
+                        type: string
+                        default: ""
                     - variable: ipVersion
                       label: IP Version
                       description: |
@@ -174,16 +186,6 @@ questions:
                             description: IPv6
                           - value: ""
                             description: IPv4 and IPv6
-                    - variable: host
-                      label: Host
-                      description: |
-                        Host. </br>
-                        For example: "@"
-                      schema:
-                        type: string
-                        default: "@"
-                        required: true
-                        empty: false
 
                     # Aliyun
                     - variable: aliyunAccessKey
@@ -313,13 +315,6 @@ questions:
                         private: true
                         required: true
                         empty: false
-                    - variable: ddnssProviderIP
-                      label: DDNSS Provider IP
-                      description: DDNSS Provider IP.
-                      schema:
-                        type: boolean
-                        show_if: [["provider", "=", "ddnss"]]
-                        default: false
                     - variable: ddnssDualStack
                       label: DDNSS Dual Stack
                       description: DDNSS Dual Stack.
@@ -368,13 +363,6 @@ questions:
                         required: true
                         private: true
                         empty: false
-                    - variable: dnsOMaticProviderIP
-                      label: DNS O Matic Provider IP
-                      description: DNS O Matic Provider IP.
-                      schema:
-                        type: boolean
-                        show_if: [["provider", "=", "dnsomatic"]]
-                        default: false
 
                     # DNS Pod
                     - variable: dnsPodToken
@@ -435,13 +423,6 @@ questions:
                         required: true
                         private: true
                         empty: false
-                    - variable: duckdnsProviderIP
-                      label: Duck DNS Provider IP
-                      description: Duck DNS Provider IP.
-                      schema:
-                        type: boolean
-                        show_if: [["provider", "=", "duckdns"]]
-                        default: false
 
                     # DynDNS
                     - variable: dynClientKey
@@ -461,13 +442,6 @@ questions:
                         show_if: [["provider", "=", "dyn"]]
                         required: true
                         empty: false
-                    - variable: dynProviderIP
-                      label: DynDNS Provider IP
-                      description: DynDNS Provider IP.
-                      schema:
-                        type: boolean
-                        show_if: [["provider", "=", "dyn"]]
-                        default: false
 
                     # Dynu
                     - variable: dynuUsername
@@ -493,13 +467,6 @@ questions:
                       schema:
                         type: string
                         show_if: [["provider", "=", "dynu"]]
-                    - variable: dynuProviderIP
-                      label: Dynu Provider IP
-                      description: Dynu Provider IP.
-                      schema:
-                        type: boolean
-                        show_if: [["provider", "=", "dynu"]]
-                        default: false
 
                     # DynV6
                     - variable: dynv6Token
@@ -511,13 +478,6 @@ questions:
                         required: true
                         private: true
                         empty: false
-                    - variable: dynv6ProviderIP
-                      label: DynV6 Provider IP
-                      description: DynV6 Provider IP.
-                      schema:
-                        type: boolean
-                        show_if: [["provider", "=", "dynv6"]]
-                        default: false
 
                     # EasyDNS
                     - variable: easyDnsUsername
@@ -665,13 +625,6 @@ questions:
                         required: true
                         private: true
                         empty: false
-                    - variable: heProviderIP
-                      label: He.net Provider IP
-                      description: He.net Provider IP.
-                      schema:
-                        type: boolean
-                        show_if: [["provider", "=", "he"]]
-                        default: false
 
                     # Hetzner
                     - variable: hetznerToken
@@ -716,13 +669,6 @@ questions:
                         required: true
                         private: true
                         empty: false
-                    - variable: infomaniakProviderIP
-                      label: Infomaniak Provider IP
-                      description: Infomaniak Provider IP.
-                      schema:
-                        type: boolean
-                        show_if: [["provider", "=", "infomaniak"]]
-                        default: false
 
                     # INWX
                     - variable: inwxUsername
@@ -794,13 +740,6 @@ questions:
                         required: true
                         private: true
                         empty: false
-                    - variable: namecheapProviderIP
-                      label: Namecheap Provider IP
-                      description: Namecheap Provider IP.
-                      schema:
-                        type: boolean
-                        show_if: [["provider", "=", "namecheap"]]
-                        default: false
 
                     # Name.com
                     - variable: namecomUsername
@@ -886,13 +825,6 @@ questions:
                         required: true
                         private: true
                         empty: false
-                    - variable: njallaProviderIP
-                      label: Njalla Provider IP
-                      description: Njalla Provider IP.
-                      schema:
-                        type: boolean
-                        show_if: [["provider", "=", "njalla"]]
-                        default: false
 
                     # NoIP
                     - variable: noipUsername
@@ -912,13 +844,6 @@ questions:
                         required: true
                         private: true
                         empty: false
-                    - variable: noipProviderIP
-                      label: NoIP Provider IP
-                      description: NoIP Provider IP.
-                      schema:
-                        type: boolean
-                        show_if: [["provider", "=", "noip"]]
-                        default: false
 
                     # OpenDNS
                     - variable: opendnsUsername
@@ -938,13 +863,6 @@ questions:
                         required: true
                         private: true
                         empty: false
-                    - variable: opendnsProviderIP
-                      label: OpenDNS Provider IP
-                      description: OpenDNS Provider IP.
-                      schema:
-                        type: boolean
-                        show_if: [["provider", "=", "opendns"]]
-                        default: false
 
                     # OVH
                     - variable: ovhMode
@@ -1001,13 +919,6 @@ questions:
                         type: string
                         private: true
                         show_if: [["provider", "=", "ovh"]]
-                    - variable: ovhProviderIP
-                      label: OVH Provider IP
-                      description: OVH Provider IP.
-                      schema:
-                        type: boolean
-                        show_if: [["provider", "=", "ovh"]]
-                        default: false
 
                     # Porkbun
                     - variable: porkbunApiKey
@@ -1054,13 +965,6 @@ questions:
                         required: true
                         private: true
                         empty: false
-                    - variable: selfhostdeProviderIP
-                      label: Selfhost.de Provider IP
-                      description: Selfhost.de Provider IP.
-                      schema:
-                        type: boolean
-                        show_if: [["provider", "=", "selfhost.de"]]
-                        default: false
 
                     # Servercow
                     - variable: servercowUsername
@@ -1087,13 +991,6 @@ questions:
                         type: int
                         show_if: [["provider", "=", "servercow"]]
                         default: 120
-                    - variable: servercowProviderIP
-                      label: Servercow Provider IP
-                      description: Servercow Provider IP.
-                      schema:
-                        type: boolean
-                        show_if: [["provider", "=", "servercow"]]
-                        default: false
 
                     # Spdyn.de
                     - variable: spdynToken
@@ -1122,13 +1019,6 @@ questions:
                         required: true
                         private: true
                         empty: false
-                    - variable: spdynProviderIP
-                      label: Spdyn.de Provider IP
-                      description: Spdyn.de Provider IP.
-                      schema:
-                        type: boolean
-                        show_if: [["provider", "=", "spdyn"]]
-                        default: false
 
                     # Strato
                     - variable: stratoPassword
@@ -1140,13 +1030,6 @@ questions:
                         required: true
                         private: true
                         empty: false
-                    - variable: stratoProviderIP
-                      label: Strato Provider IP
-                      description: Strato Provider IP.
-                      schema:
-                        type: boolean
-                        show_if: [["provider", "=", "strato"]]
-                        default: false
 
                     # Variomedia
                     - variable: variomediaPassword
@@ -1166,13 +1049,6 @@ questions:
                         show_if: [["provider", "=", "variomedia"]]
                         required: true
                         empty: false
-                    - variable: variomediaProviderIP
-                      label: Variomedia Provider IP
-                      description: Variomedia Provider IP.
-                      schema:
-                        type: boolean
-                        show_if: [["provider", "=", "variomedia"]]
-                        default: false
 
                     # ZoneEdit
                     - variable: zoneeditUsername
@@ -1274,7 +1150,7 @@ questions:
             min: 1
             required: true
             empty: false
-            default: [{"provider": "all", "placeholder": "placeholder"}]
+            default: [{ "provider": "all", "placeholder": "placeholder" }]
             items:
               - variable: publicIpDnsProviderEntry
                 label: Public IP DNS Provider Entry
@@ -1310,7 +1186,7 @@ questions:
             min: 1
             required: true
             empty: false
-            default: [{"provider": "all", "custom": ""}]
+            default: [{ "provider": "all", "custom": "" }]
             items:
               - variable: publicIpHttpProviderEntry
                 label: Public IP HTTP Provider Entry
@@ -1331,8 +1207,6 @@ questions:
                             description: ifconfig
                           - value: ipinfo
                             description: ipinfo
-                          - value: google
-                            description: google
                           - value: spdyn
                             description: spdyn
                           - value: ipleak
@@ -1354,7 +1228,7 @@ questions:
             min: 1
             required: true
             empty: false
-            default: [{"provider": "all", "custom": ""}]
+            default: [{ "provider": "all", "custom": "" }]
             items:
               - variable: publicIpv4HttpProviderEntry
                 label: Public IPv4 HTTP Provider Entry
@@ -1390,7 +1264,7 @@ questions:
             min: 1
             required: true
             empty: false
-            default: [{"provider": "all", "custom": ""}]
+            default: [{ "provider": "all", "custom": "" }]
             items:
               - variable: publicIpv6HttpProviderEntry
                 label: Public IPv6 HTTP Provider Entry
@@ -1426,7 +1300,7 @@ questions:
             min: 1
             required: true
             empty: false
-            default: [{"provider": "all", "placeholder": "placeholder"}]
+            default: [{ "provider": "all", "placeholder": "placeholder" }]
             items:
               - variable: publicIpFetcherEntry
                 label: Public IP Fetcher Entry
@@ -1454,7 +1328,6 @@ questions:
                         default: placeholder
                         required: true
                         hidden: true
-
 
         - variable: additionalEnvs
           label: Additional Environment Variables
@@ -1601,7 +1474,7 @@ questions:
                 schema:
                   type: string
                   max_length: 12
-                  valid_chars: '^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$'
+                  valid_chars: "^[1-9][0-9]*([EPTGMK]i?|e[0-9]+)?$"
                   valid_chars_error: |
                     Valid Memory limit formats are</br>
                     - Suffixed with E/P/T/G/M/K - eg. 1G</br>

@@ -16,10 +16,8 @@ ddnsConfig:
       domain: example.com
       ipVersion: ""
       stratoPassword: password
-      stratoProviderIP: false
     - provider: strato
       host: "@"
       domain: example.com
       ipVersion: ""
       stratoPassword: password
-      stratoProviderIP: true

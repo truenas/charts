@@ -17,11 +17,9 @@ ddnsConfig:
       ipVersion: ""
       dnsOMaticUsername: username
       dnsOMaticPassword: password
-      dnsOMaticProviderIP: false
     - provider: dnsomatic
       host: "@"
       domain: example.com
       ipVersion: ""
       dnsOMaticUsername: username
       dnsOMaticPassword: password
-      dnsOMaticProviderIP: true

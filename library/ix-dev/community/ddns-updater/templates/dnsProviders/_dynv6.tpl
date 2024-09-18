@@ -2,7 +2,6 @@
 {{- define "ddns.config.dynv6" -}}
   {{- $item := .item }}
 token: {{ $item.dynv6Token | required "DDNS Updater - Expected non-empty [Token] for DynV6 provider" }}
-provider_ip: {{ $item.dynv6ProviderIP | default false }}
 {{- end -}}
 {{/*
 ddnsConfig:
@@ -12,5 +11,4 @@ ddnsConfig:
       host: "@"                 - Required - Valid value ("@" or subdomain)
       ipVersion: ""             - Required - Valid values (ipv4/ipv6/"")
       dynv6Token: token         - Required
-      dynv6ProviderIP: true     - Required - Valid values (true/false)
 */}}

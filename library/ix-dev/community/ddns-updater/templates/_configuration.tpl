@@ -62,5 +62,3 @@ settings:
     {{- include (printf "ddns.config.%v" $item.provider) (dict "item" $item) | trim | nindent 4 -}}
   {{- end -}}
 {{- end -}}
-
-{{/* TODO: OVH */}}

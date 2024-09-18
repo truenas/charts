@@ -17,11 +17,9 @@ ddnsConfig:
       ipVersion: ""
       opendnsUsername: username
       opendnsPassword: password
-      opendnsProviderIP: true
     - provider: opendns
       host: "@"
       domain: example.com
       ipVersion: ""
       opendnsUsername: username
       opendnsPassword: password
-      opendnsProviderIP: false

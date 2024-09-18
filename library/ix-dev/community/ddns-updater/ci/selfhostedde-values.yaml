@@ -17,11 +17,9 @@ ddnsConfig:
       ipVersion: ""
       selfhostdeUsername: 123456
       selfhostdePassword: password
-      selfhostdeProviderIP: true
     - provider: selfhost.de
       host: "@"
       domain: example.com
       ipVersion: ""
       selfhostdeUsername: username
       selfhostdePassword: password
-      selfhostdeProviderIP: false

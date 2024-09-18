@@ -4,7 +4,6 @@
 username: {{ $item.servercowUsername | required "DDNS Updater - Expected non-empty [Username] for Servercow provider" }}
 password: {{ $item.servercowPassword | required "DDNS Updater - Expected non-empty [Password] for Servercow provider" }}
 ttl: {{ $item.servercowTtl | required "DDNS Updater - Expected non-empty [TTL] for Servercow provider" }}
-provider_ip: {{ $item.servercowProviderIP }}
 {{- end -}}
 {{/*
 ddnsConfig:
@@ -16,5 +15,4 @@ ddnsConfig:
       servercowUsername: username       - Required
       servercowPassword: password       - Required
       servercowTtl: 120                 - Required
-      servercowProviderIP: false        - Required - Valid values (true/false)
 */}}

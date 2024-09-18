@@ -17,11 +17,9 @@ ddnsConfig:
       ipVersion: ""
       noipUsername: username
       noipPassword: password
-      noipProviderIP: true
     - provider: noip
       host: "@"
       domain: example.com
       ipVersion: ""
       noipUsername: username
       noipPassword: password
-      noipProviderIP: false

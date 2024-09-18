@@ -12,7 +12,6 @@ ci: true
 ddnsConfig:
   config:
     - provider: duckdns
-      host: subdomain
-      domain: example.com
+      host: subdomain.example
+      domain: subdomain.example.duckdns.org
       duckdnsToken: abcd1234-abcd-1234-abcd-abcd1234abcd
-      duckdnsProviderIP: false

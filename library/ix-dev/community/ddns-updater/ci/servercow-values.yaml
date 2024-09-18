@@ -18,7 +18,6 @@ ddnsConfig:
       servercowUsername: username
       servercowPassword: password
       servercowTtl: 120
-      servercowProviderIP: false
     - provider: servercow
       host: "@"
       domain: example.com
@@ -26,4 +25,3 @@ ddnsConfig:
       servercowUsername: username
       servercowPassword: password
       servercowTtl: 120
-      servercowProviderIP: true

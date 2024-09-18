@@ -13,7 +13,6 @@ consumer_key: {{ $item.ovhConsumerKey | required "DDNS Updater - Expected non-em
 {{- else -}}
   {{- fail (printf "DDNS Updater - Expected [Mode] to be one of [Dynamic, API], but got [%v]" $item.ovhMode) -}}
 {{- end }}
-provider_ip: {{ $item.ovhProviderIP }}
 {{- end -}}
 {{/*
 ddnsConfig:
@@ -34,5 +33,4 @@ ddnsConfig:
       ovhAppSecret: appSecret           - Required
       ovhConsumerKey: consumerKey       - Required
 
-      ovhProviderIP: false              - Required - Valid values (true/false)
 */}}

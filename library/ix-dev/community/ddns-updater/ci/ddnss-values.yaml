@@ -17,7 +17,6 @@ ddnsConfig:
       ipVersion: ""
       ddnssUsername: username
       ddnssPassword: password
-      ddnssProviderIP: false
       ddnssDualStack: true
     - provider: ddnss
       host: "@"
@@ -25,4 +24,3 @@ ddnsConfig:
       ipVersion: ""
       ddnssUsername: username
       ddnssPassword: password
-      ddnssProviderIP: true

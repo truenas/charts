@@ -16,17 +16,14 @@ ddnsConfig:
       domain: example.com
       ipVersion: ""
       spdynToken: token
-      spdynProviderIP: false
     - provider: spdyn
       host: "@"
       domain: example.com
       ipVersion: ""
       spdynToken: token
-      spdynProviderIP: true
     - provider: spdyn
       host: "@"
       domain: example.com
       ipVersion: ""
       spdynUsername: username
       spdynPassword: password
-      spdynProviderIP: false

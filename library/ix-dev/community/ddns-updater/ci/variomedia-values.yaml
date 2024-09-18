@@ -17,11 +17,9 @@ ddnsConfig:
       ipVersion: ""
       variomediaPassword: password
       variomediaEmail: email@example.com
-      variomediaProviderIP: false
     - provider: variomedia
       host: "@"
       domain: example.com
       ipVersion: ""
       variomediaPassword: password
       variomediaEmail: email@example.com
-      variomediaProviderIP: true

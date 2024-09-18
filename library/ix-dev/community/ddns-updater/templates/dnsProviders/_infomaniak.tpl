@@ -3,7 +3,6 @@
   {{- $item := .item }}
 username: {{ $item.infomaniakUsername | required "DDNS Updater - Expected non-empty [Username] for Infomaniak provider" }}
 password: {{ $item.infomaniakPassword | required "DDNS Updater - Expected non-empty [Password] for Infomaniak provider" }}
-provider_ip: {{ $item.infomaniakProviderIP | default false }}
 {{- end -}}
 {{/*
 ddnsConfig:
@@ -14,5 +13,4 @@ ddnsConfig:
       ipVersion: ""                     - Required - Valid values (ipv4/ipv6/"")
       infomaniakUsername: user          - Required
       infomaniakPassword: password      - Required
-      infomaniakProviderIP: true        - Required - Valid values (true/false)
 */}}
