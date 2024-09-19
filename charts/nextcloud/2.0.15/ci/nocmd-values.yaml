@@ -1,0 +1,26 @@
+ncConfig:
+  adminUser: admin
+  adminPassword: password
+  host: "127.0.0.1"
+  dataDir: /var/www/html/data
+  commands: []
+  maxUploadLimit: 3
+  phpMemoryLimit: 512
+
+ncNetwork:
+  webPort: 30001
+  nginx: {}
+
+ncStorage:
+  pgData:
+    type: pvc
+  html:
+    type: pvc
+  data:
+    type: pvc
+  pgBackup:
+    type: emptyDir
+    emptyDirConfig:
+      medium: ""
+      size: ""
+  additionalStorages: []
