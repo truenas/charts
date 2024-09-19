@@ -56,7 +56,7 @@ settings:
       {{- fail (printf "DDNS Updater - DNS Provider [%v] is not supported" $item.provider) -}}
     {{- end }}
   - provider: {{ $item.provider }}
-    host: {{ $item.host | required (printf "DDNS Updater - Expected non-empty [Host] for %v provider" $item.provider) | quote }}
+    host: {{ $item.host | quote }}
     domain: {{ $item.domain | required (printf "DDNS Updater - Expected non-empty [Domain] for %v provider" $item.provider) | quote }}
     ip_version: {{ $item.ipVersion | default "" | quote }}
     {{- include (printf "ddns.config.%v" $item.provider) (dict "item" $item) | trim | nindent 4 -}}
