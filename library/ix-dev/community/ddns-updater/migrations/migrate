@@ -17,6 +17,13 @@ def migrate(values):
         values[storageKey][storage] = {key: value for key, value in check_val.items() if key != 'hostPath'}
 
 
+    for config in values.get('ddnsConfig', {}).get('config', []):
+        for key in config.keys():
+            if key.endswith('ProviderIP'):
+                config.pop(key)
+                break
+
+
     return values
 
 
