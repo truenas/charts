@@ -15,7 +15,3 @@ Latest 28.x.x version
 ## 1.6.61
 
 Latest release before migration to 2.x.x
-
-## 2.0.15
-
-Latest 29.x.x version
