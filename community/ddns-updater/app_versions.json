@@ -1,16 +1,16 @@
 {
-    "1.0.30": {
+    "1.0.31": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/ddns-updater/1.0.30",
-        "last_update": "2024-09-19 15:39:51",
+        "location": "/__w/charts/charts/community/ddns-updater/1.0.31",
+        "last_update": "2024-09-19 15:57:27",
         "required_features": [
-            "normalize/ixVolume",
-            "definitions/timezone"
+            "definitions/timezone",
+            "normalize/ixVolume"
         ],
-        "human_version": "2.9.0_1.0.30",
-        "version": "1.0.30",
+        "human_version": "2.9.0_1.0.31",
+        "version": "1.0.31",
         "chart_metadata": {
             "name": "ddns-updater",
             "description": "Lightweight universal DDNS Updater with web UI",
@@ -18,7 +18,7 @@
                 "title": "DDNS Updater"
             },
             "type": "application",
-            "version": "1.0.30",
+            "version": "1.0.31",
             "apiVersion": "v2",
             "appVersion": "2.9.0",
             "kubeVersion": ">=1.16.0-0",
