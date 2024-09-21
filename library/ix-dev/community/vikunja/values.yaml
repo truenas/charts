@@ -1,7 +1,7 @@
 image:
   repository: vikunja/vikunja
   pullPolicy: IfNotPresent
-  tag: 0.24.2
+  tag: 0.24.3
 
 resources:
   limits:
@@ -9,7 +9,7 @@ resources:
     memory: 8Gi
 
 vikunjaConfig:
-  url: ""
+  url: ''
   maxFileSize: 20
   additionalEnvs: []
 

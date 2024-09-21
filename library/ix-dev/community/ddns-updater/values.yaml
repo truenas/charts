@@ -1,7 +1,7 @@
 image:
   repository: qmcgaw/ddns-updater
   pullPolicy: IfNotPresent
-  tag: v2.8.0
+  tag: v2.8.1
 
 ci: false
 
@@ -21,17 +21,16 @@ ddnsConfig:
     - provider: all
   publicIpHttpProviders:
     - provider: all
-      custom: ""
+      custom: ''
   publicIpv4HttpProviders:
     - provider: all
-      custom: ""
+      custom: ''
   publicIpv6HttpProviders:
     - provider: all
-      custom: ""
+      custom: ''
   publicIpFetchers:
     - provider: all
-  config:
-    []
+  config: []
     # - provider: cloudflare
     #   host: "@"
     #   domain: example.com
@@ -54,4 +53,4 @@ ddnsStorage:
     datasetName: data
 
 notes:
-  custom: ""
+  custom: ''
