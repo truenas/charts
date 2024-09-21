@@ -1,27 +1,27 @@
 image:
-  repository: vikunja/vikunja
+  repository: n8nio/n8n
   pullPolicy: IfNotPresent
-  tag: 0.24.2
+  tag: 1.60.1
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-vikunjaConfig:
-  url: ""
-  maxFileSize: 20
+n8nConfig:
+  webHost: localhost
   additionalEnvs: []
 
-vikunjaRunAs:
+n8nRunAs:
   user: 568
   group: 568
 
-vikunjaNetwork:
-  webPort: 31002
+n8nNetwork:
+  webPort: 30068
+  certificateID:
+  hostNetwork: false
 
-vikunjaStorage:
-  additionalStorages: []
+n8nStorage:
   data:
     type: ixVolume
     ixVolumeConfig:
@@ -34,6 +34,7 @@ vikunjaStorage:
     type: ixVolume
     ixVolumeConfig:
       datasetName: pgBackup
+  additionalStorages: []
 
 notes:
   custom: |
@@ -43,12 +44,12 @@ notes:
     <details>
       <summary>Database Details</summary>
 
-      - Database: `vikunja`
-      - Username: `vikunja`
-      - Password: `{{ .Values.vikunjaDbPass }}`
-      - Host:     `{{ .Values.vikunjaDbHost }}.{{ .Release.Namespace }}.svc.cluster.local`
+      - Database: `n8n`
+      - Username: `n8n`
+      - Password: `{{ .Values.n8nDbPass }}`
+      - Host:     `{{ .Values.n8nDbHost }}.{{ .Release.Namespace }}.svc.cluster.local`
       - Port:     `5432`
 
     </details>
-    {{- $_ := unset .Values "vikunjaDbPass" }}
-    {{- $_ := unset .Values "vikunjaDbHost" }}
+    {{- $_ := unset .Values "n8nDbPass" }}
+    {{- $_ := unset .Values "n8nDbHost" }}
