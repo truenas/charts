@@ -1,25 +1,26 @@
 image:
-  repository: tautulli/tautulli
+  repository: ghcr.io/onedr0p/prowlarr-develop
   pullPolicy: IfNotPresent
-  tag: v2.14.4
+  tag: 1.24.1.4740
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-tautulliConfig:
+prowlarrConfig:
+  instanceName: Prowlarr
   additionalEnvs: []
 
-tautulliNetwork:
-  webPort: 30047
+prowlarrNetwork:
+  webPort: 30050
   hostNetwork: false
 
-tautulliRunAs:
+prowlarrRunAs:
   user: 568
   group: 568
 
-tautulliStorage:
+prowlarrStorage:
   config:
     type: ixVolume
     ixVolumeConfig:
