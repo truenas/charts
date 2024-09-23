@@ -1,16 +1,16 @@
 {
-    "1.2.17": {
+    "1.2.18": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/radarr/1.2.17",
-        "last_update": "2024-09-21 05:50:31",
+        "location": "/__w/charts/charts/community/radarr/1.2.18",
+        "last_update": "2024-09-23 05:52:14",
         "required_features": [
-            "normalize/ixVolume",
-            "normalize/acl"
+            "normalize/acl",
+            "normalize/ixVolume"
         ],
-        "human_version": "5.9.1.9070_1.2.17",
-        "version": "1.2.17",
+        "human_version": "5.10.4.9218_1.2.18",
+        "version": "1.2.18",
         "chart_metadata": {
             "name": "radarr",
             "description": "Radarr is a movie collection manager for Usenet and BitTorrent users.",
@@ -18,9 +18,9 @@
                 "title": "Radarr"
             },
             "type": "application",
-            "version": "1.2.17",
+            "version": "1.2.18",
             "apiVersion": "v2",
-            "appVersion": "5.9.1.9070",
+            "appVersion": "5.10.4.9218",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
