@@ -4,12 +4,12 @@
         "supported": false,
         "healthy_error": null,
         "location": "/__w/charts/charts/community/jellyfin/1.3.5",
-        "last_update": "2024-09-25 05:51:33",
+        "last_update": "2024-09-26 11:14:04",
         "required_features": [
-            "normalize/acl",
             "definitions/gpuConfiguration",
-            "definitions/timezone",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "normalize/acl",
+            "definitions/timezone"
         ],
         "human_version": "10.9.11_1.3.5",
         "version": "1.3.5",
