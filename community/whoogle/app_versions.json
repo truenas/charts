@@ -1,16 +1,16 @@
 {
-    "1.2.3": {
+    "1.2.4": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/whoogle/1.2.3",
-        "last_update": "2024-09-30 10:17:22",
+        "location": "/__w/charts/charts/community/whoogle/1.2.4",
+        "last_update": "2024-10-01 06:42:45",
         "required_features": [
             "normalize/acl",
             "normalize/ixVolume"
         ],
-        "human_version": "0.8.4_1.2.3",
-        "version": "1.2.3",
+        "human_version": "0.9.0_1.2.4",
+        "version": "1.2.4",
         "chart_metadata": {
             "name": "whoogle",
             "description": "Whoogle is a self-hosted, ad-free, privacy-respecting metasearch engine",
@@ -18,9 +18,9 @@
                 "title": "Whoogle"
             },
             "type": "application",
-            "version": "1.2.3",
+            "version": "1.2.4",
             "apiVersion": "v2",
-            "appVersion": "0.8.4",
+            "appVersion": "0.9.0",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
