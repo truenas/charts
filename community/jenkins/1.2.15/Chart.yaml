@@ -1,0 +1,27 @@
+name: jenkins
+description: Jenkins is a leading open source automation server,
+annotations:
+  title: Jenkins
+type: application
+version: 1.2.15
+apiVersion: v2
+appVersion: 2.462.3
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.2.9
+home: https://www.jenkins.io/
+icon: https://media.sys.truenas.net/apps/jenkins/icons/icon.svg
+sources:
+  - https://hub.docker.com/r/jenkins/jenkins
+  - https://github.com/truenas/charts/tree/master/community/jenkins
+  - https://github.com/jenkinsci/jenkins
+  - https://www.jenkins.io/
+keywords:
+  - automation
+  - ci/cd

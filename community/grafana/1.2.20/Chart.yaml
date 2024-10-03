@@ -1,0 +1,29 @@
+name: grafana
+description: Grafana is the open source analytics & monitoring solution for every
+  database.
+annotations:
+  title: Grafana
+type: application
+version: 1.2.20
+apiVersion: v2
+appVersion: 11.2.2
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.2.9
+home: https://grafana.com
+icon: https://media.sys.truenas.net/apps/grafana/icons/icon.png
+sources:
+  - https://hub.docker.com/r/grafana/grafana
+  - https://github.com/truenas/charts/tree/master/community/grafana
+  - https://github.com/grafana
+keywords:
+  - dashboard
+  - monitoring
+  - analytics
+  - metrics
