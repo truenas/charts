@@ -1,16 +1,16 @@
 {
-    "2.0.17": {
+    "2.0.18": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/netdata/2.0.17",
-        "last_update": "2024-10-01 06:40:56",
+        "location": "/__w/charts/charts/charts/netdata/2.0.18",
+        "last_update": "2024-10-03 12:58:39",
         "required_features": [
             "normalize/acl",
             "normalize/ixVolume"
         ],
-        "human_version": "v1.47.2_2.0.17",
-        "version": "2.0.17",
+        "human_version": "v1.47.3_2.0.18",
+        "version": "2.0.18",
         "chart_metadata": {
             "name": "netdata",
             "description": "Real-time performance monitoring, done right!",
@@ -18,9 +18,9 @@
                 "title": "Netdata"
             },
             "type": "application",
-            "version": "2.0.17",
+            "version": "2.0.18",
             "apiVersion": "v2",
-            "appVersion": "v1.47.2",
+            "appVersion": "v1.47.3",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
@@ -1730,7 +1730,7 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/netdata/1.0.40",
-        "last_update": "2024-10-01 06:40:56",
+        "last_update": "2024-10-03 12:57:14",
         "required_features": [
             "normalize/ixVolume"
         ],

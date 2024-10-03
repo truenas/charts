@@ -1,16 +1,16 @@
 {
-    "1.2.36": {
+    "1.2.37": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/metube/1.2.36",
-        "last_update": "2024-10-01 06:40:56",
+        "location": "/__w/charts/charts/community/metube/1.2.37",
+        "last_update": "2024-10-03 12:58:39",
         "required_features": [
             "normalize/acl",
             "normalize/ixVolume"
         ],
-        "human_version": "2024-09-28_1.2.36",
-        "version": "1.2.36",
+        "human_version": "2024-10-02_1.2.37",
+        "version": "1.2.37",
         "chart_metadata": {
             "name": "metube",
             "description": "MeTube is a web GUI for youtube-dl (using the yt-dlp fork) with playlist support.",
@@ -18,9 +18,9 @@
                 "title": "MeTube"
             },
             "type": "application",
-            "version": "1.2.36",
+            "version": "1.2.37",
             "apiVersion": "v2",
-            "appVersion": "2024-09-28",
+            "appVersion": "2024-10-02",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
