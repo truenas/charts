@@ -1,25 +1,26 @@
 image:
-  repository: ghcr.io/autobrr/autobrr
+  repository: ghcr.io/onedr0p/prowlarr-develop
   pullPolicy: IfNotPresent
-  tag: v1.46.1
+  tag: 1.25.1.4770
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-autobrrConfig:
+prowlarrConfig:
+  instanceName: Prowlarr
   additionalEnvs: []
 
-autobrrNetwork:
-  webPort: 30051
+prowlarrNetwork:
+  webPort: 30050
   hostNetwork: false
 
-autobrrRunAs:
+prowlarrRunAs:
   user: 568
   group: 568
 
-autobrrStorage:
+prowlarrStorage:
   config:
     type: ixVolume
     ixVolumeConfig:
