@@ -11,7 +11,7 @@ service:
         primary: true
         port: {{ .Values.frigateNetwork.webPort }}
         nodePort: {{ .Values.frigateNetwork.webPort }}
-        targetPort: 5000
+        targetPort: {{ ternary 8971 5000 .Values.frigateNetwork.authenticatedPort }}
         targetSelector: frigate
   {{ if .Values.frigateNetwork.enableRtmp }}
   rtmp:

@@ -210,7 +210,16 @@
                                         {
                                             "variable": "webPort",
                                             "label": "Web Port",
-                                            "description": "The port for the Frigate Web UI.</br>\nInternal port: 5000\n",
+                                            "description": "The port for the Frigate Web UI.</br>\nInternal port: 5000/8971\n",
+                                            "schema": {
+                                                "type": "boolean",
+                                                "default": false
+                                            }
+                                        },
+                                        {
+                                            "variable": "authenticatedPort",
+                                            "label": "Authenticated port",
+                                            "description": "Switches the web port to point to 8971",
                                             "schema": {
                                                 "type": "int",
                                                 "default": 30058,
