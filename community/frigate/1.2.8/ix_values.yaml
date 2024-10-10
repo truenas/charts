@@ -22,6 +22,7 @@ frigateNetwork:
   hostNetwork: false
   # Port numbers ignored if hostNetwork is true
   webPort: 30058
+  authenticatedPort: false
   enableRtmp: false
   rtmpPort: 30059
   enableRtsp: false

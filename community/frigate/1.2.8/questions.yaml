@@ -88,13 +88,20 @@ questions:
                 label: Web Port
                 description: |
                   The port for the Frigate Web UI.</br>
-                  Internal port: 5000
+                  Internal port: 5000/8971
                 schema:
                   type: int
                   default: 30058
                   min: 9000
                   max: 65535
                   required: true
+              - variable: authenticatedPort
+                label: Authenticated port
+                description: |
+                  Switches the web port to point to 8971
+                schema:
+                  type: boolean
+                  default: false
               - variable: enableRtmp
                 label: Enable RTMP
                 description: Enable RTMP for Frigate.
