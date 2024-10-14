@@ -1,0 +1,31 @@
+image:
+  repository: 2fauth/2fauth
+  pullPolicy: IfNotPresent
+  tag: 5.3.1
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+twofauthConfig:
+  appName: 2FAuth
+  appUrl: http://localhost:30081
+  siteOwnerEmail: admin@example.com
+  authenticationGuard: web-guard
+  authProxyHeaderUser: ''
+  authProxyHeaderEmail: ''
+  webauthnUserVerification: preferred
+  trustedProxies: []
+  additionalEnvs: []
+
+twofauthNetwork:
+  webPort: 30081
+  hostNetwork: false
+
+twofauthStorage:
+  config:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: config
+  additionalStorages: []
