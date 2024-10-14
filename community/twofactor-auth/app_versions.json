@@ -1,16 +1,16 @@
 {
-    "1.2.8": {
+    "1.2.9": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/twofactor-auth/1.2.8",
-        "last_update": "2024-10-10 13:20:10",
+        "location": "/__w/charts/charts/community/twofactor-auth/1.2.9",
+        "last_update": "2024-10-14 07:55:38",
         "required_features": [
             "normalize/acl",
             "normalize/ixVolume"
         ],
-        "human_version": "5.3.0_1.2.8",
-        "version": "1.2.8",
+        "human_version": "5.3.1_1.2.9",
+        "version": "1.2.9",
         "chart_metadata": {
             "name": "twofactor-auth",
             "description": "2FAuth is a web based self-hosted alternative to One Time Passcode (OTP) generators like Google Authenticator, designed for both mobile and desktop.",
@@ -18,9 +18,9 @@
                 "title": "2FAuth"
             },
             "type": "application",
-            "version": "1.2.8",
+            "version": "1.2.9",
             "apiVersion": "v2",
-            "appVersion": "5.3.0",
+            "appVersion": "5.3.1",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
