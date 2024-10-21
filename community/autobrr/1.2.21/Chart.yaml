@@ -1,0 +1,27 @@
+name: autobrr
+description: Autobrr is the modern download automation tool for torrents and usenet.
+annotations:
+  title: Autobrr
+type: application
+version: 1.2.21
+apiVersion: v2
+appVersion: 1.48.0
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.2.9
+home: https://github.com/autobrr/autobrr
+icon: https://media.sys.truenas.net/apps/autobrr/icons/icon.png
+sources:
+  - https://autobrr.com/installation/docker
+  - https://github.com/truenas/charts/tree/master/community/autobrr
+  - https://github.com/autobrr/autobrr
+keywords:
+  - media
+  - torrent
+  - usenet

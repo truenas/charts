@@ -1,0 +1,26 @@
+name: tailscale
+description: Secure remote access to shared resources
+annotations:
+  title: Tailscale
+type: application
+version: 1.0.47
+apiVersion: v2
+appVersion: 1.76.1
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.2.9
+home: https://tailscale.com/
+icon: https://media.sys.truenas.net/apps/tailscale/icons/icon.png
+sources:
+  - https://tailscale.com/
+  - https://github.com/truenas/charts/tree/master/community/tailscale
+  - https://hub.docker.com/r/tailscale/tailscale
+keywords:
+  - vpn
+  - tailscale
