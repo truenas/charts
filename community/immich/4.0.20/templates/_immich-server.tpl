@@ -26,17 +26,17 @@ workload:
             liveness:
               enabled: true
               type: http
-              path: /api/server-info/ping
+              path: /api/server/ping
               port: {{ .Values.immichNetwork.webuiPort }}
             readiness:
               enabled: true
               type: http
-              path: /api/server-info/ping
+              path: /api/server/ping
               port: {{ .Values.immichNetwork.webuiPort }}
             startup:
               enabled: true
               type: http
-              path: /api/server-info/ping
+              path: /api/server/ping
               port: {{ .Values.immichNetwork.webuiPort }}
       initContainers:
       {{- include "ix.v1.common.app.postgresWait" (dict "name" "postgres-wait"
