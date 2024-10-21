@@ -1,16 +1,16 @@
 {
-    "1.2.18": {
+    "1.2.19": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/searxng/1.2.18",
-        "last_update": "2024-10-14 07:54:20",
+        "location": "/__w/charts/charts/community/searxng/1.2.19",
+        "last_update": "2024-10-21 12:56:04",
         "required_features": [
-            "normalize/acl",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "normalize/acl"
         ],
-        "human_version": "2023.12.31_1.2.18",
-        "version": "1.2.18",
+        "human_version": "2024.10.19_1.2.19",
+        "version": "1.2.19",
         "chart_metadata": {
             "name": "searxng",
             "description": "SearXNG is a privacy-respecting, hackable metasearch engine",
@@ -18,9 +18,9 @@
                 "title": "SearXNG"
             },
             "type": "application",
-            "version": "1.2.18",
+            "version": "1.2.19",
             "apiVersion": "v2",
-            "appVersion": "2023.12.31",
+            "appVersion": "2024.10.19",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
