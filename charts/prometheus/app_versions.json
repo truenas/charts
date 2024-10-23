@@ -1,16 +1,16 @@
 {
-    "1.1.19": {
+    "1.1.20": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/prometheus/1.1.19",
-        "last_update": "2024-10-22 15:22:53",
+        "location": "/__w/charts/charts/charts/prometheus/1.1.20",
+        "last_update": "2024-10-23 11:55:13",
         "required_features": [
-            "normalize/acl",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "normalize/acl"
         ],
-        "human_version": "v2.54.1_1.1.19",
-        "version": "1.1.19",
+        "human_version": "v2.55.0_1.1.20",
+        "version": "1.1.20",
         "chart_metadata": {
             "name": "prometheus",
             "description": "The Prometheus monitoring system and time series database.",
@@ -18,9 +18,9 @@
                 "title": "Prometheus"
             },
             "type": "application",
-            "version": "1.1.19",
+            "version": "1.1.20",
             "apiVersion": "v2",
-            "appVersion": "v2.54.1",
+            "appVersion": "v2.55.0",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
