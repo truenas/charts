@@ -1,0 +1,25 @@
+name: home-assistant
+description: Home Assistant is an open source home automation that puts local control
+  and privacy first.
+annotations:
+  title: Home Assistant
+type: application
+version: 2.0.51
+apiVersion: v2
+appVersion: 2024.11.1
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.2.9
+home: https://www.home-assistant.io/
+icon: https://media.sys.truenas.net/apps/home-assistant/icons/icon.png
+sources:
+  - https://github.com/home-assistant/home-assistant
+  - https://github.com/truenas/charts/tree/master/charts/home-assistant
+keywords:
+  - home-automation

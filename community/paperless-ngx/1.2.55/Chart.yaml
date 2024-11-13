@@ -1,0 +1,27 @@
+name: paperless-ngx
+description: Paperless-ngx is a document management system that transforms your physical
+  documents into a searchable online archive so you can keep, well, less paper.
+annotations:
+  title: Paperless-ngx
+type: application
+version: 1.2.55
+apiVersion: v2
+appVersion: 2.13.5
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.2.9
+home: https://docs.paperless-ngx.com
+icon: https://media.sys.truenas.net/apps/paperless-ngx/icons/icon.svg
+sources:
+  - https://hub.docker.com/r/paperlessngx/paperless-ngx
+  - https://github.com/truenas/charts/tree/master/library/ix-dev/community/paperless-ngx
+  - https://github.com/paperless-ngx/paperless-ngx
+keywords:
+  - document
+  - management
