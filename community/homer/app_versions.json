@@ -1,16 +1,16 @@
 {
-    "1.2.8": {
+    "1.2.9": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/homer/1.2.8",
-        "last_update": "2024-11-13 18:44:14",
+        "location": "/__w/charts/charts/community/homer/1.2.9",
+        "last_update": "2024-11-18 15:38:46",
         "required_features": [
             "normalize/ixVolume",
             "normalize/acl"
         ],
-        "human_version": "24.11.3_1.2.8",
-        "version": "1.2.8",
+        "human_version": "24.11.4_1.2.9",
+        "version": "1.2.9",
         "chart_metadata": {
             "name": "homer",
             "description": "Homer is a dead simple static HOMepage for your servER to keep your services on hand, from a simple yaml configuration file.",
@@ -18,9 +18,9 @@
                 "title": "Homer"
             },
             "type": "application",
-            "version": "1.2.8",
+            "version": "1.2.9",
             "apiVersion": "v2",
-            "appVersion": "24.11.3",
+            "appVersion": "24.11.4",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
