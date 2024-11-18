@@ -1,0 +1,47 @@
+image:
+  pullPolicy: IfNotPresent
+  repository: plexinc/pms-docker
+  tag: 1.41.2.9200-c6bbc1b53
+plexPassImage:
+  pullPolicy: IfNotPresent
+  repository: plexinc/pms-docker
+  tag: plexpass
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+plexID:
+  user: 568
+  group: 568
+
+plexConfig:
+  imageSelector: image
+  claimToken: ''
+  additionalEnvs: []
+
+plexNetwork:
+  webPort: 30003
+  hostNetwork: false
+
+plexStorage:
+  data:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: data
+  config:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: config
+  logs:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: logs
+  transcode:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: transcode
+  additionalStorages: []
+
+plexGPU: {}

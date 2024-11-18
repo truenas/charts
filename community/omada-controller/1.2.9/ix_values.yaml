@@ -1,0 +1,41 @@
+image:
+  repository: mbentley/omada-controller
+  pullPolicy: IfNotPresent
+  tag: 5.14.32.4
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+omadaConfig:
+  additionalEnvs: []
+
+omadaID:
+  user: 568
+  group: 568
+
+omadaNetwork:
+  hostNetwork: false
+  certificateID:
+  manageHttpPort: 30076
+  manageHttpsPort: 30077
+  portalHttpPort: 30078
+  portalHttpsPort: 30079
+  appDiscoveryPort: 27001
+  discoveryPort: 29810
+  managerV1Port: 29811
+  adoptV1Port: 29812
+  upgradeV1Port: 29813
+  managerV2Port: 29814
+
+omadaStorage:
+  data:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: data
+  logs:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: logs
+  additionalStorages: []
