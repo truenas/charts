@@ -1,9 +1,9 @@
 {
-    "1.0.3": {
+    "1.0.4": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/handbrake/1.0.3",
+        "location": "/__w/charts/charts/community/handbrake/1.0.4",
         "last_update": "2024-11-20 14:22:27",
         "required_features": [
             "definitions/gpuConfiguration",
@@ -11,8 +11,8 @@
             "normalize/acl",
             "definitions/timezone"
         ],
-        "human_version": "23.12.2_1.0.3",
-        "version": "1.0.3",
+        "human_version": "24.09.01_1.0.4",
+        "version": "1.0.4",
         "chart_metadata": {
             "name": "handbrake",
             "description": "HandBrake is a tool for converting video from nearly any format to a selection of modern, widely supported codecs.",
@@ -20,9 +20,9 @@
                 "title": "HandBrake"
             },
             "type": "application",
-            "version": "1.0.3",
+            "version": "1.0.4",
             "apiVersion": "v2",
-            "appVersion": "23.12.2",
+            "appVersion": "24.09.01",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
