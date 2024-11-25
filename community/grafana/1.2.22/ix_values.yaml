@@ -1,0 +1,36 @@
+image:
+  repository: grafana/grafana
+  pullPolicy: IfNotPresent
+  tag: 11.3.1
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+grafanaConfig:
+  plugins: []
+  additionalEnvs: []
+
+grafanaNetwork:
+  hostNetwork: false
+  webPort: 30037
+  certificateID:
+  rootURL: ''
+
+grafanaRunAs:
+  user: 568
+  group: 568
+
+grafanaStorage:
+  data:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: data
+  additionalStorages: []
+
+notes:
+  custom: |
+    Default credentials:
+      - Username: admin
+      - Password: admin

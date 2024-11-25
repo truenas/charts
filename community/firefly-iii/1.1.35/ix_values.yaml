@@ -1,0 +1,65 @@
+image:
+  repository: fireflyiii/core
+  pullPolicy: IfNotPresent
+  tag: version-6.1.24
+
+importerImage:
+  repository: fireflyiii/data-importer
+  pullPolicy: IfNotPresent
+  tag: version-1.5.7
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+fireflyConfig:
+  appUrl: http://localhost:30064
+  additionalEnvs: []
+  enableImporter: false
+  additionalImporterEnvs: []
+
+fireflyNetwork:
+  webPort: 30064
+  importerPort: 30065
+  hostNetwork: false
+
+fireflyStorage:
+  uploads:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: uploads
+  pgData:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: pgData
+  pgBackup:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: pgBackup
+  additionalStorages: []
+
+
+notes:
+  custom: |
+    {{- if .Values.fireflyConfig.enableImporter }}
+    ## Data Importer
+
+    You can reach data importer at http://<ip>:{{ .Values.fireflyNetwork.importerPort }}
+    {{- end }}
+
+    ## Database
+    You can connect to the database using the pgAdmin App from the catalog
+
+    <details>
+      <summary>Database Details</summary>
+
+      - Database: `firefly`
+      - Username: `firefly`
+      - Password: `{{ .Values.fireflyDbPass }}`
+      - Host:     `{{ .Values.fireflyDbHost }}.{{ .Release.Namespace }}.svc.cluster.local`
+      - Port:     `5432`
+
+    </details>
+    {{- $_ := unset .Values "fireflyDbPass" }}
+    {{- $_ := unset .Values "fireflyDbHost" }}
