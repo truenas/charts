@@ -1,25 +1,22 @@
 image:
-  repository: ghcr.io/autobrr/autobrr
+  repository: searxng/searxng
   pullPolicy: IfNotPresent
-  tag: v1.51.0
+  tag: 2024.11.27-55481a637
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-autobrrConfig:
+searxngConfig:
+  instanceName: SearXNG
   additionalEnvs: []
 
-autobrrNetwork:
-  webPort: 30051
+searxngNetwork:
+  webPort: 30053
   hostNetwork: false
 
-autobrrRunAs:
-  user: 568
-  group: 568
-
-autobrrStorage:
+searxngStorage:
   config:
     type: ixVolume
     ixVolumeConfig:
