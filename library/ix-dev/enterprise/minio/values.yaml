@@ -1,6 +1,6 @@
 image:
   repository: minio/minio
-  tag: RELEASE.2024-10-29T16-01-48Z
+  tag: RELEASE.2024-12-13T22-19-12Z
   pullPolicy: IfNotPresent
 
 logsearchImage:
@@ -14,8 +14,8 @@ resources:
     memory: 8Gi
 
 minioCreds:
-  rootUser: ''
-  rootPass: ''
+  rootUser: ""
+  rootPass: ""
 
 minioRunAs:
   user: 568
@@ -26,8 +26,8 @@ minioNetwork:
   webPort: 30001
   certificateID: null
   hostNetwork: true
-  serverUrl: ''
-  consoleUrl: ''
+  serverUrl: ""
+  consoleUrl: ""
 
 minioMultiMode: []
 
