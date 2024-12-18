@@ -1,18 +1,18 @@
 {
-    "2.0.19": {
+    "2.0.20": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/nextcloud/2.0.19",
-        "last_update": "2024-12-04 15:18:52",
+        "location": "/__w/charts/charts/charts/nextcloud/2.0.20",
+        "last_update": "2024-12-18 00:26:58",
         "required_features": [
-            "definitions/certificate",
             "normalize/acl",
-            "normalize/ixVolume",
-            "definitions/nodeIP"
+            "definitions/nodeIP",
+            "definitions/certificate",
+            "normalize/ixVolume"
         ],
-        "human_version": "30.0.2_2.0.19",
-        "version": "2.0.19",
+        "human_version": "30.0.4_2.0.20",
+        "version": "2.0.20",
         "chart_metadata": {
             "name": "nextcloud",
             "description": "A file sharing server that puts the control and security of your own data back into your hands.",
@@ -20,9 +20,9 @@
                 "title": "Nextcloud"
             },
             "type": "application",
-            "version": "2.0.19",
+            "version": "2.0.20",
             "apiVersion": "v2",
-            "appVersion": "30.0.2",
+            "appVersion": "30.0.4",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
@@ -2287,12 +2287,12 @@
         "supported": false,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/nextcloud/2.0.15",
-        "last_update": "2024-12-04 15:18:52",
+        "last_update": "2024-12-17 21:17:22",
         "required_features": [
-            "definitions/certificate",
             "normalize/acl",
-            "normalize/ixVolume",
-            "definitions/nodeIP"
+            "definitions/nodeIP",
+            "definitions/certificate",
+            "normalize/ixVolume"
         ],
         "human_version": "29.0.6_2.0.15",
         "version": "2.0.15",
@@ -4570,11 +4570,11 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/nextcloud/1.6.61",
-        "last_update": "2024-12-04 15:18:52",
+        "last_update": "2024-12-17 21:17:22",
         "required_features": [
+            "definitions/nodeIP",
             "definitions/certificate",
-            "normalize/ixVolume",
-            "definitions/nodeIP"
+            "normalize/ixVolume"
         ],
         "human_version": "29.0.0_1.6.61",
         "version": "1.6.61",
@@ -5394,11 +5394,11 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/nextcloud/1.6.59",
-        "last_update": "2024-12-04 15:18:52",
+        "last_update": "2024-12-17 21:17:22",
         "required_features": [
+            "definitions/nodeIP",
             "definitions/certificate",
-            "normalize/ixVolume",
-            "definitions/nodeIP"
+            "normalize/ixVolume"
         ],
         "human_version": "28.0.4_1.6.59",
         "version": "1.6.59",
@@ -6218,11 +6218,11 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/nextcloud/1.6.53",
-        "last_update": "2024-12-04 15:18:52",
+        "last_update": "2024-12-17 21:17:22",
         "required_features": [
+            "definitions/nodeIP",
             "definitions/certificate",
-            "normalize/ixVolume",
-            "definitions/nodeIP"
+            "normalize/ixVolume"
         ],
         "human_version": "27.1.4_1.6.53",
         "version": "1.6.53",
@@ -7042,11 +7042,11 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/nextcloud/1.6.29",
-        "last_update": "2024-12-04 15:18:52",
+        "last_update": "2024-12-17 21:17:22",
         "required_features": [
+            "definitions/nodeIP",
             "definitions/certificate",
-            "normalize/ixVolume",
-            "definitions/nodeIP"
+            "normalize/ixVolume"
         ],
         "human_version": "26.0.2_1.6.29",
         "version": "1.6.29",
