@@ -4,11 +4,11 @@
         "supported": false,
         "healthy_error": null,
         "location": "/__w/charts/charts/enterprise/minio/1.1.5",
-        "last_update": "2024-12-18 00:26:58",
+        "last_update": "2024-12-18 15:06:44",
         "required_features": [
-            "normalize/acl",
             "definitions/certificate",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "normalize/acl"
         ],
         "human_version": "2024-12-13_1.1.5",
         "version": "1.1.5",

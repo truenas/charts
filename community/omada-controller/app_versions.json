@@ -4,12 +4,12 @@
         "supported": false,
         "healthy_error": null,
         "location": "/__w/charts/charts/community/omada-controller/1.2.10",
-        "last_update": "2024-12-18 00:26:58",
+        "last_update": "2024-12-18 15:06:44",
         "required_features": [
-            "normalize/acl",
-            "definitions/timezone",
             "definitions/certificate",
-            "normalize/ixVolume"
+            "definitions/timezone",
+            "normalize/ixVolume",
+            "normalize/acl"
         ],
         "human_version": "5.15.6.7_1.2.10",
         "version": "1.2.10",
