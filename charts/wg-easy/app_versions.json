@@ -4,10 +4,10 @@
         "supported": false,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/wg-easy/2.0.21",
-        "last_update": "2024-12-19 12:27:04",
+        "last_update": "2024-12-23 14:34:28",
         "required_features": [
-            "normalize/ixVolume",
             "normalize/acl",
+            "normalize/ixVolume",
             "definitions/nodeIP"
         ],
         "human_version": "14_2.0.21",
@@ -1176,11 +1176,11 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/wg-easy/1.0.12",
-        "last_update": "2024-12-19 12:27:04",
+        "last_update": "2024-12-23 14:34:28",
         "required_features": [
             "normalize/ixVolume",
-            "validations/lockedHostPath",
-            "definitions/nodeIP"
+            "definitions/nodeIP",
+            "validations/lockedHostPath"
         ],
         "human_version": "7_1.0.12",
         "version": "1.0.12",

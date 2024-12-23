@@ -1,17 +1,17 @@
 {
-    "2.0.3": {
+    "2.0.4": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/vikunja/2.0.3",
-        "last_update": "2024-12-19 12:27:04",
+        "location": "/__w/charts/charts/community/vikunja/2.0.4",
+        "last_update": "2024-12-23 14:35:52",
         "required_features": [
-            "normalize/ixVolume",
             "definitions/timezone",
+            "normalize/ixVolume",
             "normalize/acl"
         ],
-        "human_version": "0.24.5_2.0.3",
-        "version": "2.0.3",
+        "human_version": "0.24.6_2.0.4",
+        "version": "2.0.4",
         "chart_metadata": {
             "name": "vikunja",
             "description": "Vikunja is an open-source, self-hostable to-do app.",
@@ -19,9 +19,9 @@
                 "title": "Vikunja"
             },
             "type": "application",
-            "version": "2.0.3",
+            "version": "2.0.4",
             "apiVersion": "v2",
-            "appVersion": "0.24.5",
+            "appVersion": "0.24.6",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
