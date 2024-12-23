@@ -1,0 +1,26 @@
+name: navidrome
+description: Navidrome is a personal streaming service
+annotations:
+  title: Navidrome
+type: application
+version: 1.2.14
+apiVersion: v2
+appVersion: 0.54.2
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.2.9
+home: https://www.navidrome.org/
+icon: https://media.sys.truenas.net/apps/navidrome/icons/icon.png
+sources:
+  - https://hub.docker.com/r/deluan/navidrome
+  - https://github.com/truenas/charts/tree/master/community/navidrome
+  - https://github.com/navidrome/navidrome/
+keywords:
+  - media
+  - music
