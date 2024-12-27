@@ -28,6 +28,8 @@ frigateNetwork:
   rtspPort: 30060
   enableWebRtc: false
   webRtcPort: 30061
+  enableAuthenticatedUI: false
+  authenticatedUIPort: 30062
 
 frigateGPU: {}
 
