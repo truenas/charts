@@ -95,6 +95,17 @@ questions:
                   min: 9000
                   max: 65535
                   required: true
+              - variable: authenticatedWeb
+                label: Authenticated Web-Port
+                description: |
+                  The port for the Frigate Web UI with authentication.</br>
+                  Internal port: 8971
+                schema:
+                  type: int
+                  default: 30062
+                  min: 9000
+                  max: 65535
+                  required: true
               - variable: enableRtmp
                 label: Enable RTMP
                 description: Enable RTMP for Frigate.
