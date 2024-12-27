@@ -101,7 +101,7 @@ questions:
                 schema:
                   type: boolean
                   default: false
-              - variable: rtmpPort
+              - variable: authenticatedUIPort
                 label: Authenticated Web UI Port
                 description: |
                   The port for the Frigate Web UI with authentication.</br>
