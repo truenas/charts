@@ -95,14 +95,21 @@ questions:
                   min: 9000
                   max: 65535
                   required: true
-              - variable: authenticatedWeb
-                label: Authenticated Web-Port
+              - variable: enableAuthenticatedUI
+                label: Enable Authenticated UI
+                description: Enable Authenticated UI for Frigate.
+                schema:
+                  type: boolean
+                  default: false
+              - variable: rtmpPort
+                label: Authenticated Web UI Port
                 description: |
                   The port for the Frigate Web UI with authentication.</br>
                   Internal port: 8971
                 schema:
                   type: int
                   default: 30062
+                  show_if: [["enableAuthenticatedUI", "=", true]]
                   min: 9000
                   max: 65535
                   required: true
