@@ -302,6 +302,34 @@
                                                 "max": 65535,
                                                 "required": true
                                             }
+                                        },
+                                        {
+                                            "variable": "enableAuthenticatedUI",
+                                            "label": "Enable authenticated UI",
+                                            "description": "Enable the authenticated web ui for frigate",
+                                            "schema": {
+                                                "type": "boolean",
+                                                "default": false
+                                            }
+                                        },
+                                        {
+                                            "variable": "authenticatedUIPort",
+                                            "label": "Authenticated UI Port",
+                                            "description": "The authenticated UI port for Frigate.</br>\nInternal port: 8971</br>\n",
+                                            "schema": {
+                                                "type": "int",
+                                                "default": 30062,
+                                                "show_if": [
+                                                    [
+                                                        "enableAuthenticatedUI",
+                                                        "=",
+                                                        true
+                                                    ]
+                                                ],
+                                                "min": 9000,
+                                                "max": 65535,
+                                                "required": true
+                                            }
                                         }
                                     ]
                                 }

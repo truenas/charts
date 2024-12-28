@@ -6,6 +6,8 @@ frigateNetwork:
   rtspPort: 31002
   enableWebRtc: true
   webRtcPort: 31003
+  enableAuthenticatedUI: true
+  authenticatedUIPort: 31004
 
 frigateConfig:
   mountUSBBus: true

@@ -13,6 +13,20 @@ service:
         nodePort: {{ .Values.frigateNetwork.webPort }}
         targetPort: 5000
         targetSelector: frigate
+  {{ if .Values.frigateNetwork.enableAuthenticatedUI }}
+  authUI:
+    enabled: true
+    type: NodePort
+    targetSelector: frigate
+    ports:
+      authUI:
+        enabled: true
+        primary: true
+        port: {{ .Values.frigateNetwork.authenticatedUIPort }}
+        nodePort: {{ .Values.frigateNetwork.authenticatedUIPort }}
+        targetPort: 8971
+        targetSelector: frigate
+  {{ end }}
   {{ if .Values.frigateNetwork.enableRtmp }}
   rtmp:
     enabled: true
