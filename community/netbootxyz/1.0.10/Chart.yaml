@@ -1,0 +1,31 @@
+name: netbootxyz
+description: netboot.xyz lets you PXE boot various operating system installers or
+  utilities from a single tool over the network.
+annotations:
+  title: netbootxyz
+type: application
+version: 1.0.10
+apiVersion: v2
+appVersion: 0.7.3.3
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.2.9
+home: https://github.com/truenas/charts/tree/master/community/netbootxyz
+icon: https://media.sys.truenas.net/apps/netbootxyz/icons/icon.png
+sources:
+  - https://github.com/truenas/charts/tree/master/community/netbootxyz
+  - https://github.com/netbootxyz/docker-netbootxyz
+  - https://netboot.xyz
+keywords:
+  - tftp
+  - network
+  - pxe
+  - netboot
+  - netbootxyz
+  - netboot.xyz
