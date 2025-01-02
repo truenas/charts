@@ -4,13 +4,13 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/ix-chart/2403.0.0",
-        "last_update": "2024-12-23 14:34:28",
+        "last_update": "2025-01-02 10:38:04",
         "required_features": [
-            "definitions/interface",
-            "definitions/nodeIP",
             "normalize/ixVolume",
             "normalize/interfaceConfiguration",
-            "definitions/gpuConfiguration"
+            "definitions/nodeIP",
+            "definitions/gpuConfiguration",
+            "definitions/interface"
         ],
         "human_version": "2403.0.0",
         "version": "2403.0.0",

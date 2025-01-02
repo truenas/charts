@@ -1,16 +1,16 @@
 {
-    "1.0.34": {
+    "1.0.35": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/nginx-proxy-manager/1.0.34",
-        "last_update": "2024-12-23 14:34:28",
+        "location": "/__w/charts/charts/community/nginx-proxy-manager/1.0.35",
+        "last_update": "2025-01-02 10:39:26",
         "required_features": [
             "definitions/timezone",
             "normalize/ixVolume"
         ],
-        "human_version": "2.12.1_1.0.34",
-        "version": "1.0.34",
+        "human_version": "2.12.2_1.0.35",
+        "version": "1.0.35",
         "chart_metadata": {
             "name": "nginx-proxy-manager",
             "description": "Expose your services easily and securely",
@@ -18,9 +18,9 @@
                 "title": "Nginx Proxy Manager"
             },
             "type": "application",
-            "version": "1.0.34",
+            "version": "1.0.35",
             "apiVersion": "v2",
-            "appVersion": "2.12.1",
+            "appVersion": "2.12.2",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
