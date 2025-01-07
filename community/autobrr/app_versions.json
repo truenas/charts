@@ -1,17 +1,17 @@
 {
-    "1.2.29": {
+    "1.2.30": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/autobrr/1.2.29",
-        "last_update": "2025-01-03 13:04:25",
+        "location": "/__w/charts/charts/community/autobrr/1.2.30",
+        "last_update": "2025-01-07 10:39:54",
         "required_features": [
-            "normalize/ixVolume",
             "normalize/acl",
-            "definitions/timezone"
+            "definitions/timezone",
+            "normalize/ixVolume"
         ],
-        "human_version": "1.56.1_1.2.29",
-        "version": "1.2.29",
+        "human_version": "1.57.0_1.2.30",
+        "version": "1.2.30",
         "chart_metadata": {
             "name": "autobrr",
             "description": "Autobrr is the modern download automation tool for torrents and usenet.",
@@ -19,9 +19,9 @@
                 "title": "Autobrr"
             },
             "type": "application",
-            "version": "1.2.29",
+            "version": "1.2.30",
             "apiVersion": "v2",
-            "appVersion": "1.56.1",
+            "appVersion": "1.57.0",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
