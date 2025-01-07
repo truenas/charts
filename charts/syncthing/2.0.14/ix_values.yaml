@@ -1,23 +1,31 @@
 image:
-  repository: ghcr.io/onedr0p/sonarr
   pullPolicy: IfNotPresent
-  tag: 4.0.11.2680
+  repository: syncthing/syncthing
+  tag: 1.29.0
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-sonarrConfig:
-  instanceName: Sonarr
+podOptions:
+  dnsConfig:
+    options: []
+
+syncthingConfig:
   additionalEnvs: []
-sonarrNetwork:
-  webPort: 30027
-  hostNetwork: false
-sonarrRunAs:
+
+syncthingID:
   user: 568
   group: 568
-sonarrStorage:
+
+syncthingNetwork:
+  webPort: 20910
+  tcpPort: 20978
+  udpPort: 20979
+  hostNetwork: false
+
+syncthingStorage:
   config:
     type: ixVolume
     ixVolumeConfig:

@@ -1,26 +1,23 @@
 image:
-  repository: ghcr.io/onedr0p/prowlarr-develop
+  repository: ghcr.io/onedr0p/sonarr
   pullPolicy: IfNotPresent
-  tag: 1.29.1.4903
+  tag: 4.0.12.2823
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-prowlarrConfig:
-  instanceName: Prowlarr
+sonarrConfig:
+  instanceName: Sonarr
   additionalEnvs: []
-
-prowlarrNetwork:
-  webPort: 30050
+sonarrNetwork:
+  webPort: 30027
   hostNetwork: false
-
-prowlarrRunAs:
+sonarrRunAs:
   user: 568
   group: 568
-
-prowlarrStorage:
+sonarrStorage:
   config:
     type: ixVolume
     ixVolumeConfig:

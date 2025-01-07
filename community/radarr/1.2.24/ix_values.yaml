@@ -1,25 +1,23 @@
 image:
-  repository: ghcr.io/autobrr/autobrr
+  repository: ghcr.io/onedr0p/radarr
   pullPolicy: IfNotPresent
-  tag: v1.56.1
+  tag: 5.17.2.9580
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-autobrrConfig:
+radarrConfig:
+  instanceName: Radarr
   additionalEnvs: []
-
-autobrrNetwork:
-  webPort: 30051
+radarrNetwork:
+  webPort: 30025
   hostNetwork: false
-
-autobrrRunAs:
+radarrRunAs:
   user: 568
   group: 568
-
-autobrrStorage:
+radarrStorage:
   config:
     type: ixVolume
     ixVolumeConfig:

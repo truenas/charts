@@ -1,31 +1,25 @@
 image:
+  repository: ghcr.io/autobrr/autobrr
   pullPolicy: IfNotPresent
-  repository: syncthing/syncthing
-  tag: 1.28.1
+  tag: v1.57.0
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-podOptions:
-  dnsConfig:
-    options: []
-
-syncthingConfig:
+autobrrConfig:
   additionalEnvs: []
 
-syncthingID:
+autobrrNetwork:
+  webPort: 30051
+  hostNetwork: false
+
+autobrrRunAs:
   user: 568
   group: 568
 
-syncthingNetwork:
-  webPort: 20910
-  tcpPort: 20978
-  udpPort: 20979
-  hostNetwork: false
-
-syncthingStorage:
+autobrrStorage:
   config:
     type: ixVolume
     ixVolumeConfig:
