@@ -1,18 +1,18 @@
 {
-    "1.2.10": {
+    "1.2.11": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/omada-controller/1.2.10",
-        "last_update": "2025-01-09 13:53:05",
+        "location": "/__w/charts/charts/community/omada-controller/1.2.11",
+        "last_update": "2025-01-10 10:49:38",
         "required_features": [
-            "definitions/certificate",
             "normalize/acl",
             "normalize/ixVolume",
+            "definitions/certificate",
             "definitions/timezone"
         ],
-        "human_version": "5.15.6.7_1.2.10",
-        "version": "1.2.10",
+        "human_version": "5.15.8.2_1.2.11",
+        "version": "1.2.11",
         "chart_metadata": {
             "name": "omada-controller",
             "description": "Omada Controller (TP-Link) is a network management controller for TP-Link Omada Equipment.",
@@ -20,9 +20,9 @@
                 "title": "Omada Controller"
             },
             "type": "application",
-            "version": "1.2.10",
+            "version": "1.2.11",
             "apiVersion": "v2",
-            "appVersion": "5.15.6.7",
+            "appVersion": "5.15.8.2",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
