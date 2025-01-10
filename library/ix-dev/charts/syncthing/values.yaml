@@ -1,7 +1,7 @@
 image:
   pullPolicy: IfNotPresent
   repository: syncthing/syncthing
-  tag: 1.29.0
+  tag: 1.29.1
 
 resources:
   limits:
