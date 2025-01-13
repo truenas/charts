@@ -1,28 +1,27 @@
 image:
-  repository: alexta69/metube
+  repository: tautulli/tautulli
   pullPolicy: IfNotPresent
-  tag: '2024-12-29'
+  tag: v2.15.1
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-metubeConfig:
-  defaultTheme: auto
+tautulliConfig:
   additionalEnvs: []
 
-metubeNetwork:
-  webPort: 30094
+tautulliNetwork:
+  webPort: 30047
   hostNetwork: false
 
-metubeRunAs:
+tautulliRunAs:
   user: 568
   group: 568
 
-metubeStorage:
-  downloads:
+tautulliStorage:
+  config:
     type: ixVolume
     ixVolumeConfig:
-      datasetName: downloads
+      datasetName: config
   additionalStorages: []
