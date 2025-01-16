@@ -4,12 +4,12 @@
         "supported": false,
         "healthy_error": null,
         "location": "/__w/charts/charts/community/vaultwarden/1.1.21",
-        "last_update": "2025-01-15 08:28:51",
+        "last_update": "2025-01-16 08:48:31",
         "required_features": [
-            "normalize/acl",
-            "definitions/timezone",
             "normalize/ixVolume",
-            "definitions/certificate"
+            "definitions/timezone",
+            "definitions/certificate",
+            "normalize/acl"
         ],
         "human_version": "1.32.7_1.1.21",
         "version": "1.1.21",
