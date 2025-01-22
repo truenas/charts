@@ -1,28 +1,28 @@
 image:
-  repository: ghcr.io/advplyr/audiobookshelf
+  repository: ghcr.io/onedr0p/prowlarr-develop
   pullPolicy: IfNotPresent
-  tag: 2.17.7
+  tag: 1.30.1.4928
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-audiobookshelfConfig:
+prowlarrConfig:
+  instanceName: Prowlarr
   additionalEnvs: []
-audiobookshelfNetwork:
-  webPort: 30067
+
+prowlarrNetwork:
+  webPort: 30050
   hostNetwork: false
-audiobookshelfRunAs:
+
+prowlarrRunAs:
   user: 568
   group: 568
-audiobookshelfStorage:
+
+prowlarrStorage:
   config:
     type: ixVolume
     ixVolumeConfig:
       datasetName: config
-  metadata:
-    type: ixVolume
-    ixVolumeConfig:
-      datasetName: metadata
   additionalStorages: []
