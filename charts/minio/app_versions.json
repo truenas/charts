@@ -1,17 +1,17 @@
 {
-    "2.0.28": {
+    "2.0.29": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/minio/2.0.28",
-        "last_update": "2025-01-19 07:19:28",
+        "location": "/__w/charts/charts/charts/minio/2.0.29",
+        "last_update": "2025-01-22 13:05:30",
         "required_features": [
             "normalize/ixVolume",
-            "definitions/certificate",
-            "normalize/acl"
+            "normalize/acl",
+            "definitions/certificate"
         ],
-        "human_version": "2025-01-18T00-31-37Z_2.0.28",
-        "version": "2.0.28",
+        "human_version": "2025-01-20T14-49-07Z_2.0.29",
+        "version": "2.0.29",
         "chart_metadata": {
             "name": "minio",
             "description": "High Performance, Kubernetes Native Object Storage",
@@ -19,9 +19,9 @@
                 "title": "MinIO"
             },
             "type": "application",
-            "version": "2.0.28",
+            "version": "2.0.29",
             "apiVersion": "v2",
-            "appVersion": "2025-01-18T00-31-37Z",
+            "appVersion": "2025-01-20T14-49-07Z",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
@@ -1836,7 +1836,7 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/charts/minio/1.7.24",
-        "last_update": "2025-01-19 07:18:11",
+        "last_update": "2025-01-22 13:04:09",
         "required_features": [
             "normalize/ixVolume",
             "definitions/certificate"
