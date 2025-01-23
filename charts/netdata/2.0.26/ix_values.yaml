@@ -1,28 +1,24 @@
 image:
-  repository: jellyfin/jellyfin
   pullPolicy: IfNotPresent
-  tag: 10.10.3
+  repository: netdata/netdata
+  tag: v2.2.0
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-jellyfinConfig:
-  publishedServerUrl: ''
+podOptions:
+  dnsConfig:
+    options: []
+
+netdataConfig:
   additionalEnvs: []
 
-jellyfinGPU: {}
+netdataNetwork:
+  webPort: 20489
 
-jellyfinNetwork:
-  webPort: 30013
-  hostNetwork: false
-
-jellyfinRunAs:
-  user: 568
-  group: 568
-
-jellyfinStorage:
+netdataStorage:
   config:
     type: ixVolume
     ixVolumeConfig:
@@ -31,8 +27,8 @@ jellyfinStorage:
     type: ixVolume
     ixVolumeConfig:
       datasetName: cache
-  transcodes:
+  lib:
     type: ixVolume
     ixVolumeConfig:
-      datasetName: transcodes
+      datasetName: lib
   additionalStorages: []
