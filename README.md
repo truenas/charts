@@ -4,6 +4,14 @@
  <a href="https://jira.ixsystems.com"><img alt="File Issue" src="https://badgen.net/badge/Jira/File%20Issue//red?icon=jira" /></a>
 </p>
 
+# ⚠️ NOTE: This repository is DEPRECATED
+
+If you are running TrueNAS Dragonfish (24.04 or prior), please consider upgrading to TrueNAS Electic Eel (24.10 or later).
+
+For reporting issues for apps under TrueNAS Electric Eel (24.10 or later)
+please use https://github.com/truenas/apps repository.
+
+
 # iX Official Catalog
 
 A curated collection of TrueNAS SCALE enhanced Helm charts.
