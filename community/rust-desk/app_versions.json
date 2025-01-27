@@ -1,16 +1,16 @@
 {
-    "1.2.7": {
+    "1.2.8": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/rust-desk/1.2.7",
-        "last_update": "2025-01-25 07:55:27",
+        "location": "/__w/charts/charts/community/rust-desk/1.2.8",
+        "last_update": "2025-01-27 17:47:33",
         "required_features": [
-            "normalize/acl",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "normalize/acl"
         ],
-        "human_version": "1.1.13_1.2.7",
-        "version": "1.2.7",
+        "human_version": "1.1.14_1.2.8",
+        "version": "1.2.8",
         "chart_metadata": {
             "name": "rust-desk",
             "description": "Rust Desk is an open-source remote desktop, and alternative to TeamViewer.",
@@ -18,9 +18,9 @@
                 "title": "Rust Desk"
             },
             "type": "application",
-            "version": "1.2.7",
+            "version": "1.2.8",
             "apiVersion": "v2",
-            "appVersion": "1.1.13",
+            "appVersion": "1.1.14",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {

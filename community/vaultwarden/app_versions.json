@@ -1,18 +1,18 @@
 {
-    "1.1.21": {
+    "1.1.22": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/vaultwarden/1.1.21",
-        "last_update": "2025-01-25 07:55:27",
+        "location": "/__w/charts/charts/community/vaultwarden/1.1.22",
+        "last_update": "2025-01-27 17:47:33",
         "required_features": [
             "definitions/timezone",
-            "normalize/acl",
+            "definitions/certificate",
             "normalize/ixVolume",
-            "definitions/certificate"
+            "normalize/acl"
         ],
-        "human_version": "1.32.7_1.1.21",
-        "version": "1.1.21",
+        "human_version": "1.33.0_1.1.22",
+        "version": "1.1.22",
         "chart_metadata": {
             "name": "vaultwarden",
             "description": "Alternative implementation of the Bitwarden server API written in Rust and compatible with upstream Bitwarden clients.",
@@ -20,9 +20,9 @@
                 "title": "Vaultwarden"
             },
             "type": "application",
-            "version": "1.1.21",
+            "version": "1.1.22",
             "apiVersion": "v2",
-            "appVersion": "1.32.7",
+            "appVersion": "1.33.0",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
