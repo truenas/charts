@@ -1,28 +1,27 @@
 image:
-  repository: ghcr.io/advplyr/audiobookshelf
+  repository: ghcr.io/autobrr/autobrr
   pullPolicy: IfNotPresent
-  tag: 2.18.1
+  tag: v1.58.0
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-audiobookshelfConfig:
+autobrrConfig:
   additionalEnvs: []
-audiobookshelfNetwork:
-  webPort: 30067
+
+autobrrNetwork:
+  webPort: 30051
   hostNetwork: false
-audiobookshelfRunAs:
+
+autobrrRunAs:
   user: 568
   group: 568
-audiobookshelfStorage:
+
+autobrrStorage:
   config:
     type: ixVolume
     ixVolumeConfig:
       datasetName: config
-  metadata:
-    type: ixVolume
-    ixVolumeConfig:
-      datasetName: metadata
   additionalStorages: []
