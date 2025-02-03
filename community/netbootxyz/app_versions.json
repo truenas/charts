@@ -1,17 +1,17 @@
 {
-    "1.0.10": {
+    "1.0.11": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/netbootxyz/1.0.10",
-        "last_update": "2025-01-31 19:48:22",
+        "location": "/__w/charts/charts/community/netbootxyz/1.0.11",
+        "last_update": "2025-02-03 19:45:16",
         "required_features": [
+            "definitions/timezone",
             "normalize/ixVolume",
-            "normalize/acl",
-            "definitions/timezone"
+            "normalize/acl"
         ],
-        "human_version": "0.7.3.3_1.0.10",
-        "version": "1.0.10",
+        "human_version": "0.7.4.2_1.0.11",
+        "version": "1.0.11",
         "chart_metadata": {
             "name": "netbootxyz",
             "description": "netboot.xyz lets you PXE boot various operating system installers or utilities from a single tool over the network.",
@@ -19,9 +19,9 @@
                 "title": "netbootxyz"
             },
             "type": "application",
-            "version": "1.0.10",
+            "version": "1.0.11",
             "apiVersion": "v2",
-            "appVersion": "0.7.3.3",
+            "appVersion": "0.7.4.2",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
