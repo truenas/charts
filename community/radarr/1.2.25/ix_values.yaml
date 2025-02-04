@@ -1,25 +1,23 @@
 image:
-  repository: gotson/komga
+  repository: ghcr.io/onedr0p/radarr
   pullPolicy: IfNotPresent
-  tag: 1.19.0
+  tag: 5.18.4.9674
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-komgaConfig:
+radarrConfig:
+  instanceName: Radarr
   additionalEnvs: []
-
-komgaNetwork:
-  webPort: 30048
+radarrNetwork:
+  webPort: 30025
   hostNetwork: false
-
-komgaRunAs:
+radarrRunAs:
   user: 568
   group: 568
-
-komgaStorage:
+radarrStorage:
   config:
     type: ixVolume
     ixVolumeConfig:
