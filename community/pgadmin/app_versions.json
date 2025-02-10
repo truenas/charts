@@ -1,17 +1,17 @@
 {
-    "1.2.15": {
+    "1.2.16": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/pgadmin/1.2.15",
-        "last_update": "2025-02-05 12:49:51",
+        "location": "/__w/charts/charts/community/pgadmin/1.2.16",
+        "last_update": "2025-02-10 11:35:38",
         "required_features": [
             "definitions/certificate",
             "normalize/acl",
             "normalize/ixVolume"
         ],
-        "human_version": "8.14_1.2.15",
-        "version": "1.2.15",
+        "human_version": "9.0_1.2.16",
+        "version": "1.2.16",
         "chart_metadata": {
             "name": "pgadmin",
             "description": "pgAdmin is the most popular and feature rich Open Source administration and development platform for PostgreSQL",
@@ -19,9 +19,9 @@
                 "title": "pgAdmin"
             },
             "type": "application",
-            "version": "1.2.15",
+            "version": "1.2.16",
             "apiVersion": "v2",
-            "appVersion": "8.14",
+            "appVersion": "9.0",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
