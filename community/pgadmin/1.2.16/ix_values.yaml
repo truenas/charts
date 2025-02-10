@@ -1,0 +1,26 @@
+image:
+  repository: dpage/pgadmin4
+  pullPolicy: IfNotPresent
+  tag: '9.0'
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+pgadminConfig:
+  adminEmail: ''
+  adminPassword: ''
+  additionalEnvs: []
+
+pgadminNetwork:
+  webPort: 30056
+  certificateID:
+  hostNetwork: false
+
+pgadminStorage:
+  config:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: config
+  additionalStorages: []

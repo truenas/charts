@@ -1,0 +1,26 @@
+image:
+  repository: cloudflare/cloudflared
+  pullPolicy: IfNotPresent
+  tag: 2025.2.0
+
+ci: false
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+cloudflaredConfig:
+  tunnelToken: ''
+  additionalArgs: []
+  additionalEnvs: []
+
+cloudflaredNetwork:
+  hostNetwork: false
+
+cloudflaredRunAs:
+  user: 568
+  group: 568
+
+cloudflaredStorage:
+  additionalStorages: []

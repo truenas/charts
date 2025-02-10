@@ -1,0 +1,28 @@
+name: cloudflared
+description: Cloudflared is a client for Cloudflare Tunnel, a daemon that exposes
+  private services through the Cloudflare edge.
+annotations:
+  title: Cloudflared
+type: application
+version: 1.2.27
+apiVersion: v2
+appVersion: 2025.2.0
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.2.9
+home: https://github.com/cloudflare/cloudflared
+icon: https://media.sys.truenas.net/apps/cloudflared/icons/icon.png
+sources:
+  - https://github.com/cloudflare/cloudflared
+  - https://github.com/truenas/charts/tree/master/library/ix-dev/community/cloudflared
+  - https://hub.docker.com/r/cloudflare/cloudflared
+keywords:
+  - network
+  - cloudflare
+  - tunnel

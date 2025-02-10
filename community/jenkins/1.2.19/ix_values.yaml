@@ -1,0 +1,43 @@
+image:
+  repository: jenkins/jenkins
+  pullPolicy: IfNotPresent
+  tag: 2.492.1-jdk17
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+jenkinsConfig:
+  jenkinsOpts: []
+  jenkinsJavaOpts: []
+  additionalEnvs: []
+jenkinsNetwork:
+  webPort: 30036
+  https: false
+  certificateID:
+  agent: false
+  agentPort: 50000
+  hostNetwork: false
+jenkinsStorage:
+  home:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: home
+  additionalStorages: []
+
+# Not user configurable
+jenkinsConstants:
+  certsPath: /tmp/ix-certs
+  keystorePath: /var/jenkins_home/ix-keystore
+  crtName: ix.crt
+  keyName: ix.key
+  keystoreName: ix.jks
+
+notes:
+  custom: |
+    The initial Admin password is generated on the
+    first run of Jenkins. You can retrieve it by
+    looking at the logs of Jenkins.
+
+    The default username is admin.
