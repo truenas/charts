@@ -1,16 +1,16 @@
 {
-    "1.2.22": {
+    "1.2.23": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/sonarr/1.2.22",
-        "last_update": "2025-02-12 10:49:45",
+        "location": "/__w/charts/charts/community/sonarr/1.2.23",
+        "last_update": "2025-02-13 12:57:30",
         "required_features": [
-            "normalize/acl",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "normalize/acl"
         ],
-        "human_version": "4.0.12.2823_1.2.22",
-        "version": "1.2.22",
+        "human_version": "4.0.13.2932_1.2.23",
+        "version": "1.2.23",
         "chart_metadata": {
             "name": "sonarr",
             "description": "Sonarr is a PVR for Usenet and BitTorrent users.",
@@ -18,9 +18,9 @@
                 "title": "Sonarr"
             },
             "type": "application",
-            "version": "1.2.22",
+            "version": "1.2.23",
             "apiVersion": "v2",
-            "appVersion": "4.0.12.2823",
+            "appVersion": "4.0.13.2932",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {

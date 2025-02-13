@@ -4,12 +4,12 @@
         "supported": false,
         "healthy_error": null,
         "location": "/__w/charts/charts/community/unifi-controller/1.3.16",
-        "last_update": "2025-02-12 10:49:45",
+        "last_update": "2025-02-13 12:40:21",
         "required_features": [
-            "definitions/certificate",
-            "normalize/acl",
             "normalize/ixVolume",
-            "definitions/timezone"
+            "definitions/timezone",
+            "definitions/certificate",
+            "normalize/acl"
         ],
         "human_version": "9.0.114_1.3.16",
         "version": "1.3.16",
