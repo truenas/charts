@@ -1,0 +1,27 @@
+name: roundcube
+description: Roundcube is a browser-based multilingual IMAP client with an application-like
+  user interface.
+annotations:
+  title: Roundcube
+type: application
+version: 1.0.7
+apiVersion: v2
+appVersion: 1.6.10
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.2.9
+home: https://roundcube.net/
+icon: https://media.sys.truenas.net/apps/roundcube/icons/icon.png
+sources:
+  - https://roundcube.net/
+  - https://github.com/truenas/charts/tree/master/community/roundcube
+  - https://hub.docker.com/r/roundcube/roundcubemail/
+keywords:
+  - webmail
+  - email

@@ -1,0 +1,28 @@
+name: ipfs
+description: Interplanetary Filesystem - the Web3 standard for content-addressing,
+  interoperable with HTTP
+annotations:
+  title: IPFS
+type: application
+version: 1.0.43
+apiVersion: v2
+appVersion: v0.33.2
+kubeVersion: '>=1.16.0-0'
+maintainers:
+  - name: truenas
+    url: https://www.truenas.com/
+    email: dev@ixsystems.com
+dependencies:
+  - name: common
+    repository: file://../../../common
+    version: 1.2.9
+home: https://ipfs.tech/
+icon: https://media.sys.truenas.net/apps/ipfs/icons/icon.png
+sources:
+  - https://github.com/ipfs/kubo
+  - https://github.com/truenas/charts/tree/master/community/ipfs
+  - https://ipfs.tech/
+keywords:
+  - storage
+  - ipfs
+  - kubo

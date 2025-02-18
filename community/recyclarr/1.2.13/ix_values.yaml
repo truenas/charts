@@ -1,0 +1,25 @@
+image:
+  repository: recyclarr/recyclarr
+  pullPolicy: IfNotPresent
+  tag: 7.4.1
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+
+recyclarrConfig:
+  createConfig: true
+  cronSchedule: '@daily'
+  additionalEnvs: []
+
+recyclarrRunAs:
+  user: 568
+  group: 568
+
+recyclarrStorage:
+  config:
+    type: ixVolume
+    ixVolumeConfig:
+      datasetName: config
+  additionalStorages: []

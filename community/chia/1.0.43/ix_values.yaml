@@ -1,0 +1,26 @@
+image:
+  repository: ghcr.io/chia-network/chia
+  tag: 2.5.1
+  pullPolicy: IfNotPresent
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+chiaNetwork:
+  chiaPort: 8444
+  farmerPort: 8447
+chiaConfig:
+  service: ''
+  farmer_address: ''
+  farmer_port: 0
+  ca: ''
+  full_node_peer: ''
+  additionalEnvs: []
+chiaStorage:
+  data:
+    type: ixVolume
+    datasetName: data
+  plots:
+    type: ixVolume
+    datasetName: plots
+  additionalVolumes: []
