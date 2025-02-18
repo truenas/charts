@@ -4,12 +4,12 @@
         "supported": false,
         "healthy_error": null,
         "location": "/__w/charts/charts/test/syncthing/1.2.3",
-        "last_update": "2025-02-13 12:40:21",
+        "last_update": "2025-02-18 12:25:27",
         "required_features": [
+            "normalize/acl",
             "normalize/ixVolume",
             "definitions/timezone",
-            "definitions/certificate",
-            "normalize/acl"
+            "definitions/certificate"
         ],
         "human_version": "1.27.6_1.2.3",
         "version": "1.2.3",
@@ -1072,7 +1072,7 @@
         "supported": true,
         "healthy_error": null,
         "location": "/__w/charts/charts/test/syncthing/1.1.5",
-        "last_update": "2025-02-13 12:40:21",
+        "last_update": "2025-02-18 12:25:27",
         "required_features": [
             "normalize/ixVolume",
             "definitions/timezone",
