@@ -1,17 +1,17 @@
 {
-    "1.1.29": {
+    "1.1.30": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/gitea/1.1.29",
-        "last_update": "2025-02-19 11:44:42",
+        "location": "/__w/charts/charts/community/gitea/1.1.30",
+        "last_update": "2025-02-20 16:15:06",
         "required_features": [
             "normalize/acl",
-            "definitions/certificate",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "definitions/certificate"
         ],
-        "human_version": "1.23.3_1.1.29",
-        "version": "1.1.29",
+        "human_version": "1.23.4_1.1.30",
+        "version": "1.1.30",
         "chart_metadata": {
             "name": "gitea",
             "description": "Gitea - Git with a cup of tea",
@@ -19,9 +19,9 @@
                 "title": "Gitea"
             },
             "type": "application",
-            "version": "1.1.29",
+            "version": "1.1.30",
             "apiVersion": "v2",
-            "appVersion": "1.23.3",
+            "appVersion": "1.23.4",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
