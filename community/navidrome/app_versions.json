@@ -1,16 +1,16 @@
 {
-    "1.2.16": {
+    "1.2.17": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/navidrome/1.2.16",
-        "last_update": "2025-02-21 12:18:07",
+        "location": "/__w/charts/charts/community/navidrome/1.2.17",
+        "last_update": "2025-02-24 08:07:09",
         "required_features": [
-            "normalize/acl",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "normalize/acl"
         ],
-        "human_version": "0.54.4_1.2.16",
-        "version": "1.2.16",
+        "human_version": "0.54.5_1.2.17",
+        "version": "1.2.17",
         "chart_metadata": {
             "name": "navidrome",
             "description": "Navidrome is a personal streaming service",
@@ -18,9 +18,9 @@
                 "title": "Navidrome"
             },
             "type": "application",
-            "version": "1.2.16",
+            "version": "1.2.17",
             "apiVersion": "v2",
-            "appVersion": "0.54.4",
+            "appVersion": "0.54.5",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
