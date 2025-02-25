@@ -1,16 +1,16 @@
 {
-    "1.2.31": {
+    "1.2.32": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/castopod/1.2.31",
-        "last_update": "2025-02-24 08:05:49",
+        "location": "/__w/charts/charts/community/castopod/1.2.32",
+        "last_update": "2025-02-25 16:22:24",
         "required_features": [
-            "normalize/ixVolume",
-            "normalize/acl"
+            "normalize/acl",
+            "normalize/ixVolume"
         ],
-        "human_version": "1.13.3_1.2.31",
-        "version": "1.2.31",
+        "human_version": "1.13.4_1.2.32",
+        "version": "1.2.32",
         "chart_metadata": {
             "name": "castopod",
             "description": "Castopod is an open-source hosting platform made for podcasters who want engage and interact with their audience.",
@@ -18,9 +18,9 @@
                 "title": "Castopod"
             },
             "type": "application",
-            "version": "1.2.31",
+            "version": "1.2.32",
             "apiVersion": "v2",
-            "appVersion": "1.13.3",
+            "appVersion": "1.13.4",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
