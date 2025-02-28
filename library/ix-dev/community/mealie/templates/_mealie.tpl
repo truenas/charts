@@ -35,19 +35,19 @@ workload:
               type: exec
               command:
                 - python
-                - -m mealie.scripts.healthcheck
+                - /app/mealie/scripts/healthcheck.py
             readiness:
               enabled: true
               type: exec
               command:
                 - python
-                - -m mealie.scripts.healthcheck
+                - /app/mealie/scripts/healthcheck.py
             startup:
               enabled: true
               type: exec
               command:
                 - python
-                - -m mealie.scripts.healthcheck
+                - /app/mealie/scripts/healthcheck.py
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "containerName" "01-permissions"
                                                         "UID" .Values.mealieRunAs.user
