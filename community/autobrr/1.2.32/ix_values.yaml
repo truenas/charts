@@ -1,24 +1,25 @@
 image:
-  repository: dpage/pgadmin4
+  repository: ghcr.io/autobrr/autobrr
   pullPolicy: IfNotPresent
-  tag: '9.0'
+  tag: v1.59.0
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-pgadminConfig:
-  adminEmail: ''
-  adminPassword: ''
+autobrrConfig:
   additionalEnvs: []
 
-pgadminNetwork:
-  webPort: 30056
-  certificateID:
+autobrrNetwork:
+  webPort: 30051
   hostNetwork: false
 
-pgadminStorage:
+autobrrRunAs:
+  user: 568
+  group: 568
+
+autobrrStorage:
   config:
     type: ixVolume
     ixVolumeConfig:
