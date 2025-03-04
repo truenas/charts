@@ -1,16 +1,16 @@
 {
-    "1.2.59": {
+    "1.2.60": {
         "healthy": true,
         "supported": false,
         "healthy_error": null,
-        "location": "/__w/charts/charts/community/drawio/1.2.59",
-        "last_update": "2025-02-28 13:51:09",
+        "location": "/__w/charts/charts/community/drawio/1.2.60",
+        "last_update": "2025-03-04 12:37:13",
         "required_features": [
-            "normalize/acl",
-            "normalize/ixVolume"
+            "normalize/ixVolume",
+            "normalize/acl"
         ],
-        "human_version": "26.0.9_1.2.59",
-        "version": "1.2.59",
+        "human_version": "26.0.16_1.2.60",
+        "version": "1.2.60",
         "chart_metadata": {
             "name": "drawio",
             "description": "Draw.io is a whiteboarding / diagramming software application.",
@@ -18,9 +18,9 @@
                 "title": "Draw.IO"
             },
             "type": "application",
-            "version": "1.2.59",
+            "version": "1.2.60",
             "apiVersion": "v2",
-            "appVersion": "26.0.9",
+            "appVersion": "26.0.16",
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
