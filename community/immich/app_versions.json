@@ -4,12 +4,12 @@
         "supported": false,
         "healthy_error": null,
         "location": "/__w/charts/charts/community/immich/4.0.23",
-        "last_update": "2025-03-04 12:35:51",
+        "last_update": "2025-03-05 14:27:33",
         "required_features": [
-            "definitions/gpuConfiguration",
-            "normalize/acl",
             "normalize/ixVolume",
-            "definitions/timezone"
+            "definitions/timezone",
+            "definitions/gpuConfiguration",
+            "normalize/acl"
         ],
         "human_version": "1.119.1_4.0.23",
         "version": "4.0.23",
