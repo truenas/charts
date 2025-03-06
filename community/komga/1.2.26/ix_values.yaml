@@ -1,28 +1,27 @@
 image:
-  repository: alexta69/metube
+  repository: gotson/komga
   pullPolicy: IfNotPresent
-  tag: '2025-03-04'
+  tag: 1.21.0
 
 resources:
   limits:
     cpu: 4000m
     memory: 8Gi
 
-metubeConfig:
-  defaultTheme: auto
+komgaConfig:
   additionalEnvs: []
 
-metubeNetwork:
-  webPort: 30094
+komgaNetwork:
+  webPort: 30048
   hostNetwork: false
 
-metubeRunAs:
+komgaRunAs:
   user: 568
   group: 568
 
-metubeStorage:
-  downloads:
+komgaStorage:
+  config:
     type: ixVolume
     ixVolumeConfig:
-      datasetName: downloads
+      datasetName: config
   additionalStorages: []
